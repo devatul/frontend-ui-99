@@ -1,0 +1,106 @@
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<section>
+    <!--my_header start-->
+        <div class="my_header">
+            <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header dropdown">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                    <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
+                        <div class="row">
+                            <div class="col-sm-6 col-noti">
+                                <h4>NEWS FEED</h4>
+                                <ul class="list-unstyled noti-list">
+                                   <li rt-repeat="noti in this.state.newsfeed" key="{noti.id}">
+                                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                                        <p>{noti.content}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6 col-noti">
+                                <h4>TODO LIST</h4>
+                                <ul class="list-unstyled noti-list">
+                                    <li rt-repeat="todo in this.state.todo" key="{todo.id}">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                    <p>{todo.content}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 text-center mt-md">
+                                <a href="#">See all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <Link to="/Dashboard/OverView" activeClassName="active">Overview</Link>
+                        </li>
+                        <li>
+                            <Link to="/Dashboard/DashboardIndex" activeClassName="active">Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to="/Dashboard/Review" activeClassName="active">Review</Link>
+                        </li>
+                        <li>
+                            <Link to="/Dashboard/Admin" activeClassName="active">Admin</Link>
+                        </li>
+                        <li><a href="#">User Validation</a></li>
+                        <!--<li><a href="#">Anomaly Detection</a></li>-->
+                        <li><a href="#">Run Analysis</a></li>
+                        <li>                        
+                            <Link to="/Dashboard/Profile" activeClassName="active">Settings</Link>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+                
+                <div class="header-right">
+                    <div id="userbox" class="userbox">
+                        <a href="#" data-toggle="dropdown" aria-expanded="true">
+                            <figure class="profile-picture">
+                                <img src="/assets/images/!logged-user.jpg" alt="Tony" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg">
+                            </figure>
+                            <div class="profile-info">
+                                <span class="name">Chris</span>
+                                <span class="role">administrator</span>
+                            </div>
+            
+                            <i class="fa custom-caret"></i>
+                        </a>
+            
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-tasks"></i> My Todo</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-users"></i> My Team</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    <div>{this.props.children}</div>
+</section>

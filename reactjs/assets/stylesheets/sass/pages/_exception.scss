@@ -1,0 +1,68 @@
+.table-challenge {
+  .fa{
+    font-size: 18px;
+    &.disabled{
+      color: #777;
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+  .doc-path, .file-name {
+    display: inline-block;
+    max-width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .file-name{
+    max-width: 80px;
+  }
+  select.changed{
+    color: $color-danger;
+  }
+  select{
+    font-size: 13px;
+    padding: 6px;
+  }
+  textarea{
+    font-size: 13px;
+    min-width: 200px;
+  }
+  .previous-status{
+    margin-top: 5px;
+    font-size: 10px;
+  }
+}
+
+.reviewer-tab{
+  .tab-content{
+    border: 1px solid #ccc;
+  }
+  .reviewer-info{
+    margin-bottom: 10px;
+  }
+  .tabs-vertical{
+    ul{
+      li{
+        &:first-child{
+          border-top: 1px solid #DDD;
+        }
+        &:last-child{
+          border-bottom: 1px solid #DDD;
+        }
+      }
+    }
+  }
+  .c100{
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    margin-left: 10px;
+    &>span{
+      width: 3.4em;
+      line-height: 3.4em;
+      font-size: 0.3em;
+    }
+  }
+}

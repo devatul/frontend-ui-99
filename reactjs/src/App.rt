@@ -1,0 +1,4 @@
+ <div>
+	{this.props.children}
+	<p class="text-center text-muted mb-md">Copyright &#169; 2016 by Dathena Science</p>
+</div>

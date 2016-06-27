@@ -1,0 +1,106 @@
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<div class="container">
+			<div class="tabs tabs-primary">
+				<ul class="my-profile-header nav nav-tabs">
+					<li class="active">
+						<a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
+					</li>
+					<li class="">
+						<a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="my_profile" class="my-profile-tab-content tab-pane active">
+						<div class="row">
+							<div class="my-profile-left col-md-8 col-sm-8 col-xs-12">
+								<div>
+									<a class="my-profile-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a>
+									<div class="my-profile-user">
+										<h4>Christopher Muffat</h4>
+										<p>Job Position: CEO & Founder</p>
+									</div>
+								</div>
+								<div class="my-profile-content-top pro_content">
+									<div class="pro_panel-body my-profile-content panel-body">
+										<form class="form-horizontal my-profile-form-bordered form-bordered" method="get">
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Windows ID:</label>
+												<div class="col-md-8 col-sm-8">
+													<p>CMUFFAT</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Department</label>
+												<div class="col-md-8 col-sm-8">
+													<p>Management Office</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Company Name</label>
+												<div class="col-md-8 col-sm-8">
+													<p>Dathena Science</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Location</label>
+												<div class="col-md-8 col-sm-8">
+													<p>Singapore</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Email</label>
+												<div class="col-md-8 col-sm-8">
+													<p>chris@dathena.io</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Landline)</label>
+												<div class="col-md-8 col-sm-8">
+													<p>+65 90000000</p>
+												</div>
+											</div>
+											<div class="pro_form-group form-group row">
+												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Mobile)</label>
+												<div class="col-md-8 col-sm-8">
+													<p>+65 90000000</p>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div>
+									<ul class="my-profile-ul">
+										<li>System user</li>
+										<li class="left1">
+											<div class="switch switch-sm switch-primary">
+												<div class="ios-switch off">
+													<div class="on-background background-fill"></div><div class="state-background background-fill">
+													</div>
+													<div class="handle"></div>
+												</div>
+													<input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+											</div>
+										</li>
+										<li class="left3"><p>Active Directory</p>
+											<div class="my-profile-check-none checkbox-custom checkbox-default">
+												<input class="x" id="z" name="agreeterms" type="checkbox">
+												<label for="AgreeTerms">enable SSO</label>
+											</div>
+										</li>
+									</ul>
+								</div>
+							
+							</div>
+							<div class="my-profile-bottom col-md-4 col-sm-4 col-xs-12">
+								<Link to="/Dashboard/EditProfile" class="btn btn-primary btn-ok">Edit Profile</Link>
+							</div>
+						</div>
+					</div>
+					<div id="my_team" class="tab-pane">
+						<p>Recent</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+				</div>
+			</div>
+</div>
+      

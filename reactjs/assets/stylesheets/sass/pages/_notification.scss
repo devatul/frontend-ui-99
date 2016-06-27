@@ -1,0 +1,39 @@
+.fa-alert-warning{
+  color: #ed9c28;
+}
+.fa-alert-danger{
+  color: #d2322d;
+}
+
+.filter-noti{
+  display: inline-block;
+  width: 200px;
+}
+
+.panel-noti{
+  .panel-heading{
+    padding: 10px 15px;
+    h2{
+      font-size: 16px;
+    }
+  }
+  .noti-item{
+    font-size: 14px;
+    margin-bottom: 5px;
+    .fa-check{
+      color: $color-tertiary;
+    }
+    .noti-left{
+      display: inline-block;
+      width: 20px;
+    }
+    .noti-right{
+      width: 20px;
+      display: inline-block;
+    }
+    .noti-center{
+      display: inline-block;
+      @include calc(width, '100% - 50px');
+    }
+  }
+}

@@ -1,0 +1,286 @@
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<section>
+    <div class="my_main container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Data Processing Dashboard | Analytics Filter:</p>
+            </div>
+            <div class="col-md-8">
+                <ul class="text-right filter-list pt-xs">
+                    <li>
+                        <select name="state" class="form-control ddList">
+                            <option value="">Country</option>
+                            <option class="lt" value="--">-All-</option>
+                            <option class="lt" value="AL">-One-</option>
+                            <option class="lt" value="AK">-Two-</option>
+                        </select>
+                    </li>
+                    <li>
+                        <div class="wrap-select">
+                            <select name="state" class="form-control ddList">
+                                <option value="">Business Unit</option>
+                                <option class="lt" value="--">-All-</option>
+                                <option class="lt" value="AL">-One-</option>
+                                <option class="lt" value="AK">-Two-</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrap-select">
+                            <select name="state" class="form-control ddList">
+                                <option value="">Department</option>
+                                <option class="lt" value="--">-All-</option>
+                                <option class="lt" value="AL">-One-</option>
+                                <option class="lt" value="AK">-Two-</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrap-select">
+                            <select name="state" class="form-control ddList">
+                                <option value="">Team</option>
+                                <option class="lt" value="--">-All-</option>
+                                <option class="lt" value="AL">-One-</option>
+                                <option class="lt" value="AK">-Two-</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrap-select">
+                            <select name="state" class="form-control ddList">
+                                <option value="">Data Owner</option>
+                                <option class="lt" value="--">-All-</option>
+                                <option class="lt" value="AL">-One-</option>
+                                <option class="lt" value="AK">-Two-</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="first_table container">
+        <div class="col">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">General Details</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table general-table mb-none">
+                            <tbody>
+                            <tr>
+                                <td>Last Data Scan:</td>
+                                <td colspan="3">{this.state.detailLastScan.last_data_scan}</td>
+                            </tr>
+                            <tr>
+                                <td>Country In Scope:</td>
+                                <td colspan="3">{this.state.detailLastScan.country}</td>
+                            </tr>
+                            <tr>
+                                <td>Business In Scope:</td>
+                                <td colspan="3">{this.state.detailLastScan.business_unit}</td>
+                            </tr>
+                            <tr>
+                                <td>Scan Status:</td>
+                                <td colspan="3">{this.state.detailLastScan.is_completed == false ? "Not Completed": "Completed"}</td>
+                            </tr>
+                            <tr>
+                                <td>Documents Analyzed:</td>
+                                <td colspan="3">{this.state.detailLastScan.total_documents}</td>
+                            </tr>
+                            <tr>
+                                <td>File Extension Processed:</td>
+                                <td colspan="3">{this.state.detailLastScan.file_extensions_processed}</td>
+                            </tr>
+                            <tr>
+                                <td>Duplication Documents:</td>
+                                <td colspan="3">{this.state.detailLastScan.total_duplicates}</td>
+                            </tr>
+                            <tr>
+                                    <td>Encrypted Documents or Archives:</td>
+                                    <td>{this.state.detailLastScan.encrypted_documents}</td>
+                                    <td>Number of Category Applied:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Documents Skipped:</td>
+                                    <td>{this.state.detailLastScan.documents_skipped}</td>
+                                    <td>Level of Confidentiality Applied:</td>
+                                    <td></td>
+                                </tr>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="widget container">
+            <div class="row">
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-secondary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">{this.state.totalDocument}</strong>
+                                        </div>
+                                        <h4 class="title">Total Documents</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <a href="#" class="widget-action"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-quartenary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">{this.state.documentsReviewed}</strong>
+                                        </div>
+                                        <h4 class="title">Documents Reviewed</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <span class="percentage-badge">{this.state.documentsReviewedPercent}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-primary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">{this.state.documentsValidated}</strong>
+                                        </div>
+                                        <h4 class="title">Documents Validated</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <span class="percentage-badge">{this.state.documentsValidatedPercent}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+   
+    <div class="table_content_icon container">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">Categorization Overview</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div id="datatable-editable_wrapper" class="no-footer">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-none no-footer"
+                                       id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1" aria-sort="ascending">Categories
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1">% Reviewed Documents
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1">% Validated Documents
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                            rowspan="1" colspan="1">Reviewed Accuracy
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                            rowspan="1" colspan="1">
+                                            ML Accuracy
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" role="row" rt-repeat="categorization in this.state.categorizationOverview" key="{categorization.key}">
+                                            <td class="text-left">
+                                                <i class="fa {categorization.class}" aria-hidden="true"></i>
+                                                {categorization.name}
+                                            </td>
+                                            <td>{categorization.reviewedDocumentsPercent}% ({categorization.reviewedDocuments})</td>
+                                            <td>{categorization.validatedDocumentsPercent}% ({categorization.validatedDocuments})</td>
+                                            <td>{categorization.reviewedAccuracy}%</td>
+                                            <td>{categorization.mLAccuracy}%</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="table_content container">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">Classification Overview</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-none no-footer"
+                                       id="datatable-default" role="grid" aria-describedby="datatable-default_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1" aria-sort="ascending">Level of Confidentiality
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1">% Reviewed Document
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                            colspan="1">% Validated Documents
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                            rowspan="1" colspan="1">% Data Owner Review Accuracy
+                                        </th>
+                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                            rowspan="1" colspan="1">
+                                            % Prediction Accuracy
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeA odd" rt-repeat="classification in this.state.classificationOverview" key="{classification.key}" role="row">
+                                        <td class="sorting_1">{classification.name}</td>
+                                        <td>{classification.reviewedDocumentsPercent}% ({classification.reviewedDocuments}) </td>
+                                        <td>{classification.validatedDocuments}% ({classification.validatedDocumentsPercent}) </td>
+                                        <td class="center hidden-phone">{classification.dataOwnerReviewAccuracyPercent}% ({classification.dataOwnerReviewAccuracy})</td>
+                                        <td class="center hidden-phone">{classification.predictionAccuracyPercent}% ({classification.predictionAccuracy})</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

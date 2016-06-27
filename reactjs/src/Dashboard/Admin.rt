@@ -1,0 +1,591 @@
+<section>
+  <header class="page-header">
+      <div class="container">
+        <h2>Workflow Status</h2>
+      
+        <div class="right-wrapper pull-right">
+          <ol class="breadcrumbs">
+            <li>
+              <a href="/">
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
+            <li><a href="#"><span>Products</span></a></li>
+            <li><a href="#"><span>Xyz</span></a></li>
+            <li><span>Features</span></li>
+          </ol>
+
+        </div>
+      </div>
+  </header>
+    <!--bar_menu start-->
+  <div class="my_main bar_menu container">
+      <div class="row">
+      <div class="col-xs-12">
+          <div class="tabs">
+            <ul class="nav nav-tabs nav-justified workflow-tab">
+              <li class="active">
+                <a href="#registration" data-toggle="tab" class="text-center">Organisation Registration</a>
+              </li>
+              <li>
+                <a href="#setup" data-toggle="tab" class="text-center">Technology Setup</a>
+              </li>
+              <li>
+                <a href="#framework" data-toggle="tab" class="text-center">Policies and Framework</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="registration" class="detail-tab tab-pane active">
+                
+                <h3 class="heading1">Oragnisation Registration <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h3>
+
+                <div class="well add-detail-section">
+                  <h4 class="heading2">1. Organisation Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h4>
+
+                  <div class="add-detail-block">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Entity Name </label>
+                            <a onClick={this.postOrganisation} style="cursor: pointer">Add Entity <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8">
+                            <input type="text" value={this.state.name} onChange={this.nameChange} id="name" name="name" class="form-control input-md" rt-class={"has-error":this.state.requiedName}>
+                            <span for="name" generated="true" class="err" rt-if="this.state.requiedName">{this.state.requiedName}</span>
+                          </div>
+                        </div>
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Region</label>
+                            <a onClick={this.postOrganisation} style="cursor: pointer">Add Region <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8">
+                            <input type="text" value={this.state.region} onChange={this.regionChange} id="region" name="region" class="form-control input-md">
+                          </div>
+                        </div>
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Country </label>
+                            <a onClick={this.postOrganisation} style="cursor: pointer">Add Country <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8">
+                            <input type="text" value={this.state.country} onChange={this.countryChange} id="country" name="country" class="form-control">
+                          </div>
+                        </div>
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">State/Province </label>
+                            <a onClick={this.postOrganisation} style="cursor: pointer">Add State/Province <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8">
+                            <input type="text" value={this.state.state} onChange={this.stateChange} id="state" name="state" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="well add-detail-section">
+                  <h4 class="heading2">2. Business and Risk Management Team Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h4>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">2.1 2nd Line Team Registration <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Risk Lead </label>
+                            <a onClick={this.postTeamRiskLead} style="cursor: pointer">Add Risk Lead <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" value={this.state.nameTeam} onChange={this.nameTeamChange} rt-class={"has-error":this.state.requiedNameTeam} name="name" placeholder="Name" class="form-control">
+                            <span for="name" generated="true" class="err" rt-if="this.state.requiedNameTeam">{this.state.requiedNameTeam}</span>
+                            <input type="text" value={this.state.jobtitleTeam} onChange={this.jobtitleTeamChange} name="job" placeholder="Job Title" class="form-control">
+
+                            <input type="email" name="email" placeholder="Email Address (SMTP)" class="form-control" value={this.state.emailTeam} onChange={this.emailTeamChange} rt-class={"has-error":this.state.requiedEmailTeam}>
+                            <span for="email" generated="true" class="err" rt-if="this.state.requiedEmailTeam">{this.state.requiedEmailTeam}</span>
+                            <select class="form-control detail-select" data-placeholder="Permission Required">
+                                <option value="risk_lead">Risk Lead</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Risk Officers</label>
+                            <a onClick={this.postTeamRiskOfficers} style="cursor: pointer">Add Risk Officers <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" value={this.state.nameTeam} onChange={this.nameTeamChange} rt-class={"has-error":this.state.requiedNameTeam} name="name" placeholder="Name" class="form-control">
+                            <span for="name" generated="true" class="err" rt-if="this.state.requiedNameTeam">{this.state.requiedNameTeam}</span>
+                            <input type="text" value={this.state.jobtitleTeam} onChange={this.jobtitleTeamChange} name="job" placeholder="Job Title" class="form-control">
+                            <input type="email" name="email" placeholder="Email Address (SMTP)" class="form-control" value={this.state.emailTeam} onChange={this.emailTeamChange} rt-class={"has-error":this.state.requiedEmailTeam}>
+                            <span for="email" generated="true" class="err" rt-if="this.state.requiedEmailTeam">{this.state.requiedEmailTeam}</span>
+                            <select class="form-control detail-select" data-placeholder="Permission Required">
+                                <option value="risk_officer">Risk Officers</option>
+                                
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">SLA </label>
+                            <a href="#">Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <select class="form-control detail-select" data-placeholder="Workflow Action">
+                                <option value="action1">Action 1</option>
+                                <option value="action2">Action 2</option>
+                            </select>
+                            <select class="form-control detail-select" data-placeholder="SLA">
+                                <option value="sla1">SLA 1</option>
+                                <option value="sla2">SLA 2</option>
+                            </select>
+                            <select class="form-control detail-select" data-placeholder="Reminder Frequency">
+                                <option value="fre1">Fre 1</option>
+                                <option value="fre2">Fre 2</option>
+                            </select>
+                            <input type="text" class="form-control" placeholder="Escalate To">
+                          </div>
+                        </div>
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">SLA </label>
+                            <a href="#">Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <select class="form-control detail-select" data-placeholder="Workflow Action">
+                                <option value="action1">Action 1</option>
+                                <option value="action2">Action 2</option>
+                            </select>
+                            <select class="form-control detail-select" data-placeholder="SLA">
+                                <option value="sla1">SLA 1</option>
+                                <option value="sla2">SLA 2</option>
+                            </select>
+                            <select class="form-control detail-select" data-placeholder="Reminder Frequency">
+                                <option value="fre1">Fre 1</option>
+                                <option value="fre2">Fre 2</option>
+                            </select>
+                            <input type="text" class="form-control" placeholder="Escalate To">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">2.2 3rd Line Team Registration <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Audit Officier </label>
+                            <a onClick={this.postTeamAudit} style="cursor: pointer">Add Audit Officier <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" value={this.state.nameTeam} onChange={this.nameTeamChange} rt-class={"has-error":this.state.requiedNameTeam} name="name" placeholder="Name" class="form-control">
+                            <span for="name" generated="true" class="err" rt-if="this.state.requiedNameTeam">{this.state.requiedNameTeam}</span>
+                            <input type="text" value={this.state.jobtitleTeam} onChange={this.jobtitleTeamChange} name="job" placeholder="Job Title" class="form-control">
+                            <input type="email" name="email" placeholder="Email Address (SMTP)" class="form-control" value={this.state.emailTeam} onChange={this.emailTeamChange} rt-class={"has-error":this.state.requiedEmailTeam}>
+                            <span for="email" generated="true" class="err" rt-if="this.state.requiedEmailTeam">{this.state.requiedEmailTeam}</span>
+
+                            <select class="form-control detail-select" data-placeholder="Permission Required">
+                                <option value="audit">Audit</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">2.3 Business and Data Owner Registration <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Data Repository </label>
+                            <a href="#">Add Data Repository <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" name="name" placeholder="Name" class="form-control">
+
+                            <input type="text" name="root" placeholder="Root Repository" class="form-control">
+
+                            <input type="text" name="path" placeholder="Path" class="form-control">
+
+                            <input type="text" name="department" placeholder="Department" class="form-control">
+
+                            <input type="text" name="owner" placeholder="Functional Owner" class="form-control">
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row detail-row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Risk Officier </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <div id="setup" class="detail-tab tab-pane">
+                
+                <h3 class="heading1">Technology Set Up <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h3>
+
+                <div class="well add-detail-section">
+                  <h4 class="heading2">1. Business and Risk Management Team Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h4>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">1.1 Domain Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                    <div class="row detail-row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Domain Details </label>
+                            <a href="#">Add Domain <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" placeholder="Domain Name" class="form-control">
+
+                            <input type="text" placeholder="Domain Location" class="form-control">
+
+                            <input type="text" placeholder="Domain OS" class="form-control">
+
+                            <input type="text" placeholder="Domain Owner" class="form-control">
+
+                            <input type="text" placeholder="Domain Administrator" class="form-control">
+
+                            <a href="#" class="mb-sm pull-right">Add Domain Admin <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-8 detail-right">
+                            <input type="text" placeholder="Domain Administrator Name" class="form-control">
+                            <input type="text" placeholder="Domain Administrator Email" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">1.2 Folder Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                    <div class="row detail-row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-sm-4 detail-left clearfix">
+                            <label class="control-label">Folder Paths </label>
+                            <a href="#">Add Risk Lead <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="col-sm-8 detail-right">
+                            <input type="text" placeholder="Folder Name" class="form-control">
+
+                            <input type="text" placeholder="Full Folder Path" class="form-control">
+
+                            <input type="text" placeholder="Windows Credentials" class="form-control">
+
+                            <input type="text" placeholder="Folder Owner" class="form-control">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">1.3 Email Server Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                      <div class="row detail-row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-sm-4 detail-left clearfix">
+                              <label class="control-label">Email Server </label>
+                              <a href="#">Add Server <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="col-sm-8 detail-right">
+                              <input type="text" placeholder="Email Server Name" class="form-control">
+
+                              <input type="text" placeholder="Email Server OS" class="form-control">
+
+                              <input type="text" placeholder="Server SMTP" class="form-control">
+
+                              <input type="text" placeholder="Server Owner" class="form-control">
+
+                              <input type="text" placeholder="Server Administrator" class="form-control">
+
+                              <a href="#" class="mb-sm pull-right">Add Server Admin <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-8 detail-right">
+                              <input type="text" placeholder="Server Administrator Name" class="form-control">
+                              <input type="text" placeholder="Server Administrator Email" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+
+                  <div class="add-detail-block">
+                    <h5 class="heading3">1.4 HDP Server Details <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h5>
+
+                      <div class="row detail-row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-sm-4 detail-left clearfix">
+                              <label class="control-label">HDP Server </label>
+                              <a href="#">Add Server <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="col-sm-8 detail-right">
+                              <input type="text" placeholder="Server Name" class="form-control">
+
+                              <input type="text" placeholder="Server ID" class="form-control">
+
+                              <input type="text" placeholder="Server Key" class="form-control">
+
+                              <input type="text" placeholder="Server Owner" class="form-control">
+
+                              <input type="text" placeholder="Server Administrator" class="form-control">
+
+                              <a href="#" class="mb-sm pull-right">Add Server Admin <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-8 detail-right">
+                              <input type="text" placeholder="Server Administrator Name" class="form-control">
+                              <input type="text" placeholder="Server Administrator Email" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <div id="framework" class="detail-tab tab-pane">
+
+                <h3 class="heading1">Policies and Framework <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h3>
+
+                <div class="well add-detail-section">
+                  <h4 class="heading2">1. Data Classification Schema <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h4>
+
+                  <div class="panel panel-default panel-policies">
+                    <div class="panel-body">
+                      <div class="row hidden-xs row-title">
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <h5>Default</h5>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <h5>Display Name</h5>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          Public
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample1">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <a href="#" class="cat-edit-link">Sub Category Editing</a>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          Internal Only
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample2">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <a href="#" class="cat-edit-link">Sub Category Editing</a>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          Confidential
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample3">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <a href="#" class="cat-edit-link">Sub Category Editing</a>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          Secret
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample4">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <a href="#" class="cat-edit-link">Sub Category Editing</a>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          Banking Secrecy
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample5">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <a href="#" class="cat-edit-link">Sub Category Editing</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="well add-detail-section">
+                  <h4 class="heading2">2. Sub Category Data Classification <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a></h4>
+
+                  <div class="panel panel-default panel-policies">
+                    <div class="panel-body">
+                      <div class="row hidden-xs row-title">
+                        <div class="col-xs-12 col-sm-3 col-md-2">
+                          <h5>Default</h5>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <h5>Display Name</h5>
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          TBC
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample6">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          TBC
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox" id="checkboxExample7">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          TBC
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox" id="checkboxExample8">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          TBC
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox" id="checkboxExample9">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="row row-policies">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-default">
+                          TBC
+                          <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox"  id="checkboxExample10">
+                            <label for="checkboxExample2"></label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
