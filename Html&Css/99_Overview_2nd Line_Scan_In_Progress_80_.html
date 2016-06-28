@@ -170,9 +170,8 @@
                     <div class="col-sm-8">
                         <p class="page-heading-sm">Dashboard Overview</p>
                         <div class="filter-tags-block">
-                            <label class="pull-left mr-md">Applied Filters:</label>
+                            <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
                             <div class="pull-left filter-tags">
-                                <span class="filter-label label label-info" data-value="Accounting/Tax" data-crit="category"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">Accounting/Tax</span></span>
                             </div>
                         </div>
                     </div>
@@ -186,7 +185,7 @@
                                         <li class="mb-sm">
                                             <div class="form-group">
                                                 <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category" name="category">
-                                                    <option selected value="Accounting/Tax">Accounting/Tax</option>
+                                                    <option value="Accounting/Tax">Accounting/Tax</option>
                                                     <option value-"Corporate Entity">Corporate Entity</option>
                                                     <option value="Client/Customer">Client/Customer</option>
                                                     <option value="Employee">Employee</option>
@@ -243,7 +242,7 @@
                                                 <td colspan="3">Switzerland</td>
                                             </tr>
                                             <tr>
-                                                <td>Business In Scope:</td>
+                                                <td>Business Unit in Scope:</td>
                                                 <td colspan="3">Private bank</td>
                                             </tr>
                                             <tr>
@@ -279,6 +278,42 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="col-md-3">
+                <div class="span12">
+                    <form id="custom-search-form" class="form-search form-horizontal pull-right dropdown">
+                        <div data-toggle="dropdown" class="input-group input-group-icon">
+                            <span class="input-group-addon">
+                                <span class="icon"><i class="fa fa-search"></i></span>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                        </div>
+                        <div class="dropdown-menu dropdown-search has-arrow dd-sm full-mobile">
+                            <div class="col-sm-12 col-noti mt-sm">
+                                <h4>TODO LIST</h4>
+                                <ul class="list-unstyled noti-list">
+                                    <li>
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                        <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 col-noti mt-lg">
+                                <h4>NOTIFICATION</h4>
+                                <ul class="list-unstyled noti-list">
+                                    <li>
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 text-center mt-md">
+                                <a href="#">See all search result</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
         </div>
         </div>
 
@@ -302,9 +337,9 @@
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
-                                            <strong class="amount">100%</strong>
+                                            <strong class="amount">80%</strong>
                                         </div>
-                                        <h4 class="title">100,000 documents scanned</h4>
+                                        <h4 class="title">64,000 documents scanned</h4>
                                     </div>
                                 </div>
                             </div>
@@ -331,13 +366,13 @@
                                                 <div class="info">
                                                     <strong class="amount">1%</strong>
                                                 </div>
-                                                <h4 class="title">1,000 duplicates</h4>
+                                                <h4 class="title">640 duplicates</h4>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="summary">
                                                 <div class="info">
-                                                    <strong class="amount">20%</strong>
+                                                    <strong class="amount">19%</strong>
                                                 </div>
                                                 <h4 class="title">20,000 twins</h4>
                                             </div>
@@ -363,7 +398,7 @@
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
-                                            <strong class="amount">97%</strong>
+                                            <strong class="amount">98%</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -374,7 +409,7 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Confidentiality
+                            <h4 class="widget-title">Classification
                                 <div class="inline-block-item dropdown">
                                     <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
@@ -392,7 +427,7 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Classification
+                            <h4 class="widget-title">Category & Language
                                 <div class="inline-block-item dropdown">
                                     <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
@@ -401,8 +436,10 @@
                                 </div>
                             </h4>
                             <div class="widget-chart">
-                                <div class="chart chart-md" id="flotPie2Filter"></div>
-                                <div id="legendContainer2Filter"></div>
+                                <div class="chart chart-md" id="flotPie2"></div>
+                                <div class="chart chart-md-inner" id="flotPie2Inner"></div>
+                                <div id="legendContainer2"></div>
+                                <div id="legendContainer2Inner"></div>
                             </div>
                         </div>
                     </section>
@@ -509,7 +546,6 @@
                     </section>
                 </div>
             </div>
-
         </div>
         <div class="container">
             <div class="row">
@@ -548,10 +584,61 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                                                    Legal/Regulatory
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-male" aria-hidden="true"></i>
+                                                    Employee
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-usd" aria-hidden="true"></i>
+                                                    Transaction
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
                                             <tr class="even" role="row">
                                                 <td class="text-left">
                                                     <i class="fa fa-calculator" aria-hidden="true"></i>
                                                     Accounting/Tax
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                                    Corporate Entity
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                                    Customer
                                                 </td>
                                                 <td>20% (10000)</td>
                                                 <td>10% (1000)</td>
@@ -567,9 +654,8 @@
                 </div>
             </div>
         </div>
-
+        
         <p class="text-center text-muted mt-md mb-md">Copyright &copy; 2016 by Dathena Science</p>
-    
     </div>
 
     <!-- Vendor -->

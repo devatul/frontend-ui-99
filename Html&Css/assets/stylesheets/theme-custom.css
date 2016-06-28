@@ -1098,6 +1098,8 @@ body {
   height: 104px; }
   .my_header.has-sub-header {
     height: 50px; }
+  .my_header .userbox .role {
+    display: none; }
 
 .my_header .navbar-default {
   background-color: #171717; }
@@ -1110,10 +1112,15 @@ body {
   margin-left: 15px;
   float: none; }
 
+.filter-list {
+  text-align: center; }
+
 .filter-list > li {
   display: inline-block;
   margin-left: 15px;
   float: none; }
+  .filter-list > li .btn-group .dropdown-toggle {
+    min-width: 135px; }
 
 .my_main p {
   margin-top: 12px;
@@ -1492,7 +1499,16 @@ tr td {
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
   display: none; }
 .widget-panel .widget-chart {
-  min-height: 300px; }
+  min-height: 300px;
+  position: relative; }
+  .widget-panel .widget-chart .chart-disabled-overlay {
+    width: 100%;
+    height: 95%;
+    top: 5%;
+    left: 0;
+    z-index: 9;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); }
   .widget-panel .widget-chart .chart.chart-md {
     height: 300px;
     position: relative; }
@@ -1811,9 +1827,19 @@ div[id^='legendContainer'] {
 
   ul.filter-list > li select.form-control {
     width: auto; } }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .my_header .navbar-collapse {
-    float: left; } }
+    width: -webkit-calc(100% - 400px);
+    width: -moz-calc(100% - 400px);
+    width: calc(100% - 400px);
+    text-align: center;
+    float: left; }
+    .my_header .navbar-collapse .navbar-nav {
+      float: none;
+      text-align: center; }
+      .my_header .navbar-collapse .navbar-nav > li {
+        float: none;
+        display: inline-block; } }
 @media (max-width: 996px) {
   .dropdown-menu.full-mobile {
     width: 90%;
@@ -2022,13 +2048,15 @@ div[id^='legendContainer'] {
 .document-chart {
   height: 300px; }
 
-.review_table > tbody > tr > td > span {
-  display: inline-block;
-  width: -webkit-calc(100% - 25px);
-  width: -moz-calc(100% - 25px);
-  width: calc(100% - 25px);
-  overflow: hidden;
-  text-overflow: ellipsis; }
+.statistic_table > tbody > tr > td {
+  padding: 5px 0; }
+  .statistic_table > tbody > tr > td > span {
+    display: inline-block;
+    width: -webkit-calc(100% - 25px);
+    width: -moz-calc(100% - 25px);
+    width: calc(100% - 25px);
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 .table-challenge .fa {
   font-size: 18px; }

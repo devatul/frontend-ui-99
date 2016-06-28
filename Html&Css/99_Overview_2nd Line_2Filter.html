@@ -173,6 +173,7 @@
                             <label class="pull-left mr-md">Applied Filters:</label>
                             <div class="pull-left filter-tags">
                                 <span class="filter-label label label-info" data-value="Accounting/Tax" data-crit="category"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">Accounting/Tax</span></span>
+                                <span class="filter-label label label-info" data-value="Banking Secrecy" data-crit="confidentiality"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">Banking Secrecy</span></span>
                             </div>
                         </div>
                     </div>
@@ -202,7 +203,7 @@
                                                     <option value="Internal Only">Internal Only</option>
                                                     <option value="Confidential">Confidential</option>
                                                     <option value="Secret">Secret</option>
-                                                    <option value="Banking Secrecy">Banking Secrecy</option>
+                                                    <option selected value="Banking Secrecy">Banking Secrecy</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -243,7 +244,7 @@
                                                 <td colspan="3">Switzerland</td>
                                             </tr>
                                             <tr>
-                                                <td>Business In Scope:</td>
+                                                <td>Business Unit in Scope:</td>
                                                 <td colspan="3">Private bank</td>
                                             </tr>
                                             <tr>
@@ -374,7 +375,7 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Confidentiality
+                            <h4 class="widget-title">Classification
                                 <div class="inline-block-item dropdown">
                                     <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
@@ -392,7 +393,7 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Classification
+                            <h4 class="widget-title">Category & Language
                                 <div class="inline-block-item dropdown">
                                     <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
@@ -403,6 +404,7 @@
                             <div class="widget-chart">
                                 <div class="chart chart-md" id="flotPie2Filter"></div>
                                 <div id="legendContainer2Filter"></div>
+                                <div class="chart-disabled-overlay"></div>
                             </div>
                         </div>
                     </section>
@@ -466,34 +468,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Unrestricted</td>
-                                                <td>80% (152.5253) </td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Internal</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Confidential</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Secret</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
                                             <tr class="gradeA odd" role="row">
                                                 <td class="sorting_1">Banking Secrecy</td>
                                                 <td>80% (152.5253)</td>

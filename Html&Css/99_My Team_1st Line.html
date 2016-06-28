@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<!-- Basic -->
+		<meta charset="UTF-8">
+
+		<meta name="keywords" content="HTML5 Admin Template" />
+		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="assets/stylesheets/sass/theme-custom.scss">
+		<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+		<link rel="stylesheet" href="assets/vendor/chartist/chartist.min.css" />
+		<link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
+		<link rel="stylesheet" href="assets/vendor/bootstrap-toggle-master/css/bootstrap-toggle.min.css"/>
+		<link rel="stylesheet" href="assets/vendor/jqcloud/jqcloud.css"/>
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+		<link rel="stylesheet" href="assets/stylesheets/style-dathena.css">
+		<link rel="stylesheet" href="assets/stylesheets/my_profile.css">
+
+		<!-- Head Libs -->
+		<script src="assets/vendor/modernizr/modernizr.js"></script>
+
+	</head>
+	<body>
+	
+		<!-------------------------------------------------------- Navigation ------------------------------------------------------>
+		 <!--my_header start-->
+        <div class="my_header">
+			<nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header dropdown">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+						<a class="bell" id="bell" data-toggle="dropdown">
+							<span class="badge">3</span>
+							<i class="fa fa-bell-o" aria-hidden="true"></i>
+						</a>
+						<div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
+							<div class="row">
+								<div class="col-sm-6 col-noti">
+									<h4>My Notification</h4>
+									<div class="noti-block">
+										<h3 class="noti-date">Today</h3>
+										<ul class="list-unstyled noti-list">
+											<li>
+												<i class="fa fa-clock-o" aria-hidden="true"></i>
+												<p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
+											</li>
+										</ul>
+									</div>
+									<div class="noti-block">
+										<h3 class="noti-date">Yesterday</h3>
+										<ul class="list-unstyled noti-list">
+											<li>
+												<i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+												<p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+											</li>
+											<li>
+												<i class="fa fa-check icon-success" aria-hidden="true"></i>
+												<p>You have completed the review of 30 documents in Accouting/ Tax category </p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-sm-6 col-noti">
+									<h4>My Pending Action: 7
+										<span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
+										<span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
+									</h4>
+									<span>Action completed on time: 100%</span>
+									<ul class="list-unstyled noti-list">
+										<li>
+											<i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+											<p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+										</li>
+										<li>
+											<i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+											<p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+										</li>
+										<li>
+											<i class="fa fa-clock-o" aria-hidden="true"></i>
+											<p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+										</li>
+										<li>
+											<i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+											<p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+										</li>
+									</ul>
+								</div>
+								<!-- <div class="col-sm-12 text-center mt-md">
+									<a href="#">See all notifications</a>
+								</div> -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Dashboard</a></li>
+							<li><span class="badge">3</span><a href="#">Review</a></li>
+							<li><a href="#">Insight</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+					
+					<div class="header-right">
+						<div id="userbox" class="userbox">
+							<a href="#" data-toggle="dropdown" aria-expanded="true">
+								<figure class="profile-picture">
+									<img src="assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg">
+								</figure>
+								<div class="profile-info">
+									<span class="name">Chris Muffat</span>
+									<span class="role">administrator</span>
+								</div>
+				
+								<i class="fa custom-caret"></i>
+							</a>
+				
+							<div class="dropdown-menu">
+								<ul class="list-unstyled">
+									<li class="divider"></li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+									</li>
+									<li>
+										<a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div><!-- /.container-fluid -->
+			</nav>
+        </div>
+        <!--bar_menu start-->
+		<!-------------------------------------------bar_menu start------------------------------------>
+		
+		<div class="container">
+			<div class="tabs tabs-primary">
+				<ul class="my-profile-header nav nav-tabs">
+					<li class="">
+						<a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
+					</li>
+					<li class="active">
+						<a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="my_profile" class="my-profile-tab-content tab-pane">
+						adc
+					</div>
+					<div id="my_team" class="my-team-content tab-pane active">
+						<section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
+							<header class="panel-heading">
+								<h2 class="panel-title">My Team
+									<div class="r dropdown inline-block-item">
+	                                   <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+	                                    <div class="my-team-note dropdown-menu has-arrow dd-md full-mobile">
+	                                        <p>This displays the name of each individual document, as it exists in its current state.</p>
+	                                    </div>
+                                	</div>		
+								</h2>
+							</header>
+							<div class="panel-body">
+								<div id="datatable-editable_wrapper" class="no-footer">
+									<div class="table-responsive">
+										<table class="my-team-table table table-bordered my-team-table-striped table-striped mb-none no-footer" id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+											<thead>
+											<tr role="row">
+												<th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Name
+												</th>
+												<th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of documents reviewed in SLA
+                                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+														<div class="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile">
+															<p>This displays the organisational member who has last modified the document. 
+															This owner is automatically assigned by 99 from the 
+															Document metadata itself gathered during the scanning process.</p>
+														</div>
+													</div>
+												</th>
+												<th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of documents reviewed out SLA
+													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+														<div class="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+															<p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+															The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+														</div>
+													</div>
+												</th>
+												<th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of documents reviewed
+													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+														<div class="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+															<p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+															The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+														</div>
+													</div>
+												</th>
+												<th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Progress
+													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+														<div class="my_team note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+															<p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+															The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+														</div>
+													</div>
+												</th>
+											</tr>
+											</thead>
+											<tbody>
+												<tr class="even" role="row">
+													<td class="bold">
+														Gabriel
+													</td>
+													<td>50</td>
+													<td>50</td>
+													<td>100</td>
+													<td>
+														<div class="my-team-chart c100 p80 warning xsmall">
+								                            <span>80%</span>
+								                            <div class="slice">
+								                                <div class="bar"></div>
+								                                <div class="fill"></div>
+								                            </div>
+								                        </div>		
+													</td>
+												</tr>
+												<tr class="even" role="row">
+													<td class="bold">
+														Chris
+													</td>
+													<td>100</td>
+													<td>0</td>
+													<td>100</td>
+													<td>
+														<div class="my-team-chart c100 p100 warning xsmall">
+								                            <span>100%</span>
+								                            <div class="slice">
+								                                <div class="bar"></div>
+								                                <div class="fill"></div>
+								                            </div>
+								                        </div>		
+													</td>
+												</tr>
+												<tr class="even" role="row">
+													<td class="bold">
+														John
+													</td>
+													<td>80</td>
+													<td>10</td>
+													<td>90</td>
+													<td>
+														<div class="my-team-chart c100 p80 warning xsmall">
+								                            <span>80%</span>
+								                            <div class="slice">
+								                                <div class="bar"></div>
+								                                <div class="fill"></div>
+								                            </div>
+								                        </div>	
+													</td>
+												</tr>
+												<tr class="even" role="row">
+													<td class="bold">
+														Ben
+													</td>
+													<td>20</td>
+													<td>0</td>
+													<td>20</td>
+													<td>
+														<div class="my-team-chart c100 p10 warning xsmall">
+															<span>10%</span>
+								                          <div class="slice">
+								                                <div class="bar"></div>
+								                                <div class="fill"></div>
+								                            </div>
+								                        </div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<p class="text-center text-muted mt-md mb-md">Copyright © 2016 by Dathena Science</p>
+		</div>
+      
+							
+	 <!-- Vendor -->
+		<script src="assets/vendor/jquery/jquery.js"></script>
+		<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+		<script src="assets/vendor/select2/js/select2.full.min.js"></script>
+
+		<!-- Theme Base, Components and Settings -->
+		<script src="assets/javascripts/theme.js"></script>
+		<!-- Theme Initialization Files -->
+		<script src="assets/javascripts/theme.init.js"></script>
+		
+		<!-- Theme Help guide for suggested reviewers -->
+		<script src="assets/javascripts/help_guide.js"></script>
+		<script src="assets/javascripts/javascript.js"></script>
+
+	</body>
+</html>

@@ -341,8 +341,13 @@ input[type="hidden" i], input[type="image" i], input[type="file" i] {
 	color: #d2322d;
 }
 .my-team-chart {
-	float: right;
-	margin: -4px 0px 0px 0px;
+	float: none;
+	margin: -4px auto 0px;
+}
+.my-team-chart span {
+	font-size: 0.3em;
+	line-height: 3.3em;
+	width: 3.4em;
 }
 .my-team-table-striped .even>td {
 	padding: 9px 8px 4px 9px;
@@ -354,6 +359,9 @@ input[type="hidden" i], input[type="image" i], input[type="file" i] {
 th:focus {
 	outline: none;
 }
+.my-team-content .my_team.has-arrow {
+	margin-top: 20px;
+}
 .panel-featured-primary .panel-title .my-team-note {
 	color: #000;
 	letter-spacing: 0px;
@@ -361,20 +369,15 @@ th:focus {
 .my-team-content a.help_question_a {
 	color: #D3D3D3;
 	position: absolute;
-    margin-top: -17px;
-    right: -30px;
-    margin-left: 0px;
+	top: 0px;
 }
 .my-team-table > thead > tr > th { 
 	vertical-align: top;
-	padding: 8px 40px;
+	padding: 8px 20px;
 }
 .my-team-table>thead>tr>th:last-child {
 	min-width: 180px;
 	vertical-align: middle;
-}
-.my-team-content .my-team-table>thead>tr>th:last-child a.help_question_a {
-	margin-top: -7px;
 }
 .my-team-table>thead>tr>th:first-child {
 	vertical-align: middle;
@@ -394,8 +397,8 @@ th:focus {
 .line_document {
 	background-color: #fff;
 	color: #4fca9d;
-	cursor: default;
-	font-size: 16px;
+	font-size: 20px;
+	font-weight: bold;
 }
 .line_document:hover {
 	color: #4fca9d;
@@ -423,14 +426,95 @@ th:focus {
 .line_document_content_header {
 	list-style: none;
 	content: none;
+	padding-left: 0px;
 }
 .line_document_content_header>li {
 	display: inline-block;
+	vertical-align: top;
 }
-
-
-
-
+.line-document-menu.has-arrow {
+	margin-left: 15px;
+	margin-top: -7px;
+}
+.line-document-menu.has-arrow:before {
+	margin-left: 69px;
+}
+.line-document-menu.has-arrow:after {
+	margin-left: 70px;
+}
+.line_document_content_header .fa-clock-o {
+	font-size: 30px;
+	color: #FF0000;
+}
+.line_document_content_header .fa-clock-o.only {
+	color: #F1AA24;
+}
+.line_document_content_header .fa-clock-o.challenged {
+	color: #D3D3D3;
+}
+.document_panel-title>h2 {
+	font-size: 16px;
+}
+.my_team.note_chart_content_review.has-arrow {
+	margin-left: -662px;
+}
+.document_panel-title {
+	padding-top: 2px;
+	padding-left: 5px;
+}
+.document_panel-heading {
+	padding: 12px 18px;
+}
+.document_note {
+	font-size: 14px;
+	padding-left: 30px;
+	margin-bottom: 20px;
+}
+.legal_secret {
+	border-bottom: 1px solid #DADADA;
+	border-left: 1px solid #DADADA;
+	border-right: 1px solid #DADADA;
+}
+.document_review_table>tbody>tr>td {
+	padding: 8px;
+}
+.document_review_table .file-name {
+	max-width: 75px;
+}
+.document_review_table .file-name.w90 {
+	max-width: 90px;
+}
+.document_review_table .fa {
+	font-size: 13px;
+}
+.table-challenge > tbody > tr > td.document_2nd {
+	width: 125px;
+	height: 69px;
+}
+.document_review_table td.document_2nd .doc-path {
+	max-width: 108px;
+	white-space: normal;
+	margin-bottom: -8px;
+	text-align: left;
+}
+.doc-path {
+	height: 38px;
+}
+.document_2nd .more {
+	float: right;
+	color: #0000FF;
+	text-decoration: underline;
+	font-style: italic;
+}
+.doc-path.height-2nd {
+	height: auto;
+}
+.opacitys {
+	opacity: 0.4;
+}
+.document_review_table .select-group select  {
+	background: none;
+}
 
 
 
@@ -460,6 +544,12 @@ th:focus {
 	}
 	.my_team.help_question_content.has-arrow {
 		margin-top: 16px;
+	}
+	.line-document-menu.has-arrow {
+		margin-left: auto;
+	}
+	.my_team.note_chart_content_review.has-arrow {
+		margin-left: auto;
 	}
 }
 @media (max-width: 480px) {
@@ -532,6 +622,9 @@ th:focus {
 	.mpe-tab-pane {
 		padding: 5px 0px 10px 0px;
 	}
+	.document_note {
+		padding-left: 15px;
+	}
 
 @media (max-width: 400px) {
 	.my-profile-ul>li.left2 {
@@ -558,9 +651,9 @@ th:focus {
 		margin-left: 0px;
 	}
 }
+
 @media (min-width: 768px){
 	.my-profile-form-bordered .control-label {
 		text-align: left;
-	}
-	
+	}	
 }

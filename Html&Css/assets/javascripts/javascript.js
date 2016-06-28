@@ -255,7 +255,7 @@ $(function () {
             legend: {
                 show: true,
                 position: 'sw',
-                noColumns: 3,
+                noColumns: 5,
                 container:$("#legendContainer3"), 
             },
             grid: {

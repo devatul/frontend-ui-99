@@ -257,6 +257,9 @@ body {
     &.has-sub-header{
       height: 50px;
     }
+    .userbox .role{
+      display: none;
+    }
 }
 
 .my_header .navbar-default {
@@ -273,10 +276,19 @@ body {
     float: none;
 }
 
+.filter-list{
+  text-align: center;
+}
+
 .filter-list > li {
     display: inline-block;
     margin-left: 15px;
     float: none;
+    .btn-group{
+      .dropdown-toggle{
+        min-width: 135px;
+      }
+    }
 }
 
 .my_main p {
@@ -770,6 +782,16 @@ ul.filter-list li{
   }
   .widget-chart{
     min-height: 300px;
+    position: relative;
+    .chart-disabled-overlay{
+      width: 100%;
+      height: 95%;
+      top: 5%;
+      left: 0;
+      z-index: 9;
+      position: absolute;
+      background-color: rgba(255,255,255,0.8);
+    }
     .chart.chart-md{
       height: 300px;
       position: relative;
@@ -1226,9 +1248,19 @@ div[id^='legendContainer']{
     }
 }
 
-@media (min-width: 768px){
+@media (min-width: 769px){
   .my_header .navbar-collapse {
+    @include calc(width, '100% - 400px');
+    text-align: center;
     float: left;
+    .navbar-nav{
+      float: none;
+      text-align: center;
+      &>li{
+        float: none;
+        display: inline-block;
+      }
+    }
   }
 }
 

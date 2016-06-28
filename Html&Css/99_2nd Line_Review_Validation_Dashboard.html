@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+  <head>
 
-		<!-- Basic -->
-		<meta charset="UTF-8">
+    <!-- Basic -->
+    <meta charset="UTF-8">
 
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+    <meta name="keywords" content="HTML5 Admin Template" />
+    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
+    <meta name="author" content="okler.net">
 
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
 
-		<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
-		<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-    <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
-		<link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
 
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="assets/stylesheets/theme.css" />
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
 
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
-		
-		<!-- Help guide for suggested reviewers CSS-->
-		<link rel="stylesheet" href="assets/stylesheets/style-dathena.css">
-		
-		
-		<!-- Head Libs -->
-		<script src="assets/vendor/modernizr/modernizr.js"></script>	
-		
-	</head>
-	<body>
-	
-		<!--my_header start-->
-    <div class="my_header">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    
+    <!-- Help guide for suggested reviewers CSS-->
+    <link rel="stylesheet" href="assets/stylesheets/style-dathena.css">
+    
+    
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    
+    
+  </head>
+  <body>
+  
+    
+
+    <!--my_header start-->
+        <div class="my_header">
         <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -121,14 +125,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="#">Dashboard</a></li>
-                        <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
-                          <ul class="dropdown-menu">
-                              <li><a href="#">Orphan Review</a></li>
-                              <li><a href="#">Group Review</a></li>
-                              <li class="active"><span class="badge">1</span><a href="#">User Assignment</a></li>
-                          </ul>
-                        </li>
-
+                        <li class="active"><span class="badge">3</span><a href="#">Review</a></li>
                         <li><a href="#">Insight</a></li>
                         <li><a href="#">Review Validation</a></li>
                         <li><a href="#">Anomaly Detection</a></li>
@@ -164,361 +161,337 @@
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
-    </div>
-		
-		<div class="my_main bar_menu container">
+        </div>
+    
+    <div class="my_main bar_menu container">
       <div class="row">
         <div class="col-md-12 mb-md">
-          <div class="row">
-              <div class="col-sm-8">
-                  <p class="page-heading-sm">Documents Classification & Categorisation Review</p>
-                  <div class="filter-tags-block">
-                      <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
-                      <div class="pull-left filter-tags">
+          <p class="page-heading-sm pull-left">Documents Classification Challenge - 2nd Line user's review validation</p>
+          <ul class="filter-buttons pull-right">
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                  <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
+                      <div class="table-responsive">
+                          <table class="table general-table mb-none">
+                              <tbody>
+                              <tr>
+                                  <td>Last Data Scan:</td>
+                                  <td colspan="3">08 May 2016 15:00</td>
+                              </tr>
+                              <tr>
+                                  <td>Country In Scope:</td>
+                                  <td colspan="3">Switzerland</td>
+                              </tr>
+                              <tr>
+                                  <td>Business Unit in Scope:</td>
+                                  <td colspan="3">Private bank</td>
+                              </tr>
+                              <tr>
+                                  <td>Scan Status:</td>
+                                  <td colspan="3">Completed</td>
+                              </tr>
+                              <tr>
+                                  <td>Documents Analyzed:</td>
+                                  <td colspan="3">4.326.215</td>
+                              </tr>
+                              <tr>
+                              <td>File Extension Processed:</td>
+                                  <td colspan="3">txt, log, rtf, pdf, doc, docx, xls, xlsx, xlsm, ppt, pptx, msg, eml, zip, rar</td>
+                              </tr>
+                              <tr>
+                                  <td>Duplicated Documents:</td>
+                                  <td colspan="3"> 4.235.371</td>
+                              </tr>
+                              <tr>
+                                  <td>Encrypted Documents or Archives:</td>
+                                  <td colspan="3">784</td>
+                              </tr>
+                              <tr>
+                                  <td>Documents Skipped:</td>
+                                  <td colspan="3">15.3624</td>
+                              </tr>
+                              </tbody>
+                          </table>
                       </div>
                   </div>
-              </div>
-              <div class="col-sm-4">
-                  <ul class="filter-buttons pull-right">
-                      <li class="dropdown">
-                          <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                          <div class="dropdown-backdrop-custom" style="display:none"></div>
-                          <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
-                              <ul class="filter-list list-unstyled pt-xs">
-                                  <li class="mb-sm">
-                                      <div class="form-group">
-                                          <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category" name="category">
-                                              <option value="Accounting/Tax">Accounting/Tax</option>
-                                              <option value-"Corporate Entity">Corporate Entity</option>
-                                              <option value="Client/Customer">Client/Customer</option>
-                                              <option value="Employee">Employee</option>
-                                              <option value="Legal/Regulatory">Legal/Regulatory</option>
-                                              <option value="Transaction">Transaction</option>
-                                          </select>
-                                      </div>
-                                  </li>
-                                  <li class="mb-sm">
-                                      <div class="form-group">
-                                          <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
-                                              <option value="Public">Public</option>
-                                              <option value="Internal Only">Internal Only</option>
-                                              <option value="Confidential">Confidential</option>
-                                              <option value="Secret">Secret</option>
-                                              <option value="Banking Secrecy">Banking Secrecy</option>
-                                          </select>
-                                      </div>
-                                  </li>
-                                  <li class="mb-sm">
-                                      <div class="form-group">
-                                          <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type" name="document_type">
-                                              <option value="Excel">Excel</option>
-                                              <option value="Word">Word</option>
-                                              <option value="PDF">PDF</option>
-                                              <option value="Power Point">Power Point</option>
-                                          </select>
-                                      </div>
-                                  </li>
-                                  <li class="mb-sm">
-                                      <div class="form-group">
-                                          <select class="form-control select-multiple" multiple="multiple" data-title="Language" name="language">
-                                              <option value="English">English</option>
-                                              <option value="French">French</option>
-                                              <option value="German">German</option>
-                                          </select>
-                                      </div>
-                                  </li>
-                              </ul>
-                          </div>
-                      </li>
-                      <li class="dropdown">
-                          <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                          <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
-                              <div class="table-responsive">
-                                  <table class="table general-table mb-none">
-                                      <tbody>
-                                      <tr>
-                                          <td>Last Data Scan:</td>
-                                          <td colspan="3">08 May 2016 15:00</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Country In Scope:</td>
-                                          <td colspan="3">Switzerland</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Business In Scope:</td>
-                                          <td colspan="3">Private bank</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Scan Status:</td>
-                                          <td colspan="3">Completed</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Documents Analyzed:</td>
-                                          <td colspan="3">4.326.215</td>
-                                      </tr>
-                                      <tr>
-                                      <td>File Extension Processed:</td>
-                                          <td colspan="3">txt, log, rtf, pdf, doc, docx, xls, xlsx, xlsm, ppt, pptx, msg, eml, zip, rar</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Duplicated Documents:</td>
-                                          <td colspan="3"> 4.235.371</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Encrypted Documents or Archives:</td>
-                                          <td colspan="3">784</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Documents Skipped:</td>
-                                          <td colspan="3">15.3624</td>
-                                      </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                          </div>
-                      </li>
-                  </ul>
-              </div>
-          </div>
+              </li>
+          </ul>
         </div>
       </div>
-    </div>
-		<hr />
-		<div class="container">
-			<div class="tabs tabs-primary">
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
-					</li>
-					<li class="">
-						<a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
-					</li>
-					<li class="">
-						<a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
-					</li>
-					<li class="">
-						<a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
-					</li>
-					<li class="">
-						<a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Regulatory</a>
-					</li>
-					<li class="">
-						<a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
-					</li>
-					<li class="">
-						<a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
-					</li>
-				</ul>
-				<div class="help_guide_sub tab-content">
-					<div id="accounting_tax" class="help_guide tab-pane active">
-						<div class="row">
-              <div class="col-md-3">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">Sample Parameters</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body">
-                    <div class="form-group">
-                      <label class="">As % of overall Accounting/ Tax Category</label>
-                      <select name="state" class="form-control ddList">
-                        <option class="lt" value="">0.01% (17 Documents)</option>
-                        <option class="lt" value="">0.02% (34 Documents)</option>
-                      </select>
-                    </div>
-                    <div class="or-divider"><span>OR</span></div>
-                    <div class="form-group">
-                      <label class="">Fixed number of Documents</label>
-                      <select name="state" class="form-control ddList">
-                        <option class="lt" value="">10 Documents (0.17%)</option>
-                        <option class="lt" value="">20 Documents (0.34%)</option>
-                      </select>
-                    </div>
-                  </div>
-                </section>
-              </div>    
-
-              <div class="col-md-9">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">Document Category Information</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body">
-                    <span>Number of Documents: 168,000</span>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Classification Overview</h4>
-                        <div id="confidentialityOverviewChart" class="document-chart"></div>
-                      </div>
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Document type per Level of Confidentiality</h4>
-                        <div id="confidentialityLevelChart" class="document-chart"></div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>  
-            </div>
+        </div>
+    <hr />
+    <div class="container">
+      <div class="tabs tabs-primary reviewer-tab">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
+          </li>
+          <li class="">
+            <a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
+          </li>
+          <li class="">
+            <a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
+          </li>
+          <li class="">
+            <a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
+          </li>
+          <li class="">
+            <a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Regulatory</a>
+          </li>
+          <li class="">
+            <a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+          </li>
+          <li class="">
+            <a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="accounting_tax" class="tab-pane active">
             <div class="row">
               <div class="col-md-12">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">User Selection - Key contributor for Accounting/ Tax Documents</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <ul class="help_guide_content_left_ul filter-list pt-xs">
-                            <li>
-                              <select name="state" class="help_question_select form-control ddList">
-                                <option value="">Timeframe</option>
-                                <option class="lt" value="">1 year</option>
-                                <option class="lt" value="">6 months</option>
-                                <option class="lt" value="">3 months</option>
-                                <option class="lt" value="">1 months</option>
-                              </select>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This establishes the timeframe for which user activity will be based on.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="wrap-select">
-                                <select name="state" class="help_question_select form-control ddList">
-                                  <option value="">Number of Users</option>
-                                  <option class="lt" value="">Top 30</option>
-                                  <option class="lt" value="">Top 2</option>
-                                  <option class="lt" value="">Top 20</option>
-                                  <option class="lt" value="">Top 15</option>
-                                  <option class="lt" value="">Top 10</option>
-                                  <option class="lt" value="">Top 5</option>
-                                </select>
-                              </div>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine the number of users that are displayed as suggested reviewers, 
-                                ranked by activity. If the chosen number is greater than the number of users detected, 
-                                the screen will display all relevant results.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="wrap-select">
-                                <select name="state" class="help_question_select form-control ddList">
-                                  <option value="">Type of Reviewer</option>
-                                  <option class="lt" value="">Document Last Modifie</option>
-                                  <option class="lt" value="">Document Creator</option>
-                                </select>
-                              </div>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine whether the suggested users selected are based on who created the document 
-                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                              </div>
-                            </li>
-                          </ul>
+                <div class="row mb-sm">
+                  <div class="col-sm-2 col-xs-4 hidden-xs">Reviewers List</div>
 
-                      </div>
-
-                      <div class="col-md-6">
-                          <div class="row">
-                            <div class="col-xs-8">
-                              <div>Users</div>
-                              <div id="userReviewChart"></div>
-                            </div>
-                            <div class="col-xs-4 select-reviewers">
-                              <div style="margin-bottom:8px">Select the Reviewer(s)</div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                            </div>
-                          </div>
-                      </div>
+                  <div class="col-sm-10 col-xs-12">
+                    Accounting/ Tax Review Status: 4 users - 23 documents challenged - Progress:
+                    <div class="c100 p20 danger xsmall">
+                        <span>20%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
                     </div>
+
                   </div>
-                  <div class="pull-right">
-                    <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Validate and Go to Next Category</button>
+                </div>
+                <div class="tabs tabs-vertical tabs-primary tabs-left">
+                  <ul class="nav nav-tabs col-sm-1 col-xs-12">
+                    <li class="active">
+                      <a href="#reviewer1" data-toggle="tab" aria-expanded="true">todd.smith</a>
+                    </li>
+                    <li class="">
+                      <a href="#reviewer2" data-toggle="tab" aria-expanded="false">tony.gomes</a>
+                    </li>
+                    <li class="">
+                      <a href="#reviewer3" data-toggle="tab" aria-expanded="false">stan.siow</a>
+                    </li>
+                    <li class="">
+                      <a href="#reviewer4" data-toggle="tab" aria-expanded="false">chris.muffat</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content col-sm-11 col-xs-12">
+                    <div id="reviewer1" class="tab-pane active">
+                      <div class="reviewer-info">
+                        <span class="mr-md">Reviewer: todd.smith</span>
+                        <span>3 Document Challenged - Validation Progress: </span>
+                        <div class="c100 p66 warning xsmall">
+                            <span>66%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped mb-none no-footer table-challenge">
+                          <thead>
+                            <tr>
+                              <th>Status</th>
+                              <th>Document Name</th>
+                              <th>Path</th>
+                              <th>Category</th>
+                              <th>Confidentiality</th>
+                              <th>2nd Line Comment</th>
+                              <th>2nd Line Validation</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><i class="fa fa-check icon-success"></i></td>
+                              <td class="text-left">
+                                <span class="text-italic file-name">Tax report.ppt</span>
+                                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                        <ul>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                              </td>
+                              <td class="text-left">
+                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                              </td>
+                              <td class="vertical-top">
+                                <select class="form-control">
+                                    <option>Legal/Regulatory</option>
+                                    <option>Employee</option>
+                                    <option>Transaction</option>
+                                    <option selected="">Accounting/ Tax</option>
+                                    <option>Corporate Entity</option>
+                                    <option>Customer</option>
+                                </select>
+                              </td>
+                              <td class="vertical-top text-left">
+                                <select class="form-control changed">
+                                    <option>Unrestricted</option>
+                                    <option>Internal</option>
+                                    <option>Confidential</option>
+                                    <option selected="">Secret</option>
+                                    <option>Banking Secrecy</option>
+                                </select>
+                                <span class="text-italic previous-status">Previous: Confidentiality</span>
+                              </td>
+                              <td>
+                                <textarea class="form-control">challenge on confidentiality accepted</textarea>
+                              </td>
+                              <td>
+                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
+                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><i class="fa fa-times icon-danger"></i></td>
+                              <td class="text-left">
+                                <span class="text-italic file-name">Tax 2015.xls</span>
+                                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                        <ul>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                              </td>
+                              <td class="text-left">
+                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                              </td>
+                              <td class="vertical-top">
+                                <select class="form-control">
+                                    <option>Legal/Regulatory</option>
+                                    <option>Employee</option>
+                                    <option>Transaction</option>
+                                    <option selected="">Accounting/ Tax</option>
+                                    <option>Corporate Entity</option>
+                                    <option>Customer</option>
+                                </select>
+                              </td>
+                              <td class="vertical-top text-left">
+                                <select class="form-control changed">
+                                    <option>Unrestricted</option>
+                                    <option>Internal</option>
+                                    <option>Confidential</option>
+                                    <option selected="">Secret</option>
+                                    <option>Banking Secrecy</option>
+                                </select>
+                                <span class="text-italic previous-status">Previous: Confidentiality</span>
+                              </td>
+                              <td>
+                                <textarea class="form-control">Reason for rejection is that the classification is too high</textarea>
+                              </td>
+                              <td>
+                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success disabled"></i></a>
+                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger"></i></a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><i class="fa fa-clock-o"></i></td>
+                              <td class="text-left">
+                                <span class="text-italic file-name">Case2.pdf</span>
+                                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                        <ul>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                              </td>
+                              <td class="text-left">
+                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                              </td>
+                              <td class="vertical-top text-left">
+                                <select class="form-control changed">
+                                    <option selected="">Legal</option>
+                                    <option>Employee</option>
+                                    <option>Transaction</option>
+                                    <option>Accounting/ Tax</option>
+                                    <option>Corporate Entity</option>
+                                    <option>Customer</option>
+                                </select>
+                                <span class="text-italic previous-status">Previous: Accounting/ Tax</span>
+                              </td>
+                              <td class="vertical-top text-left">
+                                <select class="form-control">
+                                    <option>Unrestricted</option>
+                                    <option>Internal</option>
+                                    <option selected="">Confidential</option>
+                                    <option>Secret</option>
+                                    <option>Banking Secrecy</option>
+                                </select>
+                              </td>
+                              <td>
+                                <textarea class="form-control">Challenge is accept</textarea>
+                              </td>
+                              <td>
+                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success disabled"></i></a>
+                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                    <div id="reviewer2" class="tab-pane">
+                      <p>Recent</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                    </div>
+
+                    <button class="btn btn-green btn-next-reviewer pull-right mt-sm">Go to next reviewer</button>
+
                   </div>
-                </section>
+
+                  <button class="btn btn-green btn-next-reviewer pull-right mt-sm mr-md">Go to next Category</button>
+                </div>
+
               </div>
             </div>
-					</div>
-					<div id="corporate_entity" class="tab-pane">
-						<p>corporate_entity</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="client_customer" class="tab-pane">
-						<p>client_customer</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="employee" class="tab-pane">
-						<p>employee</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="legal_regulatory" class="tab-pane">
-						<p>legal_regulatory</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="transaction" class="tab-pane">
-						<p>transaction</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="summary" class="tab-pane">
+          </div>
+          <div id="corporate_entity" class="tab-pane">
+            <p>corporate_entity</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+          </div>
+          <div id="client_customer" class="tab-pane">
+            <p>client_customer</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+          </div>
+          <div id="employee" class="tab-pane">
+            <p>employee</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+          </div>
+          <div id="legal_regulatory" class="tab-pane">
+            <p>legal_regulatory</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+          </div>
+          <div id="transaction" class="tab-pane">
+            <p>transaction</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+          </div>
+          <div id="summary" class="tab-pane">
             <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
                   <h2 class="panel-title">Accounting/ Tax</h2>
@@ -884,37 +857,37 @@
                 <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and notify all reviewers</button>
               </div>
             </div>
-					</div>
-				</div>
-			</div>
-		</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		
+    
       
-		
-	<!-- Vendor -->
-		<script src="assets/vendor/jquery/jquery.js"></script>
-		<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-		<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
-		<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
-		<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
-		<script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-		<script src="assets/vendor/select2/js/select2.full.min.js"></script>
-    <script src="assets/vendor/highcharts/js/highcharts.js"></script>
+    
+  <!-- Vendor -->
+    <script src="assets/vendor/jquery/jquery.js"></script>
+    <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="assets/vendor/select2/js/select2.full.min.js"></script>
 
-		<!-- Theme Base, Components and Settings -->
-		<script src="assets/javascripts/theme.js"></script>
+    <!-- Theme Base, Components and Settings -->
+    <script src="assets/javascripts/theme.js"></script>
 
-		<!-- Theme Initialization Files -->
-		<script src="assets/javascripts/theme.init.js"></script>
-    <script src="assets/javascripts/theme.admin.extension.js"></script>
-		
-		
-		<script src="assets/javascripts/javascript.js"></script>
-    <script src="assets/javascripts/javascript.overview.js"></script>
-    <script src="assets/javascripts/javascript.assignement.js"></script>
-		
+    <!-- Theme Initialization Files -->
+    <script src="assets/javascripts/theme.init.js"></script>
+    
+    <!-- Theme Help guide for suggested reviewers -->
+    <script src="assets/javascripts/help_guide.js"></script>
+    <script src="assets/javascripts/chart.js"></script>
+    
+    <script src="assets/javascripts/javascript.js"></script>
+    <script src="assets/javascripts/javascript.todo.js"></script>
+    
+    
 
-	</body>
+  </body>
 </html>

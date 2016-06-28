@@ -147,10 +147,11 @@
   height: 300px;
 }
 
-.review_table{
+.statistic_table{
   &>tbody{
     &>tr{
       &>td{
+      padding:5px 0;
         &>span{
           display: inline-block;
           @include calc(width, '100% - 25px');

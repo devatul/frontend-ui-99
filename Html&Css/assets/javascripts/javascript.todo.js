@@ -77,7 +77,7 @@ $(function () {
           $('.show-on-checked-all').show();
       }
       else{
-          $('.show-on-checked-all').hide();
+          $('.show-on-checked-all').hide();		  
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
@@ -122,3 +122,5 @@ $(function () {
   });     
 
 });
+
+
