@@ -956,6 +956,25 @@ ul.filter-list li{
   .checkbox-custom{
     padding: 0 0 0 5px;
   }
+  &.orphan-review{
+    @media (min-width: 1024px){
+      .progress{
+            min-width: 100px;
+      }
+    }
+    .select-group .selected-info{
+      position: relative;
+    }
+    .doc-check{
+      .fa-clock-o{
+        display: none;
+      }
+      .fa-check{
+        display: inline-block;
+        color: $color-info;
+      }
+    }
+  }
   .doc-check{
     font-size: 18px;
     text-decoration: none;
@@ -1224,6 +1243,8 @@ div[id^='legendContainer']{
     margin-right: 5px;
     font-size: 100%;
     font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
     .filter-remove{
       color: #fff;
       margin-right: 5px;
@@ -1349,6 +1370,20 @@ div[id^='legendContainer']{
   .dropdown-menu.dd-filter{
     width: 90vw
   }
+  .view-stat-block{
+    label{
+      display: block;
+    }
+  }
+  .my-actions-btn-group{
+    position: relative;
+    right: -20px;
+    .panel-action-toggle{
+      top: -100px;
+      right: 20px;
+      position: relative;
+    }
+  }
 }
 
 @media (max-width: 400px){
@@ -1368,3 +1403,4 @@ div[id^='legendContainer']{
 @import 'pages/notification';
 @import 'pages/reviewer';
 @import 'pages/exception';
+@import 'pages/admin';

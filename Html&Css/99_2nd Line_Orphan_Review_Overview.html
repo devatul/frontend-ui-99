@@ -43,8 +43,7 @@
 	</head>
 	<body>
 	
-		
-
+	
 		<!--my_header start-->
         <div class="my_header">
             <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
@@ -125,8 +124,8 @@
                             <li><a href="#">Dashboard</a></li>
                             <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
                               <ul class="dropdown-menu">
-                                  <li><a href="#">Orphan Review</a></li>
-                                  <li class="active"><a href="#">Group Review</a></li>
+                                  <li class="active"><a href="#">Orphan Review</a></li>
+                                  <li><a href="#">Group Review</a></li>
                                   <li><span class="badge">1</span><a href="#">User Assignment</a></li>
                               </ul>
                             </li>
@@ -281,15 +280,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
-                        <h5><span class="text-bold">Group Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
+                        <h5><span class="text-bold">Orphan Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
                         <div class="form-group">
                             <div class="input-group mb-md">
                                 <label for="choose_cluster">
-                                    Choose a Group
+                                    Choose a Orphan
 
                                     <select class="js-example-basic-single js-states form-control" id="choose_cluster">
-                                        <option value="cluster0">Group 0</option>
-                                        <option value="cluster1">Group 1</option>
+                                        <option value="cluster0">Orphan 0</option>
+                                        <option value="cluster1">Orphan 1</option>
                                     </select>
                                 </label>
                                 <button class="btn btn-green btn-ok" type="button">OK</button>
@@ -309,7 +308,7 @@
                     <div class="col-sm-12">
                         <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
                             <header class="panel-heading">
-                                <h2 class="panel-title">Group Statistics</h2>
+                                <h2 class="panel-title">Orphan Statistics</h2>
                             </header>
                             <div class="review_panel-body panel-body">
                                 <div class="row">
@@ -326,7 +325,7 @@
                                               </div>
                                           </header>
                                           <div class="panel-body" id="stat-block">
-                                            <h4 class="mt-none">Cluster Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+                                            <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
                                             <div class="mt-lg">
                                               <a href="#" class="btn btn-green">Subclustering</a>
                                               <span class="dropdown">
@@ -338,82 +337,6 @@
                                             </div>
                                           </div>
                                         </section>
-
-                                        <!-- <table class="review_table table table-condensed mb-none">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-left"><span>Total number of Documents</span>
-                          														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                          															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                          																<p>This represents the total number of documents that have been detected by 99 during the initial scan of 
-                          																the locations that have been inputted into the tool.</p>
-                          															</div>
-                          														</div>
-                          													</td>
-                                                    <td class="text-left">8</td>
-                                                <tr>
-                                                    <td class="text-left"><span>Completed Number of Documents</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the number of documents that 99 has been successful in classifying.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Average Centroid Distance</span>
-                          														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                          															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                          																<p>This represents the average level of deviance from the centroid point, 
-                          																where the centroid point represents the optimal point of classification. 
-                          																The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
-                          															</div>
-                          														</div>
-                          													</td>
-                                                    <td class="text-left">3.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Maximum Centroid Distance</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the document that has been registered furthest from the centroid point. 
-                        																The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">9.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Minimum Centroid Distance</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the document that has been registered closest to the centroid point. 
-                        																Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">1.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Centroid Distance Varience</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represent the document variance within the selected cluster. Variance is the expectation of the 
-                        																squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">12.5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table> -->
                                     </div>  
                                     <div class="col-md-9">
                                         <div class="tabs">
@@ -476,7 +399,7 @@
         </div>
 		
 		
-		    <div class="container">
+		<div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary actions-panel">
@@ -504,7 +427,7 @@
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
+                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
                                         <thead>
                                             <tr role="row">
                                                 <th>
@@ -539,7 +462,7 @@
 														</div>
 													</div>
 												</th>
-                                                <th class="review_note">Proposed category (confidence level)
+                                                <th class="review_note">Category
 													<div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
 														<div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
@@ -550,7 +473,7 @@
 														</div>
 													</div>
 												</th>
-                                                <th class="review_note">Proposed confidentiality (confidence level)
+                                                <th class="review_note">Confidentiality
 													   <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
 														<div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
@@ -609,12 +532,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -626,12 +543,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -679,12 +590,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -696,12 +601,6 @@
                                                               <span class="progress-percentage">(67%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -749,12 +648,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -766,12 +659,6 @@
                                                               <span class="progress-percentage">(30%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -819,12 +706,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -836,12 +717,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -889,12 +764,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -906,12 +775,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -959,12 +822,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -976,12 +833,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1029,12 +880,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1046,12 +891,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1099,12 +938,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1116,12 +949,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1169,12 +996,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1186,12 +1007,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1239,12 +1054,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1256,12 +1065,6 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
-                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1323,7 +1126,7 @@
 		<script src="assets/javascripts/theme.init.js"></script>
 
 		<script src="assets/javascripts/javascript.js"></script>
-    <script src="assets/javascripts/javascript.overview.js"></script>
+        <script src="assets/javascripts/javascript.overview.js"></script>
 		<script src="assets/javascripts/javascript.todo.js"></script>
 		<script src="assets/javascripts/javascript.cluster.js"></script>
 		<script src="assets/javascripts/help_guide.js"></script>

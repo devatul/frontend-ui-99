@@ -409,7 +409,6 @@ th:focus {
 	text-decoration: none;
 }
 .line_document_header>li {
-	display: inline-block;
 	padding: 8px 2px 8px 15px;
 	background-color: #fff;
 	border-top: 3px solid #4fca9d;
@@ -419,6 +418,8 @@ th:focus {
 	border-left: 1px solid #EEE;
 	border-right: 1px solid #EEE;
 	padding-left: 0px;
+	list-style: none; 
+	content: none;
 }
 .line_document>i {
 	padding-left: 5px;
@@ -478,9 +479,10 @@ th:focus {
 .document_review_table>tbody>tr>td {
 	padding: 8px;
 }
-.document_review_table .file-name {
-	max-width: 75px;
+.document_review_table .my_review_note {
+	min-width: 114px;
 }
+
 .document_review_table .file-name.w90 {
 	max-width: 90px;
 }
@@ -494,11 +496,9 @@ th:focus {
 .document_review_table td.document_2nd .doc-path {
 	max-width: 108px;
 	white-space: normal;
-	margin-bottom: -8px;
+	margin-bottom: -4px;
 	text-align: left;
-}
-.doc-path {
-	height: 38px;
+	float: left;
 }
 .document_2nd .more {
 	float: right;
@@ -506,15 +506,78 @@ th:focus {
 	text-decoration: underline;
 	font-style: italic;
 }
+.document_2nd .zoom-out {
+	float: right;
+	color: #0000FF;
+	text-decoration: underline;
+	font-style: italic;
+}
+.zoom-out {
+	display: none;
+}
+.zoom-out.zoom-out-block {
+	display: block !important;
+}
+.more {
+	display: none;
+}
+.document_2nd .more-note>a {
+	float: right;
+	color: #0000FF;
+	text-decoration: underline;
+	font-style: italic;
+}
+.more-note {
+	display: none;
+}
+.more1.display-none {
+	display: none !important;
+}
+.more-click-bottom {
+	display: none;
+}
+.more-click-bottom.more-click-bottom-block {
+	display: block;
+}
+.more-click-bottom.has-arrow:after {
+	margin-left: 590px;
+}
+.more-click-bottom.has-arrow:before {
+	margin-left: 590px;
+}
 .doc-path.height-2nd {
-	height: auto;
+	height: auto !important;
 }
 .opacitys {
-	opacity: 0.4;
+	opacity: 0.6;
 }
 .document_review_table .select-group select  {
 	background: none;
+	-webkit-appearance: menulist;
+	min-width: 122px;
 }
+.select-group select.black {
+	color: #777;
+}
+.select-group select.red {
+	color: #d2322d;
+}
+.btn-file-info {
+	margin-left: 5px;
+}
+.document_review_table > tbody > tr > td.my_file-name {
+	padding: 10px 5px 10px 10px !important;
+}
+.more.display-block, .more-note.display-block {
+	display: block;
+}
+.document_review_table .checkbox-custom {
+	padding: 0px 5px 0px 5px;
+}
+.approve-button-2 {
+	margin-left: 42px;
+}
+
 
 
 

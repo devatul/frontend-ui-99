@@ -24,8 +24,10 @@ $(document).ready(function(){
 	$(".abc").click(function(){
 		$(this).parent().next().toggleClass("my-team-p-b");
 	});
-	$("a.more").click(function(){
-		$(this).prev().toggleClass("height-2nd");
+	$("a.more").click(function(){ 
+		$(".doc-path").toggleClass("height-2nd");
+		$(this).children(".more1").toggleClass("display-none");
+		$(this).children(".zoom-out").toggleClass("zoom-out-block");
 	});
 	$("tr.opa>td.opa-child select").click(function(){
 		$(this).closest('tbody').find('tr').addClass('opacitys');
@@ -46,5 +48,19 @@ $(document).ready(function(){
 			
 			container.removeClass('active').closest('tbody').find('tr').removeClass('opacitys');
 		}
+	});
+	$( ".my-doc-path" ).each(function( index ) {
+		  var hi = "38"; 
+		var h = $(this).height();
+		if(h>hi){
+			$(this).css('height', hi);
+			$(this).next().addClass("display-block");
+			console.log(h);
+			console.log(hi);
+		}
+		
+		});
+	$(".more-click").click(function(){
+		$(this).next().toggleClass("more-click-bottom-block");
 	});
 });

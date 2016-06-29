@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
 		<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
 		<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-        <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="assets/vendor/chartist/chartist.min.css" />
 		<link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
 		<link rel="stylesheet" href="assets/vendor/bootstrap-toggle-master/css/bootstrap-toggle.min.css"/>
@@ -326,7 +326,86 @@
                                               </div>
                                           </header>
                                           <div class="panel-body" id="stat-block">
-                                            <h4 class="mt-none">Cluster Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+                                            <h4 class="mt-none">Cluster Quality 
+                                              <!-- <i class="cluster-quality-icon fa fa-arrow-right icon-warning"></i> -->
+                                              <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
+                                            </h4>
+                                            <table class="statistic_table table table-condensed mb-none">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left"><span>Total number of Documents</span>
+                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                              <p>This represents the total number of documents that have been detected by 99 during the initial scan of 
+                                                              the locations that have been inputted into the tool.</p>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td class="text-left">8</td>
+                                                    <tr>
+                                                        <td class="text-left"><span>Completed Number of Documents</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the number of documents that 99 has been successful in classifying.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Average Centroid Distance</span>
+                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                              <p>This represents the average level of deviance from the centroid point, 
+                                                              where the centroid point represents the optimal point of classification. 
+                                                              The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td class="text-left">3.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Maximum Centroid Distance</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the document that has been registered furthest from the centroid point. 
+                                                            The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">9.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Minimum Centroid Distance</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the document that has been registered closest to the centroid point. 
+                                                            Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">1.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Centroid Distance Varience</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represent the document variance within the selected cluster. Variance is the expectation of the 
+                                                            squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">12.5</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
                                             <div class="mt-lg">
                                               <a href="#" class="btn btn-green">Subclustering</a>
                                               <span class="dropdown">
@@ -339,81 +418,7 @@
                                           </div>
                                         </section>
 
-                                        <!-- <table class="review_table table table-condensed mb-none">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-left"><span>Total number of Documents</span>
-                          														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                          															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                          																<p>This represents the total number of documents that have been detected by 99 during the initial scan of 
-                          																the locations that have been inputted into the tool.</p>
-                          															</div>
-                          														</div>
-                          													</td>
-                                                    <td class="text-left">8</td>
-                                                <tr>
-                                                    <td class="text-left"><span>Completed Number of Documents</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the number of documents that 99 has been successful in classifying.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Average Centroid Distance</span>
-                          														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                          															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                          																<p>This represents the average level of deviance from the centroid point, 
-                          																where the centroid point represents the optimal point of classification. 
-                          																The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
-                          															</div>
-                          														</div>
-                          													</td>
-                                                    <td class="text-left">3.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Maximum Centroid Distance</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the document that has been registered furthest from the centroid point. 
-                        																The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">9.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Minimum Centroid Distance</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represents the document that has been registered closest to the centroid point. 
-                        																Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">1.6</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Centroid Distance Varience</span>
-                        														<div class="dropdown dropdown-file-info-holder inline-block-item">
-                        															<a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        															<div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                        																<p>This represent the document variance within the selected cluster. Variance is the expectation of the 
-                        																squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
-                        															</div>
-                        														</div>
-                        													</td>
-                                                    <td class="text-left">12.5</td>
-                                                </tr>
-                                            </tbody>
-                                        </table> -->
+                                        
                                     </div>  
                                     <div class="col-md-9">
                                         <div class="tabs">
@@ -432,7 +437,7 @@
                                                 <div id="distribution" class="tab-pane active">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <h4 class="chart-title">Classification
+                                                            <h4 class="chart-title">Classification 
                                                               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                               <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                                 <p>This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99.</p>
@@ -476,7 +481,7 @@
         </div>
 		
 		
-		    <div class="container">
+		<div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary actions-panel">
@@ -1323,7 +1328,7 @@
 		<script src="assets/javascripts/theme.init.js"></script>
 
 		<script src="assets/javascripts/javascript.js"></script>
-    <script src="assets/javascripts/javascript.overview.js"></script>
+        <script src="assets/javascripts/javascript.overview.js"></script>
 		<script src="assets/javascripts/javascript.todo.js"></script>
 		<script src="assets/javascripts/javascript.cluster.js"></script>
 		<script src="assets/javascripts/help_guide.js"></script>
