@@ -48,10 +48,10 @@ body .btn-primary:hover {
 	margin-top: 15px;
 }
 .my-profile-bottom .btn-primary {
-	background-color: #349da2;
+	background-color: #0FABE6;
 }
 .my-profile-bottom .btn-primary:hover {
-	background-color: #71bb94;
+	background-color: #0D9FD6;
 }
 .my-profile-content-top {
 	margin-top: 10px;
@@ -69,15 +69,6 @@ body .btn-primary:hover {
 	color: #000;
 	font-size: 14px;
 }
-.my-profile-ul>li.left1 {
-	margin-left: 10px;
-}
-.my-profile-ul>li.left2 {
-	margin-left: 10px;
-}
-.my-profile-ul>li.left3 {
-	margin-left: 10px;
-}
 .left3>p {
 	margin-bottom: 0px;
 }
@@ -85,11 +76,27 @@ body .btn-primary:hover {
 	margin-left: 15px;
 }
 
-.left2>p {
+.left2 p.content_profile_note {
 	margin-bottom: 0px;
 }
-.left2>div.checkbox-custom {
+.content_profile_note_ul {
+	list-style: none;
+	content: none;
+	padding-left: 0px;
+}
+.content_profile_note_ul>li {
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 5px;
+}
+.my-profile-edit-content .tabs-vertical ul.content_profile_note_ul li:first-child {
+	border-top: 0px;
+}
+.left2 div.checkbox-custom {
 	margin-left: 15px;
+}
+.my-profile-edit-content .tabs-vertical ul li.left4:last-child {
+	border-bottom: 0px;
 }
 .my-profile-left {
 	padding-left: 70px;
@@ -141,16 +148,16 @@ body .btn-primary:hover {
 	font-family: "Open Sans", Arial, sans-serif;
 }
 .mpe_top>a {
-	color: #0000ff;
+	color: #0D9FD6;
 	font-size: 14px;
 	text-decoration: none;
 }
 .mpe_top>a>i {
 	padding-right: 5px;
-	color: #0000ff;
+	color: #0D9FD6;
 }
 .mpe_top>a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 .mpe-list-content {
 	margin-top: 20px;
@@ -207,7 +214,7 @@ body .btn-primary:hover {
 	min-height: 44px;
 }
 .switch.switch-primary .ios-switch .on-background {
-	background-color: #198c19;
+	background-color: #59D0A7;
 }
 
 /***********************	My profile photo******************************/
@@ -229,15 +236,15 @@ body .btn-primary:hover {
 }
 .my-profile-photo-a2 {
 	font-size: 14px;
-	color: #0000ff;
+	color: #0D9FD6;
 	text-decoration: none;
 }
 .my-profile-photo-a2>span {
-	text-decoration: underline;
+	text-decoration: none;
 	margin-left: 30px;
 }
 .my-profile-photo-a2:hover {
-	color: #0000ff;
+	color: #0D9FD6;
 }
 .my-profile-photo-a2:hover>i {
 	color: #000;
@@ -278,17 +285,6 @@ body .btn-primary:hover {
     direction: ltr;
     cursor: pointer;
 }
-input[type="file" i] {
-    align-items: baseline;
-    color: inherit;
-    text-align: start;
-}
-input[type="hidden" i], input[type="image" i], input[type="file" i] {
-    -webkit-appearance: initial;
-    background-color: initial;
-    padding: initial;
-    border: initial;
-}
 .tabs-left .mpe-tab-content {
    border: 1px solid #ccc;
    border-radius: 0 5px 5px 5px;
@@ -309,6 +305,16 @@ input[type="hidden" i], input[type="image" i], input[type="file" i] {
 }
 .change-email-bottom {
 	padding-left: 0px;
+}
+.my-team-table .progress-radial {
+	float: none;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    margin-right: 0px;
+    background-color: #006600;
 }
 .my-team-table-striped > tbody > tr:nth-of-type(odd), .even {
 	background-color: #fff;
@@ -489,10 +495,7 @@ th:focus {
 .document_review_table .fa {
 	font-size: 13px;
 }
-.table-challenge > tbody > tr > td.document_2nd {
-	width: 125px;
-	height: 69px;
-}
+
 .document_review_table td.document_2nd .doc-path {
 	max-width: 108px;
 	white-space: normal;
@@ -533,11 +536,12 @@ th:focus {
 .more1.display-none {
 	display: none !important;
 }
-.more-click-bottom {
-	display: none;
+.more-click-bottom>p {
+	background-color: #fff;
 }
 .more-click-bottom.more-click-bottom-block {
 	display: block;
+	margin-top: -4px;
 }
 .more-click-bottom.has-arrow:after {
 	margin-left: 590px;
@@ -578,9 +582,71 @@ th:focus {
 	margin-left: 42px;
 }
 
+/*	*	*	*	*	*	*	PwC Records Retention Update Page	*	*	*	*	*	*/
+
+.record_search {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.record_table > tbody > tr > td {
+	border-top: 0px;
+	vertical-align: middle;
+	padding: 8px 16px;
+}
+.record_table > thead > tr > th {
+	border-bottom: 0px;
+	padding: 8px 16px;
+}
+select.record_select {
+	width: 100%;
+	height:auto;
+	padding: 4px;
+}
+.record_select>option:first-child {
+	display: none;
+}
+.record_select>option {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.record-align-left {
+	text-align: left;
+}
+.record-align-left>ul {
+	list-style: none;
+	content: none;
+	width: 100%;
+	padding-left: 0px;
+}
+.record-align-left>ul>li {
+	display: inline;
+	text-align: left;
+	float: left;
+}
+.record-align-left>ul>li:last-child {
+	text-align: right;
+	float: right;
+}
+.dataTables_wrapper table thead th.review_note.review_note_r {
+	padding-right: 8px !important;
+}
+.document_review_table textarea {
+	min-width: 170px;
+}
+.document_2nd {
+	min-width: 150px;
+}
 
 
 
+
+
+
+@media screen and (max-width: 991px) {
+	.table-responsive > .document_review_table  > tbody > tr > td.ipab_document {
+	white-space: normal;
+	}
+}
 
 
 @media (max-width: 768px) {
@@ -688,7 +754,7 @@ th:focus {
 	.document_note {
 		padding-left: 15px;
 	}
-
+}
 @media (max-width: 400px) {
 	.my-profile-ul>li.left2 {
 		margin-left: 0px;

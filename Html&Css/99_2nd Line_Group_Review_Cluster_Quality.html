@@ -61,69 +61,75 @@
                         <a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
                         <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
-                            <div class="row">
-                                <div class="col-sm-6 col-noti">
-                                    <h4>My Notification</h4>
-                                    <div class="noti-block">
-                                        <h3 class="noti-date">Today</h3>
-                                        <ul class="list-unstyled noti-list">
-                                            <li>
-                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="noti-block">
-                                        <h3 class="noti-date">Yesterday</h3>
-                                        <ul class="list-unstyled noti-list">
-                                            <li>
-                                                <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                                <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-check icon-success" aria-hidden="true"></i>
-                                                <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-noti">
-                                    <h4>My Pending Action: 7
-                                        <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
-                                        <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
-                                    </h4>
-                                    <span>Action completed on time: 100%</span>
+                        <div class="row">
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Notification</h4>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Today</h3>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
-                                            <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
-                                        </li>
-                                        <li>
+                                        <li data-noti-type="waiting">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+                                            <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- <div class="col-sm-12 text-center mt-md">
-                                    <a href="#">See all notifications</a>
-                                </div> -->
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Yesterday</h3>
+                                    <ul class="list-unstyled noti-list">
+                                        <li data-noti-type="danger">
+                                            <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                        </li>
+                                        <li data-noti-type="success">
+                                            <i class="fa fa-check icon-success" aria-hidden="true"></i>
+                                            <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Pending Action: 7
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                                </h4>
+                                <span class="actions-percentage">Action completed on time: 100%</span>
+                                <div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Help content</p>
+                                    </div>
+                                </div>
+                                <ul class="list-unstyled noti-list">
+                                    <li data-noti-type="danger">
+                                        <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                        <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                    </li>
+                                    <li data-noti-type="warning">
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+                                    </li>
+                                    <li data-noti-type="waiting">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+                                    </li>
+                                    <li  data-noti-type="warning">
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 text-center mt-md">
+                                <a href="#">See all notifications</a>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="#">Dashboard</a></li>
-                            <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
+                            <li class="dropdown active"><span class="badge">1</span><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
                               <ul class="dropdown-menu">
                                   <li><a href="#">Orphan Review</a></li>
                                   <li class="active"><a href="#">Group Review</a></li>
@@ -186,7 +192,7 @@
                                               <option value-"Corporate Entity">Corporate Entity</option>
                                               <option value="Client/Customer">Client/Customer</option>
                                               <option value="Employee">Employee</option>
-                                              <option value="Legal/Regulatory">Legal/Regulatory</option>
+                                              <option value="Legal/Compliance">Legal/Compliance</option>
                                               <option value="Transaction">Transaction</option>
                                           </select>
                                       </div>
@@ -195,7 +201,7 @@
                                       <div class="form-group">
                                           <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
                                               <option value="Public">Public</option>
-                                              <option value="Internal Only">Internal Only</option>
+                                              <option value="Internal">Internal</option>
                                               <option value="Confidential">Confidential</option>
                                               <option value="Secret">Secret</option>
                                               <option value="Banking Secrecy">Banking Secrecy</option>
@@ -407,11 +413,11 @@
                                             </table>
 
                                             <div class="mt-lg">
-                                              <a href="#" class="btn btn-green">Subclustering</a>
+                                              <a href="#" class="btn btn-green">Refine Group</a>
                                               <span class="dropdown">
                                                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                 <div class="dropdown-menu has-arrow dropdown-file-info">
-                                                  <p>Subclustering would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
+                                                  <p>Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
                                                 </div>
                                               </span>
                                             </div>
@@ -437,7 +443,7 @@
                                                 <div id="distribution" class="tab-pane active">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <h4 class="chart-title">Classification 
+                                                            <h4 class="chart-title">Confidentiality 
                                                               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                               <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                                 <p>This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99.</p>
@@ -478,21 +484,21 @@
                     </div>
                 </div>
             </div>
-        </div>
+          </div>
 		
 		
-		<div class="container">
+		      <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary actions-panel">
                         <header class="panel-heading">
                             <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
-                            <div class="inline-block-item view-stat-block">
+                            <!-- <div class="inline-block-item view-stat-block">
                                 <label>Sample Method: </label>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
-                            </div>
+                            </div> -->
                             <div class="panel-actions my-actions-btn-group">
 
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
@@ -519,53 +525,53 @@
                                                     </div>
                                                 </th>
                                                 <th class="review_note">Document
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the name of each individual document, as it exists in its current state.</p>
-														</div>
-													</div>
-												</th>
+                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the name of each individual document, as it exists in its current state.</p>
+                            </div>
+                          </div>
+                        </th>
                                                 <th class="review_note">Path
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the logical folder path to where each document is currently located.</p>
-														</div>
-													</div>
-												</th>
+                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the logical folder path to where each document is currently located.</p>
+                            </div>
+                          </div>
+                        </th>
                                                 <th class="review_note">Owner
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the organisational member who has last modified the document. 
-															This owner is automatically assigned by 99 from the 
-															Document metadata itself gathered during the scanning process.</p>
-														</div>
-													</div>
-												</th>
+                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the organisational member who has last modified the document. 
+                              This owner is automatically assigned by 99 from the 
+                              Document metadata itself gathered during the scanning process.</p>
+                            </div>
+                          </div>
+                        </th>
                                                 <th class="review_note">Proposed category (confidence level)
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-															<p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-															The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-														</div>
-													</div>
-												</th>
+                            <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                              The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                            </div>
+                          </div>
+                        </th>
                                                 <th class="review_note">Proposed confidentiality (confidence level)
-													   <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                             <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-															<p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-															The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-														</div>
-													</div>
-												</th>
+                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                              The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                            </div>
+                          </div>
+                        </th>
                                                 <th class="text-center">Status
                                                     <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -614,11 +620,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -632,10 +640,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -684,11 +693,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -702,10 +713,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -754,11 +766,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -772,10 +786,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -824,11 +839,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -842,10 +859,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -894,11 +912,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -912,10 +932,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -964,11 +985,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -982,10 +1005,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1034,11 +1058,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1052,10 +1078,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1104,11 +1131,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1122,10 +1151,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1174,11 +1204,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1192,10 +1224,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1244,11 +1277,13 @@
                                                               <span class="progress-percentage">(50%)</span>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Tax</option>
-                                                            <option selected="">Legal</option>
-                                                            <option>Corporate</option>
-                                                            <option>IT</option>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1262,10 +1297,11 @@
                                                             </div>
                                                         </div>
                                                         <select class="form-control">
-                                                            <option>Secret</option>
-                                                            <option selected="">Confidential</option>
-                                                            <option>Internal Only</option>
-                                                            <option>Public</option>
+                                                          <option>Public</option>
+                                                          <option>Internal</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Secret</option>
+                                                          <option>Banking Secrecy</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1295,7 +1331,162 @@
 
         </div>
 		
-		
+		<!--Modal-->
+  
+  <div id="previewModal" class="modal fade in" role="dialog">
+      <div class="modal-dialog modal-preview">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+                <div class="col-sm-4 modal-title">
+                    <i class="fa fa-search"></i>
+                    Document Preview
+                </div>
+                <div class="col-sm-4 modal-info text-center">
+                    <span class="text-itatic">Contract.doc</span><br>
+                    <span>Folder /legal/teamA/</span>
+                </div>
+                <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+          <thead>
+            <tr role="row" class="">
+              <th>
+                <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </th>
+              <th class="review_note">Document Name
+              </th>
+              <th class="review_note">Path
+              </th>
+              <th class="review_note">Owner
+              </th>
+              <th class="review_note">Proposed category (confidence level)
+                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                    The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                  </div>
+                </div>
+              </th>
+              <th class="review_note">Proposed confidentiality (confidence level)
+                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                    The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                  </div>
+                </div>
+              </th>
+              <th class="text-center">Status
+                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represent the status of the review for each file.</p>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td>
+                <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Contract.doc</span>
+                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                  <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                  <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                    <ul>
+                      <li>Creation Date: 2015-01-01</li>
+                      <li>Modifitcation Date: 2015-05-28</li>
+                      <li>Required Legal Retention until: 2025-03-03</li>
+                      <li>Confidentiality Label: Yes/No</li>
+                      <li>Number of Classification Challenge: 1</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+              </td>
+              <td class="text-left">
+                <span class="text-italic">todd.smith</span>
+              </td>
+              <td>
+                <div class="select-group">
+                  <div class="selected-info">
+                    <div class="progress progress-striped light">
+                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                      </div>
+                      <span class="progress-percentage">(50%)</span>
+                    </div>
+                  </div>
+                  <select class="form-control">
+                    <option value="Accounting/Tax">Accounting/Tax</option>
+                    <option value-"Corporate Entity">Corporate Entity</option>
+                    <option value="Client/Customer">Client/Customer</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Legal/Compliance">Legal/Compliance</option>
+                    <option value="Transaction">Transaction</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="select-group">
+                  <div class="selected-info">
+                    <div class="progress progress-striped light">
+                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                      </div>
+                      <span class="progress-percentage">(50%)</span>
+                    </div>
+                  </div>
+                  <select class="form-control">
+                    <option>Public</option>
+                    <option>Internal</option>
+                    <option selected="">Confidential</option>
+                    <option>Secret</option>
+                    <option>Banking Secrecy</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <a href="#" class="doc-check">
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="file-preview mt-md">
+                <p>File Preview Content</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
       
 		
 		 <!-- Vendor -->

@@ -63,7 +63,7 @@
                                 <div class="noti-block">
                                     <h3 class="noti-date">Today</h3>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
+                                        <li data-noti-type="waiting">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
                                         </li>
@@ -72,11 +72,11 @@
                                 <div class="noti-block">
                                     <h3 class="noti-date">Yesterday</h3>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
+                                        <li data-noti-type="danger">
                                             <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
                                             <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
                                         </li>
-                                        <li>
+                                        <li data-noti-type="success">
                                             <i class="fa fa-check icon-success" aria-hidden="true"></i>
                                             <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
                                         </li>
@@ -85,32 +85,38 @@
                             </div>
                             <div class="col-sm-6 col-noti">
                                 <h4>My Pending Action: 7
-                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
-                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
                                 </h4>
-                                <span>Action completed on time: 100%</span>
+                                <span class="actions-percentage">Action completed on time: 100%</span>
+                                <div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Help content</p>
+                                    </div>
+                                </div>
                                 <ul class="list-unstyled noti-list">
-                                    <li>
+                                    <li data-noti-type="danger">
                                         <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
                                         <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
                                     </li>
-                                    <li>
+                                    <li data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
                                     </li>
-                                    <li>
+                                    <li data-noti-type="waiting">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
                                     </li>
-                                    <li>
+                                    <li  data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="col-sm-12 text-center mt-md">
+                            <div class="col-sm-12 text-center mt-md">
                                 <a href="#">See all notifications</a>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +175,7 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <p class="page-heading-sm">Dashboard Overview</p>
-                        <div class="filter-tags-block">
+                        <div class="filter-tags-block clearfix">
                             <label class="pull-left mr-md">Applied Filters:</label>
                             <div class="pull-left filter-tags">
                                 <span class="filter-label label label-info" data-value="Accounting/Tax" data-crit="category"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">Accounting/Tax</span></span>
@@ -193,7 +199,7 @@
                                                     <option value-"Corporate Entity">Corporate Entity</option>
                                                     <option value="Client/Customer">Client/Customer</option>
                                                     <option value="Employee">Employee</option>
-                                                    <option value="Legal/Regulatory">Legal/Regulatory</option>
+                                                    <option value="Legal/Compliance">Legal/Compliance</option>
                                                     <option value="Transaction">Transaction</option>
                                                 </select>
                                             </div>
@@ -202,7 +208,7 @@
                                             <div class="form-group">
                                                 <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
                                                     <option value="Public">Public</option>
-                                                    <option value="Internal Only">Internal Only</option>
+                                                    <option value="Internal">Internal</option>
                                                     <option value="Confidential">Confidential</option>
                                                     <option value="Secret">Secret</option>
                                                     <option selected value="Banking Secrecy">Banking Secrecy</option>
@@ -406,11 +412,11 @@
                                                     colspan="1">% Validated Documents
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                    rowspan="1" colspan="1">% Data Owner Review Accuracy
+                                                    rowspan="1" colspan="1">Review Accuracy
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">
-                                                    % Prediction Accuracy
+                                                    Accuracy
                                                 </th>
                                             </tr>
                                         </thead>
@@ -460,11 +466,11 @@
                                                 colspan="1">% Validated Documents
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                rowspan="1" colspan="1">Reviewed Accuracy
+                                                rowspan="1" colspan="1">Review Accuracy
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                 rowspan="1" colspan="1">
-                                                ML Accuracy
+                                                Accuracy
                                             </th>
                                         </tr>
                                         </thead>

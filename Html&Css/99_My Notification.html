@@ -56,28 +56,58 @@
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
                             <div class="row">
                                 <div class="col-sm-6 col-noti">
-                                    <h4>NEWS FEED</h4>
-                                    <ul class="list-unstyled noti-list">
-                                        <li>
-                                            <i class="fa fa-smile-o" aria-hidden="true"></i>
-                                            <p>You completed review of document 'xxx'</p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-smile-o" aria-hidden="true"></i>
-                                            <p>Chris completed review of document 'xxx'</p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-smile-o" aria-hidden="true"></i>
-                                            <p>Chris completed review of document 'xxx'</p>
-                                        </li>
-                                    </ul>
+                                    <h4>My Notification</h4>
+                                    <div class="noti-block">
+                                        <h3 class="noti-date">Today</h3>
+                                        <ul class="list-unstyled noti-list">
+                                            <li data-noti-type="waiting">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="noti-block">
+                                        <h3 class="noti-date">Yesterday</h3>
+                                        <ul class="list-unstyled noti-list">
+                                            <li data-noti-type="danger">
+                                                <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                                <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                            </li>
+                                            <li data-noti-type="success">
+                                                <i class="fa fa-check icon-success" aria-hidden="true"></i>
+                                                <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 col-noti">
-                                    <h4>TODO LIST</h4>
+                                    <h4>My Pending Action: 7
+                                        <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                                        <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                                    </h4>
+                                    <span class="actions-percentage">Action completed on time: 100%</span>
+                                    <div class="inline-block-item dropdown dropdown-help">
+                                        <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="dropdown-menu has-arrow dd-md full-mobile">
+                                            <p>Help content</p>
+                                        </div>
+                                    </div>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
-                                            <i class="fa fa-lock" aria-hidden="true"></i>
-                                            <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
+                                        <li data-noti-type="danger">
+                                            <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                        </li>
+                                        <li data-noti-type="warning">
+                                            <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+                                        </li>
+                                        <li data-noti-type="waiting">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+                                        </li>
+                                        <li  data-noti-type="warning">
+                                            <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                            <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -162,8 +192,14 @@
                 </div>
                 <div class="col-sm-4 mb-md">
                     <span class="mr-md">Pending Actions: 7</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                    <div class="inline-block-item dropdown dropdown-help">
+                        <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu has-arrow dd-md full-mobile">
+                            <p>Help content</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4 mb-md">
                     <span>Action completed on time: 100%</span>
@@ -175,7 +211,7 @@
                     <h2 class="panel-title">Today</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="warning">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
@@ -186,7 +222,7 @@
                             <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
                         </span>
                     </div>
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="danger">
                         <span class="noti-left">
                             <i class="fa fa-check"></i>
                         </span>
@@ -194,7 +230,7 @@
                             You have completed the review of 30 documents in Client/Customer category
                         </span>
                         <span class="noti-right">
-                            &nbsp;
+                            <i class="fa fa-exclamation-triangle fa-alert-danger"></i>
                         </span>
                     </div>
                 </div>
@@ -205,7 +241,7 @@
                     <h2 class="panel-title">Yesterday</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="warning">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
@@ -216,7 +252,7 @@
                             <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
                         </span>
                     </div>
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="">
                         <span class="noti-left">
                             <i class="fa fa-check"></i>
                         </span>
@@ -227,7 +263,7 @@
                             &nbsp;
                         </span>
                     </div>
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
@@ -246,7 +282,7 @@
                     <h2 class="panel-title">Last 7 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="">
                         <span class="noti-left">
                             <i class="fa fa-check"></i>
                         </span>
@@ -257,7 +293,7 @@
                             &nbsp;
                         </span>
                     </div>
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
@@ -276,7 +312,7 @@
                     <h2 class="panel-title">Older Notification</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item">
+                    <div class="noti-item" data-noti-type="">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>

@@ -63,7 +63,7 @@
                                 <div class="noti-block">
                                     <h3 class="noti-date">Today</h3>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
+                                        <li data-noti-type="waiting">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
                                         </li>
@@ -72,11 +72,11 @@
                                 <div class="noti-block">
                                     <h3 class="noti-date">Yesterday</h3>
                                     <ul class="list-unstyled noti-list">
-                                        <li>
+                                        <li data-noti-type="danger">
                                             <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
                                             <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
                                         </li>
-                                        <li>
+                                        <li data-noti-type="success">
                                             <i class="fa fa-check icon-success" aria-hidden="true"></i>
                                             <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
                                         </li>
@@ -85,32 +85,38 @@
                             </div>
                             <div class="col-sm-6 col-noti">
                                 <h4>My Pending Action: 7
-                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
-                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
                                 </h4>
-                                <span>Action completed on time: 100%</span>
+                                <span class="actions-percentage">Action completed on time: 100%</span>
+                                <div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Help content</p>
+                                    </div>
+                                </div>
                                 <ul class="list-unstyled noti-list">
-                                    <li>
+                                    <li data-noti-type="danger">
                                         <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
                                         <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
                                     </li>
-                                    <li>
+                                    <li data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
                                     </li>
-                                    <li>
+                                    <li data-noti-type="waiting">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
                                     </li>
-                                    <li>
+                                    <li  data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
                                         <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="col-sm-12 text-center mt-md">
+                            <div class="col-sm-12 text-center mt-md">
                                 <a href="#">See all notifications</a>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +195,7 @@
                                                     <option value-"Corporate Entity">Corporate Entity</option>
                                                     <option value="Client/Customer">Client/Customer</option>
                                                     <option value="Employee">Employee</option>
-                                                    <option value="Legal/Regulatory">Legal/Regulatory</option>
+                                                    <option value="Legal/Compliance">Legal/Compliance</option>
                                                     <option value="Transaction">Transaction</option>
                                                 </select>
                                             </div>
@@ -198,7 +204,7 @@
                                             <div class="form-group">
                                                 <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
                                                     <option value="Public">Public</option>
-                                                    <option value="Internal Only">Internal Only</option>
+                                                    <option value="Internal">Internal</option>
                                                     <option value="Confidential">Confidential</option>
                                                     <option value="Secret">Secret</option>
                                                     <option value="Banking Secrecy">Banking Secrecy</option>
@@ -494,45 +500,45 @@
                                                     colspan="1">% Validated Documents
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                    rowspan="1" colspan="1">% Data Owner Review Accuracy
+                                                    rowspan="1" colspan="1">Review Accuracy
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">
-                                                    % Prediction Accuracy
+                                                    Accuracy
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Unrestricted</td>
+                                                <td class="sorting_1 text-left">Public</td>
                                                 <td>80% (152.5253) </td>
                                                 <td>80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                             </tr>
                                             <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Internal</td>
+                                                <td class="sorting_1 text-left">Internal</td>
                                                 <td>80% (152.5253)</td>
                                                 <td>80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                             </tr>
                                             <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Confidential</td>
+                                                <td class="sorting_1 text-left">Confidential</td>
                                                 <td>80% (152.5253)</td>
                                                 <td>80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                             </tr>
                                             <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Secret</td>
+                                                <td class="sorting_1 text-left">Secret</td>
                                                 <td>80% (152.5253)</td>
                                                 <td>80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
                                             </tr>
                                             <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Banking Secrecy</td>
+                                                <td class="sorting_1 text-left">Banking Secrecy</td>
                                                 <td>80% (152.5253)</td>
                                                 <td>80% (152.5253)</td>
                                                 <td class="center hidden-phone">80% (152.5253)</td>
@@ -575,19 +581,39 @@
                                                 colspan="1">% Validated Documents
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                rowspan="1" colspan="1">Reviewed Accuracy
+                                                rowspan="1" colspan="1">Review Accuracy
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                 rowspan="1" colspan="1">
-                                                ML Accuracy
+                                                Accuracy
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="odd" role="row">
                                                 <td class="text-left">
-                                                    <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                                                    Legal/Regulatory
+                                                    <i class="fa fa-calculator" aria-hidden="true"></i>
+                                                    Accounting/Tax
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                                    Corporate Entity
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                                    Customer
                                                 </td>
                                                 <td>20% (10000)</td>
                                                 <td>10% (1000)</td>
@@ -606,39 +632,18 @@
                                             </tr>
                                             <tr class="odd" role="row">
                                                 <td class="text-left">
+                                                    <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                                                    Legal/Compliance
+                                                </td>
+                                                <td>20% (10000)</td>
+                                                <td>10% (1000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
                                                     <i class="fa fa-usd" aria-hidden="true"></i>
                                                     Transaction
-                                                </td>
-                                                <td>20% (10000)</td>
-                                                <td>10% (1000)</td>
-                                                <td>80%</td>
-                                                <td>100%</td>
-                                            </tr>
-                                            <tr class="even" role="row">
-                                                <td class="text-left">
-                                                    <i class="fa fa-calculator" aria-hidden="true"></i>
-                                                    Accounting/Tax
-                                                </td>
-                                                <td>20% (10000)</td>
-                                                <td>10% (1000)</td>
-                                                <td>80%</td>
-                                                <td>100%</td>
-                                            </tr>
-                                            <tr class="odd" role="row">
-                                                <td class="text-left">
-                                                    <i class="fa fa-university" aria-hidden="true"></i>
-                                                    Corporate Entity
-                                                </td>
-                                                <td>20% (10000)</td>
-                                                <td>10% (1000)</td>
-                                                <td>80%</td>
-                                                <td>100%</td>
-                                            </tr>
-
-                                            <tr class="even" role="row">
-                                                <td class="text-left">
-                                                    <i class="fa fa-users" aria-hidden="true"></i>
-                                                    Customer
                                                 </td>
                                                 <td>20% (10000)</td>
                                                 <td>10% (1000)</td>
