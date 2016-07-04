@@ -746,7 +746,7 @@ $backColor: darken(#ecedf0, 10%);
  * Mixin for progress-% class
  * ------------------------------------- */
 
-$step: 3;
+$step: 1;
 $loops: round(100 / $step);
 $increment: 360 / $loops;
 $half: round($loops / 2);
@@ -763,6 +763,15 @@ $half: round($loops / 2);
       @if $i < 67 {$barColor: #ed9c28;}
       @else {$barColor: #47a447;}
       background-image: linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
+    }
+  }
+}
+
+@media (min-width: 768px){
+  .add-detail-section .detail-left label{
+    padding-left: 32px;
+    &+a{
+      padding-left: 32px;
     }
   }
 }

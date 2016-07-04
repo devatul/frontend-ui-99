@@ -57,7 +57,7 @@
 						</button>
 						<a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
 						<a class="bell" id="bell" data-toggle="dropdown">
-							<span class="badge">3</span>
+							<span class="badge"></span>
 							<i class="fa fa-bell-o" aria-hidden="true"></i>
 						</a>
 						
@@ -130,9 +130,9 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Dashboard</a></li>
-							<li><a href="#">Review</a></li>
-							<li><a href="#">Insight</a></li>
+							<li><a href="#">Summary</a></li>
+							<li><span class="badge"></span><a href="#">Records Retention Schedule Update</a></li>
+							<li><a href="#">Setting</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 					
@@ -166,171 +166,204 @@
 				</div><!-- /.container-fluid -->
 			</nav>
         </div>
+        <!--bar_menu start-->
         <div class="my_main bar_menu container">
             <div class="row">
                 <div class="col-md-9 mb-md">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <p class="page-heading-sm pull-left">My Notifications</p>
-                        </div>
+                    
+                </div>
+
+                <div class="col-md-3 record_search">
+                    <div class="span12">
+                        <form id="custom-search-form" class="form-search form-horizontal pull-right dropdown">
+                            <div data-toggle="dropdown" class="input-group input-group-icon">
+                                <span class="input-group-addon">
+                                    <span class="icon"><i class="fa fa-search"></i></span>
+                                </span>
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search for Country">
+                            </div>
+                            <div class="dropdown-menu dropdown-search has-arrow dd-sm full-mobile">
+                                <div class="col-sm-12 col-noti mt-sm">
+                                    <h4>TODO LIST</h4>
+                                    <ul class="list-unstyled noti-list">
+                                        <li>
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12 col-noti mt-lg">
+                                    <h4>NOTIFICATION</h4>
+                                    <ul class="list-unstyled noti-list">
+                                        <li>
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                            <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12 text-center mt-md">
+                                    <a href="#">See all search result</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-		<div class="notification-list container">
-            <div class="notification-filter row">
-                <div class="col-sm-4 mb-md">
-                    <label>Last update</label>
-                    <select class="form-control filter-noti">
-                        <option>All Actions</option>
-                        <option>Last 7 Days</option>
-                        <option>Last 30 Days (by default)</option>
-                        <option>Pending Actions</option>
-                        <option>Completed Actions</option>
-                    </select>
-                </div>
-                <div class="col-sm-4 mb-md">
-                    <span class="mr-md">Pending Actions: 1</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 1</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 1</span>
-                </div>
-                <div class="col-sm-4 mb-md">
-                    <span>Action completed on time: 100%</span>
-                </div>
-            </div>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Today</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            Notificaltion has been sent to your coordinator
-                        </span>
-                        <span class="noti-right">
-                            
-                        </span>
-                    </div>
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            Summary email has been sent to you
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have completed the review of 30 documents in Client/Customer category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                </div>
-            </section>
+        <hr>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Yesterday</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have to review 30 documents in Client/Customer category by latest 16th May
-                        </span>
-                        <span class="noti-right">
-                           
-                        </span>
-                    </div>
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You challenge of documents xxx has been accepted in Accounting/Tax category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have challenged classification of document xxx
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-noti">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Last 7 days</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have assigned Chris to review 30 documents in Accounting/Tax category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have assigned Stan to review 20 documents in Client/Customer category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-noti">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Older Notification</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="noti-item">
-                        <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have assigned Todd to review 10 documents in Client/Customer category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                </div>
-            </section>
-        </div>
-
+        <div class="container">
+	      <div class="tabs tabs-primary reviewer-tab">
+	        <ul class="nav nav-tabs">
+	          <li class="active">
+	            <a href="#europe" data-toggle="tab" aria-expanded="true">Europe</a>
+	          </li>
+	          <li class="">
+	            <a href="#africa" data-toggle="tab" aria-expanded="false">Africa</a>
+	          </li>
+	          <li class="">
+	            <a href="#asia" data-toggle="tab" aria-expanded="false">Asia</a>
+	          </li>
+	          <li class="">
+	            <a href="#north_america" data-toggle="tab" aria-expanded="false">North America</a>
+	          </li>
+	          <li class="">
+	            <a href="#south_america" data-toggle="tab" aria-expanded="false">South America</a>
+	          </li>
+	          <li class="">
+	            <a href="#oceania" data-toggle="tab" aria-expanded="false">Oceania</a>
+	          </li>
+	        </ul>
+	        <div class="tab-content">
+	          <div id="europe" class="tab-pane active">
+	          	<div class="panel-body">
+					<div class="table-responsive">
+						<table class="record_table table mb-none">
+							<thead style="border: 0px;">
+								<tr>
+									<th></th>
+									<th>
+										<select class="record_select" id="carlist">
+										  <option value="volvo">Country</option>
+										  <option value="Australia">Australia</option>
+										  <option value="Italy">Italy</option>
+										  <option value="Armenia">Armenia</option>
+										  <option value="France">France</option>
+										  <option value="Germany">Germany</option>
+										</select>
+									</th>
+									<th>
+										<select class="record_select" id="carlist">
+										  <option value="volvo">% of fields completed</option>
+										  <option value="Content 1">Content 1</option>
+										   <option value="Content 4">Content 4</option>
+										  <option value="Content 2">Content 2</option>
+										  
+										  <option value="Content 3">Content 3</option>
+										 
+										</select>	
+										
+									</th>
+									<th>
+										<select class="record_select" id="carlist">
+										  <option value="volvo">Last Updated</option>
+										  <option value="Content 1">Content 1</option>
+										  <option value="Content 2">Content 2</option>
+										  <option value="Content 3">Content 3</option>
+										  <option value="Content 4">Content 4</option>
+										</select>	
+									
+									</th>
+									<th>
+										<select class="record_select" id="carlist">
+										  <option value="volvo">Annual Refresh Complete?</option>
+										  <option value="Content 1">Content 1</option>
+										  <option value="Content 2">Content 2</option>
+										  <option value="Content 3">Content 3</option>
+										  <option value="Content 4">Content 4</option>
+										</select>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr style="border: 0px;">
+									<td><img src="assets/images/flags/Austria.png"/></td>
+									<td class="record-align-left">
+										<ul>
+											<li><span>Austria</span></li>
+											<li><a href="#"><i class="fa fa-plus-square" aria-hidden="true"></i></a></li>
+										</ul>
+									</td>
+									<td>75%</td>
+									<td>12/05/2016</td>
+									<td>Yes</td>
+								</tr>
+								<tr>
+									<td><img src="assets/images/flags/Germany.png"/></td>
+									<td class="record-align-left">
+										<ul>
+											<li><span>Germany</span></li>
+											<li><a href="#"><i class="fa fa-plus-square" aria-hidden="true"></i></a></li>
+										</ul>
+									</td>
+									<td>100%</td>
+									<td>12/11/2017</td>
+									<td>No</td>
+								</tr>
+								<tr>
+									<td><img src="assets/images/flags/France.png"/></td>
+									<td class="record-align-left">
+										<ul>
+											<li><span>France</span></li>
+											<li><a href="#"><i class="fa fa-plus-square" aria-hidden="true"></i></a></li>
+										</ul>
+									</td>
+									<td>75%</td>
+									<td>30/05/2016</td>
+									<td>No</td>
+								</tr>
+								<tr>
+									<td><img src="assets/images/flags/Italy.png"/></td>
+									<td class="record-align-left">
+										<ul>
+											<li><span>Italy</span></li>
+											<li><a href="#"><i class="fa fa-plus-square" aria-hidden="true"></i></a></li>
+										</ul>
+									</td>
+									<td>0%</td>
+									<td>12/05/2016</td>
+									<td>Yes</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+	          </div>
+	          <div id="africa" class="tab-pane">
+	            <p>Africa</p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+	          </div>
+	          <div id="asia" class="tab-pane">
+	            <p>Asia</p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+	          </div>
+	          <div id="north_america" class="tab-pane">
+	            <p>North America</p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+	          </div>
+	          <div id="south_america" class="tab-pane">
+	            <p>South America</p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+	          </div>
+	          <div id="oceania" class="tab-pane">
+	            <p>Oceania</p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		
 		<p class="text-center text-muted mt-md mb-md">Copyright &copy; 2016 by Dathena Science</p>
 	</div>
 

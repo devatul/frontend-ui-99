@@ -156,6 +156,13 @@ html body .tabs-primary .nav-tabs li a:hover{
   font-style: italic;
 }
 
+.checkbox-custom.checkbox-success{
+  label:before {
+    background: #59D0A7;
+    border-color: #59D0A7;
+  }
+}
+
 .btn-success{
   background-color: $color-tertiary!important;
   border-color: $color-tertiary!important;
@@ -641,6 +648,9 @@ ul.filter-list li{
   &:hover{
     color: $color-success!important;
   }
+  &.disabled{
+    color: lighten( $color-success, 20%);
+  }
 }
 
 .noti-block{
@@ -983,6 +993,9 @@ ul.filter-list li{
     .select-group .selected-info{
       position: relative;
     }
+    .select-group select{
+      color: #777;
+    }
     .doc-check{
       .fa-clock-o{
         display: none;
@@ -1133,6 +1146,21 @@ div[id^='legendContainer']{
     }
     .btn-ok{
       margin-left: 10px;
+    }
+  }
+}
+
+#stat-block{
+  position: relative;
+}
+
+.collapse-stat-table{
+  .panel-action{
+    cursor: pointer;
+  }
+  .collapsed{
+    &:before {
+     content: "\f0d8";
     }
   }
 }
