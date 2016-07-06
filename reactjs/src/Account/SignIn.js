@@ -3,7 +3,9 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './signin.rt';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import $ from 'jquery'
+import $ from 'jquery';
+
+import Constant from '../Constant.js';
 var Signin = React.createClass
 ({
 	getInitialState() {
@@ -29,7 +31,7 @@ var Signin = React.createClass
 	      return;
 	    }else{
     		$.ajax({
-		      url:'http://54.251.148.133/api/token/api-token-auth/',
+		      url: Constant.SERVER_API + 'api/token/api-token-auth/',
 		      dataType: 'json',
 		      type: 'POST',
 		      data:{

@@ -25,7 +25,7 @@ $(document).ready(function(){
 		$(this).parent().next().toggleClass("my-team-p-b");
 	});
 	$("a.more").click(function(){ 
-		$(".doc-path").toggleClass("height-2nd");
+		$(this).prev().toggleClass("height-2nd");
 		$(this).children(".more1").toggleClass("display-none");
 		$(this).children(".zoom-out").toggleClass("zoom-out-block");
 	});
@@ -63,4 +63,29 @@ $(document).ready(function(){
 	$(".more-click").click(function(){
 		$(this).next().toggleClass("more-click-bottom-block");
 	});
+	function sortlist()
+	{
+	    var cl = document.getElementById('carlist');
+	    var clTexts = new Array();
+	
+	    for(i = 2; i < cl.length; i++)
+	    {
+	        clTexts[i-2] =
+	            cl.options[i].text.toUpperCase() + "," +
+	            cl.options[i].text + "," +
+	            cl.options[i].value;
+	    }
+	
+	    clTexts.sort();
+	
+	    for(i = 2; i < cl.length; i++)
+	    {
+	        var parts = clTexts[i-2].split(',');
+	        
+	        cl.options[i].text = parts[1];
+	        cl.options[i].value = parts[2];
+	    }
+	}
+	
+	sortlist();
 });

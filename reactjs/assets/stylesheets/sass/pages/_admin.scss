@@ -598,6 +598,9 @@
 }
 
 .admin-page{
+  .validate-btn{
+    margin-top: 10px;
+  }
   .panel{
     &.disabled{
       position: relative;
@@ -612,6 +615,9 @@
         position: absolute;
         z-index: 9;
       }
+    }
+    hr{
+      margin-bottom: 30px;
     }
   }
   .panel-title{
@@ -658,15 +664,114 @@
 }
 
 .admin_header{
-  .c100{
+  .progress-radial{
+    float: none;
+    width: 25px;
+    height: 25px;
     display: inline-block;
     vertical-align: middle;
-    float: none;
-    margin-left: 10px;
-    &>span{
-      width: 3.4em;
-      line-height: 3.4em;
-      font-size: 0.3em;
+    border: none;
+  }
+}
+
+.table-no-border{
+  &> tbody > tr > td{
+    border: none;
+  }
+}
+
+.table-align-left{
+  &> tbody > tr > td{
+    text-align: left;
+  }
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  [class^="col"]{
+    .panel{
+      height: 100%;
+    }
+    .panel-body{
+      @include calc(height, '100% - 57px');
+    }
+  }
+}
+
+// Colors
+$barColor: tomato;
+$overlayColor: #fffde8;
+$backColor: darken(#ecedf0, 10%);
+/* -------------------------------------
+ * Bar container
+ * ------------------------------------- */
+.progress-radial{
+  float: left;
+  margin-right: 30px;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid $backColor;
+  background-color: $barColor;
+  &.small{
+      float: none;
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      vertical-align: middle;
+      border: none;
+  }
+}
+
+/* -------------------------------------
+ * Optional centered circle w/text
+ * ------------------------------------- */  
+.progress-radial .overlay{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: $overlayColor;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-top: 20px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 16px;
+}
+  
+/* -------------------------------------
+ * Mixin for progress-% class
+ * ------------------------------------- */
+
+$step: 1;
+$loops: round(100 / $step);
+$increment: 360 / $loops;
+$half: round($loops / 2);
+@for $i from 0 through $loops{
+  .progress-#{$i*$step}{
+    @if $i < $half {
+      $nextdeg: 90deg + ( $increment * $i );
+      @if $i < 33 {$barColor: #d2322d;}
+      @else {$barColor: #ed9c28;}
+      background-image: linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
+    }
+    @else{
+      $nextdeg: -90deg + ( $increment * ( $i - $half ) );
+      @if $i < 67 {$barColor: #ed9c28;}
+      @else {$barColor: #47a447;}
+      background-image: linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
+    }
+  }
+}
+
+@media (min-width: 768px){
+  .add-detail-section .detail-left label{
+    padding-left: 32px;
+    &+a{
+      padding-left: 32px;
     }
   }
 }

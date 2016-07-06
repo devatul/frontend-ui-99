@@ -13,7 +13,7 @@ $(function () {
         },
         colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
         xAxis: {
-            categories: ['Unrestricted', 'Internal', 'Confidential', 'Secret', 'Banking Secrecy' ],
+            categories: ['Public', 'Internal', 'Confidential', 'Secret', 'Banking Secrecy' ],
             labels:{
               autoRotation: false,
               style: {
@@ -90,7 +90,7 @@ $(function () {
         },
         colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
         xAxis: {
-            categories: ['txt', 'log', 'rtf', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'xlsm', 'ppt', 'pptx', 'msg', 'eml'],
+            categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
             labels:{
               autoRotation: false,
               style: {
@@ -140,20 +140,20 @@ $(function () {
             }
         },
         series: [{
-            name: 'Unrestricted',
-            data: [400,420,390,410,440,400,395,80,100,123,90,111,85]
+            name: 'Public',
+            data: [400,420,390,410,440]
         }, {
             name: 'Internal',
-            data: [80,100,123,90,111,85,140,210,180,188,240,250,230]
+            data: [80,100,123,90,111]
         }, {
             name: 'Confidential',
-            data: [200,210,180,188,240,250,230,390,410,440,400,395,80]
+            data: [200,210,180,188,240]
         },{
             name: 'Secret',
-            data: [400,420,390,410,440,400,395,100,123,90,111,85,140]
+            data: [400,420,390,410,440]
         }, {
             name: 'Banking Secrecy',
-            data: [80,100,123,90,111,85,140,440,400,395,80,100,123]
+            data: [80,100,123,90,111]
         }]
     });
   }

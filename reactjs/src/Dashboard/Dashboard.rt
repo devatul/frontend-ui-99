@@ -2,24 +2,22 @@
 <section>
     <!--my_header start-->
 
-    <div class="my_header">
-        <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header dropdown">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
-                    <a class="bell" id="bell" data-toggle="dropdown">
-                        <span class="badge">3</span>
-                        <i class="fa fa-bell-o" aria-hidden="true"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
+        <!--my_header start-->
+        <div class="my_header">
+            <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header dropdown">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                        <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
                         <div class="row">
                             <div class="col-sm-6 col-noti">
                                 <h4>My Notification</h4>
@@ -82,48 +80,74 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Review</a></li>
-
-                        <li><a href="#">Insight</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
+                            </li>
+                            <li class="dropdown">
+                                <span class="badge">1</span><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><!--<li class="active">-->
+                                        <Link to="/Dashboard/Review/Orphan" activeClassName="active">Orphan Review</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/Dashboard/Review/Group" activeClassName="active">Group Review</Link>
+                                    </li>
+                                    <li>
+                                        <span class="badge">1</span>
+                                        <Link to="/Dashboard/Review/UserAssignment" activeClassName="active">User Assignment</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <Link to="/Dashboard/Insight" activeClassName="active">Insight</Link>
+                            </li>
+                            <li>
+                                <Link to="/Dashboard/ReviewValidation" activeClassName="active">Review Validation</Link>
+                            </li>
+                            <li>
+                                <Link to="/Dashboard/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                    
+                    <div class="header-right">
+                        <div id="userbox" class="userbox">
+                            <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                <figure class="profile-picture">
+                                    <img src="/assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="/assets/images/!logged-user.jpg">
+                                </figure>
+                                <div class="profile-info">
+                                    <span class="name">Chris Muffat</span>
+                                    <span class="role">administrator</span>
+                                </div>
                 
-                <div class="header-right">
-                    <div id="userbox" class="userbox">
-                        <a href="#" data-toggle="dropdown" aria-expanded="true">
-                            <figure class="profile-picture">
-                                <img src="/assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="/assets/images/!logged-user.jpg">
-                            </figure>
-                            <div class="profile-info">
-                                <span class="name">Chris Muffat</span>
-                                <span class="role">administrator</span>
+                                <i class="fa custom-caret"></i>
+                            </a>
+                
+                            <div class="dropdown-menu">
+                                <ul class="list-unstyled">
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                    </li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                    </li>
+                                </ul>
                             </div>
-            
-                            <i class="fa custom-caret"></i>
-                        </a>
-            
-                        <div class="dropdown-menu">
-                            <ul class="list-unstyled">
-                                <li class="divider"></li>
-                                <li>
-                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
-                                </li>
-                                <li>
-                                    <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </nav>
+                </div><!-- /.container-fluid -->
+            </nav>
         </div>
+        
+        <!-------------------------------------------bar_menu start------------------------------------>
+        
         <!--<div class="my_header">
             <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
             <div class="container">
@@ -225,5 +249,6 @@
             </div><!-- /.container-fluid -
             </nav>
         </div>-->
+
     <div>{this.props.children}</div>
 </section>

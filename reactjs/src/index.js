@@ -9,12 +9,12 @@ var ResetConfirmation = require('./Account/ResetConfirmation');
 var EmailSend = require('./Account/EmailSend');
 var RecoverPassword = require('./Account/RecoverPassword');
 var Dashboard = require('./Dashboard/Dashboard');
-var DashboardIndex = require('./Dashboard/DashboardIndex');
 var OverView = require('./Dashboard/OverView');
-var Review = require('./Dashboard/Review');
 var Admin = require('./Dashboard/Admin');
 var Profile = require('./Dashboard/Profile');
 var EditProfile = require('./Dashboard/EditProfile');
+var Review = require('./Dashboard/Review/Review');
+var Orphan = require('./Dashboard/Review/Orphan');
 
 render((
   	<Router history={browserHistory}>
@@ -26,12 +26,13 @@ render((
 		  	<Route path="/Account/emailSend" component={EmailSend} />
 	  		<Route path="/Account/recoverPassword" component={RecoverPassword} />
 		  	<Route path="/Dashboard/Dashboard" component={Dashboard}>
-			  	<Route path="/Dashboard/DashboardIndex" component={DashboardIndex} />
 			  	<Route path="/Dashboard/OverView" component={OverView} />
-				<Route path="/Dashboard/Review" component={Review} />
 				<Route path="/Dashboard/Admin" component={Admin} />
 				<Route path="/Dashboard/Profile" component={Profile} />
 				<Route path="/Dashboard/EditProfile" component={EditProfile} />
+				<Route path="/Dashboard/Review/Review" component={Review} >
+					<Route path="/Dashboard/Review/Orphan" component={Orphan} />
+				</Route>
 	  		</Route>
     	</Route>
   	</Router>

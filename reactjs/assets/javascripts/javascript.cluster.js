@@ -30,53 +30,54 @@ $(function () {
     }
   });
 
+  var word_list = new Array(
+    {text: "Entity", weight: 13},
+    {text: "matter", weight: 10.5},
+    {text: "science", weight: 9.4},
+    {text: "properties", weight: 8},
+    {text: "speed", weight: 6.2},
+    {text: "Accounting", weight: 5},
+    {text: "interactions", weight: 5},
+    {text: "nature", weight: 5},
+    {text: "branch", weight: 5},
+    {text: "concerned", weight: 4},
+    {text: "Sapien", weight: 4},
+    {text: "Pellentesque", weight: 3},
+    {text: "habitant", weight: 3},
+    {text: "morbi", weight: 3},
+    {text: "tristisque", weight: 3},
+    {text: "senectus", weight: 3},
+    {text: "et netus", weight: 3},
+    {text: "et malesuada", weight: 3},
+    {text: "fames", weight: 2},
+    {text: "ac turpis", weight: 2},
+    {text: "egestas", weight: 2},
+    {text: "Aenean", weight: 2},
+    {text: "vestibulum", weight: 2},
+    {text: "elit", weight: 2},
+    {text: "sit amet", weight: 2},
+    {text: "metus", weight: 2},
+    {text: "adipiscing", weight: 2},
+    {text: "ut ultrices", weight: 2},
+    {text: "justo", weight: 1},
+    {text: "dictum", weight: 1},
+    {text: "Ut et leo", weight: 1},
+    {text: "metus", weight: 1},
+    {text: "at molestie", weight: 1},
+    {text: "purus", weight: 1},
+    {text: "Curabitur", weight: 1},
+    {text: "diam", weight: 1},
+    {text: "dui", weight: 1},
+    {text: "ullamcorper", weight: 1},
+    {text: "id vuluptate ut", weight: 1},
+    {text: "mattis", weight: 1},
+    {text: "et nulla", weight: 1},
+    {text: "Sed", weight: 1}
+  );
+
   var cloudRendered = false;
   var drawCloud = function(){
     if (!cloudRendered){
-      var word_list = new Array(
-        {text: "Entity", weight: 13},
-        {text: "matter", weight: 10.5},
-        {text: "science", weight: 9.4},
-        {text: "properties", weight: 8},
-        {text: "speed", weight: 6.2},
-        {text: "Accounting", weight: 5},
-        {text: "interactions", weight: 5},
-        {text: "nature", weight: 5},
-        {text: "branch", weight: 5},
-        {text: "concerned", weight: 4},
-        {text: "Sapien", weight: 4},
-        {text: "Pellentesque", weight: 3},
-        {text: "habitant", weight: 3},
-        {text: "morbi", weight: 3},
-        {text: "tristisque", weight: 3},
-        {text: "senectus", weight: 3},
-        {text: "et netus", weight: 3},
-        {text: "et malesuada", weight: 3},
-        {text: "fames", weight: 2},
-        {text: "ac turpis", weight: 2},
-        {text: "egestas", weight: 2},
-        {text: "Aenean", weight: 2},
-        {text: "vestibulum", weight: 2},
-        {text: "elit", weight: 2},
-        {text: "sit amet", weight: 2},
-        {text: "metus", weight: 2},
-        {text: "adipiscing", weight: 2},
-        {text: "ut ultrices", weight: 2},
-        {text: "justo", weight: 1},
-        {text: "dictum", weight: 1},
-        {text: "Ut et leo", weight: 1},
-        {text: "metus", weight: 1},
-        {text: "at molestie", weight: 1},
-        {text: "purus", weight: 1},
-        {text: "Curabitur", weight: 1},
-        {text: "diam", weight: 1},
-        {text: "dui", weight: 1},
-        {text: "ullamcorper", weight: 1},
-        {text: "id vuluptate ut", weight: 1},
-        {text: "mattis", weight: 1},
-        {text: "et nulla", weight: 1},
-        {text: "Sed", weight: 1}
-      );
       $("#words-cloud").jQCloud(word_list,{
         afterCloudRender: function(){
           cloudRendered = true;
@@ -84,6 +85,12 @@ $(function () {
       });
     }
   };
+
+  $(window).resize(function(){
+    //$('#words-cloud').jQCloud('update', word_list);
+    $('#words-cloud').css("width", "100%");
+    $('#words-cloud').html('').jQCloud(word_list) 
+  });
 
   var drawCentroid = function(){
     $('#centroidChart').highcharts({
@@ -141,7 +148,7 @@ $(function () {
   if( $('#confidentialityChart').length){
         // PIE CHART
         var flotPieData = [{
-            label: "Unrestricted",
+            label: "Public",
             data: [
                 [1, 10]
             ],
@@ -238,7 +245,7 @@ $(function () {
         },
         colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
         xAxis: {
-            categories: ['txt', 'log', 'rtf', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'xlsm', 'ppt', 'pptx', 'msg', 'eml'],
+            categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
             labels:{
               autoRotation: false,
               style: {
@@ -281,20 +288,20 @@ $(function () {
             }
         },
         series: [{
-            name: 'Unrestricted',
-            data: [400,420,390,410,440,400,395,80,100,123,90,111,85]
+            name: 'Public',
+            data: [400,420,390,410,440]
         }, {
             name: 'Internal',
-            data: [80,100,123,90,111,85,140,210,180,188,240,250,230]
+            data: [80,100,123,90,111]
         }, {
             name: 'Confidential',
-            data: [200,210,180,188,240,250,230,390,410,440,400,395,80]
+            data: [200,210,180,188,240]
         },{
             name: 'Secret',
-            data: [400,420,390,410,440,400,395,100,123,90,111,85,140]
+            data: [400,420,390,410,440]
         }, {
             name: 'Banking Secrecy',
-            data: [80,100,123,90,111,85,140,440,400,395,80,100,123]
+            data: [80,100,123,90,111]
         }]
     });
   }

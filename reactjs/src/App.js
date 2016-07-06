@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './App.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import $ from 'jquery'
+import validate from 'jquery-validation';
 const TIMEVALIDTOKEN = 300000;
 module.exports = React.createClass({
     mixins: [LinkedStateMixin],
@@ -37,7 +38,7 @@ module.exports = React.createClass({
     			
 	    	}, TIMEVALIDTOKEN);
 	    	
-			browserHistory.push('/Dashboard/OverView');	
+			//browserHistory.push('/Dashboard/OverView');	
 		}else
 		{
 			console.log("noToken");

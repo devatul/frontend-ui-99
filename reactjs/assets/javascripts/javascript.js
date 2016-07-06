@@ -3,7 +3,7 @@ $(function () {
     if( $('#flotPie').length){
         // PIE CHART
         var flotPieData = [{
-            label: "Unrestricted",
+            label: "Public",
             data: [
                 [1, 50]
             ],
@@ -122,19 +122,19 @@ $(function () {
             data: [
                 [1, 50]
             ],
-            color: '#5bc0de'
+            color: '#2ecc71'
         }, {
             label: "FR",
             data: [
                 [1, 25]
             ],
-            color: '#349da2'
+            color: '#9b59b6'
         }, {
             label: "DE",
             data: [
                 [1, 4]
             ],
-            color: '#E36159'
+            color: '#34495e'
         }];
 
         $.plot('#flotPie2Inner', flotPieInnerData2, {
@@ -166,19 +166,19 @@ $(function () {
             data: [
                 [1, 50]
             ],
-            color: '#5bc0de'
+            color: '#2ecc71'
         }, {
             label: "FR",
             data: [
                 [1, 25]
             ],
-            color: '#349da2'
+            color: '#9b59b6'
         }, {
             label: "DE",
             data: [
                 [1, 4]
             ],
-            color: '#E36159'
+            color: '#34495e'
         }];
 
         $.plot('#flotPie2Filter', flotPie2FilterData, {
@@ -205,13 +205,13 @@ $(function () {
     if( $('#flotPie3').length){
         // PIE CHART 3
         var flotPieData3 = [{
-            label: "Excel",
+            label: "Word",
             data: [
                 [1, 50]
             ],
             color: '#5bc0de'
         }, {
-            label: "Word",
+            label: "Excel",
             data: [
                 [1, 25]
             ],
@@ -223,13 +223,13 @@ $(function () {
             ],
             color: '#7986cb'
         }, {
-            label: "Text",
+            label: "Power Point",
             data: [
                 [1, 6]
             ],
             color: '#ed9c28'
         }, {
-            label: "Power Point",
+            label: "Other",
             data: [
                 [1, 4]
             ],
@@ -293,7 +293,8 @@ $(function () {
         var windowWidth = $(window).innerWidth();
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');
-
+        console.log($(e.target));
+        $(e.target).append('<span class="dropdown-backdrop"></span>');
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){   
             // detach it and append it to the body
             $('body').append(dropdownMenu.detach());
@@ -323,5 +324,21 @@ $(function () {
     $('select.detail-select').select2({
         minimumResultsForSearch: Infinity
     }).select2('val', null);;
+
+    $('.filter-noti-icon').on('click', function(){
+        var notiType = $(this).attr('data-type');
+        $('[data-noti-type]').each(function(){
+            if ($(this).attr('data-noti-type') == notiType){
+                $(this).show();
+            }
+            else{
+                $(this).hide();   
+            }
+        });
+    });
+
+    $('.dropdown-noti .overview_question_a').on('click', function(e){
+        e.preventDefault();
+    });
 
 });
