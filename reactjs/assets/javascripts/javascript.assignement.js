@@ -40,7 +40,8 @@ $(function () {
             verticalAlign: 'bottom',
             floating: false,
             backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            shadow: false
+            shadow: false,
+            enabled: false
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
@@ -54,8 +55,23 @@ $(function () {
             }
         },
         series: [{
-            name: 'Confidentiality Overview',
-            data: [80,100,123,90,111]
+            name: 'Classification',
+            data: [{
+                y: 80,
+                color: '#5bc0de'
+            },{
+                y: 100,
+                color: '#349da2'
+            },{
+                y: 123,
+                color: '#7986cb'
+            },{
+                y: 90,
+                color: '#ed9c28'
+            },{
+                y: 111,
+                color: '#E36159'
+            }]
         }]
     });
   }
@@ -96,7 +112,7 @@ $(function () {
                 text: ''
             },
             stackLabels: {
-                enabled: true,
+                enabled: false,
                 style: {
                     fontWeight: 'bold',
                     color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
@@ -108,7 +124,8 @@ $(function () {
             verticalAlign: 'bottom',
             floating: false,
             backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            shadow: false
+            shadow: false,
+            enabled: false
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
@@ -171,13 +188,6 @@ $(function () {
               enabled: false
             }
         },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
         legend: {
           enabled:  false
         },
@@ -185,20 +195,36 @@ $(function () {
             enabled: false
         },
         plotOptions: {
-            series: {
-                pointWidth: 20,
-                groupPadding: 0.1,
-                pointPadding: 0,
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
             }
         },
 
         series: [{
-            data: [25,50,2,73,55]
+            name: 'Documents',
+            data: [{
+                y: 70,
+                color: '#5bc0de'
+            },{
+                y: 50,
+                color: '#349da2'
+            },{
+                y: 25,
+                color: '#7986cb'
+            },{
+                y: 20,
+                color: '#ed9c28'
+            },{
+                y: 4,
+                color: '#E36159'
+            }]
         }]
     });
 
-$("div.off").click(function(){
-    $(this).toggleClass("on");
-  });
+    $("div.off").click(function(){
+        $(this).toggleClass("on");
+    });
 
 });

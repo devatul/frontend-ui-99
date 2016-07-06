@@ -5,6 +5,7 @@
  * Author: Andre Firchow
  *
 *****************************************************************/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100);
 .rect-auto, .c100.p51 .slice, .c100.p52 .slice, .c100.p53 .slice, .c100.p54 .slice, .c100.p55 .slice, .c100.p56 .slice, .c100.p57 .slice, .c100.p58 .slice, .c100.p59 .slice, .c100.p60 .slice, .c100.p61 .slice, .c100.p62 .slice, .c100.p63 .slice, .c100.p64 .slice, .c100.p65 .slice, .c100.p66 .slice, .c100.p67 .slice, .c100.p68 .slice, .c100.p69 .slice, .c100.p70 .slice, .c100.p71 .slice, .c100.p72 .slice, .c100.p73 .slice, .c100.p74 .slice, .c100.p75 .slice, .c100.p76 .slice, .c100.p77 .slice, .c100.p78 .slice, .c100.p79 .slice, .c100.p80 .slice, .c100.p81 .slice, .c100.p82 .slice, .c100.p83 .slice, .c100.p84 .slice, .c100.p85 .slice, .c100.p86 .slice, .c100.p87 .slice, .c100.p88 .slice, .c100.p89 .slice, .c100.p90 .slice, .c100.p91 .slice, .c100.p92 .slice, .c100.p93 .slice, .c100.p94 .slice, .c100.p95 .slice, .c100.p96 .slice, .c100.p97 .slice, .c100.p98 .slice, .c100.p99 .slice, .c100.p100 .slice {
   clip: rect(auto, auto, auto, auto); }
 
@@ -896,6 +897,9 @@
 .c100.success:hover > span {
   color: #47a447; }
 
+body {
+  font-family: 'Lato', sans-serif; }
+
 @media (min-width: 768px) and (max-width: 1199px) {
   .navbar-collapse.collapse {
     display: none !important; }
@@ -937,6 +941,12 @@ a {
 
 .icon-info {
   color: #D3D3D3; }
+
+.overflow-visible {
+  overflow: visible !important; }
+
+.vertical-top {
+  vertical-align: top !important; }
 
 .btn-green {
   background-color: #349da2;
@@ -985,6 +995,15 @@ html body .tabs-primary .nav-tabs li a:hover {
 
 .input-group-icon .input-group-addon {
   z-index: 9; }
+
+.dropdown-backdrop-custom {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+  background-color: rgba(255, 255, 255, 0.5); }
 
 .dropdown-backdrop {
   background-color: rgba(255, 255, 255, 0.5); }
@@ -1076,9 +1095,11 @@ body {
   background-color: #ecedf0; }
 
 .my_header {
-  height: 70px; }
+  height: 104px; }
   .my_header.has-sub-header {
     height: 50px; }
+  .my_header .userbox .role {
+    display: none; }
 
 .my_header .navbar-default {
   background-color: #171717; }
@@ -1086,15 +1107,20 @@ body {
 .my_header .navbar-default .navbar-nav > li > a {
   color: #FFF; }
 
-.my_main ul li {
+.my_main .filter-buttons > li {
   display: inline-block;
   margin-left: 15px;
   float: none; }
 
-.filter-list li {
+.filter-list {
+  text-align: center; }
+
+.filter-list > li {
   display: inline-block;
   margin-left: 15px;
   float: none; }
+  .filter-list > li .btn-group .dropdown-toggle {
+    min-width: 135px; }
 
 .my_main p {
   margin-top: 12px;
@@ -1171,17 +1197,26 @@ tr td {
   display: inline-block;
   width: 30px;
   height: 30px;
-  margin-top: 10px;
+  margin-top: 28px;
   line-height: 26px;
   text-align: center;
   border: 1px solid #349da2;
   background-color: #349da2;
   cursor: pointer;
-  margin-right: 15px; }
+  margin-right: 15px;
+  position: relative; }
   .bell i {
     color: #fff; }
   .bell:hover {
     background-color: #71bb94; }
+  .bell .badge {
+    background-color: #D2312D;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 16px;
+    padding: 3px 5px 3px 5px;
+    font-size: 10px; }
 
 .toggle-button {
   border-radius: 50%;
@@ -1219,6 +1254,9 @@ tr td {
 .widget-panel .widget-summary {
   padding-top: 25px;
   text-align: center; }
+
+.border-right {
+  border-right: 1px solid #fff; }
 
 .widget-panel .widget-summary .summary {
   min-height: 100px; }
@@ -1310,7 +1348,7 @@ tr td {
   pointer-events: none; }
 
 .dropdown-menu.dropdown-noti:after, .dropdown-menu.dropdown-noti:before {
-  left: 128px; }
+  left: 210px; }
 
 .dropdown-menu.dropdown-search:after, .dropdown-menu.dropdown-search:before {
   left: auto;
@@ -1383,17 +1421,49 @@ tr td {
   line-height: 40px; }
 
 .my_header .navbar-default.nav-custom {
-  background: #fff; }
-  .my_header .navbar-default.nav-custom .navbar-nav > li > a {
-    color: #34495e;
-    font-weight: 600; }
-    .my_header .navbar-default.nav-custom .navbar-nav > li > a:hover, .my_header .navbar-default.nav-custom .navbar-nav > li > a:focus {
+  background: #fff;
+  min-height: 84px; }
+  @media (min-width: 768px) {
+    .my_header .navbar-default.nav-custom .navbar-nav {
+      padding-top: 17px; } }
+  .my_header .navbar-default.nav-custom .navbar-nav > li {
+    position: relative; }
+    .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu {
+      min-width: 170px; }
+      .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li {
+        position: relative; }
+        .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li .badge {
+          right: 5px;
+          top: 8px; }
+        .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li a {
+          font-size: 16px;
+          padding: 5px 20px; }
+        .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li.active a {
+          background-color: #349da2; }
+    .my_header .navbar-default.nav-custom .navbar-nav > li .badge {
+      background-color: #D2312D;
+      position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 16px;
+      padding: 3px 5px 3px 5px;
+      font-size: 10px;
+      z-index: 1; }
+    .my_header .navbar-default.nav-custom .navbar-nav > li > a {
+      color: #34495e;
+      font-weight: 600;
+      font-size: 20px; }
+      .my_header .navbar-default.nav-custom .navbar-nav > li > a:hover, .my_header .navbar-default.nav-custom .navbar-nav > li > a:focus {
+        text-decoration: underline; }
+    .my_header .navbar-default.nav-custom .navbar-nav > li.active > a {
+      color: #34495e;
       text-decoration: underline; }
-  .my_header .navbar-default.nav-custom .navbar-nav > li.active > a {
-    color: #34495e;
-    text-decoration: underline; }
-    .my_header .navbar-default.nav-custom .navbar-nav > li.active > a:hover, .my_header .navbar-default.nav-custom .navbar-nav > li.active > a:focus {
-      color: #34495e; }
+      .my_header .navbar-default.nav-custom .navbar-nav > li.active > a:hover, .my_header .navbar-default.nav-custom .navbar-nav > li.active > a:focus {
+        color: #34495e; }
+  .my_header .navbar-default.nav-custom .navbar-brand {
+    width: 187px;
+    padding-top: 25px;
+    height: 84px; }
 
 .my_header .container {
   position: relative; }
@@ -1404,11 +1474,21 @@ tr td {
 
 .userbox {
   display: inline-block;
-  margin: 6px 10px 0 0; }
+  margin: 24px 10px 0 0; }
+
+.navbar-toggle {
+  margin-top: 25px; }
+
+#legendContainer2Inner {
+  position: absolute;
+  right: 10px;
+  top: 50px; }
 
 .widget-panel .widget-summary.unscanned .summary .amount {
-  font-size: 2rem;
-  opacity: 0.7; }
+  font-size: 1.8rem;
+  opacity: 0.7;
+  word-break: break-word;
+  line-height: 2.8rem; }
 .widget-panel .widget-summary.unscanned .summary .title a {
   color: #fff;
   text-decoration: underline;
@@ -1419,7 +1499,30 @@ tr td {
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
   display: none; }
 .widget-panel .widget-chart {
-  min-height: 350px; }
+  min-height: 300px;
+  position: relative; }
+  .widget-panel .widget-chart .chart-disabled-overlay {
+    width: 100%;
+    height: 95%;
+    top: 5%;
+    left: 0;
+    z-index: 9;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); }
+  .widget-panel .widget-chart .chart.chart-md {
+    height: 300px;
+    position: relative; }
+  .widget-panel .widget-chart .chart-md-inner {
+    height: 180px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -112px;
+    margin-left: -90px;
+    width: 180px; }
+    @media (max-width: 380px) {
+      .widget-panel .widget-chart .chart-md-inner {
+        height: 157px; } }
   .widget-panel .widget-chart.unscanned {
     padding-top: 140px;
     text-align: center; }
@@ -1495,7 +1598,10 @@ tr td {
     position: relative;
     background-color: transparent;
     margin-bottom: 0;
-    color: #fff; }
+    color: #fff;
+    background: url(../images/custom-select-arrows.png) no-repeat;
+    background-position: right 6px top 9px;
+    -webkit-appearance: none; }
     .select-group select option {
       color: #333; }
   .select-group .progress-percentage {
@@ -1519,6 +1625,16 @@ tr td {
 
 .table-my-actions .checkbox-custom {
   padding: 0 0 0 5px; }
+@media (min-width: 1024px) {
+  .table-my-actions.orphan-review .progress {
+    min-width: 100px; } }
+.table-my-actions.orphan-review .select-group .selected-info {
+  position: relative; }
+.table-my-actions.orphan-review .doc-check .fa-clock-o {
+  display: none; }
+.table-my-actions.orphan-review .doc-check .fa-check {
+  display: inline-block;
+  color: #5bc0de; }
 .table-my-actions .doc-check {
   font-size: 18px;
   text-decoration: none; }
@@ -1573,7 +1689,7 @@ tr td {
 
 .my-actions-btn-group.actions-bottom {
   text-align: right;
-  padding-right: 40px; }
+  padding-right: 20px; }
 
 #words-cloud {
   width: 500px;
@@ -1699,16 +1815,16 @@ div[id^='legendContainer'] {
 .panel-policies .col-default {
   padding-top: 5px; }
 
-.filter-tags {
-  padding-top: 12px; }
-  .filter-tags .filter-label {
+.filter-tags .filter-label {
+  margin-right: 5px;
+  font-size: 100%;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 5px; }
+  .filter-tags .filter-label .filter-remove {
+    color: #fff;
     margin-right: 5px;
-    font-size: 100%;
-    font-weight: 600; }
-    .filter-tags .filter-label .filter-remove {
-      color: #fff;
-      margin-right: 5px;
-      cursor: pointer; }
+    cursor: pointer; }
 
 /*Responsive*/
 @media (max-width: 768px) {
@@ -1716,16 +1832,26 @@ div[id^='legendContainer'] {
     text-align: left;
     padding-left: 0; }
 
-  ul.filter-list li {
+  ul.filter-list > li {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px; }
 
-  ul.filter-list li select.form-control {
+  ul.filter-list > li select.form-control {
     width: auto; } }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .my_header .navbar-collapse {
-    float: left; } }
+    width: -webkit-calc(100% - 400px);
+    width: -moz-calc(100% - 400px);
+    width: calc(100% - 400px);
+    text-align: center;
+    float: left; }
+    .my_header .navbar-collapse .navbar-nav {
+      float: none;
+      text-align: center; }
+      .my_header .navbar-collapse .navbar-nav > li {
+        float: none;
+        display: inline-block; } }
 @media (max-width: 996px) {
   .dropdown-menu.full-mobile {
     width: 90%;
@@ -1734,7 +1860,14 @@ div[id^='legendContainer'] {
     z-index: 9999; }
 
   .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before {
-    display: none; } }
+    display: none; }
+
+  .dropdown-menu.dd-filter {
+    width: 80vw;
+    right: 0;
+    margin-left: -70vw; }
+    .dropdown-menu.dd-filter:before, .dropdown-menu.dd-filter:after {
+      display: none; } }
 @media (max-width: 1199px) {
   .header-right {
     position: absolute;
@@ -1780,10 +1913,45 @@ div[id^='legendContainer'] {
       width: 200px; }
 
   .nav-tabs li {
-    width: 100%; } }
+    width: 100%; }
+
+  .dropdown-menu.dd-filter {
+    width: 90vw; }
+
+  .view-stat-block label {
+    display: block; }
+
+  .my-actions-btn-group {
+    position: relative;
+    right: -20px; }
+    .my-actions-btn-group .panel-action-toggle {
+      top: -100px;
+      right: 20px;
+      position: relative; } }
 @media (max-width: 400px) {
   .modal-preview .modal-title {
-    margin-top: 20px; } }
+    margin-top: 20px; }
+
+  .dropdown-menu.dd-filter {
+    margin-left: -60vw; }
+
+  .my_header .navbar-default.nav-custom .navbar-brand {
+    width: 100px;
+    padding-top: 33px; } }
+.overview_question_a, .review_question_a {
+  color: #D3D3D3; }
+  .overview_question_a:hover, .review_question_a:hover {
+    color: #b9b9b9 !important; }
+
+.help_timeframe {
+  color: #000011;
+  font-weight: normal;
+  width: auto !important;
+  min-width: 300px; }
+
+.filter-tags-block {
+  margin-bottom: 10px; }
+
 .fa-alert-warning {
   color: #ed9c28; }
 
@@ -1827,6 +1995,11 @@ div[id^='legendContainer'] {
   border-bottom: 1px solid #DADADA;
   border-left: 1px solid #DADADA; }
 
+.no-border-top {
+  border-top: none !important; }
+
+.table-reviewer-summary thead tr th {
+  border-bottom: none; }
 .table-reviewer-summary tr td {
   text-align: left; }
 .table-reviewer-summary .hiddenRow {
@@ -1834,6 +2007,42 @@ div[id^='legendContainer'] {
 .table-reviewer-summary .assigned-num {
   display: inline-block;
   min-width: 30px; }
+.table-reviewer-summary .child-table > td {
+  border-top: none !important; }
+.table-reviewer-summary .border-bottom {
+  border-bottom: 1px solid #ddd; }
+.table-reviewer-summary .chart-col {
+  padding-left: 0;
+  border-left: 1px solid #000; }
+  .table-reviewer-summary .chart-col .progress {
+    margin-bottom: 0;
+    background: none;
+    box-shadow: none;
+    width: 90%;
+    overflow: visible;
+    float: left; }
+    .table-reviewer-summary .chart-col .progress .progress-bar {
+      position: relative;
+      text-align: right; }
+      .table-reviewer-summary .chart-col .progress .progress-bar .percent {
+        position: relative;
+        left: 20px;
+        color: #333; }
+  .table-reviewer-summary .chart-col .percent {
+    position: relative;
+    left: 30px; }
+.table-reviewer-summary .child-table .progress-bar {
+  background-color: #5bc0de; }
+.table-reviewer-summary .child-table tr:first-child .progress-bar {
+  background-color: #5bc0de; }
+.table-reviewer-summary .child-table tr:nth-child(2) .progress-bar {
+  background-color: #349da2; }
+.table-reviewer-summary .child-table tr:nth-child(3) .progress-bar {
+  background-color: #7986cb; }
+.table-reviewer-summary .child-table tr:nth-child(4) .progress-bar {
+  background-color: #ed9c28; }
+.table-reviewer-summary .child-table tr:nth-child(5) .progress-bar {
+  background-color: #d2322d; }
 
 .or-divider {
   text-align: center;
@@ -1857,11 +2066,23 @@ div[id^='legendContainer'] {
     margin-left: -50px; }
 
 #userReviewChart {
-  height: 200px;
-  margin-top: 15px; }
+  height: 200px; }
 
 .select-reviewers .switch {
   margin: 5px 0; }
+
+.document-chart {
+  height: 300px; }
+
+.statistic_table > tbody > tr > td {
+  padding: 5px 0; }
+  .statistic_table > tbody > tr > td > span {
+    display: inline-block;
+    width: -webkit-calc(100% - 25px);
+    width: -moz-calc(100% - 25px);
+    width: calc(100% - 25px);
+    overflow: hidden;
+    text-overflow: ellipsis; }
 
 .table-challenge .fa {
   font-size: 18px; }
@@ -1888,14 +2109,37 @@ div[id^='legendContainer'] {
 .table-challenge .previous-status {
   margin-top: 5px;
   font-size: 10px; }
+.table-challenge > tbody > tr > td {
+  vertical-align: middle; }
+
+.validation-btn {
+  border-radius: 50%;
+  padding: 4px;
+  line-height: 1;
+  width: 28px;
+  height: 28px; }
+
+.review_nav-tabs > li {
+  position: relative; }
+  .review_nav-tabs > li .badge {
+    background-color: #D2312D;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    height: 16px;
+    padding: 3px 5px 3px 5px;
+    font-size: 10px;
+    z-index: 1;
+    right: 0;
+    top: -7px; }
 
 .reviewer-tab .tab-content {
   border: 1px solid #ccc; }
 .reviewer-tab .reviewer-info {
   margin-bottom: 10px; }
-.reviewer-tab .tabs-vertical ul li:first-child {
+.reviewer-tab .tabs-vertical > ul li:first-child {
   border-top: 1px solid #DDD; }
-.reviewer-tab .tabs-vertical ul li:last-child {
+.reviewer-tab .tabs-vertical > ul li:last-child {
   border-bottom: 1px solid #DDD; }
 .reviewer-tab .c100 {
   display: inline-block;
@@ -1903,6 +2147,657 @@ div[id^='legendContainer'] {
   float: none;
   margin-left: 10px; }
   .reviewer-tab .c100 > span {
+    width: 3.4em;
+    line-height: 3.4em;
+    font-size: 0.3em; }
+
+@media (min-width: 996px) {
+  .reviewer-tab .tab-content {
+    width: 100% !important; } }
+@media (max-width: 995px) {
+  .reviewer-tab .tabs-vertical {
+    display: block; }
+  .reviewer-tab .nav-tabs {
+    display: block;
+    float: left; }
+  .reviewer-tab .tab-content {
+    display: block; } }
+@media (max-width: 767px) {
+  .reviewer-tab .tabs-vertical ul li {
+    border-right: 1px solid #DDD; } }
+/*! Select2 Bootstrap Theme v0.1.0-beta.4 | MIT License | github.com/select2/select2-bootstrap-theme */
+.select2-container--bootstrap {
+  display: block;
+  /*------------------------------------*\
+          #COMMON STYLES
+  \*------------------------------------*/
+  /**
+   * Search field in the Select2 dropdown.
+   */
+  /**
+   * No outline for all search fields - in the dropdown
+   * and inline in multi Select2s.
+   */
+  /**
+   * Adjust Select2's choices hover and selected styles to match
+   * Bootstrap 3's default dropdown styles.
+   *
+   * @see http://getbootstrap.com/components/#dropdowns
+   */
+  /**
+   * Clear the selection.
+   */
+  /**
+   * Address disabled Select2 styles.
+   *
+   * @see https://select2.github.io/examples.html#disabled
+   * @see http://getbootstrap.com/css/#forms-control-disabled
+   */
+  /*------------------------------------*\
+          #DROPDOWN
+  \*------------------------------------*/
+  /**
+   * Dropdown border color and box-shadow.
+   */
+  /**
+   * Limit the dropdown height.
+   */
+  /*------------------------------------*\
+          #SINGLE SELECT2
+  \*------------------------------------*/
+  /*------------------------------------*\
+      #MULTIPLE SELECT2
+  \*------------------------------------*/
+  /**
+   * Address Bootstrap control sizing classes
+   *
+   * 1. Reset Bootstrap defaults.
+   * 2. Adjust the dropdown arrow button icon position.
+   *
+   * @see http://getbootstrap.com/css/#forms-control-sizes
+   */
+  /* 1 */
+  /*------------------------------------*\
+      #RTL SUPPORT
+  \*------------------------------------*/ }
+
+.select2-container--bootstrap .select2-selection {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #555555;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  outline: 0; }
+
+.select2-container--bootstrap .select2-search--dropdown .select2-search__field {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #555555;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; }
+
+.select2-container--bootstrap .select2-search__field {
+  outline: 0;
+  /* Firefox 18- */
+  /**
+   * Firefox 19+
+   *
+   * @see http://stackoverflow.com/questions/24236240/color-for-styled-placeholder-text-is-muted-in-firefox
+   */ }
+
+.select2-container--bootstrap .select2-search__field::-webkit-input-placeholder {
+  color: #999; }
+
+.select2-container--bootstrap .select2-search__field:-moz-placeholder {
+  color: #999; }
+
+.select2-container--bootstrap .select2-search__field::-moz-placeholder {
+  color: #999;
+  opacity: 1; }
+
+.select2-container--bootstrap .select2-search__field:-ms-input-placeholder {
+  color: #999; }
+
+.select2-container--bootstrap .select2-results__option {
+  /**
+   * Disabled results.
+   *
+   * @see https://select2.github.io/examples.html#disabled-results
+   */
+  /**
+   * Hover state.
+   */
+  /**
+   * Selected state.
+   */ }
+
+.select2-container--bootstrap .select2-results__option[role=group] {
+  padding: 0; }
+
+.select2-container--bootstrap .select2-results__option[aria-disabled=true] {
+  color: #777777;
+  cursor: not-allowed; }
+
+.select2-container--bootstrap .select2-results__option[aria-selected=true] {
+  background-color: #f5f5f5;
+  color: #262626; }
+
+.select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
+  background-color: #337ab7;
+  color: #fff; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option {
+  padding: 6px 12px; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__group {
+  padding-left: 0; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -12px;
+  padding-left: 24px; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -24px;
+  padding-left: 36px; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -36px;
+  padding-left: 48px; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -48px;
+  padding-left: 60px; }
+
+.select2-container--bootstrap .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -60px;
+  padding-left: 72px; }
+
+.select2-container--bootstrap .select2-results__group {
+  color: #777777;
+  display: block;
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 1.428571429;
+  white-space: nowrap; }
+
+.select2-container--bootstrap.select2-container--focus .select2-selection, .select2-container--bootstrap.select2-container--open .select2-selection {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  border-color: #66afe9; }
+
+.select2-container--bootstrap.select2-container--open {
+  /**
+   * Make the dropdown arrow point up while the dropdown is visible.
+   */
+  /**
+   * Handle border radii of the container when the dropdown is showing.
+   */ }
+
+.select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b {
+  border-color: transparent transparent #999 transparent;
+  border-width: 0 4px 4px 4px; }
+
+.select2-container--bootstrap.select2-container--open.select2-container--below .select2-selection {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-color: transparent; }
+
+.select2-container--bootstrap.select2-container--open.select2-container--above .select2-selection {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-color: transparent; }
+
+.select2-container--bootstrap .select2-selection__clear {
+  color: #999;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  margin-right: 10px; }
+
+.select2-container--bootstrap .select2-selection__clear:hover {
+  color: #333; }
+
+.select2-container--bootstrap.select2-container--disabled .select2-selection {
+  border-color: #ccc;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+.select2-container--bootstrap.select2-container--disabled .select2-selection,
+.select2-container--bootstrap.select2-container--disabled .select2-search__field {
+  cursor: not-allowed; }
+
+.select2-container--bootstrap.select2-container--disabled .select2-selection,
+.select2-container--bootstrap.select2-container--disabled .select2-selection--multiple .select2-selection__choice {
+  background-color: #eeeeee; }
+
+.select2-container--bootstrap.select2-container--disabled .select2-selection__clear,
+.select2-container--bootstrap.select2-container--disabled .select2-selection--multiple .select2-selection__choice__remove {
+  display: none; }
+
+.select2-container--bootstrap .select2-dropdown {
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  border-color: #66afe9;
+  overflow-x: hidden;
+  margin-top: -1px; }
+
+.select2-container--bootstrap .select2-dropdown--above {
+  margin-top: 1px; }
+
+.select2-container--bootstrap .select2-results > .select2-results__options {
+  max-height: 200px;
+  overflow-y: auto; }
+
+.select2-container--bootstrap .select2-selection--single {
+  height: 34px;
+  line-height: 1.428571429;
+  padding: 6px 24px 6px 12px;
+  /**
+   * Adjust the single Select2's dropdown arrow button appearance.
+   */ }
+
+.select2-container--bootstrap .select2-selection--single .select2-selection__arrow {
+  position: absolute;
+  bottom: 0;
+  right: 12px;
+  top: 0;
+  width: 4px; }
+
+.select2-container--bootstrap .select2-selection--single .select2-selection__arrow b {
+  border-color: #999 transparent transparent transparent;
+  border-style: solid;
+  border-width: 4px 4px 0 4px;
+  height: 0;
+  left: 0;
+  margin-left: -4px;
+  margin-top: -2px;
+  position: absolute;
+  top: 50%;
+  width: 0; }
+
+.select2-container--bootstrap .select2-selection--single .select2-selection__rendered {
+  color: #555555;
+  padding: 0; }
+
+.select2-container--bootstrap .select2-selection--single .select2-selection__placeholder {
+  color: #999; }
+
+.select2-container--bootstrap .select2-selection--multiple {
+  min-height: 34px;
+  /**
+   * Make Multi Select2's choices match Bootstrap 3's default button styles.
+   */
+  /**
+   * Minus 2px borders.
+   */
+  /**
+   * Clear the selection.
+   */ }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered {
+  box-sizing: border-box;
+  display: block;
+  line-height: 1.428571429;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__placeholder {
+  color: #999;
+  float: left;
+  margin-top: 5px; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+  color: #555555;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: default;
+  float: left;
+  margin: 5px 0 0 6px;
+  padding: 0 6px; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+  background: transparent;
+  padding: 0 12px;
+  height: 32px;
+  line-height: 1.428571429;
+  margin-top: 0;
+  min-width: 5em; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove {
+  color: #999;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 3px; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove:hover {
+  color: #333; }
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
+  margin-top: 6px; }
+
+.select2-container--bootstrap.input-sm, .select2-container--bootstrap.input-lg {
+  border-radius: 0;
+  font-size: 12px;
+  height: auto;
+  line-height: 1;
+  padding: 0; }
+
+.select2-container--bootstrap.input-sm .select2-selection--single, .input-group-sm .select2-container--bootstrap .select2-selection--single, .form-group-sm .select2-container--bootstrap .select2-selection--single {
+  border-radius: 3px;
+  font-size: 12px;
+  height: 30px;
+  line-height: 1.5;
+  padding: 5px 22px 5px 10px;
+  /* 2 */ }
+
+.select2-container--bootstrap.input-sm .select2-selection--single .select2-selection__arrow b, .input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b {
+  margin-left: -5px; }
+
+.select2-container--bootstrap.input-sm .select2-selection--multiple, .input-group-sm .select2-container--bootstrap .select2-selection--multiple, .form-group-sm .select2-container--bootstrap .select2-selection--multiple {
+  min-height: 30px; }
+
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__choice, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 4px 0 0 5px;
+  padding: 0 5px; }
+
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+  padding: 0 10px;
+  font-size: 12px;
+  height: 28px;
+  line-height: 1.5; }
+
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__clear, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
+  margin-top: 5px; }
+
+.select2-container--bootstrap.input-lg .select2-selection--single, .input-group-lg .select2-container--bootstrap .select2-selection--single, .form-group-lg .select2-container--bootstrap .select2-selection--single {
+  border-radius: 6px;
+  font-size: 18px;
+  height: 46px;
+  line-height: 1.3333333;
+  padding: 10px 31px 10px 16px;
+  /* 1 */ }
+
+.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow {
+  width: 5px; }
+
+.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow b, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b {
+  border-width: 5px 5px 0 5px;
+  margin-left: -5px;
+  margin-left: -10px;
+  margin-top: -2.5px; }
+
+.select2-container--bootstrap.input-lg .select2-selection--multiple, .input-group-lg .select2-container--bootstrap .select2-selection--multiple, .form-group-lg .select2-container--bootstrap .select2-selection--multiple {
+  min-height: 46px; }
+
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__choice, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 4px;
+  margin: 9px 0 0 8px;
+  padding: 0 10px; }
+
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+  padding: 0 16px;
+  font-size: 18px;
+  height: 44px;
+  line-height: 1.3333333; }
+
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__clear, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
+  margin-top: 10px; }
+
+.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single {
+  /**
+   * Make the dropdown arrow point up while the dropdown is visible.
+   */ }
+
+.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent #999 transparent;
+  border-width: 0 5px 5px 5px; }
+
+.input-group-lg .select2-container--bootstrap.select2-container--open .select2-selection--single {
+  /**
+   * Make the dropdown arrow point up while the dropdown is visible.
+   */ }
+
+.input-group-lg .select2-container--bootstrap.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent #999 transparent;
+  border-width: 0 5px 5px 5px; }
+
+.select2-container--bootstrap[dir="rtl"] {
+  /**
+   * Single Select2
+   *
+   * 1. Makes sure that .select2-selection__placeholder is positioned
+   *    correctly.
+   */
+  /**
+   * Multiple Select2
+   */ }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--single {
+  padding-left: 24px;
+  padding-right: 12px; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__rendered {
+  padding-right: 0;
+  padding-left: 0;
+  text-align: right;
+  /* 1 */ }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__clear {
+  float: left; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+  left: 12px;
+  right: auto; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--single .select2-selection__arrow b {
+  margin-left: 0; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice,
+.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder {
+  float: right; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice {
+  margin-left: 0;
+  margin-right: 6px; }
+
+.select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
+  margin-left: 2px;
+  margin-right: auto; }
+
+/*------------------------------------*\
+    #ADDITIONAL GOODIES
+\*------------------------------------*/
+/**
+ * Address Bootstrap's validation states
+ *
+ * If a Select2 widget parent has one of Bootstrap's validation state modifier
+ * classes, adjust Select2's border colors and focus states accordingly.
+ * You may apply said classes to the Select2 dropdown (body > .select2-container)
+ * via JavaScript match Bootstraps' to make its styles match.
+ *
+ * @see http://getbootstrap.com/css/#forms-control-validation
+ */
+.has-warning .select2-dropdown,
+.has-warning .select2-selection {
+  border-color: #8a6d3b; }
+
+.has-warning .select2-container--focus .select2-selection,
+.has-warning .select2-container--open .select2-selection {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
+  border-color: #66512c; }
+
+.has-warning.select2-drop-active {
+  border-color: #66512c; }
+
+.has-warning.select2-drop-active.select2-drop.select2-drop-above {
+  border-top-color: #66512c; }
+
+.has-error .select2-dropdown,
+.has-error .select2-selection {
+  border-color: #a94442; }
+
+.has-error .select2-container--focus .select2-selection,
+.has-error .select2-container--open .select2-selection {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  border-color: #843534; }
+
+.has-error.select2-drop-active {
+  border-color: #843534; }
+
+.has-error.select2-drop-active.select2-drop.select2-drop-above {
+  border-top-color: #843534; }
+
+.has-success .select2-dropdown,
+.has-success .select2-selection {
+  border-color: #3c763d; }
+
+.has-success .select2-container--focus .select2-selection,
+.has-success .select2-container--open .select2-selection {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
+  border-color: #2b542c; }
+
+.has-success.select2-drop-active {
+  border-color: #2b542c; }
+
+.has-success.select2-drop-active.select2-drop.select2-drop-above {
+  border-top-color: #2b542c; }
+
+/**
+ * Select2 widgets in Bootstrap Input Groups
+ *
+ * When Select2 widgets are combined with other elements using Bootstraps
+ * "Input Group" component, we don't want specific edges of the Select2
+ * container to have a border-radius.
+ *
+ * Use .select2-bootstrap-prepend and .select2-bootstrap-append on
+ * a Bootstrap 3 .input-group to let the contained Select2 widget know which
+ * edges should not be rounded as they are directly followed by another element.
+ *
+ * @see http://getbootstrap.com/components/#input-groups
+ */
+/**
+ * Mimick Bootstraps .input-group .form-control styles.
+ *
+ * @see https://github.com/twbs/bootstrap/blob/master/less/input-groups.less
+ */
+.input-group .select2-container--bootstrap {
+  display: table;
+  table-layout: fixed;
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0; }
+
+.input-group.select2-bootstrap-prepend .select2-container--bootstrap .select2-selection {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0; }
+
+.input-group.select2-bootstrap-append .select2-container--bootstrap .select2-selection {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0; }
+
+/**
+ * Adjust alignment of Bootstrap buttons in Bootstrap Input Groups to address
+ * Multi Select2's height which - depending on how many elements have been selected -
+ * may grow taller than its initial size.
+ *
+ * @see http://getbootstrap.com/components/#input-groups
+ */
+.select2-bootstrap-append .select2-container--bootstrap,
+.select2-bootstrap-append .input-group-btn,
+.select2-bootstrap-append .input-group-btn .btn,
+.select2-bootstrap-prepend .select2-container--bootstrap,
+.select2-bootstrap-prepend .input-group-btn,
+.select2-bootstrap-prepend .input-group-btn .btn {
+  vertical-align: top; }
+
+/**
+ * Temporary fix for https://github.com/select2/select2-bootstrap-theme/issues/9
+ *
+ * Provides `!important` for certain properties of the class applied to the
+ * original `<select>` element to hide it.
+ *
+ * @see https://github.com/select2/select2/pull/3301
+ * @see https://github.com/fk/select2/commit/31830c7b32cb3d8e1b12d5b434dee40a6e753ada
+ */
+.form-control.select2-hidden-accessible {
+  position: absolute !important;
+  width: 1px !important; }
+
+/**
+ * Display override for inline forms
+*/
+.form-inline .select2-container--bootstrap {
+  display: inline-block; }
+
+.admin-page .panel.disabled {
+  position: relative; }
+  .admin-page .panel.disabled:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: block;
+    position: absolute;
+    z-index: 9; }
+.admin-page .panel-title i {
+  margin-right: 10px; }
+.admin-page .help_question_content {
+  letter-spacing: 0;
+  color: #777;
+  font-weight: normal; }
+.admin-page .panel-policies-fr h5 {
+  font-weight: 600; }
+.admin-page .panel-policies-fr .fa-check-circle {
+  font-size: 20px; }
+.admin-page .panel-policies-fr .control-label {
+  padding-top: 0; }
+.admin-page .panel-service-level h4, .admin-page .panel-service-level h5 {
+  font-weight: 600; }
+.admin-page .panel-service-level h5 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem; }
+.admin-page .panel-service-level .sub-block {
+  margin-bottom: 20px; }
+.admin-page .panel-service-level .row, .admin-page .panel-service-level .form-horizontal .form-group {
+  margin-left: -5px;
+  margin-right: -5px; }
+.admin-page .panel-service-level [class^="col"] {
+  padding-left: 5px;
+  padding-right: 5px; }
+
+.admin_header .c100 {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  margin-left: 10px; }
+  .admin_header .c100 > span {
     width: 3.4em;
     line-height: 3.4em;
     font-size: 0.3em; }

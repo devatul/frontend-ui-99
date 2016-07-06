@@ -124,15 +124,25 @@ header.h_header {
 	margin-top: 4px;
 	z-index: 1000000;
 }
+.my-team-content .help_question_content.has-arrow {
+	margin-top: 6px;
+}
+.my-team-content .help_question_bottom.has-arrow {
+	margin-top: 6px;
+}
 .help_question_content.has-arrow:before {
-	margin-left: 219px;
+	border-color: rgba(204, 204, 204, 0);
+    border-bottom-color: #ccc;
+    border-width: 9px;
+    margin-left: 219px;
 }
 .help_question_content.has-arrow:after {
 	margin-left: 220px;
 }
 .note_chart_content.has-arrow {
-	margin-left: -50px;
-	margin-top: 4px;
+	
+	margin-top: 10px;
+    margin-left: -50px;
 }
 .note_chart_content.has-arrow:before {
 	margin-left: 20px;
@@ -141,14 +151,17 @@ header.h_header {
 	margin-left: 21px;
 }
 .note_chart_content_review.has-arrow {
-	margin-left: -670px;
-	margin-top: 4px;
+	margin-left: -650px;
+	margin-top: 10px;
+}
+.my-team-content .note_chart_content_review.has-arrow {
+	margin-top: 14px;
 }
 .note_chart_content_review.has-arrow:before {
 	margin-left: 640px;
 }
 .note_chart_content_review.has-arrow:after {
-	margin-left: 641px;
+	margin-left: 617px;
 }
 .help_question_bottom.has-arrow {
 	margin-left: -525px;

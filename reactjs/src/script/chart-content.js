@@ -1,38 +1,6 @@
-$(function () {
-
+module.exports = function() {
     if( $('#flotPie').length){
         // PIE CHART
-        var flotPieData = [{
-            label: "Unrestricted",
-            data: [
-                [1, 50]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Internal",
-            data: [
-                [1, 25]
-            ],
-            color: '#349da2'
-        }, {
-            label: "Confidential",
-            data: [
-                [1, 15]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Secret",
-            data: [
-                [1, 6]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Banking Secrecy",
-            data: [
-                [1, 4]
-            ],
-            color: '#E36159'
-        }];
 
         var plot = $.plot('#flotPie', flotPieData, {
             series: {
@@ -264,64 +232,4 @@ $(function () {
             }
         });
     }
-       
-    $(document).on('click', '.dropdown-menu.has-arrow', function (e) {
-        e.stopPropagation();
-    });    
-
-    $(document).on('click', '.dropdown-menu.has-child', function(e){
-        e.stopPropagation();
-    });
-
-    $('.toggle-button').on('click', function(){
-        var parent = $(this).parents('.dropdown');
-        $(parent).find('.dropdown-backdrop-custom').toggle();
-        $(parent).find('.dropdown-menu.has-child').toggle();
-    });
-
-    $('.dropdown-backdrop-custom').on('click', function(e){
-        $('.dropdown-backdrop-custom').toggle();
-        $('.dropdown-menu.has-child').toggle();
-    });
-
-    // hold onto the drop down menu                                             
-    var dropdownMenu;
-
-    // and when you show it, move it to the body                                     
-    $(window).on('show.bs.dropdown', function (e) {
-
-        var windowWidth = $(window).innerWidth();
-        // grab the menu     
-        dropdownMenu = $(e.target).find('.dropdown-menu');
-
-        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){   
-            // detach it and append it to the body
-            $('body').append(dropdownMenu.detach());
-
-            // grab the new offset position
-            var eOffset = $(e.target).offset();
-
-            // make sure to place it where it would normally go (this could be improved)
-            dropdownMenu.css({
-                'display': 'block',
-                'top': eOffset.top + $(e.target).outerHeight(),
-                'left': eOffset.left
-            });
-        }
-    });
-
-    // and when you hide it, reattach the drop down, and hide it normally                                                   
-    $(window).on('hide.bs.dropdown', function (e) {
-        var windowWidth = $(window).innerWidth();
-
-        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
-            $(e.target).append(dropdownMenu.detach());
-            dropdownMenu.hide();
-        }
-    });     
-
-    $('select.detail-select').select2({
-        minimumResultsForSearch: Infinity
-    }).select2('val', null);;
-
-});
+}

@@ -1,5 +1,10 @@
 /* Add here all your CSS customizations */
 @import "config/imports";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100);
+
+body{
+  font-family: 'Lato', sans-serif;
+}
 
 @media (min-width: 768px) and (max-width: 1199px) {
     .navbar-collapse.collapse {
@@ -56,6 +61,14 @@ a{
 
 .icon-info{
   color: #D3D3D3
+}
+
+.overflow-visible{
+  overflow: visible!important;
+}
+
+.vertical-top{
+  vertical-align: top!important;
 }
 
 .btn-green{
@@ -115,6 +128,16 @@ html body .tabs-primary .nav-tabs li a:hover{
 
 .input-group-icon .input-group-addon{
   z-index: 9;
+}
+
+.dropdown-backdrop-custom {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .dropdown-backdrop{
@@ -230,9 +253,12 @@ body {
 }
 
 .my_header {
-    height: 70px;
+    height: 104px;
     &.has-sub-header{
       height: 50px;
+    }
+    .userbox .role{
+      display: none;
     }
 }
 
@@ -244,16 +270,25 @@ body {
     color: #FFF;
 }
 
-.my_main ul li {
+.my_main .filter-buttons > li {
     display: inline-block;
     margin-left: 15px;
     float: none;
 }
 
-.filter-list li {
+.filter-list{
+  text-align: center;
+}
+
+.filter-list > li {
     display: inline-block;
     margin-left: 15px;
     float: none;
+    .btn-group{
+      .dropdown-toggle{
+        min-width: 135px;
+      }
+    }
 }
 
 .my_main p {
@@ -349,18 +384,28 @@ tr td {
     display: inline-block;
     width: 30px;
     height: 30px;
-    margin-top: 10px;
+    margin-top: 28px;
     line-height: 26px;
     text-align: center;
     border: 1px solid  $color-tertiary;
     background-color: $color-tertiary;
     cursor: pointer;
     margin-right: 15px;
+    position: relative;
     i{
       color: #fff;
     }
     &:hover{
       background-color: rgb(113, 187, 148);
+    }
+    .badge{
+      background-color: #D2312D;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      height: 16px;
+      padding: 3px 5px 3px 5px;
+      font-size: 10px;
     }
 }
 
@@ -409,6 +454,11 @@ ul.filter-list li{
 .widget-panel .widget-summary{
     padding-top: 25px;
     text-align: center;
+}
+
+
+.border-right{
+  border-right: 1px solid #fff;
 }
 
 .widget-panel .widget-summary .summary{
@@ -528,7 +578,7 @@ ul.filter-list li{
 }
 
 .dropdown-menu.dropdown-noti:after, .dropdown-menu.dropdown-noti:before{
-    left: 128px;
+    left: 210px;
 }
 .dropdown-menu.dropdown-search:after, .dropdown-menu.dropdown-search:before{
     left: auto;
@@ -617,10 +667,47 @@ ul.filter-list li{
 
 .my_header .navbar-default.nav-custom{
   background: #fff;
+  min-height: 84px;
+  .navbar-nav{
+    @media (min-width: 768px){
+      padding-top: 17px;
+    }
+  }
   .navbar-nav > li {
+    position: relative;
+    .dropdown-menu{
+      min-width: 170px;
+      li{
+        position: relative;
+        .badge{
+          right: 5px;
+          top: 8px;
+        }
+        a{
+          font-size: 16px;
+          padding: 5px 20px;
+        }
+        &.active{
+          a{
+            background-color: $color-tertiary;
+          }
+        }
+      }
+    }
+    .badge{
+      background-color: #D2312D;
+      position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 16px;
+      padding: 3px 5px 3px 5px;
+      font-size: 10px;
+      z-index: 1;
+    }
     &> a{
       color: $color-black;
       font-weight: 600;
+      font-size: 20px;
       &:hover, &:focus{
         text-decoration: underline;
       }
@@ -632,6 +719,11 @@ ul.filter-list li{
         color: $color-black;
       }
     }
+  }
+  .navbar-brand{
+    width: 187px;
+    padding-top: 25px;
+    height: 84px;
   }
 }
 
@@ -646,7 +738,17 @@ ul.filter-list li{
 
 .userbox {
   display: inline-block;
-  margin: 6px 10px 0 0;
+  margin: 24px 10px 0 0;
+}
+
+.navbar-toggle{
+  margin-top: 25px;
+}
+
+#legendContainer2Inner{
+  position: absolute;
+  right: 10px;
+  top: 50px;
 }
 
 .widget-panel{
@@ -654,8 +756,10 @@ ul.filter-list li{
     &.unscanned{
       .summary {
         .amount{
-          font-size: 2rem;
+          font-size: 1.8rem;
           opacity: 0.7;
+          word-break: break-word;
+          line-height: 2.8rem;
         }
         .title{
           a{
@@ -677,7 +781,33 @@ ul.filter-list li{
     }
   }
   .widget-chart{
-    min-height: 350px;
+    min-height: 300px;
+    position: relative;
+    .chart-disabled-overlay{
+      width: 100%;
+      height: 95%;
+      top: 5%;
+      left: 0;
+      z-index: 9;
+      position: absolute;
+      background-color: rgba(255,255,255,0.8);
+    }
+    .chart.chart-md{
+      height: 300px;
+      position: relative;
+    }
+    .chart-md-inner{
+      height: 180px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -112px;
+      margin-left: -90px;
+      width: 180px;
+      @media (max-width: 380px){
+        height: 157px;
+      }
+    }
     &.unscanned{
       padding-top: 140px;
       text-align: center;
@@ -789,6 +919,9 @@ ul.filter-list li{
     background-color: transparent;
     margin-bottom: 0;
     color: #fff;
+    background: url(../images/custom-select-arrows.png) no-repeat;
+    background-position: right 6px top 9px;
+    -webkit-appearance: none;
     option{
       color: #333;
     }
@@ -822,6 +955,25 @@ ul.filter-list li{
 .table-my-actions{
   .checkbox-custom{
     padding: 0 0 0 5px;
+  }
+  &.orphan-review{
+    @media (min-width: 1024px){
+      .progress{
+            min-width: 100px;
+      }
+    }
+    .select-group .selected-info{
+      position: relative;
+    }
+    .doc-check{
+      .fa-clock-o{
+        display: none;
+      }
+      .fa-check{
+        display: inline-block;
+        color: $color-info;
+      }
+    }
   }
   .doc-check{
     font-size: 18px;
@@ -912,7 +1064,7 @@ ul.filter-list li{
 
 .my-actions-btn-group.actions-bottom{
     text-align: right;
-    padding-right: 40px;
+    padding-right: 20px;
 }
 
 #words-cloud{
@@ -1087,11 +1239,12 @@ div[id^='legendContainer']{
 }
 
 .filter-tags{
-  padding-top: 12px;
   .filter-label{
     margin-right: 5px;
     font-size: 100%;
     font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
     .filter-remove{
       color: #fff;
       margin-right: 5px;
@@ -1106,19 +1259,29 @@ div[id^='legendContainer']{
         text-align: left;
         padding-left: 0;
     }
-    ul.filter-list li{
+    ul.filter-list > li{
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 10px;
     }
-    ul.filter-list li select.form-control{
+    ul.filter-list > li select.form-control{
         width: auto;
     }
 }
 
-@media (min-width: 768px){
+@media (min-width: 769px){
   .my_header .navbar-collapse {
+    @include calc(width, '100% - 400px');
+    text-align: center;
     float: left;
+    .navbar-nav{
+      float: none;
+      text-align: center;
+      &>li{
+        float: none;
+        display: inline-block;
+      }
+    }
   }
 }
 
@@ -1131,6 +1294,15 @@ div[id^='legendContainer']{
     }
     .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before{
         display: none;
+    }
+
+    .dropdown-menu.dd-filter{
+      width: 80vw;
+      right: 0;
+      margin-left: -70vw;
+      &:before, &:after{
+        display: none;
+      }
     }
 }
 
@@ -1195,14 +1367,40 @@ div[id^='legendContainer']{
   .nav-tabs li{
     width: 100%;
   }
+  .dropdown-menu.dd-filter{
+    width: 90vw
+  }
+  .view-stat-block{
+    label{
+      display: block;
+    }
+  }
+  .my-actions-btn-group{
+    position: relative;
+    right: -20px;
+    .panel-action-toggle{
+      top: -100px;
+      right: 20px;
+      position: relative;
+    }
+  }
 }
 
 @media (max-width: 400px){
   .modal-preview .modal-title {
       margin-top: 20px;
   }
+  .dropdown-menu.dd-filter{
+    margin-left: -60vw
+  }
+  .my_header .navbar-default.nav-custom .navbar-brand{
+    width: 100px;
+    padding-top: 33px;
+  }
 }
 
+@import 'pages/overview';
 @import 'pages/notification';
 @import 'pages/reviewer';
 @import 'pages/exception';
+@import 'pages/admin';

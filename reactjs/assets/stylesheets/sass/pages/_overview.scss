@@ -1,0 +1,16 @@
+.overview_question_a, .review_question_a{
+  color: #D3D3D3;
+  &:hover{
+    color: darken(#D3D3D3, 10%)!important;
+  }
+}
+.help_timeframe{
+  color: #000011;
+  font-weight: normal;
+  width: auto!important;
+  min-width: 300px;
+}
+
+.filter-tags-block{
+  margin-bottom: 10px;
+}

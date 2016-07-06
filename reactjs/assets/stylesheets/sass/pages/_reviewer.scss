@@ -16,7 +16,18 @@
   border-left: 1px solid #DADADA;
 }
 
+.no-border-top{
+  border-top: none!important;
+}
+
 .table-reviewer-summary{
+  thead{
+    tr{
+      th{
+        border-bottom: none;
+      }
+    }
+  }
   tr{
     td{
       text-align: left;
@@ -28,6 +39,73 @@
   .assigned-num{
     display: inline-block;
     min-width: 30px;
+  }
+  .child-table{
+    &>td{
+      border-top: none!important;
+    }
+  }
+  .border-bottom{
+    border-bottom: 1px solid #ddd;
+  }
+  .chart-col{
+    padding-left: 0;
+    border-left: 1px solid #000;
+    .progress{
+      margin-bottom: 0;
+      background: none;
+      box-shadow: none;
+      width: 90%;
+      overflow: visible;
+      float: left;
+      .progress-bar{
+        position: relative;
+        text-align: right;
+        .percent {
+          position: relative;
+          left: 20px;
+          color: #333;
+        }
+      }
+    }
+    .percent{
+      position: relative;
+      left: 30px;
+    }
+  }
+  .child-table{
+    .progress-bar{
+      background-color: #5bc0de
+    }
+    tr{
+      &:first-child{
+        .progress-bar{
+          background-color: $color-info;
+        }
+      }
+      &:nth-child(2){
+        .progress-bar{
+          background-color: $color-tertiary;
+        }
+      }
+      &:nth-child(3){
+        .progress-bar{
+          background-color: $color-quartenary;
+        }
+      }
+
+      &:nth-child(4){
+        .progress-bar{
+          background-color: $color-warning;
+        }
+      }
+
+      &:nth-child(5){
+        .progress-bar{
+          background-color: $color-danger;
+        }
+      }
+    }
   }
 }
 
@@ -57,11 +135,30 @@
 
 #userReviewChart{
   height: 200px;
-  margin-top: 15px;
 }
 
 .select-reviewers{
   .switch{
     margin: 5px 0;
+  }
+}
+
+.document-chart{
+  height: 300px;
+}
+
+.statistic_table{
+  &>tbody{
+    &>tr{
+      &>td{
+      padding:5px 0;
+        &>span{
+          display: inline-block;
+          @include calc(width, '100% - 25px');
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
   }
 }

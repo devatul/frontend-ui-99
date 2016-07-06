@@ -33,6 +33,39 @@
     margin-top: 5px;
     font-size: 10px;
   }
+  &>tbody{
+    &>tr{
+      &>td{
+        vertical-align: middle
+      }
+    }
+  }
+}
+
+.validation-btn{
+  border-radius: 50%;
+  padding: 4px;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+}
+
+.review_nav-tabs{
+  &>li{
+    position: relative;
+    .badge {
+      background-color: #D2312D;
+      position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 16px;
+      padding: 3px 5px 3px 5px;
+      font-size: 10px;
+      z-index: 1;
+      right: 0;
+      top: -7px;
+    }
+  }
 }
 
 .reviewer-tab{
@@ -43,7 +76,7 @@
     margin-bottom: 10px;
   }
   .tabs-vertical{
-    ul{
+    &>ul{
       li{
         &:first-child{
           border-top: 1px solid #DDD;
@@ -64,5 +97,35 @@
       line-height: 3.4em;
       font-size: 0.3em;
     }
+  }
+}
+
+@media (min-width: 996px){
+  .reviewer-tab {
+    .tab-content{
+      width: 100%!important;
+    }
+  }
+}
+
+@media (max-width: 995px){
+  .reviewer-tab {
+    .tabs-vertical{
+      display: block;
+    }
+    .nav-tabs{
+      display: block;
+      float: left;
+    }
+    .tab-content{
+      display: block;
+      
+    }
+  }
+}
+
+@media (max-width: 767px){
+  .reviewer-tab .tabs-vertical ul li{
+    border-right: 1px solid #DDD;
   }
 }

@@ -64,7 +64,7 @@ var Signin = React.createClass
 	componentDidMount() {
 
 		console.log("token");
-		$(function () {
+		/*$(function () {
 		    jQuery("#signIn").validate({
 		        // Specify the validation rules
 		        rules: {
@@ -115,7 +115,7 @@ var Signin = React.createClass
 				    return false;
 		        }
 		    });
-		})
+		});*/
   	},
   	componentWillMount(){
   		

@@ -260,19 +260,13 @@ $(function () {
                 text: ''
             },
             stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                }
+                enabled: false
             }
         },
         legend: {
-            align: 'left',
             verticalAlign: 'bottom',
-            floating: false,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            shadow: false
+            shadow: false,
+            useHTML: true
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',

@@ -36,11 +36,12 @@ module.exports = React.createClass({
     			}
     			
 	    	}, TIMEVALIDTOKEN);
+	    	
 			browserHistory.push('/Dashboard/OverView');	
 		}else
 		{
 			console.log("noToken");
-			//browserHistory.push('/Account/Signin');	
+			browserHistory.push('/Account/Signin');	
 		}
     },
     render:template
