@@ -325,15 +325,14 @@
                                         <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                                           <header class="panel-heading">
                                               <h2 class="panel-title">Basic Statistics</h2>
-                                              <div class="panel-actions">
-
-                                                  <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                                              </div>
                                           </header>
                                           <div class="panel-body" id="stat-block">
-                                            <h4 class="mt-none">Cluster Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i></h4>
-                                            
-                                            <table class="statistic_table table table-condensed mb-none">
+                                            <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i></h4>
+                                            <div class="panel-actions collapse-stat-table">
+                                              <a class="panel-action panel-action-toggle" data-toggle="collapse" data-target="#statisticTable"></a>
+                                            </div>
+
+                                            <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
                                                 <tbody>
                                                     <tr>
                                                         <td class="text-left"><span>Total number of Documents</span>
@@ -608,24 +607,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -666,24 +666,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(67%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -724,24 +725,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(30%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -782,24 +784,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -840,24 +843,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -898,24 +902,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -956,24 +961,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1014,24 +1020,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1072,24 +1079,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -1130,24 +1138,25 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control"> 
+                                                          <option value="Accounting/Tax">Accounting/Tax</option>
+                                                          <option value-"Corporate Entity">Corporate Entity</option>
+                                                          <option value="Client/Customer">Client/Customer</option>
+                                                          <option value="Employee">Employee</option>
+                                                          <option value="Legal/Compliance">Legal/Compliance</option>
+                                                          <option value="Transaction">Transaction</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                              </div>
-                                                              <span class="progress-percentage">(50%)</span>
-                                                            </div>
-                                                        </div>
+                                                        <select class="form-control">
+                                                          <option>Banking Secrecy</option>
+                                                          <option>Secret</option>
+                                                          <option selected="">Confidential</option>
+                                                          <option>Internal</option>
+                                                          <option>Public</option>
+                                                        </select>
                                                     </div>
                                                 </td>
                                                 <td>

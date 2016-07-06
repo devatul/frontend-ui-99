@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <meta name="keywords" content="HTML5 Admin Template" />
+    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
+    <meta name="author" content="okler.net">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    
+    <!-- Help guide for suggested reviewers CSS-->
+    <link rel="stylesheet" href="assets/stylesheets/style-dathena.css">
+    
+    
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>  
+    
+  </head>
+  <body class="admin-page">
+  
+    <!--my_header start-->
+    <div class="my_header">
+        <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header dropdown">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                    <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
+                        <div class="row">
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Notification</h4>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Today</h3>
+                                    <ul class="list-unstyled noti-list">
+                                        <li>
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Yesterday</h3>
+                                    <ul class="list-unstyled noti-list">
+                                        <li>
+                                            <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check icon-success" aria-hidden="true"></i>
+                                            <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Pending Action: 7
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning"></i> : 2</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger"></i> : 3</span>
+                                </h4>
+                                <span>Action completed on time: 100%</span>
+                                <ul class="list-unstyled noti-list">
+                                    <li>
+                                        <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                        <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <div class="col-sm-12 text-center mt-md">
+                                <a href="#">See all notifications</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Review</a>
+                        <li><a href="#">Insight</a></li>
+                        <li><a href="#">Review Validation</a></li>
+                        <li><a href="#">Anomaly Detection</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+                
+                <div class="header-right">
+                    <div id="userbox" class="userbox">
+                        <a href="#" data-toggle="dropdown" aria-expanded="true">
+                            <figure class="profile-picture">
+                                <img src="assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg">
+                            </figure>
+                            <div class="profile-info">
+                                <span class="name">Chris Muffat</span>
+                                <span class="role">administrator</span>
+                            </div>
+            
+                            <i class="fa custom-caret"></i>
+                        </a>
+            
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+
+    <div class="container">
+      <div class="wizard-progress wizard-progress-lg">
+        <div class="steps-progress">
+          <div class="progress-indicator" style="width: 50%;"></div>
+        </div>
+        <ul class="wizard-steps">
+          <li class="completed">
+            <a href="#" data-toggle="tab"><span>1</span>Business</a>
+          </li>
+          <li class="completed">
+            <a href="#" data-toggle="tab"><span>2</span>Technology</a>
+          </li>
+          <li class="active">
+            <a href="#" data-toggle="tab"><span>3</span>Team</a>
+          </li>
+          <li>
+            <a href="#" data-toggle="tab"><span>4</span>Data Scientist</a>
+          </li>
+          <li>
+            <a href="#" data-toggle="tab"><span>5</span>Run Scan</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="bar_menu admin_header container">
+      <div class="row">
+        <div class="col-md-12 mb-md">
+          <div class="row">
+              <div class="col-sm-8">
+                  <h4 class="inline-block-item">Business and Risk Management Team Settings Progress: 0/3</h4>
+                  <span class="help_question_li dropdown inline-block-item">
+                    <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                      <p>This will determine whether the suggested users selected are based on who created the document 
+                      OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                    </div>
+                  </span>
+                  <div class="progress-radial progress-0"></div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <section class="panel panel-featured panel-featured-primary panel-bordered">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+              <i class="fa fa-clock-o icon-success"></i>1.Business and Data Owner Registration
+              <span class="help_question_li dropdown inline-block-item">
+                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This will determine whether the suggested users selected are based on who created the document 
+                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                </div>
+              </span>
+            </h2>
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </div>
+        </header>
+        <div class="panel-body add-detail-section">
+          <div class="row detail-row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Data Resposity </label>
+                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Data Resposity </a>
+                </div>
+                <div class="col-sm-8 detail-right">
+                  <input type="text" placeholder="Name" class="form-control">
+
+                  <input type="text" placeholder="Root Resposity" class="form-control">
+
+                  <input type="text" placeholder="Path" class="form-control">
+
+                  <input type="text" placeholder="Department" class="form-control">
+
+                  <input type="text" placeholder="Functional Owner" class="form-control">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <a href="#" class="btn btn-green validate-btn">Validate</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-featured panel-featured-primary panel-bordered disabled">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+              <i class="fa fa-arrow-circle-right icon-success"></i>2. Classification Coordinator Team
+              <span class="help_question_li dropdown inline-block-item">
+                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This will determine whether the suggested users selected are based on who created the document 
+                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                </div>
+              </span>
+            </h2>
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </div>
+        </header>
+        <div class="panel-body add-detail-section">
+          <div class="row detail-row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Team Lead 
+                    <span class="help_question_li dropdown inline-block-item">
+                      <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                          <p>This will determine whether the suggested users selected are based on who created the document 
+                          OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                      </div>
+                    </span>
+                  </label>
+                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Team Lead </a>
+                </div>
+                <div class="col-sm-8 detail-right">
+                  <input type="text" placeholder="Name" class="form-control">
+
+                  <input type="text" placeholder="Job Title" class="form-control">
+
+                  <input type="text" placeholder="Email Address(SMTP)" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                <header class="panel-heading">
+                  <h2 class="panel-title">Permission Required</h2>
+                </header>
+                <div class="panel-body">
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox1">
+                    <label for="checkbox1">Data Respository 1</label>
+                  </div>
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox2">
+                    <label for="checkbox2">Data Respository 2</label>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row detail-row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Coordinator 
+                    <span class="help_question_li dropdown inline-block-item">
+                      <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                          <p>This will determine whether the suggested users selected are based on who created the document 
+                          OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                      </div>
+                    </span>
+                  </label>
+                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Coordinator </a>
+                </div>
+                <div class="col-sm-8 detail-right">
+                  <input type="text" placeholder="Name" class="form-control">
+
+                  <input type="text" placeholder="Job Title" class="form-control">
+
+                  <input type="text" placeholder="Email Address(SMTP)" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                <header class="panel-heading">
+                  <h2 class="panel-title">Permission Required</h2>
+                </header>
+                <div class="panel-body">
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox1">
+                    <label for="checkbox1">Data Respository 1</label>
+                  </div>
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox2">
+                    <label for="checkbox2">Data Respository 2</label>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <a href="#" class="btn btn-green validate-btn">Validate</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-featured panel-featured-primary panel-bordered disabled">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+              <i class="fa fa-arrow-circle-right icon-success"></i>3.Audit Team
+              <span class="help_question_li dropdown inline-block-item">
+                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This will determine whether the suggested users selected are based on who created the document 
+                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                </div>
+              </span>
+            </h2>
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </div>
+        </header>
+        <div class="panel-body add-detail-section">
+          <div class="row detail-row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Audit Officer 
+                    <span class="help_question_li dropdown inline-block-item">
+                      <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                          <p>This will determine whether the suggested users selected are based on who created the document 
+                          OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                      </div>
+                    </span>
+                  </label>
+                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Audit Officer </a>
+                </div>
+                <div class="col-sm-8 detail-right">
+                  <input type="text" placeholder="Name" class="form-control">
+
+                  <input type="text" placeholder="Job Title" class="form-control">
+
+                  <input type="text" placeholder="Email Address(SMTP)" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                <header class="panel-heading">
+                  <h2 class="panel-title">Permission Required</h2>
+                </header>
+                <div class="panel-body">
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox1">
+                    <label for="checkbox1">Data Respository 1</label>
+                  </div>
+                  <div class="checkbox-custom checkbox-success">
+                    <input type="checkbox" checked="" id="checkbox2">
+                    <label for="checkbox2">Data Respository 2</label>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <a href="#" class="btn btn-green validate-btn">Validate</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    
+  <!-- Vendor -->
+    <script src="assets/vendor/jquery/jquery.js"></script>
+    <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="assets/vendor/select2/js/select2.full.min.js"></script>
+    <script src="assets/vendor/highcharts/js/highcharts.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="assets/javascripts/theme.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="assets/javascripts/theme.init.js"></script>
+    <script src="assets/javascripts/theme.admin.extension.js"></script>
+    
+    
+    <script src="assets/javascripts/javascript.js"></script>
+    <script src="assets/javascripts/javascript.admin.js"></script>
+    
+
+  </body>
+</html>
