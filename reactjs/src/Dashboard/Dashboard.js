@@ -11,10 +11,26 @@ module.exports = React.createClass({
   	getInitialState() {
 	    return {
 	    	newsfeed: {},
-	    	todo:{},
-	    	noti:{}
+            notification: {
+                total: 0,
+                list: []
+            },
 	    };
 	},
+    propTypes: {
+        noti: React.PropTypes.shape({
+            total: React.PropTypes.number.isRequired,
+            list: React.PropTypes.array
+        })
+    },
+    getDefaultProps() {
+        return {
+              noti: {
+                total: 0,
+                list: []
+              }
+        };
+    },
   	logOut(){
 		//console.log(localStorage.getItem('token'));
 		localStorage.removeItem('token');
@@ -74,22 +90,31 @@ module.exports = React.createClass({
         */
 		
 	},
-	showAllNoti(){
-		$.ajax({
-            url:'http://54.169.106.24/notification/',
+    getNotification() {
+        $.ajax({
+            url: Constant.SERVER_API + 'api/notification/',
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState({noti:data});
-                console.log(this.state.noti);
+                var update_notification = update(this.state, {
+                    notification: {
+                        total: {$set: data.length},
+                        list: {$set: data}
+                    } 
+                });
+                this.setState(update_notification);
+                console.log("notification: ", this.state.notification);
             }.bind(this),
             error: function(xhr, status, err) {
                 console.log(err);
             }.bind(this)
         });
-	},
+    },
+    notificationHandle() {
+        $("#total_notification").hide();
+    },
     render:template
 });

@@ -16,7 +16,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
-                        <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                        <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}><span id="total_notification" class="badge">3</span><i class="fa fa-bell-o" aria-hidden="true"></i></a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
                         <div class="row">
                             <div class="col-sm-6 col-noti">
@@ -76,7 +76,7 @@
                                 </ul>
                             </div>
                             <div class="col-sm-12 text-center mt-md">
-                                <a href="#">See all notifications</a>
+                             <Link to="/Dashboard/Notification">See all notifications</Link>
                             </div>
                         </div>
                     </div>
@@ -92,14 +92,14 @@
                                 <span class="badge">1</span><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><!--<li class="active">-->
-                                        <Link to="/Dashboard/Review/Orphan" activeClassName="active">Orphan Review</Link>
+                                        <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                                     </li>
                                     <li>
-                                        <Link to="/Dashboard/Review/Group" activeClassName="active">Group Review</Link>
+                                        <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                                     </li>
                                     <li>
                                         <span class="badge">1</span>
-                                        <Link to="/Dashboard/Review/UserAssignment" activeClassName="active">User Assignment</Link>
+                                        <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                                     </li>
                                 </ul>
                             </li>
@@ -133,10 +133,10 @@
                                 <ul class="list-unstyled">
                                     <li class="divider"></li>
                                     <li>
-                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                     <Link to="/Dashboard/Profile" role="menuitem" tabindex="-1"><i class="fa fa-user"></i> My Profile</Link>
                                     </li>
                                     <li>
-                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                        <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
                                     </li>
                                 </ul>
                             </div>

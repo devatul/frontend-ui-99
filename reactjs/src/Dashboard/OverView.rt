@@ -1,130 +1,110 @@
+<rt-require dependency="react-router/lib/Link" as="Link"/>
 <section>
     
     <!--bar_menu start-->
     <div class="my_main bar_menu container">
             <div class="row">
-                <div class="col-md-9 mb-md">
-                    <p class="page-heading-sm pull-left">Categorisation and Classification Dashboard</p>
-                    <ul>
-                        <li id="startScan">
-                            <a class="toggle-button btn btn-default" data-toggle="tooltip" title="Run a scan" onClick={this.scan}>
-                                <i class="fa fa-play" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li id="pauseScan" style="display:none">
-                            <a class="toggle-button btn btn-default" data-toggle="tooltip" title="Scanning" data-original-title="Pause scanning">
-                            <i class="fa fa-pause" aria-hidden="true"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile">
-                                <ul class="filter-list list-unstyled pt-xs">
-                                    <li class="mb-sm">
-                                        <select name="state" class="form-control ddList">
-                                            <option value="">Country</option>
-                                            <option class="lt" value="--">-All-</option>
-                                            <option class="lt" value="AL">-One-</option>
-                                            <option class="lt" value="AK">-Two-</option>
-                                        </select>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="wrap-select">
-                                            <select name="state" class="form-control ddList">
-                                                <option value="">Business Unit</option>
-                                                <option class="lt" value="--">-All-</option>
-                                                <option class="lt" value="AL">-One-</option>
-                                                <option class="lt" value="AK">-Two-</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="wrap-select">
-                                            <select name="state" class="form-control ddList">
-                                                <option value="">Department</option>
-                                                <option class="lt" value="--">-All-</option>
-                                                <option class="lt" value="AL">-One-</option>
-                                                <option class="lt" value="AK">-Two-</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="wrap-select">
-                                            <select name="state" class="form-control ddList">
-                                                <option value="">Team</option>
-                                                <option class="lt" value="--">-All-</option>
-                                                <option class="lt" value="AL">-One-</option>
-                                                <option class="lt" value="AK">-Two-</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="wrap-select">
-                                            <select name="state" class="form-control ddList">
-                                                <option value="">Data Owner</option>
-                                                <option class="lt" value="--">-All-</option>
-                                                <option class="lt" value="AL">-One-</option>
-                                                <option class="lt" value="AK">-Two-</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default" onClick={this.showLastScan}><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile">
-                                <div class="table-responsive">
-                                    <table class="table general-table mb-none">
-                                        <tbody>
-                                        <tr>
-                                            <td>Last Data Scan:</td>
-                                            <td colspan="3">{this.state.detailLastScan.last_data_scan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Country In Scope:</td>
-                                            <td colspan="3">{this.state.detailLastScan.country}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Business In Scope:</td>
-                                            <td colspan="3">{this.state.detailLastScan.business_unit}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Scan Status:</td>
-                                            <td colspan="3">{this.state.detailLastScan.is_completed == false ? "Not Completed": "Completed"}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Documents Analyzed:</td>
-                                            <td colspan="3">{this.state.detailLastScan.total_documents}</td>
-                                        </tr>
-                                        <tr>
-                                        <td>File Extension Processed:</td>
-                                            <td colspan="3">{this.state.detailLastScan.file_extensions_processed}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Duplication Documents:</td>
-                                            <td colspan="3">{this.state.detailLastScan.total_duplicates}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Encrypted Documents or Archives:</td>
-                                            <td>{this.state.detailLastScan.encrypted_documents}</td>
-                                            <td>Number of Category Applied:</td>
-                                            <td>9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Documents Skipped:</td>
-                                            <td>{this.state.detailLastScan.documents_skipped}</td>
-                                            <td>Level of Confidentiality Applied:</td>
-                                            <td>7</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                <div class="col-md-12 mb-md">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p class="page-heading-sm">Dashboard Overview</p>
+                            <div class="filter-tags-block">
+                                <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
+                                <div class="pull-left filter-tags">
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="filter-buttons pull-right">
+                                <li class="dropdown">
+                                    <a class="toggle-button btn btn-default" onClick={this.filterScan}><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                    <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                    <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                                        <ul class="filter-list list-unstyled pt-xs">
+                                            <li class="mb-sm">
+                                                <div class="form-group">
+                                                    <select id="category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
+                                                        <option rt-repeat="category in this.state.label.list_category" key="{category.id}" value="{category.name}">{category.name}</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li class="mb-sm">
+                                                <div class="form-group">
+                                                    <select id="confidentiality" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality">
+                                                        <option rt-repeat="confidentiality in this.state.label.list_confidentiality" key="{confidentiality.id}" value="{confidentiality.name}">{confidentiality.name}</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li class="mb-sm">
+                                                <div class="form-group">
+                                                    <select id="doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
+                                                        <option rt-repeat="doctype in this.state.label.list_doctype" key="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li class="mb-sm">
+                                                <div class="form-group">
+                                                    <select id="language" class="form-control select-multiple" multiple="multiple" data-title="Language">
+                                                        <option rt-repeat="language in this.state.label.list_language" key="{language.id}" value="{language.name}">{language.name}</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
+                                        <div class="table-responsive">
+                                            <table class="table general-table mb-none">
+                                                <tbody>
+                                                <tr>
+                                                    <td>Last Data Scan:</td>
+                                                    <td colspan="3">{this.state.scan_result.last_data_scan}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country In Scope:</td>
+                                                    <td colspan="3">{this.state.scan_result.country}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Business In Scope:</td>
+                                                    <td colspan="3">{this.state.scan_result.business_unit}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Scan Status:</td>
+                                                    <td colspan="3">{this.state.scan_result.scan_status}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Documents Analyzed:</td>
+                                                    <td colspan="3">{this.state.scan_result.document_analyzed}</td>
+                                                </tr>
+                                                <tr>
+                                                <td>File Extension Processed:</td>
+                                                    <td colspan="3">{this.state.scan_result.file_extensions_processed}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Duplicated Documents:</td>
+                                                    <td colspan="3">{this.state.scan_result.total_duplicates}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Encrypted Documents or Archives:</td>
+                                                    <td colspan="3">{this.state.scan_result.encrypted_documents}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Documents Skipped:</td>
+                                                    <td colspan="3">{this.state.scan_result.documents_skipped}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <div class="span12">
                         <form id="custom-search-form" class="form-search form-horizontal pull-right dropdown">
                             <div data-toggle="dropdown" class="input-group input-group-icon">
@@ -158,353 +138,164 @@
                             </div>
                         </form>
                     </div>
+                </div> -->
+            </div>
+        </div>
+
+        <hr>
+
+        <!--charts start-->
+        <div class="charts container mt-lg">
+            <div class="row">
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-secondary widget-panel">
+                            <h4 class="widget-title">Scan 
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">{this.state.scan_result.percentage_documents_scanned}%</strong>
+                                        </div>
+                                        <h4 class="title">{this.state.scan_result.total_documents_scanned} documents scanned</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-quartenary widget-panel">
+                            <h4 class="widget-title">Duplicates / Twins 
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+
+                                    <div class="row">
+                                        <div class="col-xs-6 border-right">
+                                            <div class="summary">
+                                                <div class="info">
+                                                    <strong class="amount">{this.state.scan_result.percentage_duplicates}%</strong>
+                                                </div>
+                                                <h4 class="title">{this.state.scan_result.total_duplicates} duplicates</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="summary">
+                                                <div class="info">
+                                                    <strong class="amount">{this.state.scan_result.percentage_twins}%</strong>
+                                                </div>
+                                                <h4 class="title">{this.state.scan_result.total_twins} twins</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-tertiary widget-panel">
+                            <h4 class="widget-title">Accuracy  
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represents the level of confidence that 99 has in its initial classification. The higher the accuracy level, the greater the level of confidence that 99’s classification is correct.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">{this.state.scan_result.percentage_accuracy}%</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body widget-panel">
+                            <h4 class="widget-title">Confidentiality
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-chart">
+                                <div class="chart chart-md" id="flotPie"></div>
+                                <div id="legendContainer"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body widget-panel">
+                            <h4 class="widget-title">Category & Language
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This presents a visual display of the document classification types that have been assigned to the total set of files scanned by 99.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-chart">
+                                <div class="chart chart-md" id="flotPie2"></div>
+                                <div class="chart chart-md-inner" id="flotPie2Inner"></div>
+                                <div id="legendContainer2"></div>
+                                <div id="legendContainer2Inner"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body widget-panel">
+                            <h4 class="widget-title">Document Type
+                                <div class="inline-block-item dropdown">
+                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represents the breakdown of all the file types that 99 has detected in the initial scan, and how the volumes of each type.</p>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="widget-chart">
+                                <!-- Flot: Pie -->
+                                <div class="chart chart-md" id="flotPie3"></div>
+                                <div id="legendContainer3"></div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
-        </div>
-        <hr>
-    <!--my_main-->
-    <div class="my_main container">
-        <div class="row">
-            <div class="modal col-md-12 select_filer">
-                <ul class="filter_ul">
-                    <li>
-                        <select name="state" class="ddList">
-                            <option value="">Country</option>
-                            <option class="lt" value="--">-All-</option>
-                            <option class="lt" value="AL">-One-</option>
-                            <option class="lt" value="AK">-Two-</option>
-                        </select>
-                    </li>
-                    <li>
-                        <div class="wrap-select">
-                            <select name="state" class="ddList">
-                                <option value="">Business Unit</option>
-                                <option class="lt" value="--">-All-</option>
-                                <option class="lt" value="AL">-One-</option>
-                                <option class="lt" value="AK">-Two-</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wrap-select">
-                            <select name="state" class="ddList">
-                                <option value="">Deportment</option>
-                                <option class="lt" value="--">-All-</option>
-                                <option class="lt" value="AL">-One-</option>
-                                <option class="lt" value="AK">-Two-</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wrap-select">
-                            <select name="state" class="ddList">
-                                <option value="">Team</option>
-                                <option class="lt" value="--">-All-</option>
-                                <option class="lt" value="AL">-One-</option>
-                                <option class="lt" value="AK">-Two-</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="wrap-select">
-                            <select name="state" class="ddList">
-                                <option value="">Data Owner</option>
-                                <option class="lt" value="--">-All-</option>
-                                <option class="lt" value="AL">-One-</option>
-                                <option class="lt" value="AK">-Two-</option>
-                            </select>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!--charts start-->
-    <div class="charts container mt-lg">
-            <div class="row">
-            <div class="col-md-4">
-                <section class="panel">
-                    <div class="panel-body bg-secondary widget-panel">
-                        <h4 class="widget-title">Scan</h4>
-                        <div class="widget-summary unscanned">
-                            <div class="widget-summary-col">
-                                <div class="summary" rt-if="this.state.scanStatus == 'beforeScan'">
-                                    <div class="info">
-                                        <strong class="amount">Please run a scan</strong>
-                                    </div>
-                                    <h4 class="title"><a href="#">More info here</a></h4>
-                                </div>
-                                <div class="summary" rt-if="this.state.scanStatus == 'scanning'">
-                                    <span class="loading-dot">in progress</span>
-                                </div>
-                                <div class="summary" rt-if="this.state.scanStatus == 'finishScan'">
-                                    <div class="info">
-                                        <strong class="amount">{this.state.scanResult.percentage_documents_scanned}%</strong>
-                                    </div>
-                                    <h4 class="title">{this.state.scanResult.total_documents} documents scanned</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-           
-            </div>
-            <div class="col-md-4">
-                <section class="panel">
-                    <div class="panel-body bg-quartenary widget-panel">
-                        <h4 class="widget-title">Duplicates</h4>
-                        <div class="widget-summary unscanned">
-                            <div class="widget-summary-col">
-                                <div class="summary" rt-if="this.state.scanStatus == 'beforeScan'">
-                                    <div class="info">
-                                        <strong class="amount">Please run a scan</strong>
-                                    </div>
-                                    <h4 class="title"><a href="#">More info here</a></h4>
-                                </div>
-                                <div class="summary" rt-if="this.state.scanStatus == 'scanning'">
-                                    <span class="loading-dot">in progress</span>
-                                </div>
-                                <div class="summary" rt-if="this.state.scanStatus == 'finishScan'">
-                                    <div class="info">
-                                        <strong class="amount">{this.state.scanResult.percentage_duplicates}%</strong>
-                                    </div>
-                                    <h4 class="title">{this.state.scanResult.total_duplicates} duplicates</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--<div class="summary">
-                    <div class="info">
-                        <strong class="amount">1%</strong>
-                    </div>
-                    <h4 class="title">1000 duplicates</h4>
-                </div>-->
-                           
-            </div>
-            <div class="col-md-4">
-                <section class="panel">
-                        <div class="panel-body bg-tertiary widget-panel">
-                            <h4 class="widget-title">Accuracy</h4>
-                            <div class="widget-summary unscanned">
-                                <div class="widget-summary-col">
-                                    <div class="summary" rt-if="this.state.scanStatus == 'beforeScan'">
-                                        <div class="info">
-                                            <strong class="amount">Please run a scan</strong>
-                                        </div>
-                                        <h4 class="title"><a href="#">More info here</a></h4>
-                                    </div>
-                                    <div class="summary" rt-if="this.state.scanStatus == 'scanning'">
-                                        <span class="loading-dot">in progress</span>
-                                    </div>
-                                    <div class="summary" rt-if="this.state.scanStatus == 'finishScan'">
-                                        <div class="info">
-                                            <strong class="amount">{this.state.scanResult.percentage_accuracy}%</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                           
-            </div>
-            <div class="col-md-4">
-                <section class="panel">
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'beforeScan'">
-                            <h4 class="widget-title">Confidentiality</h4>
-                            <div class="widget-chart unscanned">
-                                <div class="info">
-                                    <strong class="amount">Please run a scan</strong>
-                                </div>
-                                <h4 class="title"><a href="#">More info here</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'scanning'">
-                            <h4 class="widget-title">Confidentiality</h4>
-                            <div class="widget-chart unscanned">
-                            <span class="loading-dot inverse">in progress</span>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'finishScan'">
-                            <h4 class="widget-title">Confidentiality</h4>
-                            <div class="chart chart-md" id="flotPie"></div>
-                            <div id="legendContainer"></div>
-                        </div>
-                </section>
-                <!--<section class="panel">
-                    <div class="panel-body widget-panel">
-                        <h4 class="widget-title">Confidentiality</h4>
-                        <div class="chart chart-md" id="flotPie"></div>
-                        <div id="legendContainer"></div>
-                    </div>
-                </section>-->
-            </div>
-            <div class="col-md-4">
-                <section class="panel">
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'beforeScan'">
-                            <h4 class="widget-title">Classification</h4>
-                            <div class="widget-chart unscanned">
-                                <div class="info">
-                                    <strong class="amount">Please run a scan</strong>
-                                </div>
-                                <h4 class="title"><a href="#">More info here</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'scanning'">
-                            <h4 class="widget-title">Confidentiality</h4>
-                            <div class="widget-chart unscanned">
-                            <span class="loading-dot inverse">in progress</span>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'finishScan'">
-                            <h4 class="widget-title">Classification</h4>
-                            <div class="chart chart-md" id="flotBar"></div>
-                            <div id="legendContainer2"></div>
-                        </div>
-                </section>
-                <!--<section class="panel">
-                    <div class="panel-body widget-panel">
-                        <h4 class="widget-title">Classification</h4>
-                        <div class="chart chart-md" id="flotBar"></div>
-                        <div id="legendContainer2"></div>
-                    </div>
-                </section>-->
-            </div>
-            <div class="col-md-4">
-                <section class="panel">
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'beforeScan'">
-                            <h4 class="widget-title">Document Type</h4>
-                            <div class="widget-chart unscanned">
-                                <div class="info">
-                                    <strong class="amount">Please run a scan</strong>
-                                </div>
-                                <h4 class="title"><a href="#">More info here</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'scanning'">
-                            <h4 class="widget-title">Confidentiality</h4>
-                            <div class="widget-chart unscanned">
-                            <span class="loading-dot inverse">in progress</span>
-                            </div>
-                        </div>
-                        <div class="panel-body widget-panel" rt-if="this.state.scanStatus == 'finishScan'">
-                            <h4 class="widget-title">Document Type</h4>
-                            <div class="chart chart-md" id="flotPie2"></div>
-                            <div id="legendContainer3"></div>
-                        </div>
-                    </section>
-                <!--<section class="panel">
-                    <div class="panel-body widget-panel">
-                        <h4 class="widget-title">Document Type</h4>
-                        
-                        <div class="chart chart-md" id="flotPie2"></div>
-                        <div id="legendContainer3"></div>
-                    </div>
-                </section>-->
-            </div>
-        </div>
 
         </div>
-    <!--table start-->
-    <div class="table_content container">
-        <div class="row">
-            <div class="col-md-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        <h2 class="panel-title">Categorization Summary</h2>
-                        <div class="panel-actions">
-                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                        </div>
-                    </header>
-                    <div class="panel-body">
-                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped mb-none no-footer"
-                                       id="datatable-default" role="grid" aria-describedby="datatable-default_info">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                            colspan="1" aria-sort="ascending">Level of Confidentiality
-                                        </th>
-                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                            colspan="1">% Reviewed Document
-                                        </th>
-                                        <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                            colspan="1">% Validated Documents
-                                        </th>
-                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                            rowspan="1" colspan="1">% Data Owner Review Accuracy
-                                        </th>
-                                        <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                            rowspan="1" colspan="1">
-                                            % Prediction Accuracy
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="gradeA odd" role="row">
-                                        <td class="sorting_1">Unrestricted</td>
-                                        <td>80% (152.5253) </td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA even" role="row">
-                                        <td class="sorting_1">Internal</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA odd" role="row">
-                                        <td class="sorting_1">Confidential</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA even" role="row">
-                                        <td class="sorting_1">Secret</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA odd" role="row">
-                                        <td class="sorting_1">Banking Secrecy</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA even" role="row">
-                                        <td class="sorting_1">Webkit</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    <tr class="gradeA odd" role="row">
-                                        <td class="sorting_1">Webkit</td>
-                                        <td>80% (152.5253)</td>
-                                        <td>80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                        <td class="center hidden-phone">80% (152.5253)</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <div class="table_content container">
+        <!--table start-->
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <section class="panel">
+                    <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
                             <h2 class="panel-title">Classification Summary</h2>
                             <div class="panel-actions">
@@ -514,57 +305,35 @@
                         <div class="panel-body">
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped mb-none no-footer" id="datatable-default" role="grid" aria-describedby="datatable-default_info">
+                                    <table class="table table-bordered table-striped mb-none no-footer"
+                                           id="datatable-default" role="grid" aria-describedby="datatable-default_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Level of Confidentiality
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1" aria-sort="ascending">Level of Confidentiality
                                                 </th>
-                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">% Reviewed Document
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1">% Reviewed Document
                                                 </th>
-                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">% Validated Documents
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1">% Validated Documents
                                                 </th>
-                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">% Data Owner Review Accuracy
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                    rowspan="1" colspan="1">Review Accuracy
                                                 </th>
-                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">
-                                                    % Prediction Accuracy
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                    rowspan="1" colspan="1">
+                                                    Accuracy
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Unrestricted</td>
-                                                <td>80% (152.5253) </td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Internal</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Confidential</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA even" role="row">
-                                                <td class="sorting_1">Secret</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                            </tr>
-                                            <tr class="gradeA odd" role="row">
-                                                <td class="sorting_1">Banking Secrecy</td>
-                                                <td>80% (152.5253)</td>
-                                                <td>80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
-                                                <td class="center hidden-phone">80% (152.5253)</td>
+                                            <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
+                                                <td class="sorting_1 text-left">{item.name}</td>
+                                                <td>{item.percentage_reviewed_docs}% ({item.total_reviewed_docs}) </td>
+                                                <td>{item.percentage_validated_docs}% ({item.total_validated_docs})</td>
+                                                <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}% ({item.total_owner_accuracy_docs})</td>
+                                                <td class="center hidden-phone">{item.percentage_prediction_accuracy_docs}% ({item.total_prediction_accuracy_docs})</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -574,5 +343,60 @@
                     </section>
                 </div>
             </div>
-    </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel panel-featured panel-featured-primary">
+                        <header class="panel-heading">
+                            <h2 class="panel-title">Categorization Summary</h2>
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            </div>
+                        </header>
+                        
+                        <div class="panel-body">
+                            <div id="datatable-editable_wrapper" class="no-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped mb-none no-footer"
+                                           id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1" aria-sort="ascending">Categories
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">% Reviewed Documents
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">% Validated Documents
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">Review Accuracy
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">
+                                                Accuracy
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd" role="row" rt-repeat="category in this.state.scan_result.categories">
+                                                <td class="text-left">
+                                                    {category.name}
+                                                </td>
+                                                <td>{category.percentage_reviewed_docs}% ({category.total_reviewed_docs})</td>
+                                                <td>{category.percentage_validated_docs}% ({category.total_validated_docs})</td>
+                                                <td>{category.percentage_owner_accuracy_docs}%</td>
+                                                <td>{category.percentage_prediction_accuracy_docs}%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
 </section>

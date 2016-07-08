@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './signin.rt';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import $ from 'jquery';
-
+var dropdown = require('../script/drop-down.js');
 import Constant from '../Constant.js';
 var Signin = React.createClass
 ({
@@ -42,6 +42,7 @@ var Signin = React.createClass
 		      	console.log(data.token);
 
 	    		localStorage.setItem('token', data.token);
+	    		dropdown();
 		        browserHistory.push('/Dashboard/OverView');
 		      }.bind(this),
 		      error: function(xhr, status, err) {

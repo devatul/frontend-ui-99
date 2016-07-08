@@ -1,0 +1,162 @@
+<section>
+	<div class="my_main bar_menu container">
+            <div class="row">
+                <div class="col-md-9 mb-md">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p class="page-heading-sm pull-left" rt-props="">My Notifications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification-list container">
+            <div class="notification-filter row">
+                <div class="col-sm-4 mb-md">
+                    <label>Last update</label>
+                    <select class="form-control filter-noti">
+                        <option>Today</option>
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days (by default)</option>
+                        <option>Pending Actions</option>
+                        <option>Completed Actions</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 mb-md">
+                    <span class="mr-md">Pending Actions: 7</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                    <div class="inline-block-item dropdown dropdown-help">
+                        <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu has-arrow dd-md full-mobile">
+                            <p>Help content</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-md">
+                    <span>Action completed on time: 100%</span>
+                </div>
+            </div>
+
+            <section class="panel panel-featured panel-featured-primary panel-noti">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Today</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="noti-item" data-noti-type="warning">
+                        <span class="noti-left">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have to review 30 documents in Client/Customer category by latest 10th May
+                        </span>
+                        <span class="noti-right">
+                            <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
+                        </span>
+                    </div>
+                    <div class="noti-item" data-noti-type="danger">
+                        <span class="noti-left">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have completed the review of 30 documents in Client/Customer category
+                        </span>
+                        <span class="noti-right">
+                            <i class="fa fa-exclamation-triangle fa-alert-danger"></i>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-noti">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Yesterday</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="noti-item" data-noti-type="warning">
+                        <span class="noti-left">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have to review 30 documents in Client/Customer category by latest 16th May
+                        </span>
+                        <span class="noti-right">
+                            <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
+                        </span>
+                    </div>
+                    <div class="noti-item" data-noti-type="">
+                        <span class="noti-left">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have completed the review of 30 documents in Accounting/Tax category
+                        </span>
+                        <span class="noti-right">
+                            &nbsp;
+                        </span>
+                    </div>
+                    <div class="noti-item" data-noti-type="">
+                        <span class="noti-left">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <span class="noti-center">
+                            Stan challenged classification of document xxx - click <a href="#">here</a> to cross check
+                        </span>
+                        <span class="noti-right">
+                            &nbsp;
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-noti">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Last 7 days</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="noti-item" data-noti-type="">
+                        <span class="noti-left">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have assigned Chris to review 30 documents in Accounting/Tax category
+                        </span>
+                        <span class="noti-right">
+                            &nbsp;
+                        </span>
+                    </div>
+                    <div class="noti-item" data-noti-type="">
+                        <span class="noti-left">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <span class="noti-center">
+                            You have assigned Stan to review 20 documents in Client/Customer category
+                        </span>
+                        <span class="noti-right">
+                            &nbsp;
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-noti">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Older Notification</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
+                        <span class="noti-left">
+                            <i class="fa fa-clock-o"></i>
+                        </span>
+                        <span class="noti-center">
+                            {notification.message}
+                        </span>
+                        <span class="noti-right">
+                            &nbsp;
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </div>
+</section>

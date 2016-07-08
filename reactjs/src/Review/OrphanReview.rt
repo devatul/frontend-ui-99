@@ -1,0 +1,357 @@
+	<section>
+    <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
+                        <h5><span class="text-bold">Orphan Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
+                        <div class="form-group">
+                            <div class="input-group mb-md">
+                                <label for="choose_cluster">
+                                    Choose a Orphan
+
+                                    <select class="js-example-basic-single js-states form-control" id="choose_cluster">
+                                        <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}">Orphan {orphanIndex}</option>
+                                    </select>
+                                </label>
+                                <button class="btn btn-green btn-ok" type="button">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                 <div class="row mb-sm">
+                    <div class="col-sm-12 view-stat-block">
+                        <label>Sample Method: </label>
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Random</button>
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Nearest</button>
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Farthest</button>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Orphan Statistics</h2>
+                            </header>
+                            <div class="review_panel-body panel-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h4>Review Status</h4>
+                                        <div class="liquid-meter" id="meter"  min="0" max="100" value="25"></div>
+
+                                        <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+                                          <header class="panel-heading">
+                                              <h2 class="panel-title">Basic Statistics</h2>
+                                          </header>
+                                          <div class="panel-body" id="stat-block">
+                                            <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+
+                                            <div class="panel-actions collapse-stat-table">
+                                              <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                                            </div>
+
+                                            <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left"><span>Total number of Documents</span>
+                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                              <p>This represents the total number of documents that have been detected by 99 during the initial scan of 
+                                                              the locations that have been inputted into the tool.</p>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td class="text-left">8</td>
+                                                    <tr>
+                                                        <td class="text-left"><span>Completed Number of Documents</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the number of documents that 99 has been successful in classifying.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Average Centroid Distance</span>
+                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                              <p>This represents the average level of deviance from the centroid point, 
+                                                              where the centroid point represents the optimal point of classification. 
+                                                              The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
+                                                            </div>
+                                                          </div>
+                                                        </td>
+                                                        <td class="text-left">3.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Maximum Centroid Distance</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the document that has been registered furthest from the centroid point. 
+                                                            The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">9.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Minimum Centroid Distance</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represents the document that has been registered closest to the centroid point. 
+                                                            Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">1.6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"><span>Centroid Distance Varience</span>
+                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <p>This represent the document variance within the selected cluster. Variance is the expectation of the 
+                                                            squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                        <td class="text-left">12.5</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                            <div class="mt-lg">
+                                              <a href="#" class="btn btn-green">Refine Group</a>
+                                              <span class="dropdown">
+                                                <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                <div class="dropdown-menu has-arrow dropdown-file-info">
+                                                  <p>Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
+                                                </div>
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </section>
+                                    </div>  
+                                    <div class="col-md-9">
+                                        <div class="tabs">
+                                            <ul class="review_nav-tabs nav nav-tabs">
+                                                <li class="li_first active">
+                                                    <a href="#distribution" data-toggle="tab">Category Distribution</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#centroid" data-toggle="tab">Centroid Distance Histogram</a>
+                                                </li>
+                                                <li class="li_late">
+                                                    <a href="#cloud" data-toggle="tab">Significant Words Cloud</a>
+                                                </li>
+                                            </ul>
+                                            <div class="review_tab-content tab-content">
+                                                <div id="distribution" class="tab-pane active">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h4 class="chart-title">Confidentiality
+                                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                                <p>This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99.</p>
+                                                              </div>
+                                                            </h4>
+                                                            <div class="chart-container">
+                                                                <div id="confidentialityChartLegend"></div>
+                                                                <div id="confidentialityChart">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h4 class="chart-title">Document type per Level of Confidentiality
+                                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                                <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
+                                                              </h4>
+                                                            <div id="confidentialityLevelChart"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="centroid" class="tab-pane">
+                                                    <h4 class="chart-title">Centroid Distance Histogram in this group</h4>
+                                                    <div id="centroidChart"></div>
+                                                </div>
+                                                <div id="cloud" class="tab-pane">
+                                                     <p class="review_cloud_p">Significant Words is the</p>
+                                                    <div id="words-cloud"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="panel panel-primary cluster-block" id="cluster1">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel panel-featured panel-featured-primary actions-panel">
+                        <header class="panel-heading">
+                            <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
+                            <div class="inline-block-item view-stat-block">
+                                <label>Sample Method: </label>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
+                            </div>
+                            <div class="panel-actions my-actions-btn-group">
+
+                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            </div>
+                        </header>
+                        <div class="panel-body" style="display: block;">
+                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                                <button type="button" class="mb-md mr-xs btn btn-success show-on-checked-all approve-button">Approve</button>
+                                <div class="alert alert-success actions-success">
+                                    <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>
+                                                    <div class="checkbox-custom checkbox-primary">
+                                                        <input type="checkbox" id="checkboxExample2" class="checkbox-all" data-target="#table-my-actions">
+                                                        <label for="checkboxExample2"></label>
+                                                    </div>
+                                                </th>
+                                                <th class="review_note">Document
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the name of each individual document, as it exists in its current state.</p>
+                            </div>
+                          </div>
+                        </th>
+                                                <th class="review_note">Path
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the logical folder path to where each document is currently located.</p>
+                            </div>
+                          </div>
+                        </th>
+                                                <th class="review_note">Owner
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This displays the organisational member who has last modified the document. 
+                              This owner is automatically assigned by 99 from the 
+                              Document metadata itself gathered during the scanning process.</p>
+                            </div>
+                          </div>
+                        </th>
+                                                <th class="review_note">Category
+                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                              The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                            </div>
+                          </div>
+                        </th>
+                                                <th class="review_note">Confidentiality
+                             <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                              The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                            </div>
+                          </div>
+                        </th>
+                                                <th class="text-center">Status
+                                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                        <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                                            <p>This represent the status of the review for each file.</p>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr rt-repeat="doc in this.state.orphan_current.documents">
+                                                <td>
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions">
+                                                        <label for="checkboxExample1"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="text-left">
+                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{doc.name}</span>
+                                                    <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                        <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                                        <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                            <ul>
+                                                                <li>Creation Date: {doc.creation_date}</li>
+                                                                <li>Modifitcation Date: {doc.modification_date}</li>
+                                                                <li>Required Legal Retention until: {doc.legal_retention_until}</li>
+                                                                <li>Confidentiality Label: {doc.confidentiality_label}</li>
+                                                                <li>Number of Classification Challenge: {doc.number_of_classification_challenge}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-left">
+                                                    <span class="text-italic doc-path">{doc.path}</span>
+                                                </td>
+                                                <td class="text-left">
+                                                    <span class="text-italic">{doc.owner}</span>
+                                                </td>
+                                                <td>
+                                                    <div class="select-group">
+                                                        <select class="form-control"> 
+                                                          <option rt-repeat="category in doc.categories" value="{category.name}">{category.name}</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="select-group">
+                                                        <select class="form-control">
+                                                          <option rt-repeat="confidentialy in doc.confidentialities" value="{confidentialy.name}">{confidentialy.name}</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="doc-check">
+                                                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                      <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="my-actions-btn-group actions-bottom clearfix mt-md">
+                                <button type="button" class="mb-md mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+	</section>

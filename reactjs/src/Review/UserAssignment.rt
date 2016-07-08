@@ -1,0 +1,606 @@
+<section>
+	<div class="container">
+			<div class="tabs tabs-primary">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
+					</li>
+					<li class="">
+						<a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
+					</li>
+					<li class="">
+						<a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
+					</li>
+					<li class="">
+						<a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
+					</li>
+					<li class="">
+						<a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Regulatory</a>
+					</li>
+					<li class="">
+						<a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+					</li>
+					<li class="">
+						<a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
+					</li>
+				</ul>
+				<div class="help_guide_sub tab-content">
+					<div id="accounting_tax" class="help_guide tab-pane active">
+						<div class="row">
+              <div class="col-md-3">
+                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                  <header class="panel-heading">
+                      <h2 class="panel-title">Sample Parameters</h2>
+                      <div class="panel-actions">
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      </div>
+                  </header>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <label class="">As % of overall Accounting/ Tax Category</label>
+                      <select name="state" class="form-control ddList">
+                        <option class="lt" value="">0.01% (17 Documents)</option>
+                        <option class="lt" value="">0.02% (34 Documents)</option>
+                      </select>
+                    </div>
+                    <div class="or-divider"><span>OR</span></div>
+                    <div class="form-group">
+                      <label class="">Fixed number of Documents</label>
+                      <select name="state" class="form-control ddList">
+                        <option class="lt" value="">10 Documents (0.17%)</option>
+                        <option class="lt" value="">20 Documents (0.34%)</option>
+                      </select>
+                    </div>
+                  </div>
+                </section>
+              </div>    
+
+              <div class="col-md-9">
+                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                  <header class="panel-heading">
+                      <h2 class="panel-title">Document Category Information</h2>
+                      <div class="panel-actions">
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      </div>
+                  </header>
+                  <div class="panel-body">
+                    <span>Number of Documents: 168,000</span>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h4 class="chart-title">Classification Overview</h4>
+                        <div id="confidentialityOverviewChart" class="document-chart"></div>
+                      </div>
+                      <div class="col-sm-6">
+                        <h4 class="chart-title">Document type per Level of Confidentiality</h4>
+                        <div id="confidentialityLevelChart" class="document-chart"></div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>  
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                  <header class="panel-heading">
+                      <h2 class="panel-title">User Selection - Key contributor for Accounting/ Tax Documents</h2>
+                      <div class="panel-actions">
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      </div>
+                  </header>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <ul class="help_guide_content_left_ul filter-list pt-xs">
+                            <li>
+                              <select name="state" class="help_question_select form-control ddList">
+                                <option value="">Timeframe</option>
+                                <option class="lt" value="">1 year</option>
+                                <option class="lt" value="">6 months</option>
+                                <option class="lt" value="">3 months</option>
+                                <option class="lt" value="">1 months</option>
+                              </select>
+                            </li>
+                            <li class="help_question_li dropdown">
+                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                                <p>This establishes the timeframe for which user activity will be based on.</p>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="wrap-select">
+                                <select name="state" class="help_question_select form-control ddList">
+                                  <option value="">Number of Users</option>
+                                  <option class="lt" value="">Top 30</option>
+                                  <option class="lt" value="">Top 2</option>
+                                  <option class="lt" value="">Top 20</option>
+                                  <option class="lt" value="">Top 15</option>
+                                  <option class="lt" value="">Top 10</option>
+                                  <option class="lt" value="">Top 5</option>
+                                </select>
+                              </div>
+                            </li>
+                            <li class="help_question_li dropdown">
+                              <a data-toggle="dropdown" class="help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                <p>This will determine the number of users that are displayed as suggested reviewers, 
+                                ranked by activity. If the chosen number is greater than the number of users detected, 
+                                the screen will display all relevant results.</p>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="wrap-select">
+                                <select name="state" class="help_question_select form-control ddList">
+                                  <option value="">Type of Reviewer</option>
+                                  <option class="lt" value="">Document Last Modifie</option>
+                                  <option class="lt" value="">Document Creator</option>
+                                </select>
+                              </div>
+                            </li>
+                            <li class="help_question_li dropdown">
+                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                <p>This will determine whether the suggested users selected are based on who created the document 
+                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
+                              </div>
+                            </li>
+                          </ul>
+
+                      </div>
+
+                      <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-xs-8">
+                              <div>Users</div>
+                              <div id="userReviewChart"></div>
+                            </div>
+                            <div class="col-xs-4 select-reviewers">
+                              <div style="margin-bottom:8px">Select the Reviewer(s)</div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Validate and Go to Next Category</button>
+                  </div>
+                </section>
+              </div>
+            </div>
+					</div>
+					<div id="corporate_entity" class="tab-pane">
+						<p>corporate_entity</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+					<div id="client_customer" class="tab-pane">
+						<p>client_customer</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+					<div id="employee" class="tab-pane">
+						<p>employee</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+					<div id="legal_regulatory" class="tab-pane">
+						<p>legal_regulatory</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+					<div id="transaction" class="tab-pane">
+						<p>transaction</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+					</div>
+					<div id="summary" class="tab-pane">
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Accounting/ Tax</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Accounting/ Tax</td>
+                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">30</td>
+                          <td class="no-border-top text-center">12,031</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList1"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Chris.Muffat (Last Modified)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Matt.Nixon (Last Modified)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 no-border-top chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                          <span class="percent">55</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Tony.Gomes (Last Modified)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 no-border-top chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+                                          <span class="percent">50</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Last Modified)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 no-border-top chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                                          <span class="percent">2</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Corporate Entity</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Corporate Entity</td>
+                          <td class="no-border-top"><span class="assigned-num">1</span> <a data-toggle="collapse" data-target="#reviewerList2" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">10</td>
+                          <td class="no-border-top text-center">11,302</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList2"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Document Creator)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Client/ Customer</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Client/ Customer</td>
+                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList3" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">10</td>
+                          <td class="no-border-top text-center">11,302</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList3"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Document Creator)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Employee</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Employee</td>
+                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList4" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">10</td>
+                          <td class="no-border-top text-center">11,302</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList4"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Document Creator)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Legal/Compliance</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Legal/Compliance</td>
+                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList5" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">10</td>
+                          <td class="no-border-top text-center">11,302</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList5"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Document Creator)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <header class="panel-heading">
+                  <h2 class="panel-title">Tax</h2>
+                  <div class="panel-actions">
+                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                  </div>
+              </header>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-reviewer-summary">
+                    <thead>
+                      <tr>
+                        <th class="col20">&nbsp;</th>
+                        <th class="col40">Number of Assigned Reviewers</th>
+                        <th class="col15">Documents Sampled</th>
+                        <th class="col25">Total Number of Document Classified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td class="no-border-top border-bottom">Tax</td>
+                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList6" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">10</td>
+                          <td class="no-border-top text-center">11,302</td>
+                      </tr>
+                      <tr class="child-table">
+                        <td colspan="4" class="hiddenRow">
+                          <div class="accordian-body collapse" id="reviewerList6"> 
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col40">Stan.Slow (Document Creator)</td>
+                                  <td class="col15">&nbsp;</td>
+                                  <td class="col25 chart-col">
+                                    <div class="progress progress-xl progress-squared light">
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                          <span class="percent">73</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          
+                          </div> 
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <div class="clearfix">
+              <div class="pull-right">
+                <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and notify all reviewers</button>
+              </div>
+            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
