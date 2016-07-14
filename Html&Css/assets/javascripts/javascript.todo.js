@@ -1,30 +1,31 @@
 $(function () {
     $('.approve-button-2').click(function(){
         $(this).hide();
-        $(this).next().show();
-        $('.table-my-actions tr').each(function () {
-            if ($(this).find('input[type="checkbox"].checkbox-item').prop('checked')){
-                $(this).find('.doc-check').addClass('validated');
-
-            };
+        var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+        console.log(table);
+        table.find('tr').each(function () {
+          if ($(this).find('input[type="checkbox"].checkbox-item-1').prop('checked')){
+            $(this).find('.doc-check').addClass('validated');
+          };
         });
-        if ($('.table-my-actions .doc-check').length == $('.table-my-actions .doc-check.validated').length){
-            $('.btn-end-review').removeClass('btn-disabled');
+        if (table.find('.doc-check').length == table.find('.doc-check.validated').length){
+          table.find('.btn-end-review').removeClass('btn-disabled');
+           table.parents('.dataTables_wrapper').find('.actions-success').show();
         }
     });
 
 
   $('.approve-button').click(function(){
     $(this).hide();
-    $('.actions-success').show();
-    $('.table-my-actions tr').each(function () {
+    var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+    table.find('tr').each(function () {
       if ($(this).find('input[type="checkbox"].checkbox-item').prop('checked')){
         $(this).find('.doc-check').addClass('validated');
-
       };
     });
-    if ($('.table-my-actions .doc-check').length == $('.table-my-actions .doc-check.validated').length){
-      $('.btn-end-review').removeClass('btn-disabled');
+    if (table.find('.doc-check').length == table.find('.doc-check.validated').length){
+      table.find('.btn-end-review').removeClass('btn-disabled');
+       table.parents('.dataTables_wrapper').find('.actions-success').show();
     }
   });
 
@@ -204,7 +205,7 @@ $('.checkbox-item-1').on('change', function(){
             $('.table-my-actions tr').removeClass('inactive');
         }
 
-  });     
+  });   
 
 });
 

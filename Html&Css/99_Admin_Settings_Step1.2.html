@@ -67,7 +67,7 @@
                                     <ul class="list-unstyled noti-list">
                                         <li>
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                            <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
+                                            <p>You have 10 documents to review within the Accouting/ Tax category with Internal Confidentiality by latest 10th May</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -76,7 +76,7 @@
                                     <ul class="list-unstyled noti-list">
                                         <li>
                                             <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                            <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
                                         </li>
                                         <li>
                                             <i class="fa fa-check icon-success" aria-hidden="true"></i>
@@ -94,19 +94,19 @@
                                 <ul class="list-unstyled noti-list">
                                     <li>
                                         <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                        <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                        <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
                                     </li>
                                     <li>
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th June</p>
                                     </li>
                                     <li>
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th May</p>
                                     </li>
                                     <li>
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 16th May</p>
                                     </li>
                                 </ul>
                             </div>
@@ -209,7 +209,7 @@
     </div>
 
     <div class="container">
-      <section class="panel panel-featured panel-featured-primary panel-bordered">
+      <section class="panel panel-featured panel-featured-primary panel-bordered validated-step">
         <header class="panel-heading">
             <h2 class="panel-title">
               <i class="fa fa-check icon-success"></i>1. Organisation Details
@@ -329,7 +329,10 @@
                         <label class="control-label">Secret</label>
                       </div>
                       <div class="col-xs-3">
-                        <i class="fa fa-check-circle icon-success"></i>
+                        <div class="checkbox-custom">
+                          <input type="checkbox" checked="" id="checkbox2" disabled="">
+                          <label for="checkbox2"></label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -345,7 +348,10 @@
                         <label class="control-label">Confidential</label>
                       </div>
                       <div class="col-xs-3">
-                        <i class="fa fa-check-circle icon-success"></i>
+                        <div class="checkbox-custom">
+                          <input type="checkbox" checked="" id="checkbox3" disabled="">
+                          <label for="checkbox3"></label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -361,7 +367,10 @@
                         <label class="control-label">Internal</label>
                       </div>
                       <div class="col-xs-3">
-                        <i class="fa fa-check-circle icon-success"></i>
+                        <div class="checkbox-custom">
+                          <input type="checkbox" checked="" id="checkbox4" disabled="">
+                          <label for="checkbox4"></label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -377,7 +386,10 @@
                         <label class="control-label">Public</label>
                       </div>
                       <div class="col-xs-3">
-                        <i class="fa fa-check-circle icon-success"></i>
+                        <div class="checkbox-custom">
+                          <input type="checkbox" checked="" id="checkbox5" disabled="">
+                          <label for="checkbox5"></label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -417,12 +429,12 @@
             <div class="col-xs-12">
               <form class="form-horizontal">
 
-                <h4>Classification Review</h4>
+                <h3>Classification Review</h3>
 
                 <div class="sub-block">
 
                   <div class="sub-block-title">
-                    <h5>1. Document Reviewer
+                    <h4>1. Document Reviewer
                       <span class="help_question_li dropdown inline-block-item">
                         <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
@@ -430,10 +442,18 @@
                             OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
                         </div>
                       </span>
-                    </h5>
+                    </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6 col-md-offset-6">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-4">Confidentiality Level</div>
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-4">Category</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">Month(s)</div>
                         <div class="col-xs-3">Week(s)</div>
@@ -728,7 +748,7 @@
                 <div class="sub-block">
 
                   <div class="sub-block-title">
-                    <h5>2. Classification Review Coordinator
+                    <h4>2. Classification Review Coordinator
                       <span class="help_question_li dropdown inline-block-item">
                         <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
@@ -736,10 +756,18 @@
                             OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
                         </div>
                       </span>
-                    </h5>
+                    </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6 col-md-offset-6">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-4">Confidentiality Level</div>
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-4">Category</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">Month(s)</div>
                         <div class="col-xs-3">Week(s)</div>
@@ -1031,12 +1059,12 @@
 
                 </div>
 
-                <h4>Security Anomaly Detection</h4>
+                <h3>Security Anomaly Detection</h3>
 
                 <div class="sub-block">
 
                   <div class="sub-block-title">
-                    <h5>3. Security Anomaly Review Coordinator
+                    <h4>3. Security Anomaly Review Coordinator
                       <span class="help_question_li dropdown inline-block-item">
                         <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
@@ -1044,10 +1072,18 @@
                             OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
                         </div>
                       </span>
-                    </h5>
+                    </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6 col-md-offset-6">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-4">Confidentiality Level</div>
+                        <div class="col-sm-1">&nbsp;</div>
+                        <div class="col-sm-4">Category</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">Month(s)</div>
                         <div class="col-xs-3">Week(s)</div>
@@ -1370,6 +1406,7 @@
     
     
     <script src="assets/javascripts/javascript.js"></script>
+    <script src="assets/javascripts/javascript.admin.js"></script>
     
 
   </body>

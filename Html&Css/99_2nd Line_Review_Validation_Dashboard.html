@@ -71,7 +71,7 @@
                                     <ul class="list-unstyled noti-list">
                                         <li data-noti-type="waiting">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                            <p>You have to review 10 documents in Accouting/ Tax category by latest 10th May</p>
+                                            <p>You have 10 documents to review within the Accouting/ Tax category with Internal Confidentiality by latest 10th May</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -80,7 +80,7 @@
                                     <ul class="list-unstyled noti-list">
                                         <li data-noti-type="danger">
                                             <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                            <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                            <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
                                         </li>
                                         <li data-noti-type="success">
                                             <i class="fa fa-check icon-success" aria-hidden="true"></i>
@@ -104,19 +104,19 @@
                                 <ul class="list-unstyled noti-list">
                                     <li data-noti-type="danger">
                                         <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                        <p>You have to review 30 documents in Client/ Customer category by latest 16th May</p>
+                                        <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
                                     </li>
                                     <li data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th June</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th June</p>
                                     </li>
                                     <li data-noti-type="waiting">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 25th May</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th May</p>
                                     </li>
                                     <li  data-noti-type="warning">
                                         <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                        <p>You have to review 10 documents in Accounting/ Tax category by latest 16th May</p>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 16th May</p>
                                     </li>
                                 </ul>
                             </div>
@@ -172,7 +172,7 @@
     <div class="my_main bar_menu container">
       <div class="row">
         <div class="col-md-12 mb-md">
-          <p class="page-heading-sm pull-left">Documents Classification Challenge - 2nd Line user's review validation</p>
+          <p class="page-heading-sm pull-left">Documents Classification Challenge - Coordinator’s review validation</p>
           <ul class="filter-buttons pull-right">
               <li class="dropdown">
                   <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
@@ -281,10 +281,15 @@
                   </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
                     <div id="reviewer1" class="tab-pane active">
-                      <div class="reviewer-info">
+                      <div class="reviewer-info clearfix">
                         <span class="mr-md">Reviewer: todd.smith</span>
-                        <span>3 Document Challenged - Validation Progress: </span>
+                        <span>3 Documents Challenged - Validation Progress: </span>
                         <div class="progress-radial small progress-66"></div>
+
+                        <div class="pull-right">
+                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                        </div>
                       </div>
 
                       <div class="table-responsive">
@@ -441,7 +446,7 @@
                                 <textarea class="form-control">Challenge is accept</textarea>
                               </td>
                               <td>
-                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success disabled"></i></a>
+                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="You challenged back the review"></i></a>
                                 <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
                               </td>
                             </tr>
@@ -455,11 +460,11 @@
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                     </div>
 
-                    <button class="btn btn-green btn-next-reviewer pull-right mt-sm">Go to next reviewer</button>
+                    <button class="btn btn-green btn-next-reviewer pull-right mt-sm">Go to Next Reviewer</button>
 
                   </div>
 
-                  <button class="btn btn-green btn-next-reviewer pull-right mt-sm mr-md">Go to next Category</button>
+                  <button class="btn btn-green btn-next-reviewer pull-right mt-sm mr-md">Go to Next Category</button>
                 </div>
 
               </div>
@@ -498,15 +503,13 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                        <th class="col50">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Accounting/ Tax</td>
                           <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">30</td>
                           <td class="no-border-top text-center">12,031</td>
@@ -517,9 +520,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Chris.Muffat (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Chris.Muffat (Last Modified)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -529,9 +531,8 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Matt.Nixon (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Matt.Nixon (Last Modified)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 no-border-top chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
@@ -541,9 +542,8 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Tony.Gomes (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Tony.Gomes (Last Modified)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 no-border-top chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
@@ -553,9 +553,8 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Last Modified)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 no-border-top chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
@@ -579,24 +578,13 @@
             <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
                   <h2 class="panel-title">Corporate Entity</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                  <div class="panel-actions">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Corporate Entity</td>
                           <td class="no-border-top"><span class="assigned-num">1</span> <a data-toggle="collapse" data-target="#reviewerList2" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">10</td>
                           <td class="no-border-top text-center">11,302</td>
@@ -607,9 +595,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Document Creator)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -642,15 +629,13 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                        <th class="col50">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Client/ Customer</td>
                           <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList3" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">10</td>
                           <td class="no-border-top text-center">11,302</td>
@@ -661,9 +646,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Document Creator)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -696,15 +680,13 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                        <th class="col50">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Employee</td>
                           <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList4" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">10</td>
                           <td class="no-border-top text-center">11,302</td>
@@ -715,9 +697,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Document Creator)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -750,15 +731,13 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                        <th class="col50">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Legal/Compliance</td>
                           <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList5" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">10</td>
                           <td class="no-border-top text-center">11,302</td>
@@ -769,9 +748,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Document Creator)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -804,15 +782,13 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
+                        <th class="col50">Number of Assigned Reviewers:</th>
+                        <th class="col25">Number of Documetns Challenged</th>
+                        <th class="col25">Total Numbers of Documents Classified</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Tax</td>
                           <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList6" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">10</td>
                           <td class="no-border-top text-center">11,302</td>
@@ -823,9 +799,8 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col50">Stan.Slow (Document Creator)</td>
+                                  <td class="col25">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -848,7 +823,7 @@
 
             <div class="clearfix">
               <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and notify all reviewers</button>
+                <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
               </div>
             </div>
           </div>
@@ -881,7 +856,7 @@
             </div>
           <div class="modal-body">
             <div class="table-responsive">
-               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
           <thead>
             <tr role="row" class="">
               <th>
@@ -896,36 +871,10 @@
               </th>
               <th class="review_note">Owner
               </th>
-              <th class="review_note">Proposed category (confidence level)
-                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                    The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-                  </div>
-                </div>
-              </th>
-              <th class="review_note">Proposed confidentiality (confidence level)
-                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                    The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-                  </div>
-                </div>
-              </th>
-              <th class="text-center">Status
-                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represent the status of the review for each file.</p>
-                  </div>
-                </div>
-              </th>
+              <th class="review_note">Category</th>
+              <th class="review_note">Confidentiality</th>
+              <th class="review_note">Comment</th>
+              <th class="text-center">Validation</th>
             </tr>
           </thead>
           <tbody>
@@ -957,47 +906,32 @@
               <td class="text-left">
                 <span class="text-italic">todd.smith</span>
               </td>
-              <td>
-                <div class="select-group">
-                  <div class="selected-info">
-                    <div class="progress progress-striped light">
-                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                      </div>
-                      <span class="progress-percentage">(50%)</span>
-                    </div>
-                  </div>
-                  <select class="form-control">
-                    <option value="Accounting/Tax">Accounting/Tax</option>
-                    <option value-"Corporate Entity">Corporate Entity</option>
-                    <option value="Client/Customer">Client/Customer</option>
-                    <option value="Employee">Employee</option>
-                    <option value="Legal/Compliance">Legal/Compliance</option>
-                    <option value="Transaction">Transaction</option>
-                  </select>
-                </div>
+              <td class="vertical-top">
+                <select class="form-control">
+                    <option selected="">Accounting/ Tax</option>
+                    <option>Corporate Entity</option>
+                    <option>Customer</option>
+                    <option>Employee</option>
+                    <option>Legal/Compliance</option>
+                    <option>Transaction</option>
+                </select>
               </td>
-              <td>
-                <div class="select-group">
-                  <div class="selected-info">
-                    <div class="progress progress-striped light">
-                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                      </div>
-                      <span class="progress-percentage">(50%)</span>
-                    </div>
-                  </div>
-                  <select class="form-control">
-                    <option>Secret</option>
-                    <option selected="">Confidential</option>
-                    <option>Internal Only</option>
+              <td class="vertical-top text-left">
+                <select class="form-control changed">
+                    <option>Banking Secrecy</option>
+                    <option selected="">Secret</option>
+                    <option>Confidential</option>
+                    <option>Internal</option>
                     <option>Public</option>
-                  </select>
-                </div>
+                </select>
+                <span class="text-italic previous-status">Previous: Confidentiality</span>
               </td>
               <td>
-                <a href="#" class="doc-check">
-                  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                </a>
+                <textarea class="form-control">challenge on confidentiality accepted</textarea>
+              </td>
+              <td>
+                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
+                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
               </td>
             </tr>
                     </tbody>

@@ -59,6 +59,12 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
     }
@@ -114,6 +120,12 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
 
@@ -154,6 +166,12 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
     }
@@ -198,6 +216,12 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
     }
@@ -261,6 +285,12 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
     }
@@ -294,7 +324,9 @@ $(function () {
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');
         console.log($(e.target));
-        $(e.target).append('<span class="dropdown-backdrop"></span>');
+        if (!$('.dropdown-backdrop').length && !$('.dropdown-backdrop-custom').length){
+            $(e.target).append('<span class="dropdown-backdrop"></span>');
+        }
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){   
             // detach it and append it to the body
             $('body').append(dropdownMenu.detach());
@@ -325,16 +357,43 @@ $(function () {
         minimumResultsForSearch: Infinity
     }).select2('val', null);;
 
+    var notiType;
     $('.filter-noti-icon').on('click', function(){
-        var notiType = $(this).attr('data-type');
-        $('[data-noti-type]').each(function(){
-            if ($(this).attr('data-noti-type') == notiType){
-                $(this).show();
-            }
-            else{
-                $(this).hide();   
-            }
-        });
+        if (notiType == $(this).attr('data-type')){
+            $('[data-noti-type]').show();
+            $('.filter-noti-icon').parents('span').show();
+            notiType = '';
+        }
+        else{
+            notiType = $(this).attr('data-type');
+            $('.filter-noti-icon').parents('span').hide();
+            $('.filter-noti-icon[data-type='+notiType+']').parents('span').show();
+            $('[data-noti-type]').each(function(){
+                if ($(this).attr('data-noti-type') == notiType){
+                    $(this).show();
+                }
+                else{
+                    $(this).hide();   
+                }
+            });
+        }
+    });
+
+    $('.filter-noti').on('change', function(){
+        var filterType = $( '.filter-noti option:selected' ).attr('data-update-time');
+        if (filterType == 'update-default'){
+            $('[data-last-update]').show();
+        }
+        else if (filterType == 'update-pending' || filterType == 'update-completed'){
+            $('[data-last-update]').show();
+            $('[data-update-status]').hide();
+            $('[data-update-status='+filterType+']').show();
+        }
+        else{
+            $('[data-last-update]').hide();
+            $('[data-last-update='+filterType+']').show();
+        }
+
     });
 
     $('.dropdown-noti .overview_question_a').on('click', function(e){

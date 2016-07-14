@@ -1,0 +1,499 @@
+<!doctype html>
+<html class="fixed">
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <meta name="keywords" content="HTML5 Admin Template" />
+    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
+    <meta name="author" content="okler.net">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <div class="my_header">
+            <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Overview</a></li>
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Review</a></li>
+                            <li><a href="#">User Validation</a></li>
+                            <li><a href="#">Anomaly Detection</a></li>
+                            <li><a href="#">Run Analysis</a></li>
+                            <li><a href="#">Settings</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+
+                    <div class="header-right">
+                        <div id="userbox" class="userbox">
+                            <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                <figure class="profile-picture">
+                                    <img src="assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg">
+                                </figure>
+                                <div class="profile-info">
+                                    <span class="name">Chris</span>
+                                    <span class="role">administrator</span>
+                                </div>
+                
+                                <i class="fa custom-caret"></i>
+                            </a>
+                
+                            <div class="dropdown-menu">
+                                <ul class="list-unstyled">
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                    </li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-tasks"></i> My Todo</a>
+                                    </li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-users"></i> My Team</a>
+                                    </li>
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+
+        <div class="my_main container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Data Processing Dashboard | Analytics Filter:</p>
+                </div>
+                <div class="col-md-8">
+                    <ul class="text-right filter-list pt-xs">
+                        <li>
+                            <select name="state" class="form-control ddList">
+                                <option value="">Country</option>
+                                <option class="lt" value="--">-All-</option>
+                                <option class="lt" value="AL">-One-</option>
+                                <option class="lt" value="AK">-Two-</option>
+                            </select>
+                        </li>
+                        <li>
+                            <div class="wrap-select">
+                                <select name="state" class="form-control ddList">
+                                    <option value="">Business Unit</option>
+                                    <option class="lt" value="--">-All-</option>
+                                    <option class="lt" value="AL">-One-</option>
+                                    <option class="lt" value="AK">-Two-</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="wrap-select">
+                                <select name="state" class="form-control ddList">
+                                    <option value="">Department</option>
+                                    <option class="lt" value="--">-All-</option>
+                                    <option class="lt" value="AL">-One-</option>
+                                    <option class="lt" value="AK">-Two-</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="wrap-select">
+                                <select name="state" class="form-control ddList">
+                                    <option value="">Team</option>
+                                    <option class="lt" value="--">-All-</option>
+                                    <option class="lt" value="AL">-One-</option>
+                                    <option class="lt" value="AK">-Two-</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="wrap-select">
+                                <select name="state" class="form-control ddList">
+                                    <option value="">Data Owner</option>
+                                    <option class="lt" value="--">-All-</option>
+                                    <option class="lt" value="AL">-One-</option>
+                                    <option class="lt" value="AK">-Two-</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="first_table container">
+            <div class="col">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">General Details</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table general-table mb-none">
+                                <tbody>
+                                <tr>
+                                    <td>Last Data Scan:</td>
+                                    <td colspan="3">08 May 2016 15:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Country In Scope:</td>
+                                    <td colspan="3">Switzerland</td>
+                                </tr>
+                                <tr>
+                                    <td>Business In Scope:</td>
+                                    <td colspan="3">Private bank</td>
+                                </tr>
+                                <tr>
+                                    <td>Scan Status:</td>
+                                    <td colspan="3">Completed</td>
+                                </tr>
+                                <tr>
+                                    <td>Documents Analyzed:</td>
+                                    <td colspan="3">4.326.215</td>
+                                </tr>
+                                <tr>
+                                    <td>File Extension Processed:</td>
+                                    <td colspan="3">txt, log, rtf, pdf, doc, docx, xls, xlsx, xlsm, ppt, pptx, msg, eml, zip, rar</td>
+                                </tr>
+                                <tr>
+                                    <td>Duplication Documents:</td>
+                                    <td colspan="3"> 4.235.371</td>
+                                </tr>
+                                <tr>
+                                    <td>Encrypted Documents or Archives:</td>
+                                    <td>784</td>
+                                    <td>Number of Category Applied:</td>
+                                    <td>9</td>
+                                </tr>
+                                <tr>
+                                    <td>Documents Skipped:</td>
+                                    <td>15.3624</td>
+                                    <td>Level of Confidentiality Applied:</td>
+                                    <td>7</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="widget container">
+            <div class="row">
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-secondary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">1,000,000</strong>
+                                        </div>
+                                        <h4 class="title">Total Documents</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <a href="#" class="widget-action"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-quartenary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">536,000</strong>
+                                        </div>
+                                        <h4 class="title">Documents Reviewed</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <span class="percentage-badge">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="panel-body bg-tertiary widget-overview">
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="summary">
+                                        <div class="info">
+                                            <strong class="amount">110</strong>
+                                        </div>
+                                        <h4 class="title">Documents Validated</h4>
+                                    </div>
+                                </div>
+                                <div class="widget-summary-col">
+                                    <span class="percentage-badge">5%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="table_content_icon container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel panel-featured panel-featured-primary">
+                        <header class="panel-heading">
+                            <h2 class="panel-title">Categorization Summary</h2>
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            </div>
+                        </header>
+                        <div class="panel-body">
+                            <div id="datatable-editable_wrapper" class="no-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped mb-none no-footer"
+                                           id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1" aria-sort="ascending">Categories
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">% Reviewed Documentss
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">% Validated Documents
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">Reviewed Accuracy
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">
+                                                ML Accuracy
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                                                    Legal/Regulatory
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-male" aria-hidden="true"></i>
+                                                    Employee
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-usd" aria-hidden="true"></i>
+                                                    Transaction
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-calculator" aria-hidden="true"></i>
+                                                    Accounting/Tax
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                                    Corporate Entity
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+
+                                            <tr class="even" role="row">
+                                                <td class="text-left">
+                                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                                    Customer
+                                                </td>
+                                                <td>20% (10.000)</td>
+                                                <td>10% (1.000)</td>
+                                                <td>80%</td>
+                                                <td>100%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="table_content container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel panel-featured panel-featured-primary">
+                        <header class="panel-heading">
+                            <h2 class="panel-title">Classification Summary</h2>
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            </div>
+                        </header>
+                        <div class="panel-body">
+                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped mb-none no-footer"
+                                           id="datatable-default" role="grid" aria-describedby="datatable-default_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1" aria-sort="ascending">Level of Confidentiality
+                                                </th>
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1">% Reviewed Documents
+                                                </th>
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                    colspan="1">% Validated Documents
+                                                </th>
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                    rowspan="1" colspan="1">% Data Owner Review Accuracy
+                                                </th>
+                                                <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                    rowspan="1" colspan="1">
+                                                    % Prediction Accuracy
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="gradeA odd" role="row">
+                                                <td class="sorting_1">Unrestricted</td>
+                                                <td>80% (152.5253) </td>
+                                                <td>80% (152.5253)</td>
+                                                <td class="center hidden-phone">80%</td>
+                                                <td class="center hidden-phone">80%</td>
+                                            </tr>
+                                            <tr class="gradeA even" role="row">
+                                                <td class="sorting_1">Internal</td>
+                                                <td>80% (152.5253)</td>
+                                                <td>80% (152.5253)</td>
+                                                <td class="center hidden-phone">80%</td>
+                                                <td class="center hidden-phone">80%</td>
+                                            </tr>
+                                            <tr class="gradeA odd" role="row">
+                                                <td class="sorting_1">Confidential</td>
+                                                <td>80% (152.5253)</td>
+                                                <td>80% (152.5253)</td>
+                                                <td class="center hidden-phone">80%</td>
+                                                <td class="center hidden-phone">80%</td>
+                                            </tr>
+                                            <tr class="gradeA even" role="row">
+                                                <td class="sorting_1">Secret</td>
+                                                <td>80% (152.5253)</td>
+                                                <td>80% (152.5253)</td>
+                                                <td class="center hidden-phone">80%</td>
+                                                <td class="center hidden-phone">80%</td>
+                                            </tr>
+                                            <tr class="gradeA odd" role="row">
+                                                <td class="sorting_1">Banking Secrecy</td>
+                                                <td>80% (152.5253)</td>
+                                                <td>80% (152.5253)</td>
+                                                <td class="center hidden-phone">80%</td>
+                                                <td class="center hidden-phone">80%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+            
+        <p class="text-center text-muted mt-md mb-md">Copyright &copy; 2016 by Dathena Science</p>
+    </div>
+
+    <!-- Vendor -->
+    <script src="assets/vendor/jquery/jquery.js"></script>
+    <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    
+    <script src="assets/vendor/flot/jquery.flot.js"></script>
+    <script src="assets/vendor/flot.tooltip/flot.tooltip.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="assets/javascripts/theme.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="assets/javascripts/theme.init.js"></script>
+
+    <!-- Examples -->
+    <script src="assets/javascripts/javascript.js"></script>
+    </body>
+</html>

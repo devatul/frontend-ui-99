@@ -1,5 +1,7 @@
 $(function () {
 
+  var previousPoint = null;
+
   $('#choose_cluster').select2();
   $('#choose_cluster').on("change", function(e) {
     $('.cluster-block').hide();
@@ -31,48 +33,48 @@ $(function () {
   });
 
   var word_list = new Array(
-    {text: "Entity", weight: 13},
-    {text: "matter", weight: 10.5},
-    {text: "science", weight: 9.4},
-    {text: "properties", weight: 8},
-    {text: "speed", weight: 6.2},
-    {text: "Accounting", weight: 5},
-    {text: "interactions", weight: 5},
-    {text: "nature", weight: 5},
-    {text: "branch", weight: 5},
-    {text: "concerned", weight: 4},
-    {text: "Sapien", weight: 4},
-    {text: "Pellentesque", weight: 3},
-    {text: "habitant", weight: 3},
-    {text: "morbi", weight: 3},
-    {text: "tristisque", weight: 3},
-    {text: "senectus", weight: 3},
-    {text: "et netus", weight: 3},
-    {text: "et malesuada", weight: 3},
-    {text: "fames", weight: 2},
-    {text: "ac turpis", weight: 2},
-    {text: "egestas", weight: 2},
-    {text: "Aenean", weight: 2},
-    {text: "vestibulum", weight: 2},
-    {text: "elit", weight: 2},
-    {text: "sit amet", weight: 2},
-    {text: "metus", weight: 2},
-    {text: "adipiscing", weight: 2},
-    {text: "ut ultrices", weight: 2},
-    {text: "justo", weight: 1},
-    {text: "dictum", weight: 1},
-    {text: "Ut et leo", weight: 1},
-    {text: "metus", weight: 1},
-    {text: "at molestie", weight: 1},
-    {text: "purus", weight: 1},
-    {text: "Curabitur", weight: 1},
-    {text: "diam", weight: 1},
-    {text: "dui", weight: 1},
-    {text: "ullamcorper", weight: 1},
-    {text: "id vuluptate ut", weight: 1},
-    {text: "mattis", weight: 1},
-    {text: "et nulla", weight: 1},
-    {text: "Sed", weight: 1}
+    {text: "Entity", weight: 13, html: {"data-tooltip": "1300"}},
+    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134"}},
+    {text: "science", weight: 9.4, html: {"data-tooltip": "999"}},
+    {text: "properties", weight: 8, html: {"data-tooltip": "676"}},
+    {text: "speed", weight: 6.2, html: {"data-tooltip": "444"}},
+    {text: "Accounting", weight: 5, html: {"data-tooltip": "777"}},
+    {text: "interactions", weight: 5, html: {"data-tooltip": "35"}},
+    {text: "nature", weight: 5, html: {"data-tooltip": "535"}},
+    {text: "branch", weight: 5, html: {"data-tooltip": "535"}},
+    {text: "concerned", weight: 4, html: {"data-tooltip": "334"}},
+    {text: "Sapien", weight: 4, html: {"data-tooltip": "200"}},
+    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "habitant", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "morbi", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "tristisque", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "senectus", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "et netus", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13"}},
+    {text: "fames", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "egestas", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "Aenean", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "elit", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "sit amet", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "metus", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13"}, html: {"data-tooltip": "13"}},
+    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13"}},
+    {text: "justo", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "dictum", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "metus", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "at molestie", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "purus", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "diam", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "dui", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "mattis", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "et nulla", weight: 1, html: {"data-tooltip": "13"}},
+    {text: "Sed", weight: 1, html: {"data-tooltip": "13"}}
   );
 
   var cloudRendered = false;
@@ -81,6 +83,8 @@ $(function () {
       $("#words-cloud").jQCloud(word_list,{
         afterCloudRender: function(){
           cloudRendered = true;
+
+          $("[data='tooltip']").tooltip();
         }
       });
     }
@@ -110,6 +114,7 @@ $(function () {
           title: {
               text: 'Number of Documents'
           },
+          allowDecimals: false
         },
         credits: {
           enabled: false
@@ -138,6 +143,12 @@ $(function () {
             pointPlacement: -0.5
           }
         },
+
+
+        tooltip: {
+            headerFormat: '',
+            pointFormat: 'Documents: <b>{point.y}</b><br/>'
+        },
         
         series: [{
             data: [[1,1], [2,0], [3,0], [4,0], [5,3], [6,2], [7,1], [8,1], [9,0], [10,0]]
@@ -146,6 +157,7 @@ $(function () {
   };
 
   if( $('#confidentialityChart').length){
+
         // PIE CHART
         var flotPieData = [{
             label: "Public",
@@ -201,36 +213,15 @@ $(function () {
             grid: {
                 hoverable: true,
                 clickable: true,
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
   }
-
-  // if ($('#confidentialityLevelChart').length){
-  //   new Chartist.Bar('#confidentialityLevelChart', {
-  //     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-  //     series: [
-  //       [400,420,390,410,440,400,395],
-  //       [80,100,123,90,111,85,140],
-  //       [200,210,180,188,240,250,230],
-  //       [100,99,98,130,120,140,110],
-  //       [640,700,600,800,1000,1200,1250]
-  //     ]
-  //   }, {
-  //     height: 350,
-  //     stackBars: true,
-  //     axisY: {
-  //       labelInterpolationFnc: function(value) {
-  //         return (value);
-  //       }
-  //     }
-  //   }).on('draw', function(data) {
-  //     if (data.type === 'bar') {
-  //       data.element.attr({
-  //         style: 'stroke-width: 20px'
-  //       });
-  //     }
-  //   });
-  // }
 
   if ($('#confidentialityLevelChart').length){
     $('#confidentialityLevelChart').highcharts({
@@ -305,5 +296,11 @@ $(function () {
         }]
     });
   }
+
+  $('.btn-refine').on('click', function(e){
+    e.preventDefault();
+    $(this).removeClass('btn-green').addClass('btn-disabled');
+    $('<span> (in progress)</span>').insertAfter($(this));
+  });
 
 });

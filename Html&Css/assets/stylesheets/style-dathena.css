@@ -695,6 +695,10 @@ a.help_question_a:hover>i {
     border-width: 8px;
     margin-left: 270px;
 }
+.add-detail-section .detail-row-edit {
+	margin-bottom: 30px;
+}
+
 
 
 
