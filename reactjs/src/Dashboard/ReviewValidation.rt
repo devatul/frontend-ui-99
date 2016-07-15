@@ -1,5 +1,5 @@
 <section>
-  <div class="my_main bar_menu container">
+  <!--<div class="my_main bar_menu container">
       <div class="row">
         <div class="col-md-12 mb-md">
           <p class="page-heading-sm pull-left">Documents Classification Challenge - 2nd Line user's review validation</p>
@@ -59,23 +59,8 @@
     <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs">
-          <li class="active">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
-          </li>
-          <li class="">
-            <a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
-          </li>
-          <li class="">
-            <a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
-          </li>
-          <li class="">
-            <a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
-          </li>
-          <li class="">
-            <a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Regulatory</a>
-          </li>
-          <li class="">
-            <a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+          <li rt-repeat="category in this.state.categories" class="active">
+            <a href="#{category.name}" onClick="()=>this.getCategoryInfo(category.id)" data-toggle="tab" aria-expanded="true">{category.name}</a>
           </li>
           <li class="">
             <a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
@@ -96,25 +81,16 @@
                 </div>
                 <div class="tabs tabs-vertical tabs-primary tabs-left">
                   <ul class="nav nav-tabs col-sm-1 col-xs-12">
-                    <li class="active">
-                      <a href="#reviewer1" data-toggle="tab" aria-expanded="true">todd.smith</a>
-                    </li>
-                    <li class="">
-                      <a href="#reviewer2" data-toggle="tab" aria-expanded="false">tony.gomes</a>
-                    </li>
-                    <li class="">
-                      <a href="#reviewer3" data-toggle="tab" aria-expanded="false">stan.siow</a>
-                    </li>
-                    <li class="">
-                      <a href="#reviewer4" data-toggle="tab" aria-expanded="false">chris.muffat</a>
+                    <li rt-repeat="reviewer in this.state.reviewers" class="active">
+                      <a href="#reviewer" onClick="()=>this.setReviewerCurrent(reviewer.id)" data-toggle="tab" aria-expanded="true">{reviewer.name}</a>
                     </li>
                   </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
-                    <div id="reviewer1" class="tab-pane active">
+                    <div id="reviewer" rt-scope="reviewer as  this.state.reviewerInfo" class="tab-pane active">
                       <div class="reviewer-info">
-                        <span class="mr-md">Reviewer: todd.smith</span>
-                        <span>3 Document Challenged - Validation Progress: </span>
-                        <div class="progress-radial small progress-66"></div>
+                        <span class="mr-md">Reviewer: {reviewer.name}</span>
+                        <span>{reviewer.challenged_docs} Document Challenged - Validation Progress: </span>
+                        <div class="progress-radial small progress{(reviewer.validation_progress != null) ? '-' + reviewer.validation_progress: '-0'}"></div>
                       </div>
 
                       <div class="table-responsive">
@@ -131,10 +107,10 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td><i class="fa fa-check icon-success"></i></td>
+                            <tr rt-repeat="document in reviewer.documents">
+                              <td><i class="fa fa-check icon-success"></i>{document.status}</td>
                               <td class="text-left">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Tax report.ppt</span>
+                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{document.name}</span>
                                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                                     <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                     <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -149,10 +125,10 @@
                                 </div>
                               </td>
                               <td class="text-left">
-                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                                <span class="text-italic doc-path">{document.path}</span>
                               </td>
                               <td class="vertical-top">
-                                <select class="form-control">
+                                <select class="form-control" onChange={this.categoryOnChange}>
                                     <option selected="">Accounting/ Tax</option>
                                     <option>Corporate Entity</option>
                                     <option>Customer</option>
@@ -160,119 +136,24 @@
                                     <option>Legal/Compliance</option>
                                     <option>Transaction</option>
                                 </select>
+                                <span class="text-italic previous-status">Previous: {document.previous_category}</span>
                               </td>
                               <td class="vertical-top text-left">
-                                <select class="form-control changed">
+                                <select class="form-control changed" onChange={this.confidentialityOnChange}>
                                     <option>Banking Secrecy</option>
                                     <option selected="">Secret</option>
                                     <option>Confidential</option>
                                     <option>Internal</option>
                                     <option>Public</option>
                                 </select>
-                                <span class="text-italic previous-status">Previous: Confidentiality</span>
+                                <span class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
                               </td>
                               <td>
                                 <textarea class="form-control">challenge on confidentiality accepted</textarea>
                               </td>
                               <td>
-                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
-                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><i class="fa fa-times icon-danger"></i></td>
-                              <td class="text-left">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Tax 2015.xls</span>
-                                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                        <ul>
-                                            <li>Creation Date: 2015-01-01</li>
-                                            <li>Modifitcation Date: 2015-05-28</li>
-                                            <li>Required Legal Retention until: 2025-03-03</li>
-                                            <li>Confidentiality Label: Yes/No</li>
-                                            <li>Number of Classification Challenge: 1</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                              </td>
-                              <td class="text-left">
-                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
-                              </td>
-                              <td class="vertical-top">
-                                <select class="form-control">
-                                    <option selected="">Accounting/ Tax</option>
-                                    <option>Corporate Entity</option>
-                                    <option>Customer</option>
-                                    <option>Employee</option>
-                                    <option>Legal/Compliance</option>
-                                    <option>Transaction</option>
-                                </select>
-                              </td>
-                              <td class="vertical-top text-left">
-                                <select class="form-control changed">
-                                    <option>Banking Secrecy</option>
-                                    <option selected="">Secret</option>
-                                    <option>Confidential</option>
-                                    <option>Internal</option>
-                                    <option>Public</option>
-                                </select>
-                                <span class="text-italic previous-status">Previous: Confidentiality</span>
-                              </td>
-                              <td>
-                                <textarea class="form-control">Reason for rejection is that the classification is too high</textarea>
-                              </td>
-                              <td>
-                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success disabled"></i></a>
-                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger"></i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><i class="fa fa-clock-o"></i></td>
-                              <td class="text-left">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Case2.pdf</span>
-                                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                        <ul>
-                                            <li>Creation Date: 2015-01-01</li>
-                                            <li>Modifitcation Date: 2015-05-28</li>
-                                            <li>Required Legal Retention until: 2025-03-03</li>
-                                            <li>Confidentiality Label: Yes/No</li>
-                                            <li>Number of Classification Challenge: 1</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                              </td>
-                              <td class="text-left">
-                                <span class="text-italic doc-path">/legal/teamA/contract/</span>
-                              </td>
-                              <td class="vertical-top text-left">
-                                <select class="form-control changed">
-                                    <option>Accounting/ Tax</option>
-                                    <option>Corporate Entity</option>
-                                    <option>Customer</option>
-                                    <option>Employee</option>
-                                    <option selected="">Legal/Compliance</option>
-                                    <option>Transaction</option>
-                                </select>
-                                <span class="text-italic previous-status">Previous: Accounting/ Tax</span>
-                              </td>
-                              <td class="vertical-top text-left">
-                                <select class="form-control">
-                                    <option>Banking Secrecy</option>
-                                    <option>Secret</option>
-                                    <option selected="">Confidential</option>
-                                    <option>Internal</option>
-                                    <option>Public</option>
-                                </select>
-                              </td>
-                              <td>
-                                <textarea class="form-control">Challenge is accept</textarea>
-                              </td>
-                              <td>
-                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success disabled"></i></a>
-                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
+                                <a href="#" class="validation-btn btn btn-default check" onClick={this.buttonAccept}><i class="fa fa-check icon-success"></i></a>
+                                <a href="#" class="validation-btn btn btn-default uncheck" onClick={this.buttonReject}><i class="fa fa-times icon-danger disabled"></i></a>
                               </td>
                             </tr>
                           </tbody>
@@ -316,9 +197,9 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
           </div>
           <div id="summary" class="tab-pane">
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+            <section rt-repeat="summary in this.state.summaryValidation" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
-                  <h2 class="panel-title">Accounting/ Tax</h2>
+                  <h2 class="panel-title">{summary.name}</h2>
                   <div class="panel-actions">
                       <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                   </div>
@@ -336,67 +217,30 @@
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Accounting/ Tax</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">30</td>
-                          <td class="no-border-top text-center">12,031</td>
+                          <td class="no-border-top border-bottom">{summary.name}</td>
+                          <td class="no-border-top"><span class="assigned-num">{summary.number_of_assigned}</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">{summary.total_challenged_docs}</td>
+                          <td class="no-border-top text-center">{summary.total_classified_docs}</td>
                       </tr>
                       <tr class="child-table">
                         <td colspan="4" class="hiddenRow">
                           <div class="accordian-body collapse" id="reviewerList1"> 
                             <table class="table">
                               <tbody>
-                                <tr>
+                                <tr rt-repeat="reviewer in summary.reviewers">
                                   <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Chris.Muffat (Last Modified)</td>
+                                  <td class="col40">{reviewer.first_name} (Last Modified)</td>
                                   <td class="col15">&nbsp;</td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Matt.Nixon (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                          <span class="percent">55</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Tony.Gomes (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                          <span class="percent">50</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                                          <span class="percent">2</span>
+                                          <span class="percent">{reviewer.number_classified_docs}</span>
                                       </div>
                                     </div>
                                   </td>
                                 </tr>
                               </tbody>
                             </table>
-                          
                           </div> 
                          </td>
                       </tr>
@@ -405,277 +249,6 @@
                 </div>
               </div>
             </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Corporate Entity</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Corporate Entity</td>
-                          <td class="no-border-top"><span class="assigned-num">1</span> <a data-toggle="collapse" data-target="#reviewerList2" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList2"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Client/ Customer</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Client/ Customer</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList3" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList3"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Employee</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Employee</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList4" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList4"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Legal/Compliance</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Legal/Compliance</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList5" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList5"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Tax</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Tax</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList6" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList6"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
             <div class="clearfix">
               <div class="pull-right">
                 <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and notify all reviewers</button>
@@ -688,11 +261,11 @@
 
     <!--Modal-->
   
-    <div id="previewModal" class="modal fade in" role="dialog">
+    <!--<div id="previewModal" class="modal fade in" role="dialog">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <!--<div class="modal-content">
           <div class="modal-header">
             <div class="row">
                 <div class="col-sm-4 modal-title">
@@ -798,7 +371,7 @@
                   </div>
                   <select class="form-control">
                     <option value="Accounting/Tax">Accounting/Tax</option>
-                    <option value-"Corporate Entity">Corporate Entity</option>
+                    <option value="Corporate Entity">Corporate Entity</option>
                     <option value="Client/Customer">Client/Customer</option>
                     <option value="Employee">Employee</option>
                     <option value="Legal/Compliance">Legal/Compliance</option>
@@ -841,4 +414,118 @@
 
       </div>
     </div>
+    <!--Modal-->
+  
+    <!--<div id="previewModal" class="modal fade in" role="dialog">
+      <div class="modal-dialog modal-preview">
+
+        <!-- Modal content-->
+        <!--<div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+                <div class="col-sm-4 modal-title">
+                    <i class="fa fa-search"></i>
+                    Document Preview
+                </div>
+                <div class="col-sm-4 modal-info text-center">
+                    <span class="text-itatic">Contract.doc</span><br>
+                    <span>Folder /legal/teamA/</span>
+                </div>
+                <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+          <thead>
+            <tr role="row" class="">
+              <th>
+                <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </th>
+              <th class="review_note">Document Name
+              </th>
+              <th class="review_note">Path
+              </th>
+              <th class="review_note">Owner
+              </th>
+              <th class="review_note">Category</th>
+              <th class="review_note">Confidentiality</th>
+              <th class="review_note">Comment</th>
+              <th class="text-center">Validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td>
+                <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Contract.doc</span>
+                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                  <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                  <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                    <ul>
+                      <li>Creation Date: 2015-01-01</li>
+                      <li>Modifitcation Date: 2015-05-28</li>
+                      <li>Required Legal Retention until: 2025-03-03</li>
+                      <li>Confidentiality Label: Yes/No</li>
+                      <li>Number of Classification Challenge: 1</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+              </td>
+              <td class="text-left">
+                <span class="text-italic">todd.smith</span>
+              </td>
+              <td class="vertical-top">
+                <select class="form-control">
+                    <option selected="">Accounting/ Tax</option>
+                    <option>Corporate Entity</option>
+                    <option>Customer</option>
+                    <option>Employee</option>
+                    <option>Legal/Compliance</option>
+                    <option>Transaction</option>
+                </select>
+              </td>
+              <td class="vertical-top text-left">
+                <select class="form-control changed">
+                    <option>Banking Secrecy</option>
+                    <option selected="">Secret</option>
+                    <option>Confidential</option>
+                    <option>Internal</option>
+                    <option>Public</option>
+                </select>
+                <span class="text-italic previous-status">Previous: Confidentiality</span>
+              </td>
+              <td>
+                <textarea class="form-control">challenge on confidentiality accepted</textarea>
+              </td>
+              <td>
+                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
+                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
+              </td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="file-preview mt-md">
+                <p>File Preview Content</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>-->
 </section>

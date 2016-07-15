@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
+import { browserHistory, Router, Route, Link, Redirect,IndexRoute  } from 'react-router'
 var App = require('./App');
 var SignIn = require('./Account/SignIn');
 var SignUp = require('./Account/SignUp');
@@ -23,6 +23,7 @@ var Notification = require('./Dashboard/Notification');
 render((
   	<Router history={browserHistory}>
     	<Route path="/" component={App}>
+    		<IndexRoute component={SignIn}/>
 		  	<Route path="/Account/signIn" component={SignIn}/>
 		  	<Route path="/Account/signUp" component={SignUp}/>
 		  	<Route path="/Account/passwordNew" component={PasswordNew}/>

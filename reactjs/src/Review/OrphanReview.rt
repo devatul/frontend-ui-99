@@ -8,8 +8,8 @@
                                 <label for="choose_cluster">
                                     Choose a Orphan
 
-                                    <select class="js-example-basic-single js-states form-control" id="choose_cluster">
-                                        <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}">Orphan {orphanIndex}</option>
+                                    <select class="js-example-basic-single js-states form-control" id="choose_cluster" value="0">
+                                        <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}" key="{orphan.id}">{orphan.name}</option>
                                     </select>
                                 </label>
                                 <button class="btn btn-green btn-ok" type="button">OK</button>
@@ -60,7 +60,7 @@
                                                             </div>
                                                           </div>
                                                         </td>
-                                                        <td class="text-left">8</td>
+                                                        <td class="text-left">{this.state.statistics.total_number_documents}</td>
                                                     <tr>
                                                         <td class="text-left"><span>Completed Number of Documents</span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
@@ -70,7 +70,7 @@
                                                           </div>
                                                         </div>
                                                       </td>
-                                                        <td class="text-left">2</td>
+                                                        <td class="text-left">{this.state.statistics.completed_number_documents}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Average Centroid Distance</span>
@@ -83,7 +83,7 @@
                                                             </div>
                                                           </div>
                                                         </td>
-                                                        <td class="text-left">3.6</td>
+                                                        <td class="text-left">{this.state.statistics.avg_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Maximum Centroid Distance</span>
@@ -95,7 +95,7 @@
                                                           </div>
                                                         </div>
                                                       </td>
-                                                        <td class="text-left">9.6</td>
+                                                        <td class="text-left">{this.state.statistics.max_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Minimum Centroid Distance</span>
@@ -107,7 +107,7 @@
                                                           </div>
                                                         </div>
                                                       </td>
-                                                        <td class="text-left">1.6</td>
+                                                        <td class="text-left">{this.state.statistics.min_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Centroid Distance Varience</span>
@@ -119,7 +119,7 @@
                                                           </div>
                                                         </div>
                                                       </td>
-                                                        <td class="text-left">12.5</td>
+                                                        <td class="text-left">{this.state.statistics.centroid_distance_variance}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -293,7 +293,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr rt-repeat="doc in this.state.orphan_current.documents">
+                                            <tr rt-repeat="doc in this.state.samples" key="{doc.name}">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
                                                         <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions">
@@ -324,14 +324,14 @@
                                                 <td>
                                                     <div class="select-group">
                                                         <select class="form-control"> 
-                                                          <option rt-repeat="category in doc.categories" value="{category.name}">{category.name}</option>
+                                                          <option rt-repeat="category in doc.categories" value="{category.name}" key="{category.name}">{category.name}</option>
                                                         </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
                                                         <select class="form-control">
-                                                          <option rt-repeat="confidentialy in doc.confidentialities" value="{confidentialy.name}">{confidentialy.name}</option>
+                                                          <option rt-repeat="confidentialy in doc.confidentialities" value="{confidentialy.name}" key="{confidentialy.name}">{confidentialy.name}</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -354,4 +354,160 @@
                     </section>
                 </div>
             </div>
-	</section>
+   <!--Modal-->
+  
+  <div id="previewModal" class="modal fade in" role="dialog">
+      <div class="modal-dialog modal-preview">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+                <div class="col-sm-4 modal-title">
+                    <i class="fa fa-search"></i>
+                    Document Preview
+                </div>
+                <div class="col-sm-4 modal-info text-center">
+                    <span class="text-itatic">Contract.doc</span><br>
+                    <span>Folder /legal/teamA/</span>
+                </div>
+                <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+          <thead>
+            <tr role="row" class="">
+              <th>
+                <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </th>
+              <th class="review_note">Document Name
+              </th>
+              <th class="review_note">Path
+              </th>
+              <th class="review_note">Owner
+              </th>
+              <th class="review_note">Proposed category (confidence level)
+                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                    The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                  </div>
+                </div>
+              </th>
+              <th class="review_note">Proposed confidentiality (confidence level)
+                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                    The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                  </div>
+                </div>
+              </th>
+              <th class="text-center">Status
+                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represent the status of the review for each file.</p>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td>
+                <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
+                  <label></label>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Contract.doc</span>
+                <div class="dropdown dropdown-file-info-holder inline-block-item">
+                  <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                  <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                    <ul>
+                      <li>Creation Date: 2015-01-01</li>
+                      <li>Modifitcation Date: 2015-05-28</li>
+                      <li>Required Legal Retention until: 2025-03-03</li>
+                      <li>Confidentiality Label: Yes/No</li>
+                      <li>Number of Classification Challenge: 1</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left">
+                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+              </td>
+              <td class="text-left">
+                <span class="text-italic">todd.smith</span>
+              </td>
+              <td>
+                <div class="select-group">
+                  <div class="selected-info">
+                    <div class="progress progress-striped light">
+                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                      </div>
+                      <span class="progress-percentage">(50%)</span>
+                    </div>
+                  </div>
+                  <select class="form-control">
+                    <option value="Accounting/Tax">Accounting/Tax</option>
+                    <option value-"Corporate Entity">Corporate Entity</option>
+                    <option value="Client/Customer">Client/Customer</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Legal/Compliance">Legal/Compliance</option>
+                    <option value="Transaction">Transaction</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="select-group">
+                  <div class="selected-info">
+                    <div class="progress progress-striped light">
+                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                      </div>
+                      <span class="progress-percentage">(50%)</span>
+                    </div>
+                  </div>
+                  <select class="form-control">
+                    <option>Public</option>
+                    <option>Internal</option>
+                    <option selected="">Confidential</option>
+                    <option>Secret</option>
+                    <option>Banking Secrecy</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <a href="#" class="doc-check">
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="file-preview mt-md">
+                <p>File Preview Content</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div> 
+</section>

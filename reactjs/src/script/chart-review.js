@@ -1,36 +1,37 @@
 module.exports = function() {
 
-	  $('#choose_cluster').select2();
-	  /*$('#choose_cluster').on("change", function(e) {
-	    $('.cluster-block').hide();
-	    $('[id="'+$(this).val()+'"]').show();
-	  });*/
+		  	$('#choose_cluster').select2();
+		  /*$('#choose_cluster').on("change", function(e) {
+		    $('.cluster-block').hide();
+		    $('[id="'+$(this).val()+'"]').show();
+		  });*/
 
-	  $('#meter').liquidMeter({
-	    shape: 'circle',
-	    color: '#0088CC',
-	    background: '#F9F9F9',
-	    fontSize: '24px',
-	    fontWeight: '600',
-	    stroke: '#F2F2F2',
-	    textColor: '#333',
-	    liquidOpacity: 0.9,
-	    liquidPalette: ['#333'],
-	    speed: 3000,
-	    animate: !$.browser.mobile
-	  });
+		  $('#meter').liquidMeter({
+		    shape: 'circle',
+		    color: '#0088CC',
+		    background: '#F9F9F9',
+		    fontSize: '24px',
+		    fontWeight: '600',
+		    stroke: '#F2F2F2',
+		    textColor: '#333',
+		    liquidOpacity: 0.9,
+		    liquidPalette: ['#333'],
+		    speed: 3000,
+		    animate: !$.browser.mobile
+		  });
 
-	  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-	    var target = $(e.target).attr("href") // activated tab
-	    if (target == '#cloud'){
-	      drawCloud();
-	    }
-	    if (target == '#centroid'){
-	      drawCentroid();
-	    }
-	  });
+		  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		    var target = $(e.target).attr("href") // activated tab
+		    if (target == '#cloud'){
+		      drawCloud();
+		    }
+		    if (target == '#centroid'){
+		      drawCentroid();
+		    }
+		  });
 
-	  var word_list = new Array(
+	  }
+	  /*var word_list = new Array(
 	    {text: "Entity", weight: 13},
 	    {text: "matter", weight: 10.5},
 	    {text: "science", weight: 9.4},
@@ -90,9 +91,10 @@ module.exports = function() {
 	    //$('#words-cloud').jQCloud('update', word_list);
 	    $('#words-cloud').css("width", "100%");
 	    $('#words-cloud').html('').jQCloud(word_list) 
-	  });
+	  });*/
 
-	  var drawCentroid = function(){
+	  /*var drawCentroid = function(){
+	  	console.log("aadcccccccccccccccc", data_centroid);
 	    $('#centroidChart').highcharts({
 	        chart: {
 	            type:'column'
@@ -140,12 +142,12 @@ module.exports = function() {
 	        },
 	        
 	        series: [{
-	            data: [[1,1], [2,0], [3,0], [4,0], [5,3], [6,2], [7,1], [8,1], [9,0], [10,0]]
+	            data: data_centroid
 	        }]
 	    });
-	  };
+	  };*/
 
-	  if( $('#confidentialityChart').length){
+	  /*if( $('#confidentialityChart').length){
 	        // PIE CHART
 	        var flotPieData = [{
 	            label: "Public",
@@ -203,7 +205,7 @@ module.exports = function() {
 	                clickable: true,
 	            }
 	        });
-	  }
+	  }*/
 
 	  // if ($('#confidentialityLevelChart').length){
 	  //   new Chartist.Bar('#confidentialityLevelChart', {
@@ -232,7 +234,7 @@ module.exports = function() {
 	  //   });
 	  // }
 
-	  if ($('#confidentialityLevelChart').length){
+	  /*if ($('#confidentialityLevelChart').length){
 	    $('#confidentialityLevelChart').highcharts({
 	        chart: {
 	            type: 'column'
@@ -304,5 +306,5 @@ module.exports = function() {
 	            data: [80,100,123,90,111]
 	        }]
 	    });
-	  }
-}
+	  }*/
+//}

@@ -44,26 +44,15 @@
                     <h2 class="panel-title">Today</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="warning">
+                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
                         <span class="noti-center">
-                            You have to review 30 documents in Client/Customer category by latest 10th May
+                            {notification.message}
                         </span>
                         <span class="noti-right">
-                            <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
-                        </span>
-                    </div>
-                    <div class="noti-item" data-noti-type="danger">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have completed the review of 30 documents in Client/Customer category
-                        </span>
-                        <span class="noti-right">
-                            <i class="fa fa-exclamation-triangle fa-alert-danger"></i>
+                            &nbsp;
                         </span>
                     </div>
                 </div>
@@ -74,34 +63,12 @@
                     <h2 class="panel-title">Yesterday</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="warning">
+                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
                         <span class="noti-center">
-                            You have to review 30 documents in Client/Customer category by latest 16th May
-                        </span>
-                        <span class="noti-right">
-                            <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
-                        </span>
-                    </div>
-                    <div class="noti-item" data-noti-type="">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have completed the review of 30 documents in Accounting/Tax category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                    <div class="noti-item" data-noti-type="">
-                        <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
-                        </span>
-                        <span class="noti-center">
-                            Stan challenged classification of document xxx - click <a href="#">here</a> to cross check
+                            {notification.message}
                         </span>
                         <span class="noti-right">
                             &nbsp;
@@ -115,23 +82,12 @@
                     <h2 class="panel-title">Last 7 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="">
-                        <span class="noti-left">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span class="noti-center">
-                            You have assigned Chris to review 30 documents in Accounting/Tax category
-                        </span>
-                        <span class="noti-right">
-                            &nbsp;
-                        </span>
-                    </div>
-                    <div class="noti-item" data-noti-type="">
+                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
                         <span class="noti-left">
                             <i class="fa fa-clock-o"></i>
                         </span>
                         <span class="noti-center">
-                            You have assigned Stan to review 20 documents in Client/Customer category
+                            {notification.message}
                         </span>
                         <span class="noti-right">
                             &nbsp;

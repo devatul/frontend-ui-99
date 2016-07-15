@@ -6,6 +6,8 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import dropdown from '../script/drop-down.js'
 import Constant from '../Constant.js'
+import chartOverview from '../script/chart-overview.js'
+import multiselect from '../script/multiselect.js'
 import 'jquery'
 var OverView = React.createClass
 ({
@@ -48,7 +50,7 @@ var OverView = React.createClass
                 languages: [],
                 doc_types: []
             },
-            PieData: {
+            ChartData: {
                 data_confidentiality: [],
                 data_categories: [],
                 data_languages: [],
@@ -56,74 +58,73 @@ var OverView = React.createClass
             }
 		};
 	},
-    getDefaultProps() {
-        return {
-        };
-    },
     componentWillMount() {
-          if(this.state.scan_result.scan_status == Constant.scan.IS_NO_SCAN) {
-                this.startScan();
-            }
+        if(this.state.scan_result.scan_status == Constant.scan.IS_NO_SCAN) {
+           this.startScan();
+        }
 
     },
 	componentDidMount() {
         $('#bell').click();
+
         dropdown();
+
         this.getCategory();
         this.getConfidentiality();
         this.getDoctypes();
         this.getLanguages();
-        console.log("asdfasdfasdf:function ", this.state.scan_result.scan_status);
-        this.scanResult();
-        console.log("category filter: ", this.state.label.list_category);
+        
+        
+        if(this.state.scan_result.scan_status != Constant.scan.IS_NO_SCAN) {
+            this.getScanResult();
+        }
         
         this.filterOnChange();
-        /*
-        $(function () {
-            $('.navbar-nav > li').on('click',function(){
-               $('.navbar-nav > li').removeClass('active');
-              $(this).addClass('active');
-            });
-        });*/
                       
   	},
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.label != nextState.label) {
+            return true;
+        }
+        if(this.state.filter != nextState.filter) {
+            return true;
+        }
+        return false;
+    },
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state.filter != prevState.filter) {
+            this.openFilterPopup();
+        }
+        if(this.state.filter != prevState.filter) {
+            this.filterScan(this.state.filter);
+        }
+    },
     startScan() {
         $.ajax({
             method: 'POST',
             url: Constant.SERVER_API + 'api/scan/',
             dataType: 'application/json',
+            async: false,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            /*data: {
-                "folder_paths":[{
-                    "folder_name":"name",
-                    "full_folder_path":"folder_path",
-                    "windows_username":"quyenhoang",
-                    "windows_password":"123123",
-                    "folder_owner":"owner"
-                }],
-                "min_groups":12,
-                "max_groups":100
-            },*/
-            success: function(data) {
-                console.log("Start Scan success", data);
-            }.bind(this),
-            error: function(error) {
-                if(error.status == 201) {
-                    var update_scan_status = update(this.state, {
-                        scan_result: {
-                            scan_status: {$set: Constant.scan.IS_SCANING}
-                        } 
-                    });
-                    this.setState(update_scan_status);
-                }
-                console.log("Start Scan error: ", error, this.state.scan_result.scan_status);
-            }.bind(this)
-        });
+            }
+        })
+        .done(function(data) {
+                    console.log("Start Scan success", data);
+        }.bind(this))
+        .fail(function(error) {
+            if(error.status == 201) {
+                var update_scan_status = update(this.state, {
+                    scan_result: {
+                        scan_status: {$set: Constant.scan.IS_SCANING}
+                    } 
+                });
+                this.setState(update_scan_status);
+                console.log("asdfasdfasd fiale", this.state.scan_result.scan_status);
+            }
+        }.bind(this));
     },
-
-    scanResult(){
+    getScanResult(){
         $.ajax({
             url: Constant.SERVER_API + 'api/scan/',
             dataType: 'json',
@@ -139,7 +140,7 @@ var OverView = React.createClass
                 this.setState(update_scan_result);
                 console.log("scan result: ", data);
             }.bind(this),
-            error: function(xhr, status, err) {
+            error: function(xhr, status, error) {
                 console.log(xhr);
                 var jsonResponse = JSON.parse(xhr.responseText);
                 console.log(jsonResponse);
@@ -151,50 +152,77 @@ var OverView = React.createClass
         });
        
     },
-    selectmultiple() {
-        $(function () {
-            var renderFilterBlock = function(){
-              if ($('.filter-tags .filter-label').length){
-                $('.filter-tags-block label').show();
-              }
-              else{
-                $('.filter-tags-block label').hide();
-              }
-            };
+    openFilterPopup() {
+        var renderFilterBlock = function(){
+          if ($('.filter-tags .filter-label').length){
+            $('.filter-tags-block label').show();
+          }
+          else{
+            $('.filter-tags-block label').hide();
+          }
+        };
 
-            if ($('.select-multiple').length){
-                $('.select-multiple').each(function(){
-                    var buttonText = $(this).attr('data-title');
-                    $(this).multiselect({
-                        includeSelectAllOption: true,
-                        buttonText: function(options, select) {
-                            return buttonText;
-                        },
-                        onChange: function(option, checked){
-                            var selectedOption = $(option).val();
-                            var filterCriteria = $(option).parents('.overview-filter').attr('name');
-                            if(checked == true) {
-                                $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
-                                renderFilterBlock();
-                            }
-                            else{
-                                $('.filter-label[data-value="'+selectedOption+'"]').remove();
-                                renderFilterBlock();
-                            }
+        if ($('.select-multiple').length){
+            $('.select-multiple').each(function(){
+                var buttonText = $(this).attr('data-title');
+                $(this).multiselect({
+                    includeSelectAllOption: true,
+                    buttonText: function(options, select) {
+                        return buttonText;
+                    },
+                    onChange: function(option, checked){
+                        var selectedOption = $(option).val();
+                        var filterCriteria = $(option).parents('.overview-filter').attr('name');
+                        if(checked == true) {
+                            $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
+                            renderFilterBlock();
                         }
-                    });
+                        else{
+                            $('.filter-label[data-value="'+selectedOption+'"]').remove();
+                            renderFilterBlock();
+                        }
+                    }
                 });
-            }
-
-            $('body').on('click', '.filter-remove', function(){
-              var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
-              var value = $(this).parents('.filter-label').attr('data-value');
-              $(this).parents('.filter-label').remove();
-              $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]);
-              renderFilterBlock();
             });
+        }
 
+        $('body').on('click', '.filter-remove', function(){
+          var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
+          var value = $(this).parents('.filter-label').attr('data-value');
+          $(this).parents('.filter-label').remove();
+          $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]);
+          renderFilterBlock();
         });
+    },
+    filterScan(bodyRequest) {
+        if((bodyRequest.categories.length > 0) && (bodyRequest.confidentialities.length > 0) && (bodyRequest['doc-types'].length > 0) && (bodyRequest.languages.length > 0)) {
+            $.ajax({
+                method: 'POST',
+                url: Constant.SERVER_API + "api/scan/filter/",
+                dataType: 'json',
+                data: JSON.stringify(bodyRequest),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                },
+                success: function(data) {
+                    this.updateChartData(data);
+                    var update_scan_result = update(this.state, {
+                        scan_result: {$set: data}
+                    });
+                    this.setState(update_scan_result);
+                    console.log("Filter Scan success");
+                }.bind(this),
+                error: function(xhr, status, error) {
+                    console.log("Filter Scan error: " + error);
+                    if(xhr.status === 401)
+                    {
+                        browserHistory.push('/Account/SignIn');
+                    }
+                }.bind(this)
+            });
+        } else {
+            this.getScanResult();
+        }
     },
     updateChartData(data) {
         var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
@@ -245,7 +273,7 @@ var OverView = React.createClass
             }
         //update into state
             var update_chart_data = update(this.state, {
-                  PieData: {
+                  ChartData: {
                     data_confidentiality: {$set: data_confidentiality},
                     data_categories: {$set: data_categories},
                     data_languages: {$set: data_languages},
@@ -253,145 +281,28 @@ var OverView = React.createClass
                   }
                 });
             this.setState(update_chart_data);
-        //chart pie confidentiality
-        var plot = $.plot('#flotPie', this.state.PieData.data_confidentiality, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.4
-                    
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 3,
-                container:$("#legendContainer"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            }
-        });
-        //chart pie category
-        var plot = $.plot('#flotPie2', this.state.PieData.data_categories, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.6,
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 3,
-                container:$("#legendContainer2"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            }
-        });
-        //chart pie languages
-        $.plot('#flotPie2Inner', this.state.PieData.data_languages, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    innerRadius: 0.6,
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 1,
-                container:$("#legendContainer2Inner"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            }
-        });
-        //chart pie doctypes
-         var plot = $.plot('#flotPie3', this.state.PieData.data_doctypes, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.4,
-                    // label: {
-                    //     show: true,
-                    //     radius: 1/2,
-                    //     formatter: function (label, series) {
-                    //         return '<div style="font-size:14pt;text-align:center;padding:5px;color:white;">'+ Math.round(series.percent) + '%</div>';
-                    //     },
-                    //     threshold: 0.1
-                    // }
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 5,
-                container:$("#legendContainer3"), 
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            }
-        });
-    },
-    filterScan(bodyRequest) {
-        this.selectmultiple();
-        /*var bodyRequest = {
-            "categories":[{"id":1, "name":"accounting/tax"}],
-            "confidentialities":[{"id":1, "name":"public"}],
-            "doc-types":[{"id":1, "name":"excel"}],
-            "languages":[{"id":1, "name":"english", "short_name":"EN"}]
-        }*/
-        if((bodyRequest.categories.length > 0) && (bodyRequest.confidentialities.length > 0) && (bodyRequest['doc-types'].length > 0) && (bodyRequest.languages.length > 0)) {
-            $.ajax({
-                method: 'POST',
-                url: Constant.SERVER_API + "api/scan/filter/",
-                dataType: 'json',
-                data: JSON.stringify(bodyRequest),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-                },
-                success: function(data) {
-                    console.log("Filter Scan success");
-                    this.updateChartData(data);
-                    var update_scan_result = update(this.state, {
-                        scan_result: {$set: data}
-                    });
-                    this.setState(update_scan_result);
-                    console.log(data);
-                }.bind(this),
-                error: function(error) {
-                    console.log("Filter Scan error: " + error);
-                }.bind(this)
-            });
-        } else {
-            this.scanResult();
-        }
+            chartOverview(this.state.ChartData);
     },
     getCategory() {
         $.ajax({
             url: Constant.SERVER_API + 'api/label/category/',
             dataType: 'json',
             method: 'GET',
+            //async: true,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                data = data.sort(function (a, b) {
+                    return a.name.localeCompare( b.name );
+                });
                 var update_list_category = update(this.state, {
                       label: {
                         list_category: {$set: data}
                       }
                     });
                 this.setState(update_list_category);
+
                 console.log("category: ", data);
             }.bind(this),
             error: function(xhr, status, err) {
@@ -405,6 +316,7 @@ var OverView = React.createClass
             method: 'GET',
             url: Constant.SERVER_API + "api/label/confidentiality/",
             dataType: 'json',
+            //async: false,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -428,6 +340,7 @@ var OverView = React.createClass
             method: 'GET',
             url: Constant.SERVER_API + "api/label/doctypes/",
             dataType: 'json',
+            //async: false,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -451,6 +364,7 @@ var OverView = React.createClass
             method: 'GET',
             url: Constant.SERVER_API + "api/label/languages/",
             dataType: 'json',
+            //async: false,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -478,17 +392,22 @@ var OverView = React.createClass
                 }
             });
             this.setState(empty);
-            var categories, confidentialities, doctypes, languages = [];
+             
             if(selected != null){
                 for(var i = 0; i < this.state.label.list_category.length; i++) {
                     for(var j = 0; j < selected.length; j++) {
                         if(this.state.label.list_category[i].name == selected[j]) {
-                            categories.push(this.state.label.list_category[i]);
+                            var updateState = update(this.state,{
+                                filter: {
+                                    "categories": {$push: [this.state.label.list_category[i]]}
+                                }
+                            });
+                            this.setState(updateState);
                         }
                     }
                 }
             }
-            this.filterScan(this.state.filter);
+            //this.filterScan(this.state.filter);
             console.log("category filter: ", this.state.filter.categories);
         }.bind(this));
         $('#confidentiality').change(function(e) {
@@ -513,7 +432,7 @@ var OverView = React.createClass
                     }
                 }
             }
-            this.filterScan(this.state.filter);
+            //this.filterScan(this.state.filter);
             console.log("confidentiality filter: ", this.state.filter.confidentialities);
         }.bind(this));
         $('#doctype').change(function(e) {
@@ -538,7 +457,7 @@ var OverView = React.createClass
                     }
                 }
             }
-            this.filterScan(this.state.filter);
+            //this.filterScan(this.state.filter);
             console.log("doctype filter: ", this.state.filter);
         }.bind(this));
         $('#language').change(function(e) {
@@ -563,7 +482,7 @@ var OverView = React.createClass
                     }
                 }
             }
-            this.filterScan(this.state.filter);
+            //this.filterScan(this.state.filter);
             console.log("language filter: ", this.state.filter.languages);
         }.bind(this));
     },

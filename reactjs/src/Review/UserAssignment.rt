@@ -2,30 +2,15 @@
 	<div class="container">
 			<div class="tabs tabs-primary">
 				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
-					</li>
-					<li class="">
-						<a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
-					</li>
-					<li class="">
-						<a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
-					</li>
-					<li class="">
-						<a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
-					</li>
-					<li class="">
-						<a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Regulatory</a>
-					</li>
-					<li class="">
-						<a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+					<li rt-repeat="category in this.state.categories" class="active">
+						<a href="#{category.name}" data-toggle="tab" onClick={this.getCategoryInfo(category.id)} aria-expanded="true" key="{category.id}">{category.name}</a>
 					</li>
 					<li class="">
 						<a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
 					</li>
 				</ul>
 				<div class="help_guide_sub tab-content">
-					<div id="accounting_tax" class="help_guide tab-pane active">
+					<div rt-repeat="category in this.state.categories" id="{category.name}" class="help_guide tab-pane active">
 						<div class="row">
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
@@ -64,7 +49,7 @@
                       </div>
                   </header>
                   <div class="panel-body">
-                    <span>Number of Documents: 168,000</span>
+                    <span>Number of Documents: {this.state.category_Info.number_docs}</span>
                     <div class="row">
                       <div class="col-sm-6">
                         <h4 class="chart-title">Classification Overview</h4>
@@ -93,7 +78,7 @@
                       <div class="col-md-6">
                         <ul class="help_guide_content_left_ul filter-list pt-xs">
                             <li>
-                              <select name="state" class="help_question_select form-control ddList">
+                              <select name="state" onChange={this.filterOnchange} class="help_question_select form-control ddList">
                                 <option value="">Timeframe</option>
                                 <option class="lt" value="">1 year</option>
                                 <option class="lt" value="">6 months</option>
@@ -111,12 +96,12 @@
                               <div class="wrap-select">
                                 <select name="state" class="help_question_select form-control ddList">
                                   <option value="">Number of Users</option>
-                                  <option class="lt" value="">Top 30</option>
-                                  <option class="lt" value="">Top 2</option>
-                                  <option class="lt" value="">Top 20</option>
-                                  <option class="lt" value="">Top 15</option>
-                                  <option class="lt" value="">Top 10</option>
                                   <option class="lt" value="">Top 5</option>
+                                  <option class="lt" value="">Top 10</option>
+                                  <option class="lt" value="">Top 15</option>
+                                  <option class="lt" value="">Top 20</option>
+                                  <option class="lt" value="">Top 25</option>
+                                  <option class="lt" value="">Top 30</option>
                                 </select>
                               </div>
                             </li>
@@ -213,26 +198,8 @@
               </div>
             </div>
 					</div>
-					<div id="corporate_entity" class="tab-pane">
-						<p>corporate_entity</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="client_customer" class="tab-pane">
-						<p>client_customer</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="employee" class="tab-pane">
-						<p>employee</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="legal_regulatory" class="tab-pane">
-						<p>legal_regulatory</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
-					<div id="transaction" class="tab-pane">
-						<p>transaction</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-					</div>
+
+
 					<div id="summary" class="tab-pane">
             <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">

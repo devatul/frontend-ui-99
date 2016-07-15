@@ -17,7 +17,7 @@
                         <div class="col-sm-4">
                             <ul class="filter-buttons pull-right">
                                 <li class="dropdown">
-                                    <a class="toggle-button btn btn-default" onClick={this.filterScan}><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                    <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                     <div class="dropdown-backdrop-custom" style="display:none"></div>
                                     <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
                                         <ul class="filter-list list-unstyled pt-xs">
