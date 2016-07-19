@@ -7,49 +7,19 @@ import update from 'react-addons-update'
 import dropdown from '../script/drop-down.js'
 import Constant from '../Constant.js'
 import chartOverview from '../script/chart-overview.js'
-import multiselect from '../script/multiselect.js'
 import 'jquery'
 var OverView = React.createClass
 ({
     mixins: [LinkedStateMixin],
 	getInitialState() {
 	    return {
-            label: {
-                list_category: [],
-                list_confidentiality: [],
-                list_doctype: [],
-                list_language: []
-            },
             filter: {
                 "categories":[],
                 "confidentialities":[],
                 "doc-types":[],
                 "languages":[]
             },
-            
-            scan_result:{
-                is_groups_reviewed: false,
-                last_data_scan: "",
-                country: "",
-                business_unit: "",
-                scan_status: Constant.scan.IS_NO_SCAN,
-                document_analyzed: 0,
-                file_extensions_processed: "",
-                encrypted_documents: 0,
-                documents_skipped: 0,
-                number_orphan_groups: 0,
-                total_documents_scanned: 0,
-                percentage_documents_scanned: 0,
-                total_duplicates: 0,
-                percentage_duplicates: 0,
-                total_twins: 0,
-                percentage_twins: 0,
-                percentage_accuracy: 0,
-                confidentialities: [],
-                categories: [],
-                languages: [],
-                doc_types: []
-            },
+            scan_result:{},
             ChartData: {
                 data_confidentiality: [],
                 data_categories: [],
@@ -69,21 +39,15 @@ var OverView = React.createClass
 
         dropdown();
 
-        this.getCategory();
-        this.getConfidentiality();
-        this.getDoctypes();
-        this.getLanguages();
-        
-        
         if(this.state.scan_result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
         }
         
-        this.filterOnChange();
+        //this.filterOnChange();
                       
   	},
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.label != nextState.label) {
+        if(this.state.scan_result != nextState.scan_result) {
             return true;
         }
         if(this.state.filter != nextState.filter) {
@@ -152,48 +116,7 @@ var OverView = React.createClass
         });
        
     },
-    openFilterPopup() {
-        var renderFilterBlock = function(){
-          if ($('.filter-tags .filter-label').length){
-            $('.filter-tags-block label').show();
-          }
-          else{
-            $('.filter-tags-block label').hide();
-          }
-        };
-
-        if ($('.select-multiple').length){
-            $('.select-multiple').each(function(){
-                var buttonText = $(this).attr('data-title');
-                $(this).multiselect({
-                    includeSelectAllOption: true,
-                    buttonText: function(options, select) {
-                        return buttonText;
-                    },
-                    onChange: function(option, checked){
-                        var selectedOption = $(option).val();
-                        var filterCriteria = $(option).parents('.overview-filter').attr('name');
-                        if(checked == true) {
-                            $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
-                            renderFilterBlock();
-                        }
-                        else{
-                            $('.filter-label[data-value="'+selectedOption+'"]').remove();
-                            renderFilterBlock();
-                        }
-                    }
-                });
-            });
-        }
-
-        $('body').on('click', '.filter-remove', function(){
-          var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
-          var value = $(this).parents('.filter-label').attr('data-value');
-          $(this).parents('.filter-label').remove();
-          $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]);
-          renderFilterBlock();
-        });
-    },
+    
     filterScan(bodyRequest) {
         if((bodyRequest.categories.length > 0) && (bodyRequest.confidentialities.length > 0) && (bodyRequest['doc-types'].length > 0) && (bodyRequest.languages.length > 0)) {
             $.ajax({
@@ -283,115 +206,16 @@ var OverView = React.createClass
             this.setState(update_chart_data);
             chartOverview(this.state.ChartData);
     },
-    getCategory() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/label/category/',
-            dataType: 'json',
-            method: 'GET',
-            //async: true,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                data = data.sort(function (a, b) {
-                    return a.name.localeCompare( b.name );
-                });
-                var update_list_category = update(this.state, {
-                      label: {
-                        list_category: {$set: data}
-                      }
-                    });
-                this.setState(update_list_category);
 
-                console.log("category: ", data);
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.log(err);
-            }.bind(this)
-        });
-        console.log(this.state.listCategory);
-    },
-    getConfidentiality() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/confidentiality/",
-            dataType: 'json',
-            //async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                 var update_list_confidentiality = update(this.state, {
-                      label: {
-                        list_confidentiality: {$set: data}
-                      }
-                    });
-                this.setState(update_list_confidentiality);
-                console.log("list_confidentiality: ", data);
-            }.bind(this),
-            error: function(error) {
-                console.log("error: listConfidentiality");
-            }.bind(this)
-        });
-    },
-
-    getDoctypes() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/doctypes/",
-            dataType: 'json',
-            //async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                var update_list_doctype = update(this.state, {
-                      label: {
-                        list_doctype: {$set: data}
-                      }
-                    });
-                this.setState(update_list_doctype);
-                console.log("list_doctype: ", data);
-            }.bind(this),
-            error: function(error) {
-                console.log("error: listDoctype");
-            }.bind(this)
-        });
-    },
-
-    getLanguages() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/languages/",
-            dataType: 'json',
-            //async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                var update_list_language = update(this.state, {
-                      label: {
-                        list_language: {$set: data}
-                      }
-                    });
-                this.setState(update_list_language);
-                console.log("list_language: ", data);
-            }.bind(this),
-            error: function(error) {
-                console.log("error: listLanguage");
-            }.bind(this)
-        });
-    },
-
-    filterOnChange() {
+    /*filterOnChange() {
         $('#category').change(function(e) {
             var selected = $(e.target).val();
-            var empty = update(this.state,{
+            var setEmpty = update(this.state,{
                 filter: {
                     "categories": {$set: []}
                 }
             });
-            this.setState(empty);
+            this.setState(setEmpty);
              
             if(selected != null){
                 for(var i = 0; i < this.state.label.list_category.length; i++) {
@@ -407,11 +231,7 @@ var OverView = React.createClass
                     }
                 }
             }
-            //this.filterScan(this.state.filter);
-            console.log("category filter: ", this.state.filter.categories);
-        }.bind(this));
-        $('#confidentiality').change(function(e) {
-            var selected = $(e.target).val();
+            //this.filterScan(this.state.filter);            var selected = $(e.target).val();
             var empty = update(this.state,{
                 filter: {
                     "confidentialities": {$set: []}
@@ -485,7 +305,7 @@ var OverView = React.createClass
             //this.filterScan(this.state.filter);
             console.log("language filter: ", this.state.filter.languages);
         }.bind(this));
-    },
+    },*/
 	render:template
 });
 module.exports = OverView;

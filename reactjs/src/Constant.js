@@ -10,5 +10,14 @@ module.exports = {
 		IS_1ST: '',
 		IS_2ND: '',
 		IS_3RD: ''
+	},
+	progressBar: {
+		level1: "progress-bar-danger",
+		level2: "progress-bar-warning",
+		level3: "progress-bar-success"
+	},
+	progressValue: {
+		level1: 30,
+		level2: 60
 	}
 };
