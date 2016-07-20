@@ -1,5 +1,5 @@
 <section>
-  <!--<div class="my_main bar_menu container">
+  <div class="my_main bar_menu container">
       <div class="row">
         <div class="col-md-12 mb-md">
           <p class="page-heading-sm pull-left">Documents Classification Challenge - 2nd Line user's review validation</p>
@@ -59,15 +59,15 @@
     <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs">
-          <li rt-repeat="category in this.state.categories" class="active">
-            <a href="#{category.name}" onClick="()=>this.getCategoryInfo(category.id)" data-toggle="tab" aria-expanded="true">{category.name}</a>
+          <li rt-repeat="category in this.state.categories">
+            <a href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true">{category.name}</a>
           </li>
           <li class="">
             <a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
           </li>
         </ul>
         <div class="tab-content">
-          <div id="accounting_tax" class="tab-pane active">
+          <div id="categoryInfo" class="tab-pane active">
             <div class="row">
               <div class="col-md-12">
                 <div class="row mb-sm">
@@ -81,12 +81,12 @@
                 </div>
                 <div class="tabs tabs-vertical tabs-primary tabs-left">
                   <ul class="nav nav-tabs col-sm-1 col-xs-12">
-                    <li rt-repeat="reviewer in this.state.reviewers" class="active">
-                      <a href="#reviewer" onClick="()=>this.setReviewerCurrent(reviewer.id)" data-toggle="tab" aria-expanded="true">{reviewer.name}</a>
+                    <li rt-repeat="reviewer in this.state.reviewers">
+                      <a href="#reviewer" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name}.{reviewer.last_name}</a>
                     </li>
                   </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
-                    <div id="reviewer" rt-scope="reviewer as  this.state.reviewerInfo" class="tab-pane active">
+                    <div id="reviewer" rt-scope="this.state.reviewers as reviewer" class="tab-pane active">
                       <div class="reviewer-info">
                         <span class="mr-md">Reviewer: {reviewer.name}</span>
                         <span>{reviewer.challenged_docs} Document Challenged - Validation Progress: </span>
@@ -261,11 +261,11 @@
 
     <!--Modal-->
   
-    <!--<div id="previewModal" class="modal fade in" role="dialog">
+    <div id="previewModal" class="modal fade in" role="dialog">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
-        <!--<div class="modal-content">
+        <div class="modal-content">
           <div class="modal-header">
             <div class="row">
                 <div class="col-sm-4 modal-title">
@@ -414,118 +414,4 @@
 
       </div>
     </div>
-    <!--Modal-->
-  
-    <!--<div id="previewModal" class="modal fade in" role="dialog">
-      <div class="modal-dialog modal-preview">
-
-        <!-- Modal content-->
-        <!--<div class="modal-content">
-          <div class="modal-header">
-            <div class="row">
-                <div class="col-sm-4 modal-title">
-                    <i class="fa fa-search"></i>
-                    Document Preview
-                </div>
-                <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic">Contract.doc</span><br>
-                    <span>Folder /legal/teamA/</span>
-                </div>
-                <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
-                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-            </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-          <thead>
-            <tr role="row" class="">
-              <th>
-                <div class="checkbox-custom checkbox-primary">
-                  <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
-                  <label></label>
-                </div>
-              </th>
-              <th class="review_note">Document Name
-              </th>
-              <th class="review_note">Path
-              </th>
-              <th class="review_note">Owner
-              </th>
-              <th class="review_note">Category</th>
-              <th class="review_note">Confidentiality</th>
-              <th class="review_note">Comment</th>
-              <th class="text-center">Validation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="">
-              <td>
-                <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
-                  <label></label>
-                </div>
-              </td>
-              <td class="text-left">
-                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Contract.doc</span>
-                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                  <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                  <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                    <ul>
-                      <li>Creation Date: 2015-01-01</li>
-                      <li>Modifitcation Date: 2015-05-28</li>
-                      <li>Required Legal Retention until: 2025-03-03</li>
-                      <li>Confidentiality Label: Yes/No</li>
-                      <li>Number of Classification Challenge: 1</li>
-                    </ul>
-                  </div>
-                </div>
-              </td>
-              <td class="text-left">
-                <span class="text-italic doc-path">/legal/teamA/contract/</span>
-              </td>
-              <td class="text-left">
-                <span class="text-italic">todd.smith</span>
-              </td>
-              <td class="vertical-top">
-                <select class="form-control">
-                    <option selected="">Accounting/ Tax</option>
-                    <option>Corporate Entity</option>
-                    <option>Customer</option>
-                    <option>Employee</option>
-                    <option>Legal/Compliance</option>
-                    <option>Transaction</option>
-                </select>
-              </td>
-              <td class="vertical-top text-left">
-                <select class="form-control changed">
-                    <option>Banking Secrecy</option>
-                    <option selected="">Secret</option>
-                    <option>Confidential</option>
-                    <option>Internal</option>
-                    <option>Public</option>
-                </select>
-                <span class="text-italic previous-status">Previous: Confidentiality</span>
-              </td>
-              <td>
-                <textarea class="form-control">challenge on confidentiality accepted</textarea>
-              </td>
-              <td>
-                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
-                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
-              </td>
-            </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="file-preview mt-md">
-                <p>File Preview Content</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>-->
 </section>

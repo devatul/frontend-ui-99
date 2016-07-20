@@ -4,8 +4,8 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './ReviewValidation.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-var dropdown = require('../script/drop-down.js');
-var Constant = require('../Constant.js');
+import javascript from '../script/javascript.js';
+import Constant from '../Constant.js';
 import 'jquery'
 
 var ReviewValidation = React.createClass({
@@ -13,6 +13,7 @@ var ReviewValidation = React.createClass({
     getInitialState() {
         return {
         	categories: [],
+            category_current: {},
             reviewers: [],
             reviewer_current: [],
             review_validations: [],
@@ -22,22 +23,30 @@ var ReviewValidation = React.createClass({
         };
     },
     componentWillMount() {
-        this.getCategories();
         this.getChallengedDocs();          
     },
     componentDidMount() {
-        
+        this.getCategories();
     },
     shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.reviewer_current != nextState.reviewer_current) {
+            return true;
+        }
+        if(this.state.category_current != nextState.category_current) {
+            return true;
+        }
         if(this.state.reviewer_current != nextState.reviewer_current) {
             return true;
         }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
+        if(this.state.category_current != prevState.category_current) {
+            this.getReviewers(this.state.category_current.id);
+            console.log("id category: ", this.state.category_current.id);
+        }
         if(this.state.reviewer_current != prevState.reviewer_current) {
-            this.setReviewValidation();
-            this.setChallengedDoc();
+            this.getChallengedDoc(this.state.reviewer_current.id);
         }
     },
     getCategories() {
@@ -52,6 +61,7 @@ var ReviewValidation = React.createClass({
             success: function(data) {
                 var updateState = update(this.state, {
                     categories: {$set: data},
+                    category_current: {$set: data[0]}
                 });
                 this.setState(updateState);
                 console.log("categories ok: ", data);
@@ -65,12 +75,11 @@ var ReviewValidation = React.createClass({
             }.bind(this)
         });
     },
-    getReviewer(categoryId) {
+    getReviewers(categoryId) {
     	$.ajax({
             method: 'GET',
-            url: Constant.SERVER_API + "api/assign/reviewer",
+            url: Constant.SERVER_API + "api/assign/reviewer/",
             dataType: 'json',
-            async: false,
             data: {"id": categoryId},
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
@@ -92,17 +101,18 @@ var ReviewValidation = React.createClass({
             }.bind(this)
         });
     },
-    setReviewerCurrent(reviewId) {
-        for(var i = 0; i < reviewers.length; i++) {
-            if(reviewers[i].id == reviewId) {
-                var setReviewer = update(this.state, {
-                    reviewer_current: reviewers[i]
-                });
-                this.setState(setReviewer);
-            }
-        } 
+    setReviewerCurrent: function(reviewerIndex) {
+        var setReviewer = update(this.state, {
+            reviewer_current: this.state.reviewers[reviewerIndex]
+        });
+        this.setState(setReviewer); 
     },
-    getChallengedDocs(reviewId) {
+    setCategoryCurrent: function(categoryIndex) {
+        this.setState(update(this.state, {
+            category_current: { $set: this.state.categories[categoryIndex]}
+        }));
+    },
+    getChallengedDoc(reviewId) {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/review/challenged_docs/",

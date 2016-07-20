@@ -5,7 +5,7 @@ import template from './OrphanReview.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import 'jquery'
-import chart from '../script/chart-review.js'
+import chart from '../script/chart-orphan-review.js'
 import Constant from '../Constant.js'
 
 var OrphanReview = React.createClass({
@@ -13,19 +13,31 @@ var OrphanReview = React.createClass({
     displayName: 'OrphanReview',
     getInitialState() {
         return {
-            orphan_current: {},
+            orphan_current: 0,
             list_orphan: [],
+            categories: [],
             statistics: [],
             cloudwords: [],
             centroids: [],
-            samples: []
+            samples: [],
+            documentPreview: [],
+            documentPreview_current: 0
         };
     },
     componentWillMount() {
-        //this.getOrphan();
+        this.getOrphan();
+    },
+    componentDidMount() {
+        chart();
+        this.getCategoryDistribution();
+        this.getStatistics();
+        this.getSamples();
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.orphan_current != nextState.orphan_current) {
+            return true;
+        }
+        if(this.state.categories != nextState.categories) {
             return true;
         }
         if(this.state.statistics != nextState.statistics) {
@@ -34,24 +46,32 @@ var OrphanReview = React.createClass({
         if(this.state.samples != nextState.samples) {
             return true;
         }
+        if(this.state.centroids != nextState.centroids) {
+            return true;
+        }
+        if(this.state.cloudwords != nextState.cloudwords) {
+            return true;
+        }
         return false;
-    },
-    componentDidMount() {
-        this.getOrphan();
-        
-        chart(this.drawCloud);
-        
-        this.chooseCluster();
     },
     componentDidUpdate(prevProps, prevState) {
         if(this.state.orphan_current != prevState.orphan_current) {
+            console.log("jkskskskskkskskskks");
+            this.getCategoryDistribution();
             this.getStatistics();
             this.getSamples();
-            this.getCentroids();
-            this.getCloudwords();
-        } 
+        }
+        if(this.state.categories != prevState.categories) {
+            this.drawChart(this.state.categories);
+        }
+        if(this.state.centroids != prevState.centroids) {
+            this.drawCentroid();
+        }
+        if(this.state.cloudwords != prevState.cloudwords) {
+            this.drawCloud();
+        }
     },
-    getOrphan() {
+    getOrphan: function() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/",
@@ -78,16 +98,37 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    chooseCluster() {
-        $('#choose_cluster').change(function(element){
-                console.log(element.target.value);
-                var orphan_selected = element.target.value;
+    changeOrphan: function() {
+        console.log("djjdjdjdjdjdjd", this.refs.choose_orphan.value);
+        var updateState = update(this.state, {
+            orphan_current: {$set: this.state.list_orphan[this.refs.choose_orphan.value]}
+        });
+        this.setState(updateState);
+    },
+    getCategoryDistribution: function() {
+        $.ajax({
+            method: 'GET',
+            url: Constant.SERVER_API + "api/group/orphan/categories/",
+            dataType: 'json',
+            data: { "id":this.state.orphan_current.id },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+            },
+            success: function(data) {
                 var updateState = update(this.state, {
-                    orphan_current: {$set: this.state.list_orphan[orphan_selected]}
+                    categories: {$set: data}
                 });
                 this.setState(updateState);
-                console.log("orpahan: ", this.state.list_orphan[orphan_selected]);
-        }.bind(this));
+                console.log("categories ok: ", data);
+            }.bind(this),
+            error: function(xhr,error) {
+                console.log("categories " + error);
+                if(xhr.status === 401)
+                {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
     },
     getStatistics() {
         $.ajax({
@@ -164,7 +205,7 @@ var OrphanReview = React.createClass({
                 }
                 console.log("centroids ok: ", data);
             }.bind(this),
-            error: function(error) {
+            error: function(xhr,error) {
                 console.log("centroids " + error);
                 if(xhr.status === 401)
                 {
@@ -189,7 +230,7 @@ var OrphanReview = React.createClass({
                 this.setState(updateState);
                 console.log("samples ok: ", data);
             }.bind(this),
-            error: function(error) {
+            error: function(xhr,error) {
                 console.log("samples " + error);
                 if(xhr.status === 401)
                 {
@@ -197,6 +238,13 @@ var OrphanReview = React.createClass({
                 }
             }.bind(this)
         });
+    },
+    setDocumentReview: function(index) {
+        this.setState(update(this.state, {
+            documentPreview: {$set: this.state.samples[index]},
+            documentPreview_current: {$set: index }
+        }));
+        console.log("afasdccccc: ", this.state.samples[index], index);
     },
     drawCloud() {
         var word_list = this.state.cloudwords;
@@ -261,7 +309,10 @@ var OrphanReview = React.createClass({
                 pointPlacement: -0.5
               }
             },
-            
+            tooltip: {
+                headerFormat: '',
+                pointFormat: 'Documents: <b>{point.y}</b><br/>'
+            },
             series: [{
                 data: this.state.centroids
             }]
@@ -309,6 +360,12 @@ var OrphanReview = React.createClass({
             grid: {
                 hoverable: true,
                 clickable: true,
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+                }
             }
         });
 

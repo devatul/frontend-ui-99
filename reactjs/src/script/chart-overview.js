@@ -18,6 +18,12 @@ module.exports = function(data) {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
         //chart pie category
@@ -38,6 +44,12 @@ module.exports = function(data) {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
         //chart pie languages
@@ -58,6 +70,12 @@ module.exports = function(data) {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
         //chart pie doctypes
@@ -86,6 +104,12 @@ module.exports = function(data) {
             grid: {
                 hoverable: true,
                 clickable: true
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              },
             }
         });
 }

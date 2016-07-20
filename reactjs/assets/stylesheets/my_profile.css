@@ -260,8 +260,9 @@ body .btn-primary:hover {
 	color: #fff;
 	padding: 5px 15px;
 	font-size: 14px;
-	margin-top: 15px;
+	margin-top: 5px;
 	text-align: center;
+	margin-bottom: 30px;
 	}
 .body-sign .panel-sign .my-panel-body {
 	padding: 0px 0px 15px;
@@ -376,6 +377,12 @@ th:focus {
 	color: #D3D3D3;
 	position: absolute;
 	top: 0px;
+}
+.edit_th {
+	margin-top:-17px;
+}
+.edit_th_right {
+	margin-top: 0px;
 }
 .my-team-table > thead > tr > th { 
 	vertical-align: top;
@@ -733,6 +740,8 @@ select.record_select {
 		border-left: 0px;
 		border-radius: 5px 5px 0px 0px;
 		border-right: 0px;
+	}.my-profile-edit-content .tabs-vertical ul li a.edit {
+		border-top: 0px;
 	}
 	.my-profile-edit-content .tabs-left .nav-tabs > li:first-child a {
 		border-radius: 5px 5px 0px 0px;

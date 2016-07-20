@@ -1,9 +1,10 @@
 /* Add here all your CSS customizations */
 @import "config/imports";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
 body{
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
@@ -28,6 +29,26 @@ body{
 hr{
   margin-top: 10px;
   margin-bottom: 10px;
+}
+h1{
+  color: $color-h1;
+  font-size: 24px;
+}
+h2{
+  color: $color-h2;
+  font-size: 20px;
+}
+h3{
+  color: $color-h3;
+  font-size: 16px;
+}
+h4{
+  color: $color-h4;
+  font-size: 14px;
+}
+p{
+  color: $color-p;
+  font-size: 13px;
 }
 
 .col20{
@@ -71,6 +92,73 @@ a{
   vertical-align: top!important;
 }
 
+/**
+ * Tooltip Styles
+ */
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -30px;
+  padding: 7px;
+  width: 60px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-left: 1px;
+  width: 0;
+  border-top: 5px solid #000;
+  border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: "progidDXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+  z-index: 9999999;
+}
+
 .btn-green{
   background-color: #0FABE6;
   border-color: #0FABE6;
@@ -80,6 +168,10 @@ a{
     border-color: #0D9FD6;
     color: #fff;
   }
+}
+
+.btn-disabled{
+  color: #fff;
 }
 
 .panel-featured-primary{
@@ -217,6 +309,7 @@ html body .tabs-primary .nav-tabs li a:hover{
   padding-right: 10px;
   font-size: 12px;
   padding-left: 3px;
+  text-align: left;
 }
 
 .modal-button{
@@ -301,8 +394,9 @@ body {
 .my_main p {
     margin-top: 12px;
     font-size: 16px;
-    font-weight: bold;
-    color: $color-tertiary
+    font-weight: 300;
+    color: $color-h1;
+    font-size:24px;
 }
 
 .table_content .panel {
@@ -388,7 +482,7 @@ tr td {
 
 .bell{
     border-radius: 50%;
-    display: inline-block;
+    float: left;
     width: 30px;
     height: 30px;
     margin-top: 28px;
@@ -734,8 +828,9 @@ ul.filter-list li{
     }
     &> a{
       color: $color-black;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 20px;
+      font-family: 'Lato', sans-serif;
       &:hover, &:focus{
         text-decoration: underline;
       }
@@ -752,6 +847,7 @@ ul.filter-list li{
     width: 187px;
     padding-top: 25px;
     height: 84px;
+    float: left;
   }
 }
 
@@ -776,7 +872,7 @@ ul.filter-list li{
 #legendContainer2Inner{
   position: absolute;
   right: 10px;
-  top: 50px;
+  top: 10px;
 }
 
 .widget-panel{
@@ -834,6 +930,9 @@ ul.filter-list li{
       width: 180px;
       @media (max-width: 380px){
         height: 157px;
+      }
+      @media (min-width: 992px) and (max-width: 1200px){
+        height: 160px;
       }
     }
     &.unscanned{
@@ -938,7 +1037,7 @@ ul.filter-list li{
       margin: 0;
       height: 34px;
       border-radius: 5px;
-      background: #fff;
+      background: #ddd;
     }
   }
   select{
@@ -996,7 +1095,7 @@ ul.filter-list li{
     .select-group select{
       color: #777;
     }
-    .doc-check{
+/*    .doc-check{
       .fa-clock-o{
         display: none;
       }
@@ -1004,7 +1103,7 @@ ul.filter-list li{
         display: inline-block;
         color: $color-info;
       }
-    }
+    }*/
   }
   .doc-check{
     font-size: 18px;
@@ -1040,6 +1139,11 @@ ul.filter-list li{
   }
   &>tbody{
     &>tr{
+      &.item-validated{
+        input, select, label{
+          pointer-events: none;
+        }
+      }
       &>td{
         vertical-align: middle;
         position: relative;
@@ -1311,6 +1415,45 @@ div[id^='legendContainer']{
   }
 }
 
+.multiselect-container{
+  margin-top: 10px;
+  &:after, &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  &:before {
+    border-color: rgba(196, 196, 196, 0);
+    border-bottom-color: #c4c4c4;
+    border-width: 11px;
+    margin-left: -11px;
+  }
+}
+
+#datatable-editable_wrapper{
+  .table{
+    .fa{
+          min-width: 20px;
+    }
+  }
+}
+
+.document_review_table .fa{
+  vertical-align: middle;
+}
+
 /*Responsive*/
 @media (max-width: 768px){
     ul.filter-list{
@@ -1329,7 +1472,7 @@ div[id^='legendContainer']{
 
 @media (min-width: 769px){
   .my_header .navbar-collapse {
-    @include calc(width, '100% - 400px');
+    @include calc(width, '100% - 410px');
     text-align: center;
     float: left;
     .navbar-nav{
@@ -1448,6 +1591,24 @@ div[id^='legendContainer']{
   background-color: #59D0A7;
 }
 
+.sample-params{
+  select{
+    @include calc(width, '100% - 35px');
+    float: left;
+  }
+  .validation-btn{
+    float: right;
+    margin-top: 3px;
+    line-height: 18px;
+    i{
+      color: #777;
+      &.icon-success{
+        color: #59D0A7;
+      }
+    }
+  }
+}
+
 @media (max-width: 400px){
   .modal-preview .modal-title {
       margin-top: 20px;
@@ -1458,6 +1619,33 @@ div[id^='legendContainer']{
   .my_header .navbar-default.nav-custom .navbar-brand{
     width: 100px;
     padding-top: 33px;
+  }
+}
+
+.help_guide_sub{
+  .filter-tags{
+    padding-top: 10px;
+    padding-left: 15px;
+  }
+}
+
+.ios-switch{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.checkbox-custom input[type="checkbox"]:not(:checked) + label:before{
+  background-color: #ecedf0!important;
+  border-color: #ecedf0!important;
+}
+
+.checkbox-custom input[type="checkbox"]:disabled + label:before{
+  border: 1px solid #bbb!important;
+}
+
+@media (min-width: 992px){
+  .dd-filter{
+    min-width: 700px;
   }
 }
 

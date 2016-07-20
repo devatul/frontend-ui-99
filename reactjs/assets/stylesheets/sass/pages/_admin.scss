@@ -775,3 +775,28 @@ $half: round($loops / 2);
     }
   }
 }
+
+
+.validated-step{
+  a.disabled-link{
+    pointer-events: none;
+    color: #777;
+  }
+  .btn-group-admin{
+    display: inline-block;
+  }
+}
+
+.btn-group-admin{
+  display: inline-block;
+  top: -4px;
+  position: relative;
+  display: none;
+  .btn-save-step{
+    display: none;
+  }
+}
+
+.id-file{
+  visibility: hidden;
+}

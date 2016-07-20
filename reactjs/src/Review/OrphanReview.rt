@@ -8,11 +8,11 @@
                                 <label for="choose_cluster">
                                     Choose a Orphan
 
-                                    <select class="js-example-basic-single js-states form-control" id="choose_cluster" value="0">
+                                    <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster">
                                         <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}" key="{orphan.id}">{orphan.name}</option>
                                     </select>
                                 </label>
-                                <button class="btn btn-green btn-ok" type="button">OK</button>
+                                <button class="btn btn-green btn-ok" type="button" onClick={this.changeOrphan}>OK</button>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                                             </table>
                                             
                                             <div class="mt-lg">
-                                              <a href="#" class="btn btn-green">Refine Group</a>
+                                              <a href="#" class="btn btn-refine btn-green">Refine Group</a>
                                               <span class="dropdown">
                                                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                 <div class="dropdown-menu has-arrow dropdown-file-info">
@@ -143,10 +143,10 @@
                                                     <a href="#distribution" data-toggle="tab">Category Distribution</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#centroid" data-toggle="tab">Centroid Distance Histogram</a>
+                                                    <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
                                                 </li>
                                                 <li class="li_late">
-                                                    <a href="#cloud" data-toggle="tab">Significant Words Cloud</a>
+                                                    <a href="#cloud" data-toggle="tab" onClick={this.getCloudwords}>Significant Words Cloud</a>
                                                 </li>
                                             </ul>
                                             <div class="review_tab-content tab-content">
@@ -301,7 +301,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{doc.name}</span>
+                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(docIndex)">{doc.name}</span>
                                                     <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                         <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                         <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">

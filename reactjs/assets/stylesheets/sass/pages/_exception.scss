@@ -1,11 +1,15 @@
 .table-challenge {
-  .fa{
+  .challenge-btn{
     font-size: 18px;
-    &.disabled{
-      color: #777;
-      &:hover{
-        color: inherit;
-      }
+    line-height: 16px;
+    color: #777;
+    &:hover{
+      color: #0D9FD6!important;
+    }
+  }
+  .validation-btn{
+    &:hover .fa{
+      color: #0D9FD6!important;
     }
   }
   .doc-path, .file-name {

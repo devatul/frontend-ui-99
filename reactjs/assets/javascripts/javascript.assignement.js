@@ -177,7 +177,12 @@ $(function () {
             minPadding: 0,
             maxPadding: 0,
             gridLineWidth: 0,
-            tickmarkPlacement: 'on'
+            tickmarkPlacement: 'on',
+            labels: {
+                style: {
+                    font: '11px Roboto, Helvetica, sans-serif'
+                }
+            }
         },
         yAxis: {
             min: 0,
@@ -227,4 +232,23 @@ $(function () {
         $(this).toggleClass("on");
     });
 
+    $('.assignent-select').on('change', function(){
+        var selectedOption = $(this).find('option:selected').text();
+        var filterCriteria = $(this).attr('name');
+          if(selectedOption) {
+            if ($('[data-crit="'+filterCriteria+'"]').length){
+                $('[data-crit="'+filterCriteria+'"]').find('.option-name').text(selectedOption);
+            }
+            else{
+                $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
+            }
+          }
+          else{
+              $('.filter-label[data-value="'+selectedOption+'"]').remove();
+        }
+    });
+
+    $('.sample-params select').on('change', function(){
+        $(this).next().find('i').addClass('icon-success');
+    });
 });

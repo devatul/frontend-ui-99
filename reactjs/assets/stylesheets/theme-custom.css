@@ -1,7 +1,8 @@
 /* Add here all your CSS customizations */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300,100);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 body {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Roboto', 'Helvetica', sans-serif; }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .navbar-collapse.collapse {
@@ -21,6 +22,26 @@ body {
 hr {
   margin-top: 10px;
   margin-bottom: 10px; }
+
+h1 {
+  color: #15213C;
+  font-size: 24px; }
+
+h2 {
+  color: #3BA7AC;
+  font-size: 20px; }
+
+h3 {
+  color: #59D0A7;
+  font-size: 16px; }
+
+h4 {
+  color: #747474;
+  font-size: 14px; }
+
+p {
+  color: #747474;
+  font-size: 13px; }
 
 .col20 {
   width: 20%; }
@@ -51,6 +72,67 @@ a {
 .vertical-top {
   vertical-align: top !important; }
 
+/**
+ * Tooltip Styles
+ */
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+  position: relative;
+  cursor: pointer; }
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  pointer-events: none; }
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -30px;
+  padding: 7px;
+  width: 60px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #000;
+  background-color: rgba(51, 51, 51, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2; }
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-left: 1px;
+  width: 0;
+  border-top: 5px solid #000;
+  border-top: 5px solid rgba(51, 51, 51, 0.9);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0; }
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: "progidDXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+  z-index: 9999999; }
+
 .btn-green {
   background-color: #0FABE6;
   border-color: #0FABE6;
@@ -59,6 +141,9 @@ a {
     background-color: #0D9FD6;
     border-color: #0D9FD6;
     color: #fff; }
+
+.btn-disabled {
+  color: #fff; }
 
 .panel-featured-primary {
   border-color: #4fca9d; }
@@ -168,7 +253,8 @@ html body .tabs-primary .nav-tabs li a:hover {
 .legendLabel {
   padding-right: 10px;
   font-size: 12px;
-  padding-left: 3px; }
+  padding-left: 3px;
+  text-align: left; }
 
 .modal-button {
   display: inline-block;
@@ -232,8 +318,9 @@ body {
 .my_main p {
   margin-top: 12px;
   font-size: 16px;
-  font-weight: bold;
-  color: #349da2; }
+  font-weight: 300;
+  color: #15213C;
+  font-size: 24px; }
 
 .table_content .panel {
   border: 1px solid #ccc;
@@ -301,7 +388,7 @@ tr td {
 
 .bell {
   border-radius: 50%;
-  display: inline-block;
+  float: left;
   width: 30px;
   height: 30px;
   margin-top: 28px;
@@ -572,8 +659,9 @@ tr td {
       z-index: 1; }
     .my_header .navbar-default.nav-custom .navbar-nav > li > a {
       color: #34495e;
-      font-weight: 600;
-      font-size: 20px; }
+      font-weight: 500;
+      font-size: 20px;
+      font-family: 'Lato', sans-serif; }
       .my_header .navbar-default.nav-custom .navbar-nav > li > a:hover, .my_header .navbar-default.nav-custom .navbar-nav > li > a:focus {
         text-decoration: underline; }
     .my_header .navbar-default.nav-custom .navbar-nav > li.active > a {
@@ -584,7 +672,8 @@ tr td {
   .my_header .navbar-default.nav-custom .navbar-brand {
     width: 187px;
     padding-top: 25px;
-    height: 84px; }
+    height: 84px;
+    float: left; }
 
 .my_header .container {
   position: relative; }
@@ -603,7 +692,7 @@ tr td {
 #legendContainer2Inner {
   position: absolute;
   right: 10px;
-  top: 50px; }
+  top: 10px; }
 
 .widget-panel .widget-summary.unscanned .summary .amount {
   font-size: 1.8rem;
@@ -644,6 +733,9 @@ tr td {
     @media (max-width: 380px) {
       .widget-panel .widget-chart .chart-md-inner {
         height: 157px; } }
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .widget-panel .widget-chart .chart-md-inner {
+        height: 160px; } }
   .widget-panel .widget-chart.unscanned {
     padding-top: 140px;
     text-align: center; }
@@ -713,7 +805,7 @@ tr td {
       margin: 0;
       height: 34px;
       border-radius: 5px;
-      background: #fff; }
+      background: #ddd; }
   .select-group select {
     z-index: 1;
     position: relative;
@@ -746,18 +838,23 @@ tr td {
 
 .table-my-actions .checkbox-custom {
   padding: 0 0 0 5px; }
-@media (min-width: 1024px) {
-  .table-my-actions.orphan-review .progress {
-    min-width: 100px; } }
-.table-my-actions.orphan-review .select-group .selected-info {
-  position: relative; }
-.table-my-actions.orphan-review .select-group select {
-  color: #777; }
-.table-my-actions.orphan-review .doc-check .fa-clock-o {
-  display: none; }
-.table-my-actions.orphan-review .doc-check .fa-check {
-  display: inline-block;
-  color: #5bc0de; }
+.table-my-actions.orphan-review {
+  /*    .doc-check{
+        .fa-clock-o{
+          display: none;
+        }
+        .fa-check{
+          display: inline-block;
+          color: $color-info;
+        }
+      }*/ }
+  @media (min-width: 1024px) {
+    .table-my-actions.orphan-review .progress {
+      min-width: 100px; } }
+  .table-my-actions.orphan-review .select-group .selected-info {
+    position: relative; }
+  .table-my-actions.orphan-review .select-group select {
+    color: #777; }
 .table-my-actions .doc-check {
   font-size: 18px;
   text-decoration: none; }
@@ -778,6 +875,8 @@ tr td {
     color: #4fca9d; }
   .table-my-actions .doc-check.validated {
     color: #4fca9d; }
+.table-my-actions > tbody > tr.item-validated input, .table-my-actions > tbody > tr.item-validated select, .table-my-actions > tbody > tr.item-validated label {
+  pointer-events: none; }
 .table-my-actions > tbody > tr > td {
   vertical-align: middle;
   position: relative;
@@ -966,6 +1065,34 @@ div[id^='legendContainer'] {
     margin-right: 5px;
     cursor: pointer; }
 
+.multiselect-container {
+  margin-top: 10px; }
+  .multiselect-container:after, .multiselect-container:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none; }
+  .multiselect-container:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px; }
+  .multiselect-container:before {
+    border-color: rgba(196, 196, 196, 0);
+    border-bottom-color: #c4c4c4;
+    border-width: 11px;
+    margin-left: -11px; }
+
+#datatable-editable_wrapper .table .fa {
+  min-width: 20px; }
+
+.document_review_table .fa {
+  vertical-align: middle; }
+
 /*Responsive*/
 @media (max-width: 768px) {
   ul.filter-list {
@@ -981,9 +1108,9 @@ div[id^='legendContainer'] {
     width: auto; } }
 @media (min-width: 769px) {
   .my_header .navbar-collapse {
-    width: -webkit-calc(100% - 400px);
-    width: -moz-calc(100% - 400px);
-    width: calc(100% - 400px);
+    width: -webkit-calc(100% - 410px);
+    width: -moz-calc(100% - 410px);
+    width: calc(100% - 410px);
     text-align: center;
     float: left; }
     .my_header .navbar-collapse .navbar-nav {
@@ -1071,6 +1198,20 @@ div[id^='legendContainer'] {
 .switch.switch-success .ios-switch .on-background {
   background-color: #59D0A7; }
 
+.sample-params select {
+  width: -webkit-calc(100% - 35px);
+  width: -moz-calc(100% - 35px);
+  width: calc(100% - 35px);
+  float: left; }
+.sample-params .validation-btn {
+  float: right;
+  margin-top: 3px;
+  line-height: 18px; }
+  .sample-params .validation-btn i {
+    color: #777; }
+    .sample-params .validation-btn i.icon-success {
+      color: #59D0A7; }
+
 @media (max-width: 400px) {
   .modal-preview .modal-title {
     margin-top: 20px; }
@@ -1081,6 +1222,24 @@ div[id^='legendContainer'] {
   .my_header .navbar-default.nav-custom .navbar-brand {
     width: 100px;
     padding-top: 33px; } }
+.help_guide_sub .filter-tags {
+  padding-top: 10px;
+  padding-left: 15px; }
+
+.ios-switch {
+  display: inline-block;
+  vertical-align: middle; }
+
+.checkbox-custom input[type="checkbox"]:not(:checked) + label:before {
+  background-color: #ecedf0 !important;
+  border-color: #ecedf0 !important; }
+
+.checkbox-custom input[type="checkbox"]:disabled + label:before {
+  border: 1px solid #bbb !important; }
+
+@media (min-width: 992px) {
+  .dd-filter {
+    min-width: 700px; } }
 .overview_question_a, .review_question_a {
   color: #D3D3D3; }
   .overview_question_a:hover, .review_question_a:hover {
@@ -1209,7 +1368,8 @@ div[id^='legendContainer'] {
     margin-left: -50px; }
 
 #userReviewChart {
-  height: 200px; }
+  height: 200px;
+  margin-top: 12px; }
 
 .select-reviewers .switch {
   margin: 5px 0; }
@@ -1227,12 +1387,14 @@ div[id^='legendContainer'] {
     overflow: hidden;
     text-overflow: ellipsis; }
 
-.table-challenge .fa {
-  font-size: 18px; }
-  .table-challenge .fa.disabled {
-    color: #777; }
-    .table-challenge .fa.disabled:hover {
-      color: inherit; }
+.table-challenge .challenge-btn {
+  font-size: 18px;
+  line-height: 16px;
+  color: #777; }
+  .table-challenge .challenge-btn:hover {
+    color: #0D9FD6 !important; }
+.table-challenge .validation-btn:hover .fa {
+  color: #0D9FD6 !important; }
 .table-challenge .doc-path, .table-challenge .file-name {
   display: inline-block;
   max-width: 90px;
@@ -2311,5 +2473,21 @@ div[id^='legendContainer'] {
     padding-left: 32px; }
     .add-detail-section .detail-left label + a {
       padding-left: 32px; } }
+.validated-step a.disabled-link {
+  pointer-events: none;
+  color: #777; }
+.validated-step .btn-group-admin {
+  display: inline-block; }
+
+.btn-group-admin {
+  display: inline-block;
+  top: -4px;
+  position: relative;
+  display: none; }
+  .btn-group-admin .btn-save-step {
+    display: none; }
+
+.id-file {
+  visibility: hidden; }
 
 /*# sourceMappingURL=theme-custom.css.map */

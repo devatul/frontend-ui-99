@@ -1,24 +1,19 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
-import template from './OverView.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import update from 'react-addons-update'
-import dropdown from '../script/drop-down.js'
-import Constant from '../Constant.js'
-import chartOverview from '../script/chart-overview.js'
-import 'jquery'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
+import template from './OverView.rt';
+import LinkedStateMixin from 'react-addons-linked-state-mixin';
+import update from 'react-addons-update';
+import javascript from '../script/javascript.js';
+import scriptOverview from '../script/javascript-overview.js'
+import Constant from '../Constant.js';
+import chartOverview from '../script/chart-overview.js';
+import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
     mixins: [LinkedStateMixin],
 	getInitialState() {
 	    return {
-            filter: {
-                "categories":[],
-                "confidentialities":[],
-                "doc-types":[],
-                "languages":[]
-            },
             scan_result:{},
             ChartData: {
                 data_confidentiality: [],
@@ -36,31 +31,27 @@ var OverView = React.createClass
     },
 	componentDidMount() {
         $('#bell').click();
-
-        dropdown();
-
+        javascript();
         if(this.state.scan_result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
         }
-        
-        //this.filterOnChange();
                       
   	},
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.scan_result != nextState.scan_result) {
             return true;
         }
-        if(this.state.filter != nextState.filter) {
+        if(this.state.ChartData != nextState.ChartData) {
             return true;
         }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.filter != prevState.filter) {
-            this.openFilterPopup();
+        if(this.state.scan_result != prevState.scan_result) {
+            this.updateChartData(this.state.scan_result);
         }
-        if(this.state.filter != prevState.filter) {
-            this.filterScan(this.state.filter);
+        if(this.state.ChartData != prevState.ChartData) {
+            chartOverview(this.state.ChartData);
         }
     },
     startScan() {
@@ -115,37 +106,6 @@ var OverView = React.createClass
             }.bind(this)
         });
        
-    },
-    
-    filterScan(bodyRequest) {
-        if((bodyRequest.categories.length > 0) && (bodyRequest.confidentialities.length > 0) && (bodyRequest['doc-types'].length > 0) && (bodyRequest.languages.length > 0)) {
-            $.ajax({
-                method: 'POST',
-                url: Constant.SERVER_API + "api/scan/filter/",
-                dataType: 'json',
-                data: JSON.stringify(bodyRequest),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-                },
-                success: function(data) {
-                    this.updateChartData(data);
-                    var update_scan_result = update(this.state, {
-                        scan_result: {$set: data}
-                    });
-                    this.setState(update_scan_result);
-                    console.log("Filter Scan success");
-                }.bind(this),
-                error: function(xhr, status, error) {
-                    console.log("Filter Scan error: " + error);
-                    if(xhr.status === 401)
-                    {
-                        browserHistory.push('/Account/SignIn');
-                    }
-                }.bind(this)
-            });
-        } else {
-            this.getScanResult();
-        }
     },
     updateChartData(data) {
         var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
@@ -204,108 +164,16 @@ var OverView = React.createClass
                   }
                 });
             this.setState(update_chart_data);
-            chartOverview(this.state.ChartData);
     },
-
-    /*filterOnChange() {
-        $('#category').change(function(e) {
-            var selected = $(e.target).val();
-            var setEmpty = update(this.state,{
-                filter: {
-                    "categories": {$set: []}
-                }
-            });
-            this.setState(setEmpty);
-             
-            if(selected != null){
-                for(var i = 0; i < this.state.label.list_category.length; i++) {
-                    for(var j = 0; j < selected.length; j++) {
-                        if(this.state.label.list_category[i].name == selected[j]) {
-                            var updateState = update(this.state,{
-                                filter: {
-                                    "categories": {$push: [this.state.label.list_category[i]]}
-                                }
-                            });
-                            this.setState(updateState);
-                        }
-                    }
-                }
-            }
-            //this.filterScan(this.state.filter);            var selected = $(e.target).val();
-            var empty = update(this.state,{
-                filter: {
-                    "confidentialities": {$set: []}
-                }
-            });
-            this.setState(empty);
-            if(selected != null){
-                for(var i = 0; i < this.state.label.list_confidentiality.length; i++) {
-                    for(var j = 0; j < selected.length; j++) {
-                        if(this.state.label.list_confidentiality[i].name == selected[j]) {
-                            var updateState = update(this.state,{
-                                filter: {
-                                    "confidentialities": {$push: [this.state.label.list_confidentiality[i]]}
-                                }
-                            });
-                            this.setState(updateState);
-                        }
-                    }
-                }
-            }
-            //this.filterScan(this.state.filter);
-            console.log("confidentiality filter: ", this.state.filter.confidentialities);
-        }.bind(this));
-        $('#doctype').change(function(e) {
-            var selected = $(e.target).val();
-            var empty = update(this.state,{
-                filter: {
-                    "doc-types": {$set: []}
-                }
-            });
-            this.setState(empty);
-            if(selected != null){
-                for(var i = 0; i < this.state.label.list_doctype.length; i++) {
-                    for(var j = 0; j < selected.length; j++) {
-                        if(this.state.label.list_doctype[i].name == selected[j]) {
-                            var updateState = update(this.state,{
-                                filter: {
-                                    "doc-types": {$push: [this.state.label.list_doctype[i]]}
-                                }
-                            });
-                            this.setState(updateState);
-                        }
-                    }
-                }
-            }
-            //this.filterScan(this.state.filter);
-            console.log("doctype filter: ", this.state.filter);
-        }.bind(this));
-        $('#language').change(function(e) {
-            var selected = $(e.target).val();
-            var empty = update(this.state,{
-                filter: {
-                    "languages": {$set: []}
-                }
-            });
-            this.setState(empty);
-            if(selected != null){
-                for(var i = 0; i < this.state.label.list_language.length; i++) {
-                    for(var j = 0; j < selected.length; j++) {
-                        if(this.state.label.list_language[i].name == selected[j]) {
-                            var updateState = update(this.state,{
-                                filter: {
-                                    "languages": {$push: [this.state.label.list_language[i]]}
-                                }
-                            });
-                            this.setState(updateState);
-                        }
-                    }
-                }
-            }
-            //this.filterScan(this.state.filter);
-            console.log("language filter: ", this.state.filter.languages);
-        }.bind(this));
-    },*/
+    handleFilter: function(data) {
+        if(data === false) {
+            this.getScanResult();
+        } else {
+            this.setState(update(this.state, {
+                scan_result: {$set: data }
+            }));
+        }
+    },
 	render:template
 });
 module.exports = OverView;

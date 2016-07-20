@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './UserAssignment.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import dropdown from '../script/drop-down.js'
+import javascript from '../script/javascript.js';
 import Constant from '../Constant.js'
 import chart from '../script/chart-user-assignment.js'
 import 'jquery'

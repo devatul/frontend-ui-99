@@ -1,31 +1,41 @@
 $(function () {
     $('.approve-button-2').click(function(){
         $(this).hide();
-        $(this).next().show();
-        $('.table-my-actions tr').each(function () {
-            if ($(this).find('input[type="checkbox"].checkbox-item').prop('checked')){
-                $(this).find('.doc-check').addClass('validated');
-
-            };
+        var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+        table.find('tr').each(function () {
+          $(this).removeClass('inactive');
+          if ($(this).find('input[type="checkbox"]').prop('checked')){
+            $(this).find('.doc-check').addClass('validated');
+            $(this).addClass('item-validated');
+            $(this).find('input[type="checkbox"]').prop('checked', false);
+          };
         });
-        if ($('.table-my-actions .doc-check').length == $('.table-my-actions .doc-check.validated').length){
-            $('.btn-end-review').removeClass('btn-disabled');
+        if (table.find('.doc-check').length == table.find('.doc-check.validated').length){
+          table.find('.btn-end-review').removeClass('btn-disabled');
+           table.parents('.dataTables_wrapper').find('.actions-success').show();
         }
+        var docToReview = 10 - table.find('.doc-check.validated').length;
+        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
     });
 
 
   $('.approve-button').click(function(){
     $(this).hide();
-    $('.actions-success').show();
-    $('.table-my-actions tr').each(function () {
-      if ($(this).find('input[type="checkbox"].checkbox-item').prop('checked')){
+    var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+    table.find('tr').each(function () {
+      $(this).removeClass('inactive');
+      if ($(this).find('input[type="checkbox"]').prop('checked')){
         $(this).find('.doc-check').addClass('validated');
-
+        $(this).addClass('item-validated');
+        $(this).find('input[type="checkbox"]').prop('checked', false);
       };
     });
-    if ($('.table-my-actions .doc-check').length == $('.table-my-actions .doc-check.validated').length){
-      $('.btn-end-review').removeClass('btn-disabled');
+    if (table.find('.doc-check').length == table.find('.doc-check.validated').length){
+      table.find('.btn-end-review').removeClass('btn-disabled');
+       table.parents('.dataTables_wrapper').find('.actions-success').show();
     }
+    var docToReview = 10 - table.find('.doc-check.validated').length;
+    $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
   });
 
   $(".alert-close[data-hide]").on("click", function(){
@@ -45,11 +55,14 @@ $(function () {
   $('.doc-check').on('click', function(e){
     e.preventDefault();
     $(this).addClass('validated');
-    if ($('.table-my-actions .doc-check').length == $('.table-my-actions .doc-check.validated').length){
+    $(this).parents('tr').addClass('item-validated');
+    if ($(this).parents('.table-my-actions').find('.doc-check').length == $(this).parents('.table-my-actions').find('.doc-check.validated').length){
       $('.actions-success').show();
       $('.doc-check').addClass('validated');
       $('.btn-end-review').removeClass('btn-disabled');
     }
+    var docToReview = 10 - $(this).parents('.table-my-actions').find('.doc-check.validated').length;
+    $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
   });
 
   $('.select-group select').change(function(){
@@ -65,7 +78,7 @@ $(function () {
   $('.checkbox-all').on('change', function(){
       var target = $(this).attr('data-target');
       if ($(this).prop('checked')){
-          $(target).find('input[type="checkbox"].checkbox-item').prop('checked', true);
+          $(target).find('tr:not(.item-validated) input[type="checkbox"].checkbox-item').prop('checked', true);
           $('.show-on-checked-all').show();
           $('.table-my-actions tr').removeClass('inactive');
       }
@@ -77,7 +90,7 @@ $(function () {
   $('.checkbox-all-1').on('change', function(){
       var target = $(this).attr('data-target');
       if ($(this).prop('checked')){
-          $(target).find('input[type="checkbox"].checkbox-item-1').prop('checked', true);
+          $(target).find('tr:not(.item-validated) input[type="checkbox"].checkbox-item-1').prop('checked', true);
           $('.show-on-checked-all-1').show();
           $('.table-my-actions tr').removeClass('inactive');
       }
@@ -89,7 +102,7 @@ $(function () {
   $('.checkbox-all-2').on('change', function(){
       var target = $(this).attr('data-target');
       if ($(this).prop('checked')){
-          $(target).find('input[type="checkbox"].checkbox-item-2').prop('checked', true);
+          $(target).find('tr:not(.item-validated) input[type="checkbox"].checkbox-item-2').prop('checked', true);
           $('.show-on-checked-all-2').show();
           $('.table-my-actions tr').removeClass('inactive');
       }
@@ -167,6 +180,28 @@ $('.checkbox-item-1').on('change', function(){
       }
   }); 
 
+  $('.challenge-btn').on('click', function(e){
+    e.preventDefault();
+    $(this).find('i').addClass('icon-success');
+  });
+
+  $('.challenge-confidentiality').on('change', function(){
+    var btn = $(this).parents('tr').find('.challenge-btn i');
+    if (btn.hasClass('icon-success')){
+      btn.remove();
+    }
+    $(this).parents('tr').find('.challenge-btn').html('<i class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="You challenged back the review"></i>');
+    $(this).parents('tr').find('.challenge-btn i').tooltip();
+  });
+
+  $('.btn-next-reviewer').on('click', function(){
+    $('.reviewer-list > .active').next('li').find('a').trigger('click');
+  });
+
+  $('.btn-next-cat').on('click', function(){
+    $('.cat-list > .active').next('li').find('a').trigger('click');
+  });
+
   $(window).on('show.bs.dropdown', function (e) {
 
       var windowWidth = $(window).innerWidth();
@@ -204,7 +239,7 @@ $('.checkbox-item-1').on('change', function(){
             $('.table-my-actions tr').removeClass('inactive');
         }
 
-  });     
+  });   
 
 });
 

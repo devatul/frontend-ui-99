@@ -4,12 +4,13 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './GroupReview.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import chart from '../script/chart-review.js'
+import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
-require('jquery');
+import 'jquery'
 
 var GroupReview = React.createClass({
     displayName: 'GroupReview',
+    mixins: [LinkedStateMixin],
     getInitialState: function() {
     	return {
     		list_group:[],
@@ -18,27 +19,34 @@ var GroupReview = React.createClass({
     		cloudwords: [],
     		centroids: [],
     		samples: [],
-    		categories: []
+    		categories: [],
+            samples_current: 0,
+            category_level: [],
+            category_level_current: "",
+            confidential_level: [],
+            confidential_level_current: "",
+            documentPreview: {},
+            documentPreview_current: 0,
+            stackAction: []
     	};
     },
     componentWillMount() {
         this.getGroup();
     },
     componentDidMount() {
-        this.getStatistics(this.state.group_current);
-        this.getCloudwords(this.state.group_current);
-        this.getCentroids(this.state.group_current);
-        this.getSamples(this.state.group_current);
-        this.getCategories(this.state.group_current);
+        this.getStatistics();
+        this.getSamples();
+        this.getCategoryDistribution();
+        chart();
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.group_current != nextState.group_current) {
             return true;
         }
-        if(this.state.statistics != nextState.statistics) {
+        if(this.state.samples != nextState.samples) {
             return true;
         }
-        if(this.state.samples != nextState.samples) {
+        if(this.state.statistics != nextState.statistics) {
             return true;
         }
         if(this.state.centroids != nextState.centroids) {
@@ -47,13 +55,52 @@ var GroupReview = React.createClass({
         if(this.state.categories != nextState.categories) {
             return true;
         }
+        if(this.state.cloudwords != nextState.cloudwords) {
+            return true;
+        }
+        if(this.state.category_level_current != nextState.category_level_current) {
+            return true;
+        }
+        if(this.state.confidential_level_current != nextState.confidential_level_current) {
+            return true;
+        }
+        if(this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
         return false;
     },
-
     componentDidUpdate(prevProps, prevState) {
+        if(this.state.group_current != prevState.group_current){
+            console.log("okasdfasdfasdfasdfad", this.state.group_current);
+            this.getStatistics();
+            this.getSamples();
+            this.getCategoryDistribution();
+        }
+        if(this.state.samples != prevState.samples) {
+            this.setDefaultValue();
+        }
         if(this.state.categories != prevState.categories) {
             this.drawChart(this.state.categories);
         }
+        if(this.state.centroids != prevState.centroids) {
+            this.drawCentroid(this.state.centroids);
+        }
+        if(this.state.cloudwords != prevState.cloudwords) {
+            this.drawCloud(this.state.cloudwords);
+        }
+    },
+    setDefaultValue: function() {
+        var samples = this.state.samples;
+        var category_level = [];
+        var confidential_level = [];
+        for(var i = 0; i < samples.length; i++) {
+            category_level[i] = samples[i].categories[0].confidence_level;
+            confidential_level[i] = samples[i].confidentialities[0].confidence_level;
+        }
+        this.setState(update(this.state, {
+            category_level: {$set: category_level },
+            confidential_level: {$set: confidential_level}
+        }));
     },
     getGroup() {
     	$.ajax({
@@ -81,21 +128,18 @@ var GroupReview = React.createClass({
         });
     },
     changeGroup() {
-    	$('#choose_cluster').change(function(element){
-                console.log(element.target.value);
-                var group_selected = element.target.value;
-                var updateState = update(this.state, {
-                    group_current: {$set: this.state.list_group[group_selected]}
-                });
-                this.setState(updateState);
-        }.bind(this))
+            var group_selected = this.refs.choose_group.value;
+            var updateState = update(this.state, {
+                group_current: {$set: this.state.list_group[group_selected]}
+            });
+            this.setState(updateState);
     },
-    getStatistics(group_current) {
+    getStatistics() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/statistics/",
             dataType: 'json',
-            data: { "id":group_current.id },
+            data: { "id":this.state.group_current.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -113,12 +157,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getCloudwords(group_current) {
+    getCloudwords() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/cloudwords/",
             dataType: 'json',
-            data: { "id":group_current.id },
+            data: { "id":this.state.group_current.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -126,10 +170,11 @@ var GroupReview = React.createClass({
                 this.setState({ cloudwords: [] });
                 for (var i = 0; i < data.length; i++) {
                     var updateState = update(this.state, {
-                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count}]}
+                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count, html: { "data-tooltip": "1"} }]}
                     });
                     this.setState(updateState);
                 }
+                console.log(this.state.cloudwords);
             }.bind(this),
             error: function(xhr,error) {
                 if(xhr.status === 401)
@@ -139,12 +184,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getCentroids(group_current) {
+    getCentroids() {
         $.ajax({
             method: 'GET',
-            url: Constant.SERVER_API + "api/group/centroids",
+            url: Constant.SERVER_API + "api/group/centroids/",
             dataType: 'json',
-            data: { "id":group_current.id },
+            data: { "id":this.state.group_current.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -166,12 +211,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getSamples(group_current) {
+    getSamples() {
         $.ajax({
             method: 'GET',
-            url: Constant.SERVER_API + "api/group/samples",
+            url: Constant.SERVER_API + "api/group/samples/",
             dataType: 'json',
-            data: { "id":group_current.id },
+            data: { "id":this.state.group_current.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -190,18 +235,18 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getCategories(group_current) {
+    getCategoryDistribution() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/categories/",
             dataType: 'json',
-            data: { "id":group_current.id },
+            data: { "id":this.state.group_current.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
-                    categories: {$set: data}
+                    categories: {$set: data} 
                 });
                 this.setState(updateState);
                 console.log("asfdasdfasdfasdfasdfasdfa",  data);
@@ -214,21 +259,61 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    drawCloud(cloudwords) {
+    setDocumentReview: function(index) {
+        this.setState(update(this.state, {
+            documentPreview: {$set: this.state.samples[index]},
+            documentPreview_current: {$set: index }
+        }));
+        console.log("afasdccccc: ", this.state.samples[index], index);
+    },
+    drawCloud: function(word_list) {
         var cloudRendered = false;
+      var drawCloud = function(){
         if (!cloudRendered){
-          $("#words-cloud").jQCloud(cloudwords,{
+          $("#words-cloud").jQCloud(word_list,{
             afterCloudRender: function(){
               cloudRendered = true;
+
+              $("[data='tooltip']").tooltip();
             }
           });
         }
-        
-        $(window).resize(function(){
-            //$('#words-cloud').jQCloud('update', word_list);
-            $('#words-cloud').css("width", "100%");
-            $('#words-cloud').html('').jQCloud(cloudwords) 
+      };
+
+      $(window).resize(function(){
+        //$('#words-cloud').jQCloud('update', word_list);
+        $('#words-cloud').css("width", "100%");
+        $('#words-cloud').html('').jQCloud(word_list) 
+      });
+    },
+    progressbar: function(value) {
+        if(value <= Constant.progressValue.level1) {
+            return Constant.progressBar.level1;
+        } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
+            return Constant.progressBar.level2;
+        }
+        return Constant.progressBar.level3;
+    },
+    onChangeCategory: function(event, index) {
+        var new_category_level = this.state.category_level;
+        new_category_level[index] = event.target.value;
+
+        var updateState = update(this.state, {
+            category_level: {$set: new_category_level},
+            category_level_current: {$set: index + ':' + event.target.value}
         });
+        this.setState(updateState);
+    },
+    onChangeConfidential: function(event, index) {
+        console
+        var new_confidential_level = this.state.confidential_level;
+        new_confidential_level[index] = event.target.value;
+
+        var updateState = update(this.state, {
+            confidential_level: {$set: new_confidential_level},
+            confidential_level_current: {$set: index + ':' + event.target.value}
+        });
+        this.setState(updateState); 
     },
     drawCentroid(centroids) {
         $('#centroidChart').highcharts({
@@ -275,6 +360,11 @@ var GroupReview = React.createClass({
                 groupPadding: 0,
                 pointPlacement: -0.5
               }
+            },
+
+            tooltip: {
+                headerFormat: '',
+                pointFormat: 'Documents: <b>{point.y}</b><br/>'
             },
             
             series: [{
@@ -324,6 +414,12 @@ var GroupReview = React.createClass({
             grid: {
                 hoverable: true,
                 clickable: true,
+            },
+            tooltip: {
+              show: true,
+              content: function(label,x,y){
+                return label + ': ' +y;
+              }
             }
         });
 

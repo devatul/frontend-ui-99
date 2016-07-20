@@ -511,7 +511,6 @@ ul.review_nav-tabs > li > a {
 	margin-top: 30px;
 }
 .review_cloud_p {
-	color: #0cf;
 	font-size: 1.6rem;
 }
 .review_mr-sm {
@@ -695,6 +694,10 @@ a.help_question_a:hover>i {
     border-width: 8px;
     margin-left: 270px;
 }
+.add-detail-section .detail-row-edit {
+	margin-bottom: 30px;
+}
+
 
 
 
