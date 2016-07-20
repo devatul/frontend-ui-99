@@ -177,7 +177,12 @@ $(function () {
             minPadding: 0,
             maxPadding: 0,
             gridLineWidth: 0,
-            tickmarkPlacement: 'on'
+            tickmarkPlacement: 'on',
+            labels: {
+                style: {
+                    font: '11px Roboto, Helvetica, sans-serif'
+                }
+            }
         },
         yAxis: {
             min: 0,
@@ -243,4 +248,11 @@ $(function () {
         }
     });
 
+    $('.sample-params select').on('change', function(){
+        $(this).next().find('i').addClass('icon-success');
+    });
+
+    $('.btn-next-cat').on('click', function(){
+        $('.cat-list > .active').next('li').find('a').trigger('click');
+    });
 });

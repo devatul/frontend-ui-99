@@ -63,7 +63,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+ ' Documents';
               },
             }
         });
@@ -90,7 +90,7 @@ $(function () {
             ],
             color: '#7986cb'
         }, {
-            label: "Legal",
+            label: "Legal/ Compliance",
             data: [
                 [1, 6]
             ],
@@ -124,8 +124,8 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
-              },
+                return label + ': ' +y+ ' Documents';
+              }
             }
         });
 
@@ -170,7 +170,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+ ' Documents';
               },
             }
         });
@@ -220,7 +220,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+ ' Documents';
               },
             }
         });
@@ -289,7 +289,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+ ' Documents';
               },
             }
         });
@@ -314,6 +314,11 @@ $(function () {
         $('.dropdown-menu.has-child').toggle();
     });
 
+    $('body').on('click', '.dropdown-backdrop', function(e){
+        $(this).remove();
+        $(this).parent().find('.dropdown-menu').toggle();
+    });
+
     // hold onto the drop down menu                                             
     var dropdownMenu;
 
@@ -324,9 +329,12 @@ $(function () {
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');
         console.log($(e.target));
-        if (!$('.dropdown-backdrop').length && !$('.dropdown-backdrop-custom').length){
-            $(e.target).append('<span class="dropdown-backdrop"></span>');
-        }
+        setTimeout(function(){
+            if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
+                $(e.target).append('<span class="dropdown-backdrop"></span>');
+            }
+
+        });
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){   
             // detach it and append it to the body
             $('body').append(dropdownMenu.detach());
@@ -388,6 +396,13 @@ $(function () {
             $('[data-last-update]').show();
             $('[data-update-status]').hide();
             $('[data-update-status='+filterType+']').show();
+        }
+        else if (filterType == 'update-week'){
+            $('[data-update-status]').show();
+            $('[data-last-update]').hide();
+            $('[data-last-update='+filterType+']').show();
+            $('[data-last-update="update-yesterday"]').show();
+            $('[data-last-update="update-today"]').show();
         }
         else{
             $('[data-last-update]').hide();

@@ -25,7 +25,7 @@ $(function () {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href") // activated tab
     if (target == '#cloud'){
-      drawCloud();
+      $(window).resize();
     }
     if (target == '#centroid'){
       drawCentroid();
@@ -33,48 +33,48 @@ $(function () {
   });
 
   var word_list = new Array(
-    {text: "Entity", weight: 13, html: {"data-tooltip": "1300"}},
-    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134"}},
-    {text: "science", weight: 9.4, html: {"data-tooltip": "999"}},
-    {text: "properties", weight: 8, html: {"data-tooltip": "676"}},
-    {text: "speed", weight: 6.2, html: {"data-tooltip": "444"}},
-    {text: "Accounting", weight: 5, html: {"data-tooltip": "777"}},
-    {text: "interactions", weight: 5, html: {"data-tooltip": "35"}},
-    {text: "nature", weight: 5, html: {"data-tooltip": "535"}},
-    {text: "branch", weight: 5, html: {"data-tooltip": "535"}},
-    {text: "concerned", weight: 4, html: {"data-tooltip": "334"}},
-    {text: "Sapien", weight: 4, html: {"data-tooltip": "200"}},
-    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "habitant", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "morbi", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "tristisque", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "senectus", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "et netus", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13"}},
-    {text: "fames", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "egestas", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "Aenean", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "elit", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "sit amet", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "metus", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13"}, html: {"data-tooltip": "13"}},
-    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13"}},
-    {text: "justo", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "dictum", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "metus", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "at molestie", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "purus", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "diam", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "dui", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "mattis", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "et nulla", weight: 1, html: {"data-tooltip": "13"}},
-    {text: "Sed", weight: 1, html: {"data-tooltip": "13"}}
+    {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
+    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
+    {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
+    {text: "properties", weight: 8, html: {"data-tooltip": "676 Documents"}},
+    {text: "speed", weight: 6.2, html: {"data-tooltip": "444 Documents"}},
+    {text: "Accounting", weight: 5, html: {"data-tooltip": "777 Documents"}},
+    {text: "interactions", weight: 5, html: {"data-tooltip": "35 Documents"}},
+    {text: "nature", weight: 5, html: {"data-tooltip": "535 Documents"}},
+    {text: "branch", weight: 5, html: {"data-tooltip": "535 Documents"}},
+    {text: "concerned", weight: 4, html: {"data-tooltip": "334 Documents"}},
+    {text: "Sapien", weight: 4, html: {"data-tooltip": "200 Documents"}},
+    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "habitant", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "morbi", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "tristisque", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "senectus", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "et netus", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "fames", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "egestas", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "Aenean", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "elit", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "sit amet", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "metus", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "justo", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "dictum", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "metus", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "at molestie", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "purus", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "diam", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "dui", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
   );
 
   var cloudRendered = false;
@@ -124,7 +124,10 @@ $(function () {
         },
 
         legend: {
-          enabled: false
+          enabled: false,
+          itemStyle: {
+            fontFamily: 'Roboto'
+          }
         },
         
         plotOptions: {
@@ -147,7 +150,7 @@ $(function () {
 
         tooltip: {
             headerFormat: '',
-            pointFormat: 'Documents: <b>{point.y}</b><br/>'
+            pointFormat: '{point.y} Documents'
         },
         
         series: [{
@@ -208,7 +211,10 @@ $(function () {
                 position: 'nw',
                 noColumns: 1, 
                 backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend')
+                container: $('#confidentialityChartLegend'),
+                  itemStyle: {
+                    fontFamily: 'Roboto'
+                  }
             },
             grid: {
                 hoverable: true,
@@ -217,7 +223,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+ ' Documents';
               },
             }
         });
@@ -264,7 +270,10 @@ $(function () {
         legend: {
             verticalAlign: 'bottom',
             shadow: false,
-            useHTML: true
+            useHTML: true,
+              itemStyle: {
+                fontFamily: 'Roboto'
+              }
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
@@ -300,7 +309,7 @@ $(function () {
   $('.btn-refine').on('click', function(e){
     e.preventDefault();
     $(this).removeClass('btn-green').addClass('btn-disabled');
-    $('<span> (in progress)</span>').insertAfter($(this));
+    $(this).parent().find('.refine-progress').show();
   });
 
 });
