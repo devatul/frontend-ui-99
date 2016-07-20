@@ -25,7 +25,7 @@ $(function () {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href") // activated tab
     if (target == '#cloud'){
-      drawCloud();
+      $(window).resize();
     }
     if (target == '#centroid'){
       drawCentroid();
@@ -124,7 +124,10 @@ $(function () {
         },
 
         legend: {
-          enabled: false
+          enabled: false,
+          itemStyle: {
+            fontFamily: 'Roboto'
+          }
         },
         
         plotOptions: {
@@ -208,7 +211,10 @@ $(function () {
                 position: 'nw',
                 noColumns: 1, 
                 backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend')
+                container: $('#confidentialityChartLegend'),
+                  itemStyle: {
+                    fontFamily: 'Roboto'
+                  }
             },
             grid: {
                 hoverable: true,
@@ -264,7 +270,10 @@ $(function () {
         legend: {
             verticalAlign: 'bottom',
             shadow: false,
-            useHTML: true
+            useHTML: true,
+              itemStyle: {
+                fontFamily: 'Roboto'
+              }
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
@@ -300,7 +309,7 @@ $(function () {
   $('.btn-refine').on('click', function(e){
     e.preventDefault();
     $(this).removeClass('btn-green').addClass('btn-disabled');
-    $('<span> (in progress)</span>').insertAfter($(this));
+    $(this).parent().find('.refine-progress').show();
   });
 
 });

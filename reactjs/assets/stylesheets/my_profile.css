@@ -643,6 +643,9 @@ select.record_select {
 .document_2nd {
 	min-width: 150px;
 }
+.table-responsive {
+	overflow-x: hidden;
+}
 
 
 
@@ -657,6 +660,9 @@ select.record_select {
 
 
 @media (max-width: 768px) {
+	.table-responsive {
+		overflow-x: auto;
+	}
 	.mpe-content-left {
 	padding-right: 24px;
 	}
@@ -794,5 +800,11 @@ select.record_select {
 	.my-profile-form-bordered .control-label {
 		text-align: left;
 	}	
+	.my_header-edit5 .navbar-collapse .navbar-nav {
+		float: left;
+	}
+	.my_header-edit5 .navbar-collapse .navbar-nav > li {
+		float: left;
+	}
 }
 

@@ -163,3 +163,24 @@
     }
   }
 }
+
+.line_document.review_title{
+  font-weight: normal;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.actions-panel{
+  .document_panel-title>h2{
+    font-size: 18px;
+  }
+}
+
+.refine-progress{
+  display: none;
+  margin-top: 10px;
+  #circularG{
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+}

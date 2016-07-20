@@ -251,4 +251,8 @@ $(function () {
     $('.sample-params select').on('change', function(){
         $(this).next().find('i').addClass('icon-success');
     });
+
+    $('.btn-next-cat').on('click', function(){
+        $('.cat-list > .active').next('li').find('a').trigger('click');
+    });
 });

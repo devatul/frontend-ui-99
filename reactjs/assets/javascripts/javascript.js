@@ -90,7 +90,7 @@ $(function () {
             ],
             color: '#7986cb'
         }, {
-            label: "Legal",
+            label: "Legal/ Compliance",
             data: [
                 [1, 6]
             ],

@@ -63,6 +63,7 @@ $(function () {
     var addDomainAdminBlock = $('.domain-admin-block').first().clone();
     addDomainAdminBlock.find('input').val('');
     addDomainAdminBlock.appendTo($(this).parents('.domain-block'));
+    $('.domain-admin-block').not($('.domain-admin-block').last()).find('.add-domain-admin').remove();
   });
 
   $('body').on('click', '.add-server-admin', function(e){
@@ -70,13 +71,15 @@ $(function () {
     var addServerAdminBlock = $('.server-admin-block').first().clone();
     addServerAdminBlock.find('input').val('');
     addServerAdminBlock.appendTo($(this).parents('.server-block'));
+    $('.server-admin-block').not($('.server-admin-block').last()).find('.add-server-admin').remove();
   });
 
   $('body').on('click', '.add-folder', function(e){
     e.preventDefault();
-    var folderBlock = $('.folder-block').first().clone();
+    var folderBlock = $('.folder-block').last().clone();
     folderBlock.find('input').val('');
     folderBlock.insertAfter($('.folder-block').last());
+    $('.folder-block').not($('.folder-block').last()).find('.add-folder').remove();
   });
 
   $('body').on('click', '.add-server', function(e){
@@ -84,34 +87,39 @@ $(function () {
     var serverBlock = $('.server-block').first().clone();
     serverBlock.find('input').val('');
     serverBlock.insertAfter($('.server-block').last());
+    $('.server-block').not($('.server-block').last()).find('.add-server').remove();
   });
 
   $('body').on('click', '.add-resposity', function(e){
     e.preventDefault();
-    var cloneBlock = $('.resposity-block').first().clone(); 
+    var cloneBlock = $('.resposity-block').last().clone(); 
     cloneBlock.find('input').val('');
     cloneBlock.insertAfter($('.resposity-block').last());
+    $('.resposity-block').not($('.resposity-block').last()).find('.add-resposity').remove();
   });
 
   $('body').on('click', '.add-teamlead', function(e){
     e.preventDefault();
-    var cloneBlock = $('.teamlead-block').first().clone(); 
+    var cloneBlock = $('.teamlead-block').last().clone(); 
     cloneBlock.find('input').val('');
     cloneBlock.insertAfter($('.teamlead-block').last());
+    $('.teamlead-block').not($('.teamlead-block').last()).find('.add-teamlead').remove();
   });
 
   $('body').on('click', '.add-coordinator', function(e){
     e.preventDefault();
-    var cloneBlock = $('.coordinator-block').first().clone(); 
+    var cloneBlock = $('.coordinator-block').last().clone(); 
     cloneBlock.find('input').val('');
     cloneBlock.insertAfter($('.coordinator-block').last());
+    $('.coordinator-block').not($('.coordinator-block').last()).find('.add-coordinator').remove();
   });
 
   $('body').on('click', '.add-audit', function(e){
     e.preventDefault();
-    var cloneBlock = $('.audit-block').first().clone(); 
+    var cloneBlock = $('.audit-block').last().clone(); 
     cloneBlock.find('input').val('');
     cloneBlock.insertAfter($('.audit-block').last());
+    $('.audit-block').not($('.audit-block').last()).find('.add-audit').remove();
   });
 
   $('.id-file-name').on('click', function(){

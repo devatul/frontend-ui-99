@@ -120,7 +120,7 @@ a{
   margin-bottom: 5px;
   margin-left: -30px;
   padding: 7px;
-  width: 60px;
+  min-width: 60px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -131,6 +131,7 @@ a{
   text-align: center;
   font-size: 14px;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* Triangle hack to make tooltip look like a speech bubble */
@@ -306,7 +307,7 @@ html body .tabs-primary .nav-tabs li a:hover{
 }
 
 .legendLabel{
-  padding-right: 10px;
+  padding-right: 8px;
   font-size: 12px;
   padding-left: 3px;
   text-align: left;
@@ -1472,7 +1473,7 @@ div[id^='legendContainer']{
 
 @media (min-width: 769px){
   .my_header .navbar-collapse {
-    @include calc(width, '100% - 410px');
+    @include calc(width, '100% - 402px');
     text-align: center;
     float: left;
     .navbar-nav{
