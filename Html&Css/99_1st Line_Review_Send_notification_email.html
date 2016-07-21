@@ -62,7 +62,7 @@
                                         <ul class="list-unstyled noti-list">
                                             <li data-noti-type="waiting">
                                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                <p>You have 10 documents to review within the Accouting/ Tax category with Internal Confidentiality by latest 10th May</p>
+                                                <p>You have 10 documents to review within the Accouting/ Tax category with Internal confidentiality by latest 10th May</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -71,7 +71,7 @@
                                         <ul class="list-unstyled noti-list">
                                             <li data-noti-type="danger">
                                                 <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                                <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
+                                                <p>You have 30 documents to review within the Client/ Customer category with Internal confidentiality by latest 16th May</p>
                                             </li>
                                             <li data-noti-type="success">
                                                 <i class="fa fa-check icon-success" aria-hidden="true"></i>
@@ -81,11 +81,11 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-noti">
-                                    <h4>My Pending Action: 7
+                                    <h4>My Pending Actions: 7
                                         <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
                                         <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
                                     </h4>
-                                    <span class="actions-percentage">Action completed on time: 100%</span>
+                                    <span class="actions-percentage">Action completed on Time: 100%</span>
                                     <div class="inline-block-item dropdown dropdown-help">
                                         <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu has-arrow dd-md full-mobile">
@@ -95,24 +95,24 @@
                                     <ul class="list-unstyled noti-list">
                                         <li data-noti-type="danger">
                                             <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
-                                            <p>You have 30 documents to review within the Client/ Customer category with Internal Confidentiality by latest 16th May</p>
+                                            <p>You have 30 documents to review within the Client/ Customer category with Internal confidentiality by latest 16th May</p>
                                         </li>
                                         <li data-noti-type="warning">
                                             <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th June</p>
+                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 25th June</p>
                                         </li>
                                         <li data-noti-type="waiting">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 25th May</p>
+                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 25th May</p>
                                         </li>
                                         <li  data-noti-type="warning">
                                             <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
-                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal Confidentiality by latest 16th May</p>
+                                            <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 16th May</p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-12 text-center mt-md">
-                                    <a href="#">See all notifications</a>
+                                    <a href="#">See all Notifications</a>
                                 </div>
                             </div>
                         </div>
@@ -122,10 +122,16 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Dashboard</a></li>
-                            <li><a href="#">Review</a></li>
-                            <li><a href="#">User Assignment</a></li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="#">Orphan Review</a></li>
+                                  <li class="active"><a href="#">Group Review</a></li>
+                                  <li><span class="badge">1</span><a href="#">User Assignment</a></li>
+                              </ul>
+                            </li>
+                            <li><a href="#">Insights</a></li>
+                            <li><a href="#">Review Validation</a></li>
                             <li><a href="#">Anomaly Detection</a></li>
-                            <li><a href="#">Settings</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                     
@@ -181,7 +187,7 @@
         <div class="notification-list container">
             <div class="notification-filter row">
                 <div class="col-sm-4 mb-md">
-                    <label>Last update</label>
+                    <label>Last Update</label>
                     <select class="form-control filter-noti">
                         <option data-update-time="update-today">Today</option>
                         <option data-update-time="update-week">Last 7 Days</option>
@@ -202,7 +208,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4 mb-md">
-                    <span>Actions completed on time: 100%</span>
+                    <span>Actions completed on Time: 100%</span>
                 </div>
             </div>
 
@@ -260,7 +266,7 @@
                             You have 30 documents to review within the Client/Customer category by latest 16th May
                         </span>
                         <span class="noti-right">
-                            <i class="fa fa-exclamation-triangle fa-alert-warning"></i>
+                            <i class="fa fa-exclamation-triangle fa-alert-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Action required by the latest 19/Jul" ></i>
                         </span>
                     </div>
                     <div class="noti-item" data-noti-type="" data-update-status="update-completed">
