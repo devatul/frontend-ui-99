@@ -6,6 +6,7 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
+import undo from '../script/Undo.js'
 import 'jquery'
 
 var GroupReview = React.createClass({
@@ -286,6 +287,12 @@ var GroupReview = React.createClass({
         $('#words-cloud').html('').jQCloud(word_list) 
       });
     },
+    addAction: function(event) {
+        undo.addAction(event.target);
+    },
+    undoHandle: function() {
+        undo.undoHandle();
+    },
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
             return Constant.progressBar.level1;
@@ -295,6 +302,7 @@ var GroupReview = React.createClass({
         return Constant.progressBar.level3;
     },
     onChangeCategory: function(event, index) {
+        undo.addAction(event.target);
         var new_category_level = this.state.category_level;
         new_category_level[index] = event.target.value;
 
@@ -305,7 +313,7 @@ var GroupReview = React.createClass({
         this.setState(updateState);
     },
     onChangeConfidential: function(event, index) {
-        console
+        undo.addAction(event.target);
         var new_confidential_level = this.state.confidential_level;
         new_confidential_level[index] = event.target.value;
 

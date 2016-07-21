@@ -301,7 +301,7 @@
                                             <tr rt-repeat="sample in this.state.samples">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
-                                                        <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions">
+                                                        <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions" onChange={this.addAction}>
                                                         <label for="checkboxExample1"></label>
                                                     </div>
                                                 </td>
@@ -366,7 +366,7 @@
                                 </div>
                             </div>
                             <div class="my-actions-btn-group actions-bottom clearfix mt-md">
-                                <button type="button" class="mb-md mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button type="button" class="mb-md mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                 <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
                             </div>
                         </div>
@@ -449,7 +449,7 @@
             <tr class="">
               <td>
                 <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
+                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1"/>
                   <label></label>
                 </div>
               </td>
