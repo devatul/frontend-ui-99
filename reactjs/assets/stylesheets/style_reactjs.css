@@ -50,3 +50,16 @@
 .dropdown-menu.dd-md{
     width: 52vw;
 }
+
+.dropdown-menu.dd-md.custom-dd{
+    width: 565px;
+}
+
+.dropdown-menu.dd-md.custom-dd .filter-list{
+  text-align: left;
+}
+
+.user-selection-titles {
+    font-size: 1.6rem;
+    font-weight: 500;
+}

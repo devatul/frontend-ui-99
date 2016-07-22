@@ -68,79 +68,77 @@
               <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">User Selection - Key contributor for Accounting/ Tax Documents</h2>
+                      <h2 class="panel-title">User Selection</h2>
                       <div class="panel-actions">
                           <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                       </div>
                   </header>
                   <div class="panel-body">
                     <div class="row">
-                      <div class="col-md-6">
-                        <ul class="help_guide_content_left_ul filter-list pt-xs">
-                            <li>
-                              <select name="state" onChange={this.filterOnchange} class="help_question_select form-control ddList">
-                                <option value="">Timeframe</option>
-                                <option class="lt" value="">1 year</option>
-                                <option class="lt" value="">6 months</option>
-                                <option class="lt" value="">3 months</option>
-                                <option class="lt" value="">1 months</option>
-                              </select>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This establishes the timeframe for which user activity will be based on.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="wrap-select">
-                                <select name="state" class="help_question_select form-control ddList">
-                                  <option value="">Number of Users</option>
-                                  <option class="lt" value="">Top 5</option>
-                                  <option class="lt" value="">Top 10</option>
-                                  <option class="lt" value="">Top 15</option>
-                                  <option class="lt" value="">Top 20</option>
-                                  <option class="lt" value="">Top 25</option>
-                                  <option class="lt" value="">Top 30</option>
-                                </select>
-                              </div>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine the number of users that are displayed as suggested reviewers, 
-                                ranked by activity. If the chosen number is greater than the number of users detected, 
-                                the screen will display all relevant results.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="wrap-select">
-                                <select name="state" class="help_question_select form-control ddList">
-                                  <option value="">Type of Reviewer</option>
-                                  <option class="lt" value="">Document Last Modifie</option>
-                                  <option class="lt" value="">Document Creator</option>
-                                </select>
-                              </div>
-                            </li>
-                            <li class="help_question_li dropdown">
-                              <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                              <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine whether the suggested users selected are based on who created the document 
-                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                              </div>
-                            </li>
-                          </ul>
 
-                      </div>
-
-                      <div class="col-md-6">
-                          <div class="row">
+                      <div class="col-xs-12">
+                          <div class="row mt-md">
                             <div class="col-xs-8">
-                              <div>Users</div>
+                              <div class="clearfix">
+                                <span class="pull-left mt-sm mr-md user-selection-titles">Users</span>
+                                <ul class="filter-buttons list-unstyled pull-left">
+                                    <li class="dropdown">
+                                        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                        <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                        <div class="dropdown-menu has-child has-arrow dd-md custom-dd">
+                                            <ul class="filter-list list-unstyled pt-xs">
+                                                <li>
+                                                  <select name="timeframe" onChange={this.filterOnchange} class="assignent-select form-control ddList">
+                                                    <option value="">Timeframe</option>
+                                                    <option class="lt" value="">1 Year</option>
+                                                    <option class="lt" value="">6 Months</option>
+                                                    <option class="lt" value="">3 Months</option>
+                                                    <option class="lt" value="">1 Months</option>
+                                                  </select>
+                                                </li>
+                                                <li>
+                                                  <select name="usersnum" class="assignent-select form-control ddList">
+                                                    <option value="">Number of Users</option>
+                                                    <option class="lt" value="">Top 30</option>
+                                                    <option class="lt" value="">Top 2</option>
+                                                    <option class="lt" value="">Top 20</option>
+                                                    <option class="lt" value="">Top 15</option>
+                                                    <option class="lt" value="">Top 10</option>
+                                                    <option class="lt" value="">Top 5</option>
+                                                  </select>
+                                                </li>
+                                                <li>
+                                                  <select name="reviewertype" class="assignent-select form-control ddList">
+                                                    <option value="">Type of Reviewer</option>
+                                                    <option class="lt" value="">Document Last Modified</option>
+                                                    <option class="lt" value="">Document Creator</option>
+                                                  </select>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="filter-tags-block pull-left">
+                                    <div class="pull-left filter-tags">
+                                    </div>
+                                </div>
+
+                              </div>
                               <div id="userReviewChart"></div>
                             </div>
                             <div class="col-xs-4 select-reviewers">
-                              <div style="margin-bottom:8px">Select the Reviewer(s)</div>
+                              <div class="user-selection-titles" style="margin-bottom:8px;">Select the Reviewer(s)</div>
+                              <div class="switch switch-sm switch-success">
+                                <div class="ios-switch off select-all">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                                Select All
+                              </div>
+                              <div class="clearfix"></div>
                               <div class="switch switch-sm switch-success">
                                 <div class="ios-switch off">
                                   <div class="on-background background-fill"></div><div class="state-background background-fill">
