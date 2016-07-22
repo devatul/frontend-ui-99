@@ -133,6 +133,18 @@
                                                   <p>Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
                                                 </div>
                                               </span>
+                                              <div class="refine-progress">
+                                              <span>In progress</span>
+                                              <div id="circularG" class="inline-block-item">
+                                                  <div id="circularG_1" class="circularG"></div>
+                                                  <div id="circularG_2" class="circularG"></div>
+                                                  <div id="circularG_3" class="circularG"></div>
+                                                  <div id="circularG_4" class="circularG"></div>
+                                                  <div id="circularG_5" class="circularG"></div>
+                                                  <div id="circularG_6" class="circularG"></div>
+                                                  <div id="circularG_7" class="circularG"></div>
+                                                  <div id="circularG_8" class="circularG"></div>
+                                              </div>
                                             </div>
                                           </div>
                                         </section>
@@ -212,7 +224,7 @@
                             </div>
                             <div class="panel-actions my-actions-btn-group">
 
-                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
 
                                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
@@ -231,7 +243,7 @@
                                             <tr role="row">
                                                 <th>
                                                     <div class="checkbox-custom checkbox-primary">
-                                                        <input type="checkbox" id="checkboxAllExample2" class="checkbox-all" data-target="#table-my-actions">
+                                                        <input type="checkbox" id="checkboxAllExample2" class="checkbox-all setUndo" data-target="#table-my-actions">
                                                         <label for="checkboxExample2"></label>
                                                     </div>
                                                 </th>
@@ -348,7 +360,7 @@
                                 </div>
                             </div>
                             <div class="my-actions-btn-group actions-bottom clearfix mt-md">
-                                <button type="button" class="mb-md mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                 <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
                             </div>
                         </div>

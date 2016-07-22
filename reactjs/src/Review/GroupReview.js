@@ -104,13 +104,13 @@ var GroupReview = React.createClass({
             }.bind(this));
         }
         if(this.state.categories != prevState.categories) {
-            this.drawChart(this.state.categories);
+            this.drawChart();
         }
         if(this.state.centroids != prevState.centroids) {
-            this.drawCentroid(this.state.centroids);
+            this.drawCentroid();
         }
         if(this.state.cloudwords != prevState.cloudwords) {
-            this.drawCloud(this.state.cloudwords);
+            this.drawCloud();
         }
     },
     setDefaultValue: function() {
@@ -290,14 +290,14 @@ var GroupReview = React.createClass({
         }));
         console.log("afasdccccc: ", this.state.samples[index], index);
     },
-    drawCloud: function(word_list) {
+    drawCloud: function() {
+        var word_list = this.state.cloudwords;
         var cloudRendered = false;
       var drawCloud = function(){
         if (!cloudRendered){
           $("#words-cloud").jQCloud(word_list,{
             afterCloudRender: function(){
               cloudRendered = true;
-
               $("[data='tooltip']").tooltip();
             }
           });
@@ -339,7 +339,8 @@ var GroupReview = React.createClass({
         });
         this.setState(updateState); 
     },
-    drawCentroid(centroids) {
+    drawCentroid() {
+        var centroids = this.state.centroids;
         $('#centroidChart').highcharts({
             chart: {
                 type:'column'
@@ -396,7 +397,8 @@ var GroupReview = React.createClass({
             }]
         });
     },
-    drawChart(categories) {
+    drawChart() {
+        var categories = this.state.categories;
     	if( $('#confidentialityChart').length){
 		var flotPieData = [];
 		var highchart = [];

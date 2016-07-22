@@ -23,7 +23,7 @@ var ReviewValidation = React.createClass({
         };
     },
     componentWillMount() {
-        this.getChallengedDocs();          
+        //this.getChallengedDocs();          
     },
     componentDidMount() {
         this.getCategories();

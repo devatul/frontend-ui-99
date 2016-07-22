@@ -44,10 +44,6 @@ var OrphanReview = React.createClass({
             return true;
         }
         if(this.state.samples != nextState.samples) {
-            javascript_todo();
-            undo.setup(function(dataUndo, val) {
-
-            });
             return true;
         }
         if(this.state.centroids != nextState.centroids) {
@@ -64,6 +60,12 @@ var OrphanReview = React.createClass({
             this.getCategoryDistribution();
             this.getStatistics();
             this.getSamples();
+        }
+        if(this.state.samples != prevState.samples) {
+            javascript_todo();
+            undo.setup(function(dataUndo, val) {
+                console.log("undo", dataUndo, val);
+            });
         }
         if(this.state.categories != prevState.categories) {
             this.drawChart(this.state.categories);
@@ -257,6 +259,7 @@ var OrphanReview = React.createClass({
           $("#words-cloud").jQCloud(word_list,{
             afterCloudRender: function(){
               cloudRendered = true;
+              $("[data='tooltip']").tooltip();
             }
           });
         }
