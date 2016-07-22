@@ -189,7 +189,7 @@
                                         </thead>
                                         <tbody>
                                             <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
-                                                <td class="sorting_1 text-left">{item.name}</td>
+                                                <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
                                                 <td>{item.percentage_reviewed_docs}% ({item.total_reviewed_docs}) </td>
                                                 <td>{item.percentage_validated_docs}% ({item.total_validated_docs})</td>
                                                 <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}% ({item.total_owner_accuracy_docs})</td>
@@ -242,8 +242,8 @@
                                         </thead>
                                         <tbody>
                                             <tr class="odd" role="row" rt-repeat="category in this.state.scan_result.categories">
-                                                <td class="text-left">
-                                                    {category.name}
+                                                <td class="text-left" style="text-transform: capitalize">
+                                                    <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
                                                 <td>{category.percentage_reviewed_docs}% ({category.total_reviewed_docs})</td>
                                                 <td>{category.percentage_validated_docs}% ({category.total_validated_docs})</td>

@@ -49,6 +49,19 @@ var OverView = React.createClass
     componentDidUpdate(prevProps, prevState) {
         if(this.state.scan_result != prevState.scan_result) {
             this.updateChartData(this.state.scan_result);
+
+            for(var i=0; i < this.state.scan_result.categories.length; i++)
+            {
+                console.log(i);
+                //this.state.scan_result.categories.class='';
+                for(var j=0; j < Constant.iconCategories.length; j++){
+                    if(this.state.scan_result.categories[i].name == Constant.iconCategories[j].name)
+                    {
+                        this.state.scan_result.categories[i].class = Constant.iconCategories[j].class;
+                        break;
+                    }
+                }
+            }
         }
         if(this.state.ChartData != prevState.ChartData) {
             chartOverview(this.state.ChartData);

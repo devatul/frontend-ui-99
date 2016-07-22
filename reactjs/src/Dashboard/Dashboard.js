@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Dashboard.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import $ from 'jquery'
-
+import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
   	mixins: [LinkedStateMixin],
@@ -15,6 +15,7 @@ module.exports = React.createClass({
                 total: 0,
                 list: []
             },
+            role:''
 	    };
 	},
     propTypes: {
@@ -38,56 +39,22 @@ module.exports = React.createClass({
 	},
 	componentDidMount() 
 	{
-		/*
+        console.log("Didcmoit");
         $.ajax({
-            url:'http://54.251.148.133/newsfeed/',
+            url: Constant.SERVER_API + 'api/account/role/',
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState({newsfeed:data});
-                console.log(this.state.newsfeed);
+                this.setState({role: data.role});
+                console.log("role: ", this.state.role);
             }.bind(this),
             error: function(xhr, status, err) {
                 console.log(err);
             }.bind(this)
         });
-        
-        
-        $.ajax({
-            url:'http://54.169.106.24/todo/5',
-            dataType: 'json',
-            type: 'DELETE',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                //this.setState({todo:data});
-                console.log(data);
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.log(err);
-            }.bind(this)
-        });
-        
-        $.ajax({
-            url:'http://54.169.106.24/todo/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                this.setState({todo:data});
-                console.log(this.state.todo);
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.log(err);
-            }.bind(this)
-        });
-        */
 		
 	},
     getNotification() {
