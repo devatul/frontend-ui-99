@@ -1,6 +1,5 @@
-module.exports = function() {
-
-  $(document).on('click', '.dropdown-menu.has-arrow', function (e) {
+module.exports = function () {
+    $(document).on('click', '.dropdown-menu.has-arrow', function (e) {
         e.stopPropagation();
     });    
 

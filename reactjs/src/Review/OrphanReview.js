@@ -6,6 +6,8 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import 'jquery'
 import chart from '../script/chart-orphan-review.js'
+import javascript_todo from '../script/javascript.todo.js'
+import undo from '../script/Undo.js'
 import Constant from '../Constant.js'
 
 var OrphanReview = React.createClass({
@@ -25,13 +27,11 @@ var OrphanReview = React.createClass({
         };
     },
     componentWillMount() {
-        this.getOrphan();
+        //this.getOrphan();
     },
     componentDidMount() {
+        this.getOrphan();
         chart();
-        this.getCategoryDistribution();
-        this.getStatistics();
-        this.getSamples();
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.orphan_current != nextState.orphan_current) {
@@ -44,6 +44,10 @@ var OrphanReview = React.createClass({
             return true;
         }
         if(this.state.samples != nextState.samples) {
+            javascript_todo();
+            undo.setup(function(dataUndo, val) {
+
+            });
             return true;
         }
         if(this.state.centroids != nextState.centroids) {

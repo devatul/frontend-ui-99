@@ -61,6 +61,7 @@
                                                           </div>
                                                         </td>
                                                         <td class="text-left">{this.state.statistics.total_number_documents}</td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Completed Number of Documents</span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
@@ -230,7 +231,7 @@
                                             <tr role="row">
                                                 <th>
                                                     <div class="checkbox-custom checkbox-primary">
-                                                        <input type="checkbox" id="checkboxExample2" class="checkbox-all" data-target="#table-my-actions">
+                                                        <input type="checkbox" id="checkboxAllExample2" class="checkbox-all" data-target="#table-my-actions">
                                                         <label for="checkboxExample2"></label>
                                                     </div>
                                                 </th>
@@ -296,8 +297,8 @@
                                             <tr rt-repeat="doc in this.state.samples" key="{doc.name}">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
-                                                        <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions">
-                                                        <label for="checkboxExample1"></label>
+                                                        <input type="checkbox" id="checkboxExample{docIndex}" class="checkbox-item setUndo" data-target="#table-my-actions">
+                                                        <label for="checkboxExample{docIndex}"></label>
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
@@ -323,14 +324,14 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <select class="form-control"> 
+                                                        <select id="{'Category_' + docIndex}" class="form-control setUndo"> 
                                                           <option rt-repeat="category in doc.categories" value="{category.name}" key="{category.name}">{category.name}</option>
                                                         </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <select class="form-control">
+                                                        <select id="{'Confidential_' + docIndex}" class="form-control setUndo">
                                                           <option rt-repeat="confidentialy in doc.confidentialities" value="{confidentialy.name}" key="{confidentialy.name}">{confidentialy.name}</option>
                                                         </select>
                                                     </div>

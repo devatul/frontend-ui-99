@@ -7,6 +7,7 @@ import update from 'react-addons-update'
 import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
 import undo from '../script/Undo.js'
+import javascript_todo from '../script/javascript.todo.js'
 import 'jquery'
 
 var GroupReview = React.createClass({
@@ -15,7 +16,7 @@ var GroupReview = React.createClass({
     getInitialState: function() {
     	return {
     		list_group:[],
-    		group_current: {},
+    		group_current: null,
     		statistics: {},
     		cloudwords: [],
     		centroids: [],
@@ -23,21 +24,18 @@ var GroupReview = React.createClass({
     		categories: [],
             samples_current: 0,
             category_level: [],
-            category_level_current: "",
+            category_level_current: null,
             confidential_level: [],
-            confidential_level_current: "",
+            confidential_level_current: null,
             documentPreview: {},
-            documentPreview_current: 0,
-            stackAction: []
+            documentPreview_current: 0
     	};
     },
     componentWillMount() {
-        this.getGroup();
+        //this.getGroup();
     },
     componentDidMount() {
-        this.getStatistics();
-        this.getSamples();
-        this.getCategoryDistribution();
+        this.getGroup(); 
         chart();
     },
     shouldComponentUpdate(nextProps, nextState) {
@@ -59,6 +57,9 @@ var GroupReview = React.createClass({
         if(this.state.cloudwords != nextState.cloudwords) {
             return true;
         }
+        if(this.state.confidential_level != nextState.confidential_level) {
+            return true;
+        }
         if(this.state.category_level_current != nextState.category_level_current) {
             return true;
         }
@@ -72,13 +73,35 @@ var GroupReview = React.createClass({
     },
     componentDidUpdate(prevProps, prevState) {
         if(this.state.group_current != prevState.group_current){
-            console.log("okasdfasdfasdfasdfad", this.state.group_current);
-            this.getStatistics();
-            this.getSamples();
-            this.getCategoryDistribution();
+            this.getStatistics(this.state.list_group[this.state.group_current].id);
+            this.getSamples(this.state.list_group[this.state.group_current].id);
+            this.getCategoryDistribution(this.state.list_group[this.state.group_current].id);
         }
         if(this.state.samples != prevState.samples) {
+            javascript_todo();
             this.setDefaultValue();
+            undo.setup(function(dataUndo, val) {
+                var element = dataUndo.obj;
+                var id = dataUndo.id;
+                console.log("element: ", element, val);
+                if(element.dataset.value != null) var data = element.dataset.value.split(':');
+                if(data != null && data[1] === "Category") {
+                    var new_category_level = this.state.category_level;
+                    new_category_level[data[0]] = val;
+                    this.setState(update(this.state, {
+                        category_level: {$set: new_category_level},
+                        category_level_current: {$set: data[0] + ':' + val}
+                    }));
+                }
+                if(data != null && data[1] ==="Confidential") {
+                    var new_confidential_level = this.state.confidential_level;
+                    new_confidential_level[data[0]] = val;
+                    this.setState(update(this.state, {
+                        confidential_level: {$set: new_confidential_level},
+                        confidential_level_current: {$set: data[1] + ':' + val}
+                    }));
+                }
+            }.bind(this));
         }
         if(this.state.categories != prevState.categories) {
             this.drawChart(this.state.categories);
@@ -115,7 +138,7 @@ var GroupReview = React.createClass({
             success: function(data) {
                 var updateState = update(this.state, {
                     list_group: {$set: data},
-                    group_current: {$set: data[0]}
+                    group_current: {$set: 0}
                 });
                 this.setState(updateState);
                 console.log("asdfasdfasdfasd", data);
@@ -131,16 +154,16 @@ var GroupReview = React.createClass({
     changeGroup() {
             var group_selected = this.refs.choose_group.value;
             var updateState = update(this.state, {
-                group_current: {$set: this.state.list_group[group_selected]}
+                group_current: {$set: group_selected}
             });
             this.setState(updateState);
     },
-    getStatistics() {
+    getStatistics(groupId) {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/statistics/",
             dataType: 'json',
-            data: { "id":this.state.group_current.id },
+            data: { "id":groupId },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -163,7 +186,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/cloudwords/",
             dataType: 'json',
-            data: { "id":this.state.group_current.id },
+            data: { "id":this.state.list_group[this.state.group_current].id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -190,7 +213,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/centroids/",
             dataType: 'json',
-            data: { "id":this.state.group_current.id },
+            data: { "id":this.state.list_group[this.state.group_current].id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -212,12 +235,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getSamples() {
+    getSamples(groupId) {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/samples/",
             dataType: 'json',
-            data: { "id":this.state.group_current.id },
+            data: { "id":groupId },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -236,12 +259,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getCategoryDistribution() {
+    getCategoryDistribution(groupId) {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/categories/",
             dataType: 'json',
-            data: { "id":this.state.group_current.id },
+            data: { "id":groupId },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -287,12 +310,6 @@ var GroupReview = React.createClass({
         $('#words-cloud').html('').jQCloud(word_list) 
       });
     },
-    addAction: function(event) {
-        undo.addAction(event.target);
-    },
-    undoHandle: function() {
-        undo.undoHandle();
-    },
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
             return Constant.progressBar.level1;
@@ -302,18 +319,17 @@ var GroupReview = React.createClass({
         return Constant.progressBar.level3;
     },
     onChangeCategory: function(event, index) {
-        undo.addAction(event.target);
+        var val = event.target.value;
         var new_category_level = this.state.category_level;
-        new_category_level[index] = event.target.value;
+        new_category_level[index] = val;
 
         var updateState = update(this.state, {
             category_level: {$set: new_category_level},
-            category_level_current: {$set: index + ':' + event.target.value}
+            category_level_current: {$set: index + ':' + val}
         });
         this.setState(updateState);
     },
     onChangeConfidential: function(event, index) {
-        undo.addAction(event.target);
         var new_confidential_level = this.state.confidential_level;
         new_confidential_level[index] = event.target.value;
 

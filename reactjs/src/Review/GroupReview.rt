@@ -1,452 +1,473 @@
-
 <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
-                        <h5><span class="text-bold">Group Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
-                        <div class="form-group">
-                            <div class="input-group mb-md">
-                                <label for="choose_cluster">
-                                    Choose a Group
-
-                                    <select ref="choose_group" class="js-example-basic-single js-states form-control" id="choose_cluster">
-                                        <option rt-repeat="group in this.state.list_group" value="{groupIndex}" key="{group.id}">{group.name}</option>
-                                    </select>
-                                </label>
-                                <button class="btn btn-green btn-ok" type="button" onClick={this.changeGroup}>OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--                 <div class="row mb-sm">
-                    <div class="col-sm-12 view-stat-block">
-                        <label>Sample Method: </label>
-                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Random</button>
-                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Nearest</button>
-                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Farthest</button>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
-                            <header class="panel-heading">
-                                <h2 class="panel-title">Group Statistics</h2>
-                            </header>
-                            <div class="review_panel-body panel-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h4>Review Status</h4>
-                                        <div class="liquid-meter" id="meter"  min="0" max="100" value="25"></div>
-
-                                        <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
-                                          <header class="panel-heading">
-                                              <h2 class="panel-title">Basic Statistics</h2>
-                                          </header>
-
-                                          <div class="panel-body" id="stat-block">
-                                            <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
-
-                                            <div class="panel-actions collapse-stat-table">
-                                              <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
-                                            </div>
-
-                                            <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-left"><span>Total number of Documents</span>
-                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                              <p>This represents the total number of documents that have been detected by 99 during the initial scan of 
-                                                              the locations that have been inputted into the tool.</p>
-                                                            </div>
-                                                          </div>
-                                                        </td>
-                                                        <td class="text-left">{this.state.statistics.total_number_documents}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><span>Completed Number of Documents</span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <p>This represents the number of documents that 99 has been successful in classifying.</p>
-                                                          </div>
-                                                        </div>
-                                                      </td>
-                                                        <td class="text-left">{this.state.statistics.completed_number_documents}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><span>Average Centroid Distance</span>
-                                                          <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                              <p>This represents the average level of deviance from the centroid point, 
-                                                              where the centroid point represents the optimal point of classification. 
-                                                              The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
-                                                            </div>
-                                                          </div>
-                                                        </td>
-                                                        <td class="text-left">{this.state.statistics.avg_centroid_distance}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><span>Maximum Centroid Distance</span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <p>This represents the document that has been registered furthest from the centroid point. 
-                                                            The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
-                                                          </div>
-                                                        </div>
-                                                      </td>
-                                                        <td class="text-left">{this.state.statistics.max_centroid_distance}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><span>Minimum Centroid Distance</span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <p>This represents the document that has been registered closest to the centroid point. 
-                                                            Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
-                                                          </div>
-                                                        </div>
-                                                      </td>
-                                                        <td class="text-left">{this.state.statistics.min_centroid_distance}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><span>Centroid Distance Varience</span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                          <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                          <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <p>This represent the document variance within the selected cluster. Variance is the expectation of the 
-                                                            squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
-                                                          </div>
-                                                        </div>
-                                                      </td>
-                                                        <td class="text-left">{this.state.statistics.centroid_distance_variance}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-                                            <div class="mt-lg">
-                                              <a href="#" class="btn btn-refine btn-green">Refine Group</a>
-                                              <span class="dropdown">
-                                                <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                <div class="dropdown-menu has-arrow dropdown-file-info">
-                                                  <p>Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
-                                                </div>
-                                              </span>
-                                            </div>
-                                          </div>
-                                        </section>
-
-                                        
-                                    </div>  
-                                    <div class="col-md-9">
-                                        <div class="tabs">
-                                            <ul class="review_nav-tabs nav nav-tabs">
-                                                <li class="li_first active">
-                                                    <a href="#distribution" data-toggle="tab">Category Distribution</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
-                                                </li>
-                                                <li class="li_late">
-                                                    <a href="#cloud" data-toggle="tab" onClick={this.getCloudwords}>Significant Words Cloud</a>
-                                                </li>
-                                            </ul>
-                                            <div class="review_tab-content tab-content">
-                                                <div id="distribution" class="tab-pane active">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h4 class="chart-title">Confidentiality
-                                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                                <p>This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99.</p>
-                                                              </div>
-                                                            </h4>
-                                                            <div class="chart-container">
-                                                                <div id="confidentialityChartLegend"></div>
-                                                                <div id="confidentialityChart">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <h4 class="chart-title">Document type per Level of Confidentiality
-                                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                                <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
-                                                              </h4>
-                                                            <div id="confidentialityLevelChart"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="centroid" class="tab-pane">
-                                                    <h4 class="chart-title">Centroid Distance Histogram in this group</h4>
-                                                    <div id="centroidChart"></div>
-                                                </div>
-                                                <div id="cloud" class="tab-pane">
-													                           <p class="review_cloud_p">Significant Words is the</p>
-                                                    <div id="words-cloud"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="panel panel-primary cluster-block" id="cluster1">
-                        </section>
-                    </div>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
+            <h5><span class="text-bold">Group Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
+            <div class="form-group">
+                <div class="input-group mb-md">
+                    <label for="choose_cluster">
+                        Choose a Group
+                        <select ref="choose_group" class="js-example-basic-single js-states form-control" id="choose_cluster" value="{this.state.group_current}">
+                            <option rt-repeat="group in this.state.list_group" value="{groupIndex}" key="{group.id}">{group.name}</option>
+                        </select>
+                    </label>
+                    <button class="btn btn-green btn-ok" type="button" onClick={this.changeGroup}>OK</button>
                 </div>
             </div>
         </div>
-		
-		
-		    <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <section class="panel panel-featured panel-featured-primary actions-panel">
-                        <header class="panel-heading">
-                            <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
-<!--                             <div class="inline-block-item view-stat-block">
-                                <label>Sample Method: </label>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
-                            </div> -->
-                            <div class="panel-actions my-actions-btn-group">
+    </div>
 
-                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Group Statistics</h2>
+                </header>
+                <div class="review_panel-body panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4>Review Status</h4>
+                            <div class="liquid-meter" id="meter"  min="0" max="100" value="25"></div>
 
-                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                            </div>
-                        </header>
-                        <div class="panel-body" style="display: block;">
-                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                <button type="button" class="mb-md mr-xs btn btn-success show-on-checked-all approve-button">Approve</button>
-                                <div class="alert alert-success actions-success">
-                                    <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                    <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+                              <header class="panel-heading">
+                                  <h2 class="panel-title">Basic Statistics</h2>
+                              </header>
+
+                              <div class="panel-body" id="stat-block">
+                                <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+
+                                <div class="panel-actions collapse-stat-table">
+                                  <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th>
-                                                    <div class="checkbox-custom checkbox-primary">
-                                                        <input type="checkbox" id="checkboxExample2" class="checkbox-all" data-target="#table-my-actions">
-                                                        <label for="checkboxExample2"></label>
-                                                    </div>
-                                                </th>
-                                                <th class="review_note">Document
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the name of each individual document, as it exists in its current state.</p>
-														</div>
-													</div>
-												</th>
-                                                <th class="review_note">Path
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the logical folder path to where each document is currently located.</p>
-														</div>
-													</div>
-												</th>
-                                                <th class="review_note">Owner
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-															<p>This displays the organisational member who has last modified the document. 
-															This owner is automatically assigned by 99 from the 
-															Document metadata itself gathered during the scanning process.</p>
-														</div>
-													</div>
-												</th>
-                                                <th class="review_note">Proposed category (confidence level)
-													<div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-															<p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-															The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-														</div>
-													</div>
-												</th>
-                                                <th class="review_note">Proposed confidentiality (confidence level)
-													   <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-														<div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-															<p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-															In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-															The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-															The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-														</div>
-													</div>
-												</th>
-                                                <th class="text-center">Status
-                                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                        <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                                            <p>This represent the status of the review for each file.</p>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr rt-repeat="sample in this.state.samples">
-                                                <td>
-                                                    <div class="checkbox-custom checkbox-default">
-                                                        <input type="checkbox" id="checkboxExample1" class="checkbox-item" data-target="#table-my-actions" onChange={this.addAction}>
-                                                        <label for="checkboxExample1"></label>
-                                                    </div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(sampleIndex)">{sample.name}</span>
-                                                    <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                        <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                                        <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <ul>
-                                                                <li>Creation Date: {sample.creation_date}</li>
-                                                                <li>Modifitcation Date: {sample.modification_date}</li>
-                                                                <li>Required Legal Retention until: {sample.legal_retention_until}</li>
-                                                                <li>Confidentiality Label: {sample.confidentiality_label}</li>
-                                                                <li>Number of Classification Challenge: {sample.number_of_classification_challenge}</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <span class="text-italic doc-path">{sample.path}</span>
-                                                </td>
-                                                <td class="text-left">
-                                                    <span class="text-italic">{sample.owner}</span>
-                                                </td>
-                                                <td>
-                                                    <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar {this.progressbar(this.state.category_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.category_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.category_level[sampleIndex]}%;">
-                                                              </div>
-                                                              <span class="progress-percentage">({this.state.category_level[sampleIndex]}%)</span>
-                                                            </div>
-                                                        </div>
-                                                        <select class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value={this.state.category_level[sampleIndex]}>
-                                                          <option rt-repeat="category in sample.categories" value="{category.confidence_level}">{category.name}</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="select-group">
-                                                        <div class="selected-info">
-                                                            <div class="progress progress-striped light">
-                                                              <div class="progress-bar {this.progressbar(this.state.confidential_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.confidential_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.confidential_level[sampleIndex]}%;">
-                                                              </div>
-                                                              <span class="progress-percentage">({this.state.confidential_level[sampleIndex]}%)</span>
-                                                            </div>
-                                                        </div>
-                                                        <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value={this.state.confidential_level[sampleIndex]}>
-                                                          <option rt-repeat="Confidential in sample.confidentialities" value="{Confidential.confidence_level}">{Confidential.name}</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="doc-check">
-                                                      <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                      <i class="fa fa-check" aria-hidden="true"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+                                <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left"><span>Total Number of Documents</span>
+                                              <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                  <p>This represents the total number of documents that have been detected by 99 during the initial scan of 
+                                                  the locations that have been inputted into the tool.</p>
+                                                </div>
+                                              </div>
+                                            </td>
+                                            <td class="text-left">{this.state.statistics.total_number_documents}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><span>Completed Number of Documents</span>
+                                            <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                <p>This represents the number of documents that 99 has been successful in classifying.</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                            <td class="text-left">{this.state.statistics.completed_number_documents}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><span>Average Centroid Distance</span>
+                                              <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                                <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                  <p>This represents the average level of deviance from the centroid point, 
+                                                  where the centroid point represents the optimal point of classification. 
+                                                  The smaller the average deviation, the greater the level of confidence in 99’s classification results.</p>
+                                                </div>
+                                              </div>
+                                            </td>
+                                            <td class="text-left">{this.state.statistics.avg_centroid_distance}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><span>Maximum Centroid Distance</span>
+                                            <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                <p>This represents the document that has been registered furthest from the centroid point. 
+                                                The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results.</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                            <td class="text-left">{this.state.statistics.max_centroid_distance}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><span>Minimum Centroid Distance</span>
+                                            <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                <p>This represents the document that has been registered closest to the centroid point. 
+                                                Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct.</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                            <td class="text-left">{this.state.statistics.min_centroid_distance}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><span>Centroid Distance Variance</span>
+                                            <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                              <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                              <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                <p>This represent the document variance within the selected cluster. Variance is the expectation of the 
+                                                squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid.</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                            <td class="text-left">{this.state.statistics.centroid_distance_variance}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="mt-lg">
+                                  <a href="#" class="btn btn-green btn-refine">Refine Group</a>
+                                  <span class="dropdown">
+                                    <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dropdown-file-info">
+                                      <p>Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough</p>
+                                    </div>
+                                  </span>
+                                  <div class="refine-progress">
+                                    <span>In progress</span>
+                                    <div id="circularG" class="inline-block-item">
+                                        <div id="circularG_1" class="circularG"></div>
+                                        <div id="circularG_2" class="circularG"></div>
+                                        <div id="circularG_3" class="circularG"></div>
+                                        <div id="circularG_4" class="circularG"></div>
+                                        <div id="circularG_5" class="circularG"></div>
+                                        <div id="circularG_6" class="circularG"></div>
+                                        <div id="circularG_7" class="circularG"></div>
+                                        <div id="circularG_8" class="circularG"></div>
+                                    </div>
+                                  </div>
                                 </div>
-                            </div>
-                            <div class="my-actions-btn-group actions-bottom clearfix mt-md">
-                                <button type="button" class="mb-md mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                              </div>
+                            </section>
+
+                            
+                        </div>  
+                        <div class="col-md-9">
+                            <div class="tabs">
+                                <ul class="review_nav-tabs nav nav-tabs">
+                                    <li class="li_first active">
+                                        <a href="#distribution" data-toggle="tab">Category Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
+                                    </li>
+                                    <li class="li_late">
+                                        <a href="#cloud" data-toggle="tab" onClick={this.getCloudwords}>Significant Words Cloud</a>
+                                    </li>
+                                </ul>
+                                <div class="review_tab-content tab-content">
+                                    <div id="distribution" class="tab-pane active">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4 class="chart-title">Confidentiality
+                                                  <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                  <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                    <p>This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99.</p>
+                                                  </div>
+                                                </h4>
+                                                <div class="chart-container">
+                                                    <div id="confidentialityChartLegend"></div>
+                                                    <div id="confidentialityChart">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4 class="chart-title">Document Type per Level of Confidentiality
+                                                  <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                  <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                    <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
+                                                  </h4>
+                                                <div id="confidentialityLevelChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="centroid" class="tab-pane">
+                                        <h4 class="chart-title">Centroid Distance Histogram</h4>
+                                        <div id="centroidChart"></div>
+                                    </div>
+                                    <div id="cloud" class="tab-pane">
+                                         <h4 class="review_cloud_p">Significant Words Cloud</h4>
+                                        <div id="words-cloud"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
-            </div>
- <!--Modal-->
-  
-  <div id="previewModal" class="modal fade in" role="dialog" rt-if="(this.state.documentPreview != null)">
-      <div class="modal-dialog modal-preview">
+            </section>
+            <section class="panel panel-primary cluster-block" id="cluster1">
+            </section>
+        </div>
+    </div>
+</div>
 
-        <!-- Modal content-->
-        <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview_current as documentPreview_current">
-          <div class="modal-header">
-            <div class="row">
-                <div class="col-sm-4 modal-title">
-                    <i class="fa fa-search"></i>
-                    Document Preview
+
+
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel panel-featured panel-featured-primary actions-panel">
+            <header class="panel-heading">
+                <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
+
+                <div class="panel-actions my-actions-btn-group">
+
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+
+                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                 </div>
-                <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic"></span><br>
-                    <span>Folder /legal/teamA/</span>
-                </div>
-                <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
-                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </header>
+            <div class="panel-body" style="display: block;">
+                <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                    <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all approve-button">Approve</button>
+                    <div class="alert alert-success actions-success">
+                        <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
+                            <thead>
+                                <tr role="row">
+                                    <th>
+                                        <div class="checkbox-custom checkbox-primary">
+                                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all setUndo" data-target="#table-my-actions">
+                                            <label for="checkboxAllExample2"></label>
+                                        </div>
+                                    </th>
+                                    <th class="review_note">Document
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This displays the name of each individual document, as it exists in its current state.</p>
                 </div>
               </div>
+            </th>
+            <th class="review_note">Path
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This displays the logical folder path to where each document is currently located.</p>
+                </div>
+              </div>
+            </th>
+                                    <th class="review_note">Owner
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This displays the organisational member who has last modified the document. 
+                  This owner is automatically assigned by 99 from the 
+                  Document metadata itself gathered during the scanning process.</p>
+                </div>
+              </div>
+            </th>
+                                    <th class="review_note">Proposed Category (confidence level)
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                  In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                  The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                  The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                </div>
+              </div>
+            </th>
+                                    <th class="review_note">Proposed Confidentiality (confidence level)
+                 <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                  In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                  The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                  The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                </div>
+              </div>
+            </th>
+                                    <th class="text-center">Status
+                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                                <p>This represent the status of the review for each file.</p>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr rt-repeat="sample in this.state.samples" key="{sampleIndex}">
+                                    <td>
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item setUndo" data-target="#table-my-actions">
+                                            <label for="checkboxExample{sampleIndex}"></label>
+                                        </div>
+                                    </td>
+                                    <td class="text-left">
+                                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(sampleIndex)">{sample.name}</span>
+                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                            <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                            <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                                <ul>
+                                                    <li>Creation Date: {sample.creation_date}</li>
+                                                    <li>Modifitcation Date: {sample.modification_date}</li>
+                                                    <li>Required Legal Retention until: {sample.legal_retention_until}</li>
+                                                    <li>Confidentiality Label: {sample.confidentiality_label}</li>
+                                                    <li>Number of Classification Challenge: {sample.number_of_classification_challenge}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-left">
+                                        <span class="text-italic doc-path">{sample.path}</span>
+                                    </td>
+                                    <td class="text-left">
+                                        <span class="text-italic">{sample.owner}</span>
+                                    </td>
+                                    <td>
+                                        <div class="select-group">
+                                            <div class="selected-info">
+                                                <div class="progress progress-striped light">
+                                                  <div class="progress-bar {this.progressbar(this.state.category_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.category_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.category_level[sampleIndex]}%;">
+                                                  </div>
+                                                  <span class="progress-percentage">({this.state.category_level[sampleIndex]}%)</span>
+                                                </div>
+                                            </div>
+                                            <select id="{'Category_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{this.state.category_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Category'}">
+                                              <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="select-group">
+                                            <div class="selected-info">
+                                                <div class="progress progress-striped light">
+                                                  <div class="progress-bar {this.progressbar(this.state.confidential_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.confidential_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.confidential_level[sampleIndex]}%;">
+                                                  </div>
+                                                  <span class="progress-percentage">({this.state.confidential_level[sampleIndex]}%)</span>
+                                                </div>
+                                            </div>
+                                            <select id="{'Confidential_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{this.state.confidential_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Confidential'}">
+                                              <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{Confidential.confidence_level}">{Confidential.name}</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="doc-check">
+                                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                          <i class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="my-actions-btn-group actions-bottom clearfix mt-md">
+                    <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                </div>
             </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-          <thead>
-            <tr role="row" class="">
-              <th>
-                <div class="checkbox-custom checkbox-primary">
-                  <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
-                  <label></label>
-                </div>
-              </th>
-              <th class="review_note">Document Name
-              </th>
-              <th class="review_note">Path
-              </th>
-              <th class="review_note">Owner
-              </th>
-              <th class="review_note">Proposed category (confidence level)
-                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                    The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+        </section>
+    </div>
+</div>
+
+<!--Modal-->
+  
+<div id="previewModal" class="modal fade in" role="dialog">
+  <div class="modal-dialog modal-preview">
+
+    <!-- Modal content-->
+    <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview_current as documentPreview_current">
+      <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-4 modal-title">
+                <i class="fa fa-search"></i>
+                Document Preview
+            </div>
+            <div class="col-sm-4 modal-info text-center">
+                <span class="text-itatic">Contract.doc</span><br>
+                <span>Folder /legal/teamA/</span>
+            </div>
+            <div class="col-sm-4 modal-actions text-right">
+                <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+           <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+      <thead>
+        <tr role="row" class="">
+          <th>
+            <div class="checkbox-custom checkbox-primary">
+              <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
+              <label></label>
+            </div>
+          </th>
+          <th class="review_note">Document Name
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                      <p>This displays the name of each individual document, as it exists in its current state.</p>
                   </div>
-                </div>
-              </th>
-              <th class="review_note">Proposed confidentiality (confidence level)
-                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                    The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+              </div>
+          </th>
+          <th class="review_note">Path
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                      <p>This displays the logical folder path to where each document is currently located.</p>
                   </div>
-                </div>
-              </th>
-              <th class="text-center">Status
-                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represent the status of the review for each file.</p>
+              </div>
+          </th>
+          <th class="review_note">Owner
+              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                      <p>This displays the organisational member who has last modified the document. 
+                      This owner is automatically assigned by 99 from the 
+                      Document metadata itself gathered during the scanning process.</p>
                   </div>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="">
+              </div>
+          </th>
+          <th class="review_note">Proposed Category (confidence level)
+            <div class="r dropdown dropdown-file-info-holder inline-block-item">
+               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+              </div>
+            </div>
+          </th>
+          <th class="review_note">Proposed Confidentiality (confidence level)
+               <div class="r dropdown dropdown-file-info-holder inline-block-item">
+               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+              </div>
+            </div>
+          </th>
+          <th class="text-center">Status
+            <div class="r dropdown dropdown-file-info-holder inline-block-item">
+               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                <p>This represent the status of the review for each file.</p>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
               <td>
                 <div class="checkbox-custom checkbox-default">
                   <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1"/>
@@ -483,8 +504,8 @@
                           <span class="progress-percentage">({this.state.category_level[documentPreview_current]}%)</span>
                         </div>
                     </div>
-                    <select class="form-control" onChange="(event)=>this.onChangeCategory(event, documentPreview_current)" value={this.state.category_level[documentPreview_current]}>
-                      <option rt-repeat="category in document.categories" value="{category.confidence_level}">{category.name}</option>
+                    <select class="form-control" onChange="(event)=>this.onChangeCategory(event, documentPreview_current)" value="{this.state.category_level[documentPreview_current]}">
+                      <option rt-repeat="category in document.categories" value="{category.confidence_level}" key="{categoryIndex}">{category.name}</option>
                     </select>
                 </div>
             </td>
@@ -498,7 +519,7 @@
                         </div>
                     </div>
                     <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, documentPreview_current)" value={this.state.confidential_level[documentPreview_current]}>
-                      <option rt-repeat="Confidential in document.confidentialities" value="{Confidential.confidence_level}">{Confidential.name}</option>
+                      <option rt-repeat="Confidential in document.confidentialities" value="{Confidential.confidence_level}" key="{ConfidentialIndex}">{Confidential.name}</option>
                     </select>
                 </div>
             </td>
@@ -509,16 +530,16 @@
                 </a>
               </td>
             </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="file-preview mt-md">
-                <p>File Preview Content</p>
-                <img src="{document.image_url}" title="File Preview Content">
-            </div>
-          </div>
+            </tbody>
+            </table>
         </div>
-
+        <div class="file-preview mt-md">
+            <p>File Preview Content</p>
+            <img src="{document.image_url}" title="File Preview Content">
+        </div>
       </div>
-    </div>  
+    </div>
+
+  </div>
+</div> 
 </section>

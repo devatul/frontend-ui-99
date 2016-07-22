@@ -5,6 +5,8 @@ import template from './App.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import $ from 'jquery'
 import validate from 'jquery-validation';
+import javascript from './script/javascript.js';
+import javascript_todo from './script/javascript.todo.js';
 const TIMEVALIDTOKEN = 300000;
 module.exports = React.createClass({
     mixins: [LinkedStateMixin],
@@ -44,6 +46,12 @@ module.exports = React.createClass({
 			console.log("noToken");
 			browserHistory.push('/Account/Signin');	
 		}
+    },
+    componentDidMount() {
+    },
+    
+    componentDidUpdate(prevProps, prevState) {
+        console.log("update app");
     },
     render:template
 

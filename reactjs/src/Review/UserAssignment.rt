@@ -2,15 +2,15 @@
 	<div class="container">
 			<div class="tabs tabs-primary">
 				<ul class="nav nav-tabs">
-					<li rt-repeat="category in this.state.categories" class="active">
-						<a href="#{category.name}" data-toggle="tab" onClick={this.getCategoryInfo(category.id)} aria-expanded="true" key="{category.id}">{category.name}</a>
+					<li rt-repeat="category in this.state.categories" class="">
+						<a href="#categoryInfo" data-toggle="tab" onClick={this.getCategoryInfo} aria-expanded="true">{category.name}</a>
 					</li>
 					<li class="">
 						<a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
 					</li>
 				</ul>
 				<div class="help_guide_sub tab-content">
-					<div rt-repeat="category in this.state.categories" id="{category.name}" class="help_guide tab-pane active">
+					<div id="categoryInfo" class="help_guide tab-pane active">
 						<div class="row">
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">

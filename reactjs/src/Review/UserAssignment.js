@@ -19,14 +19,16 @@ var UserAssignment = React.createClass({
             filter: []
         };
     },
-    componentWillUnmount() {
-        this.getCategories();  
+    componentWillUnmount() {  
     },
     componentDidMount() {
-        this.getCategoryInfo(1);
-        this.filterOnchange();
+    	this.getCategories();
+    	this.getCategoryInfo(1);
     },
     shouldComponentUpdate(nextProps, nextState) {
+    	if(this.state.categories != nextState.categories) {
+    		return true;
+    	}
         if(this.state.category_Info != nextState.category_Info) {
         	return true;
         }
@@ -36,8 +38,8 @@ var UserAssignment = React.createClass({
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
-    	if(this.state.category_Info != nextState.category_Info) {
-        	this.chartAssignment();
+    	if(this.state.category_Info != prevState.category_Info) {
+        	this.chartAssignment(this.state.category_Info);
         }
     	if(prevState.filter != this.state.filter) {
     		this.chartUserFilter();
@@ -57,7 +59,7 @@ var UserAssignment = React.createClass({
                     categories: {$set: data},
                 });
                 this.setState(updateState);
-                console.log("categories ok: ", data);
+                console.log("categories: ", data);
             }.bind(this),
             error: function(xhr,error) {
                 console.log("categories error: " + error);
@@ -133,7 +135,7 @@ var UserAssignment = React.createClass({
 		    		},
 		    		Series: []
 		    	};
-		    	confidentialities = category_Info.confidentialities.sort(function (a, b) {
+		    	var confidentialities = category_Info.confidentialities.sort(function (a, b) {
 				    return a.name.localeCompare( b.name );
 				});
 		    	for(var i = 0; i < confidentialities.length; i++) {

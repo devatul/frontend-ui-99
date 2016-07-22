@@ -42,7 +42,7 @@ var Signin = React.createClass
 		      	console.log(data.token);
 
 	    		localStorage.setItem('token', data.token);
-	    		javascript();
+	    		//javascript();
 		        browserHistory.push('/Dashboard/OverView');
 		      }.bind(this),
 		      error: function(xhr, status, err) {

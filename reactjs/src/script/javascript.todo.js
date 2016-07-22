@@ -1,4 +1,25 @@
-$(function () {
+module.exports = function () {
+  $('.btn-end-review').click(function(){
+    var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+    table.find('tr').each(function () {
+      $(this).removeClass('inactive');
+      if ($(this).find('input[type="checkbox"]').prop('checked')){
+        $(this).find('.doc-check').addClass('validated');
+        $(this).addClass('item-validated');
+        $(this).find('input[type="checkbox"]').prop('checked', false);
+      };
+    });
+    if (table.find('.doc-check').length == table.find('.doc-check.validated').length){
+      table.find('.btn-end-review').removeClass('btn-disabled');
+       table.parents('.dataTables_wrapper').find('.actions-success').show();
+    }
+    var docToReview = 10 - table.find('.doc-check.validated').length;
+    $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+  });
+
+  $(".alert-close[data-hide]").on("click", function(){
+      $(this).closest("." + $(this).attr("data-hide")).hide();
+  });
     $('.approve-button-2').click(function(){
         $(this).hide();
         var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
@@ -17,7 +38,6 @@ $(function () {
         var docToReview = 10 - table.find('.doc-check.validated').length;
         $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
     });
-
   $('.approve-button').click(function(){
     $(this).hide();
     var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
@@ -129,10 +149,10 @@ $(function () {
           $('.show-on-checked-all').show();
       }
       else{
-          $('.show-on-checked-all').hide();		  
+          $('.show-on-checked-all').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
-  }); 
+  });
 
 $('.checkbox-item-1').on('change', function(){
       var target = $(this).attr('data-target');
@@ -152,7 +172,7 @@ $('.checkbox-item-1').on('change', function(){
           $('.show-on-checked-all-1').show();
       }
       else{
-          $('.show-on-checked-all-1').hide();		  
+          $('.show-on-checked-all-1').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
@@ -174,7 +194,7 @@ $('.checkbox-item-1').on('change', function(){
           $('.show-on-checked-all-2').show();
       }
       else{
-          $('.show-on-checked-all-2').hide();		  
+          $('.show-on-checked-all-2').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
@@ -240,6 +260,6 @@ $('.checkbox-item-1').on('change', function(){
 
   });   
 
-});
+}
 
 

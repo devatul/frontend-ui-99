@@ -1,54 +1,97 @@
 module.exports = {
+	classSetUndo: ".setUndo",
+	classGetUndo: ".getUndo",
 	//config this.number of action
-	number: 15,
+	//number: 20,
 	//this.stack action
-	stack: [{ context: null, value: null }],
+	stack: [],
 
-	addAction: function(element) {
-		var value = null;
-		if(element.type == "checkbox" || element.type == "radio") {
-			if(this.stack.length > 2 && this.stack[this.stack.lenth-2].context != element) {
-				this.stack.push({
-			        context: element,
-			        value: !element.value
-			    });
+	default: [],
+
+	getDefaultValue: function() {
+		var name = this.classSetUndo;
+		this.default = [];
+		this.stack = [];
+		if($(name).length) {
+            $(name).map(function(index, obj) {
+                this.default.push({
+                	id: obj.id,
+                	obj: obj,
+                	value: (obj.type == "checkbox" || obj.type == "radio") ? obj.checked : obj.value
+                });
+            }.bind(this));
+        }
+        console.log("default: ", this.default);
+	},
+
+	addAction: function(el) {
+		var set_undo = this.classSetUndo;
+		//if(this.number > 0) {
+			var element_check = $.grep(this.stack, function(e) {
+				return e.id == el.id;
+			});
+			console.log("check: ", element_check);
+			if(element_check.length == 0) {
+				var default_element = $.grep(this.default, function(e) {
+					return e.id == el.id;
+				})
+				if(el.type == "checkbox" || el.type == "radio") {
+					this.stack.push( {
+						id: el.id,
+						obj: el,
+						value: (el.checked) ? false : true
+					});
+				} else {
+					this.stack.push( {
+						id: default_element[0].id,
+						obj: default_element[0].obj,
+						value: default_element[0].value
+					});
+				}
+				console.log("arr: ", default_element);
 			}
-			value = element.checked;
-		} else {
-			if(this.stack.length > 2 && this.stack[this.stack.lenth-2].context != element && (element.value.length == 1)) {
+			//if(this.stack.length < this.number) {
 				this.stack.push({
-			        context: element,
-			        value: null  
-			    });
-			}
-			value = element.value;
-		}
-		if(this.number > 0) {
-			if(this.stack.length < this.number) {
-				this.stack.push({
-			        context: element,
-			        value: value
-			    });
-			} else {
+					id: el.id,
+					obj: el,
+					value: (el.type == "checkbox" || el.type == "radio") ? el.checked : el.value
+				});
+			/*} else {
 				this.stack.splice(0, 1);
 				this.stack.push({
-			        context: element,
-			        value: value
-			    });
-			}
-		}
-		if(this.stack[0].context == null) {
-			this.stack[0].context = this.stack[1].context;
-			this.stack[0].value = value;
-		}
+					obj: el,
+					value: (el.type == "checkbox" || el.type == "radio") ? el.checked : el.value
+				});
+			}*/
+		//}
 	    console.log("add: ",this.stack);
 	},
-	undoHandle: function() {
-		if(this.stack[this.stack.length-2].context.type == "checkbox" || this.stack[this.stack.length-1].context.type == "radio") {
-			this.stack[this.stack.length-2].context.checked = this.stack[this.stack.length-2].value;
-		} else {
-			this.stack[this.stack.length-2].context.value = this.stack[this.stack.length-2].value;
+
+	undoHandle: function(callback) {
+		if(this.stack.length > 1) {
+			var total = this.stack.length;
+			var element = this.stack[(total - 2)];
+			if(element.obj.type == "checkbox" || element.obj.type == "radio") {
+				element.obj.checked = element.value;
+			} else {
+				element.obj.value = element.value;
+				console.log("ok", element.value);
+			}
+			callback(element, element.value);
+			this.stack.pop();
+		 		
+		 	console.log("sasdss: ", this.stack);
 		}
-	 	this.stack.pop();
+	},
+	setup: function(callback) {
+		var set_undo = this.classSetUndo;
+		var get_undo = this.classGetUndo;
+		this.getDefaultValue();
+		$(set_undo).on("change", function(event) {
+			this.addAction(event.target);
+		}.bind(this));
+		$(get_undo).on("click", function() {
+			this.undoHandle(callback);
+		}.bind(this));
 	}
 }
