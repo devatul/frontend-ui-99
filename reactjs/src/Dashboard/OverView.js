@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './OverView.rt';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import update from 'react-addons-update';
-import javascript from '../script/javascript.js';
+import javascriptTodo from '../script/javascript.todo.js';
 import scriptOverview from '../script/javascript-overview.js'
 import Constant from '../Constant.js';
 import chartOverview from '../script/chart-overview.js';
@@ -31,7 +31,7 @@ var OverView = React.createClass
     },
 	componentDidMount() {
         $('#bell').click();
-        javascript();
+        javascriptTodo();
         if(this.state.scan_result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
         }

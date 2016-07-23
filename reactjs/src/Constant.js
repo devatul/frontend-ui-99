@@ -29,5 +29,10 @@ module.exports = {
 		{ name:"employee", class:'fa-male'},
 		{ name:"legal", class:'fa-balance-scale'},
 		{ name:"transaction", class:'fa-usd'}
+	],
+	urgency: [
+		{ name: "low",  class: ""},
+		{ name: "high", class: "fa-clock-o only" },
+		{ name: "very high", class: "fa-clock-o" }
 	]
 };

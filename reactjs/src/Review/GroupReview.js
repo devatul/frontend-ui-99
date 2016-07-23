@@ -87,10 +87,10 @@ var GroupReview = React.createClass({
                 if(element.dataset.value != null) var data = element.dataset.value.split(':');
                 if(data != null && data[1] === "Category") {
                     var new_category_level = this.state.category_level;
-                    new_category_level[data[0]] = val;
+                    new_category_level[data[0]][data[1]] = val;
                     this.setState(update(this.state, {
                         category_level: {$set: new_category_level},
-                        category_level_current: {$set: data[0] + ':' + val}
+                        category_level_current: {$set: data[0] + ':' + data[1] + ':' + val}
                     }));
                 }
                 if(data != null && data[1] ==="Confidential") {

@@ -925,7 +925,7 @@ $half: round($loops / 2);
   .progress-#{$i*$step}{
     @if $i < $half {
       $nextdeg: 90deg + ( $increment * $i );
-      @if $i < 33 {$barColor: #d2322d;}
+      @if $i < 34 {$barColor: #d2322d;}
       @else {$barColor: #ed9c28;}
       background-image: linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
     }

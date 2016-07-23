@@ -277,7 +277,7 @@ $(function () {
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
-            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+            pointFormat: '{series.name}: {point.y} Documents<br/>Total: {point.stackTotal} Documents'
         },
         plotOptions: {
             column: {
