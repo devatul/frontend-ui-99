@@ -7,9 +7,11 @@ import update from 'react-addons-update'
 import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
 import 'jquery'
+import javascriptTodo from '../script/javascript.todo.js'
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
+    mixins: [LinkedStateMixin],
     getInitialState() {
         return {
         	categories: [],
@@ -19,14 +21,18 @@ var ReviewValidation = React.createClass({
             review_validations: [],
             review_valid_current: [],
             challenged_docs: [],
-            challenged_doc_current: []
+            challenged_doc_current: [],
+            summary: [],
+            elementAtReviewrs:0,
+            elementAtCategories:0
         };
     },
     componentWillMount() {
-        //this.getChallengedDocs();          
+
     },
     componentDidMount() {
         this.getCategories();
+        
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.reviewer_current != nextState.reviewer_current) {
@@ -35,30 +41,32 @@ var ReviewValidation = React.createClass({
         if(this.state.category_current != nextState.category_current) {
             return true;
         }
-        if(this.state.reviewer_current != nextState.reviewer_current) {
-            return true;
-        }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
         if(this.state.category_current != prevState.category_current) {
             this.getReviewers(this.state.category_current.id);
+            this.setState({elementAtReviewrs: 0});
             console.log("id category: ", this.state.category_current.id);
         }
         if(this.state.reviewer_current != prevState.reviewer_current) {
-            this.getChallengedDoc(this.state.reviewer_current.id);
+            this.getReviewValidation(this.state.reviewer_current.id);
         }
+        //javascriptTodo();
+        
     },
     getCategories() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/label/category/",
             dataType: 'json',
-            async: false,
+            async: true,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                this.getReviewers(data[0].id);
+
                 var updateState = update(this.state, {
                     categories: {$set: data},
                     category_current: {$set: data[0]}
@@ -103,14 +111,27 @@ var ReviewValidation = React.createClass({
     },
     setReviewerCurrent: function(reviewerIndex) {
         var setReviewer = update(this.state, {
-            reviewer_current: this.state.reviewers[reviewerIndex]
+            reviewer_current: { $set: this.state.reviewers[reviewerIndex]}
         });
-        this.setState(setReviewer); 
+        this.setState(setReviewer);
+        if(reviewerIndex <= this.state.reviewers.length-1)
+        {
+            
+            this.setState({elementAtReviewrs: reviewerIndex});
+            console.log("index ",reviewerIndex, ",elementAtReviewrs: ",this.state.elementAtReviewrs);
+        }
     },
     setCategoryCurrent: function(categoryIndex) {
         this.setState(update(this.state, {
             category_current: { $set: this.state.categories[categoryIndex]}
         }));
+        if(categoryIndex <= this.state.categories.length-1)
+        {
+            
+            this.setState({elementAtCategories: categoryIndex});
+            console.log("index ",categoryIndex, ",elementAtCategories: ",this.state.elementAtCategories);
+        }
+        //
     },
     getChallengedDoc(reviewId) {
     	$.ajax({
@@ -151,19 +172,24 @@ var ReviewValidation = React.createClass({
     getReviewValidation(reviewId) {
         $.ajax({
             method: 'GET',
-            url: Constant.SERVER_API + "api/review_validation/",
+            url: Constant.SERVER_API + "api/review/review_validation/",
             dataType: 'json',
             async: false,
-            data: {"id": reviewId},
+            data: {
+                "review_id": reviewId,
+                "category_id": this.state.category_current.id
+
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                console.log(this.state.reviewer_current.id);
                 var updateState = update(this.state, {
-                    challenged_docs: {$set: data},
+                    review_validations: {$set: data},
                 });
                 this.setState(updateState);
-                console.log("reviewers ok: ", data);
+                console.log("review_validations ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
                 console.log("reviewers error: " + error);
@@ -196,6 +222,33 @@ var ReviewValidation = React.createClass({
     buttonReject() {
 
     },
+
+    getSummary() {
+        $.ajax({
+            method: 'GET',
+            url: Constant.SERVER_API + "api/review/review_validation/summary/",
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+            },
+            success: function(data) {
+                console.log(this.state.reviewer_current.id);
+                var updateState = update(this.state, {
+                    summary: {$set: data},
+                });
+                this.setState(updateState);
+                console.log("summary ok: ", data);
+            }.bind(this),
+            error: function(xhr,error) {
+                console.log("summary error: " + error);
+                if(xhr.status === 401)
+                {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
+    },
+    
     render:template
 });
 
