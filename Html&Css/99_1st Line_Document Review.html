@@ -131,7 +131,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li><a href="#">Dashboard</a></li>
-							<li><span class="badge">3</span><a href="#">Review</a></li>
+							<li class="active"><span class="badge">3</span><a href="#">Review</a></li>
 							<li><a href="#">Insights</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
@@ -367,7 +367,7 @@
 									</div>
 								</header>
 								<div class="panel-body" style="display: block;">
-									<p class="document_note">You have to review 10 documents in Legal Category of Secret Confidentiality by latest 28th June</p>
+									<p class="document_note">You have to review <span class="num">10</span> documents in Legal category of Secret confidentiality by latest 28th June</p>
 									<div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 										<button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1 approve-button-2" style="display: none;">Approve</button>
 										<div class="alert alert-success actions-success">
@@ -1209,7 +1209,7 @@
 									</div>
 								</header>
 								<div class="panel-body" style="display: block;">
-									<p class="document_note">You have to review 10 documents in Legal Category of Internal Only Confidentiality by latest 15th July</p>
+									<p class="document_note">You have to review <span class="num">10</span> documents in Legal category of Internal Only confidentiality by latest 15th July</p>
 									<div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 										<button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-2  approve-button-2" style="display: none;">Approve</button>
 										<div class="alert alert-success actions-success">
@@ -2046,11 +2046,13 @@
 										</li>
 									</ul>
 									<div class="panel-actions my-actions-btn-group">
+                                        <button type="button" class="mb-xs mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                        <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
 										<a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
 									</div>
 								</header>
 								<div class="panel-body" style="display: block;">
-									<p class="document_note">Stan challenged classification of 2 documents - You have to review it by latest 10th July</p>
+									<p class="document_note">Stan challenged classification of <span class="num">2</span> documents - You have to review it by latest 10th July</p>
 									<div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 										<button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all  approve-button-2" style="display: none;">Approve</button>
 										<div class="alert alert-success actions-success">
@@ -2068,7 +2070,7 @@
 																<label></label>
 															</div>
 														</th>
-														<th class="my_review_note review_note">Document Name
+														<th class="my_review_note review_note" style="letter-spacing: -1px;">Document Name
                                                             <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                                <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                                 <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
@@ -2307,11 +2309,31 @@
 								</div>
 							</th>
 							<th class="review_note">Document Name
-							</th>
-							<th class="review_note">Path
-							</th>
-							<th class="review_note">Owner
-							</th>
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Path
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the logical folder path to where each document is currently located.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Owner
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the organisational member who has last modified the document. 
+                                        This owner is automatically assigned by 99 from the 
+                                        Document metadata itself gathered during the scanning process.</p>
+                                    </div>
+                                </div>
+                            </th>
 							<th class="review_note">Proposed Category (confidence level)
 								<div class="r dropdown dropdown-file-info-holder inline-block-item">
 								   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -2463,11 +2485,31 @@
 								</div>
 							</th>
 							<th class="review_note">Document Name
-							</th>
-							<th class="review_note">Path
-							</th>
-							<th class="review_note">Owner
-							</th>
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Path
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the logical folder path to where each document is currently located.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Owner
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the organisational member who has last modified the document. 
+                                        This owner is automatically assigned by 99 from the 
+                                        Document metadata itself gathered during the scanning process.</p>
+                                    </div>
+                                </div>
+                            </th>
 							<th class="review_note">Proposed Category (confidence level)
 								<div class="r dropdown dropdown-file-info-holder inline-block-item">
 								   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -2620,12 +2662,32 @@
 									<label></label>
 								</div>
 							</th>
-							<th class="my_review_note review_note review_note_r">Document Name
-							</th>
-							<th class="review_note review_note_r">Path
-							</th>
-							<th class="review_note review_note_r">Owner
-							</th>
+							<th class="review_note">Document Name
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Path
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the logical folder path to where each document is currently located.</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="review_note">Owner
+                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the organisational member who has last modified the document. 
+                                        This owner is automatically assigned by 99 from the 
+                                        Document metadata itself gathered during the scanning process.</p>
+                                    </div>
+                                </div>
+                            </th>
 							<th class="review_note">Category
 								<div class="r dropdown dropdown-file-info-holder inline-block-item">
                                    <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>

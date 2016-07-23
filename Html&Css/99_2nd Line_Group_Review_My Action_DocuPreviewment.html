@@ -144,149 +144,125 @@
 
         <!--bar_menu start-->
         <div class="my_main bar_menu container">
-            <div class="row">
-                <div class="col-md-12 mb-md">
-                    <p class="page-heading-sm pull-left">Document Categorisation and Classification</p>
-                    <ul class="filter-buttons pull-right">
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
-                                <ul class="filter-list list-unstyled pt-xs">
-                                      <li class="mb-sm">
-                                          <div class="form-group">
-                                              <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category" name="category">
-                                                  <option value="Accounting/Tax">Accounting/Tax</option>
-                                                  <option value-"Corporate Entity">Corporate Entity</option>
-                                                  <option value="Client/Customer">Client/Customer</option>
-                                                  <option value="Employee">Employee</option>
-                                                  <option value="Legal/Compliance">Legal/Compliance</option>
-                                                  <option value="Transaction">Transaction</option>
-                                              </select>
-                                          </div>
-                                      </li>
-                                      <li class="mb-sm">
-                                          <div class="form-group">
-                                              <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
-                                                  <option value="Public">Public</option>
-                                                  <option value="Internal">Internal</option>
-                                                  <option value="Confidential">Confidential</option>
-                                                  <option value="Secret">Secret</option>
-                                                  <option value="Banking Secrecy">Banking Secrecy</option>
-                                              </select>
-                                          </div>
-                                      </li>
-                                      <li class="mb-sm">
-                                          <div class="form-group">
-                                              <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type" name="document_type">
-                                                  <option value="Excel">Excel</option>
-                                                  <option value="Word">Word</option>
-                                                  <option value="PDF">PDF</option>
-                                                  <option value="Power Point">Power Point</option>
-                                              </select>
-                                          </div>
-                                      </li>
-                                      <li class="mb-sm">
-                                          <div class="form-group">
-                                              <select class="form-control select-multiple" multiple="multiple" data-title="Language" name="language">
-                                                  <option value="English">English</option>
-                                                  <option value="French">French</option>
-                                                  <option value="German">German</option>
-                                              </select>
-                                          </div>
-                                      </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
-                                <div class="table-responsive">
-                                    <table class="table general-table mb-none">
-                                        <tbody>
-                                        <tr>
-                                            <td>Last Data Scan:</td>
-                                            <td colspan="3">08 May 2016 15:00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Country in Scope:</td>
-                                            <td colspan="3">Switzerland</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Business Unit in Scope:</td>
-                                            <td colspan="3">Private bank</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Scan Status:</td>
-                                            <td colspan="3">Completed</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Documents Analyzed:</td>
-                                            <td colspan="3">4,326,215</td>
-                                        </tr>
-                                        <tr>
-                                        <td>File Extension Processed:</td>
-                                            <td colspan="3">txt, log, rtf, pdf, doc, docx, xls, xlsx, xlsm, ppt, pptx, msg, eml, zip, rar</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Duplication Documents:</td>
-                                            <td colspan="3"> 4,235,371</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Twins Documents:</td>
-                                            <td colspan="3"> 4,235,371</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Encrypted Documents or Archives:</td>
-                                            <td colspan="3">784</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Documents Skipped:</td>
-                                            <td colspan="3">15,3624</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- <div class="col-md-3">
-                    <div class="span12">
-                        <form id="custom-search-form" class="form-search form-horizontal pull-right dropdown">
-                            <div data-toggle="dropdown" class="input-group input-group-icon">
-                                <span class="input-group-addon">
-                                    <span class="icon"><i class="fa fa-search"></i></span>
-                                </span>
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search">
-                            </div>
-                            <div class="dropdown-menu dropdown-search has-arrow dd-sm full-mobile">
-                                <div class="col-sm-12 col-noti mt-sm">
-                                    <h4>TODO LIST</h4>
-                                    <ul class="list-unstyled noti-list">
-                                        <li>
-                                            <i class="fa fa-lock" aria-hidden="true"></i>
-                                            <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-12 col-noti mt-lg">
-                                    <h4>NOTIFICATION</h4>
-                                    <ul class="list-unstyled noti-list">
-                                        <li>
-                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                            <p>You need to confirm confidentiality of 10 Documents by latest 10th May</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-12 text-center mt-md">
-                                    <a href="#">See all search result</a>
-                                </div>
-                            </div>
-                        </form>
+          <div class="row">
+            <div class="col-md-12 mb-md">
+              <div class="row">
+                <div class="col-sm-8">
+                    <p class="page-heading-sm">Document Categorisation and Classification</p>
+                    <div class="filter-tags-block">
+                        <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
+                        <div class="pull-left filter-tags">
+                        </div>
                     </div>
-                </div> -->
+                </div>
+                <div class="col-sm-4">
+                  <ul class="filter-buttons pull-right">
+                    <li class="dropdown">
+                        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                        <div class="dropdown-backdrop-custom" style="display:none"></div>
+                        <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                            <ul class="filter-list list-unstyled pt-xs">
+                                <li class="mb-sm">
+                                    <div class="form-group">
+                                        <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category" name="category">
+                                            <option value="Accounting/Tax">Accounting/Tax</option>
+                                            <option value-"Corporate Entity">Corporate Entity</option>
+                                            <option value="Client/Customer">Client/Customer</option>
+                                            <option value="Employee">Employee</option>
+                                            <option value="Legal/Compliance">Legal/Compliance</option>
+                                            <option value="Transaction">Transaction</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="mb-sm">
+                                    <div class="form-group">
+                                        <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality" name="confidentiality">
+                                            <option value="Public">Public</option>
+                                            <option value="Internal">Internal</option>
+                                            <option value="Confidential">Confidential</option>
+                                            <option value="Secret">Secret</option>
+                                            <option value="Banking Secrecy">Banking Secrecy</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="mb-sm">
+                                    <div class="form-group">
+                                        <select class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type" name="document_type">
+                                            <option value="Excel">Excel</option>
+                                            <option value="Word">Word</option>
+                                            <option value="PDF">PDF</option>
+                                            <option value="Power Point">Power Point</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class="mb-sm">
+                                    <div class="form-group">
+                                        <select class="form-control select-multiple" multiple="multiple" data-title="Language" name="language">
+                                            <option value="English">English</option>
+                                            <option value="French">French</option>
+                                            <option value="German">German</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
+                            <div class="table-responsive">
+                                <table class="table general-table mb-none">
+                                    <tbody>
+                                    <tr>
+                                        <td>Last Data Scan:</td>
+                                        <td colspan="3">08 May 2016 15:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country in Scope:</td>
+                                        <td colspan="3">Switzerland</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Business Unit in Scope:</td>
+                                        <td colspan="3">Private bank</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Scan Status:</td>
+                                        <td colspan="3">Completed</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Documents Analyzed:</td>
+                                        <td colspan="3">4,326,215</td>
+                                    </tr>
+                                    <tr>
+                                    <td>File Extension Processed:</td>
+                                        <td colspan="3">txt, log, rtf, pdf, doc, docx, xls, xlsx, xlsm, ppt, pptx, msg, eml, zip, rar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Duplicated Documents:</td>
+                                        <td colspan="3"> 4,235,371</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Twins Documents:</td>
+                                        <td colspan="3"> 4,235,371</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encrypted Documents or Archives:</td>
+                                        <td colspan="3">784</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Documents Skipped:</td>
+                                        <td colspan="3">15,3624</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
 
         <hr>
@@ -519,6 +495,7 @@
                             </div>
                         </header>
                         <div class="panel-body" style="display: block;">
+                            <p class="document_note">You have <span class="num">10</span> documents to review within Legal category with Secret Confidentiality in Group 0 by latest 28th June</p>
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all approve-button">Approve</button>
                                 <div class="alert alert-success actions-success">
@@ -535,7 +512,7 @@
                                                         <label for="checkboxExample2"></label>
                                                     </div>
                                                 </th>
-                                                <th class="review_note">Document
+                                                <th class="review_note">Document Name
                                                     <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                         <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
@@ -1375,7 +1352,7 @@
                                     <label for="checkboxExample2"></label>
                                 </div>
                             </th>
-                            <th class="review_note">Document
+                            <th class="review_note">Document Name
                                 <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                    <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">

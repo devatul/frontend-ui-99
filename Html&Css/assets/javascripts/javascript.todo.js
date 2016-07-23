@@ -15,7 +15,7 @@ $(function () {
            table.parents('.dataTables_wrapper').find('.actions-success').show();
         }
         var docToReview = 10 - table.find('.doc-check.validated').length;
-        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        $(this).parents('.panel-body').find('.document_note .num').html(docToReview);
     });
 
 
@@ -35,7 +35,7 @@ $(function () {
        table.parents('.dataTables_wrapper').find('.actions-success').show();
     }
     var docToReview = 10 - table.find('.doc-check.validated').length;
-    $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+    $(this).parents('.panel-body').find('.document_note .num').html(docToReview);
   });
 
   $(".alert-close[data-hide]").on("click", function(){
@@ -52,17 +52,17 @@ $(function () {
       selectedRow.removeClass('inactive');
   });
 
-  $('.doc-check').on('click', function(e){
+  $('body').on('click', '.doc-check', function(e){
     e.preventDefault();
     $(this).addClass('validated');
     $(this).parents('tr').addClass('item-validated');
     if ($(this).parents('.table-my-actions').find('.doc-check').length == $(this).parents('.table-my-actions').find('.doc-check.validated').length){
-      $('.actions-success').show();
-      $('.doc-check').addClass('validated');
-      $('.btn-end-review').removeClass('btn-disabled');
+      $(this).parents('.table-my-actions').find('.actions-success').show();
+      $(this).parents('.table-my-actions').find('.doc-check').addClass('validated');
+      $(this).parents('.table-my-actions').find('.btn-end-review').removeClass('btn-disabled');
     }
     var docToReview = 10 - $(this).parents('.table-my-actions').find('.doc-check.validated').length;
-    $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+    $(this).parents('.panel-body').find('.document_note .num').html(docToReview);
   });
 
   $('.select-group select').change(function(){
@@ -130,7 +130,7 @@ $(function () {
           $('.show-on-checked-all').show();
       }
       else{
-          $('.show-on-checked-all').hide();		  
+          $('.show-on-checked-all').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
@@ -153,7 +153,7 @@ $('.checkbox-item-1').on('change', function(){
           $('.show-on-checked-all-1').show();
       }
       else{
-          $('.show-on-checked-all-1').hide();		  
+          $('.show-on-checked-all-1').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
@@ -175,17 +175,18 @@ $('.checkbox-item-1').on('change', function(){
           $('.show-on-checked-all-2').show();
       }
       else{
-          $('.show-on-checked-all-2').hide();		  
+          $('.show-on-checked-all-2').hide();     
           $('.table-my-actions tr').removeClass('inactive');
       }
   }); 
 
-  $('.challenge-btn').on('click', function(e){
+  $('body').on('click', '.challenge-btn', function(e){
     e.preventDefault();
     $(this).find('i').addClass('icon-success');
+    $(this).parents('tr').addClass('item-challenged');
   });
 
-  $('.challenge-confidentiality').on('change', function(){
+  $('body').on('change', '.challenge-confidentiality', function(){
     var btn = $(this).parents('tr').find('.challenge-btn i');
     if (btn.hasClass('icon-success')){
       btn.remove();
@@ -240,6 +241,32 @@ $('.checkbox-item-1').on('change', function(){
         }
 
   });   
+
+  $(window).on('show.bs.modal', function (e) {
+    console.log($(e.relatedTarget));
+    var row = $(e.relatedTarget).parents('tr').clone();
+    $("[id^='previewModal']").find('tbody').html(row);
+  });
+
+  $('.tab-challenge .challenge-btn').on('click', function(){
+    var btn= $(this);
+    setTimeout(function(){
+      var table = btn.parents('.table-challenge');
+      var tab = table.parents('.tab-challenge');
+      var challengedItem = table.find('.item-challenged').length;
+      var itemNum = table.find('tbody tr').length;
+      tab.find('.doc-num').html(challengedItem);
+      var progress = parseInt(challengedItem/itemNum*100);
+      var progressRadial = tab.find('.progress-radial');
+      var classes = progressRadial.attr('class').split(' ');
+        $.each(classes, function(i, c) {
+            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+                progressRadial.removeClass(c);
+            }
+      });
+      progressRadial.addClass('progress-'+progress);
+    }, 100);
+  });
 
 });
 
