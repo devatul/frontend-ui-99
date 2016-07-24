@@ -1,10 +1,11 @@
+<rt-import name="BarName" from="../components/BarMenu"/>
 <section>
-
+ <BarName title="Documents Classification Challenge - Coordinator’s Review Validation" isShowInfo="false"></BarName>
     <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs cat-list">
           <li rt-repeat="category in this.state.categories" key="{categoryIndex}">
-            <a id="{'Category_' + categoryIndex}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true">{category.name}</a>
+            <a id="{'Category_' + categoryIndex}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
           </li>
           <li class="">
             <a href="#summary" onClick="{this.getSummary()}" data-toggle="tab" aria-expanded="false">Summary</a>
@@ -24,7 +25,7 @@
                 </div>
                 <div class="tabs tabs-vertical tabs-primary tabs-left">
                   <ul class="nav nav-tabs col-sm-1 col-xs-12 reviewer-list">
-                    <li rt-repeat="reviewer in reviewers">
+                    <li style="text-transform: capitalize" rt-repeat="reviewer in reviewers">
                       <a id="{'Reviewer_' + reviewerIndex}" href="#reviewValidation" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name}.{reviewer.last_name}</a>
                     </li>
                   </ul>
@@ -32,9 +33,9 @@
                     
                    <div id="{'reviewValidation_' + reviewerCurrent}" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
                       <div class="reviewer-info clearfix">
-                        <span class="mr-md">Reviewer: {reviewers[reviewerCurrent].first_name}.{reviewers[reviewerCurrent].last_name}</span>
+                        <span style="text-transform: capitalize" class="mr-md">Reviewer: {reviewers[reviewerCurrent].first_name}.{reviewers[reviewerCurrent].last_name}</span>
                         <span><span class="doc-num">{reviewValidations.documents.length}</span> Documents Challenged - Validation Progress: </span>
-                        <div class="progress-radial small progress{(reviewValidations.validation_progress != null) ? '-' + reviewValidations.validation_progress: '-0'}"></div>
+                        <div class="progress-radial small progress-50"></div>
 
                         <div class="pull-right">
                           <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
@@ -62,7 +63,7 @@
                             <tr rt-repeat="document in reviewValidations.documents">
                               <td>
                                 <i rt-if="document.status == 'accepted'" class="fa fa-check icon-success"></i>
-                                <i rt-if="document.status == 'rejected'" class="fa fa-check icon-icon-danger"></i>
+                                <i rt-if="document.status == 'rejected'" class="fa fa-times icon-danger"></i>
                               </td>
                               <td class="text-left">
                                 <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{document.name}</span>
@@ -104,11 +105,11 @@
                                 <span class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
                               </td>
                               <td>
-                                <textarea class="form-control">challenge on confidentiality accepted</textarea>
+                                <textarea class="form-control">{document['2nd_line_comment']}</textarea>
                               </td>
                               <td>
                                 <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="{'#reviewValidation_' + reviewerCurrent}">
-                                <i class="fa fa-check {(document.status == 'accepted') ? 'icon-success' : '' }"></i>
+                                <i class="fa fa-check {(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
                             
                                 </a>
                               </td>

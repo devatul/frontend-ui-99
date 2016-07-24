@@ -73,7 +73,7 @@ var ReviewValidation = React.createClass({
             this.getReviewValidation();
         }
         if(this.state.reviewValidations != prevState.reviewValidations) {
-            javascriptTodo();
+//            javascriptTodo();
         }
         if(this.state.documentPreview != prevState.documentPreview) {
             loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
@@ -143,6 +143,7 @@ var ReviewValidation = React.createClass({
         });
     },
     setReviewerCurrent: function(reviewerIndex) {
+        
         var reviewers = this.state.reviewers;
         var shouldUpdate = this.state.shouldUpdate;
         if(reviewerIndex <= (reviewers.length - 1)) {
@@ -158,6 +159,7 @@ var ReviewValidation = React.createClass({
         }
     },
     setCategoryCurrent: function(categoryIndex) {
+        
         var categories = this.state.categories;
         if(categoryIndex <= (categories.length - 1)) {
             var setCategory = update(this.state, {
@@ -187,6 +189,7 @@ var ReviewValidation = React.createClass({
                 });
                 this.setState(updateState);
                 console.log("reviewers ok: ", data);
+
             }.bind(this),
             error: function(xhr,error) {
                 console.log("reviewers error: " + error);
@@ -196,6 +199,7 @@ var ReviewValidation = React.createClass({
                 }
             }.bind(this)
         });
+
     },
     setChallengedDoc() {
         for(var i = 0; i < this.state.challengedDocs.length; i++) {
@@ -214,7 +218,7 @@ var ReviewValidation = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/review/review_validation/",
             dataType: 'json',
-            async: false,
+            async: true,
             data: {
                 "review_id": reviewId,
                 "category_id": categoryId
@@ -239,6 +243,7 @@ var ReviewValidation = React.createClass({
                 }
             }.bind(this)
         });
+
     },
     setDocumentPreview(docIndex) {
         var updateState = update(this.state, {

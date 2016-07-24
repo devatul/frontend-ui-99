@@ -134,7 +134,7 @@ module.exports = function () {
       table.find('.btn-end-review').removeClass('btn-disabled');
        table.parents('.dataTables_wrapper').find('.actions-success').show();
     }
-    var docToReview = 10 - table.find('.doc-check.validated').length;
+    var docToReview = 2 - table.find('.doc-check.validated').length;
     $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
   });
 
@@ -322,13 +322,33 @@ $('.checkbox-item-1').on('change', function(){
   }); 
 
   $('.challenge-btn').on('click', function(e){
+    
     e.preventDefault();
     var target = $(this).attr('data-target');
     $(this).find('i').addClass('icon-success');
+    $().removeClass();
+
     if($(target).find('.challenge-btn').length == $(target).find('.challenge-btn i.icon-success').length) {
         $(target).find('.actions-success').show();
         $(target).find('.btn-end-review').removeClass('btn-disabled');
     }
+      var btn= $(this);
+    setTimeout(function(){
+      var table = btn.parents('.table-challenge');
+      var tab = table.parents('.tab-challenge');
+      var challengedItem = table.find('.item-challenged').length;
+      var itemNum = table.find('tbody tr').length;
+      tab.find('.doc-num').html(challengedItem);
+      var progress = parseInt(challengedItem/itemNum*100);
+      var progressRadial = tab.find('.progress-radial');
+      var classes = progressRadial.attr('class').split(' ');
+        $.each(classes, function(i, c) {
+            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+                progressRadial.removeClass(c);
+            }
+      });
+      progressRadial.addClass('progress-'+$(target).find('.challenge-btn i.icon-success').length*50);
+    }, 100);
   });
 
   $('.challenge-confidentiality').on('change', function(){
@@ -354,6 +374,23 @@ $('.checkbox-item-1').on('change', function(){
     $(this).addClass('red changed');
     $(this).parents('tr').find('.challenge-btn').html('<i class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="You challenged back the review"></i>');
     $(this).parents('tr').find('.challenge-btn i').tooltip();
+    var btn= $(this);
+    setTimeout(function(){
+      var table = btn.parents('.table-challenge');
+      var tab = table.parents('.tab-challenge');
+      var challengedItem = table.find('.item-challenged').length;
+      var itemNum = table.find('tbody tr').length;
+      tab.find('.doc-num').html(challengedItem);
+      var progress = parseInt(challengedItem/itemNum*100);
+      var progressRadial = tab.find('.progress-radial');
+      var classes = progressRadial.attr('class').split(' ');
+        $.each(classes, function(i, c) {
+            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+                progressRadial.removeClass(c);
+            }
+      });
+      progressRadial.addClass('progress-'+$(target).find('.challenge-btn i.icon-success').length*50);
+    }, 100);
   });
 
   $('.btn-next-reviewer').on('click', function(){
