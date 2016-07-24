@@ -191,7 +191,7 @@
     </div>
    <!--Modal-->
   
-    <div id="previewModal" rt-if="(this.state.documentPreview != null)" class="modal fade in" role="dialog" rt-scope="this.state.reviewValidations.documents[this.state.documentPreview] as docPreview; this.state.reviewerCurrent as reviewerCurrent">
+    <div id="previewModal" rt-if="(this.state.documentPreview !== null)" class="modal fade in" role="dialog" rt-scope="this.state.reviewValidations.documents[this.state.documentPreview] as docPreview; this.state.reviewerCurrent as reviewerCurrent">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->

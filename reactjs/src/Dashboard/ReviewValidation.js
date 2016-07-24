@@ -34,18 +34,7 @@ var ReviewValidation = React.createClass({
     componentDidMount() {
         console.log("sfdssss", this.state.categories);
         this.getCategories();
-        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-            $('#previewModal').on('show.bs.modal', function(e) {
-
-                //get data-id attribute of the clicked element
-                var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                console.log(fileURL);
-                
-                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                $('#embedURL').gdocsViewer();
-            });
-        }.bind(this));
+        
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.categories != nextState.categories) {
@@ -66,6 +55,9 @@ var ReviewValidation = React.createClass({
         if(this.state.shouldUpdate != nextState.shouldUpdate) {
             return true;
         }
+        if(this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
@@ -82,6 +74,20 @@ var ReviewValidation = React.createClass({
         }
         if(this.state.reviewValidations != prevState.reviewValidations) {
             javascriptTodo();
+        }
+        if(this.state.documentPreview != prevState.documentPreview) {
+            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+                $('#previewModal').on('show.bs.modal', function(e) {
+
+                    //get data-id attribute of the clicked element
+                    var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                    console.log(fileURL);
+                    
+                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                    $('#embedURL').gdocsViewer();
+                });
+            }.bind(this));
         }
     },
     getCategories() {
