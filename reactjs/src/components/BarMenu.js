@@ -10,10 +10,85 @@ var InfoOn = React.createClass
 ({
 	getInitialState() {
 	    return {
-            category: [],
-            confidentiality: [],
-            doctype: [],
-            language: [],
+            category: [
+                  {
+                    "id": 1,
+                    "name": "accounting/tax"
+                  },
+                  {
+                    "id": 2,
+                    "name": "corporate entity"
+                  },
+                  {
+                    "id": 3,
+                    "name": "client/customer"
+                  },
+                  {
+                    "id": 4,
+                    "name": "employee"
+                  },
+                  {
+                    "id": 5,
+                    "name": "legal/regulatory"
+                  }
+                ],
+            confidentiality: [
+                  {
+                    "id": 1,
+                    "name": "public"
+                  },
+                  {
+                    "id": 2,
+                    "name": "internal only"
+                  },
+                  {
+                    "id": 3,
+                    "name": "confidential"
+                  },
+                  {
+                    "id": 4,
+                    "name": "secret"
+                  },
+                  {
+                    "id": 5,
+                    "name": "banking secrecy"
+                  }
+                ],
+            doctype: [
+                  {
+                    "id": 1,
+                    "name": "excel"
+                  },
+                  {
+                    "id": 2,
+                    "name": "doc"
+                  },
+                  {
+                    "id": 3,
+                    "name": "pdf"
+                  },
+                  {
+                    "id": 4,
+                    "name": "power point"
+                  }
+                ],
+            language: [
+                  {
+                    "id": 1,
+                    "short_name": "EN",
+                    "name": "english"
+                  },
+                  {
+                    "id": 2,
+                    "short_name": "FR",
+                    "name": "french"
+                  },
+                  {
+                    "id": 3,
+                    "short_name": "DE",
+                    "name": "german"
+                  }
+                ],
             filter: {
                 "categories":[],
                 "confidentialities":[],
@@ -23,6 +98,171 @@ var InfoOn = React.createClass
             scan_result: {}
 	    };
 	},
+    getDefaultProps() {
+        return {
+            title: "title",
+            datainfo: {
+                      "confidentialities": [
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "public",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "confidential",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "secret",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "internal only",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "banking secrecy",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        }
+                      ],
+                      "total_twins": 2,
+                      "percentage_accuracy": 5,
+                      "percentage_duplicates": 1,
+                      "country": "Switzerland",
+                      "percentage_twins": 1,
+                      "file_extensions_processed": "pdf, doc",
+                      "encrypted_documents": 1234,
+                      "documents_skipped": 123,
+                      "doc-types": [
+                        {
+                          "total_docs": 10,
+                          "name": "pdf"
+                        },
+                        {
+                          "total_docs": 90,
+                          "name": "doc"
+                        }
+                      ],
+                      "languages": [
+                        {
+                          "total_docs": 5,
+                          "name": "EN"
+                        },
+                        {
+                          "total_docs": 5,
+                          "name": "FR"
+                        },
+                        {
+                          "total_docs": 5,
+                          "name": "DE"
+                        }
+                      ],
+                      "total_documents_scanned": 10,
+                      "business_unit": "private bank",
+                      "total_duplicates": 2,
+                      "number_orphan_clusters": 2,
+                      "categories": [
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "accounting/tax",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "corporate entity",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "transaction",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "legal",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        },
+                        {
+                          "percentage_owner_accuracy_docs": 10,
+                          "name": "employee",
+                          "percentage_reviewed_docs": 10,
+                          "total_validated_docs": 100,
+                          "percentage_validated_docs": 10,
+                          "total_owner_accuracy_docs": 100,
+                          "percentage_prediction_accuracy_docs": 10,
+                          "total_prediction_accuracy_docs": 100,
+                          "total_reviewed_docs": 100
+                        }
+                      ],
+                      "is_clusters_reviewed": false,
+                      "document_analyzed": 10000,
+                      "scan_status": "in progress",
+                      "percentage_documents_scanned": 10,
+                      "last_data_scan": "20-07-2016 14:00:00"
+            },
+            handleFilter: function() {},
+            isShowFilter: true,
+            isShowInfo: true
+        };
+    },
 	propTypes: {
 		title: React.PropTypes.string,
 	    datainfo: React.PropTypes.object,
@@ -31,10 +271,11 @@ var InfoOn = React.createClass
 	    isShowInfo: React.PropTypes.bool
 	},
 	componentWillMount() {
-	    this.getCategory();
-	    this.getConfidentiality();
-	    this.getDoctypes();
-	    this.getLanguages();  
+	    //this.getCategory();
+	    //this.getConfidentiality();
+	    //this.getDoctypes();
+	    //this.getLanguages();
+        console.log("will mout bar");   
 	},
     componentDidMount() {
         this.filterOnChange();  
@@ -77,7 +318,7 @@ var InfoOn = React.createClass
             this.props.handleFilter(this.state.scan_result);
         } 
     },
-	getCategory: function() {
+	/*getCategory: function() {
         $.ajax({
             url: Constant.SERVER_API + 'api/label/category/',
             dataType: 'json',
@@ -129,7 +370,7 @@ var InfoOn = React.createClass
             method: 'GET',
             url: Constant.SERVER_API + "api/label/doctypes/",
             dataType: 'json',
-            //async: false,
+            async: true,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -151,7 +392,7 @@ var InfoOn = React.createClass
             method: 'GET',
             url: Constant.SERVER_API + "api/label/languages/",
             dataType: 'json',
-            //async: false,
+            async: true,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -166,7 +407,7 @@ var InfoOn = React.createClass
                 console.log("error: listLanguage");
             }.bind(this)
         });
-    },
+    },*/
     openFilterPopup: function() {
        javascriptOverview();
     },
