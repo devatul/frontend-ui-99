@@ -22,7 +22,11 @@ var DocumentReview = React.createClass({
             category_level_current: null,
             confidential_confidence_level: null,
             confidential_level_current: null,
-            ChallengedDocuments: []
+            ChallengedDocuments: [],
+            documentPreview: null,
+            documentPreviewIndex: null,
+            challengedDocPreview: null,
+            challengedDocPreviewIndex: null
 
         };
     },
@@ -42,10 +46,26 @@ var DocumentReview = React.createClass({
                 $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
                 $('#embedURL').gdocsViewer();
             });
+            $('#previewModal3').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                console.log(fileURL);
+                
+                $('#previewModal3 .file-preview').html('<a href="'+fileURL+'" id="embedURL3"></a>');
+                $('#embedURL3').gdocsViewer();
+            });
         }.bind(this));
         console.log("ddddddd", this.state.category_confidence_level);
     },
     shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
+        if(this.state.challengedDocPreview != nextState.challengedDocPreview) {
+            return true;
+        }
         if(this.state.category_level_current != nextState.category_level_current) {
             return true;
         }
@@ -112,6 +132,8 @@ var DocumentReview = React.createClass({
                 }
                 var updateState = update(this.state, {
                     Actions: {$set: data},
+                    documentPreview: {$set: data[0].documents[0] },
+                    documentPreviewIndex: {$set: [0, 0] },
                     category_confidence_level: {$set: category_lv },
                     confidential_confidence_level: {$set: confidential_lv }
                 });
@@ -138,7 +160,9 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 var updateState = update(this.state, {
-                    ChallengedDocuments: {$set: data}
+                    ChallengedDocuments: {$set: data},
+                    challengedDocPreview: {$set: data[0].documents[0]},
+                    challengedDocPreviewIndex: {$set: [0, 0] }
                 });
                 this.setState(updateState);
                 console.log("Doc ok: ", data);
@@ -152,10 +176,21 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
-    setDocumentCurrent: function(actionIndex, docIndex) {
+    setDocumentPreview: function(actionIndex, docIndex) {
+        var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
         var setDocumentCurrent = update(this.state, {
-            
+            documentPreview: { $set: documentCurrent },
+            documentPreviewIndex: { $set: [actionIndex, docIndex] }
         });
+        this.setState(setDocumentCurrent);
+    },
+    setChallengedCurrent: function(challengedIndex, docChallIndex) {
+        var challengedDocCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
+        var setChallengedDocCurrent = update(this.state, {
+            challengedDocPreview: { $set: challengedDocCurrent },
+            challengedDocPreviewIndex: { $set: [challengedIndex, docChallIndex] }
+        });
+        this.setState(setChallengedDocCurrent);
     },
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {

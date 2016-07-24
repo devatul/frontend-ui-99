@@ -85,15 +85,15 @@ var GroupReview = React.createClass({
                 var id = dataUndo.id;
                 console.log("element: ", element, val);
                 if(element.dataset.value != null) var data = element.dataset.value.split(':');
-                if(data != null && data[1] === "Category") {
+                if(data != null && data[1] == "Category") {
                     var new_category_level = this.state.category_level;
-                    new_category_level[data[0]][data[1]] = val;
+                    new_category_level[data[0]] = val;
                     this.setState(update(this.state, {
                         category_level: {$set: new_category_level},
                         category_level_current: {$set: data[0] + ':' + data[1] + ':' + val}
                     }));
                 }
-                if(data != null && data[1] ==="Confidential") {
+                if(data != null && data[1] == "Confidential") {
                     var new_confidential_level = this.state.confidential_level;
                     new_confidential_level[data[0]] = val;
                     this.setState(update(this.state, {
