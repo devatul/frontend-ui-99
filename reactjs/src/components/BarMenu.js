@@ -259,8 +259,8 @@ var InfoOn = React.createClass
                       "last_data_scan": "20-07-2016 14:00:00"
             },
             handleFilter: function() {},
-            isShowFilter: true,
-            isShowInfo: true
+            isShowFilter: false,
+            isShowInfo: false
         };
     },
 	propTypes: {

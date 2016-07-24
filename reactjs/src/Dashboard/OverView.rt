@@ -2,7 +2,7 @@
 <section>
     
     <!--bar_menu start-->
-    <BarName title="Overview" datainfo={this.state.scan_result} handleFilter={this.handleFilter}></BarName>
+    <BarName title="Overview" datainfo={this.state.scan_result} handleFilter={this.handleFilter} isShowInfo="" isShowFilter=""></BarName>
 
         <!--charts start-->
         <div class="charts container mt-lg">

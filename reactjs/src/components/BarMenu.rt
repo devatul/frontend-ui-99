@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-sm-4" style="text-transform: capitalize">
                     <ul class="filter-buttons pull-right">
-                        <li rt-if="true" class="dropdown">
+                        <li rt-if="this.props.isShowFilter" class="dropdown">
                             <a class="toggle-button btn btn-default" onClick={this.openFilterPopup}><i class="fa fa-filter" aria-hidden="true"></i></a>
                             <div class="dropdown-backdrop-custom" style="display:none"></div>
                             <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
@@ -49,7 +49,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li rt-if="true" class="dropdown">
+                        <li rt-if="this.props.isShowInfo" class="dropdown">
                             <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                             <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
                                 <div class="table-responsive">
