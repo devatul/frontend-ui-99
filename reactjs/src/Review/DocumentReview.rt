@@ -153,7 +153,7 @@
                                                                   <span class="progress-percentage">({this.state.category_confidence_level[actionIndex][docIndex]}%)</span>
                                                                 </div>
                                                             </div>
-                                                            <select id="{'Category_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, [actionIndex, docIndex])" value={this.state.category_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Category'}">
+                                                            <select style="text-transform: capitalize" id="{'Category_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, [actionIndex, docIndex])" value={this.state.category_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Category'}">
                                                                 <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                                             </select>
                                                         </div>
@@ -167,7 +167,7 @@
                                                                   <span class="progress-percentage">({ this.state.confidential_confidence_level[actionIndex][docIndex] }%)</span>
                                                                 </div>
                                                             </div>
-                                                            <select id="{'Confidential_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, [actionIndex, docIndex])" value={this.state.confidential_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Confidential'}">
+                                                            <select style="text-transform: capitalize" id="{'Confidential_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, [actionIndex, docIndex])" value={this.state.confidential_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Confidential'}">
                                                                 <option rt-repeat="condential in doc.confidentialities" key="{condentialIndex}" value="{condential.confidence_level}">{condential.name}</option>
                                                             </select>
                                                         </div>
@@ -318,14 +318,14 @@
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo">
+                                                            <select style="text-transform: capitalize" id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo">
                                                                 <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo">
+                                                            <select style="text-transform: capitalize" id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo">
                                                                 <option rt-repeat="confidential in docChall.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                                             </select>
                                                         </div>
@@ -373,8 +373,8 @@
                     Document Preview
                 </div>
                 <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic">{docPreview.name}</span><br>
-                    <span>Folder {docPreview.path}</span>
+                    <span class="text-itatic" >{docPreview.name}</span><br>
+                    <span >Folder {docPreview.path}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
                     <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
@@ -469,7 +469,7 @@
                                           <span class="progress-percentage">({category_level[index[0]][index[1]]}%)</span>
                                         </div>
                                     </div>
-                                    <select class="form-control" onChange="(event)=>this.onChangeCategory(event, [index[0], index[1]])" value="{category_level[index[0]][index[1]]}">
+                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, [index[0], index[1]])" value="{category_level[index[0]][index[1]]}">
                                         <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                     </select>
                                 </div>
@@ -483,7 +483,7 @@
                                           <span class="progress-percentage">({confidential_level[index[0]][index[1]]}%)</span>
                                         </div>
                                     </div>
-                                    <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, [index[0], index[1]])" value="{confidential_level[index[0]][index[1]]}">
+                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, [index[0], index[1]])" value="{confidential_level[index[0]][index[1]]}">
                                         <option rt-repeat="confidential in docPreview.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                     </select>
                                 </div>
@@ -607,7 +607,7 @@
                             </td>
                             <td class="vertical-top opa-child">
                                 <div class="select-group">
-                                    <select class="form-control black">
+                                    <select style="text-transform: capitalize" class="form-control black">
                                         <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                     </select>
                                     
@@ -615,7 +615,7 @@
                             </td>
                             <td class="vertical-top opa-child">
                                 <div class="select-group">
-                                    <select class="form-control red challenge-confidentiality">
+                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality">
                                         <option rt-repeat="confidential in docPreview.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                     </select>
                                 </div>
@@ -630,8 +630,9 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
-                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>
+                             <a href="#" class="challenge-btn validation-btn btn btn-default" data-target=""><i class="fa fa-check"></i></a>
+                                <!--<a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
+                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>-->
                             </td>
                         </tr>
                     </tbody>
