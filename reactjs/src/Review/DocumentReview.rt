@@ -1,3 +1,4 @@
+<rt-require dependency="react-router/lib/Link" as="Link"/>
 <div>
     <div class="container">
         <div class="tabs tabs-primary">
@@ -33,7 +34,7 @@
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
                                     <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                    <button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
 
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
@@ -172,7 +173,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="doc-check">
+                                                        <a href="#" class="doc-check" data-target="#{'section_action_' + actionIndex}">
                                                           <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                           <i class="fa fa-check" aria-hidden="true"></i>
                                                         </a>
@@ -209,7 +210,7 @@
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
                                     <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                    <button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
                             </header>
@@ -295,7 +296,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-left my_file-name">
-                                                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3" onClick="()=>this.setChallengedCurrent(challengedIndex, docChallIndex)" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{(docChall.name.length > 7) ? docChall.name.substring(7, 0) + '...' : docChall.name }</span>
+                                                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3" onClick="()=>this.setChallengedCurrent(challengedIndex, docChallIndex)" data-file-url="http://www.snee.com/xml/xslt/sample.doc" onClick="()=>this.setDocumentPreview(docChallIndex)">{(docChall.name.length > 7) ? docChall.name.substring(7, 0) + '...' : docChall.name }</span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                             <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                             <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -317,14 +318,14 @@
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black setUndo">
+                                                            <select id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo">
                                                                 <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control red challenge-confidentiality setUndo">
+                                                            <select id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo">
                                                                 <option rt-repeat="confidential in docChall.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                                             </select>
                                                         </div>
@@ -341,7 +342,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                                                        <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="#{'section_challenged_' + challengedIndex}"><i class="fa fa-check"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>

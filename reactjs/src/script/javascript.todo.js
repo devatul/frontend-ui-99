@@ -194,14 +194,15 @@ module.exports = function () {
 
   $('.doc-check').on('click', function(e){
     e.preventDefault();
+    var target = $(this).attr('data-target');
     $(this).addClass('validated');
     $(this).parents('tr').addClass('item-validated');
     if ($(this).parents('.table-my-actions').find('.doc-check').length == $(this).parents('.table-my-actions').find('.doc-check.validated').length){
-      $('.actions-success').show();
-      $('.doc-check').addClass('validated');
-      $('.btn-end-review').removeClass('btn-disabled');
+      $(target).find('.actions-success').show();
+      $(target).find('.doc-check').addClass('validated');
+      $(target).find('.btn-end-review').removeClass('btn-disabled');
     }
-    var docToReview = 10 - $(this).parents('.table-my-actions').find('.doc-check.validated').length;
+    var docToReview = 2 - $(this).parents('.table-my-actions').find('.doc-check.validated').length;
     $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
   });
 
@@ -322,14 +323,35 @@ $('.checkbox-item-1').on('change', function(){
 
   $('.challenge-btn').on('click', function(e){
     e.preventDefault();
+    var target = $(this).attr('data-target');
     $(this).find('i').addClass('icon-success');
+    if($(target).find('.challenge-btn').length == $(target).find('.challenge-btn i.icon-success').length) {
+        $(target).find('.actions-success').show();
+        $(target).find('.btn-end-review').removeClass('btn-disabled');
+    }
   });
 
   $('.challenge-confidentiality').on('change', function(){
+    var target = $(this).attr('data-target');
     var btn = $(this).parents('tr').find('.challenge-btn i');
     if (btn.hasClass('icon-success')){
       btn.remove();
+      $(target).find('.actions-success').hide();
+      $(target).find('.btn-end-review').addClass('btn-disabled');
     }
+    $(this).addClass('red changed');
+    $(this).parents('tr').find('.challenge-btn').html('<i class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="You challenged back the review"></i>');
+    $(this).parents('tr').find('.challenge-btn i').tooltip();
+  });
+  $('.challenge-category').on('change', function(){
+    var target = $(this).attr('data-target');
+    var btn = $(this).parents('tr').find('.challenge-btn i');
+    if (btn.hasClass('icon-success')){
+      btn.remove();
+      $(target).find('.actions-success').hide();
+      $(target).find('.btn-end-review').addClass('btn-disabled');
+    }
+    $(this).addClass('red changed');
     $(this).parents('tr').find('.challenge-btn').html('<i class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="You challenged back the review"></i>');
     $(this).parents('tr').find('.challenge-btn i').tooltip();
   });

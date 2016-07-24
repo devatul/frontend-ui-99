@@ -8,6 +8,7 @@ import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
 import 'jquery'
 import javascriptTodo from '../script/javascript.todo.js'
+import loadScript from '../script/load.scripts.js';
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -22,7 +23,9 @@ var ReviewValidation = React.createClass({
             reviewValidCurrent: null,
             challengedDocs: [],
             challengedDocCurrent: null,
-            summary: []
+            summary: [],
+            shouldUpdate: false,
+            documentPreview: null
         };
     },
     componentWillMount() {
@@ -31,6 +34,18 @@ var ReviewValidation = React.createClass({
     componentDidMount() {
         console.log("sfdssss", this.state.categories);
         this.getCategories();
+        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+            $('#previewModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                console.log(fileURL);
+                
+                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                $('#embedURL').gdocsViewer();
+            });
+        }.bind(this));
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.categories != nextState.categories) {
@@ -46,6 +61,9 @@ var ReviewValidation = React.createClass({
             return true;
         }
         if(this.state.reviewValidations != nextState.reviewValidations) {
+            return true;
+        }
+        if(this.state.shouldUpdate != nextState.shouldUpdate) {
             return true;
         }
         return false;
@@ -120,11 +138,17 @@ var ReviewValidation = React.createClass({
     },
     setReviewerCurrent: function(reviewerIndex) {
         var reviewers = this.state.reviewers;
+        var shouldUpdate = this.state.shouldUpdate;
         if(reviewerIndex <= (reviewers.length - 1)) {
             var setReviewer = update(this.state, {
                 reviewerCurrent: { $set: reviewerIndex}
             });
             this.setState(setReviewer);
+        }
+        if(shouldUpdate) {
+            this.setState({ shouldUpdate: false });
+        } else {
+            this.setState({ shouldUpdate: true });
         }
     },
     setCategoryCurrent: function(categoryIndex) {
@@ -134,6 +158,11 @@ var ReviewValidation = React.createClass({
                 categoryCurrent: { $set: categoryIndex }
             });
             this.setState(setCategory);
+        }
+        if(shouldUpdate) {
+            this.setState({ shouldUpdate: false });
+        } else {
+            this.setState({ shouldUpdate: true });
         }
     },
     getChallengedDoc(reviewId) {
@@ -191,6 +220,7 @@ var ReviewValidation = React.createClass({
                 console.log(this.state.reviewerCurrent.id);
                 var updateState = update(this.state, {
                     reviewValidations: {$set: data},
+                    documentPreview: {$set: 0 }
                 });
                 this.setState(updateState);
                 console.log("reviewValidations ok: ", data);
@@ -204,15 +234,11 @@ var ReviewValidation = React.createClass({
             }.bind(this)
         });
     },
-    setReviewValidation() {
-        for(var i = 0; i < this.state.reviewValidations.length; i++) {
-            if(this.state.reviewValidations[i].id == this.state.reviewerCurrent.id) {
-                var updateState = update(this.state, {
-                    reviewValidCurrent: { $set: this.state.reviewValidations[i] }
-                });
-                this.setState(updateState);
-            }
-        }
+    setDocumentPreview(docIndex) {
+        var updateState = update(this.state, {
+            documentPreview: { $set: docIndex }
+        });
+        this.setState(updateState);
     },
     categoryOnChange() {
 
@@ -251,7 +277,9 @@ var ReviewValidation = React.createClass({
             }.bind(this)
         });
     },
-    
+    endReviewHandle: function() {
+        browserHistory.push('/Dashboard/OverView');
+    },
     render:template
 });
 

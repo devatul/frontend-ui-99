@@ -25,12 +25,12 @@
                 <div class="tabs tabs-vertical tabs-primary tabs-left">
                   <ul class="nav nav-tabs col-sm-1 col-xs-12 reviewer-list">
                     <li rt-repeat="reviewer in reviewers">
-                      <a id="{'Reviewer_' + reviewerIndex}" href="#reviewer" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name}.{reviewer.last_name}</a>
+                      <a id="{'Reviewer_' + reviewerIndex}" href="#reviewValidation" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name}.{reviewer.last_name}</a>
                     </li>
                   </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
                     
-                   <div id="reviewer" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
+                   <div id="{'reviewValidation_' + reviewerCurrent}" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
                       <div class="reviewer-info clearfix">
                         <span class="mr-md">Reviewer: {reviewers[reviewerCurrent].first_name}.{reviewers[reviewerCurrent].last_name}</span>
                         <span><span class="doc-num">{reviewValidations.documents.length}</span> Documents Challenged - Validation Progress: </span>
@@ -38,10 +38,13 @@
 
                         <div class="pull-right">
                           <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                         </div>
                       </div>
-
+                        <div class="alert alert-success actions-success">
+                            <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                        </div>
                       <div class="table-responsive">
                         <table class="table table-bordered table-striped mb-none no-footer table-challenge">
                           <thead>
@@ -62,7 +65,7 @@
                                 <i rt-if="document.status == 'rejected'" class="fa fa-check icon-icon-danger"></i>
                               </td>
                               <td class="text-left">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{document.name}</span>
+                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{document.name}</span>
                                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                                     <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                     <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -80,7 +83,7 @@
                                 <span class="text-italic doc-path">{document.path}</span>
                               </td>
                               <td class="vertical-top">
-                                <select class="form-control" onChange={this.categoryOnChange}>
+                                <select class="form-control challenge-category" onChange={this.categoryOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
                                     <option selected="">Accounting/ Tax</option>
                                     <option>Corporate Entity</option>
                                     <option>Customer</option>
@@ -91,7 +94,7 @@
                                 <span class="text-italic previous-status">Previous: {document.previous_category}</span>
                               </td>
                               <td class="vertical-top text-left">
-                                <select class="form-control changed challenge-confidentiality" onChange={this.confidentialityOnChange}>
+                                <select class="form-control challenge-confidentiality" onChange={this.confidentialityOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
                                     <option>Banking Secrecy</option>
                                     <option selected="">Secret</option>
                                     <option>Confidential</option>
@@ -104,7 +107,10 @@
                                 <textarea class="form-control">challenge on confidentiality accepted</textarea>
                               </td>
                               <td>
-                                <a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                                <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="{'#reviewValidation_' + reviewerCurrent}">
+                                <i class="fa fa-check {(document.status == 'accepted') ? 'icon-success' : '' }"></i>
+                            
+                                </a>
                               </td>
                             </tr>
                           </tbody>
@@ -185,7 +191,7 @@
     </div>
    <!--Modal-->
   
-    <div id="previewModal" class="modal fade in" role="dialog">
+    <div id="previewModal" rt-if="(this.state.documentPreview != null)" class="modal fade in" role="dialog" rt-scope="this.state.reviewValidations.documents[this.state.documentPreview] as docPreview; this.state.reviewerCurrent as reviewerCurrent">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
@@ -197,8 +203,8 @@
                     Document Preview
                 </div>
                 <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic">Contract.doc</span><br>
-                    <span>Folder /legal/teamA/</span>
+                    <span class="text-itatic">{docPreview.name}</span><br>
+                    <span>Folder {docPreview.path}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
                     <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
@@ -217,12 +223,10 @@
                   <label></label>
                 </div>
               </th>
-              <th class="review_note">Document Name
-              </th>
-              <th class="review_note">Path
-              </th>
-              <th class="review_note">Category
-              </th>
+              <th class="review_note">Document Name</th>
+              <th class="review_note">Path</th>
+              <th class="review_note">Owner</th>
+              <th class="review_note">Category</th>
               <th class="review_note">Confidentiality</th>
               <th class="review_note">Comment</th>
               <th class="text-center">Validation</th>
@@ -237,7 +241,7 @@
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">Contract.doc</span>
+                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{docPreview.name}</span>
                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                   <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                   <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -252,13 +256,13 @@
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                <span class="text-italic doc-path">{docPreview.path}</span>
               </td>
               <td class="text-left">
-                <span class="text-italic">todd.smith</span>
+                <span class="text-italic">{docPreview.owner}</span>
               </td>
               <td class="vertical-top">
-                <select class="form-control">
+                <select class="form-control challenge-category" onChange={this.categoryOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
                     <option selected="">Accounting/ Tax</option>
                     <option>Corporate Entity</option>
                     <option>Customer</option>
@@ -266,16 +270,17 @@
                     <option>Legal/Compliance</option>
                     <option>Transaction</option>
                 </select>
+                <span class="text-italic previous-status">Previous: {docPreview.previous_category}</span>
               </td>
               <td class="vertical-top text-left">
-                <select class="form-control changed challenge-confidentiality">
+                <select class="form-control challenge-confidentiality" onChange={this.confidentialityOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
                     <option>Banking Secrecy</option>
                     <option selected="">Secret</option>
                     <option>Confidential</option>
                     <option>Internal</option>
                     <option>Public</option>
                 </select>
-                <span class="text-italic previous-status">Previous: Confidentiality</span>
+                <span class="text-italic previous-status">Previous: {docPreview.previous_confidentiality}</span>
               </td>
               <td>
                 <textarea class="form-control">challenge on confidentiality accepted</textarea>

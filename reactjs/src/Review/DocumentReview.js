@@ -9,6 +9,7 @@ import Constant from '../Constant.js'
 import undo from '../script/Undo.js'
 import javascript_todo from '../script/javascript.todo.js'
 import javascript_docs from '../script/javascript.docs.js'
+import help_guide from '../script/help_guide.js';
 import nanoscroller from '../script/nanoscroller.js'
 import loadScript from '../script/load.scripts.js';
 import 'jquery'
@@ -80,6 +81,7 @@ var DocumentReview = React.createClass({
     componentDidUpdate(prevProps, prevState) {
         if(this.state.ChallengedDocuments != prevState.ChallengedDocuments) {
             javascript_todo();
+            help_guide();
             nanoscroller();
             undo.setup(function(dataUndo, val) {
                 console.log('undo: ', dataUndo );
@@ -228,7 +230,9 @@ var DocumentReview = React.createClass({
             }
         }
     },
-
+    endReviewHandle: function() {
+        browserHistory.push('/Dashboard/OverView');
+    },
     render:template
 });
 module.exports = DocumentReview;
