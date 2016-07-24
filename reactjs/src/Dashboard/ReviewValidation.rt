@@ -31,14 +31,14 @@
                   </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
                     
-                   <div id="{'reviewValidation_' + reviewerCurrent}" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
+                   <div id="reviewValidation" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
                       <div class="reviewer-info clearfix">
                         <span style="text-transform: capitalize" class="mr-md">Reviewer: {reviewers[reviewerCurrent].first_name}.{reviewers[reviewerCurrent].last_name}</span>
                         <span><span class="doc-num">{reviewValidations.documents.length}</span> Documents Challenged - Validation Progress: </span>
                         <div class="progress-radial small progress-50"></div>
 
                         <div class="pull-right">
-                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                           <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                         </div>
                       </div>
@@ -84,32 +84,32 @@
                                 <span class="text-italic doc-path">{document.path}</span>
                               </td>
                               <td class="vertical-top">
-                                <select class="form-control challenge-category" onChange={this.categoryOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
-                                    <option selected="">Accounting/ Tax</option>
-                                    <option>Corporate Entity</option>
-                                    <option>Customer</option>
-                                    <option>Employee</option>
-                                    <option>Legal/Compliance</option>
-                                    <option>Transaction</option>
+                                <select id="{'category_' + documentIndex}" class="form-control challenge-category setUndo" onChange={this.categoryOnChange} data-target="#reviewValidation">
+                                    <option selected="" value="10">Accounting/ Tax</option>
+                                    <option value="20">Corporate Entity</option>
+                                    <option value="30">Customer</option>
+                                    <option value="40">Employee</option>
+                                    <option value="50">Legal/Compliance</option>
+                                    <option value="60">Transaction</option>
                                 </select>
                                 <span class="text-italic previous-status">Previous: {document.previous_category}</span>
                               </td>
                               <td class="vertical-top text-left">
-                                <select class="form-control challenge-confidentiality" onChange={this.confidentialityOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
-                                    <option>Banking Secrecy</option>
-                                    <option selected="">Secret</option>
-                                    <option>Confidential</option>
-                                    <option>Internal</option>
-                                    <option>Public</option>
+                                <select id="{'confidential_' + documentIndex}" class="form-control challenge-confidentiality setUndo" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
+                                    <option value="10">Banking Secrecy</option>
+                                    <option selected="" value="20">Secret</option>
+                                    <option value="30">Confidential</option>
+                                    <option value="40">Internal</option>
+                                    <option value="50">Public</option>
                                 </select>
                                 <span class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
                               </td>
                               <td>
-                                <textarea class="form-control">{document['2nd_line_comment']}</textarea>
+                                <textarea id="{'textarea_' + documentIndex}" class="form-control setUndo">{document['2nd_line_comment']}</textarea>
                               </td>
                               <td>
-                                <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="{'#reviewValidation_' + reviewerCurrent}">
-                                <i class="fa fa-check {(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
+                                <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="#reviewValidation">
+                                <i id="{'icon_' + documentIndex}" class="fa fa-check {(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
                             
                                 </a>
                               </td>
@@ -263,7 +263,7 @@
                 <span class="text-italic">{docPreview.owner}</span>
               </td>
               <td class="vertical-top">
-                <select class="form-control challenge-category" onChange={this.categoryOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
+                <select class="form-control challenge-category" onChange={this.categoryOnChange} data-target="#reviewValidation">
                     <option selected="">Accounting/ Tax</option>
                     <option>Corporate Entity</option>
                     <option>Customer</option>
@@ -274,7 +274,7 @@
                 <span class="text-italic previous-status">Previous: {docPreview.previous_category}</span>
               </td>
               <td class="vertical-top text-left">
-                <select class="form-control challenge-confidentiality" onChange={this.confidentialityOnChange} data-target="{'#reviewValidation_' + reviewerCurrent}">
+                <select class="form-control challenge-confidentiality" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
                     <option>Banking Secrecy</option>
                     <option selected="">Secret</option>
                     <option>Confidential</option>

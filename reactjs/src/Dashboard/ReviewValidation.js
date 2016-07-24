@@ -9,6 +9,7 @@ import Constant from '../Constant.js';
 import 'jquery'
 import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
+import undo from '../script/Undo.js';
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -24,7 +25,6 @@ var ReviewValidation = React.createClass({
             challengedDocs: [],
             challengedDocCurrent: null,
             summary: [],
-            shouldUpdate: false,
             documentPreview: null
         };
     },
@@ -52,9 +52,6 @@ var ReviewValidation = React.createClass({
         if(this.state.reviewValidations != nextState.reviewValidations) {
             return true;
         }
-        if(this.state.shouldUpdate != nextState.shouldUpdate) {
-            return true;
-        }
         if(this.state.documentPreview != nextState.documentPreview) {
             return true;
         }
@@ -73,7 +70,10 @@ var ReviewValidation = React.createClass({
             this.getReviewValidation();
         }
         if(this.state.reviewValidations != prevState.reviewValidations) {
-//            javascriptTodo();
+            javascriptTodo();
+            undo.setup(function(dataUndo, val) {
+                console.log("undo");
+            }.bind(this));
         }
         if(this.state.documentPreview != prevState.documentPreview) {
             loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
@@ -152,14 +152,17 @@ var ReviewValidation = React.createClass({
             });
             this.setState(setReviewer);
         }
-        if(shouldUpdate) {
-            this.setState({ shouldUpdate: false });
-        } else {
-            this.setState({ shouldUpdate: true });
-        }
+        $('#reviewValidation').find('.challenge-btn i.icon-success').removeClass('icon-success');
+        $('#reviewValidation').find('.challenge-btn i.icon-danger').removeClass('icon-danger');
+        $('#reviewValidation').find('.actions-success').hide();
+        $('#reviewValidation').find('.btn-end-review').addClass('btn-disabled');
+        $('#reviewValidation').find('.progress-radial').removeClass('progress-100');
+        $('#reviewValidation').find('.progress-radial').addClass('progress-50');
+        $('#reviewValidation').find('#icon_0').addClass('icon-success');
+        $('#reviewValidation').find('.challenge-category').removeClass('changed');
+        $('#reviewValidation').find('.challenge-confidentiality').removeClass('changed');
     },
     setCategoryCurrent: function(categoryIndex) {
-        
         var categories = this.state.categories;
         if(categoryIndex <= (categories.length - 1)) {
             var setCategory = update(this.state, {
@@ -167,11 +170,15 @@ var ReviewValidation = React.createClass({
             });
             this.setState(setCategory);
         }
-        if(shouldUpdate) {
-            this.setState({ shouldUpdate: false });
-        } else {
-            this.setState({ shouldUpdate: true });
-        }
+        $('#reviewValidation').find('.challenge-btn i.icon-success').removeClass('icon-success');
+        $('#reviewValidation').find('.challenge-btn i.icon-danger').removeClass('icon-danger');
+        $('#reviewValidation').find('.actions-success').hide();
+        $('#reviewValidation').find('.btn-end-review').addClass('btn-disabled');
+        $('#reviewValidation').find('.progress-radial').removeClass('progress-100');
+        $('#reviewValidation').find('.progress-radial').addClass('progress-50');
+        $('#reviewValidation').find('#icon_0').addClass('icon-success');
+        $('#reviewValidation').find('.challenge-category').removeClass('changed');
+        $('#reviewValidation').find('.challenge-confidentiality').removeClass('changed');
     },
     getChallengedDoc(reviewId) {
         $.ajax({
