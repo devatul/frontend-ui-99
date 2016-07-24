@@ -24,7 +24,7 @@
                                         <div class="info">
                                             <strong class="amount">{this.state.scan_result.percentage_documents_scanned}%</strong>
                                         </div>
-                                        <h4 class="title">{this.state.scan_result.total_documents_scanned} documents scanned</h4>
+                                        <h4 class="title">{this.state.scan_result.total_documents_scanned} Documents Scanned</h4>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{this.state.scan_result.percentage_duplicates}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.state.scan_result.total_duplicates} duplicates</h4>
+                                                <h4 class="title">{this.state.scan_result.total_duplicates} Duplicates</h4>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
@@ -59,7 +59,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{this.state.scan_result.percentage_twins}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.state.scan_result.total_twins} twins</h4>
+                                                <h4 class="title">{this.state.scan_result.total_twins} Twins</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </h4>
-                            <div class="widget-summary">
+                            <div class="widget-summary"> 
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </h4>
-                            <div class="widget-chart">
+                            <div class="widget-chart"  style="text-transform: capitalize">
                                 <div class="chart chart-md" id="flotPie"></div>
                                 <div id="legendContainer"></div>
                             </div>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </h4>
-                            <div class="widget-chart">
+                            <div class="widget-chart"  style="text-transform: capitalize">
                                 <div class="chart chart-md" id="flotPie2"></div>
                                 <div class="chart chart-md-inner" id="flotPie2Inner"></div>
                                 <div id="legendContainer2"></div>
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                             </h4>
-                            <div class="widget-chart">
+                            <div class="widget-chart"  style="text-transform: capitalize">
                                 <!-- Flot: Pie -->
                                 <div class="chart chart-md" id="flotPie3"></div>
                                 <div id="legendContainer3"></div>

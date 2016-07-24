@@ -7,11 +7,11 @@
                     <p class="page-heading-sm">{this.props.title}</p>
                     <div class="filter-tags-block">
                         <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
-                        <div class="pull-left filter-tags">
+                        <div class="pull-left filter-tags" style="text-transform: capitalize">
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" style="text-transform: capitalize">
                     <ul class="filter-buttons pull-right">
                         <li rt-if="true" class="dropdown">
                             <a class="toggle-button btn btn-default" onClick={this.openFilterPopup}><i class="fa fa-filter" aria-hidden="true"></i></a>

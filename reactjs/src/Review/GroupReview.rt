@@ -238,7 +238,7 @@
                                             <label for="checkboxAllExample2"></label>
                                         </div>
                                     </th>
-                                    <th class="review_note">Document
+                                    <th class="review_note">Document Name
               <div class="r dropdown dropdown-file-info-holder inline-block-item">
                                            <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                 <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
@@ -334,7 +334,7 @@
                                                   <span class="progress-percentage">({this.state.category_level[sampleIndex]}%)</span>
                                                 </div>
                                             </div>
-                                            <select id="{'Category_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{this.state.category_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Category'}">
+                                            <select style="text-transform: capitalize" id="{'Category_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{this.state.category_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Category'}">
                                               <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                             </select>
                                         </div>
@@ -348,7 +348,7 @@
                                                   <span class="progress-percentage">({this.state.confidential_level[sampleIndex]}%)</span>
                                                 </div>
                                             </div>
-                                            <select id="{'Confidential_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{this.state.confidential_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Confidential'}">
+                                            <select style="text-transform: capitalize" id="{'Confidential_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{this.state.confidential_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Confidential'}">
                                               <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{Confidential.confidence_level}">{Confidential.name}</option>
                                             </select>
                                         </div>

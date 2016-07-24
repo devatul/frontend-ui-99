@@ -22,7 +22,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y + ' Documents';
               },
             }
         });
@@ -48,7 +48,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y + ' Documents';
               },
             }
         });
@@ -74,7 +74,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y+' Documents';
               },
             }
         });
@@ -108,7 +108,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y + ' Documents';
               },
             }
         });

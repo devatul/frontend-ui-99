@@ -16,6 +16,18 @@ module.exports = function() {
               buttonText: function(options, select) {
                   return buttonText;
               },
+              onDropdownShow: function(event){
+                var dropdown = $(event.target).find('.dropdown-menu');
+                var dropdownHeight = dropdown.height();
+                var parentDropdown = dropdown.parents('.dropdown-menu.has-child');
+                var newHeight = parentDropdown.height() + dropdownHeight + 40;
+                parentDropdown.css('height', newHeight);
+              },
+              onDropdownHide: function(event){
+                var dropdown = $(event.target).find('.dropdown-menu');
+                var parentDropdown = dropdown.parents('.dropdown-menu.has-child');
+                parentDropdown.css('height', '');
+              },
               onChange: function(option, checked){
                   var selectedOption = $(option).val();
                   var filterCriteria = $(option).parents('.overview-filter').attr('name');

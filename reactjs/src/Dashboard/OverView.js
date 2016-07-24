@@ -29,6 +29,11 @@ var OverView = React.createClass
         }
 
     },
+    ucwords:function(str){
+        return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
+            return a.toUpperCase();
+        });
+    },
 	componentDidMount() {
         $('#bell').click();
         javascriptTodo();
@@ -129,8 +134,9 @@ var OverView = React.createClass
         var data_doctypes = [];
         //add data_confidentiality
             for(var i = 0; i < data.confidentialities.length; i++) {
+                
                 data_confidentiality.push({
-                    label: data.confidentialities[i].name,
+                    label: this.ucwords(data.confidentialities[i].name),
                     data: [
                         [1, data.confidentialities[i].percentage_owner_accuracy_docs]
                     ],
@@ -140,7 +146,7 @@ var OverView = React.createClass
         //add data_categories
             for(var i = 0; i < data.categories.length; i++) {
                 data_categories.push({
-                    label: data.categories[i].name,
+                    label: this.ucwords(data.categories[i].name),
                     data: [
                         [1, data.categories[i].percentage_owner_accuracy_docs]
                     ],
@@ -150,7 +156,7 @@ var OverView = React.createClass
         //add data_languages
             for(var i = 0; i < data.languages.length; i++) {
                 data_languages.push({
-                    label: (data.languages[i].short_name == null) ? data.languages[i].name : data.languages[i].short_name,
+                    label: (data.languages[i].short_name == null) ? this.ucwords(data.languages[i].name) : this.ucwords(data.languages[i].short_name),
                     data: [
                         [1, data.languages[i].total_docs]
                     ],
@@ -160,7 +166,7 @@ var OverView = React.createClass
         //add data_doctypes
             for(var i = 0; i < data["doc-types"].length; i++) {
                 data_doctypes.push({
-                    label: data["doc-types"][i].name,
+                    label: this.ucwords(data["doc-types"][i].name),
                     data: [
                         [1, data["doc-types"][i].total_docs]
                     ],

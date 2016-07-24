@@ -126,6 +126,11 @@ var GroupReview = React.createClass({
             confidential_level: {$set: confidential_level}
         }));
     },
+    ucwords:function(str){
+        return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
+            return a.toUpperCase();
+        });
+    },
     getGroup() {
     	$.ajax({
             method: 'GET',
@@ -389,7 +394,7 @@ var GroupReview = React.createClass({
 
             tooltip: {
                 headerFormat: '',
-                pointFormat: 'Documents: <b>{point.y}</b><br/>'
+                pointFormat: '{point.y} Documents<br/>'
             },
             
             series: [{
@@ -397,6 +402,7 @@ var GroupReview = React.createClass({
             }]
         });
     },
+    
     drawChart() {
         var categories = this.state.categories;
     	if( $('#confidentialityChart').length){
@@ -404,15 +410,16 @@ var GroupReview = React.createClass({
 		var highchart = [];
 		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
 			for(var i = 0; i < categories.length; i++) {
+                var name = this.ucwords(categories[i].name);
 				flotPieData.push({
-					label: categories[i].name,
+					label: name,
 		            data: [
 		                [1, categories[i].percentage]
 		            ],
 		            color: colors[i]
 				});
 				highchart.push({
-					name: categories[i].name,
+					name: name,
 		            data: [categories[i].doc_types[1].total,0,categories[i].doc_types[0].total,0,0]
 				});
 			}
@@ -444,7 +451,7 @@ var GroupReview = React.createClass({
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y;
+                return label + ': ' +y + ' Documents';
               }
             }
         });
@@ -494,7 +501,7 @@ var GroupReview = React.createClass({
 		        },
 		        tooltip: {
 		            headerFormat: '<b>{point.x}</b><br/>',
-		            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+		            pointFormat: '{series.name}: {point.y} Documents<br/>Total: {point.stackTotal} Documents'
 		        },
 		        plotOptions: {
 		            column: {
