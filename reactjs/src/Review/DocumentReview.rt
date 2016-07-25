@@ -42,7 +42,7 @@
                             <div class="panel-body" style="display: block;">
                                 <p class="document_note">You have to review 2 documents in {action.category} Category of Secret Confidentiality by latest 28th June</p>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button id="{'button_approve_' + actionIndex}" type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1 approve-button-2" style="display: none;">Approve</button>
+                                    <button id="{'button_approve_' + actionIndex}" type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1 approve-button-2" style="display: none;" data-target="#{'section_action_' + actionIndex}">Approve</button>
                                     <div class="alert alert-success actions-success">
                                         <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
                                         <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
@@ -153,7 +153,7 @@
                                                                   <span class="progress-percentage">({this.state.category_confidence_level[actionIndex][docIndex]}%)</span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" id="{'Category_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, [actionIndex, docIndex])" value={this.state.category_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Category'}">
+                                                            <select style="text-transform: capitalize" id="{'Category_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, [actionIndex, docIndex])" value={this.state.category_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Category'}" data-target="#{'section_action_' + actionIndex}">
                                                                 <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                                             </select>
                                                         </div>
@@ -167,7 +167,7 @@
                                                                   <span class="progress-percentage">({ this.state.confidential_confidence_level[actionIndex][docIndex] }%)</span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" id="{'Confidential_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, [actionIndex, docIndex])" value={this.state.confidential_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Confidential'}">
+                                                            <select style="text-transform: capitalize" id="{'Confidential_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, [actionIndex, docIndex])" value={this.state.confidential_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Confidential'}" data-target="#{'section_action_' + actionIndex}">
                                                                 <option rt-repeat="condential in doc.confidentialities" key="{condentialIndex}" value="{condential.confidence_level}">{condential.name}</option>
                                                             </select>
                                                         </div>
@@ -217,7 +217,7 @@
                             <div class="panel-body" style="display: block;">
                                 <p class="document_note">Stan challenged classification of 2 documents - You have to review it by latest 10th July</p>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1  approve-button-2" style="display: none;">Approve</button>
+                                    <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1  approve-button-2" style="display: none;" data-target="#{'section_challenged_' + challengedIndex}">Approve</button>
                                     <div class="alert alert-success actions-success">
                                         <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
                                         <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
@@ -318,14 +318,14 @@
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select style="text-transform: capitalize" id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo">
+                                                            <select style="text-transform: capitalize" id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo" data-target="#{'section_challenged_' + challengedIndex}">
                                                                 <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td class="vertical-top opa-child">
                                                         <div class="select-group">
-                                                            <select style="text-transform: capitalize" id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo">
+                                                            <select style="text-transform: capitalize" id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo" data-target="#{'section_challenged_' + challengedIndex}">
                                                                 <option rt-repeat="confidential in docChall.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                                             </select>
                                                         </div>
@@ -607,7 +607,7 @@
                             </td>
                             <td class="vertical-top opa-child">
                                 <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control black">
+                                    <select class="form-control black challenge-category" style="text-transform: capitalize" class="form-control black">
                                         <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
                                     </select>
                                     
@@ -615,7 +615,7 @@
                             </td>
                             <td class="vertical-top opa-child">
                                 <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality">
+                                    <select style="text-transform: capitalize" class="form-control black challenge-confidentiality">
                                         <option rt-repeat="confidential in docPreview.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
                                     </select>
                                 </div>

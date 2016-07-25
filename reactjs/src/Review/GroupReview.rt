@@ -207,7 +207,7 @@
 
 
 <div class="container">
-<div class="row">
+<div class="row" id="groupReview">
     <div class="col-md-12">
         <section class="panel panel-featured panel-featured-primary actions-panel">
             <header class="panel-heading">
@@ -216,7 +216,7 @@
                 <div class="panel-actions my-actions-btn-group">
 
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
 
                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                 </div>
@@ -234,7 +234,7 @@
                                 <tr role="row">
                                     <th>
                                         <div class="checkbox-custom checkbox-primary">
-                                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all setUndo" data-target="#table-my-actions">
+                                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1 setUndo" data-target="#groupReview">
                                             <label for="checkboxAllExample2"></label>
                                         </div>
                                     </th>
@@ -300,7 +300,7 @@
                                 <tr rt-repeat="sample in this.state.samples" key="{sampleIndex}">
                                     <td>
                                         <div class="checkbox-custom checkbox-default">
-                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item setUndo" data-target="#table-my-actions">
+                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item-1 setUndo" data-target="#groupReview">
                                             <label for="checkboxExample{sampleIndex}"></label>
                                         </div>
                                     </td>
@@ -354,7 +354,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#" class="doc-check">
+                                        <a href="#" class="doc-check" data-target="#groupReview">
                                           <i class="fa fa-clock-o" aria-hidden="true"></i>
                                           <i class="fa fa-check" aria-hidden="true"></i>
                                         </a>
@@ -367,7 +367,7 @@
                 </div>
                 <div class="my-actions-btn-group actions-bottom clearfix mt-md">
                     <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                    <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                    <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                 </div>
             </div>
         </section>

@@ -515,6 +515,9 @@ var GroupReview = React.createClass({
 		    });
 		 }
     },
+    endReviewHandle: function() {
+        browserHistory.push('/Dashboard/OverView');
+    },
     render:template
 });
 

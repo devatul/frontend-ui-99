@@ -211,7 +211,7 @@
     
     
     <div class="container">
-            <div class="row">
+            <div class="row" id="orphanReview">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary actions-panel">
                         <header class="panel-heading">
@@ -225,7 +225,7 @@
                             <div class="panel-actions my-actions-btn-group">
 
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
 
                                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                             </div>
@@ -243,7 +243,7 @@
                                             <tr role="row">
                                                 <th>
                                                     <div class="checkbox-custom checkbox-primary">
-                                                        <input type="checkbox" id="checkboxAllExample2" class="checkbox-all setUndo" data-target="#table-my-actions">
+                                                        <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1 setUndo" data-target="#orphanReview">
                                                         <label for="checkboxExample2"></label>
                                                     </div>
                                                 </th>
@@ -309,7 +309,7 @@
                                             <tr rt-repeat="doc in this.state.samples" key="{doc.name}">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
-                                                        <input type="checkbox" id="checkboxExample{docIndex}" class="checkbox-item setUndo" data-target="#table-my-actions">
+                                                        <input type="checkbox" id="checkboxExample{docIndex}" class="checkbox-item-1 setUndo" data-target="#orphanReview">
                                                         <label for="checkboxExample{docIndex}"></label>
                                                     </div>
                                                 </td>
@@ -336,20 +336,20 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <select style="text-transform: capitalize" id="{'Category_' + docIndex}" class="form-control setUndo"> 
+                                                        <select style="text-transform: capitalize" id="{'Category_' + docIndex}" class="form-control setUndo" data-target="#orphanReview"> 
                                                           <option rt-repeat="category in doc.categories" value="{category.name}" key="{category.name}">{category.name}</option>
                                                         </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group">
-                                                        <select style="text-transform: capitalize" id="{'Confidential_' + docIndex}" class="form-control setUndo">
+                                                        <select style="text-transform: capitalize" id="{'Confidential_' + docIndex}" class="form-control setUndo" data-target="#orphanReview">
                                                           <option rt-repeat="confidentialy in doc.confidentialities" value="{confidentialy.name}" key="{confidentialy.name}">{confidentialy.name}</option>
                                                         </select>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="doc-check">
+                                                    <a href="#" class="doc-check" data-target="#orphanReview">
                                                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                       <i class="fa fa-check" aria-hidden="true"></i>
                                                     </a>
@@ -361,7 +361,7 @@
                             </div>
                             <div class="my-actions-btn-group actions-bottom clearfix mt-md">
                                 <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                             </div>
                         </div>
                     </section>

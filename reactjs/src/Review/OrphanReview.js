@@ -82,6 +82,9 @@ var OrphanReview = React.createClass({
             this.drawCloud();
         }
     },
+    endReviewHandle: function() {
+        browserHistory.push('/Dashboard/OverView');
+    },
     getOrphan: function() {
     	$.ajax({
             method: 'GET',
