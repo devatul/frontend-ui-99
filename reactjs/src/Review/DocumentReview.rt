@@ -34,7 +34,7 @@
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
                                     <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                    <!--<button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
 
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
@@ -211,7 +211,7 @@
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
                                     <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                                    <!--<button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
                             </header>

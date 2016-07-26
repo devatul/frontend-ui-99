@@ -89,7 +89,7 @@
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
                             <li class="dropdown">
-                                <span class="badge">1</span>
+                                <span class="badge">2</span>
                                 <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Review <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -119,7 +119,7 @@
                             <li>
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
-                            <li><span class="badge">3</span>
+                            <li><span class="badge">2</span>
                                 <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                             <li>
                                 <a href="#">Insights</a>

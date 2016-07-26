@@ -309,9 +309,10 @@ $(function () {
         $(parent).find('.dropdown-menu.has-child').toggle();
     });
 
-    $('.dropdown-backdrop-custom').on('click', function(e){
-        $('.dropdown-backdrop-custom').toggle();
-        $('.dropdown-menu.has-child').toggle();
+    $('.dropdown-backdrop-custom').on('click', function(){
+        var parent = $(this).parents('.dropdown');
+        $(parent).find('.dropdown-backdrop-custom').toggle();
+        $(parent).find('.dropdown-menu.has-child').toggle();
     });
 
     $('body').on('click', '.dropdown-backdrop', function(e){

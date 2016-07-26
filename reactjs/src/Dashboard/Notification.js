@@ -31,33 +31,38 @@ var Notification = React.createClass
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                var date = new Date();
-                //var day = date.getDate();
-                //var month = date.getMonth();
-                //var year = date.getFullYear();
                 var today = [];
                 var yesterday = [];
                 var last_7_days = [];
                 var last_30_days = [];
                 var older = [];
                 for (var i = 0; i < data.length; i++) {
+                    var date1 = new Date();
+                    var date2 = new Date();
+                    var date3 = new Date();
+                    var date4 = new Date();
                     var created = new Date(data[i].created);
-                    if((date == created)) {
+                    date2.setDate(date2.getDate()-1);
+                    date3.setDate(date3.getDate()-7);
+                    date4.setMonth(date4.getMonth()-1);
+                    if(date1.getDate() == created.getDate() && date1.getMonth() == created.getMonth() && date1.getFullYear() == created.getFullYear()  ) {
                         //today
                         today.push(data[i]);
-                    } else if(date.setDate(created.getDate()-1) == created) {
+                    } else if(date2.getDate() == created.getDate() && date2.getMonth() == created.getMonth() && date2.getFullYear() == created.getFullYear()  ) {
                         //yesterday
                         yesterday.push(data[i]);
-                    } else if(date.setDate(created.getDate()-7) == created) {
+                    } else if(created >= date3) {
                         //7 days
                         last_7_days.push(data[i]);
-                    } else if(date.setMonth(created.getMonth()-1) == created) {
+                    } else if(created >= date4) {
                         //30 days
                         last_30_days.push(data[i]);
                     } else {
                         //older
+
                         older.push(data[i]);
                     }
+                    
                 }
                 var update_notification = update(this.state, {
                     notification: {

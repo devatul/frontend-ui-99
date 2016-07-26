@@ -23,12 +23,12 @@ module.exports = {
 	,
 	iconCategories:
 	[
-		{ name:"accounting/tax", class:'fa-calculator'},
-		{ name:"corporate entity", class:'fa-university'},
-		{ name:"client/customer", class:'fa-users'},
-		{ name:"employee", class:'fa-male'},
-		{ name:"legal", class:'fa-balance-scale'},
-		{ name:"transaction", class:'fa-usd'}
+		{ name:"Accounting/Tax", class:'fa-calculator'},
+		{ name:"Corporate Entity", class:'fa-university'},
+		{ name:"Client/Customer", class:'fa-users'},
+		{ name:"Employee", class:'fa-male'},
+		{ name:"Legal/Compliance", class:'fa-balance-scale'},
+		{ name:"Transaction", class:'fa-usd'}
 	],
 	urgency: [
 		{ name: "low",  class: ""},
