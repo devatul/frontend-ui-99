@@ -144,7 +144,10 @@ module.exports = function () {
     $('.approve-button-2').click(function(){
         $(this).hide();
         var target = $(this).attr('data-target');
-        var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+        var table = $(target).find('.table-my-actions');
+        var trNum = $(target).find('tbody tr').length;
+        var tableTitle = $(target).find('.document_panel-title.panel-title').text();
+
         table.find('tr').each(function () {
           $(this).removeClass('inactive');
           if ($(this).find('input[type="checkbox"]').prop('checked')){
@@ -162,9 +165,15 @@ module.exports = function () {
             $(target).find('.btn-end-review').removeClass('btn-disabled');
            $(target).find('.actions-success').show();
         }
-        if(table.find('.doc-check.validated')!= null) {
-        var docToReview = 2 - table.find('.doc-check.validated').length;
-        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        if(table.find('.doc-check.validated').length > 0) {
+          var docToReview = trNum - table.find('.doc-check.validated').length;
+          $(target).find('.document_note span.document_number').html(docToReview);
+          $(target).find('.document_note span.document_category').html(tableTitle);
+        }
+        if($(target).find('.challenge-btn i.icon-success').length > 0) {
+          var docToReview = trNum - table.find('.challenge-btn i.icon-success').length;
+          $(target).find('.document_note span.document_number').html(docToReview);
+          $(target).find('.document_note span.document_category').html(tableTitle);
         }
     });
   $('.approve-button').click(function(){

@@ -35,7 +35,7 @@
                               </header>
 
                               <div class="panel-body" id="stat-block">
-                                <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+                                <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
 
                                 <div class="panel-actions collapse-stat-table">
                                   <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>

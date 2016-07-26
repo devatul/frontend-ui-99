@@ -102,7 +102,7 @@ var DocumentReview = React.createClass({
                     new_confidential_level[data[0]][data[1]] = val;
                     this.setState(update(this.state, {
                         confidential_confidence_level: {$set: new_confidential_level},
-                        confidential_level_current: {$set: data[1] + ':' + val}
+                        confidential_level_current: {$set: data[0] + ':' + data[1] + ':' + val}
                     }));
                 }
             }.bind(this));
@@ -232,6 +232,36 @@ var DocumentReview = React.createClass({
     },
     endReviewHandle: function() {
         browserHistory.push('/Dashboard/OverView');
+    },
+    approveHandleChallenged: function() {
+        $(this).hide();
+        var target = $(this).attr('data-target');
+        var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
+        table.find('tr').each(function () {
+          $(this).removeClass('inactive');
+          if ($(this).find('input[type="checkbox"]').prop('checked')){
+            $(this).find('.doc-check').addClass('validated');
+            //$(this).addClass('item-validated');
+            $(this).find('input[type="checkbox"]').prop('checked', false);
+            $(this).find( 'i.fa-check').attr('style', 'color: #59D0A7');
+            $(this).find( 'i.fa-check').addClass('icon-success');
+          };
+        });
+        if($(target).find('.challenge-btn i').hasClass('icon-danger')) {
+              $(target).find('.challenge-btn i').removeClass('icon-danger');
+           }
+        if (table.find('.doc-check').length == table.find('.doc-check.validated').length && $(target).find('.checkbox-all-1').attr('checked')){
+            $(target).find('.btn-end-review').removeClass('btn-disabled');
+           $(target).find('.actions-success').show();
+        }
+        if(table.find('.doc-check.validated')!= null) {
+        var docToReview = 2 - table.find('.doc-check.validated').length;
+        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        }
+        if(table.find('.challenge-btn i.icon-success')!= null) {
+        var docToReview = 2 - table.find('.challenge-btn i.icon-success').length;
+        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        }
     },
     render:template
 });

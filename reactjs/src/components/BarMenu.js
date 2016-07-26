@@ -52,6 +52,18 @@ var MenuBar = React.createClass
     });
   },
   shouldComponentUpdate(nextProps, nextState) {
+      if(this.state.listCategory != nextState.listCategory) {
+        return true;
+      }
+      if(this.state.listConfidentiality != nextState.listConfidentiality) {
+        return true;
+      }
+      if(this.state.listDoctype != nextState.listDoctype) {
+        return true;
+      }
+      if(this.state.listLanguage != nextState.listLanguage) {
+        return true;
+      }
       if(this.state.categories != nextState.categories) {
           return true;
       }
