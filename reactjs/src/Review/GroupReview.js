@@ -425,7 +425,7 @@ var GroupReview = React.createClass({
 				});
 				highchart.push({
 					name: name,
-		            data: [categories[i].doc_types[1].total,0,categories[i].doc_types[0].total,0,0]
+		            data: [categories[i].doc_types[0].total,categories[i].doc_types[1].total,categories[i].doc_types[2].total,categories[i].doc_types[3].total,categories[i].doc_types[4].total]
 				});
 			}
 		}

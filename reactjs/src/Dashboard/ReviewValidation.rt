@@ -85,7 +85,7 @@
                               </td>
                               <td class="vertical-top">
                                 <select id="{'category_' + documentIndex}" class="form-control challenge-category setUndo" onChange={this.categoryOnChange} data-target="#reviewValidation">
-                                    <option selected="" value="10">Accounting/ Tax</option>
+                                    <option selected="" value="10">Accounting/Tax</option>
                                     <option value="20">Corporate Entity</option>
                                     <option value="30">Customer</option>
                                     <option value="40">Employee</option>
@@ -96,8 +96,8 @@
                               </td>
                               <td class="vertical-top text-left">
                                 <select id="{'confidential_' + documentIndex}" class="form-control challenge-confidentiality setUndo" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
-                                    <option value="10">Banking Secrecy</option>
-                                    <option selected="" value="20">Secret</option>
+                                    <option value="20">Banking Secrecy</option>
+                                    <option selected="" value="10">Secret</option>
                                     <option value="30">Confidential</option>
                                     <option value="40">Internal</option>
                                     <option value="50">Public</option>
