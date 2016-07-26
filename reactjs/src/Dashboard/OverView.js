@@ -127,8 +127,8 @@ var OverView = React.createClass
        
     },
     updateChartData(data) {
-        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
-        var color_language = ['#2ecc71', '#9b59b6', '#34495e'];
+        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240'];
+        var color_language = ['#2ecc71', '#9b59b6', '#34495e','#edc240'];
         var data_confidentiality = [];
         var data_categories = [];
         var data_languages = [];

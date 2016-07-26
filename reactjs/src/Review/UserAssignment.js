@@ -6,11 +6,10 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import javascript from '../script/javascript.js';
 import Constant from '../Constant.js'
-import chart from '../script/chart-user-assignment.js'
+import userAssignment from '../script/javascript.assignement.js'
 import 'jquery'
 
 var UserAssignment = React.createClass({
-    displayName: 'UserAssignment',
     mixins: [LinkedStateMixin],
     getInitialState() {
         return {
@@ -24,6 +23,7 @@ var UserAssignment = React.createClass({
     componentDidMount() {
     	this.getCategories();
     	this.getCategoryInfo(1);
+    	userAssignment();
     },
     shouldComponentUpdate(nextProps, nextState) {
     	if(this.state.categories != nextState.categories) {
