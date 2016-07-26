@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './OverView.rt';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import update from 'react-addons-update';
+import _ from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import scriptOverview from '../script/javascript-overview.js'
 import Constant from '../Constant.js';
@@ -184,13 +185,35 @@ var OverView = React.createClass
                 });
             this.setState(update_chart_data);
     },
-    handleFilter: function(data) {
-        if(data === false) {
-            this.getScanResult();
+    handleFilter: function(bodyRequest) {
+        console.log('bodyRequest', bodyRequest);
+        if(!_.isEmpty(bodyRequest)) {
+            $.ajax({
+                url: Constant.SERVER_API + 'api/scan/filter/',
+                dataType: 'json',
+                type: 'POST',
+                data: JSON.stringify(bodyRequest),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                },
+                success: function(data) {
+                    this.updateChartData(data);
+                    
+                    this.setState(update(this.state, {
+                        scan_result: {$set: data}
+                    }));
+
+                    console.log("scan result: ", data);
+                }.bind(this),
+                error: function(xhr, error) {
+                    if(xhr.status === 401)
+                    {
+                        browserHistory.push('/Account/SignIn');
+                    }
+                }.bind(this)
+            });
         } else {
-            this.setState(update(this.state, {
-                scan_result: {$set: data }
-            }));
+            this.getScanResult();
         }
     },
 	render:template

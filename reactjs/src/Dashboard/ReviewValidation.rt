@@ -1,6 +1,6 @@
 <rt-import name="BarName" from="../components/BarMenu"/>
 <section>
- <BarName title="Documents Classification Challenge - Coordinator’s Review Validation" isShowInfo="false"></BarName>
+ <BarName title="Documents Classification Challenge - Coordinator’s Review Validation" showInfo={true}></BarName>
     <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs cat-list">

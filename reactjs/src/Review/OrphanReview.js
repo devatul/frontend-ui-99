@@ -32,6 +32,11 @@ var OrphanReview = React.createClass({
     componentDidMount() {
         this.getOrphan();
         chart();
+        $('.btn-refine').on('click', function(e){
+            e.preventDefault();
+            $(this).removeClass('btn-green').addClass('btn-disabled');
+            $(this).parent().find('.refine-progress').show();
+        });
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {

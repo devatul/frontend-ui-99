@@ -1,4 +1,6 @@
-<div>
+
+
+<div rt-scope="this.state.listCategory as listCategory; this.state.listConfidentiality as listConfidentiality; this.state.listDoctype as listDoctype; this.state.listLanguage as listLanguage; this.state.scan_result as scan_result">
 <div class="my_main bar_menu container">
     <div class="row">
         <div class="col-md-12 mb-md">
@@ -13,43 +15,43 @@
                 </div>
                 <div class="col-sm-4" style="text-transform: capitalize">
                     <ul class="filter-buttons pull-right">
-                        <li rt-if="this.props.isShowFilter" class="dropdown">
+                        <li rt-if="this.props.showFilter" class="dropdown">
                             <a class="toggle-button btn btn-default" onClick={this.openFilterPopup}><i class="fa fa-filter" aria-hidden="true"></i></a>
                             <div class="dropdown-backdrop-custom" style="display:none"></div>
                             <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
                                 <ul class="filter-list list-unstyled pt-xs">
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
-                                                <option rt-repeat="category in this.state.category" key="{category.id}" value="{category.name}">{category.name}</option>
+                                            <select id="filter_category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
+                                                <option rt-repeat="category in listCategory" key="{category.id}" data-value="{category.id}" value="{category.name}">{category.name}</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="confidentiality" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality">
-                                                <option rt-repeat="confidentiality in this.state.confidentiality" key="{confidentiality.id}" value="{confidentiality.name}">{confidentiality.name}</option>
+                                            <select id="filter_confidentiality" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality">
+                                                <option rt-repeat="confidentiality in listConfidentiality" key="{confidentialityIndex}" data-value="{confidentiality.id}" value="{confidentiality.name}">{confidentiality.name}</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
-                                                <option rt-repeat="doctype in this.state.doctype" key="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
+                                            <select id="filter_doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
+                                                <option rt-repeat="doctype in listDoctype" key="{doctype.id}" data-value="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="language" class="form-control select-multiple" multiple="multiple" data-title="Language">
-                                                <option rt-repeat="language in this.state.language" key="{language.id}" value="{language.name}">{language.name}</option>
+                                            <select id="filter_language" class="form-control select-multiple" multiple="multiple" data-title="Language">
+                                                <option rt-repeat="language in listLanguage" key="{language.id}" data-value="{language.id}" value="{language.name}">{language.name}</option>
                                             </select>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li rt-if="this.props.isShowInfo" class="dropdown">
+                        <li rt-if="this.props.showInfo" class="dropdown">
                             <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                             <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
                                 <div class="table-responsive">
@@ -57,39 +59,39 @@
                                         <tbody>
                                         <tr>
                                             <td>Last Data Scan:</td>
-                                            <td colspan="3">{this.props.datainfo.last_data_scan}</td>
+                                            <td colspan="3">{scan_result.last_data_scan}</td>
                                         </tr>
                                         <tr>
                                             <td>Country In Scope:</td>
-                                            <td colspan="3">{this.props.datainfo.country}</td>
+                                            <td colspan="3">{scan_result.country}</td>
                                         </tr>
                                         <tr>
                                             <td>Business In Scope:</td>
-                                            <td colspan="3">{this.props.datainfo.business_unit}</td>
+                                            <td colspan="3">{scan_result.business_unit}</td>
                                         </tr>
                                         <tr>
                                             <td>Scan Status:</td>
-                                            <td colspan="3">{this.props.datainfo.scan_status}</td>
+                                            <td colspan="3">{scan_result.scan_status}</td>
                                         </tr>
                                         <tr>
                                             <td>Documents Analyzed:</td>
-                                            <td colspan="3">{this.props.datainfo.document_analyzed}</td>
+                                            <td colspan="3">{scan_result.document_analyzed}</td>
                                         </tr>
                                         <tr>
                                         <td>File Extension Processed:</td>
-                                            <td colspan="3">{this.props.datainfo.file_extensions_processed}</td>
+                                            <td colspan="3">{scan_result.file_extensions_processed}</td>
                                         </tr>
                                         <tr>
                                             <td>Duplicated Documents:</td>
-                                            <td colspan="3">{this.props.datainfo.total_duplicates}</td>
+                                            <td colspan="3">{scan_result.total_duplicates}</td>
                                         </tr>
                                         <tr>
                                             <td>Encrypted Documents or Archives:</td>
-                                            <td colspan="3">{this.props.datainfo.encrypted_documents}</td>
+                                            <td colspan="3">{scan_result.encrypted_documents}</td>
                                         </tr>
                                         <tr>
                                             <td>Documents Skipped:</td>
-                                            <td colspan="3">{this.props.datainfo.documents_skipped}</td>
+                                            <td colspan="3">{scan_result.documents_skipped}</td>
                                         </tr>
                                         </tbody>
                                     </table>

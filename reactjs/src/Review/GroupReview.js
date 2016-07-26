@@ -37,6 +37,11 @@ var GroupReview = React.createClass({
     componentDidMount() {
         this.getGroup(); 
         chart();
+        $('.btn-refine').on('click', function(e){
+            e.preventDefault();
+            $(this).removeClass('btn-green').addClass('btn-disabled');
+            $(this).parent().find('.refine-progress').show();
+        });
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.group_current != nextState.group_current) {

@@ -1,5 +1,5 @@
 module.exports = function() {
-	var renderFilterBlock = function(){
+  var renderFilterBlock = function(){
     if ($('.filter-tags .filter-label').length){
       $('.filter-tags-block label').show();
     }
@@ -30,7 +30,7 @@ module.exports = function() {
               },
               onChange: function(option, checked){
                   var selectedOption = $(option).val();
-                  var filterCriteria = $(option).parents('.overview-filter').attr('name');
+                  var filterCriteria = $(option).parents('.overview-filter').attr('id');
                   if(checked == true) {
                       $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
                       renderFilterBlock();
@@ -43,12 +43,4 @@ module.exports = function() {
           });
       });
   }
-
-  $('body').on('click', '.filter-remove', function(){
-    var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
-    var value = $(this).parents('.filter-label').attr('data-value');
-    $(this).parents('.filter-label').remove();
-    $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]);
-    renderFilterBlock();
-  });
 }
