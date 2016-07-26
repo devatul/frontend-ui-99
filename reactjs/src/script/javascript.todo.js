@@ -372,25 +372,14 @@ $('.checkbox-item-1').on('change', function(){
         $(target).find('.actions-success').show();
         $(target).find('.btn-end-review').removeClass('btn-disabled');
     }
-      var btn= $(this);
-    setTimeout(function(){
-      var table = btn.parents('.table-challenge');
-      var tab = table.parents('.tab-challenge');
-      var challengedItem = table.find('.item-challenged').length;
-      var itemNum = table.find('tbody tr').length;
-      tab.find('.doc-num').html(challengedItem);
-      var progress = parseInt(challengedItem/itemNum*100);
-      var progressRadial = tab.find('.progress-radial').length;
-      if(progressRadial) {
-        var classes = progressRadial.attr('class').split(' ');
-        $.each(classes, function(i, c) {
-            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
-                progressRadial.removeClass(c);
-            }
-      });
-      progressRadial.addClass('progress-'+$(target).find('.challenge-btn i.icon-success').length*50);
-      }
-    }, 100);
+      var percent = $(target).find('.challenge-btn i.icon-success').length * 50;
+    var classes =  $("#reviewValidation .progress-radial").attr('class').split(' ');
+    $.each(classes, function(i, c) {
+        if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+            $("#reviewValidation .progress-radial").removeClass(c);
+        }
+    });
+    $("#reviewValidation .progress-radial").addClass('progress-'+percent);
   });
   var defaultValue = 10;
   var defaultText = 'Accounting/Tax';
@@ -404,25 +393,15 @@ $('.checkbox-item-1').on('change', function(){
       $(target).find('.actions-success').hide();
       $(target).find('.btn-end-review').addClass('btn-disabled');
     }
-    var btn= $(this);
-    setTimeout(function(){
-      var table = btn.parents('.table-challenge');
-      var tab = table.parents('.tab-challenge');
-      var challengedItem = table.find('.item-challenged').length;
-      var itemNum = table.find('tbody tr').length;
-      tab.find('.doc-num').html(challengedItem);
-      var progress = parseInt(challengedItem/itemNum*100);
-      var progressRadial = tab.find('.progress-radial').length;
-      if(progressRadial > 0) {
-        var classes = progressRadial.attr('class').split(' ');
-        $.each(classes, function(i, c) {
-            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
-                progressRadial.removeClass(c);
-            }
-      });
-      progressRadial.addClass('progress-'+$(target).find('.challenge-btn i.icon-success').length*50);
-      }
-    }, 100);
+    var percent = $(target).find('.challenge-btn i.icon-success').length * 50;
+    var classes =  $("#reviewValidation .progress-radial").attr('class').split(' ');
+    $.each(classes, function(i, c) {
+        if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+            $("#reviewValidation .progress-radial").removeClass(c);
+        }
+    });
+    $("#reviewValidation .progress-radial").addClass('progress-'+percent);
+
     $(this).addClass('red changed');
     if(defaultValue == val && defaultText == text) {
       $(this).removeClass('changed');
@@ -448,25 +427,15 @@ $('.checkbox-item-1').on('change', function(){
     }
     $(this).parents('tr').find('.challenge-btn').html('<i id="icon_0" class="fa fa-check icon-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="You challenged back the review"></i>');
     $(this).parents('tr').find('.challenge-btn i').tooltip();
-    var btn= $(this);
-    setTimeout(function(){
-      var table = btn.parents('.table-challenge');
-      var tab = table.parents('.tab-challenge');
-      var challengedItem = table.find('.item-challenged').length;
-      var itemNum = table.find('tbody tr').length;
-      tab.find('.doc-num').html(challengedItem);
-      var progress = parseInt(challengedItem/itemNum*100);
-      var progressRadial = tab.find('.progress-radial').length;
-      if(progressRadial) {
-        var classes = progressRadial.attr('class').split(' ');
-        $.each(classes, function(i, c) {
-            if (c != 'progress-radial' && c.indexOf('progress') == 0) {
-                progressRadial.removeClass(c);
-            }
-      });
-      progressRadial.addClass('progress-'+$(target).find('.challenge-btn i.icon-success').length*50);
-      }
-    }, 100);
+
+    var percent = $(target).find('.challenge-btn i.icon-success').length * 50;
+    var classes =  $("#reviewValidation .progress-radial").attr('class').split(' ');
+    $.each(classes, function(i, c) {
+        if (c != 'progress-radial' && c.indexOf('progress') == 0) {
+            $("#reviewValidation .progress-radial").removeClass(c);
+        }
+    });
+    $("#reviewValidation .progress-radial").addClass('progress-'+percent);
   });
 
   $('.btn-next-reviewer').on('click', function(){
