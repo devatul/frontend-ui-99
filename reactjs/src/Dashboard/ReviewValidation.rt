@@ -62,8 +62,9 @@
                           <tbody>
                             <tr rt-repeat="document in reviewValidations.documents" id="{'document_' + documentIndex}" class="set-element-undo">
                               <td>
-                                <i rt-if="document.status == 'accepted'" class="fa fa-check icon-success"></i>
-                                <i rt-if="document.status == 'rejected'" class="fa fa-times icon-danger"></i>
+                                <i rt-if="document.status == 'accepted'" class="fa fa-clock-o icon-success"></i>
+                                <i rt-if="document.status == 'rejected'" class="fa fa-clock-o icon-danger"></i>
+                                <i rt-if="document.status != 'rejected' && document.status != 'accepted'" class="fa fa-clock-o icon-warning"></i>
                               </td>
                               <td class="text-left">
                                 <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{document.name}</span>

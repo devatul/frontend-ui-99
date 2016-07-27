@@ -105,6 +105,7 @@
                             <div class="widget-chart"  style="text-transform: capitalize">
                                 <div class="chart chart-md" id="flotPie"></div>
                                 <div id="legendContainer"></div>
+                                <div id="legendContainerCensord1"  style="display:none" class="chart-disabled-overlay"></div>
                             </div>
                         </div>
                     </section>
@@ -125,6 +126,7 @@
                                 <div class="chart chart-md-inner" id="flotPie2Inner"></div>
                                 <div id="legendContainer2"></div>
                                 <div id="legendContainer2Inner"></div>
+                                <div id="legendContainerCensord2"  style="display:none" class="chart-disabled-overlay"></div>
                             </div>
                         </div>
                     </section>
@@ -144,6 +146,7 @@
                                 <!-- Flot: Pie -->
                                 <div class="chart chart-md" id="flotPie3"></div>
                                 <div id="legendContainer3"></div>
+                                <div id="legendContainerCensord3"  style="display:none" class="chart-disabled-overlay"></div>
                             </div>
                         </div>
                     </section>

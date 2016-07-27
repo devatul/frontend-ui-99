@@ -132,6 +132,7 @@ var ReviewValidation = React.createClass({
             }.bind(this),
             error: function(xhr,error) {
                 console.log("reviewers error: " + error);
+
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -154,7 +155,7 @@ var ReviewValidation = React.createClass({
         $('#reviewValidation').find('.actions-success').hide();
         $('#reviewValidation').find('.btn-end-review').addClass('btn-disabled');
         $('#reviewValidation').find('.progress-radial').removeClass('progress-100');
-        $('#reviewValidation').find('.progress-radial').addClass('progress-50');
+        $('#reviewValidation').find('.progress-radial').addClass('progress-0');
         $('#reviewValidation').find('#icon_0').addClass('icon-success');
         $('#reviewValidation').find('.challenge-category').removeClass('changed');
         $('#reviewValidation').find('.challenge-confidentiality').removeClass('changed');
@@ -172,7 +173,7 @@ var ReviewValidation = React.createClass({
         $('#reviewValidation').find('.actions-success').hide();
         $('#reviewValidation').find('.btn-end-review').addClass('btn-disabled');
         $('#reviewValidation').find('.progress-radial').removeClass('progress-100');
-        $('#reviewValidation').find('.progress-radial').addClass('progress-50');
+        $('#reviewValidation').find('.progress-radial').addClass('progress-0');
         $('#reviewValidation').find('#icon_0').addClass('icon-success');
         $('#reviewValidation').find('.challenge-category').removeClass('changed');
         $('#reviewValidation').find('.challenge-confidentiality').removeClass('changed');
