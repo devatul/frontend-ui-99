@@ -63,3 +63,10 @@
     font-size: 1.6rem;
     font-weight: 500;
 }
+.table-my-actions .doc-path-2 {
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

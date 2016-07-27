@@ -314,7 +314,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(docIndex)">{doc.name}</span>
+                                                    <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(docIndex)">{doc.name}</span>
                                                     <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                         <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                         <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">

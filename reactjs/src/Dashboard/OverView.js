@@ -10,6 +10,7 @@ import scriptOverview from '../script/javascript-overview.js'
 import Constant from '../Constant.js';
 import chartOverview from '../script/chart-overview.js';
 import $, { JQuery } from 'jquery';
+import numeral from 'numeral';
 var OverView = React.createClass
 ({
     mixins: [LinkedStateMixin],
@@ -24,6 +25,18 @@ var OverView = React.createClass
             }
 		};
 	},
+    addCommas(nStr)
+    {
+        nStr += '';
+        var x = nStr.split('.');
+        var x1 = x[0];
+        var x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+          x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    },
     componentWillMount() {
         if(this.state.scan_result.scan_status == Constant.scan.IS_NO_SCAN) {
            this.startScan();
@@ -72,6 +85,9 @@ var OverView = React.createClass
         if(this.state.ChartData != prevState.ChartData) {
             chartOverview(this.state.ChartData);
         }
+
+    },
+    componentWillUpdate(){
     },
     startScan() {
         $.ajax({

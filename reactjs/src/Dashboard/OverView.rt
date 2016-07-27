@@ -24,7 +24,7 @@
                                         <div class="info">
                                             <strong class="amount">{this.state.scan_result.percentage_documents_scanned}%</strong>
                                         </div>
-                                        <h4 class="title">{this.state.scan_result.total_documents_scanned} Documents Scanned</h4>
+                                        <h4 class="title">{this.addCommas(this.state.scan_result.total_documents_scanned)} Documents Scanned</h4>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{this.state.scan_result.percentage_duplicates}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.state.scan_result.total_duplicates} Duplicates</h4>
+                                                <h4 class="title">{this.addCommas(this.state.scan_result.total_duplicates)} Duplicates</h4>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
@@ -59,7 +59,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{this.state.scan_result.percentage_twins}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.state.scan_result.total_twins} Twins</h4>
+                                                <h4 class="title">{this.addCommas(this.state.scan_result.total_twins)} Twins</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -190,10 +190,10 @@
                                         <tbody>
                                             <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
-                                                <td>{item.percentage_reviewed_docs}% ({item.total_reviewed_docs}) </td>
-                                                <td>{item.percentage_validated_docs}% ({item.total_validated_docs})</td>
-                                                <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}% ({item.total_owner_accuracy_docs})</td>
-                                                <td class="center hidden-phone">{item.percentage_prediction_accuracy_docs}% ({item.total_prediction_accuracy_docs})</td>
+                                                <td>{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
+                                                <td>{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
+                                                <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}%</td>
+                                                <td class="center hidden-phone">{item.percentage_prediction_accuracy_docs}% </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -245,8 +245,8 @@
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
-                                                <td>{category.percentage_reviewed_docs}% ({category.total_reviewed_docs})</td>
-                                                <td>{category.percentage_validated_docs}% ({category.total_validated_docs})</td>
+                                                <td>{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
+                                                <td>{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
                                                 <td>{category.percentage_owner_accuracy_docs}%</td>
                                                 <td>{category.percentage_prediction_accuracy_docs}%</td>
                                             </tr>

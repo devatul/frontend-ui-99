@@ -75,7 +75,7 @@
                                         </tr>
                                         <tr>
                                             <td>Documents Analyzed:</td>
-                                            <td colspan="3">{scan_result.document_analyzed}</td>
+                                            <td colspan="3">{this.addCommas(scan_result.total_documents_scanned)}</td>
                                         </tr>
                                         <tr>
                                         <td>File Extension Processed:</td>
@@ -83,20 +83,26 @@
                                         </tr>
                                         <tr>
                                             <td>Duplicated Documents:</td>
-                                            <td colspan="3">{scan_result.total_duplicates}</td>
+                                            <td colspan="3">{this.addCommas(scan_result.total_duplicates)}</td>
                                         </tr>
                                         <tr>
+                                        <td>Twins Documents:</td>
+                                            <td colspan="3">{this.addCommas(scan_result.total_twins)}</td>
+                                        </tr>
+
+                                        <tr>
                                             <td>Encrypted Documents or Archives:</td>
-                                            <td colspan="3">{scan_result.encrypted_documents}</td>
+                                            <td colspan="3">{this.addCommas(scan_result.encrypted_documents)}</td>
                                         </tr>
                                         <tr>
                                             <td>Documents Skipped:</td>
-                                            <td colspan="3">{scan_result.documents_skipped}</td>
+                                            <td colspan="3">{this.addCommas(scan_result.documents_skipped)}</td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            
                         </li>
                     </ul>
                 </div>
