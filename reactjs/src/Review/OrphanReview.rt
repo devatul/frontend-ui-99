@@ -1,4 +1,4 @@
-	<section>
+  <section>
     <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
@@ -134,7 +134,6 @@
                                                 </div>
                                               </span>
                                               <div class="refine-progress">
-                                              <span>In progress</span>
                                               <div id="circularG" class="inline-block-item">
                                                   <div id="circularG_1" class="circularG"></div>
                                                   <div id="circularG_2" class="circularG"></div>
@@ -225,7 +224,7 @@
                             <div class="panel-actions my-actions-btn-group">
 
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
+                                <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" style="display: none" onClick={this.endReviewHandle}>End Review</button>
 
                                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                             </div>
@@ -306,7 +305,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr rt-repeat="doc in this.state.samples" key="{doc.name}">
+                                            <tr rt-repeat="doc in this.state.samples" key="{doc.name}" id="{'document_' + docIndex}">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
                                                         <input type="checkbox" id="checkboxExample{docIndex}" class="checkbox-item-1 setUndo" data-target="#orphanReview">
@@ -314,7 +313,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(docIndex)">{doc.name}</span>
+                                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentPreview(docIndex)" data-file-url="{doc.image_url}">{doc.name}</span>
                                                     <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                         <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                         <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -361,7 +360,7 @@
                             </div>
                             <div class="my-actions-btn-group actions-bottom clearfix mt-md">
                                 <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
+                                <button type="button" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review" style="display: none" onClick={this.endReviewHandle}>End Review</button>
                             </div>
                         </div>
                     </section>
@@ -460,7 +459,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="">
+          <tr id="document_preview_info">
+          </tr>
+            <!--<tr class="">
               <td>
                 <div class="checkbox-custom checkbox-default">
                   <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
@@ -517,7 +518,7 @@
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </a>
               </td>
-            </tr>
+            </tr>-->
                     </tbody>
                 </table>
             </div>

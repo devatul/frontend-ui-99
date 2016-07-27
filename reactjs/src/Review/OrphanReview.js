@@ -7,6 +7,7 @@ import update from 'react-addons-update'
 import 'jquery'
 import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
+import loadScript from '../script/load.scripts.js'
 import undo from '../script/Undo.js'
 import Constant from '../Constant.js'
 
@@ -22,12 +23,10 @@ var OrphanReview = React.createClass({
             cloudwords: [],
             centroids: [],
             samples: [],
-            documentPreview: [],
-            documentPreview_current: 0
+            documentPreview: 0
         };
     },
     componentWillMount() {
-        //this.getOrphan();
     },
     componentDidMount() {
         this.getOrphan();
@@ -62,6 +61,9 @@ var OrphanReview = React.createClass({
         if(this.state.cloudwords != nextState.cloudwords) {
             return true;
         }
+        if(this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
@@ -78,7 +80,7 @@ var OrphanReview = React.createClass({
             });
         }
         if(this.state.categories != prevState.categories) {
-            this.drawChart(this.state.categories);
+            this.drawChart();
         }
         if(this.state.centroids != prevState.centroids) {
             this.drawCentroid();
@@ -86,9 +88,33 @@ var OrphanReview = React.createClass({
         if(this.state.cloudwords != prevState.cloudwords) {
             this.drawCloud();
         }
+        if(this.state.documentPreview != prevState.documentPreview) {
+            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+                $('#previewModal').on('show.bs.modal', function(e) {
+
+                    //get data-id attribute of the clicked element
+                    var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                    console.log(fileURL);
+                    
+                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                    $('#embedURL').gdocsViewer();
+                });
+            }.bind(this));
+        }
     },
     endReviewHandle: function() {
         browserHistory.push('/Dashboard/OverView');
+    },
+
+    setDocumentPreview: function(docIndex) {
+        this.setState(update(this.state, {
+            documentPreview: {$set: docIndex }
+        }));
+        var element = $('tr#document_' + docIndex).clone(true, true);
+        console.log('element', element);
+        element[0].id = 'document_preview_info';
+        $('tr#document_preview_info').replaceWith(element[0]);
     },
     getOrphan: function() {
     	$.ajax({
@@ -118,7 +144,6 @@ var OrphanReview = React.createClass({
         });
     },
     changeOrphan: function() {
-        console.log("djjdjdjdjdjdjd", this.refs.choose_orphan.value);
         var updateState = update(this.state, {
             orphan_current: {$set: this.state.list_orphan[this.refs.choose_orphan.value]}
         });
@@ -190,7 +215,7 @@ var OrphanReview = React.createClass({
                 this.setState(updateState);
                 for (var i = 0; i < data.length; i++) {
                     var updateState = update(this.state, {
-                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count}]}
+                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count, html: {"data-tooltip": data[i].count + " Documents"}}] }
                     });
                     this.setState(updateState);
                 }
@@ -338,58 +363,59 @@ var OrphanReview = React.createClass({
             }]
         });
     },
-    drawChart(categories) {
-        if( $('#confidentialityChart').length){
-        var flotPieData = [];
-        var highchart = [];
+    drawChart() {
+        var categories = this.state.categories;
+        var fPieData = [];
+        var series = [];
         var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
-            for(var i = 0; i < categories.length; i++) {
-                var name = this.ucwords(categories[i].name);
-                flotPieData.push({
-                    label: name,
-                    data: [
-                        [1, categories[i].percentage]
-                    ],
-                    color: colors[i]
-                });
-                highchart.push({
-                    name: name,
-                    data: [categories[i].doc_types[0].total,categories[i].doc_types[1].total,categories[i].doc_types[2].total,categories[i].doc_types[3].total,categories[i].doc_types[4].total]
-                });
-            }
+
+        for(var i = 0; i < categories.length; i++) {
+            var name = this.ucwords(categories[i].name);
+            fPieData[i] = {
+                label: categories[i].name,
+                data: [
+                    [1, categories[i].percentage]
+                ],
+                color: colors[i]
+            };
+            series[i] = {
+                name: categories[i].name,
+                data: [categories[i].doc_types[0].total,categories[i].doc_types[1].total,categories[i].doc_types[2].total,categories[i].doc_types[3].total,categories[i].doc_types[4].total]
+            };
         }
-
-        var plot = $.plot('#confidentialityChart', flotPieData, {
-            series: {
-                pie: {
-                    show: true,
-                    label:{
-                      show: true,
-                      formatter: function labelFormatter(label, series) {
-                          return "<div style='font-size:8pt; max-width:60px; line-height: 12pt; text-align:center; padding:2px; color:"+series.color+"'>" + label + "</div>";
-                      }
+        
+        if( $('#confidentialityChart').length){
+            var plot = $.plot('#confidentialityChart', fPieData, {
+                series: {
+                    pie: {
+                        show: true,
+                        label:{
+                          show: true,
+                          formatter: function labelFormatter(label, series) {
+                              return "<div style='font-size:8pt; max-width:60px; line-height: 12pt; text-align:center; padding:2px; color:"+series.color+"'>" + label + "</div>";
+                          }
+                        }
                     }
+                },
+                legend: {
+                    show: true,
+                    position: 'nw',
+                    noColumns: 1, 
+                    backgroundOpacity: 0 ,
+                    container: $('#confidentialityChartLegend')
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
+                },
+                tooltip: {
+                  show: true,
+                  content: function(label,x,y){
+                    return label + ': ' +y + ' Documents';
+                  }
                 }
-            },
-            legend: {
-                show: true,
-                position: 'nw',
-                noColumns: 1, 
-                backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend')
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': ' +y + ' Documents';
-                }
-            }
-        });
-
+            });
+        }
         if ($('#confidentialityLevelChart').length){
             $('#confidentialityLevelChart').highcharts({
                 chart: {
@@ -445,7 +471,7 @@ var OrphanReview = React.createClass({
                         }
                     }
                 },
-                series: highchart
+                series: series
             });
          }
     },
