@@ -239,7 +239,7 @@ module.exports = function() {
                 $('[data-crit="'+filterCriteria+'"]').find('.option-name').text(selectedOption);
             }
             else{
-                $('<span class="filter-label label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags');
+                $('<span class="filter-label-assign label label-info" data-value="'+selectedOption+'" data-crit="'+filterCriteria+'"><a class="filter-remove-assign"><i class="fa fa-times"></i></a><span class="option-name">'+selectedOption+'</span></span>').appendTo('.filter-tags-userassign');
             }
           }
           else{
@@ -253,5 +253,12 @@ module.exports = function() {
 
     $('.btn-next-cat').on('click', function(){
         $('.cat-list > .active').next('li').find('a').trigger('click');
+    });
+    $('body').on('click', '.filter-remove-assign', function(){
+      var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
+      var value = $(this).parents('.filter-label').attr('data-value');
+      $(this).parents('.filter-label-assign').remove();
+      var a = $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]).change();
+      console.log("ddddddddddds", a);
     });
 }

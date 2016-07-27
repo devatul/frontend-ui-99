@@ -7,6 +7,7 @@ import update from 'react-addons-update'
 import javascript from '../script/javascript.js';
 import Constant from '../Constant.js'
 import userAssignment from '../script/javascript.assignement.js'
+import javascriptOverview from '../script/javascript-overview.js'
 import 'jquery'
 
 var UserAssignment = React.createClass({
@@ -24,6 +25,7 @@ var UserAssignment = React.createClass({
     	this.getCategories();
     	this.getCategoryInfo(1);
     	userAssignment();
+    	javascript();
     },
     shouldComponentUpdate(nextProps, nextState) {
     	if(this.state.categories != nextState.categories) {

@@ -8,6 +8,7 @@ import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
 import undo from '../script/Undo.js'
 import javascript_todo from '../script/javascript.todo.js'
+import loadScript from '../script/load.scripts.js'
 import 'jquery'
 
 var GroupReview = React.createClass({
@@ -42,6 +43,7 @@ var GroupReview = React.createClass({
             $(this).removeClass('btn-green').addClass('btn-disabled');
             $(this).parent().find('.refine-progress').show();
         });
+
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.group_current != nextState.group_current) {
@@ -117,6 +119,21 @@ var GroupReview = React.createClass({
         if(this.state.cloudwords != prevState.cloudwords) {
             this.drawCloud();
         }
+        if(this.state.documentPreview != prevState.documentPreview) {
+            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+                $('#previewModal').on('show.bs.modal', function(e) {
+
+                    //get data-id attribute of the clicked element
+                    var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                    console.log(fileURL);
+                    
+                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                    $('#embedURL').gdocsViewer();
+                });
+            }.bind(this));
+        }
+        
     },
     setDefaultValue: function() {
         var samples = this.state.samples;

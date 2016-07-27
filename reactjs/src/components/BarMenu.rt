@@ -22,13 +22,6 @@
                                 <ul class="filter-list list-unstyled pt-xs">
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
-                                                <option rt-repeat="category in listCategory" key="{category.id}" data-value="{category.id}" value="{category.name}">{category.name}</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="form-group">
                                             <select id="filter_confidentiality" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality">
                                                 <option rt-repeat="confidentiality in listConfidentiality" key="{confidentialityIndex}" data-value="{confidentiality.id}" value="{confidentiality.name}">{confidentiality.name}</option>
                                             </select>
@@ -36,15 +29,22 @@
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
-                                                <option rt-repeat="doctype in listDoctype" key="{doctype.id}" data-value="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
+                                            <select id="filter_category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
+                                                <option rt-repeat="category in listCategory" key="{category.id}" data-value="{category.id}" value="{category.name}">{category.name}</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_language" class="form-control select-multiple" multiple="multiple" data-title="Language">
+                                            <select id="filter_language" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Language">
                                                 <option rt-repeat="language in listLanguage" key="{language.id}" data-value="{language.id}" value="{language.name}">{language.name}</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="mb-sm">
+                                        <div class="form-group">
+                                            <select id="filter_doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
+                                                <option rt-repeat="doctype in listDoctype" key="{doctype.id}" data-value="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
                                             </select>
                                         </div>
                                     </li>

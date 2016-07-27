@@ -7,19 +7,19 @@
             <a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
           </li>
           <li class="">
-            <a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
           </li>
           <li class="">
-            <a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Client / Customer</a>
           </li>
           <li class="">
-            <a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Employee</a>
           </li>
           <li class="">
-            <a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Compliance</a>
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Legal / Compliance</a>
           </li>
           <li class="">
-            <a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Transaction</a>
           </li>
           <li class="">
             <a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
@@ -138,7 +138,7 @@
                                 </ul>
 
                                 <div class="filter-tags-block pull-left">
-                                    <div class="pull-left filter-tags">
+                                    <div class="pull-left filter-tags-userassign">
                                     </div>
                                 </div>
 

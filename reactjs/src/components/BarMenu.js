@@ -160,6 +160,7 @@ var MenuBar = React.createClass
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                data.reverse();
                 this.setState(update(this.state, {
                     listConfidentiality: {$set: data}
                 }));
