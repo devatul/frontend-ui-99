@@ -25,7 +25,7 @@ module.exports = function() {
           $('.btn-refine').on('click', function(e){
             e.preventDefault();
             $(this).removeClass('btn-green').addClass('btn-disabled');
-            $('<span> (in progress)</span>').insertAfter($(this));
+            //$('<span> (in progress)</span>').insertAfter($(this));
           });
 
       }

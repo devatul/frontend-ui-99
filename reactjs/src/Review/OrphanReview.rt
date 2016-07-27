@@ -126,7 +126,7 @@
                                             </table>
                                             
                                             <div class="mt-lg">
-                                              <a href="#" class="btn btn-refine btn-green">Refine Group</a>
+                                              <a href="#" class="btn btn-refine btn-green">Refine Orphan</a>
                                               <span class="dropdown">
                                                 <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                 <div class="dropdown-menu has-arrow dropdown-file-info">
@@ -178,7 +178,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <h4 class="chart-title">Document type per Level of Confidentiality
+                                                            <h4 class="chart-title">Document Type per Level of Confidentiality
                                                               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                               <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                                 <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
@@ -188,11 +188,11 @@
                                                     </div>
                                                 </div>
                                                 <div id="centroid" class="tab-pane">
-                                                    <h4 class="chart-title">Centroid Distance Histogram in this group</h4>
+                                                    <h4 class="chart-title">Centroid Distance Histogram</h4>
                                                     <div id="centroidChart"></div>
                                                 </div>
                                                 <div id="cloud" class="tab-pane">
-                                                     <p class="review_cloud_p">Significant Words is the</p>
+                                                     <p class="review_cloud_p">Significant Words Cloud</p>
                                                     <div id="words-cloud"></div>
                                                 </div>
                                             </div>

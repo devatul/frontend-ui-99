@@ -211,7 +211,12 @@
         <section class="panel panel-featured panel-featured-primary actions-panel">
             <header class="panel-heading">
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
-
+                 <div class="inline-block-item view-stat-block">
+                                <label>Sample Method: </label>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
+                                <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
+                            </div>
                 <div class="panel-actions my-actions-btn-group">
 
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>

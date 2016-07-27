@@ -10,7 +10,7 @@ import 'jquery'
 import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
 import undo from '../script/Undo.js';
-import elementUndo from '../script/elementUndo.js'
+//import elementUndo from '../script/elementUndo.js'
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
