@@ -38,8 +38,8 @@
                         <div class="progress-radial small progress-50"></div>
 
                         <div class="pull-right">
-                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
+                          <button type="button" class="mb-xs mt-none mr-xs btn btn-green get-element-undo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                          <button type="button" style="display: none" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                         </div>
                       </div>
                         <div class="alert alert-success actions-success">
@@ -60,7 +60,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr rt-repeat="document in reviewValidations.documents">
+                            <tr rt-repeat="document in reviewValidations.documents" id="{'document_' + documentIndex}" class="set-element-undo">
                               <td>
                                 <i rt-if="document.status == 'accepted'" class="fa fa-check icon-success"></i>
                                 <i rt-if="document.status == 'rejected'" class="fa fa-times icon-danger"></i>
@@ -84,7 +84,7 @@
                                 <span class="text-italic doc-path">{document.path}</span>
                               </td>
                               <td class="vertical-top">
-                                <select id="{'category_' + documentIndex}" class="form-control challenge-category setUndo" onChange={this.categoryOnChange} data-target="#reviewValidation">
+                                <select id="{'select_category_' + documentIndex}" class="form-control challenge-category element-event" onChange={this.categoryOnChange} data-target="#reviewValidation">
                                     <option selected="" value="10">Accounting/Tax</option>
                                     <option value="20">Corporate Entity</option>
                                     <option value="30">Customer</option>
@@ -95,7 +95,7 @@
                                 <span class="text-italic previous-status">Previous: {document.previous_category}</span>
                               </td>
                               <td class="vertical-top text-left">
-                                <select id="{'confidential_' + documentIndex}" class="form-control challenge-confidentiality setUndo" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
+                                <select id="{'select_confidential_' + documentIndex}" class="form-control challenge-confidentiality element-event" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
                                     <option value="20">Banking Secrecy</option>
                                     <option selected="" value="10">Secret</option>
                                     <option value="30">Confidential</option>
@@ -105,10 +105,10 @@
                                 <span class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
                               </td>
                               <td>
-                                <textarea id="{'textarea_' + documentIndex}" class="form-control setUndo">{document['2nd_line_comment']}</textarea>
+                                <textarea id="{'textarea_' + documentIndex}" class="form-control element-event">{document['2nd_line_comment']}</textarea>
                               </td>
                               <td>
-                                <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="#reviewValidation">
+                                <a id="{'challenge_btn_' + documentIndex}" href="#" class="challenge-btn validation-btn btn btn-default element-event" data-target="#reviewValidation">
                                 <i id="{'icon_' + documentIndex}" class="fa fa-check {(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
                             
                                 </a>
@@ -156,11 +156,11 @@
                       </tr>
                       <tr class="child-table">
                         <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse" id="reviewerList{summaryIndex+1}"> 
+                          <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
                             <table class="table">
                               <tbody>
                                 <tr rt-repeat="reviewer in summary.reviewers">
-                                  <td class="col50">{reviewer.first_name}.{reviewer.last_name} (Last Modified)</td>
+                                  <td class="col50" style="text-transform: capitalize">{reviewer.first_name}.{reviewer.last_name} (Last Modified)</td>
                                   <td class="col25"></td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">

@@ -10,6 +10,7 @@ import 'jquery'
 import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
 import undo from '../script/Undo.js';
+import elementUndo from '../script/elementUndo.js'
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -25,16 +26,15 @@ var ReviewValidation = React.createClass({
             challengedDocs: [],
             challengedDocCurrent: null,
             summary: [],
-            documentPreview: null
+            documentPreview: null,
+            stackChange: []
         };
     },
     componentWillMount() {
-        //this.getCategories();
     },
     componentDidMount() {
         console.log("sfdssss", this.state.categories);
         this.getCategories();
-        
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.categories != nextState.categories) {
@@ -71,9 +71,6 @@ var ReviewValidation = React.createClass({
         }
         if(this.state.reviewValidations != prevState.reviewValidations) {
             javascriptTodo();
-            undo.setup(function(dataUndo, val) {
-                console.log("undo");
-            }.bind(this));
         }
         if(this.state.documentPreview != prevState.documentPreview) {
             loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {

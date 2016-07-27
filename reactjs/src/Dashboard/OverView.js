@@ -10,7 +10,6 @@ import scriptOverview from '../script/javascript-overview.js'
 import Constant from '../Constant.js';
 import chartOverview from '../script/chart-overview.js';
 import $, { JQuery } from 'jquery';
-import numeral from 'numeral';
 var OverView = React.createClass
 ({
     mixins: [LinkedStateMixin],
