@@ -149,22 +149,22 @@ var OverView = React.createClass
         var data_languages = [];
         var data_doctypes = [];
         //add data_confidentiality
-            for(var i = 0; i < data.confidentialities.length; i++) {
+            for(var i = 0; i < data.confidentialities_chart_data.length; i++) {
                 
                 data_confidentiality.push({
-                    label: this.ucwords(data.confidentialities[i].name),
+                    label: this.ucwords(data.confidentialities_chart_data[i].name),
                     data: [
-                        [1, data.confidentialities[i].percentage_owner_accuracy_docs]
+                        [1, data.confidentialities_chart_data[i].total_docs]
                     ],
                     color: colors[i]
                 });
             }
         //add data_categories
-            for(var i = 0; i < data.categories.length; i++) {
+            for(var i = 0; i < data.categories_chart_data.length; i++) {
                 data_categories.push({
-                    label: this.ucwords(data.categories[i].name),
+                    label: this.ucwords(data.categories_chart_data[i].name),
                     data: [
-                        [1, data.categories[i].percentage_owner_accuracy_docs]
+                        [1, data.categories_chart_data[i].total_docs]
                     ],
                     color: colors[i]
                 });

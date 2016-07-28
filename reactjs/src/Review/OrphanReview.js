@@ -22,7 +22,7 @@ var OrphanReview = React.createClass({
             statistics: [],
             cloudwords: [],
             centroids: [],
-            samples: [],
+            samplesDocument: [],
             documentPreview: 0
         };
     },
@@ -36,6 +36,9 @@ var OrphanReview = React.createClass({
             $(this).removeClass('btn-green').addClass('btn-disabled');
             $(this).parent().find('.refine-progress').show();
         });
+        $('#choose_cluster').on('change', function(event) {
+            this.changeOrphan(event);
+        }.bind(this));
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
@@ -52,7 +55,7 @@ var OrphanReview = React.createClass({
         if(this.state.statistics != nextState.statistics) {
             return true;
         }
-        if(this.state.samples != nextState.samples) {
+        if(this.state.samplesDocument != nextState.samplesDocument) {
             return true;
         }
         if(this.state.centroids != nextState.centroids) {
@@ -68,12 +71,11 @@ var OrphanReview = React.createClass({
     },
     componentDidUpdate(prevProps, prevState) {
         if(this.state.orphan_current != prevState.orphan_current) {
-            console.log("jkskskskskkskskskks");
             this.getCategoryDistribution();
             this.getStatistics();
-            this.getSamples();
+            this.getSamplesDocument();
         }
-        if(this.state.samples != prevState.samples) {
+        if(this.state.samplesDocument != prevState.samplesDocument) {
             javascript_todo();
             undo.setup(function(dataUndo, val) {
                 console.log("undo", dataUndo, val);
@@ -143,7 +145,8 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    changeOrphan: function() {
+    changeOrphan: function(event) {
+        var val = event.target.value;
         var updateState = update(this.state, {
             orphan_current: {$set: this.state.list_orphan[this.refs.choose_orphan.value]}
         });
@@ -258,7 +261,7 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    getSamples() {
+    getSamplesDocument() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/samples/",
@@ -269,13 +272,13 @@ var OrphanReview = React.createClass({
             },
             success: function(data) {
                 var updateState = update(this.state, {
-                    samples: {$set: data}
+                    samplesDocument: {$set: data}
                 });
                 this.setState(updateState);
-                console.log("samples ok: ", data);
+                console.log("samplesDocument ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("samples " + error);
+                console.log("samplesDocument " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -285,28 +288,31 @@ var OrphanReview = React.createClass({
     },
     setDocumentReview: function(index) {
         this.setState(update(this.state, {
-            documentPreview: {$set: this.state.samples[index]},
+            documentPreview: {$set: this.state.samplesDocument[index]},
             documentPreview_current: {$set: index }
         }));
-        console.log("afasdccccc: ", this.state.samples[index], index);
+        console.log("afasdccccc: ", this.state.samplesDocument[index], index);
     },
-    drawCloud() {
+    drawCloud: function() {
         var word_list = this.state.cloudwords;
         var cloudRendered = false;
+        var drawCloud = function(){
         if (!cloudRendered){
-          $("#words-cloud").jQCloud(word_list,{
-            afterCloudRender: function(){
-              cloudRendered = true;
-              $("[data='tooltip']").tooltip();
+            $("#words-cloud").jQCloud(word_list,{
+                afterCloudRender: function(){
+                    cloudRendered = true;
+                    $("[data='tooltip']").tooltip();
+                    }
+                });
             }
-          });
-        }
-        
+        };
+
         $(window).resize(function(){
             //$('#words-cloud').jQCloud('update', word_list);
             $('#words-cloud').css("width", "100%");
             $('#words-cloud').html('').jQCloud(word_list) 
         });
+       $(window).resize();
     },
     drawCentroid() {
         $('#centroidChart').highcharts({

@@ -17,8 +17,8 @@ module.exports = {
 		level3: "progress-bar-success"
 	},
 	progressValue: {
-		level1: 30,
-		level2: 60
+		level1: 33,
+		level2: 66
 	}
 	,
 	iconCategories:
@@ -34,5 +34,14 @@ module.exports = {
 		{ name: "low",  class: ""},
 		{ name: "high", class: "fa-clock-o only" },
 		{ name: "very high", class: "fa-clock-o" }
+	],
+	status: [
+		{normal: { name: "normal", color: "#999"} },
+		
+		{editing: {name: "editing", color: "#ffc200"} },
+		
+		{accept: {name: "accept", color: "#4fca9d"} },
+		
+		{reject: {name: "reject", color: "#ff2d00"} }
 	]
 };

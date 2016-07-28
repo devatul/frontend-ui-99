@@ -1,4 +1,5 @@
 <section>
+<rt-import name="Const" from="../Constant.js"/>
   <div class="container">
     <div class="row">
         <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
@@ -7,11 +8,11 @@
                 <div class="input-group mb-md">
                     <label for="choose_cluster">
                         Choose a Group
-                        <select ref="choose_group" class="js-example-basic-single js-states form-control" id="choose_cluster" value="{this.state.group_current}">
-                            <option rt-repeat="group in this.state.list_group" value="{groupIndex}" key="{group.id}">{group.name}</option>
+                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" value="{this.state.groupCurrent}" key="index">
+                            <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}">{group.name}</option>
                         </select>
                     </label>
-                    <button class="btn btn-green btn-ok" type="button" onClick={this.changeGroup}>OK</button>
+                    <button class="btn btn-green btn-ok" type="button" style="display: none">OK</button>
                 </div>
             </div>
         </div>
@@ -211,15 +212,10 @@
         <section class="panel panel-featured panel-featured-primary actions-panel">
             <header class="panel-heading">
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
-                 <div class="inline-block-item view-stat-block">
-                                <label>Sample Method: </label>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
-                                <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
-                            </div>
+
                 <div class="panel-actions my-actions-btn-group">
 
-                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" style="display: none" onClick={this.endReviewHandle}>End Review</button>
 
                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
@@ -227,8 +223,8 @@
             </header>
             <div class="panel-body" style="display: block;">
                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                    <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all approve-button">Approve</button>
-                    <div class="alert alert-success actions-success">
+                    <button rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)" type="button" class="mb-md mr-xs btn btn-green approve-button" onClick="(event)=>this.approveButon()">Approve</button>
+                    <div rt-if="(this.state.validateNumber > 0 && this.state.validateNumber == this.state.samplesDocument.length)" class="alert alert-success">
                         <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
                         <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                     </div>
@@ -238,7 +234,7 @@
                                 <tr role="row">
                                     <th>
                                         <div class="checkbox-custom checkbox-primary">
-                                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1 setUndo" data-target="#groupReview">
+                                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
                                             <label for="checkboxAllExample2"></label>
                                         </div>
                                     </th>
@@ -301,10 +297,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr rt-repeat="sample in this.state.samples" key="{sampleIndex}">
+                                <tr rt-repeat="sample in this.state.samplesDocument" key="{sampleIndex}" class="{(this.state.checkedNumber > 0 && sample.current.checked == false) ? 'inactive' : ''}">
                                     <td>
                                         <div class="checkbox-custom checkbox-default">
-                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item-1 setUndo" data-target="#groupReview">
+                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item-1" checked="{sample.current.checked}" onChange="(event)=>this.onClickCheckbox(event, sampleIndex)" data-target="#groupReview">
                                             <label for="checkboxExample{sampleIndex}"></label>
                                         </div>
                                     </td>
@@ -329,38 +325,38 @@
                                     <td class="text-left">
                                         <span class="text-italic">{sample.owner}</span>
                                     </td>
-                                    <td>
+                                    <td rt-scope="sample.current as current">
                                         <div class="select-group">
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
-                                                  <div class="progress-bar {this.progressbar(this.state.category_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.category_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.category_level[sampleIndex]}%;">
+                                                  <div class="progress-bar {this.progressbar(sample.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{sample.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {sample.categories[current.category].confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">({this.state.category_level[sampleIndex]}%)</span>
+                                                  <span class="progress-percentage">({sample.categories[current.category].confidence_level}%)</span>
                                                 </div>
                                             </div>
-                                            <select style="text-transform: capitalize" id="{'Category_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{this.state.category_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Category'}">
-                                              <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                            <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{current.category}">
+                                              <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                             </select>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td rt-scope="sample.current as current">
                                         <div class="select-group">
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
-                                                  <div class="progress-bar {this.progressbar(this.state.confidential_level[sampleIndex])}" role="progressbar" aria-valuenow="{this.state.confidential_level[sampleIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.confidential_level[sampleIndex]}%;">
+                                                  <div class="progress-bar {this.progressbar(sample.categories[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{sample.categories[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {sample.categories[current.confidential].confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">({this.state.confidential_level[sampleIndex]}%)</span>
+                                                  <span class="progress-percentage">({sample.categories[current.confidential].confidence_level}%)</span>
                                                 </div>
                                             </div>
-                                            <select style="text-transform: capitalize" id="{'Confidential_' + sampleIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{this.state.confidential_level[sampleIndex]}" data-value="{sampleIndex + ':' + 'Confidential'}">
-                                              <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{Confidential.confidence_level}">{Confidential.name}</option>
+                                            <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{current.confidential}">
+                                              <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                             </select>
                                         </div>
                                     </td>
-                                    <td>
-                                        <a href="#" class="doc-check" data-target="#groupReview">
-                                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                          <i class="fa fa-check" aria-hidden="true"></i>
+                                    <td rt-scope="sample.current as current">
+                                        <a style="cursor: pointer" class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButton(event, sampleIndex)">
+                                          <i rt-if="(current.status == 'normal')" class="fa fa-clock-o" aria-hidden="true"></i>
+                                          <i class="fa fa-check" aria-hidden="true" rt-props="(current.status == 'editing') ? {style: { color: '#ffc200'}} : ''"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -370,7 +366,7 @@
                     </div>
                 </div>
                 <div class="my-actions-btn-group actions-bottom clearfix mt-md">
-                    <button type="button" class="mb-md mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button type="button" class="mb-md mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <button type="button" style="display: none" class="mb-md mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                 </div>
             </div>
@@ -381,10 +377,10 @@
 <!--Modal-->
   
 <div id="previewModal" class="modal fade in" role="dialog">
-  <div class="modal-dialog modal-preview">
+  <div class="modal-dialog modal-preview" rt-if="(this.state.documentPreview != null)">
 
     <!-- Modal content-->
-    <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview_current as documentPreview_current">
+    <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview.index as index; this.state.documentPreview.current as current">
       <div class="modal-header">
         <div class="row">
             <div class="col-sm-4 modal-title">
@@ -392,8 +388,8 @@
                 Document Preview
             </div>
             <div class="col-sm-4 modal-info text-center">
-                <span class="text-itatic">Contract.doc</span><br>
-                <span>Folder /legal/teamA/</span>
+                <span class="text-itatic">{document.name}</span><br>
+                <span>Folder {this.cutPath(document.path)}</span>
             </div>
             <div class="col-sm-4 modal-actions text-right">
                 <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
@@ -503,13 +499,13 @@
                 <div class="select-group">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
-                          <div class="progress-bar {this.progressbar(this.state.category_level[documentPreview_current])}" role="progressbar" aria-valuenow="{this.state.category_level[documentPreview_current]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.category_level[documentPreview_current]}%;">
+                          <div class="progress-bar {this.progressbar(document.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{document.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.categories[current.category].confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({this.state.category_level[documentPreview_current]}%)</span>
+                          <span class="progress-percentage">({document.categories[current.category].confidence_level}%)</span>
                         </div>
                     </div>
-                    <select class="form-control" onChange="(event)=>this.onChangeCategory(event, documentPreview_current)" value="{this.state.category_level[documentPreview_current]}">
-                      <option rt-repeat="category in document.categories" value="{category.confidence_level}" key="{categoryIndex}">{category.name}</option>
+                    <select class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" value="{current.category}">
+                      <option rt-repeat="category in document.categories" value="{categoryIndex}" key="{categoryIndex}">{category.name}</option>
                     </select>
                 </div>
             </td>
@@ -517,13 +513,13 @@
                 <div class="select-group">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
-                          <div class="progress-bar {this.progressbar(this.state.confidential_level[documentPreview_current])}" role="progressbar" aria-valuenow="{this.state.confidential_level[documentPreview_current]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.confidential_level[documentPreview_current]}%;">
+                          <div class="progress-bar {this.progressbar(document.confidentialities[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{document.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidentialities[current.confidential].confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({this.state.confidential_level[documentPreview_current]}%)</span>
+                          <span class="progress-percentage">({document.confidentialities[current.confidential].confidence_level}%)</span>
                         </div>
                     </div>
-                    <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, documentPreview_current)" value={this.state.confidential_level[documentPreview_current]}>
-                      <option rt-repeat="Confidential in document.confidentialities" value="{Confidential.confidence_level}" key="{ConfidentialIndex}">{Confidential.name}</option>
+                    <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" value="{current.confidential}">
+                      <option rt-repeat="Confidential in document.confidentialities" value="{ConfidentialIndex}" key="{ConfidentialIndex}">{Confidential.name}</option>
                     </select>
                 </div>
             </td>
@@ -544,5 +540,5 @@
     </div>
 
   </div>
-</div> 
+</div>
 </section>
