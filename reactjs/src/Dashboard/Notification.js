@@ -4,25 +4,115 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Notification.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
+import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
 
 var Notification = React.createClass
 ({
-	getInitialState() {
-	    return {
-	        notification: {
-                Today: [],
+    getInitialState() {
+        return {
+            notification: {
+                today: [],
                 yesterday: [],
                 last_7_days: [],
                 last_30_days: [],
                 older: []
-            }  
-	    };
-	},
-	componentDidMount() {
-		this.getNotification();
-	},
-	getNotification() {
+            },
+            notiType: '',
+            warningNoti: 0,
+            dangerNoti: 0
+        };
+    },
+    componentDidMount() {
+        this.getDummyNotification();
+        //this.getNotification();
+    },
+
+    filterAlert(event) {
+        var selected = event.target.getAttribute('data-type');
+        console.log(selected);
+        if (this.state.notiType == selected){
+            $('[data-noti-type]').show();
+            $('.filter-noti-icon').parents('span').show();
+            notiType = '';
+            this.setState({"notiType": notiType });
+        }
+        else{
+            var notiType = event.target.getAttribute('data-type');
+            $('.filter-noti-icon').parents('span').hide();
+            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
+            $('[data-noti-type]').each(function(){
+                // console.log($(this).attr('data-noti-type'));
+                if ($(this).attr('data-noti-type') == notiType){
+                    $(this).show();
+                }
+                else{
+                    $(this).hide();   
+                }
+            });
+            this.setState({"notiType": notiType });
+        };
+    },
+
+    getDummyNotification() {
+        var date = new Date();
+        var update_notification = update(this.state, {
+            notification: {
+                today: {$set: [{
+                                "created": "today", 
+                                "id": 1, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "done"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 2, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "low"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 3, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "hight",
+                            },
+                            {
+                                "created": "today", 
+                                "id": 10, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "very hight"
+                            }]},
+                yesterday: {$set: [{
+                                "created": "yesterday", 
+                                "id": 4, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "low"
+                            }] },
+                last_7_days: {$set: [{
+                                "created": "yesterday", 
+                                "id": 5, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "done"
+                            }] },
+                last_30_days: {$set: [{
+                                "created": "yesterday", 
+                                "id": 6, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "hight"
+                            }] },
+                older: {$set: [{
+                                "created": "yesterday", 
+                                "id": 7, 
+                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "urgency": "very hight"
+                            }] }
+            } 
+        });
+        this.setState(update_notification);
+        console.log("test: ", this.state.notification);
+    },
+
+    getNotification() {
         $.ajax({
             url: Constant.SERVER_API + 'api/notification/',
             dataType: 'json',
@@ -66,7 +156,7 @@ var Notification = React.createClass
                 }
                 var update_notification = update(this.state, {
                     notification: {
-                    	today: {$set: today},
+                        today: {$set: today},
                         yesterday: {$set: yesterday },
                         last_7_days: {$set: last_7_days },
                         last_30_days: {$set: last_30_days },

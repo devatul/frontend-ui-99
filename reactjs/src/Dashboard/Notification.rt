@@ -25,8 +25,8 @@
                 </div>
                 <div class="col-sm-4 mb-md">
                     <span class="mr-md">Pending Actions: 7</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
-                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" onClick={this.filterAlert}></i> : 2</span>
+                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" onClick={this.filterAlert}></i> : 2</span>
                     <div class="inline-block-item dropdown dropdown-help">
                         <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <div class="dropdown-menu has-arrow dd-md full-mobile">
@@ -44,15 +44,21 @@
                     <h2 class="panel-title">Today</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.today">
                         <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
+                            <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                     'fa-clock-o': notification.urgency === 'low',
+                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                            </i>
                         </span>
                         <span class="noti-center">
                             {notification.message}
                         </span>
                         <span class="noti-right">
-                            &nbsp;
+                            <i class="fa " rt-if="notification.urgency !== 'done'"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
                 </div>
@@ -63,15 +69,21 @@
                     <h2 class="panel-title">Yesterday</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.yesterday">
                         <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
+                            <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                     'fa-clock-o': notification.urgency === 'low',
+                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                            </i>
                         </span>
                         <span class="noti-center">
                             {notification.message}
                         </span>
                         <span class="noti-right">
-                            &nbsp;
+                            <i class="fa " rt-if="notification.urgency !== 'done'"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
                 </div>
@@ -82,15 +94,21 @@
                     <h2 class="panel-title">Last 7 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_7_days">
                         <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
+                            <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                     'fa-clock-o': notification.urgency === 'low',
+                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                            </i>
                         </span>
                         <span class="noti-center">
                             {notification.message}
                         </span>
                         <span class="noti-right">
-                            &nbsp;
+                            <i class="fa " rt-if="notification.urgency !== 'done'"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
                 </div>
@@ -98,18 +116,49 @@
 
             <section class="panel panel-featured panel-featured-primary panel-noti">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Older Notification</h2>
+                    <h2 class="panel-title">Last 30 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="" rt-repeat="notification in this.state.notification.older.list">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_30_days">
                         <span class="noti-left">
-                            <i class="fa fa-clock-o"></i>
+                            <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                     'fa-clock-o': notification.urgency === 'low',
+                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                            </i>
                         </span>
                         <span class="noti-center">
                             {notification.message}
                         </span>
                         <span class="noti-right">
-                            &nbsp;
+                            <i class="fa " rt-if="notification.urgency !== 'done'"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel panel-featured panel-featured-primary panel-noti">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Older</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.older">
+                        <span class="noti-left">
+                            <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                     'fa-clock-o': notification.urgency === 'low',
+                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                            </i>
+                        </span>
+                        <span class="noti-center">
+                            {notification.message}
+                        </span>
+                        <span class="noti-right">
+                            <i class="fa " rt-if="notification.urgency !== 'done'"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
                 </div>
