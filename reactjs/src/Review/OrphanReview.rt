@@ -9,10 +9,10 @@
                                     Choose a Orphan
 
                                     <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster">
-                                        <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}" key="{orphan.id}">{orphan.name}</option>
+                                        <option rt-repeat="orphan in this.state.list_orphan" value="{orphanIndex}" key="{orphanIndex}">{orphan.name}</option>
                                     </select>
                                 </label>
-                                <button class="btn btn-green btn-ok" type="button" onClick={this.changeOrphan}>OK</button>
+                                <button class="btn btn-green btn-ok" type="button" style="display:none">OK</button>
                             </div>
                         </div>
                     </div>
