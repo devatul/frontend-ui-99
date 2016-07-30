@@ -77,7 +77,7 @@
                                 </ul>
                             </div>
                             <div class="col-sm-12 text-center mt-md">
-                             <Link to="/Dashboard/Notification">See all notifications</Link>
+                             <Link to="/Dashboard/Notification" onClick="{this.hideMenu}">See All Notifications</Link>
                             </div>
                         </div>
                     </div>

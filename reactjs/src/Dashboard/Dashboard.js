@@ -80,6 +80,10 @@ module.exports = React.createClass({
             }.bind(this)
         });
     },
+    hideMenu() {
+        // close notification-menu when changes route
+        $('.dropdown-backdrop').click()
+    },
     notificationHandle() {
         $("#total_notification").hide();
     },
