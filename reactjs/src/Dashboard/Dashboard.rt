@@ -17,7 +17,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
-                        <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}><span id="total_notification" class="badge">3</span><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                        <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}><span id="total_notification" class="badge">4</span><i class="fa fa-bell-o" aria-hidden="true"></i></a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
                         <div class="row">
                             <div class="col-sm-6 col-noti">
@@ -89,18 +89,20 @@
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
                             <li class="dropdown">
-                                <span class="badge">2</span>
+                                <span class="badge">4</span>
                                 <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Review <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><!--<li class="active">-->
+                                        <span class="badge">20</span>
                                         <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                                     </li>
                                     <li>
+                                        <span class="badge">20</span>
                                         <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                                     </li>
                                     <li>
-                                        <span class="badge">1</span>
+                                        
                                         <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                                     </li>
                                 </ul>

@@ -184,7 +184,8 @@ module.exports = function(data) {
               },
             }
         });
-         if(data.data_doctypes.length <= 1){
+        
+        if(data.data_doctypes.length <= 1){
             $("#legendContainerCensord3").css("display","");
         }else{
             $("#legendContainerCensord3").css("display","none");

@@ -79,3 +79,36 @@
     position: absolute;
     background-color: rgba(255, 255, 255, 0.8);
 }
+.toggle-button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #349da2;
+    border: none;
+    padding: 0;
+    padding-top: 1px;
+    padding-left: 0.5px;
+}
+.help_guide_sub .filter-tags-userassign {
+    padding-top: 10px;
+    padding-left: 15px;
+}
+.filter-tags-userassign .filter-label-assign .filter-remove-assign {
+    color: #fff;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.filter-tags-userassign .filter-label-assign {
+    margin-right: 5px;
+    font-size: 100%;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+#userReviewChart {
+    height: auto;
+    margin-top: 12px;
+}

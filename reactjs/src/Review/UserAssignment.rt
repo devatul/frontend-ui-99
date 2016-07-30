@@ -1,32 +1,17 @@
 <section>
-<!--section 2-->
   <div class="container">
       <div class="tabs tabs-primary">
         <ul class="nav nav-tabs cat-list">
-          <li class="active">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="true">Accounting / Tax</a>
+          <li rt-repeat="category in this.state.categories" key="{categoryIndex}">
+            <a id="{'Category_' + category.id}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
           </li>
           <li class="">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
+            <a href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>
           </li>
-          <li class="">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Client / Customer</a>
-          </li>
-          <li class="">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Employee</a>
-          </li>
-          <li class="">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Legal / Compliance</a>
-          </li>
-          <li class="">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Transaction</a>
-          </li>
-          <li class="">
-            <a href="#summary" data-toggle="tab" aria-expanded="false">Summary</a>
-          </li>
+          
         </ul>
         <div class="help_guide_sub tab-content">
-          <div id="accounting_tax" class="help_guide tab-pane active">
+          <div id="categoryInfo" class="help_guide tab-pane active">
             <div class="row">
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
@@ -67,7 +52,7 @@
                       </div>
                   </header>
                   <div class="panel-body">
-                    <span>Number of Documents: 168,000</span>
+                    <span>Number of Documents: {this.addCommas(this.state.categoryInfo.number_docs)}</span>
                     <div class="row">
                       <div class="col-sm-6">
                         <h4 class="chart-title">Confidentiality Overview</h4>
@@ -147,61 +132,30 @@
                             </div>
                             <div class="col-xs-4 select-reviewers">
                               <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)</h4>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off select-all">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                              <div>
+                                <div class="switch switch-sm switch-success">
+                                  <div class="ios-switch off select-all" onClick={this.selectAll}>
+                                    <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                    </div>
+                                    <div class="handle"></div>
                                   </div>
-                                  <div class="handle"></div>
+                                    <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                                  Select All
                                 </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                                Select All
+                                <div class="clearfix"></div>
                               </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 37.5px" >
+                                <div class="switch switch-sm switch-success">
+                                  <div class="ios-switch off" id="select_{reviewIndex}" onClick="()=> this.select(reviewIndex)">
+                                    <div class="on-background background-fill"></div>
+                                    <div class="state-background background-fill">
+                                    </div>
+                                    <div class="handle"></div>
                                   </div>
-                                  <div class="handle"></div>
+                                    <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
                                 </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="switch switch-sm switch-success">
-                                <div class="ios-switch off">
-                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                  </div>
-                                  <div class="handle"></div>
-                                </div>
-                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                              </div>
-                              <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+                              <div>
                             </div>
                           </div>
                       </div>
@@ -211,41 +165,6 @@
                     <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
                   </div>
                 </section>
-              </div>
-            </div>
-          </div>
-          <div id="corporate_entity" class="tab-pane">
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
-              </div>
-            </div>
-          </div>
-          <div id="client_customer" class="tab-pane">
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
-              </div>
-            </div>
-          </div>
-          <div id="employee" class="tab-pane">
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
-              </div>
-            </div>
-          </div>
-          <div id="legal_regulatory" class="tab-pane">
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
-              </div>
-            </div>
-          </div>
-          <div id="transaction" class="tab-pane">
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
               </div>
             </div>
           </div>
@@ -262,7 +181,7 @@
                   <table class="table table-condensed table-reviewer-summary">
                     <thead>
                       <tr>
-                        <th class="col20">&nbsp;</th>
+                        <th class="col20"></th>
                         <th class="col40">Number of Assigned Reviewers:</th>
                         <th class="col15">Documents Sampled</th>
                         <th class="col25">Total Number of Documents Classified</th>
@@ -281,9 +200,9 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
+                                  <td class="col20 no-border-top"></td>
                                   <td class="col40">Chris.Muffat (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
+                                  <td class="col15"></td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
                                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -339,277 +258,6 @@
                 </div>
               </div>
             </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Corporate Entity</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Corporate Entity</td>
-                          <td class="no-border-top"><span class="assigned-num">1</span> <a data-toggle="collapse" data-target="#reviewerList2" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList2"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Client/ Customer</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Client/ Customer</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList3" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList3"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Employee</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Employee</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList4" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList4"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Legal/Compliance</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Legal/Compliance</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList5" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList5"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title">Tax</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20">&nbsp;</th>
-                        <th class="col40">Number of Assigned Reviewers</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Document Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom">Tax</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList6" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">10</td>
-                          <td class="no-border-top text-center">11,302</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList6"> 
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Document Creator)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-
             <div class="clearfix">
               <div class="pull-right">
                 <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
