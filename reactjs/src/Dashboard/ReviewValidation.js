@@ -40,6 +40,7 @@ var ReviewValidation = React.createClass({
         console.log("sfdssss", this.state.categories);
         this.getReviewers();
         this.getConfidentiality();
+        this.getSummary();
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.categoryCurrent != nextState.categoryCurrent) {
@@ -48,10 +49,16 @@ var ReviewValidation = React.createClass({
         if(this.state.reviewers != nextState.reviewers) {
             return true;
         }
+        if(this.state.summary != nextState.summary) {
+            return true;
+        }
+        if(this.state.stackChange != nextState.stackChange) {
+            return true;
+        }
         if(this.state.reviewerCurrent != nextState.reviewerCurrent) {
             return true;
         }
-        if(this.state.reviewValidations != nextState.reviewValidations) {
+        if(this.state.confidentiality != nextState.confidentiality) {
             return true;
         }
         if(this.state.reviewCurrent != nextState.reviewCurrent) {
@@ -90,7 +97,18 @@ var ReviewValidation = React.createClass({
             }.bind(this));
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
-            
+            var update = this.state.shouldUpdate;
+            if( update.name == 'updateValidate' || update.name == 'updateCategory' || update.name == 'updateConfidentiality') {
+                this.validateReviewer();
+            }
+            if(update.name == 'validateReviewer' && update.Number > 0 ) {
+                this.validateCategory();
+            }
+        }
+        if(this.state.reviewCurrent != prevState.reviewCurrent) {
+            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            });
         }
     },
     getCategories() {
@@ -106,9 +124,11 @@ var ReviewValidation = React.createClass({
                 for(var i = 0; i < data.length; i++) {
                     data[i].totalValidate = 0;
                 }
+                var category = data[0];
+                category.index = 0;
                 var updateState = update(this.state, {
                     categories: {$set: data},
-                    categoryCurrent: {$set: data[0] }
+                    categoryCurrent: {$set: category }
                 });
                 this.setState(updateState);
                 console.log("categories ok: ", data);
@@ -166,39 +186,36 @@ var ReviewValidation = React.createClass({
                 }
             }.bind(this)
         });*/
-        var data = [{
-                id: 1,
-                first_name: "chiris",
-                last_name: "quyen"
-            },
-            {
-                id: 2,
-                first_name: "chiris1",
-                last_name: "quyen2"
-            },
-            {
-                id: 3,
-                first_name: "chiris",
-                last_name: "quyen"
-            }];
+        var data = [{"last_name":"Gilford","first_name":"Jack","number_hits":74,"type":"last_modifier","id":9},{"last_name":"McConnell","first_name":"Judith","number_hits":52,"type":"last_modifier","id":24},{"last_name":"Granger","first_name":"Farley","number_hits":51,"type":"last_modifier","id":7},{"last_name":"Haig","first_name":"Sid","number_hits":37,"type":"last_modifier","id":10},{"last_name":"Hope","first_name":"Bob","number_hits":35,"type":"last_modifier","id":13},{"last_name":"Ghostley","first_name":"Alice","number_hits":34,"type":"last_modifier","id":6},{"last_name":"Gordon","first_name":"Leo","number_hits":27,"type":"last_modifier","id":33},{"last_name":"Harris","first_name":"Jonathan","number_hits":17,"type":"last_modifier","id":11},{"last_name":"Hillaire","first_name":"Marcel","number_hits":13,"type":"last_modifier","id":12},{"last_name":"Hackett","first_name":"Buddy","number_hits":11,"type":"last_modifier","id":8}];
+        var reviewer = data[0];
+        reviewer.index = 0;
         var updateState = update(this.state, {
             reviewers: {$set: data },
-            reviewerCurrent: {$set: data[0] }
+            reviewerCurrent: {$set: reviewer }
         });
         this.setState(updateState);
     },
     setReviewerCurrent: function(reviewerIndex) {
-        var reviewers = this.state.reviewers;
-        var setReviewer = update(this.state, {
-            reviewerCurrent: { $set: this.state.reviewers[reviewerIndex]}
-        });
-        this.setState(setReviewer);
+        if(reviewerIndex < this.state.reviewers.length) {
+            var Reviewer = this.state.reviewers[reviewerIndex];
+            Reviewer.index = reviewerIndex;
+            var setReviewer = update(this.state, {
+                reviewerCurrent: { $set: Reviewer}
+            });
+            this.setState(setReviewer);
+        }
     },
     setCategoryCurrent: function(categoryIndex) {
-        var setCategory = update(this.state, {
-            categoryCurrent: { $set: this.state.categories[categoryIndex] }
-        });
-        this.setState(setCategory);
+        if(categoryIndex < this.state.categories.length) {
+            var category = this.state.categories[categoryIndex];
+            category.index = categoryIndex;
+            var setCategory = update(this.state, {
+                categoryCurrent: { $set: category }
+            });
+            this.setState(setCategory);
+        } else {
+            $("#gotosummary").click();
+        }
     },
     getChallengedDoc(reviewId) {
         $.ajax({
@@ -254,41 +271,48 @@ var ReviewValidation = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                console.log(data);
-                var check = 0;
+                console.log('data', data);
+                var check = null;
                 var reviewValidations = this.state.reviewValidations;
                 for(var i = 0; i < reviewValidations.length; i++) {
-                    if(reviewValidations[i].categoryId == categoryId && reviewValidations[i].reviewerId == reviewerId) {
-                        check++;
+                    if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
+                        check = i;
+                        console.log('i', i);
                     }
                 }
-                for (var i = 0; i < data[1].documents.length; i++) {
-                    data[1].documents[i]['2nd_line_validation'] = "normal";
-                    data[1].documents[i].current_category = 0;
-                    data[1].documents[i].current_confidentiality = 0;
-                    data[1].documents[i].previous_category = null;
-                    data[1].documents[i].previous_confidentiality = null;
+                console.log('ii', check, check===null, null === 0);
+                for (var i = 0; i < data.documents.length; i++) {
+                    data.documents[i]['2nd_line_validation'] = "normal";
+                    data.documents[i].current_category = 0;
+                    data.documents[i].current_confidentiality = 0;
+                    data.documents[i].previous_category = null;
+                    data.documents[i].previous_confidentiality = null;
                 }
-                if(check === 0) {
+                if(check === null) {
                     var reviewCurrent = {
-                        reviewerId: reviewerId,
-                        categoryId: categoryId,
-                        documents: $.extend(true, {}, data[1].documents),
+                        Id: [categoryId,reviewerId],
+                        documents: $.extend(true, {}, data.documents),
                         totalValidate: 0
                     };
                     reviewValidations.push(reviewCurrent);
+                    var documentPreview = reviewValidations[0].documents[0];
+                    documentPreview.index = 0;
                     var updateState = update(this.state, {
                         reviewValidations: {$set: reviewValidations },
-                        reviewCurrent: {$set: reviewCurrent }
+                        reviewCurrent: {$set: reviewCurrent },
+                        documentPreview: {$set: documentPreview}
                     });
                 } else {
+                    var documentPreview = reviewValidations[check].documents[0];
+                    documentPreview.index = 0;
                     var updateState = update(this.state, {
                         reviewValidations: {$set: reviewValidations },
-                        reviewCurrent: {$set: reviewValidations[check - 1]}
+                        reviewCurrent: {$set: reviewValidations[check]},
+                        documentPreview: {$set: documentPreview}
                     });
                 }
                 this.setState(updateState);
-                console.log("reviewValidations ok: ", reviewValidations[0].documents.length);
+                console.log("reviewValidations ok: ", reviewValidations);
             }.bind(this),
             error: function(xhr,error) {
                 console.log("reviewers error: " + error);
@@ -300,6 +324,11 @@ var ReviewValidation = React.createClass({
         });
 
     },
+    cutPath: function(str) {
+        if(str.length > 0) {
+            return str.substring(0,str.lastIndexOf('/') + 1);
+        }
+    },
     size: function(obj) {
         return _.size(obj);
     },
@@ -308,7 +337,7 @@ var ReviewValidation = React.createClass({
         var reviewValidations = this.state.reviewValidations;
         var indexValid = null;
         for (var i = 0; i < reviewValidations.length; i++) {
-            if(reviewValidations[i].categoryId == categoryId && reviewValidations[i].reviewerId) {
+            if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
                 indexValid = i;
             }
         }
@@ -341,7 +370,7 @@ var ReviewValidation = React.createClass({
         var reviewValidations = this.state.reviewValidations;
         var indexValid = null;
         for (var i = 0; i < reviewValidations.length; i++) {
-            if(reviewValidations[i].categoryId == categoryId && reviewValidations[i].reviewerId) {
+            if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
                 indexValid = i;
             }
         }
@@ -369,39 +398,91 @@ var ReviewValidation = React.createClass({
         }));
         this.setState({shouldUpdate: {name: 'updateConfidentiality', categoryId: categoryId, reviewerId: reviewerId, docIndex: docIndex, confidentialIndex: confidentialIndex }});
     },
-    validateNumber: function() {
+    undoHandle: function() {
+        var cateId = this.state.categoryCurrent.id;
+        var revId = this.state.reviewerCurrent.id;
+        if(this.state.stackChange.length > 0) {
+            var stackChange = this.state.stackChange;
+            var reviewValidations = this.state.reviewValidations;
+            var stack = null;
+            var index = null;
+            var index2 = null;
+            for (var i = stackChange.length - 1; i >= 0; i--) {
+                if(stackChange[i].index.categoryId == cateId && stackChange[i].index.reviewerId == revId) {
+                    index = i;
+                    stack = stackChange[i];
+                    break;
+                }
+            }
+            for(var i = 0; i < reviewValidations.length; i++) {
+                if(reviewValidations[i].Id[0] == cateId && reviewValidations[i].Id[1] == revId) {
+                    index2 = i;
+                    reviewValidations[i].documents[stack.index.docIndex] = stack.contents;
+                }
+            }
+            stackChange.splice(index, index+1);
+            var setUpdate = update(this.state, {
+                reviewValidations: {$set: reviewValidations },
+                stackChange: {$set: stackChange },
+                documentPreview: {$set: reviewValidations[index2].documents[stack.index.docIndex] }
+            });
+            this.setState(setUpdate);
+            this.setState({shouldUpdate: { name: 'undoAction',  categoryId:  cateId, reviewerId: revId, Number: index, stackChange: stackChange.length }});
+        }
+    },
+    validateCategory: function() {
+        var categoryId = this.state.categoryCurrent.id;
+        var reviewerId = this.state.reviewerCurrent.id;
+        var categories = this.state.categories;
+        var reviewValidations = this.state.reviewValidations;
+        var validCategory = 0;
+        for(var i = 0; i < reviewValidations.length; i++) {
+            if(reviewValidations[i].Id[0] == categoryId) {
+                validCategory += reviewValidations[i].totalValidate;
+            }
+        }
+
+        for (var i = 0; i < categories.length; i++) {
+            if(categories[i].id == categoryId) {
+                categories[i].totalValidate = validCategory;
+            }
+        }
+        this.setState(update(this.state, {
+            categories: {$set: categories }
+        }));
+        this.setState({shouldUpdate: { name: 'validateCategory',  categoryId:  categoryId, reviewerId: reviewerId, Number: validCategory}});
+    },
+    validateReviewer: function() {
         var categoryId = this.state.categoryCurrent.id;
         var reviewerId = this.state.reviewerCurrent.id;
         var reviewValidations = this.state.reviewValidations;
-        var categories = this.state.categories;
         var index = null;
         var validReviewer = 0;
-        var validCategory = 0;
         for(var i = 0; i < reviewValidations.length; i++) {
-            if(reviewValidations[i].reviewerId == reviewerId && reviewValidations[i].categoryId == categoryId) {
+            if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
                 index = i;
-                console.log('validateNumber', i);
+                break;
             }
         }
-        for(var i = 0; i < reviewValidations[index].documents.length; i++) {
-            if(reviewValidations[index].documents[i]['2nd_line_validation'] == "accepted")
-            validReviewer++;
+        //debugger;
+        console.log('i', i, _.size(reviewValidations[index].documents));
+        for(var i = 0; i < _.size(reviewValidations[index].documents); i++) {
+            if(reviewValidations[index].documents[i]['2nd_line_validation'] == "accepted") {
+                validReviewer++;
+            } 
         }
-        for (var i = 0; i < categories.length; i++) {
-            if(categories[i].id == reviewValidations[index].categoryId)
-                categories[i].totalValidate += validReviewer;
-        }
+        reviewValidations[index].totalValidate = validReviewer;
+
         this.setState(update(this.state, {
-            reviewValidations: {$set: reviewValidations },
-            categories: {$set: categories }
+            reviewValidations: {$set: reviewValidations }
         }));
-        this.setState({shouldUpdate: { name: 'validateNumber',  categoryId:  categoryId, reviewerId: reviewerId, indexReview: index }});
+        this.setState({shouldUpdate: { name: 'validateReviewer',  categoryId:  categoryId, reviewerId: reviewerId, Number: validReviewer}});
     },
     onClickValidationButton: function(categoryId, reviewerId, docIndex) {
         var reviewValidations = this.state.reviewValidations;
         var indexValid = null;
         for (var i = 0; i < reviewValidations.length; i++) {
-            if(reviewValidations[i].categoryId == categoryId && reviewValidations[i].reviewerId) {
+            if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
                 indexValid = i;
             }
         }
@@ -425,6 +506,28 @@ var ReviewValidation = React.createClass({
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: { name: 'updateValidate', categoryId: categoryId, reviewerId: reviewerId, docIndex: docIndex,  status: 'accepted' }});
+    },
+    parseInt: function(num) {
+        return Math.round(num);
+    },
+    setDocumentPreview: function(categoryId, reviewerId, docIndex) {
+        var reviewValidations = this.state.reviewValidations;
+        var indexValid = null;
+        for (var i = 0; i < reviewValidations.length; i++) {
+            if(reviewValidations[i].Id[0] == categoryId && reviewValidations[i].Id[1] == reviewerId) {
+                indexValid = i;
+            }
+        }
+        var document = reviewValidations[indexValid].documents[docIndex];
+        document.index = docIndex;
+        if(indexValid != null) {
+            this.setState(update(this.state, {
+                documentPreview: {$set: document }
+            }));
+        }
+    },
+    nextReviewer: function(categoryId, reviewerId) {
+
     },
     getSummary() {
         $.ajax({
