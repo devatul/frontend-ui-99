@@ -8,7 +8,7 @@
                 <div class="input-group mb-md">
                     <label for="choose_cluster">
                         Choose a Group
-                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" value="{this.state.groupCurrent}" key="index">
+                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index">
                             <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}">{group.name}</option>
                         </select>
                     </label>
@@ -212,7 +212,12 @@
         <section class="panel panel-featured panel-featured-primary actions-panel">
             <header class="panel-heading">
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
-
+                <div class="inline-block-item view-stat-block">
+                    <label>Sample Method: </label>
+                    <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
+                    <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
+                    <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
+                </div>
                 <div class="panel-actions my-actions-btn-group">
 
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
@@ -222,13 +227,25 @@
                 </div>
             </header>
             <div class="panel-body" style="display: block;">
+                <p class="document_note" rt-if="this.state.groupCurrent != null">
+                  You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within <span rt-if="this.state.documentPreview != null">{this.state.documentPreview.categories.length} category with {this.state.documentPreview.confidentialities.length}</span> confidentiality in {this.state.groupCurrent.name } by latest 28th june
+                </p>
                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                    <button rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)" type="button" class="mb-md mr-xs btn btn-green approve-button" onClick="(event)=>this.approveButon()">Approve</button>
-                    <div rt-if="(this.state.validateNumber > 0 && this.state.validateNumber == this.state.samplesDocument.length)" class="alert alert-success">
-                        <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                    <button
+                      rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)"
+                      type="button"
+                      class="mb-md mr-xs btn btn-green approve-button"
+                      onClick="(event)=>this.approveButon()">
+                        Approve
+                      </button>
+                    <div
+                      rt-if="(this.state.validateNumber > 0 && this.state.validateNumber == this.state.samplesDocument.length)"
+                      class="alert alert-success">
+                        <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true" onClick={this.alertClose}>×</button>
                         <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                     </div>
                     <div class="table-responsive">
+                        
                         <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
                             <thead>
                                 <tr role="row">
@@ -248,7 +265,7 @@
             </th>
             <th class="review_note">Path
               <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                 <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
                   <p>This displays the logical folder path to where each document is currently located.</p>
                 </div>
@@ -297,19 +314,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr rt-repeat="sample in this.state.samplesDocument" key="{sampleIndex}" class="{(this.state.checkedNumber > 0 && sample.current.checked == false) ? 'inactive' : ''}">
+                                <tr rt-repeat="sample in this.state.samplesDocument"
+                                  key="{sampleIndex}"
+                                  class="{(this.state.checkedNumber > 0 && sample.current.checked == false) ? 'inactive':''}">
                                     <td>
                                         <div class="checkbox-custom checkbox-default">
-                                            <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item-1" checked="{sample.current.checked}" onChange="(event)=>this.onClickCheckbox(event, sampleIndex)" data-target="#groupReview">
-                                            <label for="checkboxExample{sampleIndex}"></label>
+                                            <input
+                                              type="checkbox"
+                                              id="checkboxExample{sampleIndex}"
+                                              class="checkbox-item-1"
+                                              checked="{sample.current.checked}"
+                                              onChange="(event)=>this.onClickCheckbox(event, sampleIndex)">
+                                            <label></label>
                                         </div>
                                     </td>
                                     <td class="text-left">
-                                        <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentReview(sampleIndex)" data-file-url="{sample.image_url}">{sample.name}</span>
+                                        <span
+                                          class="text-italic file-name doc-path-2"
+                                          data-toggle="modal"
+                                          data-target="#previewModal"
+                                          onClick="()=>this.setDocumentPreview(sampleIndex)"
+                                          data-file-url="{sample.image_url}">
+                                            <span
+                                              class="file-name-1"
+                                              data-toggle="tooltip"
+                                              data-original-title="{sample.name}">
+                                              {sample.name}
+                                            </span>
+                                        </span>
                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
                                             <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                             <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                 <ul>
+                                                    <li>Name: {sample.name}</li>
                                                     <li>Creation Date: {sample.creation_date}</li>
                                                     <li>Modifitcation Date: {sample.modification_date}</li>
                                                     <li>Required Legal Retention until: {sample.legal_retention_until}</li>
@@ -329,13 +366,30 @@
                                         <div class="select-group">
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
-                                                  <div class="progress-bar {this.progressbar(sample.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{sample.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {sample.categories[current.category].confidence_level}%;">
+                                                  <div
+                                                    class="progress-bar {this.progressbar(sample.categories[current.category].confidence_level)}"
+                                                    role="progressbar"
+                                                    aria-valuenow="{sample.categories[current.category].confidence_level}"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                    style="width: {sample.categories[current.category].confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">({sample.categories[current.category].confidence_level}%)</span>
+                                                  <span class="progress-percentage">
+                                                    ({sample.categories[current.category].confidence_level}%)
+                                                  </span>
                                                 </div>
                                             </div>
-                                            <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{current.category}">
-                                              <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
+                                            <select
+                                              style="text-transform: capitalize"
+                                              class="form-control"
+                                              onChange="(event)=>this.onChangeCategory(event, sampleIndex)"
+                                              value="{current.category}">
+                                              <option
+                                                rt-repeat="category in sample.categories"
+                                                key="{categoryIndex}"
+                                                value="{categoryIndex}">
+                                                {category.name}
+                                              </option>
                                             </select>
                                         </div>
                                     </td>
@@ -343,9 +397,15 @@
                                         <div class="select-group">
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
-                                                  <div class="progress-bar {this.progressbar(sample.categories[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{sample.categories[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {sample.categories[current.confidential].confidence_level}%;">
+                                                  <div
+                                                    class="progress-bar {this.progressbar(sample.confidentialities[current.confidential].confidence_level)}"
+                                                    role="progressbar"
+                                                    aria-valuenow="{sample.confidentialities[current.confidential].confidence_level}"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                    style="width:{sample.confidentialities[current.confidential].confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">({sample.categories[current.confidential].confidence_level}%)</span>
+                                                  <span class="progress-percentage">({sample.confidentialities[current.confidential].confidence_level}%)</span>
                                                 </div>
                                             </div>
                                             <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{current.confidential}">
@@ -380,7 +440,7 @@
   <div class="modal-dialog modal-preview" rt-if="(this.state.documentPreview != null)">
 
     <!-- Modal content-->
-    <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview.index as index; this.state.documentPreview.current as current">
+    <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview.index as index">
       <div class="modal-header">
         <div class="row">
             <div class="col-sm-4 modal-title">
@@ -392,6 +452,7 @@
                 <span>Folder {this.cutPath(document.path)}</span>
             </div>
             <div class="col-sm-4 modal-actions text-right">
+                <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                 <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
                 <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
@@ -468,18 +529,19 @@
       </thead>
       <tbody>
         <tr class="">
-              <td>
+              <td rt-scope="document.current as current">
                 <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1"/>
+                  <input type="checkbox" class="checkbox-item-1" checked="{current.checked}" onChange="(event)=>this.onClickCheckbox(event, index)"/>
                   <label></label>
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{document.name}</span>
+                <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" data-file-url="{document.image_url}"><span class="file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{document.name}">{document.name}</span></span>
                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                   <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                   <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                     <ul>
+                      <li>Name: {document.name }</li>
                       <li>Creation Date: {document.creation_date}</li>
                       <li>Modifitcation Date: {document.modification_date}</li>
                       <li>Required Legal Retention until: {document.legal_retention_until}</li>
@@ -496,7 +558,7 @@
                 <span class="text-italic">{document.owner}</span>
               </td>
               <td>
-                <div class="select-group">
+                <div class="select-group" rt-scope="document.current as current">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
                           <div class="progress-bar {this.progressbar(document.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{document.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.categories[current.category].confidence_level}%;">
@@ -510,7 +572,7 @@
                 </div>
             </td>
             <td>
-                <div class="select-group">
+                <div class="select-group" rt-scope="document.current as current">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
                           <div class="progress-bar {this.progressbar(document.confidentialities[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{document.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidentialities[current.confidential].confidence_level}%;">
@@ -523,11 +585,11 @@
                     </select>
                 </div>
             </td>
-              <td>
-                <a href="#" class="doc-check">
-                  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                </a>
+              <td rt-scope="document.current as current">
+                <a style="cursor: pointer" class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButton(event, index)">
+                <i rt-if="(current.status == 'normal')" class="fa fa-clock-o" aria-hidden="true"></i>
+                <i class="fa fa-check" aria-hidden="true" rt-props="(current.status == 'editing') ? {style: { color: '#ffc200'}} : ''"></i>
+              </a>
               </td>
             </tr>
             </tbody>

@@ -1,5 +1,5 @@
 module.exports = {
-	SERVER_API:'http://54.251.148.133/',
+	SERVER_API:'http://54.254.145.121/',
 	scan: {
 		IS_NO_SCAN: 'no scan',
 		IS_SCANING: 'in progress',

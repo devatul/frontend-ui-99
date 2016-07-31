@@ -12,7 +12,7 @@
                 </li>
             </ul>
             <div class="tab-content" rt-if="(this.state.Actions != null)">
-                <div class="row" rt-repeat="action in this.state.Actions" key="{'action_' + actionIndex}" id="{'section_action_' + actionIndex}">
+                <div class="row" rt-repeat="action in this.state.Actions" key="{actionIndex}" id="{'section_action_' + actionIndex}">
                     <div class="col-md-12">
                         <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">
                             <header class="document_panel-heading panel-heading">
@@ -33,19 +33,29 @@
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
-                                    <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
 
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
                             </header>
                             <div class="panel-body" style="display: block;">
-                                <p class="document_note">You have to review <span class="document_number">{action.documents.length}</span> documents in <span class="document_category" style="text-transform: capitalize">{action.category}</span> Category of Secret Confidentiality by latest 28th June</p>
+                                <p class="document_note">
+                                    You have to review {action.documents.length - action.validateNumber} documents in {action.category} Category of Secret Confidentiality by latest 28th June
+                                </p>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button id="{'button_approve_' + actionIndex}" type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1 approve-button-2" style="display: none;" data-target="#{'section_action_' + actionIndex}">Approve</button>
-                                    <div class="alert alert-success actions-success">
-                                        <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                        <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                    <button
+                                        rt-if="(action.checkedNumber > 0 && action.validateNumber < action.documents.length)"
+                                        type="button" class="mb-md mr-xs btn btn-green"
+                                        onClick="(event)=>this.approveButon(actionIndex)">
+                                            Approve
+                                    </button>
+                                    <div
+                                        rt-if="(action.validateNumber == action.documents.length)"
+                                        class="alert alert-success">
+                                        <button onClick={this.alertClose} type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        <strong>Well done, you have completed the classification review!</strong>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-{actionIndex}" role="grid" aria-describedby="datatable-default_info">
@@ -53,7 +63,7 @@
                                                 <tr role="row" class="">
                                                     <th>
                                                         <div class="checkbox-custom checkbox-primary">
-                                                            <input id="{'check_all_' + actionIndex}" type="checkbox" class="checkbox-all-1 setUndo" data-target="#{'section_action_' + actionIndex}">
+                                                            <input type="checkbox" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event, actionIndex)" checked="{action.checkAll}">
                                                             <label></label>
                                                         </div>
                                                     </th>
@@ -116,20 +126,36 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="" rt-repeat="doc in action.documents" key="{'doc_' + docIndex}">
+                                                <tr
+                                                    rt-repeat="doc in action.documents"
+                                                    key="{docIndex}"
+                                                    class="{(action.checkedNumber > 0 && doc.current.checked == false) ? 'inactive':''}">
                                                     <td>
                                                         <div class="checkbox-custom checkbox-default">
-                                                            <input id="{'checkbox_' + '_' + docIndex + '_' + actionIndex}" type="checkbox" class="checkbox-item-1 setUndo" data-target="#{'section_action_' + actionIndex}">
+                                                            <input type="checkbox" class="checkbox-item-1" checked="{doc.current.checked}" onChange="(event)=>this.onClickCheckbox(event, actionIndex, docIndex)">
                                                             <label></label>
                                                         </div>
                                                     </td>
                                                     <td class="text-left">
                                                         <!--http://www.snee.com/xml/xslt/sample.doc-->
-                                                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.pdf995.com/samples/pdf.pdf" onClick="()=>this.setDocumentPreview(actionIndex, docIndex)">{doc.name}</span>
+                                                        <span
+                                                            class="text-italic file-name doc-path-2"
+                                                            data-toggle="modal"
+                                                            data-target="#previewModal"
+                                                            onClick="()=>this.setDocumentPreview(actionIndex, docIndex)"
+                                                            data-file-url="{doc.image_url}">
+                                                                <span class="file-name-1"
+                                                                    rel="tooltip"
+                                                                    data-toggle="tooltip"
+                                                                    data-original-title="{doc.name}">
+                                                                    {doc.name}
+                                                                </span>
+                                                        </span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                             <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                             <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                                 <ul>
+                                                                    <li>Name: {doc.name}</li>
                                                                     <li>Creation Date: {doc.creation_date}</li>
                                                                     <li>Modifitcation Date: {doc.modification_date}</li>
                                                                     <li>Required Legal Retention until: {doc.legal_retention_until}</li>
@@ -145,38 +171,71 @@
                                                     <td class="text-left">
                                                         <span class="text-italic">{doc.owner}</span>
                                                     </td>
-                                                    <td>
-                                                        <div class="select-group" rt-if="(this.state.category_confidence_level != null)">
+                                                    <td rt-scope="doc.current as current">
+                                                        <div class="select-group">
                                                             <div class="selected-info">
                                                                 <div class="progress progress-striped light">
-                                                                  <div class="progress-bar {this.progressbar(this.state.category_confidence_level[actionIndex][docIndex])}" role="progressbar" aria-valuenow="{this.state.category_confidence_level[actionIndex][docIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: {this.state.category_confidence_level[actionIndex][docIndex]}%;">
-                                                                  </div>
-                                                                  <span class="progress-percentage">({this.state.category_confidence_level[actionIndex][docIndex]}%)</span>
+                                                                    <div 
+                                                                        class="progress-bar {this.progressbar(doc.categories[current.category].confidence_level)}"
+                                                                        role="progressbar"
+                                                                        aria-valuenow="{doc.categories[current.category].confidence_level}"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"
+                                                                        style="width: {doc.categories[current.category].confidence_level}%;">
+                                                                    </div>
+                                                                    <span class="progress-percentage">
+                                                                        ({doc.categories[current.category].confidence_level}%)
+                                                                    </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" id="{'Category_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeCategory(event, [actionIndex, docIndex])" value={this.state.category_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Category'}" data-target="#{'section_action_' + actionIndex}">
-                                                                <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                                            <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{current.category}">
+                                                              <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <div class="select-group" rt-if="(this.state.confidential_confidence_level != null)">
+                                                    <td rt-scope="doc.current as current">
+                                                        <div class="select-group">
                                                             <div class="selected-info">
                                                                 <div class="progress progress-striped light">
-                                                                  <div class="progress-bar {this.progressbar(this.state.confidential_confidence_level[actionIndex][docIndex])}" role="progressbar" aria-valuenow="{this.state.confidential_confidence_level[actionIndex][docIndex]}" aria-valuemin="0" aria-valuemax="100" style="width: { this.state.confidential_confidence_level[actionIndex][docIndex] }%;">
-                                                                  </div>
-                                                                  <span class="progress-percentage">({ this.state.confidential_confidence_level[actionIndex][docIndex] }%)</span>
+                                                                <div
+                                                                    class="progress-bar {this.progressbar(doc.confidentialities[current.confidential].confidence_level)}"
+                                                                    role="progressbar"
+                                                                    aria-valuenow="{doc.confidentialities[current.confidential].confidence_level}"
+                                                                    aria-valuemin="0"
+                                                                    aria-valuemax="100"
+                                                                    style="width: {doc.confidentialities[current.confidential].confidence_level}%;">
+                                                                </div>
+                                                                <span class="progress-percentage">
+                                                                    ({doc.confidentialities[current.confidential].confidence_level}%)
+                                                                </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" id="{'Confidential_' + actionIndex + '_' + docIndex}" class="form-control setUndo" onChange="(event)=>this.onChangeConfidential(event, [actionIndex, docIndex])" value={this.state.confidential_confidence_level[actionIndex][docIndex]} data-value="{actionIndex + ':' + docIndex + ':' + 'Confidential'}" data-target="#{'section_action_' + actionIndex}">
-                                                                <option rt-repeat="condential in doc.confidentialities" key="{condentialIndex}" value="{condential.confidence_level}">{condential.name}</option>
+                                                            <select 
+                                                                style="text-transform: capitalize"
+                                                                class="form-control"
+                                                                onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)"
+                                                                value="{current.confidential} ">
+                                                                <option
+                                                                    rt-repeat="Confidential in doc.confidentialities"
+                                                                    key="{ConfidentialIndex}"
+                                                                    value="{ConfidentialIndex}">
+                                                                    {Confidential.name}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <a href="#" class="doc-check" data-target="#{'section_action_' + actionIndex}">
-                                                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                          <i class="fa fa-check" aria-hidden="true"></i>
+                                                    <td rt-scope="doc.current as current">
+                                                        <a style="cursor: pointer"
+                                                            class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }"
+                                                            onClick="(event)=>this.onClickValidationButton(event, actionIndex, docIndex)">
+                                                            <i rt-if="(current.status == 'normal')"
+                                                                class="fa fa-clock-o"
+                                                                aria-hidden="true">
+                                                            </i>
+                                                            <i class="fa fa-check"
+                                                                aria-hidden="true"
+                                                                rt-props="(current.status == 'editing') ? {style: { color: '#ffc200'}} : ''">
+                                                            </i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -188,8 +247,8 @@
                         </section>
                     </div>
                 </div>
-                
-                <div class="row" rt-repeat="challenged in this.state.ChallengedDocuments" key="{'challenged_' + challengedIndex}" id="{'section_challenged_' + challengedIndex}">
+                <!-- Challenged Documents -->
+                <div class="row" rt-repeat="challenged in this.state.ChallengedDocuments" key="{challengedIndex}">
                     <div class="col-md-12">
                         <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">
                             <header class="document_panel-heading panel-heading">
@@ -210,18 +269,29 @@
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
-                                    <button type="button" class="mb-xs mr-xs btn btn-green getUndo">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
                                     <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
                             </header>
                             <div class="panel-body" style="display: block;">
-                                <p class="document_note">Stan challenged classification of <span class="document_number">{challenged.documents.length}</span> documents - You have to review it by latest 10th July</p>
+                                <p class="document_note"></p>
+                                <p class="document_note">
+                                    Stan challenged classification of {challenged.documents.length - challenged.validateNumber} documents - You have to review it by latest 10th July
+                                </p>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all-1  approve-button-2" style="display: none;" data-target="#{'section_challenged_' + challengedIndex}">Approve</button>
-                                    <div class="alert alert-success actions-success">
-                                        <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                        <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                    <button
+                                        rt-if="(challenged.checkedNumber > 0 && challenged.validateNumber < challenged.documents.length)"
+                                        type="button" class="mb-md mr-xs btn btn-green"
+                                        onClick="(event)=>this.approveButonChallenged(challengedIndex)">
+                                            Approve
+                                    </button>
+                                    <div
+                                        rt-if="(challenged.validateNumber == challenged.documents.length)"
+                                        class="alert alert-success">
+                                        <button onClick={this.alertClose} type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        <strong>Well done, you have completed the classification review!</strong>
                                     </div>
                                     <div class="table-responsive">
                                         
@@ -230,7 +300,7 @@
                                                 <tr role="row" class="">
                                                     <th>
                                                         <div class="checkbox-custom checkbox-primary">
-                                                            <input id="{ 'checkbox_all_' + challengedIndex}" type="checkbox" class="checkbox-all-1 setUndo" data-target="#{'section_challenged_' + challengedIndex}">
+                                                            <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
                                                             <label></label>
                                                         </div>
                                                     </th>
@@ -289,19 +359,35 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="opa" rt-repeat="docChall in challenged.documents" key="{'docChall_' + docChallIndex}">
+                                                <tr class="opa" rt-repeat="docChall in challenged.documents" key="{docChallIndex}">
                                                     <td>
                                                         <div class="checkbox-custom checkbox-default">
-                                                            <input id="{'checkbox_' + '_' + docChallIndex + '_' + challengedIndex}" type="checkbox" class="checkbox-item-1 setUndo" data-target="#{'section_challenged_' + challengedIndex}">
+                                                            <input type="checkbox"
+                                                                class="checkbox-item-1"
+                                                                checked="{docChall.current.checked}"
+                                                                onChange="(event)=>this.onClickCheckboxChallenged(event, challengedIndex, docChallIndex)">
                                                             <label></label>
                                                         </div>
                                                     </td>
                                                     <td class="text-left my_file-name">
-                                                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3" onClick="()=>this.setChallengedCurrent(challengedIndex, docChallIndex)" data-file-url="http://www.snee.com/xml/xslt/sample.doc" onClick="()=>this.setDocumentPreview(docChallIndex)">{(docChall.name.length > 7) ? docChall.name.substring(7, 0) + '...' : docChall.name }</span>
+                                                        <span
+                                                            class="text-italic file-name doc-path"
+                                                            data-toggle="modal"
+                                                            data-target="#previewModal3"
+                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex)"
+                                                            data-file-url="{docChall.image_url}">
+                                                            <span class="file-name-1"
+                                                                rel="tooltip"
+                                                                data-toggle="tooltip"
+                                                                data-original-title="{docChall.name}">
+                                                                {docChall.name}
+                                                            </span>
+                                                        </span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                             <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                                             <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                                                 <ul>
+                                                                    <li>Name: {docChall.name}</li>
                                                                     <li>Creation Date: {docChall.creation_date}</li>
                                                                     <li>Modifitcation Date: {docChall.modification_date}</li>
                                                                     <li>Required Legal Retention until: {docChall.legal_retention_until}</li>
@@ -315,20 +401,24 @@
                                                         <span class="text-italic doc-path">{docChall.path}</span>
                                                     </td>
                                                     <td class="text-left">
-                                                        <span class="text-italic">{(docChall.name.length > 7) ? docChall.owner.substring(7, 0) + '...' : docChall.owner}</span>
+                                                        <span class="text-italic">
+                                                            {(docChall.name.length > 7) ? docChall.owner.substring(7, 0) + '...' : docChall.owner}
+                                                        </span>
                                                     </td>
-                                                    <td class="vertical-top opa-child">
+                                                    <td class="vertical-top opa-child" rt-scope="docChall.current as current">
                                                         <div class="select-group">
-                                                            <select style="text-transform: capitalize" id="{'Select_Category_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-category setUndo" data-target="#{'section_challenged_' + challengedIndex}">
-                                                                <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                                            <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
+                                                              <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
+                                                            <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docChall.categories[current.prevCategory].name}</span>
                                                         </div>
                                                     </td>
-                                                    <td class="vertical-top opa-child">
+                                                    <td class="vertical-top opa-child" rt-scope="docChall.current as current">
                                                         <div class="select-group">
-                                                            <select style="text-transform: capitalize" id="{'Select_Confidential_' + docChallIndex + '_' + challengedIndex}" class="form-control black challenge-confidentiality setUndo" data-target="#{'section_challenged_' + challengedIndex}">
-                                                                <option rt-repeat="confidential in docChall.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
+                                                            <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
+                                                              <option rt-repeat="Confidential in docChall.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                             </select>
+                                                            <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docChall.confidentialities[current.prevConfidential].name}</span>
                                                         </div>
                                                         
                                                     </td>
@@ -339,11 +429,14 @@
                                                     </td>
                                                     <td class="opa-child">
                                                         <div class="select-group">
-                                                            <textarea id="{'textarea_' + docChallIndex + '_' + challengedIndex}" class="form-control setUndo" placeholder="Reason for rejection"></textarea>
+                                                            <textarea class="form-control" placeholder="Explain your choice"></textarea>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <a href="#" class="challenge-btn validation-btn btn btn-default" data-target="#{'section_challenged_' + challengedIndex}"><i class="fa fa-check"></i></a>
+                                                    <td rt-scope="docChall.current as current">
+                                                        <!--<a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>-->
+                                                        <a style="cursor: pointer" class="challenge-btn validation-btn btn btn-default {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButtonChallenged(event, challengedIndex, docChallIndex)">
+                                                          <i class="fa fa-check {(current.status == 'accept') ? 'icon-success' : '' }{(current.status == 'editing') ? 'icon-danger' : ''}" aria-hidden="true"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -366,7 +459,7 @@
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
-        <div class="modal-content" rt-scope="this.state.documentPreview as docPreview; this.state.documentPreviewIndex as index; this.state.category_confidence_level as category_level; this.state.confidential_confidence_level as confidential_level;">
+        <div class="modal-content" rt-scope="this.state.documentPreview as docPreview; this.state.documentPreview.index as index">
           <div class="modal-header">
             <div class="row">
                 <div class="col-sm-4 modal-title">
@@ -375,9 +468,10 @@
                 </div>
                 <div class="col-sm-4 modal-info text-center">
                     <span class="text-itatic" >{docPreview.name}</span><br>
-                    <span >Folder {docPreview.path}</span>
+                    <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
@@ -436,16 +530,25 @@
                         <tr class="">
                             <td>
                                 <div class="checkbox-custom checkbox-default">
-                                    <input type="checkbox" class="checkbox-item-1" data-target="#table-my-actions-1">
+                                    <input type="checkbox" class="checkbox-item-1" checked="{docPreview.current.checked}" onChange="(event)=>this.onClickCheckbox(event, index.actionIndex, index.docIndex)">
                                     <label></label>
                                 </div>
                             </td>
                             <td class="text-left">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal">{docPreview.name}</span>
+                                <!--http://www.snee.com/xml/xslt/sample.doc-->
+                                <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" data-file-url="{docPreview.image_url}">
+                                    <span class="file-name-1"
+                                        rel="tooltip"
+                                        data-toggle="tooltip"
+                                        data-original-title="{docPreview.name}">
+                                        {docPreview.name}
+                                    </span>
+                                </span>
                                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                                     <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                     <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                         <ul>
+                                            <li>name: {docPreview.name}</li>
                                             <li>Creation Date: {docPreview.creation_date}</li>
                                             <li>Modifitcation Date: {docPreview.modification_date}</li>
                                             <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
@@ -461,38 +564,38 @@
                             <td class="text-left">
                                 <span class="text-italic">{docPreview.owner}</span>
                             </td>
-                            <td>
+                            <td rt-scope="docPreview.current as current">
                                 <div class="select-group">
                                     <div class="selected-info">
                                         <div class="progress progress-striped light">
-                                          <div class="progress-bar {this.progressbar(category_level[index[0]][index[1]])}" role="progressbar" aria-valuenow="{category_level[index[0]][index[1]]}" aria-valuemin="0" aria-valuemax="100" style="width: {category_level[index[0]][index[1]]}%;">
+                                          <div class="progress-bar {this.progressbar(docPreview.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{docPreview.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.categories[current.category].confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({category_level[index[0]][index[1]]}%)</span>
+                                          <span class="progress-percentage">({docPreview.categories[current.category].confidence_level}%)</span>
                                         </div>
                                     </div>
-                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, [index[0], index[1]])" value="{category_level[index[0]][index[1]]}">
-                                        <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value="{current.category}">
+                                      <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                     </select>
                                 </div>
                             </td>
-                            <td>
+                            <td rt-scope="docPreview.current as current">
                                 <div class="select-group">
                                     <div class="selected-info">
                                         <div class="progress progress-striped light">
-                                          <div class="progress-bar {this.progressbar(confidential_level[index[0]][index[1]])}" role="progressbar" aria-valuenow="{confidential_level[index[0]][index[1]]}" aria-valuemin="0" aria-valuemax="100" style="width: {confidential_level[index[0]][index[1]]}%;">
+                                          <div class="progress-bar {this.progressbar(docPreview.confidentialities[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{docPreview.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidentialities[current.confidential].confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({confidential_level[index[0]][index[1]]}%)</span>
+                                          <span class="progress-percentage">({docPreview.confidentialities[current.confidential].confidence_level}%)</span>
                                         </div>
                                     </div>
-                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, [index[0], index[1]])" value="{confidential_level[index[0]][index[1]]}">
-                                        <option rt-repeat="confidential in docPreview.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
+                                    <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
+                                      <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select>
                                 </div>
                             </td>
-                            <td>
-                                <a href="#" class="doc-check">
-                                  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
+                            <td rt-scope="docPreview.current as current">
+                                <a style="cursor: pointer" class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButton(event, index.actionIndex, index.docIndex)">
+                                  <i rt-if="(current.status == 'normal')" class="fa fa-clock-o" aria-hidden="true"></i>
+                                  <i class="fa fa-check" aria-hidden="true" rt-props="(current.status == 'editing') ? {style: { color: '#ffc200'}} : ''"></i>
                                 </a>
                             </td>
                         </tr>
@@ -514,7 +617,7 @@
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
-        <div class="modal-content" rt-if="(this.state.challengedDocPreview != null)" rt-scope="this.state.challengedDocPreview as docPreview; this.state.challengedDocPreviewIndex as index;">
+        <div class="modal-content" rt-if="this.state.challengedPreview != null" rt-scope="this.state.challengedPreview as docPreview; docPreview.index as index">
           <div class="modal-header">
             <div class="row">
                 <div class="col-sm-4 modal-title">
@@ -522,10 +625,11 @@
                     Document Preview
                 </div>
                 <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic">{docPreview.name}</span><br>
-                    <span>Folder {docPreview.path}</span>
+                    <span class="text-itatic" >{docPreview.name}</span><br>
+                    <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
@@ -581,16 +685,32 @@
                         <tr class="opa">
                             <td>
                                 <div class="checkbox-custom checkbox-default">
-                                    <input type="checkbox" class="checkbox-item" data-target="#table-my-actions-3">
+                                    <input
+                                        type="checkbox"
+                                        class="checkbox-item-1"
+                                        checked="{docPreview.current.checked}"
+                                        onChange="(event)=>this.onClickCheckboxChallenged(event, index.actionIndex, index.docIndex)">
                                     <label></label>
                                 </div>
                             </td>
                             <td class="text-left my_file-name">
-                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3">{docPreview.name}</span>
+                                <span
+                                    class="text-italic file-name doc-path-2"
+                                    data-toggle="modal"
+                                    data-target="#previewModal3"
+                                    data-file-url="{docPreview.image_url}">
+                                    <span class="file-name-1"
+                                        rel="tooltip"
+                                        data-toggle="tooltip"
+                                        data-original-title="{docPreview.name}">
+                                        {docPreview.name}
+                                    </span>
+                                </span>
                                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                                     <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                     <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                         <ul>
+                                            <li>name: {docPreview.name}</li>
                                             <li>Creation Date: {docPreview.creation_date}</li>
                                             <li>Modifitcation Date: {docPreview.modification_date}</li>
                                             <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
@@ -604,36 +724,38 @@
                                 <span class="text-italic doc-path">{docPreview.path}</span>
                             </td>
                             <td class="text-left">
-                                <span class="text-italic">{docPreview.ouwne}</span>
+                                <span class="text-italic">{(docPreview.name.length > 7) ? docPreview.owner.substring(7, 0) + '..' : docPreview.owner}</span>
                             </td>
-                            <td class="vertical-top opa-child">
+                            <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
                                 <div class="select-group">
-                                    <select class="form-control black challenge-category" style="text-transform: capitalize" class="form-control black">
-                                        <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{category.confidence_level}">{category.name}</option>
+                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
+                                      <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                     </select>
-                                    
+
                                 </div>
                             </td>
-                            <td class="vertical-top opa-child">
+                            <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
                                 <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control black challenge-confidentiality">
-                                        <option rt-repeat="confidential in docPreview.confidentialities" key="{confidentialIndex}" value="{confidential.confidence_level}">{confidential.name}</option>
+                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
+                                      <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select>
                                 </div>
-                                
                             </td>
                             <td class="vertical-top document_2nd first-ch">
-                                <span class="doc-path my-doc-path">Level to confidenttiality to low for this type of document</span>
+                                <span class="doc-path my-doc-path">Level of Confidentiality is too low/high for this type of document</span>
+                                <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
+           
                             </td>
                             <td class="opa-child">
                                 <div class="select-group">
-                                    <textarea class="form-control" placeholder="Reason for rejection"></textarea>
+                                    <textarea class="form-control" placeholder="Explain your choice"></textarea>
                                 </div>
                             </td>
-                            <td>
-                             <a href="#" class="challenge-btn validation-btn btn btn-default" data-target=""><i class="fa fa-check"></i></a>
-                                <!--<a href="#" class="validation-btn btn btn-default check"><i class="fa fa-check icon-success"></i></a>
-                                <a href="#" class="validation-btn btn btn-default uncheck"><i class="fa fa-times icon-danger disabled"></i></a>-->
+                            <td rt-scope="docPreview.current as current">
+                                <!--<a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>-->
+                                <a style="cursor: pointer" class="challenge-btn validation-btn btn btn-default {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButtonChallenged(event, index.actionIndex, index.docIndex)">
+                                  <i class="fa fa-check {(current.status == 'accept') ? 'icon-success' : '' }{(current.status == 'editing') ? 'icon-danger' : ''}" aria-hidden="true"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

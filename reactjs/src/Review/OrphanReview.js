@@ -8,7 +8,6 @@ import 'jquery'
 import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
-import undo from '../script/Undo.js'
 import Constant from '../Constant.js'
 
 var OrphanReview = React.createClass({
@@ -16,20 +15,26 @@ var OrphanReview = React.createClass({
     displayName: 'OrphanReview',
     getInitialState() {
         return {
-            orphan_current: 0,
-            list_orphan: [],
+            orphanCurrent: 0,
+            listOrphan: [],
             categories: [],
             statistics: [],
             cloudwords: [],
             centroids: [],
             samplesDocument: [],
-            documentPreview: 0
+            samplesDefault: [],
+            documentPreview: null,
+            stackChange: [],
+            checkedNumber: 0,
+            validateNumber: 0,
+            shouldUpdate: null,
+            checkBoxAll: false
         };
     },
     componentWillMount() {
     },
     componentDidMount() {
-        this.getOrphan();
+        this.getListOrphan();
         chart();
         $('.btn-refine').on('click', function(e){
             e.preventDefault();
@@ -46,16 +51,28 @@ var OrphanReview = React.createClass({
         });
     },
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.orphan_current != nextState.orphan_current) {
-            return true;
-        }
-        if(this.state.categories != nextState.categories) {
-            return true;
-        }
-        if(this.state.statistics != nextState.statistics) {
+        if(this.state.orphanCurrent != nextState.orphanCurrent) {
             return true;
         }
         if(this.state.samplesDocument != nextState.samplesDocument) {
+            return true;
+        }
+        if(this.state.stackChange != nextState.stackChange) {
+            return true;
+        }
+        if(this.state.shouldUpdate != nextState.shouldUpdate) {
+            return true;
+        }
+        if(this.state.checkedNumber != nextState.checkedNumber) {
+            return true;
+        }
+        if(this.state.validateNumber != nextState.validateNumber) {
+            return true;
+        }
+        if(this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
+        if(this.state.categories != nextState.categories) {
             return true;
         }
         if(this.state.centroids != nextState.centroids) {
@@ -64,21 +81,31 @@ var OrphanReview = React.createClass({
         if(this.state.cloudwords != nextState.cloudwords) {
             return true;
         }
-        if(this.state.documentPreview != nextState.documentPreview) {
-            return true;
-        }
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.orphan_current != prevState.orphan_current) {
-            this.getCategoryDistribution();
+        if(this.state.orphanCurrent != prevState.orphanCurrent) {
             this.getStatistics();
             this.getSamplesDocument();
+            this.getCategoryDistribution();
         }
         if(this.state.samplesDocument != prevState.samplesDocument) {
-            javascript_todo();
-            undo.setup(function(dataUndo, val) {
-                console.log("undo", dataUndo, val);
+            $('.select-group select').focus(function(){
+            var selectedRow = $(this).parents('tr');
+                $('.table-my-actions tr').each(function(){
+                    if(!$(this).find('.checkbox-item').prop('checked')){
+                        $(this).addClass('inactive');
+                    }
+                });
+                selectedRow.removeClass('inactive');
+            });
+
+            $('.select-group select').blur(function(){
+                $('.table-my-actions tr').removeClass('inactive');
+            });
+
+            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
             });
         }
         if(this.state.categories != prevState.categories) {
@@ -87,9 +114,10 @@ var OrphanReview = React.createClass({
         if(this.state.centroids != prevState.centroids) {
             this.drawCentroid();
         }
-        if(this.state.cloudwords != prevState.cloudwords) {
+        if(this.state.cloudwords != prevState.cloudwords) {   
             this.drawCloud();
         }
+
         if(this.state.documentPreview != prevState.documentPreview) {
             loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
                 $('#previewModal').on('show.bs.modal', function(e) {
@@ -104,21 +132,16 @@ var OrphanReview = React.createClass({
                 });
             }.bind(this));
         }
+        if(this.state.shouldUpdate != prevState.shouldUpdate) {
+            this.checkedNumber();
+            this.validateNumber();   
+        }
     },
     endReviewHandle: function() {
         browserHistory.push('/Dashboard/OverView');
     },
 
-    setDocumentPreview: function(docIndex) {
-        this.setState(update(this.state, {
-            documentPreview: {$set: docIndex }
-        }));
-        var element = $('tr#document_' + docIndex).clone(true, true);
-        console.log('element', element);
-        element[0].id = 'document_preview_info';
-        $('tr#document_preview_info').replaceWith(element[0]);
-    },
-    getOrphan: function() {
+    getListOrphan: function() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/",
@@ -130,14 +153,14 @@ var OrphanReview = React.createClass({
             },
             success: function(data) {
                 var updateState = update(this.state, {
-                    list_orphan: {$set: data},
-                    orphan_current: {$set: data[0]}
+                    listOrphan: {$set: data},
+                    orphanCurrent: {$set: data[0]}
                 });
                 this.setState(updateState);
-                console.log("list_orphan ok: ", data[0]);
+                console.log("listOrphan ok: ", data[0]);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("list_orphan error: " + error);
+                console.log("listOrphan error: " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -148,16 +171,17 @@ var OrphanReview = React.createClass({
     changeOrphan: function(event) {
         var val = event.target.value;
         var updateState = update(this.state, {
-            orphan_current: {$set: this.state.list_orphan[this.refs.choose_orphan.value]}
+            orphanCurrent: {$set: this.state.listOrphan[val]}
         });
         this.setState(updateState);
+        this.setState({shouldUpdate: 'updateOrphan_' + val });
     },
     getCategoryDistribution: function() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/categories/",
             dataType: 'json',
-            data: { "id":this.state.orphan_current.id },
+            data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -178,15 +202,26 @@ var OrphanReview = React.createClass({
         });
     },
     getStatistics() {
+        var totalDocument = [880,768,743,
+                            722,710,703,
+                            694,693,688,
+                            674,623,589,
+                            587,499,455,
+                            402,395,394,
+                            333,288,285,
+                            235,226,213,
+                            193,170,150,
+                            127,114,59];
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/statistics/",
             dataType: 'json',
-            data: { "id":this.state.orphan_current.id },
+            data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                data.total_number_documents = totalDocument[this.state.orphanCurrent.id - 1];
                 var updateState = update(this.state, {
                     statistics: {$set: data}
                 });
@@ -207,7 +242,7 @@ var OrphanReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/cloudwords/",
             dataType: 'json',
-            data: { "id":this.state.orphan_current.id },
+            data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -238,7 +273,7 @@ var OrphanReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/centroids/",
             dataType: 'json',
-            data: { "id":this.state.orphan_current.id },
+            data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -261,21 +296,31 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    getSamplesDocument() {
+    getSamplesDocument: function() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/samples/",
             dataType: 'json',
-            data: { "id":this.state.orphan_current.id },
+            data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                console.log('ddddddddddddddd',data);
+                for(var i = 0; i < data.length; i++) {
+                    data[i].current = {
+                        checked: false,
+                        category: Math.floor((Math.random() * data[i].categories.length)),
+                        confidential: Math.floor((Math.random() * data[i].confidentialities.length)),
+                        status: "normal"
+                    };
+                }
                 var updateState = update(this.state, {
-                    samplesDocument: {$set: data}
+                    samplesDocument: {$set: data},
+                    samplesDefault: {$set: $.extend(true, {}, data) },
+                    documentPreview: {$set: data[0]}
                 });
                 this.setState(updateState);
-                console.log("samplesDocument ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
                 console.log("samplesDocument " + error);
@@ -286,12 +331,170 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    setDocumentReview: function(index) {
+    setDocumentPreview: function(index) {
+        var document = this.state.samplesDocument[index];
+        document.index = index;
         this.setState(update(this.state, {
-            documentPreview: {$set: this.state.samplesDocument[index]},
-            documentPreview_current: {$set: index }
+            documentPreview: {$set: document},
         }));
         console.log("afasdccccc: ", this.state.samplesDocument[index], index);
+    },
+    cutPath: function(str) {
+        return str.substring(0,str.lastIndexOf('/') + 1);
+    },
+    onChangeCategory: function(event, sampleIndex) {
+        var categoryIndex = event.target.value;
+        var listDocument = this.state.samplesDocument;
+        var samplesDefault = this.state.samplesDefault;
+        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: sampleIndex,
+            contents: saveDocument
+        });
+            listDocument[sampleIndex].current.category = categoryIndex;
+        if(categoryIndex == samplesDefault[sampleIndex].current.category) {
+            listDocument[sampleIndex].current.status = "accept";
+        } else {
+            listDocument[sampleIndex].current.status = "editing";
+        }
+        this.setState(update(this.state,{
+            stackChange: {$set: stackList },
+            samplesDocument: {$set: listDocument }
+        }));
+        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + sampleIndex});
+    },
+    onChangeConfidential: function(event, sampleIndex) {
+        var confidentialIndex = event.target.value;
+        var listDocument = this.state.samplesDocument;
+        var samplesDefault = this.state.samplesDefault;
+        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: sampleIndex,
+            contents: saveDocument
+        });
+        listDocument[sampleIndex].current.confidential = confidentialIndex;
+        if(confidentialIndex == samplesDefault[sampleIndex].current.confidential)
+            listDocument[sampleIndex].current.status = "accept";
+        else
+            listDocument[sampleIndex].current.status = "editing";
+        var setUpdate = update(this.state,{
+            stackChange: {$set:  stackList },
+            samplesDocument: {$set: listDocument}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdate: 'updateConfidential_' + confidentialIndex + '_' + sampleIndex}); 
+    },
+    checkedNumber: function() {
+        var samplesDocument = this.state.samplesDocument;
+        var num = 0;
+        for(var i = 0; i < samplesDocument.length; i++) {
+            if(samplesDocument[i].current.checked === true) {
+                num++;
+            }
+        }
+        this.setState({ checkedNumber: num });
+    },
+    onClickCheckbox: function(event, sampleIndex) {
+        var checked = event.target.checked;
+        var listDocument = this.state.samplesDocument;
+        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: sampleIndex,
+            contents: saveDocument
+        });
+        listDocument[sampleIndex].current.checked = checked;
+        var setUpdate = update(this.state,{
+            stackChange: {$set: stackList },
+            samplesDocument: {$set: listDocument}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdate: 'updateCheckBox_' + sampleIndex  + '_' + checked});
+    },
+    validateNumber: function() {
+        var samplesDocument = this.state.samplesDocument;
+        var num = 0;
+        for(var i = 0; i < samplesDocument.length; i++) {
+            if(samplesDocument[i].current.status === "accept") {
+                num++;
+            }
+        }
+        this.setState({ validateNumber: num });
+    },
+    onClickValidationButton: function(event, sampleIndex) {
+        var listDocument = this.state.samplesDocument;
+        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: sampleIndex,
+            contents: saveDocument
+        });
+        listDocument[sampleIndex].current.status = "accept";
+        var setUpdate = update(this.state,{
+            stackChange: {$set: stackList },
+            samplesDocument: {$set: listDocument}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdate: 'updateValidate' + '_' + 'accept' + '_' + sampleIndex});
+    },
+    approveButon: function(event) {
+        var documents = this.state.samplesDocument;
+        var approveIndex = '';
+        for(var i = 0; i < documents.length; i++) {
+            if(documents[i].current.checked === true) {
+                documents[i].current.status = "accept";
+                documents[i].current.checked = false;
+                approveIndex += "_" + i;
+            }
+        }
+        var setUpdate = update(this.state,{
+            samplesDocument: {$set: documents},
+            checkBoxAll: {$set: false }
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdate: 'approveButon_' + approveIndex });
+    },
+    checkAllButton: function(event) {
+        var checked = event.target.checked;
+        console.log(checked);
+        var documents = this.state.samplesDocument;
+        for (var i = 0; i < documents.length; i++) {
+            documents[i].current.checked = checked;
+        }
+        var setUpdate = update(this.state,{
+            samplesDocument: {$set: documents},
+            checkBoxAll: {$set: checked }
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdate: 'updateCheckAll_' + checked});
+    },
+    undoHandle: function() {
+        console.log('stackChange' , this.state.stackChange);
+        if(this.state.stackChange.length > 0) {
+            var newStackChange = this.state.stackChange;
+            var newSamplesDocument = this.state.samplesDocument;
+            var documentOld = newStackChange[this.state.stackChange.length - 1];
+            newSamplesDocument[documentOld.index] = documentOld.contents;
+            newStackChange.pop();
+            var setUpdate = update(this.state, {
+                samplesDocument: {$set: newSamplesDocument },
+                stackChange: {$set: newStackChange },
+                documentPreview: {$set: newSamplesDocument[documentOld.index] }
+            });
+            this.setState(setUpdate);
+            this.setState({shouldUpdate: 'undoAction_' + newStackChange.length })
+        }
+    },
+    alertClose: function() {
+        $(".alert-close[data-hide]").closest(".alert-success").hide();
+    },
+    cutPath: function(str) {
+        if(str.length > 0) {
+            str.substring(0,str.lastIndexOf('/') + 1);
+        }
+        return str;
     },
     drawCloud: function() {
         var word_list = this.state.cloudwords;

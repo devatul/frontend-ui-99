@@ -22,6 +22,7 @@ var GroupReview = React.createClass({
     		cloudwords: [],
     		centroids: [],
     		samplesDocument: [],
+            samplesDefault: [],
     		categoriesInfo: [],
             documentPreview: null,
             shouldUpdate: null,
@@ -45,7 +46,6 @@ var GroupReview = React.createClass({
         $('#choose_cluster').on('change', function(event) {
             this.changeGroup(event);
         }.bind(this));
-
     },
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.state.groupCurrent != nextState.groupCurrent) {
@@ -88,7 +88,23 @@ var GroupReview = React.createClass({
         }
         if(this.state.samplesDocument != prevState.samplesDocument) {
             //javascript_todo();
-             console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
+            $('.select-group select').focus(function(){
+            var selectedRow = $(this).parents('tr');
+                $('.table-my-actions tr').each(function(){
+                    if(!$(this).find('.checkbox-item').prop('checked')){
+                        $(this).addClass('inactive');
+                    }
+                });
+                selectedRow.removeClass('inactive');
+            });
+
+            $('.select-group select').blur(function(){
+                $('.table-my-actions tr').removeClass('inactive');
+            });
+            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            });
+            console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
         }
         if(this.state.categoriesInfo != prevState.categoriesInfo) {
             this.drawChart();
@@ -133,9 +149,10 @@ var GroupReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                console.log(data);
                 var updateState = update(this.state, {
                     listGroup: {$set: data},
-                    groupCurrent: {$set: 0}
+                    groupCurrent: {$set: data[0]}
                 });
                 this.setState(updateState);
             }.bind(this),
@@ -147,12 +164,12 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getStatistics: function(groupId) {
+    getStatistics: function() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/statistics/",
             dataType: 'json',
-            data: { "id":this.state.listGroup[this.state.groupCurrent].id },
+            data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -175,7 +192,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/cloudwords/",
             dataType: 'json',
-            data: { "id":this.state.listGroup[this.state.groupCurrent].id },
+            data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -201,7 +218,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/centroids/",
             dataType: 'json',
-            data: { "id":this.state.listGroup[this.state.groupCurrent].id },
+            data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -228,7 +245,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/samples/",
             dataType: 'json',
-            data: { "id":this.state.listGroup[this.state.groupCurrent].id },
+            data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -243,6 +260,7 @@ var GroupReview = React.createClass({
                 }
                 var updateState = update(this.state, {
                     samplesDocument: {$set: data},
+                    samplesDefault: {$set: $.extend(true, {}, data) },
                     documentPreview: {$set: data[0]}
                 });
                 this.setState(updateState);
@@ -260,7 +278,7 @@ var GroupReview = React.createClass({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/categories/",
             dataType: 'json',
-            data: { "id":this.state.listGroup[this.state.groupCurrent].id },
+            data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
@@ -269,7 +287,6 @@ var GroupReview = React.createClass({
                     categoriesInfo: {$set: data} 
                 });
                 this.setState(updateState);
-                console.log("asfdasdfasdfasdfasdfasdfa",  data);
             }.bind(this),
             error: function(xhr,error) {
                 if(xhr.status === 401)
@@ -282,15 +299,16 @@ var GroupReview = React.createClass({
     changeGroup: function(event) {
         var val = event.target.value;
         var updateState = update(this.state, {
-            groupCurrent: {$set: val}
+            groupCurrent: {$set: this.state.listGroup[val]}
         });
         this.setState(updateState);
     },
-    setDocumentReview: function(index) {
+    setDocumentPreview: function(index) {
         var document = this.state.samplesDocument[index];
             document.index = index;
         this.setState(update(this.state, {
             documentPreview: {$set: document},
+            shouldUpdate: {$set: "PreviewDocument_" + index}
         }));
     },
     drawCloud: function() {
@@ -327,6 +345,7 @@ var GroupReview = React.createClass({
     },
     onChangeCategory: function(event, sampleIndex) {
         var categoryIndex = event.target.value;
+        var samplesDefault = this.state.samplesDefault;
         var listDocument = this.state.samplesDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -335,7 +354,11 @@ var GroupReview = React.createClass({
             contents: saveDocument
         });
         listDocument[sampleIndex].current.category = categoryIndex;
-        listDocument[sampleIndex].current.status = "editing";
+        if(categoryIndex == samplesDefault[sampleIndex].current.category) {
+            listDocument[sampleIndex].current.status = "accept";
+        } else {
+            listDocument[sampleIndex].current.status = "editing";
+        }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             samplesDocument: {$set: listDocument }
@@ -344,6 +367,7 @@ var GroupReview = React.createClass({
     },
     onChangeConfidential: function(event, sampleIndex) {
         var confidentialIndex = event.target.value;
+        var samplesDefault = this.state.samplesDefault;
         var listDocument = this.state.samplesDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -352,7 +376,10 @@ var GroupReview = React.createClass({
             contents: saveDocument
         });
         listDocument[sampleIndex].current.confidential = confidentialIndex;
-        listDocument[sampleIndex].current.status = "editing";
+        if(confidentialIndex == samplesDefault[sampleIndex].current.confidential)
+            listDocument[sampleIndex].current.status = "accept";
+        else
+            listDocument[sampleIndex].current.status = "editing";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
             samplesDocument: {$set: listDocument}
@@ -446,20 +473,29 @@ var GroupReview = React.createClass({
     },
     undoHandle: function() {
         console.log('stackChange' , this.state.stackChange);
-        var newStackChange = this.state.stackChange;
-        var newSamplesDocument = this.state.samplesDocument;
-        var documentOld = newStackChange[this.state.stackChange.length - 1];
-        newSamplesDocument[documentOld.index] = documentOld.contents;
-        newStackChange.pop();
-        var setUpdate = update(this.state, {
-            samplesDocument: {$set: newSamplesDocument },
-            stackChange: {$set: newStackChange }
-        });
-        this.setState(setUpdate);
-        this.setState({shouldUpdate: 'undoAction_' + newStackChange.length })
+        if(this.state.stackChange.length > 0) {
+            var newStackChange = this.state.stackChange;
+            var newSamplesDocument = this.state.samplesDocument;
+            var documentOld = newStackChange[this.state.stackChange.length - 1];
+            newSamplesDocument[documentOld.index] = documentOld.contents;
+            newStackChange.pop();
+            var setUpdate = update(this.state, {
+                samplesDocument: {$set: newSamplesDocument },
+                stackChange: {$set: newStackChange },
+                documentPreview: {$set: newSamplesDocument[documentOld.index] }
+            });
+            this.setState(setUpdate);
+            this.setState({shouldUpdate: 'undoAction_' + newStackChange.length })
+        }
+    },
+    alertClose: function() {
+        $(".alert-close[data-hide]").closest(".alert-success").hide();
     },
     cutPath: function(str) {
-        return str.substring(0,str.lastIndexOf('/') + 1);
+        if(str.length > 0) {
+            str.substring(0,str.lastIndexOf('/') + 1);
+        }
+        return str;
     },
     drawCentroid() {
         var centroids = this.state.centroids;

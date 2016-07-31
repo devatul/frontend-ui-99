@@ -6,11 +6,6 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
-import undo from '../script/Undo.js'
-import javascript_todo from '../script/javascript.todo.js'
-import javascript_docs from '../script/javascript.docs.js'
-import help_guide from '../script/help_guide.js';
-import nanoscroller from '../script/nanoscroller.js'
 import loadScript from '../script/load.scripts.js';
 import 'jquery'
 
@@ -19,15 +14,14 @@ var DocumentReview = React.createClass({
     getInitialState() {
         return {
             Actions: null,
-            category_confidence_level: null,
-            category_level_current: null,
-            confidential_confidence_level: null,
-            confidential_level_current: null,
             ChallengedDocuments: [],
             documentPreview: null,
-            documentPreviewIndex: null,
-            challengedDocPreview: null,
-            challengedDocPreviewIndex: null
+            challengedPreview: null,
+            shouldUpdate: null,
+            shouldUpdateChall: null,
+            stackChange: [],
+            stackChangeChallenged: [],
+
 
         };
     },
@@ -58,53 +52,90 @@ var DocumentReview = React.createClass({
                 $('#embedURL3').gdocsViewer();
             });
         }.bind(this));
-        console.log("ddddddd", this.state.category_confidence_level);
     },
     shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
+            return true;
+        }
         if(this.state.documentPreview != nextState.documentPreview) {
             return true;
         }
-        if(this.state.challengedDocPreview != nextState.challengedDocPreview) {
+        if(this.state.challengedPreview != nextState.challengedPreview) {
+             return true;
+        }
+        if(this.state.shouldUpdate != nextState.shouldUpdate) {
             return true;
         }
-        if(this.state.category_level_current != nextState.category_level_current) {
-            return true;
-        }
-        if(this.state.confidential_level_current != nextState.confidential_level_current) {
-            return true;
-        }
-        if(this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
+        if(this.state.shouldUpdateChall != nextState.shouldUpdateChall) {
             return true;
         }
         return false;  
     },
     componentDidUpdate(prevProps, prevState) {
+        if(this.state.shouldUpdate != prevState.shouldUpdate) {
+            var update = this.state.shouldUpdate;
+            if(update.name === 'updateValidate' || update.name === 'undoAction' || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
+                this.validateNumber(update.actionIndex);
+            }
+            if(update.name === 'updateCheckBox' || update.name === 'undoAction' || update.name === "updateCheckAll" || update.name === 'approveButon') {
+                this.checkedNumber(update.actionIndex);
+            }
+        }
+        if(this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
+            var update = this.state.shouldUpdateChall;
+            if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
+                this.validateNumberChallenged(update.actionIndex);
+            }
+            if(update.name === 'updateCheckBox' || update.name === "undoActionChallenged" || update.name === "updateCheckAll" || update.name === 'approveButon') {
+                this.checkedNumberChallenged(update.actionIndex);
+            }
+        }
         if(this.state.ChallengedDocuments != prevState.ChallengedDocuments) {
-            javascript_todo();
-            help_guide();
-            nanoscroller();
-            undo.setup(function(dataUndo, val) {
-                console.log('undo: ', dataUndo );
-                var element = dataUndo.obj;
-                var id = dataUndo.id;
-                console.log("element: ", element, val);
-                if(element.dataset.value != null) var data = element.dataset.value.split(':');
-                if(data != null && data[2] === "Category") {
-                    var new_category_level = this.state.category_confidence_level;
-                    new_category_level[data[0]][data[1]] = val;
-                    this.setState(update(this.state, {
-                        category_confidence_level: {$set: new_category_level},
-                        category_level_current: {$set: data[0] + ':' + data[1] + ':' + val}
-                    }));
+            console.log('challengedPreview', this.state.challengedPreview);
+            $('.select-group select').focus(function(){
+            var selectedRow = $(this).parents('tr');
+                $('.table-my-actions tr').each(function(){
+                    if(!$(this).find('.checkbox-item').prop('checked')){
+                        $(this).addClass('inactive');
+                    }
+                });
+                selectedRow.removeClass('inactive');
+            });
+
+            $('.select-group select').blur(function(){
+                $('.table-my-actions tr').removeClass('inactive');
+            });
+            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            });
+            $("a.more").click(function(){ 
+                $(this).prev().toggleClass("height-2nd");
+                $(this).children(".more1").toggleClass("display-none");
+                $(this).children(".zoom-out").toggleClass("zoom-out-block");
+            });
+            $( ".my-doc-path" ).each(function( index ) {
+                var hi = "38"; 
+                var h = $(this).height();
+                if(h>hi){
+                    $(this).css('height', hi);
+                    $(this).next().addClass("display-block");
+                    console.log(h);
+                    console.log(hi);
                 }
-                if(data != null && data[2] ==="Confidential") {
-                    var new_confidential_level = this.state.confidential_confidence_level;
-                    new_confidential_level[data[0]][data[1]] = val;
-                    this.setState(update(this.state, {
-                        confidential_confidence_level: {$set: new_confidential_level},
-                        confidential_level_current: {$set: data[0] + ':' + data[1] + ':' + val}
-                    }));
-                }
+            });
+        }
+        if(this.state.challengedPreview != prevState.challengedPreview) {
+            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+                $('#previewModal3').on('show.bs.modal', function(e) {
+
+                    //get data-id attribute of the clicked element
+                    var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                    console.log(fileURL);
+                    
+                    $('#previewModal3 .file-preview').html('<a href="'+fileURL+'" id="embedURL3"></a>');
+                    $('#embedURL3').gdocsViewer();
+                });
             }.bind(this));
         }
     },
@@ -118,26 +149,24 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                var category = [];
-                var category_lv = [];
-                var confidential = [];
-                var confidential_lv = [];
                 for(var i = 0; i < data.length; i++) {
-                    category = [];
-                    confidential = [];
-                    for (var j = 0; j < data[i].documents.length; j++) {
-                        category.push(data[i].documents[j].categories[0].confidence_level);
-                        confidential.push(data[i].documents[j].confidentialities[0].confidence_level);
+                    data[i].checkAll = false;
+                    data[i].checkedNumber = 0;
+                    data[i].validateNumber = 0;
+                    for(var j = 0; j < data[i].documents.length; j++) {
+                        data[i].documents[j].current = {
+                            checked: false,
+                            category: 0,
+                            confidential: 0,
+                            status: "normal"
+                        };
                     }
-                    category_lv.push(category);
-                    confidential_lv.push(confidential);
                 }
+                var documentPreview = data[0].documents[0];
+                documentPreview.index = { actionIndex: 0, docIndex: 0};
                 var updateState = update(this.state, {
                     Actions: {$set: data},
-                    documentPreview: {$set: data[0].documents[0] },
-                    documentPreviewIndex: {$set: [0, 0] },
-                    category_confidence_level: {$set: category_lv },
-                    confidential_confidence_level: {$set: confidential_lv }
+                    documentPreview: {$set: documentPreview}
                 });
                 this.setState(updateState);
                 console.log("Documents ok: ", data);
@@ -151,6 +180,190 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
+    setDocumentPreview: function(actionIndex, docIndex) {
+        var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
+        documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
+        var setDocumentCurrent = update(this.state, {
+            documentPreview: { $set: documentCurrent },
+        });
+        this.setState(setDocumentCurrent);
+    },
+    progressbar: function(value) {
+        if(value <= Constant.progressValue.level1) {
+            return Constant.progressBar.level1;
+        } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
+            return Constant.progressBar.level2;
+        }
+        return Constant.progressBar.level3;
+    },
+    onChangeCategory: function(event, actionIndex, docIndex) {
+        var categoryIndex = event.target.value;
+        var actions = this.state.Actions;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: { actionIndex: actionIndex,docIndex: docIndex },
+            contents: saveDocument
+        });
+        actions[actionIndex].documents[docIndex].current.category = categoryIndex;
+        if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        else
+            actions[actionIndex].documents[docIndex].current.status = "editing";
+        this.setState(update(this.state,{
+            stackChange: {$set: stackList },
+            Actions: {$set: actions }
+        }));
+        this.setState({shouldUpdate: { name: 'updateCategory', actionIndex:  actionIndex, docIndex: docIndex, categoryIndex: categoryIndex}});
+    },
+    onChangeConfidential: function(event, actionIndex, docIndex) {
+        var confidentialIndex = event.target.value;
+        var actions = this.state.Actions;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: { actionIndex: actionIndex, docIndex: docIndex },
+            contents: saveDocument
+        });
+        actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
+        if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        else
+            actions[actionIndex].documents[docIndex].current.status = "editing";
+        var setUpdate = update(this.state,{
+            stackChange: {$set:  stackList },
+            Actions: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdate: { name: 'updateConfidential', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
+    },
+    checkedNumber: function(actionIndex) {
+        var actions = this.state.Actions;
+        var num = 0;
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.checked === true) {
+                num++;
+            }
+        }
+        actions[actionIndex].checkedNumber = num;
+        this.setState(update(this.state, {
+            Actions: {$set: actions }
+        }));
+        this.setState({shouldUpdate: { name: 'checkedNumber', actionIndex: actionIndex }}); 
+    },
+    onClickCheckbox: function(event, actionIndex, docIndex) {
+        var checked = event.target.checked;
+        var actions = this.state.Actions;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: { actionIndex: actionIndex,docIndex: docIndex },
+            contents: saveDocument
+        });
+        actions[actionIndex].documents[docIndex].current.checked = checked;
+        var setUpdate = update(this.state,{
+            stackChange: {$set: stackList },
+            Actions: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdate: {name: 'updateCheckBox', actionIndex: actionIndex, docIndex: docIndex, checked: checked}});
+    },
+    validateNumber: function(actionIndex) {
+        var actions = this.state.Actions;
+        var num = 0;
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.status === "accept") {
+                num++;
+            }
+        }
+        actions[actionIndex].validateNumber = num;
+        this.setState(update(this.state, {
+            Actions: {$set: actions }
+        }));
+        this.setState({shouldUpdate: { name: 'validateNumber',  actionIndex:  actionIndex, number: num}});
+    },
+    onClickValidationButton: function(event, actionIndex, docIndex) {
+        var actions = this.state.Actions;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChange;
+        stackList.push({
+            index: { actionIndex: actionIndex, docIndex: docIndex },
+            contents: saveDocument
+        });
+        actions[actionIndex].documents[docIndex].current.status = "accept";
+        var setUpdate = update(this.state,{
+            stackChange: {$set: stackList },
+            Actions: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdate: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' }});
+        //debugger;
+    },
+    approveButon: function(actionIndex) {
+        var actions = this.state.Actions;
+        var approveIndex = '';
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.checked === true) {
+                actions[actionIndex].documents[i].current.status = "accept";
+                actions[actionIndex].documents[i].current.checked = false;
+                approveIndex += "_" + i;
+            }
+        }
+        actions[actionIndex].checkAll = false;
+        var setUpdate = update(this.state,{
+            Actions: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdate: {name: 'approveButon', actionIndex: actionIndex, listApprove: approveIndex }});
+    },
+    checkAllButton: function(event, actionIndex) {
+        var checked = event.target.checked;
+        var actions = this.state.Actions;
+        for (var i = 0; i < actions[actionIndex].documents.length; i++) {
+            actions[actionIndex].documents[i].current.checked = checked;
+        }
+        actions[actionIndex].checkAll = checked;
+        var setUpdate = update(this.state,{
+            Actions: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdate: {name: 'updateCheckAll', actionIndex: actionIndex, checked: checked }});
+    },
+    undoHandle: function() {
+        console.log('stackChange' , this.state.stackChange);
+        if(this.state.stackChange.length > 0) {
+            var newStackChange = this.state.stackChange;
+            var actions = this.state.Actions;
+            var documentOld = newStackChange[this.state.stackChange.length - 1];
+            actions[documentOld.index.actionIndex].documents[documentOld.index.docIndex] = documentOld.contents;
+            newStackChange.pop();
+            var setUpdate = update(this.state, {
+                Actions: {$set: actions },
+                stackChange: {$set: newStackChange },
+                documentPreview: {$set: actions[documentOld.index.actionIndex].documents[documentOld.index.docIndex] }
+            });
+            this.setState(setUpdate);
+            this.setState({shouldUpdate: { name: 'undoAction', actionIndex:documentOld.index.actionIndex, docIndex: documentOld.index.docIndex, stack: newStackChange.length }})
+        }
+    },
+    urgency: function(value) {
+        for(var i = 0; i < Constant.urgency.length; i++) {
+            if(value == Constant.urgency[i].name) {
+                return Constant.urgency[i]['class'];
+            }
+        }
+    },
+    alertClose: function() {
+        $(".alert-close[data-hide]").closest(".alert-success").hide();
+    },
+    cutPath: function(str) {
+        if(str.length > 0) {
+            return str.substring(0,str.lastIndexOf('/') + 1);
+        }
+    },
+
+
+    //Challenged Document
     getChallengedDocument: function() {
         $.ajax({
             method: 'GET',
@@ -161,16 +374,33 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                for(var i = 0; i < data.length; i++) {
+                    data[i].checkAll = false;
+                    data[i].checkedNumber = 0;
+                    data[i].validateNumber = 0;
+                    for(var j = 0; j < data[i].documents.length; j++) {
+                        data[i].documents[j].current = {
+                            checked: false,
+                            category: 0,
+                            confidential: 0,
+                            status: "normal",
+                            comment: 'Explain your choice',
+                            prevCategory: null,
+                            prevConfidential: null
+                        };
+                    }
+                }
+                var challengedPreview = data[0].documents[0];
+                challengedPreview.index = {actionIndex: 0, docIndex: 0 };
                 var updateState = update(this.state, {
                     ChallengedDocuments: {$set: data},
-                    challengedDocPreview: {$set: data[0].documents[0]},
-                    challengedDocPreviewIndex: {$set: [0, 0] }
+                    challengedPreview: {$set: challengedPreview}
                 });
                 this.setState(updateState);
+                debugger;
                 console.log("Doc ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("Doc error: " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -178,90 +408,188 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
-    setDocumentPreview: function(actionIndex, docIndex) {
-        var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
-        var setDocumentCurrent = update(this.state, {
-            documentPreview: { $set: documentCurrent },
-            documentPreviewIndex: { $set: [actionIndex, docIndex] }
+    setChallengedPreview: function(challengedIndex, docChallIndex) {
+        var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
+        challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
+        var setChallengedCurrent = update(this.state, {
+            challengedPreview: { $set: challengedCurrent },
         });
-        this.setState(setDocumentCurrent);
+        this.setState(setChallengedCurrent);
     },
-    setChallengedCurrent: function(challengedIndex, docChallIndex) {
-        var challengedDocCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
-        var setChallengedDocCurrent = update(this.state, {
-            challengedDocPreview: { $set: challengedDocCurrent },
-            challengedDocPreviewIndex: { $set: [challengedIndex, docChallIndex] }
+    onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
+        var categoryIndex = event.target.value;
+        var actions = this.state.ChallengedDocuments;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChangeChallenged;
+        stackList.push({
+            index: { actionIndex: actionIndex,docIndex: docIndex },
+            contents: saveDocument
         });
-        this.setState(setChallengedDocCurrent);
-    },
-    progressbar: function(value) {
-        if(value <= Constant.progressValue.level1) {
-            return Constant.progressBar.level1;
-        } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
-            return Constant.progressBar.level2;
+        if(actions[actionIndex].documents[docIndex].current.prevCategory == null) {
+            actions[actionIndex].documents[docIndex].current.prevCategory = actions[actionIndex].documents[docIndex].current.category;
         }
-        return Constant.progressBar.level3;
+        if(actions[actionIndex].documents[docIndex].current.prevCategory == categoryIndex){
+            actions[actionIndex].documents[docIndex].current.prevCategory = null;
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        } else {
+            actions[actionIndex].documents[docIndex].current.status = "editing";
+        }
+        actions[actionIndex].documents[docIndex].current.category = categoryIndex;
+        /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        else
+            actions[actionIndex].documents[docIndex].current.status = "editing";*/
+        this.setState(update(this.state,{
+            stackChangeChallenged: {$set: stackList },
+            ChallengedDocuments: {$set: actions }
+        }));
+        this.setState({shouldUpdateChall: { name: 'updateCategory', actionIndex:  actionIndex, docIndex: docIndex, categoryIndex: categoryIndex}});
     },
-    onChangeCategory: function(event, index) {
-        var val = event.target.value;
-        var new_category_level = this.state.category_confidence_level;
-        new_category_level[index[0]][index[1]] = val;
-        var updateState = update(this.state, {
-            category_confidence_level: {$set: new_category_level},
-            category_level_current: {$set: index[0] + ':' + index[1] + ':' + val}
+    onChangeConfidentialChallenged: function(event, actionIndex, docIndex) {
+        var confidentialIndex = event.target.value;
+        var actions = this.state.ChallengedDocuments;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChangeChallenged;
+        stackList.push({
+            index: { actionIndex: actionIndex, docIndex: docIndex },
+            contents: saveDocument
         });
-        this.setState(updateState);
-    },
-    onChangeConfidential: function(event, index) {
-        var val = event.target.value;
-        var new_confidential_level = this.state.confidential_confidence_level;
-        new_confidential_level[index[0]][index[1]] = val;
-        
-        var updateState = update(this.state, {
-            confidential_confidence_level: {$set: new_confidential_level},
-            confidential_level_current: {$set: index[0] + '' + index[1] + ':' + val}
+        if(actions[actionIndex].documents[docIndex].current.prevConfidential == null) {
+            actions[actionIndex].documents[docIndex].current.prevConfidential = actions[actionIndex].documents[docIndex].current.confidential;
+        } else if(actions[actionIndex].documents[docIndex].current.prevConfidential == confidentialIndex) {
+            actions[actionIndex].documents[docIndex].current.prevConfidential = null;
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        } else {
+            actions[actionIndex].documents[docIndex].current.status = "editing";
+        }
+        actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
+        /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
+            actions[actionIndex].documents[docIndex].current.status = "accept";
+        else
+            actions[actionIndex].documents[docIndex].current.status = "editing";*/
+        var setUpdate = update(this.state,{
+            stackChangeChallenged: {$set:  stackList },
+            ChallengedDocuments: {$set: actions}
         });
-        this.setState(updateState); 
+        this.setState(setUpdate);
+        this.setState({ shouldUpdateChall: { name: 'updateConfidential', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
     },
-    urgency: function(value) {
-        for(var i = 0; i < Constant.urgency.length; i++) {
-            if(value == Constant.urgency[i].name) {
-                return Constant.urgency[i]['class'];
+    checkedNumberChallenged: function(actionIndex) {
+        var actions = this.state.ChallengedDocuments;
+        var num = 0;
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.checked === true) {
+                num++;
             }
         }
+        actions[actionIndex].checkedNumber = num;
+        this.setState(update(this.state, {
+            ChallengedDocuments: {$set: actions }
+        }));
+        this.setState({shouldUpdateChall: { name: 'checkedNumber', actionIndex: actionIndex }}); 
     },
-    endReviewHandle: function() {
-        browserHistory.push('/Dashboard/OverView');
-    },
-    approveHandleChallenged: function() {
-        $(this).hide();
-        var target = $(this).attr('data-target');
-        var table = $(this).parents('.dataTables_wrapper').find('.table-my-actions');
-        table.find('tr').each(function () {
-          $(this).removeClass('inactive');
-          if ($(this).find('input[type="checkbox"]').prop('checked')){
-            $(this).find('.doc-check').addClass('validated');
-            //$(this).addClass('item-validated');
-            $(this).find('input[type="checkbox"]').prop('checked', false);
-            $(this).find( 'i.fa-check').attr('style', 'color: #59D0A7');
-            $(this).find( 'i.fa-check').addClass('icon-success');
-          };
+    onClickCheckboxChallenged: function(event, actionIndex, docIndex) {
+        var checked = event.target.checked;
+        var actions = this.state.ChallengedDocuments;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChangeChallenged;
+        stackList.push({
+            index: { actionIndex: actionIndex,docIndex: docIndex },
+            contents: saveDocument
         });
-        if($(target).find('.challenge-btn i').hasClass('icon-danger')) {
-              $(target).find('.challenge-btn i').removeClass('icon-danger');
-           }
-        if (table.find('.doc-check').length == table.find('.doc-check.validated').length && $(target).find('.checkbox-all-1').attr('checked')){
-            $(target).find('.btn-end-review').removeClass('btn-disabled');
-           $(target).find('.actions-success').show();
+        actions[actionIndex].documents[docIndex].current.checked = checked;
+        var setUpdate = update(this.state,{
+            stackChangeChallenged: {$set: stackList },
+            ChallengedDocuments: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdateChall: {name: 'updateCheckBox', actionIndex: actionIndex, docIndex: docIndex, checked: checked}});
+    },
+    validateNumberChallenged: function(actionIndex) {
+        var actions = this.state.ChallengedDocuments;
+        var num = 0;
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.status === "accept") {
+                num++;
+            }
         }
-        if(table.find('.doc-check.validated')!= null) {
-        var docToReview = 2 - table.find('.doc-check.validated').length;
-        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        actions[actionIndex].validateNumber = num;
+        this.setState(update(this.state, {
+            ChallengedDocuments: {$set: actions }
+        }));
+        this.setState({shouldUpdateChall: { name: 'validateNumber',  actionIndex:  actionIndex, number: num}});
+    },
+    onClickValidationButtonChallenged: function(event, actionIndex, docIndex) {
+        var actions = this.state.ChallengedDocuments;
+        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var stackList = this.state.stackChangeChallenged;
+        stackList.push({
+            index: { actionIndex: actionIndex, docIndex: docIndex },
+            contents: saveDocument
+        });
+        if(actions[actionIndex].documents[docIndex].current.prevConfidential != null) {
+            actions[actionIndex].documents[docIndex].current.prevConfidential = null;
         }
-        if(table.find('.challenge-btn i.icon-success')!= null) {
-        var docToReview = 2 - table.find('.challenge-btn i.icon-success').length;
-        $(this).parents('.panel-body').find('.document_note').html('You have to review '+docToReview+' documents in Legal Category of Secret Confidentiality by latest 28th June');
+        if(actions[actionIndex].documents[docIndex].current.prevCategory != null) {
+            actions[actionIndex].documents[docIndex].current.prevCategory = null;
         }
+        actions[actionIndex].documents[docIndex].current.status = "accept";
+        var setUpdate = update(this.state,{
+            stackChangeChallenged: {$set: stackList },
+            ChallengedDocuments: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({shouldUpdateChall: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' }});
+        //debugger;
+    },
+    approveButonChallenged: function(actionIndex) {
+        var actions = this.state.ChallengedDocuments;
+        var approveIndex = '';
+        for(var i = 0; i < actions[actionIndex].documents.length; i++) {
+            if(actions[actionIndex].documents[i].current.checked === true) {
+                actions[actionIndex].documents[i].current.status = "accept";
+                actions[actionIndex].documents[i].current.checked = false;
+                approveIndex += "_" + i;
+            }
+        }
+        actions[actionIndex].checkAll = false;
+        var setUpdate = update(this.state,{
+            ChallengedDocuments: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdateChall: {name: 'approveButon', actionIndex: actionIndex, listApprove: approveIndex }});
+    },
+    checkAllButtonChallenged: function(event, actionIndex) {
+        var checked = event.target.checked;
+        var actions = this.state.ChallengedDocuments;
+        for (var i = 0; i < actions[actionIndex].documents.length; i++) {
+            actions[actionIndex].documents[i].current.checked = checked;
+        }
+        actions[actionIndex].checkAll = checked;
+        var setUpdate = update(this.state,{
+            ChallengedDocuments: {$set: actions}
+        });
+        this.setState(setUpdate);
+        this.setState({ shouldUpdateChall: {name: 'updateCheckAll', actionIndex: actionIndex, checked: checked }});
+    },
+    undoHandleChallenged: function() {
+
+        console.log('stackChange' , this.state.stackChangeChallenged);
+        if(this.state.stackChangeChallenged.length > 0) {
+            var newStackChange = this.state.stackChangeChallenged;
+            var actions = this.state.ChallengedDocuments;
+            var documentOld = newStackChange[this.state.stackChangeChallenged.length - 1];
+            actions[documentOld.index.actionIndex].documents[documentOld.index.docIndex] = documentOld.contents;
+            newStackChange.pop();
+            var setUpdate = update(this.state, {
+                ChallengedDocuments: {$set: actions },
+                stackChangeChallenged: {$set: newStackChange },
+                challengedPreview: {$set: actions[documentOld.index.actionIndex].documents[documentOld.index.docIndex] }
+            });
+            this.setState(setUpdate);
+            this.setState({shouldUpdateChall: { name: 'undoActionChallenged', actionIndex:documentOld.index.actionIndex, docIndex: documentOld.index.docIndex, stack: newStackChange.length }})
+        }
+        debugger;
     },
     render:template
 });

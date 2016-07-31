@@ -3,38 +3,64 @@
  <BarName title="Documents Classification Challenge - Coordinator’s Review Validation" showInfo={true}></BarName>
     <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
-        <ul class="nav nav-tabs cat-list">
-          <li rt-repeat="category in this.state.categories" key="{categoryIndex}">
-            <a id="{'Category_' + categoryIndex}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
+        <ul rt-if="this.state.reviewCurrent != null && this.state.categories.length > 0" class="nav nav-tabs cat-list">
+          <li
+            rt-repeat="category in this.state.categories"
+            key="{categoryIndex}"
+            class="{(category.id == this.state.reviewCurrent.categoryId) ? 'active' : ''}">
+              <a
+                href="#categoryInfo"
+                onClick="()=>this.setCategoryCurrent(categoryIndex)"
+                data-toggle="tab"
+                aria-expanded="true"
+                style="text-transform: capitalize">
+                {category.name}
+              </a>
           </li>
           <li class="">
-            <a href="#summary" onClick="{this.getSummary()}" data-toggle="tab" aria-expanded="false">Summary</a>
+            <a
+              href="#summary"
+              onClick={this.getSummary}
+              data-toggle="tab"
+              aria-expanded="false">
+              Summary
+            </a>
           </li>
         </ul>
         <div class="tab-content">
-          <div rt-if="(this.state.reviewers != null)" id="categoryInfo" class="tab-pane active">
-            <div class="row" rt-scope="this.state.categories as categories; this.state.reviewers as reviewers; this.state.reviewerCurrent as reviewerCurrent; this.state.reviewValidations as reviewValidations; this.state.categoryCurrent as categoryCurrent;">
+          <div id="categoryInfo" class="tab-pane active">
+            <div class="row">
               <div class="col-md-12">
                 <div class="row mb-sm">
                   <div class="col-sm-2 col-xs-4 hidden-xs">Reviewers List</div>
 
-                  <div rt-if="(reviewValidations != null && categoryCurrent != null)" class="col-sm-10 col-xs-12" style="text-transform: capitalize">
-                   {categories[categoryCurrent].name} Review Status: {reviewers.length} Users - {reviewers.length*reviewValidations.documents.length} Documents Challenged - Progress:
-                    <div class="progress-radial small progress{(reviewValidations.validation_progress != null) ? '-' + reviewValidations.validation_progress: '-0'}"></div>
+                  <div rt-if="this.state.reviewCurrent != null && this.state.reviewers.length > 0" class="col-sm-10 col-xs-12" style="text-transform: capitalize">
+                   {this.state.categoryCurrent.name} Review Status: { this.state.reviewers.length } Users - {this.state.reviewers.length * this.size(this.state.reviewCurrent.documents)} Documents Challenged - Progress:
+                    <div class="progress-radial small progress{(this.state.reviewValidations.validation_progress != null) ? '-' + this.state.reviewValidations.validation_progress : '-0'}">
+                    </div>
                   </div>
                 </div>
-                <div class="tabs tabs-vertical tabs-primary tabs-left">
-                  <ul class="nav nav-tabs col-sm-1 col-xs-12 reviewer-list">
-                    <li style="text-transform: capitalize" rt-repeat="reviewer in reviewers">
-                      <a id="{'Reviewer_' + reviewerIndex}" href="#reviewValidation" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name}.{reviewer.last_name}</a>
-                    </li>
-                  </ul>
+                <div rt-if="this.state.reviewers.length > 0 && this.state.reviewCurrent != null" class="tabs tabs-vertical tabs-primary tabs-left">
+                    <ul class="nav nav-tabs col-sm-1 col-xs-12 reviewer-list">
+                      <li rt-repeat="reviewer in this.state.reviewers"
+                          style="text-transform: capitalize"
+                          class="{(reviewer.id == this.state.reviewCurrent.reviewerId) ? 'active' : ''}">
+                        <a href="#reviewValidation" onClick="()=>this.setReviewerCurrent(reviewerIndex)" data-toggle="tab" aria-expanded="true">{reviewer.first_name + '.' + reviewer.last_name}</a>
+                      </li>
+                    </ul>
                   <div class="tab-content col-sm-11 col-xs-12">
-                    
-                   <div id="reviewValidation" class="tab-pane active tab-challenge" rt-if="(reviewerCurrent != null && reviewValidations != null)">
+                   <div id="reviewValidation" class="tab-pane active tab-challenge">
                       <div class="reviewer-info clearfix">
-                        <span style="text-transform: capitalize" class="mr-md">Reviewer: {reviewers[reviewerCurrent].first_name}.{reviewers[reviewerCurrent].last_name}</span>
-                        <span><span class="doc-num">{reviewValidations.documents.length}</span> Documents Challenged - Validation Progress: </span>
+                        <span
+                          rt-if="this.state.reviewerCurrent != null"
+                          style="text-transform: capitalize"
+                          class="mr-md">
+                            Reviewer: { this.state.reviewerCurrent.first_name}.{this.state.reviewerCurrent.last_name}
+                        </span>
+                        <span>
+                          <span rt-if="this.state.reviewCurrent != null" class="doc-num">
+                            {this.size(this.state.reviewCurrent.documents)}
+                          </span> Documents Challenged - Validation Progress: </span>
                         <div class="progress-radial small progress-50"></div>
 
                         <div class="pull-right">
@@ -42,29 +68,108 @@
                           <button type="button" style="display: none" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
                         </div>
                       </div>
-                        <div class="alert alert-success actions-success">
-                            <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
-                        </div>
-                      <div class="table-responsive">
-                        <table class="table table-bordered table-striped mb-none no-footer table-challenge">
-                          <thead>
-                            <tr>
-                              <th>Status</th>
-                              <th>Document Name</th>
-                              <th>Path</th>
-                              <th>Category</th>
-                              <th>Confidentiality</th>
-                              <th>Comment</th>
-                              <th>Validation</th>
-                            </tr>
+                    <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">    
+                        <header class="document_panel-heading panel-heading">
+                          <ul class="line_document_content_header">
+                            <li class="document_panel-title">
+                              <h2 class="document_panel-title panel-title">Challenge</h2>
+                            </li>
+                            <li class="document_panel-title">
+                              <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                  <p>This is text of Legal / Secret</p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <div class="panel-actions my-actions-btn-group">
+                            <!--
+                              <button type="button" class="mb-xs mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                              <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                            -->
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                          </div>
+                        </header> 
+                        <div class="panel-body" style="display: block">
+                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped mb-none no-footer table-challenge">
+                            <thead>
+                              <tr>
+                                <th class="review_note">Status
+                                  <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                    <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                    </div>
+                                </div>  
+                                </th>
+                                <th class="review_note">Document Name
+                                  <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                      <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                          <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                      </div>
+                                  </div>  
+                                </th>
+                                <th class="review_note">Path
+                                  <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                     <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                          <p>This displays the logical folder path to where each document is currently located.</p>
+                                      </div>
+                                  </div>
+                                </th>
+                                <th class="review_note">Category
+                                  <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                     <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                          <p>This displays the organisational member who has last modified the document. 
+                                          This owner is automatically assigned by 99 from the 
+                                          Document metadata itself gathered during the scanning process.</p>
+                                      </div>
+                                  </div>
+                                </th>
+                                <th class="review_note">Confidentiality
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
+                                      </div>
+                                    </div>
+                                </th>
+                                <th class="review_note">Coordinator's Comment
+                                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                   <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                  <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                    <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                                    In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                    The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                    The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                                  </div>
+                                <span class="dropdown-backdrop"></span></div>
+                                </th>
+                                <th class="review_note">Validation
+                                  <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                     <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                      <p>This represent the status of the review for each file.</p>
+                                    </div>
+                                  <span class="dropdown-backdrop"></span>
+                                  </div>
+                                </th>
+                              </tr>
                           </thead>
-                          <tbody>
-                            <tr rt-repeat="document in reviewValidations.documents" id="{'document_' + documentIndex}" class="set-element-undo">
+                          <tbody rt-if="this.state.reviewCurrent != null" rt-scope="this.state.reviewCurrent as reviewCurrent">
+                            <tr rt-repeat="document in this.state.reviewCurrent.documents" id="{'document_' + documentIndex}" class="set-element-undo">
                               <td>
                                 <i rt-if="document.status == 'accepted'" class="fa fa-clock-o icon-success"></i>
                                 <i rt-if="document.status == 'rejected'" class="fa fa-clock-o icon-danger"></i>
-                                <i rt-if="document.status != 'rejected' && document.status != 'accepted'" class="fa fa-clock-o icon-warning"></i>
+                                <i rt-if="document.status == 'editing'" class="fa fa-clock-o icon-warning"></i>
                               </td>
                               <td class="text-left">
                                 <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{document.name}</span>
@@ -72,6 +177,7 @@
                                     <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                                     <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
                                         <ul>
+                                            <li>name: {document.name}</li>
                                             <li>Creation Date: 2015-01-01</li>
                                             <li>Modifitcation Date: 2015-05-28</li>
                                             <li>Required Legal Retention until: 2025-03-03</li>
@@ -85,42 +191,192 @@
                                 <span class="text-italic doc-path">{document.path}</span>
                               </td>
                               <td class="vertical-top">
-                                <select id="{'select_category_' + documentIndex}" class="form-control challenge-category element-event" onChange={this.categoryOnChange} data-target="#reviewValidation">
-                                    <option selected="" value="10">Accounting/Tax</option>
-                                    <option value="20">Corporate Entity</option>
-                                    <option value="30">Customer</option>
-                                    <option value="40">Employee</option>
-                                    <option value="50">Legal/Compliance</option>
-                                    <option value="60">Transaction</option>
+                                <select class="form-control challenge-category element-event {(document.previous_category != null && document.previous_category != document.current_category) ? 'changed' : ''}" onChange="(event)=>this.onChangeCategory(event, reviewCurrent.categoryId, reviewCurrent.reviewerId, documentIndex)" value="{document.current_category}">
+                                    <option rt-repeat="category in this.state.categories" value="{categoryIndex}">{category.name}</option>
                                 </select>
-                                <span class="text-italic previous-status">Previous: {document.previous_category}</span>
+                                <span rt-if="document.previous_category != null" class="text-italic previous-status">Previous: {this.state.categories[document.previous_category].name}</span>
                               </td>
                               <td class="vertical-top text-left">
-                                <select id="{'select_confidential_' + documentIndex}" class="form-control challenge-confidentiality element-event" onChange={this.confidentialityOnChange} data-target="#reviewValidation">
-                                    <option value="20">Banking Secrecy</option>
-                                    <option selected="" value="10">Secret</option>
-                                    <option value="30">Confidential</option>
-                                    <option value="40">Internal</option>
-                                    <option value="50">Public</option>
+                                <select class="form-control challenge-confidentiality element-event {(document.previous_confidentiality != null && document.previous_confidentiality != document.current_confidentiality) ? 'changed' : ''}" onChange="(event)=>this.onChangeConfidential(event, reviewCurrent.categoryId, reviewCurrent.reviewerId, documentIndex)" value="{document.current_confidentiality}">
+                                    <option rt-repeat="confidentiality in this.state.confidentiality" value="{confidentialityIndex}">{confidentiality.name}</option>
                                 </select>
-                                <span class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
+                                <span rt-if="document.previous_confidentiality != null" class="text-italic previous-status">Previous: {this.state.confidentiality[document.previous_confidentiality].name}</span>
                               </td>
                               <td>
-                                <textarea id="{'textarea_' + documentIndex}" class="form-control element-event">{document['2nd_line_comment']}</textarea>
+                                <textarea class="form-control element-event" placeholder="Explain your choice"></textarea>
                               </td>
                               <td>
-                                <a id="{'challenge_btn_' + documentIndex}" href="#" class="challenge-btn validation-btn btn btn-default element-event" data-target="#reviewValidation">
-                                <i id="{'icon_' + documentIndex}" class="fa fa-check {(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
-                            
+                                <a style="cursor: pointer" onClick="(event)=>this.onClickValidationButton(reviewCurrent.categoryId, reviewCurrent.reviewerId, documentIndex)" class="challenge-btn validation-btn btn btn-default element-event">
+                                <i class="fa fa-check {(document['2nd_line_validation'] == 'editing') ? 'icon-danger' : '' }{(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
                                 </a>
                               </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-
                     </div>
+                </div>
+            </section>
+                    </div>
+                    <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">
+                      <header class="document_panel-heading panel-heading">
+                        <ul class="line_document_content_header">
 
+                          <li class="document_panel-title">
+                            <h2 class="document_panel-title panel-title">Challenge Back - Last Review</h2>
+                          </li>
+                          <li class="document_panel-title">
+                            <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                              <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                <p>This is text of Legal / Internal Only</p>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <div class="panel-actions my-actions-btn-group">
+                          <!--
+                          <button type="button" class="mb-xs mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                          <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
+                          -->
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                        </div>
+                      </header>
+                      <div class="panel-body" style="display: block;">
+                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                          <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all  approve-button-2" style="display: none;">Approve</button>
+                          <div class="alert alert-success actions-success">
+                            <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                          </div>
+                          <div class="table-responsive">
+                            
+                            <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                              <thead>
+                                <tr role="row" class="">
+                                  <th class="review_note">Status
+                                      <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                         <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                          <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                              <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                          </div>
+                                      </div>  
+                                  </th>
+                                  <th class="my_review_note review_note">Document Name
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                            <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                        </div>
+                                    </div>
+                                  </th>
+                                  <th class="review_note">Path
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                            <p>This displays the logical folder path to where each document is currently located.</p>
+                                        </div>
+                                    </div>
+                                  </th>
+                                  
+                                  <th class="review_note">Category
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                      <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the organisational member who has last modified the document. 
+                                        This owner is automatically assigned by 99 from the 
+                                        Document metadata itself gathered during the scanning process.</p>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <th class="review_note">Confidentiality
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                      <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This displays the organisational member who has last modified the document. 
+                                        This owner is automatically assigned by 99 from the 
+                                        Document metadata itself gathered during the scanning process.</p>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <th class="review_note">Reviewer's Comment
+                                       <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
+                                      </div>
+                                    </div>
+                                  </th>
+                                  <th class="review_note">Validation
+                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                      <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>This represent the status of the review for each file.</p>
+                                      </div>
+                                    </div>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="opa">
+                                  <td><i class="fa fa-clock-o"></i></td>
+                                  <td class="text-left my_file-name">
+                                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3">Tax report.ppt</span>
+                                    <div class="dropdown dropdown-file-info-holder inline-block-item">
+                                      <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
+                                      <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                                        <ul>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="text-left">
+                                    <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                                  </td>
+                                  
+                                  <td class="vertical-top">
+                                    <select class="form-control">
+                                        <option selected="">Accounting/ Tax</option>
+                                        <option>Corporate Entity</option>
+                                        <option>Customer</option>
+                                        <option>Employee</option>
+                                        <option>Legal/Compliance</option>
+                                        <option>Transaction</option>
+                                    </select>
+                                </td>
+                                <td class="vertical-top text-left">
+                                  <select class="form-control changed challenge-confidentiality">
+                                      <option>Banking Secrecy</option>
+                                      <option>Secret</option>
+                                      <option selected="">Confidential</option>
+                                      <option>Internal</option>
+                                      <option>Public</option>
+                                  </select>
+                                  <span class="text-italic previous-status">Previously: Secret</span>
+                                </td>
+                                <td class="vertical-top document_2nd document_2nd2 first-ch">
+                                    <span class="doc-path my-doc-path">The classification should be Confidential because. The classification should be Confidential because</span>
+                                    <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
+                                </td>
+                                <td>
+                                    <a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </section>
                     <button class="btn btn-green btn-next-reviewer pull-right mt-sm" onClick="()=>this.setReviewerCurrent(reviewerCurrent + 1)" >Go to Next Reviewer</button>
                   </div>
 
@@ -193,7 +449,7 @@
     </div>
    <!--Modal-->
   
-    <div id="previewModal" rt-if="(this.state.documentPreview !== null)" class="modal fade in" role="dialog" rt-scope="this.state.reviewValidations.documents[this.state.documentPreview] as docPreview; this.state.reviewerCurrent as reviewerCurrent">
+    <div id="previewModal" rt-if="(this.state.documentPreview !== null)" class="modal fade in" role="dialog" rt-scope="this.state.documentPreview as docPreview; this.state.reviewerCurrent as reviewerCurrent">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
