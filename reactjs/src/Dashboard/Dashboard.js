@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './Dashboard.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import update from 'react-addons-update'
 import $ from 'jquery'
 import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
@@ -13,6 +14,11 @@ module.exports = React.createClass({
 	    	newsfeed: {},
             notification: {
                 total: 0,
+                list: []
+            },
+            pending_action: {
+                warning: 0,
+                danger: 0,
                 list: []
             },
             role:''
@@ -55,6 +61,7 @@ module.exports = React.createClass({
                 console.log(err);
             }.bind(this)
         });
+        this.getDummyNotification();
 		
 	},
     getNotification() {
@@ -80,6 +87,54 @@ module.exports = React.createClass({
             }.bind(this)
         });
     },
+
+    getDummyNotification() {
+        var update_notification = update(this.state, {
+            notification: {
+                list: {$set: [{
+                                "created": "today", 
+                                "id": 1, 
+                                "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                                "urgency": "done"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 2, 
+                                "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
+                                "urgency": "low"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 3, 
+                                "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                                "urgency": "done"
+                            }]}
+                },
+            pending_action: {
+                list: {$set: [{
+                                "created": "today", 
+                                "id": 4, 
+                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
+                                "urgency": "very hight"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 5, 
+                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
+                                "urgency": "hight"
+                            },
+                            {
+                                "created": "today", 
+                                "id": 6, 
+                                "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
+                                "urgency": "low"
+                            }]}
+            } 
+        });
+        this.setState(update_notification);
+        console.log("dummy notification: ", this.state.notification);
+    },
+
     hideMenu() {
         // close notification-menu when changes route
         $('.dropdown-backdrop').click()

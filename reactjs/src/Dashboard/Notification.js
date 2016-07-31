@@ -61,50 +61,54 @@ var Notification = React.createClass
                 today: {$set: [{
                                 "created": "today", 
                                 "id": 1, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
-                                "urgency": "done"
-                            },
-                            {
-                                "created": "today", 
-                                "id": 2, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.", 
                                 "urgency": "low"
-                            },
-                            {
-                                "created": "today", 
-                                "id": 3, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
-                                "urgency": "hight",
-                            },
-                            {
-                                "created": "today", 
-                                "id": 10, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
-                                "urgency": "very hight"
                             }]},
                 yesterday: {$set: [{
                                 "created": "yesterday", 
-                                "id": 4, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "id": 2, 
+                                "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
                                 "urgency": "low"
                             }] },
                 last_7_days: {$set: [{
-                                "created": "yesterday", 
-                                "id": 5, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "created": "7_days_ago", 
+                                "id": 3, 
+                                "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
                                 "urgency": "done"
-                            }] },
-                last_30_days: {$set: [{
-                                "created": "yesterday", 
-                                "id": 6, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                            },{
+                                "created": "7_days_ago", 
+                                "id": 4, 
+                                "message": "You have challenged the classification of the document cyber_security_healthcheck_-_cs149981.xls", 
+                                "urgency": "done"
+                            },{
+                                "created": "7_days_ago", 
+                                "id": 5, 
+                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
                                 "urgency": "hight"
-                            }] },
+                            },
+                            // {
+                            //     "created": "7_days_ago", 
+                            //     "id": 5, 
+                            //     "message": "Scan Finished- You are required to review the classification and to assign a reviewer.", 
+                            //     "urgency": "hight"
+                            // },{
+                            //     "created": "7_days_ago", 
+                            //     "id": 5, 
+                            //     "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.", 
+                            //     "urgency": "done"
+                            // }
+                            ]},
+                last_30_days: {$set: [] },
                 older: {$set: [{
-                                "created": "yesterday", 
-                                "id": 7, 
-                                "message": "You have accepted the challenge of the document. It has been classified in Accounting/Tax category with the confidentiality rating of Banking Secrecy", 
+                                "created": "older", 
+                                "id": 6, 
+                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
                                 "urgency": "very hight"
+                            },{
+                                "created": "older", 
+                                "id": 7, 
+                                "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                                "urgency": "done"
                             }] }
             } 
         });

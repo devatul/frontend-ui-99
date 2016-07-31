@@ -80,7 +80,7 @@ module.exports = function () {
         else{
             notiType = $(this).attr('data-type');
             $('.filter-noti-icon').parents('span').hide();
-            $('.filter-noti-icon[data-type='+notiType+']').parents('span').show();
+            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
             $('[data-noti-type]').each(function(){
                 if ($(this).attr('data-noti-type') == notiType){
                     $(this).show();
