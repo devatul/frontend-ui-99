@@ -12,40 +12,34 @@ module.exports = function(categoryInfo) {
         }
         return x1 + x2;
     }
+    var confidentialities = [];
+    var doc_type=[];
+    //var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
+    for(var i = 0; i < categoryInfo.doc_type.length; i++) 
+    {
+        var start = [];
+        for(var j=0; j < categoryInfo.doc_type[i].types.length; j++){
+            start.push(categoryInfo.doc_type[i].types[j].number);
+        }
+        doc_type.push({
+            name: categoryInfo.doc_type[i].name,
+            data: start
+        });
+    }
     if( $('#confidentialityOverviewChart').length){
-
-        // PIE CHART
-        var flotPieData = [{
-            label: "Public",
-            data: [
-                [1, 4680]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Internal",
-            data: [
-                [1, 3000]
-            ],
-            color: '#349da2'
-        }, {
-            label: "Confidential",
-            data: [
-                [1, 3000]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Secret",
-            data: [
-                [1, 3000]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Banking Secrecy",
-            data: [
-                [1, 3000]
-            ],
-            color: '#E36159'
-        }];
+        var flotPieData = [];
+        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
+            for(var i = 0; i < categoryInfo.confidentialities.length; i++) {
+                var name = categoryInfo.confidentialities[i].name;
+                flotPieData.push({
+                    label: name,
+                    data: [
+                        [1, categoryInfo.confidentialities[i].number]
+                    ],
+                    color: colors[i]
+                });
+            }
+        }
 
         var plot = $.plot('#confidentialityOverviewChart', flotPieData, {
             series: {
@@ -64,10 +58,7 @@ module.exports = function(categoryInfo) {
                 position: 'nw',
                 noColumns: 1, 
                 backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend'),
-                  itemStyle: {
-                    fontFamily: 'Roboto'
-                  }
+                container: $('#confidentialityChartLegend')
             },
             grid: {
                 hoverable: true,
@@ -76,11 +67,10 @@ module.exports = function(categoryInfo) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +addCommas(y)+ ' Documents';
-              },
+                return label + ': ' +y + ' Documents';
+              }
             }
         });
-        }
     if ($('#confidentialityLevelChart').length){
         $('#confidentialityLevelChart').highcharts({
             chart: {
@@ -92,7 +82,7 @@ module.exports = function(categoryInfo) {
             credits: {
               enabled: false
             },
-            colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
+            colors : ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
             xAxis: {
                 categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
                 labels:{
@@ -144,22 +134,7 @@ module.exports = function(categoryInfo) {
                     }
                 }
             },
-            series: [{
-                name: 'Public',
-                data: [900,900,900,900,1080]
-            }, {
-                name: 'Internal',
-                data: [600,600,600,600,600]
-            }, {
-                name: 'Confidential',
-                data: [600,600,600,600,600]
-            },{
-                name: 'Secret',
-                data: [600,600,600,600,600]
-            }, {
-                name: 'Banking Secrecy',
-                data: [600,600,600,600,600]
-            }]
+            series: doc_type
         });
     }
 }

@@ -4,6 +4,15 @@
 body {
   font-family: 'Roboto', 'Helvetica', sans-serif; }
 
+ .panel-over  table>tbody>tr>td:nth-child(2){
+	 text-align: left;
+	 padding-left: 95px;
+ }
+ .panel-over  table>tbody>tr>td:nth-child(3){
+	 text-align: left;
+	 padding-left: 95px;
+ }
+  
 @media (min-width: 768px) and (max-width: 1199px) {
   .navbar-collapse.collapse {
     display: none !important; }
@@ -255,7 +264,7 @@ html body .tabs-primary .nav-tabs li a:hover {
   display: none; }
 
 .legendLabel {
-  padding-right: 4px;
+  padding-right: 8px;
   font-size: 12px;
   padding-left: 3px;
   text-align: left; }
@@ -737,6 +746,16 @@ tr td {
     margin-top: -112px;
     margin-left: -90px;
     width: 180px; }
+	@media (max-width: 1024px) {
+		.widget-panel .widget-chart .chart-md-inner {
+			top: 47%;
+		}
+	}
+	@media (max-width: 768px) {
+		.widget-panel .widget-chart .chart-md-inner {
+			top: 50%;
+		}
+	}
     @media (max-width: 380px) {
       .widget-panel .widget-chart .chart-md-inner {
         height: 157px; } }
@@ -1103,6 +1122,15 @@ div[id^='legendContainer'] {
   vertical-align: middle; }
 
 /*Responsive*/
+.flot-overlay {
+		 border-radius: 100px;
+	 }
+	 .flot-base {
+		 border-radius: 100px;
+	 }
+.chart-md-inner {
+	border-radius: 100px;
+}
 @media (max-width: 768px) {
   ul.filter-list {
     text-align: left;
@@ -1222,6 +1250,12 @@ div[id^='legendContainer'] {
       color: #59D0A7; }
 
 @media (max-width: 400px) {
+	.widget-panel .widget-chart .chart-md-inner {
+		height: 169px;
+	}
+	.widget-panel .widget-chart .chart-md-inner {
+		top: 46%;
+	}
   .modal-preview .modal-title {
     margin-top: 20px; }
 
@@ -1230,7 +1264,9 @@ div[id^='legendContainer'] {
 
   .my_header .navbar-default.nav-custom .navbar-brand {
     width: 100px;
-    padding-top: 33px; } }
+    padding-top: 33px; } 
+  
+	}
 .help_guide_sub .filter-tags {
   padding-top: 10px;
   padding-left: 15px; }
@@ -1251,6 +1287,19 @@ div[id^='legendContainer'] {
   padding-left: 30px;
   margin-bottom: 20px; }
 
+ @media (max-width: 330px) {
+	 .widget-panel .widget-chart .chart-md-inner {
+		 top: 48%;
+	 }
+	 .widget-panel .widget-chart .chart-md-inner {
+		 height: 152px;
+		 width: 154px;
+		 left: 55%;
+		 border-radius: 100px;
+	 }
+	 .
+ }
+  
 @media (min-width: 992px) {
   .dd-filter {
     min-width: 700px; } }

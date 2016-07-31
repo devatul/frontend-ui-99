@@ -10,25 +10,30 @@ import userAssignment from '../script/chart-user-assignment.js'
 import chartFilterAssignment from '../script/chart-filter-assignment.js'
 import javascriptAssignement from '../script/javascript.assignement.js'
 import 'jquery'
+import _ from 'lodash';
 
 var UserAssignment = React.createClass({
     mixins: [LinkedStateMixin],
     getInitialState() {
         return {
             categories: [],
-            categoryCurrent:[],
-            categoryInfo: [],
+            categoryCurrent:{},
+            categoryInfo: {},
             reviewers:[],
-            filter: [],
+            filter: null,
             summary:[]
         };
     },
-    componentWillUnmount() {  
+   	componentWillMount() {
+        
+        
     },
     componentDidMount() {
     	this.getCategories();
+    	console.log(this.state);
     	javascript();
     	javascriptAssignement();
+    	//this.handleOnChange();
     },
     addCommas(nStr)
     {
@@ -58,57 +63,153 @@ var UserAssignment = React.createClass({
         if(this.state.reviewers != nextState.reviewers) {
             return true;
         }
-        
         if(this.state.summary != nextState.summary) {
             return true;
         }
+        if(this.state.filter != nextState.filter) {
+          return true;
+      	}
         return false;
         
     },
     select(index){
     	$('#select_'+index).toggleClass("on");
+    	this.state.reviewers[index].select = !this.state.reviewers[index].select 
     },
     selectAll(){
     	$("div.off").toggleClass("on");
+    	for(var i=0; i< this.state.reviewers.length; i++){
+    		this.state.reviewers[i].select = !this.state.reviewers[index].select
+    	}
     },
     componentDidUpdate(prevProps, prevState) {
     	if(this.state.categoryInfo != prevState.categoryInfo) {
+    		//debugger;
         	this.chartAssignment(this.state.categoryInfo);
         }
-    	/*if(prevState.filter != this.state.filter) {
-    		this.chartUserFilter();
-    	}*/
         if(this.state.categories != prevState.categories) {
+        	
             $("#Category_"+ this.state.categories[0].id).click();
-            this.getCategoryInfo(this.state.categories[0].id);
-            this.getReviewers();
+            //this.getCategoryInfo(this.state.categoryCurrent.id);
+            this.handleOnChange();
         }
         if(this.state.categoryCurrent != prevState.categoryCurrent) {
-            $('#Category_' + this.state.categoryCurrent.id).click();
+        	
+        	$("#Category_"+ this.state.categoryCurrent.id).click();
             this.getCategoryInfo(this.state.categoryCurrent.id);
-            this.getReviewers();
+            //this.chartAssignment(this.state.categoryInfo);
+            //this.handleOnChange();
         }
         if(this.state.reviewers != prevState.reviewers) {
         	
             this.chartUserFilter(this.state.reviewers);
         }
-        
+        if(this.state.filter != prevState.filter) {
+          this.handleFilter(this.state.filter);
+          console.log("filter: ", this.state.filter);
+      	}
+    },
+    handleOnChange: function() {
+    	//debugger;
+    	var filter = {};
+    	if(this.state.categoryCurrent.id >= 0){
+    		filter.id=this.state.categoryCurrent.id;
+	    	if($('#timeframe :selected').val() == 0){
+	        	filter.timeframe = 6;
+	        }else{
+	        	filter.timeframe = $('#timeframe :selected').val();
+	    	}
+	        
+	        console.log("filter.timeframe: ", filter.timeframe);
+	        if($('#usersnum :selected').val() == 0){
+	        	filter.numberuser = 30;
+	        }else{
+	        	filter.numberuser = $('#usersnum :selected').val();
+	    	}
+	    	if($('#reviewertype :selected').val() == 0){
+	        	filter.type = 'last_modifier';
+	        }else{
+	        	filter.type = $('#reviewertype :selected').val();
+	    	}
+	        console.log("filter.numberuser", filter.numberuser);
+	        
+	        console.log("filter.type", filter.type);
+    	}
+	    if(!_.isEmpty(filter)){
+		      /*var updateFilter = update(this.state, {
+		        filter: {$set: filter }
+		      });
+		      this.setState(updateFilter);*/
+		      this.state.filter = filter;
+		      this.handleFilter(filter);
+		}else{
+		  	this.handleFilter();
+		}
+    },
+    handleFilter: function(bodyRequest) {
+        console.log('bodyRequest', bodyRequest);
+        if(!_.isEmpty(bodyRequest)) {
+        	var heightChart= bodyRequest.numberuser*38;
+        	$('#userReviewChart').css("height", heightChart);
+            $.ajax({
+                url: Constant.SERVER_API +  "api/assign/reviewer/",
+                dataType: 'json',
+                type: 'GET',
+                data: bodyRequest,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                },
+                success: function(data) {
+	            	for(var i = 0; i < data.length; i++){
+	            		data[i]['select'] = false;	
+	            	}
+	            	console.log(data);
+	                var updateState = update(this.state, {
+	                    reviewers: {$set: data}
+	                });
+	                this.setState(updateState);
+	                $("div.off").removeClass("on");
+	                console.log("reviewers ok: ", data);
+                }.bind(this),
+                error: function(xhr, error) {
+                    if(xhr.status === 401)
+                    {
+                        browserHistory.push('/Account/SignIn');
+                    }
+                }.bind(this)
+            });
+        } else {
+            this.getReviewers();
+        }
     },
     getReviewers() {
-        //var categoryIndex = this.state.categoryCurrent.;
+        var categoryId = this.state.categoryCurrent.id;
+        var heightChart= 30*38;
+        $('#userReviewChart').css("height", heightChart);
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/reviewer/",
             dataType: 'json',
-            data: {"id": this.state.categoryCurrent.id},
+            data: {
+            	"id": categoryId,
+            	"timeframe":6,
+            	"type" : "last_modifier",
+            	"numberuser":30
+        	},
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+            	
+            	for(var i = 0; i< data.length; i++){
+            		data[i]['select'] = false;	
+            	}
+            	console.log(data);
                 var updateState = update(this.state, {
                     reviewers: {$set: data}
                 });
                 this.setState(updateState);
+                $("div.off").removeClass("on");
                 console.log("reviewers ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
@@ -131,8 +232,10 @@ var UserAssignment = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+            	//data[0].index = 0;
                	var updateState = update(this.state, {
                     categories: {$set: data},
+                    categoryCurrent: {$set:data[0]}
                 });
 
                	this.setState(updateState);
@@ -149,6 +252,7 @@ var UserAssignment = React.createClass({
         });
     },
     getCategoryInfo(id) {
+
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/category/",
@@ -176,40 +280,29 @@ var UserAssignment = React.createClass({
     },
     setCategoryCurrent: function(categoryIndex) {
 
-        var categories = this.state.categories;
-        if(categoryIndex <= (categories.length - 1)) {
+        var categories = this.state.categories[categoryIndex];
+        //categories.index = categoryIndex;
+        var filter = {
+        	id:categories.id,
+        	timeframe:6,
+        	numberuser:30,
+        	type:'last_modifier'
+        };
+        if(categoryIndex <= (this.state.categories.length - 1)) {
             var setCategory = update(this.state, {
-                categoryCurrent: { $set: this.state.categories[categoryIndex] }
+                categoryCurrent: { $set: categories },
+                filter: { $set: filter }
+            });
+            this.setState(setCategory);
+        }else{
+        	var setCategory = update(this.state, {
+                filter: { $set: filter }
             });
             this.setState(setCategory);
         }
     },
-    filterOnchange(event) {
-    	var value = event.target.value;
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/assign/reviewer/",
-            dataType: 'json',
-            async: false,
-            data: { "id": id, "timeframe": "", "type": ""},
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateState = update(this.state, {
-                    categoryInfo: {$set: data},
-                });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
-        });
-    },
     chartAssignment(categoryInfo) {
+    	//debugger;
     	userAssignment(categoryInfo);
     },
     chartUserFilter(reviewers) {    	

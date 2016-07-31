@@ -1,5 +1,6 @@
 module.exports = {
 	SERVER_API:'http://54.254.145.121/',
+	TIMEVALIDTOKEN :300000,
 	scan: {
 		IS_NO_SCAN: 'no scan',
 		IS_SCANING: 'in progress',

@@ -25,17 +25,17 @@
                     <div class="form-group">
                       <label class="">As % of overall Accounting/ Tax Category</label>
                       <select name="state" class="form-control ddList">
-                        <option class="lt" value="">0.01% (17 Documents)</option>
-                        <option class="lt" value="">0.02% (34 Documents)</option>
+                        <option rt-repeat="percentageDoc in this.state.categoryInfo.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
                       </select>
-                      <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                      <a href="#" class="validation-btn btn btn-default">
+                        <i rt-if="this.state" class="fa fa-check icon-success"></i>
+                      </a>
                     </div>
                     <div class="or-divider"><span>OR</span></div>
                     <div class="form-group">
                       <label class="">Fixed Number of Documents</label>
                       <select name="state" class="form-control ddList">
-                        <option class="lt" value="">10 Documents (0.17%)</option>
-                        <option class="lt" value="">20 Documents (0.34%)</option>
+                       <option rt-repeat="docPercentage in this.state.categoryInfo.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
                       </select>
                       <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
                     </div>
@@ -56,10 +56,14 @@
                     <div class="row">
                       <div class="col-sm-6">
                         <h4 class="chart-title">Confidentiality Overview</h4>
-                        <div id="confidentialityOverviewChart" class="document-chart"></div>
+                        <div class="chart-container">
+                          <div id="confidentialityChartLegend" class="document-chart"></div>
+                          <div id="confidentialityOverviewChart" class="document-chart"></div>
+                        </div>
                       </div>
                       <div class="col-sm-6">
                         <h4 class="chart-title">Document Type per Confidentiality Level</h4>
+
                         <div id="confidentialityLevelChart" class="document-chart"></div>
                       </div>
                     </div>
@@ -91,30 +95,30 @@
                                         <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 560px;">
                                             <ul class="filter-list list-unstyled pt-xs">
                                                 <li>
-                                                  <select name="timeframe" class="assignent-select form-control ddList">
-                                                    <option selected disabled value="">Timeframe</option>
-                                                    <option class="lt" value="">1 Year</option>
-                                                    <option class="lt" value="">6 Months</option>
-                                                    <option class="lt" value="">3 Months</option>
-                                                    <option class="lt" value="">1 Months</option>
+                                                  <select id="timeframe" name="timeframe" onChange={this.handleOnChange} class="assignent-select form-control ddList">
+                                                    <option selected disabled value="0">Timeframe</option>
+                                                    <option class="lt" value="12">1 Year</option>
+                                                    <option class="lt" value="6">6 Months</option>
+                                                    <option class="lt" value="3">3 Months</option>
+                                                    <option class="lt" value="1">1 Months</option>
                                                   </select>
                                                 </li>
                                                 <li>
-                                                  <select name="usersnum" class="assignent-select form-control ddList">
-                                                    <option selected disabled value="">Number of Users</option>
-                                                    <option class="lt" value="">Top 30</option>
-                                                    <option class="lt" value="">Top 2</option>
-                                                    <option class="lt" value="">Top 20</option>
-                                                    <option class="lt" value="">Top 15</option>
-                                                    <option class="lt" value="">Top 10</option>
-                                                    <option class="lt" value="">Top 5</option>
+                                                  <select id="usersnum" name="usersnum" onChange={this.handleOnChange} class="assignent-select form-control ddList">
+                                                    <option selected disabled value="0">Number of Users</option>
+                                                    <option class="lt" value="30">Top 30</option>
+                                                    <option class="lt" value="2">Top 2</option>
+                                                    <option class="lt" value="20">Top 20</option>
+                                                    <option class="lt" value="15">Top 15</option>
+                                                    <option class="lt" value="10">Top 10</option>
+                                                    <option class="lt" value="5">Top 5</option>
                                                   </select>
                                                 </li>
                                                 <li>
-                                                  <select name="reviewertype" class="assignent-select form-control ddList">
-                                                    <option selected disabled value="">Type of Reviewer</option>
-                                                    <option class="lt" value="">Document Last Modified</option>
-                                                    <option class="lt" value="">Document Creator</option>
+                                                  <select id="reviewertype" name="reviewertype" onChange={this.handleOnChange}  class="assignent-select form-control ddList">
+                                                    <option selected disabled value="0">Type of Reviewer</option>
+                                                    <option class="lt" value="last_modifier">Document Last Modified</option>
+                                                    <option class="lt" value="creator">Document Creator</option>
                                                   </select>
                                                 </li>
                                             </ul>
@@ -144,9 +148,9 @@
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
-                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 37.5px" >
+                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 38.5px" >
                                 <div class="switch switch-sm switch-success">
-                                  <div class="ios-switch off" id="select_{reviewIndex}" onClick="()=> this.select(reviewIndex)">
+                                  <div class="ios-switch off" rt-class="{on:review}" id="select_{reviewIndex}" onClick="()=> this.select(reviewIndex)">
                                     <div class="on-background background-fill"></div>
                                     <div class="state-background background-fill">
                                     </div>
@@ -154,7 +158,7 @@
                                   </div>
                                     <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
                                 </div>
-                                <div class="clearfix"></div>
+                                <!--<div class="clearfix"></div>-->
                               <div>
                             </div>
                           </div>
@@ -162,16 +166,16 @@
                     </div>
                   </div>
                   <div class="pull-right">
-                    <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button">Validate and Go to Next Category</button>
+                    <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button" onClick="()=>this.setCategoryCurrent(this.state.categoryCurrent.id)">Validate and Go to Next Category</button>
                   </div>
                 </section>
               </div>
             </div>
           </div>
           <div id="summary" class="tab-pane">
-            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+            <section rt-repeat="summary in this.state.summary" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
-                  <h2 class="panel-title">Accounting/ Tax</h2>
+                  <h2 class="panel-title">{summary.name}</h2>
                   <div class="panel-actions">
                       <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                   </div>
@@ -189,60 +193,24 @@
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">Accounting/ Tax</td>
-                          <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">30</td>
-                          <td class="no-border-top text-center">12,031</td>
+                          <td class="no-border-top border-bottom">{summary.name}</td>
+                          <td class="no-border-top"><span class="assigned-num">{summary.reviewers.length}</span> <a data-toggle="collapse" data-target="#reviewerList{summaryIndex+1}" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                          <td class="no-border-top text-center">{summary.docs_sampled}</td>
+                          <td class="no-border-top text-center">{this.addCommas(summary.total_number_document_classified)}</td>
                       </tr>
                       <tr class="child-table">
                         <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList1"> 
+                          <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
                             <table class="table">
                               <tbody>
-                                <tr>
+                                <tr rt-repeat="viewer in summary.reviewers">
                                   <td class="col20 no-border-top"></td>
-                                  <td class="col40">Chris.Muffat (Last Modified)</td>
+                                  <td class="col40" style="text-transform: capitalize">{viewer.first_name}.{viewer.last_name} (Last Modified)</td>
                                   <td class="col15"></td>
                                   <td class="col25 chart-col">
                                     <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                          <span class="percent">73</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Matt.Nixon (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                          <span class="percent">55</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Tony.Gomes (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                          <span class="percent">50</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="col20 no-border-top">&nbsp;</td>
-                                  <td class="col40">Stan.Slow (Last Modified)</td>
-                                  <td class="col15">&nbsp;</td>
-                                  <td class="col25 no-border-top chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                                          <span class="percent">2</span>
+                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {viewer.number_docs/summary.total_number_document_classified*100}%;">
+                                          <span class="percent">{viewer.number_docs}</span>
                                       </div>
                                     </div>
                                   </td>

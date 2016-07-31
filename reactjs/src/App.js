@@ -7,7 +7,7 @@ import $ from 'jquery'
 import validate from 'jquery-validation';
 import javascript from './script/javascript.js';
 import javascript_todo from './script/javascript.todo.js';
-const TIMEVALIDTOKEN = 300000;
+import Constant from './Constant.js';
 module.exports = React.createClass({
     mixins: [LinkedStateMixin],
     componentWillMount() 
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     			var token = localStorage.getItem('token');
     			if(localStorage.getItem('token')){
     				$.ajax({
-			            url:'http://54.251.148.133/api/token/api-token-refresh/',
+			            url: Constant.SERVER_API + 'api/token/api-token-refresh/',
 			            dataType: 'json',
 			            type: 'POST',
 			            data:{
@@ -38,7 +38,7 @@ module.exports = React.createClass({
 		        	});
     			}
     			
-	    	}, TIMEVALIDTOKEN);
+	    	}, Constant.TIMEVALIDTOKEN);
 	    	
 			//browserHistory.push('/Dashboard/ReviewValidation');	
 		}else

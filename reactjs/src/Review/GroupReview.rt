@@ -155,7 +155,7 @@
                                         <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
                                     </li>
                                     <li class="li_late">
-                                        <a href="#cloud" data-toggle="tab" onClick={this.getCloudwords}>Significant Words Cloud</a>
+                                        <a href="#cloud" data-toggle="tab" onClick={this.drawCloud}>Significant Words Cloud</a>
                                     </li>
                                 </ul>
                                 <div class="review_tab-content tab-content">

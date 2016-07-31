@@ -134,7 +134,7 @@
                         <div id="userbox" class="userbox">
                             <a href="#" data-toggle="dropdown" aria-expanded="true">
                                 <figure class="profile-picture">
-                                    <img src="/assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="/assets/images/!logged-user.jpg">
+                                    <img src="/assets/images/User_font_awesome.svg.jpg">
                                 </figure>
                                 <div class="profile-info">
                                     <span class="name">Chris Muffat</span>

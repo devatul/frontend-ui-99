@@ -112,3 +112,8 @@
     height: auto;
     margin-top: 12px;
 }
+.center-padding {
+    text-align: left;
+    padding-left: 95px !important;
+   
+}

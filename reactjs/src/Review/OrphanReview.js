@@ -238,6 +238,7 @@ var OrphanReview = React.createClass({
         });
     },
     getCloudwords() {
+        /*
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/cloudwords/",
@@ -266,7 +267,7 @@ var OrphanReview = React.createClass({
                     browserHistory.push('/Account/SignIn');
                 }
             }.bind(this)
-        });
+        });*/
     },
     getCentroids() {
         $.ajax({
@@ -496,8 +497,52 @@ var OrphanReview = React.createClass({
         }
         return str;
     },
-    drawCloud: function() {
-        var word_list = this.state.cloudwords;
+    drawCloud: function() { 
+        //var word_list = this.state.cloudwords;
+        var word_list = new Array(
+    {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
+    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
+    {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
+    {text: "properties", weight: 8, html: {"data-tooltip": "676 Documents"}},
+    {text: "speed", weight: 6.2, html: {"data-tooltip": "444 Documents"}},
+    {text: "Accounting", weight: 5, html: {"data-tooltip": "777 Documents"}},
+    {text: "interactions", weight: 5, html: {"data-tooltip": "35 Documents"}},
+    {text: "nature", weight: 5, html: {"data-tooltip": "535 Documents"}},
+    {text: "branch", weight: 5, html: {"data-tooltip": "535 Documents"}},
+    {text: "concerned", weight: 4, html: {"data-tooltip": "334 Documents"}},
+    {text: "Sapien", weight: 4, html: {"data-tooltip": "200 Documents"}},
+    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "habitant", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "morbi", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "tristisque", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "senectus", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "et netus", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13 Documents"}},
+    {text: "fames", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "egestas", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "Aenean", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "elit", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "sit amet", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "metus", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13 Documents"}},
+    {text: "justo", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "dictum", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "metus", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "at molestie", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "purus", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "diam", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "dui", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
+    {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
+  );
         var cloudRendered = false;
         var drawCloud = function(){
         if (!cloudRendered){

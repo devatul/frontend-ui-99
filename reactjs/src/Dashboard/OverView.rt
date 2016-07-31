@@ -176,10 +176,10 @@
                                                     colspan="1" aria-sort="ascending">Level of Confidentiality
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                                    colspan="1">% Reviewed Document
+                                                    colspan="1">Reviewed Document
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                                    colspan="1">% Validated Documents
+                                                    colspan="1">Validated Documents
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
@@ -193,8 +193,8 @@
                                         <tbody>
                                             <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
-                                                <td style="text-align: left">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
-                                                <td style="text-align: left">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
+                                                <td class="center-padding">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
+                                                <td class="center-padding">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
                                                 <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}%</td>
                                                 <td class="center hidden-phone">{item.percentage_prediction_accuracy_docs}% </td>
                                             </tr>
@@ -229,10 +229,10 @@
                                                 colspan="1" aria-sort="ascending">Categories
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                                colspan="1">% Reviewed Documents
+                                                colspan="1">Reviewed Documents
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
-                                                colspan="1">% Validated Documents
+                                                colspan="1">Validated Documents
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                 rowspan="1" colspan="1">Review Accuracy
@@ -248,8 +248,8 @@
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
-                                                <td>{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
-                                                <td>{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
+                                                <td class="center-padding">{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
+                                                <td class="center-padding">{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
                                                 <td>{category.percentage_owner_accuracy_docs}%</td>
                                                 <td>{category.percentage_prediction_accuracy_docs}%</td>
                                             </tr>
