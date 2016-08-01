@@ -55,63 +55,96 @@ var Notification = React.createClass
     },
 
     getDummyNotification() {
-        var date = new Date();
-        var update_notification = update(this.state, {
-            notification: {
-                today: {$set: [{
-                                "created": "today", 
-                                "id": 1, 
-                                "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.", 
-                                "urgency": "low"
-                            }]},
-                yesterday: {$set: [{
-                                "created": "yesterday", 
-                                "id": 2, 
-                                "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
-                                "urgency": "low"
-                            }] },
-                last_7_days: {$set: [{
-                                "created": "7_days_ago", 
-                                "id": 3, 
-                                "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
-                                "urgency": "done"
-                            },{
-                                "created": "7_days_ago", 
-                                "id": 4, 
-                                "message": "You have challenged the classification of the document cyber_security_healthcheck_-_cs149981.xls", 
-                                "urgency": "done"
-                            },{
-                                "created": "7_days_ago", 
-                                "id": 5, 
-                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
-                                "urgency": "hight"
-                            },
-                            // {
-                            //     "created": "7_days_ago", 
-                            //     "id": 5, 
-                            //     "message": "Scan Finished- You are required to review the classification and to assign a reviewer.", 
-                            //     "urgency": "hight"
-                            // },{
-                            //     "created": "7_days_ago", 
-                            //     "id": 5, 
-                            //     "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.", 
-                            //     "urgency": "done"
-                            // }
-                            ]},
-                last_30_days: {$set: [] },
-                older: {$set: [{
-                                "created": "older", 
-                                "id": 6, 
-                                "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
-                                "urgency": "very hight"
-                            },{
-                                "created": "older", 
-                                "id": 7, 
-                                "message": "You have completed the review of 10 document in Legal/Compliance category.", 
-                                "urgency": "done"
-                            }] }
-            } 
-        });
+        //temproary for dummy data 
+        function getRole () {
+            var result="";
+            $.ajax({
+                url: Constant.SERVER_API + 'api/account/role/',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                },
+                success: function(data) {
+                    result = data; 
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+            return result.role
+        }
+        var role = getRole();
+        if (role === Constant.role.IS_1ST) {
+            var update_notification = update(this.state, {
+                notification: {
+                    today: {$set: [{
+                                    "created": "today", 
+                                    "id": 1, 
+                                    "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.", 
+                                    "urgency": "low"
+                                }]},
+                    yesterday: {$set: [{
+                                    "created": "yesterday", 
+                                    "id": 2, 
+                                    "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
+                                    "urgency": "low"
+                                }] },
+                    last_7_days: {$set: [{
+                                    "created": "7_days_ago", 
+                                    "id": 3, 
+                                    "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
+                                    "urgency": "done"
+                                },{
+                                    "created": "7_days_ago", 
+                                    "id": 4, 
+                                    "message": "You have challenged the classification of the document cyber_security_healthcheck_-_cs149981.xls", 
+                                    "urgency": "done"
+                                },{
+                                    "created": "7_days_ago", 
+                                    "id": 5, 
+                                    "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
+                                    "urgency": "hight"
+                                }
+                                ]},
+                    last_30_days: {$set: [] },
+                    older: {$set: [{
+                                    "created": "older", 
+                                    "id": 6, 
+                                    "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
+                                    "urgency": "very hight"
+                                },{
+                                    "created": "older", 
+                                    "id": 7, 
+                                    "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                                    "urgency": "done"
+                                }] }
+                },
+                warningNoti: {$set: 1 },
+                dangerNoti: {$set: 1 }
+            });
+        } else if (role === Constant.role.IS_2ND) {
+            var update_notification = update(this.state, {
+                notification: {
+                    last_7_days: {$set: [
+                                {
+                                    "created": "7_days_ago", 
+                                    "id": 8, 
+                                    "message": "Scan Finished- You are required to review the classification and to assign a reviewer.", 
+                                    "urgency": "hight"
+                                },{
+                                    "created": "7_days_ago", 
+                                    "id": 9, 
+                                    "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.", 
+                                    "urgency": "done"
+                                }
+                                ]}
+                },
+                warningNoti: {$set: 1 },
+                dangerNoti: {$set: 0 }
+            });
+        }
         this.setState(update_notification);
         console.log("test: ", this.state.notification);
     },

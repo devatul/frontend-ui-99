@@ -17,7 +17,10 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
-                        <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}><span id="total_notification" class="badge">4</span><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                        <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
+                            <span id="total_notification" class="badge">{this.state.notification.total}</span>
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                        </a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
                         <div class="row">
                             <div class="col-sm-6 col-noti">
@@ -28,6 +31,7 @@
                                         <li data-noti-type="{notification.urgency}" key="{notification.id}">
                                             <i  class="fa" 
                                                 rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                                            'fa-check icon-warning': notification.urgency === 'adone',
                                                          'fa-clock-o': notification.urgency === 'low',
                                                          'fa-clock-o icon-warning': notification.urgency === 'hight',
                                                          'fa-clock-o icon-danger': notification.urgency === 'very hight'}" 
@@ -38,9 +42,9 @@
                                 </div>
                             </div>
                             <div class="col-sm-6 col-noti">
-                                <h4>My Pending Action: 3
-                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" ></i> : 1</span>
-                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" ></i> : 1</span>
+                                <h4>My Pending Action: {this.state.pending_action.warning + this.state.pending_action.danger}
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" ></i> : {this.state.pending_action.warning}</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" ></i> : {this.state.pending_action.danger}</span>
                                 </h4>
 
                                 <span class="actions-percentage">Action completed on time: 100%</span>
@@ -76,7 +80,7 @@
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
                             <li class="dropdown">
-                                <span class="badge">4</span>
+                                <span class="badge">40</span>
                                 <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Review <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -108,7 +112,7 @@
                             <li>
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
-                            <li><span class="badge">2</span>
+                            <li><span class="badge">4</span>
                                 <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                             <li>
                                 <a href="#">Insights</a>
