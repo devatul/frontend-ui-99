@@ -15,16 +15,16 @@
             <div class="notification-filter row">
                 <div class="col-sm-4 mb-md">
                     <label>Last update</label>
-                    <select class="form-control filter-noti">
-                        <option>Today</option>
-                        <option>Last 7 Days</option>
-                        <option>Last 30 Days (by default)</option>
-                        <option>Pending Actions</option>
-                        <option>Completed Actions</option>
+                    <select class="form-control filter-noti" onChange={this.filterNotification}>
+                        <option data-update-time="update-today">Today</option>
+                        <option data-update-time="update-week">Last 7 Days</option>
+                        <option data-update-time="update-default" selected="">Last 30 Days (by default)</option>
+                        <option data-update-time="update-pending">Pending Actions</option>
+                        <option data-update-time="update-completed">Completed Actions</option>
                     </select>
                 </div>
                 <div class="col-sm-4 mb-md">
-                    <span class="mr-md">Pending Actions: {this.state.warningNoti + this.state.dangerNoti}</span>
+                    <span class="mr-md">Pending Actions: {this.state.total}</span>
                     <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" onClick={this.filterAlert}></i> : {this.state.warningNoti}</span>
                     <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" onClick={this.filterAlert}></i> : {this.state.dangerNoti}</span>
                     <div class="inline-block-item dropdown dropdown-help">
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
+            <section class="panel panel-featured panel-featured-primary panel-noti" rt-if="this.state.notification.today.length" data-last-update="update-today">
                 <header class="panel-heading">
                     <h2 class="panel-title">Today</h2>
                 </header>
@@ -64,7 +64,7 @@
                 </div>
             </section>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
+            <section class="panel panel-featured panel-featured-primary panel-noti" rt-if="this.state.notification.yesterday.length" data-last-update="update-yesterday">
                 <header class="panel-heading">
                     <h2 class="panel-title">Yesterday</h2>
                 </header>
@@ -89,7 +89,7 @@
                 </div>
             </section>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
+            <section class="panel panel-featured panel-featured-primary panel-noti" rt-if="this.state.notification.last_7_days.length" data-last-update="update-week">
                 <header class="panel-heading">
                     <h2 class="panel-title">Last 7 days</h2>
                 </header>
@@ -114,7 +114,7 @@
                 </div>
             </section>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
+            <section class="panel panel-featured panel-featured-primary panel-noti" rt-if="this.state.notification.last_30_days.length" data-last-update="update-older">
                 <header class="panel-heading">
                     <h2 class="panel-title">Last 30 days</h2>
                 </header>
@@ -139,7 +139,7 @@
                 </div>
             </section>
 
-            <section class="panel panel-featured panel-featured-primary panel-noti">
+            <section class="panel panel-featured panel-featured-primary panel-noti" rt-if="this.state.notification.older.length" data-last-update="update-older">
                 <header class="panel-heading">
                     <h2 class="panel-title">Older</h2>
                 </header>

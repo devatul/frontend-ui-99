@@ -20,12 +20,12 @@
                         <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
                             <span rt-if="this.state.role === contant.role.IS_2ND" id="total_notification" class="badge">{this.state.notification.total}</span>
-                            <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">3</span>
+                            <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
                             <i class="fa fa-bell-o" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
-                        <div class="row">
-                            <div class="col-sm-6 col-noti">
+                        <div class="row noti-popup">
+                            <div class="col-sm-6 col-noti noti-div">
                                 <h4>My Notification</h4>
                                 <div class="noti-block">
                                     <h3 class="noti-date">Last Update</h3>
@@ -43,8 +43,8 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-noti">
-                                <h4>My Pending Action: {this.state.pending_action.warning + this.state.pending_action.danger}
+                            <div class="col-sm-6 col-noti ">
+                                <h4>My Pending Action: {this.state.pending_action.list.length}
                                     <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" ></i> : {this.state.pending_action.warning}</span>
                                     <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" ></i> : {this.state.pending_action.danger}</span>
                                 </h4>
@@ -114,7 +114,7 @@
                             <li>
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
-                            <li><span class="badge">3</span>
+                            <li><span class="badge">4</span>
                                 <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                             <li>
                                 <a href="#">Insights</a>
