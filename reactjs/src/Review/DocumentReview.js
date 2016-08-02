@@ -162,6 +162,7 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaa', data);
+                var data = data.splice(1,2);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -171,8 +172,8 @@ var DocumentReview = React.createClass({
                         data[i].documents[j].confidence_level = Math.floor(Math.random()*(99-70+1)+70);
                         data[i].documents[j].current = {
                             checked: false,
-                            category: 0,
-                            confidential: 0,
+                            category: 4,
+                            confidential: (i == 0) ? 1 : 2,
                             status: "normal"
                         };
                     }
@@ -424,6 +425,7 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaattt', data);
+                var data = data.splice(0,1);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -431,7 +433,7 @@ var DocumentReview = React.createClass({
                     for(var j = 0; j < data[i].documents.length; j++) {
                         data[i].documents[j].current = {
                             checked: false,
-                            category: 0,
+                            category: 4,
                             confidential: 0,
                             status: "normal",
                             comment: 'Explain your choice',
