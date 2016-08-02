@@ -333,7 +333,7 @@ var UserAssignment = React.createClass({
         var filter = {
         	id:categories.id,
         	timeframe:6,
-        	numberuser:30,
+        	numberuser:10,
         	type:'last_modifier'
         };
         if(categoryIndex <= (this.state.categories.length - 1)) {
