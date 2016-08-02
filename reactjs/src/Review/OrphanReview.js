@@ -59,6 +59,10 @@ var OrphanReview = React.createClass({
             speed: 3000,
             animate: !$.browser.mobile
           });
+          $("#select2-choose_cluster-container").attr({
+            title: 'Group 1',
+        });
+        $("#select2-choose_cluster-container").text("Group 1");
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {

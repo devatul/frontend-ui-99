@@ -36,6 +36,7 @@ var GroupReview = React.createClass({
     },
     componentWillMount() {
         //this.getGroup();
+        
     },
     componentDidMount() {
         this.getListGroup(); 
@@ -62,6 +63,12 @@ var GroupReview = React.createClass({
             speed: 3000,
             animate: !$.browser.mobile
           });
+        debugger;
+
+        $("#select2-choose_cluster-container").attr({
+            title: 'Group 1',
+        });
+        $("#select2-choose_cluster-container").text("Group 1");
     },
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.state.groupCurrent != nextState.groupCurrent) {
