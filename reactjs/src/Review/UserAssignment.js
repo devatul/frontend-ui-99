@@ -122,7 +122,7 @@ var UserAssignment = React.createClass({
 	        
 	        console.log("filter.timeframe: ", filter.timeframe);
 	        if($('#usersnum :selected').val() == 0){
-	        	filter.numberuser = 30;
+	        	filter.numberuser = 10;
 	        }else{
 	        	filter.numberuser = $('#usersnum :selected').val();
 	    	}
@@ -149,7 +149,12 @@ var UserAssignment = React.createClass({
     handleFilter: function(bodyRequest) {
         console.log('bodyRequest', bodyRequest);
         if(!_.isEmpty(bodyRequest)) {
-        	var heightChart= bodyRequest.numberuser*38;
+        	if(bodyRequest.numberuser <= 15){
+	        	var heightChart= bodyRequest.numberuser*39;
+	        }else{
+	        	var heightChart= bodyRequest.numberuser*36.5;
+	        }
+
         	$('#userReviewChart').css("height", heightChart);
             $.ajax({
                 url: Constant.SERVER_API +  "api/assign/reviewer/",
@@ -184,7 +189,7 @@ var UserAssignment = React.createClass({
     },
     getReviewers() {
         var categoryId = this.state.categoryCurrent.id;
-        var heightChart= 30*38;
+        var heightChart= 10*39;
         $('#userReviewChart').css("height", heightChart);
         $.ajax({
             method: 'GET',
@@ -194,7 +199,7 @@ var UserAssignment = React.createClass({
             	"id": categoryId,
             	"timeframe":6,
             	"type" : "last_modifier",
-            	"numberuser":30
+            	"numberuser":10
         	},
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));

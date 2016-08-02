@@ -23,7 +23,7 @@
                   </header>
                   <div class="panel-body sample-params">
                     <div class="form-group">
-                      <label class="">As % of overall Accounting/ Tax Category</label>
+                      <label class="">As % of overall {this.state.categoryCurrent.name} Category</label>
                       <select name="state" class="form-control ddList">
                         <option rt-repeat="percentageDoc in this.state.categoryInfo.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
                       </select>
@@ -107,11 +107,11 @@
                                                   <select id="usersnum" name="usersnum" onChange={this.handleOnChange} class="assignent-select form-control ddList">
                                                     <option selected disabled value="0">Number of Users</option>
                                                     <option class="lt" value="30">Top 30</option>
-                                                    <option class="lt" value="2">Top 2</option>
                                                     <option class="lt" value="20">Top 20</option>
                                                     <option class="lt" value="15">Top 15</option>
                                                     <option class="lt" value="10">Top 10</option>
                                                     <option class="lt" value="5">Top 5</option>
+                                                    <option class="lt" value="2">Top 2</option>
                                                   </select>
                                                 </li>
                                                 <li>
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
-                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 38.5px" >
+                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 37.5px" >
                                 <div class="switch switch-sm switch-success">
                                   <div class="ios-switch off" rt-class="{on:review}" id="select_{reviewIndex}" onClick="()=> this.select(reviewIndex)">
                                     <div class="on-background background-fill"></div>
