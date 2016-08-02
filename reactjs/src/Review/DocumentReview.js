@@ -116,7 +116,7 @@ var DocumentReview = React.createClass({
                 $(this).children(".zoom-out").toggleClass("zoom-out-block");
             });
             $( ".my-doc-path" ).each(function( index ) {
-                var hi = "38"; 
+                var hi = "18"; 
                 var h = $(this).height();
                 if(h>hi){
                     $(this).css('height', hi);
@@ -139,16 +139,6 @@ var DocumentReview = React.createClass({
                     $('#embedURL3').gdocsViewer();
                 });
             }.bind(this));
-            $( ".my-doc-path" ).each(function( index ) {
-                var hi = "38"; 
-                var h = $(this).height();
-                if(h>hi){
-                    $(this).css('height', hi);
-                    $(this).next().addClass("display-block");
-                    console.log(h);
-                    console.log(hi);
-                }
-            });
         }
     },
     getActions: function() {
@@ -162,6 +152,12 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaa', data);
+                data[0].category = "Legal/Compliance/ Secret";
+                data[0].urgency = "very high";
+
+                data[1].category = "Legal/Compliance/ Confidential";
+                data[1].urgency = "high";
+
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;

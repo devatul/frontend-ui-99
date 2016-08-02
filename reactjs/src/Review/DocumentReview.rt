@@ -183,7 +183,7 @@
                                                                         aria-valuemax="100"
                                                                         style="width: {doc.confidence_level}%;">
                                                                     </div>
-                                                                    <span class="progress-percentage">
+                                                                    <span class="progress-percentage" style="color: #000">
                                                                         ({doc.confidence_level}%)
                                                                     </span>
                                                                 </div>
@@ -205,7 +205,7 @@
                                                                     aria-valuemax="100"
                                                                     style="width: {doc.confidential_confidence_level}%;">
                                                                 </div>
-                                                                <span class="progress-percentage">
+                                                                <span class="progress-percentage" style="color: #000">
                                                                 ({doc.confidential_confidence_level}%)
                                                                     <!--({doc.confidentialities[current.confidential].confidence_level}%)-->
                                                                 </span>
@@ -355,7 +355,7 @@
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
                                                     </th>
-                                                    <th class="text-center review_note_r">Validation
+                                                    <th class="text-center review_note_r" style="max-width: 68px;">Validation
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -424,13 +424,13 @@
                                                         
                                                     </td>
                                                     <td class="vertical-top document_2nd first-ch">
-                                                        <span class="doc-path my-doc-path">Level to confidenttiality to low for this type of document</span>
+                                                        <span class="doc-path my-doc-path">Level of Confidentiality is too low for this type of document</span>
                                                         <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
                                    
                                                     </td>
                                                     <td class="opa-child">
                                                         <div class="select-group">
-                                                            <textarea class="form-control" placeholder="Explain your choice"></textarea>
+                                                            <textarea class="form-control" placeholder="Explain your choice">Challenge’s rationale details</textarea>
                                                         </div>
                                                     </td>
                                                     <td rt-scope="docChall.current as current">
@@ -571,7 +571,7 @@
                                         <div class="progress progress-striped light">
                                           <div class="progress-bar {this.progressbar(docPreview.confidence_level)}" role="progressbar" aria-valuenow="{docPreview.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({docPreview.confidence_level}%)</span>
+                                          <span class="progress-percentage" style="color: #000">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
                                     <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value="{current.category}">
@@ -585,7 +585,7 @@
                                         <div class="progress progress-striped light">
                                           <div class="progress-bar {this.progressbar(docPreview.confidential_confidence_level)}" role="progressbar" aria-valuenow="{docPreview.confidential_confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidential_confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({docPreview.confidential_confidence_level}%)</span>
+                                          <span class="progress-percentage" style="color: #000">({docPreview.confidential_confidence_level}%)</span>
                                         </div>
                                     </div>
                                     <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">

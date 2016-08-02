@@ -117,3 +117,16 @@
     padding-left: 95px !important;
    
 }
+.table-my-actions > tbody > tr > td {
+    vertical-align: middle;
+    position: relative;
+    /* padding: 10px !important; */
+}
+.vertical-top.document_2nd.first-ch {
+    /* min-width: 160px; */
+    max-width: 150px;
+}
+.document_review_table>tbody>tr>td {
+    max-width: 185px;
+    padding: 8px !important;
+}
