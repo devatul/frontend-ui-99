@@ -175,7 +175,7 @@
           <div id="summary" class="tab-pane">
             <section rt-repeat="summary in this.state.summary" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
-                  <h2 class="panel-title">{summary.name}</h2>
+                  <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
                   <div class="panel-actions">
                       <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                   </div>
@@ -193,7 +193,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                          <td class="no-border-top border-bottom">{summary.name}</td>
+                          <td class="no-border-top border-bottom" style="text-transform: capitalize">{summary.name}</td>
                           <td class="no-border-top"><span class="assigned-num">{summary.reviewers.length}</span> <a data-toggle="collapse" data-target="#reviewerList{summaryIndex+1}" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">{summary.docs_sampled}</td>
                           <td class="no-border-top text-center">{this.addCommas(summary.total_number_document_classified)}</td>
