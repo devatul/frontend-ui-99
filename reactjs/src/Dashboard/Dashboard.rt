@@ -20,7 +20,7 @@
                         <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
                             <span rt-if="this.state.role === contant.role.IS_2ND" id="total_notification" class="badge">{this.state.notification.total}</span>
-                            <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">3</span>
+                            <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
                             <i class="fa fa-bell-o" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
@@ -114,7 +114,7 @@
                             <li>
                                 <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                             </li>
-                            <li><span class="badge">3</span>
+                            <li><span class="badge">4</span>
                                 <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                             <li>
                                 <a href="#">Insights</a>
