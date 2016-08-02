@@ -85,6 +85,7 @@
                                         <div class="info">
                                             <strong class="amount">{this.state.scan_result.percentage_accuracy}%</strong>
                                         </div>
+                                        <span>340,740 documents correctly classified</span>
                                     </div>
                                 </div>
                             </div>

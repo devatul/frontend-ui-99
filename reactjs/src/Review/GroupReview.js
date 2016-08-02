@@ -21,6 +21,8 @@ var GroupReview = React.createClass({
     		statistics: {},
     		cloudwords: [],
     		centroids: [],
+            data: {},
+            status: 0,
     		samplesDocument: [],
             samplesDefault: [],
     		categoriesInfo: [],
@@ -46,6 +48,20 @@ var GroupReview = React.createClass({
         $('#choose_cluster').on('change', function(event) {
             this.changeGroup(event);
         }.bind(this));
+        $('#meter').liquidMeter({
+            id:'meterCircle',
+            shape: 'circle',
+            color: '#0088CC',
+            background: '#F9F9F9',
+            fontSize: '24px',
+            fontWeight: '600',
+            stroke: '#F2F2F2',
+            textColor: '#333',
+            liquidOpacity: 0.9,
+            liquidPalette: ['#333'],
+            speed: 3000,
+            animate: !$.browser.mobile
+          });
     },
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.state.groupCurrent != nextState.groupCurrent) {
@@ -76,6 +92,9 @@ var GroupReview = React.createClass({
             return true;
         }
         if(this.state.cloudwords != nextState.cloudwords) {
+            return true;
+        }
+        if(this.state.status != nextState.status) {
             return true;
         }
         return false;
@@ -130,8 +149,25 @@ var GroupReview = React.createClass({
             }.bind(this));
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
-            this.checkedNumber();
             this.validateNumber();   
+        }
+        if(this.state.status != prevState.status) {
+            debugger;
+            $('.liquid-meter').replaceWith('<div class="liquid-meter" id="meter"  min="0" max="100" value="' + this.state.status + '"></div>');
+            $('#meter').liquidMeter({
+            id:'meterCircle',
+            shape: 'circle',
+            color: '#0088CC',
+            background: '#F9F9F9',
+            fontSize: '24px',
+            fontWeight: '600',
+            stroke: '#F2F2F2',
+            textColor: '#333',
+            liquidOpacity: 0.9,
+            liquidPalette: ['#333'],
+            speed: 3000,
+            animate: !$.browser.mobile
+          });
         }
     },
     ucwords:function(str){
@@ -164,7 +200,20 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
+    parseInt: function(num) {
+        return Math.round(num);
+    },
     getStatistics: function() {
+        var totalDocument = [880,768,743,
+                            722,710,703,
+                            694,693,688,
+                            674,623,589,
+                            587,499,455,
+                            402,395,394,
+                            333,288,285,
+                            235,226,213,
+                            193,170,150,
+                            127,114,59];
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/statistics/",
@@ -174,6 +223,7 @@ var GroupReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                data.total_number_documents = totalDocument[this.state.groupCurrent.id - 1];
                 var updateState = update(this.state, {
                     statistics: {$set: data}
                 });
@@ -252,18 +302,21 @@ var GroupReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                for(var i = 0; i < data.length; i++) {
-                    data[i].current = {
+                for(var i = 0; i < data.documents.length; i++) {
+                    data.documents[i].current = {
                         checked: false,
-                        category: 0,
-                        confidential: 0,
+                        category: Math.floor((Math.random() * 5)),
+                        confidential: Math.floor((Math.random() * 4)),
                         status: "normal"
                     };
                 }
+                var documentPreview = data.documents[0];
+                documentPreview.index = 0;
                 var updateState = update(this.state, {
-                    samplesDocument: {$set: data},
-                    samplesDefault: {$set: $.extend(true, {}, data) },
-                    documentPreview: {$set: data[0]}
+                    data: {$set: data },
+                    samplesDocument: {$set: data.documents},
+                    samplesDefault: {$set: $.extend(true, {}, data.documents) },
+                    documentPreview: {$set: data.documents[0]}
                 });
                 this.setState(updateState);
             }.bind(this),
@@ -458,6 +511,7 @@ var GroupReview = React.createClass({
             samplesDocument: {$set: listDocument}
         });
         this.setState(setUpdate);
+        this.checkedNumber();
         this.setState({shouldUpdate: 'updateCheckBox_' + sampleIndex  + '_' + checked});
     },
     validateNumber: function() {
@@ -468,7 +522,8 @@ var GroupReview = React.createClass({
                 num++;
             }
         }
-        this.setState({ validateNumber: num });
+        var status = this.parseInt((num * 100) / this.state.samplesDocument.length);
+        this.setState(update(this.state, { validateNumber: {$set: num }, status: {$set: status } } ));
     },
     onClickValidationButton: function(event, sampleIndex) {
         var listDocument = this.state.samplesDocument;
@@ -501,6 +556,7 @@ var GroupReview = React.createClass({
             checkBoxAll: {$set: false }
         });
         this.setState(setUpdate);
+        this.checkedNumber();
         this.setState({ shouldUpdate: 'approveButon_' + approveIndex });
     },
     checkAllButton: function(event) {
@@ -515,6 +571,7 @@ var GroupReview = React.createClass({
             checkBoxAll: {$set: checked }
         });
         this.setState(setUpdate);
+        this.checkedNumber();
         this.setState({ shouldUpdate: 'updateCheckAll_' + checked});
     },
     undoHandle: function() {
@@ -539,9 +596,8 @@ var GroupReview = React.createClass({
     },
     cutPath: function(str) {
         if(str.length > 0) {
-            str.substring(0,str.lastIndexOf('/') + 1);
+            return str.substring(0,str.lastIndexOf('/') + 1);
         }
-        return str;
     },
     drawCentroid() {
         var centroids = this.state.centroids;
@@ -613,7 +669,7 @@ var GroupReview = React.createClass({
 				flotPieData.push({
 					label: name,
 		            data: [
-		                [1, categoriesInfo[i].percentage]
+		                [6, categoriesInfo[i].percentage]
 		            ],
 		            color: colors[i]
 				});
@@ -650,7 +706,7 @@ var GroupReview = React.createClass({
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y + ' Documents';
+                return label + ': ' + y + ' Documents';
               }
             }
         });

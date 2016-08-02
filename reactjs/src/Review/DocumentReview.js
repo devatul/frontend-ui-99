@@ -295,6 +295,40 @@ var DocumentReview = React.createClass({
             stackChange: {$set: stackList },
             Actions: {$set: actions}
         });
+        $.ajax({
+            url: Constant.SERVER_API + 'api/review/documents/',
+            type: 'PUT',
+            dataType: 'Json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+            },
+            data: JSON.stringify({
+                    "id": "1",
+                    "documents": [
+                        {
+                            "id": "document_id",
+                            "category": {
+                                "name": "tax",
+                                "confidence_level": 10
+                            },
+                            "confidentiality": {
+                                "name": "secret",
+                                "confidence_level": 10
+                            }
+                        }
+                    ]
+                })
+        })
+        .done(function(data) {
+            console.log("success", data);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
         this.setState(setUpdate);
         this.setState({shouldUpdate: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' }});
         //debugger;

@@ -6,10 +6,9 @@
                         <div class="form-group">
                             <div class="input-group mb-md">
                                 <label for="choose_cluster">
-                                    Choose a Orphan
-
+                                    Select
                                     <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster">
-                                        <option rt-repeat="orphan in this.state.listOrphan" value="{orphanIndex}" key="{orphanIndex}">{orphan.name}</option>
+                                        <option rt-repeat="orphan in this.state.listOrphan" value="{orphanIndex}" key="{orphanIndex}">{this.cutString(orphan.name)}</option>
                                     </select>
                                 </label>
                                 <button class="btn btn-green btn-ok" type="button" style="display:none">OK</button>
@@ -35,7 +34,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <h4>Review Status</h4>
-                                        <div class="liquid-meter" id="meter"  min="0" max="100" value="25"></div>
+                                        <div class="liquid-meter" id="meter"  min="0" max="100" value="0"></div>
 
                                         <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                                           <header class="panel-heading">
@@ -63,7 +62,7 @@
                                                         <td class="text-left">{this.state.statistics.total_number_documents}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-left"><span>Completed Number of Documents</span>
+                                                        <td class="text-left"><span>Number of Documents Reviewed</span>
                                                         <div class="dropdown dropdown-file-info-holder inline-block-item">
                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                                           <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -71,7 +70,7 @@
                                                           </div>
                                                         </div>
                                                       </td>
-                                                        <td class="text-left">{this.state.statistics.completed_number_documents}</td>
+                                                        <td class="text-left">{this.state.validateNumber}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Average Centroid Distance</span>
@@ -216,6 +215,7 @@
                         <header class="panel-heading">
                             <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
                             <div class="inline-block-item view-stat-block">
+                                <b>Review {this.state.orphanCurrent.name + '   '}</b>
                                 <label>Sample Method: </label>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
@@ -230,7 +230,7 @@
                             </div>
                         </header>
                         <div class="panel-body" style="display: block;">
-                            <p class="document_note">You have {this.state.samplesDocument.length - this.state.validateNumber} documents to assign in {this.state.orphanCurrent.name } by latest 28th june</p>
+                            <p class="document_note">You have {this.state.samplesDocument.length - this.state.validateNumber} documents to assign in {this.state.orphanCurrent.name} by latest 15th August</p>
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <button rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)" type="button" class="mb-md mr-xs btn btn-green approve-button" onClick="(event)=>this.approveButon()">Approve</button>
                                 <div rt-if="(this.state.validateNumber > 0 && this.state.validateNumber == this.state.samplesDocument.length)" class="alert alert-success">
@@ -349,14 +349,16 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
-                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" value="{current.category}">
+                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" key="index">
+                                                        <option selected disabled>Please select</option>
                                                         <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                       </select>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
-                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{current.confidential}">
+                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" key="index">
+                                                        <option selected disabled>Please select</option>
                                                         <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                       </select>
                                                     </div>

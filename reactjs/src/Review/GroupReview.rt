@@ -7,7 +7,7 @@
             <div class="form-group">
                 <div class="input-group mb-md">
                     <label for="choose_cluster">
-                        Choose a Group
+                        Select
                         <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index">
                             <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}">{group.name}</option>
                         </select>
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <h4>Review Status</h4>
-                            <div class="liquid-meter" id="meter"  min="0" max="100" value="25"></div>
+                            <div class="liquid-meter" id="meter"  min="0" max="100" value="0"></div>
 
                             <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                               <header class="panel-heading">
@@ -57,7 +57,7 @@
                                             <td class="text-left">{this.state.statistics.total_number_documents}</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-left"><span>Completed Number of Documents</span>
+                                            <td class="text-left"><span>Number of Documents Reviewed</span>
                                             <div class="dropdown dropdown-file-info-holder inline-block-item">
                                               <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                               <div class=" review_question_chart dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -65,7 +65,7 @@
                                               </div>
                                             </div>
                                           </td>
-                                            <td class="text-left">{this.state.statistics.completed_number_documents}</td>
+                                            <td class="text-left">{this.state.validateNumber}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Average Centroid Distance</span>
@@ -203,9 +203,6 @@
         </div>
     </div>
 </div>
-
-
-
 <div class="container">
 <div class="row" id="groupReview">
     <div class="col-md-12">
@@ -213,6 +210,7 @@
             <header class="panel-heading">
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
                 <div class="inline-block-item view-stat-block">
+                <b rt-if="this.state.groupCurrent != null">Review {this.state.groupCurrent.name + '   '}</b>
                     <label>Sample Method: </label>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
@@ -228,7 +226,7 @@
             </header>
             <div class="panel-body" style="display: block;">
                 <p class="document_note" rt-if="this.state.groupCurrent != null">
-                  You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within <span rt-if="this.state.documentPreview != null">{this.state.documentPreview.categories.length} category with {this.state.documentPreview.confidentialities.length}</span> confidentiality in {this.state.groupCurrent.name } by latest 28th june
+                  You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within  category in {this.state.groupCurrent.name} by latest 15th August
                 </p>
                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                     <button
@@ -367,15 +365,15 @@
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
                                                   <div
-                                                    class="progress-bar {this.progressbar(sample.categories[current.category].confidence_level)}"
+                                                    class="progress-bar {this.progressbar(sample.confidence_level)}"
                                                     role="progressbar"
                                                     aria-valuenow="{sample.categories[current.category].confidence_level}"
                                                     aria-valuemin="0"
                                                     aria-valuemax="100"
-                                                    style="width: {sample.categories[current.category].confidence_level}%;">
+                                                    style="width: {sample.confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">
-                                                    ({sample.categories[current.category].confidence_level}%)
+                                                  <span class="progress-percentage" style="color: #000">
+                                                    ({sample.confidence_level}%)
                                                   </span>
                                                 </div>
                                             </div>
@@ -398,14 +396,14 @@
                                             <div class="selected-info">
                                                 <div class="progress progress-striped light">
                                                   <div
-                                                    class="progress-bar {this.progressbar(sample.confidentialities[current.confidential].confidence_level)}"
+                                                    class="progress-bar {this.progressbar(sample.confidentiality_confidence_level)}"
                                                     role="progressbar"
                                                     aria-valuenow="{sample.confidentialities[current.confidential].confidence_level}"
                                                     aria-valuemin="0"
                                                     aria-valuemax="100"
-                                                    style="width:{sample.confidentialities[current.confidential].confidence_level}%;">
+                                                    style="width:{sample.confidentiality_confidence_level}%;">
                                                   </div>
-                                                  <span class="progress-percentage">({sample.confidentialities[current.confidential].confidence_level}%)</span>
+                                                  <span class="progress-percentage" style="color: #000">({sample.confidentiality_confidence_level}%)</span>
                                                 </div>
                                             </div>
                                             <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" value="{current.confidential}">

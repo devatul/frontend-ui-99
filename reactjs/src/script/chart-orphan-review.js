@@ -8,24 +8,10 @@ module.exports = function() {
             $('[id="'+$(this).val()+'"]').show();
           });*/
 
-          $('#meter').liquidMeter({
-            shape: 'circle',
-            color: '#0088CC',
-            background: '#F9F9F9',
-            fontSize: '24px',
-            fontWeight: '600',
-            stroke: '#F2F2F2',
-            textColor: '#333',
-            liquidOpacity: 0.9,
-            liquidPalette: ['#333'],
-            speed: 3000,
-            animate: !$.browser.mobile
-          });
-
-          $('.btn-refine').on('click', function(e){
+          /*$('.btn-refine').on('click', function(e){
             e.preventDefault();
             $(this).removeClass('btn-green').addClass('btn-disabled');
             //$('<span> (in progress)</span>').insertAfter($(this));
-          });
+          });*/
 
       }

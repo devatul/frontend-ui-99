@@ -3,16 +3,17 @@ module.exports = function(data) {
         function addCommas(nStr)
         {
             nStr += '';
-            var x = nStr.split('.');
-            var x1 = x[0];
-            var x2 = x.length > 1 ? '.' + x[1] : '';
+            var num = nStr.split('.');
+            var x1 = num[0];
+            var x2 = num.length > 1 ? '.' + num[1] : '';
             var rgx = /(\d+)(\d{3})/;
             while (rgx.test(x1)) {
               x1 = x1.replace(rgx, '$1' + ',' + '$2');
             }
             return x1 + x2;
         }
-        var plot = $.plot('#flotPie', data.data_confidentiality, {
+
+        $.plot('#flotPie', data.data_confidentiality, {
             series: {
                 pie: {
                     show: true,
@@ -33,9 +34,9 @@ module.exports = function(data) {
             },
             tooltip: {
               show: true,
-              content: function(label,x,y){
-                return label + ': ' +addCommas(y) + ' Documents';
-              },
+              content: function(label, xval, yval, flotitem) {
+                return label + ': ' + addCommas(yval) + ' Documents';
+              }
             }
         });
         if(data.data_confidentiality.length <= 1){
@@ -179,7 +180,7 @@ module.exports = function(data) {
             },
             tooltip: {
               show: true,
-              content: function(label,x,y){
+              content: function(label,x,y,z){
                 return label + ': ' +addCommas(y)  + ' Documents';
               },
             }

@@ -27,7 +27,48 @@ var ReviewValidation = React.createClass({
             reviewValidCurrent: null,
             challengedDocs: [],
             challengedDocCurrent: null,
-            summary: [],
+            summary: [{"id":1,
+      "name":"accounting/tax",
+      "docs_sampled" : 20,
+      "number_of_assigned": 30,
+      "total_challenged_docs": 9,
+      "total_number_document_classified": 70256,
+      "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
+{"id":2,
+       "name":"corporate entity",
+       "docs_sampled" : 20,
+       "number_of_assigned": 30,
+       "total_challenged_docs": 7,
+       "total_number_document_classified": 35128,
+       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
+{"id":3,
+       "name":"Client/Customer",
+       "docs_sampled" : 20,
+       "number_of_assigned": 30,
+       "total_challenged_docs": 9,
+       "total_number_document_classified": 122947,
+       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
+{"id":4,
+       "name":"Employee",
+       "docs_sampled" : 20,
+       "number_of_assigned": 30,
+       "total_challenged_docs": 7,
+       "total_number_document_classified": 17564,
+       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
+{"id":5,
+       "name":"Legal/Compliance",
+       "docs_sampled" : 20,
+       "number_of_assigned": 30,
+       "total_challenged_docs": 9,
+       "total_number_document_classified": 52692,
+       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
+{"id":6,
+       "name":"Transaction",
+       "docs_sampled" : 20,
+       "number_of_assigned": 30,
+       "total_challenged_docs": 4,
+       "total_number_document_classified": 52692,
+       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] }],
             documentPreview: null,
             stackChange: [],
             shouldUpdate: null
@@ -286,7 +327,7 @@ var ReviewValidation = React.createClass({
                     data.documents[i].current_category = 0;
                     data.documents[i].current_confidentiality = 0;
                     data.documents[i].previous_category = null;
-                    data.documents[i].previous_confidentiality = null;
+                    //data.documents[i].previous_confidentiality = null;
                 }
                 if(check === null) {
                     var reviewCurrent = {
@@ -384,7 +425,7 @@ var ReviewValidation = React.createClass({
             reviewValidations[indexValid].documents[docIndex].previous_confidentiality = reviewValidations[indexValid].documents[docIndex].current_confidentiality;
         }
         if(reviewValidations[indexValid].documents[docIndex].previous_confidentiality == confidentialIndex){
-            reviewValidations[indexValid].documents[docIndex].previous_confidentiality = null;
+            //reviewValidations[indexValid].documents[docIndex].previous_confidentiality = null;
             reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "accepted";
             reviewValidations[indexValid].documents[docIndex].status = "accepted";
         } else {
@@ -493,10 +534,10 @@ var ReviewValidation = React.createClass({
             contents: saveDocument
         });
         if(reviewValidations[indexValid].documents[docIndex].previous_confidentiality != null) {
-            reviewValidations[indexValid].documents[docIndex].previous_confidentiality = null;
+            //reviewValidations[indexValid].documents[docIndex].previous_confidentiality = null;
         }
         if(reviewValidations[indexValid].documents[docIndex].previous_category != null) {
-            reviewValidations[indexValid].documents[docIndex].previous_category = null;
+            //reviewValidations[indexValid].documents[docIndex].previous_category = null;
         }
         reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "accepted";
         reviewValidations[indexValid].documents[docIndex].status = "accepted";
@@ -530,7 +571,7 @@ var ReviewValidation = React.createClass({
 
     },
     getSummary() {
-        $.ajax({
+        /*$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/review/review_validation/summary/",
             dataType: 'json',
@@ -551,7 +592,7 @@ var ReviewValidation = React.createClass({
                     browserHistory.push('/Account/SignIn');
                 }
             }.bind(this)
-        });
+        });*/
     },
     endReviewHandle: function() {
         browserHistory.push('/Dashboard/OverView');

@@ -139,7 +139,7 @@
                                                     <td class="text-left">
                                                         <!--http://www.snee.com/xml/xslt/sample.doc-->
                                                         <span
-                                                            class="text-italic file-name doc-path-2"
+                                                            class="text-italic file-name doc-path"
                                                             data-toggle="modal"
                                                             data-target="#previewModal"
                                                             onClick="()=>this.setDocumentPreview(actionIndex, docIndex)"
@@ -166,7 +166,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-left">
-                                                        <span class="text-italic doc-path">{doc.path}</span>
+                                                        <span class="text-italic file-name-1 doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{doc.path}">{doc.path}</span>
                                                     </td>
                                                     <td class="text-left">
                                                         <span class="text-italic">{doc.owner}</span>
@@ -721,7 +721,7 @@
                                 </div>
                             </td>
                             <td class="text-left">
-                                <span class="text-italic doc-path">{docPreview.path}</span>
+                                <span class="text-italic doc-path file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{docPreview.path}">{docPreview.path}</span>
                             </td>
                             <td class="text-left">
                                 <span class="text-italic">{(docPreview.name.length > 7) ? docPreview.owner.substring(7, 0) + '..' : docPreview.owner}</span>
@@ -731,7 +731,7 @@
                                     <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
                                       <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                     </select>
-
+                                    <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docPreview.categories[current.prevCategory].name}</span>
                                 </div>
                             </td>
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
@@ -739,10 +739,11 @@
                                     <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
                                       <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select>
+                                    <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docPreview.confidentialities[current.prevConfidential].name}</span>
                                 </div>
                             </td>
                             <td class="vertical-top document_2nd first-ch">
-                                <span class="doc-path my-doc-path">Level of Confidentiality is too low/high for this type of document</span>
+                                <span class="my-doc-path">Level of Confidentiality is too low/high for this type of document</span>
                                 <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
            
                             </td>

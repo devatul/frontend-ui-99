@@ -154,7 +154,7 @@ var OverView = React.createClass
                 data_confidentiality.push({
                     label: this.ucwords(data.confidentialities_chart_data[i].name),
                     data: [
-                        [1, data.confidentialities_chart_data[i].total_docs]
+                        [data.confidentialities_chart_data[i].percentage_docs,data.confidentialities_chart_data[i].total_docs]
                     ],
                     color: colors[i]
                 });
@@ -164,7 +164,7 @@ var OverView = React.createClass
                 data_categories.push({
                     label: this.ucwords(data.categories_chart_data[i].name),
                     data: [
-                        [1, data.categories_chart_data[i].total_docs]
+                        [5 , data.categories_chart_data[i].total_docs]
                     ],
                     color: colors[i]
                 });
