@@ -162,7 +162,6 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaa', data);
-                var data = data.splice(1,2);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -425,7 +424,6 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaattt', data);
-                var data = data.splice(0,1);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
