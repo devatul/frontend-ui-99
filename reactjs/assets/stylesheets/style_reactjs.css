@@ -117,3 +117,16 @@
     padding-left: 95px !important;
    
 }
+
+.noti-popup {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.noti-div {
+    display: flex;
+    flex-direction: column;
+}

@@ -16,7 +16,8 @@ var Notification = React.createClass
                 yesterday: [],
                 last_7_days: [],
                 last_30_days: [],
-                older: []
+                older: [],
+                total: 0
             },
             notiType: '',
             warningNoti: 0,
@@ -52,6 +53,30 @@ var Notification = React.createClass
             });
             this.setState({"notiType": notiType });
         };
+    },
+
+    filterNotification() {
+        var filterType = $( '.filter-noti option:selected' ).attr('data-update-time');
+        console.log(filterType);
+        if (filterType == 'update-default'){
+            $('[data-last-update]').show();
+        }
+        else if (filterType == 'update-pending' || filterType == 'update-completed'){
+            $('[data-last-update]').show();
+            $('[data-update-status]').hide();
+            $('[data-update-status='+filterType+']').show();
+        }
+        else if (filterType == 'update-week'){
+            $('[data-update-status]').show();
+            $('[data-last-update]').hide();
+            $('[data-last-update='+filterType+']').show();
+            $('[data-last-update="update-yesterday"]').show();
+            $('[data-last-update="update-today"]').show();
+        }
+        else{
+            $('[data-last-update]').hide();
+            $('[data-last-update='+filterType+']').show();
+        }
     },
 
     getDummyNotification() {
@@ -122,7 +147,8 @@ var Notification = React.createClass
                                 }] }
                 },
                 warningNoti: {$set: 1 },
-                dangerNoti: {$set: 1 }
+                dangerNoti: {$set: 1 },
+                total: {$set: 4 }
             });
         } else if (role === Constant.role.IS_2ND) {
             var update_notification = update(this.state, {
@@ -142,7 +168,8 @@ var Notification = React.createClass
                                 ]}
                 },
                 warningNoti: {$set: 1 },
-                dangerNoti: {$set: 0 }
+                dangerNoti: {$set: 0 },
+                total: {$set: 1 }
             });
         }
         this.setState(update_notification);
