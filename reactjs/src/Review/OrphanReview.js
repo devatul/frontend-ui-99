@@ -349,8 +349,8 @@ var OrphanReview = React.createClass({
                 for(var i = 0; i < data.documents.length; i++) {
                     data.documents[i].current = {
                         checked: false,
-                        category: 0,
-                        confidential: 0,
+                        category: -1,
+                        confidential: -1,
                         status: "normal"
                     };
                 }
@@ -459,7 +459,7 @@ var OrphanReview = React.createClass({
         var samplesDocument = this.state.samplesDocument;
         var num = 0;
         for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.status === "accept") {
+            if(samplesDocument[i].current.status === "editing" || samplesDocument[i].current.status === "accept") {
                 num++;
             }
         }

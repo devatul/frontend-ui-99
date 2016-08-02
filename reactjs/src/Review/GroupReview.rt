@@ -8,7 +8,7 @@
                 <div class="input-group mb-md">
                     <label for="choose_cluster">
                         Select
-                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index">
+                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index" onClick={this.selectGroup}>
                             <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}">{group.name}</option>
                         </select>
                     </label>
@@ -225,8 +225,8 @@
                 </div>
             </header>
             <div class="panel-body" style="display: block;">
-                <p class="document_note" rt-if="this.state.groupCurrent != null">
-                  You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within  category in {this.state.groupCurrent.name} by latest 15th August
+                <p class="document_note" rt-if="this.state.groupCurrent != null && this.state.documentPreview != null">
+                  You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within {this.state.documentPreview.categories[this.state.groupCurrent.category].name}  category in {this.state.groupCurrent.name} by latest 15th August
                 </p>
                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                     <button
@@ -451,7 +451,7 @@
             </div>
             <div class="col-sm-4 modal-actions text-right">
                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                 <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
           </div>
@@ -559,9 +559,9 @@
                 <div class="select-group" rt-scope="document.current as current">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
-                          <div class="progress-bar {this.progressbar(document.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{document.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.categories[current.category].confidence_level}%;">
+                          <div class="progress-bar {this.progressbar(document.confidence_level)}" role="progressbar" aria-valuenow="{document.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({document.categories[current.category].confidence_level}%)</span>
+                          <span class="progress-percentage">({document.confidence_level}%)</span>
                         </div>
                     </div>
                     <select class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" value="{current.category}">
@@ -573,9 +573,9 @@
                 <div class="select-group" rt-scope="document.current as current">
                     <div class="selected-info">
                         <div class="progress progress-striped light">
-                          <div class="progress-bar {this.progressbar(document.confidentialities[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{document.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidentialities[current.confidential].confidence_level}%;">
+                          <div class="progress-bar {this.progressbar(document.confidentiality_confidence_level)}" role="progressbar" aria-valuenow="{document.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidentiality_confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({document.confidentialities[current.confidential].confidence_level}%)</span>
+                          <span class="progress-percentage">({document.confidentiality_confidence_level}%)</span>
                         </div>
                     </div>
                     <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" value="{current.confidential}">

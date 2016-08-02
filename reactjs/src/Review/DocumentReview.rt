@@ -176,15 +176,15 @@
                                                             <div class="selected-info">
                                                                 <div class="progress progress-striped light">
                                                                     <div 
-                                                                        class="progress-bar {this.progressbar(doc.categories[current.category].confidence_level)}"
+                                                                        class="progress-bar {this.progressbar(doc.confidence_level)}"
                                                                         role="progressbar"
                                                                         aria-valuenow="{doc.categories[current.category].confidence_level}"
                                                                         aria-valuemin="0"
                                                                         aria-valuemax="100"
-                                                                        style="width: {doc.categories[current.category].confidence_level}%;">
+                                                                        style="width: {doc.confidence_level}%;">
                                                                     </div>
                                                                     <span class="progress-percentage">
-                                                                        ({doc.categories[current.category].confidence_level}%)
+                                                                        ({doc.confidence_level}%)
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -198,15 +198,16 @@
                                                             <div class="selected-info">
                                                                 <div class="progress progress-striped light">
                                                                 <div
-                                                                    class="progress-bar {this.progressbar(doc.confidentialities[current.confidential].confidence_level)}"
+                                                                    class="progress-bar {this.progressbar(doc.confidential_confidence_level)}"
                                                                     role="progressbar"
                                                                     aria-valuenow="{doc.confidentialities[current.confidential].confidence_level}"
                                                                     aria-valuemin="0"
                                                                     aria-valuemax="100"
-                                                                    style="width: {doc.confidentialities[current.confidential].confidence_level}%;">
+                                                                    style="width: {doc.confidential_confidence_level}%;">
                                                                 </div>
                                                                 <span class="progress-percentage">
-                                                                    ({doc.confidentialities[current.confidential].confidence_level}%)
+                                                                ({doc.confidential_confidence_level}%)
+                                                                    <!--({doc.confidentialities[current.confidential].confidence_level}%)-->
                                                                 </span>
                                                                 </div>
                                                             </div>
@@ -568,9 +569,9 @@
                                 <div class="select-group">
                                     <div class="selected-info">
                                         <div class="progress progress-striped light">
-                                          <div class="progress-bar {this.progressbar(docPreview.categories[current.category].confidence_level)}" role="progressbar" aria-valuenow="{docPreview.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.categories[current.category].confidence_level}%;">
+                                          <div class="progress-bar {this.progressbar(docPreview.confidence_level)}" role="progressbar" aria-valuenow="{docPreview.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({docPreview.categories[current.category].confidence_level}%)</span>
+                                          <span class="progress-percentage">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
                                     <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value="{current.category}">
@@ -582,9 +583,9 @@
                                 <div class="select-group">
                                     <div class="selected-info">
                                         <div class="progress progress-striped light">
-                                          <div class="progress-bar {this.progressbar(docPreview.confidentialities[current.confidential].confidence_level)}" role="progressbar" aria-valuenow="{docPreview.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidentialities[current.confidential].confidence_level}%;">
+                                          <div class="progress-bar {this.progressbar(docPreview.confidential_confidence_level)}" role="progressbar" aria-valuenow="{docPreview.confidential_confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidential_confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage">({docPreview.confidentialities[current.confidential].confidence_level}%)</span>
+                                          <span class="progress-percentage">({docPreview.confidential_confidence_level}%)</span>
                                         </div>
                                     </div>
                                     <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">

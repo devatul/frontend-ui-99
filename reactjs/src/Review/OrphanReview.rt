@@ -7,7 +7,7 @@
                             <div class="input-group mb-md">
                                 <label for="choose_cluster">
                                     Select
-                                    <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster">
+                                    <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster" key="index" defaultValue="0">
                                         <option rt-repeat="orphan in this.state.listOrphan" value="{orphanIndex}" key="{orphanIndex}">{this.cutString(orphan.name)}</option>
                                     </select>
                                 </label>
@@ -349,7 +349,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
-                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" key="index">
+                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" key="index" value="{current.category}">
                                                         <option selected disabled>Please select</option>
                                                         <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                       </select>
@@ -357,7 +357,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
-                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" key="index">
+                                                      <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" key="index" value="{current.confidential}">
                                                         <option selected disabled>Please select</option>
                                                         <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                       </select>
@@ -401,7 +401,7 @@
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
               </div>
@@ -509,14 +509,16 @@
               </td>
               <td>
                 <div class="select-group">
-                  <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" value="{current.category}">
+                  <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" key="index" value="{current.category}">
+                    <option selected disabled value="-1">Please select</option>
                     <option rt-repeat="category in document.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                   </select>
                 </div>
               </td>
               <td>
                 <div class="select-group">
-                  <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" value="{current.confidential}">
+                  <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" key="index" value="{current.confidential}">
+                    <option selected disabled value="-1">Please select</option>
                     <option rt-repeat="Confidential in document.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                   </select>
                 </div>

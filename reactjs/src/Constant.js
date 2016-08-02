@@ -18,8 +18,8 @@ module.exports = {
 		level3: "progress-bar-success"
 	},
 	progressValue: {
-		level1: 33,
-		level2: 66
+		level1: 30,
+		level2: 80
 	}
 	,
 	iconCategories:

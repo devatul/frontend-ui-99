@@ -186,6 +186,30 @@ var GroupReview = React.createClass({
             },
             success: function(data) {
                 console.log(data);
+                var category = [0,
+                                2,
+                                0,
+                                5,
+                                5,
+                                1,
+                                5,
+                                5,
+                                5,
+                                1,
+                                5,
+                                1,
+                                5,
+                                1,
+                                5,
+                                5,
+                                1,
+                                1,
+                                1,
+                                1];
+
+                for(var i = 0; i < data.length; i++) {
+                    data[i].category = category[i];
+                }
                 var updateState = update(this.state, {
                     listGroup: {$set: data},
                     groupCurrent: {$set: data[0]}
@@ -236,6 +260,10 @@ var GroupReview = React.createClass({
                 }
             }.bind(this)
         });
+    },
+    selectGroup: function(event) {
+        debugger;
+        $('option#defaultSelect').css('display', 'none');
     },
     getCloudwords: function() {
         /*
@@ -303,9 +331,11 @@ var GroupReview = React.createClass({
             },
             success: function(data) {
                 for(var i = 0; i < data.documents.length; i++) {
+                    data.documents[i].confidence_level = (data.documents[i].confidence_level - 10)
+                    data.documents[i].confidentiality_confidence_level = (data.documents[i].confidentiality_confidence_level-10)
                     data.documents[i].current = {
                         checked: false,
-                        category: Math.floor((Math.random() * 5)),
+                        category: this.state.groupCurrent.category,
                         confidential: Math.floor((Math.random() * 4)),
                         status: "normal"
                     };
@@ -518,7 +548,7 @@ var GroupReview = React.createClass({
         var samplesDocument = this.state.samplesDocument;
         var num = 0;
         for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.status === "accept") {
+            if(samplesDocument[i].current.status === "editing" || samplesDocument[i].current.status === "accept") {
                 num++;
             }
         }

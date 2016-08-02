@@ -75,6 +75,7 @@ var DocumentReview = React.createClass({
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate;
             if(update.name === 'updateValidate' || update.name === 'undoAction' || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
+                debugger;
                 this.validateNumber(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === 'undoAction' || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -83,7 +84,8 @@ var DocumentReview = React.createClass({
         }
         if(this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
             var update = this.state.shouldUpdateChall;
-            if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
+            if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidentialChall") {
+                debugger;
                 this.validateNumberChallenged(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === "undoActionChallenged" || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -137,6 +139,16 @@ var DocumentReview = React.createClass({
                     $('#embedURL3').gdocsViewer();
                 });
             }.bind(this));
+            $( ".my-doc-path" ).each(function( index ) {
+                var hi = "38"; 
+                var h = $(this).height();
+                if(h>hi){
+                    $(this).css('height', hi);
+                    $(this).next().addClass("display-block");
+                    console.log(h);
+                    console.log(hi);
+                }
+            });
         }
     },
     getActions: function() {
@@ -149,11 +161,14 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                console.log('dataaaa', data);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
                     data[i].validateNumber = 0;
                     for(var j = 0; j < data[i].documents.length; j++) {
+                        data[i].documents[j].confidential_confidence_level = Math.floor(Math.random()*(99-70+1)+70);
+                        data[i].documents[j].confidence_level = Math.floor(Math.random()*(99-70+1)+70);
                         data[i].documents[j].current = {
                             checked: false,
                             category: 0,
@@ -272,7 +287,7 @@ var DocumentReview = React.createClass({
         var actions = this.state.Actions;
         var num = 0;
         for(var i = 0; i < actions[actionIndex].documents.length; i++) {
-            if(actions[actionIndex].documents[i].current.status === "accept") {
+            if(actions[actionIndex].documents[i].current.status === "editing" || actions[actionIndex].documents[i].current.status === "accept") {
                 num++;
             }
         }
@@ -408,6 +423,7 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
+                console.log('dataaaattt', data);
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -490,12 +506,15 @@ var DocumentReview = React.createClass({
         });
         if(actions[actionIndex].documents[docIndex].current.prevConfidential == null) {
             actions[actionIndex].documents[docIndex].current.prevConfidential = actions[actionIndex].documents[docIndex].current.confidential;
-        } else if(actions[actionIndex].documents[docIndex].current.prevConfidential == confidentialIndex) {
+        }
+        if(actions[actionIndex].documents[docIndex].current.prevConfidential == confidentialIndex) {
             actions[actionIndex].documents[docIndex].current.prevConfidential = null;
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
+            debugger;
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
+        debugger;
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
         /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
@@ -506,7 +525,7 @@ var DocumentReview = React.createClass({
             ChallengedDocuments: {$set: actions}
         });
         this.setState(setUpdate);
-        this.setState({ shouldUpdateChall: { name: 'updateConfidential', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
+        this.setState({ shouldUpdateChall: { name: 'updateConfidentialChall', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
     },
     checkedNumberChallenged: function(actionIndex) {
         var actions = this.state.ChallengedDocuments;
@@ -543,7 +562,7 @@ var DocumentReview = React.createClass({
         var actions = this.state.ChallengedDocuments;
         var num = 0;
         for(var i = 0; i < actions[actionIndex].documents.length; i++) {
-            if(actions[actionIndex].documents[i].current.status === "accept") {
+            if(actions[actionIndex].documents[i].current.status === "editing" || actions[actionIndex].documents[i].current.status === "accept") {
                 num++;
             }
         }

@@ -508,7 +508,7 @@ var ReviewValidation = React.createClass({
         //debugger;
         console.log('i', i, _.size(reviewValidations[index].documents));
         for(var i = 0; i < _.size(reviewValidations[index].documents); i++) {
-            if(reviewValidations[index].documents[i]['2nd_line_validation'] == "accepted") {
+            if(reviewValidations[index].documents[i]['2nd_line_validation'] == "accepted" || reviewValidations[index].documents[i]['2nd_line_validation'] == "editing") {
                 validReviewer++;
             } 
         }

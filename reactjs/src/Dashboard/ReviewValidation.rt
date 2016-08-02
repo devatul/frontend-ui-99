@@ -59,7 +59,7 @@
                         </span>
                         <span>
                           <span rt-if="this.state.reviewCurrent != null" class="doc-num">
-                            {this.size(this.state.reviewCurrent.documents)}
+                            {this.size(this.state.reviewCurrent.documents) - this.state.reviewCurrent.totalValidate}
                           </span> Documents Challenged - Validation Progress: </span>
                         <div class="progress-radial small progress{'-' + this.parseInt((this.state.reviewCurrent.totalValidate * 100) / this.size(this.state.reviewCurrent.documents))}"></div>
 
