@@ -21,7 +21,8 @@ var Notification = React.createClass
             },
             notiType: '',
             warningNoti: 0,
-            dangerNoti: 0
+            dangerNoti: 0,
+            filterUpdate: 'update-default'
         };
     },
     componentDidMount() {
@@ -29,36 +30,52 @@ var Notification = React.createClass
         //this.getNotification();
     },
 
-    filterAlert(event) {
-        var selected = event.target.getAttribute('data-type');
-        console.log(selected);
-        if (this.state.notiType == selected){
+    removeFilter() {
+        if (this.state.filterUpdate == 'update-pending') {
+            $('[data-update-status=update-pending]').show();
+        } else {
             $('[data-noti-type]').show();
-            $('.filter-noti-icon').parents('span').show();
-            notiType = '';
-            this.setState({"notiType": notiType });
-        }
-        else{
-            var notiType = event.target.getAttribute('data-type');
-            $('.filter-noti-icon').parents('span').hide();
-            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
-            $('[data-noti-type]').each(function(){
-                // console.log($(this).attr('data-noti-type'));
-                if ($(this).attr('data-noti-type') == notiType){
-                    $(this).show();
-                }
-                else{
-                    $(this).hide();   
-                }
-            });
-            this.setState({"notiType": notiType });
+        };
+        
+        $('.filter-noti-icon').parents('span').show();
+        var notiType = '';
+        this.setState({"notiType": notiType });
+    },
+
+    filterAlert(event) {
+        if (this.state.filterUpdate == 'update-completed') {
+
+        } else {
+            var selected = event.target.getAttribute('data-type');
+            console.log(selected);
+            if (this.state.notiType == selected){
+                this.removeFilter();
+            }
+            else{
+                var notiType = event.target.getAttribute('data-type');
+                $('.filter-noti-icon').parents('span').hide();
+                $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
+                $('[data-noti-type]').each(function(){
+                    // console.log($(this).attr('data-noti-type'));
+                    if ($(this).attr('data-noti-type') == notiType){
+                        $(this).show();
+                    }
+                    else{
+                        $(this).hide();   
+                    }
+                });
+                this.setState({"notiType": notiType });
+            };
         };
     },
 
     filterNotification() {
-        var filterType = $( '.filter-noti option:selected' ).attr('data-update-time');
+        var filterType = $( '.filter-noti option:selected' ).attr('value');
+        this.setState({"filterUpdate": filterType });
         console.log(filterType);
+        this.removeFilter();
         if (filterType == 'update-default'){
+            $('[data-update-status]').show();
             $('[data-last-update]').show();
         }
         else if (filterType == 'update-pending' || filterType == 'update-completed'){
@@ -74,6 +91,7 @@ var Notification = React.createClass
             $('[data-last-update="update-today"]').show();
         }
         else{
+            $('[data-update-status]').show();
             $('[data-last-update]').hide();
             $('[data-last-update='+filterType+']').show();
         }

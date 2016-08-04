@@ -15,12 +15,12 @@
             <div class="notification-filter row">
                 <div class="col-sm-4 mb-md">
                     <label>Last update</label>
-                    <select class="form-control filter-noti" onChange={this.filterNotification}>
-                        <option data-update-time="update-today">Today</option>
-                        <option data-update-time="update-week">Last 7 Days</option>
-                        <option data-update-time="update-default" selected="">Last 30 Days (by default)</option>
-                        <option data-update-time="update-pending">Pending Actions</option>
-                        <option data-update-time="update-completed">Completed Actions</option>
+                    <select class="form-control filter-noti" onChange={this.filterNotification} value={this.state.filterUpdate}>
+                        <option value="update-today">Today</option>
+                        <option value="update-week">Last 7 Days</option>
+                        <option value="update-default" >Last 30 Days</option>
+                        <option value="update-pending">Pending Actions</option>
+                        <option value="update-completed">Completed Actions</option>
                     </select>
                 </div>
                 <div class="col-sm-4 mb-md">
@@ -44,7 +44,7 @@
                     <h2 class="panel-title">Today</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.today" key="{notification.id}">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.today" key="{notification.id}" data-update-status="{ notification.urgency === 'done' ? 'update-completed' : 'update-pending'}">
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
@@ -69,7 +69,7 @@
                     <h2 class="panel-title">Yesterday</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.yesterday" key="{notification.id}">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.yesterday" key="{notification.id}" data-update-status="{ notification.urgency === 'done' ? 'update-completed' : 'update-pending'}">
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
@@ -94,7 +94,7 @@
                     <h2 class="panel-title">Last 7 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_7_days" key="{notification.id}">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_7_days" key="{notification.id}" data-update-status="{ notification.urgency === 'done' ? 'update-completed' : 'update-pending'}">
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
@@ -119,7 +119,7 @@
                     <h2 class="panel-title">Last 30 days</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_30_days" key="{notification.id}">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.last_30_days" key="{notification.id}" data-update-status="{ notification.urgency === 'done' ? 'update-completed' : 'update-pending'}">
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
@@ -144,7 +144,7 @@
                     <h2 class="panel-title">Older</h2>
                 </header>
                 <div class="panel-body">
-                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.older" key="{notification.id}">
+                    <div class="noti-item" data-noti-type="{notification.urgency}" rt-repeat="notification in this.state.notification.older" key="{notification.id}" data-update-status="{ notification.urgency === 'done' ? 'update-completed' : 'update-pending'}">
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
