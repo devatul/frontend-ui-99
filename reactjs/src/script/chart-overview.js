@@ -34,8 +34,8 @@ module.exports = function(data) {
             },
             tooltip: {
               show: true,
-              content: function(label, xval, yval, flotitem) {
-                return label + ': ' + addCommas(yval) + ' Documents';
+              content: function(label, xval, yval) {
+                return label + ': %p.0% /' + addCommas(yval) + ' Documents';
               }
             }
         });
@@ -66,7 +66,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' + addCommas(y) + ' Documents';
+                return label + ': %p.0% / ' + addCommas(y) + ' Documents';
               },
             }
         };
@@ -91,7 +91,7 @@ module.exports = function(data) {
                 tooltip: {
                   show: true,
                   content: function(label,x,y){
-                    return label + ': ' +addCommas(y) +' Documents';
+                    return label + ': %p.0% / ' +addCommas(y) +' Documents';
                   },
                 }
             };
@@ -127,7 +127,7 @@ module.exports = function(data) {
                 tooltip: {
                   show: true,
                   content: function(label,x,y,z){
-                    return label + ': ' +addCommas(y)  + ' Documents';
+                    return label + ': %p.0% / ' +addCommas(y)  + ' Documents';
                   },
                 }
             };
@@ -159,7 +159,7 @@ module.exports = function(data) {
                 tooltip: {
                   show: true,
                   content: function(label,x,y,z){
-                    return label + ': ' +addCommas(y)  + ' Documents';
+                    return label + ': %p.0% / ' +addCommas(y)  + ' Documents';
                   },
                 }
             };
@@ -191,7 +191,7 @@ module.exports = function(data) {
             tooltip: {
               show: true,
               content: function(label,x,y,z){
-                return label + ': ' +addCommas(y)  + ' Documents';
+                return label + ': %p.0% / ' +addCommas(y)  + ' Documents';
               },
             }
         };

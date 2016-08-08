@@ -101,7 +101,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <Link to="/Dashboard/Insight" activeClassName="active">Insight</Link>
+                                <Link to="/Dashboard/Insight" activeClassName="active">Insights</Link>
                             </li>
                             <li>
                                 <Link to="/Dashboard/ReviewValidation" activeClassName="active">Review Validation</Link>

@@ -77,6 +77,7 @@ var MenuBar = React.createClass
             this.props.handleFilter(this.state.filter);
         }
         if(this.state.dataSelectBox != prevState.dataSelectBox) {
+            debugger
             this.state.eventContext.length > 1 &&
                 this.updateFilterList(this.state.eventContext);
         }
@@ -177,7 +178,16 @@ var MenuBar = React.createClass
         });
     },
     clearFilter: function() {
-      this.setState({ filterLabel: [] });
+        var data = this.state.dataSelectBox;
+        _.forEach(this.state.filterLabel, function(object, index) {
+            var updateData = update(data,{
+                [object.selectId]: {
+                    [object.index]: { $merge: { checked: false } }
+                }
+            });
+            data = updateData;
+        }.bind(this));
+        this.setState({ dataSelectBox: data, filterLabel: [] });
     },
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
@@ -218,12 +228,10 @@ var MenuBar = React.createClass
                 arr.push(object);
             }
         }.bind(this));
-        debugger
         this.setState({ filterLabel: arr });
     },
     deleteLabelBySelectId: function(selectId, checked) {
         var arr = _.concat(this.state.filterLabel);
-        debugger
         _.remove(arr, {selectId: selectId, checked: checked });
         this.setState({ filterLabel: arr });
     },

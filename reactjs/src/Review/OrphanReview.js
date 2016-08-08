@@ -385,9 +385,6 @@ var OrphanReview = React.createClass({
             console.log("afasdccccc: ", this.state.samplesDocument[index], index);
         }
     },
-    cutPath: function(str) {
-        return str.substring(0,str.lastIndexOf('/') + 1);
-    },
     onChangeCategory: function(event, sampleIndex) {
         var categoryIndex = event.target.value;
         var listDocument = this.state.samplesDocument;
@@ -704,7 +701,7 @@ var OrphanReview = React.createClass({
                 tooltip: {
                   show: true,
                   content: function(label,x,y){
-                    return label + ': ' +y + ' Documents';
+                    return label + ': %p.0% /' +y + ' Documents';
                   }
                 }
             });

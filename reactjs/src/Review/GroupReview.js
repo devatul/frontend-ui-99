@@ -732,7 +732,7 @@ var GroupReview = React.createClass({
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' + y + ' Documents';
+                return label + ': %p.0% / ' + y + ' Documents';
               }
             }
         });
@@ -750,7 +750,7 @@ var GroupReview = React.createClass({
 		        },
 		        colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
 		        xAxis: {
-		            categoriesInfo: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
+		            categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
 		            labels:{
 		              autoRotation: false,
 		              style: {
