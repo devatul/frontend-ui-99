@@ -502,7 +502,7 @@ ul.review_nav-tabs > li > a {
 	border-bottom-right-radius: 3px;
 }
 .review_table>tbody>tr>td {
-	padding: 10px 0px 10px 15px;
+	padding: 10px;
 }
 .review_table>tbody>tr>td:first-child {
 	padding: 8px;

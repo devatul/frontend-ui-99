@@ -1,33 +1,34 @@
+'Use Strict';
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import Constant from '../Constant.js'
 import template from './BarMenu.rt'
-import javascriptOverview from '../script/javascript-overview.js'
+import _ from 'lodash'
 import 'jquery'
 
 var MenuBar = React.createClass
 ({
+  static: {
+    categoryId: 'categories',
+    confidentialId: 'confidentialities',
+    doctypeId: 'doc-types',
+    languageId: 'languages',
+    selectAll: 'select_all'
+  },
 	getInitialState() {
 	    return {
-            listCategory: [],
-            listConfidentiality: [],
-            listDoctype: [],
-            listLanguage: [],
-
-            categories: [],
-            confidentialities: [],
-            doctypes: [],
-            languages: [],
-
+            list: {},
             scan_result: {},
-
-            filter: {}
+            filter: {},
+            dataSelectBox: {},
+            filterLabel: [],
+            eventContext: ''
 	    };
 	},
 	propTypes: {
-		  title: React.PropTypes.string,
+		title: React.PropTypes.string,
 	    handleFilter: React.PropTypes.func,
 	    showFilter: React.PropTypes.bool,
 	    showInfo: React.PropTypes.bool
@@ -44,103 +45,56 @@ var MenuBar = React.createClass
         }
         return x1 + x2;
     },
-  componentDidMount() {
-    if(this.props.showFilter) {
-      this.getCategory(true);
-      this.getConfidentiality(true);
-      this.getDoctypes(true);
-      this.getLanguages(true);
-    }
-    if(this.props.showInfo) {
-      this.getScanResult();
-    }
-    this.handleOnChange();
-    $('body').on('click', '.filter-remove', function(){
-      var filterCriteria = $(this).parents('.filter-label').attr('data-crit');
-      var value = $(this).parents('.filter-label').attr('data-value');
-      $(this).parents('.filter-label').remove();
-      var a = $('.select-multiple[id="'+filterCriteria+'"]').multiselect('deselect', [value]).change();
-      console.log("ddddddddddds", a);
-    });
-  },
-  shouldComponentUpdate(nextProps, nextState) {
-      if(this.state.listCategory != nextState.listCategory) {
-        return true;
-      }
-      if(this.state.listConfidentiality != nextState.listConfidentiality) {
-        return true;
-      }
-      if(this.state.listDoctype != nextState.listDoctype) {
-        return true;
-      }
-      if(this.state.listLanguage != nextState.listLanguage) {
-        return true;
-      }
-      if(this.state.categories != nextState.categories) {
-          return true;
-      }
-      if(this.state.confidentialities != nextState.confidentialities) {
-          return true;
-      }
-      if(this.state.doctypes != nextState.doctypes) {
-          return true;
-      }
-      if(this.state.languages != nextState.languages) {
-          return true;
-      }
-      if(this.state.filter != nextState.filter) {
-          return true;
-      }
-      if(this.state.scan_result != nextState.scan_result) {
-          return true;
-      }
-      return false;
-  },
-  componentDidUpdate(prevProps, prevState) {
-      if(this.state.categories != prevState.categories) {
-          this.setState(update(this.state, {
-            filter: { "categories": {$set: this.state.categories} }
-          }));
-      }
-      if(this.state.confidentialities != prevState.confidentialities) {
-          this.setState(update(this.state, {
-            filter: { "confidentialities": {$set: this.state.confidentialities} }
-          }));
-      }
-      if(this.state.doctypes != prevState.doctypes) {
-          this.setState(update(this.state, {
-            filter: { "doc-types": {$set: this.state.doctypes} }
-          }));
-      }
-      if(this.state.languages != prevState.languages) {
-          this.setState(update(this.state, {
-            filter: { "languages": {$set: this.state.languages} }
-          }));
-      }
-      if(this.state.filter != prevState.filter) {
-          if(this.state.languages.length == 0) {
-            delete this.state.filter.languages;
-          }
-          if(this.state.doctypes.length == 0) {
-            delete this.state.filter["doc-types"];
-          }
-          if(this.state.confidentialities.length == 0) {
-            delete this.state.filter.confidentialities;
-          }
-          if(this.state.categories.length == 0) {
-            delete this.state.filter.categories;
-          }
-          console.log("aaaaaaaaaaa", this.state.filter);
-          this.props.handleFilter(this.state.filter);
-          console.log("filll: ", this.state.filter);
-      }
-  },
-  componentWillUnmount: function() {
-      console.log("a", this.state.listCategory);
-      console.log("b", this.state.listConfidentiality);
-      console.log("c", this.state.listDoctype);
-      console.log("d", this.state.listLanguage);
-  },
+    componentWillMount: function() {
+        
+    },
+    componentDidMount() {
+        if(this.props.showFilter) {
+            this.getConfidentiality(true);
+            this.getCategory(true);
+            this.getDoctypes(true);
+            this.getLanguages(true);
+        }
+        if(this.props.showInfo) {
+            this.getScanResult();
+        }
+    },
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state.filter != prevState.filter) {
+            var filter = this.state.filter;
+            if(filter.languages != null) {
+            filter.languages.length === 0 && delete this.state.filter.languages;
+            }
+            if(filter["doc-types"] != null) {
+            filter["doc-types"].length === 0 && delete this.state.filter["doc-types"];
+            }
+            if(filter.confidentialities != null) {
+            filter.confidentialities.length === 0 && delete this.state.filter.confidentialities;
+            }
+            if(filter.categories != null) {
+            filter.categories.length === 0 && delete this.state.filter.categories;
+            }
+            this.props.handleFilter(this.state.filter);
+        }
+        if(this.state.dataSelectBox != prevState.dataSelectBox) {
+            this.state.eventContext.length > 1 &&
+                this.updateFilterList(this.state.eventContext);
+        }
+    },
+    copyToDataSelectBox: function(data, id) {
+        var newData = _.assignIn({}, this.state.dataSelectBox);
+        var arr = [];
+        var newObject = {};
+        _.forEach(data, function(object, index) {
+            newObject = _.assignIn({}, object);
+            newObject.checked = true;
+            newObject.selectId = id;
+            newObject.index = index;
+            arr.push(newObject);
+        }.bind(this));
+        newData[id] = arr;
+        this.setState({ dataSelectBox: newData });
+    },
 	getCategory: function(async) {
         $.ajax({
             url: Constant.SERVER_API + 'api/label/category/',
@@ -151,9 +105,8 @@ var MenuBar = React.createClass
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState(update(this.state, {
-                    listCategory: {$set: data}
-                }));
+                this.copyToDataSelectBox(data, this.static.categoryId);
+                this.setState({ list: { [this.static.categoryId]: data } });
             }.bind(this),
             error: function(xhr, error) {
                 if(xhr.status == 401) {
@@ -173,9 +126,8 @@ var MenuBar = React.createClass
             },
             success: function(data) {
                 data.reverse();
-                this.setState(update(this.state, {
-                    listConfidentiality: {$set: data}
-                }));
+                this.copyToDataSelectBox(data, this.static.confidentialId);
+                this.setState({ list: { [this.static.confidentialId]: data } });
             }.bind(this),
             error: function(xhr, error) {
               if(xhr.status == 401) {
@@ -194,9 +146,8 @@ var MenuBar = React.createClass
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState(update(this.state, {
-                    listDoctype: {$set: data}
-                }));
+                this.copyToDataSelectBox(data, this.static.doctypeId);
+                this.setState({ list: { [this.static.doctypeId]: data } });
             }.bind(this),
             error: function(xhr, error) {
               if(xhr.status == 401) {
@@ -215,9 +166,8 @@ var MenuBar = React.createClass
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState(update(this.state, {
-                  listLanguage: {$set: data}
-                }));
+                this.copyToDataSelectBox(data, this.static.languageId);
+                this.setState({ list: { [this.static.languageId]: data } });
             }.bind(this),
             error: function(xhr, error) {
               if(xhr.status == 401) {
@@ -226,82 +176,103 @@ var MenuBar = React.createClass
             }.bind(this)
         });
     },
-    openFilterPopup: function() {
-      console.log("a", this.state.listCategory);
-      console.log("b", this.state.listConfidentiality);
-      console.log("c", this.state.listDoctype);
-      console.log("d", this.state.listLanguage);
-       javascriptOverview();
+    clearFilter: function() {
+      this.setState({ filterLabel: [] });
     },
-    
-    handleOnChange: function() {
-      $('#filter_category').change(function(e) {
-          var categories = [];
-          $('#filter_category :selected').each(function(i, selected){ 
-            categories[i] = {
-              "id": $(selected).data('value'),
-              "name": $(selected).val()
-            };
-          });
-          //if(categories.length > 0) {
-            var setCategories = update(this.state, {
-              categories: {$set: categories }
-            });
-            this.setState(setCategories);
-          //}
-          console.log("categories", categories);
-      }.bind(this));
-    
-      $('#filter_confidentiality').change(function(e) {
-          var confidentiality = [];
-          $('#filter_confidentiality :selected').each(function(i, selected){ 
-            confidentiality[i] = {
-              "id": $(selected).data('value'),
-              "name": $(selected).val()
-            };
-          });
-          //if(confidentiality.length > 0) {
-            var setConfidentiality = update(this.state, {
-              confidentialities: {$set: confidentiality }
-            });
-            this.setState(setConfidentiality);
-          //}
-          console.log("confidentiality", confidentiality);
-      }.bind(this));
-    
-      $('#filter_doctype').change(function(e) {
-        var doctype = [];
-        $('#filter_doctype :selected').each(function(i, selected){ 
-          doctype[i] = {
-            "id": $(selected).data('value'),
-            "name": $(selected).val()
-          };
+    onClickLabel: function(label, index) {
+        var listLabel = _.concat(this.state.filterLabel);
+        var newArray = _.concat(this.state.dataSelectBox[label.selectId]);
+        listLabel.splice(index, index + 1);
+        newArray[label.index].checked = false;
+        // var updateData = update(this.state.dataSelectBox, {
+        //     [label.selectId]: {$set: newArray }
+        // });
+        this.setState({ dataSelectBox: { [label.selectId]: newArray }, filterLabel: listLabel });
+        console.log(this.state.filterLabel);
+    },
+    updateFilterList: function(selectId) {
+        var filter = _.assignIn({}, this.state.filter);
+        var arr = [];
+        _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
+            if(object.checked) {
+                arr.push({
+                    id: object.id,
+                    name: object.name
+                });
+            }
         });
-        //if(doctype.length > 0) {
-          var setDoctype = update(this.state, {
-            doctypes: {$set: doctype }
-          });
-          this.setState(setDoctype);
-        //}
-        console.log("doctype", doctype);
-      }.bind(this));
-      
-      $('#filter_language').change(function(e) {
-        var languages = [];
-        $('#filter_language :selected').each(function(i, selected){ 
-          languages[i] = {
-            "id": $(selected).data('value'),
-            "name": $(selected).val()
-          };
+        filter[selectId] = arr;
+        this.setState({ filter: filter });
+    },
+    addLabel: function(field) {
+        var arr = _.concat(this.state.filterLabel);
+        if(_.find(arr, {id: field.id, name: field.name}) == null) {
+            arr.push(field);
+        }
+        this.setState({ filterLabel: arr });
+    },
+    addLabelBySelectId: function(selectId) {
+        var arr = _.concat(this.state.filterLabel);
+        _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
+            if(object.checked && (_.find(arr, {id: object.id, name: object.name}) == null)) {
+                arr.push(object);
+            }
+        }.bind(this));
+        debugger
+        this.setState({ filterLabel: arr });
+    },
+    deleteLabelBySelectId: function(selectId, checked) {
+        var arr = _.concat(this.state.filterLabel);
+        debugger
+        _.remove(arr, {selectId: selectId, checked: checked });
+        this.setState({ filterLabel: arr });
+    },
+    deleteLabelByIdName: function(field, id, name) {
+        var arr = _.concat(this.state.filterLabel);
+        _.remove(arr, {id: id, name: name});
+        this.setState({ filterLabel: arr });
+    },
+    handleSelectBoxChange: function(field, index) {
+        var updateData = update(this.state.dataSelectBox, {
+            [field.selectId]: {
+                [index]: {
+                    checked: { $set: field.checked } 
+                } 
+            }
         });
-        //if(languages.length > 0) {
-          var setLanguages = update(this.state, {
-            languages: {$set: languages }
-          });
-          this.setState(setLanguages);
-        //}
-        console.log("languages", languages);
-      }.bind(this));
+        this.setState({ dataSelectBox: updateData, eventContext: field.selectId });
+        if(field.checked) {
+            this.addLabel(field);
+        } else {
+            this.deleteLabelByIdName(field, field.id, field.name);
+        }
+    },
+    handleSelectAll: function(field) {
+        var arr = _.concat(this.state.dataSelectBox[field.selectId]);
+        _.forEach(arr, function(object, index) {
+            object.checked = field.checked;
+        }.bind(this));
+        var updateData = update(this.state.dataSelectBox, {
+            [field.selectId]: {$set: arr }
+        });
+        this.setState({ dataSelectBox: updateData, eventContext: field.selectId });
+        if(!field.checked) {
+            this.deleteLabelBySelectId(field.selectId, false);
+        } else {
+            this.addLabelBySelectId(field.selectId);
+        }
+    },
+    handleOnClear: function(field) {
+        var arr = _.concat(this.state.dataSelectBox[field.selectId]);
+        _.forEach(arr, function(object, index) {
+            if(object.checked) {
+                object.checked = false;
+            }
+        }.bind(this));
+        var updateData = update(this.state.dataSelectBox, {
+            [field.selectId]: {$set: arr }
+        });
+        this.setState({ dataSelectBox: updateData });
     },
     getScanResult(){
       $.ajax({

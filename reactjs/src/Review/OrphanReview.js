@@ -63,6 +63,18 @@ var OrphanReview = React.createClass({
             title: 'Group 1',
         });
         $("#select2-choose_cluster-container").text("Group 1");
+        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+            /*$('#previewModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                console.log(fileURL);
+                
+                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                $('#embedURL').gdocsViewer();
+            });*/
+        }.bind(this));
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
@@ -144,7 +156,7 @@ var OrphanReview = React.createClass({
                 $('.table-my-actions tr').removeClass('inactive');
             });
 
-            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+            $('[data-toggle="tooltip"]').tooltip({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
             });
         }
@@ -156,21 +168,6 @@ var OrphanReview = React.createClass({
         }
         if(this.state.cloudwords != prevState.cloudwords) {   
             this.drawCloud();
-        }
-
-        if(this.state.documentPreview != prevState.documentPreview) {
-            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-                $('#previewModal').on('show.bs.modal', function(e) {
-
-                    //get data-id attribute of the clicked element
-                    var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                    console.log(fileURL);
-                    
-                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                    $('#embedURL').gdocsViewer();
-                });
-            }.bind(this));
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             debugger;
@@ -324,7 +321,7 @@ var OrphanReview = React.createClass({
                 this.setState({ centroids: [] });
                 for(var i = 0; i < data.length; i++) {
                     var updateState = update(this.state, {
-                        centroids: {$push: [[data[i].distance, data[i].number_docs]]}
+                        centroids: {$push: [[i + 1, data[i].number_docs]]}
                     });
                     this.setState(updateState);
                 }
@@ -378,11 +375,15 @@ var OrphanReview = React.createClass({
     },
     setDocumentPreview: function(index) {
         var document = this.state.samplesDocument[index];
-        document.index = index;
-        this.setState(update(this.state, {
-            documentPreview: {$set: document},
-        }));
-        console.log("afasdccccc: ", this.state.samplesDocument[index], index);
+        if(document != null) {
+            document.index = index;
+            this.setState(update(this.state, {
+                documentPreview: {$set: document},
+            }));
+            $('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
+            $('#embedURL').gdocsViewer();
+            console.log("afasdccccc: ", this.state.samplesDocument[index], index);
+        }
     },
     cutPath: function(str) {
         return str.substring(0,str.lastIndexOf('/') + 1);
@@ -401,7 +402,7 @@ var OrphanReview = React.createClass({
         if(categoryIndex == samplesDefault[sampleIndex].current.category) {
             listDocument[sampleIndex].current.status = "accept";
         } else {
-            listDocument[sampleIndex].current.status = "editing";
+            listDocument[sampleIndex].current.status = "accept";
         }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
@@ -423,7 +424,7 @@ var OrphanReview = React.createClass({
         if(confidentialIndex == samplesDefault[sampleIndex].current.confidential)
             listDocument[sampleIndex].current.status = "accept";
         else
-            listDocument[sampleIndex].current.status = "editing";
+            listDocument[sampleIndex].current.status = "accept";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
             samplesDocument: {$set: listDocument}
@@ -540,7 +541,7 @@ var OrphanReview = React.createClass({
         $(".alert-close[data-hide]").closest(".alert-success").hide();
     },
     cutString: function(str) {
-        if(str.length > 0) {
+        if(str != null && str.length > 0) {
             return str.substring(6,str.length);
         }
     },
@@ -551,7 +552,7 @@ var OrphanReview = React.createClass({
     },
     drawCloud: function() { 
         //var word_list = this.state.cloudwords;
-        var word_list = new Array(
+        var word_list = [
     {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
     {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
     {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
@@ -594,25 +595,11 @@ var OrphanReview = React.createClass({
     {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
     {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
     {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
-  );
-        var cloudRendered = false;
-        var drawCloud = function(){
-        if (!cloudRendered){
-            $("#words-cloud").jQCloud(word_list,{
-                afterCloudRender: function(){
-                    cloudRendered = true;
-                    $("[data='tooltip']").tooltip();
-                    }
-                });
-            }
-        };
-
-        $(window).resize(function(){
-            //$('#words-cloud').jQCloud('update', word_list);
-            $('#words-cloud').css("width", "100%");
-            $('#words-cloud').html('').jQCloud(word_list) 
+  ];
+        $('#words-cloud').replaceWith('<div id="words-cloud"></div>');
+        $('#words-cloud').jQCloud(word_list, {
+          autoResize: true
         });
-       $(window).resize();
     },
     drawCentroid() {
         $('#centroidChart').highcharts({
@@ -621,9 +608,9 @@ var OrphanReview = React.createClass({
             },
             xAxis: {
                 startOnTick: true,
-                min: 0,
+                min: 1,
                 step: 2,
-                max: 10,
+                max: this.state.centroids.length,
                 startOnTick: true,
                 endOnTick: true,
                 tickInterval: 1,

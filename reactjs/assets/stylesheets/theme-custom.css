@@ -908,7 +908,7 @@ tr td {
 .table-my-actions > tbody > tr > td {
   vertical-align: middle;
   position: relative;
-  padding: 10px !important; }
+  padding: 10px; }
 .table-my-actions > tbody > tr.inactive > td:after {
   content: '';
   width: 100%;

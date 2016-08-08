@@ -213,12 +213,9 @@ var OverView = React.createClass
                 },
                 success: function(data) {
                     this.updateChartData(data);
-                    
                     this.setState(update(this.state, {
                         scan_result: {$set: data}
                     }));
-
-                    console.log("scan result: ", data);
                 }.bind(this),
                 error: function(xhr, error) {
                     if(xhr.status === 401)

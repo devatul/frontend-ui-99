@@ -31,17 +31,8 @@ var DocumentReview = React.createClass({
     componentDidMount() {
         this.getChallengedDocument();
         loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-            $('#previewModal').on('show.bs.modal', function(e) {
-
-                //get data-id attribute of the clicked element
-                var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                console.log(fileURL);
-                
-                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                $('#embedURL').gdocsViewer();
-            });
-            $('#previewModal3').on('show.bs.modal', function(e) {
+            
+            /*$('#previewModal3').on('show.bs.modal', function(e) {
 
                 //get data-id attribute of the clicked element
                 var fileURL = $(e.relatedTarget).attr('data-file-url');
@@ -50,7 +41,7 @@ var DocumentReview = React.createClass({
                 
                 $('#previewModal3 .file-preview').html('<a href="'+fileURL+'" id="embedURL3"></a>');
                 $('#embedURL3').gdocsViewer();
-            });
+            });*/
         }.bind(this));
     },
     shouldComponentUpdate(nextProps, nextState) {
@@ -126,20 +117,6 @@ var DocumentReview = React.createClass({
                 }
             });
         }
-        if(this.state.challengedPreview != prevState.challengedPreview) {
-            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-                $('#previewModal3').on('show.bs.modal', function(e) {
-
-                    //get data-id attribute of the clicked element
-                    var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                    console.log(fileURL);
-                    
-                    $('#previewModal3 .file-preview').html('<a href="'+fileURL+'" id="embedURL3"></a>');
-                    $('#embedURL3').gdocsViewer();
-                });
-            }.bind(this));
-        }
     },
     getActions: function() {
         $.ajax({
@@ -193,11 +170,15 @@ var DocumentReview = React.createClass({
     },
     setDocumentPreview: function(actionIndex, docIndex) {
         var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
-        documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
-        var setDocumentCurrent = update(this.state, {
-            documentPreview: { $set: documentCurrent },
-        });
-        this.setState(setDocumentCurrent);
+        if(documentCurrent != null) {
+            documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
+            var setDocumentCurrent = update(this.state, {
+                documentPreview: { $set: documentCurrent },
+            });
+            this.setState(setDocumentCurrent);
+            $('#previewModal .file-preview').html('<a href="'+documentCurrent.image_url+'" id="embedURL"></a>');
+            $('#embedURL').gdocsViewer();
+        }
     },
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
@@ -455,12 +436,18 @@ var DocumentReview = React.createClass({
         });
     },
     setChallengedPreview: function(challengedIndex, docChallIndex) {
+        debugger
         var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
-        challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
-        var setChallengedCurrent = update(this.state, {
-            challengedPreview: { $set: challengedCurrent },
-        });
-        this.setState(setChallengedCurrent);
+        if(challengedCurrent != null) {
+            challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
+            var setChallengedCurrent = update(this.state, {
+                challengedPreview: { $set: challengedCurrent },
+            });
+            this.setState(setChallengedCurrent);
+
+            $('#previewModal3 .file-preview').html('<a href="'+challengedCurrent.image_url+'" id="embedURL3"></a>');
+            $('#embedURL3').gdocsViewer();
+        }
     },
     onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
         var categoryIndex = event.target.value;
@@ -478,7 +465,7 @@ var DocumentReview = React.createClass({
             actions[actionIndex].documents[docIndex].current.prevCategory = null;
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
-            actions[actionIndex].documents[docIndex].current.status = "editing";
+            actions[actionIndex].documents[docIndex].current.status = "accept";
         }
         actions[actionIndex].documents[docIndex].current.category = categoryIndex;
         /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
@@ -508,7 +495,7 @@ var DocumentReview = React.createClass({
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
             debugger;
-            actions[actionIndex].documents[docIndex].current.status = "editing";
+            actions[actionIndex].documents[docIndex].current.status = "accept";
         }
         debugger;
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;

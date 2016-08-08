@@ -1,8 +1,8 @@
-<rt-import name="BarName" from="../components/BarMenu"/>
+<rt-import name="MenuBar" from="../components/BarMenu"/>
 <section>
     
     <!--bar_menu start-->
-    <BarName title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></BarName>
+    <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
 
         <!--charts start-->
         <div class="charts container mt-lg">
@@ -194,10 +194,10 @@
                                         <tbody>
                                             <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
-                                                <td class="center-padding">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
-                                                <td class="center-padding">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
-                                                <td class="center hidden-phone">{item.percentage_owner_accuracy_docs}%</td>
-                                                <td class="center hidden-phone">{item.percentage_prediction_accuracy_docs}% </td>
+                                                <td class="center-padding-table-overview">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
+                                                <td class="center-padding-table-overview">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
+                                                <td class="center-padding-table-overview center hidden-phone">{item.percentage_owner_accuracy_docs}%</td>
+                                                <td class="center-padding-table-overview center hidden-phone">{item.percentage_prediction_accuracy_docs}% </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -249,10 +249,10 @@
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
-                                                <td class="center-padding">{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
-                                                <td class="center-padding">{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
-                                                <td>{category.percentage_owner_accuracy_docs}%</td>
-                                                <td>{category.percentage_prediction_accuracy_docs}%</td>
+                                                <td class="center-padding-table-overview">{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
+                                                <td class="center-padding-table-overview">{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
+                                                <td class="center-padding-table-overview">{category.percentage_owner_accuracy_docs}%</td>
+                                                <td class="center-padding-table-overview">{category.percentage_prediction_accuracy_docs}%</td>
                                             </tr>
                                         </tbody>
                                     </table>

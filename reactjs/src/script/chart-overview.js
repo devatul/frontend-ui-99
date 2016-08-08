@@ -44,8 +44,8 @@ module.exports = function(data) {
         }else{
             $("#legendContainerCensord1").css("display","none");
         }
-        //chart pie category
-        var plot = $.plot('#flotPie2', data.data_categories, {
+        //chart pie category and languages
+        var categoryConfig = {
             series: {
                 pie: {
                     show: true,
@@ -69,11 +69,8 @@ module.exports = function(data) {
                 return label + ': ' + addCommas(y) + ' Documents';
               },
             }
-        });
-        //chart pie languages
-        if(data.data_languages.length > 1){
-            $("#flotPie2Inner").css("display","");
-            $.plot('#flotPie2Inner', data.data_languages, {
+        };
+        var languagesConfig = {
                 series: {
                     pie: {
                         show: true,
@@ -97,21 +94,31 @@ module.exports = function(data) {
                     return label + ': ' +addCommas(y) +' Documents';
                   },
                 }
-            });
-        }else{
-            $.plot('#flotPie2Inner', data.data_languages, {
+            };
+
+        if(data.data_categories.length > 1 && data.data_languages.length > 1) {
+            $.plot('#flotPie2', data.data_categories, categoryConfig);
+            $('#flotPie2').css('display', '');
+
+            $.plot('#flotPie2Inner', data.data_languages, languagesConfig);
+            $('#flotPie2Inner').css('display', '');
+            $('#legendContainer2Inner').css('display', '');
+        }
+        if(data.data_languages.length > 1 && data.data_categories.length <= 1){
+
+            var languagesConfig2 = {
                 series: {
                     pie: {
                         show: true,
-                        radius: 1,
+                        radius:0.8,
                         innerRadius: 0.4,
                     }
                 },
                 legend: {
                     show: true,
                     position: 'sw',
-                    noColumns: 1,
-                    container:$("#legendContainer2Inner"),       
+                    noColumns: 5,
+                    container:$("#legendContainer2"), 
                 },
                 grid: {
                     hoverable: true,
@@ -119,13 +126,19 @@ module.exports = function(data) {
                 },
                 tooltip: {
                   show: true,
-                  content: function(label,x,y){
-                    return label + ': ' +addCommas(y) +' Documents';
+                  content: function(label,x,y,z){
+                    return label + ': ' +addCommas(y)  + ' Documents';
                   },
                 }
-            });
-            $("#flotPie2Inner").css("display","none");
-            var plot = $.plot('#flotPie2', data.data_categories, {
+            };
+            
+            $.plot('#flotPie2', data.data_languages, languagesConfig2);
+            $('#flotPie2').css('display', '');
+            $('#flotPie2Inner').css('display', 'none');
+            $('#legendContainer2Inner').css('display', 'none');
+        }
+        if(data.data_categories.length > 1 && data.data_languages.length <= 1){
+            var categoryConfig2 = {
                 series: {
                     pie: {
                         show: true,
@@ -137,7 +150,7 @@ module.exports = function(data) {
                     show: true,
                     position: 'sw',
                     noColumns: 3,
-                    container:$("#legendContainer2"),       
+                    container:$("#legendContainer2"), 
                 },
                 grid: {
                     hoverable: true,
@@ -145,27 +158,24 @@ module.exports = function(data) {
                 },
                 tooltip: {
                   show: true,
-                  content: function(label,x,y){
-                    return label + ': ' + addCommas(y) + ' Documents';
+                  content: function(label,x,y,z){
+                    return label + ': ' +addCommas(y)  + ' Documents';
                   },
                 }
-            });
+            };
+            $.plot('#flotPie2', data.data_categories, categoryConfig2);
+            $('#flotPie2Inner').css('display', 'none');
+            $("#legendContainer2Inner").css('display', 'none');
+
         }
+        
         //chart pie doctypes
-         var plot = $.plot('#flotPie3', data.data_doctypes, {
+        var doctypeConfig = {
             series: {
                 pie: {
                     show: true,
                     radius:0.8,
                     innerRadius: 0.4,
-                    // label: {
-                    //     show: true,
-                    //     radius: 1/2,
-                    //     formatter: function (label, series) {
-                    //         return '<div style="font-size:14pt;text-align:center;padding:5px;color:white;">'+ Math.round(series.percent) + '%</div>';
-                    //     },
-                    //     threshold: 0.1
-                    // }
                 }
             },
             legend: {
@@ -184,17 +194,12 @@ module.exports = function(data) {
                 return label + ': ' +addCommas(y)  + ' Documents';
               },
             }
-        });
-        
+        };
+        $.plot('#flotPie3', data.data_doctypes, doctypeConfig);
         if(data.data_doctypes.length <= 1){
             $("#legendContainerCensord3").css("display","");
         }else{
             $("#legendContainerCensord3").css("display","none");
-        }
-          if(data.data_languages.length <= 1 && data.data_categories.length <= 1){
-            $("#legendContainerCensord2").css("display","");
-        }else{
-            $("#legendContainerCensord2").css("display","none");
         }
         
 }

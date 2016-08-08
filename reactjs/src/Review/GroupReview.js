@@ -6,9 +6,9 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import chart from '../script/chart-group-review.js'
 import Constant, { status } from '../Constant.js'
-import undo from '../script/Undo.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
+//import { Table, TableHead, TableRow, TableBody } from '../components/Table'
 import 'jquery'
 
 var GroupReview = React.createClass({
@@ -63,12 +63,24 @@ var GroupReview = React.createClass({
             speed: 3000,
             animate: !$.browser.mobile
           });
-        debugger;
 
         $("#select2-choose_cluster-container").attr({
             title: 'Group 1',
         });
         $("#select2-choose_cluster-container").text("Group 1");
+
+        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+            /*$('#previewModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var fileURL = $(e.relatedTarget).attr('data-file-url');
+
+                console.log(fileURL);
+                
+                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                $('#embedURL').gdocsViewer();
+            });*/
+        }.bind(this));
     },
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.state.groupCurrent != nextState.groupCurrent) {
@@ -127,33 +139,19 @@ var GroupReview = React.createClass({
             $('.select-group select').blur(function(){
                 $('.table-my-actions tr').removeClass('inactive');
             });
-            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+            $('[data-toggle="tooltip"]').tooltip({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
             });
             console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
         }
         if(this.state.categoriesInfo != prevState.categoriesInfo) {
-            this.drawChart();
+           this.drawChart();
         }
         if(this.state.centroids != prevState.centroids) {
             this.drawCentroid();
         }
         if(this.state.cloudwords != prevState.cloudwords) {
             
-        }
-        if(this.state.documentPreview != prevState.documentPreview) {
-            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-                $('#previewModal').on('show.bs.modal', function(e) {
-
-                    //get data-id attribute of the clicked element
-                    var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                    console.log(fileURL);
-                    
-                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                    $('#embedURL').gdocsViewer();
-                });
-            }.bind(this));
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             this.validateNumber();   
@@ -313,7 +311,7 @@ var GroupReview = React.createClass({
             	this.setState({ centroids: [] });
             	for(var i = 0; i < data.length; i++) {
             		var updateState = update(this.state, {
-		                centroids: {$push: [[data[i].distance, data[i].number_docs]]}
+		                centroids: {$push: [[i+1, data[i].number_docs]]}
 		            });
 		            this.setState(updateState);
             	}
@@ -365,7 +363,7 @@ var GroupReview = React.createClass({
             }.bind(this)
         });
     },
-    getcategoriesInfo: function(groupId) {
+    getcategoriesInfo: function() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/categories/",
@@ -397,15 +395,19 @@ var GroupReview = React.createClass({
     },
     setDocumentPreview: function(index) {
         var document = this.state.samplesDocument[index];
+        if(document != null) {
             document.index = index;
-        this.setState(update(this.state, {
-            documentPreview: {$set: document},
-            shouldUpdate: {$set: "PreviewDocument_" + index}
-        }));
+            this.setState(update(this.state, {
+                documentPreview: {$set: document},
+                shouldUpdate: {$set: "PreviewDocument_" + index}
+            }));
+            $('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
+            $('#embedURL').gdocsViewer();
+        }
     },
     drawCloud: function() {
         //var word_list = this.state.cloudwords;
-        var word_list = new Array(
+        var word_list = [
     {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
     {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
     {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
@@ -448,25 +450,12 @@ var GroupReview = React.createClass({
     {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
     {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
     {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
-  );
-        var cloudRendered = false;
-        var drawCloud = function(){
-        if (!cloudRendered){
-            $("#words-cloud").jQCloud(word_list,{
-                afterCloudRender: function(){
-                    cloudRendered = true;
-                    $("[data='tooltip']").tooltip();
-                    }
-                });
-            }
-        };
+  ];
 
-        $(window).resize(function(){
-            //$('#words-cloud').jQCloud('update', word_list);
-            $('#words-cloud').css("width", "100%");
-            $('#words-cloud').html('').jQCloud(word_list) 
+        $('#words-cloud').replaceWith('<div id="words-cloud"></div>');
+        $('#words-cloud').jQCloud(word_list, {
+          autoResize: true
         });
-       $(window).resize();
     },
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
@@ -646,7 +635,7 @@ var GroupReview = React.createClass({
                 startOnTick: true,
                 min: 0,
                 step: 2,
-                max: 10,
+                max: centroids.length,
                 startOnTick: true,
                 endOnTick: true,
                 tickInterval: 1,

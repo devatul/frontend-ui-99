@@ -33,6 +33,7 @@
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group">
+
                                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
 
@@ -399,7 +400,9 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-left">
-                                                        <span class="text-italic doc-path">{docChall.path}</span>
+                                                        <span class="text-italic file-name-1 doc-path"
+                                                            data-toggle="tooltip"
+                                                            data-original-title="{docChall.path}">{docChall.path}</span>
                                                     </td>
                                                     <td class="text-left">
                                                         <span class="text-italic">
@@ -423,12 +426,12 @@
                                                         </div>
                                                         
                                                     </td>
-                                                    <td class="vertical-top document_2nd first-ch">
+                                                    <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
                                                         <span class="doc-path my-doc-path">Level of Confidentiality is too low for this type of document</span>
                                                         <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
                                    
                                                     </td>
-                                                    <td class="opa-child">
+                                                    <td class="opa-child fix-1st-pading-comment-table">
                                                         <div class="select-group">
                                                             <textarea class="form-control" placeholder="Explain your choice">Challenge’s rationale details</textarea>
                                                         </div>
@@ -472,8 +475,9 @@
                     <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
               </div>
@@ -537,7 +541,7 @@
                             </td>
                             <td class="text-left">
                                 <!--http://www.snee.com/xml/xslt/sample.doc-->
-                                <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" data-file-url="{docPreview.image_url}">
+                                <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal" data-file-url="{docPreview.image_url}">
                                     <span class="file-name-1"
                                         rel="tooltip"
                                         data-toggle="tooltip"
@@ -560,7 +564,8 @@
                                 </div>
                             </td>
                             <td class="text-left">
-                                <span class="text-italic doc-path">{docPreview.path}</span>
+                                <span class="text-italic doc-path file-name-1" data-toggle="tooltip"
+                                        data-original-title="{docPreview.path}">{docPreview.path}</span>
                             </td>
                             <td class="text-left">
                                 <span class="text-italic">{docPreview.owner}</span>
@@ -630,8 +635,9 @@
                     <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setChallengedPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                    <button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                    <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
               </div>
@@ -696,7 +702,7 @@
                             </td>
                             <td class="text-left my_file-name">
                                 <span
-                                    class="text-italic file-name doc-path-2"
+                                    class="text-italic file-name doc-path"
                                     data-toggle="modal"
                                     data-target="#previewModal3"
                                     data-file-url="{docPreview.image_url}">
@@ -743,12 +749,12 @@
                                     <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docPreview.confidentialities[current.prevConfidential].name}</span>
                                 </div>
                             </td>
-                            <td class="vertical-top document_2nd first-ch">
+                            <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
                                 <span class="my-doc-path">Level of Confidentiality is too low/high for this type of document</span>
                                 <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
            
                             </td>
-                            <td class="opa-child">
+                            <td class="opa-child fix-1st-pading-comment-table">
                                 <div class="select-group">
                                     <textarea class="form-control" placeholder="Explain your choice"></textarea>
                                 </div>

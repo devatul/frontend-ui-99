@@ -216,7 +216,7 @@
                                 <span rt-if="document.previous_confidentiality != null" class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
                               </td>
                               <td>
-                                <textarea class="form-control element-event" placeholder="Explain your choice"></textarea>
+                                <textarea class="form-control element-event" placeholder="Challenge's rationale details"></textarea>
                               </td>
                               <td>
                                 <a style="cursor: pointer" onClick="(event)=>this.onClickValidationButton(reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" class="challenge-btn validation-btn btn btn-default element-event">

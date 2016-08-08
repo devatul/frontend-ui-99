@@ -1,6 +1,6 @@
-
-
-<div rt-scope="this.state.listCategory as listCategory; this.state.listConfidentiality as listConfidentiality; this.state.listDoctype as listDoctype; this.state.listLanguage as listLanguage; this.state.scan_result as scan_result">
+<rt-import name="MultiSelectBox" from="./dathena/multiselectBox"/>
+<rt-import name="FilterLabel" from="./dathena/FilterLabel"/>
+<div rt-scope="this.state.scan_result as scan_result">
 <div class="my_main bar_menu container">
     <div class="row">
         <div class="col-md-12 mb-md">
@@ -10,49 +10,75 @@
                     <div class="filter-tags-block">
                         <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
                         <div class="pull-left filter-tags" style="text-transform: capitalize">
+                            <FilterLabel
+                                id="Confidential"
+                                data={this.state.filterLabel}
+                                onClick={this.onClickLabel}
+                                onClear={this.clearFilter} />
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4" style="text-transform: capitalize">
                     <ul class="filter-buttons pull-right">
                         <li rt-if="this.props.showFilter" class="dropdown">
-                            <a class="toggle-button btn btn-default" onClick={this.openFilterPopup}><i class="fa fa-filter" aria-hidden="true"></i></a>
+                            <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                             <div class="dropdown-backdrop-custom" style="display:none"></div>
                             <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
                                 <ul class="filter-list list-unstyled pt-xs">
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_confidentiality" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Confidentiality">
-                                                <option rt-repeat="confidentiality in listConfidentiality" key="{confidentialityIndex}" data-value="{confidentiality.id}" value="{confidentiality.name}">{confidentiality.name}</option>
-                                            </select>
+                                            <MultiSelectBox
+                                                id={this.static.confidentialId}
+                                                title="Confidentiality"
+                                                onChange={this.handleSelectBoxChange}
+                                                onSelectAll={this.handleSelectAll}
+                                                onClear={this.handleOnClear}
+                                                checked={true}
+                                                data={this.state.dataSelectBox[this.static.confidentialId]} />
+                                        </div>
+                                    </li>
+                                    
+                                    <li class="mb-sm">
+                                        <div class="form-group">
+                                            <MultiSelectBox
+                                                id={this.static.categoryId}
+                                                title="Category"
+                                                onChange={this.handleSelectBoxChange}
+                                                onSelectAll={this.handleSelectAll}
+                                                onClear={this.handleOnClear}
+                                                checked={true}
+                                                data={this.state.dataSelectBox[this.static.categoryId]} />
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_category" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Category">
-                                                <option rt-repeat="category in listCategory" key="{category.id}" data-value="{category.id}" value="{category.name}">{category.name}</option>
-                                            </select>
+                                            <MultiSelectBox
+                                                id={this.static.languageId}
+                                                title="Languages"
+                                                onChange={this.handleSelectBoxChange}
+                                                onSelectAll={this.handleSelectAll}
+                                                onClear={this.handleOnClear}
+                                                checked={true}
+                                                data={this.state.dataSelectBox[this.static.languageId]} />
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <select id="filter_language" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Language">
-                                                <option rt-repeat="language in listLanguage" key="{language.id}" data-value="{language.id}" value="{language.name}">{language.name}</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="form-group">
-                                            <select id="filter_doctype" class="form-control select-multiple overview-filter" multiple="multiple" data-title="Document Type">
-                                                <option rt-repeat="doctype in listDoctype" key="{doctype.id}" data-value="{doctype.id}" value="{doctype.name}">{doctype.name}</option>
-                                            </select>
+                                            <MultiSelectBox
+                                                id={this.static.doctypeId}
+                                                title="Document Type"
+                                                onChange={this.handleSelectBoxChange}
+                                                onSelectAll={this.handleSelectAll}
+                                                onClear={this.handleOnClear}
+                                                checked={true}
+                                                data={this.state.dataSelectBox[this.static.doctypeId]} />
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li rt-if="this.props.showInfo" class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                            <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                             <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
                                 <div class="table-responsive">
                                     <table class="table general-table mb-none">
@@ -110,6 +136,5 @@
         </div>
     </div>
 </div>
-
 <hr>
 </div>

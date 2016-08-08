@@ -43,8 +43,8 @@
                                           <div class="panel-body" id="stat-block">
                                             <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
 
-                                            <div class="panel-actions collapse-stat-table">
-                                              <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                                            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                              <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
                                             </div>
 
                                             <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse">
@@ -151,7 +151,7 @@
                                         <div class="tabs">
                                             <ul class="review_nav-tabs nav nav-tabs">
                                                 <li class="li_first active">
-                                                    <a href="#distribution" data-toggle="tab">Category Distribution</a>
+                                                    <a href="#distribution" data-toggle="tab" onClick={this.getCategoryDistribution}>Category Distribution</a>
                                                 </li>
                                                 <li>
                                                     <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
@@ -215,7 +215,7 @@
                         <header class="panel-heading">
                             <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
                             <div class="inline-block-item view-stat-block">
-                                <b>Review {this.state.orphanCurrent.name + '   '}</b>
+                                <span class="b" style="padding-left: 5px; padding-right: 10px">Orphan Review: {this.cutString(this.state.orphanCurrent.name)}</span>
                                 <label>Sample Method: </label>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                                 <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
@@ -315,7 +315,7 @@
                                                 </td>
                                                 <td class="text-left">
                                                     <span
-                                                      class="text-italic file-name doc-path-2"
+                                                      class="text-italic file-name doc-path"
                                                       data-toggle="modal"
                                                       data-target="#previewModal"
                                                       onClick="()=>this.setDocumentPreview(sampleIndex)"
@@ -350,7 +350,7 @@
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
                                                       <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, sampleIndex)" key="index" value="{current.category}">
-                                                        <option selected disabled>Please select</option>
+                                                        <option value="-1" selected disabled>Select</option>
                                                         <option rt-repeat="category in sample.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                       </select>
                                                     </div>
@@ -358,7 +358,7 @@
                                                 <td>
                                                     <div class="select-group" rt-scope="sample.current as current">
                                                       <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, sampleIndex)" key="index" value="{current.confidential}">
-                                                        <option selected disabled>Please select</option>
+                                                        <option value="-1" selected disabled>Select</option>
                                                         <option rt-repeat="Confidential in sample.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                       </select>
                                                     </div>
@@ -400,6 +400,7 @@
                     <span>Folder {this.cutPath(document.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index + 1)">Go to Next Document</button>
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -486,7 +487,7 @@
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic file-name doc-path-2" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentPreview(index)" data-file-url="{document.image_url}"><span class="file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{document.name}">{document.name}</span></span>
+                <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal"><span class="file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{document.name}">{document.name}</span></span>
                 <div class="dropdown dropdown-file-info-holder inline-block-item">
                   <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
                   <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
@@ -502,7 +503,7 @@
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic doc-path">{document.path}</span>
+                <span class="text-italic doc-path file-name-1" data-toggle="tooltip" data-original-title="{document.path}">{document.path}</span>
               </td>
               <td class="text-left">
                 <span class="text-italic">{document.owner}</span>
@@ -510,7 +511,7 @@
               <td>
                 <div class="select-group">
                   <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" key="index" value="{current.category}">
-                    <option selected disabled value="-1">Please select</option>
+                    <option selected disabled value="-1">select</option>
                     <option rt-repeat="category in document.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                   </select>
                 </div>
@@ -518,7 +519,7 @@
               <td>
                 <div class="select-group">
                   <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" key="index" value="{current.confidential}">
-                    <option selected disabled value="-1">Please select</option>
+                    <option selected disabled value="-1">select</option>
                     <option rt-repeat="Confidential in document.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                   </select>
                 </div>

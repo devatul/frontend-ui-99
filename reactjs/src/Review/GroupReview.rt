@@ -1,15 +1,16 @@
 <section>
 <rt-import name="Const" from="../Constant.js"/>
+<rt-import name="Table, TableHead, TableRow, TableBody" from="../components/Table"/>
   <div class="container">
     <div class="row">
         <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
             <h5><span class="text-bold">Group Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
             <div class="form-group">
                 <div class="input-group mb-md">
-                    <label for="choose_cluster">
+                    <label for="choose_cluster" rt-if="this.state.listGroup != null">
                         Select
-                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index" onClick={this.selectGroup}>
-                            <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}">{group.name}</option>
+                        <select class="js-example-basic-single js-states form-control" id="choose_cluster" key="index">
+                            <option rt-repeat="group in this.state.listGroup" value="{groupIndex}" key="{groupIndex}" selected="{groupIndex == 0 ? 'selected':''}">{group.name}</option>
                         </select>
                     </label>
                     <button class="btn btn-green btn-ok" type="button" style="display: none">OK</button>
@@ -38,8 +39,8 @@
                               <div class="panel-body" id="stat-block">
                                 <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
 
-                                <div class="panel-actions collapse-stat-table">
-                                  <a class="panel-action panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                                <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                  <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
                                 </div>
 
                                 <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse">
@@ -149,7 +150,7 @@
                             <div class="tabs">
                                 <ul class="review_nav-tabs nav nav-tabs">
                                     <li class="li_first active">
-                                        <a href="#distribution" data-toggle="tab">Category Distribution</a>
+                                        <a href="#distribution" onClick={this.getcategoriesInfo} data-toggle="tab">Category Distribution</a>
                                     </li>
                                     <li>
                                         <a href="#centroid" data-toggle="tab" onClick={this.getCentroids}>Centroid Distance Histogram</a>
@@ -210,7 +211,7 @@
             <header class="panel-heading">
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
                 <div class="inline-block-item view-stat-block">
-                <b rt-if="this.state.groupCurrent != null">Review {this.state.groupCurrent.name + '   '}</b>
+                <span rt-if="this.state.groupCurrent != null" class="b" style="padding-left: 5px; padding-right: 10px">Group Review: {this.state.groupCurrent.name}</span>
                     <label>Sample Method: </label>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
@@ -245,6 +246,7 @@
                     <div class="table-responsive">
                         
                         <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
+
                             <thead>
                                 <tr role="row">
                                     <th>
@@ -254,13 +256,13 @@
                                         </div>
                                     </th>
                                     <th class="review_note">Document Name
-              <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                  <p>This displays the name of each individual document, as it exists in its current state.</p>
-                </div>
-              </div>
-            </th>
+                                      <div class="r dropdown dropdown-file-info-holder inline-block-item">
+                                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
+                                          <p>This displays the name of each individual document, as it exists in its current state.</p>
+                                        </div>
+                                      </div>
+                                    </th>
             <th class="review_note">Path
               <div class="r dropdown dropdown-file-info-holder inline-block-item">
                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -328,7 +330,7 @@
                                     </td>
                                     <td class="text-left">
                                         <span
-                                          class="text-italic file-name doc-path-2"
+                                          class="text-italic file-name doc-path"
                                           data-toggle="modal"
                                           data-target="#previewModal"
                                           onClick="()=>this.setDocumentPreview(sampleIndex)"
@@ -355,7 +357,8 @@
                                         </div>
                                     </td>
                                     <td class="text-left">
-                                        <span class="text-italic doc-path">{sample.path}</span>
+                                        <span class="text-italic doc-path" data-toggle="tooltip"
+                                              data-original-title="{sample.name}">{sample.path}</span>
                                     </td>
                                     <td class="text-left">
                                         <span class="text-italic">{sample.owner}</span>
@@ -421,6 +424,7 @@
                                 
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
                 <div class="my-actions-btn-group actions-bottom clearfix mt-md">
@@ -450,6 +454,7 @@
                 <span>Folder {this.cutPath(document.path)}</span>
             </div>
             <div class="col-sm-4 modal-actions text-right">
+                <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index + 1)">Go to Next Document</button>
                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                 <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                 <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -550,7 +555,7 @@
                 </div>
               </td>
               <td class="text-left">
-                <span class="text-italic doc-path">{document.path}</span>
+                <span class="text-italic doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{document.path}">{document.path}</span>
               </td>
               <td class="text-left">
                 <span class="text-italic">{document.owner}</span>
@@ -561,7 +566,7 @@
                         <div class="progress progress-striped light">
                           <div class="progress-bar {this.progressbar(document.confidence_level)}" role="progressbar" aria-valuenow="{document.categories[current.category].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({document.confidence_level}%)</span>
+                          <span class="progress-percentage" style="color: #000">({document.confidence_level}%)</span>
                         </div>
                     </div>
                     <select class="form-control" onChange="(event)=>this.onChangeCategory(event, index)" value="{current.category}">
@@ -575,7 +580,7 @@
                         <div class="progress progress-striped light">
                           <div class="progress-bar {this.progressbar(document.confidentiality_confidence_level)}" role="progressbar" aria-valuenow="{document.confidentialities[current.confidential].confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {document.confidentiality_confidence_level}%;">
                           </div>
-                          <span class="progress-percentage">({document.confidentiality_confidence_level}%)</span>
+                          <span class="progress-percentage" style="color: #000">({document.confidentiality_confidence_level}%)</span>
                         </div>
                     </div>
                     <select class="form-control" onChange="(event)=>this.onChangeConfidential(event, index)" value="{current.confidential}">
