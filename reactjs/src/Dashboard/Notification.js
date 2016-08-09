@@ -30,6 +30,7 @@ var Notification = React.createClass
         //this.getNotification();
     },
 
+    //TODO: rewrite filters to react components
     removeFilter() {
         if (this.state.filterUpdate == 'update-pending') {
             $('[data-update-status=update-pending]').show();
@@ -42,12 +43,31 @@ var Notification = React.createClass
         this.setState({"notiType": notiType });
     },
 
+    checkPanelVisibility() {
+        $('.panel-body').each(function(){
+            var current = $(this);
+            if (!current.children().is(':visible')) {
+                current.parent().hide();
+            }
+        })
+    },
+    checkEmptyData() {
+
+        if(!$(".panel-noti").is(':visible')) {
+            $("#emptyData").show();
+        } else {
+            $("#emptyData").hide();
+        }
+    },
+
     filterAlert(event) {
         if (this.state.filterUpdate == 'update-completed') {
 
         } else {
             var selected = event.target.getAttribute('data-type');
             console.log(selected);
+            this.filterNotification()
+
             if (this.state.notiType == selected){
                 this.removeFilter();
             }
@@ -65,7 +85,9 @@ var Notification = React.createClass
                     }
                 });
                 this.setState({"notiType": notiType });
+                this.checkPanelVisibility();
             };
+            this.checkEmptyData();
         };
     },
 
@@ -82,6 +104,7 @@ var Notification = React.createClass
             $('[data-last-update]').show();
             $('[data-update-status]').hide();
             $('[data-update-status='+filterType+']').show();
+            this.checkPanelVisibility();
         }
         else if (filterType == 'update-week'){
             $('[data-update-status]').show();
@@ -95,6 +118,7 @@ var Notification = React.createClass
             $('[data-last-update]').hide();
             $('[data-last-update='+filterType+']').show();
         }
+        this.checkEmptyData();
     },
 
     getDummyNotification() {

@@ -163,5 +163,6 @@
                     </div>
                 </div>
             </section>
+            <p class='center' id="emptyData" style="display: none; font-size:20px">There is no notification for the applied filters</p>
         </div>
 </section>
