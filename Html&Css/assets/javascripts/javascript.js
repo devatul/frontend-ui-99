@@ -63,7 +63,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -124,7 +124,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               }
             }
         });
@@ -170,7 +170,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -220,7 +220,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -289,7 +289,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -310,7 +310,7 @@ $(function () {
     });
 
     $('.dropdown-backdrop-custom').on('click', function(e){
-        $('.dropdown-backdrop-custom').toggle();
+        $(this).toggle();
         $('.dropdown-menu.has-child').toggle();
     });
 

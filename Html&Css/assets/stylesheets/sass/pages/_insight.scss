@@ -1,0 +1,357 @@
+.widget-panel{
+  &.insight-panel{
+    .widget-title{
+      top: 1px;
+      left: 1px;
+      font-size: 14px;
+    }
+    .widget-summary{
+      .summary{
+        min-height: 0;
+        padding: 10px;
+        .amount{
+          font-size: 4.5rem;
+          color: #fff;
+        }
+      }
+    }
+    .insight-stat{
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 5px 10px;
+      font-weight: bold;
+      font-size: 16px;
+      i{
+        margin-right: 5px;
+      }
+    }
+    .summary-list{
+      min-height: 70px;
+      li:not(:last-child){
+        margin-bottom: 1px;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+      }
+    }
+    &.bg-white{
+      border: 1px solid #dadada;
+    }
+  }
+}
+
+.panel-featured{
+  .filter-buttons{
+    position: absolute;
+    top: 8px;
+    right: 50px;
+  }
+}
+
+.panel-identity{
+  h3{
+    color: #ACACAC;
+    font-weight: normal;
+    margin-bottom: 15px;
+    font-size: 17px;
+    letter-spacing: 0;
+  }
+  .panel-title{
+    padding-right: 80px;
+  }
+}
+
+.panel-chart{
+  background-color: #fff;
+  border: 1px solid #dadada;
+  .panel-body{
+    background-color: #fff;
+  }
+  .col-chart-item{
+    margin-bottom: 25px;
+  }
+}
+
+.btn-extract{
+  margin-left: 106px;
+  border-radius: 3px;
+}
+
+.pie-info{
+  display: block;
+  margin: auto;
+}
+
+$size: 150px;
+.pie-wrapper{
+  display: inline-block;
+  height: $size;
+  margin: 10px;
+  position: relative;
+  width: $size;
+  .pie{
+    clip: rect(0, $size, $size, $size/ 2);
+    height: $size;
+    position: absolute;
+    width: $size;
+  
+    .half-circle{
+      border: $size/ 10 solid #3498db;
+      border-radius: 50%;
+      clip: rect(0,  $size/ 2, $size, 0);
+      height: $size;
+      position: absolute;
+      width: $size;
+    }
+  }
+  .label{
+    background: #34495e;
+    border-radius: 50%;
+    color: #ecf0f1;
+    cursor: default;
+    display: block;
+    font-size: 3em;
+    height: $size - ($size * .2);
+    left: 10%;
+    line-height: 3em;
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    width: $size - ($size * .2);
+    
+    .smaller{
+      color: #727272;
+      font-size: .5em;
+      padding-bottom: 20px;
+      font-weight: 300;
+      margin-top: 5px;
+      vertical-align: super;
+      display: block;
+    }
+  }
+
+  &.pie-md{
+    height: 60px;
+    width: 60px;
+    margin: 0;
+    .pie{
+      clip: rect(0, 60px, 60px, 30px);
+      width: 60px;
+      height: 60px;
+      .half-circle{
+        border-width: 6px;
+        clip: rect(0,  30px, 60px, 0);
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .label{
+      width: 48px;
+      height: 48px;
+      line-height: 44px;
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+  }
+
+  &.pie-sm{
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    .pie{
+      clip: rect(0, 30px, 30px, 15px);
+      width: 30px;
+      height: 30px;
+      .half-circle{
+        border-width: 3px;
+        clip: rect(0,  15px, 30px, 0);
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .label{
+      width: 24px;
+      height: 24px;
+      line-height: 22px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+  }
+
+  &.style-2{
+    .shadow{
+      border: 5px solid #edecf1;
+      border-radius: 50%;
+      height: 96%;
+      width: 96%;
+      position: relative;
+      top: 2%;
+      left: 2%;
+    }
+    .pie{
+      z-index: 1;
+      .half-circle{
+        border-width: 12px;
+      }
+    }
+    .label{
+      background: none;
+      color: #7f8c8d;
+      line-height: 1;
+      font-weight: normal;
+      font-size: 3rem;
+      padding: 0;
+      padding-top: 40px;
+      .smaller{
+        color: #bdc3c7;
+      }
+    }
+    &.pie-green{
+      .pie{
+        .half-circle{
+          border-color: $color-quartenary-2;
+        }
+      }
+      .label{
+        color: $color-quartenary-2;
+      }
+    }
+    &.pie-red{
+      .pie{
+        .half-circle{
+          border-color: $color-secondary;
+        }
+      }
+      .label{
+        color: $color-secondary;
+      }
+    }
+    &.pie-yellow{
+      .pie{
+        .half-circle{
+          border-color: $color-warning;
+        }
+      }
+      .label{
+        color: $color-warning;
+      }
+    }
+    &.pie-blue{
+      .pie{
+        .half-circle{
+          border-color: #0FABE6;
+        }
+      }
+      .label{
+        color: #0FABE6;
+      }
+    }
+  }
+}
+
+$step: 1;
+$loops: round(100 / $step);
+$increment: 360 / $loops;
+$half: round($loops / 2);
+@for $i from 0 through $loops{
+  .pie-wrapper.pie-progress-#{$i*$step}{
+
+    @if $i < 34 {$barColor: #d2322d;}
+    @else if $i < 76 {$barColor: #ed9c28;}
+    @else {$barColor: #47a447;}
+
+    &.style-1{
+      .label{
+        background-color: $barColor;
+      }
+      .pie{
+        .half-circle{
+          border-color: lighten($barColor, 10%);
+        }
+      }
+    }
+
+    .pie{
+      .left-side{
+        @include rotate($i*$step*3.6);
+      }
+    }
+    @if $i <= $half {
+     .pie{
+        .right-side{
+          display: none;
+        }
+      }
+    }
+    @else{
+      .pie{
+        clip: rect(auto, auto, auto, auto);
+        .right-side{
+          @include rotate(180);
+        }
+      }
+    }
+  }
+}
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.table-suggestion{
+  border: 1px solid #dadada;
+  tr{
+    td{
+      line-height: 28px!important;
+      &:first-child{
+        width: 150px;
+      }
+      &:last-child{
+        min-width: 150px;
+        padding: 0;
+        .pie-wrapper{
+          position: relative;
+          top: 7px;
+        }
+      }
+    }
+  }
+  .kw-list{
+    color: #777;
+    font-weight: 500;
+    font-weight: 600;
+  }
+  .morelink{
+    color: #64d7b0;
+    font-weight: 400;
+  }
+}
+
+.table-suggestion-wrapper{
+  margin-bottom: 20px;
+  .btn-extract{
+    float: right;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .table-title{
+    font-size: 17px;
+    color: #ACACAC;
+    font-weight: 400;
+  }
+}
+
+.col-chart-item{
+  h4{
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 992px){
+  .panel-identity .dd-filter {
+      min-width: 800px;
+  }
+}

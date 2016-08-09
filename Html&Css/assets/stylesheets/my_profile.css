@@ -499,12 +499,9 @@ th:focus {
 .document_review_table .file-name.w90 {
 	max-width: 90px;
 }
-.document_review_table .fa {
-	font-size: 13px;
-}
 
 .document_review_table td.document_2nd .doc-path {
-	max-width: 108px;
+	max-width: 100%;
 	white-space: normal;
 	margin-bottom: -4px;
 	text-align: left;
@@ -645,6 +642,21 @@ select.record_select {
 }
 .table-responsive {
 	overflow-x: hidden;
+}
+.vertical-top.document_2nd.first-ch {
+	min-width: 160px;
+}
+.document_2nd.document_2nd2 {
+	width: 224px;
+}
+#previewModal3 .more.display-block {
+	display: none;
+}
+#previewModal3 .my-doc-path {
+	height: auto !important;
+}
+.fic-eidt {
+	padding: 12px;
 }
 
 
