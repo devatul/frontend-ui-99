@@ -1,0 +1,51 @@
+
+.max-witdh-coordinator-comment {
+    max-width: 170px;
+}
+
+.fix-1st-pading-comment-table {
+	padding: 3px !important;
+}
+.center-padding-table-overview {
+    text-align: left;
+    padding-left: 95px !important;
+}
+
+.fix-center-info-toggle-button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #349da2;
+    border: none;
+    padding: 0;
+    padding-top: 1.3px;
+    padding-left: 0.5px;
+}
+
+/*Basic static - group/orphan review*/
+.fix-arrow-collapse-stat-table .collapsed:before {
+    content: "\f0d7";
+}
+.fix-arrow-panel-action-toggle:before {
+    content: "\f0d8";
+}
+/* Filter tags user Assignment */
+.help_guide_sub .filter-tags-userassign {
+    padding-top: 10px;
+    padding-left: 15px;
+}
+.filter-tags-userassign .filter-label-assign .filter-remove-assign {
+    color: #fff;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.filter-tags-userassign .filter-label-assign {
+    margin-right: 5px;
+    font-size: 100%;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
+}

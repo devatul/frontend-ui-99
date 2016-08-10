@@ -77,7 +77,6 @@ var MenuBar = React.createClass
             this.props.handleFilter(this.state.filter);
         }
         if(this.state.dataSelectBox != prevState.dataSelectBox) {
-            debugger
             this.state.eventContext.length > 1 &&
                 this.updateFilterList(this.state.eventContext);
         }
@@ -191,14 +190,13 @@ var MenuBar = React.createClass
     },
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
-        var newArray = _.concat(this.state.dataSelectBox[label.selectId]);
         listLabel.splice(index, index + 1);
-        newArray[label.index].checked = false;
-        // var updateData = update(this.state.dataSelectBox, {
-        //     [label.selectId]: {$set: newArray }
-        // });
-        this.setState({ dataSelectBox: { [label.selectId]: newArray }, filterLabel: listLabel });
-        console.log(this.state.filterLabel);
+        var updateData = update(this.state.dataSelectBox, {
+            [label.selectId]: {
+                [label.index]: {checked: {$set: false } }
+            }
+        });
+        this.setState({ dataSelectBox: updateData, filterLabel: listLabel });
     },
     updateFilterList: function(selectId) {
         var filter = _.assignIn({}, this.state.filter);

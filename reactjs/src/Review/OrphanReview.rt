@@ -342,7 +342,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span class="text-italic doc-path">{sample.path}</span>
+                                                    <span class="text-italic doc-path file-name-1"
+                                                        data-toggle="tooltip"
+                                                        data-original-title="{sample.path}">{sample.path}</span>
                                                 </td>
                                                 <td class="text-left">
                                                     <span class="text-italic">{sample.owner}</span>

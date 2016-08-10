@@ -1,6 +1,5 @@
 <rt-import name="MenuBar" from="../components/BarMenu"/>
 <section>
-    
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
 

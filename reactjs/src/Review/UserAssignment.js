@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './UserAssignment.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import update from 'react-addons-update'
 import javascript from '../script/javascript.js';
 import Constant from '../Constant.js'
@@ -13,70 +13,76 @@ import 'jquery'
 import _ from 'lodash';
 
 var UserAssignment = React.createClass({
-    mixins: [LinkedStateMixin],
+    mixins: [PureRenderMixin],
+    static: {
+        selectId: {
+            timeframe: 'timeframe',
+            numberuser: 'numberuser',
+            reviewertype: 'reviewertype'
+        }
+    },
     getInitialState() {
         return {
-            categories: [],
-            categoryCurrent:{},
-            categoryInfo: {},
-            reviewers:[],
-            filter: null,
-            summary: [
-	            {"id":1,
-				      "name":"accounting/tax",
-				      "docs_sampled" : 20,
-				      "number_of_assigned": 30,
-				      "total_challenged_docs": 9,
-				      "total_number_document_classified": 70256,
-				      "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
-				{"id":2,
-				       "name":"corporate entity",
-				       "docs_sampled" : 20,
-				       "number_of_assigned": 30,
-				       "total_challenged_docs": 7,
-				       "total_number_document_classified": 35128,
-				       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
-				{"id":3,
-				       "name":"Client/Customer",
-				       "docs_sampled" : 20,
-				       "number_of_assigned": 30,
-				       "total_challenged_docs": 9,
-				       "total_number_document_classified": 122947,
-				       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
-				{"id":4,
-				       "name":"Employee",
-				       "docs_sampled" : 20,
-				       "number_of_assigned": 30,
-				       "total_challenged_docs": 7,
-				       "total_number_document_classified": 17564,
-				       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
-				{"id":5,
-				       "name":"Legal/Compliance",
-				       "docs_sampled" : 20,
-				       "number_of_assigned": 30,
-				       "total_challenged_docs": 9,
-				       "total_number_document_classified": 52692,
-				       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] },
-				{"id":6,
-				       "name":"Transaction",
-				       "docs_sampled" : 20,
-				       "number_of_assigned": 30,
-				       "total_challenged_docs": 4,
-				       "total_number_document_classified": 52692,
-				       "reviewers": [{"id":0,"first_name": "Alice","last_name":"Ghostley", "number_docs":135},{"id":1,"first_name": "Jack","last_name":"Gilford", "number_docs":122},{"id":2,"first_name": "Leo","last_name":"Gordon", "number_docs":112},{"id":3,"first_name": "Farley","last_name":"Granger", "number_docs":108},{"id":4,"first_name": "Buddy","last_name":"Hackett", "number_docs":101},{"id":5,"first_name": "Sid","last_name":"Haig", "number_docs":96},{"id":6,"first_name": "Jonathan","last_name":"Harris", "number_docs":80},{"id":7,"first_name": "Marcel","last_name":"Hillaire", "number_docs":72},{"id":8,"first_name": "Bob","last_name":"Hope", "number_docs":60},{"id":9,"first_name": "John","last_name":"Hoyt", "number_docs":45},{"id":10,"first_name": "Conrad","last_name":"Janis", "number_docs":42},{"id":11,"first_name": "Gordon","last_name":"Jump", "number_docs":38},{"id":12,"first_name": "Ted","last_name":"Knight", "number_docs":36},{"id":13,"first_name": "James","last_name":"Komack", "number_docs":31},{"id":14,"first_name": "Martin","last_name":"Landau", "number_docs":28},{"id":15,"first_name": "Charles","last_name":"Lane", "number_docs":26},{"id":16,"first_name": "Len","last_name":"Lesser", "number_docs":25},{"id":17,"first_name": "Laurie","last_name":"Main", "number_docs":25},{"id":18,"first_name": "Kenneth","last_name":"Mars", "number_docs":23},{"id":19,"first_name": "Judith","last_name":"McConnell", "number_docs":22},{"id":20,"first_name": "Pat","last_name":"McCormick", "number_docs":20},{"id":21,"first_name": "Robert","last_name":"Middleton", "number_docs":18},{"id":22,"first_name": "Al","last_name":"Molinaro", "number_docs":16},{"id":23,"first_name": "Howard","last_name":"Morton", "number_docs":15},{"id":24,"first_name": "Burt","last_name":"Mustin", "number_docs":12},{"id":25,"first_name": "Barry","last_name":"Newman", "number_docs":9},{"id":26,"first_name": "Julie","last_name":"Newmar", "number_docs":7},{"id":27,"first_name": "Leonard","last_name":"Nimoy", "number_docs":6},{"id":28,"first_name": "Alan","last_name":"Oppenheimer", "number_docs":6},{"id":29,"first_name": "Pat","last_name":"Paulsen", "number_docs":4}] }
-	       	],
+            category: {
+                list: [],
+                reviewers: [],
+                current: {},
+                info: {},
+                default: 0
+            },
+            buttonStatus: {
+                category: '',
+                fixedNumber: ''
+            },
+            datafilter: {
+                params: {
+                    id: 0,
+                    timeframe: 6,
+                    numberuser: 10,
+                    type: 'last_modifier'
+                },
+                request: {
+                    id: 0,
+                    name:"name category",
+                    docs_sampled: 0,
+                    reviewers:[]
+                },
+                usersNumber: [
+                    {name: 'Number of Users', value: 0 },
+                    {name: 'Top 30', value: 30 },
+                    {name: 'Top 20', value: 20 },
+                    {name: 'Top 15', value: 15 },
+                    {name: 'Top 10', value: 10 },
+                    {name: 'Top 5', value: 5 },
+                    {name: 'Top 2', value: 2 }
+                ],
+                reviewerType: [
+                    {name: 'Type of Reviewer', value: 0 },
+                    {name: 'Document Last Modified', value: 'last_modifier'},
+                    {name: 'Document Creator', value: 'creator'}
+                ],
+                timeFrame: [
+                    {name: 'Timeframe', value: 0},
+                    {name: '1 Year', value: 12},
+                    {name: '6 Months', value: 6},
+                    {name: '3 Months', value: 3},
+                    {name: '1 Months', value: 1}
+                ],
+                setValue: {
+                    timeframe: 0,
+                    numberuser: 0,
+                    reviewertype: 0
+                },
+                filterLabel: []
+            },
+            summary: []
         };
     },
-   	componentWillMount() {
-        
-        
-    },
     componentDidMount() {
-    	this.getCategories();
+    	this.getCategoryList();
     	console.log(this.state);
     	javascript();
-    	javascriptAssignement();
-    	//this.handleOnChange();
+    	//javascriptAssignement();
     },
     addCommas(nStr)
     {
@@ -90,179 +96,193 @@ var UserAssignment = React.createClass({
         }
         return x1 + x2;
     },
-    shouldComponentUpdate(nextProps, nextState) {
-       if(this.state.categories != nextState.categories) {
-    		return true;
-    	}
-        if(this.state.categoryInfo != nextState.categoryInfo) {
-        	return true;
-        }
-        if(this.state.filter != nextState.filter) {
-        	return true;
-        }
-        if(this.state.categoryCurrent != nextState.categoryCurrent) {
-            return true;
-        }
-        if(this.state.reviewers != nextState.reviewers) {
-            return true;
-        }
-        if(this.state.summary != nextState.summary) {
-            return true;
-        }
-        if(this.state.filter != nextState.filter) {
-          return true;
-      	}
-        return false;
-        
-    },
-    select(index){
-    	$('#select_'+index).toggleClass("on");
-    	this.state.reviewers[index].select = !this.state.reviewers[index].select 
-    },
-    selectAll(){
-    	$("div.off").toggleClass("on");
-    	for(var i=0; i< this.state.reviewers.length; i++){
-    		this.state.reviewers[i].select = !this.state.reviewers[index].select
-    	}
-    },
     componentDidUpdate(prevProps, prevState) {
-    	if(this.state.categoryInfo != prevState.categoryInfo) {
-    		//debugger;
-        	this.chartAssignment(this.state.categoryInfo);
+        var { category } = this.state;
+    	if(category.info != prevState.category.info) {
+        	this.chartAssignment(this.state.category.info);
         }
-        if(this.state.categories != prevState.categories) {
-        	
-            $("#Category_"+ this.state.categories[0].id).click();
-            //this.getCategoryInfo(this.state.categoryCurrent.id);
-            this.handleOnChange();
+        if(category.current != prevState.category.current) {
+            this.getCategoryInfo();
+            this.getReviewers();
         }
-        if(this.state.categoryCurrent != prevState.categoryCurrent) {
-        	
-        	$("#Category_"+ this.state.categoryCurrent.id).click();
-            this.getCategoryInfo(this.state.categoryCurrent.id);
-            //this.chartAssignment(this.state.categoryInfo);
-            //this.handleOnChange();
+        if(category.reviewers != prevState.category.reviewers) {
+            this.chartUserFilter(category.reviewers);
         }
-        if(this.state.reviewers != prevState.reviewers) {
-        	
-            this.chartUserFilter(this.state.reviewers);
-        }
-        if(this.state.filter != prevState.filter) {
-          this.handleFilter(this.state.filter);
-          console.log("filter: ", this.state.filter);
+        if(this.state.datafilter.params != prevState.datafilter.params) {
+            this.getReviewers();
       	}
     },
-    handleOnChange: function() {
-    	//debugger;
-    	var filter = {};
-    	if(this.state.categoryCurrent.id >= 0){
-    		filter.id=this.state.categoryCurrent.id;
-	    	if($('#timeframe :selected').val() == 0){
-	        	filter.timeframe = 6;
-	        }else{
-	        	filter.timeframe = $('#timeframe :selected').val();
-	    	}
-	        
-	        console.log("filter.timeframe: ", filter.timeframe);
-	        if($('#usersnum :selected').val() == 0){
-	        	filter.numberuser = 10;
-	        }else{
-	        	filter.numberuser = $('#usersnum :selected').val();
-	    	}
-	    	if($('#reviewertype :selected').val() == 0){
-	        	filter.type = 'last_modifier';
-	        }else{
-	        	filter.type = $('#reviewertype :selected').val();
-	    	}
-	        console.log("filter.numberuser", filter.numberuser);
-	        
-	        console.log("filter.type", filter.type);
-    	}
-	    if(!_.isEmpty(filter)){
-		      /*var updateFilter = update(this.state, {
-		        filter: {$set: filter }
-		      });
-		      this.setState(updateFilter);*/
-		      this.state.filter = filter;
-		      this.handleFilter(filter);
-		}else{
-		  	this.handleFilter();
-		}
+    handleOnChangeSelectBox: function(data, field) {
+        var { params, filterLabel } = this.state.datafilter;
+        var { selectId } = this.static;
+        var indexLabel = _.findIndex(filterLabel, {id: field.id });
+        var label = _.assignIn({}, data);
+            label.id = field.id;
+        if(indexLabel == -1) {
+            indexLabel = filterLabel.length;
+        }
+        switch(field.id) {
+            case selectId.numberuser: 
+                params = update(params, {
+                    numberuser: {$set: data.value }
+                });
+                break;
+            case selectId.timeframe:
+                params = update(params, {
+                    timeframe: {$set: data.value }
+                });
+                break;
+            case selectId.reviewertype:
+                params = update(params, {
+                    type: {$set: data.value }
+                });
+            }
+        var updateData = update(this.state.datafilter, {
+            params: {$set: params },
+            setValue: {
+                [field.id]: {$set: field.value }
+            },
+            filterLabel: {
+                [indexLabel]: {$set: label}
+            }
+        });
+        this.setState({ datafilter: updateData });
     },
-    handleFilter: function(bodyRequest) {
-        console.log('bodyRequest', bodyRequest);
-        if(!_.isEmpty(bodyRequest)) {
-        	if(bodyRequest.numberuser <= 15){
-	        	var heightChart= bodyRequest.numberuser*39;
-	        }else{
-	        	var heightChart= bodyRequest.numberuser*36.5;
-	        }
-
-        	$('#userReviewChart').css("height", heightChart);
+    handleClickFilterLabel: function(label, index) {
+        var { selectId } = this.static;
+        var { params, filterLabel } = this.state.datafilter;
+        var indexLabel = _.findIndex(filterLabel, {id: label.id });
+        switch(label.id) {
+            case selectId.numberuser: 
+                params = update(params, {
+                    numberuser: {$set: 10 }
+                });
+                break;
+            case selectId.timeframe:
+                params = update(params, {
+                    timeframe: {$set: 6 }
+                });
+                break;
+            case selectId.reviewertype:
+                params = update(params, {
+                    type: {$set: 'last_modifier' }
+                });
+            }
+        var updateData = update(this.state.datafilter, {
+            params: {$set: params },
+            setValue: {
+                [label.id]: {$set: 0 }
+            },
+            filterLabel: {$splice: [[indexLabel, 1]]}
+        });
+        this.setState({ datafilter: updateData });
+    },
+    handleOnClickValidationButton: function(id) {
+        var updateButton = update(this.state.buttonStatus, {
+            [id]: {$set: 'success' }
+        });
+        this.setState({ buttonStatus: updateButton });
+    },
+    handleValidateButton: function() {
+        var { current, info, list } = this.state.category;
+        var indexCategory = _.findIndex(list, { id: current.id, name: current.name });
+        var { request } = this.state.datafilter;
+            request.id = current.id;
+            request.name = current.name;
+            request.docs_sampled = info.number_docs;
+        if(request.reviewers.length > 0) {
             $.ajax({
-                url: Constant.SERVER_API +  "api/assign/reviewer/",
-                dataType: 'json',
-                type: 'GET',
-                data: bodyRequest,
+                method: 'POST',
+                url: Constant.SERVER_API + "api/assign/reviewer/",
+                dataType: "json",
+                data: JSON.stringify(request),
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
                 },
                 success: function(data) {
-	            	for(var i = 0; i < data.length; i++){
-	            		data[i]['select'] = false;	
-	            	}
-	            	console.log(data);
-	                var updateState = update(this.state, {
-	                    reviewers: {$set: data}
-	                });
-	                this.setState(updateState);
-	                $("div.off").removeClass("on");
-	                console.log("reviewers ok: ", data);
+                    console.log("assign user", data);
                 }.bind(this),
-                error: function(xhr, error) {
+                error: function(xhr,error) {
                     if(xhr.status === 401)
                     {
                         browserHistory.push('/Account/SignIn');
                     }
                 }.bind(this)
             });
-        } else {
-            this.getReviewers();
+
+            var setCurrent = update(this.state.category, {
+                current: { $set: list[indexCategory + 1] }
+            });
+            var setReviewer = update(this.state.datafilter, {
+                request: {
+                    reviewers: { $set: [] }
+                }
+            });
+            this.setState({ category: setCurrent, datafilter: setReviewer });
+
         }
     },
+    setCategoryCurrent: function(categoryIndex) {
+        var category = this.state.category.list[categoryIndex];
+        var setCategory = update(this.state.category, {
+            current: { $set: category }
+        });
+        this.setState({ category: setCategory });
+    },
+    chartAssignment(categoryInfo) {
+    	userAssignment(categoryInfo);
+    },
+    chartUserFilter(reviewers) {    	
+    	 chartFilterAssignment(reviewers);
+    },
+    
+    handleOnChangeSelectButton: function(checked, index) {
+        var { reviewers } = this.state.category;
+        var { request } = this.state.datafilter;
+        var indexReviewer = _.findIndex(request.reviewers, {id: reviewers[index].id });
+        var updateRequest = update(this.state.datafilter, {
+            request: {
+                reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [reviewers[index]] } : {$splice: [[indexReviewer, 1]]}
+            }
+        });
+        this.setState({ datafilter: updateRequest });
+    },
+    handleOnChangeSelectAll: function(checked) {
+        var { reviewers } = this.state.category;
+
+        var updateRequest = update(this.state.datafilter, {
+            request: {
+                reviewers: {$set: (checked == 'on') ? reviewers : [] }
+            }
+        });
+        this.setState({ datafilter: updateRequest });
+    },
     getReviewers() {
-        var categoryId = this.state.categoryCurrent.id;
-        var heightChart= 10*39;
-        $('#userReviewChart').css("height", heightChart);
+        var { datafilter, category }  = this.state;
+        datafilter.params.id = category.current.id;
+        var heightChart = 0;
+        if(datafilter.params.numberuser <= 15){
+            heightChart = datafilter.params.numberuser * 39;
+        }else{
+            heightChart = datafilter.params.numberuser * 37.5;
+        }
+        $('#userReviewChart').css({ 'height': heightChart });
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/reviewer/",
             dataType: 'json',
-            data: {
-            	"id": categoryId,
-            	"timeframe":6,
-            	"type" : "last_modifier",
-            	"numberuser":10
-        	},
+            data: datafilter.params,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-            	
-            	for(var i = 0; i< data.length; i++){
-            		data[i]['select'] = false;	
-            	}
-            	console.log(data);
-                var updateState = update(this.state, {
+                var updateState = update(this.state.category, {
                     reviewers: {$set: data}
                 });
-                this.setState(updateState);
-                $("div.off").removeClass("on");
+                this.setState({ category: updateState });
                 console.log("reviewers ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("reviewers error: " + error);
-
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -270,7 +290,7 @@ var UserAssignment = React.createClass({
             }.bind(this)
         });
     },
-    getCategories() {
+    getCategoryList() {
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/label/category/",
@@ -280,18 +300,13 @@ var UserAssignment = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-            	//data[0].index = 0;
-               	var updateState = update(this.state, {
-                    categories: {$set: data},
-                    categoryCurrent: {$set:data[0]}
+               	var updateData = update(this.state.category, {
+                    list: {$set: data},
+                    current: {$set: data[this.state.category.default] }
                 });
-
-               	this.setState(updateState);
-                //this.state.categories = data;
-                console.log("categories: ", data);
+               	this.setState({ category: updateData });
             }.bind(this),
             error: function(xhr,error) {
-                console.log("categories error: " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -299,26 +314,25 @@ var UserAssignment = React.createClass({
             }.bind(this)
         });
     },
-    getCategoryInfo(id) {
-
+    getCategoryInfo() {
+        var {current} = this.state.category;
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/category/",
             dataType: 'json',
             async: false,
-            data: { "id": id},
+            data: { "id": current.id},
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                var updateState = update(this.state, {
-                    categoryInfo: {$set: data},
+                debugger
+                var updateData = update(this.state.category, {
+                    info: {$set: data},
                 });
-                this.setState(updateState);
-                console.log("categories ok: ", data);
+                this.setState({ category: updateData });
             }.bind(this),
             error: function(xhr,error) {
-                console.log("categories error: " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -326,38 +340,8 @@ var UserAssignment = React.createClass({
             }.bind(this)
         });
     },
-    setCategoryCurrent: function(categoryIndex) {
-
-        var categories = this.state.categories[categoryIndex];
-        //categories.index = categoryIndex;
-        var filter = {
-        	id:categories.id,
-        	timeframe:6,
-        	numberuser:10,
-        	type:'last_modifier'
-        };
-        if(categoryIndex <= (this.state.categories.length - 1)) {
-            var setCategory = update(this.state, {
-                categoryCurrent: { $set: categories },
-                filter: { $set: filter }
-            });
-            this.setState(setCategory);
-        }else{
-        	var setCategory = update(this.state, {
-                filter: { $set: filter }
-            });
-            this.setState(setCategory);
-        }
-    },
-    chartAssignment(categoryInfo) {
-    	//debugger;
-    	userAssignment(categoryInfo);
-    },
-    chartUserFilter(reviewers) {    	
-    	 chartFilterAssignment(reviewers);
-    },
     getSummary() {
-        /*$.ajax({
+        $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/summary/",
             dataType: 'json',
@@ -365,20 +349,19 @@ var UserAssignment = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
             },
             success: function(data) {
-                var updateState = update(this.state, {
-                    summary: {$set: data},
-                });
-                this.setState(updateState);
+                // var updateState = update(this.state, {
+                //     summary: {$set: data},
+                // });
+                // this.setState(updateState);
                 console.log("summary ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("summary error: " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
                 }
             }.bind(this)
-        });*/
+        });
     },
     render:template
 });

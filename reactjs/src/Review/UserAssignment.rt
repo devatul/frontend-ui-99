@@ -1,8 +1,12 @@
+<rt-import name="SelectButton" from="../components/dathena/SelectButton"/>
+<rt-import name="SelectBox" from="../components/dathena/SelectBox"/>
+<rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
+<rt-import name="ValidationButton" from="../components/dathena/ValidationButton"/>
 <section>
   <div class="container">
       <div class="tabs tabs-primary">
         <ul class="nav nav-tabs cat-list">
-          <li rt-repeat="category in this.state.categories" key="{categoryIndex}">
+          <li rt-repeat="category in this.state.category.list" key="{categoryIndex}" class="{this.state.category.current.id == category.id && 'active'}">
             <a id="{'Category_' + category.id}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
           </li>
           <li class="">
@@ -23,21 +27,25 @@
                   </header>
                   <div class="panel-body sample-params">
                     <div class="form-group">
-                      <label class="">As % of overall {this.state.categoryCurrent.name} Category</label>
+                      <label class="">As % of overall {this.state.category.current.name} Category</label>
                       <select name="state" class="form-control ddList">
-                        <option rt-repeat="percentageDoc in this.state.categoryInfo.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
+                        <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
                       </select>
-                      <a href="#" class="validation-btn btn btn-default">
-                        <i rt-if="this.state" class="fa fa-check icon-success"></i>
-                      </a>
+                      <ValidationButton
+                          id='category'
+                          onClick={this.handleOnClickValidationButton}
+                          status={this.state.buttonStatus.category} />
                     </div>
                     <div class="or-divider"><span>OR</span></div>
                     <div class="form-group">
                       <label class="">Fixed Number of Documents</label>
                       <select name="state" class="form-control ddList">
-                       <option rt-repeat="docPercentage in this.state.categoryInfo.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
+                       <option rt-repeat="docPercentage in this.state.category.info.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
                       </select>
-                      <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                      <ValidationButton
+                          id='fixedNumber'
+                          onClick={this.handleOnClickValidationButton}
+                          status={this.state.buttonStatus.fixedNumber} />
                     </div>
                   </div>
                 </section>
@@ -52,7 +60,7 @@
                       </div>
                   </header>
                   <div class="panel-body">
-                    <span>Number of Documents: {this.addCommas(this.state.categoryInfo.number_docs)}</span>
+                    <span>Number of Documents: {this.addCommas(this.state.category.info.number_docs)}</span>
                     <div class="row">
                       <div class="col-sm-6">
                         <h4 class="chart-title">Confidentiality Overview</h4>
@@ -90,36 +98,39 @@
                                 <h4 class="chart-title pull-left mt-sm mr-md">Users</h4>
                                 <ul class="filter-buttons list-unstyled pull-left">
                                     <li class="dropdown">
-                                        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                      <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                         <div class="dropdown-backdrop-custom" style="display:none"></div>
                                         <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 560px;">
                                             <ul class="filter-list list-unstyled pt-xs">
                                                 <li>
-                                                  <select id="timeframe" name="timeframe" onChange={this.handleOnChange} class="assignent-select form-control ddList">
-                                                    <option selected disabled value="0">Timeframe</option>
-                                                    <option class="lt" value="12">1 Year</option>
-                                                    <option class="lt" value="6">6 Months</option>
-                                                    <option class="lt" value="3">3 Months</option>
-                                                    <option class="lt" value="1">1 Months</option>
-                                                  </select>
+                                                  <SelectBox
+                                                    id={this.static.selectId.timeframe}
+                                                    name="timeframe"
+                                                    data={this.state.datafilter.timeFrame}
+                                                    value={this.state.datafilter.setValue.timeframe}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
                                                 </li>
                                                 <li>
-                                                  <select id="usersnum" name="usersnum" onChange={this.handleOnChange} class="assignent-select form-control ddList">
-                                                    <option selected disabled value="0">Number of Users</option>
-                                                    <option class="lt" value="30">Top 30</option>
-                                                    <option class="lt" value="20">Top 20</option>
-                                                    <option class="lt" value="15">Top 15</option>
-                                                    <option class="lt" value="10">Top 10</option>
-                                                    <option class="lt" value="5">Top 5</option>
-                                                    <option class="lt" value="2">Top 2</option>
-                                                  </select>
+                                                <SelectBox
+                                                    id={this.static.selectId.numberuser}
+                                                    name="usersnum"
+                                                    data={this.state.datafilter.usersNumber}
+                                                    value={this.state.datafilter.setValue.numberuser}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
                                                 </li>
                                                 <li>
-                                                  <select id="reviewertype" name="reviewertype" onChange={this.handleOnChange}  class="assignent-select form-control ddList">
-                                                    <option selected disabled value="0">Type of Reviewer</option>
-                                                    <option class="lt" value="last_modifier">Document Last Modified</option>
-                                                    <option class="lt" value="creator">Document Creator</option>
-                                                  </select>
+                                                  <SelectBox
+                                                    id={this.static.selectId.reviewertype}
+                                                    name="reviewertype"
+                                                    data={this.state.datafilter.reviewerType}
+                                                    value={this.state.datafilter.setValue.reviewertype}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
                                                 </li>
                                             </ul>
                                         </div>
@@ -127,7 +138,10 @@
                                 </ul>
 
                                 <div class="filter-tags-block pull-left">
-                                    <div class="pull-left filter-tags-userassign">
+                                    <div class="pull-left filter-tags">
+                                      <FilterLabel
+                                          data={this.state.datafilter.filterLabel}
+                                          onClick={this.handleClickFilterLabel} />
                                     </div>
                                 </div>
 
@@ -135,38 +149,27 @@
                               <div id="userReviewChart"></div>
                             </div>
                             <div class="col-xs-4 select-reviewers">
-                              <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)</h4>
-                              <div>
-                                <div class="switch switch-sm switch-success">
-                                  <div class="ios-switch off select-all" onClick={this.selectAll}>
-                                    <div class="on-background background-fill"></div><div class="state-background background-fill">
-                                    </div>
-                                    <div class="handle"></div>
-                                  </div>
-                                    <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                                  Select All
-                                </div>
-                                <div class="clearfix"></div>
-                              </div>
-                              <div rt-repeat="review in this.state.reviewers" key="{reviewIndex}" style="height: 37.5px" >
-                                <div class="switch switch-sm switch-success">
-                                  <div class="ios-switch off" rt-class="{on:review}" id="select_{reviewIndex}" onClick="()=> this.select(reviewIndex)">
-                                    <div class="on-background background-fill"></div>
-                                    <div class="state-background background-fill">
-                                    </div>
-                                    <div class="handle"></div>
-                                  </div>
-                                    <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-                                </div>
-                                <!--<div class="clearfix"></div>-->
-                              <div>
+                                <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)</h4>
+                                <SelectButton
+                                    key="{'select_all'}"
+                                    title="Select All"
+                                    checked="{this.state.datafilter.request.reviewers.length >= this.state.category.reviewers.length ? 'on' : 'off'}"
+                                    onChange="(e)=>this.handleOnChangeSelectAll(e)" />
+                                <SelectButton
+                                    rt-repeat="review in this.state.category.reviewers"
+                                    key="{'select_' + reviewIndex}"
+                                    checked="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
+                                    onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
                             </div>
-                          </div>
-                      </div>
                     </div>
                   </div>
                   <div class="pull-right">
-                    <button class="btn btn-green btn-ok mb-sm mt-md btn-next-cat" type="button" onClick="()=>this.setCategoryCurrent(this.state.categoryCurrent.id)">Validate and Go to Next Category</button>
+                    <button
+                        class="btn btn-green btn-ok mb-sm mt-md {this.state.checkedNumber == 0 && 'disabled'}"
+                        type="button"
+                        onClick={this.handleValidateButton}>
+                        Validate and Go to Next Category
+                    </button>
                   </div>
                 </section>
               </div>
