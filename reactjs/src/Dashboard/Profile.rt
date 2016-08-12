@@ -16,8 +16,8 @@
 								<div>
 									<a class="my-profile-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a>
 									<div class="my-profile-user">
-										<h4>Christopher Muffat</h4>
-										<p>Job Position: CEO & Founder</p>
+										<h4>{this.state.profile.user}</h4>
+										<p>Job Position: {this.state.profile.job_position}</p>
 									</div>
 								</div>
 								<div class="my-profile-content-top pro_content">
@@ -26,43 +26,43 @@
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Windows ID:</label>
 												<div class="col-md-8 col-sm-8">
-													<p>CMUFFAT</p>
+													<p>{this.state.profile.windows_id}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Department</label>
 												<div class="col-md-8 col-sm-8">
-													<p>Management Office</p>
+													<p>{this.state.profile.department}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Company Name</label>
 												<div class="col-md-8 col-sm-8">
-													<p>Dathena Science</p>
+													<p>{this.state.profile.company_name}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Location</label>
 												<div class="col-md-8 col-sm-8">
-													<p>Singapore</p>
+													<p>{this.state.profile.location}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Email</label>
 												<div class="col-md-8 col-sm-8">
-													<p>chris@dathena.io</p>
+													<p>{this.state.profile.corporate_email}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Landline)</label>
 												<div class="col-md-8 col-sm-8">
-													<p>+65 90000000</p>
+													<p>{this.state.profile.corporate_phone}</p>
 												</div>
 											</div>
 											<div class="pro_form-group form-group row">
 												<label class="col-md-4 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Mobile)</label>
 												<div class="col-md-8 col-sm-8">
-													<p>+65 90000000</p>
+													<p>{this.state.profile.corporate_mobile}</p>
 												</div>
 											</div>
 										</form>

@@ -1,211 +1,260 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
-<div class="container">
-			<div class="tabs tabs-primary">
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
-					</li>
-					<li class="">
-						<a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div id="my_profile" class="my-profile-edit tab-pane active">
-						<div class="mpe_top">
-							<Link to="/Dashboard/Profile">Back To Profile</Link>
-							<h4 class="mpe_top_h4">Edit Profile</h4>
-						</div>
-						<div class="my-profile-edit-content">
-							<div class="tabs tabs-vertical tabs-left tabs-primary">
-									<ul class="nav nav-tabs col-sm-2 col-xs-12">
-										<li class="active">
-											<a href="#profile_details" data-toggle="tab" aria-expanded="true">Profile Details</a>
-										</li>
-										<li class="">
-											<a href="#photo" data-toggle="tab" aria-expanded="false">Photo</a>
-										</li>
-										<li class="">
-											<a href="#change_email" data-toggle="tab" aria-expanded="false">Change Email</a>
-										</li>
-										<li class="">
-											<a href="#password" data-toggle="tab" aria-expanded="false">Password</a>
-										</li>
-									  </ul>
-									<div class="mpe-content-right">
-										<div class="mpe-tab-content tab-content">
-											<div id="profile_details" class="mpe-tab-pane tab-pane active">
-												<h4 class="mpe_top_h4">Change Personal Details</h4>
-												<div class="row">
-													<div class="profile-details-left col-md-6 col-sm-6 col-xs-12">
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Windows ID:</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="CMUFFAT">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Department</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="Management Office">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Company Name</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="Dathena Science">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Location</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="Singapore">
-															</div>
-														</div>
-													</div>
-													<div class="profile-details-right col-md-6 col-sm-6 col-xs-12">
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Corporate Email</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="chris@dathena.io">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Corporate Phone (Landline)</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="+65 90000000">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label" for="inputDefault">Corporate Phone (Mobile)</label>
-															<div class="mpe_input">
-																<input type="text" class="form-control" id="inputDefault" value="+65 90000000">
-															</div>
-														</div>
-														<div class="profile_details_bottom_right">
-															<ul class="my-profile-ul">
-																<li>System user</li>
-																<li class="left1">
-																	<div class="switch switch-sm switch-primary">
-																		<div class="ios-switch off">
-																			<div class="on-background background-fill"></div><div class="state-background background-fill">
-																			</div>
-																			<div class="handle"></div>
-																		</div>
-																			<input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
-																	</div>
-																</li>
-																<li class="left2"><p>Active Directory</p>
-																	<div class="my-profile-check-none checkbox-custom checkbox-default">
-																		<input class="x" id="z" name="agreeterms" type="checkbox">
-																		<label for="AgreeTerms">enable SSO</label>
-																	</div>
-																</li>
-															</ul>
-														</div>
-													</div>
+<!-- <rt-import name="validate" from="../components/dathena/validate"/>
+
+
+ --><div class="container">
+	<div class="tabs tabs-primary">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
+			</li>
+			<li class="">
+				<a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="my_profile" class="my-profile-edit tab-pane active">
+				<div class="mpe_top">
+					<Link to="/Dashboard/Profile">Back To Profile</Link>
+					<h4 class="mpe_top_h4">Edit Profile</h4>
+				
+				</div>
+				<div class="my-profile-edit-content">
+					<div class="tabs tabs-vertical tabs-left tabs-primary">
+						<ul class="nav nav-tabs col-sm-2 col-xs-12">
+							<li class="active">
+								<a href="#profile_details" data-toggle="tab" aria-expanded="true">Profile Details</a>
+							</li>
+							<li class="">
+								<a href="#photo" data-toggle="tab" aria-expanded="false">Photo</a>
+							</li>
+							<li class="">
+								<a href="#change_email" data-toggle="tab" aria-expanded="false">Change Email</a>
+							</li>
+							<li class="">
+								<a href="#password" data-toggle="tab" aria-expanded="false">Password</a>
+							</li>
+						</ul>
+						<div class="mpe-content-right">
+							<div class="mpe-tab-content tab-content">
+								<div id="profile_details" class="mpe-tab-pane tab-pane active">
+									<h4 class="mpe_top_h4">Change Personal Details</h4>
+									<div class="row">
+										<div class="profile-details-left col-md-6 col-sm-6 col-xs-12">
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Windows ID:</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="WindowID" 
+														onChange="{this.getWindowID}"
+											            value={this.state.profile.windows_id}>
 												</div>
+												<span id="WindowIDErr" style="color: #B94A48"></span>
 											</div>
-											<div id="photo" class="mpe-tab-pane tab-pane">
-												<h4 class="mpe_top_h4">Change Profile Photo</h4>
-												<div class="my-profile-photo-upload">
-													<p class="my-profile-photo-user"><a class="my-profile-photo-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a></p>
-													<p><a class="my-profile-photo-a2" href="#" type="file"><i class="fa fa-upload" aria-hidden="true"></i><span class="fileinput-button">
-                                                    <span>Upload Your Photo</span>
-                                                    <input type="file" name="files[]" multiple>
-                                                </span></a></p>
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Department</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="Department"  value={this.state.profile.department} onChange="{this.getdepartment}" />
 												</div>
-                                                
+												<span id="DepartmentErr" style="color: #B94A48"></span>
 											</div>
-											<div id="change_email" class="mpe-tab-pane tab-pane">
-												<h4 class="mpe_top_h4">Change Email Address</h4>
-												<div class="change-email-address">
-													<div class="form-group mb-lg">
-														<div class="clearfix">
-															<label class="pull-left">Current Password</label>
-														</div>
-														<div class="input-group input-group-icon">
-															<input name="pwd" type="password" class="form-control input-md">
-															<span class="input-group-addon">
-																<span class="icon icon-md">
-																	<i class="fa fa-lock"></i>
-																</span>
-															</span>
-														</div>
-													</div>
-													<div class="form-group mb-lg">
-														<div class="clearfix">
-															<label class="pull-left">New Email</label>
-														</div>
-														<div class="input-group input-group-icon">
-															<input name="pwd" type="email" class="form-control input-md">
-															<span class="input-group-addon">
-																<span class="icon icon-md">
-																	<i class="fa fa-envelope" aria-hidden="true"></i>
-																</span>
-															</span>
-														</div>
-													</div>
-													<div class="change-email-bottom my-profile-bottom col-xs-12">
-														<a href="#" class="btn btn-primary btn-ok">Change my Email</a>
-													</div>
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Company Name</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="CompanyName" 
+													 value={this.state.profile.company_name} onChange={this.getCompanyName}>
 												</div>
-											</div>
-											<div id="password" class="mpe-tab-pane tab-pane">
-												<h4 class="mpe_top_h4">Change Password</h4>
-												<div class="change-email-address">
-													<div class="form-group mb-lg">
-														<div class="clearfix">
-															<label class="pull-left">Current Password</label>
-														</div>
-														<div class="input-group input-group-icon">
-															<input name="pwd" type="password" class="form-control input-md">
-															<span class="input-group-addon">
-																<span class="icon icon-md">
-																	<i class="fa fa-lock"></i>
-																</span>
-															</span>
-														</div>
-													</div>
-													<div class="form-group mb-lg">
-														<div class="clearfix">
-															<label class="pull-left">New Password</label>
-														</div>
-														<div class="input-group input-group-icon">
-															<input name="pwd" type="password" class="form-control input-md">
-															<span class="input-group-addon">
-																<span class="icon icon-md">
-																	<i class="fa fa-lock"></i>
-																</span>
-															</span>
-														</div>
-													</div>
-													<div class="form-group mb-lg">
-														<div class="clearfix">
-															<label class="pull-left">Confirm New Password</label>
-														</div>
-														<div class="input-group input-group-icon">
-															<input name="pwd" type="password" class="form-control input-md">
-															<span class="input-group-addon">
-																<span class="icon icon-md">
-																	<i class="fa fa-lock"></i>
-																</span>
-															</span>
-														</div>
-													</div>
-													<div class="change-email-bottom my-profile-bottom col-xs-12">
-														<a href="#" class="btn btn-primary btn-ok">Change my Password</a>
-													</div>
+												<span id="CompanyNameErr" style="color: #B94A48"></span>
+											</div>	
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Location</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="Location" value={this.state.profile.location}  onChange={this.getLocation}>
 												</div>
+												<span id="LocationErr" style="color: #B94A48"></span>
 											</div>
 										</div>
+										<div class="profile-details-right col-md-6 col-sm-6 col-xs-12">
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Corporate Email</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="Email" value={this.state.profile.corporate_email} 
+													onChange={this.getCorporateEmail}>
+												</div>
+												<span id="EmailErr" style="color: #B94A48"></span>
+											</div>
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Corporate Phone (Landline)</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="Corporate_phone" value={this.state.profile.corporate_phone}
+													
+													onChange={this.getCorporatePhone}>
+												</div>
+												<span id="Corporate_phoneErr" style="color: #B94A48"></span>
+											</div>
+											<div class="form-group">
+												<label class="control-label" for="inputDefault">Corporate Phone (Mobile)</label>
+												<div class="mpe_input">
+													<input type="text" class="form-control" id="Corporate_mobile"
+													value={this.state.profile.corporate_mobile} onChange={this.getCorporatePhoneMobile}>
+												</div>
+												<span id="Corporate_mobileErr" style="color: #B94A48"></span>
+											</div>
+											<div class="profile_details_bottom_right">
+												<ul class="my-profile-ul">
+													<li>System user</li>
+													<li class="left1">
+														<div class="switch switch-sm switch-primary">
+															<div class="ios-switch off">
+																<div class="on-background background-fill"></div>
+																<div class="state-background background-fill">
+															</div>
+															<div class="handle"></div>
+														</div>
+													<!-- 	<input type="checkbox"  checked={this.state.profile.use_active_directory} 
+														onChange={this.IsUseactivedirectory}
+														> -->
+													</div>
+													<span id="WindowIDErr" style="color: #B94A48"></span>
+												</li>
+												<li class="left2"><p>Active Directory</p>
+													<div class="my-profile-check-none checkbox-custom checkbox-default">
+														<input class="x" id="z" name="agreeterms" checked= {this.state.profile.enable_sso} type="checkbox" onChange={this.IsEnablesso}>
+														<label for="AgreeTerms">enable SSO</label>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="change-email-bottom my-profile-bottom col-xs-12">
+											<a class="btn btn-primary btn-ok" onClick="{this.editProfile}">Change Profile
+											</a>
+										</div>
 									</div>
+								</div>
+							</div>
+							<div id="photo" class="mpe-tab-pane tab-pane">
+								<h4 class="mpe_top_h4">Change Profile Photo</h4>
+								<div class="my-profile-photo-upload">
+									<p class="my-profile-photo-user"><a class="my-profile-photo-a"><img src={this.state.photo} /></a></p>
+									<form  ref="uploadForm" className="uploader" encType="multipart/form-data" onSubmit={this.uploadFile}>
+										<p>
+											<a class="my-profile-photo-a2" href="#" type="file">
+												<i class="fa fa-upload" aria-hidden="true" type="submit" onClick={this.uploadFile}></i>
+												<span class="fileinput-button">
+													<span>Upload Your Photo</span>
+													<input type="file" name="files[]" id="myFile" multiple >
+												</span>
+												
+											</a>
+										</p>
+									</form>
+									
+								</div>
+
+							</div>
+							<div id="change_email" class="mpe-tab-pane tab-pane">
+								<h4 class="mpe_top_h4">Change Email Address</h4>
+								<form  id="changeEmail">
+									<div class="change-email-address">
+									<div class="form-group mb-lg">
+										<div class="clearfix">
+											<label class="pull-left">Current Password</label>
+										</div>
+										<div class="input-group input-group-icon">
+											<input name="currentPass" id="currentPass" type="password" class="form-control input-md" value ={this.state.CurrentPass} onChange={this.getCurrentPass}>
+											<span id="currentPassErr" style="color: #B94A48"></span>
+											<span class="input-group-addon">
+												<span class="icon icon-md">
+													<i class="fa fa-lock"></i>
+												</span>
+											</span>
+
+										</div>
+									</div>
+									<div class="form-group mb-lg">
+										<div class="clearfix">
+											<label class="pull-left">New Email</label>
+										</div>
+										<div class="input-group input-group-icon">
+											<input name="pwd" type="email" name="newEmail" id="newEmail" class="form-control input-md" value={this.state.NewEmail} onChange={this.getNewEmail}>
+											<span id="newEmailErr" style="color: #B94A48;"></span>
+											<span class="input-group-addon">
+												<span class="icon icon-md">
+													<i class="fa fa-envelope" aria-hidden="true"></i>
+												</span>
+											</span>
+										</div>
+										<p id="status" style="color:#B94A48;">{this.state.success}</p>
+										<p id="error" style="color:#B94A48;">{this.state.errorEmail}</p>
+									</div>
+									<div class="change-email-bottom my-profile-bottom col-xs-12">
+										<a class="btn btn-primary btn-ok" onClick={this.ChangeEmail}>Change my Email</a>
+									</div>
+								</div>
+								</form>
+								
+							</div>
+							<div id="password" class="mpe-tab-pane tab-pane">
+								<h4 class="mpe_top_h4">Change Password</h4>
+								<div class="change-email-address">
+									<div class="form-group mb-lg">
+										<div class="clearfix">
+											<label class="pull-left">Current Password</label>
+										</div>
+										<div class="input-group input-group-icon">
+											<input name="pwd" id="currentPass1" type="password" class="form-control input-md" value={this.state.CurrentPassforChangePass} onChange={this.getCurrentPassforChangePass}>
+											<span id="currentPass1Err" style="color: #B94A48;"></span>
+											<span class="input-group-addon">
+												<span class="icon icon-md">
+													<i class="fa fa-lock"></i>
+												</span>
+											</span>
+										</div>
+									</div>
+									<div class="form-group mb-lg">
+										<div class="clearfix">
+											<label class="pull-left">New Password</label>
+										</div>
+										<div class="input-group input-group-icon">
+											<input name="pwd" type="password" id="newPass" class="form-control input-md" value={this.state.NewPass} onChange={this.getNewPass}>
+											<span id="newPassErr" style="color: #B94A48;"></span>
+											<span class="input-group-addon">
+												<span class="icon icon-md">
+													<i class="fa fa-lock"></i>
+												</span>
+											</span>
+										</div>
+									</div>
+									<div class="form-group mb-lg">
+										<div class="clearfix">
+											<label class="pull-left">Confirm New Password</label>
+										</div>
+										<div class="input-group input-group-icon">
+											<input name="pwd" type="password" id="ConfirmPass" class="form-control input-md" value={this.state.ConfirmPass} onChange={this.getConfirmPass}>
+											<span id="ConfirmPassErr" style="color: #B94A48;"></span>
+											<span class="input-group-addon">
+												<span class="icon icon-md">
+													<i class="fa fa-lock"></i>
+												</span>
+											</span>
+
+										</div>
+										<p id="errorPass" style="color:#B94A48;"></p>
+										<p id="errorPassSer" style="color:#B94A48;">{this.state.error}</p>
+									</div>
+									<div class="change-email-bottom my-profile-bottom col-xs-12">
+										<a onClick={this.changePassword} class="btn btn-primary btn-ok">Change my Password</a>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div id="my_team" class="tab-pane">
-						<p>Recent</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div id="my_team" class="tab-pane">
+			<p>Recent</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+		</div>
+	</div>
+</div>
+</div>

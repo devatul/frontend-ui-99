@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './SignUp.rt'
 import $ from 'jquery'
 import validate from 'jquery-validation';
-require('../Constant.js');
+import Constant from '../Constant.js';
 var SignUp = React.createClass({
 	getInitialState() {
 	    return {userName: '', password: '', firstName:'', lastName:'', email:'', phoneLandline:'',
@@ -111,7 +111,7 @@ var SignUp = React.createClass({
 	        submitHandler: function()
 	        {
 			   	$.ajax({
-				    url: SERVER_API + 'api/account/registration/',
+				    url: Constant.SERVER_API + 'api/account/registration/',
 				    dataType: 'json',
 				    type: "POST",
 				    data: {

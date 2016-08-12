@@ -3,16 +3,42 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './Profile.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import $ from 'jquery'
+import Constant from '../Constant.js';
+import $, { JQuery } from 'jquery';
 module.exports = React.createClass({
   	mixins: [LinkedStateMixin],
   	getInitialState() {
+
 	    return {
-	    	
+	   		 profile:{},
 	    };
 	},
-	componentDidMount() 
-	{
+	componentWillMount(){
+			$.ajax({
+            url: Constant.SERVER_API + 'api/account/profile/',
+            dataType: 'json',
+            type: 'GET',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+            },
+            success: function(data) {
+            	
+                this.setState( {profile: data});
+                
+                console.log("scan result: ", data);
+            }.bind(this),
+            error: function(xhr, status, error) {
+                console.log(xhr);
+                var jsonResponse = JSON.parse(xhr.responseText);
+                console.log(jsonResponse);
+                if(xhr.status === 401)
+                {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
+	},
+	componentDidMount() {
 		$(document).ready(function(){
 			$("p.on_off").click(function() {
 				$(this).toggleClass("on_off_b");
@@ -38,7 +64,6 @@ module.exports = React.createClass({
 				$(this).next().toggleClass("checkbox-inline_b");
 			});
 		});
-
 	},
     render:template
 });
