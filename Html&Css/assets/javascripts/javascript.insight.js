@@ -7,7 +7,7 @@ $(function(){
       data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 45, color: '#7986cb'},{y: 40, color: '#ed9c28'},{y: 10, color: '#E36159'}]
     },
     {
-      categories: ['ADCompl.WE', 'ADHR.WR', 'ADHR.WR', 'ADHR.WR', 'ADHR.WR'],
+      categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley'],
       data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 25, color: '#7986cb'},{y: 20, color: '#ed9c28'},{y: 4, color: '#E36159'}]
     },
     {
