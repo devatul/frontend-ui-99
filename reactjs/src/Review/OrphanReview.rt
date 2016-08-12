@@ -1,3 +1,5 @@
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
   <section>
     <div class="container">
                 <div class="row">
@@ -238,7 +240,7 @@
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions" role="grid" aria-describedby="datatable-default_info">
+                                    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                                         <thead>
                                             <tr role="row">
                                                 <th>
@@ -248,60 +250,35 @@
                                                     </div>
                                                 </th>
                                                 <th class="review_note">Document Name
-                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This displays the name of each individual document, as it exists in its current state.</p>
-                            </div>
-                          </div>
-                        </th>
+                                                    <HelpButton classNote="note_chart_content"
+                                                            setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                </th>
                                                 <th class="review_note">Path
-                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This displays the logical folder path to where each document is currently located.</p>
-                            </div>
-                          </div>
-                        </th>
+                                                    <HelpButton classNote="help_question_content"
+                                                                setValue="This displays the logical folder path to where each document is currently located" />
+                                                </th>
                                                 <th class="review_note">Owner
-                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This displays the organisational member who has last modified the document. 
-                              This owner is automatically assigned by 99 from the 
-                              Document metadata itself gathered during the scanning process.</p>
-                            </div>
-                          </div>
-                        </th>
+                                                    <HelpButton classNote="help_question_content"
+                                                                setValue="This displays the organisational member who has last modified the document.
+                                                                This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
+                                                </th>
                                                 <th class="review_note">Category
-                          <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                              The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-                            </div>
-                          </div>
-                        </th>
+                                                    <HelpButton classNote="help_question_bottom"
+                                                                setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                                                                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                                                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                                                The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                                </th>
                                                 <th class="review_note">Confidentiality
-                             <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                              In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                              The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                              The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-                            </div>
-                          </div>
-                        </th>
+                                                    <HelpButton classNote="note_chart_content_review"
+                                                                setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                                                                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                                                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                                                The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                                </th>
                                                 <th class="text-center">Status
-                                                    <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                       <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                        <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                                            <p>This represent the status of the review for each file.</p>
-                                                        </div>
-                                                    </div>
+                                                    <HelpButton classNote="note_chart_content_review"
+                                                                setValue="This represent the status of the review for each file." />
                                                 </th>
                                             </tr>
                                         </thead>
@@ -309,42 +286,31 @@
                                             <tr rt-repeat="sample in this.state.samplesDocument" key="{sampleIndex}" class="{(this.state.checkedNumber > 0 && sample.current.checked == false) ? 'inactive' : ''}">
                                                 <td>
                                                     <div class="checkbox-custom checkbox-default">
-                                                      <input type="checkbox" id="checkboxExample{sampleIndex}" class="checkbox-item-1" checked="{sample.current.checked}" onChange="(event)=>this.onClickCheckbox(event, sampleIndex)">
-                                                      <label for="checkboxExample{sampleIndex}"></label>
+                                                      <input type="checkbox" class="checkbox-item-1" checked="{sample.current.checked}" onChange="(event)=>this.onClickCheckbox(event, sampleIndex)">
+                                                      <label></label>
                                                     </div>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span
-                                                      class="text-italic file-name doc-path"
-                                                      data-toggle="modal"
-                                                      data-target="#previewModal"
-                                                      onClick="()=>this.setDocumentPreview(sampleIndex)"
-                                                      data-file-url="{sample.image_url}">
-                                                      <span
-                                                        class="file-name-1"
-                                                        data-toggle="tooltip"
-                                                        data-original-title="{sample.name}">
-                                                        {sample.name}
-                                                      </span>
+                                                    <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal" onClick="()=>this.setDocumentPreview(sampleIndex)" data-file-url="{sample.image_url}">
+                                                        <span class="file-name-1" data-toggle="tooltip" data-original-title="{sample.name}">
+                                                          {sample.name}
+                                                        </span>
                                                     </span>
-                                                    <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                        <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                                        <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                            <ul>
-                                                                <li>Name: {sample.name}</li>
-                                                                <li>Creation Date: {sample.creation_date}</li>
-                                                                <li>Modifitcation Date: {sample.modification_date}</li>
-                                                                <li>Required Legal Retention until: {sample.legal_retention_until}</li>
-                                                                <li>Confidentiality Label: {sample.confidentiality_label}</li>
-                                                                <li>Number of Classification Challenge: {sample.number_of_classification_challenge}</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    <InfoButton>
+                                                          <ul>
+                                                              <li>Name: {sample.name}</li>
+                                                              <li>Creation Date: {sample.creation_date}</li>
+                                                              <li>Modifitcation Date: {sample.modification_date}</li>
+                                                              <li>Required Legal Retention until: {sample.legal_retention_until}</li>
+                                                              <li>Confidentiality Label: {sample.confidentiality_label}</li>
+                                                              <li>Number of Classification Challenge: {sample.number_of_classification_challenge}</li>
+                                                          </ul>
+                                                    </InfoButton>
                                                 </td>
                                                 <td class="text-left">
-                                                    <span class="text-italic doc-path file-name-1"
-                                                        data-toggle="tooltip"
-                                                        data-original-title="{sample.path}">{sample.path}</span>
+                                                    <span class="text-italic doc-path file-name-1" data-toggle="tooltip" data-original-title="{sample.path}">
+                                                        {sample.path}
+                                                    </span>
                                                 </td>
                                                 <td class="text-left">
                                                     <span class="text-italic">{sample.owner}</span>

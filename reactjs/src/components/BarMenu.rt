@@ -32,7 +32,6 @@
                                                 title="Confidentiality"
                                                 onChange={this.handleSelectBoxChange}
                                                 onSelectAll={this.handleSelectAll}
-                                                onClear={this.handleOnClear}
                                                 checked={true}
                                                 data={this.state.dataSelectBox[this.static.confidentialId]} />
                                         </div>
@@ -45,7 +44,6 @@
                                                 title="Category"
                                                 onChange={this.handleSelectBoxChange}
                                                 onSelectAll={this.handleSelectAll}
-                                                onClear={this.handleOnClear}
                                                 checked={true}
                                                 data={this.state.dataSelectBox[this.static.categoryId]} />
                                         </div>
@@ -57,7 +55,6 @@
                                                 title="Languages"
                                                 onChange={this.handleSelectBoxChange}
                                                 onSelectAll={this.handleSelectAll}
-                                                onClear={this.handleOnClear}
                                                 checked={true}
                                                 data={this.state.dataSelectBox[this.static.languageId]} />
                                         </div>
@@ -69,7 +66,6 @@
                                                 title="Document Type"
                                                 onChange={this.handleSelectBoxChange}
                                                 onSelectAll={this.handleSelectAll}
-                                                onClear={this.handleOnClear}
                                                 checked={true}
                                                 data={this.state.dataSelectBox[this.static.doctypeId]} />
                                         </div>
@@ -108,7 +104,7 @@
                                             <td colspan="3">{scan_result.file_extensions_processed}</td>
                                         </tr>
                                         <tr>
-                                            <td>Duplicated Documents:</td>
+                                            <td>Duplicate Documents:</td>
                                             <td colspan="3">{this.addCommas(scan_result.total_duplicates)}</td>
                                         </tr>
                                         <tr>

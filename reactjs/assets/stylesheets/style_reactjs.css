@@ -92,41 +92,39 @@
     padding-top: 1px;
     padding-left: 0.5px;
 }
-.help_guide_sub .filter-tags-userassign {
-    padding-top: 10px;
-    padding-left: 15px;
-}
-.filter-tags-userassign .filter-label-assign .filter-remove-assign {
-    color: #fff;
-    margin-right: 5px;
-    cursor: pointer;
-}
-.filter-tags-userassign .filter-label-assign {
-    margin-right: 5px;
-    font-size: 100%;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 5px;
-}
+
 #userReviewChart {
     height: auto;
     margin-top: 12px;
 }
-.center-padding {
+/*.center-padding {
     text-align: left;
     padding-left: 95px !important;
    
-}
-.table-my-actions > tbody > tr > td {
+}*/
+/*.table-my-actions > tbody > tr > td {
     vertical-align: middle;
     position: relative;
     /* padding: 10px !important; */
-}
+/*}
 .vertical-top.document_2nd.first-ch {
-    /* min-width: 160px; */
+    min-width: 160px; 
     max-width: 150px;
-}
-.document_review_table>tbody>tr>td {
+}*/
+/*.document_review_table>tbody>tr>td {
     max-width: 185px;
     padding: 8px !important;
+}*/
+
+.noti-popup {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.noti-div {
+    display: flex;
+    flex-direction: column;
 }

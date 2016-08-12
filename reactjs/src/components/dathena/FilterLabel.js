@@ -46,13 +46,9 @@ var FilterLabel = React.createClass({
 				{child}
 
 				{ this.props.data.length > 0 && this.props.onClear &&
-				<span className={'filter-label label label-info'}
-					style={{backgroundColor: '#747474'}}>
-					<a className={'filter-remove'} onClick={this.clearFilter}>
-					<i className={'fa fa-times'}></i>
-					</a>
-					<span className={'option-name'}>Clear Filter</span>
-				</span>
+				<button type="button" onClick={this.clearFilter} className={'filter-label label label-info'} style={{backgroundColor: '#747474'}}>
+					Clear Filter
+				</button>
 				}
 			</div>
 		);

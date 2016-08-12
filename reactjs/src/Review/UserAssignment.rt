@@ -10,7 +10,7 @@
             <a id="{'Category_' + category.id}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
           </li>
           <li class="">
-            <a href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>
+            <a id='summarytab' href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>
           </li>
           
         </ul>
@@ -153,19 +153,19 @@
                                 <SelectButton
                                     key="{'select_all'}"
                                     title="Select All"
-                                    checked="{this.state.datafilter.request.reviewers.length >= this.state.category.reviewers.length ? 'on' : 'off'}"
+                                    setSelected="{this.state.datafilter.request.reviewers.length >= this.state.category.reviewers.length ? 'on' : 'off'}"
                                     onChange="(e)=>this.handleOnChangeSelectAll(e)" />
                                 <SelectButton
                                     rt-repeat="review in this.state.category.reviewers"
                                     key="{'select_' + reviewIndex}"
-                                    checked="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
+                                    setSelected="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
                                     onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
                             </div>
                     </div>
                   </div>
                   <div class="pull-right">
                     <button
-                        class="btn btn-green btn-ok mb-sm mt-md {this.state.checkedNumber == 0 && 'disabled'}"
+                        class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
                         type="button"
                         onClick={this.handleValidateButton}>
                         Validate and Go to Next Category
@@ -176,7 +176,7 @@
             </div>
           </div>
           <div id="summary" class="tab-pane">
-            <section rt-repeat="summary in this.state.summary" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+            <section rt-repeat="summary in this.state.summary.data" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
                   <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
                   <div class="panel-actions">

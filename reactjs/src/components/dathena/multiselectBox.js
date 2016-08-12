@@ -10,14 +10,6 @@ var multiselectBox = React.createClass({
     getInitialState: function() {
         return {
             checkList: [],
-            field: {
-                id: 'id',
-                name: 'name',
-                selectId: 'id box',
-                index: 'index object',
-                checked: 'check box',
-                value: 'value'
-            }
         };
     },
     propTypes: {
@@ -30,24 +22,18 @@ var multiselectBox = React.createClass({
         onSelectAll: PropTypes.func,
         onClear: PropTypes.func
     },
+
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.props.data != nextProps.data) {
             return true;
         }
         return false;
     },
+
     handleOnClick: function() {
 
     },
-    handleClear: function(event) {
-        var field = {
-            name: event.target.name,
-            selectId: this.props.id,
-            checked: event.target.checked,
-            value: event.target.value
-        }
-        this.props.onClear(field);
-    },
+
     handleOnChange: function(event,index) {
         var field = {
             id: this.props.data[index].id,
@@ -59,6 +45,7 @@ var multiselectBox = React.createClass({
         }
         this.props.onChange(field, index);
     },
+
     handleSelectAll: function(event) {
         var field = {
             name: event.target.name,
@@ -111,19 +98,6 @@ var multiselectBox = React.createClass({
 						</label>
 						</a>
 					</li>
-                    <li className={'multiselect-item multiselect-all'}>
-                        <a tabIndex="0" className="multiselect-all">
-                        <label className="checkbox">
-                            <input ref="clearFilter"
-                                name={'Clear_Checkbox'}
-                                key={this.props.id + 'Clear_Filter'}
-                                checked={this.state.clearChecked}
-                                onChange={this.handleClear}
-                                type="checkbox" value="Clear_Filter"/>
-                            Clear Filter
-                        </label>
-                        </a>
-                    </li>
 					{children}
 				</ul>
 			</div>

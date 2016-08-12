@@ -4,10 +4,10 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './ReviewValidation.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import javascript from '../script/javascript.js';
+//import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
 import 'jquery'
-import javascriptTodo from '../script/javascript.todo.js'
+//import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
 import _ from 'lodash';
 //import elementUndo from '../script/elementUndo.js'
