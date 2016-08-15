@@ -31,7 +31,7 @@ var multiselectBox = React.createClass({
     },
 
     handleOnClick: function() {
-
+        $('#dropdownFilter').css({ display: 'block', height: '271px' });
     },
 
     handleOnChange: function(event,index) {

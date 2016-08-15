@@ -8,7 +8,7 @@
                 <div class="col-sm-8">
                     <p class="page-heading-sm">{this.props.title}</p>
                     <div class="filter-tags-block">
-                        <label class="pull-left mr-md" style="display:none">Applied Filters:</label>
+                        <label rt-if="this.state.filterLabel.length > 0" class="pull-left mr-md">Applied Filters:</label>
                         <div class="pull-left filter-tags" style="text-transform: capitalize">
                             <FilterLabel
                                 id="Confidential"
@@ -23,7 +23,7 @@
                         <li rt-if="this.props.showFilter" class="dropdown">
                             <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                             <div class="dropdown-backdrop-custom" style="display:none"></div>
-                            <div class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                            <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
                                 <ul class="filter-list list-unstyled pt-xs">
                                     <li class="mb-sm">
                                         <div class="form-group">

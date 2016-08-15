@@ -25,6 +25,14 @@
     padding-left: 0.5px;
 }
 
+
+.fix-center-heading-input-table {
+    padding: 10px 20px 6px 10px;
+}
+
+.fix-center-td-input-table {
+    padding: 0px 20px 0px 10px;
+}
 /*Basic static - group/orphan review*/
 .fix-arrow-collapse-stat-table .collapsed:before {
     content: "\f0d7";

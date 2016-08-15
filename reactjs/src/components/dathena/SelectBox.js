@@ -3,10 +3,10 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import _ from 'lodash'
+import { forEach } from 'lodash'
 
 var SelectBox = React.createClass({
-    displayName: 'selectButton',
+    displayName: 'selectBox',
 
     mixins: [PureRenderMixin],
 
@@ -33,7 +33,7 @@ var SelectBox = React.createClass({
 
     render: function() {
         let children = [];
-        _.forEach(this.props.data, function(object, index) {
+        forEach(this.props.data, function(object, index) {
             children[index] = <option
                                     key={object.name + '_' + index}
                                     className="lt"

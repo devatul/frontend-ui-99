@@ -292,7 +292,7 @@ module.exports = React.createClass({
 				"enable_sso" : this.state.profile.enable_sso,
 			},
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 				browserHistory.push('/Dashboard/Profile');
@@ -322,7 +322,7 @@ module.exports = React.createClass({
 
 			},
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 				console.log("ChangePass: ", data);
@@ -396,7 +396,7 @@ module.exports = React.createClass({
 				"email" :this.state.NewEmail,
 			},
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 				
@@ -481,7 +481,7 @@ module.exports = React.createClass({
 				"confirm_password" : this.state.ConfirmPass
 			},
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 				alert("success");
@@ -517,7 +517,7 @@ module.exports = React.createClass({
 	    	type: 'PUT',
 	    	data: fd,
     	beforeSend: function(xhr) {
-    		xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+    		xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
     	},
     	success: function(data) {
 
@@ -545,7 +545,7 @@ componentWillMount(){
 		dataType: 'json',
 		type: 'GET',
 		beforeSend: function(xhr) {
-			xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+			xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 		},
 		success: function(data) {
 
@@ -568,7 +568,7 @@ componentWillMount(){
 		dataType: 'json',
 		type: 'GET',
 		beforeSend: function(xhr) {
-			xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+			xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 		},
 		success: function(data) {
 

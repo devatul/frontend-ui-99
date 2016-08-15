@@ -52,13 +52,13 @@ var HelpButton = React.createClass({
     render: function() {
         var { setOpen, expanded } = this.state;
         return(
-            <div ref="dropdown" className={'r dropdown dropdown-file-info-holder inline-block-item ' + setOpen}>
+            <div ref="dropdown" className={'r dropdown inline-block-item ' + this.props.className + ' ' + setOpen}>
                 <a data-toggle="dropdown"
                     onMouseOver={this.handleOnMouseOver}
                     onMouseOut={this.handleOnMouseOut}
                     className="review_question_a help_question_a"
                     aria-expanded={expanded}>
-                    <i className="fa fa-question-circle" aria-hidden="true"></i>
+                    <i className={this.props.classIcon == null ? 'fa fa-question-circle' : 'fa ' + this.props.classIcon} aria-hidden="true"></i>
                 </a>
                 <div ref="dropdownMenu" className={this.props.classNote + ' dropdown-menu has-arrow dd-md full-mobile'}>
                     {this.props.setValue && 

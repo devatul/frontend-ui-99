@@ -204,7 +204,7 @@ var UserAssignment = React.createClass({
             //     dataType: "json",
             //     data: JSON.stringify(request),
             //     beforeSend: function(xhr) {
-            //         xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+            //         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             //     },
             //     success: function(data) {
             //         console.log("assign user", data);
@@ -298,7 +298,7 @@ var UserAssignment = React.createClass({
             dataType: 'json',
             data: datafilter.params,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state.category, {
@@ -322,7 +322,7 @@ var UserAssignment = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                	var updateData = update(this.state.category, {
@@ -348,7 +348,7 @@ var UserAssignment = React.createClass({
             async: false,
             data: { "id": current.id},
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 debugger
@@ -371,7 +371,7 @@ var UserAssignment = React.createClass({
             url: Constant.SERVER_API + "api/assign/summary/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 // var updateState = update(this.state, {

@@ -1,4 +1,6 @@
 <rt-import name="MenuBar" from="../components/BarMenu"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
@@ -10,12 +12,8 @@
                     <section class="panel">
                         <div class="panel-body bg-secondary widget-panel">
                             <h4 class="widget-title">Scan 
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                                    </div>
-                                </div>
+                                <HelpButton className="" classNote="overview_timeframe help_timeframe"
+                                    setValue="This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -34,12 +32,8 @@
                     <section class="panel">
                         <div class="panel-body bg-quartenary widget-panel">
                             <h4 class="widget-title">Duplicates / Twins 
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here.</p>
-                                    </div>
-                                </div>
+                                <HelpButton classNote="overview_timeframe help_timeframe"
+                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -161,11 +155,11 @@
                     <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
                             <h2 class="panel-title">Classification Summary</h2>
-                            <div class="panel-actions">
-                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                <ToggleButton setDefault="open" setTarget="#overview-panel-1" />
                             </div>
                         </header>
-                        <div class="panel-body">
+                        <div class="panel-body" id="overview-panel-1">
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped mb-none no-footer"
@@ -213,12 +207,12 @@
                     <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
                             <h2 class="panel-title">Categorisation Summary</h2>
-                            <div class="panel-actions">
-                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
                             </div>
                         </header>
                         
-                        <div class="panel-body">
+                        <div class="panel-body" id="overview-panel-2">
                             <div id="datatable-editable_wrapper" class="no-footer">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped mb-none no-footer"

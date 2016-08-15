@@ -99,39 +99,39 @@
                             <thead>
                               <tr>
                                 <th class="review_note">Status
-                                  <HelpButton classNote="note_chart_content"
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
                                       setValue="This displays the name of each individual document, as it exists in its current state." />  
                                 </th>
                                 <th class="review_note">Document Name
-                                  <HelpButton classNote="note_chart_content"
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
                                       setValue="This displays the name of each individual document, as it exists in its current state." />
                                 </th>
                                 <th class="review_note">Path
-                                  <HelpButton classNote="help_question_content"
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                       setValue="This displays the logical folder path to where each document is currently located." />
                                 </th>
                                 <th class="review_note">Category
-                                  <HelpButton classNote="help_question_content"
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                       setValue="This displays the organisational member who has last modified the document. 
                                           This owner is automatically assigned by 99 from the 
                                           Document metadata itself gathered during the scanning process." />
                                 </th>
                                 <th class="review_note">Confidentiality
-                                    <HelpButton classNote="help_question_bottom"
+                                    <HelpButton className="dropdown-file-info-holder" classNote="help_question_bottom" classIcon="fa-question-circle"
                                       setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
                                         In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
                                         The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
                                         The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
                                 </th>
                                 <th class="review_note">Coordinator's Comment
-                                    <HelpButton classNote="note_chart_content_review"
+                                    <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
                                       setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
                                     In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
                                     The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
                                     The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                 </th>
                                 <th class="review_note">Validation
-                                  <HelpButton classNote="note_chart_content_review"
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
                                       setValue="This represent the status of the review for each file." />
                                 </th>
                               </tr>

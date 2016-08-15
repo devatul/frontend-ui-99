@@ -159,7 +159,7 @@ var ReviewValidation = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 for(var i = 0; i < data.length; i++) {
@@ -189,7 +189,7 @@ var ReviewValidation = React.createClass({
             url: Constant.SERVER_API + "api/label/confidentiality/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.reverse();
@@ -212,7 +212,7 @@ var ReviewValidation = React.createClass({
             async: false,
             data: {"id": this.state.categoryCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -266,7 +266,7 @@ var ReviewValidation = React.createClass({
             async: false,
             data: {"id": reviewId},
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -309,7 +309,7 @@ var ReviewValidation = React.createClass({
                 "reviewer_id": 2
             },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log('data', data);
@@ -576,7 +576,7 @@ var ReviewValidation = React.createClass({
             url: Constant.SERVER_API + "api/review/review_validation/summary/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {

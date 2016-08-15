@@ -41,7 +41,7 @@ var Signin = React.createClass
 		      success: function(data) {
 		      	console.log(data.token);
 
-	    		localStorage.setItem('token', data.token);
+	    		sessionStorage.setItem('token', data.token);
 	    		//javascript();
 		        browserHistory.push('/Dashboard/OverView');
 		      }.bind(this),
@@ -104,7 +104,7 @@ var Signin = React.createClass
 				      success: function(data) {
 				        if(this.state.isRemember)
 				        {
-					    	localStorage.setItem('token', data.token);
+					    	sessionStorage.setItem('token', data.token);
 			    		}
 				        browserHistory.push('/Dashboard/OverView');
 				      }.bind(this),

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
+import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './BarMenu.rt'
 import _ from 'lodash'
@@ -102,7 +103,7 @@ var MenuBar = React.createClass
             method: 'GET',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.categoryId);
@@ -122,7 +123,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.reverse();
@@ -143,7 +144,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.doctypeId);
@@ -163,7 +164,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.languageId);
@@ -262,7 +263,7 @@ var MenuBar = React.createClass
           dataType: 'json',
           type: 'GET',
           beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+              xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
           },
           success: function(data) {
               var update_scan_result = update(this.state, {

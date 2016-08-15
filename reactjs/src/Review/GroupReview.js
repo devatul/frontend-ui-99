@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
+import { forEach } from 'lodash'
 import template from './GroupReview.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import chart from '../script/chart-group-review.js'
 import Constant, { status } from '../Constant.js'
-import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
-//import { Table, TableHead, TableRow, TableBody } from '../components/Table'
-import 'jquery'
 
 var GroupReview = React.createClass({
     displayName: 'GroupReview',
-    mixins: [LinkedStateMixin],
     getInitialState: function() {
     	return {
     		listGroup:[],
@@ -31,7 +26,16 @@ var GroupReview = React.createClass({
             checkedNumber: 0,
             validateNumber: 0,
             checkBoxAll: false,
-            stackChange: []
+            stackChange: [],
+            store: {
+                centroids: []
+            },
+            dataChart: {
+                pieChart: [],
+                columnChart: [],
+                centroidChart: [],
+                cloudWords: []
+            }
     	};
     },
     componentWillMount() {
@@ -40,29 +44,15 @@ var GroupReview = React.createClass({
     },
     componentDidMount() {
         this.getListGroup(); 
-        chart();
         $('.btn-refine').on('click', function(e){
             e.preventDefault();
             $(this).removeClass('btn-green').addClass('btn-disabled');
             $(this).parent().find('.refine-progress').show();
         });
+        $('#choose_cluster').select2();
         $('#choose_cluster').on('change', function(event) {
             this.changeGroup(event);
         }.bind(this));
-        $('#meter').liquidMeter({
-            id:'meterCircle',
-            shape: 'circle',
-            color: '#0088CC',
-            background: '#F9F9F9',
-            fontSize: '24px',
-            fontWeight: '600',
-            stroke: '#F2F2F2',
-            textColor: '#333',
-            liquidOpacity: 0.9,
-            liquidPalette: ['#333'],
-            speed: 3000,
-            animate: !$.browser.mobile
-          });
 
         $("#select2-choose_cluster-container").attr({
             title: 'Group 1',
@@ -82,47 +72,49 @@ var GroupReview = React.createClass({
             });*/
         }.bind(this));
     },
-    shouldComponentUpdate: function(nextProps, nextState) {
-        if(this.state.groupCurrent != nextState.groupCurrent) {
-            return true;
-        }
-        if(this.state.samplesDocument != nextState.samplesDocument) {
-            return true;
-        }
-        if(this.state.stackChange != nextState.stackChange) {
-            return true;
-        }
-        if(this.state.shouldUpdate != nextState.shouldUpdate) {
-            return true;
-        }
-        if(this.state.checkedNumber != nextState.checkedNumber) {
-            return true;
-        }
-        if(this.state.validateNumber != nextState.validateNumber) {
-            return true;
-        }
-        if(this.state.documentPreview != nextState.documentPreview) {
-            return true;
-        }
-        if(this.state.categoriesInfo != nextState.categoriesInfo) {
-            return true;
-        }
-        if(this.state.centroids != nextState.centroids) {
-            return true;
-        }
-        if(this.state.cloudwords != nextState.cloudwords) {
-            return true;
-        }
-        if(this.state.status != nextState.status) {
-            return true;
-        }
-        return false;
-    },
+    // shouldComponentUpdate: function(nextProps, nextState) {
+    //     if(this.state.groupCurrent != nextState.groupCurrent) {
+    //         return true;
+    //     }
+    //     if(this.state.samplesDocument != nextState.samplesDocument) {
+    //         return true;
+    //     }
+    //     if(this.state.stackChange != nextState.stackChange) {
+    //         return true;
+    //     }
+    //     if(this.state.shouldUpdate != nextState.shouldUpdate) {
+    //         return true;
+    //     }
+    //     if(this.state.checkedNumber != nextState.checkedNumber) {
+    //         return true;
+    //     }
+    //     if(this.state.validateNumber != nextState.validateNumber) {
+    //         return true;
+    //     }
+    //     if(this.state.documentPreview != nextState.documentPreview) {
+    //         return true;
+    //     }
+    //     if(this.state.categoriesInfo != nextState.categoriesInfo) {
+    //         return true;
+    //     }
+    //     if(this.state.centroids != nextState.centroids) {
+    //         return true;
+    //     }
+    //     if(this.state.cloudwords != nextState.cloudwords) {
+    //         return true;
+    //     }
+    //     if(this.state.status != nextState.status) {
+    //         return true;
+    //     }
+    //     return false;
+    // },
     componentDidUpdate: function(prevProps, prevState) {
+        var { store, categoriesInfo } = this.state;
         if(this.state.groupCurrent != prevState.groupCurrent){
             this.getStatistics();
             this.getSamplesDocument();
             this.getcategoriesInfo();
+            this.getCentroids();
         }
         if(this.state.samplesDocument != prevState.samplesDocument) {
             //javascript_todo();
@@ -144,35 +136,14 @@ var GroupReview = React.createClass({
             });
             console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
         }
-        if(this.state.categoriesInfo != prevState.categoriesInfo) {
-           this.drawChart();
-        }
-        if(this.state.centroids != prevState.centroids) {
-            this.drawCentroid();
-        }
-        if(this.state.cloudwords != prevState.cloudwords) {
-            
-        }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             this.validateNumber();   
         }
-        if(this.state.status != prevState.status) {
-            debugger;
-            $('.liquid-meter').replaceWith('<div class="liquid-meter" id="meter"  min="0" max="100" value="' + this.state.status + '"></div>');
-            $('#meter').liquidMeter({
-            id:'meterCircle',
-            shape: 'circle',
-            color: '#0088CC',
-            background: '#F9F9F9',
-            fontSize: '24px',
-            fontWeight: '600',
-            stroke: '#F2F2F2',
-            textColor: '#333',
-            liquidOpacity: 0.9,
-            liquidPalette: ['#333'],
-            speed: 3000,
-            animate: !$.browser.mobile
-          });
+        if(store.centroids != prevState.store.centroids) {
+            this.drawCentroid();
+        }
+        if(categoriesInfo != prevState.categoriesInfo) {
+            this.drawChart();
         }
     },
     ucwords:function(str){
@@ -187,7 +158,7 @@ var GroupReview = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log(data);
@@ -217,7 +188,7 @@ var GroupReview = React.createClass({
                 }
                 var updateState = update(this.state, {
                     listGroup: {$set: data},
-                    groupCurrent: {$set: data[0]}
+                    groupCurrent: {$set: data[0]},
                 });
                 this.setState(updateState);
             }.bind(this),
@@ -249,7 +220,7 @@ var GroupReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.total_number_documents = totalDocument[this.state.groupCurrent.id - 1];
@@ -278,7 +249,7 @@ var GroupReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.setState({ cloudwords: [] });
@@ -305,17 +276,13 @@ var GroupReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-            	this.setState({ centroids: [] });
-            	for(var i = 0; i < data.length; i++) {
-            		var updateState = update(this.state, {
-		                centroids: {$push: [[i+1, data[i].number_docs]]}
-		            });
-		            this.setState(updateState);
-            	}
-                console.log("centroids: ", this.state.centroids);
+                var updateStore = update(this.state.store, {
+                    centroids: {$set: data }
+                });
+                this.setState({ store: updateStore });
             }.bind(this),
             error: function(xhr,error) {
                 if(xhr.status === 401)
@@ -332,7 +299,7 @@ var GroupReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 for(var i = 0; i < data.documents.length; i++) {
@@ -364,13 +331,14 @@ var GroupReview = React.createClass({
         });
     },
     getcategoriesInfo: function() {
+        debugger
     	$.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/categories/",
             dataType: 'json',
             data: { "id":this.state.groupCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -389,7 +357,8 @@ var GroupReview = React.createClass({
     changeGroup: function(event) {
         var val = event.target.value;
         var updateState = update(this.state, {
-            groupCurrent: {$set: this.state.listGroup[val]}
+            groupCurrent: {$set: this.state.listGroup[val]},
+            status: {$set: 0 }        
         });
         this.setState(updateState);
     },
@@ -405,58 +374,7 @@ var GroupReview = React.createClass({
             $('#embedURL').gdocsViewer();
         }
     },
-    drawCloud: function() {
-        //var word_list = this.state.cloudwords;
-        var word_list = [
-    {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
-    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
-    {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
-    {text: "properties", weight: 8, html: {"data-tooltip": "676 Documents"}},
-    {text: "speed", weight: 6.2, html: {"data-tooltip": "444 Documents"}},
-    {text: "Accounting", weight: 5, html: {"data-tooltip": "777 Documents"}},
-    {text: "interactions", weight: 5, html: {"data-tooltip": "35 Documents"}},
-    {text: "nature", weight: 5, html: {"data-tooltip": "535 Documents"}},
-    {text: "branch", weight: 5, html: {"data-tooltip": "535 Documents"}},
-    {text: "concerned", weight: 4, html: {"data-tooltip": "334 Documents"}},
-    {text: "Sapien", weight: 4, html: {"data-tooltip": "200 Documents"}},
-    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "habitant", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "morbi", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "tristisque", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "senectus", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "et netus", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "fames", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "egestas", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "Aenean", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "elit", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "sit amet", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "metus", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "justo", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "dictum", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "metus", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "at molestie", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "purus", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "diam", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "dui", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
-  ];
-
-        $('#words-cloud').replaceWith('<div id="words-cloud"></div>');
-        $('#words-cloud').jQCloud(word_list, {
-          autoResize: true
-        });
-    },
+    
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
             return Constant.progressBar.level1;
@@ -625,68 +543,71 @@ var GroupReview = React.createClass({
             return str.substring(0,str.lastIndexOf('/') + 1);
         }
     },
-    drawCentroid() {
-        var centroids = this.state.centroids;
-        $('#centroidChart').highcharts({
-            chart: {
-                type:'column'
-            },
-            xAxis: {
-                startOnTick: true,
-                min: 0,
-                step: 2,
-                max: centroids.length,
-                startOnTick: true,
-                endOnTick: true,
-                tickInterval: 1,
-            },
-            yAxis: {
-              title: {
-                  text: 'Number of Documents'
-              },
-            },
-            credits: {
-              enabled: false
-            },
-            title: {
-              text: ''
-            },
+    drawCloud: function() {
+        //var word_list = this.state.cloudwords;
+        var word_list = [
+    {text: "Entity", weight: 13},
+    {text: "matter", weight: 10.5},
+    {text: "science", weight: 9.4},
+    {text: "properties", weight: 8},
+    {text: "speed", weight: 6.2},
+    {text: "Accounting", weight: 5},
+    {text: "interactions", weight: 5},
+    {text: "nature", weight: 5},
+    {text: "branch", weight: 5},
+    {text: "concerned", weight: 4},
+    {text: "Sapien", weight: 4},
+    {text: "Pellentesque", weight: 3},
+    {text: "habitant", weight: 3},
+    {text: "morbi", weight: 3},
+    {text: "tristisque", weight: 3},
+    {text: "senectus", weight: 3},
+    {text: "et netus", weight: 3},
+    {text: "et malesuada", weight: 3},
+    {text: "fames", weight: 2},
+    {text: "ac turpis", weight: 2},
+    {text: "egestas", weight: 2},
+    {text: "Aenean", weight: 2},
+    {text: "vestibulum", weight: 2},
+    {text: "elit", weight: 2},
+    {text: "sit amet", weight: 2},
+    {text: "metus", weight: 2},
+    {text: "adipiscing", weight: 2},
+    {text: "ut ultrices", weight: 2},
+    {text: "justo", weight: 1},
+    {text: "dictum", weight: 1},
+    {text: "Ut et leo", weight: 1},
+    {text: "metus", weight: 1},
+    {text: "at molestie", weight: 1},
+    {text: "purus", weight: 1},
+    {text: "Curabitur", weight: 1},
+    {text: "diam", weight: 1},
+    {text: "dui", weight: 1},
+    {text: "ullamcorper", weight: 1},
+    {text: "id vuluptate ut", weight: 1},
+    {text: "mattis", weight: 1},
+    {text: "et nulla", weight: 1},
+    {text: "Sed", weight: 1}
+  ];
 
-            legend: {
-              enabled: false
-            },
-            
-            plotOptions: {
-              column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                      textShadow: '0 0 3px black'
-                    }
-                },
-                pointPadding: 0,
-                borderWidth: 1,              
-                groupPadding: 0,
-                pointPlacement: -0.5
-              }
-            },
-
-            tooltip: {
-                headerFormat: '',
-                pointFormat: '{point.y} Documents<br/>'
-            },
-            
-            series: [{
-                data: centroids
-            }]
+        var updateChart = update(this.state.dataChart, {
+            cloudWords: {$set: word_list }
         });
+        this.setState({ dataChart: updateChart });
+    },
+    drawCentroid() {
+        var centroids = []
+        forEach(this.state.store.centroids, (val, index) => {
+            centroids.push([index + 1, val.number_docs]);
+        });
+        var updateChart = update(this.state.dataChart, {
+            centroidChart: {$set: centroids }
+        });
+        this.setState({ dataChart: updateChart });
     },
     
     drawChart() {
         var categoriesInfo = this.state.categoriesInfo;
-    	if( $('#confidentialityChart').length){
 		var flotPieData = [];
 		var highchart = [];
 		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
@@ -704,97 +625,11 @@ var GroupReview = React.createClass({
 		            data: [categoriesInfo[i].doc_types[0].total,categoriesInfo[i].doc_types[1].total,categoriesInfo[i].doc_types[2].total,categoriesInfo[i].doc_types[3].total,categoriesInfo[i].doc_types[4].total]
 				});
 			}
-		}
-
-        var plot = $.plot('#confidentialityChart', flotPieData, {
-            series: {
-                pie: {
-                    show: true,
-                    label:{
-                      show: true,
-                      formatter: function labelFormatter(label, series) {
-                          return "<div style='font-size:8pt; max-width:60px; line-height: 12pt; text-align:center; padding:2px; color:"+series.color+"'>" + label + "</div>";
-                      }
-                    }
-                }
-            },
-            legend: {
-                show: true,
-                position: 'nw',
-                noColumns: 1, 
-                backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend')
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' + y + ' Documents';
-              }
-            }
+        var updateChart = update(this.state.dataChart, {
+            pieChart: {$set: flotPieData },
+            columnChart: {$set: highchart }
         });
-
-        if ($('#confidentialityLevelChart').length){
-		    $('#confidentialityLevelChart').highcharts({
-		        chart: {
-		            type: 'column'
-		        },
-		        title: {
-		            text: ''
-		        },
-		        credits: {
-		          enabled: false
-		        },
-		        colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
-		        xAxis: {
-		            categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
-		            labels:{
-		              autoRotation: false,
-		              style: {
-		                color: '#272727',
-		                'font-size': '10px'
-		              },
-		            },
-		            tickInterval: 1,
-		            tickWidth: 0,
-		            lineWidth: 0,
-		            minPadding: 0,
-		            maxPadding: 0,
-		            gridLineWidth: 0,
-		            tickmarkPlacement: 'on'
-		        },
-		        yAxis: {
-		            min: 0,
-		            title: {
-		                text: ''
-		            },
-		            stackLabels: {
-		                enabled: false
-		            }
-		        },
-		        legend: {
-		            verticalAlign: 'bottom',
-		            shadow: false,
-		            useHTML: true
-		        },
-		        tooltip: {
-		            headerFormat: '<b>{point.x}</b><br/>',
-		            pointFormat: '{series.name}: {point.y} Documents<br/>Total: {point.stackTotal} Documents'
-		        },
-		        plotOptions: {
-		            column: {
-		                stacking: 'normal',
-		                dataLabels: {
-		                    enabled: false,
-		                }
-		            }
-		        },
-		        series: highchart
-		    });
-		 }
+        this.setState({ dataChart: updateChart });
     },
     endReviewHandle: function() {
         browserHistory.push('/Dashboard/OverView');

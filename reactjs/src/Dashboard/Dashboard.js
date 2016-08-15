@@ -39,8 +39,8 @@ module.exports = React.createClass({
         };
     },
   	logOut(){
-		//console.log(localStorage.getItem('token'));
-		localStorage.removeItem('token');
+		//console.log(sessionStorage.getItem('token'));
+		sessionStorage.removeItem('token');
 		browserHistory.push('/Account/SignIn');
 	},
 	componentDidMount() 
@@ -51,7 +51,7 @@ module.exports = React.createClass({
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.setState({role: data.role});
@@ -70,7 +70,7 @@ module.exports = React.createClass({
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var update_notification = update(this.state, {
@@ -98,7 +98,7 @@ module.exports = React.createClass({
                 type: 'GET',
                 async: false,
                 beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
                     result = data; 

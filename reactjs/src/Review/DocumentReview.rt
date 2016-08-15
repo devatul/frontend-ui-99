@@ -1,4 +1,7 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
+<rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <div>
     <div class="container">
         <div class="tabs tabs-primary">
@@ -32,15 +35,13 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="panel-actions my-actions-btn-group">
-
+                                <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
-
-                                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                    <ToggleButton setDefault="open" setTarget="#action{'_panel_' + actionIndex}"
                                 </div>
                             </header>
-                            <div class="panel-body" style="display: block;">
+                            <div class="panel-body" id="action{'_panel_' + actionIndex}" style="display: block;">
                                 <p class="document_note">
                                     You have to review {action.documents.length - action.validateNumber} documents in {action.category} Category of Secret Confidentiality by latest 28th June
                                 </p>
@@ -69,60 +70,42 @@
                                                         </div>
                                                     </th>
                                                     <th class="review_note">Document Name
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the name of each individual document, as it exists in its current state.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content"
+                                                            setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
                                                     <th class="review_note">Path
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the logical folder path to where each document is currently located.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="This displays the logical folder path to where each document is currently located." />
                                                     </th>
                                                     <th class="review_note">Owner
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the organisational member who has last modified the document. 
-                                                                This owner is automatically assigned by 99 from the 
-                                                                Document metadata itself gathered during the scanning process.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="This displays the organisational member who has last modified the document. 
+                                                            This owner is automatically assigned by 99 from the 
+                                                            Document metadata itself gathered during the scanning process." />
                                                     </th>
                                                     <th class="review_note">Proposed Category (confidence level)
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                                                                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                                                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                                                The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_bottom"
+                                                            setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
+                                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                                     </th>
                                                     <th class="review_note">Proposed Confidentiality (confidence level)
-                                                           <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                                                                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                                                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                                                The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review"
+                                                            setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
+                                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
+                                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
+                                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                                     </th>
                                                     <th class="text-center">Status
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This represent the status of the review for each file.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review"
+                                                            setValue="This represent the status of the review for each file." />
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -152,19 +135,14 @@
                                                                     {doc.name}
                                                                 </span>
                                                         </span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                            <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                                            <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                                <ul>
-                                                                    <li>Name: {doc.name}</li>
-                                                                    <li>Creation Date: {doc.creation_date}</li>
-                                                                    <li>Modifitcation Date: {doc.modification_date}</li>
-                                                                    <li>Required Legal Retention until: {doc.legal_retention_until}</li>
-                                                                    <li>Confidentiality Label: {doc.confidentiality_label}</li>
-                                                                    <li>Number of Classification Challenge: {doc.number_of_classification_challenge}</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        <InfoButton>
+                                                            <li>Name: {doc.name}</li>
+                                                            <li>Creation Date: {doc.creation_date}</li>
+                                                            <li>Modifitcation Date: {doc.modification_date}</li>
+                                                            <li>Required Legal Retention until: {doc.legal_retention_until}</li>
+                                                            <li>Confidentiality Label: {doc.confidentiality_label}</li>
+                                                            <li>Number of Classification Challenge: {doc.number_of_classification_challenge}</li>
+                                                        </InfoButton>
                                                     </td>
                                                     <td class="text-left">
                                                         <span class="text-italic file-name-1 doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{doc.path}">{doc.path}</span>

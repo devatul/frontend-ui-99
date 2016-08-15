@@ -95,7 +95,7 @@ var OverView = React.createClass
             dataType: 'application/json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             }
         })
         .done(function(data) {
@@ -119,7 +119,7 @@ var OverView = React.createClass
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.updateChartData(data);
@@ -209,7 +209,7 @@ var OverView = React.createClass
                 type: 'POST',
                 data: JSON.stringify(bodyRequest),
                 beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
                     this.updateChartData(data);
