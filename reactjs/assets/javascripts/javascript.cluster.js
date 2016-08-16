@@ -223,7 +223,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
+                return label + ': ' +y+ ' Documents';
               },
             }
         });

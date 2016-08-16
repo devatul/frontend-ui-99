@@ -1,5 +1,0 @@
- <rt-import name="BarName" from="../components/BarMenu"/>
-<div>
-<BarName title="Insights Dashboard" showInfo={true} showFilter={false}></BarName>
-	{this.props.children}
-</div>

@@ -10,7 +10,7 @@ window.admin = {};
 (function($) {
 
 	$(function() {
-		$('.panel').not('.panel-has-child')
+		$('.panel')
 			.on( 'panel:toggle', function() {
 				var $this,
 					direction;
