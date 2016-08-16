@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Indentity.rt'
 import Constant from '../Constant.js'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import javascript from '../script/javascript-overview.js'
 import $ from 'jquery'
 /*import loadScript from '../script/load.scripts.js';*/
 var Indentity = React.createClass({
@@ -131,6 +132,7 @@ var Indentity = React.createClass({
 	},
 	componentDidMount() 
 	{
+		javascript();
 	},
 	render:template
 });

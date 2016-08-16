@@ -16,11 +16,11 @@ var Chart = React.createClass({
 	render(){
 
 		var style= {
-			height: '300px',
+			height: '200px',
 		}
 		return(
-
-			<div  id="identityChart" className="identity-chart" style= {style} >
+			<div>
+			<div id="identityChart" className="identity-chart" style= {style} ></div>
 			<a href="#" className="btn btn-green btn-extract">Extract</a>
 			</div>
 			
@@ -28,7 +28,7 @@ var Chart = React.createClass({
 	},
 
 	componentDidMount(){
-		var chart_data = {
+		/*var chart_data = {
 			"key_contributor": [
 			{
 				"contributors": [
@@ -120,7 +120,7 @@ var Chart = React.createClass({
 			categories: categories1,
 			data: data1
 		})
-		console.log(datas);
+		console.log(datas);*/
 		
 		/*for(var i =0 ; i< _.size(this.state.chart_data.high_risk_users); i++){
 			data.push({
@@ -136,7 +136,7 @@ var Chart = React.createClass({
 
 
 
-			/*var datas = [
+			var datas = [
 			{
 				categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley'],
 				data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 45, color: '#7986cb'},{y: 40, color: '#ed9c28'},{y: 10, color: '#E36159'}]
@@ -169,67 +169,67 @@ var Chart = React.createClass({
 				categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley'],
 				data: [{y: 75, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 25, color: '#7986cb'},{y: 20, color: '#ed9c28'},{y: 4, color: '#E36159'}]
 			},
-			];*/
+			];
 			
 			$('.identity-chart').each(function(index){
-    $(this).highcharts({
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: ''
-        },
-        xAxis: {
-            categories: datas[index].categories,
-            title: {
-                text: null
-            },
-            tickInterval: 1,
-            tickWidth: 0,
-            lineWidth: 0,
-            minPadding: 0,
-            maxPadding: 0,
-            gridLineWidth: 0,
-            tickmarkPlacement: 'on',
-            labels: {
-                style: {
-                    font: '11px Roboto, Helvetica, sans-serif'
-                }
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: null
-            },
-            labels: {
-              enabled: false
-            }
-        },
-        legend: {
-          enabled:  false
-        },
-        credits: {
-            enabled: false
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: false
-                }
-            }
-        },
-        tooltip: {
-          formatter: function() {
-            return '<b>'+this.x+'</b><br>'+this.series.name+': '+this.y;
-          }
-        },
-        series: [{
-            name: 'Documents',
-            data: datas[index].data,
-        }]
-    });
-  });
+				$(this).highcharts({
+					chart: {
+						type: 'bar'
+					},
+					title: {
+						text: ''
+					},
+					xAxis: {
+						categories: datas[index].categories,
+						title: {
+							text: null
+						},
+						tickInterval: 1,
+						tickWidth: 0,
+						lineWidth: 0,
+						minPadding: 0,
+						maxPadding: 0,
+						gridLineWidth: 0,
+						tickmarkPlacement: 'on',
+						labels: {
+							style: {
+								font: '11px Roboto, Helvetica, sans-serif'
+							}
+						}
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: null
+						},
+						labels: {
+							enabled: false
+						}
+					},
+					legend: {
+						enabled:  false
+					},
+					credits: {
+						enabled: false
+					},
+					plotOptions: {
+						bar: {
+							dataLabels: {
+								enabled: false
+							}
+						}
+					},
+					tooltip: {
+						formatter: function() {
+							return '<b>'+this.x+'</b><br>'+this.series.name+': '+this.y;
+						}
+					},
+					series: [{
+						name: 'Documents',
+						data: datas[index].data,
+					}]
+				});
+			});
 
   // CONTENT TOGGLE
   // Configure/customize these variables.
