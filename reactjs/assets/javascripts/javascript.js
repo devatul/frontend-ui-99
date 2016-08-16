@@ -63,7 +63,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -124,7 +124,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               }
             }
         });
@@ -170,7 +170,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -220,7 +220,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -289,7 +289,7 @@ $(function () {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y+ ' Documents';
+                return label + ': %p.0% / ' +y+ ' Documents';
               },
             }
         });
@@ -309,10 +309,9 @@ $(function () {
         $(parent).find('.dropdown-menu.has-child').toggle();
     });
 
-    $('.dropdown-backdrop-custom').on('click', function(){
-        var parent = $(this).parents('.dropdown');
-        $(parent).find('.dropdown-backdrop-custom').toggle();
-        $(parent).find('.dropdown-menu.has-child').toggle();
+    $('.dropdown-backdrop-custom').on('click', function(e){
+        $(this).toggle();
+        $('.dropdown-menu.has-child').toggle();
     });
 
     $('body').on('click', '.dropdown-backdrop', function(e){
@@ -329,10 +328,15 @@ $(function () {
         var windowWidth = $(window).innerWidth();
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');
-        console.log($(e.target));
         setTimeout(function(){
-            if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
-                $(e.target).append('<span class="dropdown-backdrop"></span>');
+            //if target doesn't have any child dropdown
+            if (!dropdownMenu.parents('.dropdown-menu').length){
+                if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
+                    $(e.target).append('<span class="dropdown-backdrop"></span>');
+                }
+            }
+            else{
+                dropdownMenu.parents('.has-child').addClass('children-open');
             }
 
         });
@@ -359,6 +363,9 @@ $(function () {
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
+        }
+        if (dropdownMenu.parents('.has-child').hasClass('children-open')){
+            dropdownMenu.parents('.has-child').removeClass('children-open');
         }
     });     
 
