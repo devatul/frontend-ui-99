@@ -107,7 +107,7 @@ var Indentity = React.createClass({
 				type: 'POST',
 				data: JSON.stringify(bodyRequest),
 				beforeSend: function(xhr) {
-					xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+					xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 				},
 				success: function(data) {
 					this.updateChartData(data);

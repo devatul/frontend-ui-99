@@ -131,7 +131,7 @@ var Notification = React.createClass
                 type: 'GET',
                 async: false,
                 beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
                     result = data; 
@@ -224,7 +224,7 @@ var Notification = React.createClass
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var today = [];

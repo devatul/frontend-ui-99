@@ -67,7 +67,7 @@ module.exports = function(categoryInfo) {
             tooltip: {
               show: true,
               content: function(label,x,y){
-                return label + ': ' +y + ' Documents';
+                return label + ': %p.0% / ' +y + ' Documents';
               }
             }
         });

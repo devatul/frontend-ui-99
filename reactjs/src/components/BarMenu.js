@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
+import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './BarMenu.rt'
 import _ from 'lodash'
@@ -87,7 +88,7 @@ var MenuBar = React.createClass
         var newObject = {};
         _.forEach(data, function(object, index) {
             newObject = _.assignIn({}, object);
-            newObject.checked = true;
+            newObject.checked = false;
             newObject.selectId = id;
             newObject.index = index;
             arr.push(newObject);
@@ -102,7 +103,7 @@ var MenuBar = React.createClass
             method: 'GET',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.categoryId);
@@ -122,7 +123,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.reverse();
@@ -143,7 +144,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.doctypeId);
@@ -163,7 +164,7 @@ var MenuBar = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.languageId);
@@ -188,6 +189,7 @@ var MenuBar = React.createClass
         }.bind(this));
         this.setState({ dataSelectBox: data, filterLabel: [] });
     },
+
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
         listLabel.splice(index, index + 1);
@@ -198,6 +200,7 @@ var MenuBar = React.createClass
         });
         this.setState({ dataSelectBox: updateData, filterLabel: listLabel });
     },
+
     updateFilterList: function(selectId) {
         var filter = _.assignIn({}, this.state.filter);
         var arr = [];
@@ -212,6 +215,7 @@ var MenuBar = React.createClass
         filter[selectId] = arr;
         this.setState({ filter: filter });
     },
+
     addLabel: function(field) {
         var arr = _.concat(this.state.filterLabel);
         if(_.find(arr, {id: field.id, name: field.name}) == null) {
@@ -219,25 +223,13 @@ var MenuBar = React.createClass
         }
         this.setState({ filterLabel: arr });
     },
-    addLabelBySelectId: function(selectId) {
-        var arr = _.concat(this.state.filterLabel);
-        _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
-            if(object.checked && (_.find(arr, {id: object.id, name: object.name}) == null)) {
-                arr.push(object);
-            }
-        }.bind(this));
-        this.setState({ filterLabel: arr });
-    },
-    deleteLabelBySelectId: function(selectId, checked) {
-        var arr = _.concat(this.state.filterLabel);
-        _.remove(arr, {selectId: selectId, checked: checked });
-        this.setState({ filterLabel: arr });
-    },
+
     deleteLabelByIdName: function(field, id, name) {
         var arr = _.concat(this.state.filterLabel);
         _.remove(arr, {id: id, name: name});
         this.setState({ filterLabel: arr });
     },
+
     handleSelectBoxChange: function(field, index) {
         var updateData = update(this.state.dataSelectBox, {
             [field.selectId]: {
@@ -253,6 +245,7 @@ var MenuBar = React.createClass
             this.deleteLabelByIdName(field, field.id, field.name);
         }
     },
+
     handleSelectAll: function(field) {
         var arr = _.concat(this.state.dataSelectBox[field.selectId]);
         _.forEach(arr, function(object, index) {
@@ -262,31 +255,15 @@ var MenuBar = React.createClass
             [field.selectId]: {$set: arr }
         });
         this.setState({ dataSelectBox: updateData, eventContext: field.selectId });
-        if(!field.checked) {
-            this.deleteLabelBySelectId(field.selectId, false);
-        } else {
-            this.addLabelBySelectId(field.selectId);
-        }
     },
-    handleOnClear: function(field) {
-        var arr = _.concat(this.state.dataSelectBox[field.selectId]);
-        _.forEach(arr, function(object, index) {
-            if(object.checked) {
-                object.checked = false;
-            }
-        }.bind(this));
-        var updateData = update(this.state.dataSelectBox, {
-            [field.selectId]: {$set: arr }
-        });
-        this.setState({ dataSelectBox: updateData });
-    },
+    
     getScanResult(){
       $.ajax({
           url: Constant.SERVER_API + 'api/scan/',
           dataType: 'json',
           type: 'GET',
           beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+              xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
           },
           success: function(data) {
               var update_scan_result = update(this.state, {

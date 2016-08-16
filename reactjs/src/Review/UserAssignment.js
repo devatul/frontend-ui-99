@@ -75,7 +75,10 @@ var UserAssignment = React.createClass({
                 },
                 filterLabel: []
             },
-            summary: []
+            summary: {
+                id: 'summary',
+                data: []
+            }
         };
     },
     componentDidMount() {
@@ -178,47 +181,58 @@ var UserAssignment = React.createClass({
         this.setState({ datafilter: updateData });
     },
     handleOnClickValidationButton: function(id) {
+        var set = (id == 'category') ? 'fixedNumber' : 'category';
         var updateButton = update(this.state.buttonStatus, {
-            [id]: {$set: 'success' }
+             [id]: {$set: 'success' },
+             [set]: {$set: 'normal' }
         });
         this.setState({ buttonStatus: updateButton });
     },
     handleValidateButton: function() {
         var { current, info, list } = this.state.category;
-        var indexCategory = _.findIndex(list, { id: current.id, name: current.name });
+        var indexCurrent = _.findIndex(list, { id: current.id, name: current.name });
         var { request } = this.state.datafilter;
             request.id = current.id;
             request.name = current.name;
             request.docs_sampled = info.number_docs;
         if(request.reviewers.length > 0) {
-            $.ajax({
-                method: 'POST',
-                url: Constant.SERVER_API + "api/assign/reviewer/",
-                dataType: "json",
-                data: JSON.stringify(request),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
-                },
-                success: function(data) {
-                    console.log("assign user", data);
-                }.bind(this),
-                error: function(xhr,error) {
-                    if(xhr.status === 401)
-                    {
-                        browserHistory.push('/Account/SignIn');
+            if(list.length === indexCurrent + 1)
+                $('#summarytab').click();
+            // $.ajax({
+            //     method: 'POST',
+            //     url: Constant.SERVER_API + "api/assign/reviewer/",
+            //     dataType: "json",
+            //     data: JSON.stringify(request),
+            //     beforeSend: function(xhr) {
+            //         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            //     },
+            //     success: function(data) {
+            //         console.log("assign user", data);
+            //     }.bind(this),
+            //     error: function(xhr,error) {
+            //         if(xhr.status === 401)
+            //         {
+            //             browserHistory.push('/Account/SignIn');
+            //         }
+            //     }.bind(this)
+            // });
+            else {
+                var setCurrent = update(this.state.category, {
+                    current: { $set: (list.length === indexCurrent + 1) ? {} : list[indexCurrent + 1] }
+                });
+                var setReviewer = update(this.state.datafilter, {
+                    request: {
+                        reviewers: { $set: [] }
+                    },
+                    filterLabel: { $set: [] },
+                    setValue: {
+                        timeframe: { $set: 0 },
+                        numberuser: { $set: 0 },
+                        reviewertype: { $set: 0 }
                     }
-                }.bind(this)
-            });
-
-            var setCurrent = update(this.state.category, {
-                current: { $set: list[indexCategory + 1] }
-            });
-            var setReviewer = update(this.state.datafilter, {
-                request: {
-                    reviewers: { $set: [] }
-                }
-            });
-            this.setState({ category: setCurrent, datafilter: setReviewer });
+                });
+                this.setState({ category: setCurrent, datafilter: setReviewer });
+            }
 
         }
     },
@@ -227,7 +241,18 @@ var UserAssignment = React.createClass({
         var setCategory = update(this.state.category, {
             current: { $set: category }
         });
-        this.setState({ category: setCategory });
+        var datafilter = update(this.state.datafilter, {
+            request: {
+                reviewers: { $set: [] }
+            },
+            filterLabel: { $set: [] },
+            setValue: {
+                timeframe: { $set: 0 },
+                numberuser: { $set: 0 },
+                reviewertype: { $set: 0 }
+            }
+        });
+        this.setState({ category: setCategory, datafilter: datafilter });
     },
     chartAssignment(categoryInfo) {
     	userAssignment(categoryInfo);
@@ -273,7 +298,7 @@ var UserAssignment = React.createClass({
             dataType: 'json',
             data: datafilter.params,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state.category, {
@@ -297,7 +322,7 @@ var UserAssignment = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                	var updateData = update(this.state.category, {
@@ -323,7 +348,7 @@ var UserAssignment = React.createClass({
             async: false,
             data: { "id": current.id},
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 debugger
@@ -346,7 +371,7 @@ var UserAssignment = React.createClass({
             url: Constant.SERVER_API + "api/assign/summary/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 // var updateState = update(this.state, {

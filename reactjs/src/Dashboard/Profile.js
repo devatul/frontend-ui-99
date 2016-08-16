@@ -19,12 +19,11 @@ module.exports = React.createClass({
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
             	
                 this.setState( {profile: data});
-                
                 console.log("scan result: ", data);
             }.bind(this),
             error: function(xhr, status, error) {

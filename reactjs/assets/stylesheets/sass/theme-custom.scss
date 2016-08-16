@@ -527,7 +527,7 @@ ul.filter-list li{
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    line-height: 38px;
+    line-height: 40px;
     text-align: center;
     padding: 0;
     color: #fff;
@@ -588,8 +588,33 @@ ul.filter-list li{
     background: $color-quartenary;
 }
 
+.panel-body.bg-quartenary-2{
+    background: $color-quartenary-2;
+    color: #fff;
+}
+
+.panel-body.bg-quartenary-3{
+    background: $color-quartenary-3;
+    color: #fff;
+}
+
 .panel-body.bg-tertiary{
     background: $color-tertiary;
+}
+
+.panel-body.bg-tertiary-2{
+    background: $color-tertiary-2;
+    color: #fff;
+}
+
+.panel-body.bg-tertiary-3{
+    background: $color-tertiary-3;
+    color: #fff;
+}
+
+.panel-body.bg-secondary-2{
+    background: $color-secondary-2;
+    color: #fff;
 }
 
 .panel-body.bg-primary{
@@ -600,8 +625,20 @@ ul.filter-list li{
     color: $color-secondary;
 }
 
+.panel-body.bg-secondary-2 .widget-title{
+    color: $color-secondary-2;
+}
+
 .panel-body.bg-quartenary .widget-title{
     color: $color-quartenary;
+}
+
+.panel-body.bg-quartenary-2 .widget-title{
+    color: $color-quartenary-2;
+}
+
+.panel-body.bg-quartenary-3 .widget-title{
+    color: $color-quartenary-3;
 }
 
 .panel-body.bg-primary .widget-title{
@@ -610,6 +647,14 @@ ul.filter-list li{
 
 .panel-body.bg-tertiary .widget-title{
     color: $color-tertiary;
+}
+
+.panel-body.bg-tertiary-2 .widget-title{
+    color: $color-tertiary-2;
+}
+
+.panel-body.bg-tertiary-3 .widget-title{
+    color: $color-tertiary-3;
 }
 
 .page-heading{
@@ -1674,3 +1719,4 @@ div[id^='legendContainer']{
 @import 'pages/reviewer';
 @import 'pages/exception';
 @import 'pages/admin';
+@import 'pages/insight';

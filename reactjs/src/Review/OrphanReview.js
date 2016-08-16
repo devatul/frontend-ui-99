@@ -9,6 +9,7 @@ import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
 import Constant from '../Constant.js'
+import { forEach } from 'lodash'
 
 var OrphanReview = React.createClass({
     mixins: [LinkedStateMixin],
@@ -29,7 +30,16 @@ var OrphanReview = React.createClass({
             checkedNumber: 0,
             validateNumber: 0,
             shouldUpdate: null,
-            checkBoxAll: false
+            checkBoxAll: false,
+            store: {
+                centroids: []
+            },
+            dataChart: {
+                pieChart: [],
+                columnChart: [],
+                centroidChart: [],
+                cloudWords: []
+            }
         };
     },
     componentWillMount() {
@@ -45,20 +55,7 @@ var OrphanReview = React.createClass({
         $('#choose_cluster').on('change', function(event) {
             this.changeOrphan(event);
         }.bind(this));
-        $('#meter').liquidMeter({
-            id:'meterCircle',
-            shape: 'circle',
-            color: '#0088CC',
-            background: '#F9F9F9',
-            fontSize: '24px',
-            fontWeight: '600',
-            stroke: '#F2F2F2',
-            textColor: '#333',
-            liquidOpacity: 0.9,
-            liquidPalette: ['#333'],
-            speed: 3000,
-            animate: !$.browser.mobile
-          });
+
           $("#select2-choose_cluster-container").attr({
             title: 'Group 1',
         });
@@ -81,65 +78,49 @@ var OrphanReview = React.createClass({
             return a.toUpperCase();
         });
     },
-    shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.orphanCurrent != nextState.orphanCurrent) {
-            return true;
-        }
-        if(this.state.samplesDocument != nextState.samplesDocument) {
-            return true;
-        }
-        if(this.state.stackChange != nextState.stackChange) {
-            return true;
-        }
-        if(this.state.shouldUpdate != nextState.shouldUpdate) {
-            return true;
-        }
-        if(this.state.checkedNumber != nextState.checkedNumber) {
-            return true;
-        }
-        if(this.state.validateNumber != nextState.validateNumber) {
-            return true;
-        }
-        if(this.state.documentPreview != nextState.documentPreview) {
-            return true;
-        }
-        if(this.state.status != nextState.status) {
-            return true;
-        }
-        if(this.state.categories != nextState.categories) {
-            return true;
-        }
-        if(this.state.centroids != nextState.centroids) {
-            return true;
-        }
-        if(this.state.cloudwords != nextState.cloudwords) {
-            return true;
-        }
-        return false;
-    },
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if(this.state.orphanCurrent != nextState.orphanCurrent) {
+    //         return true;
+    //     }
+    //     if(this.state.samplesDocument != nextState.samplesDocument) {
+    //         return true;
+    //     }
+    //     if(this.state.stackChange != nextState.stackChange) {
+    //         return true;
+    //     }
+    //     if(this.state.shouldUpdate != nextState.shouldUpdate) {
+    //         return true;
+    //     }
+    //     if(this.state.checkedNumber != nextState.checkedNumber) {
+    //         return true;
+    //     }
+    //     if(this.state.validateNumber != nextState.validateNumber) {
+    //         return true;
+    //     }
+    //     if(this.state.documentPreview != nextState.documentPreview) {
+    //         return true;
+    //     }
+    //     if(this.state.status != nextState.status) {
+    //         return true;
+    //     }
+    //     if(this.state.categories != nextState.categories) {
+    //         return true;
+    //     }
+    //     if(this.state.centroids != nextState.centroids) {
+    //         return true;
+    //     }
+    //     if(this.state.cloudwords != nextState.cloudwords) {
+    //         return true;
+    //     }
+    //     return false;
+    // },
     componentDidUpdate(prevProps, prevState) {
+        var { store, categories } = this.state;
         if(this.state.orphanCurrent != prevState.orphanCurrent) {
             this.getStatistics();
             this.getSamplesDocument();
             this.getCategoryDistribution();
-        }
-        if(this.state.status != prevState.status) {
-            debugger;
-            $('.liquid-meter').replaceWith('<div class="liquid-meter" id="meter"  min="0" max="100" value="' + this.state.status + '"></div>');
-            $('#meter').liquidMeter({
-            id:'meterCircle',
-            shape: 'circle',
-            color: '#0088CC',
-            background: '#F9F9F9',
-            fontSize: '24px',
-            fontWeight: '600',
-            stroke: '#F2F2F2',
-            textColor: '#333',
-            liquidOpacity: 0.9,
-            liquidPalette: ['#333'],
-            speed: 3000,
-            animate: !$.browser.mobile
-          });
+            this.getCentroids()
         }
         if(this.state.samplesDocument != prevState.samplesDocument) {
             $('.select-group select').focus(function(){
@@ -160,18 +141,14 @@ var OrphanReview = React.createClass({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
             });
         }
-        if(this.state.categories != prevState.categories) {
-            this.drawChart();
+        if(this.state.shouldUpdate != prevState.shouldUpdate) {
+            this.validateNumber();   
         }
-        if(this.state.centroids != prevState.centroids) {
+        if(store.centroids != prevState.store.centroids) {
             this.drawCentroid();
         }
-        if(this.state.cloudwords != prevState.cloudwords) {   
-            this.drawCloud();
-        }
-        if(this.state.shouldUpdate != prevState.shouldUpdate) {
-            debugger;
-            this.validateNumber();   
+        if(categories != prevState.categories) {
+            this.drawChart();
         }
     },
     endReviewHandle: function() {
@@ -188,7 +165,7 @@ var OrphanReview = React.createClass({
             async: false,
             //data: JSON.stringify(bodyRequest),
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -210,10 +187,10 @@ var OrphanReview = React.createClass({
     changeOrphan: function(event) {
         var val = event.target.value;
         var updateState = update(this.state, {
-            orphanCurrent: {$set: this.state.listOrphan[val]}
+            orphanCurrent: {$set: this.state.listOrphan[val]},
+            status: {$set: 0 }
         });
         this.setState(updateState);
-        this.setState({shouldUpdate: 'updateOrphan_' + val });
     },
     getCategoryDistribution: function() {
         $.ajax({
@@ -222,7 +199,7 @@ var OrphanReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -257,7 +234,7 @@ var OrphanReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.total_number_documents = totalDocument[this.state.orphanCurrent.id - 1];
@@ -284,7 +261,7 @@ var OrphanReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -315,16 +292,13 @@ var OrphanReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                this.setState({ centroids: [] });
-                for(var i = 0; i < data.length; i++) {
-                    var updateState = update(this.state, {
-                        centroids: {$push: [[i + 1, data[i].number_docs]]}
-                    });
-                    this.setState(updateState);
-                }
+                var updateStore = update(this.state.store, {
+                    centroids: {$set: data }
+                });
+                this.setState({ store: updateStore });
                 console.log("centroids ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
@@ -343,7 +317,7 @@ var OrphanReview = React.createClass({
             dataType: 'json',
             data: { "id":this.state.orphanCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log('ddddddddddddddd',data);
@@ -547,223 +521,93 @@ var OrphanReview = React.createClass({
             return str.substring(0,str.lastIndexOf('/') + 1);
         }
     },
-    drawCloud: function() { 
+    drawCloud: function() {
         //var word_list = this.state.cloudwords;
         var word_list = [
-    {text: "Entity", weight: 13, html: {"data-tooltip": "1300 Documents"}},
-    {text: "matter", weight: 10.5, html: {"data-tooltip": "1134 Documents"}},
-    {text: "science", weight: 9.4, html: {"data-tooltip": "999 Documents"}},
-    {text: "properties", weight: 8, html: {"data-tooltip": "676 Documents"}},
-    {text: "speed", weight: 6.2, html: {"data-tooltip": "444 Documents"}},
-    {text: "Accounting", weight: 5, html: {"data-tooltip": "777 Documents"}},
-    {text: "interactions", weight: 5, html: {"data-tooltip": "35 Documents"}},
-    {text: "nature", weight: 5, html: {"data-tooltip": "535 Documents"}},
-    {text: "branch", weight: 5, html: {"data-tooltip": "535 Documents"}},
-    {text: "concerned", weight: 4, html: {"data-tooltip": "334 Documents"}},
-    {text: "Sapien", weight: 4, html: {"data-tooltip": "200 Documents"}},
-    {text: "Pellentesque", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "habitant", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "morbi", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "tristisque", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "senectus", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "et netus", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "et malesuada", weight: 3, html: {"data-tooltip": "13 Documents"}},
-    {text: "fames", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "ac turpis", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "egestas", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "Aenean", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "vestibulum", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "elit", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "sit amet", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "metus", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "adipiscing", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "ut ultrices", weight: 2, html: {"data-tooltip": "13 Documents"}},
-    {text: "justo", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "dictum", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Ut et leo", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "metus", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "at molestie", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "purus", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Curabitur", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "diam", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "dui", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "ullamcorper", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "id vuluptate ut", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "mattis", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "et nulla", weight: 1, html: {"data-tooltip": "13 Documents"}},
-    {text: "Sed", weight: 1, html: {"data-tooltip": "13 Documents"}}
+    {text: "Entity", weight: 13},
+    {text: "matter", weight: 10.5},
+    {text: "science", weight: 9.4},
+    {text: "properties", weight: 8},
+    {text: "speed", weight: 6.2},
+    {text: "Accounting", weight: 5},
+    {text: "interactions", weight: 5},
+    {text: "nature", weight: 5},
+    {text: "branch", weight: 5},
+    {text: "concerned", weight: 4},
+    {text: "Sapien", weight: 4},
+    {text: "Pellentesque", weight: 3},
+    {text: "habitant", weight: 3},
+    {text: "morbi", weight: 3},
+    {text: "tristisque", weight: 3},
+    {text: "senectus", weight: 3},
+    {text: "et netus", weight: 3},
+    {text: "et malesuada", weight: 3},
+    {text: "fames", weight: 2},
+    {text: "ac turpis", weight: 2},
+    {text: "egestas", weight: 2},
+    {text: "Aenean", weight: 2},
+    {text: "vestibulum", weight: 2},
+    {text: "elit", weight: 2},
+    {text: "sit amet", weight: 2},
+    {text: "metus", weight: 2},
+    {text: "adipiscing", weight: 2},
+    {text: "ut ultrices", weight: 2},
+    {text: "justo", weight: 1},
+    {text: "dictum", weight: 1},
+    {text: "Ut et leo", weight: 1},
+    {text: "metus", weight: 1},
+    {text: "at molestie", weight: 1},
+    {text: "purus", weight: 1},
+    {text: "Curabitur", weight: 1},
+    {text: "diam", weight: 1},
+    {text: "dui", weight: 1},
+    {text: "ullamcorper", weight: 1},
+    {text: "id vuluptate ut", weight: 1},
+    {text: "mattis", weight: 1},
+    {text: "et nulla", weight: 1},
+    {text: "Sed", weight: 1}
   ];
-        $('#words-cloud').replaceWith('<div id="words-cloud"></div>');
-        $('#words-cloud').jQCloud(word_list, {
-          autoResize: true
+
+        var updateChart = update(this.state.dataChart, {
+            cloudWords: {$set: word_list }
         });
+        this.setState({ dataChart: updateChart });
     },
     drawCentroid() {
-        $('#centroidChart').highcharts({
-            chart: {
-                type:'column'
-            },
-            xAxis: {
-                startOnTick: true,
-                min: 1,
-                step: 2,
-                max: this.state.centroids.length,
-                startOnTick: true,
-                endOnTick: true,
-                tickInterval: 1,
-            },
-            yAxis: {
-              title: {
-                  text: 'Number of Documents'
-              },
-            },
-            credits: {
-              enabled: false
-            },
-            title: {
-              text: ''
-            },
-
-            legend: {
-              enabled: false
-            },
-            
-            plotOptions: {
-              column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                      textShadow: '0 0 3px black'
-                    }
-                },
-                pointPadding: 0,
-                borderWidth: 1,              
-                groupPadding: 0,
-                pointPlacement: -0.5
-              }
-            },
-            tooltip: {
-                headerFormat: '',
-                pointFormat: '{point.y} Documents<br/>'
-            },
-            series: [{
-                data: this.state.centroids
-            }]
+        var centroids = []
+        forEach(this.state.store.centroids, (val, index) => {
+            centroids.push([index + 1, val.number_docs]);
         });
+        var updateChart = update(this.state.dataChart, {
+            centroidChart: {$set: centroids }
+        });
+        this.setState({ dataChart: updateChart });
     },
+    
     drawChart() {
-        var categories = this.state.categories;
-        var fPieData = [];
-        var series = [];
-        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
-
-        for(var i = 0; i < categories.length; i++) {
-            var name = this.ucwords(categories[i].name);
-            fPieData[i] = {
-                label: categories[i].name,
-                data: [
-                    [1, categories[i].percentage]
-                ],
-                color: colors[i]
-            };
-            series[i] = {
-                name: categories[i].name,
-                data: [categories[i].doc_types[0].total,categories[i].doc_types[1].total,categories[i].doc_types[2].total,categories[i].doc_types[3].total,categories[i].doc_types[4].total]
-            };
-        }
-        
-        if( $('#confidentialityChart').length){
-            var plot = $.plot('#confidentialityChart', fPieData, {
-                series: {
-                    pie: {
-                        show: true,
-                        label:{
-                          show: true,
-                          formatter: function labelFormatter(label, series) {
-                              return "<div style='font-size:8pt; max-width:60px; line-height: 12pt; text-align:center; padding:2px; color:"+series.color+"'>" + label + "</div>";
-                          }
-                        }
-                    }
-                },
-                legend: {
-                    show: true,
-                    position: 'nw',
-                    noColumns: 1, 
-                    backgroundOpacity: 0 ,
-                    container: $('#confidentialityChartLegend')
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true,
-                },
-                tooltip: {
-                  show: true,
-                  content: function(label,x,y){
-                    return label + ': %p.0% /' +y + ' Documents';
-                  }
-                }
-            });
-        }
-        if ($('#confidentialityLevelChart').length){
-            $('#confidentialityLevelChart').highcharts({
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: ''
-                },
-                credits: {
-                  enabled: false
-                },
-                colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
-                xAxis: {
-                    categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
-                    labels:{
-                      autoRotation: false,
-                      style: {
-                        color: '#272727',
-                        'font-size': '10px'
-                      },
-                    },
-                    tickInterval: 1,
-                    tickWidth: 0,
-                    lineWidth: 0,
-                    minPadding: 0,
-                    maxPadding: 0,
-                    gridLineWidth: 0,
-                    tickmarkPlacement: 'on'
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: ''
-                    },
-                    stackLabels: {
-                        enabled: false
-                    }
-                },
-                legend: {
-                    verticalAlign: 'bottom',
-                    shadow: false,
-                    useHTML: true
-                },
-                tooltip: {
-                    headerFormat: '<b>{point.x}</b><br/>',
-                    pointFormat: '{series.name}: {point.y} Documents<br/>Total: {point.stackTotal} Documents'
-                },
-                plotOptions: {
-                    column: {
-                        stacking: 'normal',
-                        dataLabels: {
-                            enabled: false,
-                        }
-                    }
-                },
-                series: series
-            });
-         }
+        var categoriesInfo = this.state.categories;
+		var flotPieData = [];
+		var highchart = [];
+		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
+			for(var i = 0; i < categoriesInfo.length; i++) {
+                var name = this.ucwords(categoriesInfo[i].name);
+				flotPieData.push({
+					label: name,
+		            data: [
+		                [6, categoriesInfo[i].percentage]
+		            ],
+		            color: colors[i]
+				});
+				highchart.push({
+					name: name,
+		            data: [categoriesInfo[i].doc_types[0].total,categoriesInfo[i].doc_types[1].total,categoriesInfo[i].doc_types[2].total,categoriesInfo[i].doc_types[3].total,categoriesInfo[i].doc_types[4].total]
+				});
+			}
+        var updateChart = update(this.state.dataChart, {
+            pieChart: {$set: flotPieData },
+            columnChart: {$set: highchart }
+        });
+        this.setState({ dataChart: updateChart });
     },
     render:template
 });

@@ -13,13 +13,13 @@ module.exports = React.createClass({
     componentWillMount() 
     {
     	console.log("app");
-    	if(localStorage.getItem('token'))
+    	if(sessionStorage.getItem('token'))
 		{
 			console.log("havetoken");
 			setInterval(function()
     		{
-    			var token = localStorage.getItem('token');
-    			if(localStorage.getItem('token')){
+    			var token = sessionStorage.getItem('token');
+    			if(sessionStorage.getItem('token')){
     				$.ajax({
 			            url: Constant.SERVER_API + 'api/token/api-token-refresh/',
 			            dataType: 'json',
@@ -29,7 +29,7 @@ module.exports = React.createClass({
 			            },
 			            success: function(data) 
 			            {
-			            	localStorage.setItem('token', data.token);
+			            	sessionStorage.setItem('token', data.token);
 			            }.bind(this),
 			            error: function(xhr, status, err) 
 			            {

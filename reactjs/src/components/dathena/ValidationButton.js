@@ -11,6 +11,7 @@ var ValidationButton = React.createClass({
 
     static: {
         status: {
+            normal: {name: 'normal', className: ''},
             warning: {name: 'warning', className: 'icon-warning'},
             danger: {name: 'danger', className: 'icon-danger'},
             success: {name: 'success', className: 'icon-success'}

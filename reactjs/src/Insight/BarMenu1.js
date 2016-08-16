@@ -151,7 +151,7 @@ var MenuBar1 = React.createClass
             method: 'GET',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.setState(update(this.state, {
@@ -172,7 +172,7 @@ var MenuBar1 = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.reverse();
@@ -194,7 +194,7 @@ var MenuBar1 = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.setState(update(this.state, {
@@ -215,7 +215,7 @@ var MenuBar1 = React.createClass
             dataType: 'json',
             async: async,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.setState(update(this.state, {
@@ -313,7 +313,7 @@ var MenuBar1 = React.createClass
           dataType: 'json',
           type: 'GET',
           beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+              xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
           },
           success: function(data) {
               var update_scan_result = update(this.state, {

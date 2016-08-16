@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import template from './DocumentReview.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import chart from '../script/chart-group-review.js'
 import Constant from '../Constant.js'
 import loadScript from '../script/load.scripts.js';
 import 'jquery'
 
 var DocumentReview = React.createClass({
-    mixins: [LinkedStateMixin],
     getInitialState() {
         return {
             Actions: null,
@@ -125,7 +122,7 @@ var DocumentReview = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log('dataaaa', data);
@@ -292,7 +289,7 @@ var DocumentReview = React.createClass({
             type: 'PUT',
             dataType: 'Json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             data: JSON.stringify({
                     "id": "1",
@@ -397,7 +394,7 @@ var DocumentReview = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log('dataaaattt', data);
