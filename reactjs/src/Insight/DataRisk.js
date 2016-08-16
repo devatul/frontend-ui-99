@@ -4,6 +4,8 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './DataRisk.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import $ from 'jquery'
+import javascriptOver from '../script/javascript-overview.js'
+import javascript from '../script/javascript.js'
 
  var DataRisk= React.createClass({
   	mixins: [LinkedStateMixin],
@@ -14,6 +16,8 @@ import $ from 'jquery'
 	},
 	componentDidMount() 
 	{
+		javascript();
+		javascriptOver();
 	},
     render:template
 });
