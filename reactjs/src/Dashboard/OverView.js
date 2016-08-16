@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import template from './OverView.rt';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import update from 'react-addons-update';
-import _ from 'lodash'
+import { isEmpty } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
-import scriptOverview from '../script/javascript-overview.js'
 import Constant from '../Constant.js';
 import chartOverview from '../script/chart-overview.js';
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
-    mixins: [LinkedStateMixin],
 	getInitialState() {
 	    return {
             scan_result:{},
@@ -95,7 +92,7 @@ var OverView = React.createClass
             dataType: 'application/json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             }
         })
         .done(function(data) {
@@ -119,7 +116,7 @@ var OverView = React.createClass
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 this.updateChartData(data);
@@ -202,14 +199,14 @@ var OverView = React.createClass
     },
     handleFilter: function(bodyRequest) {
         console.log('bodyRequest', bodyRequest);
-        if(!_.isEmpty(bodyRequest)) {
+        if(!isEmpty(bodyRequest)) {
             $.ajax({
                 url: Constant.SERVER_API + 'api/scan/filter/',
                 dataType: 'json',
                 type: 'POST',
                 data: JSON.stringify(bodyRequest),
                 beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
                     this.updateChartData(data);

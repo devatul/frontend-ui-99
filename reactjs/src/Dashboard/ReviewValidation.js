@@ -4,10 +4,10 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './ReviewValidation.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import javascript from '../script/javascript.js';
+//import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
 import 'jquery'
-import javascriptTodo from '../script/javascript.todo.js'
+//import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
 import _ from 'lodash';
 //import elementUndo from '../script/elementUndo.js'
@@ -159,7 +159,7 @@ var ReviewValidation = React.createClass({
             dataType: 'json',
             async: false,
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 for(var i = 0; i < data.length; i++) {
@@ -189,7 +189,7 @@ var ReviewValidation = React.createClass({
             url: Constant.SERVER_API + "api/label/confidentiality/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 data.reverse();
@@ -212,7 +212,7 @@ var ReviewValidation = React.createClass({
             async: false,
             data: {"id": this.state.categoryCurrent.id },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -266,7 +266,7 @@ var ReviewValidation = React.createClass({
             async: false,
             data: {"id": reviewId},
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
@@ -309,7 +309,7 @@ var ReviewValidation = React.createClass({
                 "reviewer_id": 2
             },
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 console.log('data', data);
@@ -321,7 +321,6 @@ var ReviewValidation = React.createClass({
                         console.log('i', i);
                     }
                 }
-                console.log('ii', check, check===null, null === 0);
                 for (var i = 0; i < data.documents.length; i++) {
                     data.documents[i]['2nd_line_validation'] = "normal";
                     data.documents[i].current_category = 0;
@@ -559,12 +558,14 @@ var ReviewValidation = React.createClass({
                 indexValid = i;
             }
         }
-        var document = reviewValidations[indexValid].documents[docIndex];
-        document.index = docIndex;
         if(indexValid != null) {
+            var document = reviewValidations[indexValid].documents[docIndex];
+            document.index = parseInt(docIndex);
             this.setState(update(this.state, {
                 documentPreview: {$set: document }
             }));
+            $('#previewModal .file-preview').html('<a href="'+document.image_url+'" id="embedURL"></a>');
+            $('#embedURL').gdocsViewer();
         }
     },
     nextReviewer: function(categoryId, reviewerId) {
@@ -576,7 +577,7 @@ var ReviewValidation = React.createClass({
             url: Constant.SERVER_API + "api/review/review_validation/summary/",
             dataType: 'json',
             beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + localStorage.getItem('token'));
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
                 var updateState = update(this.state, {
