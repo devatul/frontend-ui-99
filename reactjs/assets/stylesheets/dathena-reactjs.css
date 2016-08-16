@@ -1,4 +1,3 @@
-
 .max-witdh-coordinator-comment {
     max-width: 170px;
 }
@@ -48,4 +47,40 @@
     font-weight: 600;
     display: inline-block;
     margin-bottom: 5px;
+}
+
+/*Notification Page*/
+.panel-noti > .panel-body {
+    padding: 0 0 5px 0;
+}
+
+.noti-item {
+    margin: 0 !important;
+    padding: 8px 15px;
+}
+
+.noti-item:nth-child(even), .noti-block > .noti-list:nth-child(odd), .col-noti > .noti-list:nth-child(even) {
+    background-color: #f6f6f6 ;
+}
+
+.noti-popup   .list-unstyled > li {
+    padding-left: 10px;
+}
+
+.noti-popup {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.noti-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.noti-block .noti-date {
+    color: #747474;
+    background-color: #E6E6E6;
 }

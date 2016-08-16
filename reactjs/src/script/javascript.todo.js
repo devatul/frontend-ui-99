@@ -74,13 +74,15 @@ module.exports = function () {
     $('.filter-noti-icon').on('click', function(){
         if (notiType == $(this).attr('data-type')){
             $('[data-noti-type]').show();
-            $('.filter-noti-icon').parents('span').show();
+            //$('.filter-noti-icon').parents('span').show();
+            $('.filter-noti-icon').parents('span').css("visibility","visible");
             notiType = '';
         }
         else{
             notiType = $(this).attr('data-type');
-            $('.filter-noti-icon').parents('span').hide();
-            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
+            //$('.filter-noti-icon').parents('span').hide();
+            $('.filter-noti-icon').parents('span').css("visibility","hidden");
+            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').css("visibility","visible");
             $('[data-noti-type]').each(function(){
                 if ($(this).attr('data-noti-type') == notiType){
                     $(this).show();
