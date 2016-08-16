@@ -139,6 +139,7 @@
 }
 
 .select-reviewers{
+  text-align: right;
   .switch{
     margin: 5px 0;
   }
@@ -162,6 +163,12 @@
       }
     }
   }
+  .dropdown-file-info-holder{
+    float: left;
+  }
+  .text-num{
+    font-weight: bold;
+  }
 }
 
 .line_document.review_title{
@@ -182,5 +189,17 @@
   #circularG{
     vertical-align: middle;
     margin-left: 5px;
+  }
+}
+
+.switch-label{
+  min-width: 82px;
+  display: inline-block;
+  text-align: left;
+}
+
+.help_guide_sub.tab-content{
+  &>.chart-legend{
+    display: none;
   }
 }

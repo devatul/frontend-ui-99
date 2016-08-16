@@ -39,14 +39,6 @@
   }
 }
 
-.panel-featured{
-  .filter-buttons{
-    position: absolute;
-    top: 8px;
-    right: 50px;
-  }
-}
-
 .panel-identity{
   .toggle-button{
     line-height: 40px;
@@ -60,6 +52,11 @@
   }
   .panel-title{
     padding-right: 80px;
+  }
+  .filter-buttons{
+    position: absolute;
+    top: 8px;
+    right: 50px;
   }
 }
 

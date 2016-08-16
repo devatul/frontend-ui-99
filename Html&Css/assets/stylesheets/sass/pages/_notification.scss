@@ -36,4 +36,14 @@
       @include calc(width, '100% - 50px');
     }
   }
+  .panel-body{
+    padding: 0;
+    .noti-item{
+      padding: 10px 15px;
+      margin-bottom: 0;
+      &:nth-child(even){
+        background-color: #f5f5f5;
+      };
+    }
+  }
 }

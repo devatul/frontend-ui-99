@@ -55,6 +55,7 @@
 }
 
 .review_nav-tabs{
+  text-align: left!important;
   &>li{
     position: relative;
     .badge {
@@ -70,6 +71,10 @@
       top: -7px;
     }
   }
+}
+
+.review_tab-content{
+  padding: 0;
 }
 
 .reviewer-tab{

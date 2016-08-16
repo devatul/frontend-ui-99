@@ -98,11 +98,14 @@
                             
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
+                        <li>
+                            <Link to="/Dashboard/ReviewValidation" activeClassName="active">Review Validation</Link>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                   
-                    <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Insight <b class="caret"></b>
+                    <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Insights <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
@@ -115,13 +118,11 @@
                         </li>
                         <li>
                             
-                            <Link to="/Insight/DataLost" activeClassName="active">Data Lost Prevention</Link>
+                            <Link to="/Insight/DataLost" activeClassName="active">Data Loss Prevention</Link>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <Link to="/Dashboard/ReviewValidation" activeClassName="active">Review Validation</Link>
-                </li>
+                
                 <li>
                     <Link to="/Dashboard/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>

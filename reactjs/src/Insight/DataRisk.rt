@@ -424,7 +424,7 @@
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
-                        <div class="pie-wrapper pie-progress-23 style-2 pie-blue">
+                        <div class="pie-wrapper pie-progress-23 style-2 pie-yellow">
                           <span class="label">10,897<span class="smaller">files</span></span>
                           <div class="pie">
                             <div class="left-side half-circle"></div>
@@ -452,7 +452,7 @@
                   <div class="widget-summary">
                       <div class="widget-summary-col">
                         <div class="pie-wrapper pie-progress-16 style-2 pie-red">
-                          <span class="label">1,4T<span class="smaller">of data</span></span>
+                          <span class="label">1.4TB<span class="smaller">of data</span></span>
                           <div class="pie">
                             <div class="left-side half-circle"></div>
                             <div class="right-side half-circle"></div>
@@ -516,7 +516,7 @@
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
-                        <div class="pie-wrapper pie-progress-23 style-2 pie-green">
+                        <div class="pie-wrapper pie-progress-3 style-2 pie-green">
                           <span class="label">854<span class="smaller">folders</span></span>
                           <div class="pie">
                             <div class="left-side half-circle"></div>

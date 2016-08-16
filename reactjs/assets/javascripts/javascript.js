@@ -1,300 +1,5 @@
 $(function () {
 
-    if( $('#flotPie').length){
-        // PIE CHART
-        var flotPieData = [{
-            label: "Public",
-            data: [
-                [1, 50]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Internal",
-            data: [
-                [1, 25]
-            ],
-            color: '#349da2'
-        }, {
-            label: "Confidential",
-            data: [
-                [1, 15]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Secret",
-            data: [
-                [1, 6]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Banking Secrecy",
-            data: [
-                [1, 4]
-            ],
-            color: '#E36159'
-        }];
-
-        var plot = $.plot('#flotPie', flotPieData, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.4,
-                    // label: {
-                    //     show: true,
-                    //     radius: 1/2,
-                    //     formatter: function (label, series) {
-                    //         return '<div style="font-size:14pt;text-align:center;padding:5px;color:white;">'+ Math.round(series.percent) + '%</div>';
-                    //     },
-                    //     threshold: 0.1
-                    // }
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 3,
-                container:$("#legendContainer"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
-              },
-            }
-        });
-    }
-
-    if( $('#flotPie2').length){
-        // PIE CHART
-        var flotPieData2 = [{
-            label: "Accounting/ Tax",
-            data: [
-                [1, 50]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Corporate Entity",
-            data: [
-                [1, 25]
-            ],
-            color: '#349da2'
-        }, {
-            label: "Transaction",
-            data: [
-                [1, 15]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Legal/ Compliance",
-            data: [
-                [1, 6]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Employee",
-            data: [
-                [1, 4]
-            ],
-            color: '#E36159'
-        }];
-
-        var plot = $.plot('#flotPie2', flotPieData2, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.6,
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 3,
-                container:$("#legendContainer2"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
-              }
-            }
-        });
-
-        var flotPieInnerData2 = [{
-            label: "EN",
-            data: [
-                [1, 50]
-            ],
-            color: '#2ecc71'
-        }, {
-            label: "FR",
-            data: [
-                [1, 25]
-            ],
-            color: '#9b59b6'
-        }, {
-            label: "DE",
-            data: [
-                [1, 4]
-            ],
-            color: '#34495e'
-        }];
-
-        $.plot('#flotPie2Inner', flotPieInnerData2, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    innerRadius: 0.6,
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 1,
-                container:$("#legendContainer2Inner"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
-              },
-            }
-        });
-    }
-
-    if( $('#flotPie2Filter').length){
-        // PIE CHART
-
-        var flotPie2FilterData = [{
-            label: "EN",
-            data: [
-                [1, 50]
-            ],
-            color: '#2ecc71'
-        }, {
-            label: "FR",
-            data: [
-                [1, 25]
-            ],
-            color: '#9b59b6'
-        }, {
-            label: "DE",
-            data: [
-                [1, 4]
-            ],
-            color: '#34495e'
-        }];
-
-        $.plot('#flotPie2Filter', flotPie2FilterData, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 0.8,
-                    innerRadius: 0.4,
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 3,
-                container:$("#legendContainer2Filter"),       
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
-              },
-            }
-        });
-    }
-
-    if( $('#flotPie3').length){
-        // PIE CHART 3
-        var flotPieData3 = [{
-            label: "Word",
-            data: [
-                [1, 50]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Excel",
-            data: [
-                [1, 25]
-            ],
-            color: '#349da2'
-        }, {
-            label: "PDF",
-            data: [
-                [1, 15]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Power Point",
-            data: [
-                [1, 6]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Other",
-            data: [
-                [1, 4]
-            ],
-            color: '#E36159'
-        }];
-
-        var plot = $.plot('#flotPie3', flotPieData3, {
-            series: {
-                pie: {
-                    show: true,
-                    radius:0.8,
-                    innerRadius: 0.4,
-                    // label: {
-                    //     show: true,
-                    //     radius: 1/2,
-                    //     formatter: function (label, series) {
-                    //         return '<div style="font-size:14pt;text-align:center;padding:5px;color:white;">'+ Math.round(series.percent) + '%</div>';
-                    //     },
-                    //     threshold: 0.1
-                    // }
-                }
-            },
-            legend: {
-                show: true,
-                position: 'sw',
-                noColumns: 5,
-                container:$("#legendContainer3"), 
-            },
-            grid: {
-                hoverable: true,
-                clickable: true
-            },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
-              },
-            }
-        });
-    }
-       
     $(document).on('click', '.dropdown-menu.has-arrow', function (e) {
         e.stopPropagation();
     });    
@@ -317,6 +22,15 @@ $(function () {
     $('body').on('click', '.dropdown-backdrop', function(e){
         $(this).remove();
         $(this).parent().find('.dropdown-menu').toggle();
+    });
+
+    $('body').on('click', '.filter-list .btn-group', function(){
+        // $('.filter-list .btn-group').removeClass('open');
+        // $('.filter-list .btn-group').find('.dropdown-menu').hide();
+        // $(this).addClass('open');
+        // $(this).find('.dropdown-menu').toggle();
+        $('.btn-group.open').trigger('click');
+        //$(this).trigger('click');
     });
 
     // hold onto the drop down menu                                             
@@ -358,13 +72,14 @@ $(function () {
 
     // and when you hide it, reattach the drop down, and hide it normally                                                   
     $(window).on('hide.bs.dropdown', function (e) {
+        console.log('1');
         var windowWidth = $(window).innerWidth();
 
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
         }
-        if (dropdownMenu.parents('.has-child').hasClass('children-open')){
+        if (dropdownMenu && dropdownMenu.parents('.has-child').hasClass('children-open')){
             dropdownMenu.parents('.has-child').removeClass('children-open');
         }
     });     

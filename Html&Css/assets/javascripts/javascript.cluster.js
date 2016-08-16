@@ -8,19 +8,21 @@ $(function () {
     $('[id="'+$(this).val()+'"]').show();
   });
 
-  $('#meter').liquidMeter({
-    shape: 'circle',
-    color: '#0088CC',
-    background: '#F9F9F9',
-    fontSize: '24px',
-    fontWeight: '600',
-    stroke: '#F2F2F2',
-    textColor: '#333',
-    liquidOpacity: 0.9,
-    liquidPalette: ['#333'],
-    speed: 3000,
-    animate: !$.browser.mobile
-  });
+  if ($('#meter').length){
+    $('#meter').liquidMeter({
+      shape: 'circle',
+      color: '#0088CC',
+      background: '#F9F9F9',
+      fontSize: '24px',
+      fontWeight: '600',
+      stroke: '#F2F2F2',
+      textColor: '#333',
+      liquidOpacity: 0.9,
+      liquidPalette: ['#333'],
+      speed: 3000,
+      animate: !$.browser.mobile
+    });
+  }
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href") // activated tab
@@ -79,7 +81,7 @@ $(function () {
 
   var cloudRendered = false;
   var drawCloud = function(){
-    if (!cloudRendered){
+    if (!cloudRendered && $("#words-cloud").length){
       $("#words-cloud").jQCloud(word_list,{
         afterCloudRender: function(){
           cloudRendered = true;
@@ -96,137 +98,298 @@ $(function () {
     $('#words-cloud').html('').jQCloud(word_list) 
   });
 
+  var colors = [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'];
   var drawCentroid = function(){
-    $('#centroidChart').highcharts({
-        chart: {
-            type:'column'
-        },
-        xAxis: {
-            startOnTick: true,
-            min: 0,
-            step: 2,
-            max: 10,
-            startOnTick: true,
-            endOnTick: true,
-            tickInterval: 1,
-        },
-        yAxis: {
-          title: {
-              text: 'Number of Documents'
-          },
-          allowDecimals: false
-        },
-        credits: {
-          enabled: false
-        },
-        title: {
-          text: ''
-        },
+  $('#centroidChart').highcharts({
+    chart: {
+      polar: true
+    },
 
-        legend: {
-          enabled: false,
-          itemStyle: {
-            fontFamily: 'Roboto'
+    credits: {
+      enabled: false
+    },
+
+    title: {
+      text: null
+    },
+
+    pane: {
+      startAngle: 90
+    },
+
+    xAxis: {
+      tickInterval: 45,
+      min: 0,
+      max: 360,
+      labels: {
+        enabled: false
+      },
+      plotLines: [{
+        color: '#BFDDF7',
+        width: 2,
+        value: [0, 2],
+        zIndex: 1
+      }]
+    },
+
+    yAxis: {
+      min: -5,
+      tickInterval: 5,
+      plotBands: [{
+        from: 0,
+        to: 5,
+        color: '#EDEDED'
+      },{
+        from: 5,
+        to: 10,
+        color: '#F2F2F2'
+      },{
+        from: 10,
+        to: 15,
+        color: '#F7F7F7'
+      },{
+        from: 15,
+        to: 20,
+        color: '#FCFCFC'
+      }],
+      labels: {
+        formatter: function() {
+          return this.value >= 0 ? this.value : null;
+        }
+      }
+    },
+
+    plotOptions: {
+      series: {
+        pointStart: 0,
+        pointInterval: 45
+      },
+      column: {
+        pointPadding: 0,
+        groupPadding: 0
+      },
+      line: {
+        //lineWidth: 0
+      }
+    },
+
+    legend:{
+      enabled: false
+    },
+    tooltip: {
+      formatter: function() {
+        return 'Documents:' + this.y;
+      },
+      useHTML: true
+    },
+    series: [{
+      type: 'scatter',
+      lineWidth: 2,
+      data: [
+        [0, 5], 
+        {
+          x: 0,
+          y: 0,
+          marker: {
+            enabled: false
           }
         },
-        
-        plotOptions: {
-          column: {
-            stacking: 'normal',
-            dataLabels: {
-                enabled: true,
-                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                style: {
-                  textShadow: '0 0 3px black'
-                }
-            },
-            pointPadding: 0,
-            borderWidth: 1,              
-            groupPadding: 0,
-            pointPlacement: -0.5
+        null, 
+        [20, 8], 
+        {
+          x: 20,
+          y: 0,
+          marker: {
+            enabled: false
           }
         },
-
-
-        tooltip: {
-            headerFormat: '',
-            pointFormat: '{point.y} Documents'
+        null, 
+        [60, 12], 
+        {
+          x: 60,
+          y: 0,
+          marker: {
+            enabled: false
+          }
         },
-        
-        series: [{
-            data: [[1,1], [2,0], [3,0], [4,0], [5,3], [6,2], [7,1], [8,1], [9,0], [10,0]]
-        }]
+        null, 
+        [135, 15], 
+        {
+          x: 135,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [180, 18], 
+        {
+          x: 180,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [225, 20], 
+        {
+          x: 225,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [240, 22], 
+        {
+          x: 240,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [260, 3], 
+        {
+          x: 260,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [280, 5], 
+        {
+          x: 280,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null, 
+        [320, 10], 
+        {
+          x: 320,
+          y: 0,
+          marker: {
+            enabled: false
+          }
+        },
+        null
+      ]
+    }]
+
     });
   };
 
-  if( $('#confidentialityChart').length){
+  var colors = [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'];
+  var colorsHover  = [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
+  var confidentialityChartData = [{
+      name: 'Public',
+      y: 50
+  }, {
+      name: 'Internal',
+      y: 25,
+  }, {
+      name: 'Confidential',
+      y: 15
+  }, {
+      name: 'Secret',
+      y: 6
+  }, {
+      name: 'Banking Secrecy',
+      y: 4
+  }];
 
-        // PIE CHART
-        var flotPieData = [{
-            label: "Public",
-            data: [
-                [1, 10]
-            ],
-            color: '#5bc0de'
-        }, {
-            label: "Internal",
-            data: [
-                [1, 20]
-            ],
-            color: '#349da2'
-        }, {
-            label: "Confidential",
-            data: [
-                [1, 10]
-            ],
-            color: '#7986cb'
-        }, {
-            label: "Secret",
-            data: [
-                [1, 10]
-            ],
-            color: '#ed9c28'
-        }, {
-            label: "Banking Secrecy",
-            data: [
-                [1, 50]
-            ],
-            color: '#E36159'
-        }];
-
-        var plot = $.plot('#confidentialityChart', flotPieData, {
-            series: {
-                pie: {
-                    show: true,
-                    label:{
-                      show: true,
-                      formatter: function labelFormatter(label, series) {
-                          return "<div style='font-size:8pt; max-width:60px; line-height: 12pt; text-align:center; padding:2px; color:"+series.color+"'>" + label + "</div>";
-                      }
-                    }
+  var div = $('#confidentialityChart');
+  var parentDiv = div.closest('.tab-pane');
+  if (div.length){
+    div.highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        backgroundColor: null,
+        events: {
+          load: function () {
+                var chart = this;
+                $(chart.series).each(function (i, serie) {
+                  var serieDiv = $('<ul class="list-unstyled chart-legend" id="confidentialityChartLegend"></ul>').appendTo(parentDiv);
+                  $.each(serie.data, function(i, point){
+                    $('<li><i class="legend-symbol" style="background-color: ' + point.color + '"></i>' + point.name + '</li>').appendTo(serieDiv);
+                  })
+                });
+            }
+        },
+      },
+      title: {
+        text: ''
+      },
+      credits: {
+        enabled: false
+      },
+      tooltip: {
+        pointFormat: 'Documents: {point.percentage}% / {point.y}'
+      },
+      plotOptions: {
+        pie: {
+            allowPointSelect: false,
+            cursor: 'pointer',
+            colors: colors,
+            dataLabels: {
+                enabled: true,
+                connectorWidth: 0,
+                distance: 5,
+                useHTML: true,
+                formatter: function () {
+                  return '<span style="color:' + this.point.color + '">' + this.point.name + '</span>';
                 }
             },
-            legend: {
-                show: true,
-                position: 'nw',
-                noColumns: 1, 
-                backgroundOpacity: 0 ,
-                container: $('#confidentialityChartLegend'),
-                  itemStyle: {
-                    fontFamily: 'Roboto'
-                  }
+            states: {
+                hover: {
+                    brightness: 0,
+                }
             },
-            grid: {
-                hoverable: true,
-                clickable: true,
+            showInLegend: true,
+            point:  {
+              events: {
+                mouseOver: function(event){
+                  this.graphic.attr({
+                    fill: colors[this.index]
+                  });
+                }
+              }
             },
-            tooltip: {
-              show: true,
-              content: function(label,x,y){
-                return label + ': %p.0% / ' +y+ ' Documents';
+            events: {
+              mouseOver: function(){
+                var serie = this.points;
+                $.each(serie, function (i, e) {
+                    this.graphic.attr({
+                        fill: colorsHover[i]
+                    });
+                });
               },
+              mouseOut: function(){
+                var serie = this.points;
+                $.each(serie, function (i, e) {
+                    this.graphic.attr({
+                        fill: colors[i]
+                    });
+                });
+              }
             }
-        });
+        },
+      },
+      
+      legend: {
+        enabled: false
+      },
+      series: [{
+        colorByPoint: true,
+        data: confidentialityChartData
+      }]
+    });
   }
 
   if ($('#confidentialityLevelChart').length){
@@ -240,7 +403,7 @@ $(function () {
         credits: {
           enabled: false
         },
-        colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'],
+        colors: colors,
         xAxis: {
             categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
             labels:{
@@ -268,12 +431,7 @@ $(function () {
             }
         },
         legend: {
-            verticalAlign: 'bottom',
-            shadow: false,
-            useHTML: true,
-              itemStyle: {
-                fontFamily: 'Roboto'
-              }
+          enabled: false
         },
         tooltip: {
             headerFormat: '<b>{point.x}</b><br/>',
@@ -284,24 +442,51 @@ $(function () {
                 stacking: 'normal',
                 dataLabels: {
                     enabled: false,
+                },
+                point: {
+                  events: {
+                    mouseOver: function(){
+                      console.log(this);
+                      var columnIndex = this.index;
+                    }
+                  }
+                },
+                events: {
+                  mouseOver: function(){
+                    console.log(this);
+                    // var serie = this.points;
+                    // $.each(serie, function (i, e) {
+                    //     this.graphic.attr({
+                    //         fill: colorsHover[i]
+                    //     });
+                    // });
+                  },
+                  mouseOut: function(){
+                    var serie = this.points;
+                    // $.each(serie, function (i, e) {
+                    //     this.graphic.attr({
+                    //         fill: colors[i]
+                    //     });
+                    // });
+                  }
                 }
             }
         },
         series: [{
             name: 'Public',
-            data: [400,420,390,410,440]
+            data: [400,420,390,410, 414]
         }, {
             name: 'Internal',
-            data: [80,100,123,90,111]
+            data: [80,100,123,90, 300]
         }, {
             name: 'Confidential',
-            data: [200,210,180,188,240]
+            data: [200,210,180,188, 310]
         },{
             name: 'Secret',
-            data: [400,420,390,410,440]
+            data: [400,420,390,410, 404]
         }, {
             name: 'Banking Secrecy',
-            data: [80,100,123,90,111]
+            data: [80,100,123,90, 111]
         }]
     });
   }

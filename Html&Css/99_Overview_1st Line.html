@@ -421,8 +421,7 @@
                                 </div>
                             </h4>
                             <div class="widget-chart">
-                                <div class="chart chart-md" id="flotPie"></div>
-                                <div id="legendContainer"></div>
+                                <div class="chart chart-md" id="confidentialityPieChart"></div>
                             </div>
                         </div>
                     </section>
@@ -438,11 +437,8 @@
                                     </div>
                                 </div>
                             </h4>
-                            <div class="widget-chart">
-                                <div class="chart chart-md" id="flotPie2"></div>
-                                <div class="chart chart-md-inner" id="flotPie2Inner"></div>
-                                <div id="legendContainer2"></div>
-                                <div id="legendContainer2Inner"></div>
+                            <div class="widget-chart chart-stacked">
+                                <div class="chart chart-md" id="categoryLanguagePieChart"></div>
                             </div>
                         </div>
                     </section>
@@ -459,9 +455,7 @@
                                 </div>
                             </h4>
                             <div class="widget-chart">
-                                <!-- Flot: Pie -->
-                                <div class="chart chart-md" id="flotPie3"></div>
-                                <div id="legendContainer3"></div>
+                                <div class="chart chart-md" id="documentPieChart"></div>
                             </div>
                         </div>
                     </section>
@@ -473,7 +467,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <section class="panel panel-featured panel-featured-primary">
+                    <section class="panel panel-featured panel-featured-primary panel-over">
                         <header class="panel-heading">
                             <h2 class="panel-title">Classification Summary</h2>
                             <div class="panel-actions">
@@ -553,7 +547,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <section class="panel panel-featured panel-featured-primary">
+                    <section class="panel panel-featured panel-featured-primary panel-over">
                         <header class="panel-heading">
                             <h2 class="panel-title">Categorisation Summary</h2>
                             <div class="panel-actions">
@@ -669,12 +663,8 @@
     <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
     <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-    
-    <script src="assets/vendor/flot/jquery.flot.js"></script>
-    <script src="assets/vendor/flot.tooltip/flot.tooltip.js"></script>
-    <script src="assets/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="assets/vendor/flot/jquery.flot.categories.js"></script>
-    <script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+
+    <script src="assets/vendor/highcharts/js/highcharts.js"></script>
 
     <!-- Theme Base, Components and Settings -->
     <script src="assets/javascripts/theme.js"></script>

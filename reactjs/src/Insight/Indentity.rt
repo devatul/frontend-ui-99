@@ -681,7 +681,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <h3>High Risk Directory Activity Access with Client Data
+          <h3>High Risk Active Directory Access with Client Data
             <div class="inline-block-item dropdown">
               <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
               <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">

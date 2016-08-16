@@ -35,7 +35,8 @@ $(function(){
       data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 25, color: '#7986cb'},{y: 20, color: '#ed9c28'},{y: 4, color: '#E36159'}]
     },
   ];
-
+  var colors = [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'];
+  var colorsHover  = [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
   $('.identity-chart').each(function(index){
     $(this).highcharts({
         chart: {
@@ -81,6 +82,38 @@ $(function(){
             bar: {
                 dataLabels: {
                     enabled: false
+                },
+                states: {
+                    hover: {
+                        brightness: 0,
+                    }
+                },
+                point:  {
+                    events: {
+                      mouseOver: function(event){
+                        this.graphic.attr({
+                          fill: colors[this.index]
+                        });
+                      },
+                    }
+                  },
+                events: {
+                    mouseOver: function(e){
+                      var serie = this.points;
+                      $.each(serie, function (i, e) {
+                          this.graphic.attr({
+                              fill: colorsHover[i]
+                          });
+                      });
+                    },
+                    mouseOut: function(){
+                      var serie = this.points;
+                      $.each(serie, function (i, e) {
+                          this.graphic.attr({
+                              fill: colors[i]
+                          });
+                      });
+                    }
                 }
             }
         },
