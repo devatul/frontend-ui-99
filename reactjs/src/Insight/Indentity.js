@@ -100,7 +100,7 @@ var Indentity = React.createClass({
 		};
 	},
 	
-	Filter: function(bodyRequest) {
+	handleFilter: function(bodyRequest) {
 		console.log('bodyRequest', bodyRequest);
 		if(!_.isEmpty(bodyRequest)) {
 			$.ajax({
@@ -132,7 +132,7 @@ var Indentity = React.createClass({
 		}
 	},
 	componentDidMount() 
-	{
+	{	
 		javascript();
 		javascriptOver();
 	},
