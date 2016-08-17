@@ -83,7 +83,7 @@
                 </li>
                 <li class="dropdown">
                     <span class="badge">40</span>
-                    <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Review <b class="caret"></b>
+                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
@@ -105,7 +105,7 @@
                 </li>
                 <li class="dropdown">
                   
-                    <a href="#" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown">Insights <b class="caret"></b>
+                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
@@ -118,7 +118,7 @@
                         </li>
                         <li>
                             
-                            <Link to="/Insight/DataLost" activeClassName="active">Data Loss Prevention</Link>
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
                         </li>
                     </ul>
                 </li>

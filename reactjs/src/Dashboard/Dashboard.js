@@ -8,37 +8,37 @@ import $ from 'jquery'
 import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
-  	mixins: [LinkedStateMixin],
-  	getInitialState() {
-	    return {
-	    	newsfeed: {},
-            notification: {
-                total: 0,
-                list: []
-            },
-            pending_action: {
-                warning: 0,
-                danger: 0,
-                list: []
-            },
-            role:''
-	    };
-	},
-    propTypes: {
-        noti: React.PropTypes.shape({
-            total: React.PropTypes.number.isRequired,
-            list: React.PropTypes.array
-        })
+ mixins: [LinkedStateMixin],
+ getInitialState() {
+   return {
+      newsfeed: {},
+      notification: {
+        total: 0,
+        list: []
     },
-    getDefaultProps() {
-        return {
-              noti: {
-                total: 0,
-                list: []
-              }
-        };
+    pending_action: {
+        warning: 0,
+        danger: 0,
+        list: []
     },
-  	logOut(){
+    role:''
+};
+},
+propTypes: {
+    noti: React.PropTypes.shape({
+        total: React.PropTypes.number.isRequired,
+        list: React.PropTypes.array
+    })
+},
+getDefaultProps() {
+    return {
+      noti: {
+        total: 0,
+        list: []
+    }
+};
+},
+logOut(){
 		//console.log(sessionStorage.getItem('token'));
 		sessionStorage.removeItem('token');
 		browserHistory.push('/Account/SignIn');
@@ -62,8 +62,8 @@ module.exports = React.createClass({
             }.bind(this)
         });
         this.getDummyNotification();
-		
-	},
+
+    },
     getNotification() {
         $.ajax({
             url: Constant.SERVER_API + 'api/notification/',
@@ -114,51 +114,51 @@ module.exports = React.createClass({
             var update_notification = update(this.state, {
                 notification: {
                     list: {$set: [{
-                                    "created": "today", 
-                                    "id": 1, 
-                                    "message": "You have completed the review of 10 document in Legal/Compliance category.", 
-                                    "urgency": "done"
-                                },
-                                {
-                                    "created": "today", 
-                                    "id": 2, 
-                                    "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
-                                    "urgency": "adone"
-                                },
-                                {
-                                    "created": "today", 
-                                    "id": 3, 
-                                    "message": "You have completed the review of 10 document in Legal/Compliance category.", 
-                                    "urgency": "done"
-                                }]},
-                    total: {$set: 4}
+                        "created": "today", 
+                        "id": 1, 
+                        "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                        "urgency": "done"
                     },
+                    {
+                        "created": "today", 
+                        "id": 2, 
+                        "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.", 
+                        "urgency": "adone"
+                    },
+                    {
+                        "created": "today", 
+                        "id": 3, 
+                        "message": "You have completed the review of 10 document in Legal/Compliance category.", 
+                        "urgency": "done"
+                    }]},
+                    total: {$set: 4}
+                },
                 pending_action: {
                     list: {$set: [{
-                                    "created": "today", 
-                                    "id": 4, 
-                                    "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
-                                    "urgency": "very hight"
-                                },
-                                {
-                                    "created": "today", 
-                                    "id": 5, 
-                                    "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
-                                    "urgency": "hight"
-                                },
-                                {
-                                    "created": "today", 
-                                    "id": 6, 
-                                    "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
-                                    "urgency": "low"
-                                },
-                                {
-                                    "created": "today", 
-                                    "id": 6, 
-                                    "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.", 
-                                    "urgency": "low"
-                                }
-                                ]},
+                        "created": "today", 
+                        "id": 4, 
+                        "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.", 
+                        "urgency": "very hight"
+                    },
+                    {
+                        "created": "today", 
+                        "id": 5, 
+                        "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.", 
+                        "urgency": "hight"
+                    },
+                    {
+                        "created": "today", 
+                        "id": 6, 
+                        "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.", 
+                        "urgency": "low"
+                    },
+                    {
+                        "created": "today", 
+                        "id": 6, 
+                        "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.", 
+                        "urgency": "low"
+                    }
+                    ]},
                     warning: {$set: 1},
                     danger: {$set: 1}
                 } 
@@ -167,20 +167,20 @@ module.exports = React.createClass({
             var update_notification = update(this.state, {
                 notification: {
                     list: {$set: [{
-                                    "created": "today", 
-                                    "id": 1, 
-                                    "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.", 
-                                    "urgency": "done"
-                                }]},
+                        "created": "today", 
+                        "id": 1, 
+                        "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.", 
+                        "urgency": "done"
+                    }]},
                     total: {$set: 40}
-                    },
+                },
                 pending_action: {
                     list: {$set: [{
-                                    "created": "today", 
-                                    "id": 2, 
-                                    "message": "Scan Finished- You are required to review the classification and to assign a reviewer.", 
-                                    "urgency": "hight"
-                                }]},
+                        "created": "today", 
+                        "id": 2, 
+                        "message": "Scan Finished- You are required to review the classification and to assign a reviewer.", 
+                        "urgency": "hight"
+                    }]},
                     warning: {$set: 1},
                     danger: {$set: 0}
                 } 
@@ -197,5 +197,15 @@ module.exports = React.createClass({
     notificationHandle() {
         $("#total_notification").hide();
     },
+    changeToggle(event){
+       
+        $("#"+event).find("b").removeClass('fa-caret-down').addClass('fa-caret-up');
+        $('body').click(function() {
+
+            $("#"+event).find("b").removeClass('fa-caret-up').addClass('fa-caret-down');
+
+        })
+    },
+
     render:template
 });

@@ -29,7 +29,7 @@ var ToggleButton = React.createClass({
     
 
     handleToggleButton() {
-        debugger
+       
         if(this.state.default === 'open') {
             $(this.props.setTarget).css('display', 'block');
             this.setState({ default: 'close', style: 'collapse' });

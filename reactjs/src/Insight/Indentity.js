@@ -6,7 +6,8 @@ import Constant from '../Constant.js'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
-import $ from 'jquery'
+
+import $, { JQuery }  from 'jquery'
 /*import loadScript from '../script/load.scripts.js';*/
 var Indentity = React.createClass({
 	mixins: [LinkedStateMixin],
@@ -135,6 +136,7 @@ var Indentity = React.createClass({
 	{	
 		javascript();
 		javascriptOver();
+		
 	},
 	render:template
 });
