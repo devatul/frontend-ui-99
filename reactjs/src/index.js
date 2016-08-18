@@ -22,7 +22,7 @@ var DocumentReview = require('./Review/DocumentReview');
 var Insight = require('./Insight/Insight');
 var Indentity = require('./Insight/Indentity');
 var DataRisk = require('./Insight/DataRisk');
-var DataLost = require('./Insight/DataLost');
+var DataLoss = require('./Insight/DataLoss');
 
 render((
   	<Router history={browserHistory}>
@@ -49,7 +49,7 @@ render((
 				<Route path="/Insight/Insight" component={Insight}>
 					<Route path="/Insight/Indentity" component={Indentity}/>
 					<Route path="/Insight/DataRisk" component={DataRisk}/>
-					<Route path="/Insight/DataLost" component={DataLost}/>
+					<Route path="/Insight/DataLoss" component={DataLoss}/>
 				</Route>
 	  		</Route>
     	</Route>
