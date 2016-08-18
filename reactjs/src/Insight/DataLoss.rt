@@ -1,847 +1,448 @@
+<rt-import name="Keyword" from="./components/keyword"/>
 <div class="container">
-      <section class="panel panel-featured panel-featured-primary">
-        <header class="panel-heading">
-            <h2 class="panel-title">Risk Insights
-              <div class="inline-block-item dropdown">
-                <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                </div>
-              </div>
-            </h2>
-        </header>
-        <div class="panel-body pb-none">
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary widget-panel insight-panel">
-                  <h4 class="widget-title">Unidentifiable Files 
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>10,072</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">10,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Access Rights Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>0</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Twin Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>200</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">430</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Retention
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>750</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">420</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Aging
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>750</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">9,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Duplicate Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>10,720</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">10,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Repository Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>0</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">99</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary widget-panel insight-panel">
-                  <h4 class="widget-title">Cost Savings
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>980MB</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">1.2TB</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Stale Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>127,000</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <ul class="list-unstyled summary-list">
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>3+ Years</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>Total</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
-                              </div>
-                            </li>
-                          </ul>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
+  <section class="panel panel-featured panel-featured-primary">
+    <header class="panel-heading">
+      <h2 class="panel-title">Risk Insights
+        <div class="inline-block-item dropdown">
+          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
           </div>
         </div>
-      </section>
-
-      <section class="panel panel-has-child panel-featured panel-featured-primary">
-        <header class="panel-heading">
-          <h2 class="panel-title">Data Loss Prevention</h2>
-        </header>
-        <div class="panel-body">
-          <section class="panel panel-featured panel-featured-primary panel-identity panel-bordered">
-            <header class="panel-heading">
-              <h3 class="panel-title mb-none">
-                Policy Suggestion - Most Efficient Keywords
+      </h2>
+    </header>
+    <div class="panel-body pb-none">
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary widget-panel insight-panel">
+              <h4 class="widget-title">Unidentifiable Files 
                 <div class="inline-block-item dropdown">
-                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                    </div>
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
                 </div>
-              </h3>
-              <div class="panel-actions">
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>10,072</span>
               </div>
-            </header>
-            <div class="panel-body">
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Accounting/ Tax</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">10,000</strong>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Corporate Entity</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
-              </div>
-
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Client/ Customer</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
-              </div>
-
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Employee</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
-              </div>
-
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Legal/ Compliance</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
-              </div>
-
-              <div class="table-responsive table-suggestion-wrapper">
-                <h4 class="table-title">Transaction</h4>
-                <table class="table table-striped mb-none table-suggestion">
-                  <thead>
-                    <tr>
-                      <th>Confidentiality Level</th>
-                      <th>Keywords</th>
-                      <th class="text-center">Predicted Efficiency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Banking Secrecy</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-98 style-1 pie-sm">
-                          <span class="label">98%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Secret</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-92 style-1 pie-sm">
-                          <span class="label">92%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Confidential</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-75 style-1 pie-sm">
-                          <span class="label">75%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Internal</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="text-left">Public</td>
-                      <td class="text-left kw-list"><span class="more">Keyword 1, Keyword 2, Keyword 3, Keyword 4, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span></td>
-                      <td>
-                        <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
-                          <span class="label">99%</span>
-                          <div class="pie">
-                            <div class="left-side half-circle"></div>
-                            <div class="right-side half-circle"></div>
-                          </div>
-                          <div class="shadow"></div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="#" class="btn btn-green btn-extract">Extract</a>
-              </div>
-
             </div>
           </section>
         </div>
-      </section>
-
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Access Rights Anomaly
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>0</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">138</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Twin Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>200</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">430</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Document Retention
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>750</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">420</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
+              <h4 class="widget-title">Document Aging
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>750</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">9,000</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+              <h4 class="widget-title">Duplicate Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>10,720</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">10,000</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Document Repository Anomaly
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>0</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">99</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary widget-panel insight-panel">
+              <h4 class="widget-title">Cost Savings
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>980MB</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">1.2TB</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Stale Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>127,000</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <ul class="list-unstyled summary-list">
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>3+ Years</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>Total</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section class="panel panel-has-child panel-featured panel-featured-primary">
+    <header class="panel-heading">
+      <h2 class="panel-title">Data Loss Prevention</h2>
+    </header>
+    <div class="panel-body">
+      <section class="panel panel-featured panel-featured-primary panel-identity panel-bordered">
+        <header class="panel-heading">
+          <h3 class="panel-title mb-none">
+            Policy Suggestion - Most Efficient Keywords
+            <div class="inline-block-item dropdown">
+              <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+              </div>
+            </div>
+          </h3>
+          <div class="panel-actions">
+            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+          </div>
+        </header>
+        <div class="panel-body">
+          <div class="table-responsive table-suggestion-wrapper">
+            <h4 class="table-title">Accounting/ Tax</h4>
+            <table class="table table-striped mb-none table-suggestion">
+              <thead>
+                <tr>
+                  <th>Confidentiality Level</th>
+                  <th>Keywords</th>
+                  <th class="text-center">Predicted Efficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+                <Keyword id="id_1" level="Banking Secrecy" percent ="98"/>
+                <Keyword id="id_2" level="Secret" percent ="92"/>
+                <Keyword id="id_3" level="Confidential" percent ="75"/>
+                <Keyword id="id_4" level="Internal" percent ="99"/>
+                <Keyword id="id_5" level="Public" percent ="99"/>
+
+
+
+
+              </tbody>
+            </table>
+            <a href="#" class="btn btn-green btn-extract">Extract</a>
+          </div>
+
+          <div class="table-responsive table-suggestion-wrapper">
+            <h4 class="table-title">Corporate Entity</h4>
+            <table class="table table-striped mb-none table-suggestion">
+              <thead>
+                <tr>
+                  <th>Confidentiality Level</th>
+                  <th>Keywords</th>
+                  <th class="text-center">Predicted Efficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <Keyword id="id_6" level="Banking Secrecy" percent ="98"/>
+                <Keyword id="id_7" level="Secret" percent ="92"/>
+                <Keyword id="id_8" level="Confidential" percent ="75"/>
+                <Keyword id="id_9" level="Internal" percent ="99"/>
+                <Keyword id="id_10" level="Public" percent ="99"/>
+
+
+                
+              </tbody>
+            </table>
+            <a href="#" class="btn btn-green btn-extract">Extract</a>
+          </div>
+
+          <div class="table-responsive table-suggestion-wrapper">
+            <h4 class="table-title">Client/ Customer</h4>
+            <table class="table table-striped mb-none table-suggestion">
+              <thead>
+                <tr>
+                  <th>Confidentiality Level</th>
+                  <th>Keywords</th>
+                  <th class="text-center">Predicted Efficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <Keyword id="id_11" level="Banking Secrecy" percent ="98"/>
+                <Keyword id="id_12" level="Secret" percent ="92"/>
+                <Keyword id="id_13" level="Confidential" percent ="75"/>
+                <Keyword id="id_14" level="Internal" percent ="99"/>
+                <Keyword id="id_15" level="Public" percent ="99"/>
+
+
+              </tbody>
+            </table>
+            <a href="#" class="btn btn-green btn-extract">Extract</a>
+          </div>
+
+          <div class="table-responsive table-suggestion-wrapper">
+            <h4 class="table-title">Employee</h4>
+            <table class="table table-striped mb-none table-suggestion">
+              <thead>
+                <tr>
+                  <th>Confidentiality Level</th>
+                  <th>Keywords</th>
+                  <th class="text-center">Predicted Efficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <Keyword id="id_16" level="Banking Secrecy" percent ="98"/>
+                <Keyword id="id_17" level="Secret" percent ="92"/>
+                <Keyword id="id_18" level="Confidential" percent ="75"/>
+                <Keyword id="id_19" level="Internal" percent ="99"/>
+                <Keyword id="id_20" level="Public" percent ="99"/>
+
+              </tbody>
+            </table>
+            <a href="#" class="btn btn-green btn-extract">Extract</a>
+          </div>
+
+          <div class="table-responsive table-suggestion-wrapper">
+            <h4 class="table-title">Legal/ Compliance</h4>
+            <table class="table table-striped mb-none table-suggestion">
+              <thead>
+                <tr>
+                  <th>Confidentiality Level</th>
+                  <th>Keywords</th>
+                  <th class="text-center">Predicted Efficiency</th>
+                </tr>
+              </thead>
+              <tbody>
+               <Keyword id="id_21" level="Banking Secrecy" percent ="98"/>
+               <Keyword id="id_22" level="Secret" percent ="92"/>
+               <Keyword id="id_23" level="Confidential" percent ="75"/>
+               <Keyword id="id_24" level="Internal" percent ="99"/>
+               <Keyword id="id_25" level="Public" percent ="99"/>
+             </tbody>
+           </table>
+           <a href="#" class="btn btn-green btn-extract">Extract</a>
+         </div>
+
+         <div class="table-responsive table-suggestion-wrapper">
+          <h4 class="table-title">Transaction</h4>
+          <table class="table table-striped mb-none table-suggestion">
+            <thead>
+              <tr>
+                <th>Confidentiality Level</th>
+                <th>Keywords</th>
+                <th class="text-center">Predicted Efficiency</th>
+              </tr>
+            </thead>
+            <tbody>
+             <Keyword id="id_26" level="Banking Secrecy" percent ="98"/>
+             <Keyword id="id_27" level="Secret" percent ="92"/>
+             <Keyword id="id_28" level="Confidential" percent ="75"/>
+             <Keyword id="id_29" level="Internal" percent ="99"/>
+             <Keyword id="id_30" level="Public" percent ="99"/>
+           </tbody>
+         </table>
+         <a href="#" class="btn btn-green btn-extract">Extract</a>
+       </div>
+
+     </div>
+   </section>
+ </div>
+</section>
+
+</div>

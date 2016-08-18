@@ -6,6 +6,8 @@ import Constant from '../Constant.js'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
+import update from 'react-addons-update'
+import _ from 'lodash'
 
 import $, { JQuery }  from 'jquery'
 /*import loadScript from '../script/load.scripts.js';*/
@@ -44,59 +46,9 @@ var Indentity = React.createClass({
 				]
 			},
 
-			chart_data : {
-				"key_contributor": [
-				{
-					"contributors": [
-					{
-						"docs": 60,
-						"name": "Jack.Gilford"
-					},
-					{
-						"docs": 54,
-						"name": "Judith McConnell"
-					}
-					],
-					"category_name": "accounting"
-				},
-				{
-					"contributors": [
-					{
-						"docs": 60,
-						"name": "Jack.Gilford"
-					},
-					{
-						"docs": 54,
-						"name": "Judith McConnell"
-					}
-					],
-					"category_name": "corporate entity"
-				}
-				],
-
-				"high_risk_users": [
-				{
-					"docs": 60,
-					"name": "Jack Gilford"
-				},
-				{
-					"docs": 54,
-					"name": "Judith McConnell"
-				}
-				],
-
-				"high_risk_directory": [
-				{
-					"docs": 60,
-					"name": "ADCompl.WE"
-				},
-				{
-					"docs": 60,
-					"name": "ADHR.WR"
-				}
-				]
-			}
-
+			high_risk_users: [],
+			high_risk_directory : [],
+			key_contributor : []
 			
 		};
 	},
@@ -105,7 +57,7 @@ var Indentity = React.createClass({
 		console.log('bodyRequest', bodyRequest);
 		if(!_.isEmpty(bodyRequest)) {
 			$.ajax({
-				url: Constant.SERVER_API + 'api/scan/filter/',
+				url: Constant.SERVER_API + 'api/insight/iam/',
 				dataType: 'json',
 				type: 'POST',
 				data: JSON.stringify(bodyRequest),
@@ -131,6 +83,55 @@ var Indentity = React.createClass({
 		} else {
 			this.getScanResult();
 		}
+	},
+	updateChartData(data){
+		
+		var dataChart = [];
+		var categories = []
+		
+
+		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240'];
+		for(var i=0; i< _.size(data.high_risk_users) ;i++){	
+
+			categories.push(data.high_risk_users[i].name);
+			dataChart.push(
+			{
+				y: data.high_risk_users[i].docs,
+				color: colors[i],
+			}
+			)
+
+		}
+		this.setState({
+			high_risk_users : {
+				categories : categories,
+				data : dataChart
+			}
+		})
+		console.log('high_risk_users',this.state.high_risk_users)
+		categories = []
+		dataChart = []
+		categories.length =0 
+		dataChart.length = 0
+
+		for(var i=0; i< _.size(data.high_risk_directory) ;i++){	
+
+			categories.push(data.high_risk_directory[i].name);
+			dataChart.push(
+			{
+				y: data.high_risk_directory[i].docs,
+				color: colors[i],
+			}
+			)
+
+		}
+		this.setState({
+			high_risk_directory : {
+				categories : categories,
+				data : dataChart
+			}
+		})
+		console.log('high_risk_directory',this.state.high_risk_directory)
 	},
 	componentDidMount() 
 	{	
