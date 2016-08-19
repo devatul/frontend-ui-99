@@ -210,7 +210,7 @@
                                     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                                         <thead>
                                             <tr role="row">
-                                                <th>
+                                                <th style="padding: 10px 14px 10px 10px !important;">
                                                     <div class="checkbox-custom checkbox-primary">
                                                       <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
                                                       <label for="checkboxAllExample2"></label>

@@ -241,7 +241,7 @@
                                             This owner is automatically assigned by 99 from the 
                                             Document metadata itself gathered during the scanning process." />
                                     </th>
-                                    <th class="review_note">Proposed Category (confidence level)
+                                    <th class="review_note max-width-th-confidentialy">Proposed Category (confidence level)
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="help_question_bottom"
                                             setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
@@ -249,7 +249,7 @@
                                         The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
                                         The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                     </th>
-                                    <th class="review_note">Proposed Confidentiality (confidence level)
+                                    <th class="review_note max-width-th-confidentialy">Proposed Confidentiality (confidence level)
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content_review"
                                             setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
@@ -419,7 +419,7 @@
            <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
       <thead>
         <tr role="row">
-            <th>
+            <th style="padding: 10px 20px 0px 10px;">
                 <div class="checkbox-custom checkbox-primary">
                     <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
                     <label for="checkboxAllExample2"></label>

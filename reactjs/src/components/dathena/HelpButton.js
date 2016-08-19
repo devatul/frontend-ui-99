@@ -62,7 +62,7 @@ var HelpButton = React.createClass({
                 </a>
                 <div ref="dropdownMenu" className={this.props.classNote + ' dropdown-menu has-arrow dd-md full-mobile'}>
                     {this.props.setValue && 
-                        <p>{this.props.setValue + ' ' + this.props.setValue}</p>}
+                        <p>{' '}</p>}
                 </div>
                 <span class="dropdown-backdrop"></span>
             </div>

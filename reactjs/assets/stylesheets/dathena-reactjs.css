@@ -84,3 +84,8 @@
     color: #747474;
     background-color: #E6E6E6;
 }
+
+/* Fix max width td table */
+.max-width-th-confidentialy {
+    min-width: 240px
+}

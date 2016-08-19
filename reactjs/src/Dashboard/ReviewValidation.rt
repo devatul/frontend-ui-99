@@ -170,7 +170,10 @@
                                 </InfoButton>
                               </td>
                               <td class="text-left">
-                                <span class="text-italic doc-path">{document.path}</span>
+                                <span class="text-italic doc-path"
+                                      rel="tooltip"
+                                      data-toggle="tooltip"
+                                      data-original-title="{document.name}">{document.path}</span>
                               </td>
                               <td class="vertical-top">
                                 <select class="form-control challenge-category element-event {(document.previous_category != null && document.previous_category != document.current_category) ? 'changed' : ''}" onChange="(event)=>this.onChangeCategory(event, reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" value="{document.current_category}">
@@ -344,7 +347,7 @@
                                   </select>
                                   <span class="text-italic previous-status">Previously: Secret</span>
                                 </td>
-                                <td class="vertical-top document_2nd document_2nd2 first-ch">
+                                <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
                                     <span class="doc-path my-doc-path">The classification should be Confidential because. The classification should be Confidential because</span>
                                     <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
                                 </td>

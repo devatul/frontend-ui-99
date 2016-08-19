@@ -1,23 +1,58 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import template from './OverView.rt';
 import update from 'react-addons-update';
-import { isEmpty } from 'lodash'
+import { isEmpty, forEach, isEqual } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js';
-import chartOverview from '../script/chart-overview.js';
+import { makeRequest } from '../utils/http.js'
+import DonutChart from '../components/chart/DonutChart'
+import StackedChart from '../components/chart/StackedChart'
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
 	getInitialState() {
 	    return {
-            scan_result:{},
-            ChartData: {
-                data_confidentiality: [],
-                data_categories: [],
-                data_languages: [],
-                data_doctypes: []
+            scan: {
+                result: {}
+            },
+
+            dataChart: {
+                categories: [],
+                confidentiality: [],
+                languages: [],
+                doctypes: []
+            },
+
+            configChart: {
+                categoryChart: [{
+                    name: 'Category',
+                    innerSize: '80%',
+                    colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896'],
+                    colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6'],
+                    data: []
+                    }, {
+                    name: 'Language',
+                    size: '80%',
+                    innerSize: '60%',
+                    colors: [ '#2ecd71', '#9b58b5', '#33495e'],
+                    colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad'],
+                    data: []
+                }],
+                confidentiality: {
+                    name: 'Confidentiality',
+                    innerSize: '60%',
+                    colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                    colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+                    data: []
+                },
+                doctypes: {
+                    name: 'Document Type',
+                    innerSize: '60%',
+                    colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                    colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+                    data: []
+                }
             }
 		};
 	},
@@ -34,7 +69,7 @@ var OverView = React.createClass
         return x1 + x2;
     },
     componentWillMount() {
-        if(this.state.scan_result.scan_status == Constant.scan.IS_NO_SCAN) {
+        if(this.state.scan.result.scan_status == Constant.scan.IS_NO_SCAN) {
            this.startScan();
         }
 
@@ -47,184 +82,210 @@ var OverView = React.createClass
 	componentDidMount() {
         $('#bell').click();
         javascriptTodo();
-        if(this.state.scan_result.scan_status != Constant.scan.IS_NO_SCAN) {
+        this.startScan();
+        if(this.state.scan.result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
         }
                       
   	},
     shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.scan_result != nextState.scan_result) {
-            return true;
-        }
-        if(this.state.ChartData != nextState.ChartData) {
-            return true;
-        }
-        return false;
+        var { scan, dataChart } = this.state
+
+        return !isEqual(scan.result, nextState.scan.result) || !isEqual(dataChart, nextState.dataChart);
     },
+
+    componentWillUpdate() {
+
+    },
+
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.scan_result != prevState.scan_result) {
-            this.updateChartData(this.state.scan_result);
+        var prevResult = prevState.scan.result
+        var result = this.state.scan.result
 
-            for(var i=0; i < this.state.scan_result.categories.length; i++)
-            {
-                console.log(i);
-                //this.state.scan_result.categories.class='';
-                for(var j=0; j < Constant.iconCategories.length; j++){
-                    if(this.state.scan_result.categories[i].name == Constant.iconCategories[j].name)
-                    {
-                        this.state.scan_result.categories[i].class = Constant.iconCategories[j].class;
-                        break;
-                    }
-                }
-            }
-        }
-        if(this.state.ChartData != prevState.ChartData) {
-            chartOverview(this.state.ChartData);
+        if(!isEqual(result.confidentialities_chart_data, prevResult.confidentialities_chart_data)) {
+            debugger
+            this.confidentialityChart()
         }
 
+        if(!isEqual(result.categories_chart_data, prevResult.categories_chart_data)) {
+            debugger
+            this.categoryChart()
+        }
+
+        if(!isEqual(result.languages, prevResult.languages)) {
+            debugger
+            this.languageChart()
+        }
+
+        if(!isEqual(result['doc-types'], prevResult['doc-types'])) {
+            this.doctypeChart()
+        }
+
+        if(!isEqual( result, prevResult )) {
+            var { iconCategories } = Constant
+            this.updatedataChart(result)
+            forEach(result.categories, (val, index) => {
+                if( val.name == iconCategories[index].name )
+                    val.class = iconCategories[index].class
+            } )
+        }
+
+        if(this.state.dataChart != prevState.dataChart) {
+            debugger
+        }
     },
-    componentWillUpdate(){
-    },
+
     startScan() {
-        $.ajax({
+        makeRequest({
             method: 'POST',
-            url: Constant.SERVER_API + 'api/scan/',
-            dataType: 'application/json',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            path: 'api/scan/',
+            success: (data) => {
+                console.log('start scan', data)
+            },
+            error: (err) => {
+                console.log('scan error', err)
             }
         })
-        .done(function(data) {
-                    console.log("Start Scan success", data);
-        }.bind(this))
-        .fail(function(error) {
-            if(error.status == 201) {
-                var update_scan_status = update(this.state, {
-                    scan_result: {
-                        scan_status: {$set: Constant.scan.IS_SCANING}
-                    } 
-                });
-                this.setState(update_scan_status);
-                console.log("asdfasdfasd fiale", this.state.scan_result.scan_status);
-            }
-        }.bind(this));
     },
     getScanResult(){
-        $.ajax({
-            url: Constant.SERVER_API + 'api/scan/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                this.updateChartData(data);
-                var update_scan_result = update(this.state, {
-                    scan_result: {$set: data}
+        makeRequest({
+            path: 'api/scan/',
+            success: (data) => {
+                var setResult = update(this.state.scan, {
+                    result: { $set: data }
                 });
-                this.setState(update_scan_result);
-                console.log("scan result: ", data);
-            }.bind(this),
-            error: function(xhr, status, error) {
-                console.log(xhr);
-                var jsonResponse = JSON.parse(xhr.responseText);
-                console.log(jsonResponse);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
-        });
-       
+                this.setState({ scan: setResult });
+            }
+        })
     },
-    updateChartData(data) {
-        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240'];
-        var color_language = ['#2ecc71', '#9b59b6', '#34495e','#edc240'];
-        var data_confidentiality = [];
-        var data_categories = [];
-        var data_languages = [];
-        var data_doctypes = [];
-        //add data_confidentiality
-            for(var i = 0; i < data.confidentialities_chart_data.length; i++) {
-                
-                data_confidentiality.push({
-                    label: this.ucwords(data.confidentialities_chart_data[i].name),
-                    data: [
-                        [data.confidentialities_chart_data[i].percentage_docs,data.confidentialities_chart_data[i].total_docs]
-                    ],
-                    color: colors[i]
-                });
-            }
-        //add data_categories
-            for(var i = 0; i < data.categories_chart_data.length; i++) {
-                data_categories.push({
-                    label: this.ucwords(data.categories_chart_data[i].name),
-                    data: [
-                        [5 , data.categories_chart_data[i].total_docs]
-                    ],
-                    color: colors[i]
-                });
-            }
-        //add data_languages
-            for(var i = 0; i < data.languages.length; i++) {
-                data_languages.push({
-                    label: (data.languages[i].short_name == null) ? this.ucwords(data.languages[i].name) : this.ucwords(data.languages[i].short_name),
-                    data: [
-                        [1, data.languages[i].total_docs]
-                    ],
-                    color: color_language[i]
-                });
-            }
-        //add data_doctypes
-            for(var i = 0; i < data["doc-types"].length; i++) {
-                data_doctypes.push({
-                    label: this.ucwords(data["doc-types"][i].name),
-                    data: [
-                        [1, data["doc-types"][i].total_docs]
-                    ],
-                    color: colors[i]
-                });
-            }
+
+    categoryChart() {
+        var categories = []
+        var { categories_chart_data } = this.state.scan.result
+        forEach(categories_chart_data, (val, index) => {
+            categories.push({
+                name: val.name,
+                y: val.total_docs
+            })
+        })
+
+        var setData = update(this.state.dataChart, {
+            categories: { $set: categories }
+        })
+
+        this.setState({ dataChart: setData })
+    },
+
+    confidentialityChart() {
+        var confidentiality = []
+        var { confidentialities_chart_data } = this.state.scan.result
+
+        forEach(confidentialities_chart_data, (val, index) => {
+            confidentiality.push({
+                name: val.name,
+                y: val.total_docs
+            })
+        })
+        var setData = update(this.state.dataChart, {
+            confidentiality: { $set: confidentiality }
+        })
+        this.setState({ dataChart: setData })
+        debugger
+    },
+
+    languageChart() {
+        var language = []
+        var { languages } = this.state.scan.result
+
+        forEach(languages, (val, index) => {
+            language.push({
+                name: val.name,
+                y: val.total_docs
+            })
+        })
+
+        var setData = update(this.state.dataChart, {
+            languages: { $set: language }
+        })
+
+        this.setState({ dataChart: setData })
+        debugger
+    },
+
+    doctypeChart() {
+        var doctype = []
+        var { result } = this.state.scan
+
+        forEach(result["doc-types"], (val, index) => {
+            doctype.push({
+                name: val.name,
+                y: val.total_docs
+            })
+        })
+
+        this.setState({ dataChart: { ['doctypes']: doctype } })
+        debugger
+    },
+
+    updatedataChart(data) {
+        var confidentiality = [], categories = [], languages = [], doctypes = [];
+        var { confidentialities_chart_data, categories_chart_data } = data
+
+        //add confidentiality
+            forEach(confidentialities_chart_data, (val, index) => {
+                confidentiality.push({
+                    name: this.ucwords(val.name),
+                    y: val.total_docs
+                })
+            })
+        //add categories
+            forEach(categories_chart_data, (val, index) => {
+                categories.push({
+                    name: this.ucwords(val.name),
+                    y: val.total_docs
+                })
+            })
+        //add languages
+            forEach(data.languages, (val, index) => {
+                languages.push({
+                    name: this.ucwords(val.name),
+                    y: val.total_docs
+                })
+            })
+        //add doctypes
+            forEach(data["doc-types"], (val, index) => {
+                doctypes.push({
+                    name: val.name,
+                    y: val.total_docs
+                })
+            })
         //update into state
-            var update_chart_data = update(this.state, {
-                  ChartData: {
-                    data_confidentiality: {$set: data_confidentiality},
-                    data_categories: {$set: data_categories},
-                    data_languages: {$set: data_languages},
-                    data_doctypes: {$set: data_doctypes}
-                  }
-                });
-            this.setState(update_chart_data);
+            var setData = update(this.state.dataChart, {
+                categories: { $set: categories },
+                confidentiality: { $set: confidentiality },
+                languages: { $set: languages },
+                doctypes: { $set: doctypes }
+            })
+            this.setState({ dataChart: setData });
     },
     handleFilter: function(bodyRequest) {
-        console.log('bodyRequest', bodyRequest);
         if(!isEmpty(bodyRequest)) {
-            $.ajax({
-                url: Constant.SERVER_API + 'api/scan/filter/',
-                dataType: 'json',
-                type: 'POST',
-                data: JSON.stringify(bodyRequest),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-                },
-                success: function(data) {
-                    this.updateChartData(data);
-                    this.setState(update(this.state, {
-                        scan_result: {$set: data}
-                    }));
-                }.bind(this),
-                error: function(xhr, error) {
-                    if(xhr.status === 401)
-                    {
-                        browserHistory.push('/Account/SignIn');
-                    }
-                }.bind(this)
-            });
+            makeRequest({
+                method: 'POST',
+                path: 'api/scan/filter/',
+                params: JSON.stringify(bodyRequest),
+                success: (data) => {
+                    var setResult = update(this.state.scan, {
+                        result: { $set: data }
+                    });
+                    this.setState({ scan: setResult });
+                }
+            })
         } else {
             this.getScanResult();
         }
     },
+    
 	render:template
 });
 module.exports = OverView;

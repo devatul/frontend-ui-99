@@ -47,9 +47,6 @@
     
     display: block;
 }
-.dropdown-menu.dd-md{
-    width: 52vw;
-}
 
 .dropdown-menu.dd-md.custom-dd{
     width: 565px;
@@ -125,8 +122,4 @@
 .vertical-top.document_2nd.first-ch {
     /* min-width: 160px; */
     max-width: 150px;
-}
-.document_review_table>tbody>tr>td {
-    max-width: 185px;
-    padding: 8px !important;
 }

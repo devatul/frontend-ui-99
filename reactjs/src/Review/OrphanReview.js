@@ -188,7 +188,8 @@ var OrphanReview = React.createClass({
         var val = event.target.value;
         var updateState = update(this.state, {
             orphanCurrent: {$set: this.state.listOrphan[val]},
-            status: {$set: 0 }
+            status: { $set: 0 },
+            validateNumber: { $set: 0 }
         });
         this.setState(updateState);
     },
@@ -370,11 +371,12 @@ var OrphanReview = React.createClass({
             contents: saveDocument
         });
             listDocument[sampleIndex].current.category = categoryIndex;
-        if(categoryIndex == samplesDefault[sampleIndex].current.category) {
-            listDocument[sampleIndex].current.status = "accept";
-        } else {
+        if(categoryIndex == samplesDefault[sampleIndex].current.category || listDocument[sampleIndex].current.confidential > -1 ) {
             listDocument[sampleIndex].current.status = "accept";
         }
+        //  else {
+        //     listDocument[sampleIndex].current.status = "accept";
+        // }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             samplesDocument: {$set: listDocument }
@@ -392,10 +394,10 @@ var OrphanReview = React.createClass({
             contents: saveDocument
         });
         listDocument[sampleIndex].current.confidential = confidentialIndex;
-        if(confidentialIndex == samplesDefault[sampleIndex].current.confidential)
+        if(confidentialIndex == samplesDefault[sampleIndex].current.confidential || listDocument[sampleIndex].current.category > -1)
             listDocument[sampleIndex].current.status = "accept";
-        else
-            listDocument[sampleIndex].current.status = "accept";
+        // else
+        //     listDocument[sampleIndex].current.status = "accept";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
             samplesDocument: {$set: listDocument}

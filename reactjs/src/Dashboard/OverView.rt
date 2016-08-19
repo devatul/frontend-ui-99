@@ -1,12 +1,14 @@
 <rt-import name="MenuBar" from="../components/BarMenu"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
+<rt-import name="DonutChart" from="../components/chart/DonutChart" />
+<rt-import name="StackedChart" from="../components/chart/StackedChart" />
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
-
+    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart; this.state.dataChart as dataChart ">
         <!--charts start-->
-        <div class="charts container mt-lg">
+        <div class="charts container mt-lg"> 
             <div class="row">
                 <div class="col-md-4">
                     <section class="panel">
@@ -19,9 +21,9 @@
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
-                                            <strong class="amount">{this.state.scan_result.percentage_documents_scanned}%</strong>
+                                            <strong class="amount">{scan.result.percentage_documents_scanned}%</strong>
                                         </div>
-                                        <h4 class="title">{this.addCommas(this.state.scan_result.total_documents_scanned)} Documents Scanned</h4>
+                                        <h4 class="title">{this.addCommas(scan.result.total_documents_scanned)} Documents Scanned</h4>
                                     </div>
                                 </div>
                             </div>
@@ -42,17 +44,17 @@
                                         <div class="col-xs-6 border-right">
                                             <div class="summary">
                                                 <div class="info">
-                                                    <strong class="amount">{this.state.scan_result.percentage_duplicates}%</strong>
+                                                    <strong class="amount">{scan.result.percentage_duplicates}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.addCommas(this.state.scan_result.total_duplicates)} Duplicates</h4>
+                                                <h4 class="title">{this.addCommas(scan.result.total_duplicates)} Duplicates</h4>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="summary">
                                                 <div class="info">
-                                                    <strong class="amount">{this.state.scan_result.percentage_twins}%</strong>
+                                                    <strong class="amount">{scan.result.percentage_twins}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.addCommas(this.state.scan_result.total_twins)} Twins</h4>
+                                                <h4 class="title">{this.addCommas(scan.result.total_twins)} Twins</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -65,18 +67,14 @@
                     <section class="panel">
                         <div class="panel-body bg-tertiary widget-panel">
                             <h4 class="widget-title">Accuracy  
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represents the level of confidence that 99 has in its initial classification. The higher the accuracy level, the greater the level of confidence that 99’s classification is correct.</p>
-                                    </div>
-                                </div>
+                                <HelpButton classNote="overview_timeframe help_timeframe"
+                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                             </h4>
                             <div class="widget-summary"> 
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
-                                            <strong class="amount">{this.state.scan_result.percentage_accuracy}%</strong>
+                                            <strong class="amount">{scan.result.percentage_accuracy}%</strong>
                                         </div>
                                         <span>340,740 documents correctly classified</span>
                                     </div>
@@ -86,64 +84,23 @@
                     </section>
                 </div>
                 <div class="col-md-4">
-                    <section class="panel">
-                        <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Confidentiality
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied.</p>
-                                    </div>
-                                </div>
-                            </h4>
-                            <div class="widget-chart"  style="text-transform: capitalize">
-                                <div class="chart chart-md" id="flotPie"></div>
-                                <div id="legendContainer"></div>
-                                <div id="legendContainerCensord1"  style="display:none" class="chart-disabled-overlay"></div>
-                            </div>
-                        </div>
-                    </section>
+                    <DonutChart
+                        id="confidentialityPieChart"
+                        config={configChart.confidentiality}
+                        data={dataChart.confidentiality} />
                 </div>
                 <div class="col-md-4">
-                    <section class="panel">
-                        <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Category & Language
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This presents a visual display of the document classification types that have been assigned to the total set of files scanned by 99.</p>
-                                    </div>
-                                </div>
-                            </h4>
-                            <div class="widget-chart"  style="text-transform: capitalize">
-                                <div class="chart chart-md" id="flotPie2"></div>
-                                <div class="chart chart-md-inner" id="flotPie2Inner"></div>
-                                <div id="legendContainer2"></div>
-                                <div id="legendContainer2Inner"></div>
-                                <div id="legendContainerCensord2"  style="display:none" class="chart-disabled-overlay"></div>
-                            </div>
-                        </div>
-                    </section>
+                    <StackedChart
+                        id="categoryLanguagePieChart"
+                        title="Category & Language"
+                        config={configChart.categoryChart}
+                        data="{[dataChart.categories, dataChart.languages]}" />
                 </div>
                 <div class="col-md-4">
-                    <section class="panel">
-                        <div class="panel-body widget-panel">
-                            <h4 class="widget-title">Document Type
-                                <div class="inline-block-item dropdown">
-                                    <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represents the breakdown of all the file types that 99 has detected in the initial scan, and how the volumes of each type.</p>
-                                    </div>
-                                </div>
-                            </h4>
-                            <div class="widget-chart"  style="text-transform: capitalize">
-                                <!-- Flot: Pie -->
-                                <div class="chart chart-md" id="flotPie3"></div>
-                                <div id="legendContainer3"></div>
-                                <div id="legendContainerCensord3"  style="display:none" class="chart-disabled-overlay"></div>
-                            </div>
-                        </div>
-                    </section>
+                    <DonutChart
+                        id="documentPieChart"
+                        config={configChart.doctypes}
+                        data={dataChart.doctypes} />
                 </div>
             </div>
 
@@ -185,7 +142,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeA odd" role="row" rt-repeat="item in this.state.scan_result.confidentialities">
+                                            <tr class="gradeA odd" role="row" rt-repeat="item in scan.result.confidentialities">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
                                                 <td class="center-padding-table-overview">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
                                                 <td class="center-padding-table-overview">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
@@ -238,7 +195,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd" role="row" rt-repeat="category in this.state.scan_result.categories">
+                                            <tr class="odd" role="row" rt-repeat="category in scan.result.categories">
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
@@ -256,4 +213,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
