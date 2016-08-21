@@ -1,5 +1,5 @@
 <rt-import name="MultiSelectBox" from="../components/dathena/multiselectBox"/>
-
+<rt-import name="NumberUser" from="./components/MultiselectBoxNumberUser"/>
 <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
     <ul class="filter-list list-unstyled pt-xs">
         <li class="mb-sm">
@@ -38,12 +38,9 @@
         </li>
         <li class="mb-sm">
             <div class="form-group">
-                <select class="form-control select-multiple" data-title="Number of users & AD group" name="user_number">
-                    <option value="Top 5">Top 5</option>
-                    <option value="Top 15">Top 15</option>
-                    <option value="Top 25">Top 25</option>
-                    <option value="Top 50">Top 50</option>
-                </select>
+            
+                <NumberUser onChange="{this.handleSelectNumber}"  id={this.static.numberId}
+                title="Number of users & AD group" data={this.state.dataSelectBox[this.static.numberId]}  checked={true}/>
             </div>
         </li>
     </ul>

@@ -71,7 +71,7 @@ var Indentity = React.createClass({
 						scan_result: {$set: data}
 					}));
 
-					console.log("scan result: ", data);
+					
 				}.bind(this),
 				error: function(xhr, error) {
 					if(xhr.status === 401)
@@ -108,7 +108,7 @@ var Indentity = React.createClass({
 				data : dataChart
 			}
 		})
-		console.log('high_risk_users',this.state.high_risk_users)
+		
 		categories = []
 		dataChart = []
 		categories.length =0 
@@ -131,7 +131,7 @@ var Indentity = React.createClass({
 				data : dataChart
 			}
 		})
-		console.log('high_risk_directory',this.state.high_risk_directory)
+		
 	},
 	componentDidMount() 
 	{	
