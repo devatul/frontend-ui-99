@@ -11,6 +11,7 @@ var RecoverPassword = require('./Account/RecoverPassword');
 var Dashboard = require('./Dashboard/Dashboard');
 var OverView = require('./Dashboard/OverView');
 var Profile = require('./Dashboard/Profile');
+var MyTeam = require('./Dashboard/MyTeam');
 var EditProfile = require('./Dashboard/EditProfile');
 var ReviewValidation = require('./Dashboard/ReviewValidation');
 var Review = require('./Review/Review');
@@ -38,6 +39,7 @@ render((
 		  		<Route path="/Dashboard/Notification" component={Notification}/>
 			  	<Route path="/Dashboard/OverView" component={OverView}/>
 				<Route path="/Dashboard/Profile" component={Profile}/>
+				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
 				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
 				<Route path="/Dashboard/ReviewValidation" component={ReviewValidation}/>
 				<Route path="/Review/Review" component={Review}>

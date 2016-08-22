@@ -40,7 +40,7 @@
             <div class="form-group">
             
                 <NumberUser onChange="{this.handleSelectNumber}"  id={this.static.numberId}
-                title="Number of users & AD group" data={this.state.dataSelectBox[this.static.numberId]}  checked={true}/>
+                title="Number of users & AD group" data={this.state.dataSelectBox[this.static.numberId]}  checked={this.state.checked} />
             </div>
         </li>
     </ul>

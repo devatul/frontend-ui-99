@@ -23,6 +23,7 @@ var MenuBar1 = React.createClass
     },
     getInitialState() {
       return {
+        checked: 0,
         list: {},
         scan_result: {},
         filter: {},
@@ -333,6 +334,8 @@ handleSelectNumber(field, index){
     for(var i=0; i < 4 ; i++){
         if(i == index){
             updateData_selected.number_users[i].checked = true;
+            this.setState({checked: index})
+            console.log(this.props.checked)
         }else{
             updateData_selected.number_users[i].checked = false
         }

@@ -1,12 +1,12 @@
-<rt-import name="Keyword" from="./components/keyword"/>
+<rt-import name="Keyword" from="./components/Keyword"/>
 <div class="container">
-  <section class="panel panel-featured panel-featured-primary">
+ <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
         <div class="inline-block-item dropdown">
           <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
           <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+            <p>Overview of the key indicators of the data repository(ies) scanned by Dathena 99.</p>
           </div>
         </div>
       </h2>
@@ -20,7 +20,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of files that can not be identified.</p>
                   </div>
                 </div>
               </h4>
@@ -47,7 +47,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of users who have abnormal access rights.</p>
                   </div>
                 </div>
               </h4>
@@ -74,7 +74,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Duplicates files with different names.</p>
                   </div>
                 </div>
               </h4>
@@ -103,7 +103,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of files past outside their retention dates.</p>
                   </div>
                 </div>
               </h4>
@@ -130,7 +130,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of files outside their retention dates.</p>
                   </div>
                 </div>
               </h4>
@@ -157,7 +157,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of duplicate files.</p>
                   </div>
                 </div>
               </h4>
@@ -186,7 +186,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of folders which have content anomalies.</p>
                   </div>
                 </div>
               </h4>
@@ -213,7 +213,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Storage Space with obsolete data.</p>
                   </div>
                 </div>
               </h4>
@@ -240,7 +240,7 @@
                 <div class="inline-block-item dropdown">
                   <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                   <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>Number of aging files that have not been accessed.</p>
                   </div>
                 </div>
               </h4>
@@ -278,7 +278,6 @@
       </div>
     </div>
   </section>
-
   <section class="panel panel-has-child panel-featured panel-featured-primary">
     <header class="panel-heading">
       <h2 class="panel-title">Data Loss Prevention</h2>
@@ -291,7 +290,7 @@
             <div class="inline-block-item dropdown">
               <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
               <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                <p>This represents a summary of keywords that Dathena 99 has identified as having commonality across the chosen data confidentiality/category type. Keywords are filtered to exclude common terms such as 'to, and, I ,we', so that the selected words have organisational and documentation relevance. These keywords can be applied to data management/protection controls that utilise key words for detection, providing a set of keywords that have been extracted directly from the documents. This can also assist in tweaking and optimising existing controls that rely on keywords, and can be refreshed on an on-demand basis to gain the most up to date set of keywords from Dathena 99.</p>
               </div>
             </div>
           </h3>
@@ -446,3 +445,5 @@
 </section>
 
 </div>
+
+

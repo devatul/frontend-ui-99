@@ -1,283 +1,283 @@
 <rt-import name="BarMenu" from='./BarMenu1'/>
 <div class="container">
       <section class="panel panel-featured panel-featured-primary">
-        <header class="panel-heading">
-            <h2 class="panel-title">Risk Insights
-              <div class="inline-block-item dropdown">
-                <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                </div>
-              </div>
-            </h2>
-        </header>
-        <div class="panel-body pb-none">
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary widget-panel insight-panel">
-                  <h4 class="widget-title">Unidentifiable Files 
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>10,072</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">10,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Access Rights Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>0</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Twin Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>200</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">430</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Retention
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>750</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">420</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Aging
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>750</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">9,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Duplicate Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>10,720</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">10,000</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Document Repository Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    <span>0</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">99</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary widget-panel insight-panel">
-                  <h4 class="widget-title">Cost Savings
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>980MB</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">1.2TB</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Stale Files
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
-                  </h4>
-                  <div class="insight-stat">
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    <span>127,000</span>
-                  </div>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <ul class="list-unstyled summary-list">
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>3+ Years</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="row">
-                                <div class="col-xs-6 text-left"><span>Total</span></div>
-                                <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
-                              </div>
-                            </li>
-                          </ul>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
+    <header class="panel-heading">
+      <h2 class="panel-title">Risk Insights
+        <div class="inline-block-item dropdown">
+          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+            <p>Overview of the key indicators of the data repository(ies) scanned by Dathena 99.</p>
           </div>
         </div>
-      </section>
+      </h2>
+    </header>
+    <div class="panel-body pb-none">
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary widget-panel insight-panel">
+              <h4 class="widget-title">Unidentifiable Files 
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of files that can not be identified.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>10,072</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">10,000</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Access Rights Anomaly
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of users who have abnormal access rights.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>0</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">138</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Twin Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Duplicates files with different names.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>200</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">430</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Document Retention
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of files past outside their retention dates.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>750</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">420</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
+              <h4 class="widget-title">Document Aging
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of files outside their retention dates.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>750</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">9,000</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+              <h4 class="widget-title">Duplicate Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of duplicate files.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>10,720</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">10,000</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Document Repository Anomaly
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of folders which have content anomalies.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <span>0</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">99</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary widget-panel insight-panel">
+              <h4 class="widget-title">Cost Savings
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Storage Space with obsolete data.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>980MB</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <div class="summary">
+                    <div class="info">
+                      <strong class="amount">1.2TB</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-4">
+          <section class="panel">
+            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+              <h4 class="widget-title">Stale Files
+                <div class="inline-block-item dropdown">
+                  <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                  <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                    <p>Number of aging files that have not been accessed.</p>
+                  </div>
+                </div>
+              </h4>
+              <div class="insight-stat">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <span>127,000</span>
+              </div>
+              <div class="widget-summary">
+                <div class="widget-summary-col">
+                  <ul class="list-unstyled summary-list">
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>3+ Years</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="row">
+                        <div class="col-xs-6 text-left"><span>Total</span></div>
+                        <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
 
       <section class="panel panel-featured panel-featured-primary panel-identity">
         <header class="panel-heading">
@@ -306,7 +306,7 @@
             <div class="inline-block-item dropdown">
                 <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                 <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                    <p>This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity.</p>
                 </div>
             </div>
           </h3>
@@ -318,7 +318,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>Duplicates are files that have been detected with 2 or more having identical information and file names.</p>
                       </div>
                     </div>
                   </h4>
@@ -345,7 +345,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>Twins are files that have been detected with 2 or more having identical information but with different file names.</p>
                       </div>
                     </div>
                   </h4>
@@ -372,7 +372,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>Stale files are files which have not been accessed for a defined period of time. This indicates that the data is stale, and may no longer have a need to be retained by the organisation.</p>
                       </div>
                     </div>
                   </h4>
@@ -399,7 +399,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files.</p>
                       </div>
                     </div>
                   </h4>
@@ -437,7 +437,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>This represents files that cannot be read or file types that cannot be queried by Dathena 99.</p>
                       </div>
                     </div>
                   </h4>
@@ -464,7 +464,7 @@
                     <div class="inline-block-item dropdown">
                       <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                       <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                        <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        <p>This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets.</p>
                       </div>
                     </div>
                   </h4>

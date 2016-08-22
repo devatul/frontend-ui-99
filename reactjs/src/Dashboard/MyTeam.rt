@@ -1,0 +1,106 @@
+<section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
+  <header class="panel-heading">
+    <h2 class="panel-title">My Team
+      <div class="r dropdown inline-block-item">
+       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+       <div class="my-team-note dropdown-menu has-arrow dd-md full-mobile">
+        <p>Your team is comprised of all the reviewers which you have currently assigned.</p>
+      </div>
+    </div>    
+  </h2>
+</header>
+
+<div class="panel-body">
+  <div id="datatable-editable_wrapper" class="no-footer">
+    <div class="table-responsive table-responsive2">
+      <table class="my-team-table table table-bordered my-team-table-striped table-striped mb-none no-footer" id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+          <tr role="row">
+            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Reviewer
+            </th>
+            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed within SLA
+              <div class="r dropdown dropdown-file-info-holder inline-block-item edit_th">
+               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+               <div class="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile">
+                <p>Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired.</p>
+                </div>
+              </div>
+            </th>
+            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed outside of SLA
+              <div class="r dropdown dropdown-file-info-holder inline-block-item edit_th">
+               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+               <div class="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                <p>Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired. </p>
+                </div>
+              </div>
+            </th>
+            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed
+              <div class="r dropdown dropdown-file-info-holder inline-block-item edit_th">
+               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+               <div class="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
+                <p>This presents a summary of all the documents reviewed. </p>
+                </div>
+              </div>
+            </th>
+            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Progress
+              <div class="r dropdown dropdown-file-info-holder inline-block-item edit_right">
+               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+               <div class="my_team note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
+                <p>This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed.</p>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="even" role="row">
+            <td class="bold">
+              Gabriel
+            </td>
+            <td>50</td>
+            <td>50</td>
+            <td>100</td>
+            <td>
+              <div class="progress-radial progress-81"></div>
+            </td>
+          </tr>
+          <tr class="even" role="row">
+            <td class="bold">
+              Chris
+            </td>
+            <td>100</td>
+            <td>0</td>
+            <td>100</td>
+            <td>
+              <div class="progress-radial progress-100"></div>
+            </td>
+          </tr>
+          <tr class="even" role="row">
+            <td class="bold">
+              John
+            </td>
+            <td>80</td>
+            <td>10</td>
+            <td>90</td>
+            <td>
+              <div class="progress-radial progress-81"></div>
+            </td>
+          </tr>
+          <tr class="even" role="row">
+            <td class="bold">
+              Ben
+            </td>
+            <td>20</td>
+            <td>0</td>
+            <td>20</td>
+            <td>
+              <div class="progress-radial progress-9"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</section>
