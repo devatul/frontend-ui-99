@@ -2,6 +2,8 @@
 <rt-import name="SelectBox" from="../components/dathena/SelectBox"/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="ValidationButton" from="../components/dathena/ValidationButton"/>
+<rt-import name="PieChart" from="../components/chart/PieChart"/>
+<rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
 <section>
   <div class="container">
       <div class="tabs tabs-primary">
@@ -59,7 +61,7 @@
                           <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                       </div>
                   </header>
-                  <div class="panel-body">
+                  <!--<div class="panel-body">
                     <span>Number of Documents: {this.addCommas(this.state.category.info.number_docs)}</span>
                     <div class="row">
                       <div class="col-sm-6">
@@ -74,8 +76,20 @@
 
                         <div id="confidentialityLevelChart" class="document-chart"></div>
                       </div>
+                    </div>-->
+                    <div class="panel-body tab-content tab-pane">
+                      <span>Number of Documents: {this.addCommas(this.state.category.info.number_docs)}</span>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <PieChart title="Confidentiality Overview"
+                              help="This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99." />
+                        </div>
+                        <div class="col-sm-6">
+                          <ColumnChart title="Document Type per Level of Confidentiality"
+                              help="Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied." />
+                        </div>
+                      </div>
                     </div>
-                  </div>
                 </section>
               </div>  
             </div>
@@ -90,7 +104,6 @@
                   </header>
                   <div class="panel-body">
                     <div class="row">
-
                       <div class="col-xs-12">
                           <div class="row mt-md">
                             <div class="col-xs-8">
@@ -144,7 +157,6 @@
                                           onClick={this.handleClickFilterLabel} />
                                     </div>
                                 </div>
-
                               </div>
                               <div id="userReviewChart"></div>
                             </div>
@@ -158,22 +170,25 @@
                                 <SelectButton
                                     rt-repeat="review in this.state.category.reviewers"
                                     key="{'select_' + reviewIndex}"
+                                    title="{ review.first_name + '.' + review.last_name }"
                                     setSelected="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
                                     onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
                             </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="pull-right">
+                      <button
+                          class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
+                          type="button"
+                          onClick={this.handleValidateButton}>
+                          Validate and Go to Next Category
+                      </button>
                     </div>
-                  </div>
-                  <div class="pull-right">
-                    <button
-                        class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
-                        type="button"
-                        onClick={this.handleValidateButton}>
-                        Validate and Go to Next Category
-                    </button>
-                  </div>
-                </section>
-              </div>
+              </section>
             </div>
+          </div>
           </div>
           <div id="summary" class="tab-pane">
             <section rt-repeat="summary in this.state.summary.data" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">

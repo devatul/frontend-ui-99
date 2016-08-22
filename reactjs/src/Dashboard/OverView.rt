@@ -1,3 +1,4 @@
+<rt-import name="func" from='../utils/function.js'/>
 <rt-import name="MenuBar" from="../components/BarMenu"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
@@ -23,7 +24,7 @@
                                         <div class="info">
                                             <strong class="amount">{scan.result.percentage_documents_scanned}%</strong>
                                         </div>
-                                        <h4 class="title">{this.addCommas(scan.result.total_documents_scanned)} Documents Scanned</h4>
+                                        <h4 class="title">{func.formatNumber(scan.result.total_documents_scanned)} Documents Scanned</h4>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +47,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{scan.result.percentage_duplicates}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.addCommas(scan.result.total_duplicates)} Duplicates</h4>
+                                                <h4 class="title">{func.formatNumber(scan.result.total_duplicates)} Duplicates</h4>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
@@ -54,7 +55,7 @@
                                                 <div class="info">
                                                     <strong class="amount">{scan.result.percentage_twins}%</strong>
                                                 </div>
-                                                <h4 class="title">{this.addCommas(scan.result.total_twins)} Twins</h4>
+                                                <h4 class="title">{func.formatNumber(scan.result.total_twins)} Twins</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -144,8 +145,8 @@
                                         <tbody>
                                             <tr class="gradeA odd" role="row" rt-repeat="item in scan.result.confidentialities">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize">{item.name}</td>
-                                                <td class="center-padding-table-overview">{item.percentage_reviewed_docs}% ({this.addCommas(item.total_reviewed_docs)}) </td>
-                                                <td class="center-padding-table-overview">{item.percentage_validated_docs}% ({this.addCommas(item.total_validated_docs)})</td>
+                                                <td class="center-padding-table-overview">{item.percentage_reviewed_docs}% ({func.formatNumber(item.total_reviewed_docs)}) </td>
+                                                <td class="center-padding-table-overview">{item.percentage_validated_docs}% ({func.formatNumber(item.total_validated_docs)})</td>
                                                 <td class="center-padding-table-overview center hidden-phone">{item.percentage_owner_accuracy_docs}%</td>
                                                 <td class="center-padding-table-overview center hidden-phone">{item.percentage_prediction_accuracy_docs}% </td>
                                             </tr>
@@ -199,8 +200,8 @@
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
                                                 </td>
-                                                <td class="center-padding-table-overview">{category.percentage_reviewed_docs}% ({this.addCommas(category.total_reviewed_docs)})</td>
-                                                <td class="center-padding-table-overview">{category.percentage_validated_docs}% ({this.addCommas(category.total_validated_docs)})</td>
+                                                <td class="center-padding-table-overview">{category.percentage_reviewed_docs}% ({func.formatNumber(category.total_reviewed_docs)})</td>
+                                                <td class="center-padding-table-overview">{category.percentage_validated_docs}% ({func.formatNumber(category.total_validated_docs)})</td>
                                                 <td class="center-padding-table-overview">{category.percentage_owner_accuracy_docs}%</td>
                                                 <td class="center-padding-table-overview">{category.percentage_prediction_accuracy_docs}%</td>
                                             </tr>

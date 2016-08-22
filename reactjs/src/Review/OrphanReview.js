@@ -60,18 +60,6 @@ var OrphanReview = React.createClass({
             title: 'Group 1',
         });
         $("#select2-choose_cluster-container").text("Group 1");
-        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-            /*$('#previewModal').on('show.bs.modal', function(e) {
-
-                //get data-id attribute of the clicked element
-                var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                console.log(fileURL);
-                
-                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                $('#embedURL').gdocsViewer();
-            });*/
-        }.bind(this));
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {

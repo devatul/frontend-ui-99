@@ -124,18 +124,12 @@ var ReviewValidation = React.createClass({
             //return true;
         }
         if(this.state.documentPreview != prevState.documentPreview) {
-            loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-                $('#previewModal').on('show.bs.modal', function(e) {
-
-                    //get data-id attribute of the clicked element
-                    var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                    console.log(fileURL);
-                    
-                    $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                    $('#embedURL').gdocsViewer();
-                });
-            }.bind(this));
+            $('#previewModal').on('show.bs.modal', function(e) {
+                //get data-id attribute of the clicked element
+                var fileURL = $(e.relatedTarget).attr('data-file-url');
+                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                $('#embedURL').gdocsViewer();
+            });
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate;
@@ -147,8 +141,24 @@ var ReviewValidation = React.createClass({
             }
         }
         if(this.state.reviewCurrent != prevState.reviewCurrent) {
-            $('.file-name-1[data-toggle="tooltip"]').tooltip({
+            $('[data-toggle="tooltip"]').tooltip({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            });
+
+            $("a.more").click(function(){ 
+                $(this).prev().toggleClass("height-2nd");
+                $(this).children(".more1").toggleClass("display-none");
+                $(this).children(".zoom-out").toggleClass("zoom-out-block");
+            });
+            $( ".my-doc-path" ).each(function( index ) {
+                var hi = "18"; 
+                var h = $(this).height();
+                if(h>hi){
+                    $(this).css('height', hi);
+                    $(this).next().addClass("display-block");
+                    console.log(h);
+                    console.log(hi);
+                }
             });
         }
     },

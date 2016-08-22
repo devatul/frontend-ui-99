@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-<!--                 <div class="row mb-sm">
+                <!--<div class="row mb-sm">
                     <div class="col-sm-12 view-stat-block">
                         <label>Sample Method: </label>
                         <button type="button" class="mb-xs mt-xs mr-xs btn btn-sm btn-default">Random</button>

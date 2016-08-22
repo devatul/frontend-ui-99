@@ -275,7 +275,7 @@
                                     </div>
                                     <div class="table-responsive">
                                         
-                                        <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-challenged-{challengedIndex}" role="grid" aria-describedby="datatable-default_info">
+                                        <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-challenged-{challengedIndex}" role="grid" aria-describedby="datatable-default_info">
                                             <thead>
                                                 <tr role="row" class="">
                                                     <th>
@@ -411,7 +411,7 @@
                                                     </td>
                                                     <td class="opa-child fix-1st-pading-comment-table">
                                                         <div class="select-group">
-                                                            <textarea class="form-control" placeholder="Explain your choice">Challenge’s rationale details</textarea>
+                                                            <textarea class="form-control" placeholder="Challenge’s rationale details"></textarea>
                                                         </div>
                                                     </td>
                                                     <td rt-scope="docChall.current as current">
@@ -465,7 +465,7 @@
                <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                     <thead>
                         <tr role="row" class="">
-                            <th>
+                            <th style="padding:10px 20px 0px 10px;">
                                 <div class="checkbox-custom checkbox-primary">
                                     <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
                                     <label></label>
@@ -623,10 +623,10 @@
           <div class="modal-body">
             <div class="table-responsive">
                 
-                <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
                     <thead>
                         <tr role="row" class="">
-                            <th>
+                            <th style="padding: 10px 15px 0px 10px;">
                                 <div class="checkbox-custom checkbox-primary">
                                     <input type="checkbox" class="checkbox-all" data-target="#table-my-actions-3">
                                     <label></label>
@@ -734,7 +734,7 @@
                             </td>
                             <td class="opa-child fix-1st-pading-comment-table">
                                 <div class="select-group">
-                                    <textarea class="form-control" placeholder="Explain your choice"></textarea>
+                                    <textarea class="form-control" placeholder="Challenge’s rationale details"></textarea>
                                 </div>
                             </td>
                             <td rt-scope="docPreview.current as current">

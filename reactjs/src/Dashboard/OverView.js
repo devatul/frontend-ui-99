@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import template from './OverView.rt';
 import update from 'react-addons-update';
-import { isEmpty, forEach, isEqual } from 'lodash'
+import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
-import DonutChart from '../components/chart/DonutChart'
-import StackedChart from '../components/chart/StackedChart'
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
@@ -56,29 +54,13 @@ var OverView = React.createClass
             }
 		};
 	},
-    addCommas(nStr)
-    {
-        nStr += '';
-        var x = nStr.split('.');
-        var x1 = x[0];
-        var x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-          x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        return x1 + x2;
-    },
+
     componentWillMount() {
         if(this.state.scan.result.scan_status == Constant.scan.IS_NO_SCAN) {
            this.startScan();
         }
+    },
 
-    },
-    ucwords:function(str){
-        return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
-            return a.toUpperCase();
-        });
-    },
 	componentDidMount() {
         $('#bell').click();
         javascriptTodo();
@@ -88,51 +70,28 @@ var OverView = React.createClass
         }
                       
   	},
+
     shouldComponentUpdate(nextProps, nextState) {
         var { scan, dataChart } = this.state
 
         return !isEqual(scan.result, nextState.scan.result) || !isEqual(dataChart, nextState.dataChart);
     },
 
-    componentWillUpdate() {
-
-    },
-
     componentDidUpdate(prevProps, prevState) {
         var prevResult = prevState.scan.result
         var result = this.state.scan.result
 
-        if(!isEqual(result.confidentialities_chart_data, prevResult.confidentialities_chart_data)) {
-            debugger
-            this.confidentialityChart()
-        }
-
-        if(!isEqual(result.categories_chart_data, prevResult.categories_chart_data)) {
-            debugger
-            this.categoryChart()
-        }
-
-        if(!isEqual(result.languages, prevResult.languages)) {
-            debugger
-            this.languageChart()
-        }
-
-        if(!isEqual(result['doc-types'], prevResult['doc-types'])) {
-            this.doctypeChart()
-        }
-
         if(!isEqual( result, prevResult )) {
             var { iconCategories } = Constant
-            this.updatedataChart(result)
+
+            this.updateDataChart( result, prevResult )
+
             forEach(result.categories, (val, index) => {
                 if( val.name == iconCategories[index].name )
                     val.class = iconCategories[index].class
             } )
         }
 
-        if(this.state.dataChart != prevState.dataChart) {
-            debugger
-        }
     },
 
     startScan() {
@@ -159,106 +118,55 @@ var OverView = React.createClass
         })
     },
 
-    categoryChart() {
-        var categories = []
-        var { categories_chart_data } = this.state.scan.result
-        forEach(categories_chart_data, (val, index) => {
-            categories.push({
-                name: val.name,
-                y: val.total_docs
-            })
-        })
-
-        var setData = update(this.state.dataChart, {
-            categories: { $set: categories }
-        })
-
-        this.setState({ dataChart: setData })
-    },
-
-    confidentialityChart() {
-        var confidentiality = []
-        var { confidentialities_chart_data } = this.state.scan.result
-
-        forEach(confidentialities_chart_data, (val, index) => {
-            confidentiality.push({
-                name: val.name,
-                y: val.total_docs
-            })
-        })
-        var setData = update(this.state.dataChart, {
-            confidentiality: { $set: confidentiality }
-        })
-        this.setState({ dataChart: setData })
-        debugger
-    },
-
-    languageChart() {
-        var language = []
-        var { languages } = this.state.scan.result
-
-        forEach(languages, (val, index) => {
-            language.push({
-                name: val.name,
-                y: val.total_docs
-            })
-        })
-
-        var setData = update(this.state.dataChart, {
-            languages: { $set: language }
-        })
-
-        this.setState({ dataChart: setData })
-        debugger
-    },
-
-    doctypeChart() {
-        var doctype = []
-        var { result } = this.state.scan
-
-        forEach(result["doc-types"], (val, index) => {
-            doctype.push({
-                name: val.name,
-                y: val.total_docs
-            })
-        })
-
-        this.setState({ dataChart: { ['doctypes']: doctype } })
-        debugger
-    },
-
-    updatedataChart(data) {
+    updateDataChart(result, prevResult) {
         var confidentiality = [], categories = [], languages = [], doctypes = [];
-        var { confidentialities_chart_data, categories_chart_data } = data
+        var { confidentialities_chart_data, categories_chart_data } = result
+        var { dataChart } = this.state
 
         //add confidentiality
+        if(!isEqual(confidentialities_chart_data, prevResult.confidentialities_chart_data)) {
             forEach(confidentialities_chart_data, (val, index) => {
                 confidentiality.push({
-                    name: this.ucwords(val.name),
+                    name: upperFirst(val.name),
                     y: val.total_docs
                 })
             })
+        } else {
+            confidentiality = dataChart.confidentiality
+        }
         //add categories
+        if(!isEqual(categories_chart_data, prevResult.categories_chart_data)) {
             forEach(categories_chart_data, (val, index) => {
                 categories.push({
-                    name: this.ucwords(val.name),
+                    name: upperFirst(val.name),
                     y: val.total_docs
                 })
             })
+        } else {
+            categories = dataChart.categories
+        }
         //add languages
-            forEach(data.languages, (val, index) => {
+        if(!isEqual(result.languages, prevResult.languages)) {
+            forEach(result.languages, (val, index) => {
                 languages.push({
-                    name: this.ucwords(val.name),
+                    name: upperFirst(val.name),
                     y: val.total_docs
                 })
             })
+        } else {
+            languages = dataChart.languages
+        }
         //add doctypes
-            forEach(data["doc-types"], (val, index) => {
+        if(!isEqual( result['doc-types'], prevResult['doc-types'] )) {
+            forEach(result["doc-types"], (val, index) => {
                 doctypes.push({
-                    name: val.name,
+                    name: upperFirst(val.name),
                     y: val.total_docs
                 })
             })
+        } else {
+            doctypes = dataChart.doctypes
+        }
         //update into state
             var setData = update(this.state.dataChart, {
                 categories: { $set: categories },

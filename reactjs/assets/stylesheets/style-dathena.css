@@ -442,9 +442,6 @@ th>div.dropdown>div.has-arrow>p {
 .review_table > thead > tr > th {
 	vertical-align: top;
 }
-.review_table > thead > tr > th:first-child {
-	padding-left: 10px;
-}
 .a_bold {
 	color: #000;
 }
@@ -509,7 +506,6 @@ ul.review_nav-tabs > li > a {
 }
 .review_table>tbody>tr>td:first-child {
 	padding: 8px;
-	width: 41px;
 }
 .review_h4 {
 	margin-top: 30px;
@@ -860,9 +856,6 @@ a.help_question_a:hover>i {
 	}
 }
 @media (max-width: 770px){
-	.review_table>tbody>tr>td:first-child {
-		width: 40px;
-	}
 	.header_search {
 		margin-right: 0px;
 	}
@@ -891,12 +884,6 @@ a.help_question_a:hover>i {
 	
 }
 @media (max-width: 650px) { 
-	.review_table>tbody>tr>td:first-child {
-		padding: 10px 7px !important;
-	}
-	.review_table > thead > tr > th:first-child {
-		padding-left: 7px;
-	}
 	.pro_ul_header>li {
 		display: block;
 		padding-left: 0px;

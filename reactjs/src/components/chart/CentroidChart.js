@@ -20,69 +20,195 @@ var CentroidChart = React.createClass({
     
 
     draw() {
-        var chartframe = $(this.refs.centroidChart);
-        var data = this.props.data;
-        $(chartframe).highcharts({
+        debugger
+        $('#centroidChart').highcharts({
             chart: {
-                type:'column'
+            polar: true
             },
-            xAxis: {
-                min: 0,
-                step: 2,
-                max: data.length,
-                startOnTick: true,
-                endOnTick: true,
-                tickInterval: 1,
-            },
-            yAxis: {
-              title: {
-                  text: 'Number of Documents'
-              },
-            },
+
             credits: {
-              enabled: false
+            enabled: false
             },
+
             title: {
-              text: ''
+            text: null
             },
 
-            legend: {
-              enabled: false
-            },
-            
-            plotOptions: {
-              column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                      textShadow: '0 0 3px black'
-                    }
-                },
-                pointPadding: 0,
-                borderWidth: 1,              
-                groupPadding: 0,
-                pointPlacement: -0.5
-              }
+            pane: {
+            startAngle: 90
             },
 
-            tooltip: {
-                headerFormat: '',
-                pointFormat: '{point.y} Documents<br/>'
+            xAxis: {
+            tickInterval: 45,
+            min: 0,
+            max: 360,
+            labels: {
+                enabled: false
             },
-            
-            series: [{
-                data: data
+            plotLines: [{
+                color: '#BFDDF7',
+                width: 2,
+                value: [0, 2],
+                zIndex: 1
             }]
+            },
+
+            yAxis: {
+            min: -5,
+            tickInterval: 5,
+            plotBands: [{
+                from: 0,
+                to: 5,
+                color: '#EDEDED'
+            },{
+                from: 5,
+                to: 10,
+                color: '#F2F2F2'
+            },{
+                from: 10,
+                to: 15,
+                color: '#F7F7F7'
+            },{
+                from: 15,
+                to: 20,
+                color: '#FCFCFC'
+            }],
+            labels: {
+                formatter: function() {
+                return this.value >= 0 ? this.value : null;
+                }
+            }
+            },
+
+            plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 45
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0
+            },
+            line: {
+                //lineWidth: 0
+            }
+            },
+
+            legend:{
+            enabled: false
+            },
+            tooltip: {
+            formatter: function() {
+                return 'Documents:' + this.y;
+            },
+            useHTML: true
+            },
+            series: [{
+            type: 'scatter',
+            lineWidth: 2,
+            data: [
+                [0, 10], 
+                {
+                x: 0,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [20, 8], 
+                {
+                x: 20,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [60, 12], 
+                {
+                x: 60,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [135, 15], 
+                {
+                x: 135,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [180, 18], 
+                {
+                x: 180,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [225, 20], 
+                {
+                x: 225,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [240, 22], 
+                {
+                x: 240,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [260, 3], 
+                {
+                x: 260,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [280, 5], 
+                {
+                x: 280,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null, 
+                [320, 10], 
+                {
+                x: 320,
+                y: 0,
+                marker: {
+                    enabled: false
+                }
+                },
+                null
+            ]
+            }]
+
         });
     },
 
     render() {
         return (
             <div>
-                <h4 class="chart-title">{this.props.title}</h4>
-                <div ref="centroidChart" id="centroidChart"></div>
+                <h4 className="chart-title">Centroid Distance Histogram</h4>
+                <div id="centroidChart"></div>
+                <div className="cendroid-chart-label"><span>Group 1</span></div>
             </div>
             );
     }

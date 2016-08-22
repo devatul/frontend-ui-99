@@ -514,7 +514,10 @@
                           </div>
                         </td>
                         <td class="text-left">
-                          <span class="text-italic doc-path">{document.path}</span>
+                          <span class="text-italic doc-path"
+                              rel="tooltip"
+                              data-toggle="tooltip"
+                              data-original-title="{document.path}">{document.path}</span>
                         </td>
                         <td class="vertical-top">
                           <select class="form-control challenge-category element-event {(document.previous_category != null && document.previous_category != document.current_category) ? 'changed' : ''}" onChange="(event)=>this.onChangeCategory(event, reviewCurrent.Id[0], reviewCurrent.Id[1], document.index)" value="{document.current_category}">

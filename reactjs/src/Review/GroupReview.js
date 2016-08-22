@@ -59,18 +59,6 @@ var GroupReview = React.createClass({
         });
         $("#select2-choose_cluster-container").text("Group 1");
 
-        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-            /*$('#previewModal').on('show.bs.modal', function(e) {
-
-                //get data-id attribute of the clicked element
-                var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                console.log(fileURL);
-                
-                $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
-                $('#embedURL').gdocsViewer();
-            });*/
-        }.bind(this));
     },
     // shouldComponentUpdate: function(nextProps, nextState) {
     //     if(this.state.groupCurrent != nextState.groupCurrent) {
@@ -358,7 +346,8 @@ var GroupReview = React.createClass({
         var val = event.target.value;
         var updateState = update(this.state, {
             groupCurrent: {$set: this.state.listGroup[val]},
-            status: {$set: 0 }        
+            status: {$set: 0 },
+            validateNumber: { $set: 0 }     
         });
         this.setState(updateState);
     },

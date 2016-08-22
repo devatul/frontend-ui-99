@@ -43,15 +43,14 @@ var SelectButton = React.createClass({
 
     render: function() {
         return(
-            <div style={{height: 37.5}}>
+            <div>
                 <div className="switch switch-sm switch-success">
+                    <span className="switch-label">{this.props.title && ' ' + this.props.title}</span>
                     <div className={'ios-switch ' + this.state.setSelected} onClick={this.handleOnclick}>
                         <div className="on-background background-fill"></div>
                         <div className="state-background background-fill"></div>
                         <div className="handle"></div>
                     </div>
-                        <input type="checkbox" name="switch" data-plugin-ios-switch="" style={{display: 'none'}}/>
-                        {this.props.title && ' ' + this.props.title}
                 </div>
                 <div className="clearfix"></div>
             </div>

@@ -27,19 +27,6 @@ var DocumentReview = React.createClass({
     },
     componentDidMount() {
         this.getChallengedDocument();
-        loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
-            
-            /*$('#previewModal3').on('show.bs.modal', function(e) {
-
-                //get data-id attribute of the clicked element
-                var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-                console.log(fileURL);
-                
-                $('#previewModal3 .file-preview').html('<a href="'+fileURL+'" id="embedURL3"></a>');
-                $('#embedURL3').gdocsViewer();
-            });*/
-        }.bind(this));
     },
     shouldComponentUpdate(nextProps, nextState) {
         if(this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
