@@ -29,6 +29,7 @@ var FilterLabel = React.createClass({
 	},
 	render: function() {
 		var child = [];
+		console.log("data_prop", this.props.data)
 			this.props.data &&
 			_.forEach(this.props.data, function(label, index) {
 				child[index] = <span
@@ -47,7 +48,7 @@ var FilterLabel = React.createClass({
 
 				{ this.props.data.length > 0 && this.props.onClear &&
 				<a onClick={this.clearFilter} className={'filter-label label label-info'} style={{backgroundColor: '#747474'}}>
-					Clear all
+					Clear <span style={{'text-transform' : 'lowercase'}}>all</span>
 				</a>
 				}
 			</div>

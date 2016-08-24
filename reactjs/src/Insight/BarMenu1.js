@@ -29,26 +29,33 @@ var MenuBar1 = React.createClass
         filter: {},
         dataSelectBox: {},
         filterLabel: [
+            {
+                checked: true,
+                id :1,
+                index : 1,
+                name : 'Top 5',
+                selectId : "number_users",
+                value : '1'
+            }
 
-          
         ],
         eventContext: '',
         numberofUser :[
         {
             "id":1,
-            "name": 5
+            "name": 'Top 5'
         },
         {
             "id":2,
-            "name": 15
+            "name": 'Top 15'
         },
         {
             "id":3,
-            "name": 25
+            "name": 'Top 25'
         },
         {
             "id":4,
-            "name": 50
+            "name": 'Top 50'
         }
         ]
         ,numberUser : 5
@@ -87,7 +94,8 @@ componentDidMount() {
 componentDidUpdate(prevProps, prevState) {
     if(this.state.filter != prevState.filter) {
 
-        var filter = this.state.filter;
+        var filter = this.state.filter; 
+       
 
         if(filter.languages != null) {
             filter.languages.length === 0 && delete this.state.filter.languages;
@@ -135,10 +143,10 @@ copyListNumberToSelecbox: function(data, id) {
     _.forEach(data, function(object, index) {
         newObject = _.assignIn({}, object);
         if(index == 0){
-         newObject.checked = true;
-         newObject.selectId = id;
-         newObject.index = index;
-     }else{
+           newObject.checked = true;
+           newObject.selectId = id;
+           newObject.index = index;
+       }else{
         newObject.checked = false;
         newObject.selectId = id;
         newObject.index = index;
@@ -149,7 +157,7 @@ copyListNumberToSelecbox: function(data, id) {
 }.bind(this));
     newData[id] = arr;
     this.setState({ dataSelectBox: newData });  
-    console.log('dataSelectBox', this.dataSelectBox)
+    console.log('dataSelectBox', newData)
 },
 getCategory: function(async) {
     $.ajax({
@@ -273,23 +281,24 @@ updateFilterList: function(selectId) {
     if(selectId == 'number_users'){
         _.forEach(this.state.dataSelectBox[selectId], function(object,index){
             if(object.checked){
-             number = object.name,
-             filter['number_users'] = object.name;    
-         }
-     })
+               number = object.name,
+               filter['number_users'] = object.name; 
+              /* console.log('fitter', filter['number_users'])  */ 
+           }
+       })
     }else{
         _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
             if(object.checked) {
 
-               arr.push({
+             arr.push({
                 id: object.id,
                 name: object.name
             });
-           }
+         }
 
-       }
+     }
 
-       )
+     )
         filter[selectId] = arr;
     }
     this.setState({numberUser: number})
@@ -298,14 +307,25 @@ updateFilterList: function(selectId) {
 
 
 addLabel: function(field) {
+    
+   
 
-    var arr = _.concat(this.state.filterLabel);
-    if(_.find(arr, {id: field.id, name: field.name}) == null) {
-        arr.push(field);
-    }
+    if(field.selectId == 'number_users'){
+        var arr = _.concat(field,_.drop(this.state.filterLabel));
+        this.setState({ filterLabel: arr });
+        console.log("field_addLabel", this.state.filterLabel)
+    } else  {
+        if(_.find(arr, {id: field.id, name: field.name}) == null) {
+          var arr = _.concat(this.state.filterLabel);
+          console.log('arr', arr)
+          arr.push(field);
+      }
+      this.setState({ filterLabel: arr });
+  }
 
-    this.setState({ filterLabel: arr });
-    console.log('filterLabel', this.state.filterLabel)
+
+
+
 },
 
 deleteLabelByIdName: function(field, id, name) {
@@ -315,9 +335,6 @@ deleteLabelByIdName: function(field, id, name) {
 },
 
 handleSelectBoxChange: function(field, index) {
-     console.log('field',field);
-    console.log('selectbox', this.state.dataSelectBox);
-    
     var updateData = update(this.state.dataSelectBox, {
         [field.selectId]: {
             [index]: {
@@ -341,7 +358,7 @@ handleSelectNumber(field, index){
         if(i == index){
             updateData_selected.number_users[i].checked = true;
             this.setState({checked: index})
-         
+
         }else{
             updateData_selected.number_users[i].checked = false
         }

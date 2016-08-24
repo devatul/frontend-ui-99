@@ -8,13 +8,17 @@ var NumberUser = React.createClass({
 	 getInitialState: function() {
         return {
             checkList: [],
-            checked: 0
+            checked: 0, 
+            selected :0,
+            newIdArr:[],
+            data : this.props.data
         };
     },
   
 
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.props.data != nextProps.data) {
+          
             return true;
         }
         return false;
@@ -47,30 +51,36 @@ var NumberUser = React.createClass({
             name: this.props.data[index].name,
             selectId: this.props.id,
             index: index,
-
+            checked: event.target.checked,
             value: event.target.value
         }
-        for (var i = 0; i < size; i++) {
+       /* for (var i = 0; i < size; i++) {
             if (i == index) {
-                $('#radio' + index).removeClass().addClass('active');
+                this.setState({clicked : true})
 
             } else {
-                $('#radio' + i).removeClass('active')
+                this.setState({clicked : false})
 
             }
 
-        }
+        }*/
+       
+        this.setState({selected  : index})
         this.props.onChange(field, index);
     },
-	
+	isActive(value){
+        return ((value===this.state.selected) ?'active':'default');
+    },
 	render(){
 		var children = [];
+        var newIdArr = [];
+        var className = this.state.clicked ? 'active' : 'no-active';
+        /*console.log('data',this.props.data)*/
+       
             _.forEach(this.props.data, function(obj, index) {
-
-                console.log('obj', obj);
-               
+                var newID = 'radio' + index;
                 var size =_.size(this.props.data)
-                children[index] =  <li className={obj.checked && 'active'} id={'radio'+index}>
+                children[index] =  <li className={obj.checked && 'active'}>
                                     <a tabIndex={index}>
                                         <label className="radio">
                                         <input id={'radio_filter_' + index} type="radio"
@@ -79,12 +89,13 @@ var NumberUser = React.createClass({
                                             value={index}
                                             key={'selectBox_' + index}
                                             
-                                            /> Top {obj.name}
+                                            /> {obj.name}
 
                                         </label>
                                     </a>
                                 </li> ;
             }.bind(this));
+           
 		return(
 			<div ref="dropdown" className="btn-group dropdown">
 				<button type="button"

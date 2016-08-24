@@ -1,5 +1,7 @@
 <rt-import name="Keyword" from="./components/Keyword"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
+
 <div class="container">
 <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
@@ -251,11 +253,11 @@
              <HelpButton type="overview_question_a" content="This represents a summary of keywords that Dathena 99 has identified as having commonality across the chosen data confidentiality/category type. Keywords are filtered to exclude common terms such as 'to, and, I ,we', so that the selected words have organisational and documentation relevance. These keywords can be applied to data management/protection controls that utilise key words for detection, providing a set of keywords that have been extracted directly from the documents. This can also assist in tweaking and optimising existing controls that rely on keywords, and can be refreshed on an on-demand basis to gain the most up to date set of keywords from Dathena 99."/>
            
           </h3>
-          <div class="panel-actions">
-            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+          <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+            <ToggleButton setDefault="open" setTarget="#toggle" />
           </div>
         </header>
-        <div class="panel-body">
+        <div class="panel-body" id="toggle">
           <div class="table-responsive table-suggestion-wrapper">
             <h4 class="table-title">Accounting / Tax</h4>
             <table class="table table-striped mb-none table-suggestion">

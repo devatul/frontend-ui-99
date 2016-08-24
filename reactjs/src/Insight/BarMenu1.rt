@@ -2,6 +2,7 @@
 <rt-import name="NumberUser" from="./components/MultiselectBoxNumberUser"/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
 <header class="panel-heading">
     <h2 class="panel-title">
@@ -74,7 +75,7 @@
 
 </li>
 </ul>
-<div class="panel-actions">
-   <a href="#" class="panel-action panel-action-toggle" data-panel-toggle="collapse" data-target="#toggle"></a>
-</div>
+ <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+    <ToggleButton setDefault="open" setTarget="#toggle" />
+  </div>
 </header>

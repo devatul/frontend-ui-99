@@ -1,5 +1,5 @@
  <rt-import name="BarName" from="../components/BarMenu"/>
 <div>
-<BarName title="Insights Dashboard { location.pathname.indexOf('/Insight/DataRisk') == 0 ? 'Data Risk Management' : location.pathname.indexOf('/Insight/Indentity') == 0 ? 'Identity and Access Management' : 'Data Loss Prevention' }" showInfo={true} showFilter={false}></BarName>
+<BarName title="Insights – { location.pathname.indexOf('/Insight/DataRisk') == 0 ? 'Data Risk Management' : location.pathname.indexOf('/Insight/Indentity') == 0 ? 'Identity and Access Management' : 'Data Loss Prevention' }" showInfo={true} showFilter={false}></BarName>
 	{this.props.children}
 </div>

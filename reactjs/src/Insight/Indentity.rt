@@ -2,279 +2,280 @@
 <rt-import name="HelpButton" from="./components/HelpButton"/>
 <rt-import name="BarMenu" from='./BarMenu1'/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
-<rt-import name="Toggle" from="../components/dathena/ToggleButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
+
+
 
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
        <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
-
-        <!--  -->
-      </h2>
-    </header>
-    <div class="panel-body pb-none">
-      <div class="row">
-        <div class="col-md-4">
-          <section class="panel">
-            <div class="panel-body bg-secondary widget-panel insight-panel">
-              <h4 class="widget-title">Unidentifiable Files 
-                 <HelpButton type="overview_question_a" content="Number of files that can not be identified."/>
-                                  
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>10,072</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">10,000</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-            <h4 class="widget-title">Access Rights Anomaly
-               <HelpButton type="overview_question_a" content="Number of users who have abnormal access rights."/>
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>0</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">138</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
-            <h4 class="widget-title">Twin Files
-             <HelpButton type="overview_question_a" content="Duplicates files with different names."/>
-              
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              <span>200</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">430</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
+     </h2>
+   </header>
+   <div class="panel-body pb-none">
     <div class="row">
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-            <h4 class="widget-title">Document Retention
-            <HelpButton type="overview_question_a" content="Number of files past outside their retention dates."/>
-             
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>750</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">420</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-            <h4 class="widget-title">Document Aging
-            <HelpButton type="overview_question_a" content="Number of files outside their retention dates."/>
-             
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              <span>750</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">9,000</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-            <h4 class="widget-title">Duplicate Files
-            <HelpButton type="overview_question_a" content="Number of duplicate files."/>
-             
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>10,720</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">10,000</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-            <h4 class="widget-title">Document Repository Anomaly
-            <HelpButton type="overview_question_a" content="Number of folders which have content anomalies."/>
-              
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-              <span>0</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">99</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
       <div class="col-md-4">
         <section class="panel">
           <div class="panel-body bg-secondary widget-panel insight-panel">
-            <h4 class="widget-title">Cost Savings
-               <HelpButton type="overview_question_a" content="Storage Space with obsolete data."/>
-             
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>980MB</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <div class="summary">
-                  <div class="info">
-                    <strong class="amount">1.2TB</strong>
-                  </div>
+            <h4 class="widget-title">Unidentifiable Files 
+             <HelpButton type="overview_question_a" content="Number of files that can not be identified."/>
+
+           </h4>
+           <div class="insight-stat">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <span>10,072</span>
+          </div>
+          <div class="widget-summary">
+            <div class="widget-summary-col">
+              <div class="summary">
+                <div class="info">
+                  <strong class="amount">10,000</strong>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </div>
-      <div class="col-md-4">
-        <section class="panel">
-          <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-            <h4 class="widget-title">Stale Files
-             <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/>
-             
-            </h4>
-            <div class="insight-stat">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <span>127,000</span>
-            </div>
-            <div class="widget-summary">
-              <div class="widget-summary-col">
-                <ul class="list-unstyled summary-list">
-                  <li>
-                    <div class="row">
-                      <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
-                      <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="row">
-                      <div class="col-xs-6 text-left"><span>3+ Years</span></div>
-                      <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="row">
-                      <div class="col-xs-6 text-left"><span>Total</span></div>
-                      <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
-                    </div>
-                  </li>
-                </ul>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-4">
+      <section class="panel">
+        <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+          <h4 class="widget-title">Access Rights Anomaly
+           <HelpButton type="overview_question_a" content="Number of users who have abnormal access rights."/>
+         </h4>
+         <div class="insight-stat">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <span>0</span>
+        </div>
+        <div class="widget-summary">
+          <div class="widget-summary-col">
+            <div class="summary">
+              <div class="info">
+                <strong class="amount">138</strong>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
+        <h4 class="widget-title">Twin Files
+         <HelpButton type="overview_question_a" content="Duplicates files with different names."/>
+
+       </h4>
+       <div class="insight-stat">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        <span>200</span>
+      </div>
+      <div class="widget-summary">
+        <div class="widget-summary-col">
+          <div class="summary">
+            <div class="info">
+              <strong class="amount">430</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+        <h4 class="widget-title">Document Retention
+          <HelpButton type="overview_question_a" content="Number of files past outside their retention dates."/>
+
+        </h4>
+        <div class="insight-stat">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <span>750</span>
+        </div>
+        <div class="widget-summary">
+          <div class="widget-summary-col">
+            <div class="summary">
+              <div class="info">
+                <strong class="amount">420</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
+        <h4 class="widget-title">Document Aging
+          <HelpButton type="overview_question_a" content="Number of files outside their retention dates."/>
+
+        </h4>
+        <div class="insight-stat">
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+          <span>750</span>
+        </div>
+        <div class="widget-summary">
+          <div class="widget-summary-col">
+            <div class="summary">
+              <div class="info">
+                <strong class="amount">9,000</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+        <h4 class="widget-title">Duplicate Files
+          <HelpButton type="overview_question_a" content="Number of duplicate files."/>
+
+        </h4>
+        <div class="insight-stat">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <span>10,720</span>
+        </div>
+        <div class="widget-summary">
+          <div class="widget-summary-col">
+            <div class="summary">
+              <div class="info">
+                <strong class="amount">10,000</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+        <h4 class="widget-title">Document Repository Anomaly
+          <HelpButton type="overview_question_a" content="Number of folders which have content anomalies."/>
+
+        </h4>
+        <div class="insight-stat">
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+          <span>0</span>
+        </div>
+        <div class="widget-summary">
+          <div class="widget-summary-col">
+            <div class="summary">
+              <div class="info">
+                <strong class="amount">99</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-4">
+    <section class="panel">
+      <div class="panel-body bg-secondary widget-panel insight-panel">
+        <h4 class="widget-title">Cost Savings
+         <HelpButton type="overview_question_a" content="Storage Space with obsolete data."/>
+
+       </h4>
+       <div class="insight-stat">
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        <span>980MB</span>
+      </div>
+      <div class="widget-summary">
+        <div class="widget-summary-col">
+          <div class="summary">
+            <div class="info">
+              <strong class="amount">1.2TB</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="col-md-4">
+  <section class="panel">
+    <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+      <h4 class="widget-title">Stale Files
+       <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/>
+
+     </h4>
+     <div class="insight-stat">
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+      <span>127,000</span>
+    </div>
+    <div class="widget-summary">
+      <div class="widget-summary-col">
+        <ul class="list-unstyled summary-list">
+          <li>
+            <div class="row">
+              <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
+              <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-6 text-left"><span>3+ Years</span></div>
+              <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-xs-6 text-left"><span>Total</span></div>
+              <div class="col-xs-6 text-right"><span class="bold">165,850</span></div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
+</div>
+</div>
+</div>
+</section>
 
 <section class="panel panel-featured panel-featured-primary panel-identity">
  <BarMenu showFilter={true} handleFilter={this.handleFilter} />
+
 <div class="panel-body" id="toggle">
   <div class="row">
     <div class="col-md-6">
       <h3>High Risk User with Client Data Access
        <HelpButton type="overview_question_a" content="Users with direct access to a large number of files which provide access to client data."/>
-        
-      </h3>
-      <div class="panel panel-chart">
-        <div class="panel-body">
-          <Chart/>
-        </div>
+
+     </h3>
+     <div class="panel panel-chart">
+      <div class="panel-body">
+        <Chart/>
       </div>
     </div>
-    <div class="col-md-6">
-      <h3>High Risk Active Directory Access with Client Data
-       <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/>
+  </div>
+  <div class="col-md-6">
+    <h3>High Risk Active Directory Access with Client Data
+     <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/>
 
-      </h3>
-      <div class="panel panel-chart">
-        <div class="panel-body">
-         <Chart/>
-       </div>
-     </div>
+   </h3>
+   <div class="panel panel-chart">
+    <div class="panel-body">
+     <Chart/>
    </div>
  </div>
- <div class="row">
+</div>
+</div>
+<div class="row">
   <div class="col-md-12">
     <h3>Key Content Contributor
-    <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/>
+      <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/>
       
     </h3>
     <div class="panel panel-chart">
