@@ -1,5 +1,6 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name ="MyTeam" from ="./MyTeam"/>
+<rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
 <div class="container">
   <div class="tabs tabs-primary">
     <ul class="my-profile-header nav nav-tabs">
@@ -36,37 +37,37 @@
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Department</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Department:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.department}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Company Name</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Company Name:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.company_name}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Location</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Location:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.location}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Email</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Email:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_email}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Landline)</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Landline):</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_phone}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Mobile)</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Mobile):</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_mobile}</p>
                     </div>
@@ -78,12 +79,8 @@
               <ul class="my-profile-ul">
                 <li class="left3">System User</li>
                 <li>
-                  <div class="inline-block-item dropdown">
-                    <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                    <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                      <p>Use your user name and password provided by Dathena to connect into Dathena99.</p>
-                    </div>
-                  </div>
+                 <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
+                  
                 </li>
                 <li class="left1">
                   <div class="switch switch-sm switch-primary">
@@ -101,12 +98,8 @@
                       <p class="content_profile_note">Active Directory</p>
                     </li>
                     <li class="left4">
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                          <p>Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials.</p>
-                        </div>
-                      </div>
+                     <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
+                     
                     </li>
                   </ul>
                   <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check">

@@ -28,7 +28,10 @@ var MenuBar1 = React.createClass
         scan_result: {},
         filter: {},
         dataSelectBox: {},
-        filterLabel: [],
+        filterLabel: [
+
+          
+        ],
         eventContext: '',
         numberofUser :[
         {
@@ -132,21 +135,21 @@ copyListNumberToSelecbox: function(data, id) {
     _.forEach(data, function(object, index) {
         newObject = _.assignIn({}, object);
         if(index == 0){
-           newObject.checked = true;
-           newObject.selectId = id;
-           newObject.index = index;
-       }else{
-            newObject.checked = false;
-            newObject.selectId = id;
-            newObject.index = index;
-       }
-       
-       arr.push(newObject);
+         newObject.checked = true;
+         newObject.selectId = id;
+         newObject.index = index;
+     }else{
+        newObject.checked = false;
+        newObject.selectId = id;
+        newObject.index = index;
+    }
+    console.log('object', newObject)
+    arr.push(newObject);
 
-   }.bind(this));
+}.bind(this));
     newData[id] = arr;
-    this.setState({ dataSelectBox: newData });
-
+    this.setState({ dataSelectBox: newData });  
+    console.log('dataSelectBox', this.dataSelectBox)
 },
 getCategory: function(async) {
     $.ajax({
@@ -270,23 +273,23 @@ updateFilterList: function(selectId) {
     if(selectId == 'number_users'){
         _.forEach(this.state.dataSelectBox[selectId], function(object,index){
             if(object.checked){
-               number = object.name,
-               filter['number_users'] = object.name;    
-           }
-       })
+             number = object.name,
+             filter['number_users'] = object.name;    
+         }
+     })
     }else{
         _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
             if(object.checked) {
 
-             arr.push({
+               arr.push({
                 id: object.id,
                 name: object.name
             });
-         }
+           }
 
-     }
+       }
 
-     )
+       )
         filter[selectId] = arr;
     }
     this.setState({numberUser: number})
@@ -295,11 +298,14 @@ updateFilterList: function(selectId) {
 
 
 addLabel: function(field) {
+
     var arr = _.concat(this.state.filterLabel);
     if(_.find(arr, {id: field.id, name: field.name}) == null) {
         arr.push(field);
     }
+
     this.setState({ filterLabel: arr });
+    console.log('filterLabel', this.state.filterLabel)
 },
 
 deleteLabelByIdName: function(field, id, name) {
@@ -309,7 +315,7 @@ deleteLabelByIdName: function(field, id, name) {
 },
 
 handleSelectBoxChange: function(field, index) {
-    console.log('field',field);
+     console.log('field',field);
     console.log('selectbox', this.state.dataSelectBox);
     
     var updateData = update(this.state.dataSelectBox, {
@@ -328,20 +334,26 @@ handleSelectBoxChange: function(field, index) {
     }
 },
 handleSelectNumber(field, index){
-
+    console.log('field1',field)
     var updateData_selected = _.assignIn({}, this.state.dataSelectBox)
 
     for(var i=0; i < 4 ; i++){
         if(i == index){
             updateData_selected.number_users[i].checked = true;
             this.setState({checked: index})
-            console.log(this.props.checked)
+         
         }else{
             updateData_selected.number_users[i].checked = false
         }
     }
 
     this.setState({ dataSelectBox: updateData_selected, eventContext: field.selectId });
+    if(field.checked) {
+        this.addLabel(field);
+    } else {
+        this.deleteLabelByIdName(field, field.id, field.name);
+    }
+    
 },
 
 handleSelectAll: function(field) {

@@ -1,12 +1,9 @@
+<rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
 <section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
   <header class="panel-heading">
     <h2 class="panel-title">My Team
-      <div class="r dropdown inline-block-item">
-       <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-       <div class="my-team-note dropdown-menu has-arrow dd-md full-mobile">
-        <p>Your team is comprised of all the reviewers which you have currently assigned.</p>
-      </div>
-    </div>    
+     <HelpButton  type="review_question_a help_question_a" content="Your team is comprised of all the reviewers which you have currently the same category assigned."/>
+        
   </h2>
 </header>
 
@@ -19,19 +16,19 @@
             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Reviewer
             </th>
             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed within SLA
+             
               <div class="r dropdown dropdown-file-info-holder inline-block-item edit_th">
-               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <HelpButton type="review_question_a help_question_a" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <!--  <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                <div class="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile">
                 <p>Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired.</p>
-                </div>
+                </div> -->
               </div>
             </th>
             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed outside of SLA
               <div class="r dropdown dropdown-file-info-holder inline-block-item edit_th">
-               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-               <div class="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                <p>Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired. </p>
-                </div>
+                <HelpButton type="review_question_a help_question_a" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              
               </div>
             </th>
             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed

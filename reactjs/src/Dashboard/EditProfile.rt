@@ -1,5 +1,6 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name ="MyTeam" from ="./MyTeam"/>
+<rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
 <!-- <rt-import name="validate" from="../components/dathena/validate"/>-->
 
 <div class="container">
@@ -108,12 +109,7 @@
                         <ul class="my-profile-ul">
                           <li class="left3">System User</li>
                           <li>
-                            <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                             <a data-toggle="dropdown" class="review_question_a help_question_a edit" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                             <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                              <p>Use your user name and password provided by Dathena to connect into Dathena99.</p>
-                            </div>
-                          </div>
+                             <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
                         </li>
                         <li class="left1">
                           <div class="switch switch-sm switch-primary">
@@ -130,12 +126,7 @@
                               <p class="content_profile_note">Active Directory</p>
                             </li>
                             <li class="left4">
-                              <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                               <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                               <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                <p>Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials.</p>
-                              </div>
-                            </div>
+                               <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
                           </li>
                         </ul>
                         <div class="my-profile-check-none checkbox-custom checkbox-default">

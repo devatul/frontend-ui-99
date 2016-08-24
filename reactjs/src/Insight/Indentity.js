@@ -16,6 +16,8 @@ var Indentity = React.createClass({
 	getInitialState() {
 
 		return {
+		
+			sizeFilter : 0,
 			scan_result:{},
 			rickInsight :{
 				"stale_files": {
@@ -54,7 +56,6 @@ var Indentity = React.createClass({
 	},
 	
 	handleFilter: function(bodyRequest) {
-		console.log('bodyRequest', bodyRequest);
 		if(!_.isEmpty(bodyRequest)) {
 			$.ajax({
 				url: Constant.SERVER_API + 'api/insight/iam/',
