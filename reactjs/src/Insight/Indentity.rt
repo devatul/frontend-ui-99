@@ -245,7 +245,7 @@
 </section>
 
 <section class="panel panel-featured panel-featured-primary panel-identity">
- <BarMenu showFilter={true} handleFilter={this.handleFilter} />
+ <BarMenu title="Identity and Access Management " showFilter={true} handleFilter={this.handleFilter} helpInfo="Overview of the users access in the data repositoty(ies) scanned by Dathena 99."/>
 
 <div class="panel-body" id="toggle">
   <div class="row">
