@@ -87,16 +87,11 @@ componentDidMount() {
         this.getDoctypes(true);
         this.getLanguages(true);
         this.copyNumberOfUser(true);
-        
     }
-
 },
 componentDidUpdate(prevProps, prevState) {
     if(this.state.filter != prevState.filter) {
-
         var filter = this.state.filter; 
-       
-
         if(filter.languages != null) {
             filter.languages.length === 0 && delete this.state.filter.languages;
         }
@@ -151,13 +146,13 @@ copyListNumberToSelecbox: function(data, id) {
         newObject.selectId = id;
         newObject.index = index;
     }
-    console.log('object', newObject)
+    /*console.log('object', newObject)*/
     arr.push(newObject);
 
 }.bind(this));
     newData[id] = arr;
     this.setState({ dataSelectBox: newData });  
-    console.log('dataSelectBox', newData)
+  /*  console.log('dataSelectBox', newData)*/
 },
 getCategory: function(async) {
     $.ajax({
@@ -252,6 +247,7 @@ copyNumberOfUser(async){
 clearFilter: function() {
     var data = this.state.dataSelectBox;
     _.forEach(this.state.filterLabel, function(object, index) {
+      
         var updateData = update(data,{
             [object.selectId]: {
                 [object.index]: { $merge: { checked: false } }
@@ -307,25 +303,19 @@ updateFilterList: function(selectId) {
 
 
 addLabel: function(field) {
-    
-   
-
     if(field.selectId == 'number_users'){
         var arr = _.concat(field,_.drop(this.state.filterLabel));
         this.setState({ filterLabel: arr });
-        console.log("field_addLabel", this.state.filterLabel)
+        
     } else  {
         if(_.find(arr, {id: field.id, name: field.name}) == null) {
           var arr = _.concat(this.state.filterLabel);
-          console.log('arr', arr)
+         
           arr.push(field);
       }
       this.setState({ filterLabel: arr });
+      console.log('filterLabel', this.state.filterLabel)
   }
-
-
-
-
 },
 
 deleteLabelByIdName: function(field, id, name) {
@@ -342,8 +332,9 @@ handleSelectBoxChange: function(field, index) {
             } 
         }
     });
-    console.log( 'fieldThen',[field])
+   
     this.setState({ dataSelectBox: updateData, eventContext: field.selectId });
+   /* console.log('dataSelectBox_notNumber', this.state.dataSelectBox)*/
     if(field.checked) {
         this.addLabel(field);
     } else {
@@ -351,8 +342,8 @@ handleSelectBoxChange: function(field, index) {
     }
 },
 handleSelectNumber(field, index){
-    console.log('field1',field)
     var updateData_selected = _.assignIn({}, this.state.dataSelectBox)
+  /*  console.log('updateData_selected', this.state.dataSelectBox)*/
 
     for(var i=0; i < 4 ; i++){
         if(i == index){
@@ -363,8 +354,18 @@ handleSelectNumber(field, index){
             updateData_selected.number_users[i].checked = false
         }
     }
+   
+    var updateData = update(this.state.dataSelectBox, {
+        [field.selectId]: {
+            [index]: {
+                checked: { $set: field.checked } 
+            } 
+        }
+    });
+   /* console.log('dataselected', updateData)*/
+    this.setState({  dataSelectBox: updateData, eventContext: field.selectId })
+   /* console.log('dataSelectBox', this.state.dataSelectBox['number_users'])*/
 
-    this.setState({ dataSelectBox: updateData_selected, eventContext: field.selectId });
     if(field.checked) {
         this.addLabel(field);
     } else {

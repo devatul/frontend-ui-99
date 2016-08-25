@@ -75,7 +75,7 @@ var NumberUser = React.createClass({
 		var children = [];
         var newIdArr = [];
         var className = this.state.clicked ? 'active' : 'no-active';
-        /*console.log('data',this.props.data)*/
+        console.log('data',this.props.data)
        
             _.forEach(this.props.data, function(obj, index) {
                 var newID = 'radio' + index;
@@ -109,7 +109,6 @@ var NumberUser = React.createClass({
 					<b className="caret"></b>
 				</button>
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
-					
 					{children}
 				</ul>
 			</div>
