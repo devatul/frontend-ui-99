@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach } from 'lodash'
+import { forEach, upperFirst } from 'lodash'
 import template from './GroupReview.rt'
 import update from 'react-addons-update'
 import Constant, { status } from '../Constant.js'
-import loadScript from '../script/load.scripts.js'
 
 var GroupReview = React.createClass({
     displayName: 'GroupReview',
@@ -32,7 +31,10 @@ var GroupReview = React.createClass({
             },
             dataChart: {
                 pieChart: [],
-                columnChart: [],
+                documentType: {
+                    categories: [],
+                    series: []
+                },
                 centroidChart: [],
                 cloudWords: []
             }
@@ -290,7 +292,7 @@ var GroupReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                for(var i = 0; i < data.documents.length; i++) {
+                for(var i = 0, total = data.documents.length; i < total; i++) {
                     data.documents[i].confidence_level = (data.documents[i].confidence_level - 10)
                     data.documents[i].confidentiality_confidence_level = (data.documents[i].confidentiality_confidence_level-10)
                     data.documents[i].current = {
@@ -365,12 +367,23 @@ var GroupReview = React.createClass({
     },
     
     progressbar: function(value) {
-        if(value <= Constant.progressValue.level1) {
-            return Constant.progressBar.level1;
-        } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
-            return Constant.progressBar.level2;
+        var {
+            avg_centroid_distance,
+            max_centroid_distance,
+            min_centroid_distance
+        } = this.state.statistics;
+
+        switch(true) {
+            case value < avg_centroid_distance: {
+                return "progress-bar-success";
+            }
+            case value > avg_centroid_distance && value < (2/3) * (max_centroid_distance - min_centroid_distance): {
+                return "progress-bar-warning";
+            }
+            case value > (2/3) * (max_centroid_distance - min_centroid_distance): {
+                return "progress-bar-danger";
+            }
         }
-        return Constant.progressBar.level3;
     },
     saveStack: function() {
 
@@ -596,27 +609,31 @@ var GroupReview = React.createClass({
     },
     
     drawChart() {
-        var categoriesInfo = this.state.categoriesInfo;
-		var flotPieData = [];
-		var highchart = [];
-		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
-			for(var i = 0; i < categoriesInfo.length; i++) {
-                var name = this.ucwords(categoriesInfo[i].name);
-				flotPieData.push({
-					label: name,
-		            data: [
-		                [6, categoriesInfo[i].percentage]
-		            ],
-		            color: colors[i]
-				});
-				highchart.push({
-					name: name,
-		            data: [categoriesInfo[i].doc_types[0].total,categoriesInfo[i].doc_types[1].total,categoriesInfo[i].doc_types[2].total,categoriesInfo[i].doc_types[3].total,categoriesInfo[i].doc_types[4].total]
-				});
-			}
+        var category = this.state.categoriesInfo;
+		var pieChart = [],
+            documentType = {
+                categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
+                series: []
+            };
+        for(let i = 0, total = category.length; i < total; i++) {
+            pieChart[i] = {
+                name: upperFirst( category[i].name ),
+                y: category[i].percentage
+            };
+
+            documentType.series[i] = {
+                name: category[i].name,
+                data: []
+            };
+
+            for(let j = 0, data = category[i].doc_types, total = data.length; j < total; j++) {
+                documentType.series[i].data[j] = data[j].total;
+            }
+        }
+        
         var updateChart = update(this.state.dataChart, {
-            pieChart: {$set: flotPieData },
-            columnChart: {$set: highchart }
+            pieChart: { $set: pieChart },
+            documentType: { $set: documentType }
         });
         this.setState({ dataChart: updateChart });
     },

@@ -9,7 +9,7 @@ import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
 import Constant from '../Constant.js'
-import { forEach } from 'lodash'
+import { forEach, upperFirst } from 'lodash'
 
 var OrphanReview = React.createClass({
     mixins: [LinkedStateMixin],
@@ -36,7 +36,10 @@ var OrphanReview = React.createClass({
             },
             dataChart: {
                 pieChart: [],
-                columnChart: [],
+                documentType: {
+                    categories: [],
+                    series: []
+                },
                 centroidChart: [],
                 cloudWords: []
             }
@@ -575,27 +578,31 @@ var OrphanReview = React.createClass({
     },
     
     drawChart() {
-        var categoriesInfo = this.state.categories;
-		var flotPieData = [];
-		var highchart = [];
-		var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159'];
-			for(var i = 0; i < categoriesInfo.length; i++) {
-                var name = this.ucwords(categoriesInfo[i].name);
-				flotPieData.push({
-					label: name,
-		            data: [
-		                [6, categoriesInfo[i].percentage]
-		            ],
-		            color: colors[i]
-				});
-				highchart.push({
-					name: name,
-		            data: [categoriesInfo[i].doc_types[0].total,categoriesInfo[i].doc_types[1].total,categoriesInfo[i].doc_types[2].total,categoriesInfo[i].doc_types[3].total,categoriesInfo[i].doc_types[4].total]
-				});
-			}
+        var category = this.state.categories;
+		var pieChart = [],
+            documentType = {
+                categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
+                series: []
+            };
+        for(let i = 0, total = category.length; i < total; i++) {
+            pieChart[i] = {
+                name: upperFirst( category[i].name ),
+                y: category[i].percentage
+            };
+
+            documentType.series[i] = {
+                name: category[i].name,
+                data: []
+            };
+
+            for(let j = 0, data = category[i].doc_types, total = data.length; j < total; j++) {
+                documentType.series[i].data[j] = data[j].total;
+            }
+        }
+        
         var updateChart = update(this.state.dataChart, {
-            pieChart: {$set: flotPieData },
-            columnChart: {$set: highchart }
+            pieChart: { $set: pieChart },
+            documentType: { $set: documentType }
         });
         this.setState({ dataChart: updateChart });
     },

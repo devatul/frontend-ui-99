@@ -6,32 +6,40 @@ import HelpButton from '../dathena/HelpButton'
 
 var StackedChart = React.createClass({
     displayName: 'StackedChart',
+
+    getInitialState() {
+        return {
+            disabled: false,
+            colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1', '#CBCCCE', '#CFCED3']
+        };
+    },
     
     PropTypes: {
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         config: PropTypes.array.isRequired,
-        data: PropTypes.array.isRequired,
         help: PropTypes.string,
         style: PropTypes.object
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { data } = this.props
-        return !isEqual(data, nextProps.data)
+        return !isEqual(this.props.config, nextProps.config) || this.state.disabled !== nextState.disabled;
     },
 
     componentDidUpdate(prevProps, prevState) {
-        this.draw()
+        this.draw();
     },
 
     draw() {
-        var colorDisabled = ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1', '#CBCCCE', '#CFCED3'];
-        var { id, config, data } = this.props
+        var { id, config } = this.props, chart = this;
 
-        forEach(config, (val, index) => {
-            val.data = data[index]
-        })
+        for( let i = config.length - 1; i >= 0; i-- ) {
+            if(!(config[i].disabled != true)) {
+                this.setState({ disabled: true });
+            } else {
+                this.setState({ disabled: false });
+            }
+        }   
 
         var div = $('#' + id);
         var parentDiv = div.parent();
@@ -46,18 +54,20 @@ var StackedChart = React.createClass({
                 backgroundColor: null,
                 events: {
                     load: function () {
-                        var chart = this;
-                        $(chart.series).each(function (i, serie) {
-                            var serieDiv = $('ul#legend' + id + '.list-unstyled.chart-legend.serie-' + i);
-                            if(serieDiv.length > 0) {
-                                $(serieDiv).html('');
-                            } else {
-                                serieDiv = $('<ul id="legend' + id + '" class="list-unstyled chart-legend serie-'+i+'"></ul>').appendTo(parentDiv);
+                        var { series } = this;
+                        
+                        if (chart.state.disabled){
+                            for( let i = series.length - 1; i >= 0; i-- ) {
+                                for(let j = series[i].points.length - 1; j >= 0; j--) {
+
+                                    series[i].points[j].graphic.attr({
+
+                                        fill: chart.state.colorDisabled[j]
+
+                                    });
+                                }
                             }
-                            $.each(serie.data, function(i, point){
-                            $('<li><i class="legend-symbol" style="background-color: ' + point.color + '"></i>' + point.name + '</li>').appendTo(serieDiv);
-                            })
-                        });
+                        }
                     }
                 },
                 },
@@ -68,7 +78,8 @@ var StackedChart = React.createClass({
                 enabled: false
                 },
                 tooltip: {
-                pointFormat: 'Documents: {point.percentage:.1f}% / {point.y}'
+                    headerFormat: '',
+                    pointFormat: '<span style="color: {point.color}; font-weight: bold;">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
                 },
                 plotOptions: {
                 pie: {
@@ -85,37 +96,35 @@ var StackedChart = React.createClass({
                         showInLegend: true,
                         point:  {
                             events: {
-                            mouseOver: function(event){
-                                this.graphic.attr({
-                                    fill: this.color
-                                });
-                            }
-                            }
-                        },
-                        events: {
-                            mouseOver: function(){
-                            var that = this;
-                            $.each(that.points, function (i, e) {
-                                var thisColor = that.userOptions.colorsHover;
-                                this.graphic.attr({
-                                    fill: that.userOptions.colorsHover[i]
-                                });
-                            });
-                            },
-                            mouseOut: function(){
-                            var that = this;
-                            $.each(that.points, function (i, e) {
-                                this.graphic.attr({
-                                    fill: that.userOptions.colors[i]
-                                });
-                            });
+                                mouseOver: function(event){
+                                    var { series } = this, { points } = series;
+
+                                    this.graphic.attr({
+                                        fill: this.color
+                                    });
+
+                                    for(let i = points.length - 1; i >= 0; i--) {
+                                        points[i].graphic.attr({
+                                            fill: series.userOptions.colorsHover[i]
+                                        });
+                                    }
+                                },
+                                mouseOut: function(event) {
+                                    var { series } = this, { points } = series;
+
+                                    for(let i = points.length - 1; i >= 0; i--) {
+                                        points[i].graphic.attr({
+                                            fill: points[i].color
+                                        });
+                                    }
+                                }
                             }
                         }
-                    },
+                    }
                 },
                     
                     legend: {
-                    enabled: false
+                        enabled: false
                     },
                     series: config
             });
@@ -123,17 +132,39 @@ var StackedChart = React.createClass({
     },
 
     render() {
-        var { id, title } = this.props
+        var legendChart = [], { id, title, config } = this.props,
+            { disabled, colorDisabled } = this.state;
+        if(config) {
+            for(let i = config.length - 1; i >= 0; i--) {
+                var children = [];
+                for(let j = config[i].data.length - 1; j >= 0; j--) {
+                    let colorSymbol = disabled === true ? colorDisabled[j] : config[i].colors[j];
+                    children[j] = <li style={config[i].data.length <= 3 ? {
+                                        margin: '0 auto 5px',
+                                        width: config[i].data[0].name.length * 8,
+                                        float: 'none'
+                                    } : {}}>
+                                        <i className={'legend-symbol'} style={{backgroundColor: colorSymbol }}></i>
+                                    {config[i].data[j].name}
+                                </li>;
+                }
+                legendChart[i] = React.createElement('ul', { className: 'list-unstyled chart-legend serie-' + i }, children);
+            }
+        }
         return (
             <section className="panel">
                 <div className="panel-body widget-panel">
-                    <h4 className="widget-title">{title}
+                    <h4 className="widget-title">{title + ' '}
                         <HelpButton classNote="overview_timeframe help_timeframe"
                                     setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                     </h4>
                     <div className="widget-chart chart-stacked">
                         <div style={{'margin-left': '0px'}} className="chart chart-md" id={id}></div>
+                        {legendChart}
                     </div>
+                    { disabled &&
+                        <div id={id} className="chart-disabled-overlay"></div>
+                    }
                 </div>
             </section>
             );

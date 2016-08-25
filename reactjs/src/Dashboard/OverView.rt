@@ -1,5 +1,5 @@
 <rt-import name="func" from='../utils/function.js'/>
-<rt-import name="MenuBar" from="../components/BarMenu"/>
+<rt-import name="MenuBar" from="../components/MenuBar"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="DonutChart" from="../components/chart/DonutChart" />
@@ -7,7 +7,7 @@
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
-    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart; this.state.dataChart as dataChart ">
+    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
         <div class="charts container mt-lg"> 
             <div class="row">
@@ -35,7 +35,9 @@
                     <section class="panel">
                         <div class="panel-body bg-quartenary widget-panel">
                             <h4 class="widget-title">Duplicates / Twins 
-                                <HelpButton classNote="overview_timeframe help_timeframe"
+                                <HelpButton
+                                    className="overview_question_a"
+                                    classNote="overview_timeframe help_timeframe"
                                     setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                             </h4>
                             <div class="widget-summary">
@@ -68,7 +70,9 @@
                     <section class="panel">
                         <div class="panel-body bg-tertiary widget-panel">
                             <h4 class="widget-title">Accuracy  
-                                <HelpButton classNote="overview_timeframe help_timeframe"
+                                <HelpButton
+                                    className="overview_question_a"
+                                    classNote="overview_timeframe help_timeframe"
                                     setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                             </h4>
                             <div class="widget-summary"> 
@@ -77,7 +81,7 @@
                                         <div class="info">
                                             <strong class="amount">{scan.result.percentage_accuracy}%</strong>
                                         </div>
-                                        <span>340,740 documents correctly classified</span>
+                                        <h4 class="title">340,740 Documents Correctly Classified</h4>
                                     </div>
                                 </div>
                             </div>
@@ -87,21 +91,18 @@
                 <div class="col-md-4">
                     <DonutChart
                         id="confidentialityPieChart"
-                        config={configChart.confidentiality}
-                        data={dataChart.confidentiality} />
+                        config={configChart.confidentiality} />
                 </div>
                 <div class="col-md-4">
                     <StackedChart
                         id="categoryLanguagePieChart"
                         title="Category & Language"
-                        config={configChart.categoryChart}
-                        data="{[dataChart.categories, dataChart.languages]}" />
+                        config={configChart.categoryLanguage} />
                 </div>
                 <div class="col-md-4">
                     <DonutChart
                         id="documentPieChart"
-                        config={configChart.doctypes}
-                        data={dataChart.doctypes} />
+                        config={configChart.doctypes} />
                 </div>
             </div>
 

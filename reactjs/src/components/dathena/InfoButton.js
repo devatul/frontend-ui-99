@@ -60,7 +60,7 @@ var InfoButton = React.createClass({
                     aria-expanded={expanded}
                     className="btn-file-info fa fa-info-circle" aria-hidden="false">
                 </span>
-                <div ref="dropdownMenu" className="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                <div ref="dropdownMenu" className="dropdown-menu has-arrow dropdown-file-info append-to-body fix-z-index-info-button">
                     {this.props.children}
                 </div>
                 <span class="dropdown-backdrop"></span>

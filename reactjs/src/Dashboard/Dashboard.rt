@@ -92,7 +92,7 @@
                         </li>
                         <li>
                             <span class="badge">20</span>
-                            <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
+                            <Link to="/Review/GroupReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
                             

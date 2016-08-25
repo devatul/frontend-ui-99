@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
+import HelpButton from '../dathena/HelpButton'
 
 var LiquidMeter = React.createClass({
     displayName: 'LiquidMeter',
@@ -44,7 +45,10 @@ var LiquidMeter = React.createClass({
     render() {
         return (
             <div>
-                <h4>{this.props.title}</h4>
+                <h4>{this.props.title}
+                    <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
+                        setValue={this.props.help && this.props.help} />
+                </h4>
                 <div class="liquid-meter" id="LiquidMeter"  min="0" max="100" value="0"></div>
             </div>
             );

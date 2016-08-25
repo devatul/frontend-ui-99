@@ -1,51 +1,44 @@
 'use strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import HelpButton from '../dathena/HelpButton'
+import { isEqual } from 'lodash'
 
 var PieChart = React.createClass({
     displayName: 'selectButton',
-    mixins: [PureRenderMixin],
     
     PropTypes: {
+        id: PropTypes.string.isRequired,
         title: PropTypes.string,
-        data: PropTypes.array,
+        config: PropTypes.object.isRequired,
+        data: PropTypes.array.isRequired,
         help: PropTypes.string,
         style: PropTypes.object
     },
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(this.props.data != prevProps.data) {
-    //         this.draw()
-    //     }  
-    // },
+    getDefaultProps() {
+        return {
+            config: {
+                colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE']
+            }
+        };
+    },
 
-    componentDidMount() {
-        this.draw()        
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props.data, nextProps.data);
+    },
+
+    componentDidUpdate(prevProps, prevState) {
+        this.draw()
     },
 
     draw() {
-        var colors = [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'];
-        var colorsHover  = [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
-        var confidentialityChartData = [{
-            name: 'Public',
-            y: 50
-        }, {
-            name: 'Internal',
-            y: 25,
-        }, {
-            name: 'Confidential',
-            y: 15
-        }, {
-            name: 'Secret',
-            y: 6
-        }, {
-            name: 'Banking Secrecy',
-            y: 4
-        }];
 
-        var div = $('#confidentialityChart');
+        var { config, data, id } = this.props,
+            { colors, colorsHover } = config;
+        debugger
+        var div = $('#' + id);
         var parentDiv = div.closest('.tab-pane');
         if (div.length){
                 div.highcharts({
@@ -58,12 +51,20 @@ var PieChart = React.createClass({
                         events: {
                         load: function () {
                                 var chart = this;
-                                $(chart.series).each(function (i, serie) {
-                                var serieDiv = $('<ul class="list-unstyled chart-legend" id="confidentialityChartLegend"></ul>').appendTo(parentDiv);
-                                $.each(serie.data, function(i, point){
-                                    $('<li><i class="legend-symbol" style="background-color: ' + point.color + '"></i>' + point.name + '</li>').appendTo(serieDiv);
-                                })
-                                });
+                                var legendChart = document.createElement('ul');
+                                    legendChart.className = 'list-unstyled chart-legend';
+                                    legendChart.id = 'confidentialityChartLegend';
+                                if($('#' + legendChart.id).length === 0 ) {
+                                    for(let i = chart.series.length - 1; i >= 0; i--) {
+
+                                        for(let point = chart.series[i].data, j = point.length - 1; j >= 0; j--) {
+                                            legendChart.innerHTML += '<li><i class="legend-symbol" style="background-color: ' + point[j].color + '"></i>' + point[j].name + '</li>';
+                                        }
+
+                                    }
+
+                                    $(legendChart).appendTo(parentDiv);
+                                }
                             }
                         },
                     },
@@ -74,7 +75,8 @@ var PieChart = React.createClass({
                         enabled: false
                     },
                     tooltip: {
-                        pointFormat: 'Documents: {point.percentage}% / {point.y}'
+                        headerFormat: '',
+                        pointFormat: '<span style="color: {point.color}; font-weight: bold; ">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
                     },
                     plotOptions: {
                         pie: {
@@ -99,8 +101,8 @@ var PieChart = React.createClass({
                             point:  {
                                 events: {
                                     mouseOver: function(event){
-                                    var data = this.series.data;
-                                    var colorsHover = this.series.userOptions.colorsHover;
+                                    var data = this.series.data, 
+                                        colorsHover = this.series.userOptions.colorsHover;
 
                                     this.graphic.attr({
                                         fill: this.color
@@ -113,8 +115,8 @@ var PieChart = React.createClass({
                                     }
                                     },
                                     mouseOut: function(event) {
-                                        var data = this.series.data;
-                                        var colors = this.series.userOptions.colors;
+                                        var data = this.series.data, 
+                                            colors = this.series.userOptions.colors;
                                         for(let i = data.length - 1; i >= 0; i--) {
                                             data[i].graphic.attr({
                                                 fill: colors[i]
@@ -133,22 +135,22 @@ var PieChart = React.createClass({
                         colorByPoint: true,
                         colors: colors,
                         colorsHover: colorsHover,
-                        data: confidentialityChartData
+                        data: data
                     }]
             });
         }
     },
 
     render() {
+        var { title, id, help } = this.props;
         return (
             <div>
-                <h4 className="chart-title">{this.props.title}
+                <h4 className="chart-title">{title}
                     <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
-                        setValue={this.props.help} />
+                        setValue={help} />
                 </h4>
-                <div class="chart-container">
-                    <div id="confidentialityChartLegend"></div>
-                    <div id="confidentialityChart"></div>
+                <div className="chart-container">
+                    <div id={id}></div>
                 </div>
             </div>
             );

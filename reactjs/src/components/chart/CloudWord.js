@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
+import HelpButton from '../dathena/HelpButton'
 
 var CloudWord = React.createClass({
     displayName: 'CloudWord',
@@ -16,7 +17,6 @@ var CloudWord = React.createClass({
     
     componentDidUpdate(prevProps, prevState) {
         if(this.props.data != prevProps.data) {
-            debugger
             this.draw();
         }  
     },
@@ -25,7 +25,6 @@ var CloudWord = React.createClass({
     draw() {
         var wordframe = $(this.refs.wordframe);
         var data = this.props.data;
-        debugger
         $(wordframe).html('');
         $(wordframe).jQCloud(data, {
           autoResize: true
@@ -36,7 +35,10 @@ var CloudWord = React.createClass({
     render() {
         return (
             <div>
-                <h4 class="review_cloud_p">{this.props.title}</h4>
+                <h4 class="review_cloud_p">{this.props.title}
+                    <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
+                        setValue={this.props.help && this.props.help} />
+                </h4>
                 <div ref="wordframe" id="words-cloud"></div>
             </div>
             );

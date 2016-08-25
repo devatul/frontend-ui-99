@@ -1,5 +1,5 @@
- <rt-import name="BarName" from="../components/BarMenu"/>
+ <rt-import name="MenuBar" from="../components/MenuBar"/>
  <div>
- <BarName title="Document Categorisation and Classification Review" showInfo={true} showFilter={false}></BarName>
+ <MenuBar title="Document Categorisation and Classification Review" showInfo={true} showFilter={false}></MenuBar>
 	{this.props.children}
 </div>

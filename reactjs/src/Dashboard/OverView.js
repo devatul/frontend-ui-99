@@ -14,43 +14,10 @@ var OverView = React.createClass
             scan: {
                 result: {}
             },
-
-            dataChart: {
-                categories: [],
-                confidentiality: [],
-                languages: [],
-                doctypes: []
-            },
-
             configChart: {
-                categoryChart: [{
-                    name: 'Category',
-                    innerSize: '80%',
-                    colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896'],
-                    colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6'],
-                    data: []
-                    }, {
-                    name: 'Language',
-                    size: '80%',
-                    innerSize: '60%',
-                    colors: [ '#2ecd71', '#9b58b5', '#33495e'],
-                    colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad'],
-                    data: []
-                }],
-                confidentiality: {
-                    name: 'Confidentiality',
-                    innerSize: '60%',
-                    colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
-                    colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
-                    data: []
-                },
-                doctypes: {
-                    name: 'Document Type',
-                    innerSize: '60%',
-                    colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
-                    colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
-                    data: []
-                }
+                categoryLanguage: [],
+                confidentiality: {},
+                doctypes: {}
             }
 		};
 	},
@@ -72,26 +39,27 @@ var OverView = React.createClass
   	},
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { scan, dataChart } = this.state
+        var { scan, dataChart, configChart } = this.state,
+            { categoryLanguageChart, confidentiality, doctypes } = configChart,
+            nextConfig = nextState.configChart;
 
-        return !isEqual(scan.result, nextState.scan.result) || !isEqual(dataChart, nextState.dataChart);
+        return !isEqual(scan.result, nextState.scan.result) || !isEqual( configChart, nextConfig );
     },
 
     componentDidUpdate(prevProps, prevState) {
-        var prevResult = prevState.scan.result
-        var result = this.state.scan.result
+        var prevResult = prevState.scan.result,
+            result = this.state.scan.result;
 
         if(!isEqual( result, prevResult )) {
             var { iconCategories } = Constant
 
-            this.updateDataChart( result, prevResult )
-
             forEach(result.categories, (val, index) => {
                 if( val.name == iconCategories[index].name )
                     val.class = iconCategories[index].class
-            } )
-        }
+            })
 
+            this.updateChart( result, prevResult );
+        }
     },
 
     startScan() {
@@ -118,64 +86,154 @@ var OverView = React.createClass
         })
     },
 
-    updateDataChart(result, prevResult) {
-        var confidentiality = [], categories = [], languages = [], doctypes = [];
-        var { confidentialities_chart_data, categories_chart_data } = result
-        var { dataChart } = this.state
-
-        //add confidentiality
-        if(!isEqual(confidentialities_chart_data, prevResult.confidentialities_chart_data)) {
-            forEach(confidentialities_chart_data, (val, index) => {
-                confidentiality.push({
-                    name: upperFirst(val.name),
-                    y: val.total_docs
-                })
-            })
+    updateChart(result, prevResult) {
+        var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
+            { categoryLanguage, confidentiality, doctypes } = this.state.configChart;
+        
+        if( !isEqual( result.categories_chart_data, prevResult.categories_chart_data )
+            || !isEqual( result.languages, prevResult.languages) ) {
+            categoryLanguageData = this.categoryLanguageChart();
         } else {
-            confidentiality = dataChart.confidentiality
+            categoryLanguageData = categoryLanguage;
         }
-        //add categories
-        if(!isEqual(categories_chart_data, prevResult.categories_chart_data)) {
-            forEach(categories_chart_data, (val, index) => {
-                categories.push({
-                    name: upperFirst(val.name),
-                    y: val.total_docs
-                })
-            })
+        if( !isEqual( result.confidentialities_chart_data, prevResult.confidentialities_chart_data )) {
+            confidentialityData = this.confidentialityChart();
         } else {
-            categories = dataChart.categories
+            confidentialityData = confidentiality;
+        }
+        if( !isEqual( result['doc-types'], prevResult['doc-types'] ) ) {
+            doctypeData = this.doctypesChart();
+        } else {
+            doctypeData = doctypes;
+        }
+
+        let updateData = update(this.state.configChart, {
+            categoryLanguage: { $set: categoryLanguageData },
+            confidentiality: { $set: confidentialityData },
+            doctypes: { $set: doctypeData }
+        });
+
+        this.setState({ configChart: updateData });
+    },
+
+    categoryLanguageChart() {
+        var categoryChart = {
+                name: 'Category',
+                innerSize: '80%',
+                disabled: false,
+                colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896'],
+                colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6'],
+                data: []
+            },
+            languageChart = {
+                name: 'Language',
+                size: '80%',
+                innerSize: '60%',
+                disabled: false,
+                colors: [ '#2ecd71', '#9b58b5', '#33495e'],
+                colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad'],
+                data: []
+            },
+            categoryLanguageChart = [],
+            categoryNumber = 0,
+            languageNumber = 0,
+            { dataChart } = this.state,
+            { languages, categories_chart_data } = this.state.scan.result;
+        //add categories
+        for(let i = categories_chart_data.length - 1; i >= 0; i--) {
+            categoryChart.data[i] = {
+                name: upperFirst(categories_chart_data[i].name),
+                y: categories_chart_data[i].total_docs
+            };
         }
         //add languages
-        if(!isEqual(result.languages, prevResult.languages)) {
-            forEach(result.languages, (val, index) => {
-                languages.push({
-                    name: upperFirst(val.name),
-                    y: val.total_docs
-                })
-            })
-        } else {
-            languages = dataChart.languages
+        for(let i = languages.length - 1; i >= 0; i--) {
+            languageChart.data[i] = {
+                name: upperFirst(languages[i].name),
+                y: languages[i].total_docs
+            };
         }
-        //add doctypes
-        if(!isEqual( result['doc-types'], prevResult['doc-types'] )) {
-            forEach(result["doc-types"], (val, index) => {
-                doctypes.push({
-                    name: upperFirst(val.name),
-                    y: val.total_docs
-                })
-            })
-        } else {
-            doctypes = dataChart.doctypes
+
+        categoryNumber = categoryChart.data.length;
+        languageNumber = languageChart.data.length;
+
+        if(languageNumber > 1 && categoryNumber > 1) {
+            categoryLanguageChart[0] = categoryChart;
+            categoryLanguageChart[1] = languageChart;
         }
-        //update into state
-            var setData = update(this.state.dataChart, {
-                categories: { $set: categories },
-                confidentiality: { $set: confidentiality },
-                languages: { $set: languages },
-                doctypes: { $set: doctypes }
-            })
-            this.setState({ dataChart: setData });
+
+        if( languageNumber <= 1 && categoryNumber > 1) {
+            categoryChart.innerSize = '60%';
+            categoryLanguageChart[0] = categoryChart;
+        }
+
+        if( categoryNumber <= 1 && languageNumber > 1) {
+            languageChart.size = '100%';
+            categoryLanguageChart[0] = languageChart;
+        } else {
+            categoryLanguageChart[0] = categoryChart;
+        }
+
+        if( categoryNumber <= 1 && languageNumber <= 1 ) {
+            categoryChart.disabled = true;
+            languageChart.disabled = true;
+
+            categoryLanguageChart[0] = categoryChart;
+            categoryLanguageChart[1] = languageChart;
+        }
+        
+        return categoryLanguageChart;
     },
+
+    confidentialityChart() {
+        var confidentialityChart = {
+            name: 'Confidentiality',
+            disabled: false,
+            innerSize: '60%',
+            colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+            colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+            data: []
+        }, { confidentialities_chart_data } = this.state.scan.result;
+        
+        for( let i = confidentialities_chart_data.length - 1; i >= 0; i-- ) {
+            confidentialityChart.data[i] = {
+                name: upperFirst(confidentialities_chart_data[i].name),
+                y: confidentialities_chart_data[i].total_docs
+            };
+        }
+
+        if( confidentialityChart.data.length <= 1 ) {
+            confidentialityChart.disabled = true;
+        }
+
+        return confidentialityChart;
+    },
+
+    doctypesChart() {
+        var doctypesChart = {
+                name: 'Document Type',
+                disabled: false,
+                innerSize: '60%',
+                colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+                data: []
+            },
+            doctypes = this.state.scan.result['doc-types'];
+        
+        for( let i = doctypes.length - 1; i >= 0; i-- ) {
+            doctypesChart.data[i] = {
+                name: upperFirst(doctypes[i].name),
+                y: doctypes[i].total_docs
+            };
+        }
+
+        if( doctypesChart.data.length <= 1 ) {
+            doctypesChart.disabled = true;
+        }
+
+        return doctypesChart;
+    },
+
     handleFilter: function(bodyRequest) {
         if(!isEmpty(bodyRequest)) {
             makeRequest({
