@@ -1,4 +1,4 @@
-<rt-import name="MultiSelectBox" from="../components/dathena/multiselectBox"/>
+<rt-import name="MultiSelectBox" from="./components/MultiselectBox"/>
 <rt-import name="NumberUser" from="./components/MultiselectBoxNumberUser"/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>

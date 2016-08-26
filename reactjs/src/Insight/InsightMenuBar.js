@@ -350,6 +350,7 @@ var MenuBar1 = React.createClass({
         });
     },
     handleSelectBoxChange: function(field, index) {
+        console.log('field_then', field)
         var updateData = update(this.state.dataSelectBox, {
             [field.selectId]: {
                 [index]: {
