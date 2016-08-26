@@ -29,9 +29,7 @@ var OverView = React.createClass
     },
 
 	componentDidMount() {
-        $('#bell').click();
         javascriptTodo();
-        this.startScan();
         if(this.state.scan.result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
         }

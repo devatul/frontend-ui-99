@@ -5,34 +5,29 @@ import update from 'react-addons-update'
 import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './MenuBar.rt'
-import { assignIn, isEqual, forEach, concat, find, remove } from 'lodash'
+import { assignIn, isEqual, forEach, concat, find, remove, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var MenuBar = React.createClass
 ({
-  static: {
-    categoryId: 'categories',
-    confidentialId: 'confidentialities',
-    doctypeId: 'doc-types',
-    languageId: 'languages',
-    selectAll: 'select_all'
-  },
 	getInitialState() {
 	    return {
             listLabel: {
                 categories: [],
                 confidentialities: [],
-                doctypes: [],
+                'doc-types': [],
                 languages: []
             },
             filter: {
-                params: {},
+                params: {
+                    categories: [],
+                    confidentialities: [],
+                    'doc-types': [],
+                    languages: []
+                },
                 labels: []
             },
-            dataSelectBox: {},
-            scan_result: {},
-            filterLabel: [],
-            eventContext: ''
+            scanResult: {},
 	    };
 	},
 	propTypes: {
@@ -44,43 +39,52 @@ var MenuBar = React.createClass
 
     componentDidMount() {
         if(this.props.showFilter) {
-            this.getConfidentiality(true);
-            //this.getCategory(true);
-            //this.getDoctypes(true);
-            //this.getLanguages(true);
+            let updateLabel = update(this.state.listLabel, {
+                categories: { $set: this.getCategory() },
+                confidentialities: { $set: this.getConfidentiality() },
+                'doc-types': { $set: this.getDoctypes() },
+                languages: { $set: this.getLanguages() }
+            });
+            this.setState({ listLabel: updateLabel });
         }
         if(this.props.showInfo) {
-            this.getScanResult();
+            this.getscanResult();
         }
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { filter, scan_result, listLabel } = this.state;
-        return !isEqual( scan_result, nextState.scan_result )
+        var { filter, scanResult, listLabel } = this.state;
+        return !isEqual( scanResult, nextState.scanResult )
             || !isEqual( listLabel, nextState.listLabel )
-            || !isEqual( filter.labels, nextState.filter.labels );
+            || !isEqual( filter.labels, nextState.filter.labels )
+            || !isEqual( filter.params, nextState.filter.params );
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.filter != prevState.filter) {
-            var filter = this.state.filter;
-            if(filter.languages != null) {
-            filter.languages.length === 0 && delete this.state.filter.languages;
+        if(!isEqual( this.state.filter.params, prevState.filter.params )) {
+            var { params } = this.state.filter,
+                {
+                    categories,
+                    languages,
+                    confidentialities
+                } = this.state.filter.params;
+
+            if(categories && categories.length === 0) {
+                delete params.categories;
             }
-            if(filter["doc-types"] != null) {
-            filter["doc-types"].length === 0 && delete this.state.filter["doc-types"];
+
+            if(confidentialities && confidentialities.length === 0) {
+                delete params.confidentialities;
             }
-            if(filter.confidentialities != null) {
-            filter.confidentialities.length === 0 && delete this.state.filter.confidentialities;
+
+            if(languages && languages.length === 0) {
+                delete params.languages;
             }
-            if(filter.categories != null) {
-            filter.categories.length === 0 && delete this.state.filter.categories;
+
+            if(params["doc-types"] && params["doc-types"].length === 0) {
+                delete params["doc-types"];
             }
-            this.props.handleFilter(this.state.filter);
-        }
-        if(this.state.dataSelectBox != prevState.dataSelectBox) {
-            this.state.eventContext.length > 1 &&
-                this.updateFilterList(this.state.eventContext);
+            this.props.handleFilter(params);
         }
     },
     configListLabel: function(data) {
@@ -89,99 +93,138 @@ var MenuBar = React.createClass
         }
     },
 	getCategory: function(async) {
+        let arr = [];
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
                 this.configListLabel(data);
-
-                let updateList = update(this.state.listLabel, {
-                    categories: { $set: data }
-                });
-                this.setState({ listLabel: updateList });
+                arr = data;
             }
         });
+        return arr;
     },
     getConfidentiality: function(async) {
+        let arr = [];
         makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.configListLabel(data);
-                debugger
-                let updateList = update(this.state.listLabel, {
-                    confidentialities: { $set: data }
-                });
-                this.setState({ listLabel: updateList });
+                arr = data;
             }
         });
+        return arr;
     },
     getDoctypes: function(async) {
+        let arr = [];
         makeRequest({
             path: 'api/label/doctypes/',
             success: (data) => {
                 this.configListLabel(data);
-
-                let updateList = update(this.state.listLabel, {
-                    doctypes: { $set: data }
-                });
-                this.setState({ listLabel: updateList });
+                arr = data;
             }
         });
+        return arr;
     },
     getLanguages: function(async) {
+        let arr = [];
         makeRequest({
             path: 'api/label/languages/',
             success: (data) => {
                 this.configListLabel(data);
-
-                let updateList = update(this.state.listLabel, {
-                    languages: { $set: data }
-                });
-                this.setState({ listLabel: updateList });
+                arr = data;
             }
         });
+        return arr;
     },
-    clearFilter: function() {
-        var data = this.state.dataSelectBox;
-        forEach(this.state.filterLabel, function(object, index) {
-            var updateData = update(data,{
-                [object.selectId]: {
-                    [object.index]: { $merge: { checked: false } }
+    onclearFilter: function() {
+        let { listLabel, filter } = this.state,
+            { labels, params } = this.state.filter;
+
+        for(let i = labels.length - 1; i >= 0; i--) {
+            let propertyIndex = labels[i].id.split('_');
+
+            listLabel = update(listLabel, {
+                [propertyIndex[0]]: {
+                    [propertyIndex[1]]: { checked: { $set: false } }
                 }
             });
-            data = updateData;
-        }.bind(this));
-        this.setState({ dataSelectBox: data, filterLabel: [] });
+        }
+        
+        filter = update(filter, {
+            params: { $set: {} },
+            labels: { $set: [] }
+        });
+
+        this.setState({ listLabel: listLabel, filter: filter });
     },
 
     onClickLabel: function(label, index) {
-        let { labels } = this.state.filter;
-        var updateLabel = update(this.state.filter, {
-            labels: { $splice: [[index, 1]] }
-        });
-        this.setState({ filter: updateLabel });
+        let { labels } = this.state.filter,
+            { listLabel } = this.state,
+            propertyIndex = label.id.split('_'),
+
+            updateLabel = update(this.state.filter, {
+                labels: { $splice: [[index, 1]] },
+                params: {
+                    [propertyIndex[0]]: {
+                        $apply: (arr) => {
+                            let label = listLabel[propertyIndex[0]][propertyIndex[1]];
+                            arr = cloneDeep(arr);
+                            
+                            for(let i = arr.length - 1; i >= 0; i--) {
+                                if(arr[i].id === label.id) {
+                                    arr.splice(i, 1);
+                                    break;
+                                }
+                            }
+                            return arr;
+                        }
+                    }
+                }
+            }),
+            updateList = update(listLabel, {
+                [propertyIndex[0]]: {
+                    [propertyIndex[1]]: { checked: { $set: false } }
+                }
+            });
+
+        this.setState({ filter: updateLabel, listLabel: updateList });
     },
 
-    updateFilterList: function(selectId) {
-        var filter = assignIn({}, this.state.filter);
-        var arr = [];
-        forEach(this.state.dataSelectBox[selectId], function(object, index) {
-            if(object.checked) {
-                arr.push({
-                    id: object.id,
-                    name: object.name
-                });
+    updateFilterParams: function(property, contextChange) {
+        let param,
+            indexParam,
+            { index, checked } = contextChange,
+            params = this.state.filter.params,
+            listLabel = this.state.listLabel[property];
+
+        if(!checked) {
+            var arr = params[property];
+            for(let i = arr.length - 1; i >= 0; i--) {
+                if(arr[i].id === listLabel[index].id) {
+                    indexParam = i;
+                }
             }
+        }
+
+        if(!params[property]) {
+            params[property] = [];
+        }
+
+        param = {
+            id: listLabel[index].id,
+            name: listLabel[index].name
+        };
+
+        return update(params, {
+            [property]: checked ? { $push: [param] } : { $splice: [[indexParam, 1]] }
         });
-        filter[selectId] = arr;
-        this.setState({ filter: filter });
     },
 
     addLabel: function(label) {
-        let updateLabel = update(this.state.filter, {
-            labels: { $push: [label] }
+        return update(this.state.filter.labels, { 
+            $push: [label] 
         });
-
-        this.setState({ filter: updateLabel });
     },
 
     deleteLabel(id) {
@@ -193,121 +236,102 @@ var MenuBar = React.createClass
             }
         }
 
-        let updateLabel = update(this.state.filter, {
-            labels: { $splice: [[indexLabel, 1]] }
-        });
-        
-        this.setState({ filter: updateLabel });
-    },
-
-    renderLabel() {
-        var child = [], { labels } = this.state.filter, total = labels.length;
-			if(total > 0) {
-				for(let i = total - 1; i >= 0; i-- ) {
-					child[i] = <span
-									key={labels[i].id}
-									className="filter-label label label-info">
-									<a className="filter-remove"
-										onClick={()=>this.onClickLabel(labels[i], i)}>
-										<i className="fa fa-times"></i>
-									</a>
-									<span className="option-name">{labels[i].name}</span>
-								</span>;
-				}
-			}
-		return (
-			<div>
-				{child}
-				{ total > 0 &&
-				<a onClick={this.clearFilter} className={'filter-label label label-info'} style={{backgroundColor: '#747474'}}>
-					Clear all
-				</a>
-				}
-			</div>
-		);
-    },
-
-    deleteLabelByIdName: function(field, id, name) {
-        var arr = concat(this.state.filterLabel);
-        remove(arr, {id: id, name: name});
-        this.setState({ filterLabel: arr });
+        return update(this.state.filter.labels, { $splice: [[indexLabel, 1]] });
     },
 
     handleSelectBoxChange: function(field) {
-        let listName = '', { listLabel } = this.state, { index, checked } = field.contextChange;
-        switch (field.id) {
-            case 'confidentialities': {
-                    listName = 'confidentialities';
-                }
-                break;
-            case 'categories': {
-                    listName = 'categories';
-                }
-                break;
-            case 'languages': {
-                    listName = 'languages';    
-                }
-                break;
-            case 'doctypes': {
-                    listName = 'doctypes';
-                }
-                break;
-        }
-        if(listName) {
-            let updateList = update(this.state.listLabel, {
-                [listName]: {
-                    [index]: {
-                        checked: { $set: checked }
+        let property = field.id,
+            { listLabel } = this.state,
+            { index, checked } = field.contextChange;
+            
+        if(property) {
+            var updateList = update(this.state.listLabel, {
+                    [property]: {
+                        [index]: {
+                            checked: { $set: checked }
+                        }
                     }
-                }
-            }),
-            label = {
-                id: field.id + '_' + index,
-                name: listLabel[listName][index].name
-            };
+                }),
+                
+                label = {
+                    id: field.id + '_' + index,
+                    name: listLabel[property][index].name
+                },
 
-            this.setState({ listLabel: updateList });
+                updateLabel = checked ? this.addLabel(label) : this.deleteLabel(label.id),
 
-            if( checked ) {
-                this.addLabel(label);
-            } else {
-                this.deleteLabel(label.id);
-            }
+                updateParam = this.updateFilterParams( property, field.contextChange ),
+
+                updateFilter = update(this.state.filter, {
+                    params: { $set: updateParam },
+                    labels: { $set: updateLabel }
+                });
+            this.setState({ filter: updateFilter, listLabel: updateList });
         }
     },
 
     handleSelectAll: function(field) {
-        var arr = concat(this.state.dataSelectBox[field.selectId]);
-        forEach(arr, function(object, index) {
-            object.checked = field.checked;
-        }.bind(this));
-        var updateData = update(this.state.dataSelectBox, {
-            [field.selectId]: {$set: arr }
-        });
-        this.setState({ dataSelectBox: updateData, eventContext: field.selectId });
+        var updateLabel = update(this.state.listLabel, {
+                [field.id]: {
+                    $apply: function(arr) {
+                        arr = cloneDeep(arr);
+                        for(let i = arr.length - 1; i >= 0; i--) {
+                            arr[i].checked = field.checked;
+                        }
+                        return arr;
+                    } 
+                }
+            }),
+            updateFilter = update(this.state.filter, {
+               params: {
+                    [field.id]: field.checked ? {
+                        $apply: () => {
+                           let params = [], arr = updateLabel[field.id], i = arr.length - 1;
+                           for(; i >= 0; i--) {
+                               params[i] = {
+                                   id: arr[i].id,
+                                   name: arr[i].name
+                               };
+                           }
+                           return params;
+                       }
+                    } : {
+                        $set: []
+                    }
+                },
+
+                labels: {
+                    $apply: (arr) => {
+                        if( field.checked === false ) {
+                            arr = cloneDeep(arr);
+
+                            for(let i = arr.length - 1; i >= 0; i--) {
+                                let pattern = new RegExp('^' + field.id + '_.*', 'g');
+                                if(pattern.test(arr[i].id)) {
+                                    arr.splice(i, 1);
+                                }
+                            }
+                        }
+                        return arr;
+                    }
+                }
+            });
+
+        this.setState({ listLabel: updateLabel, filter: updateFilter });
     },
     
-    getScanResult(){
-      $.ajax({
-          url: Constant.SERVER_API + 'api/scan/',
-          dataType: 'json',
-          type: 'GET',
-          beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-          },
-          success: function(data) {
-              var update_scan_result = update(this.state, {
-                  scan_result: {$set: data}
-              });
-              this.setState(update_scan_result);
-          }.bind(this),
-          error: function(xhr, status, error) {
-              if(xhr.status === 401)
-              {
-                  browserHistory.push('/Account/SignIn');
-              }
-          }.bind(this)
-      });  
+    getscanResult() {
+        makeRequest({
+            path: 'api/scan/',
+            success: (data) => {
+                let { scanResult } = this.state,
+                    updateResult = update(scanResult, {
+                        $set: data
+                    });
+                
+                this.setState({ scanResult: updateResult });
+            }
+        });  
     },
 	 render:template
 });

@@ -24,7 +24,6 @@ var multiselectBox = React.createClass({
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
-        debugger
         if(this.props.data != nextProps.data) {
             return true;
         }
@@ -70,17 +69,17 @@ var multiselectBox = React.createClass({
     },
 
     handleSelectAll: function(event) {
-        var field = {
-            name: event.target.name,
-            selectId: this.props.id,
-            checked: event.target.checked,
-            value: event.target.value
-        }
+        var { id, title, data, checkDefault } = this.props, { checked } = event.target,
+            field = {
+                id: id,
+                title: title,
+                data: data,
+                checked: checked
+            };
     	this.props.onSelectAll(field);
     },
     render() {
             var children = [];
-            debugger
             _.forEach(this.props.data, function(obj, index) {
                 children[index] =  <li className={obj.checked && 'active'}>
                                     <a tabIndex={index}>

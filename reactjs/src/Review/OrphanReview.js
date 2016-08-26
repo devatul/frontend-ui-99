@@ -9,7 +9,7 @@ import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
 import Constant from '../Constant.js'
-import { forEach, upperFirst } from 'lodash'
+import { forEach, upperFirst, replace } from 'lodash'
 
 var OrphanReview = React.createClass({
     mixins: [LinkedStateMixin],
@@ -443,7 +443,9 @@ var OrphanReview = React.createClass({
             index: sampleIndex,
             contents: saveDocument
         });
-        listDocument[sampleIndex].current.status = "accept";
+        if(samplesDefault[sampleIndex].current.confidential > -1 && listDocument[sampleIndex].current.category > -1) {
+            listDocument[sampleIndex].current.status = "accept";            
+        }
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
             samplesDocument: {$set: listDocument}
@@ -506,7 +508,7 @@ var OrphanReview = React.createClass({
     },
     cutString: function(str) {
         if(str != null && str.length > 0) {
-            return str.substring(6,str.length);
+            return replace(str, 'Group', '');
         }
     },
     cutPath: function(str) {

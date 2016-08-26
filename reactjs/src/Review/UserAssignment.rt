@@ -24,10 +24,10 @@
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">Sample Parameters
+                      <h2 class="panel-title">Sample Parameters 
                           <HelpButton
                               classNote="note_chart_content"
-                              setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed" />
+                              setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
                       </h2>
                       <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                           <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelParameter"></a>
@@ -35,9 +35,9 @@
                   </header>
                   <div id="panelParameter" class="panel-body sample-params nav-collapse collapse in">
                     <div class="form-group">
-                      <label class="">As % of overall {this.state.category.current.name} Category</label>
+                      <label class="">Fixed Number of Document</label>
                       <select name="state" class="form-control ddList">
-                        <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
+                       <option rt-repeat="docPercentage in this.state.category.info.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
                       </select>
                       <ValidationButton
                           id='category'
@@ -46,9 +46,9 @@
                     </div>
                     <div class="or-divider"><span>OR</span></div>
                     <div class="form-group">
-                      <label class="">Fixed Number of Documents</label>
+                      <label class="">As % of overall {this.state.category.current.name} Category</label>
                       <select name="state" class="form-control ddList">
-                       <option rt-repeat="docPercentage in this.state.category.info.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
+                        <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
                       </select>
                       <ValidationButton
                           id='fixedNumber'
@@ -91,7 +91,7 @@
                               id="confidentialityChart"
                               title="Confidentiality Overview"
                               data={this.state.dataChart.confidentiality}
-                              help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name}" />
+                              help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
                         </div>
                         <div class="col-sm-6">
                           <ColumnChart
@@ -99,7 +99,7 @@
                               title="Document Type per Level of Confidentiality"
                               categories={this.state.dataChart.documentType.categories}
                               series={this.state.dataChart.documentType.series}
-                              help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name}" />
+                              help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name} category." />
                         </div>
                       </div>
                     </div>
@@ -113,7 +113,7 @@
                       <h2 class="panel-title">User Selection
                         <HelpButton
                               classNote="note_chart_content"
-                              setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name}" />
+                              setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name} category." />
                       </h2>
                       <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                           <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelUserSelection"></a>
@@ -128,7 +128,7 @@
                                 <h4 class="chart-title pull-left mt-sm mr-md">Users
                                   <HelpButton
                                     classNote="note_chart_content"
-                                    setValue="Most active users creating or modifying (depending on the type of Reviewer chose) {this.state.category.current.name}" />
+                                    setValue="Most active users creating or modifying (depending on the type of Reviewer chose) {this.state.category.current.name} document" />
                                 </h4>
                                 <ul class="filter-buttons list-unstyled pull-left">
                                     <li class="dropdown">

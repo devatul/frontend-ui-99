@@ -329,14 +329,15 @@ var UserAssignment = React.createClass({
     },
     
     handleOnChangeSelectButton: function(checked, index) {
-        var { reviewers } = this.state.category;
-        var { request } = this.state.datafilter;
-        var indexReviewer = findIndex(request.reviewers, {id: reviewers[index].id });
-        var updateRequest = update(this.state.datafilter, {
-            request: {
-                reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [reviewers[index]] } : {$splice: [[indexReviewer, 1]]}
-            }
-        });
+        var { reviewers } = this.state.category, 
+            { request } = this.state.datafilter,
+            indexReviewer = findIndex(request.reviewers, {id: reviewers[index].id }),
+            
+            updateRequest = update(this.state.datafilter, {
+                request: {
+                    reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [reviewers[index]] } : {$splice: [[indexReviewer, 1]]}
+                }
+            });
         this.setState({ datafilter: updateRequest });
     },
     handleOnChangeSelectAll: function(checked) {

@@ -70,7 +70,7 @@
                                                         <td class="text-right text-num">{this.state.statistics.total_number_documents}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-left><span>Number of Documents Reviewed</span>
+                                                        <td class="text-left"><span>Number of Documents Reviewed</span>
                                                             <HelpButton className="dropdown-file-info-holder"
                                                                 classNote="review_question_chart"
                                                                 setValue="This represents the number of documents that 99 has been successful in classifying." />
@@ -207,7 +207,7 @@
                             </div>
                         </header>
                         <div id="panelOrphanMyAction" class="panel-body nav-collapse collapse in">
-                            <p class="document_note">You have {this.state.samplesDocument.length - this.state.validateNumber} documents to assign in {this.state.orphanCurrent.name} by latest 15th August</p>
+                            <p class="document_note">You have {this.state.samplesDocument.length - this.state.validateNumber} documents to assign in {this.cutString(this.state.orphanCurrent.name)} by latest 15th August</p>
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <button rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)" type="button" class="mb-md mr-xs btn btn-green approve-button" onClick="(event)=>this.approveButon()">Approve</button>
                                 <div rt-if="(this.state.validateNumber > 0 && this.state.validateNumber == this.state.samplesDocument.length)" class="alert alert-success">

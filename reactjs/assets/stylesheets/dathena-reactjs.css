@@ -7,7 +7,7 @@
 }
 .center-padding-table-overview {
     text-align: left;
-    padding-left: 95px !important;
+    padding-left: 105px !important;
 }
 
 .fix-center-info-toggle-button {
@@ -98,4 +98,9 @@
     margin: 0 auto 5px;
     width: 40px;
     float: none;
+}
+
+.chart-stacked .chart-legend.serie-1 {
+    right: 15px;
+    top: -15px;
 }
