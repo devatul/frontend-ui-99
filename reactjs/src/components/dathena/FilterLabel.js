@@ -48,7 +48,7 @@ var FilterLabel = React.createClass({
 
 				{ this.props.data.length > 0 && this.props.onClear &&
 				<a onClick={this.clearFilter} className={'filter-label label label-info'} style={{backgroundColor: '#747474'}}>
-					Clear <span style={{'text-transform' : 'lowercase'}}>all</span>
+					Clear <span style={{textTransform : 'lowercase'}}>all</span>
 				</a>
 				}
 			</div>

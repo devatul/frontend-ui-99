@@ -16,7 +16,7 @@ var Indentity = React.createClass({
 	getInitialState() {
 
 		return {
-		
+
 			sizeFilter : 0,
 			scan_result:{},
 			rickInsight :{
@@ -48,8 +48,8 @@ var Indentity = React.createClass({
 				]
 			},
 
-			high_risk_users: [],
-			high_risk_directory : [],
+			high_risk_users: {},
+			high_risk_directory : {},
 			key_contributor : []
 			
 		};
@@ -67,6 +67,7 @@ var Indentity = React.createClass({
 					xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 				},
 				success: function(data) {
+					console.log('data', data)
 					this.updateChartData(data);
 					
 					this.setState(update(this.state, {
@@ -111,6 +112,7 @@ var Indentity = React.createClass({
 			}
 		})
 		
+		console.log('high_risk_users', this.state.high_risk_users)
 		categories = []
 		dataChart = []
 		categories.length =0 
@@ -120,10 +122,10 @@ var Indentity = React.createClass({
 
 			categories.push(data.high_risk_directory[i].name);
 			dataChart.push(
-			{
-				y: data.high_risk_directory[i].docs,
-				color: colors[i],
-			}
+				{
+					y: data.high_risk_directory[i].docs,
+					color: colors[i],
+				}
 			)
 
 		}
@@ -133,7 +135,26 @@ var Indentity = React.createClass({
 				data : dataChart
 			}
 		})
-		
+		console.log('high_risk_directory', this.state.high_risk_directory)
+		categories = []
+		dataChart = []
+		categories.length =0 
+		dataChart.length = 0
+
+		var arr= [];
+		for(var i=0; i< _.size(data.key_contributor) ;i++){
+			if(data.key_contributor[i].category_name == "accounting"){
+				arr["accounting"] = data.key_contributor[i] 
+				this.setState({key_contributor : arr}) 
+				console.log('key_contributor' , this.state.key_contributor)
+			}
+			if(data.key_contributor[i].category_name == "corporate entity"){
+				arr["corporate entity"] = data.key_contributor[i];
+				this.setState({key_contributor : arr})
+				console.log('key_contributor', this.state.key_contributor)
+			}
+		}
+
 	},
 	componentDidMount() 
 	{	

@@ -9,7 +9,7 @@ var Title = React.createClass({
 	render(){
 		return(
 			<h2 className="panel-title">
-			      {this.props.title} <span style={{'margin-left':'3px'}}></span>
+			      {this.props.title} <span style={{marginLeft:'3px'}}></span>
 			      <HelpButton type="overview_question_a" content = {this.props.helpInfo} />
 			</h2>
 		)

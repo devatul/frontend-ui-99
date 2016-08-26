@@ -61,7 +61,7 @@ var Keywords = React.createClass({
 			<td className="text-left kw-list"><span>Keyword 1, 
 			Keyword 2, Keyword 3, Keyword 4 <span className="more" id={this.state.id}>, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, 
 			Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span><span style={this.state.style}>...  </span>
-			<a href="javascript:;" className="morelink" onClick={this.click}>{this.state.name}</a></span></td>
+			<a href="javascript:;" className="morelink" onClick={this.click} style={{marginLeft:'3px'}}>{this.state.name}</a></span></td>
 			<td>
 				<div className={this.state.charClass}>
 				<span className="label">{this.props.percent}%</span>

@@ -1,4 +1,4 @@
-<rt-import name="BarMenu" from='./BarMenu1'/>
+<rt-import name="BarMenu" from='./InsightMenuBar'/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
@@ -180,7 +180,6 @@
           <div class="panel-body bg-secondary widget-panel insight-panel">
             <h4 class="widget-title">Cost Savings
                <HelpButton type="overview_question_a" content="Storage Space with obsolete data."/>
-             
             </h4>
             <div class="insight-stat">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>

@@ -20,7 +20,7 @@ var Chart = React.createClass({
 			data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 45, color: '#7986cb'},{y: 40, color: '#ed9c28'},{y: 10, color: '#E36159'}]
 		},
 		{
-			categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley'],
+			categories: ['ADCompl.WE', 'ADHR.WR', 'ADHR.WR', 'ADHR.WR', 'ADHR.WE'],
 			data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 25, color: '#7986cb'},{y: 20, color: '#ed9c28'},{y: 4, color: '#E36159'}]
 		},
 		{

@@ -1,6 +1,6 @@
 <rt-import name="Chart" from="./components/chart"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
-<rt-import name="BarMenu" from='./BarMenu1'/>
+<rt-import name="BarMenu" from='./InsightMenuBar'/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 

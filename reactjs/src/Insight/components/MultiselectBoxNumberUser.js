@@ -54,17 +54,6 @@ var NumberUser = React.createClass({
             checked: event.target.checked,
             value: event.target.value
         }
-       /* for (var i = 0; i < size; i++) {
-            if (i == index) {
-                this.setState({clicked : true})
-
-            } else {
-                this.setState({clicked : false})
-
-            }
-
-        }*/
-       
         this.setState({selected  : index})
         this.props.onChange(field, index);
     },
@@ -80,14 +69,14 @@ var NumberUser = React.createClass({
             _.forEach(this.props.data, function(obj, index) {
                 var newID = 'radio' + index;
                 var size =_.size(this.props.data)
-                children[index] =  <li className={obj.checked && 'active'}>
+                children[index] =  <li className={obj.checked && 'active'} key ={index}>
                                     <a tabIndex={index}>
                                         <label className="radio">
                                         <input id={'radio_filter_' + index} type="radio"
                                             name="radio_filter"
                                             onClick={(event)=>this.handleOnChange(event,index,size)}
                                             value={index}
-                                            key={'selectBox_' + index}
+                                            
                                             
                                             /> {obj.name}
 
