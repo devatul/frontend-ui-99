@@ -38,8 +38,11 @@
                         <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
                             <header class="panel-heading">
                                 <h2 class="panel-title">Orphan Statistics</h2>
+                                <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelOrphanStatistics"></a>
+                                </div>
                             </header>
-                            <div class="review_panel-body panel-body">
+                            <div id="panelOrphanStatistics" class="review_panel-body panel-body nav-collapse collapse in">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <LiquidMeter title="Review Status" setValue={this.state.status} />
@@ -49,7 +52,7 @@
                                               <h2 class="panel-title">Basic Statistics</h2>
                                           </header>
                                           <div class="panel-body" id="stat-block">
-                                            <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+                                            <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i></h4>
 
                                             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                                               <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
@@ -64,15 +67,15 @@
                                                             setValue="This represents the total number of documents that have been detected by 99 during the initial scan of 
                                                             the locations that have been inputted into the tool." />
                                                         </td>
-                                                        <td class="text-left">{this.state.statistics.total_number_documents}</td>
+                                                        <td class="text-right text-num">{this.state.statistics.total_number_documents}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-left"><span>Number of Documents Reviewed</span>
+                                                        <td class="text-left><span>Number of Documents Reviewed</span>
                                                             <HelpButton className="dropdown-file-info-holder"
                                                                 classNote="review_question_chart"
                                                                 setValue="This represents the number of documents that 99 has been successful in classifying." />
                                                         </td>
-                                                        <td class="text-left">{this.state.validateNumber}</td>
+                                                        <td class="text-right text-num">{this.state.validateNumber}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Average Centroid Distance</span>
@@ -82,7 +85,7 @@
                                                                 where the centroid point represents the optimal point of classification. 
                                                                 The smaller the average deviation, the greater the level of confidence in 99’s classification results." />
                                                         </td>
-                                                        <td class="text-left">{this.state.statistics.avg_centroid_distance}</td>
+                                                        <td class="text-right text-num">{this.state.statistics.avg_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Maximum Centroid Distance</span>
@@ -91,7 +94,7 @@
                                                                     setValue="This represents the document that has been registered furthest from the centroid point. 
                                                                     The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
                                                         </td>
-                                                        <td class="text-left">{this.state.statistics.max_centroid_distance}</td>
+                                                        <td class="text-right text-num">{this.state.statistics.max_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Minimum Centroid Distance</span>
@@ -100,7 +103,7 @@
                                                                     setValue="This represents the document that has been registered closest to the centroid point. 
                                                                     Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                                                         </td>
-                                                        <td class="text-left">{this.state.statistics.min_centroid_distance}</td>
+                                                        <td class="text-right text-num">{this.state.statistics.min_centroid_distance}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left"><span>Centroid Distance Variance</span>
@@ -109,7 +112,7 @@
                                                                 setValue="This represent the document variance within the selected cluster. Variance is the expectation of the 
                                                                 squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid." />
                                                         </td>
-                                                        <td class="text-left">{this.state.statistics.centroid_distance_variance}</td>
+                                                        <td class="text-right text-num">{this.state.statistics.centroid_distance_variance}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -151,11 +154,16 @@
                                                 <div id="distribution" class="tab-pane active">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <PieChart title="Confidentiality" data={this.state.dataChart.pieChart}
+                                                            <PieChart id="confidentialityChart"
+                                                                title="Confidentiality"
+                                                                data={this.state.dataChart.pieChart}
                                                                 help="This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99." />
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ColumnChart title="Document Type per Level of Confidentiality" data={this.state.dataChart.columnChart}
+                                                            <ColumnChart id="confidentialityLevelChart"
+                                                                title="Document Type per Level of Confidentiality"
+                                                                categories={this.state.dataChart.documentType.categories}
+                                                                series={this.state.dataChart.documentType.series}
                                                                 help="Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied." />
                                                         </div>
                                                     </div>
@@ -195,10 +203,10 @@
                             <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                 <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" style="display: none" onClick={this.endReviewHandle}>End Review</button>
-                                <ToggleButton setDefault="open" setTarget="#panel-body" />
+                                <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelOrphanMyAction"></a>
                             </div>
                         </header>
-                        <div class="panel-body" id="panel-body" style="display: block;">
+                        <div id="panelOrphanMyAction" class="panel-body nav-collapse collapse in">
                             <p class="document_note">You have {this.state.samplesDocument.length - this.state.validateNumber} documents to assign in {this.state.orphanCurrent.name} by latest 15th August</p>
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <button rt-if="(this.state.checkedNumber > 0 && this.state.validateNumber < this.state.samplesDocument.length)" type="button" class="mb-md mr-xs btn btn-green approve-button" onClick="(event)=>this.approveButon()">Approve</button>

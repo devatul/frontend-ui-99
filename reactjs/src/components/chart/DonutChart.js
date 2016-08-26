@@ -8,15 +8,20 @@ import HelpButton from '../dathena/HelpButton'
 var DonutChart = React.createClass({
     displayName: 'DonutChart',
     
+    getInitialState() {
+        return {
+            colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1']
+        };
+    },
+
     PropTypes: {
         id: PropTypes.string.isRequired,
         config: PropTypes.object.isRequired,
-        data: PropTypes.array.isRequired,
         help: PropTypes.string
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.props.data, nextProps.data)
+        return !isEqual(this.props.config, nextProps.config);
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -24,19 +29,9 @@ var DonutChart = React.createClass({
     },
 
     draw() {
-        var { id, config, data } = this.props
-        var colorDisabled = ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1'];
-        
-        config.data = data;
+        var { id, config } = this.props, { colorDisabled } = this.state;
 
         var div = $('#' + id);
-        var parentDiv = div.parent();
-
-        if(data.length <= 1) {
-            $('<div id="' + id + '" class="chart-disabled-overlay"></div>').appendTo(div.parents('.widget-panel'))
-        } else {
-            $('#' + id +'.chart-disabled-overlay').remove()
-        }
 
         if (div.length){
             div.highcharts({
@@ -48,39 +43,21 @@ var DonutChart = React.createClass({
                 backgroundColor: null,
                 events: {
                     load: function () {
-                    var chart = this;
-                    if (div.parents('.widget-panel').find('.chart-disabled-overlay').length){
-                        var serie = chart.series[0].points;
-                        $.each(serie, function (i, e) {
-                            this.graphic.attr({
-                                fill: colorDisabled[i]
-                            });
-                        });
-                    }
+                        var chart = this,
+                            series = chart.series;
 
-                    $(chart.series).each(function (i, serie) {
-                        var serieDiv = $('ul#legend' + id + '.list-unstyled.chart-legend.serie-' + i);
-                        if(serieDiv.length > 0) {
-                            $(serieDiv).html('');
-                        } else {
-                            serieDiv = $('<ul id="legend' + id + '" class="list-unstyled chart-legend serie-'+i+'"></ul>').appendTo(parentDiv);
+                        if (config.disabled){
+                            for( let i = series.length - 1; i >= 0; i-- ) {
+                                for(let j = series[i].points.length - 1; j >= 0; j--) {
+
+                                    series[i].points[j].graphic.attr({
+
+                                        fill: colorDisabled[j]
+
+                                    });
+                                }
+                            }
                         }
-                        if (div.parents('.widget-panel').find('.chart-disabled-overlay').length){
-                            var points = serie.points;
-                            $.each(points, function (i, e) {
-                                console.log(e);
-                                this.graphic.attr({
-                                    fill: colorDisabled[i]
-                                });
-                                $('<li><i class="legend-symbol" style="background-color: ' + colorDisabled[i] + '"></i>' + e.name + '</li>').appendTo(serieDiv);
-                            });
-                        }
-                        else {
-                            $.each(serie.data, function(i, point){
-                                $('<li><i class="legend-symbol" style="background-color: ' + point.color + '"></i>' + point.name + '</li>').appendTo(serieDiv);
-                            })
-                        }
-                    });
                     }
                 },
                 },
@@ -91,49 +68,50 @@ var DonutChart = React.createClass({
                     enabled: false
                 },
                 tooltip: {
-                    pointFormat: 'Documents: {point.percentage:.1f}% / {point.y}'
+                    headerFormat: '',
+                    pointFormat: '<span style="color: {point.color}; font-weight: bold;">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
                 },
                 plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    states: {
-                        hover: {
-                            brightness: 0,
-                        }
-                    },
-                    showInLegend: true,
-                    point:  {
-                        events: {
-                        mouseOver: function(event){
-                            this.graphic.attr({
-                                fill: this.color
-                            });
+                    pie: {
+                        allowPointSelect: false,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
                         },
+                        states: {
+                            hover: {
+                                brightness: 0,
+                            }
+                        },
+                        showInLegend: true,
+                        point:  {
+                            events: {
+                                mouseOver: function(event){
+                                    var { series } = this, { points } = series;
+                                    
+                                    this.graphic.attr({
+                                        fill: this.color
+                                    });
+
+                                    for(let i = points.length - 1; i >= 0; i--) {
+                                        points[i].graphic.attr({
+                                            fill: series.userOptions.colorsHover[i]
+                                        });
+                                    }
+                                },
+
+                                mouseOut: function(event) {
+                                    var { series } = this, { points } = series;
+
+                                    for(let i = points.length - 1; i >= 0; i--) {
+                                        points[i].graphic.attr({
+                                            fill: points[i].color
+                                        });
+                                    }
+                                }
+                            }
                         }
                     },
-                    events: {
-                        mouseOver: function(e){
-                            var that = this;
-                            $.each(that.points, function (i, e) {
-                                this.graphic.attr({
-                                    fill: that.userOptions.colorsHover[i]
-                                });
-                            });
-                        },
-                        mouseOut: function(){
-                            var that = this;
-                            $.each(that.points, function (i, e) {
-                                this.graphic.attr({
-                                    fill: that.userOptions.colors[i]
-                                });
-                            });
-                        }
-                    }
-                },
                 },
                 legend: {
                     enabled: false,
@@ -144,17 +122,39 @@ var DonutChart = React.createClass({
     },
 
     render() {
-        let { id, config } = this.props
+        var legendChart = [], { id, config } = this.props, { colorDisabled } = this.state;
+            if( config.data ) {
+                for( let i = config.data.length - 1; i >= 0; i-- ) {
+                    let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
+                    legendChart[i] = <li style={config.data.length <= 3 ? {
+                                            margin: '0 auto 5px',
+                                            width: config.data[0].name.length * 8,
+                                            float: 'none'
+                                        } : {}}>
+                                        <i className="legend-symbol" style={{backgroundColor: color }}></i>
+                                        {config.data[i].name}
+                                    </li>;
+                }
+            }
+
         return (
             <section className="panel">
                 <div className="panel-body widget-panel">
-                    <h4 className="widget-title">{config.name}
+                    <h4 className="widget-title">{config.name + ' '}
                         <HelpButton classNote="overview_timeframe help_timeframe"
                                     setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                     </h4>
                     <div className="widget-chart">
                         <div style={{'margin-left': '0px'}} className="chart chart-md" id={id}></div>
+                        { legendChart && 
+                            <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
+                                {legendChart}
+                            </ul>
+                        }
                     </div>
+                    { config.disabled &&
+                        <div id={id} className="chart-disabled-overlay"></div>
+                    }
                 </div>
             </section>
             );

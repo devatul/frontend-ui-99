@@ -89,3 +89,13 @@
 .max-width-th-confidentialy {
     min-width: 240px
 }
+
+.fix-z-index-info-button {
+    z-index: 1050
+}
+
+.my-chart-legend-center {
+    margin: 0 auto 5px;
+    width: 40px;
+    float: none;
+}

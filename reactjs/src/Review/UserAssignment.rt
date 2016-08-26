@@ -4,6 +4,8 @@
 <rt-import name="ValidationButton" from="../components/dathena/ValidationButton"/>
 <rt-import name="PieChart" from="../components/chart/PieChart"/>
 <rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="BarChart" from="../components/chart/BarChart"/>
 <section>
   <div class="container">
       <div class="tabs tabs-primary">
@@ -22,12 +24,16 @@
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">Sample Parameters</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      <h2 class="panel-title">Sample Parameters
+                          <HelpButton
+                              classNote="note_chart_content"
+                              setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed" />
+                      </h2>
+                      <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                          <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelParameter"></a>
                       </div>
                   </header>
-                  <div class="panel-body sample-params">
+                  <div id="panelParameter" class="panel-body sample-params nav-collapse collapse in">
                     <div class="form-group">
                       <label class="">As % of overall {this.state.category.current.name} Category</label>
                       <select name="state" class="form-control ddList">
@@ -57,8 +63,9 @@
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
                       <h2 class="panel-title">Document Category Information</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                          <span>Number of Documents: <strong>{this.addCommas(this.state.category.info.number_docs)}</strong></span>
+                          <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelCategoryInfo"></a>
                       </div>
                   </header>
                   <!--<div class="panel-body">
@@ -77,16 +84,22 @@
                         <div id="confidentialityLevelChart" class="document-chart"></div>
                       </div>
                     </div>-->
-                    <div class="panel-body tab-content tab-pane">
-                      <span>Number of Documents: {this.addCommas(this.state.category.info.number_docs)}</span>
+                    <div id="panelCategoryInfo" class="panel-body tab-content tab-pane nav-collapse collapse in">
                       <div class="row">
                         <div class="col-sm-6">
-                          <PieChart title="Confidentiality Overview"
-                              help="This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99." />
+                          <PieChart
+                              id="confidentialityChart"
+                              title="Confidentiality Overview"
+                              data={this.state.dataChart.confidentiality}
+                              help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name}" />
                         </div>
                         <div class="col-sm-6">
-                          <ColumnChart title="Document Type per Level of Confidentiality"
-                              help="Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied." />
+                          <ColumnChart
+                              id="confidentialityLevelChart"
+                              title="Document Type per Level of Confidentiality"
+                              categories={this.state.dataChart.documentType.categories}
+                              series={this.state.dataChart.documentType.series}
+                              help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name}" />
                         </div>
                       </div>
                     </div>
@@ -97,18 +110,26 @@
               <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">User Selection</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      <h2 class="panel-title">User Selection
+                        <HelpButton
+                              classNote="note_chart_content"
+                              setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name}" />
+                      </h2>
+                      <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                          <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelUserSelection"></a>
                       </div>
                   </header>
-                  <div class="panel-body">
+                  <div id="panelUserSelection" class="panel-body nav-collapse collapse in">
                     <div class="row">
                       <div class="col-xs-12">
                           <div class="row mt-md">
                             <div class="col-xs-8">
                               <div class="clearfix">
-                                <h4 class="chart-title pull-left mt-sm mr-md">Users</h4>
+                                <h4 class="chart-title pull-left mt-sm mr-md">Users
+                                  <HelpButton
+                                    classNote="note_chart_content"
+                                    setValue="Most active users creating or modifying (depending on the type of Reviewer chose) {this.state.category.current.name}" />
+                                </h4>
                                 <ul class="filter-buttons list-unstyled pull-left">
                                     <li class="dropdown">
                                       <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
@@ -158,10 +179,18 @@
                                     </div>
                                 </div>
                               </div>
-                              <div id="userReviewChart"></div>
+                              <BarChart
+                                  id="userReviewBarChart"
+                                  config={this.state.dataChart.barChart.config}
+                                  categories={this.state.dataChart.barChart.categories}
+                                  data={this.state.dataChart.barChart.data} />
                             </div>
                             <div class="col-xs-4 select-reviewers">
-                                <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)</h4>
+                                <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)
+                                  <HelpButton
+                                    classNote="note_chart_content_review"
+                                    setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name}" />
+                                </h4>
                                 <SelectButton
                                     key="{'select_all'}"
                                     title="Select All"

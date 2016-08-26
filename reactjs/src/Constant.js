@@ -14,9 +14,9 @@ module.exports = {
 		IS_3RD: 'audit',
 	},
 	progressBar: {
-		level1: "progress-bar-danger",
-		level2: "progress-bar-warning",
-		level3: "progress-bar-success"
+		danger: "progress-bar-danger",
+		warning: "progress-bar-warning",
+		success: "progress-bar-success"
 	},
 	progressValue: {
 		level1: 30,

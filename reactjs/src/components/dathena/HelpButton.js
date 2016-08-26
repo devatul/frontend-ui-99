@@ -28,6 +28,7 @@ var HelpButton = React.createClass({
         var dropdown = this.refs.dropdown
         var dropdownMenu = this.refs.dropdownMenu
         var eOffset = $(dropdown).offset();
+        //debugger
         $('body').append($(dropdownMenu).detach());
         $(dropdownMenu).css({
                 'display': 'block',
@@ -60,9 +61,9 @@ var HelpButton = React.createClass({
                     aria-expanded={expanded}>
                     <i className={this.props.classIcon == null ? 'fa fa-question-circle' : 'fa ' + this.props.classIcon} aria-hidden="true"></i>
                 </a>
-                <div ref="dropdownMenu" className={this.props.classNote + ' dropdown-menu has-arrow dd-md full-mobile'}>
+                <div ref="dropdownMenu" className={this.props.classNote + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
                     {this.props.setValue && 
-                        <p>{' '}</p>}
+                        <p>{this.props.setValue}</p>}
                 </div>
                 <span class="dropdown-backdrop"></span>
             </div>

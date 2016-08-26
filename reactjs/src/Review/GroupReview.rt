@@ -12,7 +12,10 @@
   <div class="container">
     <div class="row">
         <div class="col-sm-8 col-md-6 review_choose-cluster-block choose-cluster-block clearfix">
-            <h5><span class="text-bold">Group Review</span> <a href="#"><i class="fa fa-info-circle icon-info"></i></a></h5>
+            <h5><span class="text-bold">Group Review</span>
+            <HelpButton className="dropdown-file-info-holder"
+                classNote="review_question_chart"
+                setValue="User is required to review category and confidentiality level for the documents in the groups." /></h5>
             <div class="form-group">
                 <div class="input-group mb-md">
                     <label for="choose_cluster" rt-if="this.state.listGroup != null">
@@ -32,11 +35,14 @@
             <section class="panel panel-has-child panel-featured panel-featured-primary cluster-block" id="cluster0">
                 <header class="panel-heading">
                     <h2 class="panel-title">Group Statistics</h2>
+                    <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                        <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelGroupStatistics"></a>
+                    </div>
                 </header>
-                <div class="review_panel-body panel-body">
+                <div id="panelGroupStatistics" class="review_panel-body panel-body nav-collapse collapse in">
                     <div class="row">
                         <div class="col-md-3">
-                            <LiquidMeter title="Review Status" setValue={this.state.status} />
+                            <LiquidMeter title="Review Status" help="Percentage of Documents reviewed in the selected group from all the documents in the selected group" setValue={this.state.status} />
                             
                             <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                               <header class="panel-heading">
@@ -44,7 +50,10 @@
                               </header>
 
                               <div class="panel-body" id="stat-block">
-                                <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-up icon-success"></i></h4>
+                                <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>  
+                                    <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
+                                        setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
+                                </h4>
 
                                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                                   <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
@@ -56,55 +65,49 @@
                                             <td class="text-left"><span>Total Number of Documents</span>
                                                 <HelpButton className="dropdown-file-info-holder"
                                                 classNote="review_question_chart"
-                                                setValue="This represents the total number of documents that have been detected by 99 during the initial scan of 
-                                                  the locations that have been inputted into the tool." />
+                                                setValue="Total Number of Documents in the selected group." />
                                             </td>
-                                            <td class="text-left">{this.state.statistics.total_number_documents}</td>
+                                            <td class="text-right text-num">{this.state.statistics.total_number_documents}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Number of Documents Reviewed</span>
                                                 <HelpButton className="dropdown-file-info-holder"
                                                     classNote="review_question_chart"
-                                                    setValue="This represents the number of documents that 99 has been successful in classifying." />
+                                                    setValue="Number of Documents reviewed in the selected group." />
                                             </td>
-                                            <td class="text-left">{this.state.validateNumber}</td>
+                                            <td class="text-right text-num">{this.state.validateNumber}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Average Centroid Distance</span>
                                               <HelpButton className="dropdown-file-info-holder"
                                                     classNote="review_question_chart"
-                                                    setValue="This represents the average level of deviance from the centroid point, 
-                                                    where the centroid point represents the optimal point of classification. 
-                                                    The smaller the average deviation, the greater the level of confidence in 99’s classification results." />
+                                                    setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
                                             </td>
-                                            <td class="text-left">{this.state.statistics.avg_centroid_distance}</td>
+                                            <td class="text-right text-num">{this.state.statistics.avg_centroid_distance}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Maximum Centroid Distance</span>
                                                 <HelpButton className="dropdown-file-info-holder"
                                                         classNote="review_question_chart"
-                                                        setValue="This represents the document that has been registered furthest from the centroid point. 
-                                                        The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
+                                                        setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
                                           </td>
-                                            <td class="text-left">{this.state.statistics.max_centroid_distance}</td>
+                                            <td class="text-right text-num">{this.state.statistics.max_centroid_distance}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Minimum Centroid Distance</span>
                                                 <HelpButton className="dropdown-file-info-holder"
                                                         classNote="review_question_chart"
-                                                        setValue="This represents the document that has been registered closest to the centroid point. 
-                                                        Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
+                                                        setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                                             </td>
-                                            <td class="text-left">{this.state.statistics.min_centroid_distance}</td>
+                                            <td class="text-right text-num">{this.state.statistics.min_centroid_distance}</td>
                                         </tr>
                                         <tr>
                                             <td class="text-left"><span>Centroid Distance Variance</span>
                                                 <HelpButton className="dropdown-file-info-holder"
                                                     classNote="review_question_chart"
-                                                    setValue="This represent the document variance within the selected cluster. Variance is the expectation of the 
-                                                    squared deviation of a random variable from its mean, and it informally measures how far the document are spread out from their cluster’s centroid." />
+                                                    setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
                                             </td>
-                                            <td class="text-left">{this.state.statistics.centroid_distance_variance}</td>
+                                            <td class="text-right text-num">{this.state.statistics.centroid_distance_variance}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -113,7 +116,7 @@
                                   <a href="#" class="btn btn-green btn-refine">Refine Group</a>
                                   <HelpButton className=""
                                         classNote="review_question_chart"
-                                        setValue="Refine Group would allow a refinement of the document classification and categorisation if the level of accuracy of the current cluster is not high enough." />
+                                        setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
                                   <div class="refine-progress">
                                     <div id="circularG" class="inline-block-item">
                                         <div id="circularG_1" class="circularG"></div>
@@ -149,20 +152,29 @@
                                     <div id="distribution" class="tab-pane active">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <PieChart title="Confidentiality" data={this.state.dataChart.pieChart}
-                                                    help="This presents a visual display of the document classification types that have been assigend to the total set of files scanned by 99." />
+                                                <PieChart id="confidentialityChart"
+                                                    title="Confidentiality"
+                                                    data={this.state.dataChart.pieChart}
+                                                    help="Distributions in terms of confidentiality ratings assigned to all the document within the selected group." />
                                             </div>
                                             <div class="col-md-6">
-                                                <ColumnChart title="Document Type per Level of Confidentiality" data={this.state.dataChart.columnChart}
-                                                    help="Based on the five confidentiality labels within 99, this graph summarises and displays the breakdown of how the document classification levels have been applied." />
+                                                <ColumnChart id="confidentialityLevelChart"
+                                                    title="Document Type per Level of Confidentiality"
+                                                    categories={this.state.dataChart.documentType.categories}
+                                                    series={this.state.dataChart.documentType.series}
+                                                    help="Summary of the confidentiality ratings assigned to each document type for the documents within the selected group." />
                                             </div>
                                         </div>
                                     </div>
                                     <div id="centroid" class="tab-pane">
-                                        <CentroidChart title="Centroid Distance Histogram" data={this.state.dataChart.centroidChart} />
+                                        <CentroidChart title="Centroid Distance Histogram"
+                                            help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid."
+                                            data={this.state.dataChart.centroidChart} />
                                     </div>
                                     <div id="cloud" class="tab-pane">
-                                        <CloudWord title="Significant Words Cloud" data={this.state.dataChart.cloudWords} />
+                                        <CloudWord title="Significant Words Cloud"
+                                            help="This presents a grouping of targeted key words that have been detected by Dathena 99 as being common across the selected orphan."
+                                            data={this.state.dataChart.cloudWords} />
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +195,10 @@
                 <h2 class="panel-title inline-block-item mr-sm">My Actions</h2>
                 <div class="inline-block-item view-stat-block">
                 <span rt-if="this.state.groupCurrent != null" class="b" style="padding-left: 5px; padding-right: 10px">Group Review: {this.state.groupCurrent.name}</span>
-                    <label>Sample Method: </label>
+                    <label>Sample Method: </label> 
+                    <HelpButton className=""
+                        classNote="review_question_chart"
+                        setValue="You can choose the sampling methodology that Dathena 99 uses to classify the documents." />
                     <button type="button" class="mr-xs btn btn-sm btn-default">Random</button>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Nearest</button>
                     <button type="button" class="mr-xs btn btn-sm btn-default">Farthest</button>
@@ -191,10 +206,10 @@
                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" style="display: none" onClick={this.endReviewHandle}>End Review</button>
-                    <ToggleButton setDefault="open" setTarget="#panel-body" />
+                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelGroupMyAction"></a>
                 </div>
             </header>
-            <div class="panel-body" id="panel-body" style="display: block;">
+            <div id="panelGroupMyAction" class="panel-body nav-collapse collapse in">
                 <p class="document_note" rt-if="this.state.groupCurrent != null && this.state.documentPreview != null">
                   You have {this.state.samplesDocument.length - this.state.validateNumber} documents to review within {this.state.documentPreview.categories[this.state.groupCurrent.category].name}  category in {this.state.groupCurrent.name} by latest 15th August
                 </p>
@@ -237,30 +252,23 @@
                                     <th class="review_note">Owner
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="help_question_content"
-                                            setValue="This displays the organisational member who has last modified the document. 
-                                            This owner is automatically assigned by 99 from the 
-                                            Document metadata itself gathered during the scanning process." />
+                                            setValue="This displays the organisational member who has last modified the document.
+                                            This owner is automatically assigned by 99 from the document metadata itself gathered during the scanning process." />
                                     </th>
                                     <th class="review_note max-width-th-confidentialy">Proposed Category (confidence level)
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="help_question_bottom"
-                                            setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                            setValue="Category proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                     </th>
                                     <th class="review_note max-width-th-confidentialy">Proposed Confidentiality (confidence level)
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content_review"
-                                            setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                            setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
                                     </th>
                                     <th class="text-center">Status
-                                        <HelpButton className="dropdown-file-info-holder"
+                                        <!--<HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content_review"
-                                            setValue="This represent the status of the review for each file." />
+                                            setValue="This represent the status of the review for each file." />-->
                                     </th>
                                 </tr>
                             </thead>

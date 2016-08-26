@@ -13,10 +13,10 @@ var multiselectBox = React.createClass({
         };
     },
     propTypes: {
-        key: PropTypes.string,
+        id: PropTypes.string,
       	data: PropTypes.array,
       	title: PropTypes.string,
-        checked: PropTypes.bool,
+        checkDefault: PropTypes.bool,
       	onChange: PropTypes.func,
       	onClick: PropTypes.func,
         onSelectAll: PropTypes.func,
@@ -24,6 +24,7 @@ var multiselectBox = React.createClass({
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
+        debugger
         if(this.props.data != nextProps.data) {
             return true;
         }
@@ -53,16 +54,19 @@ var multiselectBox = React.createClass({
         //$('#dropdownFilter').css({ display: 'block', height: '271px' });
     },
 
-    handleOnChange: function(event,index) {
-        var field = {
-            id: this.props.data[index].id,
-            name: this.props.data[index].name,
-            selectId: this.props.id,
-            index: index,
-            checked: event.target.checked,
-            value: event.target.value
-        }
-        this.props.onChange(field, index);
+    handleOnChange: function(event, index) {
+        var { id, title, data, checkDefault } = this.props, { checked } = event.target,
+            field = {
+                id: id,
+                title: title,
+                data: data,
+                checkDefault: checkDefault,
+                contextChange: {
+                    index: index,
+                    checked: checked
+                }
+            };
+        this.props.onChange(field);
     },
 
     handleSelectAll: function(event) {
@@ -76,13 +80,14 @@ var multiselectBox = React.createClass({
     },
     render() {
             var children = [];
+            debugger
             _.forEach(this.props.data, function(obj, index) {
                 children[index] =  <li className={obj.checked && 'active'}>
                                     <a tabIndex={index}>
                                         <label className="checkbox">
                                         <input id={'checkbox_filter_' + index} type="checkbox"
                                             name="checkbox_filter"
-                                            onChange={(event)=>this.handleOnChange(event,index)}
+                                            onChange={(event)=>this.handleOnChange(event, index)}
                                             value={index}
                                             checked={obj.checked}
                                             key={'selectBox_' + index}/>

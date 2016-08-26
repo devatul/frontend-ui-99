@@ -8,10 +8,10 @@
             <ul class="line_document_header">
                 <li class="dropdown">
                     <a class="line_document review_title">My Action</a>
-                    <a data-toggle="dropdown" class="line_document help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                    <div class="line-document-menu dropdown-menu has-arrow dd-md full-mobile">
-                        This is text my action
-                    </div>
+                    <HelpButton
+                        className="line_document help_question_a"
+                        setValue="This summarises all the actions assigned to the user. Users must review each document of this section." />
+                    
                 </li>
             </ul>
             <div class="tab-content" rt-if="(this.state.Actions != null)">
@@ -27,21 +27,18 @@
                                         <h2 class="document_panel-title panel-title" style="text-transform: capitalize">{action.category}</h2>
                                     </li>
                                     <li class="document_panel-title">
-                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                           <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                                                <p>This is text of {action.category}</p>
-                                            </div>
-                                        </div>
+                                        <HelpButton className="dropdown-file-info-holder"
+                                            classNote="note_chart_content"
+                                            setValue="All the documents in this section have been classified {action.category} with a Secret level of Confidentiality" />
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
-                                    <ToggleButton setDefault="open" setTarget="#action{'_panel_' + actionIndex}" />
+                                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#action{'_panel_' + actionIndex}"></a>
                                 </div>
                             </header>
-                            <div class="panel-body" id="action{'_panel_' + actionIndex}" style="display: block;">
+                            <div class="panel-body nav-collapse collapse in" id="action{'_panel_' + actionIndex}">
                                 <p class="document_note">
                                     You have to review {action.documents.length - action.validateNumber} documents in {action.category} Category of Secret Confidentiality by latest 28th June
                                 </p>
@@ -82,25 +79,17 @@
                                                     <th class="review_note">Owner
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="help_question_content"
-                                                            setValue="This displays the organisational member who has last modified the document. 
-                                                            This owner is automatically assigned by 99 from the 
-                                                            Document metadata itself gathered during the scanning process." />
+                                                            setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
                                                     </th>
                                                     <th class="review_note">Proposed Category (confidence level)
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="help_question_bottom"
-                                                            setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                                            setValue="Category proposed by Dathena 99." />
                                                     </th>
                                                     <th class="review_note">Proposed Confidentiality (confidence level)
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review"
-                                                            setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                                            setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="text-center">Status
                                                         <HelpButton className="dropdown-file-info-holder"
@@ -148,7 +137,9 @@
                                                         <span class="text-italic file-name-1 doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{doc.path}">{doc.path}</span>
                                                     </td>
                                                     <td class="text-left">
-                                                        <span class="text-italic">{doc.owner}</span>
+                                                        <span class="text-italic">
+                                                            {doc.owner}
+                                                        </span>
                                                     </td>
                                                     <td rt-scope="doc.current as current">
                                                         <div class="select-group">
@@ -237,24 +228,21 @@
                                         <i class="fa {this.urgency(challenged.urgency)} challenged" aria-hidden="true"></i>
                                     </li>
                                     <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">{(challenged.sla == null ) ? challenged.category + ' / ' + challenged.confidentiality : challenged.sla}</h2>
-                                    </li>
-                                    <li class="document_panel-title">
-                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                           <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="true"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                                                <p>This is text of {(challenged.sla == null ) ? challenged.category + '/' + challenged.confidentiality : challenged.sla}</p>
-                                            </div>
-                                        </div>
+                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">
+                                            {(challenged.sla == null ) ? challenged.category + ' / ' + challenged.confidentiality : challenged.sla}
+                                            <HelpButton className="dropdown-file-info-holder"
+                                            classNote="note_chart_content"
+                                            setValue="" />
+                                        </h2>
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
-                                    <ToggleButton setDefault="open" setTarget="#challenged{'_panel_' + challengedIndex}" />
+                                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#challenged{'_panel_' + challengedIndex}"></a>
                                 </div>
                             </header>
-                            <div class="panel-body" id="challenged{'_panel_' + challengedIndex}" style="display: block;">
+                            <div class="panel-body nav-collapse collapse in" id="challenged{'_panel_' + challengedIndex}">
                                 <p class="document_note"></p>
                                 <p class="document_note">
                                     Stan challenged classification of {challenged.documents.length - challenged.validateNumber} documents - You have to review it by latest 10th July
@@ -285,56 +273,44 @@
                                                         </div>
                                                     </th>
                                                     <th class="my_review_note review_note">Document Name
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="note_chart_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the name of each individual document, as it exists in its current state.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content"
+                                                            setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
                                                     <th class="review_note">Path
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the logical folder path to where each document is currently located.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="This displays the logical folder path to where each document is currently located." />
                                                     </th>
                                                     <th class="review_note">Owner
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the organisational member who has last modified the document. 
-                                                                This owner is automatically assigned by 99 from the 
-                                                                Document metadata itself gathered during the scanning process.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
                                                     </th>
                                                     <th class="review_note">Category
-                                                        <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the organisational member who has last modified the document. 
-                                                                This owner is automatically assigned by 99 from the 
-                                                                Document metadata itself gathered during the scanning process.</p>
-                                                            </div>
-                                                        </div>
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="Category proposed by Dathena 99." />
                                                     </th>
                                                     <th class="review_note">Confidentiality
-                                                      <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                                           <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                                                <p>This displays the organisational member who has last modified the document. 
-                                                                This owner is automatically assigned by 99 from the 
-                                                                Document metadata itself gathered during the scanning process.</p>
-                                                            </div>
-                                                        </div>
+                                                      <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="help_question_content"
+                                                            setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review"
+                                                            setValue="Comment of your coordinator to explain the reason of the rejection" />
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review"
+                                                            setValue="Add a comment to justify your acceptation or your rejection of the challenge." />
                                                     </th>
-                                                    <th class="text-center review_note_r" style="max-width: 68px;">Validation
+                                                    <th class="review_note" style="max-width: 100px;">Validation
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review"
+                                                            setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." />
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -363,19 +339,14 @@
                                                                 {docChall.name}
                                                             </span>
                                                         </span>
-                                                        <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                                            <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                                            <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                                                <ul>
-                                                                    <li>Name: {docChall.name}</li>
-                                                                    <li>Creation Date: {docChall.creation_date}</li>
-                                                                    <li>Modifitcation Date: {docChall.modification_date}</li>
-                                                                    <li>Required Legal Retention until: {docChall.legal_retention_until}</li>
-                                                                    <li>Confidentiality Label: {docChall.confidentiality_label}</li>
-                                                                    <li>Number of Classification Challenge: {docChall.number_of_classification_challenge}</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        <InfoButton>
+                                                            <li>Name: {docChall.name}</li>
+                                                            <li>Creation Date: {docChall.creation_date}</li>
+                                                            <li>Modifitcation Date: {docChall.modification_date}</li>
+                                                            <li>Required Legal Retention until: {docChall.legal_retention_until}</li>
+                                                            <li>Confidentiality Label: {docChall.confidentiality_label}</li>
+                                                            <li>Number of Classification Challenge: {docChall.number_of_classification_challenge}</li>
+                                                        </InfoButton>
                                                     </td>
                                                     <td class="text-left">
                                                         <span class="text-italic file-name-1 doc-path"
@@ -387,7 +358,7 @@
                                                             {(docChall.name.length > 7) ? docChall.owner.substring(7, 0) + '...' : docChall.owner}
                                                         </span>
                                                     </td>
-                                                    <td class="vertical-top opa-child" rt-scope="docChall.current as current">
+                                                    <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
                                                             <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
                                                               <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
@@ -395,7 +366,7 @@
                                                             <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docChall.categories[current.prevCategory].name}</span>
                                                         </div>
                                                     </td>
-                                                    <td class="vertical-top opa-child" rt-scope="docChall.current as current">
+                                                    <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
                                                             <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
                                                               <option rt-repeat="Confidential in docChall.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
@@ -411,7 +382,7 @@
                                                     </td>
                                                     <td class="opa-child fix-1st-pading-comment-table">
                                                         <div class="select-group">
-                                                            <textarea class="form-control" placeholder="Challenge’s rationale details"></textarea>
+                                                            <textarea style="min-width: 160px;" class="form-control" placeholder="Challenge’s rationale details"></textarea>
                                                         </div>
                                                     </td>
                                                     <td rt-scope="docChall.current as current">
@@ -471,41 +442,35 @@
                                     <label></label>
                                 </div>
                             </th>
-                            <th class="review_note">Document Name
+                            <th class="my_review_note review_note">Document Name
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content"
+                                    setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
                             <th class="review_note">Path
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="This displays the logical folder path to where each document is currently located." />
                             </th>
                             <th class="review_note">Owner
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
                             </th>
                             <th class="review_note">Proposed Category (confidence level)
-                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="help_question_bottom dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification. </p>
-                                    </div>
-                                </div>
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_bottom"
+                                    setValue="Category proposed by Dathena 99." />
                             </th>
                             <th class="review_note">Proposed Confidentiality (confidence level)
-                                   <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                                        In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                                        The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                                        The higher the percentage, the greater the confidence that 99 has in it’s document classification.</p>
-                                    </div>
-                                </div>
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content_review"
+                                    setValue="Confidentiality level proposed by Dathena." />
                             </th>
                             <th class="text-center">Status
-                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                   <a data-toggle="dropdown" class="review_question_a help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="note_chart_content_review dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This represent the status of the review for each file.</p>
-                                    </div>
-                                </div>
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content_review"
+                                    setValue="This represent the status of the review for each file." />
                             </th>
                         </tr>
                     </thead>
@@ -527,19 +492,14 @@
                                         {docPreview.name}
                                     </span>
                                 </span>
-                                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                        <ul>
-                                            <li>name: {docPreview.name}</li>
-                                            <li>Creation Date: {docPreview.creation_date}</li>
-                                            <li>Modifitcation Date: {docPreview.modification_date}</li>
-                                            <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
-                                            <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
-                                            <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <InfoButton>
+                                    <li>name: {docPreview.name}</li>
+                                    <li>Creation Date: {docPreview.creation_date}</li>
+                                    <li>Modifitcation Date: {docPreview.modification_date}</li>
+                                    <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
+                                    <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
+                                    <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
+                                </InfoButton>
                             </td>
                             <td class="text-left">
                                 <span class="text-italic doc-path file-name-1" data-toggle="tooltip"
@@ -632,37 +592,45 @@
                                     <label></label>
                                 </div>
                             </th>
-                            <th class="my_review_note review_note review_note_r">Document Name
+                            <th class="review_note">Document Name
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content"
+                                    setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
-                            <th class="review_note review_note_r">Path
+                            <th class="review_note">Path
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="This displays the logical folder path to where each document is currently located." />
                             </th>
-                            <th class="review_note review_note_r">Owner
+                            <th class="review_note">Owner
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
                             </th>
                             <th class="review_note">Category
-                                <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                   <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This displays the organisational member who has last modified the document. 
-                                        This owner is automatically assigned by 99 from the 
-                                        Document metadata itself gathered during the scanning process.</p>
-                                    </div>
-                                </div>
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="Category proposed by Dathena 99." />
                             </th>
                             <th class="review_note">Confidentiality
-                              <div class="r dropdown dropdown-file-info-holder inline-block-item">
-                                   <a data-toggle="dropdown" class="review_question_a help_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                        <p>This displays the organisational member who has last modified the document. 
-                                        This owner is automatically assigned by 99 from the 
-                                        Document metadata itself gathered during the scanning process.</p>
-                                    </div>
-                                </div>
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="help_question_content"
+                                    setValue="Confidentiality level proposed by Dathena." />
                             </th>
                             <th class="review_note review_note_r">Coordinator's Comment
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content_review"
+                                    setValue="Comment of your coordinator to explain the reason of the rejection" />
                             </th>
                             <th class="review_note review_note_r">Comment
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content_review"
+                                    setValue="Add a comment to justify your acceptation or your rejection of the challenge." />
                             </th>
-                            <th class="text-center review_note_r">Validation
+                            <th class="review_note" style="max-width: 100px;">Validation
+                                <HelpButton className="dropdown-file-info-holder"
+                                    classNote="note_chart_content_review"
+                                    setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." />
                             </th>
                         </tr>
                     </thead>
@@ -691,19 +659,14 @@
                                         {docPreview.name}
                                     </span>
                                 </span>
-                                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                                    <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                                    <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
-                                        <ul>
-                                            <li>name: {docPreview.name}</li>
-                                            <li>Creation Date: {docPreview.creation_date}</li>
-                                            <li>Modifitcation Date: {docPreview.modification_date}</li>
-                                            <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
-                                            <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
-                                            <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <InfoButton>
+                                    <li>name: {docPreview.name}</li>
+                                    <li>Creation Date: {docPreview.creation_date}</li>
+                                    <li>Modifitcation Date: {docPreview.modification_date}</li>
+                                    <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
+                                    <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
+                                    <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
+                                </InfoButton>
                             </td>
                             <td class="text-left">
                                 <span class="text-italic doc-path file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{docPreview.path}">{docPreview.path}</span>

@@ -10,7 +10,7 @@ import userAssignment from '../script/chart-user-assignment.js'
 import chartFilterAssignment from '../script/chart-filter-assignment.js'
 import javascriptAssignement from '../script/javascript.assignement.js'
 import 'jquery'
-import _ from 'lodash';
+import { upperFirst, findIndex, assignIn } from 'lodash';
 
 var UserAssignment = React.createClass({
     mixins: [PureRenderMixin],
@@ -78,6 +78,22 @@ var UserAssignment = React.createClass({
             summary: {
                 id: 'summary',
                 data: []
+            },
+            dataChart: {
+                barChart: {
+                    config: {
+                        name: 'Documents',
+                        colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                        colorsHover: '#DFF2F8'
+                    },
+                    data: [],
+                    categories: []
+                },
+                documentType: {
+                    categories: [],
+                    series: []
+                },
+                confidentiality: []
             }
         };
     },
@@ -102,14 +118,14 @@ var UserAssignment = React.createClass({
     componentDidUpdate(prevProps, prevState) {
         var { category } = this.state;
     	if(category.info != prevState.category.info) {
-        	this.chartAssignment(this.state.category.info);
+        	this.categoryInformationChart();
         }
         if(category.current != prevState.category.current) {
             this.getCategoryInfo();
             this.getReviewers();
         }
         if(category.reviewers != prevState.category.reviewers) {
-            this.chartUserFilter(category.reviewers);
+            this.updateDataChart();
         }
         if(this.state.datafilter.params != prevState.datafilter.params) {
             this.getReviewers();
@@ -118,8 +134,8 @@ var UserAssignment = React.createClass({
     handleOnChangeSelectBox: function(data, field) {
         var { params, filterLabel } = this.state.datafilter;
         var { selectId } = this.static;
-        var indexLabel = _.findIndex(filterLabel, {id: field.id });
-        var label = _.assignIn({}, data);
+        var indexLabel = findIndex(filterLabel, {id: field.id });
+        var label = assignIn({}, data);
             label.id = field.id;
         if(indexLabel == -1) {
             indexLabel = filterLabel.length;
@@ -154,7 +170,7 @@ var UserAssignment = React.createClass({
     handleClickFilterLabel: function(label, index) {
         var { selectId } = this.static;
         var { params, filterLabel } = this.state.datafilter;
-        var indexLabel = _.findIndex(filterLabel, {id: label.id });
+        var indexLabel = findIndex(filterLabel, {id: label.id });
         switch(label.id) {
             case selectId.numberuser: 
                 params = update(params, {
@@ -190,7 +206,7 @@ var UserAssignment = React.createClass({
     },
     handleValidateButton: function() {
         var { current, info, list } = this.state.category;
-        var indexCurrent = _.findIndex(list, { id: current.id, name: current.name });
+        var indexCurrent = findIndex(list, { id: current.id, name: current.name });
         var { request } = this.state.datafilter;
             request.id = current.id;
             request.name = current.name;
@@ -254,17 +270,68 @@ var UserAssignment = React.createClass({
         });
         this.setState({ category: setCategory, datafilter: datafilter });
     },
-    chartAssignment(categoryInfo) {
-    	userAssignment(categoryInfo);
+    // chartAssignment(categoryInfo) {
+    // 	userAssignment(categoryInfo);
+    // },
+    updateDataChart() {
+        var categories = [],
+            data = [], 
+            { reviewers } = this.state.category;
+
+        for(var i = 0, total = reviewers.length; i < total; i++) {
+            categories[i] = reviewers[i].first_name + '.' + reviewers[i].last_name;
+            data[i] = reviewers[i].number_hits;
+        }
+
+        var updateData = update(this.state.dataChart, {
+            barChart: {
+                categories: { $set: categories },
+                data: { $set: data }
+            }
+        });
+        this.setState({ dataChart: updateData });
     },
-    chartUserFilter(reviewers) {    	
-    	 chartFilterAssignment(reviewers);
+
+    categoryInformationChart() {
+        var { confidentialities, doc_type } = this.state.category.info;
+		var confidentiality = [],
+            documentType = {
+                categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
+                series: []
+            };
+        for(let i = 0, total = confidentialities.length; i < total; i++) {
+            confidentiality[i] = {
+                name: upperFirst( confidentialities[i].name ),
+                y: confidentialities[i].number
+            };
+        }
+
+        for(let i = 0, total = doc_type.length; i < total; i++) {
+
+            documentType.series[i] = {
+                name: doc_type[i].name,
+                data: []
+            };
+
+            for( let j = doc_type[i].types.length - 1; j >= 0; j-- ) {
+
+                documentType.series[i].data[j] = doc_type[i].types[j].number;
+
+            }
+
+        }
+        
+        var updateChart = update(this.state.dataChart, {
+            confidentiality: { $set: confidentiality },
+            documentType: { $set: documentType }
+        });
+        this.setState({ dataChart: updateChart });
     },
     
     handleOnChangeSelectButton: function(checked, index) {
         var { reviewers } = this.state.category;
         var { request } = this.state.datafilter;
-        var indexReviewer = _.findIndex(request.reviewers, {id: reviewers[index].id });
+        var indexReviewer = findIndex(request.reviewers, {id: reviewers[index].id });
         var updateRequest = update(this.state.datafilter, {
             request: {
                 reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [reviewers[index]] } : {$splice: [[indexReviewer, 1]]}
@@ -285,13 +352,7 @@ var UserAssignment = React.createClass({
     getReviewers() {
         var { datafilter, category }  = this.state;
         datafilter.params.id = category.current.id;
-        var heightChart = 0;
-        if(datafilter.params.numberuser <= 15){
-            heightChart = datafilter.params.numberuser * 39;
-        }else{
-            heightChart = datafilter.params.numberuser * 37.5;
-        }
-        $('#userReviewChart').css({ 'height': heightChart });
+
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/assign/reviewer/",
@@ -351,7 +412,6 @@ var UserAssignment = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                debugger
                 var updateData = update(this.state.category, {
                     info: {$set: data},
                 });
