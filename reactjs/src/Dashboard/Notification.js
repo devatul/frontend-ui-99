@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Notification.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-import javascript from '../script/javascript.js'
+import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js'
 
 var Notification = React.createClass
@@ -26,6 +26,7 @@ var Notification = React.createClass
         };
     },
     componentDidMount() {
+        javascriptTodo();
         this.getDummyNotification();
         //this.getNotification();
     },
@@ -38,7 +39,7 @@ var Notification = React.createClass
             $('[data-noti-type]').show();
         };
         
-        $('.filter-noti-icon').parents('span').show();
+        $('.filter-noti-icon').parents('span').css("visibility","visible");
         var notiType = '';
         this.setState({"notiType": notiType });
     },
@@ -73,8 +74,8 @@ var Notification = React.createClass
             }
             else{
                 var notiType = event.target.getAttribute('data-type');
-                $('.filter-noti-icon').parents('span').hide();
-                $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').show();
+                $('.filter-noti-icon').parents('span').css("visibility","hidden");
+                $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').css("visibility","visible");
                 $('[data-noti-type]').each(function(){
                     // console.log($(this).attr('data-noti-type'));
                     if ($(this).attr('data-noti-type') == notiType){
@@ -118,6 +119,11 @@ var Notification = React.createClass
             $('[data-last-update]').hide();
             $('[data-last-update='+filterType+']').show();
         }
+        // if (this.state.notiType !== '') {
+        //     var elem = document.createElement('p')
+        //     elem.setAttribute("data-type", this.state.notiType)
+        //     this.filterAlert({target: elem});
+        // }
         this.checkEmptyData();
     },
 

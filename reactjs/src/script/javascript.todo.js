@@ -70,53 +70,53 @@ module.exports = function () {
         minimumResultsForSearch: Infinity
     }).select2('val', null);;
 
-    var notiType;
-    $('.filter-noti-icon').on('click', function(){
-        if (notiType == $(this).attr('data-type')){
-            $('[data-noti-type]').show();
-            //$('.filter-noti-icon').parents('span').show();
-            $('.filter-noti-icon').parents('span').css("visibility","visible");
-            notiType = '';
-        }
-        else{
-            notiType = $(this).attr('data-type');
-            //$('.filter-noti-icon').parents('span').hide();
-            $('.filter-noti-icon').parents('span').css("visibility","hidden");
-            $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').css("visibility","visible");
-            $('[data-noti-type]').each(function(){
-                if ($(this).attr('data-noti-type') == notiType){
-                    $(this).show();
-                }
-                else{
-                    $(this).hide();   
-                }
-            });
-        }
-    });
+    // var notiType;
+    // $('.filter-noti-icon').on('click', function(){
+    //     if (notiType == $(this).attr('data-type')){
+    //         $('[data-noti-type]').show();
+    //         //$('.filter-noti-icon').parents('span').show();
+    //         $('.filter-noti-icon').parents('span').css("visibility","visible");
+    //         notiType = '';
+    //     }
+    //     else{
+    //         notiType = $(this).attr('data-type');
+    //         //$('.filter-noti-icon').parents('span').hide();
+    //         $('.filter-noti-icon').parents('span').css("visibility","hidden");
+    //         $(".filter-noti-icon[data-type='" + notiType + "']").parents('span').css("visibility","visible");
+    //         $('[data-noti-type]').each(function(){
+    //             if ($(this).attr('data-noti-type') == notiType){
+    //                 $(this).show();
+    //             }
+    //             else{
+    //                 $(this).hide();   
+    //             }
+    //         });
+    //     }
+    // });
 
-    $('.filter-noti').on('change', function(){
-        var filterType = $( '.filter-noti option:selected' ).attr('data-update-time');
-        if (filterType == 'update-default'){
-            $('[data-last-update]').show();
-        }
-        else if (filterType == 'update-pending' || filterType == 'update-completed'){
-            $('[data-last-update]').show();
-            $('[data-update-status]').hide();
-            $('[data-update-status='+filterType+']').show();
-        }
-        else if (filterType == 'update-week'){
-            $('[data-update-status]').show();
-            $('[data-last-update]').hide();
-            $('[data-last-update='+filterType+']').show();
-            $('[data-last-update="update-yesterday"]').show();
-            $('[data-last-update="update-today"]').show();
-        }
-        else{
-            $('[data-last-update]').hide();
-            $('[data-last-update='+filterType+']').show();
-        }
+    // $('.filter-noti').on('change', function(){
+    //     var filterType = $( '.filter-noti option:selected' ).attr('data-update-time');
+    //     if (filterType == 'update-default'){
+    //         $('[data-last-update]').show();
+    //     }
+    //     else if (filterType == 'update-pending' || filterType == 'update-completed'){
+    //         $('[data-last-update]').show();
+    //         $('[data-update-status]').hide();
+    //         $('[data-update-status='+filterType+']').show();
+    //     }
+    //     else if (filterType == 'update-week'){
+    //         $('[data-update-status]').show();
+    //         $('[data-last-update]').hide();
+    //         $('[data-last-update='+filterType+']').show();
+    //         $('[data-last-update="update-yesterday"]').show();
+    //         $('[data-last-update="update-today"]').show();
+    //     }
+    //     else{
+    //         $('[data-last-update]').hide();
+    //         $('[data-last-update='+filterType+']').show();
+    //     }
 
-    });
+    // });
 
     $('.dropdown-noti .overview_question_a').on('click', function(e){
         e.preventDefault();
