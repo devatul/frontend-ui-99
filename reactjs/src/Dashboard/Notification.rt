@@ -1,3 +1,5 @@
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+
 <section>
 	<div class="my_main bar_menu container">
             <div class="row">
@@ -13,7 +15,7 @@
 
         <div class="notification-list container">
             <div class="notification-filter row">
-                <div class="col-sm-5 mb-md">
+                <div class="col-sm-4 mb-md">
                     <label>Last update</label>
                     <select class="form-control filter-noti" onChange={this.filterNotification} value={this.state.filterUpdate}>
                         <option value="update-today">Today</option>
@@ -23,25 +25,13 @@
                         <option value="update-completed">Completed Actions</option>
                     </select>
                 </div>
-                <div class="col-sm-7 mb-md">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <span>Action completed on time: <b>100%</b></span>  
-                        </div>
-                        <div class="col-sm-4">
-                        <span class="mr-md">Pending Actions: <b>{this.state.total}</b></span>
-                        </div>
-                        <div class="col-sm-3">
+                <div class="col-sm-5 mb-md pull-right">
+
+                            <span class="mr-md">Action completed on time: <b>100% </b></span>  
+                            <span class="mr-md">Pending Actions: <b>{this.state.total}</b></span>
                             <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" onClick={this.filterAlert}></i> : {this.state.warningNoti}</span>
                             <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" onClick={this.filterAlert}></i> : {this.state.dangerNoti}</span>
-                            <div class="inline-block-item dropdown dropdown-help">
-                                <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                <div class="dropdown-menu has-arrow dd-md full-mobile">
-                                    <p>Help content</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            <HelpButton className="" classNote="overview_timeframe help_timeframe" setValue="Help content."/>
                 </div>
             </div>
 
@@ -169,6 +159,6 @@
                     </div>
                 </div>
             </section>
-            <p class='center' id="emptyData" style="display: none; font-size:20px">There is no notification for the applied filters</p>
+            <p class='center' id="emptyData" style="display: none; font-size:20px; padding: 40px 0;">There is no notification for the applied filters</p>
         </div>
 </section>

@@ -207,5 +207,32 @@ logOut(){
         })
     },
 
+    filterAlert(event) {
+        var selected = event.target.getAttribute('data-type');
+        console.log(selected);
+
+        if (this.state.notiType == selected){
+            $('[data-noti-type-popup]').show();
+            $('.filter-noti-icon-popup').parents('span').css("visibility","visible");
+            var notiType = '';
+            this.setState({"notiType": notiType });
+        }
+        else{
+            var notiType = event.target.getAttribute('data-type');
+            $('.filter-noti-icon-popup').parents('span').css("visibility","hidden");
+            $(".filter-noti-icon-popup[data-type='" + notiType + "']").parents('span').css("visibility","visible");
+            $('[data-noti-type-popup]').each(function(){
+                // console.log($(this).attr('data-noti-type'));
+                if ($(this).attr('data-noti-type-popup') == notiType){
+                    $(this).show();
+                }
+                else{
+                    $(this).hide();   
+                }
+            });
+            this.setState({"notiType": notiType });
+        };
+    },
+
     render:template
 });
