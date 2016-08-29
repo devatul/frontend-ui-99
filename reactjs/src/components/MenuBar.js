@@ -54,10 +54,12 @@ var MenuBar = React.createClass
 
     shouldComponentUpdate(nextProps, nextState) {
         var { filter, scanResult, listLabel } = this.state;
+        var {title} = this.props;
         return !isEqual( scanResult, nextState.scanResult )
             || !isEqual( listLabel, nextState.listLabel )
             || !isEqual( filter.labels, nextState.filter.labels )
-            || !isEqual( filter.params, nextState.filter.params );
+            || !isEqual( filter.params, nextState.filter.params )
+            || !isEqual( title, nextProps.title );
     },
 
     componentDidUpdate(prevProps, prevState) {
