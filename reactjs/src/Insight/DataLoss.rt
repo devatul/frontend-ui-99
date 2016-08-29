@@ -7,8 +7,6 @@
       <header class="panel-heading">
         <h2 class="panel-title">Risk Insights
          <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
-
-          <!--  -->
         </h2>
       </header>
       <div class="panel-body pb-none">
@@ -18,8 +16,7 @@
               <div class="panel-body bg-secondary widget-panel insight-panel">
                 <h4 class="widget-title">Unidentifiable Files 
                    <HelpButton type="overview_question_a" content="Number of files that can not be identified."/>
-                                    
-              </h4>
+                </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 <span>10,072</span>
@@ -62,8 +59,7 @@
           <section class="panel">
             <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
               <h4 class="widget-title">Twin Files
-               <HelpButton type="overview_question_a" content="Duplicates files with different names."/>
-                
+                <HelpButton type="overview_question_a" content="Duplicates files with different names."/>
               </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -88,7 +84,6 @@
             <div class="panel-body bg-secondary-2 widget-panel insight-panel">
               <h4 class="widget-title">Document Retention
               <HelpButton type="overview_question_a" content="Number of files past outside their retention dates."/>
-               
               </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -111,7 +106,6 @@
             <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
               <h4 class="widget-title">Document Aging
               <HelpButton type="overview_question_a" content="Number of files outside their retention dates."/>
-               
               </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -134,7 +128,6 @@
             <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
               <h4 class="widget-title">Duplicate Files
               <HelpButton type="overview_question_a" content="Number of duplicate files."/>
-               
               </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -159,7 +152,6 @@
             <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
               <h4 class="widget-title">Document Repository Anomaly
               <HelpButton type="overview_question_a" content="Number of folders which have content anomalies."/>
-                
               </h4>
               <div class="insight-stat">
                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -281,11 +273,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <Keyword id="id_1" level="Banking Secrecy" percent ="98"/>
-                      <Keyword id="id_2" level="Secret" percent ="92"/>
-                      <Keyword id="id_3" level="Confidential" percent ="75"/>
-                      <Keyword id="id_4" level="Internal" percent ="99"/>
-                      <Keyword id="id_5" level="Public" percent ="99"/>
+                      <Keyword  level="Banking Secrecy" percent ="98" />
+                      <Keyword  level="Secret" percent ="92" />
+                      <Keyword  level="Confidential" percent ="75" />
+                      <Keyword  level="Internal" percent ="99" />
+                      <Keyword  level="Public" percent ="99" />
                     </tbody>
                   </table>
                   <a href="#" class="btn btn-green btn-extract">Extract</a>
@@ -301,11 +293,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <Keyword id="id_6" level="Banking Secrecy" percent ="98"/>
-                      <Keyword id="id_7" level="Secret" percent ="92"/>
-                      <Keyword id="id_8" level="Confidential" percent ="75"/>
-                      <Keyword id="id_9" level="Internal" percent ="99"/>
-                      <Keyword id="id_10" level="Public" percent ="99"/>
+                      <Keyword  level="Banking Secrecy" percent ="98" />
+                      <Keyword  level="Secret" percent ="92" />
+                      <Keyword  level="Confidential" percent ="75" />
+                      <Keyword  level="Internal" percent ="99" />
+                      <Keyword  level="Public" percent ="99" />
                     </tbody>
                   </table>
                   <a href="#" class="btn btn-green btn-extract">Extract</a>
@@ -321,11 +313,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <Keyword id="id_11" level="Banking Secrecy" percent ="98"/>
-                      <Keyword id="id_12" level="Secret" percent ="92"/>
-                      <Keyword id="id_13" level="Confidential" percent ="75"/>
-                      <Keyword id="id_14" level="Internal" percent ="99"/>
-                      <Keyword id="id_15" level="Public" percent ="99"/>
+                      <Keyword  level="Banking Secrecy" percent ="98" />
+                      <Keyword  level="Secret" percent ="92" />
+                      <Keyword  level="Confidential" percent ="75" />
+                      <Keyword  level="Internal" percent ="99" />
+                      <Keyword  level="Public" percent ="99" />
                     </tbody>
                   </table>
                   <a href="#" class="btn btn-green btn-extract">Extract</a>
@@ -341,11 +333,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <Keyword id="id_16" level="Banking Secrecy" percent ="98"/>
-                      <Keyword id="id_17" level="Secret" percent ="92"/>
-                      <Keyword id="id_18" level="Confidential" percent ="75"/>
-                      <Keyword id="id_19" level="Internal" percent ="99"/>
-                      <Keyword id="id_20" level="Public" percent ="99"/>
+                      <Keyword  level="Banking Secrecy" percent ="98" />
+                      <Keyword  level="Secret" percent ="92" />
+                      <Keyword  level="Confidential" percent ="75" />
+                      <Keyword  level="Internal" percent ="99" />
+                      <Keyword  level="Public" percent ="99" />
                     </tbody>
                   </table>
                   <a href="#" class="btn btn-green btn-extract">Extract</a>
@@ -361,11 +353,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                     <Keyword id="id_21" level="Banking Secrecy" percent ="98"/>
-                     <Keyword id="id_22" level="Secret" percent ="92"/>
-                     <Keyword id="id_23" level="Confidential" percent ="75"/>
-                     <Keyword id="id_24" level="Internal" percent ="99"/>
-                     <Keyword id="id_25" level="Public" percent ="99"/>
+                      <Keyword  level="Banking Secrecy" percent ="98" />
+                      <Keyword  level="Secret" percent ="92" />
+                      <Keyword  level="Confidential" percent ="75" />
+                      <Keyword  level="Internal" percent ="99" />
+                      <Keyword  level="Public" percent ="99" />
                    </tbody>
                  </table>
                  <a href="#" class="btn btn-green btn-extract">Extract</a>
@@ -381,21 +373,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                   <Keyword id="id_26" level="Banking Secrecy" percent ="98"/>
-                   <Keyword id="id_27" level="Secret" percent ="92"/>
-                   <Keyword id="id_28" level="Confidential" percent ="75"/>
-                   <Keyword id="id_29" level="Internal" percent ="99"/>
-                   <Keyword id="id_30" level="Public" percent ="99"/>
+                   <Keyword  level="Banking Secrecy" percent ="98" />
+                   <Keyword  level="Secret" percent ="92" />
+                   <Keyword  level="Confidential" percent ="75" />
+                   <Keyword  level="Internal" percent ="99" />
+                   <Keyword  level="Public" percent ="99" />
                  </tbody>
                   </table>
                   <a href="#" class="btn btn-green btn-extract">Extract</a>
                 </div>
               </div>
            </div>
-     </section>
-   </div>
+        </section>
+      </div>
   </section>
-
 </div>
-
+    
 
