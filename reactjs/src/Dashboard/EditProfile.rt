@@ -1,6 +1,7 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name ="MyTeam" from ="./MyTeam"/>
 <rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
+<rt-import name="Upload" from="../Insight/components/Upload"
 <!-- <rt-import name="validate" from="../components/dathena/validate"/>-->
 
 <div class="container">
@@ -47,7 +48,7 @@
                   <div class="row">
                     <div class="profile-details-left col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <label class="control-label" for="inputDefault">Windows ID:</label>
+                        <label class="control-label" for="inputDefault">Windows ID</label>
                         <div class="mpe_input">
                           <input type="text" class="form-control" id="WindowID" 
                           onChange="{this.getWindowID}"
@@ -144,23 +145,7 @@
               </div>
             </div>
             <div id="photo" class="mpe-tab-pane tab-pane">
-              <h4 class="mpe_top_h4">Change Profile Photo</h4>
-              <div class="my-profile-photo-upload">
-                <p class="my-profile-photo-user"><a class="my-profile-photo-a"><img src={this.state.photo} /></a></p>
-                <form  ref="uploadForm" className="uploader" encType="multipart/form-data" onSubmit={this.uploadFile}>
-                  <p>
-                    <a class="my-profile-photo-a2" href="#" type="file">
-                      <i class="fa fa-upload" aria-hidden="true" type="submit" onClick={this.uploadFile}></i>
-                      <span class="fileinput-button">
-                        <span>Upload Your Photo</span>
-                        <input type="file" name="files[]" id="myFile" multiple >
-                      </span>
-
-                    </a>
-                  </p>
-                </form>
-
-              </div>
+              <Upload upload={this.uploadFile} title="class"/>
             </div>
             <div id="change_email" class="mpe-tab-pane tab-pane">
               <h4 class="mpe_top_h4">Change Email Address</h4>

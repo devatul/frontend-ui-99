@@ -94,7 +94,7 @@ var NumberUser = React.createClass({
 					data-toggle="dropdown"
 					title={this.props.title}
 					aria-expanded="false">
-					<span className="multiselect-selected-text">{this.props.title}</span>
+					<span className="multiselect-selected-text">{this.props.title} </span>
 					<b className="caret"></b>
 				</button>
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">

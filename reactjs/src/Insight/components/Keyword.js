@@ -14,13 +14,14 @@ var Keywords = React.createClass({
 				display:'inline',
 				
 			},
+			className : 'more',
 			charClass : 'pie-wrapper pie-progress-'+this.props.percent+' style-1 pie-sm'
 			
 		};
 	},
 	click(){
 		if(this.state.name =="more keywords"){
-			$('#'+this.state.id).removeClass('more').addClass('more1');
+			this.setState({className : 'more1'})
 			this.setState({
 				name : 'less keywords'
 				
@@ -37,7 +38,8 @@ var Keywords = React.createClass({
 			/*$('.pie-wrapper pie-progress-98 style-1 pie-sm').removeClass('pie-wrapper pie-progress-98 style-1 pie-sm').addClass('pie-wrapper pie-progress-98 style-1 pie-md')*/
 		}
 		if(this.state.name == "less keywords"){
-			$('#'+this.state.id).removeClass('more1').addClass('more');
+			
+			this.setState({className : 'more'})
 			this.setState({
 				name : 'more keywords'
 			})
@@ -59,7 +61,7 @@ var Keywords = React.createClass({
 			<tr>
 			<td className="text-left">{this.props.level}</td>
 			<td className="text-left kw-list"><span>Keyword 1, 
-			Keyword 2, Keyword 3, Keyword 4 <span className="more" id={this.state.id}>, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, 
+			Keyword 2, Keyword 3, Keyword 4 <span className={this.state.className} id={this.state.id}>, Keyword 5, Keyword 6, Keyword 7, Keyword 8, Keyword 9, Keyword 10, Keyword 11, Keyword 12, Keyword 13, 
 			Keyword 14, Keyword 15, Keyword 16, Keyword 17, Keyword 18, Keyword 19, Keyword 20, Keyword 21</span><span style={this.state.style}>...  </span>
 			<a href="javascript:;" className="morelink" onClick={this.click} style={{marginLeft:'3px'}}>{this.state.name}</a></span></td>
 			<td>

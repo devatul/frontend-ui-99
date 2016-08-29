@@ -7,7 +7,7 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
 import update from 'react-addons-update'
-import _ from 'lodash'
+import _ from 'lodash' 
 
 import $, { JQuery }  from 'jquery'
 /*import loadScript from '../script/load.scripts.js';*/
@@ -146,13 +146,11 @@ var Indentity = React.createClass({
 			if(data.key_contributor[i].category_name == "accounting"){
 				arr["accounting"] = data.key_contributor[i] 
 				this.setState({key_contributor : arr}) 
-				console.log('key_contributor' , this.state.key_contributor)
 			}
 			if(data.key_contributor[i].category_name == "corporate entity"){
 				arr["corporate entity"] = data.key_contributor[i];
 				this.setState({key_contributor : arr})
-				console.log('key_contributor', this.state.key_contributor)
-			}
+			}	
 		}
 
 	},

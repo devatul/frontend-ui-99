@@ -679,7 +679,7 @@ tr td {
   .my_header .navbar-default.nav-custom .navbar-nav > li {
     position: relative; }
     .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu {
-      min-width: 170px; }
+      min-width: 205px; }
       .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li {
         position: relative; }
         .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li .badge {

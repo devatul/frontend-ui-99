@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component , PropTypes } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
@@ -10,6 +10,9 @@ import update from 'react-addons-update';
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
 	mixins: [LinkedStateMixin],
+	propTypes : {
+		changeImage: PropTypes.func,
+	},
 	getInitialState() {
 		return {
 			photo :{},
@@ -32,6 +35,7 @@ module.exports = React.createClass({
 			
 		};
 	},
+	
 	getWindowID(event) {
 		
 		var update_scan_status = update(this.state, {
@@ -503,41 +507,35 @@ module.exports = React.createClass({
 
 	},
 
-	uploadFile: function () {
-		var fileInput = document.getElementById('myFile');
-		var file = fileInput.files[0];
+	uploadFile : function(fd) {
+			console.log('fd',fd)
+		    $.ajax({
+		    	url: Constant.SERVER_API + 'api/account/change_photo/',
+		    	dataType: 'json',
+		    	type: 'PUT',
+		    	data: fd,
+		    	processData: false,
+		    	beforeSend: function(xhr) {
+		    		xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+		    	},
+		    	success: function(data) {
+		    		browserHistory.push('/Dashboard/Profile');
 
-    // fd dung de luu gia tri goi len
-	    var fd = new FormData();
-	    fd.append('file', file);
-	    var fd = document.getElementById("myFile").value;
-	    $.ajax({
-	    	url: Constant.SERVER_API + 'api/account/change_photo/',
-	    	dataType: 'json',
-	    	type: 'PUT',
-	    	data: fd,
-    	beforeSend: function(xhr) {
-    		xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-    	},
-    	success: function(data) {
+		    	}.bind(this),
+		    	error: function(xhr, status, error) {
 
-    		browserHistory.push('/Dashboard/Profile');
-
-    	}.bind(this),
-    	error: function(xhr, status, error) {
-
-    		console.log(xhr);
-    		var jsonResponse = JSON.parse(xhr.responseText);
-    		console.log(jsonResponse);
-    		if(xhr.status === 401)
-    		{
-    			browserHistory.push('/Account/SignIn');
-    		}
-    	}.bind(this)
-    });
+		    		console.log(xhr);
+		    		var jsonResponse = JSON.parse(xhr.responseText);
+		    		console.log(jsonResponse);
+		    		if(xhr.status === 401)
+		    		{
+		    			browserHistory.push('/Account/SignIn');
+		    		}
+		    	}.bind(this)
+		    });
 
 
-},
+	},
 
 componentWillMount(){
 	$.ajax({
@@ -599,6 +597,9 @@ componentDidMount()
        // this.ChangeEmail();
 
        $(document).ready(function(){
+       	$("#imgInp").change(function(){
+       		this.readURL(this);
+       	});
        	$("p.on_off").click(function() {
        		$(this).toggleClass("on_off_b");
        	});
@@ -624,6 +625,6 @@ componentDidMount()
 			});
 		});
 
-   },
-   render:template
+  },
+  render:template
 });

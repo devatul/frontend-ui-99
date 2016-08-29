@@ -1,5 +1,5 @@
- <rt-import name="MenuBar" from="../components/MenuBar"/>
-<div>
-<MenuBar title="Insights – { location.pathname.indexOf('/Insight/DataRisk') == 0 ? 'Data Risk Management' : location.pathname.indexOf('/Insight/Indentity') == 0 ? 'Identity and Access Management' : 'Data Loss Prevention' }" showInfo={true} showFilter={false}></MenuBar>
+<rt-import name="MenuBar" from="../components/MenuBar"/>
+<div> 
+    <MenuBar title = " Insights – { window.location.pathname == '/Insight/Indentity' ? 'Identity and Access Management' : 	(window.location.pathname == '/Insight/DataRisk' ? 'Data Risk Management' :'Data Loss Prevention') }"  showInfo={true}></MenuBar>			
 	{this.props.children}
 </div>
