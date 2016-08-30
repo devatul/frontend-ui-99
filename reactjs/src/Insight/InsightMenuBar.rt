@@ -11,10 +11,10 @@
     <label class="pull-left mr-md">Filters:</label>
     <div class="pull-left filter-tags" style="text-transform: capitalize">
         <FilterLabel
-        id="Confidential"
-        data={this.state.filterLabel}
-        onClick={this.onClickLabel}
-        onClear={this.clearFilter} />
+          id="Confidential"
+          data={this.state.filterLabel}
+          onClick={this.onClickLabel}
+          onClear={this.clearFilter} />
     </div>
     </div>
     <ul class="filter-buttons list-unstyled">
@@ -30,7 +30,7 @@
                title="Category"
                onChange={this.handleSelectBoxChange}
                onSelectAll={this.handleSelectAll}
-               checked={true}
+               checked={false}
                data={this.state.dataSelectBox[this.static.categoryId]}
                 />
             </div>
@@ -38,12 +38,12 @@
         <li class="mb-sm">
           <div class="form-group">
             <MultiSelectBox
-            id={this.static.confidentialId}
-            title="Confidentiality"
-            onChange={this.handleSelectBoxChange}
-            onSelectAll={this.handleSelectAll}
-            checked={true}
-            data={this.state.dataSelectBox[this.static.confidentialId]} />
+              id={this.static.confidentialId}
+              title="Confidentiality"
+              onChange={this.handleSelectBoxChange}
+              onSelectAll={this.handleSelectAll}
+              checked={false}
+              data={this.state.dataSelectBox[this.static.confidentialId]} />
           </div>
         </li>
         <li class="mb-sm">
@@ -53,7 +53,7 @@
             title="Document Type"
             onChange={this.handleSelectBoxChange}
             onSelectAll={this.handleSelectAll}
-            checked={true}
+            checked={false}
             data={this.state.dataSelectBox[this.static.doctypeId]} />
            </div>
         </li>

@@ -10,6 +10,7 @@ var multiselectBox = React.createClass({
     getInitialState: function() {
         return {
             checkList: [],
+            checkall : this.props.checked
         };
     },
     propTypes: {
@@ -56,13 +57,18 @@ var multiselectBox = React.createClass({
             selectId: this.props.id,
             index: index,
             checked: event.target.checked,
-            value: event.target.value
         }
         console.log('field',field)
         this.props.onChange(field, index);
     },
 
     handleSelectAll: function(event) {
+        if(this.state.checkall == false) {
+            this.setState({checkall : true})
+        } else {
+            this.setState({checkall : false})
+        }
+           
         var field = {
             name: event.target.name,
             selectId: this.props.id,
@@ -74,7 +80,7 @@ var multiselectBox = React.createClass({
     render() {
             var children = [];
             _.forEach(this.props.data, function(obj, index) {
-                children[index] =  <li className={obj.checked && 'active'}>
+                children[index] =  <li className={obj.checked && 'active'} key = {'selectBox_' + index}>
                                     <a tabIndex={index}>
                                         <label className="checkbox">
                                         <input id={'checkbox_filter_' + index} type="checkbox"
@@ -82,7 +88,7 @@ var multiselectBox = React.createClass({
                                             onChange={(event)=>this.handleOnChange(event, index)}
                                             value={index}
                                             checked={obj.checked}
-                                            key={'selectBox_' + index}/>
+                                            />
                                         {obj.name}
                                         </label>
                                     </a>
@@ -107,9 +113,10 @@ var multiselectBox = React.createClass({
 							<input ref="checkall"
                                 name={'select_all'}
                                 key={this.props.id + '_select_all'}
-                                checked={this.state.checkall}
 								onChange={this.handleSelectAll}
-								type="checkbox" value="multiselect-all"/>
+								type="checkbox" value="multiselect-all"
+                                checked={this.state.checkall}
+                                />
 							Select all
 						</label>
 						</a>

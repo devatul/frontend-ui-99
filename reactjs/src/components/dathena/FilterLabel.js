@@ -28,7 +28,7 @@ var FilterLabel = React.createClass({
 			data &&
 			forEach(data, (label, index) => {
 				child[index] = <span
-					                key={label.id}
+					                key={index}
 					                className="filter-label label label-info">
 					                <a className="filter-remove"
 					                	onClick={()=>this.handleOnClick(label, index)}>
@@ -42,7 +42,7 @@ var FilterLabel = React.createClass({
 				{child}
 				{ data.length > 0 && this.props.onClear &&
 				<a onClick={this.clearFilter} className={'filter-label label label-info'} style={{backgroundColor: '#747474'}}>
-					Clear <span style={{'text-transform' : 'lowercase'}}>all</span>
+					Clear <span style={{'textTransform' : 'lowercase'}}>all</span>
 				</a>
 				}
 			</div>

@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './InsightMenuBar.rt'
 import javascript from '../script/javascript.js'
-import _ from 'lodash'
+import _ ,{isEqual}from 'lodash'
 import 'jquery'
 
 var MenuBar1 = React.createClass({
@@ -26,7 +26,7 @@ var MenuBar1 = React.createClass({
             scan_result: {},
             filter: {},
             dataSelectBox: {},
-            filterLabel: [{
+            filterLabel: [/*{
                     checked: true,
                     id: 1,
                     index: 1,
@@ -34,7 +34,7 @@ var MenuBar1 = React.createClass({
                     selectId: "number_users",
                     value: '1'
                 }
-
+*/
             ],
             eventContext: '',
             numberofUser: [{
@@ -262,16 +262,45 @@ var MenuBar1 = React.createClass({
         }.bind(this));
         this.setState({
             dataSelectBox: data,
-            filterLabel: [/*{
-                    checked: true,
-                    id: 1,
-                    index: 1,
-                    name: 'Top 5',
-                    selectId: "number_users",
-                    value: '1'
-                }*/]
+            filterLabel: []
         });
     },
+    clearSelectAll(id){
+        console.log('id:', id);
+        var data = this.state.dataSelectBox;
+       
+        _.forEach(this.state.filterLabel, function(object, index) {
+
+            if(object.selectId == id ){
+                 var updateData = update(data, {
+                [object.selectId]: {
+                    [object.index]: {
+                        $merge: {
+                            checked: false
+                        }
+                    }
+                }
+            });
+            data = updateData;
+            }
+           
+        }.bind(this));
+        this.setState({
+             dataSelectBox: data,
+        })
+         console.log('dataSelectBox', this.state.dataSelectBox[id])
+         console.log('filterLabel' , this.state.filterLabel)
+        /*var filterList = _.pullAllBy(this.state.filterLabel,  [this.state.dataSelectBox[id] ] , this.state.dataSelectBox[id].index)*/
+        var filterList = _.difference ( this.state.dataSelectBox[id], this.state.filterLabel)
+
+       
+        this.setState({
+           
+            filterLabel: filterList
+        });
+        console.log('filterList', filterList)
+    },
+     
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
         listLabel.splice(index, index + 1);
@@ -326,19 +355,27 @@ var MenuBar1 = React.createClass({
                 filterLabel: arr
             });
         } else {
+            var arr = this.state.filterLabel;
             if (_.find(arr, {
                     id: field.id,
                     name: field.name
                 }) == null) {
-                var arr = _.concat(this.state.filterLabel);
+                
                 arr.push(field);
+                console.log("arr", arr)
             }
             this.setState({
                 filterLabel: arr
             });
             console.log('filterLabel', this.state.filterLabel)
+           /* console.log('filterLabel', this.state.filterLabel)*/
         }
     },
+
+    addSelectAll(){
+
+    },
+
     deleteLabelByIdName: function(field, id, name) {
         var arr = _.concat(this.state.filterLabel);
         _.remove(arr, {
@@ -406,19 +443,29 @@ var MenuBar1 = React.createClass({
         }
     },
     handleSelectAll: function(field) {
-        var arr = _.concat(this.state.dataSelectBox[field.selectId]);
-        _.forEach(arr, function(object, index) {
-            object.checked = field.checked;
-        }.bind(this));
-        var updateData = update(this.state.dataSelectBox, {
-            [field.selectId]: {
-                $set: arr
-            }
-        });
-        this.setState({
-            dataSelectBox: updateData,
-            eventContext: field.selectId
-        });
+        console.log("selectAll:", this.state.filterLabel)
+        if(field.checked){
+                 var arr = _.concat(this.state.dataSelectBox[field.selectId]);
+                 _.forEach(arr, function(object, index) {
+
+
+                    object.checked = field.checked;
+                    this.addLabel(object);
+
+                }.bind(this));
+                 var updateData = update(this.state.dataSelectBox, {
+                    [field.selectId]: {
+                        $set: arr
+                    }
+                });
+                 this.setState({
+                    dataSelectBox: updateData,
+                    eventContext: field.selectId
+            });
+        } else{
+            this.clearSelectAll(field.selectId);
+        }
+       
     },
     getScanResult() {
         $.ajax({

@@ -1,7 +1,7 @@
 <rt-import name="Keyword" from="./components/Keyword"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-
+<rt-import name="Tab" from = "./components/TabName"/>
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
       <header class="panel-heading">
@@ -250,17 +250,18 @@
             </div>
           </header>
            <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
-              <ul class="my-profile-header nav nav-tabs" style="margin-left:5px;">
+              <!-- <ul class="my-profile-header nav nav-tabs" style="margin-left:5px;">
                 <li class="active">
                   <a href="#toggle" data-toggle="tab" aria-expanded="false">English</a>
                 </li>
                 <li class="">
-                  <a href="#my_team" data-toggle="tab" aria-expanded="true">French</a>
+                  <a href="#my_team" data-toggle="tab" aria-expanded="true"><span style="color:#ACACAC">French<span></a>
                 </li>
                 <li class="">
                   <a href="#my_team" data-toggle="tab" aria-expanded="true">German</a>
                 </li>
-              </ul>
+              </ul> -->
+              <Tab/>
               <div class="panel-body">
                 <div class="table-responsive table-suggestion-wrapper">
                   <h4 class="table-title">Accounting / Tax</h4>

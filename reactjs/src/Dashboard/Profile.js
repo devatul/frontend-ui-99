@@ -14,7 +14,11 @@ module.exports = React.createClass({
 	    };
 	},
 	componentWillMount(){
-			$.ajax({
+		this.getProfile();
+		this.getPhoto();	
+	},
+	getProfile(){
+		$.ajax({
             url: Constant.SERVER_API + 'api/account/profile/',
             dataType: 'json',
             type: 'GET',
@@ -36,6 +40,31 @@ module.exports = React.createClass({
                 }
             }.bind(this)
         });
+	},
+	getPhoto(){
+		$.ajax({
+			url: Constant.SERVER_API + 'api/account/change_photo/',
+			dataType: 'json',
+			type: 'GET',
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+			},
+			success: function(data) {
+
+				this.setState( {photo: data});
+
+				console.log("photo: ", photo);
+			}.bind(this),
+			error: function(xhr, status, error) {
+				console.log(xhr);
+				var jsonResponse = JSON.parse(xhr.responseText);
+				console.log(jsonResponse);
+				if(xhr.status === 401)
+				{
+					browserHistory.push('/Account/SignIn');
+				}
+			}.bind(this)
+		});
 	},
 	componentDidMount() {
 		$(document).ready(function(){
