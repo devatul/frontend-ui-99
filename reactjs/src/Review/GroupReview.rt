@@ -446,30 +446,23 @@
             <th class="review_note">Owner
                 <HelpButton className="dropdown-file-info-holder"
                     classNote="help_question_content"
-                    setValue="This displays the organisational member who has last modified the document. 
-                    This owner is automatically assigned by 99 from the 
-                    Document metadata itself gathered during the scanning process." />
+                    setValue="This displays the organisational member who has last modified the document.
+                    This owner is automatically assigned by 99 from the document metadata itself gathered during the scanning process." />
             </th>
-            <th class="review_note">Proposed Category (confidence level)
+            <th class="review_note max-width-th-confidentialy">Proposed Category (confidence level)
                 <HelpButton className="dropdown-file-info-holder"
                     classNote="help_question_bottom"
-                    setValue="This represents the category that 99 has assigned to each document as part of the initial categorisation review. 
-                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                    setValue="Category proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
             </th>
-            <th class="review_note">Proposed Confidentiality (confidence level)
+            <th class="review_note max-width-th-confidentialy">Proposed Confidentiality (confidence level)
                 <HelpButton className="dropdown-file-info-holder"
                     classNote="note_chart_content_review"
-                    setValue="This represents the category that 99 has assigned to each document as part of the initial confidentiality review. 
-                In this screen, the reviewer has the ability to change each document’s categorisation by using the drop down menu. 
-                The confidence level percentage demonstrates the level of accuracy that 99 has classified each document with. 
-                The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                    setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
             </th>
             <th class="text-center">Status
-                <HelpButton className="dropdown-file-info-holder"
+                <!--<HelpButton className="dropdown-file-info-holder"
                     classNote="note_chart_content_review"
-                    setValue="This represent the status of the review for each file." />
+                    setValue="This represent the status of the review for each file." />-->
             </th>
         </tr>
       </thead>
@@ -483,9 +476,7 @@
               </td>
               <td class="text-left">
                 <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal" data-file-url="{document.image_url}"><span class="file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{document.name}">{document.name}</span></span>
-                <div class="dropdown dropdown-file-info-holder inline-block-item">
-                  <span class="btn-file-info fa fa-info-circle" data-toggle="dropdown"></span>
-                  <div class="dropdown-menu has-arrow dropdown-file-info append-to-body">
+                <InfoButton>
                     <ul>
                       <li>Name: {document.name }</li>
                       <li>Creation Date: {document.creation_date}</li>
@@ -494,8 +485,7 @@
                       <li>Confidentiality Label: {document.confidentiality_label}</li>
                       <li>Number of Classification Challenge: {document.number_of_classification_challenge}</li>
                     </ul>
-                  </div>
-                </div>
+                </InfoButton>
               </td>
               <td class="text-left">
                 <span class="text-italic doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{document.path}">{document.path}</span>

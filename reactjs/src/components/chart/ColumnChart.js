@@ -91,7 +91,7 @@ var ColumnChart = React.createClass({
                         events: {
                             mouseOver: function(){
                                 var { series } = this.series.chart;
-                                debugger
+                                
                                 for(let i = series.length - 1; i >= 0; i--) {
                                     for( let j = series[i].points.length - 1; j >= 0; j--) {
 

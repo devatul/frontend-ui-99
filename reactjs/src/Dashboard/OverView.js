@@ -117,19 +117,42 @@ var OverView = React.createClass
     categoryLanguageChart() {
         var categoryChart = {
                 name: 'Category',
-                innerSize: '80%',
+                innerSize: '70%',
                 disabled: false,
                 colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896'],
                 colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6'],
+                dataLabels: {
+                    formatter: function () {
+                        var percent = this.percentage.toFixed(1);
+                        return percent >= 5.0 ? percent + '%' : '';
+                    },
+                    color: '#ffffff',
+                    padding: 0,
+                    distance: -25,
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textShadow: '0px 1px 2px black'
+                    }
+                },
                 data: []
             },
             languageChart = {
                 name: 'Language',
-                size: '80%',
-                innerSize: '60%',
+                size: '65%',
+                innerSize: '55%',
                 disabled: false,
                 colors: [ '#2ecd71', '#9b58b5', '#33495e'],
                 colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad'],
+                dataLabels: {
+                    formatter: function () {
+                        var percent = this.percentage.toFixed(1);
+                        return percent >= 5.0 ? percent + '%' : '';
+                    },
+                    color: '#ffffff',
+                    padding: 0,
+                    distance: -20
+                },
                 data: []
             },
             categoryLanguageChart = [],

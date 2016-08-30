@@ -1,7 +1,7 @@
 import Constants from '../Constant'
 
 module.exports = {
-    makeRequest: function({ sync = false, method = 'GET', path, params = '', success, error }) {
+    makeRequest: function({ sync = false, method = 'GET', path, params = {}, success, error }) {
         $.ajax({
 				url: Constants.SERVER_API + path,
 				dataType: 'json',

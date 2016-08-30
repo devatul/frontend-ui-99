@@ -104,3 +104,10 @@
     right: 15px;
     top: -15px;
 }
+
+.no-active {
+    color: #DDD !important;
+}
+.no-active:hover {
+    color: #4fca9d !important;
+}

@@ -2,17 +2,15 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { forEach } from 'lodash'
+import { forEach, isEqual } from 'lodash'
 
 var SelectBox = React.createClass({
     displayName: 'selectBox',
 
-    mixins: [PureRenderMixin],
-
     getInitialState: function() {
         return {
-            checked: this.props.checked
+            checked: this.props.checked,
+            open: false
         };
     },
 
@@ -20,9 +18,15 @@ var SelectBox = React.createClass({
         id: PropTypes.string,
         name: PropTypes.string,
         data: PropTypes.array,
+        binding: PropTypes.object,
         className: PropTypes.string,
         onChange: PropTypes.func,
+        onOpen: PropTypes.func,
         value: PropTypes.string
+    },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.open != nextState.open || !isEqual( this.props.value, nextProps.value ) || !isEqual( this.props.data, nextProps.data );        
     },
 
     handleOnChange: function(event) {
@@ -31,17 +35,39 @@ var SelectBox = React.createClass({
             this.props.onChange(data, event.target);
     },
 
+    handleOnClick: function(event) {
+        let { open } = this.state,
+            { id } = this.props,
+            filed = {
+                id: id,
+                event: event
+            };
+        
+        if(!open) {
+            this.props.onOpen &&
+                this.props.onOpen(filed);
+            this.setState({ open: true });
+        } else {
+            this.setState({ open: false });
+        }
+    },
+
     render: function() {
-        let children = [];
-        forEach(this.props.data, function(object, index) {
-            children[index] = <option
-                                    key={object.name + '_' + index}
+        let children = [],
+            { binding, defaultValue, data } = this.props,
+            name = binding ? binding.name : 'name',
+            value = binding ? binding.value : 'index';
+            debugger
+        for(let i = data.length - 1; i >= 0; i--) {
+
+            children[i] = <option
+                                    key={data[i][name] + '_' + i}
                                     className="lt"
-                                    value={index}
-                                    disabled={index == this.props.defaultValue && true}>
-                                    {object.name}
+                                    value={value == 'index' ? i : data[i][value]}
+                                    disabled={i === defaultValue && true}>
+                                    {data[i][name]}
                                 </option>;
-        }.bind(this));
+        }
         return(
             <select {...this.props}
                 onChange={this.handleOnChange}

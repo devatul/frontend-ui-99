@@ -16,7 +16,7 @@
                         <div class="panel-body bg-secondary widget-panel">
                             <h4 class="widget-title">Scan 
                                 <HelpButton className="" classNote="overview_timeframe help_timeframe"
-                                    setValue="This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity." />
+                                    setValue="Percentage of documents detected and scanned by Dathena 99 compared against total number of documents detected." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -38,7 +38,7 @@
                                 <HelpButton
                                     className="overview_question_a"
                                     classNote="overview_timeframe help_timeframe"
-                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
+                                    setValue="Duplicates :  Two or more files with identical content and file names. Twins : Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -73,7 +73,7 @@
                                 <HelpButton
                                     className="overview_question_a"
                                     classNote="overview_timeframe help_timeframe"
-                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
+                                    setValue="Level of confidence that 99 has in its initial classification. The higher the accuracy level, the greater the level of confidence that 99’s classification is correct." />
                             </h4>
                             <div class="widget-summary"> 
                                 <div class="widget-summary-col">
@@ -91,7 +91,8 @@
                 <div class="col-md-4">
                     <DonutChart
                         id="confidentialityPieChart"
-                        config={configChart.confidentiality} />
+                        config={configChart.confidentiality}
+                        help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
                 <div class="col-md-4">
                     <StackedChart
@@ -102,7 +103,13 @@
                 <div class="col-md-4">
                     <DonutChart
                         id="documentPieChart"
-                        config={configChart.doctypes} />
+                        config={configChart.doctypes}
+                        help="Summarised list of all Document extensions detected by Dathena 99. Document types can contain the following file extensions:
+                            Word :  .doc, .dotx, .dot, .docm, .dotm, .rtf, .txt
+                            Excel : .xlsx, .xls, .xltx, .xlt, .csv, .xlsb, .xlsm, .xltm, .xml, .xlam, .xla, .txt
+                            PDF : .pdf
+                            Power Point : .pptx, .ppt, .potx, .pot, .ppsx, .pps, .pptm, .potm, .ppsm
+                            Other : .log, .msg, .eml" />
                 </div>
             </div>
 
@@ -130,16 +137,27 @@
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Reviewed Documents
+                                                    <HelpButton
+                                                        className="dropdown-file-info-holder"
+                                                        classNote="help_question_content"
+                                                        setValue="Percentage of documents reviewed for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Validated Documents
+                                                    <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Percentage of documents validated and classify for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
+                                                    <HelpButton
+                                                        classNote="help_question_bottom"
+                                                        className="dropdown-file-info-holder"
+                                                        setValue="Percentage of successful challenges compared against all challenges for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                    rowspan="1" colspan="1">
-                                                    Accuracy
+                                                    rowspan="1" colspan="1">Accuracy
+                                                    <HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                                                        setValue="Accuracy of Dathena 99 document classification expressed as a percentage." />
                                                 </th>
                                             </tr>
                                         </thead>
@@ -183,16 +201,31 @@
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                 colspan="1">Reviewed Documents
+                                                <HelpButton
+                                                    className="dropdown-file-info-holder"
+                                                    classNote="help_question_content"
+                                                    setValue="Percentage of documents reviewed for each category" />
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                 colspan="1">Validated Documents
+                                                <HelpButton
+                                                    classNote="help_question_content"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of documents validated and classified for each category." />
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                 rowspan="1" colspan="1">Review Accuracy
+                                                <HelpButton
+                                                    classNote="help_question_bottom"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of successful challenges compared to the total level of challenges. " />
                                             </th>
                                             <th class="text-center" tabindex="0" aria-controls="datatable-default"
-                                                rowspan="1" colspan="1">
-                                                Accuracy
+                                                rowspan="1" colspan="1">Accuracy
+                                                <HelpButton
+                                                    classNote="note_chart_content_review"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of accuracy of Dathena 99 for each category." />
                                             </th>
                                         </tr>
                                         </thead>

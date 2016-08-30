@@ -2,18 +2,13 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './UserAssignment.rt'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import update from 'react-addons-update'
-import javascript from '../script/javascript.js';
+import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
-import userAssignment from '../script/chart-user-assignment.js'
-import chartFilterAssignment from '../script/chart-filter-assignment.js'
-import javascriptAssignement from '../script/javascript.assignement.js'
-import 'jquery'
-import { upperFirst, findIndex, assignIn } from 'lodash';
+import { upperFirst, findIndex, assignIn, isEqual } from 'lodash'
+import { makeRequest } from '../utils/http'
 
 var UserAssignment = React.createClass({
-    mixins: [PureRenderMixin],
     static: {
         selectId: {
             timeframe: 'timeframe',
@@ -30,7 +25,7 @@ var UserAssignment = React.createClass({
                 info: {},
                 default: 0
             },
-            buttonStatus: {
+            buttonSample: {
                 category: '',
                 fixedNumber: ''
             },
@@ -97,11 +92,18 @@ var UserAssignment = React.createClass({
             }
         };
     },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        var { category, datafilter, dataChart } = this.state;
+        return !isEqual(category, nextState.category)
+        || !isEqual( datafilter, nextState.datafilter )
+        || !isEqual( dataChart, nextState.dataChart );
+    },
+    
     componentDidMount() {
     	this.getCategoryList();
     	console.log(this.state);
     	javascript();
-    	//javascriptAssignement();
     },
     addCommas(nStr)
     {
@@ -117,25 +119,41 @@ var UserAssignment = React.createClass({
     },
     componentDidUpdate(prevProps, prevState) {
         var { category } = this.state;
-    	if(category.info != prevState.category.info) {
-        	this.categoryInformationChart();
-        }
+    	
         if(category.current != prevState.category.current) {
-            this.getCategoryInfo();
-            this.getReviewers();
+
+            var info = this.getCategoryInfo(),
+
+                reviewers = this.getReviewers(),
+
+                updateData = update(this.state.category, {
+                    info: { $set: info },
+                    reviewers: { $set: reviewers }
+                }),
+                
+                updateChart = update(this.state.dataChart, {
+                    documentType: { $set: this.documentTypeChart(info) },
+                    confidentiality: { $set: this.categoryInfoChart(info) }
+                });
+
+            this.setState({ category: updateData, dataChart: updateChart });
+
         }
         if(category.reviewers != prevState.category.reviewers) {
             this.updateDataChart();
         }
-        if(this.state.datafilter.params != prevState.datafilter.params) {
-            this.getReviewers();
-      	}
+        if(this.state.datafilter != prevState.datafilter) {
+            debugger
+        }
+        
     },
     handleOnChangeSelectBox: function(data, field) {
-        var { params, filterLabel } = this.state.datafilter;
-        var { selectId } = this.static;
-        var indexLabel = findIndex(filterLabel, {id: field.id });
-        var label = assignIn({}, data);
+        debugger
+        var { params, filterLabel } = this.state.datafilter,
+            { selectId } = this.static,
+            indexLabel = findIndex(filterLabel, {id: field.id }),
+            label = assignIn({}, data);
+
             label.id = field.id;
         if(indexLabel == -1) {
             indexLabel = filterLabel.length;
@@ -157,20 +175,26 @@ var UserAssignment = React.createClass({
                 });
             }
         var updateData = update(this.state.datafilter, {
-            params: {$set: params },
-            setValue: {
-                [field.id]: {$set: field.value }
-            },
-            filterLabel: {
-                [indexLabel]: {$set: label}
-            }
-        });
-        this.setState({ datafilter: updateData });
+                params: {$set: params },
+                
+                setValue: {
+                    [field.id]: {$set: field.value }
+                },
+                filterLabel: {
+                    [indexLabel]: {$set: label}
+                }
+            }),
+            
+            updateReviewer = update(this.state.category, {
+                reviewers: { $set: this.getReviewers( params ) }
+            });
+        this.setState({ datafilter: updateData, category: updateReviewer });
     },
     handleClickFilterLabel: function(label, index) {
-        var { selectId } = this.static;
-        var { params, filterLabel } = this.state.datafilter;
-        var indexLabel = findIndex(filterLabel, {id: label.id });
+        var { selectId } = this.static,
+            { params, filterLabel } = this.state.datafilter,
+            indexLabel = findIndex(filterLabel, {id: label.id });
+            
         switch(label.id) {
             case selectId.numberuser: 
                 params = update(params, {
@@ -188,13 +212,20 @@ var UserAssignment = React.createClass({
                 });
             }
         var updateData = update(this.state.datafilter, {
-            params: {$set: params },
-            setValue: {
-                [label.id]: {$set: 0 }
-            },
-            filterLabel: {$splice: [[indexLabel, 1]]}
-        });
-        this.setState({ datafilter: updateData });
+                params: {$set: params },
+
+                setValue: {
+                    [label.id]: {$set: 0 }
+                },
+                filterLabel: {$splice: [[indexLabel, 1]]}
+            }),
+
+            updateReviewer = update(this.state.category, {
+
+                reviewers: { $set: this.getReviewers(params) }
+
+            });
+        this.setState({ datafilter: updateData, category: updateReviewer });
     },
     handleOnClickValidationButton: function(id) {
         var set = (id == 'category') ? 'fixedNumber' : 'category';
@@ -212,8 +243,17 @@ var UserAssignment = React.createClass({
             request.name = current.name;
             request.docs_sampled = info.number_docs;
         if(request.reviewers.length > 0) {
-            if(list.length === indexCurrent + 1)
-                $('#summarytab').click();
+            if(list.length === indexCurrent + 1) {
+
+                var summary = {
+                    id: 'summary'
+                },
+                updateCurrent = update(this.state.category, {
+                    current: { $set: updateCurrent }
+                });
+
+                this.setState({ category: updateState });
+                
             // $.ajax({
             //     method: 'POST',
             //     url: Constant.SERVER_API + "api/assign/reviewer/",
@@ -232,7 +272,7 @@ var UserAssignment = React.createClass({
             //         }
             //     }.bind(this)
             // });
-            else {
+            } else {
                 var setCurrent = update(this.state.category, {
                     current: { $set: (list.length === indexCurrent + 1) ? {} : list[indexCurrent + 1] }
                 });
@@ -241,10 +281,20 @@ var UserAssignment = React.createClass({
                         reviewers: { $set: [] }
                     },
                     filterLabel: { $set: [] },
+
                     setValue: {
                         timeframe: { $set: 0 },
                         numberuser: { $set: 0 },
                         reviewertype: { $set: 0 }
+                    },
+                    params: {
+                        
+                        $set: {
+                            id: 0,
+                            timeframe: 6,
+                            numberuser: 10,
+                            type: 'last_modifier'
+                        }
                     }
                 });
                 this.setState({ category: setCurrent, datafilter: setReviewer });
@@ -270,9 +320,7 @@ var UserAssignment = React.createClass({
         });
         this.setState({ category: setCategory, datafilter: datafilter });
     },
-    // chartAssignment(categoryInfo) {
-    // 	userAssignment(categoryInfo);
-    // },
+
     updateDataChart() {
         var categories = [],
             data = [], 
@@ -292,19 +340,12 @@ var UserAssignment = React.createClass({
         this.setState({ dataChart: updateData });
     },
 
-    categoryInformationChart() {
-        var { confidentialities, doc_type } = this.state.category.info;
-		var confidentiality = [],
+    documentTypeChart(info) {
+        var { doc_type } = info, 
             documentType = {
                 categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
                 series: []
             };
-        for(let i = 0, total = confidentialities.length; i < total; i++) {
-            confidentiality[i] = {
-                name: upperFirst( confidentialities[i].name ),
-                y: confidentialities[i].number
-            };
-        }
 
         for(let i = 0, total = doc_type.length; i < total; i++) {
 
@@ -320,12 +361,20 @@ var UserAssignment = React.createClass({
             }
 
         }
+
+        return documentType;
+    },
+
+    categoryInfoChart(info) {
+        var { confidentialities } = info, confidentiality = [];
+        for(let i = 0, total = confidentialities.length; i < total; i++) {
+            confidentiality[i] = {
+                name: upperFirst( confidentialities[i].name ),
+                y: confidentialities[i].number
+            };
+        }
         
-        var updateChart = update(this.state.dataChart, {
-            confidentiality: { $set: confidentiality },
-            documentType: { $set: documentType }
-        });
-        this.setState({ dataChart: updateChart });
+        return confidentiality;
     },
     
     handleOnChangeSelectButton: function(checked, index) {
@@ -350,81 +399,67 @@ var UserAssignment = React.createClass({
         });
         this.setState({ datafilter: updateRequest });
     },
-    getReviewers() {
-        var { datafilter, category }  = this.state;
+
+    handleClickBackDrop: function(event) {
+        if(event.target.id == 'backDropFilter') {
+            event.target.style.height = "200px";
+        }
+        
+        //debugger
+    },
+
+    selectBoxOnOpen: function(field) {
+        //this.refs.backDropFilter.style.width = '560px';
+        this.refs.backDropFilter.style.height = '300px';
+        //debugger
+    },
+
+
+
+    getReviewers( params ) {
+        var { datafilter, category }  = this.state,
+        reviewers = [];
         datafilter.params.id = category.current.id;
 
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/assign/reviewer/",
-            dataType: 'json',
-            data: datafilter.params,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateState = update(this.state.category, {
-                    reviewers: {$set: data}
-                });
-                this.setState({ category: updateState });
-                console.log("reviewers ok: ", data);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        makeRequest({
+            path: 'api/assign/reviewer/',
+            params: params ? params : datafilter.params,
+            success: (data) => {
+                reviewers = data;
+            }
         });
+
+        return reviewers;
+
     },
     getCategoryList() {
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/category/",
-            dataType: 'json',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-               	var updateData = update(this.state.category, {
+
+        makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+                var updateData = update(this.state.category, {
                     list: {$set: data},
                     current: {$set: data[this.state.category.default] }
                 });
+
                	this.setState({ category: updateData });
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            }
         });
+    	
     },
     getCategoryInfo() {
-        var {current} = this.state.category;
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/assign/category/",
-            dataType: 'json',
-            async: false,
-            data: { "id": current.id},
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateData = update(this.state.category, {
-                    info: {$set: data},
-                });
-                this.setState({ category: updateData });
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        var {current} = this.state.category, info = {};
+
+        makeRequest({
+            path: 'api/assign/category/',
+            params: { "id": current.id },
+            success: (data) => {
+                info = data;
+            }
         });
+
+        return info;
+    	
     },
     getSummary() {
         $.ajax({

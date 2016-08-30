@@ -75,18 +75,28 @@ var StackedChart = React.createClass({
                 text: ''
                 },
                 credits: {
-                enabled: false
+                    enabled: false
                 },
                 tooltip: {
                     headerFormat: '',
-                    pointFormat: '<span style="color: {point.color}; font-weight: bold;">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
+                    pointFormatter: function() {
+                        var percent = this.percentage.toFixed(1);
+
+                        if(percent < 5.0) {
+                            return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
+                        } else {
+                            return 'Documents: ' + this.y;
+                        }
+                    }
                 },
                 plotOptions: {
                 pie: {
                         allowPointSelect: false,
                         cursor: 'pointer',
+                        center: ['50%', '50%'],
+                        shadow: false,
                         dataLabels: {
-                            enabled: false
+                            enabled: true
                         },
                         states: {
                             hover: {
@@ -97,25 +107,34 @@ var StackedChart = React.createClass({
                         point:  {
                             events: {
                                 mouseOver: function(event){
-                                    var { series } = this, { points } = series;
+                                    var { series } = this.series.chart, { points } = series;
 
                                     this.graphic.attr({
                                         fill: this.color
                                     });
 
-                                    for(let i = points.length - 1; i >= 0; i--) {
-                                        points[i].graphic.attr({
-                                            fill: series.userOptions.colorsHover[i]
-                                        });
+                                    for(let i = series.length - 1; i >= 0; i--) {
+
+                                        for(let j = series[i].points.length - 1; j >= 0; j--) {
+                                            series[i].points[j].graphic.attr({
+                                                fill: series[i].userOptions.colorsHover[j]
+                                            });
+                                        }
+
                                     }
+                                    
                                 },
                                 mouseOut: function(event) {
-                                    var { series } = this, { points } = series;
+                                    var { series } = this.series.chart, { points } = series;
 
-                                    for(let i = points.length - 1; i >= 0; i--) {
-                                        points[i].graphic.attr({
-                                            fill: points[i].color
-                                        });
+                                    for(let i = series.length - 1; i >= 0; i--) {
+
+                                        for(let j = series[i].points.length - 1; j >= 0; j--) {
+                                            series[i].points[j].graphic.attr({
+                                                fill: series[i].points[j].color
+                                            });
+                                        }
+
                                     }
                                 }
                             }

@@ -45,7 +45,6 @@ var DonutChart = React.createClass({
                     load: function () {
                         var chart = this,
                             series = chart.series;
-
                         if (config.disabled){
                             for( let i = series.length - 1; i >= 0; i-- ) {
                                 for(let j = series[i].points.length - 1; j >= 0; j--) {
@@ -69,14 +68,32 @@ var DonutChart = React.createClass({
                 },
                 tooltip: {
                     headerFormat: '',
-                    pointFormat: '<span style="color: {point.color}; font-weight: bold;">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
+                    pointFormatter: function() {
+                        var percent = this.percentage.toFixed(1);
+
+                        if(percent < 5.0) {
+                            return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
+                        } else {
+                            return 'Documents: ' + this.y;
+                        }
+                    }
                 },
                 plotOptions: {
                     pie: {
                         allowPointSelect: false,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: false
+                            enabled: true,
+                            distance: -30,
+                            formatter: function() {
+                                var percent = this.percentage.toFixed(1);
+                                return percent >= 5.0 ? percent + '%' : '';
+                            },
+                            style: {
+                                fontWeight: 'bold',
+                                color: 'white',
+                                textShadow: '0px 1px 2px black'
+                            }
                         },
                         states: {
                             hover: {
@@ -122,7 +139,7 @@ var DonutChart = React.createClass({
     },
 
     render() {
-        var legendChart = [], { id, config } = this.props, { colorDisabled } = this.state;
+        var legendChart = [], { id, config, help } = this.props, { colorDisabled } = this.state;
             if( config.data ) {
                 for( let i = config.data.length - 1; i >= 0; i-- ) {
                     let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
@@ -142,7 +159,7 @@ var DonutChart = React.createClass({
                 <div className="panel-body widget-panel">
                     <h4 className="widget-title">{config.name + ' '}
                         <HelpButton classNote="overview_timeframe help_timeframe"
-                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
+                                    setValue={help} />
                     </h4>
                     <div className="widget-chart">
                         <div style={{'margin-left': '0px'}} className="chart chart-md" id={id}></div>

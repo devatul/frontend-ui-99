@@ -10,13 +10,18 @@
   <div class="container">
       <div class="tabs tabs-primary">
         <ul class="nav nav-tabs cat-list">
-          <li rt-repeat="category in this.state.category.list" key="{categoryIndex}" class="{this.state.category.current.id == category.id && 'active'}">
-            <a id="{'Category_' + category.id}" href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">{category.name}</a>
+          <li rt-repeat="category in this.state.category.list"
+              key="{categoryIndex}" class="{this.state.category.current.id == category.id && 'active'}">
+            <a id="{'Category_' + category.id}"
+              href="#categoryInfo"
+              class="{this.state.category.current.id != category.id && 'no-active'}"
+              onClick="()=>this.setCategoryCurrent(categoryIndex)"
+              data-toggle="tab" aria-expanded="true" 
+              {this.state.category.current.id != category.id ? 'style="text-transform: capitalize; "' : 'style="text-transform: capitalize; color: #DDD"'}>{category.name}</a>
           </li>
           <li class="">
             <a id='summarytab' href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>
           </li>
-          
         </ul>
         <div class="help_guide_sub tab-content">
           <div id="categoryInfo" class="help_guide tab-pane active">
@@ -42,7 +47,7 @@
                       <ValidationButton
                           id='category'
                           onClick={this.handleOnClickValidationButton}
-                          status={this.state.buttonStatus.category} />
+                          status={this.state.buttonSample.category} />
                     </div>
                     <div class="or-divider"><span>OR</span></div>
                     <div class="form-group">
@@ -53,7 +58,7 @@
                       <ValidationButton
                           id='fixedNumber'
                           onClick={this.handleOnClickValidationButton}
-                          status={this.state.buttonStatus.fixedNumber} />
+                          status={this.state.buttonSample.fixedNumber} />
                     </div>
                   </div>
                 </section>
@@ -68,22 +73,6 @@
                           <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelCategoryInfo"></a>
                       </div>
                   </header>
-                  <!--<div class="panel-body">
-                    <span>Number of Documents: {this.addCommas(this.state.category.info.number_docs)}</span>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Confidentiality Overview</h4>
-                        <div class="chart-container">
-                          <div id="confidentialityChartLegend" class="document-chart"></div>
-                          <div id="confidentialityOverviewChart" class="document-chart"></div>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Document Type per Confidentiality Level</h4>
-
-                        <div id="confidentialityLevelChart" class="document-chart"></div>
-                      </div>
-                    </div>-->
                     <div id="panelCategoryInfo" class="panel-body tab-content tab-pane nav-collapse collapse in">
                       <div class="row">
                         <div class="col-sm-6">
@@ -134,7 +123,7 @@
                                     <li class="dropdown">
                                       <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                         <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                        <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 560px;">
+                                        <div ref="backDropFilter" id="backDropFilter" onClick={this.handleClickBackDrop} class="dropdown-menu has-child has-arrow dd-md">
                                             <ul class="filter-list list-unstyled pt-xs">
                                                 <li>
                                                   <SelectBox
@@ -142,9 +131,10 @@
                                                     name="timeframe"
                                                     data={this.state.datafilter.timeFrame}
                                                     value={this.state.datafilter.setValue.timeframe}
+                                                    onOpen={this.selectBoxOnOpen}
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
-                                                    onChange={this.handleOnChangeSelectBox} />
+                                                    onChange={this.handleOnChangeSelectBox} />  
                                                 </li>
                                                 <li>
                                                 <SelectBox

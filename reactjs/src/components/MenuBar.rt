@@ -1,6 +1,8 @@
 <rt-import name="MultiSelectBox" from="./dathena/multiselectBox"/>
 <rt-import name="FilterLabel" from="./dathena/FilterLabel"/>
 <rt-import name="func" from="../utils/function" />
+<rt-import name="HelpButton" from="./dathena/HelpButton"/>
+
 <div rt-scope="this.state.scanResult as scanResult">
 <div class="my_main bar_menu container">
     <div class="row">
@@ -77,44 +79,74 @@
                                     <table class="table general-table mb-none">
                                         <tbody>
                                         <tr>
-                                            <td>Last Data Scan:</td>
+                                            <td>Last Data Scan:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Time of the last data scan by Dathena 99." />
+                                            </td>
                                             <td colspan="3">{scanResult.last_data_scan}</td>
                                         </tr>
                                         <tr>
-                                            <td>Country in Scope:</td>
+                                            <td>Country in Scope:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Country(s) in scope for the last scan." />
+                                            </td>
                                             <td colspan="3">{scanResult.country}</td>
                                         </tr>
                                         <tr>
-                                            <td>Business in Scope:</td>
+                                            <td>Business in Scope:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Business unit(s) in scope for the last scan." />
+                                            </td>
                                             <td colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
                                         </tr>
                                         <tr>
-                                            <td>Scan Status:</td>
+                                            <td>Scan Status:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Details whether the scan was successful or not." />
+                                            </td>
                                             <td colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
                                         </tr>
                                         <tr>
-                                            <td>Documents Analyzed:</td>
+                                            <td>Documents Analyzed:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="The total number of documents that were detected by 99 during the scan process." />
+                                            </td>
                                             <td colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
                                         </tr>
                                         <tr>
-                                        <td>File Extension Processed:</td>
+                                        <td>File Extension Processed:
+                                            <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
+                                        </td>
                                             <td colspan="3">{scanResult.file_extensions_processed}</td>
                                         </tr>
                                         <tr>
-                                            <td>Duplicate Documents:</td>
+                                            <td>Duplicate Documents:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Two or more files with identical content and file names." />
+                                            </td>
                                             <td colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
                                         </tr>
                                         <tr>
-                                        <td>Twins Documents:</td>
+                                        <td>Twins Documents:
+                                            <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Two or more files with identical content, but with different file names." />
+                                        </td>
                                             <td colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
                                         </tr>
 
                                         <tr>
-                                            <td>Encrypted Documents or Archives:</td>
+                                            <td>Encrypted Documents or Archives:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
+                                            </td>
                                             <td colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
                                         </tr>
                                         <tr>
-                                            <td>Documents Skipped:</td>
+                                            <td>Documents Skipped:
+                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
+                                                        setValue="Documents in the data repository that have not been scanned by Dathena 99." />
+                                            </td>
                                             <td colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>
                                         </tr>
                                         </tbody>

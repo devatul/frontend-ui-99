@@ -37,7 +37,6 @@ var PieChart = React.createClass({
 
         var { config, data, id } = this.props,
             { colors, colorsHover } = config;
-        debugger
         var div = $('#' + id);
         var parentDiv = div.closest('.tab-pane');
         if (div.length){
