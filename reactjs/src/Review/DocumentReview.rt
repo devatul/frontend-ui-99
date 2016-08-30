@@ -24,7 +24,7 @@
                                         <i class="fa {this.urgency(action.urgency)}" aria-hidden="true"></i>
                                     </li>
                                     <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">{action.category}</h2>
+                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">[EN] {action.category}</h2>
                                     </li>
                                     <li class="document_panel-title">
                                         <HelpButton className="dropdown-file-info-holder"
@@ -66,21 +66,14 @@
                                                             <label></label>
                                                         </div>
                                                     </th>
-                                                    <th class="review_note">Document Name
+                                                     <th class="review_note">Type
+                                                    </th>
+                                                    <th class="review_note">Document
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
-                                                    <th class="review_note">Path
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
-                                                            setValue="This displays the logical folder path to where each document is currently located." />
-                                                    </th>
-                                                    <th class="review_note">Owner
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
-                                                            setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
-                                                    </th>
+                                                    
                                                     <th class="review_note">Proposed Category (confidence level)
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="help_question_bottom"
@@ -98,8 +91,9 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody >
                                                 <tr
+
                                                     rt-repeat="doc in action.documents"
                                                     key="{docIndex}"
                                                     class="{(action.checkedNumber > 0 && doc.current.checked == false) ? 'inactive':''}">
@@ -109,9 +103,13 @@
                                                             <label></label>
                                                         </div>
                                                     </td>
+                                                    
+                                                    <td class="text-center">
+                                                        <i class="{this.state.icon[docIndex].type}"></i>
+                                                    </td>
                                                     <td class="text-left">
                                                         <!--http://www.snee.com/xml/xslt/sample.doc-->
-                                                        <span
+                                                         <span
                                                             class="text-italic file-name doc-path"
                                                             data-toggle="modal"
                                                             data-target="#previewModal"
@@ -132,15 +130,10 @@
                                                             <li>Confidentiality Label: {doc.confidentiality_label}</li>
                                                             <li>Number of Classification Challenge: {doc.number_of_classification_challenge}</li>
                                                         </InfoButton>
+                                                       
+                                                        
                                                     </td>
-                                                    <td class="text-left">
-                                                        <span class="text-italic file-name-1 doc-path" rel="tooltip" data-toggle="tooltip" data-original-title="{doc.path}">{doc.path}</span>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <span class="text-italic">
-                                                            {doc.owner}
-                                                        </span>
-                                                    </td>
+                                                   
                                                     <td rt-scope="doc.current as current">
                                                         <div class="select-group">
                                                             <div class="selected-info">
@@ -229,7 +222,7 @@
                                     </li>
                                     <li class="document_panel-title">
                                         <h2 class="document_panel-title panel-title" style="text-transform: capitalize">
-                                            {(challenged.sla == null ) ? challenged.category + ' / ' + challenged.confidentiality : challenged.sla}
+                                            {(challenged.sla == null ) ? '[EN] '+ challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
                                             <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content"
                                             setValue="" />
@@ -272,21 +265,15 @@
                                                             <label></label>
                                                         </div>
                                                     </th>
-                                                    <th class="my_review_note review_note">Document Name
+                                                    <th class="review_note">Type
+                                                        
+                                                    </th>
+                                                    <th class="my_review_note review_note">Document
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
-                                                    <th class="review_note">Path
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
-                                                            setValue="This displays the logical folder path to where each document is currently located." />
-                                                    </th>
-                                                    <th class="review_note">Owner
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
-                                                            setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
-                                                    </th>
+                                                    
                                                     <th class="review_note">Category
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="help_question_content"
@@ -325,6 +312,9 @@
                                                             <label></label>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <i class="{this.state.iconChallengedDocument[docChallIndex].type}"></i>
+                                                    </td>
                                                     <td class="text-left my_file-name">
                                                         <span
                                                             class="text-italic file-name doc-path"
@@ -348,16 +338,8 @@
                                                             <li>Number of Classification Challenge: {docChall.number_of_classification_challenge}</li>
                                                         </InfoButton>
                                                     </td>
-                                                    <td class="text-left">
-                                                        <span class="text-italic file-name-1 doc-path"
-                                                            data-toggle="tooltip"
-                                                            data-original-title="{docChall.path}">{docChall.path}</span>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <span class="text-italic">
-                                                            {(docChall.name.length > 7) ? docChall.owner.substring(7, 0) + '...' : docChall.owner}
-                                                        </span>
-                                                    </td>
+                                                   
+                                                    
                                                     <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
                                                             <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
@@ -368,7 +350,7 @@
                                                     </td>
                                                     <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
-                                                            <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
+                                                            <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
                                                               <option rt-repeat="Confidential in docChall.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                             </select>
                                                             <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docChall.confidentialities[current.prevConfidential].name}</span>
@@ -442,21 +424,14 @@
                                     <label></label>
                                 </div>
                             </th>
-                            <th class="my_review_note review_note">Document Name
+                             <th class="review_note">Type
+                            </th>
+                            <th class="my_review_note review_note">Document
                                 <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content"
                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
-                            <th class="review_note">Path
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
-                                    setValue="This displays the logical folder path to where each document is currently located." />
-                            </th>
-                            <th class="review_note">Owner
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
-                                    setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
-                            </th>
+                           
                             <th class="review_note">Proposed Category (confidence level)
                                 <HelpButton className="dropdown-file-info-holder"
                                     classNote="help_question_bottom"
@@ -482,6 +457,9 @@
                                     <label></label>
                                 </div>
                             </td>
+                             <td class="text-left">
+                              
+                            </td>
                             <td class="text-left">
                                 <!--http://www.snee.com/xml/xslt/sample.doc-->
                                 <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal" data-file-url="{docPreview.image_url}">
@@ -501,13 +479,8 @@
                                     <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
                                 </InfoButton>
                             </td>
-                            <td class="text-left">
-                                <span class="text-italic doc-path file-name-1" data-toggle="tooltip"
-                                        data-original-title="{docPreview.path}">{docPreview.path}</span>
-                            </td>
-                            <td class="text-left">
-                                <span class="text-italic">{docPreview.owner}</span>
-                            </td>
+                            
+                           
                             <td rt-scope="docPreview.current as current">
                                 <div class="select-group">
                                     <div class="selected-info">

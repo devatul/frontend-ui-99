@@ -18,6 +18,8 @@ var DocumentReview = React.createClass({
             shouldUpdateChall: null,
             stackChange: [],
             stackChangeChallenged: [],
+            icon : [],
+            iconChallengedDocument: [],
 
 
         };
@@ -112,18 +114,25 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
+
                 console.log('dataaaa', data);
                 data[0].category = "Legal/Compliance/ Secret";
                 data[0].urgency = "very high";
 
                 data[1].category = "Legal/Compliance/ Confidential";
                 data[1].urgency = "high";
-
+                var listIcon = []; 
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
                     data[i].validateNumber = 0;
                     for(var j = 0; j < data[i].documents.length; j++) {
+                       listIcon.push(
+                            {
+                                'type' : this.getIcon(data[i].documents[j].name)
+                            }
+                        );
+                       /* data[i].documents[j].name = this.getIcon(data[i].documents[j].name);*/
                         data[i].documents[j].confidential_confidence_level = Math.floor(Math.random()*(99-70+1)+70);
                         data[i].documents[j].confidence_level = Math.floor(Math.random()*(99-70+1)+70);
                         data[i].documents[j].current = {
@@ -134,11 +143,15 @@ var DocumentReview = React.createClass({
                         };
                     }
                 }
+                console.log('listIcon', listIcon)
+                
                 var documentPreview = data[0].documents[0];
+                console.log('documentPreview', documentPreview)
                 documentPreview.index = { actionIndex: 0, docIndex: 0};
                 var updateState = update(this.state, {
                     Actions: {$set: data},
-                    documentPreview: {$set: documentPreview}
+                    documentPreview: {$set: documentPreview},
+                    icon : {$set: listIcon}
                 });
                 this.setState(updateState);
                 console.log("Documents ok: ", data);
@@ -387,11 +400,18 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 console.log('dataaaattt', data);
+                let listIcon = [] ;
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
                     data[i].validateNumber = 0;
+
                     for(var j = 0; j < data[i].documents.length; j++) {
+                        listIcon.push(
+                            {
+                                'type' : this.getIcon(data[i].documents[j].name)
+                            }
+                        );
                         data[i].documents[j].current = {
                             checked: false,
                             category: 4,
@@ -407,10 +427,10 @@ var DocumentReview = React.createClass({
                 challengedPreview.index = {actionIndex: 0, docIndex: 0 };
                 var updateState = update(this.state, {
                     ChallengedDocuments: {$set: data},
-                    challengedPreview: {$set: challengedPreview}
+                    challengedPreview: {$set: challengedPreview},
+                    iconChallengedDocument : {$set: listIcon}
                 });
                 this.setState(updateState);
-                debugger;
                 console.log("Doc ok: ", data);
             }.bind(this),
             error: function(xhr,error) {
@@ -612,6 +632,23 @@ var DocumentReview = React.createClass({
             this.setState({shouldUpdateChall: { name: 'undoActionChallenged', actionIndex:documentOld.index.actionIndex, docIndex: documentOld.index.docIndex, stack: newStackChange.length }})
         }
         debugger;
+    },
+    getIcon(value){
+       if(_.endsWith(value,'.ppt')){
+         return "fa fa-file-powerpoint-o action-file-icon"
+       }
+       if(_.endsWith(value,'.xls')){
+         return "fa fa-file-excel-o action-file-icon "
+       }
+       if(_.endsWith(value,'.pdf')){
+         return "fa fa-file-pdf-o action-file-icon"
+       }
+       if(_.endsWith(value,'.txt')){
+         return "fa fa-file-text-o action-file-icon"
+       }
+       if(_.endsWith(value,'.doc') || _.endsWith(value,'.docx')){
+         return "fa fa-file-word-o action-file-icon"
+       }
     },
     render:template
 });

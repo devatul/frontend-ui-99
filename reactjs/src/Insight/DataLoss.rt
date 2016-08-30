@@ -250,6 +250,7 @@
             </div>
           </header>
            <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
+              <ul class="my-profile-header nav nav-tabs" style="margin-left:5px">
               <!-- <ul class="my-profile-header nav nav-tabs" style="margin-left:5px;">
                 <li class="active">
                   <a href="#toggle" data-toggle="tab" aria-expanded="false">English</a>
@@ -261,7 +262,10 @@
                   <a href="#my_team" data-toggle="tab" aria-expanded="true">German</a>
                 </li>
               </ul> -->
-              <Tab/>
+                <Tab className="active" name="English"/>
+                 <Tab className="#" name="French"/>
+                  <Tab className="#" name="Germany"/>
+              </ul>
               <div class="panel-body">
                 <div class="table-responsive table-suggestion-wrapper">
                   <h4 class="table-title">Accounting / Tax</h4>

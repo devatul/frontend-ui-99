@@ -203,3 +203,19 @@
     display: none;
   }
 }
+
+.action-file-icon{
+  font-size: 30px;
+  &.fa-file-word-o{
+    color: #2259A9;
+  }
+  &.fa-file-excel-o{
+    color: #1E6F46;
+  }
+  &.fa-file-pdf-o{
+    color: #313131;
+  }
+  &.fa-file-text-o{
+    color: #ADADAD;
+  }
+}

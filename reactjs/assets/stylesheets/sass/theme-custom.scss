@@ -95,6 +95,9 @@ a{
 /**
  * Tooltip Styles
  */
+.pie-chart-legend-text{
+  z-index: -1!important
+}
 
 /* Add this attribute to the element that needs a tooltip */
 [data-tooltip] {
@@ -1164,6 +1167,10 @@ ul.filter-list li{
   }
 }
 
+.dropdown-menu.append-to-body{
+  z-index: 99999;
+}
+
 .dropdown-file-info{
   padding: 15px;
   ul{
@@ -1176,9 +1183,27 @@ ul.filter-list li{
   margin-left: 42px;
 }
 
+div[id^='preview']{
+
+}
+
 .table-my-actions{
   .checkbox-custom{
     padding: 0 0 0 5px;
+  }
+  &>thead{
+    tr{
+      th{
+        &:nth-child(2){
+          width: 50px;
+        }
+
+        &:nth-child(6){
+          width: 80px;
+          padding-right: 5px!important
+        }
+      }
+    }
   }
   &.orphan-review{
     @media (min-width: 1024px){
@@ -1235,6 +1260,9 @@ ul.filter-list li{
     }
   }
   &>tbody{
+    .dropdown-file-info-holder{
+      float:left;
+    }
     &>tr{
       &.item-challenged{
         label, input[type="checkbox"]{
@@ -1268,7 +1296,7 @@ ul.filter-list li{
   }
   .btn-file-info{
     cursor: pointer;
-    margin-left: 10px;
+    margin-right: 10px;
   }
   .doc-path{
     display: inline-block;

@@ -6,20 +6,42 @@ import _ from 'lodash'
 import HelpButton from './HelpButton'
 
 var TabName = React.createClass({
+	getInitialState(){
+		return {
+			color : {
+				'color': '#ACACAC',
+			},
+	   		
+	    };
+	},
+	onMouseOver(){
+		this.setState({color :
+			{
+				'color' : '#4fca9d'
+			}
+		})
+	},
+	onMouseOut(color){
+		this.setState({color :
+			{
+				'color' : color
+			}
+		})
+		console.log(color)
+	},
+	oncLick(){
+		this.setState({color :
+			{
+				'color' : '#4fca9d'
+			}
+		})
+	},
 	render(){
 		return(
-			 <ul className="my-profile-header nav nav-tabs" style={{'marginLeft':'5px;'}}>
-	                <li className="active">
-	                  <a href="#toggle" data-toggle="tab" aria-expanded="false">English</a>
-	                </li>
-	                <li className="">
-	                  <a href="#" data-toggle="tab" aria-expanded="true"><span style={{"color":"#ACACAC"}}>French</span></a>
-	                </li>
-	                <li className="">
-	                  <a href="#" data-toggle="tab" aria-expanded="true">German</a>
-	                </li>
-              </ul>
-		)
+			<li className={this.props.className} onMouseOver = {this.onMouseOver} onMouseOut = {this.onMouseOut.bind(this,'#ACACAC')} onClick={this.oncLick}>
+	                  <a href="#" data-toggle="tab" aria-expanded="true"><span style={this.state.color}>{this.props.name}</span></a>
+	          </li>
+	     )
 	}
 });
 
