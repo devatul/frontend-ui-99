@@ -281,7 +281,7 @@ var MenuBar1 = React.createClass({
                     }
                 }
             });
-            data = updateData;
+                data = updateData;
             }
            
         }.bind(this));
@@ -291,7 +291,7 @@ var MenuBar1 = React.createClass({
          console.log('dataSelectBox', this.state.dataSelectBox[id])
          console.log('filterLabel' , this.state.filterLabel)
         /*var filterList = _.pullAllBy(this.state.filterLabel,  [this.state.dataSelectBox[id] ] , this.state.dataSelectBox[id].index)*/
-        var filterList = _.difference ( this.state.dataSelectBox[id], this.state.filterLabel)
+        var filterList = _.difference ( this.state.filterLabel, this.state.dataSelectBox[id])
 
        
         this.setState({
