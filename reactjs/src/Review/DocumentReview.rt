@@ -84,7 +84,7 @@
                                                             classNote="note_chart_content_review"
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
-                                                    <th class="text-center">Status
+                                                    <th class="text-center" style="max-width: 70px;">Status
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review"
                                                             setValue="This represent the status of the review for each file." />
@@ -113,7 +113,7 @@
                                                             class="text-italic file-name doc-path"
                                                             data-toggle="modal"
                                                             data-target="#previewModal"
-                                                            onClick="()=>this.setDocumentPreview(actionIndex, docIndex)"
+                                                            onClick="()=>this.setDocumentPreview(actionIndex, docIndex,this.state.icon[docIndex].type)"
                                                             data-file-url="{doc.image_url}">
                                                                 <span class="file-name-1"
                                                                     rel="tooltip"
@@ -123,12 +123,14 @@
                                                                 </span>
                                                         </span>
                                                         <InfoButton>
-                                                            <li>Name: {doc.name}</li>
-                                                            <li>Creation Date: {doc.creation_date}</li>
-                                                            <li>Modifitcation Date: {doc.modification_date}</li>
-                                                            <li>Required Legal Retention until: {doc.legal_retention_until}</li>
-                                                            <li>Confidentiality Label: {doc.confidentiality_label}</li>
-                                                            <li>Number of Classification Challenge: {doc.number_of_classification_challenge}</li>
+                                                            <li>Name: <b>{doc.name}</b></li>
+                                                            <li>Path: {doc.path}</li>
+                                                            <li>Owner: <b>{doc.owner}</b></li>
+                                                            <li>Creation Date: <b>{doc.creation_date}</b></li>
+                                                            <li>Modifitcation Date: <b>{doc.modification_date}</b></li>
+                                                            <li>Required Legal Retention until: <b>{doc.legal_retention_until}</b></li>
+                                                            <li>Confidentiality Label: <b>{doc.confidentiality_label}</b></li>
+                                                            <li>Number of Classification Challenge: <b> {doc.number_of_classification_challenge}</b></li>
                                                         </InfoButton>
                                                        
                                                         
@@ -285,19 +287,19 @@
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment
-                                                        <HelpButton className="dropdown-file-info-holder"
+                                                        <!-- <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review"
-                                                            setValue="Comment of your coordinator to explain the reason of the rejection" />
+                                                            setValue="Comment of your coordinator to explain the reason of the rejection" /> -->
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
-                                                        <HelpButton className="dropdown-file-info-holder"
+                                                       <!--  <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review"
-                                                            setValue="Add a comment to justify your acceptation or your rejection of the challenge." />
+                                                            setValue="Add a comment to justify your acceptation or your rejection of the challenge." /> -->
                                                     </th>
-                                                    <th class="review_note" style="max-width: 100px;">Validation
-                                                        <HelpButton className="dropdown-file-info-holder"
+                                                    <th class="review_note" style="max-width: 120px;">Validation
+                                                       <!--  <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review"
-                                                            setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." />
+                                                            setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." /> -->
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -320,7 +322,7 @@
                                                             class="text-italic file-name doc-path"
                                                             data-toggle="modal"
                                                             data-target="#previewModal3"
-                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex)"
+                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex,this.state.iconChallengedDocument[docChallIndex].type)"
                                                             data-file-url="{docChall.image_url}">
                                                             <span class="file-name-1"
                                                                 rel="tooltip"
@@ -330,12 +332,14 @@
                                                             </span>
                                                         </span>
                                                         <InfoButton>
-                                                            <li>Name: {docChall.name}</li>
-                                                            <li>Creation Date: {docChall.creation_date}</li>
-                                                            <li>Modifitcation Date: {docChall.modification_date}</li>
-                                                            <li>Required Legal Retention until: {docChall.legal_retention_until}</li>
-                                                            <li>Confidentiality Label: {docChall.confidentiality_label}</li>
-                                                            <li>Number of Classification Challenge: {docChall.number_of_classification_challenge}</li>
+                                                            <li>Name: <b>{docChall.name}<b/></li>
+                                                            <li>Path: {docChall.path}</li>
+                                                            <li>Owner: <b>{docChall.owner}</b></li>
+                                                            <li>Creation Date: <b>{docChall.creation_date}</b></li>
+                                                            <li>Modifitcation Date: <b>{docChall.modification_date}</b></li>
+                                                            <li>Required Legal Retention until: <b>{docChall.legal_retention_until}</b></li>
+                                                            <li>Confidentiality Label: <b>{docChall.confidentiality_label}</b></li>
+                                                            <li>Number of Classification Challenge: <b>{docChall.number_of_classification_challenge}</b></li>
                                                         </InfoButton>
                                                     </td>
                                                    
@@ -406,7 +410,7 @@
                     <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index.actionIndex, index.docIndex + 1,this.state.icon[index.docIndex + 1].type)">Go to Next Document</button>
                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -457,8 +461,8 @@
                                     <label></label>
                                 </div>
                             </td>
-                             <td class="text-left">
-                              
+                            <td class="text-center">
+                                <i class="{this.state.iconReview}"></i>
                             </td>
                             <td class="text-left">
                                 <!--http://www.snee.com/xml/xslt/sample.doc-->
@@ -471,12 +475,14 @@
                                     </span>
                                 </span>
                                 <InfoButton>
-                                    <li>name: {docPreview.name}</li>
-                                    <li>Creation Date: {docPreview.creation_date}</li>
-                                    <li>Modifitcation Date: {docPreview.modification_date}</li>
-                                    <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
-                                    <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
-                                    <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
+                                    <li>Name: <b>{docPreview.name}</b></li>
+                                    <li>Path: {docPreview.path}</li>
+                                    <li>Owner: <b>{docPreview.owner}</b></li>
+                                    <li>Creation Date: <b>{docPreview.creation_date}</b></li>
+                                    <li>Modifitcation Date: <b>{docPreview.modification_date}</b></li>
+                                    <li>Required Legal Retention until: <b>{docPreview.legal_retention_until}</b></li>
+                                    <li>Confidentiality Label: <b>{docPreview.confidentiality_label}</b></li>
+                                    <li>Number of Classification Challenge: <b>{docPreview.number_of_classification_challenge}</b></li>
                                 </InfoButton>
                             </td>
                             
@@ -546,7 +552,7 @@
                     <span >Folder {this.cutPath(docPreview.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setChallengedPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setChallengedPreview(index.actionIndex, index.docIndex + 1,this.state.icon[index.docIndex + 1].type)">Go to Next Document</button>
                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -565,21 +571,15 @@
                                     <label></label>
                                 </div>
                             </th>
-                            <th class="review_note">Document Name
+                            <th class="review_note">Type
+                            
+                            </th>
+                            <th class="review_note">Document
                                 <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content"
                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
-                            <th class="review_note">Path
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
-                                    setValue="This displays the logical folder path to where each document is currently located." />
-                            </th>
-                            <th class="review_note">Owner
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
-                                    setValue="This displays the organisational member who has last modified the document. This owner is automatically assigned by 99 from the Document metadata itself gathered during the scanning process." />
-                            </th>
+                          
                             <th class="review_note">Category
                                 <HelpButton className="dropdown-file-info-holder"
                                     classNote="help_question_content"
@@ -619,6 +619,9 @@
                                     <label></label>
                                 </div>
                             </td>
+                             <td class="text-center">
+                                <i class="{this.state.iconChallengedPreview}"></i>
+                            </td>
                             <td class="text-left my_file-name">
                                 <span
                                     class="text-italic file-name doc-path"
@@ -633,20 +636,22 @@
                                     </span>
                                 </span>
                                 <InfoButton>
-                                    <li>name: {docPreview.name}</li>
-                                    <li>Creation Date: {docPreview.creation_date}</li>
-                                    <li>Modifitcation Date: {docPreview.modification_date}</li>
-                                    <li>Required Legal Retention until: {docPreview.legal_retention_until}</li>
-                                    <li>Confidentiality Label: {docPreview.confidentiality_label}</li>
-                                    <li>Number of Classification Challenge: {docPreview.number_of_classification_challenge}</li>
+                                    <li>Name: <b>{docPreview.name}</b></li>
+                                    <li>Path: {docPreview.path}</li>
+                                    <li>Owner: <b>{docPreview.owner}</b></li>
+                                    <li>Creation Date: <b>{docPreview.creation_date}</b></li>
+                                    <li>Modifitcation Date: <b>{docPreview.modification_date}</b></li>
+                                    <li>Required Legal Retention until: <b>{docPreview.legal_retention_until}</b></li>
+                                    <li>Confidentiality Label: <b>{docPreview.confidentiality_label}</b></li>
+                                    <li>Number of Classification Challenge: <b>{docPreview.number_of_classification_challenge}</b></li>
                                 </InfoButton>
                             </td>
-                            <td class="text-left">
+                            <!-- <td class="text-left">
                                 <span class="text-italic doc-path file-name-1" rel="tooltip" data-toggle="tooltip" data-original-title="{docPreview.path}">{docPreview.path}</span>
                             </td>
                             <td class="text-left">
                                 <span class="text-italic">{(docPreview.name.length > 7) ? docPreview.owner.substring(7, 0) + '..' : docPreview.owner}</span>
-                            </td>
+                            </td> -->
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
                                 <div class="select-group">
                                     <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
@@ -657,7 +662,7 @@
                             </td>
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
                                 <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
+                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
                                       <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select>
                                     <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docPreview.confidentialities[current.prevConfidential].name}</span>

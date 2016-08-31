@@ -10,6 +10,7 @@ import 'jquery'
 var DocumentReview = React.createClass({
     getInitialState() {
         return {
+
             Actions: null,
             ChallengedDocuments: [],
             documentPreview: null,
@@ -20,7 +21,8 @@ var DocumentReview = React.createClass({
             stackChangeChallenged: [],
             icon : [],
             iconChallengedDocument: [],
-
+            iconReview : '',
+            iconChallengedPreview : ''
 
         };
     },
@@ -31,6 +33,7 @@ var DocumentReview = React.createClass({
         this.getChallengedDocument();
     },
     shouldComponentUpdate(nextProps, nextState) {
+        
         if(this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
             return true;
         }
@@ -44,6 +47,12 @@ var DocumentReview = React.createClass({
             return true;
         }
         if(this.state.shouldUpdateChall != nextState.shouldUpdateChall) {
+            return true;
+        }
+        if(this.state.iconReview != nextState.iconReview){
+            return true;
+        }
+        if(this.state.iconChallengedPreview != nextState.iconChallengedPreview){
             return true;
         }
         return false;  
@@ -165,18 +174,28 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
-    setDocumentPreview: function(actionIndex, docIndex) {
+    setDocumentPreview: function(actionIndex, docIndex, icon) {
+       
+        console.log('iconReview_begin : ', icon)
+     
+        
         var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
         if(documentCurrent != null) {
             documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
             var setDocumentCurrent = update(this.state, {
                 documentPreview: { $set: documentCurrent },
+                 
             });
-            this.setState(setDocumentCurrent);
+            
+            
             $('#previewModal .file-preview').html('<a href="'+documentCurrent.image_url+'" id="embedURL"></a>');
             $('#embedURL').gdocsViewer();
         }
+        this.setState(setDocumentCurrent)
+        this.setState({iconReview : icon})
+        console.log('iconReview', this.state.iconReview)
     },
+   
     progressbar: function(value) {
         if(value <= Constant.progressValue.level1) {
             return Constant.progressBar.level1;
@@ -441,8 +460,8 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
-    setChallengedPreview: function(challengedIndex, docChallIndex) {
-        debugger
+    setChallengedPreview: function(challengedIndex, docChallIndex,icon) {
+        
         var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
         if(challengedCurrent != null) {
             challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
@@ -450,7 +469,7 @@ var DocumentReview = React.createClass({
                 challengedPreview: { $set: challengedCurrent },
             });
             this.setState(setChallengedCurrent);
-
+            this.setState({iconChallengedPreview : icon})
             $('#previewModal3 .file-preview').html('<a href="'+challengedCurrent.image_url+'" id="embedURL3"></a>');
             $('#embedURL3').gdocsViewer();
         }
