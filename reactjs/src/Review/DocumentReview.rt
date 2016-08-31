@@ -7,7 +7,7 @@
         <div class="tabs tabs-primary">
             <ul class="line_document_header">
                 <li class="dropdown">
-                    <a class="line_document review_title">My Action</a>
+                    <a class="line_document review_title">My Review</a>
                     <HelpButton
                         className="line_document help_question_a"
                         setValue="This summarises all the actions assigned to the user. Users must review each document of this section." />
@@ -153,7 +153,7 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{current.category}">
+                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{current.category}">
                                                               <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
                                                         </div>
@@ -261,7 +261,7 @@
                                         <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-challenged-{challengedIndex}" role="grid" aria-describedby="datatable-default_info">
                                             <thead>
                                                 <tr role="row" class="">
-                                                    <th>
+                                                    <th >
                                                         <div class="checkbox-custom checkbox-primary">
                                                             <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
                                                             <label></label>
@@ -318,7 +318,7 @@
                                                         <i class="{this.state.iconChallengedDocument[docChallIndex].type}"></i>
                                                     </td>
                                                     <td class="text-left my_file-name">
-                                                        <span
+                                                        <span style="margin-left: 10px" 
                                                             class="text-italic file-name doc-path"
                                                             data-toggle="modal"
                                                             data-target="#previewModal3"
@@ -422,7 +422,7 @@
                <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                     <thead>
                         <tr role="row" class="">
-                            <th style="padding:10px 20px 0px 10px;">
+                            <th style="padding:10px 12px 0px 10px;">
                                 <div class="checkbox-custom checkbox-primary">
                                     <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
                                     <label></label>

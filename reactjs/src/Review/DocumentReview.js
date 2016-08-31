@@ -61,7 +61,7 @@ var DocumentReview = React.createClass({
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate;
             if(update.name === 'updateValidate' || update.name === 'undoAction' || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
-                debugger;
+              
                 this.validateNumber(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === 'undoAction' || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -71,7 +71,7 @@ var DocumentReview = React.createClass({
         if(this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
             var update = this.state.shouldUpdateChall;
             if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidentialChall") {
-                debugger;
+                
                 this.validateNumberChallenged(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === "undoActionChallenged" || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -226,16 +226,22 @@ var DocumentReview = React.createClass({
         this.setState({shouldUpdate: { name: 'updateCategory', actionIndex:  actionIndex, docIndex: docIndex, categoryIndex: categoryIndex}});
     },
     onChangeConfidential: function(event, actionIndex, docIndex) {
+        console.log('actionIndex: ', actionIndex)
+        console.log('docIndex: ', docIndex)
         var confidentialIndex = event.target.value;
         var actions = this.state.Actions;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        console.log('saveDocument', saveDocument)
+        console.log('stackList', this.state.stackList)
         var stackList = this.state.stackChange;
         stackList.push({
             index: { actionIndex: actionIndex, docIndex: docIndex },
             contents: saveDocument
         });
+         console.log('stackList', stackList)
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
-        if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0) {
+        console.log("confidentialIndex",confidentialIndex)
+        if(actions[actionIndex].documents[docIndex].current.confidential == 1 && actions[actionIndex].documents[docIndex].current.category == 4) {
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
@@ -519,10 +525,10 @@ var DocumentReview = React.createClass({
             actions[actionIndex].documents[docIndex].current.prevConfidential = null;
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
-            debugger;
+            
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-        debugger;
+     
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
         /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
@@ -650,7 +656,8 @@ var DocumentReview = React.createClass({
             this.setState(setUpdate);
             this.setState({shouldUpdateChall: { name: 'undoActionChallenged', actionIndex:documentOld.index.actionIndex, docIndex: documentOld.index.docIndex, stack: newStackChange.length }})
         }
-        debugger;
+       
+
     },
     getIcon(value){
        if(_.endsWith(value,'.ppt')){
