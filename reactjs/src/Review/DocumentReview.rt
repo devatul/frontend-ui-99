@@ -122,7 +122,7 @@
                                                                     {doc.name}
                                                                 </span>
                                                         </span>
-                                                        <InfoButton>
+                                                        <InfoButton className="dropdown-file-info-holder-edit2">
                                                             <li>Name: <b>{doc.name}</b></li>
                                                             <li>Path: {doc.path}</li>
                                                             <li>Owner: <b>{doc.owner}</b></li>

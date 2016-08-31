@@ -129,3 +129,9 @@ font-size: 30px;}
   .fa-file-powerpoint-o{
     color: #D2312D;
   }
+.dropdown-file-info-holder.dropdown-file-info-holder-edit2 {
+    float: left;
+}
+.dropdown-file-info-holder.dropdown-file-info-holder-edit2 .btn-file-info {
+    margin-right: 10px;
+}

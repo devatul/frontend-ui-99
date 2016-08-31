@@ -53,7 +53,7 @@ var InfoButton = React.createClass({
     render: function() {
         var { setOpen, expanded } = this.state;
         return(
-            <div ref="dropdown" className={'dropdown dropdown-file-info-holder inline-block-item ' + setOpen}>
+            <div ref="dropdown" className={'dropdown dropdown-file-info-holder '+this.props.className+' inline-block-item ' + setOpen}>
                 <span data-toggle="dropdown"
                     onMouseOver={this.handleOnMouseOver}
                     onMouseOut={this.handleOnMouseOut}
