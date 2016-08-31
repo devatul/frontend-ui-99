@@ -111,27 +111,8 @@
 .no-active:hover {
     color: #4fca9d !important;
 }
-/* fix icon document  on Document Review page */
-.action-file-icon{
-font-size: 30px;}
-  .fa-file-word-o{
-    color: #2259A9;
-  }
-  .fa-file-excel-o{
-    color: #1E6F46;
-  }
-  .fa-file-pdf-o{
-    color: #313131;
-  }
-  .fa-file-text-o{
-    color: #ADADAD;
-  }
-  .fa-file-powerpoint-o{
-    color: #D2312D;
-  }
-.dropdown-file-info-holder.dropdown-file-info-holder-edit2 {
-    float: left;
-}
-.dropdown-file-info-holder.dropdown-file-info-holder-edit2 .btn-file-info {
-    margin-right: 10px;
+/* fix header review menu */
+.my_header .navbar-default.nav-custom .navbar-nav > li .fix-review-menu li a {
+    font-size: 16px;
+    padding: 5px 30px 0px 20px;
 }
