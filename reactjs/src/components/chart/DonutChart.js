@@ -162,7 +162,7 @@ var DonutChart = React.createClass({
                                     setValue={help} />
                     </h4>
                     <div className="widget-chart">
-                        <div style={{'margin-left': '0px'}} className="chart chart-md" id={id}></div>
+                        <div className="chart chart-md" id={id}></div>
                         { legendChart && 
                             <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
                                 {legendChart}

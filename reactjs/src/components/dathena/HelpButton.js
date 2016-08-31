@@ -29,15 +29,13 @@ var HelpButton = React.createClass({
         var dropdownMenu = this.refs.dropdownMenu
         var eOffset = $(dropdown).offset();
         //debugger
-        var body = document.body;
-        debugger
 
-        body.appendChild(dropdownMenu);
-
-        var style = dropdownMenu.style;
-            style.display = 'block';
-            style.top = eOffset.top + $(dropdown).outerHeight();
-            style.left = eOffset.left;
+        $('body').append($(dropdownMenu).detach());
+        $(dropdownMenu).css({
+                'display': 'block',
+                'top': eOffset.top + $(dropdown).outerHeight(),
+                'left': eOffset.left
+            });
 
         this.setState({ setOpen: 'open', expanded: true });
     },

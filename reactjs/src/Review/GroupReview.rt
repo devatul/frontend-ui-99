@@ -44,7 +44,7 @@
                         <div class="col-md-3">
                             <LiquidMeter title="Review Status" help="Percentage of Documents reviewed in the selected group from all the documents in the selected group" setValue={this.state.status} />
                             
-                            <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+                            <!--<section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                               <header class="panel-heading">
                                   <h2 class="panel-title">Basic Statistics</h2>
                               </header>
@@ -131,7 +131,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </section>
+                            </section>-->
 
                             
                         </div>  

@@ -23,7 +23,7 @@ var OrphanReview = React.createClass({
             cloudwords: [],
             centroids: [],
             status: 0,
-            samplesDocument: [],
+            listDocument: [],
             samplesDefault: [],
             documentPreview: null,
             stackChange: [],
@@ -73,7 +73,7 @@ var OrphanReview = React.createClass({
     //     if(this.state.orphanCurrent != nextState.orphanCurrent) {
     //         return true;
     //     }
-    //     if(this.state.samplesDocument != nextState.samplesDocument) {
+    //     if(this.state.listDocument != nextState.listDocument) {
     //         return true;
     //     }
     //     if(this.state.stackChange != nextState.stackChange) {
@@ -109,11 +109,11 @@ var OrphanReview = React.createClass({
         var { store, categories } = this.state;
         if(this.state.orphanCurrent != prevState.orphanCurrent) {
             this.getStatistics();
-            this.getSamplesDocument();
+            this.getlistDocument();
             this.getCategoryDistribution();
             this.getCentroids()
         }
-        if(this.state.samplesDocument != prevState.samplesDocument) {
+        if(this.state.listDocument != prevState.listDocument) {
             $('.select-group select').focus(function(){
             var selectedRow = $(this).parents('tr');
                 $('.table-my-actions tr').each(function(){
@@ -302,7 +302,7 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
-    getSamplesDocument: function() {
+    getlistDocument: function() {
         $.ajax({
             method: 'GET',
             url: Constant.SERVER_API + "api/group/orphan/samples/",
@@ -324,14 +324,14 @@ var OrphanReview = React.createClass({
                 var documentPreview = data.documents[0];
                 documentPreview.index = 0;
                 var updateState = update(this.state, {
-                    samplesDocument: {$set: data.documents},
+                    listDocument: {$set: data.documents},
                     samplesDefault: {$set: $.extend(true, {}, data.documents) },
                     documentPreview: {$set: data.documents[0]}
                 });
                 this.setState(updateState);
             }.bind(this),
             error: function(xhr,error) {
-                console.log("samplesDocument " + error);
+                console.log("listDocument " + error);
                 if(xhr.status === 401)
                 {
                     browserHistory.push('/Account/SignIn');
@@ -340,7 +340,7 @@ var OrphanReview = React.createClass({
         });
     },
     setDocumentPreview: function(index) {
-        var document = this.state.samplesDocument[index];
+        var document = this.state.listDocument[index];
         if(document != null) {
             document.index = index;
             this.setState(update(this.state, {
@@ -348,12 +348,12 @@ var OrphanReview = React.createClass({
             }));
             $('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
             $('#embedURL').gdocsViewer();
-            console.log("afasdccccc: ", this.state.samplesDocument[index], index);
+            console.log("afasdccccc: ", this.state.listDocument[index], index);
         }
     },
     onChangeCategory: function(event, sampleIndex) {
         var categoryIndex = event.target.value;
-        var listDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var samplesDefault = this.state.samplesDefault;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -370,13 +370,13 @@ var OrphanReview = React.createClass({
         // }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument }
+            listDocument: {$set: listDocument }
         }));
         this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + sampleIndex});
     },
     onChangeConfidential: function(event, sampleIndex) {
         var confidentialIndex = event.target.value;
-        var listDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var samplesDefault = this.state.samplesDefault;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -391,16 +391,16 @@ var OrphanReview = React.createClass({
         //     listDocument[sampleIndex].current.status = "accept";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
-            samplesDocument: {$set: listDocument}
+            listDocument: {$set: listDocument}
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateConfidential_' + confidentialIndex + '_' + sampleIndex}); 
     },
     checkedNumber: function() {
-        var samplesDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var numb = 0;
-        for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.checked == true) {
+        for(var i = 0; i < listDocument.length; i++) {
+            if(listDocument[i].current.checked == true) {
                 numb++;
             }
         }
@@ -408,7 +408,7 @@ var OrphanReview = React.createClass({
     },
     onClickCheckbox: function(event, sampleIndex) {
         var checked = event.target.checked;
-        var listDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
@@ -418,25 +418,25 @@ var OrphanReview = React.createClass({
         listDocument[sampleIndex].current.checked = checked;
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument}
+            listDocument: {$set: listDocument}
         });
         this.setState(setUpdate);
         this.checkedNumber();
         this.setState({shouldUpdate: 'updateCheckBox_' + sampleIndex  + '_' + checked});
     },
     validateNumber: function() {
-        var samplesDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var num = 0;
-        for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.status === "editing" || samplesDocument[i].current.status === "accept") {
+        for(var i = 0; i < listDocument.length; i++) {
+            if(listDocument[i].current.status === "editing" || listDocument[i].current.status === "accept") {
                 num++;
             }
         }
-        var status = this.parse((num * 100) / this.state.samplesDocument.length);
+        var status = this.parse((num * 100) / this.state.listDocument.length);
         this.setState(update(this.state, { validateNumber: {$set: num }, status: {$set: status } } ));
     },
     onClickValidationButton: function(event, sampleIndex) {
-        var listDocument = this.state.samplesDocument;
+        var listDocument = this.state.listDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
@@ -448,13 +448,13 @@ var OrphanReview = React.createClass({
         }
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument}
+            listDocument: {$set: listDocument}
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateValidate' + '_' + 'accept' + '_' + sampleIndex});
     },
     approveButon: function(event) {
-        var documents = this.state.samplesDocument;
+        var documents = this.state.listDocument;
         var approveIndex = '';
         for(var i = 0; i < documents.length; i++) {
             if(documents[i].current.checked === true) {
@@ -464,7 +464,7 @@ var OrphanReview = React.createClass({
             }
         }
         var setUpdate = update(this.state,{
-            samplesDocument: {$set: documents},
+            listDocument: {$set: documents},
             checkBoxAll: {$set: false }
         });
         this.setState(setUpdate);
@@ -474,12 +474,12 @@ var OrphanReview = React.createClass({
     checkAllButton: function(event) {
         var checked = event.target.checked;
         console.log(checked);
-        var documents = this.state.samplesDocument;
+        var documents = this.state.listDocument;
         for (var i = 0; i < documents.length; i++) {
             documents[i].current.checked = checked;
         }
         var setUpdate = update(this.state,{
-            samplesDocument: {$set: documents},
+            listDocument: {$set: documents},
             checkBoxAll: {$set: checked }
         });
         this.setState(setUpdate);
@@ -490,14 +490,14 @@ var OrphanReview = React.createClass({
         console.log('stackChange' , this.state.stackChange);
         if(this.state.stackChange.length > 0) {
             var newStackChange = this.state.stackChange;
-            var newSamplesDocument = this.state.samplesDocument;
+            var newlistDocument = this.state.listDocument;
             var documentOld = newStackChange[this.state.stackChange.length - 1];
-            newSamplesDocument[documentOld.index] = documentOld.contents;
+            newlistDocument[documentOld.index] = documentOld.contents;
             newStackChange.pop();
             var setUpdate = update(this.state, {
-                samplesDocument: {$set: newSamplesDocument },
+                listDocument: {$set: newlistDocument },
                 stackChange: {$set: newStackChange },
-                documentPreview: {$set: newSamplesDocument[documentOld.index] }
+                documentPreview: {$set: newlistDocument[documentOld.index] }
             });
             this.setState(setUpdate);
             this.setState({shouldUpdate: 'undoAction_' + newStackChange.length })

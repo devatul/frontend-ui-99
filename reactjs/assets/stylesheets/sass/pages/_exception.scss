@@ -1,4 +1,19 @@
 .table-challenge {
+  .fa-clock-o{
+    font-size: 16px;
+  }
+  thead{
+    th{
+      vertical-align: middle!important;
+      line-height: 22px!important;
+      &:first-child{
+        width: 80px;
+      }
+    }
+  }
+  tbody .dropdown-file-info-holder{
+    float: left;
+  }
   .challenge-btn{
     font-size: 18px;
     line-height: 16px;
@@ -20,7 +35,7 @@
     text-overflow: ellipsis;
   }
   .file-name{
-    max-width: 80px;
+    max-width: 100px;
   }
   select.changed{
     color: $color-danger;
@@ -106,6 +121,22 @@
       line-height: 3.4em;
       font-size: 0.3em;
     }
+  }
+}
+
+.review-status-icon{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+  left: 5px;
+  &.gray{
+    background-color: #DDD;
+  }
+  &.green{
+    background-color: $color-dathena;
   }
 }
 

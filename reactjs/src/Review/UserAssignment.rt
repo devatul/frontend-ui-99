@@ -41,7 +41,7 @@
                   <div id="panelParameter" class="panel-body sample-params nav-collapse collapse in">
                     <div class="form-group">
                       <label class="">Fixed Number of Document</label>
-                      <select name="state" class="form-control ddList">
+                      <select name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
                        <option rt-repeat="docPercentage in this.state.category.info.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
                       </select>
                       <ValidationButton
@@ -52,7 +52,7 @@
                     <div class="or-divider"><span>OR</span></div>
                     <div class="form-group">
                       <label class="">As % of overall {this.state.category.current.name} Category</label>
-                      <select name="state" class="form-control ddList">
+                      <select name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
                         <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
                       </select>
                       <ValidationButton

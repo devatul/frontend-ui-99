@@ -75,6 +75,9 @@ a {
 /**
  * Tooltip Styles
  */
+.pie-chart-legend-text {
+  z-index: -1 !important; }
+
 /* Add this attribute to the element that needs a tooltip */
 [data-tooltip] {
   position: relative;
@@ -165,7 +168,7 @@ html body .tabs-primary .nav-tabs li.active a, html.dark body .tabs-primary .nav
   color: #4fca9d; }
 
 html body .tabs-primary .nav-tabs li a, html body .tabs-primary .nav-tabs li a:hover {
-  color: #4fca9d; }
+  color: #777; }
 
 html body .tabs-primary .nav-tabs li a:hover {
   border-top-color: #4fca9d; }
@@ -589,8 +592,8 @@ tr td {
     border-right: 1px solid #ccc; }
   .dropdown-noti .col-noti .dropdown-help {
     position: absolute;
-    top: -3px;
-    right: 12px; }
+    top: -4px;
+    right: 15px; }
 .dropdown-noti .actions-percentage {
   margin-top: 10px;
   display: inline-block; }
@@ -679,7 +682,7 @@ tr td {
   .my_header .navbar-default.nav-custom .navbar-nav > li {
     position: relative; }
     .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu {
-      min-width: 205px; }
+      min-width: 170px; }
       .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li {
         position: relative; }
         .my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li .badge {
@@ -907,6 +910,9 @@ tr td {
   .dropdown-file-info-holder .dropdown-backdrop {
     display: none; }
 
+.dropdown-menu.append-to-body {
+  z-index: 99999; }
+
 .dropdown-file-info {
   padding: 15px; }
   .dropdown-file-info ul {
@@ -918,6 +924,11 @@ tr td {
 
 .table-my-actions .checkbox-custom {
   padding: 0 0 0 5px; }
+.table-my-actions > thead tr th:nth-child(2) {
+  width: 50px; }
+.table-my-actions > thead tr th:nth-child(6) {
+  width: 80px;
+  padding-right: 5px !important; }
 .table-my-actions.orphan-review {
   /*    .doc-check{
         .fa-clock-o{
@@ -955,6 +966,8 @@ tr td {
     color: #4fca9d; }
   .table-my-actions .doc-check.validated {
     color: #4fca9d; }
+.table-my-actions > tbody .dropdown-file-info-holder {
+  float: left; }
 .table-my-actions > tbody > tr.item-challenged label, .table-my-actions > tbody > tr.item-challenged input[type="checkbox"] {
   pointer-events: none; }
 .table-my-actions > tbody > tr.item-validated input, .table-my-actions > tbody > tr.item-validated select, .table-my-actions > tbody > tr.item-validated label {
@@ -973,7 +986,7 @@ tr td {
   background-color: rgba(255, 255, 255, 0.7); }
 .table-my-actions .btn-file-info {
   cursor: pointer;
-  margin-left: 10px; }
+  margin-right: 10px; }
 .table-my-actions .doc-path {
   display: inline-block;
   max-width: 90px;
@@ -1546,6 +1559,28 @@ div[id^='legendContainer'] {
 .help_guide_sub.tab-content > .chart-legend {
   display: none; }
 
+.action-file-icon {
+  font-size: 30px; }
+  .action-file-icon.fa-file-word-o {
+    color: #2259A9; }
+  .action-file-icon.fa-file-excel-o {
+    color: #1E6F46; }
+  .action-file-icon.fa-file-pdf-o {
+    color: #313131; }
+  .action-file-icon.fa-file-text-o {
+    color: #ADADAD; }
+  .action-file-icon.fa-file-powerpoint-o {
+    color: #E32621; }
+
+.table-challenge .fa-clock-o {
+  font-size: 16px; }
+.table-challenge thead th {
+  vertical-align: middle !important;
+  line-height: 22px !important; }
+  .table-challenge thead th:first-child {
+    width: 80px; }
+.table-challenge tbody .dropdown-file-info-holder {
+  float: left; }
 .table-challenge .challenge-btn {
   font-size: 18px;
   line-height: 16px;
@@ -1561,7 +1596,7 @@ div[id^='legendContainer'] {
   white-space: nowrap;
   text-overflow: ellipsis; }
 .table-challenge .file-name {
-  max-width: 80px; }
+  max-width: 100px; }
 .table-challenge select.changed {
   color: #d2322d; }
 .table-challenge select {
@@ -1619,6 +1654,19 @@ div[id^='legendContainer'] {
     width: 3.4em;
     line-height: 3.4em;
     font-size: 0.3em; }
+
+.review-status-icon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+  left: 5px; }
+  .review-status-icon.gray {
+    background-color: #DDD; }
+  .review-status-icon.green {
+    background-color: #4fca9d; }
 
 @media (min-width: 996px) {
   .reviewer-tab .tab-content {
@@ -2459,6 +2507,18 @@ div[id^='legendContainer'] {
   text-align: center;
   line-height: 60px;
   font-size: 16px; }
+
+.progress-radial.small .overlay {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-left: 3px;
+  margin-top: 3px;
+  text-align: center;
+  line-height: 19px;
+  font-size: 10px; }
 
 /* -------------------------------------
  * Mixin for progress-% class
@@ -4630,5 +4690,55 @@ div[id^='legendContainer'] {
     top: 0;
     left: 0;
     background-color: rgba(255, 255, 255, 0.5); }
+
+.cendroid-chart-legend {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 12px; }
+  .cendroid-chart-legend h5 {
+    font-size: 12px; }
+  .cendroid-chart-legend.right {
+    left: auto;
+    right: 20px; }
+  .cendroid-chart-legend .symbol {
+    display: inline-block;
+    height: 5px;
+    width: 30px;
+    margin-right: -2px;
+    line-height: 35px;
+    font-size: 10px; }
+  .cendroid-chart-legend .more-legend {
+    position: relative;
+    left: -3px;
+    font-size: 10px; }
+  .cendroid-chart-legend .document-symbol {
+    display: inline-block;
+    vertical-align: bottom;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 10px; }
+    .cendroid-chart-legend .document-symbol i {
+      display: block;
+      border-radius: 50%;
+      background-color: #DADADA; }
+      .cendroid-chart-legend .document-symbol i.size-1 {
+        width: 10px;
+        height: 10px; }
+      .cendroid-chart-legend .document-symbol i.size-2 {
+        width: 13px;
+        height: 13px; }
+      .cendroid-chart-legend .document-symbol i.size-3 {
+        width: 16px;
+        height: 16px; }
+      .cendroid-chart-legend .document-symbol i.size-4 {
+        width: 19px;
+        height: 19px; }
+      .cendroid-chart-legend .document-symbol i.size-5 {
+        width: 22px;
+        height: 22px; }
+      .cendroid-chart-legend .document-symbol i.size-6 {
+        width: 25px;
+        height: 25px; }
 
 /*# sourceMappingURL=theme-custom.css.map */

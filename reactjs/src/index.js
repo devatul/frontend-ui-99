@@ -18,12 +18,14 @@ var Review = require('./Review/Review');
 var OrphanReview = require('./Review/OrphanReview');
 var GroupReview = require('./Review/GroupReview');
 var UserAssignment = require('./Review/UserAssignment');
+var ClassificationReview = require('./Review/ClassificationReview');
 var Notification = require('./Dashboard/Notification');
 var DocumentReview = require('./Review/DocumentReview');
 var Insight = require('./Insight/Insight');
 var Indentity = require('./Insight/Indentity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
+
 
 render((
   	<Router history={browserHistory}>
@@ -46,6 +48,7 @@ render((
 					<Route path="/Review/OrphanReview" component={OrphanReview}/>
 					<Route path="/Review/GroupReview" component={GroupReview}/>
 					<Route path="/Review/UserAssignment" component={UserAssignment}/>
+					<Route path="/Review/ClassificationReview" component={ClassificationReview}/>
 					<Route path="/Review/DocumentReview" component={DocumentReview}/>
 				</Route>
 				<Route path="/Insight/Insight" component={Insight}>

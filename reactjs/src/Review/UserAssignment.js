@@ -94,10 +94,11 @@ var UserAssignment = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { category, datafilter, dataChart } = this.state;
+        var { category, datafilter, dataChart, buttonSample } = this.state;
         return !isEqual(category, nextState.category)
         || !isEqual( datafilter, nextState.datafilter )
-        || !isEqual( dataChart, nextState.dataChart );
+        || !isEqual( dataChart, nextState.dataChart )
+        || !isEqual( buttonSample, nextState.buttonSample );
     },
     
     componentDidMount() {
@@ -142,13 +143,9 @@ var UserAssignment = React.createClass({
         if(category.reviewers != prevState.category.reviewers) {
             this.updateDataChart();
         }
-        if(this.state.datafilter != prevState.datafilter) {
-            debugger
-        }
         
     },
     handleOnChangeSelectBox: function(data, field) {
-        debugger
         var { params, filterLabel } = this.state.datafilter,
             { selectId } = this.static,
             indexLabel = findIndex(filterLabel, {id: field.id }),
@@ -229,12 +226,29 @@ var UserAssignment = React.createClass({
     },
     handleOnClickValidationButton: function(id) {
         var set = (id == 'category') ? 'fixedNumber' : 'category';
-        var updateButton = update(this.state.buttonStatus, {
+        var updateButton = update(this.state.buttonSample, {
              [id]: {$set: 'success' },
              [set]: {$set: 'normal' }
         });
-        this.setState({ buttonStatus: updateButton });
+        this.setState({ buttonSample: updateButton });
     },
+
+    handleSelectFixedNumber: function() {
+        let updateButton = update(this.state.buttonSample, {
+            fixedNumber: { $set: 'normal' },
+            category: { $set: 'success' }
+        });
+        this.setState({ buttonSample: updateButton })
+    },
+
+    handleSelectOverall: function() {
+        let updateButton = update(this.state.buttonSample, {
+            fixedNumber: { $set: 'success' },
+            category: { $set: 'normal' }
+        });
+        this.setState({ buttonSample: updateButton })
+    },
+
     handleValidateButton: function() {
         var { current, info, list } = this.state.category;
         var indexCurrent = findIndex(list, { id: current.id, name: current.name });

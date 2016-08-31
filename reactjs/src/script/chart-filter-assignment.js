@@ -33,7 +33,16 @@ module.exports = function(reviewers) {
         
     $('#userReviewChart').highcharts({
             chart: {
-                type: 'bar'
+                type: 'bar',
+                height: data.length * 35.5,
+                events: {
+                    load: function() {
+                        //this.options.chart.height = 800;
+                        debugger
+                        //$(this.container).css({ height: '800px' });
+                        //$( window ).resize()
+                    }
+                }
             },
             title: {
                 text: ''
@@ -72,6 +81,11 @@ module.exports = function(reviewers) {
                     dataLabels: {
                         enabled: true
                     }
+                },
+                series: {
+                    pointWidth: 20,
+                    pointPadding: 0,
+                    groupPadding: 0
                 }
             },
             series: [{

@@ -1,4 +1,5 @@
 import Constants from '../Constant'
+import { browserHistory } from 'react-router'
 
 module.exports = {
     makeRequest: function({ sync = false, method = 'GET', path, params = {}, success, error }) {

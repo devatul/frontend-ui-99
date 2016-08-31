@@ -178,7 +178,7 @@ var StackedChart = React.createClass({
                                     setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
                     </h4>
                     <div className="widget-chart chart-stacked">
-                        <div style={{'margin-left': '0px'}} className="chart chart-md" id={id}></div>
+                        <div className="chart chart-md" id={id}></div>
                         {legendChart}
                     </div>
                     { disabled &&
