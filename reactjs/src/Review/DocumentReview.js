@@ -70,7 +70,7 @@ var DocumentReview = React.createClass({
         }
         if(this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
             var update = this.state.shouldUpdateChall;
-            if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidentialChall") {
+            if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' ) {
                 
                 this.validateNumberChallenged(update.actionIndex);
             }
@@ -79,6 +79,7 @@ var DocumentReview = React.createClass({
             }
         }
         if(this.state.ChallengedDocuments != prevState.ChallengedDocuments) {
+           /* console.log('ChallengedDocuments', this.state.ChallengedDocuments);
             console.log('challengedPreview', this.state.challengedPreview);
             $('.select-group select').focus(function(){
             var selectedRow = $(this).parents('tr');
@@ -110,7 +111,7 @@ var DocumentReview = React.createClass({
                     console.log(h);
                     console.log(hi);
                 }
-            });
+            });*/
         }
     },
     getActions: function() {
@@ -210,7 +211,7 @@ var DocumentReview = React.createClass({
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
-            index: { actionIndex: actionIndex,docIndex: docIndex },
+            index: { actionIndex: actionIndex, docIndex: docIndex },
             contents: saveDocument
         });
         actions[actionIndex].documents[docIndex].current.category = categoryIndex;
@@ -426,6 +427,7 @@ var DocumentReview = React.createClass({
             success: function(data) {
                 console.log('dataaaattt', data);
                 let listIcon = [] ;
+                console.log('length: ',data.length)
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -448,6 +450,7 @@ var DocumentReview = React.createClass({
                         };
                     }
                 }
+
                 var challengedPreview = data[0].documents[0];
                 challengedPreview.index = {actionIndex: 0, docIndex: 0 };
                 var updateState = update(this.state, {
@@ -456,7 +459,7 @@ var DocumentReview = React.createClass({
                     iconChallengedDocument : {$set: listIcon}
                 });
                 this.setState(updateState);
-                console.log("Doc ok: ", data);
+                console.log("Doc ok: ", this.state.ChallengedDocuments);
             }.bind(this),
             error: function(xhr,error) {
                 if(xhr.status === 401)
@@ -467,7 +470,7 @@ var DocumentReview = React.createClass({
         });
     },
     setChallengedPreview: function(challengedIndex, docChallIndex,icon) {
-        
+        false
         var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
         if(challengedCurrent != null) {
             challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
@@ -481,16 +484,21 @@ var DocumentReview = React.createClass({
         }
     },
     onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
+
         var categoryIndex = event.target.value;
+        console.log('categoryIndex', categoryIndex)
         var actions = this.state.ChallengedDocuments;
+        console.log('Actions', actions);
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
         var stackList = this.state.stackChangeChallenged;
+        console.log('stackList_challenge', stackList)
+        console.log('saveDocument', saveDocument)
         stackList.push({
             index: { actionIndex: actionIndex,docIndex: docIndex },
             contents: saveDocument
         });
         //if(actions[actionIndex].documents[docIndex].current.prevCategory == null) {
-            actions[actionIndex].documents[docIndex].current.prevCategory = actions[actionIndex].documents[docIndex].current.category;
+        actions[actionIndex].documents[docIndex].current.prevCategory = actions[actionIndex].documents[docIndex].current.category;
         //}
         if(actions[actionIndex].documents[docIndex].current.prevCategory == categoryIndex){
             actions[actionIndex].documents[docIndex].current.prevCategory = null;
