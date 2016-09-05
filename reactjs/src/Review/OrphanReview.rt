@@ -233,7 +233,7 @@
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
                                             </th>
-                                            <th class="review_note">Type
+                                            <th class="review_note dataTables_wrapper1 ">Type
                                                 <HelpButton
                                                     className="dropdown-file-info-holder"
                                                     classNote="note_chart_content"
