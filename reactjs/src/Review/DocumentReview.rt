@@ -153,7 +153,7 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{current.category}">
+                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex,current.category)" value="{current.category}">
                                                               <option rt-repeat="category in doc.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
                                                         </div>

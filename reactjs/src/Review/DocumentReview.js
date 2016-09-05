@@ -148,7 +148,7 @@ var DocumentReview = React.createClass({
                         data[i].documents[j].current = {
                             checked: false,
                             category: 4,
-                            confidential: (i == 0) ? 1 : 2,
+                            confidential: 1,
                             status: "normal"
                         };
                     }
@@ -206,6 +206,7 @@ var DocumentReview = React.createClass({
         return Constant.progressBar.level3;
     },
     onChangeCategory: function(event, actionIndex, docIndex) {
+
         var categoryIndex = event.target.value;
         var actions = this.state.Actions;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
@@ -214,12 +215,13 @@ var DocumentReview = React.createClass({
             index: { actionIndex: actionIndex, docIndex: docIndex },
             contents: saveDocument
         });
-        actions[actionIndex].documents[docIndex].current.category = categoryIndex;
-        if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0) {
+          actions[actionIndex].documents[docIndex].current.category = categoryIndex;
+        if( actions[actionIndex].documents[docIndex].current.category == 4) {
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
+      
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             Actions: {$set: actions }
@@ -239,14 +241,15 @@ var DocumentReview = React.createClass({
             index: { actionIndex: actionIndex, docIndex: docIndex },
             contents: saveDocument
         });
-         console.log('stackList', stackList)
+        console.log('stackList', stackList)
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
         console.log("confidentialIndex",confidentialIndex)
-        if(actions[actionIndex].documents[docIndex].current.confidential == 1 && actions[actionIndex].documents[docIndex].current.category == 4) {
+        if(actions[actionIndex].documents[docIndex].current.confidential == 1 ) {
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
+        
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
             Actions: {$set: actions}
@@ -486,13 +489,10 @@ var DocumentReview = React.createClass({
     onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
 
         var categoryIndex = event.target.value;
-        console.log('categoryIndex', categoryIndex)
         var actions = this.state.ChallengedDocuments;
-        console.log('Actions', actions);
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
         var stackList = this.state.stackChangeChallenged;
-        console.log('stackList_challenge', stackList)
-        console.log('saveDocument', saveDocument)
+        
         stackList.push({
             index: { actionIndex: actionIndex,docIndex: docIndex },
             contents: saveDocument
@@ -500,14 +500,15 @@ var DocumentReview = React.createClass({
         //if(actions[actionIndex].documents[docIndex].current.prevCategory == null) {
         actions[actionIndex].documents[docIndex].current.prevCategory = actions[actionIndex].documents[docIndex].current.category;
         //}
-        if(actions[actionIndex].documents[docIndex].current.prevCategory == categoryIndex){
+        actions[actionIndex].documents[docIndex].current.category = categoryIndex;
+        if(actions[actionIndex].documents[docIndex].current.category == 4 ){
             actions[actionIndex].documents[docIndex].current.prevCategory = null;
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-        actions[actionIndex].documents[docIndex].current.category = categoryIndex;
-        /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
+       
+       /* if(actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
         else
             actions[actionIndex].documents[docIndex].current.status = "editing";*/
@@ -529,7 +530,8 @@ var DocumentReview = React.createClass({
         //if(actions[actionIndex].documents[docIndex].current.prevConfidential == null) {
             actions[actionIndex].documents[docIndex].current.prevConfidential = actions[actionIndex].documents[docIndex].current.confidential;
         //}
-        if(actions[actionIndex].documents[docIndex].current.prevConfidential == confidentialIndex) {
+        actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
+        if(actions[actionIndex].documents[docIndex].current.confidential == 0) {
             actions[actionIndex].documents[docIndex].current.prevConfidential = null;
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
@@ -537,7 +539,7 @@ var DocumentReview = React.createClass({
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
      
-        actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
+        
         /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
         else
