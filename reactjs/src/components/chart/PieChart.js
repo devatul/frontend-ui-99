@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import HelpButton from '../dathena/HelpButton'
 import { isEqual } from 'lodash'
-import { chart } from 'highcharts'
 
 var PieChart = React.createClass({
     displayName: 'selectButton',
@@ -45,7 +44,7 @@ var PieChart = React.createClass({
             { colors, colorsHover } = config;
         var div = $('#' + id);
         var parentDiv = div.closest('.tab-pane');
-        chart(this.props.id, {
+        div.highcharts({
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
