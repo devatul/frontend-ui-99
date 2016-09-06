@@ -83,7 +83,7 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
                     <span class="badge">40</span>
                     <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
@@ -105,7 +105,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
                   
                     <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
                     </a>

@@ -207,6 +207,20 @@ logOut(){
         })
     },
 
+    getActive: function() {
+        let path = window.location.pathname,
+            review = /^\/Review\//,
+            insight = /^\/Insight\//;
+
+        switch(true) {
+            case review.test(path) === true: 
+                return 'Review';
+            case insight.test(path) === true:
+                return 'Insight';
+            default: ''
+        }
+    },
+
     filterAlert(event) {
         var selected = event.target.getAttribute('data-type');
         console.log(selected);
