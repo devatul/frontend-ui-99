@@ -116,6 +116,8 @@
     font-size: 16px;
     padding: 5px 30px 0px 20px;
 }
+
+/* Fix table review */
 .table-my-actions > thead tr th.fix-width:nth-child(2){
     width: 68px;
 }
@@ -134,4 +136,17 @@ table.docPreview > tbody > tr > td:nth-child(1) {
 
 table.docPreview > thead > tr > th:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
+}
+
+/* Fix help icon overview */
+.fix-overview-help-button {
+    color: #000011;
+    font-weight: normal;
+    width: 330px !important;
+    min-width: 300px;
+}
+@media (max-width: 768px) {
+    .widget-panel .widget-chart .chart.chart-md {
+        margin: auto;
+    }
 }

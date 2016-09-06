@@ -80,7 +80,15 @@ var PieChart = React.createClass({
             },
             tooltip: {
                 headerFormat: '',
-                pointFormat: '<span style="color: {point.color}; font-weight: bold; ">{point.name}: </span>{point.percentage:.1f}% / {point.y} Documents'
+                pointFormatter: function() {
+                    var percent = this.percentage.toFixed(1);
+
+                    if(percent < 5.0) {
+                        return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
+                    } else {
+                        return '<span style="color:' + this.color + '; font-weight: bold;">Documents: </span>' + this.y;
+                    }
+                }
             },
             plotOptions: {
                 pie: {
@@ -90,10 +98,12 @@ var PieChart = React.createClass({
                     dataLabels: {
                         enabled: true,
                         connectorWidth: 0,
-                        distance: 5,
+                        distance: -35,
                         useHTML: true,
                         formatter: function () {
-                        return '<span style="color:' + this.point.color + '">' + this.point.name + '</span>';
+                            var percent = this.percentage.toFixed(1) >= 5.0 ? this.percentage.toFixed(1) + '%' : '';
+
+                            return "<span style='color: white'>" + percent + "</span>";
                         }
                     },
                     states: {
@@ -146,11 +156,6 @@ var PieChart = React.createClass({
 
     render() {
         var { title, id, help } = this.props;
-            // React.createElement(Chart, {
-            //     container: id,
-            //     options: this.options()
-            // });
-        debugger
         return (
             <div>
                 <h4 className="chart-title">{title}

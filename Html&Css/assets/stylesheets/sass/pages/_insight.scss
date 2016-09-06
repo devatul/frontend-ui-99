@@ -372,3 +372,66 @@ $half: round($loops / 2);
     }
   }
 }
+
+.cendroid-chart-legend{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 12px;
+  h5{
+    font-size: 12px;
+  }
+  &.right{
+    left: auto;
+    right: 20px;
+  }
+  .symbol{
+    display: inline-block;
+    height: 5px;
+    width: 30px;
+    margin-right: -2px;
+    line-height: 35px;
+    font-size: 10px;
+  }
+  .more-legend{
+    position:relative; 
+    left:-3px; 
+    font-size: 10px
+  }
+  .document-symbol{
+    display: inline-block;
+    vertical-align: bottom;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 10px;
+    i{
+      display: block;
+      border-radius: 50%;
+      background-color: #DADADA;
+      &.size-1{
+        width: 10px;
+        height: 10px;
+      }
+      &.size-2{
+        width: 13px;
+        height: 13px;
+      }
+      &.size-3{
+        width: 16px;
+        height: 16px;
+      }
+      &.size-4{
+        width: 19px;
+        height: 19px;
+      }
+      &.size-5{
+        width:22px;
+        height: 22px;
+      }
+      &.size-6{
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}

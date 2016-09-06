@@ -234,10 +234,10 @@
                                                 </div>
                                             </th>
                                             <th class="review_note fix-width">Type
-                                                <HelpButton
+                                                <!--<HelpButton
                                                     className="dropdown-file-info-holder"
                                                     classNote="note_chart_content"
-                                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    setValue="This displays the name of each individual document, as it exists in its current state." />-->
                                             </th>
                                             <th class="review_note">Document
                                                 <HelpButton
@@ -455,10 +455,10 @@
                                 </div>
                             </th>
                             <th class="review_note fix-width">Type
-                                <HelpButton
+                                <!--<HelpButton
                                     className="dropdown-file-info-holder"
                                     classNote="note_chart_content"
-                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                                    setValue="This displays the name of each individual document, as it exists in its current state." />-->
                             </th>
                             <th class="review_note">Document
                                 <HelpButton

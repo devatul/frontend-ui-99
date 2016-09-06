@@ -295,8 +295,24 @@ html body .tabs-primary .nav-tabs li a:hover{
   text-align: right;
 }
 
+.text-left{
+  text-align: left!important;
+}
+
 .text-green{
   color: #2baab1;
+}
+
+.text-light-green{
+  color: #29c480;
+}
+
+.text-red{
+  color: #e46159;
+}
+
+.relative{
+  position: relative;
 }
 
 .btn-auth{
@@ -1177,6 +1193,9 @@ ul.filter-list li{
     padding: 0;
     list-style: none;
   }
+  a{
+    color: #777;
+  }
 }
 
 .approve-button{
@@ -1358,10 +1377,22 @@ div[id^='legendContainer']{
   width: 100%;
   height: 350px;
 }
+#centroid{
+  padding-bottom: 90px;
+  position: relative;
+  hr{
+    background-image: none;
+    border-top: 1px solid #F4F4F4;
+  }
+}
 #centroidChart{
   height: 500px;
 }
-
+#centroidChartWrapper{
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
 .choose-cluster-block{
   &>h5{
     float: left;
@@ -1580,6 +1611,135 @@ div[id^='legendContainer']{
 
 .document_review_table .fa{
   vertical-align: middle;
+}
+
+.review_table_no_progress{
+  .select-group select{
+    color: #777;
+  }
+}
+
+.dathena-select{
+  .select2-selection__rendered{
+    padding-left: 15px!important;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 13px;
+      left: 7px;
+      width: 5px;
+      height: 5px;
+      background-color: $color-dathena;
+      border-radius: 50%;
+    }
+  }
+}
+
+.dathena-select-dropdown{
+  .select2-results__options{
+    max-height: 140px!important;
+    .select2-results__option{
+      padding-left: 15px;
+      position: relative;
+      background-color: #fff!important;
+      &:before{
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 7px;
+        width: 5px;
+        height: 5px;
+        background-color: #D6D6D6;
+        border-radius: 50%;
+      }
+      &:hover{
+        color: #777!important;
+      }
+      &.select2-results__option--highlighted{
+        background-color: #fff;
+        color: #777!important;
+        &:before{
+          background-color: $color-dathena;
+        }
+      }
+    }
+  }
+
+  /* Let's get this party started */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: $color-dathena; 
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: $color-dathena; 
+  }
+}
+
+.dathena-progress{
+  display: inline-block;
+  background-color: #fff;
+  border: 4px solid #D7D7D7;
+  border-radius: 0;
+  height: 34px;
+  box-shadow: none;
+  margin-bottom: 0;
+  vertical-align: middle;
+  .progress-bar{
+    border-radius: 0;
+    line-height: 28px;
+    text-align: right;
+    padding-right: 10px;
+    &.progress-bar-danger{
+      background-color: #D9674C
+    }
+  }
+  &.style-2{
+    min-width: 30%;
+    line-height: 28px;
+    border-radius: 5px;
+    border: 2px solid #EBECEC;
+    background-color: #F6F6F6;
+    font-weight: bold;
+    padding-right: 10px;
+    .progress-bar{
+      text-align: left;
+      padding-left: 10px;
+      color: #684E4F;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 30px;
+    }
+  }
+} 
+
+.panel-heading-cluster{
+  padding: 12px 18px;
+  .panel-title{
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+.review-status-block{
+  &>span{
+    width: 90px;
+    display: inline-block;
+    font-weight: 500;
+  }
+  .progress{
+    @include calc(width, '100% - 100px');
+  }
 }
 
 /*Responsive*/
@@ -1807,3 +1967,4 @@ div[id^='legendContainer']{
 @import 'pages/exception';
 @import 'pages/admin';
 @import 'pages/insight';
+@import 'pages/anomaly';

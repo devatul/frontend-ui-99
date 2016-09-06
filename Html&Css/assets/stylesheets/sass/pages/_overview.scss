@@ -18,21 +18,23 @@
 .cendroid-chart-label{
   width: 70px;
   height: 70px;
-  background: #E6E6E6;
-  border: 5px solid #fff;
+  border: 1px solid #E6E6E6;
+  background-color: #fff;
   border-radius: 50%;
   position: absolute;
-  top: 50%;
+  bottom: -35px;
   left: 50%;
   margin-left: -35px;
-  margin-top: 6px;
   z-index: 99;
   text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  padding-top: 6px;
   span{
-    display: inline-block;
-    max-width: 40px;
-    padding-top: 10px;
-    line-height: 20px;
+    display: block;
+    line-height: 18px;
+    text-align: center;
+    font-size: 18px;
   }
 }
 

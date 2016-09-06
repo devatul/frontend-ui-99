@@ -2,7 +2,13 @@ $(function () {
 
   var previousPoint = null;
 
-  $('#choose_cluster').select2();
+  $('#choose_cluster').select2({
+    minimumResultsForSearch: Infinity,
+    containerCssClass: "dathena-select",
+    adaptDropdownCssClass: function(){
+      return "dathena-select-dropdown";
+    }
+  });
   $('#choose_cluster').on("change", function(e) {
     $('.cluster-block').hide();
     $('[id="'+$(this).val()+'"]').show();
@@ -92,343 +98,357 @@ $(function () {
     }
   };
 
+  drawCloud();
+
+  var timeout;
   $(window).resize(function(){
     //$('#words-cloud').jQCloud('update', word_list);
-    $('#words-cloud').css("width", "100%");
-    $('#words-cloud').html('').jQCloud(word_list) 
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+      $('#words-cloud').css("width", "100%");
+      $('#words-cloud').html('').jQCloud(word_list);
+
+
+    }, 100);
   });
 
   var colorsCentroid = [ '#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'];
   var drawCentroid = function(){
-  $('#centroidChart').highcharts({
-    chart: {
-      polar: true,
-      events: {
-        load: function () {
-          var chart = this;
-          $(chart.series).each(function (i, serie) {
-            var documentNum = serie.data[1].document;
-            var distance = parseInt((serie.data[0].y+5)/5);
-            var points = serie.points;
-            serie.color = colorsCentroid[distance-1];
-            serie.graph.attr({ 
-                stroke: colorsCentroid[distance-1]
-            });
-            serie.options.marker.radius = documentNum*3+1;
-            serie.options.marker.states.hover.radius = documentNum*3+2;
-            $.each(points, function (i, e) {
-                var pt = e;
-                pt.color = colorsCentroid[distance-1];
-                pt.fillColor = colorsCentroid[distance-1];
-            });
-            serie.redraw();
-          });
-        }
-      }
-    },
+    if ($('#centroidChart').length){
+      $('#centroidChart').highcharts({
+        chart: {
+          polar: true,
+          events: {
+            load: function () {
+              var chart = this;
+              $(chart.series).each(function (i, serie) {
+                var documentNum = serie.data[1].document;
+                var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
+                var points = serie.points;
+                serie.color = colorsCentroid[distance-1];
+                serie.graph.attr({ 
+                    stroke: colorsCentroid[distance-1]
+                });
+                serie.options.marker.radius = documentNum*3+1;
+                serie.options.marker.states.hover.radius = documentNum*3+2;
+                $.each(points, function (i, e) {
+                    var pt = e;
+                    pt.color = colorsCentroid[distance-1];
+                    pt.fillColor = colorsCentroid[distance-1];
+                });
+                serie.redraw();
+              });
+            }
+          }
+        },
 
-    credits: {
-      enabled: false
-    },
+        credits: {
+          enabled: false
+        },
 
-    title: {
-      text: null
-    },
+        title: {
+          text: null
+        },
 
-    pane: {
-      startAngle: 90
-    },
+        pane: {
+          startAngle: -90,
+          endAngle: 90
+        },
 
-    xAxis: {
-      tickInterval: 45,
-      min: 0,
-      max: 360,
-      labels: {
-        enabled: false
-      },
-      plotLines: [{
-        color: '#BFDDF7',
-        width: 2,
-        value: [0, 2],
-        zIndex: 1
-      }]
-    },
+        xAxis: {
+          tickInterval: 90,
+          min: 0,
+          max: 360,
+          labels: {
+            enabled: false
+          },
+          plotLines: [{
+            color: '#BFDDF7',
+            width: 2,
+            value: [0, 2],
+            zIndex: 1
+          }]
+        },
 
-    yAxis: {
-      min: -5,
-      tickInterval: 5,
-      plotBands: [{
-        from: 0,
-        to: 5,
-        color: '#EDEDED'
-      },{
-        from: 5,
-        to: 10,
-        color: '#F2F2F2'
-      },{
-        from: 10,
-        to: 15,
-        color: '#F7F7F7'
-      },{
-        from: 15,
-        to: 20,
-        color: '#FCFCFC'
-      }],
-      labels: {
-        formatter: function() {
-          return this.value >= 0 ? this.value : null;
-        }
-      }
-    },
+        yAxis: {
+          min: -5,
+          tickInterval: 5,
+          plotBands: [{
+            from: 0,
+            to: 5,
+            color: '#EDEDED'
+          },{
+            from: 5,
+            to: 10,
+            color: '#F2F2F2'
+          },{
+            from: 10,
+            to: 15,
+            color: '#F7F7F7'
+          },{
+            from: 15,
+            to: 20,
+            color: '#FCFCFC'
+          }],
+          labels: {
+            formatter: function() {
+              return this.value >= 0 ? this.value : null;
+            },
+          }
+        },
 
-    plotOptions: {
-      series: {
-        pointStart: 0,
-        pointInterval: 45
-      },
-      column: {
-        pointPadding: 0,
-        groupPadding: 0
-      },
-      line: {
-        //lineWidth: 0
-      }
-    },
+        plotOptions: {
+          series: {
+            pointStart: 0,
+            pointInterval: 45
+          },
+          column: {
+            pointPadding: 0,
+            groupPadding: 0
+          },
+          line: {
+            //lineWidth: 0
+          }
+        },
 
-    legend:{
-      enabled: false
-    },
-    tooltip: {
-      formatter: function() {
-        return 'Documents:'+ this.series.data[1].document + '<br>' +'Distance:' + this.y;
-      },
-      useHTML: true
-    },
-    series: [{
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [
-        [0, 5], 
-        {
-          x: 0,
-          y: 0,
-          document: 1,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
+        legend:{
+          enabled: false
         },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      }, 
-      data: [  
-        [20, 8], 
-        {
-          x: 20,
-          y: 0,
-          document: 1,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
+        tooltip: {
+          formatter: function() {
+            return 'Documents:'+ this.series.data[1].document + '<br>' +'Distance:' + this.y;
+          },
+          useHTML: true
         },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [   
-        [60, 12], 
-        {
-          x: 60,
-          y: 0,
-          document: 2,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [   
-        [135, 15], 
-        {
-          x: 135,
-          y: 0,
-          document: 4,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [ 
-        [180, 18], 
-        {
-          x: 180,
-          y: 0,
-          document: 1,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [  
-        [225, 19], 
-        {
-          x: 225,
-          y: 0,
-          document: 5,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [  
-        [240, 22], 
-        {
-          x: 240,
-          y: 0,
-          document: 1,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [   
-        [260, 3], 
-        {
-          x: 260,
-          y: 0,
-          document: 1,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [   
-        [280, 5], 
-        {
-          x: 280,
-          y: 0,
-          document: 3,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null]
-      }, {
-      type: 'scatter',
-      lineWidth: 2,
-      marker: {
-        symbol: 'circle'
-      },
-      data: [   
-        [320, 10], 
-        {
-          x: 320,
-          y: 0,
-          document: 2,
-          marker: {
-            enabled: false,
-            states: {
-                hover: {
-                    enabled: false
-                }
-            }
-          }
-        },
-        null
-      ]
-    }]
 
-    });
+        series: [{
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [
+            [10, 3], 
+            {
+              x: 10,
+              y: 0,
+              document: 1,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [   
+            [90, 3], 
+            {
+              x: 90,
+              y: 0,
+              document: 1,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [   
+            [120, 5], 
+            {
+              x: 120,
+              y: 0,
+              document: 3,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          }, 
+          data: [  
+            [180, 8], 
+            {
+              x: 180,
+              y: 0,
+              document: 1,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [   
+            [210, 10], 
+            {
+              x: 210,
+              y: 0,
+              document: 2,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null
+          ]
+        },{
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [   
+            [270, 12], 
+            {
+              x: 270,
+              y: 0,
+              document: 2,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [   
+            [290, 15], 
+            {
+              x: 290,
+              y: 0,
+              document: 4,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [ 
+            [310, 18], 
+            {
+              x: 310,
+              y: 0,
+              document: 1,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [  
+            [330, 19], 
+            {
+              x: 330,
+              y: 0,
+              document: 5,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }, {
+          type: 'scatter',
+          lineWidth: 2,
+          marker: {
+            symbol: 'circle'
+          },
+          data: [  
+            [350, 22], 
+            {
+              x: 350,
+              y: 0,
+              document: 1,
+              marker: {
+                enabled: false,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+              }
+            },
+            null]
+          }]
+
+      });
+    }
   };
+
+  drawCentroid();
 
   var colors = [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'];
   var colorsHover  = [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
@@ -656,4 +676,16 @@ $(function () {
     $(this).parent().find('.refine-progress').show();
   });
 
+
+  //FIle distribution chart
+  var totalFileNumber = 0;
+  $('.file-distribution .item').each(function(){
+    totalFileNumber += parseInt($(this).attr('data-value'));
+  });
+  $('.file-distribution .item').each(function(){
+    var thisValue = parseInt($(this).attr('data-value'));
+    var thisPercent = ( thisValue / totalFileNumber )*100;
+    $(this).css('width', thisPercent.toFixed(2)+ '%');
+  });
+  $('.file-distribution').show();
 });

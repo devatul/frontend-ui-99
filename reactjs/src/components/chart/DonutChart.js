@@ -158,7 +158,7 @@ var DonutChart = React.createClass({
             <section className="panel">
                 <div className="panel-body widget-panel">
                     <h4 className="widget-title">{config.name + ' '}
-                        <HelpButton classNote="overview_timeframe help_timeframe"
+                        <HelpButton classNote="overview_timeframe fix-overview-help-button"
                                     setValue={help} />
                     </h4>
                     <div className="widget-chart">

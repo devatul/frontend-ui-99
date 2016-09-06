@@ -53,7 +53,9 @@ var HelpButton = React.createClass({
         this.setState({ setOpen: '' });
     },
     render: function() {
-        var { setOpen, expanded } = this.state;
+        var { setOpen, expanded } = this.state,
+            value = this.props.setValue.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+
         return(
             <div ref="dropdown" className={'r dropdown inline-block-item ' + this.props.className + ' ' + setOpen}>
                 <a data-toggle="dropdown"
@@ -64,8 +66,7 @@ var HelpButton = React.createClass({
                     <i className={this.props.classIcon == null ? 'fa fa-question-circle' : 'fa ' + this.props.classIcon} aria-hidden="true"></i>
                 </a>
                 <div ref="dropdownMenu" className={this.props.classNote + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
-                    {this.props.setValue && 
-                        <p>{this.props.setValue}</p>}
+                    <p dangerouslySetInnerHTML={{ __html: value }}></p>
                 </div>
                 <span class="dropdown-backdrop"></span>
             </div>

@@ -4,8 +4,6 @@ $(function () {
 
     //get data-id attribute of the clicked element
     var fileURL = $(e.relatedTarget).attr('data-file-url');
-
-    console.log(fileURL);
     
     $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
     $('#embedURL').gdocsViewer();

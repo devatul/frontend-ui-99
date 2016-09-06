@@ -15,7 +15,7 @@
                     <section class="panel">
                         <div class="panel-body bg-secondary widget-panel">
                             <h4 class="widget-title">Scan 
-                                <HelpButton className="" classNote="overview_timeframe help_timeframe"
+                                <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                     setValue="Percentage of documents detected and scanned by Dathena 99 compared against total number of documents detected." />
                             </h4>
                             <div class="widget-summary">
@@ -37,7 +37,7 @@
                             <h4 class="widget-title">Duplicates / Twins 
                                 <HelpButton
                                     className="overview_question_a"
-                                    classNote="overview_timeframe help_timeframe"
+                                    classNote="overview_timeframe fix-overview-help-button"
                                     setValue="Duplicates :  Two or more files with identical content and file names. Twins : Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
@@ -72,7 +72,7 @@
                             <h4 class="widget-title">Accuracy  
                                 <HelpButton
                                     className="overview_question_a"
-                                    classNote="overview_timeframe help_timeframe"
+                                    classNote="overview_timeframe fix-overview-help-button"
                                     setValue="Level of confidence that 99 has in its initial classification. The higher the accuracy level, the greater the level of confidence that 99’s classification is correct." />
                             </h4>
                             <div class="widget-summary"> 

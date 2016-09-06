@@ -151,7 +151,7 @@ var Row = React.createClass({
                     </div>
                 </td>
                 <td>
-                    <a id="documentStatus" href="#" className="doc-check" onClick={this.handleOnclick}>
+                    <a id="documentStatus" className="doc-check" onClick={this.handleOnclick}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         <i className="fa fa-check" aria-hidden="true"></i>
                     </a>
