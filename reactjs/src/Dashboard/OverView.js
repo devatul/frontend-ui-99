@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import template from './OverView.rt';
-import update from 'react-addons-update';
+import update from 'react/lib/update';
 import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js';

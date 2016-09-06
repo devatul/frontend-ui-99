@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import Constant from '../Constant.js'
 import { makeRequest } from '../utils/http'
 

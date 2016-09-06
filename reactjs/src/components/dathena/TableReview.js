@@ -1,8 +1,9 @@
 import React,  { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import { Dropdown } from 'react-bootstrap'
-import { Toggle } from '../bootstrap/DropdownCustom'
+import InfoButton from '../dathena/InfoButton'
+import SelectBox from '../dathena/SelectBox'
+import makeRequest from '../../utils/http'
 import _ from 'lodash'
 
 var Table = React.createClass({
@@ -32,41 +33,98 @@ var Row = React.createClass({
     propTypes: {
         document: PropTypes.object.isRequired,
     },
+    
+    componentWillMount() {
 
+    },
 
+    getCategories: function() {
+        let arr = [];
+        makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+                this.configListLabel(data);
+                arr = data;
+            }
+        });
+        return arr;
+    },
+
+    getConfidentiality: function(async) {
+        let arr = [];
+        makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                this.configListLabel(data);
+                arr = data;
+            }
+        });
+        return arr;
+    },
+
+    renderType(documentName) {
+        let word = /(.doc|.docx)$/gi,
+            excel = /(.xlsx|.xlsm|.xlsb|.xls)$/gi,
+            powerPoint = /(.pptx|.pptm|.ppt)$/gi,
+            pdf = /.pdf$/gi,
+            text = /.txt$/gi;
+        switch(true) {
+            case word.test(documentName) === true:
+                return (<i className="fa fa-file-word-o action-file-icon"></i>);
+            case excel.test(documentName) === true:
+                return (<i className="fa fa-file-excel-o action-file-icon"></i>);
+            case powerPoint.test(documentName) === true:
+                return (<i className="fa fa-file-powerpoint-o action-file-icon"></i>);
+            case pdf.test(documentName) === true:
+                return (<i className="fa fa-file-pdf-o action-file-icon"></i>);
+            case text.test(documentName) === true:
+                return(<i className="fa fa-file-text-o action-file-icon"></i>);
+        }
+    },
+
+    handleSelectBoxOnchange: function(valSelect, event) {
+        this.props.onChange &&
+            this.props.onChange(event, this.props.index);
+    },
+
+    handleCheckboxChange: function(event) {
+        this.props.onChange &&
+            this.props.onChange(event, this.props.index);
+    },
+
+    handleOnclick: function(event) {
+        this.props.onClick &&
+            this.props.onClick(event, this.props.index);
+    },
 
     render() {
         let { document } = this.props;
-        debugger
         return (
             <tr className="">
                 <td>
                     <div className="checkbox-custom checkbox-default">
-                        <input type="checkbox" className="checkbox-item-1" data-target="#table-my-actions-1" />
+                        <input ref="checkbox" type="checkbox" className="checkbox-item-1"/>
                         <label></label>
                     </div>
                 </td>
                 <td className="text-center">
-                    <i className="fa fa-file-word-o action-file-icon"></i>
+                    {this.renderType(document.name)}
                 </td>
                 <td className="text-left">
-                    <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal">
-                        {document.name}
+                    <span className="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal">
+                        <span id="documentName" data-toggle="tooltip" onClick={this.handleOnclick}>{document.name}</span>
                     </span>
 
-                    <Dropdown className="dropdown-file-info-holder inline-block-item">
-                        <Toggle bsRole="toggle" className="btn-file-info fa fa-info-circle"/>
-                        <Dropdown.Menu className="has-arrow dropdown-file-info append-to-body">
-                            <li>Name: <b>Contract</b></li>
-                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                            <li>Owner: <b>Todd_Smith</b></li>
-                            <li>Creation Date: <b>2015-01-01</b></li>
-                            <li>Modification Date: <b>2015-05-28</b></li>
-                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                            <li>Confidentiality Label: <b>Yes/No</b></li>
-                            <li>Number of Classification Challenge: <b>1</b></li>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <InfoButton>
+                        <li>Name: <b>{document.name}</b></li>
+                        <li>Path: <a href="#">{document.path}</a></li>
+                        <li>Owner: <b>{document.owner}</b></li>
+                        <li>Creation Date: <b>{document.creation_date}</b></li>
+                        <li>Modification Date: <b>{document.modification_date}</b></li>
+                        <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
+                        <li>Confidentiality Label: <b>{document.confidentiality_label}</b></li>
+                        <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
+                    </InfoButton>
                 </td>
                 <td>
                     <div className="select-group">
@@ -77,14 +135,7 @@ var Row = React.createClass({
                                 <span className="progress-percentage">(50%)</span>
                             </div>
                         </div>
-                        <select className="form-control">
-                            <option>Accounting/ Tax</option>
-                            <option>Corporate Entity</option>
-                            <option>Client/Customer</option>
-                            <option>Employee</option>
-                            <option selected="">Legal/Compliance</option>
-                            <option>Transaction</option>
-                        </select>
+                        <SelectBox id="selectCategory" className="form-control" data={document.categories} onChange={this.handleSelectBoxOnchange}/>
                     </div>
                 </td>
                 <td>
@@ -96,17 +147,11 @@ var Row = React.createClass({
                                 <span className="progress-percentage">(50%)</span>
                             </div>
                         </div>
-                        <select className="form-control">
-                            <option selected="">Banking Secrecy</option>
-                            <option>Secret</option>
-                            <option>Confidential</option>
-                            <option>Internal</option>
-                            <option>Public</option>
-                        </select>
+                        <SelectBox id="selectConfidentialities" className="form-control" data={document.confidentialities} />
                     </div>
                 </td>
                 <td>
-                    <a href="#" className="doc-check">
+                    <a id="documentStatus" href="#" className="doc-check" onClick={this.handleOnclick}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         <i className="fa fa-check" aria-hidden="true"></i>
                     </a>

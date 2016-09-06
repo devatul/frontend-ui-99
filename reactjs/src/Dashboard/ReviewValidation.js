@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './ReviewValidation.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 //import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
 import 'jquery'

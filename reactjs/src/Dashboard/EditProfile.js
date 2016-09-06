@@ -5,7 +5,7 @@ import template from './EditProfile.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import Constant from '../Constant.js';
 import $, { JQuery } from 'jquery';
-import update from 'react-addons-update';
+import update from 'react/lib/update';
 
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({

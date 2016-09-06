@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
 import { forEach, upperFirst } from 'lodash'
 import template from './GroupReview.rt'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import Constant, { status } from '../Constant.js'
 
 var GroupReview = React.createClass({

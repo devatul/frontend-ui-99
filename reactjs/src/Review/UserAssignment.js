@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './UserAssignment.rt'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
 import { upperFirst, findIndex, assignIn, isEqual } from 'lodash'
@@ -145,9 +145,10 @@ var UserAssignment = React.createClass({
         }
         
     },
-    handleOnChangeSelectBox: function(data, field) {
+    handleOnChangeSelectBox: function(data, event) {
         var { params, filterLabel } = this.state.datafilter,
             { selectId } = this.static,
+            field = event.target,
             indexLabel = findIndex(filterLabel, {id: field.id }),
             label = assignIn({}, data);
 
