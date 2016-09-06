@@ -6,7 +6,7 @@ import Constant from '../Constant.js'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import _ from 'lodash' 
 
 import $, { JQuery }  from 'jquery'

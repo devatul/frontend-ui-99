@@ -30,9 +30,9 @@ var SelectBox = React.createClass({
     },
 
     handleOnChange: function(event) {
-        var data = this.props.data[event.target.value];
+        var valueSelect = this.props.data[event.target.value];
         this.props.onChange &&
-            this.props.onChange(data, event.target);
+            this.props.onChange(valueSelect, event);
     },
 
     handleOnClick: function(event) {
@@ -57,16 +57,15 @@ var SelectBox = React.createClass({
             { binding, defaultValue, data } = this.props,
             name = binding ? binding.name : 'name',
             value = binding ? binding.value : 'index';
-            debugger
         for(let i = data.length - 1; i >= 0; i--) {
 
             children[i] = <option
-                                    key={data[i][name] + '_' + i}
-                                    className="lt"
-                                    value={value == 'index' ? i : data[i][value]}
-                                    disabled={i === defaultValue && true}>
-                                    {data[i][name]}
-                                </option>;
+                                key={data[i][name] + '_' + i}
+                                className="lt"
+                                value={value == 'index' ? i : data[i][value]}
+                                disabled={i === defaultValue && true}>
+                                {data[i][name]}
+                            </option>;
         }
         return(
             <select {...this.props}

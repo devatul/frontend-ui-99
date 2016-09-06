@@ -14,10 +14,9 @@
               key="{categoryIndex}" class="{this.state.category.current.id == category.id && 'active'}">
             <a id="{'Category_' + category.id}"
               href="#categoryInfo"
-              class="{this.state.category.current.id != category.id && 'no-active'}"
               onClick="()=>this.setCategoryCurrent(categoryIndex)"
               data-toggle="tab" aria-expanded="true" 
-              {this.state.category.current.id != category.id ? 'style="text-transform: capitalize; "' : 'style="text-transform: capitalize; color: #DDD"'}>{category.name}</a>
+              style="text-transform: capitalize;">{category.name}</a>
           </li>
           <li class="">
             <a id='summarytab' href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>

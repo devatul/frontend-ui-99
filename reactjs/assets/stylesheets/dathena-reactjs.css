@@ -116,6 +116,22 @@
     font-size: 16px;
     padding: 5px 30px 0px 20px;
 }
-.table-my-actions > thead tr th:nth-child(2){
-    width: 60px;
+.table-my-actions > thead tr th.fix-width:nth-child(2){
+    width: 68px;
+}
+
+.table-my-actions > thead tr th.fix-max-width-category-confident {
+    max-width: 200px;
+}
+
+.dataTables_wrapper table thead th.fix-padding-th-checkbox {
+    padding-right: 10px !important;
+}
+
+table.docPreview > tbody > tr > td:nth-child(1) {
+    padding: 12px 7px 12px 13px !important;
+}
+
+table.docPreview > thead > tr > th:nth-child(1) {
+    padding: 12px 7px 12px 13px !important;
 }

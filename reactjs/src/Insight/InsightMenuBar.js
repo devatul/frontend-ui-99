@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './InsightMenuBar.rt'

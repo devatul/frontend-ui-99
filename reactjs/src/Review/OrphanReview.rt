@@ -227,13 +227,13 @@
                                 <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                                     <thead>
                                         <tr role="row" class="">
-                                            <th>
+                                            <th class="fix-padding-th-checkbox">
                                                 <div class="checkbox-custom checkbox-primary">
                                                     <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
                                             </th>
-                                            <th class="review_note dataTables_wrapper1 ">Type
+                                            <th class="review_note fix-width">Type
                                                 <HelpButton
                                                     className="dropdown-file-info-holder"
                                                     classNote="note_chart_content"
@@ -245,11 +245,11 @@
                                                     classNote="note_chart_content"
                                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                                             </th>
-                                            <th class="review_note">Proposed Category (confidence level)
+                                            <th class="review_note fix-max-width-category-confident">Proposed Category (confidence level)
                                                 <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
                                                             setValue="User is required to assign category for orphan documents." />
                                             </th>
-                                            <th class="review_note">Proposed Confidentiality (confidence level)
+                                            <th class="review_note fix-max-width-category-confident">Proposed Confidentiality (confidence level)
                                                 <HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
                                                             setValue="User is required to assign confidentiality level for orphan documents." />
                                             </th>
@@ -436,7 +436,7 @@
                     <span>Folder {this.cutPath(document.path)}</span>
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index + 1)">Go to Next Document</button>
+                    <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index + 1)">Go to Next Document <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                     <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick="()=>this.undoHandle()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                     <!--<button type="button" class="modal-button"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>-->
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -445,7 +445,46 @@
             </div>
           <div class="modal-body">
             <div class="table-responsive">
-               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+                <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+                    <thead>
+                        <tr role="row" class="">
+                            <th>
+                                <div class="checkbox-custom checkbox-primary">
+                                    <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
+                                    <label for="checkboxAllExample2"></label>
+                                </div>
+                            </th>
+                            <th class="review_note fix-width">Type
+                                <HelpButton
+                                    className="dropdown-file-info-holder"
+                                    classNote="note_chart_content"
+                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Document
+                                <HelpButton
+                                    className="dropdown-file-info-holder"
+                                    classNote="note_chart_content"
+                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note fix-max-width-category-confident">Proposed Category (confidence level)
+                                <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
+                                            setValue="User is required to assign category for orphan documents." />
+                            </th>
+                            <th class="review_note fix-max-width-category-confident">Proposed Confidentiality (confidence level)
+                                <HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                                            setValue="User is required to assign confidentiality level for orphan documents." />
+                            </th>
+                            <th class="text-center">Status 
+                                <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                                            setValue="This represent the status of the review for each file." />-->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody rt-scope="this.state.listDocument as listDocument">
+                        <table.row document={document} index={index}/>
+                    </tbody>
+                </table>
+               <!--<table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions orphan-review" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
           <thead>
             <tr role="row" class="">
                 <th>
@@ -480,8 +519,8 @@
                                 setValue="User is required to assign confidentiality level for orphan documents." />
                 </th>
                 <th class="text-center">Status 
-                    <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
-                                setValue="This represent the status of the review for each file." />-->
+                    <HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                                setValue="This represent the status of the review for each file." />
                 </th>
             </tr>
           </thead>
@@ -538,7 +577,7 @@
               </td>
             </tr>
                     </tbody>
-                </table>
+                </table>-->
             </div>
             <div class="file-preview mt-md">
                 <p>File Preview Content</p>

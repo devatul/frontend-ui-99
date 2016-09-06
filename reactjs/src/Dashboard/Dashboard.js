@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './Dashboard.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import update from 'react-addons-update'
+import update from 'react/lib/update'
 import $ from 'jquery'
 import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
@@ -205,6 +205,20 @@ logOut(){
             $("#"+event).find("b").removeClass('fa-caret-up').addClass('fa-caret-down');
 
         })
+    },
+
+    getActive: function() {
+        let path = window.location.pathname,
+            review = /^\/Review\//,
+            insight = /^\/Insight\//;
+
+        switch(true) {
+            case review.test(path) === true: 
+                return 'Review';
+            case insight.test(path) === true:
+                return 'Insight';
+            default: ''
+        }
     },
 
     filterAlert(event) {
