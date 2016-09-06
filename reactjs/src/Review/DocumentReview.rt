@@ -118,7 +118,7 @@
                                                                 <span class="file-name-1"
                                                                     rel="tooltip"
                                                                     data-toggle="tooltip"
-                                                                    data-original-title="{doc.name}">
+                                                                    data-original-title="{doc.name}"> 
                                                                     {doc.name}
                                                                 </span>
                                                         </span>
@@ -227,7 +227,7 @@
                                             {(challenged.sla == null ) ? '[EN] '+ challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
                                             <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content"
-                                            setValue="" />
+                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator $y with a $conf level of confidentiality." />
                                         </h2>
                                     </li>
                                 </ul>
@@ -287,19 +287,13 @@
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment
-                                                        <!-- <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content_review"
-                                                            setValue="Comment of your coordinator to explain the reason of the rejection" /> -->
+                                                       >
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
-                                                       <!--  <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content_review"
-                                                            setValue="Add a comment to justify your acceptation or your rejection of the challenge." /> -->
+                                                      
                                                     </th>
                                                     <th class="review_note" style="max-width: 120px;">Validation
-                                                       <!--  <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content_review"
-                                                            setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." /> -->
+                                                     
                                                     </th>
                                                 </tr>
                                             </thead>

@@ -27,10 +27,14 @@ var DocumentReview = React.createClass({
         };
     },
     componentWillMount() {
-        this.getActions();
+      this.getActions();
+
     },
     componentDidMount() {
-        this.getChallengedDocument();
+
+         this.getChallengedDocument();
+          
+         
     },
     shouldComponentUpdate(nextProps, nextState) {
         
@@ -79,7 +83,7 @@ var DocumentReview = React.createClass({
             }
         }
         if(this.state.ChallengedDocuments != prevState.ChallengedDocuments) {
-           /* console.log('ChallengedDocuments', this.state.ChallengedDocuments);
+            console.log('ChallengedDocuments', this.state.ChallengedDocuments);
             console.log('challengedPreview', this.state.challengedPreview);
             $('.select-group select').focus(function(){
             var selectedRow = $(this).parents('tr');
@@ -111,7 +115,7 @@ var DocumentReview = React.createClass({
                     console.log(h);
                     console.log(hi);
                 }
-            });*/
+            });
         }
     },
     getActions: function() {
