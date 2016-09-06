@@ -53,7 +53,7 @@ module.exports = React.createClass({
 
 				this.setState( {photo: data});
 
-				console.log("photo: ", photo);
+				console.log("photo: ", this.state.photo);
 			}.bind(this),
 			error: function(xhr, status, error) {
 				console.log(xhr);

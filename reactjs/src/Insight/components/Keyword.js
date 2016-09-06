@@ -19,7 +19,7 @@ var Keywords = React.createClass({
 			
 		};
 	},
-	click(){
+	click() {
 		if(this.state.name =="more keywords"){
 			this.setState({className : 'more1'})
 			this.setState({
@@ -35,7 +35,6 @@ var Keywords = React.createClass({
 					display:'none'
 				}
 			})
-			/*$('.pie-wrapper pie-progress-98 style-1 pie-sm').removeClass('pie-wrapper pie-progress-98 style-1 pie-sm').addClass('pie-wrapper pie-progress-98 style-1 pie-md')*/
 		}
 		if(this.state.name == "less keywords"){
 			
@@ -66,13 +65,13 @@ var Keywords = React.createClass({
 			<a href="javascript:;" className="morelink" onClick={this.click} style={{marginLeft:'3px'}}>{this.state.name}</a></span></td>
 			<td>
 				<div className={this.state.charClass}>
-				<span className="label">{this.props.percent}%</span>
-				<div className="pie">
-				<div className="left-side half-circle"></div>
-				<div className="right-side half-circle"></div>
-				</div>
-				<div className="shadow"></div>
-				</div>
+					<span className="label">{this.props.percent}%</span>
+					<div className="pie">
+					<div className="left-side half-circle"></div>
+					<div className="right-side half-circle"></div>
+					</div>
+					<div className="shadow"></div>
+					</div>
 				</td>
 			</tr>
 
