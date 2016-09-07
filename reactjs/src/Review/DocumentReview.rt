@@ -261,7 +261,7 @@
                                         <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-challenged-{challengedIndex}" role="grid" aria-describedby="datatable-default_info">
                                             <thead>
                                                 <tr role="row" class="">
-                                                    <th >
+                                                    <th class="fix">
                                                         <div class="checkbox-custom checkbox-primary">
                                                             <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
                                                             <label></label>

@@ -124,7 +124,7 @@
     max-width: 150px;
 }
 
-.table-challenge thead th:first-child{
+.table-challenge thead th.fix:first-child{
     width: 40px;
 }
 /*.dataTables_wrapper table thead th {
