@@ -119,14 +119,15 @@
     position: relative;
     /* padding: 10px !important; */
 }
-.vertical-top.document_2nd.first-ch {
-    /* min-width: 160px; */
+/*.vertical-top.document_2nd.first-ch {
+     min-width: 160px; 
     max-width: 150px;
-}
+}*/
 
 .table-challenge thead th.fix:first-child{
     width: 40px;
 }
+
 /*.dataTables_wrapper table thead th {
     padding-right: 17px !important;
 }*/

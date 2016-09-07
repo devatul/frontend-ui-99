@@ -286,8 +286,7 @@
                                                             classNote="help_question_content"
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
-                                                    <th class="review_note review_note_r">Coordinator's Comment
-                                                       >
+                                                    <th class="review_note review_note_r">Coordinator's Comment 
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
                                                       
@@ -559,7 +558,7 @@
                 <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
                     <thead>
                         <tr role="row" class="">
-                            <th style="padding: 10px 15px 0px 10px;">
+                            <th style="padding: 10px 15px 10px 10px;" class="fix">
                                 <div class="checkbox-custom checkbox-primary">
                                     <input type="checkbox" class="checkbox-all" data-target="#table-my-actions-3">
                                     <label></label>
