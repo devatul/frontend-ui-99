@@ -243,7 +243,8 @@
     
     <BarMenu title="Data Risk Management" showFilter={true} handleFilter={this.handleFilter} helpInfo="" />
     <div class="panel-body" id="toggle">
-      <h3>Capacity Management Risk 
+      <div style="margin-top : 40px"></div>
+      <h3 >Capacity Management Risk 
         <HelpButton type="overview_question_a" content="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity."/>
         
       </h3>

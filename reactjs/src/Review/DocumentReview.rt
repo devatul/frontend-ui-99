@@ -227,7 +227,7 @@
                                             {(challenged.sla == null ) ? '[EN] '+ challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
                                             <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content"
-                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator $y with a $conf level of confidentiality." />
+                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality." />
                                         </h2>
                                     </li>
                                 </ul>
