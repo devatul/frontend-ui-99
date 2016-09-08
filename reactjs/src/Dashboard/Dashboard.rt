@@ -88,10 +88,10 @@
                     <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
-                        <li><!--<li class="active">-->
+                        <!--<li>
                             <span class="badge">20</span>
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
-                        </li>
+                        </li>-->
                         <li>
                             <span class="badge">20</span>
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>

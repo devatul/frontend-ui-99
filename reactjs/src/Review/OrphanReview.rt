@@ -23,7 +23,7 @@
                         <label for="choose_cluster">
                             Select
                             <select ref="choose_orphan" class="js-example-basic-single js-states form-control" id="choose_cluster" key="index" defaultValue="0">
-                                <option rt-repeat="orphan in this.state.listOrphan" value="{orphanIndex}" key="{orphanIndex}">{this.cutString(orphan.name)}</option>
+                                <option rt-repeat="orphan in this.state.orphan.list" value="{orphanIndex}" key="{orphanIndex}">{this.cutString(orphan.name)}</option>
                             </select>
                         </label>
                         <button class="btn btn-green btn-ok" type="button" style="display:none">OK</button>
@@ -53,7 +53,7 @@
                             <div class="col-md-3">
                                 <LiquidMeter title="Review Status"
                                     help="Percentage of Documents reviewed in the selected orphan from all the documents in the selected orphan"
-                                    setValue={this.state.status} />
+                                    setValue={this.state.orphanData.statusReview} />
 
                                 <!--<section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                                     <header class="panel-heading">
@@ -162,7 +162,7 @@
                                                 <div class="col-md-6">
                                                     <PieChart id="confidentialityChart"
                                                         title="Confidentiality"
-                                                        data={this.state.dataChart.pieChart}
+                                                        data={this.state.dataChart.confidentiality}
                                                         help="Distributions in terms of confidentiality ratings assigned to all the document within the selected orphan." />
                                                 </div>
                                                 <div class="col-md-6">
@@ -259,8 +259,8 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody rt-scope="this.state.listDocument as listDocument">
-                                        <table.row rt-repeat=" document in listDocument " document={document} />
+                                    <tbody rt-scope="this.state.orphanData.listDocument as listDocument">
+                                        <table.row rt-repeat=" document in listDocument " document={document} index={documentIndex} onChange={this.handleTableRowOnChange} />
                                     </tbody>
                                 </table>
                             </div>
@@ -421,10 +421,10 @@
    <!--Modal-->
   
     <div id="previewModal" class="modal fade in" role="dialog">
-      <div class="modal-dialog modal-preview" rt-if="(this.state.documentPreview != null)">
+      <div class="modal-dialog modal-preview" rt-if="(this.state.orphanData.docPreview >= 0)">
   
         <!-- Modal content-->
-        <div class="modal-content" rt-scope="this.state.documentPreview as document; this.state.documentPreview.index as index; this.state.documentPreview.current as current">
+        <div class="modal-content" rt-scope="this.state.orphanData.docPreview as index; this.state.orphanData.listDocument[index] as document; document.current as current">
           <div class="modal-header">
             <div class="row">
                 <div class="col-sm-4 modal-title">
@@ -480,7 +480,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody rt-scope="this.state.listDocument as listDocument">
+                    <tbody>
                         <table.row document={document} index={index}/>
                     </tbody>
                 </table>

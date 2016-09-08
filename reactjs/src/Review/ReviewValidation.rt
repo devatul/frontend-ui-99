@@ -2,7 +2,6 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <section>
-  <MenuBar title="Documents Classification Challenge - Coordinator’s Review Validation" showInfo={true}></MenuBar>
   <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
           <ul rt-if="this.state.reviewCurrent != null && this.state.categories.length > 0" class="nav nav-tabs cat-list">
@@ -99,7 +98,8 @@
                           <div id="panelChallenge" class="panel-body nav-collapse collapse in">
                           <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                           <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-none no-footer table-challenge">
+                            <table class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge">
+                              
                               <thead>
                                 <tr>
                                   <th class="review_note">Status
@@ -153,21 +153,21 @@
                                       data-target="#previewModal"
                                       onClick="()=>this.setDocumentPreview(this.state.reviewCurrent.Id[0], this.state.reviewCurrent.Id[1], documentIndex)"
                                       data-file-url="{document.image_url}">
-                                          <span class="file-name-1"
+                                          <span
                                               rel="tooltip"
                                               data-toggle="tooltip"
                                               data-original-title="{document.name}">
-                                              {document.name}
+                                                 {document.name}
                                           </span>
                                   </span>
                                   <InfoButton>
                                         <ul>
-                                              <li>name: {document.name}</li>
-                                              <li>Creation Date: 2015-01-01</li>
-                                              <li>Modifitcation Date: 2015-05-28</li>
-                                              <li>Required Legal Retention until: 2025-03-03</li>
-                                              <li>Confidentiality Label: Yes/No</li>
-                                              <li>Number of Classification Challenge: 1</li>
+                                            <li>name: {document.name}</li>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
                                         </ul>
                                   </InfoButton>
                                 </td>
@@ -187,7 +187,7 @@
                                   <select class="form-control challenge-confidentiality element-event {(document.previous_confidentiality != null && document.previous_confidentiality != document.current_confidentiality) ? 'changed' : ''}" onChange="(event)=>this.onChangeConfidential(event, reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" value="{document.current_confidentiality}">
                                       <option rt-repeat="confidentiality in this.state.confidentiality" value="{confidentialityIndex}">{confidentiality.name}</option>
                                   </select>
-                                  <span rt-if="document.previous_confidentiality != null" class="text-italic previous-status">Previous: {document.previous_confidentiality}</span>
+                                  <span rt-if="document.previous_confidentiality != null" class="text-italic previous-status">Previous: {this.state.confidentiality[document.previous_confidentiality].name}</span>
                                 </td>
                                 <td class="fix-1st-pading-comment-table">
                                   <textarea class="form-control" placeholder="Challenge's rationale details"></textarea>
@@ -236,7 +236,7 @@
                             </div>
                             <div class="table-responsive">
                               
-                              <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                              <table class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
                                 <thead>
                                   <tr role="row" class="">
                                     <th class="review_note">Status
@@ -278,7 +278,7 @@
                                         <i class="fa fa-file-word-o action-file-icon"></i>
                                     </td>
                                     <td class="text-left my_file-name">
-                                      <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3">Tax report.ppt</span>
+                                      <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3">Tax report.ppt sadfasdfasdfasdfsdfasd</span>
                                       <InfoButton>
                                           <li>Creation Date: 2015-01-01</li>
                                           <li>Modifitcation Date: 2015-05-28</li>
@@ -292,7 +292,7 @@
                                     </td>-->
                                     
                                     <td class="vertical-top">
-                                      <select class="form-control">
+                                      <select class="form-control challenge-category">
                                           <option selected="">Accounting/ Tax</option>
                                           <option>Corporate Entity</option>
                                           <option>Customer</option>

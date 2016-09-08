@@ -12,8 +12,9 @@ var Dashboard = require('./Dashboard/Dashboard');
 var OverView = require('./Dashboard/OverView');
 var Profile = require('./Dashboard/Profile');
 var MyTeam = require('./Dashboard/MyTeam');
+var AnomalyDetection = require('./Dashboard/AnomalyDetection');
 var EditProfile = require('./Dashboard/EditProfile');
-var ReviewValidation = require('./Dashboard/ReviewValidation');
+var ReviewValidation = require('./Review/ReviewValidation');
 var Review = require('./Review/Review');
 var OrphanReview = require('./Review/OrphanReview');
 var GroupReview = require('./Review/GroupReview');
@@ -25,7 +26,6 @@ var Insight = require('./Insight/Insight');
 var Indentity = require('./Insight/Indentity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
-
 
 render((
   	<Router history={browserHistory}>
@@ -43,13 +43,14 @@ render((
 				<Route path="/Dashboard/Profile" component={Profile}/>
 				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
 				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
-				<Route path="/Dashboard/ReviewValidation" component={ReviewValidation}/>
+				<Route path="/Dashboard/AnomalyDetection" component={AnomalyDetection}/>
 				<Route path="/Review/Review" component={Review}>
 					<Route path="/Review/OrphanReview" component={OrphanReview}/>
 					<Route path="/Review/GroupReview" component={GroupReview}/>
 					<Route path="/Review/UserAssignment" component={UserAssignment}/>
 					<Route path="/Review/ClassificationReview" component={ClassificationReview}/>
 					<Route path="/Review/DocumentReview" component={DocumentReview}/>
+					<Route path="/Review/ReviewValidation" component={ReviewValidation}/>
 				</Route>
 				<Route path="/Insight/Insight" component={Insight}>
 					<Route path="/Insight/Indentity" component={Indentity}/>
