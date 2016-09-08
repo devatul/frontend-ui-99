@@ -9,33 +9,37 @@ import chart from '../script/chart-orphan-review.js'
 import javascript_todo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js'
 import Constant from '../Constant.js'
-import { forEach, upperFirst, replace } from 'lodash'
+import { forEach, upperFirst, replace, isEqual } from 'lodash'
+import { makeRequest } from '../utils/http'
 
 var OrphanReview = React.createClass({
     mixins: [LinkedStateMixin],
     displayName: 'OrphanReview',
     getInitialState() {
         return {
-            orphanCurrent: 0,
-            listOrphan: [],
-            categories: [],
-            statistics: [],
-            cloudwords: [],
-            centroids: [],
-            status: 0,
-            listDocument: [],
-            samplesDefault: [],
-            documentPreview: null,
             stackChange: [],
-            checkedNumber: 0,
-            validateNumber: 0,
             shouldUpdate: null,
             checkBoxAll: false,
-            store: {
-                centroids: []
+
+            orphan: {
+                list: [],
+                current: {}
             },
+
+            orphanData: {
+                categories: [],
+                statistics: [],
+                cloudWords: [],
+                centroids: [],
+                listDocument: [],
+                docPreview: -1,
+                statusReview: 0,
+                checkNum: 0,
+                validNum: 0
+            },
+
             dataChart: {
-                pieChart: [],
+                confidentiality: [],
                 documentType: {
                     categories: [],
                     series: []
@@ -106,13 +110,38 @@ var OrphanReview = React.createClass({
     //     return false;
     // },
     componentDidUpdate(prevProps, prevState) {
-        var { store, categories } = this.state;
-        if(this.state.orphanCurrent != prevState.orphanCurrent) {
-            this.getStatistics();
-            this.getlistDocument();
-            this.getCategoryDistribution();
-            this.getCentroids()
+        var { store, categories, orphan, orphanData } = this.state;
+        if(orphan.current != prevState.orphan.current) {
+
+            let { orphanData } = this.state,
+
+                listDocument = this.getlistDocument(),
+
+                updateOrphanData = update(orphanData, {
+                    categories: {
+                        $set: this.getCategoryDistribution()
+                    },
+
+                    cloudWords: {
+                        $set: this.getCloudwords()
+                    },
+
+                    centroids: { 
+                        $set: this.getCentroids()
+                    },
+
+                    listDocument: {
+                        $set: listDocument
+                    },
+
+                    docPreview: {
+                        $set: 0
+                    }
+                });
+            
+            this.setState({ orphanData: updateOrphanData });
         }
+        debugger
         if(this.state.listDocument != prevState.listDocument) {
             $('.select-group select').focus(function(){
             var selectedRow = $(this).parents('tr');
@@ -132,14 +161,33 @@ var OrphanReview = React.createClass({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
             });
         }
-        if(this.state.shouldUpdate != prevState.shouldUpdate) {
-            this.validateNumber();   
-        }
-        if(store.centroids != prevState.store.centroids) {
-            this.drawCentroid();
-        }
-        if(categories != prevState.categories) {
-            this.drawChart();
+        if(!isEqual(orphanData, prevState.orphanData)) {
+            let prevOrphanData = prevState.orphanData,
+                categoryChart = [],
+                centroidChart = [],
+                documentType = [],
+                wordList = [];
+                
+            debugger
+            if(!isEqual(orphanData.categories, prevOrphanData.categories)) {
+                let chart = this.drawChart();
+                
+                categoryChart = chart.categories;
+                documentType = chart.doctype;
+
+                debugger
+            }
+
+            if(!isEqual(orphanData.centroids, prevOrphanData.centroids)) {
+                centroidChart = this.drawCentroid();
+                debugger
+            }
+
+            if(!isEqual(orphanData.cloudWords, prevOrphanData.cloudWords)) {
+                wordList = this.drawCloud();
+                debugger
+            }
+
         }
     },
     endReviewHandle: function() {
@@ -148,67 +196,48 @@ var OrphanReview = React.createClass({
     parse: function(num) {
         return Math.round(num);
     },
+
     getListOrphan: function() {
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/",
-            dataType: 'json',
-            async: false,
-            //data: JSON.stringify(bodyRequest),
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateState = update(this.state, {
-                    listOrphan: {$set: data},
-                    orphanCurrent: {$set: data[0]}
-                });
-                this.setState(updateState);
-                console.log("listOrphan ok: ", data[0]);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("listOrphan error: " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        makeRequest({
+            path: "api/group/orphan/",
+            success: (res) => {
+
+               let updateOrphan = update(this.state.orphan, {
+                   list: {
+                       $set: res
+                    },
+                   current: {
+                       $set: res[0]
+                    }
+               });
+
+               this.setState({ orphan: updateOrphan });
+            }
         });
     },
+
     changeOrphan: function(event) {
-        var val = event.target.value;
-        var updateState = update(this.state, {
-            orphanCurrent: {$set: this.state.listOrphan[val]},
-            status: { $set: 0 },
-            validateNumber: { $set: 0 }
-        });
-        this.setState(updateState);
+        var val = event.target.value,
+            updateCurrent = update(this.state.orphan, {
+                current: {  $set: this.state.orphan.list[val] },
+            });
+        this.setState({ orphan: updateCurrent });
     },
+
     getCategoryDistribution: function() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/categories/",
-            dataType: 'json',
-            data: { "id":this.state.orphanCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateState = update(this.state, {
-                    categories: {$set: data}
-                });
-                this.setState(updateState);
-                console.log("categories ok: ", data);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("categories " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        let result = [],
+            orphanId = this.state.orphan.current.id;
+
+        makeRequest({
+            path: 'api/group/orphan/categories/',
+            params: { 'id': orphanId },
+            success: (data) => {
+                result = data;
+            }
         });
+        return result;
     },
+
     getStatistics() {
         var totalDocument = [880,768,743,
                             722,710,703,
@@ -245,100 +274,62 @@ var OrphanReview = React.createClass({
             }.bind(this)
         });
     },
+
     getCloudwords() {
-        /*
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/cloudwords/",
-            dataType: 'json',
-            data: { "id":this.state.orphanCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateState = update(this.state, {
-                    cloudwords: {$set: []}
-                });
-                this.setState(updateState);
-                for (var i = 0; i < data.length; i++) {
-                    var updateState = update(this.state, {
-                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count, html: {"data-tooltip": data[i].count + " Documents"}}] }
-                    });
-                    this.setState(updateState);
-                }
-                console.log("cloudwords ok: ", this.state.cloudwords);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("cloudwords " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
-        });*/
-    },
-    getCentroids() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/centroids/",
-            dataType: 'json',
-            data: { "id":this.state.orphanCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var updateStore = update(this.state.store, {
-                    centroids: {$set: data }
-                });
-                this.setState({ store: updateStore });
-                console.log("centroids ok: ", data);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("centroids " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        let data = [],
+            orphanId = this.state.orphan.current.id;
+
+        makeRequest({
+            path: 'api/group/orphan/cloudwords/',
+            params: { 'id': orphanId },
+            success: (res) => {
+                data = res;
+            }
         });
+
+        return data;
     },
+
+    getCentroids() {
+        let data = [],
+            orphanId = this.state.orphan.current.id;
+
+        makeRequest({
+            path: 'api/group/orphan/centroids/',
+            params: { 'id': orphanId },
+            success: (res) => {
+                data = res;
+            }
+        });
+
+        return data;
+    },
+
     getlistDocument: function() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/samples/",
-            dataType: 'json',
-            data: { "id":this.state.orphanCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('ddddddddddddddd',data);
-                for(var i = 0; i < data.documents.length; i++) {
-                    data.documents[i].current = {
+        let data = [],
+            orphanId = this.state.orphan.current.id;
+
+        makeRequest({
+            path: 'api/group/orphan/samples/',
+            params: { 'id' : orphanId },
+            success: (res) => {
+                let { documents } = res;
+                for(let i = documents.length - 1; i >= 0; i--) {
+                    documents[i].current = {
                         checked: false,
                         category: -1,
-                        confidential: -1,
-                        status: "normal"
-                    };
+                        confidentialy: -1,
+                        status: 'normal'
+                    }
                 }
-                var documentPreview = data.documents[0];
-                documentPreview.index = 0;
-                var updateState = update(this.state, {
-                    listDocument: {$set: data.documents},
-                    samplesDefault: {$set: $.extend(true, {}, data.documents) },
-                    documentPreview: {$set: data.documents[0]}
-                });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("listDocument " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+
+                data = documents;
+            }
         });
+
+        return data;
     },
+
     setDocumentPreview: function(index) {
         var document = this.state.listDocument[index];
         if(document != null) {
@@ -351,9 +342,23 @@ var OrphanReview = React.createClass({
             console.log("afasdccccc: ", this.state.listDocument[index], index);
         }
     },
-    onChangeCategory: function(event, sampleIndex) {
+
+    handleTableRowOnChange: (event, docIndex) => {
+        let element = event.target;
+
+        switch(element.id) {
+            case 'selectCategory': {
+                let index = element.value;
+            }
+        }
+    },
+
+    onChangeCategory: function(event, docIndex) {
+        let element = event.target,
+            index = element.value,
+            { listDocument, stackChange } = this.state;
+
         var categoryIndex = event.target.value;
-        var listDocument = this.state.listDocument;
         var samplesDefault = this.state.samplesDefault;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -365,9 +370,6 @@ var OrphanReview = React.createClass({
         if(categoryIndex == samplesDefault[sampleIndex].current.category || listDocument[sampleIndex].current.confidential > -1 ) {
             listDocument[sampleIndex].current.status = "accept";
         }
-        //  else {
-        //     listDocument[sampleIndex].current.status = "accept";
-        // }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             listDocument: {$set: listDocument }
@@ -516,71 +518,40 @@ var OrphanReview = React.createClass({
             return str.substring(0,str.lastIndexOf('/') + 1);
         }
     },
+
     drawCloud: function() {
-        //var word_list = this.state.cloudwords;
-        var word_list = [
-    {text: "Entity", weight: 13},
-    {text: "matter", weight: 10.5},
-    {text: "science", weight: 9.4},
-    {text: "properties", weight: 8},
-    {text: "speed", weight: 6.2},
-    {text: "Accounting", weight: 5},
-    {text: "interactions", weight: 5},
-    {text: "nature", weight: 5},
-    {text: "branch", weight: 5},
-    {text: "concerned", weight: 4},
-    {text: "Sapien", weight: 4},
-    {text: "Pellentesque", weight: 3},
-    {text: "habitant", weight: 3},
-    {text: "morbi", weight: 3},
-    {text: "tristisque", weight: 3},
-    {text: "senectus", weight: 3},
-    {text: "et netus", weight: 3},
-    {text: "et malesuada", weight: 3},
-    {text: "fames", weight: 2},
-    {text: "ac turpis", weight: 2},
-    {text: "egestas", weight: 2},
-    {text: "Aenean", weight: 2},
-    {text: "vestibulum", weight: 2},
-    {text: "elit", weight: 2},
-    {text: "sit amet", weight: 2},
-    {text: "metus", weight: 2},
-    {text: "adipiscing", weight: 2},
-    {text: "ut ultrices", weight: 2},
-    {text: "justo", weight: 1},
-    {text: "dictum", weight: 1},
-    {text: "Ut et leo", weight: 1},
-    {text: "metus", weight: 1},
-    {text: "at molestie", weight: 1},
-    {text: "purus", weight: 1},
-    {text: "Curabitur", weight: 1},
-    {text: "diam", weight: 1},
-    {text: "dui", weight: 1},
-    {text: "ullamcorper", weight: 1},
-    {text: "id vuluptate ut", weight: 1},
-    {text: "mattis", weight: 1},
-    {text: "et nulla", weight: 1},
-    {text: "Sed", weight: 1}
-  ];
+        let { cloudWords } = this.state.orphanData,
+            wordList = [];
+
+            for(let i = cloudWords.length - 1; i >= 0; i--) {
+                wordList[i] = {
+                    text: cloudWords[i].name, weight: Math.floor((Math.random() * 15))
+                }
+            }
+
+        let updateData = update(this.state.dataChart, {
+                cloudWords: { $set: wordList }
+            });
+        this.setState({ dataChart: updateData });
+    },
+
+    drawCentroid() {
+        var data = [],
+            { centroids } = this.state.orphanData;
+
+        for(let i = centroids.length - 1; i >= 0; i--) {
+            data[i] = [i + 1, centroids[i].number_docs];
+        }
 
         var updateChart = update(this.state.dataChart, {
-            cloudWords: {$set: word_list }
+            centroidChart: { $set: data }
         });
-        this.setState({ dataChart: updateChart });
-    },
-    drawCentroid() {
-        var centroids = []
-        forEach(this.state.store.centroids, (val, index) => {
-            centroids.push([index + 1, val.number_docs]);
-        });
-        var updateChart = update(this.state.dataChart, {
-            centroidChart: {$set: centroids }
-        });
+
         this.setState({ dataChart: updateChart });
     },
     
     drawChart() {
-        var category = this.state.categories;
+        var category = this.state.orphanData.categories;
 		var pieChart = [],
             documentType = {
                 categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
@@ -603,7 +574,7 @@ var OrphanReview = React.createClass({
         }
         
         var updateChart = update(this.state.dataChart, {
-            pieChart: { $set: pieChart },
+            confidentiality: { $set: pieChart },
             documentType: { $set: documentType }
         });
         this.setState({ dataChart: updateChart });

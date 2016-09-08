@@ -1,0 +1,1190 @@
+<section>
+    <div class="container">
+      <section class="panel panel-featured panel-featured-primary panel-bordered">
+        <header class="panel-heading">
+            <h2 class="panel-title">Risk Insights</h2>
+        </header>
+        <div class="panel-body pb-none">
+          <div class="row">
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+                  <h4 class="widget-title">Access Rights Anomaly
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">138</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-secondary widget-panel insight-panel">
+                  <h4 class="widget-title">Data Repository Anomaly
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">99</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+                  <h4 class="widget-title">Client Data Access Anomaly
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">12</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+                  <h4 class="widget-title">Users at Risk
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">1.4k</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+                  <h4 class="widget-title">Documents Risk
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">138</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-md-4">
+              <section class="panel">
+                <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
+                  <h4 class="widget-title">Active Directory Group at Risk
+                      <div class="inline-block-item dropdown">
+                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                          </div>
+                      </div>
+                  </h4>
+                  <div class="widget-summary">
+                      <div class="widget-summary-col">
+                          <div class="summary">
+                              <div class="info">
+                                  <strong class="amount">138</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+        <header class="panel-heading">
+          <h2 class="panel-title">Identity and Access Management Anomaly
+            <div class="inline-block-item dropdown">
+              <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+              </div>
+            </div>
+          </h2>
+        </header>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="40"></div>
+                <span class="anomaly-icon icon-user"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class="legend orange">Medium Risk</span>
+                  <span class="outer-indicator orange"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-5">
+                    <h4 class="anomaly-title">User - Client Data Access Anomaly
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>User with Anomaly</th>
+                        <th>Confidentiality at Risk</th>
+                        <th>Folder at Risk</th>
+                        <th>Active Directory at Risk</th>
+                        <th>User Access Right Accuracy
+                          <i class="fa fa-caret-down"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="text-big">65</span></td>
+                        <td><span class="text-normal">Banking Secrecy</span></td>
+                        <td><span class="text-big">3</span></td>
+                        <td><span class="text-big">2</span></td>
+                        <td><span class="text-big text-light-green">75,47%</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-big">23</span></td>
+                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-big">5</span></td>
+                        <td><span class="text-big">1</span></td>
+                        <td><span class="text-big text-light-green">67,14%</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Total Anomaly</th>
+                        <th>Client Data at Risk</th>
+                        <th>Security Settings at Risk</th>
+                        <th>User Client Data Access Anomaly Trend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">1,4 k</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Windows User Account</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">88</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Documents</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">3</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Windows Active Directory Group</span>
+                        </td>
+                        <td class="td-chart">
+                          <div class="anomaly-chart"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                </div>
+              </div>
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-4">
+                    <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                  <div class="col-md-8 filter-state">
+                    Display: 
+                    <a href="#">All</a> - 
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th class="text-left">Windows User Account</th>
+                        <th class="text-left">Document at Risk</th>
+                        <th class="text-left">Confidentiality</th>
+                        <th class="text-left">Folder at Risk</th>
+                        <th class="text-left">Security in Fault</th>
+                        <th>Review Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1</span></td>
+                        <td class="text-left"><span>Jack.Gilford</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>2</span></td>
+                        <td class="text-left"><span>Judith.McConnell</span></td>
+                        <td class="text-left"><span>34</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected false" data-state="false"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>3</span></td>
+                        <td class="text-left" class="text-left"><span>Farley.Granger</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>4</span></td>
+                        <td class="text-left"><span>Sid.Haig</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
+                  <a href="#" class="pull-right btn btn-green">Extract</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-lg">
+            <div class="col-md-3">
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="80"></div>
+                <span class="anomaly-icon icon-window"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class="legend red">High Risk</span>
+                  <span class="outer-indicator red"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-5">
+                    <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>User with Anomaly</th>
+                        <th>Confidentiality at Risk</th>
+                        <th>Folder at Risk</th>
+                        <th>Active Directory at Risk</th>
+                        <th>User Access Right Accuracy
+                          <i class="fa fa-caret-down"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="text-big">52</span></td>
+                        <td><span class="text-normal">Banking Secrecy</span></td>
+                        <td><span class="text-big">3</span></td>
+                        <td><span class="text-big">76</span></td>
+                        <td><span class="text-big text-light-green">75,89%</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-big">102</span></td>
+                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-big">5</span></td>
+                        <td><span class="text-big">54</span></td>
+                        <td><span class="text-big text-light-green">56,57%</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Total Anomaly</th>
+                        <th>Document at Risk</th>
+                        <th>Total Users at Risk</th>
+                        <th>Anomaly Trend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">154</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Windows Active Directory Group</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">88</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Documents</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">3</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Windows Users Account</span>
+                        </td>
+                        <td class="td-chart">
+                          <div class="anomaly-chart"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                </div>
+              </div>
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-4">
+                    <h4 class="anomaly-title">Anomaly Details - Security Settings at Risk
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                  <div class="col-md-8 filter-state">
+                    Display: 
+                    <a href="#">All</a> - 
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th class="text-left">Active Directory Group</th>
+                        <th class="text-left">Document at Risk</th>
+                        <th class="text-left">Folder at Risk</th>
+                        <th class="text-left">User at Risk</th>
+                        <th class="text-left">Confidentiality at Risk</th>
+                        <th>Review Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1074</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>4774</span></td>
+                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>1075</span></td>
+                        <td class="text-left"><span>.ADComplianceIN_RW</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>4774</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>1076</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>256</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>1077</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>2014</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
+                  <a href="#" class="pull-right btn btn-green">Extract</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-lg">
+            <div class="col-md-3">
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="80"></div>
+                <span class="anomaly-icon icon-user"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class="legend red">High Risk</span>
+                  <span class="outer-indicator red"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-5">
+                    <h4 class="anomaly-title">User - Access Right Anomaly
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>User Anomaly</th>
+                        <th>Confidentiality at Risk</th>
+                        <th>Folder at Risk</th>
+                        <th>Active Directory at Risk</th>
+                        <th>User Access Right Accuracy
+                          <i class="fa fa-caret-down"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="text-big">830</span></td>
+                        <td><span class="text-normal">Secret</span></td>
+                        <td><span class="text-big">132</span></td>
+                        <td><span class="text-big">54</span></td>
+                        <td><span class="text-big text-light-green">99,25%</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-big">2,1k</span></td>
+                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-big">804</span></td>
+                        <td><span class="text-big">1470</span></td>
+                        <td><span class="text-big text-light-green">75,89%</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-big">170</span></td>
+                        <td><span class="text-normal">Internal</span></td>
+                        <td><span class="text-big">454</span></td>
+                        <td><span class="text-big">54</span></td>
+                        <td><span class="text-big text-light-green">56,57%</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Total Anomaly</th>
+                        <th>Document at Risk</th>
+                        <th>Total Active Directory Group at Risk</th>
+                        <th>Access Right Anomaly Trend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">3,1k</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Windows User Account</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">88</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Documents</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">130</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Active Directory Group</span>
+                        </td>
+                        <td class="td-chart">
+                          <div class="anomaly-chart"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-4">
+                    <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                  <div class="col-md-8 filter-state">
+                    Display: 
+                    <a href="#">All</a> - 
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th class="text-left">Windows User Account</th>
+                        <th class="text-left">Document at Risk</th>
+                        <th class="text-left">Confidentiality</th>
+                        <th class="text-left">Folder at Risk</th>
+                        <th class="text-left">Security in Fault</th>
+                        <th>Review Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1</span></td>
+                        <td class="text-left"><span>Jack.Gilford</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>2</span></td>
+                        <td class="text-left"><span>Judith.McConnell</span></td>
+                        <td class="text-left"><span>34</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected false" data-state="false"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>3</span></td>
+                        <td class="text-left" class="text-left"><span>Farley.Granger</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>4</span></td>
+                        <td class="text-left"><span>Sid.Haig</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
+                  <a href="#" class="pull-right btn btn-green">Extract</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+        <header class="panel-heading">
+          <h2 class="panel-title">Data Architecture Risk Management
+            <div class="inline-block-item dropdown">
+              <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+              <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                  <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+              </div>
+            </div>
+          </h2>
+        </header>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="80"></div>
+                <span class="anomaly-icon icon-folder"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class="legend red">High Risk</span>
+                  <span class="outer-indicator red"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-5">
+                    <h4 class="anomaly-title">Document Repository Anomaly
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Confidentiality at Risk</th>
+                        <th>Document at Risk</th>
+                        <th>Folder at Risk</th>
+                        <th>User Anomaly</th>
+                        <th>Category at Risk
+                          <i class="fa fa-caret-down"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="text-normal">Secret</span></td>
+                        <td><span class="text-big">1,4k</span></td>
+                        <td><span class="text-big">132</span></td>
+                        <td><span class="text-big">830</span></td>
+                        <td style="width: 250px" rowspan="3">
+                          <div class="anomaly-pie-chart"></div>
+                          <div class="anomaly-pie-chart-legend">
+                            <ul class="list-unstyled clearfix">
+                              <li><span class="symbol" style="background-color: #09B3B5"></span> Accounting/Tax</li>
+                              <li><span class="symbol" style="background-color: #51CFE8"></span> Employees</li>
+                              <li><span class="symbol" style="background-color: #FBAC08"></span> Corporate Entity</li>
+                              <li><span class="symbol" style="background-color: #9295D7"></span> Legal/Compliance</li>
+                              <li><span class="symbol" style="background-color: #4F6AE7"></span> Client/Customer</li>
+                              <li><span class="symbol" style="background-color: #FF503F"></span> Accounting/Tax</li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-big">7,6k</span></td>
+                        <td><span class="text-big">804</span></td>
+                        <td><span class="text-big">2,1k</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-normal">Internal</span></td>
+                        <td><span class="text-big">2,6k</span></td>
+                        <td><span class="text-big">454</span></td>
+                        <td><span class="text-big">170</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Total Anomaly</th>
+                        <th>Total User at Risk</th>
+                        <th>Total Folder at Risk</th>
+                        <th>Document Repository Anomaly Trend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">11,6k</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Documents</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">1,39k</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Windows User Account</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">1,39k</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Folders</span>
+                        </td>
+                        <td class="td-chart">
+                          <div class="anomaly-chart"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-4">
+                    <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                  <div class="col-md-8 filter-state">
+                    Display: 
+                    <a href="#">All</a> - 
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th class="text-left">Windows User Account</th>
+                        <th class="text-left">Document at Risk</th>
+                        <th class="text-left">Confidentiality</th>
+                        <th class="text-left">Folder at Risk</th>
+                        <th class="text-left">Security in Fault</th>
+                        <th>Review Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1</span></td>
+                        <td class="text-left"><span>Jack.Gilford</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>2</span></td>
+                        <td class="text-left"><span>Judith.McConnell</span></td>
+                        <td class="text-left"><span>34</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected false" data-state="false"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>3</span></td>
+                        <td class="text-left" class="text-left"><span>Farley.Granger</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>4</span></td>
+                        <td class="text-left"><span>Sid.Haig</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
+                  <a href="#" class="pull-right btn btn-green">Extract</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-lg">
+            <div class="col-md-3">
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="80"></div>
+                <span class="anomaly-icon icon-folder"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class="legend red">High Risk</span>
+                  <span class="outer-indicator red"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-5">
+                    <h4 class="anomaly-title">Client Data Repository Anomaly
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>User Anomaly</th>
+                        <th>Confidentiality at Risk</th>
+                        <th>Folder at Risk</th>
+                        <th>Active Directory at Risk</th>
+                        <th>User Access Right Accuracy
+                          <i class="fa fa-caret-down"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="text-big">830</span></td>
+                        <td><span class="text-normal">Banking Secrecy</span></td>
+                        <td><span class="text-big">132</span></td>
+                        <td><span class="text-big">54</span></td>
+                        <td><span class="text-big text-light-green">99,25%</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="text-big">2,1k</span></td>
+                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-big">804</span></td>
+                        <td><span class="text-big">1470</span></td>
+                        <td><span class="text-big text-light-green">75,89%</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>Total Anomaly</th>
+                        <th>Document at Risk</th>
+                        <th>Active Directory at Risk</th>
+                        <th>User Client Data Access Anomaly Trend</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">3,1 k</span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                          </span>
+                          <span>Windows User Account</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">88</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Documents</span>
+                        </td>
+                        <td>
+                          <span class="text-block">
+                            <span class="text-big text-red">130</span>
+                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                          </span>
+                          <span>Active Directory Group</span>
+                        </td>
+                        <td class="td-chart">
+                          <div class="anomaly-chart"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="anomaly-block">
+                <div class="block-header row">
+                  <div class="col-md-4">
+                    <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                      <div class="inline-block-item dropdown">
+                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
+                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
+                        </div>
+                      </div>
+                    </h4>
+                  </div>
+                  <div class="col-md-8 filter-state">
+                    Display: 
+                    <a href="#">All</a> - 
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table anomaly-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th class="text-left">Windows User Account</th>
+                        <th class="text-left">Document at Risk</th>
+                        <th class="text-left">Confidentiality</th>
+                        <th class="text-left">Folder at Risk</th>
+                        <th class="text-left">Security in Fault</th>
+                        <th>Review Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span>1</span></td>
+                        <td class="text-left"><span>Jack.Gilford</span></td>
+                        <td class="text-left"><span>62</span></td>
+                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
+                        <td class="text-left"><span>8</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected true" data-state="true"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>2</span></td>
+                        <td class="text-left"><span>Judith.McConnell</span></td>
+                        <td class="text-left"><span>34</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected false" data-state="false"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>3</span></td>
+                        <td class="text-left" class="text-left"><span>Farley.Granger</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span>4</span></td>
+                        <td class="text-left"><span>Sid.Haig</span></td>
+                        <td class="text-left"><span>21</span></td>
+                        <td class="text-left"><span>Banking Secrecy</span></td>
+                        <td class="text-left"><span>5</span></td>
+                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
+                        <td class="relative">
+                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="extra-block">
+                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
+                  <a href="#" class="pull-right btn btn-green">Extract</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div id="anomalyStateSelect">   
+      <div class="anomaly-state-select">
+        <div class="states">
+          <span class="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed"></span>
+          <span class="anomaly-state investigation" data-state="investigation" data-label="Under Investigation"></span>
+          <span class="anomaly-state true" data-state="true" data-label="True Positive"></span>
+          <span class="anomaly-state false" data-state="false" data-label="False Positive"></span>
+        </div>
+        <span class="current-state"></span>
+      </div>
+    </div>
+</section>

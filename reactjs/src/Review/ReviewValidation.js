@@ -10,7 +10,6 @@ import 'jquery'
 //import javascriptTodo from '../script/javascript.todo.js'
 import loadScript from '../script/load.scripts.js';
 import _ from 'lodash';
-//import elementUndo from '../script/elementUndo.js'
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -336,7 +335,7 @@ var ReviewValidation = React.createClass({
                     data.documents[i].current_category = 0;
                     data.documents[i].current_confidentiality = 0;
                     data.documents[i].previous_category = null;
-                    //data.documents[i].previous_confidentiality = null;
+                    data.documents[i].previous_confidentiality = 1;
                 }
                 if(check === null) {
                     var reviewCurrent = {
@@ -397,9 +396,7 @@ var ReviewValidation = React.createClass({
             index: { categoryId: categoryId, reviewerId: reviewerId, docIndex: docIndex },
             contents: saveDocument
         });
-        if(reviewValidations[indexValid].documents[docIndex].previous_category == null) {
-            reviewValidations[indexValid].documents[docIndex].previous_category = reviewValidations[indexValid].documents[docIndex].current_category;
-        }
+        
         if(reviewValidations[indexValid].documents[docIndex].previous_category == categoryIndex){
             reviewValidations[indexValid].documents[docIndex].previous_category = null;
             reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "accepted";
@@ -408,6 +405,11 @@ var ReviewValidation = React.createClass({
             reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "editing";
             reviewValidations[indexValid].documents[docIndex].status = "editing";
         }
+
+        //if(reviewValidations[indexValid].documents[docIndex].previous_category == null) {
+            reviewValidations[indexValid].documents[docIndex].previous_category = reviewValidations[indexValid].documents[docIndex].current_category;
+        //}
+
         reviewValidations[indexValid].documents[docIndex].current_category = categoryIndex;
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
@@ -430,9 +432,7 @@ var ReviewValidation = React.createClass({
             index: { categoryId: categoryId, reviewerId: reviewerId, docIndex: docIndex },
             contents: saveDocument
         });
-        if(reviewValidations[indexValid].documents[docIndex].previous_confidentiality == null) {
-            reviewValidations[indexValid].documents[docIndex].previous_confidentiality = reviewValidations[indexValid].documents[docIndex].current_confidentiality;
-        }
+        
         if(reviewValidations[indexValid].documents[docIndex].previous_confidentiality == confidentialIndex){
             //reviewValidations[indexValid].documents[docIndex].previous_confidentiality = null;
             reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "accepted";
@@ -441,7 +441,11 @@ var ReviewValidation = React.createClass({
             reviewValidations[indexValid].documents[docIndex]['2nd_line_validation'] = "editing";
             reviewValidations[indexValid].documents[docIndex].status = "editing";
         }
+        //if(reviewValidations[indexValid].documents[docIndex].previous_confidentiality == null) {
+            reviewValidations[indexValid].documents[docIndex].previous_confidentiality = reviewValidations[indexValid].documents[docIndex].current_confidentiality;
+        //}
         reviewValidations[indexValid].documents[docIndex].current_confidentiality = confidentialIndex;
+
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             reviewValidations: {$set: reviewValidations }
