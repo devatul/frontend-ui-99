@@ -101,7 +101,7 @@
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
-                            <Link to="/Dashboard/ReviewValidation" activeClassName="active">Review Validation</Link>
+                            <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
                     </ul>
                 </li>
@@ -129,6 +129,61 @@
                     <Link to="/Dashboard/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>
             </ul>
+
+            <ul rt-if="this.state.role === contant.role.IS_ADMIN" class="nav navbar-nav">
+                <li>
+                    <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
+                </li>
+                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
+                    <span class="badge">40</span>
+                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    </a>
+                    <ul class="dropdown-menu fix-review-menu">
+                        <li>
+                            <span class="badge">20</span>
+                            <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
+                        </li>
+                        <li>
+                            <span class="badge">20</span>
+                            <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
+                        </li>
+                        <li>
+                            
+                            <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+                  
+                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><!--<li class="active">-->
+                            
+                            <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
+                        </li>
+                        <li>
+                          
+                            <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
+                        </li>
+                        <li>
+                            
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <Link to="/Dashboard/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
+                </li>
+            </ul>
+
+
             <ul rt-if="this.state.role === contant.role.IS_1ST" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
@@ -162,6 +217,9 @@
                             <li>
                                <Link to="/Dashboard/Profile" role="menuitem" tabindex="-1"><i class="fa fa-user"></i> My Profile</Link>
                            </li>
+                           <li rt-if="this.state.role === contant.role.IS_ADMIN">
+                                <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                            </li>
                            <li>
                             <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
