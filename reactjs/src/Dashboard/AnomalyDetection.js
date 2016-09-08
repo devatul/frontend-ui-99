@@ -5,7 +5,37 @@ import update from 'react/lib/update'
 import Constant from '../Constant.js';
 
 var AnomalyDetection = React.createClass({
-
+    getInitialState() {
+        return{
+            styleList: 'none',
+            styleShow: 'block',
+        }
+    },
+    shouldComponentUpdate(nextProps , nextState){
+        if(this.state.styleShow != nextState.styleShow){
+            return  true
+        }
+        if(this.state.styleList != nextState.styleList){
+            return  true
+        }
+    },
+    componentDidUpdate(prevProps , prevState){
+        if(this.state.styleShow != prevState.styleShow){
+            if(this.state.styleShow == 'none'){
+                this.setState({styleList: 'block'})
+            }else {
+                 this.setState({styleList: 'none'})
+            }
+            
+            console.log(this.state.styleList)
+        }
+    },
+    changeStyle(){
+        this.setState({styleShow : 'none'})
+    },
+    showLess(){
+         this.setState({styleShow : 'block'})
+    },
     componentDidMount() {
             $('body').on('click', '.anomaly-state.selected', function(){
                 var parent = $(this).parent();
@@ -15,6 +45,7 @@ var AnomalyDetection = React.createClass({
                     append: true,
                     afterInsert: function(elem){
                     $(elem).find('.'+currentStateClass).addClass('active');
+                    $(this).css('font-weight','normal')
                     $(elem).find('.current-state').html( $(elem).find('.'+currentStateClass).attr('data-label') );
                     }
                 });
@@ -27,6 +58,7 @@ var AnomalyDetection = React.createClass({
                 var parent = $(this).parents('.anomaly-state-select');
                 parent.find('.anomaly-state').removeClass('active');
                 $(this).addClass('active');
+                 $(this).css('font-weight','normal')
                 parent.find('.current-state').html( $(this).attr('data-label') );
             });
 

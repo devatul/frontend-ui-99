@@ -43,7 +43,7 @@ render((
 				<Route path="/Dashboard/Profile" component={Profile}/>
 				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
 				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
-				<Route path="/Dashboard/AnomalyDetection" component={AnomalyDetection}/>
+				<Route path="/AnomalyDetection" component={AnomalyDetection}/>
 				<Route path="/Review/Review" component={Review}>
 					<Route path="/Review/OrphanReview" component={OrphanReview}/>
 					<Route path="/Review/GroupReview" component={GroupReview}/>

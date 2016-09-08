@@ -131,3 +131,18 @@
 /*.dataTables_wrapper table thead th {
     padding-right: 17px !important;
 }*/
+.anomaly-icon.fix-icon-user {
+    background-position: -21px -25px;
+}
+.anomaly-icon-fix {
+    background-size: 346px;
+}
+.anomaly-icon.fix-icon-window{
+    background-position: -23px -74px
+}
+.anomaly-icon.fix-icon-folder{
+    background-position: -19px -143px;
+}
+ .legend.fix {
+    left: 14px;
+}

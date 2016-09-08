@@ -164,24 +164,8 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-3">
-              <div class="anomaly-radial">
-                <div class="anomaly-radial-inner" data-value="50"></div>
-                <div class="anomaly-radial-outer" data-value="40"></div>
-                <span class="anomaly-icon icon-user"></span>
-                <div class="anomaly-legend outer-legend">
-                  <span class="legend orange">Medium Risk</span>
-                  <span class="outer-indicator orange"></span>
-                </div>
-                <div class="anomaly-legend inner-legend">
-                  <span class="legend green">Prediction Quality: High</span>
-                  <span class="inner-indicator green"></span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="anomaly-block">
-                <div class="block-header row">
-                  <div class="col-md-5">
+             <div class="block-header row">
+                  <div class="col-md-5" style="margin-left: 3px">
                     <h4 class="anomaly-title">User - Client Data Access Anomaly
                       <div class="inline-block-item dropdown">
                         <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -192,6 +176,23 @@
                     </h4>
                   </div>
                 </div>
+              <div class="anomaly-radial">
+                <div class="anomaly-radial-inner" data-value="50"></div>
+                <div class="anomaly-radial-outer" data-value="40"></div>
+                <span class="anomaly-icon anomaly-icon-fix fix-icon-user"></span>
+                <div class="anomaly-legend outer-legend">
+                  <span class=" legend orange legend fix">Medium Risk</span>
+                  <span class="outer-indicator orange"></span>
+                </div>
+                <div class="anomaly-legend inner-legend">
+                  <span class="legend green">Prediction Quality: High</span>
+                  <span class="inner-indicator green"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="anomaly-block" style="margin-top: 50px">
+               
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -215,7 +216,7 @@
                       </tr>
                       <tr>
                         <td><span class="text-big">23</span></td>
-                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class=" text-normal" style="position: absolute; left: 192px; top: 155px;">Confidential</span></td>
                         <td><span class="text-big">5</span></td>
                         <td><span class="text-big">1</span></td>
                         <td><span class="text-big text-light-green">67,14%</span></td>
@@ -236,21 +237,21 @@
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">1,4 k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows User Account</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Documents</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">3</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows Active Directory Group</span>
                         </td>
@@ -261,11 +262,11 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                <div class="extra-block" style="display : {this.state.styleShow}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
               </div>
-              <div class="anomaly-block">
+              <div class="anomaly-block" style="display : {this.state.styleList}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
@@ -350,7 +351,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -363,7 +364,7 @@
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
-                <span class="anomaly-icon icon-window"></span>
+                <span class="anomaly-icon anomaly-icon-fix fix-icon-window"></span>
                 <div class="anomaly-legend outer-legend">
                   <span class="legend red">High Risk</span>
                   <span class="outer-indicator red"></span>
@@ -411,7 +412,7 @@
                       </tr>
                       <tr>
                         <td><span class="text-big">102</span></td>
-                        <td><span class="text-normal">Confidential</span></td>
+                        <td><span class="text-normal" style="position: absolute; left: 192px; top: 155px;">Confidential</span></td>
                         <td><span class="text-big">5</span></td>
                         <td><span class="text-big">54</span></td>
                         <td><span class="text-big text-light-green">56,57%</span></td>
@@ -432,21 +433,21 @@
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">154</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows Active Directory Group</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Documents</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">3</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows Users Account</span>
                         </td>
@@ -457,11 +458,11 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                <div class="extra-block" style="display : {this.state.styleShow}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ={this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
               </div>
-              <div class="anomaly-block">
+              <div class="anomaly-block" style="display : {this.state.styleList}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - Security Settings at Risk
@@ -546,7 +547,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -559,7 +560,7 @@
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
-                <span class="anomaly-icon icon-user"></span>
+                <span class="anomaly-icon anomaly-icon-fix fix-icon-user"></span>
                 <div class="anomaly-legend outer-legend">
                   <span class="legend red">High Risk</span>
                   <span class="outer-indicator red"></span>
@@ -635,21 +636,21 @@
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">3,1k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows User Account</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Documents</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">130</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Active Directory Group</span>
                         </td>
@@ -774,7 +775,7 @@
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
-                <span class="anomaly-icon icon-folder"></span>
+                <span class="anomaly-icon anomaly-icon-fix fix-icon-folder"></span>
                 <div class="anomaly-legend outer-legend">
                   <span class="legend red">High Risk</span>
                   <span class="outer-indicator red"></span>
@@ -860,21 +861,21 @@
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">11,6k</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Documents</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">1,39k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows User Account</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">1,39k</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Folders</span>
                         </td>
@@ -984,7 +985,7 @@
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
-                <span class="anomaly-icon icon-folder"></span>
+                <span class="anomaly-icon anomaly-icon-fix fix-icon-folder"></span>
                 <div class="anomaly-legend outer-legend">
                   <span class="legend red">High Risk</span>
                   <span class="outer-indicator red"></span>
@@ -1053,21 +1054,21 @@
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">3,1 k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down"></span>
+                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                           </span>
                           <span>Windows User Account</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Documents</span>
                         </td>
                         <td>
                           <span class="text-block">
                             <span class="text-big text-red">130</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up"></span>
+                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                           </span>
                           <span>Active Directory Group</span>
                         </td>
@@ -1178,7 +1179,7 @@
 
     <div id="anomalyStateSelect">   
       <div class="anomaly-state-select">
-        <div class="states">
+        <div class="states" style="font-weight">
           <span class="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed"></span>
           <span class="anomaly-state investigation" data-state="investigation" data-label="Under Investigation"></span>
           <span class="anomaly-state true" data-state="true" data-label="True Positive"></span>
