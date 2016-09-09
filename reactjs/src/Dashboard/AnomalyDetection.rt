@@ -50,7 +50,7 @@
               <section class="panel">
                 <div class="panel-body bg-secondary-2 widget-panel insight-panel">
                   <h4 class="widget-title">Client Data Access Anomaly
-                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                      <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as client identifying." />
                   </h4>
                   <div class="widget-summary">
@@ -109,7 +109,7 @@
               <section class="panel">
                 <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Active Directory Group at Risk
-                     <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                     <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types." />
                   </h4>
                   <div class="widget-summary">

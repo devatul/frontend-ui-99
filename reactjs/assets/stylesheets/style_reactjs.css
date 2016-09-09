@@ -146,3 +146,9 @@
  .legend.fix {
     left: 14px;
 }
+.fix-anomaly-help-button {
+    color: #000011;
+    font-weight: normal;
+    width: 270px !important;
+    min-width: 250px;
+}
