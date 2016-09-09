@@ -2,6 +2,7 @@
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
+<rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
 <div>
     <div class="container">
         <div class="tabs tabs-primary">
@@ -9,7 +10,7 @@
                 <li class="dropdown">
                     <a class="line_document review_title">My Review</a>
                     <HelpButton
-                        className="line_document help_question_a"
+                       classNote="overview_timeframe fix-overview-help-button"
                         setValue="This summarises all the actions assigned to the user. Users must review each document of this section." />
                     
                 </li>
@@ -28,7 +29,7 @@
                                     </li>
                                     <li class="document_panel-title">
                                         <HelpButton className="dropdown-file-info-holder"
-                                            classNote="note_chart_content"
+                                            classNote="overview_timeframe fix-overview-help-button"
                                             setValue="All the documents in this section have been classified {action.category} with a Secret level of Confidentiality" />
                                     </li>
                                 </ul>
@@ -70,24 +71,24 @@
                                                     </th>
                                                     <th class="review_note">Document
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
                                                     
                                                     <th class="review_note">Proposed Category (confidence level)
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_bottom"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="Category proposed by Dathena 99." />
                                                     </th>
                                                     <th class="review_note">Proposed Confidentiality (confidence level)
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content_review"
-                                                            setValue="Confidentiality level proposed by Dathena." />
+                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Confidentiality level proposed by Dathena."/>
                                                     </th>
                                                     <th class="text-center" style="max-width: 70px;">Status
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content_review"
-                                                            setValue="This represent the status of the review for each file." />
+                                                        <!-- <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="note_chart_content_review "
+                                                            setValue="This represent the status of the review for each file." /> -->
+                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="This represent the status of the review for each file."/>
+                                      
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -272,18 +273,18 @@
                                                     </th>
                                                     <th class="my_review_note review_note">Document
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="note_chart_content"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
                                                     
                                                     <th class="review_note">Category
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="Category proposed by Dathena 99." />
                                                     </th>
                                                     <th class="review_note">Confidentiality
-                                                      <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="help_question_content"
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment 
@@ -425,24 +426,23 @@
                             </th>
                             <th class="my_review_note review_note">Document
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="note_chart_content"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
                            
                             <th class="review_note">Proposed Category (confidence level)
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_bottom"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="Category proposed by Dathena 99." />
                             </th>
                             <th class="review_note">Proposed Confidentiality (confidence level)
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="note_chart_content_review"
-                                    setValue="Confidentiality level proposed by Dathena." />
+                                     <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix2 full-mobile" content="Confidentiality level proposed by Dathena."/>
                             </th>
                             <th class="text-center">Status
-                                <HelpButton className="dropdown-file-info-holder"
+                                <!-- <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content_review"
-                                    setValue="This represent the status of the review for each file." />
+                                    setValue="This represent the status of the review for each file." /> -->
+                                     <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content help_question_content has-arrow fixLeft dropdown-menu has-arrow dd-md dd-md fix1 full-mobile" content="This represent the status of the review for each file."/>
                             </th>
                         </tr>
                     </thead>
@@ -569,29 +569,30 @@
                             </th>
                             <th class="review_note">Document
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="note_chart_content"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
                           
                             <th class="review_note">Category
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="Category proposed by Dathena 99." />
                             </th>
                             <th class="review_note">Confidentiality
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="help_question_content"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="Confidentiality level proposed by Dathena." />
                             </th>
                             <th class="review_note review_note_r">Coordinator's Comment
                                 <HelpButton className="dropdown-file-info-holder"
-                                    classNote="note_chart_content_review"
+                                    classNote="overview_timeframe fix-anomaly-help-button"
                                     setValue="Comment of your coordinator to explain the reason of the rejection" />
                             </th>
                             <th class="review_note review_note_r">Comment
                                 <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content_review"
                                     setValue="Add a comment to justify your acceptation or your rejection of the challenge." />
+                                    
                             </th>
                             <th class="review_note" style="max-width: 100px;">Validation
                                 <HelpButton className="dropdown-file-info-holder"

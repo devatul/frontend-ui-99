@@ -117,7 +117,7 @@ var multiselectBox = React.createClass({
 								type="checkbox" value="multiselect-all"
                                 checked={this.state.checkall}
                                 />
-							Select all
+							Clear all
 						</label>
 						</a>
 					</li>

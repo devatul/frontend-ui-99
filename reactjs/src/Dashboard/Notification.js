@@ -142,7 +142,7 @@ var Notification = React.createClass({
             if( alert == 'none'){
                  this.setState({ filtersAlert: 'hight' })
              }else{
-                  this.setState({ filtersAlert: 'none' })
+                 this.setState({ filtersAlert: 'none' })
                 
              }
            
