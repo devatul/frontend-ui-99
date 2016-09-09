@@ -90,7 +90,27 @@ var Notification = React.createClass({
             })
         
          }*/
-       
+        if(this.state.filtersAlert != prevState.filtersAlert){
+            if(this.state.filtersAlert == 'none'){
+                this.setState({
+                notification: notification1
+
+                })
+                this.setState({
+                    filterUpdate: 'update-default'
+                })
+                this.setState({
+                      styleList: {
+                        today: { $set: 'block' },
+                        yesterday: { $set: 'block' },
+                        last_7_days: { $set: 'block' },
+                        last_30_days: { $set: 'block' },
+                        older: { $set: 'block' }
+                    },
+                })
+                this.setState({content: 'Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority',})
+            }
+        }
         if (this.state.selected != prevState.selected) {
             debugger
             this.setState({
@@ -127,7 +147,7 @@ var Notification = React.createClass({
     },
 
     filterAlert(value) {
-        debugger
+        
         let alert = this.state.filtersAlert
         let alertUpdate = update(this.state, {
             filter : {
@@ -167,8 +187,8 @@ var Notification = React.createClass({
                     selectbox : {$set : value}
                 }
             }))*/
-            let filter = this.state.filter.alert
-            this.filter(filter,value);
+            let alert = this.state.filter.alert
+            this.filter(alert,value);
         } else{
             if (value == 'update-today') {
             let updateStyle = update(this.state, {
@@ -308,7 +328,7 @@ var Notification = React.createClass({
         }))
 
     },
-    filter(filter , value){
+    filter(alert , value){
         debugger
         
       /*  let arr = []
@@ -380,16 +400,16 @@ var Notification = React.createClass({
             this.setState(updateStyle)
             this.setState({ filterUpdate: value })
         }
-        if (value == 'update-pending') {
+        if (value == 'update-pending' && alert == 'veryhight') {
 
             let updateStyle = update(
                 this.state, {
                     styleList: {
-                        today: { $set: 'block' },
-                        yesterday: { $set: 'block' },
-                        last_7_days: { $set: 'block' },
-                        last_30_days: { $set: 'block' },
-                        older: { $set: 'block' }
+                        today: { $set: 'none' },
+                        yesterday: { $set: 'none' },
+                        last_7_days: { $set: 'none' },
+                        last_30_days: { $set: 'none' },
+                        older: { $set: 'none' }
                     },
                 }
             )
@@ -397,16 +417,17 @@ var Notification = React.createClass({
 
             /*this.pendingAction();*/
             this.setState({ filterUpdate: value })
+            
         }
-        if (value == 'update-completed') {
+        if (value == 'update-completed' && alert == 'hight') {
             let updateStyle = update(
                 this.state, {
                     styleList: {
-                        today: { $set: 'block' },
-                        yesterday: { $set: 'block' },
-                        last_7_days: { $set: 'block' },
-                        last_30_days: { $set: 'block' },
-                        older: { $set: 'block' }
+                        today: { $set: 'none' },
+                        yesterday: { $set: 'none' },
+                        last_7_days: { $set: 'none' },
+                        last_30_days: { $set: 'none' },
+                        older: { $set: 'none' }
                     },
                 }
             )
