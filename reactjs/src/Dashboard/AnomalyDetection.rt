@@ -1,3 +1,5 @@
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+
 <section>
     <div class="container">
       <section class="panel panel-featured panel-featured-primary panel-bordered">
@@ -10,12 +12,8 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Access Rights Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -33,12 +31,8 @@
               <section class="panel">
                 <div class="panel-body bg-secondary widget-panel insight-panel">
                   <h4 class="widget-title">Data Repository Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -56,12 +50,8 @@
               <section class="panel">
                 <div class="panel-body bg-secondary-2 widget-panel insight-panel">
                   <h4 class="widget-title">Client Data Access Anomaly
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as client identifying." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -81,12 +71,8 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
                   <h4 class="widget-title">Users at Risk
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                     <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present an incorrect access pattern based on organisational role types." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -104,12 +90,8 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Documents Risk
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of documents that have been detected by Dathena 99 as being at risk." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -127,12 +109,8 @@
               <section class="panel">
                 <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Active Directory Group at Risk
-                      <div class="inline-block-item dropdown">
-                          <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                          <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                              <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                          </div>
-                      </div>
+                     <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -153,12 +131,8 @@
       <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
           <h2 class="panel-title">Identity and Access Management Anomaly
-            <div class="inline-block-item dropdown">
-              <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-              <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                  <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-              </div>
-            </div>
+            <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types." />
           </h2>
         </header>
         <div class="panel-body">
@@ -167,12 +141,8 @@
              <div class="block-header row">
                   <div class="col-md-5" style="margin-left: 3px">
                     <h4 class="anomaly-title">User - Client Data Access Anomaly
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details a list of users who have access to client data types, but their role description or department position indicates this access may be erroneous." />
                     </h4>
                   </div>
                 </div>
@@ -270,12 +240,8 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This presents a list of users based on their Windows Account name, raking them by number of anomalies detected. A full list of user exceptions can be extracted." />
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -380,12 +346,8 @@
                 <div class="block-header row">
                   <div class="col-md-5">
                     <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details client data access anomalies, based on the access rights assigned to AD groups. Where AD groups have access to client data types, and Dathena 99 has detected that one of more members of the AD group should not have these access rights, the AD group will be flagged here." />
                     </h4>
                   </div>
                 </div>
@@ -466,15 +428,12 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - Security Settings at Risk
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                      
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
+                   <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the list of active directory group at risk having the most client document at risk." />
                     Display: 
                     <a href="#">All</a> - 
                     <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
@@ -547,7 +506,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                 <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -576,12 +535,8 @@
                 <div class="block-header row">
                   <div class="col-md-5">
                     <h4 class="anomaly-title">User - Access Right Anomaly
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the access rights anomaly." />
                     </h4>
                   </div>
                 </div>
@@ -662,16 +617,15 @@
                   </table>
                 </div>
               </div>
-              <div class="anomaly-block">
+               <div class="extra-block" style="display : {this.state.styleShow}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                </div>
+              <div class="anomaly-block" style="display : {this.state.styleList}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the list of user having the most access to document at Risk." />
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -747,7 +701,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -760,12 +714,8 @@
       <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
           <h2 class="panel-title">Data Architecture Risk Management
-            <div class="inline-block-item dropdown">
-              <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-              <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                  <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-              </div>
-            </div>
+             <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the document repository anomalies for all the documents and for client data." />
           </h2>
         </header>
         <div class="panel-body">
@@ -791,12 +741,8 @@
                 <div class="block-header row">
                   <div class="col-md-5">
                     <h4 class="anomaly-title">Document Repository Anomaly
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
                     </h4>
                   </div>
                 </div>
@@ -887,16 +833,15 @@
                   </table>
                 </div>
               </div>
-              <div class="anomaly-block">
+               <div class="extra-block" style="display : {this.state.styleShow}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                </div>
+              <div class="anomaly-block" style="display : {this.state.styleList}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the list of user having access to the most document repository anomaly." />
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -972,7 +917,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs" onClick={this.showLess} ></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -1001,12 +946,8 @@
                 <div class="block-header row">
                   <div class="col-md-5">
                     <h4 class="anomaly-title">Client Data Repository Anomaly
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
                     </h4>
                   </div>
                 </div>
@@ -1080,16 +1021,15 @@
                   </table>
                 </div>
               </div>
-              <div class="anomaly-block">
+               <div class="extra-block" style="display : {this.state.styleShow}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                </div>
+              <div class="anomaly-block" style="display : {this.state.styleList}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                      <div class="inline-block-item dropdown">
-                        <a data-toggle="dropdown" class="overview_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="overview_timeframe help_timeframe dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity.</p>
-                        </div>
-                      </div>
+                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults." />
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -1165,7 +1105,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="#" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -1179,13 +1119,13 @@
 
     <div id="anomalyStateSelect">   
       <div class="anomaly-state-select">
-        <div class="states" style="font-weight">
+        <div class="states">
           <span class="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed"></span>
           <span class="anomaly-state investigation" data-state="investigation" data-label="Under Investigation"></span>
           <span class="anomaly-state true" data-state="true" data-label="True Positive"></span>
           <span class="anomaly-state false" data-state="false" data-label="False Positive"></span>
         </div>
-        <span class="current-state"></span>
+        <span class="current-state"  style="font-weight : normal"></span>
       </div>
     </div>
 </section>

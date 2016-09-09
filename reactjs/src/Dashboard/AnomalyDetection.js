@@ -45,8 +45,9 @@ var AnomalyDetection = React.createClass({
                     append: true,
                     afterInsert: function(elem){
                     $(elem).find('.'+currentStateClass).addClass('active');
-                    $(this).css('font-weight','normal')
+                   
                     $(elem).find('.current-state').html( $(elem).find('.'+currentStateClass).attr('data-label') );
+                     $('[data-label]').css('font-weight','normal')
                     }
                 });
                 var selector = parent.find('.anomaly-state-select');
@@ -58,13 +59,15 @@ var AnomalyDetection = React.createClass({
                 var parent = $(this).parents('.anomaly-state-select');
                 parent.find('.anomaly-state').removeClass('active');
                 $(this).addClass('active');
-                 $(this).css('font-weight','normal')
+                
                 parent.find('.current-state').html( $(this).attr('data-label') );
+                 $('[data-label]').css('font-weight','normal')
             });
 
             $('body').on('mouseleave', '.anomaly-state-select .anomaly-state', function(){
                 $(this).removeClass('active');
                 $(this).parents('.anomaly-state-select').find('.current-state').html('');
+
             });
 
             $('body').on('click', '.anomaly-state-select .anomaly-state', function(){
