@@ -186,7 +186,7 @@
                       </tr>
                       <tr>
                         <td><span class="text-big">23</span></td>
-                        <td><span class=" text-normal" style="position: absolute; left: 192px; top: 155px;">Confidential</span></td>
+                        <td><span class=" text-normal" style="position: absolute; left: 192px; top: 170px;">Confidential</span></td>
                         <td><span class="text-big">5</span></td>
                         <td><span class="text-big">1</span></td>
                         <td><span class="text-big text-light-green">67,14%</span></td>
@@ -326,7 +326,16 @@
           </div>
 
           <div class="row mt-lg">
+         
             <div class="col-md-3">
+             <div class="block-header row" >
+                  <div class="col-md-5" style="margin-left: 8px">
+                    <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details client data access anomalies, based on the access rights assigned to AD groups. Where AD groups have access to client data types, and Dathena 99 has detected that one of more members of the AD group should not have these access rights, the AD group will be flagged here." />
+                    </h4>
+                  </div>
+                </div>
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
@@ -342,15 +351,8 @@
               </div>
             </div>
             <div class="col-md-9">
-              <div class="anomaly-block">
-                <div class="block-header row">
-                  <div class="col-md-5">
-                    <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details client data access anomalies, based on the access rights assigned to AD groups. Where AD groups have access to client data types, and Dathena 99 has detected that one of more members of the AD group should not have these access rights, the AD group will be flagged here." />
-                    </h4>
-                  </div>
-                </div>
+              <div class="anomaly-block" style="margin-top: 50px">
+                
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -374,7 +376,7 @@
                       </tr>
                       <tr>
                         <td><span class="text-big">102</span></td>
-                        <td><span class="text-normal" style="position: absolute; left: 192px; top: 155px;">Confidential</span></td>
+                        <td><span class="text-normal" style="position: absolute; left: 192px; top: 170px;">Confidential</span></td>
                         <td><span class="text-big">5</span></td>
                         <td><span class="text-big">54</span></td>
                         <td><span class="text-big text-light-green">56,57%</span></td>
@@ -516,6 +518,14 @@
 
           <div class="row mt-lg">
             <div class="col-md-3">
+            <div class="block-header row">
+                  <div class="col-md-5" style="margin-left:8px">
+                    <h4 class="anomaly-title">User - Access Right Anomaly
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the access rights anomaly." />
+                    </h4>
+                  </div>
+                </div>
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
@@ -530,16 +540,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" style="margin-top: 50px">
               <div class="anomaly-block">
-                <div class="block-header row">
-                  <div class="col-md-5">
-                    <h4 class="anomaly-title">User - Access Right Anomaly
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the access rights anomaly." />
-                    </h4>
-                  </div>
-                </div>
+                
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -722,12 +725,20 @@
 
           <div class="row">
             <div class="col-md-3">
+            <div class="block-header row">
+                  <div class="col-md-5" style="margin-left: 3px">
+                    <h4 class="anomaly-title">Document Repository Anomaly
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                    </h4>
+                  </div>
+                </div>
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
                 <span class="anomaly-icon anomaly-icon-fix fix-icon-folder"></span>
                 <div class="anomaly-legend outer-legend">
-                  <span class="legend red">High Risk</span>
+                  <span class="legend red legend fix">High Risk</span>
                   <span class="outer-indicator red"></span>
                 </div>
                 <div class="anomaly-legend inner-legend">
@@ -737,15 +748,8 @@
               </div>
             </div>
             <div class="col-md-9">
-              <div class="anomaly-block">
-                <div class="block-header row">
-                  <div class="col-md-5">
-                    <h4 class="anomaly-title">Document Repository Anomaly
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
-                    </h4>
-                  </div>
-                </div>
+              <div class="anomaly-block" style="margin-top: 50px">
+                
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -917,7 +921,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo"><i class="fa fa-caret-right mr-xs" onClick={this.showLess} ></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo"  onClick={this.showLess}><i class="fa fa-caret-right mr-xs" ></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -927,12 +931,20 @@
 
           <div class="row mt-lg">
             <div class="col-md-3">
+             <div class="block-header row">
+                  <div class="col-md-5" style="margin-left: 8px">
+                    <h4 class="anomaly-title">Client Data Repository Anomaly
+                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                    </h4>
+                  </div>
+                </div>
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
                 <span class="anomaly-icon anomaly-icon-fix fix-icon-folder"></span>
                 <div class="anomaly-legend outer-legend">
-                  <span class="legend red">High Risk</span>
+                  <span class="legend red ">High Risk</span>
                   <span class="outer-indicator red"></span>
                 </div>
                 <div class="anomaly-legend inner-legend">
@@ -942,15 +954,8 @@
               </div>
             </div>
             <div class="col-md-9">
-              <div class="anomaly-block">
-                <div class="block-header row">
-                  <div class="col-md-5">
-                    <h4 class="anomaly-title">Client Data Repository Anomaly
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
-                    </h4>
-                  </div>
-                </div>
+              <div class="anomaly-block" style="margin-top:50px">
+               
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>

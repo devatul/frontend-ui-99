@@ -179,7 +179,7 @@
                     </ul>
                 </li>
                 <li>
-                    <Link to="/Dashboard/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
+                    <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>
             </ul>
 
