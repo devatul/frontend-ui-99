@@ -145,6 +145,24 @@ table.docPreview > thead > tr > th:nth-child(1) {
     width: 330px !important;
     min-width: 300px;
 }
+
+.fix-overview-help-button-table {
+    max-width: 300px;
+}
+
+.help_question_bottom.fix.has-arrow:after {
+	margin-left: 230px;
+}
+.help_question_bottom.fix.has-arrow {
+    margin-left: -250px;
+}
+
+.note_chart_content_review.fix.has-arrow:after {
+	margin-left: 230px;
+}
+.note_chart_content_review.fix.has-arrow {
+    margin-left: -250px;
+}
 @media (max-width: 768px) {
     .widget-panel .widget-chart .chart.chart-md {
         margin: auto;

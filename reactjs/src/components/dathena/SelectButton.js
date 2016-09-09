@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import _ from 'lodash'
+import { isEqual } from 'lodash'
 
 var SelectButton = React.createClass({
     displayName: 'selectButton',
@@ -13,13 +13,9 @@ var SelectButton = React.createClass({
         };
     },
     shouldComponentUpdate: function(nextProps, nextState) {
-        if(this.props.setSelected != nextProps.setSelected) {
-            return true;
-        }
-        if(this.state.setSelected != nextState.setSelected) {
-            return true;
-        }
-        return false;
+        return !isEqual(this.props.setSelected, nextProps.setSelected)
+        || !isEqual(this.state.setSelected, nextState.setSelected)
+        || !isEqual(this.props.title, nextProps.title);
     },
     componentDidUpdate: function(prevProps, prevState) {
         if(this.props.setSelected != prevProps.setSelected) {

@@ -321,6 +321,57 @@ var MenuBar = React.createClass
 
         this.setState({ listLabel: updateLabel, filter: updateFilter });
     },
+
+    handleClearAll: function(field) {
+        var updateLabel = update(this.state.listLabel, {
+                [field.id]: {
+                    $apply: function(arr) {
+                        arr = cloneDeep(arr);
+                        for(let i = arr.length - 1; i >= 0; i--) {
+                            arr[i].checked = false;
+                        }
+                        return arr;
+                    } 
+                }
+            }),
+            updateFilter = update(this.state.filter, {
+               params: {
+                    [field.id]: { $set: [] }
+                    // [field.id]: field.checked ? {
+                    //     $apply: () => {
+                    //        let params = [], arr = updateLabel[field.id], i = arr.length - 1;
+                    //        for(; i >= 0; i--) {
+                    //            params[i] = {
+                    //                id: arr[i].id,
+                    //                name: arr[i].name
+                    //            };
+                    //        }
+                    //        return params;
+                    //    }
+                    // } : {
+                    //     $set: []
+                    // }
+                },
+
+                labels: {
+                    $apply: (arr) => {
+                        //if( field.checked === true ) {
+                            arr = cloneDeep(arr);
+
+                            for(let i = arr.length - 1; i >= 0; i--) {
+                                let pattern = new RegExp('^' + field.id + '_.*', 'g');
+                                if(pattern.test(arr[i].id)) {
+                                    arr.splice(i, 1);
+                                }
+                            }
+                        //}
+                        return arr;
+                    }
+                }
+            });
+
+        this.setState({ listLabel: updateLabel, filter: updateFilter });
+    },
     
     getscanResult() {
         makeRequest({
