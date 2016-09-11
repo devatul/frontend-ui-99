@@ -327,7 +327,7 @@
 
           <div class="row mt-lg">
            <div class="block-header row" >
-                  <div class="col-md-5" style="margin-left: 25px">
+                  <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
                     <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
                        <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                     setValue="This details client data access anomalies, based on the access rights assigned to AD groups. Where AD groups have access to client data types, and Dathena 99 has detected that one of more members of the AD group should not have these access rights, the AD group will be flagged here." />

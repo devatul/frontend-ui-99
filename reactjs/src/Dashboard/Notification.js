@@ -83,13 +83,7 @@ var Notification = React.createClass({
                 console.log('content' , this.state.content)
             }
         }
-         /*if (this.state.filtersAlert != prevState.filtersAlert) {
-            this.setState({
-                notification: notification1
-
-            })
         
-         }*/
         if(this.state.filtersAlert != prevState.filtersAlert){
             if(this.state.filtersAlert == 'none'){
                 this.setState({
@@ -130,14 +124,6 @@ var Notification = React.createClass({
                 this.completedAction(notification1);
             }
         }
-        /*if (this.state.filtersAlert != prevState.filtersAlert) {
-            if (this.state.filtersAlert == 'hight') {
-                this.filterHight(notification1);
-            }
-            if (this.state.filtersAlert == 'veryhight') {
-                this.filtersVeryHight(notification1);
-            }
-        }*/
     },
 
     componentDidMount() {
@@ -182,11 +168,6 @@ var Notification = React.createClass({
         let value = event.target.value;
         if(this.state.filter.alert != ''){
             debugger
-            /*this.setState(update(this.state, {
-                filter : {
-                    selectbox : {$set : value}
-                }
-            }))*/
             let alert = this.state.filter.alert
             this.filter(alert,value);
         } else{
@@ -330,26 +311,6 @@ var Notification = React.createClass({
     },
     filter(alert , value){
         debugger
-        
-      /*  let arr = []
-        let notification = _.cloneDeep(this.state.notification)
-        console.log('notification', notification)
-        _.forEach(notification, function(object, index) {
-
-            if (_.isObject(object)) {
-                for (let i = 0; i < object.length; i++) {
-                    if (object[i].urgency != filter) {
-                        arr.push(i)
-                    }
-                }
-                _.pullAt(object, arr);
-                arr = [];
-            }
-
-        })
-        this.setState(update(this.state, {
-            notification: { $set: notification }
-        }))*/
         if (value == 'update-today') {
             let updateStyle = update(this.state, {
 

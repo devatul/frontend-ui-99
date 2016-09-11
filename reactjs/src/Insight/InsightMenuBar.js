@@ -7,7 +7,7 @@ import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './InsightMenuBar.rt'
 import javascript from '../script/javascript.js'
-import _ ,{isEqual}from 'lodash'
+import _, { isEqual } from 'lodash'
 import 'jquery'
 
 var MenuBar1 = React.createClass({
@@ -26,15 +26,16 @@ var MenuBar1 = React.createClass({
             scan_result: {},
             filter: {},
             dataSelectBox: {},
-            filterLabel: [/*{
-                    checked: true,
-                    id: 1,
-                    index: 1,
-                    name: 'Top 5',
-                    selectId: "number_users",
-                    value: '1'
-                }
-*/
+            filterLabel: [
+                /*{
+                                    checked: true,
+                                    id: 1,
+                                    index: 1,
+                                    name: 'Top 5',
+                                    selectId: "number_users",
+                                    value: '1'
+                                }
+                */
             ],
             eventContext: '',
             numberofUser: [{
@@ -265,42 +266,6 @@ var MenuBar1 = React.createClass({
             filterLabel: []
         });
     },
-    clearSelectAll(id){
-        console.log('id:', id);
-        var data = this.state.dataSelectBox;
-       
-        _.forEach(this.state.filterLabel, function(object, index) {
-
-            if(object.selectId == id ){
-                 var updateData = update(data, {
-                [object.selectId]: {
-                    [object.index]: {
-                        $merge: {
-                            checked: false
-                        }
-                    }
-                }
-            });
-                data = updateData;
-            }
-           
-        }.bind(this));
-        this.setState({
-             dataSelectBox: data,
-        })
-         console.log('dataSelectBox', this.state.dataSelectBox[id])
-         console.log('filterLabel' , this.state.filterLabel)
-        /*var filterList = _.pullAllBy(this.state.filterLabel,  [this.state.dataSelectBox[id] ] , this.state.dataSelectBox[id].index)*/
-        var filterList = _.difference ( this.state.filterLabel, this.state.dataSelectBox[id])
-
-       
-        this.setState({
-           
-            filterLabel: filterList
-        });
-        console.log('filterList', filterList)
-    },
-     
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
         listLabel.splice(index, index + 1);
@@ -360,7 +325,7 @@ var MenuBar1 = React.createClass({
                     id: field.id,
                     name: field.name
                 }) == null) {
-                
+
                 arr.push(field);
                 console.log("arr", arr)
             }
@@ -368,12 +333,8 @@ var MenuBar1 = React.createClass({
                 filterLabel: arr
             });
             console.log('filterLabel', this.state.filterLabel)
-           /* console.log('filterLabel', this.state.filterLabel)*/
+                /* console.log('filterLabel', this.state.filterLabel)*/
         }
-    },
-
-    addSelectAll(){
-
     },
 
     deleteLabelByIdName: function(field, id, name) {
@@ -442,30 +403,37 @@ var MenuBar1 = React.createClass({
             this.deleteLabelByIdName(field, field.id, field.name);
         }
     },
-    handleSelectAll: function(field) {
-        console.log("selectAll:", this.state.filterLabel)
-        if(field.checked){
-                 var arr = _.concat(this.state.dataSelectBox[field.selectId]);
-                 _.forEach(arr, function(object, index) {
-
-
-                    object.checked = field.checked;
-                    this.addLabel(object);
-
-                }.bind(this));
-                 var updateData = update(this.state.dataSelectBox, {
-                    [field.selectId]: {
-                        $set: arr
+    handleSelectAll: function(id) {
+        let arr = []
+        let filterLabel_clone = _.cloneDeep(this.state.filterLabel);
+        let selectBox_clone = this.state.dataSelectBox;
+        _.forEach(filterLabel_clone, function(object, index) {
+            console.log(object.selectId)
+            if (object.selectId == id) {
+                arr.push(index);
+                var updateData = update(selectBox_clone, {
+                    [object.selectId]: {
+                        [object.index]: {
+                            $merge: {
+                                checked: false
+                            }
+                        }
                     }
                 });
-                 this.setState({
-                    dataSelectBox: updateData,
-                    eventContext: field.selectId
-            });
-        } else{
-            this.clearSelectAll(field.selectId);
-        }
-       
+                selectBox_clone = updateData
+            }
+        }.bind(this));
+
+        _.pullAt(filterLabel_clone, arr)
+
+        this.setState(update(this.state, {
+                filterLabel: { $set: filterLabel_clone },
+                dataSelectBox: { $set: selectBox_clone }
+            }))
+            /*this.setState({dataSelectBox : {$set : selectBox_clone }})*/
+        console.log("selectBox_after:", this.state.dataSelectBox)
+        console.log("filterLabel_after:", this.state.filterLabel)
+
     },
     getScanResult() {
         $.ajax({

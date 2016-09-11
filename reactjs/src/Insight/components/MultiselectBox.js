@@ -62,20 +62,19 @@ var multiselectBox = React.createClass({
         this.props.onChange(field, index);
     },
 
-    handleSelectAll: function(event) {
-        if(this.state.checkall == false) {
+    handleSelectAll: function() {
+      /*  if(this.state.checkall == false) {
             this.setState({checkall : true})
         } else {
             this.setState({checkall : false})
-        }
+        }*/
            
-        var field = {
-            name: event.target.name,
+        /*var field = {
+           
             selectId: this.props.id,
-            checked: event.target.checked,
-            value: event.target.value
-        }
-    	this.props.onSelectAll(field);
+           
+        }*/
+    	this.props.onSelectAll(this.props.id);
     },
     render() {
             var children = [];
@@ -109,14 +108,8 @@ var multiselectBox = React.createClass({
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
 					<li className={'multiselect-item multiselect-all'}>
 						<a tabIndex="0" className="multiselect-all">
-						<label className="checkbox">
-							<input ref="checkall"
-                                name={'select_all'}
-                                key={this.props.id + '_select_all'}
-								onChange={this.handleSelectAll}
-								type="checkbox" value="multiselect-all"
-                                checked={this.state.checkall}
-                                />
+						<label className="checkbox" onClick={this.handleSelectAll} style={{'marginLeft':'0px'}}>
+							
 							Clear all
 						</label>
 						</a>
