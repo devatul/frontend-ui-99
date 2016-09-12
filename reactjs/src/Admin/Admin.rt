@@ -1,0 +1,4 @@
+
+<div style="margin-bottom : 30px">
+    {this.props.children}
+</div>

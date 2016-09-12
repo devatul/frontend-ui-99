@@ -4,7 +4,7 @@
     <div class="container">
       <section class="panel panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
-            <h2 class="panel-title">Risk Insights</h2>
+            <h2 class="panel-title">Anomaly Overview</h2>
         </header>
         <div class="panel-body pb-none">
           <div class="row">
@@ -162,7 +162,7 @@
             </div>
             <div class="col-md-9">
               <div class="anomaly-block" style="margin-top: 50px">
-               
+
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -245,11 +245,11 @@
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
-                    Display: 
-                    <a href="#">All</a> - 
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    Display:
+                    <a href="#">All</a> -
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
                     <a href="#"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
@@ -335,7 +335,7 @@
                   </div>
                 </div>
             <div class="col-md-3">
-            
+
               <div class="anomaly-radial">
                 <div class="anomaly-radial-inner" data-value="50"></div>
                 <div class="anomaly-radial-outer" data-value="80"></div>
@@ -352,7 +352,7 @@
             </div>
             <div class="col-md-9">
               <div class="anomaly-block" style="margin-top: 50px">
-                
+
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -430,17 +430,17 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - Security Settings at Risk
-                      
+
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
                    <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                     setValue="This details the list of active directory group at risk having the most client document at risk." />
-                    Display: 
-                    <a href="#">All</a> - 
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    Display:
+                    <a href="#">All</a> -
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
                     <a href="#"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
@@ -542,7 +542,7 @@
             </div>
             <div class="col-md-9" style="margin-top: 50px">
               <div class="anomaly-block">
-                
+
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -632,11 +632,11 @@
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
-                    Display: 
-                    <a href="#">All</a> - 
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    Display:
+                    <a href="#">All</a> -
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
                     <a href="#"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
@@ -749,7 +749,7 @@
             </div>
             <div class="col-md-9">
               <div class="anomaly-block" style="margin-top: 50px">
-                
+
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -849,11 +849,11 @@
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
-                    Display: 
-                    <a href="#">All</a> - 
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    Display:
+                    <a href="#">All</a> -
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
                     <a href="#"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
@@ -955,7 +955,7 @@
             </div>
             <div class="col-md-9">
               <div class="anomaly-block" style="margin-top:50px">
-               
+
                 <div class="table-responsive">
                   <table class="table anomaly-table">
                     <thead>
@@ -1038,11 +1038,11 @@
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
-                    Display: 
-                    <a href="#">All</a> - 
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> - 
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> - 
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> - 
+                    Display:
+                    <a href="#">All</a> -
+                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
                     <a href="#"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
@@ -1122,7 +1122,7 @@
 
     </div>
 
-    <div id="anomalyStateSelect">   
+    <div id="anomalyStateSelect">
       <div class="anomaly-state-select">
         <div class="states">
           <span class="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed"></span>

@@ -73,7 +73,7 @@ var Notification = React.createClass({
 
         if (this.state.filter != prevState.filter) {
             if (this.state.filter.alert == 'hight') {
-                
+
                 this.setState({ filtersAlert: 'none' })
                 this.filterHight(notification1);
             }
@@ -83,7 +83,7 @@ var Notification = React.createClass({
                 console.log('content' , this.state.content)
             }
         }
-        
+
         if(this.state.filtersAlert != prevState.filtersAlert){
             if(this.state.filtersAlert == 'none'){
                 this.setState({
@@ -133,7 +133,7 @@ var Notification = React.createClass({
     },
 
     filterAlert(value) {
-        
+
         let alert = this.state.filtersAlert
         let alertUpdate = update(this.state, {
             filter : {
@@ -149,9 +149,9 @@ var Notification = React.createClass({
                  this.setState({ filtersAlert: 'hight' })
              }else{
                  this.setState({ filtersAlert: 'none' })
-                
+
              }
-           
+
         }
         if(value == 'veryhight'){
             this.setState({content : 'Number of actions pending for you to complete. $nbamberaction action(s) is(are) required with hight priority.'})
@@ -160,11 +160,11 @@ var Notification = React.createClass({
              }else{
                   this.setState({ filtersAlert: 'none' })
              }
-          
+
         }
     },
     filterNotification(event) {
-        
+
         let value = event.target.value;
         if(this.state.filter.alert != ''){
             debugger
@@ -187,7 +187,7 @@ var Notification = React.createClass({
 
                     selected : { $set : value}
             })
-            
+
             this.setState(updateStyle)
             this.setState({ filterUpdate: value })
         }
@@ -285,7 +285,7 @@ var Notification = React.createClass({
         }
         }
         console.log('value', this.state.selected)
-       
+
     },
     pendingAction(noti) {
         let notification = _.cloneDeep(noti);
@@ -354,7 +354,7 @@ var Notification = React.createClass({
                          last_30_days: { $set: 'block' },
                          older: { $set: 'block' }
                      },
-                   
+
 
                 }
             )
@@ -378,7 +378,7 @@ var Notification = React.createClass({
 
             /*this.pendingAction();*/
             this.setState({ filterUpdate: value })
-            
+
         }
         if (value == 'update-completed' && alert == 'hight') {
             let updateStyle = update(
@@ -467,7 +467,7 @@ var Notification = React.createClass({
     },
 
     getDummyNotification() {
-        //temproary for dummy data 
+        //temproary for dummy data
 
         function getRole() {
             var result = "";
@@ -552,7 +552,7 @@ var Notification = React.createClass({
                             "message": "You have completed the review of 10 document in Legal/Compliance category.",
                             "urgency": "done"
                         },
-                        
+
                         ]
                     }
                 },

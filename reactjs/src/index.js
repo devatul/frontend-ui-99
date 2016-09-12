@@ -26,6 +26,9 @@ var Insight = require('./Insight/Insight');
 var Indentity = require('./Insight/Indentity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
+var Admin = require('./Admin/Admin')
+var Admin_Step1 = require('./Admin/Admin_Step1')
+var Admin_Step2 = require('./Admin/Admin_Step2')
 
 render((
   	<Router history={browserHistory}>
@@ -44,6 +47,10 @@ render((
 				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
 				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
 				<Route path="/AnomalyDetection" component={AnomalyDetection}/>
+				<Route path="/Admin/Admin" component={Admin}>
+                    <Route path="/Admin/Admin_Step1" component={Admin_Step1}/>
+                    <Route path="/Admin/Admin_Step2" component={Admin_Step2}/>
+                </Route>
 				<Route path="/Review/Review" component={Review}>
 					<Route path="/Review/OrphanReview" component={OrphanReview}/>
 					<Route path="/Review/GroupReview" component={GroupReview}/>
