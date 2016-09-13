@@ -1,250 +1,238 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name ="MyTeam" from ="./MyTeam"/>
 <rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
-<rt-import name="Upload" from="../Insight/components/Upload"
+<rt-import name="Upload" from="../Insight/components/Upload"/>
+<rt-import name="Tabs" from="../components/bootstrap/tabs"/>
 <!-- <rt-import name="validate" from="../components/dathena/validate"/>-->
 
 <div class="container">
-  <div class="tabs tabs-primary">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
-      </li>
-      <li class="">
-        <a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
-      </li>
-    </ul>
-    <div class="tab-content">
+  <Tabs.custom class="tabs-primary">
+        <Tabs.nav class="my-profile-header nav nav-tabs">
+             <Tabs.tab title="My Profile" class="{this.state.default == 1 ? 'active' : ''}"  onClick="()=>this.setDefault(1)"/>
+             <Tabs.tab title="My Team" class="{this.state.default != 1 ? 'active' : ''}"  onClick="()=>this.setDefault(2)"/>
+        </Tabs.nav>
+        <Tabs.content>
+            <Tabs.pane  class="{this.state.default == 1 ? 'my-profile-edit tab-pane active' : 'my-profile-edit tab-pane'}">
+                <div class="mpe_top">
+                  <Link to="/Dashboard/Profile"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Back to Profile</Link>
+                  <h4 class="mpe_top_h4">Edit Profile</h4>
+                </div>
+                <div class="my-profile-edit-content">
+                <Tabs.custom  class="tabs tabs-vertical tabs-left tabs-primary">
+                    <Tabs.nav class="col-sm-2 col-xs-12">
+                        <Tabs.tab title="Profile Details" class="{this.state.defaultEdit == 1 ? 'active' : ''}"  onClick="()=>this.setDefaultEdit(1)"/>
+                        <Tabs.tab title="Photo" class="{this.state.defaultEdit == 2 ? 'active' : ''}"  onClick="()=>this.setDefaultEdit(2)"/>
+                        <Tabs.tab title="Change Email" class="{this.state.defaultEdit == 3 ? 'active' : ''}"  onClick="()=>this.setDefaultEdit(3)"/>
+                        <Tabs.tab title="Password" class="{this.state.defaultEdit == 4 ? 'active' : ''}"  onClick="()=>this.setDefaultEdit(4)"/>
 
-      <div id="my_team" class=" tab-pane my-team-content">
-        <MyTeam/>
-      </div>
-      <div id="my_profile" class="my-profile-edit tab-pane active">
-
-        <div class="mpe_top">
-          <Link to="/Dashboard/Profile"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Back to Profile</Link>
-          <h4 class="mpe_top_h4">Edit Profile</h4>
-        </div>
-        <div class="my-profile-edit-content">
-          <div class="tabs tabs-vertical tabs-left tabs-primary">
-            <ul class="nav nav-tabs col-sm-2 col-xs-12">
-              <li class="active">
-                <a href="#profile_details" data-toggle="tab" aria-expanded="true">Profile Details</a>
-              </li>
-              <li class="">
-                <a href="#photo" data-toggle="tab" aria-expanded="false">Photo</a>
-              </li>
-              <li class="">
-                <a href="#change_email" data-toggle="tab" aria-expanded="false">Change Email</a>
-              </li>
-              <li class="">
-                <a href="#password" data-toggle="tab" aria-expanded="false">Password</a>
-              </li>
-            </ul>
-            <div class="mpe-content-right">
-              <div class="mpe-tab-content tab-content">
-                <div id="profile_details" class="mpe-tab-pane tab-pane active">
-                  <h4 class="mpe_top_h4">Change Personal Details</h4>
-                  <div class="row">
-                    <div class="profile-details-left col-md-6 col-sm-6 col-xs-12">
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Windows ID</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="WindowID" 
-                          onChange="{this.getWindowID}"
-                          value={this.state.profile.windows_id}>
-                        </div>
-                        <span id="WindowIDErr" style="color: #B94A48"></span>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Department</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="Department"  value={this.state.profile.department} onChange="{this.getdepartment}" />
-                        </div>
-                        <span id="DepartmentErr" style="color: #B94A48"></span>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Company Name</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="CompanyName" 
-                          value={this.state.profile.company_name} onChange={this.getCompanyName}>
-                        </div>
-                        <span id="CompanyNameErr" style="color: #B94A48"></span>
-                      </div>  
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Location</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="Location" value={this.state.profile.location}  onChange={this.getLocation}>
-                        </div>
-                        <span id="LocationErr" style="color: #B94A48"></span>
-                      </div>
-                    </div>
-                    <div class="profile-details-right col-md-6 col-sm-6 col-xs-12">
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Corporate Email</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="Email" value={this.state.profile.corporate_email} 
-                          onChange={this.getCorporateEmail}>
-                        </div>
-                        <span id="EmailErr" style="color: #B94A48"></span>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Corporate Phone (Landline)</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="Corporate_phone" value={this.state.profile.corporate_phone}
-
-                          onChange={this.getCorporatePhone}>
-                        </div>
-                        <span id="Corporate_phoneErr" style="color: #B94A48"></span>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label" for="inputDefault">Corporate Phone (Mobile)</label>
-                        <div class="mpe_input">
-                          <input type="text" class="form-control" id="Corporate_mobile"
-                          value={this.state.profile.corporate_mobile} onChange={this.getCorporatePhoneMobile}>
-                        </div>
-                        <span id="Corporate_mobileErr" style="color: #B94A48"></span>
-                      </div>
-
-                      <div class="profile_details_bottom_right">
-                        <ul class="my-profile-ul">
-                          <li class="left3">System User</li>
-                          <li>
-                             <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
-                        </li>
-                        <li class="left1">
-                          <div class="switch switch-sm switch-primary">
-                            <div class="ios-switch off">
-                              <div class="on-background background-fill"></div><div class="state-background background-fill">
+                    </Tabs.nav>
+                    <Tabs.content class="mpe-content-right mpe-tab-content tab-content">
+                        <Tabs.pane  class="{this.state.defaultEdit == 1 ? 'mpe-tab-pane tab-pane active' : 'mpe-tab-pane tab-pane'}">
+                            <h4 class="mpe_top_h4">Change Personal Details</h4>
+                          <div class="row">
+                            <div class="profile-details-left col-md-6 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Windows ID</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="WindowID"
+                                  onChange="{this.getWindowID}"
+                                  value={this.state.profile.windows_id}>
+                                </div>
+                                <span id="WindowIDErr" style="color: #B94A48"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Department</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="Department"  value={this.state.profile.department} onChange="{this.getdepartment}" />
+                                </div>
+                                <span id="DepartmentErr" style="color: #B94A48"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Company Name</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="CompanyName"
+                                  value={this.state.profile.company_name} onChange={this.getCompanyName}>
+                                </div>
+                                <span id="CompanyNameErr" style="color: #B94A48"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Location</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="Location" value={this.state.profile.location}  onChange={this.getLocation}>
+                                </div>
+                                <span id="LocationErr" style="color: #B94A48"></span>
+                              </div>
                             </div>
-                            <div class="handle"></div>
+                            <div class="profile-details-right col-md-6 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Corporate Email</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="Email" value={this.state.profile.corporate_email}
+                                  onChange={this.getCorporateEmail}>
+                                </div>
+                                <span id="EmailErr" style="color: #B94A48"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Corporate Phone (Landline)</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="Corporate_phone" value={this.state.profile.corporate_phone}
+
+                                  onChange={this.getCorporatePhone}>
+                                </div>
+                                <span id="Corporate_phoneErr" style="color: #B94A48"></span>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label" for="inputDefault">Corporate Phone (Mobile)</label>
+                                <div class="mpe_input">
+                                  <input type="text" class="form-control" id="Corporate_mobile"
+                                  value={this.state.profile.corporate_mobile} onChange={this.getCorporatePhoneMobile}>
+                                </div>
+                                <span id="Corporate_mobileErr" style="color: #B94A48"></span>
+                              </div>
+
+                              <div class="profile_details_bottom_right">
+                                <ul class="my-profile-ul">
+                                  <li class="left3">System User</li>
+                                  <li>
+                                     <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
+                                </li>
+                                <li class="left1">
+                                  <div class="switch switch-sm switch-primary">
+                                    <div class="ios-switch off">
+                                      <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                    </div>
+                                    <div class="handle"></div>
+                                  </div>
+
+                                </li>
+                                <li class="left2">
+                                  <ul class="content_profile_note_ul">
+                                    <li>
+                                      <p class="content_profile_note">Active Directory</p>
+                                    </li>
+                                    <li class="left4">
+                                       <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
+                                  </li>
+                                </ul>
+                                <div class="my-profile-check-none checkbox-custom checkbox-default">
+                                  <input class="x" id="z" name="agreeterms" checked= {this.state.profile.enable_sso} type="checkbox" onChange={this.IsEnablesso}>
+                                  <label for="AgreeTerms">Enable SSO</label>
+                                </div>
+                              </li>
+                            </ul>
                           </div>
+                          <div class="change-email-bottom my-profile-bottom col-xs-12">
+                            <a class="btn btn-primary btn-ok" onClick="{this.editProfile}">Change Profile
+                            </a>
+                          </div>
+                            </div>
+                            </div>
+                        </Tabs.pane>
+                        <Tabs.pane class="{this.state.defaultEdit == 2 ? 'mpe-tab-pane tab-pane active' : 'mpe-tab-pane tab-pane'}">
+                            <Upload upload={this.uploadFile} title="class"/>
+                        </Tabs.pane>
+                        <Tabs.pane  class="{this.state.defaultEdit == 3 ? 'mpe-tab-pane tab-pane active' : 'mpe-tab-pane tab-pane'}">
+                               <h4 class="mpe_top_h4">Change Email Address</h4>
+                               <form  id="changeEmail">
+                                    <div class="change-email-address">
+                                      <div class="form-group mb-lg">
+                                        <div class="clearfix">
+                                          <label class="pull-left">Current Password</label>
+                                        </div>
+                                        <div class="input-group input-group-icon">
+                                          <input name="currentPass" id="currentPass" type="password" class="form-control input-md" value ={this.state.CurrentPass} onChange={this.getCurrentPass}>
+                                          <span id="currentPassErr" style="color: #B94A48"></span>
+                                          <span class="input-group-addon">
+                                            <span class="icon icon-md">
+                                              <i class="fa fa-lock"></i>
+                                            </span>
+                                          </span>
 
-                        </li>
-                        <li class="left2">
-                          <ul class="content_profile_note_ul">
-                            <li>  
-                              <p class="content_profile_note">Active Directory</p>
-                            </li>
-                            <li class="left4">
-                               <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
-                          </li>
-                        </ul>
-                        <div class="my-profile-check-none checkbox-custom checkbox-default">
-                          <input class="x" id="z" name="agreeterms" checked= {this.state.profile.enable_sso} type="checkbox" onChange={this.IsEnablesso}>
-                          <label for="AgreeTerms">Enable SSO</label>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="change-email-bottom my-profile-bottom col-xs-12">
-                    <a class="btn btn-primary btn-ok" onClick="{this.editProfile}">Change Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="photo" class="mpe-tab-pane tab-pane">
-              <Upload upload={this.uploadFile} title="class"/>
-            </div>
-            <div id="change_email" class="mpe-tab-pane tab-pane">
-              <h4 class="mpe_top_h4">Change Email Address</h4>
-              <form  id="changeEmail">
-                <div class="change-email-address">
-                  <div class="form-group mb-lg">
-                    <div class="clearfix">
-                      <label class="pull-left">Current Password</label>
-                    </div>
-                    <div class="input-group input-group-icon">
-                      <input name="currentPass" id="currentPass" type="password" class="form-control input-md" value ={this.state.CurrentPass} onChange={this.getCurrentPass}>
-                      <span id="currentPassErr" style="color: #B94A48"></span>
-                      <span class="input-group-addon">
-                        <span class="icon icon-md">
-                          <i class="fa fa-lock"></i>
-                        </span>
-                      </span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group mb-lg">
+                                        <div class="clearfix">
+                                          <label class="pull-left">New Email</label>
+                                        </div>
+                                        <div class="input-group input-group-icon">
+                                          <input name="pwd" type="email" name="newEmail" id="newEmail" class="form-control input-md" value={this.state.NewEmail} onChange={this.getNewEmail}>
+                                          <span id="newEmailErr" style="color: #B94A48;"></span>
+                                          <span class="input-group-addon">
+                                            <span class="icon icon-md">
+                                              <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </span>
+                                          </span>
+                                        </div>
+                                        <p id="status" style="color:#B94A48;">{this.state.success}</p>
+                                        <p id="error" style="color:#B94A48;">{this.state.errorEmail}</p>
+                                      </div>
+                                      <div class="change-email-bottom my-profile-bottom col-xs-12">
+                                        <a class="btn btn-primary btn-ok" onClick={this.ChangeEmail}>Change my Email</a>
+                                      </div>
+                                    </div>
+                               </form>
+                        </Tabs.pane>
+                        <Tabs.pane class="{this.state.defaultEdit == 4 ? 'mpe-tab-pane tab-pane active' : 'mpe-tab-pane tab-pane'}">
+                                <h4 class="mpe_top_h4">Change Password</h4>
+                                <div class="change-email-address">
+                                <div class="form-group mb-lg">
+                                  <div class="clearfix">
+                                    <label class="pull-left">Current Password</label>
+                                  </div>
+                                  <div class="input-group input-group-icon">
+                                    <input name="pwd" id="currentPass1" type="password" class="form-control input-md" value={this.state.CurrentPassforChangePass} onChange={this.getCurrentPassforChangePass}>
+                                    <span id="currentPass1Err" style="color: #B94A48;"></span>
+                                    <span class="input-group-addon">
+                                      <span class="icon icon-md">
+                                        <i class="fa fa-lock"></i>
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="form-group mb-lg">
+                                  <div class="clearfix">
+                                    <label class="pull-left">New Password</label>
+                                  </div>
+                                  <div class="input-group input-group-icon">
+                                    <input name="pwd" type="password" id="newPass" class="form-control input-md" value={this.state.NewPass} onChange={this.getNewPass}>
+                                    <span id="newPassErr" style="color: #B94A48;"></span>
+                                    <span class="input-group-addon">
+                                      <span class="icon icon-md">
+                                        <i class="fa fa-lock"></i>
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="form-group mb-lg">
+                                  <div class="clearfix">
+                                    <label class="pull-left">Confirm New Password</label>
+                                  </div>
+                                  <div class="input-group input-group-icon">
+                                    <input name="pwd" type="password" id="ConfirmPass" class="form-control input-md" value={this.state.ConfirmPass} onChange={this.getConfirmPass}>
+                                    <span id="ConfirmPassErr" style="color: #B94A48;"></span>
+                                    <span class="input-group-addon">
+                                      <span class="icon icon-md">
+                                        <i class="fa fa-lock"></i>
+                                      </span>
+                                    </span>
 
-                    </div>
-                  </div>
-                  <div class="form-group mb-lg">
-                    <div class="clearfix">
-                      <label class="pull-left">New Email</label>
-                    </div>
-                    <div class="input-group input-group-icon">
-                      <input name="pwd" type="email" name="newEmail" id="newEmail" class="form-control input-md" value={this.state.NewEmail} onChange={this.getNewEmail}>
-                      <span id="newEmailErr" style="color: #B94A48;"></span>
-                      <span class="input-group-addon">
-                        <span class="icon icon-md">
-                          <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                      </span>
-                    </div>
-                    <p id="status" style="color:#B94A48;">{this.state.success}</p>
-                    <p id="error" style="color:#B94A48;">{this.state.errorEmail}</p>
-                  </div>
-                  <div class="change-email-bottom my-profile-bottom col-xs-12">
-                    <a class="btn btn-primary btn-ok" onClick={this.ChangeEmail}>Change my Email</a>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div id="password" class="mpe-tab-pane tab-pane">
-              <h4 class="mpe_top_h4">Change Password</h4>
-              <div class="change-email-address">
-                <div class="form-group mb-lg">
-                  <div class="clearfix">
-                    <label class="pull-left">Current Password</label>
-                  </div>
-                  <div class="input-group input-group-icon">
-                    <input name="pwd" id="currentPass1" type="password" class="form-control input-md" value={this.state.CurrentPassforChangePass} onChange={this.getCurrentPassforChangePass}>
-                    <span id="currentPass1Err" style="color: #B94A48;"></span>
-                    <span class="input-group-addon">
-                      <span class="icon icon-md">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <div class="form-group mb-lg">
-                  <div class="clearfix">
-                    <label class="pull-left">New Password</label>
-                  </div>
-                  <div class="input-group input-group-icon">
-                    <input name="pwd" type="password" id="newPass" class="form-control input-md" value={this.state.NewPass} onChange={this.getNewPass}>
-                    <span id="newPassErr" style="color: #B94A48;"></span>
-                    <span class="input-group-addon">
-                      <span class="icon icon-md">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <div class="form-group mb-lg">
-                  <div class="clearfix">
-                    <label class="pull-left">Confirm New Password</label>
-                  </div>
-                  <div class="input-group input-group-icon">
-                    <input name="pwd" type="password" id="ConfirmPass" class="form-control input-md" value={this.state.ConfirmPass} onChange={this.getConfirmPass}>
-                    <span id="ConfirmPassErr" style="color: #B94A48;"></span>
-                    <span class="input-group-addon">
-                      <span class="icon icon-md">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </span>
+                                  </div>
+                                  <p id="errorPass" style="color:#B94A48;"></p>
+                                  <p id="errorPassSer" style="color:#B94A48;">{this.state.error}</p>
+                                </div>
+                                <div class="change-email-bottom my-profile-bottom col-xs-12">
+                                  <a onClick={this.changePassword} class="btn btn-primary btn-ok">Change my Password</a>
+                                </div>
+                              </div>
+                        </Tabs.pane>
+                    </Tabs.content>
+                </Tabs.custom>
 
-                  </div>
-                  <p id="errorPass" style="color:#B94A48;"></p>
-                  <p id="errorPassSer" style="color:#B94A48;">{this.state.error}</p>
-                </div>
-                <div class="change-email-bottom my-profile-bottom col-xs-12">
-                  <a onClick={this.changePassword} class="btn btn-primary btn-ok">Change my Password</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    </div>
-  </div>
+            </Tabs.pane>
+            <Tabs.pane class="{this.state.default != 1 ? 'tab-pane my-team-content active' : 'tab-pane my-team-content'}">
+                  <MyTeam/>
+            </Tabs.pane>
+        </Tabs.content>
+   </Tabs.custom >
 </div>
 

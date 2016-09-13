@@ -1,6 +1,7 @@
 'Use Strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
+import Dropdown from './Dropdown'
 import update from 'react-addons-update'
 import _ from 'lodash'
 
@@ -34,7 +35,7 @@ var multiselectBox = React.createClass({
     componentDidMount() {
         var dropdown = this.refs.dropdown
         var dropdownmenu = this.refs.dropdownmenu
-        
+
         $(dropdown).on('show.bs.dropdown', function() {
             $('#dropdownFilter').css({
                 display: 'block',
@@ -68,12 +69,13 @@ var multiselectBox = React.createClass({
         } else {
             this.setState({checkall : false})
         }*/
-           
+
         /*var field = {
-           
+
             selectId: this.props.id,
-           
+
         }*/
+        debugger
     	this.props.onSelectAll(this.props.id);
     },
     render() {
@@ -94,7 +96,22 @@ var multiselectBox = React.createClass({
                                 </li>;
             }.bind(this));
         return (
-        	<div ref="dropdown" className="btn-group dropdown">
+            <Dropdown.custom className="btn-group dropdown" onShow={this.props.onShow} onClose={this.props.onClose}>
+                <Dropdown.toggle className="multiselect dropdown-toggle btn btn-default">
+                    <span className="multiselect-selected-text">{this.props.title}</span>
+                </Dropdown.toggle>
+                <Dropdown.menu elementType="ul" className="multiselect-container dropdown-menu">
+                    <li className={'multiselect-item multiselect-all'}>
+                        <a tabIndex="0" className="multiselect-all">
+                            <label className="checkbox" onClick={this.handleSelectAll}>
+                                <strong>Clear all</strong>
+                            </label>
+                        </a>
+                    </li>
+                    {children}
+                </Dropdown.menu>
+            </Dropdown.custom>
+        	/*<div ref="dropdown" className="btn-group dropdown">
 				<button type="button"
 					key={this.props.key + '_'}
 					onClick={this.handleOnClick}
@@ -109,14 +126,14 @@ var multiselectBox = React.createClass({
 					<li className={'multiselect-item multiselect-all'}>
 						<a tabIndex="0" className="multiselect-all">
 						<label className="checkbox" onClick={this.handleSelectAll} style={{'marginLeft':'0px'}}>
-							
+
 							Clear all
 						</label>
 						</a>
 					</li>
 					{children}
 				</ul>
-			</div>
+			</div>*/
         );
     }
 });

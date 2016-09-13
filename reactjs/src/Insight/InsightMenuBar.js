@@ -27,15 +27,6 @@ var MenuBar1 = React.createClass({
             filter: {},
             dataSelectBox: {},
             filterLabel: [
-                /*{
-                                    checked: true,
-                                    id: 1,
-                                    index: 1,
-                                    name: 'Top 5',
-                                    selectId: "number_users",
-                                    value: '1'
-                                }
-                */
             ],
             eventContext: '',
             numberofUser: [{
@@ -51,7 +42,10 @@ var MenuBar1 = React.createClass({
                 "id": 4,
                 "name": 'Top 50'
             }],
-            numberUser: 5
+            numberUser: 5,
+            style: {
+                heightMenu: 'auto'
+            }
         };
     },
     propTypes: {
@@ -71,6 +65,11 @@ var MenuBar1 = React.createClass({
         }
         return x1 + x2;
     },
+/*    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state.style != nextState.style){
+            return true;
+        }
+    },*/
     componentDidMount() {
         if (this.props.showFilter) {
             this.getConfidentiality(true);
@@ -404,6 +403,7 @@ var MenuBar1 = React.createClass({
         }
     },
     handleSelectAll: function(id) {
+        debugger
         let arr = []
         let filterLabel_clone = _.cloneDeep(this.state.filterLabel);
         let selectBox_clone = this.state.dataSelectBox;
@@ -457,6 +457,24 @@ var MenuBar1 = React.createClass({
                 }
             }.bind(this)
         });
+    },
+     handleShowSelectBox: function(el) {
+        debugger
+        let { refs } = el.refs.dropdown_Menu,
+
+            updateStyle = update(this.state.style, {
+                heightMenu: { $set: refs.Menu.offsetHeight + 80 + 'px' }
+            })
+        this.setState({ style: updateStyle });
+    },
+
+    handleCloseSelectBox: function(el) {
+        let { refs } = el.refs.dropdown_Menu,
+
+            updateStyle = update(this.state.style, {
+                heightMenu: { $set: 'auto' }
+            })
+        this.setState({ style: updateStyle });
     },
     render: template
 });

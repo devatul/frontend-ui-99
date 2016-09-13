@@ -17,65 +17,69 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
-                <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
-                    <span rt-if="this.state.role === contant.role.IS_2ND" id="total_notification" class="badge">{this.state.notification.total}</span>
-                    <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
-                    <i class="fa fa-bell-o" aria-hidden="true"></i>
-                </a>
-                <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
-                    <div class="row noti-popup">
-                        <div class="col-sm-6 col-noti noti-div">
-                            <h4>My Notification</h4>
-                            <div class="noti-block">
-                                <h3 class="noti-date">Last Update</h3>
-                                <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.notification.list">
+            </div>
+            <Dropdown.custom >
+                    <Dropdown.toggle elementType="a"  class="bell" id="bell" noCaret>
+                        <span rt-if="this.state.role === contant.role.IS_2ND" id="total_notification" class="badge">{this.state.notification.total}</span>
+                        <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
+                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                     </Dropdown.toggle>
+                     <Dropdown.menu  class="dropdown-menu dropdown-noti has-arrow has-arrow fix dd-md full-mobile">
+
+                        <div class="row noti-popup">
+                            <div class="col-sm-6 col-noti noti-div">
+                                <h4>My Notification</h4>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Last Update</h3>
+                                    <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.notification.list">
+                                        <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
+                                            <i class="fa"
+                                            rt-class="{'fa-check icon-success': notification.urgency === 'done',
+                                            'fa-check icon-warning': notification.urgency === 'adone',
+                                            'fa-clock-o': notification.urgency === 'low',
+                                            'fa-clock-o icon-warning': notification.urgency === 'hight',
+                                            'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
+                                            aria-hidden="true"></i>
+                                            <p>{notification.message}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-noti ">
+                                <div class='row'>
+                                    <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.pending_action.list.length}</h4>
+                                    <h4 class="col-sm-5 pull-right">
+                                        <div class="row">
+                                            <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick={this.filterAlert} ></i> : {this.state.pending_action.warning}</span>
+                                            <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick={this.filterAlert}></i> : {this.state.pending_action.danger}</span>
+                                            <HelpButton className="" classNote="overview_timeframe help_timeframe"
+                                                setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." />
+                                        </div>
+
+                                    </h4>
+                                </div>
+                                <span class="actions-percentage">Action completed on time: <b>100%</b></span>
+                                <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.pending_action.list">
                                     <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                        <i class="fa" 
+                                        <i class="fa"
                                         rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                        'fa-check icon-warning': notification.urgency === 'adone',
                                         'fa-clock-o': notification.urgency === 'low',
                                         'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                        'fa-clock-o icon-danger': notification.urgency === 'very hight'}" 
+                                        'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
                                         aria-hidden="true"></i>
                                         <p>{notification.message}</p>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-noti ">
-                            <div class='row'>
-                                <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.pending_action.list.length}</h4>
-                                <h4 class="col-sm-5 pull-right">
-                                    <div class="row">
-                                        <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick={this.filterAlert} ></i> : {this.state.pending_action.warning}</span>
-                                        <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick={this.filterAlert}></i> : {this.state.pending_action.danger}</span>
-                                        <HelpButton className="" classNote="overview_timeframe help_timeframe"
-                                            setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." />
-                                    </div>
 
-                                </h4>
                             </div>
-                            <span class="actions-percentage">Action completed on time: <b>100%</b></span>
-                            <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.pending_action.list">
-                                <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                    <i class="fa"  
-                                    rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                    'fa-clock-o': notification.urgency === 'low',
-                                    'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                    'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
-                                    aria-hidden="true"></i>
-                                    <p>{notification.message}</p>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <div class="col-sm-12 text-center mt-md">
-                           <Link to="/Dashboard/Notification" onClick="{this.hideMenu}">See All Notifications</Link>
+                            <div class="col-sm-12 text-center mt-md">
+                               <Link to="/Dashboard/Notification" onClick="{this.hideMenu}">See All Notifications</Link>
+                           </div>
                        </div>
-                   </div>
-               </div>
-           </div>
+
+                     </Dropdown.menu>
+                    </Dropdown.custom>
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
@@ -93,7 +97,7 @@
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-                            
+
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
@@ -118,7 +122,7 @@
                         </li>
                     </Dropdown.menu>
                 </Dropdown.custom>
-                
+
                 <li>
                     <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>
@@ -145,7 +149,7 @@
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-                            
+
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
@@ -153,7 +157,7 @@
                         </li>
                     </Dropdown.menu>
                 </Dropdown.custom>
-               
+
                 <Dropdown.custom elementType="li">
                     <Dropdown.toggle elementType="a" class="{'dropdown-toggle ' + (this.getActive() === 'Insight' && 'active')}" href="#">
                         Insight
@@ -188,7 +192,7 @@
                 </ul>
             </div>
 
-            
+
             <div class="header-right">
                 <Dropdown.custom class="userbox" eventShow="hover">
                     <Dropdown.toggle elementType="a" href="#" class="" noCaret>
@@ -199,7 +203,7 @@
                             <span class="name">Chris Muffat</span>
                             <span class="role">administrator</span>
                         </div>
-                        
+
                         <i class="fa custom-caret"></i>
                     </Dropdown.toggle>
                     <Dropdown.menu>

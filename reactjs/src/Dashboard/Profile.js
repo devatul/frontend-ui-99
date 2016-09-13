@@ -11,11 +11,12 @@ module.exports = React.createClass({
 
 	    return {
 	   		 profile:{},
+             default : 1
 	    };
 	},
 	componentWillMount(){
 		this.getProfile();
-		this.getPhoto();	
+		this.getPhoto();
 	},
 	getProfile(){
 		$.ajax({
@@ -26,7 +27,7 @@ module.exports = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-            	
+
                 this.setState( {profile: data});
                 console.log("scan result: ", data);
             }.bind(this),
@@ -66,6 +67,14 @@ module.exports = React.createClass({
 			}.bind(this)
 		});
 	},
+    setDefault(value){
+        if(value == 1) {
+            this.setState({default : value})
+        }
+         if(value == 2) {
+            this.setState({default : value})
+        }
+    },
 	componentDidMount() {
 		$(document).ready(function(){
 			$("p.on_off").click(function() {
@@ -80,8 +89,8 @@ module.exports = React.createClass({
 			$("div.ios-switch").click(function(){
 				$("div.my-profile-check-none").toggleClass("my-profile-check");
 			});
-			
-			
+
+
 			$("div.off").click(function(){
 				$(this).toggleClass("on");
 			});
