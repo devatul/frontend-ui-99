@@ -25,9 +25,9 @@ var ColumnChart = React.createClass({
         };
     },
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return  !isEqual(this.props.series, nextProps.series);
-    },
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return  !isEqual(this.props.series, nextProps.series);
+    // },
 
     componentDidUpdate(prevProps, prevState) {
         this.draw();

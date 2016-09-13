@@ -140,9 +140,9 @@ var ReviewValidation = React.createClass({
             }
         }
         if(this.state.reviewCurrent != prevState.reviewCurrent) {
-            $('[data-toggle="tooltip"]').tooltip({
-                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
-            });
+            // $('[data-toggle="tooltip"]').tooltip({
+            //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            // });
 
             $("a.more").click(function(){ 
                 $(this).prev().toggleClass("height-2nd");

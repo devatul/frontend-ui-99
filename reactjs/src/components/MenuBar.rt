@@ -2,6 +2,7 @@
 <rt-import name="FilterLabel" from="./dathena/FilterLabel"/>
 <rt-import name="func" from="../utils/function" />
 <rt-import name="HelpButton" from="./dathena/HelpButton"/>
+<rt-import name="Dropdown" from="./bootstrap/Dropdown"/>
 
 <div rt-scope="this.state.scanResult as scanResult">
 <div class="my_main bar_menu container">
@@ -19,10 +20,11 @@
                 </div>
                 <div class="col-sm-4">
                     <ul class="filter-buttons pull-right">
-                        <li rt-if="this.props.showFilter" class="dropdown">
-                            <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                            <div class="dropdown-backdrop-custom" style="display:none"></div>
-                            <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                        <Dropdown.custom rt-if="this.props.showFilter" elementType="li">
+                            <Dropdown.toggle elementType="a" class="toggle-button btn btn-default" href="#" noCaret>
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </Dropdown.toggle>
+                            <Dropdown.menu style="height: {this.state.style.heightMenu}" elementType="div" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
                                 <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state.listLabel as listLabel ">
                                     <li class="mb-sm">
                                         <div class="form-group">
@@ -30,7 +32,9 @@
                                                 id="confidentialities"
                                                 title="Confidentiality"
                                                 onChange={this.handleSelectBoxChange}
-                                                onSelectAll={this.handleClearAll}
+                                                onClear={this.handleClearAll}
+                                                onShow={this.handleShowSelectBox}
+                                                onClose={this.handleCloseSelectBox}
                                                 checkDefault={true}
                                                 data={listLabel.confidentialities} />
                                         </div>
@@ -42,7 +46,9 @@
                                                 id="categories"
                                                 title="Category"
                                                 onChange={this.handleSelectBoxChange}
-                                                onSelectAll={this.handleClearAll}
+                                                onClear={this.handleClearAll}
+                                                onShow={this.handleShowSelectBox}
+                                                onClose={this.handleCloseSelectBox}
                                                 checkDefault={true}
                                                 data={listLabel.categories} />
                                         </div>
@@ -53,7 +59,9 @@
                                                 id="languages"
                                                 title="Languages"
                                                 onChange={this.handleSelectBoxChange}
-                                                onSelectAll={this.handleClearAll}
+                                                onClear={this.handleClearAll}
+                                                onShow={this.handleShowSelectBox}
+                                                onClose={this.handleCloseSelectBox}
                                                 checkDefault={true}
                                                 data={listLabel.languages} />
                                         </div>
@@ -64,17 +72,21 @@
                                                 id="doc-types"
                                                 title="Document Type"
                                                 onChange={this.handleSelectBoxChange}
-                                                onSelectAll={this.handleClearAll}
+                                                onClear={this.handleClearAll}
+                                                onShow={this.handleShowSelectBox}
+                                                onClose={this.handleCloseSelectBox}
                                                 checkDefault={true}
                                                 data={listLabel['doc-types']} />
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
-                        </li>
-                        <li rt-if="this.props.showInfo" class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
+                            </Dropdown.menu>
+                        </Dropdown.custom>
+                        <Dropdown.custom rt-if="this.props.showInfo" elementType="li">
+                            <Dropdown.toggle elementType="a" class="toggle-button btn btn-default fix-center-info-toggle-button" href="#" noCaret>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </Dropdown.toggle>
+                            <Dropdown.menu class="dropdown-menu has-arrow dd-md full-mobile dd-right">
                                 <div class="table-responsive">
                                     <table class="table general-table mb-none">
                                         <tbody>
@@ -152,9 +164,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            
-                        </li>
+                            </Dropdown.menu>
+                        </Dropdown.custom>
                     </ul>
                 </div>
             </div>

@@ -1,9 +1,326 @@
 <rt-import name="MenuBar" from="../components/MenuBar"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
+<rt-import name="Tabs" from="../components/bootstrap/tabs"/>
+<rt-import name="Panel" from="../components/bootstrap/panel"/>
 <section>
-  <div class="container">
-      <div class="tabs tabs-primary reviewer-tab">
+<div class="container">
+  <Tabs.custom class="tabs-primary reviewer-tab">
+    <Tabs.nav class="cat-list" rt-if="this.state.reviewCurrent != null && this.state.categories.length > 0">
+      <Tabs.tab
+        rt-repeat="category in this.state.categories"
+        class="{(category.id === this.state.reviewCurrent.Id[0]) && 'active'}"
+        title="{category.name}"
+        onClick="()=>this.setCategoryCurrent(categoryIndex)"
+        style="text-transform: capitalize" />
+    </Tabs.nav>
+    <Tabs.content class="tabs-primary reviewer-tab">
+      <Tabs.pane class="active">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row mb-sm">
+              <div class="col-sm-2 col-xs-4 hidden-xs">Reviewers List
+                <HelpButton
+                    classNote="note_chart_content"
+                    setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name}" />
+              </div>
+              <div rt-if="this.state.reviewCurrent != null && this.state.reviewers.length > 0" class="col-sm-10 col-xs-12 text-right" style="text-transform: capitalize">
+                {this.state.categoryCurrent.name} Review Status: 
+                <b class="mr-lg">{ this.state.reviewers.length } Users - {this.state.reviewers.length * this.size(this.state.reviewCurrent.documents)} Documents Challenged</b>
+                Progress:
+                <div class="progress-radial small progress{'-' + this.parseInt(this.state.categoryCurrent.totalValidate * 100 / (this.state.reviewers.length * this.size(this.state.reviewCurrent.documents)))}">
+                  <div class="overlay"></div>
+                </div>
+              </div>
+            </div>
+
+            <Tabs.custom
+              rt-if="this.state.reviewers.length > 0 && this.state.reviewCurrent != null"
+              class="tabs-vertical tabs-primary tabs-left">
+
+              <Tabs.nav class="col-sm-1 col-xs-12 reviewer-list">
+
+                <Tabs.tab 
+                  rt-repeat="reviewer in this.state.reviewers"
+                  style="text-transform: capitalize"
+                  class="{(reviewer.id == this.state.reviewCurrent.Id[1]) ? 'active' : ''}"
+                  onClick="()=>this.setReviewerCurrent(reviewerIndex)">
+                    <span class="review-status-icon green"></span>
+                    <span>{reviewer.first_name + '.' + reviewer.last_name}</span>
+                </Tabs.tab>
+
+              </Tabs.nav>
+
+              <Tabs.content class="col-sm-11 col-xs-12">
+
+                <Tabs.pane class="active tab-challenge">
+                  <div class="reviewer-info clearfix">
+                    <span
+                      rt-if="this.state.reviewerCurrent != null"
+                      style="text-transform: capitalize"
+                      class="mr-md">
+                        Reviewer: { this.state.reviewerCurrent.first_name}.{this.state.reviewerCurrent.last_name}
+                    </span>
+                    <span>
+                      <span rt-if="this.state.reviewCurrent != null" class="doc-num">
+                        {this.size(this.state.reviewCurrent.documents) - this.state.reviewCurrent.totalValidate}
+                      </span> Documents Challenged - Validation Progress: </span>
+                    <div class="progress-radial small progress{'-' + this.parseInt((this.state.reviewCurrent.totalValidate * 100) / this.size(this.state.reviewCurrent.documents))}">
+                      <div class="overlay"></div>
+                    </div>
+
+                    <div class="pull-right">
+                      <button type="button" class="mb-xs mt-none mr-xs btn btn-green" onClick={this.undoHandle}>Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                      <button type="button" style="display: none" class="mb-xs mt-none mr-xs btn btn-green btn-disabled btn-end-review" onClick={this.endReviewHandle}>End Review</button>
+                    </div>
+                  </div>
+
+                  <Panel.custom class="legal_secret actions-panel">
+                    <Panel.head class="document_panel-heading">
+                      <ul class="line_document_content_header">
+                        <li class="document_panel-title">
+                          <h2 class="document_panel-title panel-title">Challenge
+                            <HelpButton
+                              classNote="note_chart_content"
+                              setValue="Documents challenged by reviewers are displayed in this section." />
+                          </h2>
+                        </li>
+                      </ul>
+                    </Panel.head>
+
+                    <Panel.body>
+
+                      <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge">
+                            <thead>
+                              <tr>
+                                <th class="review_note">Status
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
+                                      setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                                </th>
+                                <th class="review_note">Type
+                                </th>
+                                <th class="review_note">Document Name
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
+                                      setValue="This displays the name of each individual document, as it exists in its current state." />
+                                </th>
+                                <!--<th class="review_note">Path
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
+                                      setValue="This displays the logical folder path to where each document is currently located." />
+                                </th>-->
+                                <th class="review_note">Category
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
+                                      setValue="This display the category chose by the reviewer." />
+                                </th>
+                                <th class="review_note">Confidentiality
+                                    <HelpButton className="dropdown-file-info-holder" classNote="help_question_bottom" classIcon="fa-question-circle"
+                                      setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                </th>
+                                <th class="review_note">Coordinator's Comment
+                                    <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
+                                      setValue="Add a comment to justify your acceptance or your rejection of the challenge." />
+                                </th>
+                                <th class="review_note">Validation
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
+                                      setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody rt-if="this.state.reviewCurrent != null" rt-scope="this.state.reviewCurrent as reviewCurrent">
+                              <tr rt-repeat="document in this.state.reviewCurrent.documents" id="{'document_' + documentIndex}" class="opa">
+                                <td>
+                                  <i rt-if="document.status == 'accepted'" class="fa fa-clock-o icon-success"></i>
+                                  <i rt-if="document.status == 'rejected'" class="fa fa-clock-o icon-danger"></i>
+                                  <i rt-if="document.status == 'editing'" class="fa fa-clock-o icon-warning"></i>
+                                </td>
+
+                                <td>
+                                    <i class="fa fa-file-word-o action-file-icon"></i>
+                                </td>
+                                <td class="text-left my_file-name">
+                                  <span
+                                      style="cursor: pointer"
+                                      class="text-italic file-name doc-path"
+                                      data-toggle="modal"
+                                      data-target="#previewModal"
+                                      onClick="()=>this.setDocumentPreview(this.state.reviewCurrent.Id[0], this.state.reviewCurrent.Id[1], documentIndex)"
+                                      data-file-url="{document.image_url}">
+                                          <span
+                                              rel="tooltip"
+                                              data-toggle="tooltip"
+                                              data-original-title="{document.name}">
+                                                 {document.name}
+                                          </span>
+                                  </span>
+                                  <InfoButton>
+                                        <ul>
+                                            <li>name: {document.name}</li>
+                                            <li>Creation Date: 2015-01-01</li>
+                                            <li>Modifitcation Date: 2015-05-28</li>
+                                            <li>Required Legal Retention until: 2025-03-03</li>
+                                            <li>Confidentiality Label: Yes/No</li>
+                                            <li>Number of Classification Challenge: 1</li>
+                                        </ul>
+                                  </InfoButton>
+                                </td>
+                                <!--<td class="text-left">
+                                  <span class="text-italic doc-path"
+                                        rel="tooltip"
+                                        data-toggle="tooltip"
+                                        data-original-title="{document.name}">{document.path}</span>
+                                </td>-->
+                                <td class="vertical-top">
+                                  <select class="form-control challenge-category element-event {(document.previous_category != null && document.previous_category != document.current_category) ? 'changed' : ''}" onChange="(event)=>this.onChangeCategory(event, reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" value="{document.current_category}">
+                                      <option rt-repeat="category in this.state.categories" value="{categoryIndex}">{category.name}</option>
+                                  </select>
+                                  <span rt-if="document.previous_category != null" class="text-italic previous-status">Previous: {this.state.categories[document.previous_category].name}</span>
+                                </td>
+                                <td class="vertical-top text-left">
+                                  <select class="form-control challenge-confidentiality element-event {(document.previous_confidentiality != null && document.previous_confidentiality != document.current_confidentiality) ? 'changed' : ''}" onChange="(event)=>this.onChangeConfidential(event, reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" value="{document.current_confidentiality}">
+                                      <option rt-repeat="confidentiality in this.state.confidentiality" value="{confidentialityIndex}">{confidentiality.name}</option>
+                                  </select>
+                                  <span rt-if="document.previous_confidentiality != null" class="text-italic previous-status">Previous: {this.state.confidentiality[document.previous_confidentiality].name}</span>
+                                </td>
+                                <td class="fix-1st-pading-comment-table">
+                                  <textarea class="form-control" placeholder="Challenge's rationale details"></textarea>
+                                </td>
+                                <td>
+                                  <a style="cursor: pointer" onClick="(event)=>this.onClickValidationButton(reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" class="challenge-btn validation-btn btn btn-default element-event">
+                                  <i class="fa fa-check {(document['2nd_line_validation'] == 'editing') ? 'icon-danger' : '' }{(document['2nd_line_validation'] == 'accepted') ? 'icon-success' : '' }"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                    </Panel.body>
+                  </Panel.custom>
+                  
+                  <Panel.custom class="legal_secret actions-panel">
+                    <Panel.head class="document_panel-heading">
+                      <ul class="line_document_content_header">
+                        <li class="document_panel-title">
+                          <h2 class="document_panel-title panel-title">Challenge Back - Last Review
+                            <HelpButton classNote="note_chart_content" classIcon="fa-question-circle"
+                                      setValue="Documents challenged a 2nd time by a reviewer are displayed in this section. This status represents the final review for documents at this point of the workflow" />
+                          </h2>
+                        </li>
+                      </ul>
+                    </Panel.head>
+                    <Panel.body>
+                      <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                        <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all  approve-button-2" style="display: none;">Approve</button>
+                        <div class="alert alert-success actions-success">
+                          <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                        </div>
+                        <div class="table-responsive">
+                          <table class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                            <thead>
+                              <tr role="row" class="">
+                                <th class="review_note">Status
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
+                                      setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                                </th>
+                                <th class="review_note">Type
+                                </th>
+                                <th class="review_note">Document Name
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" classIcon="fa-question-circle"
+                                      setValue="This displays the name of each individual document, as it exists in its current state." />
+                                </th>
+                                <!--<th class="review_note">Path
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
+                                      setValue="This displays the logical folder path to where each document is currently located." />
+                                </th>-->
+                                <th class="review_note">Category
+                                  <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
+                                      setValue="This display the category chose by the reviewer." />
+                                </th>
+                                <th class="review_note">Confidentiality
+                                    <HelpButton className="dropdown-file-info-holder" classNote="help_question_bottom" classIcon="fa-question-circle"
+                                      setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                </th>
+                                <th class="review_note">Reviewer's Comment
+                                    <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
+                                      setValue="Comments provided by the reviewer are displayed here." />
+                                </th>
+                                <th class="review_note">Validation
+                                  <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content_review" classIcon="fa-question-circle"
+                                      setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="opa">
+                                <td><i class="fa fa-clock-o"></i></td>
+                                <td>
+                                    <i class="fa fa-file-word-o action-file-icon"></i>
+                                </td>
+                                <td class="text-left my_file-name">
+                                  <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal3">Tax report.ppt sadfasdfasdfasdfsdfasd</span>
+                                  <InfoButton>
+                                      <li>Creation Date: 2015-01-01</li>
+                                      <li>Modifitcation Date: 2015-05-28</li>
+                                      <li>Required Legal Retention until: 2025-03-03</li>
+                                      <li>Confidentiality Label: Yes/No</li>
+                                      <li>Number of Classification Challenge: 1</li>
+                                  </InfoButton>
+                                </td>
+                                <!--<td class="text-left">
+                                  <span class="text-italic doc-path">/legal/teamA/contract/</span>
+                                </td>-->
+                                
+                                <td class="vertical-top">
+                                  <select class="form-control challenge-category">
+                                      <option selected="">Accounting/ Tax</option>
+                                      <option>Corporate Entity</option>
+                                      <option>Customer</option>
+                                      <option>Employee</option>
+                                      <option>Legal/Compliance</option>
+                                      <option>Transaction</option>
+                                  </select>
+                              </td>
+                              <td class="vertical-top text-left">
+                                <select class="form-control changed challenge-confidentiality">
+                                    <option>Banking Secrecy</option>
+                                    <option>Secret</option>
+                                    <option selected="">Confidential</option>
+                                    <option>Internal</option>
+                                    <option>Public</option>
+                                </select>
+                                <span class="text-italic previous-status">Previously: Secret</span>
+                              </td>
+                              <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
+                                  <span class="doc-path my-doc-path">The classification should be Confidential because. The classification should be Confidential because</span>
+                                  <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
+                              </td>
+                              <td>
+                                  <a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                        </div>
+                    </Panel.body>
+                  </Panel.custom>
+                  <button class="btn btn-green btn-next-reviewer pull-right mt-sm" onClick="()=>this.setReviewerCurrent(this.state.reviewerCurrent.index + 1)" >Go to Next Reviewer</button>
+                </Tabs.pane>
+
+              </Tabs.content>
+              <button class="btn btn-green btn-next-cat pull-right mt-sm mr-md" onClick="()=>this.setCategoryCurrent(this.state.categoryCurrent.index + 1)">Go to Next Category</button>
+            </Tabs.custom>
+          </div>
+        </div>
+      </Tabs.pane>
+      <Tabs.pane>
+      </Tabs.pane>
+    </Tabs.content>
+  </Tabs.custom>
+      <!--<div class="tabs tabs-primary reviewer-tab">
           <ul rt-if="this.state.reviewCurrent != null && this.state.categories.length > 0" class="nav nav-tabs cat-list">
               <li rt-repeat="category in this.state.categories" key="{categoryIndex}" class="{(category.id == this.state.reviewCurrent.Id[0]) ? 'active' : ''}">
                   <a href="#categoryInfo" onClick="()=>this.setCategoryCurrent(categoryIndex)" data-toggle="tab" aria-expanded="true" style="text-transform: capitalize">
@@ -84,13 +401,13 @@
                                 </h2>
                               </li>
                             </ul>
-                            <!--<div class="panel-actions my-actions-btn-group">
-                              <!--
+                            <div class="panel-actions my-actions-btn-group">
+                              
                                 <button type="button" class="mb-xs mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                 <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
-                              -->
-                              <!--<a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>-->
-                            <!--</div>-->
+                              
+                              <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            </div>
                           <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                               <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelChallenge"></a>
                           </div>
@@ -115,7 +432,7 @@
                                   <!--<th class="review_note">Path
                                     <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                         setValue="This displays the logical folder path to where each document is currently located." />
-                                  </th>-->
+                                  </th>
                                   <th class="review_note">Category
                                     <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                         setValue="This display the category chose by the reviewer." />
@@ -176,7 +493,7 @@
                                         rel="tooltip"
                                         data-toggle="tooltip"
                                         data-original-title="{document.name}">{document.path}</span>
-                                </td>-->
+                                </td>
                                 <td class="vertical-top">
                                   <select class="form-control challenge-category element-event {(document.previous_category != null && document.previous_category != document.current_category) ? 'changed' : ''}" onChange="(event)=>this.onChangeCategory(event, reviewCurrent.Id[0], reviewCurrent.Id[1], documentIndex)" value="{document.current_category}">
                                       <option rt-repeat="category in this.state.categories" value="{categoryIndex}">{category.name}</option>
@@ -222,7 +539,7 @@
                             <button type="button" class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>
                             -->
                             <!--<a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>-->
-                          <!--</div>-->
+                          <!--</div>-
                           <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                               <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelChallengeBack"></a>
                           </div>
@@ -252,7 +569,7 @@
                                     <!--<th class="review_note">Path
                                       <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                           setValue="This displays the logical folder path to where each document is currently located." />
-                                    </th>-->
+                                    </th>-
                                     <th class="review_note">Category
                                       <HelpButton className="dropdown-file-info-holder" classNote="help_question_content" classIcon="fa-question-circle"
                                           setValue="This display the category chose by the reviewer." />
@@ -289,7 +606,7 @@
                                     </td>
                                     <!--<td class="text-left">
                                       <span class="text-italic doc-path">/legal/teamA/contract/</span>
-                                    </td>-->
+                                    </td>
                                     
                                     <td class="vertical-top">
                                       <select class="form-control challenge-category">
@@ -401,8 +718,8 @@
               </div>
             </div>
           </div>
-      </div>
-    </div>
+      </div>-->
+</div>
    <!--Modal-->
   
     <div id="previewModal" rt-if="(this.state.documentPreview !== null)" class="modal fade in" role="dialog" rt-scope="this.state.documentPreview as document; this.state.reviewerCurrent as reviewerCurrent; this.state.reviewCurrent as reviewCurrent">
@@ -431,19 +748,19 @@
           <div class="modal-body">
             <div class="table-responsive">
                <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-          <thead>
-            <tr role="row" class="">
-              <th class="review_note">Status</th>
-              <th class="review_note">Document Name</th>
-              <th class="review_note">Path</th>
-              <th class="review_note">Category</th>
-              <th class="review_note">Confidentiality</th>
-              <th class="review_note">Comment</th>
-              <th class="text-center">Validation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="">
+                  <thead>
+                    <tr role="row" class="">
+                      <th class="review_note">Status</th>
+                      <th class="review_note">Document Name</th>
+                      <th class="review_note">Path</th>
+                      <th class="review_note">Category</th>
+                      <th class="review_note">Confidentiality</th>
+                      <th class="review_note">Comment</th>
+                      <th class="text-center">Validation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="">
                         <td>
                           <i rt-if="document.status == 'accepted'" class="fa fa-clock-o icon-success"></i>
                           <i rt-if="document.status == 'rejected'" class="fa fa-clock-o icon-danger"></i>
@@ -512,7 +829,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 </section>

@@ -130,6 +130,12 @@
     padding-right: 10px !important;
 }
 
+.table-my-actions tbody.fix-td-checkbox > tr > td .checkbox-custom {
+     padding: 0px 0px 0px 0px !important;
+}
+.table-my-actions tbody.fix-td-checkbox > tr td:nth-child(1) {
+     width: 41px;
+}
 table.docPreview > tbody > tr > td:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
 }

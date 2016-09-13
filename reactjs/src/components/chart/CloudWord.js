@@ -35,7 +35,7 @@ var CloudWord = React.createClass({
     render() {
         return (
             <div>
-                <h4 class="review_cloud_p">{this.props.title}
+                <h4 className="review_cloud_p">{this.props.title}
                     <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
                         setValue={this.props.help && this.props.help} />
                 </h4>

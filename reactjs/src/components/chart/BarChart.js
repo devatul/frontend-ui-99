@@ -30,7 +30,7 @@ var BarChart = React.createClass({
            $(div).highcharts({
                 chart: {
                     type: 'bar',
-                    height: data.length * 36.5
+                    height: data.length * 37.5
                 },
                 title: {
                     text: ''

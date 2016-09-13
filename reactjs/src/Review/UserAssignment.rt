@@ -6,6 +6,7 @@
 <rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="BarChart" from="../components/chart/BarChart"/>
+<rt-import name="Dropdown" from="../components/bootstrap/Dropdown"/>
 <section>
   <div class="container">
       <div class="tabs tabs-primary">
@@ -119,11 +120,33 @@
                                     setValue="Most active users creating or modifying (depending on the type of Reviewer chose) {this.state.category.current.name} document" />
                                 </h4>
                                 <ul class="filter-buttons list-unstyled pull-left">
-                                    <li class="dropdown">
-                                      <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                                        <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                        <div ref="backDropFilter" id="backDropFilter" onClick={this.handleClickBackDrop} class="dropdown-menu has-child has-arrow dd-md">
+                                    <!--<Dropdown.custom id="userFilter" elementType="li" subMenu>
+                                      <Dropdown.toggle elementType="a" class="toggle-button btn btn-default">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>
+                                      </Dropdown.toggle>
+                                        <Dropdown.menu class="dropdown-menu has-child has-arrow dd-md">
                                             <ul class="filter-list list-unstyled pt-xs">
+                                                <Dropdown.custom id="Timeframe" elementType="li" subMenu={false}>
+                                                  <Dropdown.toggle>Timeframe</Dropdown.toggle>
+                                                  <Dropdown.menu elementType="ul">
+                                                        <li>
+                                                            sdfasdf
+                                                        </li>
+                                                        <li>
+                                                            sdfasdf
+                                                        </li>
+                                                        <li>
+                                                            sdfasdf
+                                                        </li>
+                                                    </Dropdown.menu>
+                                                </Dropdown.custom>-->
+                                      <li class="dropdown">
+                                          <a class="toggle-button btn btn-default">
+                                            <i class="fa fa-filter" aria-hidden="true"></i>
+                                          </a>
+                                          <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                          <div  class="dropdown-menu has-child has-arrow dd-md" style="max-width: 560px;">
+                                              <ul class="filter-list list-unstyled pt-xs">
                                                 <li>
                                                   <SelectBox
                                                     id={this.static.selectId.timeframe}
@@ -156,6 +179,8 @@
                                                     onChange={this.handleOnChangeSelectBox} />
                                                 </li>
                                             </ul>
+                                        <!--</Dropdown.menu>
+                                    </Dropdown.custom>-->
                                         </div>
                                     </li>
                                 </ul>
@@ -164,7 +189,8 @@
                                     <div class="pull-left filter-tags">
                                       <FilterLabel
                                           data={this.state.datafilter.filterLabel}
-                                          onClick={this.handleClickFilterLabel} />
+                                          onClick={this.handleClickFilterLabel}
+                                           />
                                     </div>
                                 </div>
                               </div>

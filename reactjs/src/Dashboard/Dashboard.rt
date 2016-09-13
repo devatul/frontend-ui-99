@@ -1,9 +1,8 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="Dropdown" from="../components/bootstrap/Dropdown"/>
 <rt-import name="contant" from="../Constant.js"/>
 <section>
-    <!--my_header start-->
-
     <!--my_header start-->
     <div class="my_header">
         <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
@@ -32,12 +31,12 @@
                                 <h3 class="noti-date">Last Update</h3>
                                 <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.notification.list">
                                     <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                        <i class="fa"
+                                        <i class="fa" 
                                         rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                         'fa-check icon-warning': notification.urgency === 'adone',
                                         'fa-clock-o': notification.urgency === 'low',
                                         'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                        'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
+                                        'fa-clock-o icon-danger': notification.urgency === 'very hight'}" 
                                         aria-hidden="true"></i>
                                         <p>{notification.message}</p>
                                     </li>
@@ -60,7 +59,7 @@
                             <span class="actions-percentage">Action completed on time: <b>100%</b></span>
                             <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.pending_action.list">
                                 <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                    <i class="fa"
+                                    <i class="fa"  
                                     rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                     'fa-clock-o': notification.urgency === 'low',
                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
@@ -83,48 +82,43 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
-                    <span class="badge">40</span>
-                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
-                    </a>
-                    <ul class="dropdown-menu fix-review-menu">
-                        <!--<li>
-                            <span class="badge">20</span>
-                            <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
-                        </li>-->
+                <Dropdown.custom elementType="li">
+                    <Dropdown.toggle elementType="a" class="{'dropdown-toggle ' + (this.getActive() === 'Review' && 'active')}" href="#">
+                        <span class="badge">40</span>
+                        Review
+                    </Dropdown.toggle>
+                    <Dropdown.menu elementType="ul" class="dropdown-menu fix-review-menu">
                         <li>
                             <span class="badge">20</span>
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-
+                            
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
-                    </ul>
-                </li>
-                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+                    </Dropdown.menu>
+                </Dropdown.custom>
 
-                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><!--<li class="active">-->
-
+                <Dropdown.custom elementType="li">
+                    <Dropdown.toggle elementType="a" class="{'dropdown-toggle ' + (this.getActive() === 'Insight' && 'active')}" href="#">
+                        Insight
+                    </Dropdown.toggle>
+                    <Dropdown.menu elementType="ul">
+                        <li>
                             <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
                         </li>
                         <li>
-
                             <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
                         </li>
                         <li>
-
                             <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
                         </li>
-                    </ul>
-                </li>
-
+                    </Dropdown.menu>
+                </Dropdown.custom>
+                
                 <li>
                     <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>
@@ -134,11 +128,11 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
-                    <span class="badge">40</span>
-                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
-                    </a>
-                    <ul class="dropdown-menu fix-review-menu">
+                <Dropdown.custom elementType="li">
+                    <Dropdown.toggle elementType="a" class="{'dropdown-toggle ' + (this.getActive() === 'Review' && 'active')}" href="#">
+                        Review
+                    </Dropdown.toggle>
+                    <Dropdown.menu elementType="ul" class="dropdown-menu fix-review-menu">
                         <li>
                             <span class="badge">20</span>
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
@@ -151,33 +145,31 @@
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-
+                            
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
-                    </ul>
-                </li>
-                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
-
-                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><!--<li class="active">-->
-
+                    </Dropdown.menu>
+                </Dropdown.custom>
+               
+                <Dropdown.custom elementType="li">
+                    <Dropdown.toggle elementType="a" class="{'dropdown-toggle ' + (this.getActive() === 'Insight' && 'active')}" href="#">
+                        Insight
+                    </Dropdown.toggle>
+                    <Dropdown.menu elementType="ul">
+                        <li>
                             <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
                         </li>
                         <li>
-
                             <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
                         </li>
                         <li>
-
                             <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
                         </li>
-                    </ul>
-                </li>
+                    </Dropdown.menu>
+                </Dropdown.custom>
                 <li>
                     <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
                 </li>
@@ -196,10 +188,10 @@
                 </ul>
             </div>
 
-
+            
             <div class="header-right">
-                <div id="userbox" class="userbox">
-                    <a href="#" data-toggle="dropdown" aria-expanded="true">
+                <Dropdown.custom class="userbox" eventShow="hover">
+                    <Dropdown.toggle elementType="a" href="#" class="" noCaret>
                         <figure class="profile-picture">
                             <img src="/assets/images/User_font_awesome.svg.jpg">
                         </figure>
@@ -207,29 +199,28 @@
                             <span class="name">Chris Muffat</span>
                             <span class="role">administrator</span>
                         </div>
-
+                        
                         <i class="fa custom-caret"></i>
-                    </a>
-
-                    <div class="dropdown-menu">
+                    </Dropdown.toggle>
+                    <Dropdown.menu>
                         <ul class="list-unstyled">
                             <li class="divider"></li>
-                            <li>
-                               <Link to="/Dashboard/Profile" role="menuitem" tabindex="-1"><i class="fa fa-user"></i> My Profile</Link>
-                           </li>
-                           <li rt-if="this.state.role === contant.role.IS_ADMIN">
-                            <Link to="/Admin/Admin_Step1" role="menuitem" tabindex="-1"><i class="fa fa-cog"></i> Settings </Link>
+                                <li>
+                                <Link to="/Dashboard/Profile" role="menuitem" tabindex="-1"><i class="fa fa-user"></i> My Profile</Link>
+                                </li>
+                            <li rt-if="this.state.role === contant.role.IS_ADMIN">
+                                <Link to="/Admin/Admin_Step1" role="menuitem" tabindex="-1"><i class="fa fa-cog"></i> Settings </Link>
                             </li>
-                           <li>
-                            <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
-                        </li>
-                    </ul>
-                </div>
+                            <li>
+                                <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </Dropdown.menu>
+                </Dropdown.custom>
             </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</nav>
+        </div><!-- /.container-fluid -->
+    </nav>
 </div>
 
-        <div>{this.props.children}</div>
-    </section>
+<div>{this.props.children}</div>
+</section>

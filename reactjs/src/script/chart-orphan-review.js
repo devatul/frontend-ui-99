@@ -2,7 +2,7 @@ module.exports = function() {
 
           var previousPoint = null;
 
-          $('#choose_cluster').select2();
+          //$('#choose_cluster').select2();
           /*$('#choose_cluster').on("change", function(e) {
             $('.cluster-block').hide();
             $('[id="'+$(this).val()+'"]').show();

@@ -142,24 +142,26 @@ var OrphanReview = React.createClass({
             this.setState({ orphanData: updateOrphanData });
         }
         debugger
-        if(this.state.listDocument != prevState.listDocument) {
-            $('.select-group select').focus(function(){
-            var selectedRow = $(this).parents('tr');
-                $('.table-my-actions tr').each(function(){
-                    if(!$(this).find('.checkbox-item').prop('checked')){
-                        $(this).addClass('inactive');
-                    }
-                });
-                selectedRow.removeClass('inactive');
-            });
+        if(!isEqual(orphanData.listDocument, prevState.orphanData.listDocument)) {
 
-            $('.select-group select').blur(function(){
-                $('.table-my-actions tr').removeClass('inactive');
-            });
+            this.checkedNumber();
+            // $('.select-group select').focus(function(){
+            // var selectedRow = $(this).parents('tr');
+            //     $('.table-my-actions tr').each(function(){
+            //         if(!$(this).find('.checkbox-item').prop('checked')){
+            //             $(this).addClass('inactive');
+            //         }
+            //     });
+            //     selectedRow.removeClass('inactive');
+            // });
 
-            $('[data-toggle="tooltip"]').tooltip({
-                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
-            });
+            // $('.select-group select').blur(function(){
+            //     $('.table-my-actions tr').removeClass('inactive');
+            // });
+
+            // $('[data-toggle="tooltip"]').tooltip({
+            //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
+            // });
         }
         if(!isEqual(orphanData, prevState.orphanData)) {
             let prevOrphanData = prevState.orphanData,
@@ -170,21 +172,22 @@ var OrphanReview = React.createClass({
                 
             debugger
             if(!isEqual(orphanData.categories, prevOrphanData.categories)) {
-                let chart = this.drawChart();
+                //this.drawChart();
+
                 
-                categoryChart = chart.categories;
-                documentType = chart.doctype;
+                //categoryChart = chart.categories;
+                //documentType = chart.doctype;
 
                 debugger
             }
 
-            if(!isEqual(orphanData.centroids, prevOrphanData.centroids)) {
-                centroidChart = this.drawCentroid();
-                debugger
-            }
+            // if(!isEqual(orphanData.centroids, prevOrphanData.centroids)) {
+            //     centroidChart = this.drawCentroid();
+            //     debugger
+            // }
 
             if(!isEqual(orphanData.cloudWords, prevOrphanData.cloudWords)) {
-                wordList = this.drawCloud();
+                this.drawCloud();
                 debugger
             }
 
@@ -343,42 +346,92 @@ var OrphanReview = React.createClass({
         }
     },
 
-    handleTableRowOnChange: (event, docIndex) => {
-        let element = event.target;
-
+    handleTableRowOnChange: function(event, index) {
+        let element = event.target, that = this;
+        //debugger
         switch(element.id) {
             case 'selectCategory': {
-                let index = element.value;
+                let index = element.value, that = this;
+                debugger
+                this.onChangeCategory(event, index);
+            }
+            break;
+            case 'selectConfidentialities': {
+                this.onChangeConfidential(event, index);
+            }
+            break;
+            case 'checkbox': {
+                this.onClickCheckbox(event, index);
             }
         }
+    },
+
+    handleTableRowOnClick: function(event, index) {
+        debugger
+    },
+
+    handleOnChangeSelectOrphan: function(event) {
+        debugger
+    },
+
+    fileDistribution: function() {
+        let data = [
+            { name: 'Word', color: 'yellow', total: 5015 },
+            { name: 'Excel', color: 'red', total: 3299 },
+            { name: 'Power Point', color: 'purple', total: 3991 },
+            { name: 'PDF', color: 'green', total: 3842 },
+            { name: 'Other', color: 'blue', total: 1067 }
+        ],
+        total = 0,
+        children = [];
+
+        data.map(function(e) {
+            total += e.total;
+        });
+
+        for(let i = data.length - 1; i >= 0; i--) {
+            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+                            {data[i].name}
+                            <span className="item-legend">{data[i].total}</span>
+                        </div>;
+        }
+
+        return(
+            <div className="file-distribution clearfix">
+                {children}
+            </div>
+        );
     },
 
     onChangeCategory: function(event, docIndex) {
         let element = event.target,
             index = element.value,
-            { listDocument, stackChange } = this.state;
+            { stackChange } = this.state,
+            { listDocument } = this.state.orphanData;
 
         var categoryIndex = event.target.value;
         var samplesDefault = this.state.samplesDefault;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var saveDocument = $.extend(true, {}, listDocument[docIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
-            index: sampleIndex,
+            index: docIndex,
             contents: saveDocument
         });
-            listDocument[sampleIndex].current.category = categoryIndex;
-        if(categoryIndex == samplesDefault[sampleIndex].current.category || listDocument[sampleIndex].current.confidential > -1 ) {
-            listDocument[sampleIndex].current.status = "accept";
+            listDocument[docIndex].current.category = categoryIndex;
+        if(categoryIndex == samplesDefault[docIndex].current.category || listDocument[docIndex].current.confidential > -1 ) {
+            listDocument[docIndex].current.status = "accept";
         }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument }
+            orphanData: {
+                listDocument: { $set: listDocument }
+            }
         }));
-        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + sampleIndex});
+        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + docIndex});
     },
     onChangeConfidential: function(event, sampleIndex) {
         var confidentialIndex = event.target.value;
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var samplesDefault = this.state.samplesDefault;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -393,24 +446,30 @@ var OrphanReview = React.createClass({
         //     listDocument[sampleIndex].current.status = "accept";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: { $set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateConfidential_' + confidentialIndex + '_' + sampleIndex}); 
     },
     checkedNumber: function() {
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var numb = 0;
         for(var i = 0; i < listDocument.length; i++) {
             if(listDocument[i].current.checked == true) {
                 numb++;
             }
         }
-        this.setState({ checkedNumber: numb});
+        let updateOrphanData = update(this.state.orphanData, {
+            checkNum: { $set: numb }
+        });
+        debugger
+        this.setState({ orphanData: updateOrphanData});
     },
     onClickCheckbox: function(event, sampleIndex) {
         var checked = event.target.checked;
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
@@ -420,7 +479,9 @@ var OrphanReview = React.createClass({
         listDocument[sampleIndex].current.checked = checked;
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: {$set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.checkedNumber();
@@ -450,7 +511,9 @@ var OrphanReview = React.createClass({
         }
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: {$set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateValidate' + '_' + 'accept' + '_' + sampleIndex});
@@ -516,6 +579,16 @@ var OrphanReview = React.createClass({
     cutPath: function(str) {
         if(str.length > 0) {
             return str.substring(0,str.lastIndexOf('/') + 1);
+        }
+    },
+
+    handleOnSelectTab: function(eventKey, event) {
+        switch(eventKey) {
+            case 'first': {
+                this.drawChart();
+                debugger
+            }
+            break;
         }
     },
 

@@ -28,6 +28,10 @@ var MenuBar = React.createClass
                 labels: []
             },
             scanResult: {},
+
+            style: {
+                heightMenu: 'auto'
+            }
 	    };
 	},
 	propTypes: {
@@ -53,9 +57,10 @@ var MenuBar = React.createClass
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { filter, scanResult, listLabel } = this.state;
+        var { filter, scanResult, listLabel, style } = this.state;
         var {title} = this.props;
         return !isEqual( scanResult, nextState.scanResult )
+            || !isEqual( style, nextState.style )
             || !isEqual( listLabel, nextState.listLabel )
             || !isEqual( filter.labels, nextState.filter.labels )
             || !isEqual( filter.params, nextState.filter.params )
@@ -371,6 +376,24 @@ var MenuBar = React.createClass
             });
 
         this.setState({ listLabel: updateLabel, filter: updateFilter });
+    },
+
+    handleShowSelectBox: function(el) {
+        let { refs } = el.refs.dropdown_Menu,
+
+            updateStyle = update(this.state.style, {
+                heightMenu: { $set: refs.Menu.offsetHeight + 80 + 'px' }
+            })
+        this.setState({ style: updateStyle });
+    },
+
+    handleCloseSelectBox: function(el) {
+        let { refs } = el.refs.dropdown_Menu,
+
+            updateStyle = update(this.state.style, {
+                heightMenu: { $set: 'auto' }
+            })
+        this.setState({ style: updateStyle });
     },
     
     getscanResult() {

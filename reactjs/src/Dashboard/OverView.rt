@@ -4,6 +4,7 @@
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="DonutChart" from="../components/chart/DonutChart" />
 <rt-import name="StackedChart" from="../components/chart/StackedChart" />
+<rt-import name="Panel" from="../components/bootstrap/panel"/>
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
@@ -181,7 +182,69 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <section class="panel panel-featured panel-featured-primary">
+                    <Panel.custom>
+                        <Panel.head title="Categorisation Summary">
+                            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                                <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
+                            </div>
+                        </Panel.head>
+                        <Panel.body>
+                            <div id="datatable-editable_wrapper" class="no-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped mb-none no-footer"
+                                           id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1" aria-sort="ascending">Categories
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">Reviewed Documents
+                                                <HelpButton
+                                                    className="dropdown-file-info-holder"
+                                                    classNote="help_question_content fix-overview-help-button-table"
+                                                    setValue="Percentage of documents reviewed for each category" />
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
+                                                colspan="1">Validated Documents
+                                                <HelpButton
+                                                    classNote="help_question_content fix-overview-help-button-table"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of documents validated and classified for each category." />
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">Review Accuracy
+                                                <HelpButton
+                                                    classNote="help_question_bottom fix fix-overview-help-button-table"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of successful challenges compared to the total level of challenges. " />
+                                            </th>
+                                            <th class="text-center" tabindex="0" aria-controls="datatable-default"
+                                                rowspan="1" colspan="1">Accuracy
+                                                <HelpButton
+                                                    classNote="note_chart_content_review fix fix-overview-help-button-table"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Percentage of accuracy of Dathena 99 for each category." />
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd" role="row" rt-repeat="category in scan.result.categories">
+                                                <td class="text-left" style="text-transform: capitalize">
+                                                    <i class="fa {category.class}" aria-hidden="true"></i>{category.name}
+                                                </td>
+                                                <td class="center-padding-table-overview">{category.percentage_reviewed_docs}% ({func.formatNumber(category.total_reviewed_docs)})</td>
+                                                <td class="center-padding-table-overview">{category.percentage_validated_docs}% ({func.formatNumber(category.total_validated_docs)})</td>
+                                                <td class="center hidden-phone">{category.percentage_owner_accuracy_docs}%</td>
+                                                <td class="center hidden-phone">{category.percentage_prediction_accuracy_docs}%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </Panel.body>
+                    </Panel.custom>
+                    <!--<section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
                             <h2 class="panel-title">Categorisation Summary</h2>
                             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
@@ -244,7 +307,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section>-->
                 </div>
             </div>
         </div>
