@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
-import Dropdown from './Dropdown'
+import Dropdown from '../../components/bootstrap/Dropdown'
 
 var NumberUser = React.createClass({
 	 getInitialState: function() {

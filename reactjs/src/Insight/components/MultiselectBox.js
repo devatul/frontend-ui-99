@@ -1,7 +1,7 @@
 'Use Strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import Dropdown from './Dropdown'
+import Dropdown from '../../components/bootstrap/Dropdown'
 import update from 'react-addons-update'
 import _ from 'lodash'
 
