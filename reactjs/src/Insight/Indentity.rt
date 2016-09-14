@@ -4,12 +4,12 @@
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
-
+ 
 
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
-      <h2 class="panel-title">Risk Insights
+      <h2 class="panel-title">Risk Insights 
        <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
 
      </h2>
@@ -19,7 +19,7 @@
       <div class="col-md-4">
         <section class="panel">
           <div class="panel-body bg-secondary widget-panel insight-panel">
-            <h4 class="widget-title">Unidentifiable Files
+            <h4 class="widget-title">Unidentifiable Files 
              <HelpButton type="overview_question_a" content="Number of files that can not be identified."/>
 
            </h4>
@@ -278,7 +278,7 @@
   <div class="col-md-12">
     <h3>Key Content Contributor
       <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/>
-
+      
     </h3>
     <div class="panel panel-chart">
       <div class="panel-body">

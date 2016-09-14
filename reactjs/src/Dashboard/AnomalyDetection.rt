@@ -172,6 +172,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
+                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>
@@ -361,7 +362,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-
+                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>
@@ -551,7 +552,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-
+                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>
@@ -758,7 +759,7 @@
                         <th>Folder at Risk</th>
                         <th>User Anomaly</th>
                         <th>Category at Risk
-
+                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>
@@ -964,7 +965,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-
+                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>

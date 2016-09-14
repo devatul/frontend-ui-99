@@ -5,7 +5,7 @@ import template from './UserAssignment.rt'
 import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
-import { upperFirst, findIndex, assignIn, isEqual, sortBy } from 'lodash'
+import { upperFirst, findIndex, assignIn, isEqual } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var UserAssignment = React.createClass({

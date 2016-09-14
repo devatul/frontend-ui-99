@@ -12,7 +12,7 @@
 }
 .has-error:focus {
   border-color: #ccc;
-
+    
 }
 #submitForm .error {
   color:#B94A48;
@@ -40,11 +40,11 @@
     background-color: #349da2;
 }
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
-
+    
     display: block;
 }
 .widget-panel .widget-chart:not(.in-progress) .loading-dot {
-
+    
     display: block;
 }
 
@@ -112,7 +112,7 @@
 .center-padding {
     text-align: left;
     padding-left: 95px !important;
-
+   
 }
 .table-my-actions > tbody > tr > td {
     vertical-align: middle;
@@ -120,7 +120,7 @@
     /* padding: 10px !important; */
 }
 /*.vertical-top.document_2nd.first-ch {
-     min-width: 160px;
+     min-width: 160px; 
     max-width: 150px;
 }*/
 
@@ -164,20 +164,4 @@
 }
 .help_question_content.has-arrow.fixLeft {
     margin-left: -295px
-}
-.has-arrow.fix_Notification{
-    margin-left: -22px;
-    margin-top: 60px;
-    width: 50vw;
-}
-.fixIcon_myteam {
-    left: 69px;
-    position: relative;
-    top: -18px;
-    font-weight: normal;
-}
-.fixIcon_myteam p {
-     font-weight: normal;
-    color: #747474;
-    font-size: 13px;
 }

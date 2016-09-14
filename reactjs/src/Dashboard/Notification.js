@@ -556,9 +556,9 @@ var Notification = React.createClass({
                         ]
                     }
                 },
-                warningNoti: { $set: 3 },
+                warningNoti: { $set: 1 },
                 dangerNoti: { $set: 1 },
-                total: { $set: 6 }
+                total: { $set: 4 }
             });
         } else if (role === Constant.role.IS_2ND) {
             var update_notification = update(this.state, {

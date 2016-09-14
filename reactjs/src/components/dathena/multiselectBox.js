@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import Dropdown from '../bootstrap/Dropdown'
 import _ from 'lodash'
 
 var multiselectBox = React.createClass({
@@ -69,14 +68,15 @@ var multiselectBox = React.createClass({
         this.props.onChange(field);
     },
 
-    handleClear: function(event) {
+    handleSelectAll: function(event) {
         var { id, title, data, checkDefault } = this.props, { checked } = event.target,
             field = {
                 id: id,
                 title: title,
-                data: data
+                data: data,
+                checked: checked
             };
-    	this.props.onClear(field);
+    	this.props.onSelectAll(field);
     },
     render() {
             var children = [];
@@ -96,22 +96,34 @@ var multiselectBox = React.createClass({
                                 </li>;
             }.bind(this));
         return (
-            <Dropdown.custom className="btn-group dropdown" onShow={this.props.onShow} onClose={this.props.onClose}>
-                <Dropdown.toggle className="multiselect dropdown-toggle btn btn-default">
-                    <span className="multiselect-selected-text">{this.props.title}</span>
-                </Dropdown.toggle>
-                <Dropdown.menu elementType="ul" className="multiselect-container dropdown-menu">
-                    <li className={'multiselect-item multiselect-all'}>
-						<a href="#" tabIndex="0" className="multiselect-all" onClick={this.handleClear}>
-                            <label className="checkbox">
-                                <strong>Clear all</strong>
-                            </label>
+        	<div ref="dropdown" className="btn-group dropdown">
+				<button type="button"
+					key={this.props.key + '_'}
+					onClick={this.handleOnClick}
+					className="multiselect dropdown-toggle btn btn-default"
+					data-toggle="dropdown"
+					title={this.props.title}
+					aria-expanded="false">
+					<span className="multiselect-selected-text">{this.props.title}</span>
+					<b className="caret"></b>
+				</button>
+				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
+					<li className={'multiselect-item multiselect-all'}>
+						<a tabIndex="0" className="multiselect-all">
+						<label className="checkbox">
+							<input ref="checkall"
+                                name={'select_all'}
+                                key={this.props.id + '_select_all'}
+                                checked={this.state.checkall}
+								onChange={this.handleSelectAll}
+								type="checkbox" value="multiselect-all"/>
+							Clear all
+						</label>
 						</a>
 					</li>
 					{children}
-                </Dropdown.menu>
-            </Dropdown.custom>
-            
+				</ul>
+			</div>
         );
     }
 });

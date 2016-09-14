@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import update from 'react-addons-update'
 import InfoButton from '../dathena/InfoButton'
 import SelectBox from '../dathena/SelectBox'
-import ProgressBar from 'react-bootstrap/lib/ProgressBar'
 import makeRequest from '../../utils/http'
 import _ from 'lodash'
 
@@ -99,13 +98,12 @@ var Row = React.createClass({
     },
 
     render() {
-        let { document, numberChecked, noConfidence } = this.props;
-        debugger
+        let { document } = this.props;
         return (
-            <tr className={(numberChecked > 0) && !document.current.checked && 'inactive'}  onClick={this.handleOnclick}>
+            <tr className="">
                 <td>
                     <div className="checkbox-custom checkbox-default">
-                        <input id="checkbox" onChange={this.handleCheckboxChange} type="checkbox" className="checkbox-item-1"/>
+                        <input ref="checkbox" type="checkbox" className="checkbox-item-1"/>
                         <label></label>
                     </div>
                 </td>
@@ -114,7 +112,7 @@ var Row = React.createClass({
                 </td>
                 <td className="text-left">
                     <span className="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal">
-                        <span id="documentName" data-toggle="tooltip">{document.name}</span>
+                        <span id="documentName" data-toggle="tooltip" onClick={this.handleOnclick}>{document.name}</span>
                     </span>
 
                     <InfoButton>
@@ -130,44 +128,30 @@ var Row = React.createClass({
                 </td>
                 <td>
                     <div className="select-group">
-                        { !noConfidence &&
-                            <div className="selected-info">
-                                <ProgressBar className="progress-striped light">
-                                    <ProgressBar
-                                        bsStyle="warning"
-                                        min={0}
-                                        max={100}
-                                        now={50}
-                                        active
-                                        label={<span className="progress-percentage">(50%)</span>} />
-                                </ProgressBar>
+                        <div className="selected-info">
+                            <div className="progress progress-striped light">
+                                <div className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style={{width: '50%'}}>
+                                </div>
+                                <span className="progress-percentage">(50%)</span>
                             </div>
-                        }
+                        </div>
                         <SelectBox id="selectCategory" className="form-control" data={document.categories} onChange={this.handleSelectBoxOnchange}/>
                     </div>
                 </td>
                 <td>
                     <div className="select-group">
                         <div className="selected-info">
-                            { !noConfidence &&
-                                <div className="selected-info">
-                                    <ProgressBar className="progress-striped light">
-                                        <ProgressBar
-                                            bsStyle="warning"
-                                            min={0}
-                                            max={100}
-                                            now={50}
-                                            active
-                                            label={<span className="progress-percentage">(50%)</span>} />
-                                    </ProgressBar>
+                            <div className="progress progress-striped light">
+                                <div className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style={{width: '50%'}}>
                                 </div>
-                            }
+                                <span className="progress-percentage">(50%)</span>
+                            </div>
                         </div>
                         <SelectBox id="selectConfidentialities" className="form-control" data={document.confidentialities} />
                     </div>
                 </td>
                 <td>
-                    <a id="documentStatus" className="doc-check">
+                    <a id="documentStatus" className="doc-check" onClick={this.handleOnclick}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         <i className="fa fa-check" aria-hidden="true"></i>
                     </a>
