@@ -25,7 +25,7 @@
                         <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
                         <i class="fa fa-bell-o" aria-hidden="true"></i>
                      </Dropdown.toggle>
-                     <Dropdown.menu  class="dropdown-menu dropdown-noti has-arrow has-arrow fix dd-md full-mobile">
+                     <Dropdown.menu  class="dropdown-menu dropdown-noti has-arrow has-arrow fix_Notification dd-md full-mobile">
 
                         <div class="row noti-popup">
                             <div class="col-sm-6 col-noti noti-div">
@@ -53,7 +53,7 @@
                                         <div class="row">
                                             <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick={this.filterAlert} ></i> : {this.state.pending_action.warning}</span>
                                             <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick={this.filterAlert}></i> : {this.state.pending_action.danger}</span>
-                                            <HelpButton className="" classNote="overview_timeframe help_timeframe"
+                                            <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                                 setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." />
                                         </div>
 
