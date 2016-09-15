@@ -14,14 +14,14 @@
             <tr role="row">
               <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Reviewer
               </th>
-              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed within SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th" type="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed within SLA
+               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
               </th>
-              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed outside of SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th" type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed outside of SLA
+               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
               </th>
-              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed
-                <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th" type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="This presents a summary of all the documents reviewed."/>
+              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed
+                <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="This presents a summary of all the documents reviewed."/>
               </th>
               <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Progress
                 <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_right" type="my_team note_chart_content_review dropdown-menu has-arrow dd-md full-mobile" content="This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed."/>
@@ -37,7 +37,15 @@
               <td>50</td>
               <td>100</td>
               <td>
-                <div class="progress-radial progress-81"></div>
+                <div className="pie-wrapper pie-progress-75 style-1 pie-sm">
+                    <span className="label">75%</span>
+                    <div className="pie">
+                    <div className="left-side half-circle"></div>
+                    <div className="right-side half-circle"></div>
+                    </div>
+                    <div className="shadow"></div>
+                    </div>
+                </td>
               </td>
             </tr>
             <tr class="even" role="row">
@@ -48,7 +56,15 @@
               <td>0</td>
               <td>100</td>
               <td>
-                <div class="progress-radial progress-100"></div>
+                <div className="pie-wrapper pie-progress-100 style-1 pie-sm">
+                    <span className="label">100%</span>
+                    <div className="pie">
+                    <div className="left-side half-circle"></div>
+                    <div className="right-side half-circle"></div>
+                    </div>
+                    <div className="shadow"></div>
+                    </div>
+                </td>
               </td>
             </tr>
             <tr class="even" role="row">
@@ -59,7 +75,15 @@
               <td>10</td>
               <td>90</td>
               <td>
-                <div class="progress-radial progress-81"></div>
+                <div className="pie-wrapper pie-progress-81 style-1 pie-sm">
+                    <span className="label">81%</span>
+                    <div className="pie">
+                    <div className="left-side half-circle"></div>
+                    <div className="right-side half-circle"></div>
+                    </div>
+                    <div className="shadow"></div>
+                    </div>
+                </td>
               </td>
             </tr>
             <tr class="even" role="row">
@@ -70,7 +94,15 @@
               <td>0</td>
               <td>20</td>
               <td>
-                <div class="progress-radial progress-9"></div>
+                <div className="pie-wrapper pie-progress-9 style-1 pie-sm">
+                    <span className="label">9%</span>
+                    <div className="pie">
+                    <div className="left-side half-circle"></div>
+                    <div className="right-side half-circle"></div>
+                    </div>
+                    <div className="shadow"></div>
+                    </div>
+                </td>
               </td>
             </tr>
           </tbody>

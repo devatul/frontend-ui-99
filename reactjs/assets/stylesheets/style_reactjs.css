@@ -12,7 +12,7 @@
 }
 .has-error:focus {
   border-color: #ccc;
-    
+
 }
 #submitForm .error {
   color:#B94A48;
@@ -40,11 +40,11 @@
     background-color: #349da2;
 }
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
-    
+
     display: block;
 }
 .widget-panel .widget-chart:not(.in-progress) .loading-dot {
-    
+
     display: block;
 }
 
@@ -112,7 +112,7 @@
 .center-padding {
     text-align: left;
     padding-left: 95px !important;
-   
+
 }
 .table-my-actions > tbody > tr > td {
     vertical-align: middle;
@@ -120,7 +120,7 @@
     /* padding: 10px !important; */
 }
 /*.vertical-top.document_2nd.first-ch {
-     min-width: 160px; 
+     min-width: 160px;
     max-width: 150px;
 }*/
 
@@ -164,4 +164,17 @@
 }
 .help_question_content.has-arrow.fixLeft {
     margin-left: -295px
+}
+.dropdown-menu.has-arrow.fix_notification {
+    margin-left: -24px;
+    margin-top: -24px;
+}
+.dropdown_menu.has-arrow.icon_help_noti{
+    margin-left: -130px;
+}
+.dropdown_menu.dd-md.icon_help_noti{
+        width: 20vw;
+}
+.dropdown_menu.has-arrow.icon_help_noti:after, .dropdown-menu.has-arrow.icon_help_noti:before{
+        left: -148px;
 }

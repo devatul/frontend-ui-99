@@ -94,6 +94,15 @@ var Notification = React.createClass({
                     filterUpdate: 'update-default'
                 })
                 this.setState({
+                    filtersAlert: 'none',
+                })
+                this.setState({
+                    filter: {
+                     selectbox: '',
+                        alert: ''
+                    },
+                })
+                this.setState({
                       styleList: {
                         today: { $set: 'block' },
                         yesterday: { $set: 'block' },
@@ -380,6 +389,25 @@ var Notification = React.createClass({
             this.setState({ filterUpdate: value })
 
         }
+        if (value == 'update-pending' && alert == 'hight') {
+
+          /*  let updateStyle = update(
+                this.state, {
+                    styleList: {
+                        today: { $set: 'none' },
+                        yesterday: { $set: 'none' },
+                        last_7_days: { $set: 'none' },
+                        last_30_days: { $set: 'none' },
+                        older: { $set: 'none' }
+                    },
+                }
+            )
+            this.setState(updateStyle)
+*/
+            /*this.pendingAction();*/
+            this.setState({ filterUpdate: value })
+
+        }
         if (value == 'update-completed' && alert == 'hight') {
             let updateStyle = update(
                 this.state, {
@@ -556,9 +584,9 @@ var Notification = React.createClass({
                         ]
                     }
                 },
-                warningNoti: { $set: 1 },
+                warningNoti: { $set: 3 },
                 dangerNoti: { $set: 1 },
-                total: { $set: 4 }
+                total: { $set: 6 }
             });
         } else if (role === Constant.role.IS_2ND) {
             var update_notification = update(this.state, {
