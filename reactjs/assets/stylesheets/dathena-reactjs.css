@@ -130,6 +130,12 @@
     padding-right: 10px !important;
 }
 
+.table-my-actions tbody.fix-td-checkbox > tr > td .checkbox-custom {
+     padding: 0px 0px 0px 0px !important;
+}
+.table-my-actions tbody.fix-td-checkbox > tr td:nth-child(1) {
+     width: 41px;
+}
 table.docPreview > tbody > tr > td:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
 }
@@ -150,11 +156,11 @@ table.docPreview > thead > tr > th:nth-child(1) {
     max-width: 300px;
 }
 
-.help_question_bottom.fix.has-arrow:after {
-	margin-left: 230px;
+.help_question_bottom.fix-margin.has-arrow:after {
+	margin-left: 235px;
 }
-.help_question_bottom.fix.has-arrow {
-    margin-left: -250px;
+.help_question_bottom.fix-margin.has-arrow {
+    margin-left: -265px;
 }
 
 .note_chart_content_review.fix.has-arrow:after {
@@ -167,4 +173,32 @@ table.docPreview > thead > tr > th:nth-child(1) {
     .widget-panel .widget-chart .chart.chart-md {
         margin: auto;
     }
+}
+
+
+/* lenged centroid chart */
+.cendroid-frame {
+    padding-bottom: 5px !important;
+}
+.cendroid-chart-legend.new .document-symbol {
+    display: block;
+    vertical-align: bottom;
+    padding: 2px;
+    text-align: left;
+    font-size: 10px;
+}
+
+.cendroid-chart-legend.new {
+    position: static;
+}
+
+.file-distribution {
+    margin: 0 15px 0 0;
+}
+.cendroid-chart-legend.new .document-symbol i {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    border-radius: 50%;
+    background-color: #DADADA;
 }

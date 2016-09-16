@@ -159,7 +159,7 @@ var PieChart = React.createClass({
         return (
             <div>
                 <h4 className="chart-title">{title}
-                    <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
+                    <HelpButton classNote="review_question_chart"
                         setValue={help} />
                 </h4>
                 <div id={id} ></div>

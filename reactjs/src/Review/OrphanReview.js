@@ -20,6 +20,7 @@ var OrphanReview = React.createClass({
             stackChange: [],
             shouldUpdate: null,
             checkBoxAll: false,
+            openPreview: false,
 
             orphan: {
                 list: [],
@@ -53,25 +54,25 @@ var OrphanReview = React.createClass({
     },
     componentDidMount() {
         this.getListOrphan();
-        chart();
+        //chart();
         $('.btn-refine').on('click', function(e){
             e.preventDefault();
             $(this).removeClass('btn-green').addClass('btn-disabled');
             $(this).parent().find('.refine-progress').show();
         });
-        $('#choose_cluster').on('change', function(event) {
-            this.changeOrphan(event);
-        }.bind(this));
+        // $('#choose_cluster').on('change', function(event) {
+        //     this.changeOrphan(event);
+        // }.bind(this));
 
-          $("#select2-choose_cluster-container").attr({
-            title: 'Group 1',
-        });
-        $("#select2-choose_cluster-container").text("Group 1");
+        //   $("#select2-choose_cluster-container").attr({
+        //     title: 'Group 1',
+        // });
+        // $("#select2-choose_cluster-container").text("Group 1");
     },
     ucwords:function(str){
-        return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
-            return a.toUpperCase();
-        });
+        // return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
+        //     return a.toUpperCase();
+        // });
     },
     // shouldComponentUpdate(nextProps, nextState) {
     //     if(this.state.orphanCurrent != nextState.orphanCurrent) {
@@ -126,6 +127,10 @@ var OrphanReview = React.createClass({
                         $set: this.getCloudwords()
                     },
 
+                    statistics: {
+                        $set: this.getStatistics()
+                    },
+
                     centroids: { 
                         $set: this.getCentroids()
                     },
@@ -142,24 +147,26 @@ var OrphanReview = React.createClass({
             this.setState({ orphanData: updateOrphanData });
         }
         debugger
-        if(this.state.listDocument != prevState.listDocument) {
-            $('.select-group select').focus(function(){
-            var selectedRow = $(this).parents('tr');
-                $('.table-my-actions tr').each(function(){
-                    if(!$(this).find('.checkbox-item').prop('checked')){
-                        $(this).addClass('inactive');
-                    }
-                });
-                selectedRow.removeClass('inactive');
-            });
+        if(!isEqual(orphanData.listDocument, prevState.orphanData.listDocument)) {
 
-            $('.select-group select').blur(function(){
-                $('.table-my-actions tr').removeClass('inactive');
-            });
+            this.checkedNumber();
+            // $('.select-group select').focus(function(){
+            // var selectedRow = $(this).parents('tr');
+            //     $('.table-my-actions tr').each(function(){
+            //         if(!$(this).find('.checkbox-item').prop('checked')){
+            //             $(this).addClass('inactive');
+            //         }
+            //     });
+            //     selectedRow.removeClass('inactive');
+            // });
 
-            $('[data-toggle="tooltip"]').tooltip({
-                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
-            });
+            // $('.select-group select').blur(function(){
+            //     $('.table-my-actions tr').removeClass('inactive');
+            // });
+
+            // $('[data-toggle="tooltip"]').tooltip({
+            //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="max-width: 500px; width: auto;"></div></div>'
+            // });
         }
         if(!isEqual(orphanData, prevState.orphanData)) {
             let prevOrphanData = prevState.orphanData,
@@ -170,21 +177,22 @@ var OrphanReview = React.createClass({
                 
             debugger
             if(!isEqual(orphanData.categories, prevOrphanData.categories)) {
-                let chart = this.drawChart();
+                //this.drawChart();
+
                 
-                categoryChart = chart.categories;
-                documentType = chart.doctype;
+                //categoryChart = chart.categories;
+                //documentType = chart.doctype;
 
                 debugger
             }
 
-            if(!isEqual(orphanData.centroids, prevOrphanData.centroids)) {
-                centroidChart = this.drawCentroid();
-                debugger
-            }
+            // if(!isEqual(orphanData.centroids, prevOrphanData.centroids)) {
+            //     centroidChart = this.drawCentroid();
+            //     debugger
+            // }
 
             if(!isEqual(orphanData.cloudWords, prevOrphanData.cloudWords)) {
-                wordList = this.drawCloud();
+                this.drawCloud();
                 debugger
             }
 
@@ -238,42 +246,57 @@ var OrphanReview = React.createClass({
         return result;
     },
 
-    getStatistics() {
-        var totalDocument = [880,768,743,
-                            722,710,703,
-                            694,693,688,
-                            674,623,589,
-                            587,499,455,
-                            402,395,394,
-                            333,288,285,
-                            235,226,213,
-                            193,170,150,
-                            127,114,59];
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/orphan/statistics/",
-            dataType: 'json',
-            data: { "id":this.state.orphanCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                data.total_number_documents = totalDocument[this.state.orphanCurrent.id - 1];
-                var updateState = update(this.state, {
-                    statistics: {$set: data}
-                });
-                this.setState(updateState);
-                console.log("list_statistics ok: ", data);
-            }.bind(this),
-            error: function(xhr,error) {
-                console.log("list_statistics " + error);
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+    getStatistics: function() {
+        let result = [],
+            orphanId = this.state.orphan.current.id;
+
+        makeRequest({
+            path: 'api/group/orphan/statistics/',
+            params: { 'id': orphanId },
+            success: (data) => {
+                result = data;
+                debugger
+            }
         });
+        return result;
     },
+
+    // getStatistics() {
+    //     var totalDocument = [880,768,743,
+    //                         722,710,703,
+    //                         694,693,688,
+    //                         674,623,589,
+    //                         587,499,455,
+    //                         402,395,394,
+    //                         333,288,285,
+    //                         235,226,213,
+    //                         193,170,150,
+    //                         127,114,59];
+    //     $.ajax({
+    //         method: 'GET',
+    //         url: Constant.SERVER_API + "api/group/orphan/statistics/",
+    //         dataType: 'json',
+    //         data: { "id":this.state.orphanCurrent.id },
+    //         beforeSend: function(xhr) {
+    //             xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+    //         },
+    //         success: function(data) {
+    //             data.total_number_documents = totalDocument[this.state.orphanCurrent.id - 1];
+    //             var updateState = update(this.state, {
+    //                 statistics: {$set: data}
+    //             });
+    //             this.setState(updateState);
+    //             console.log("list_statistics ok: ", data);
+    //         }.bind(this),
+    //         error: function(xhr,error) {
+    //             console.log("list_statistics " + error);
+    //             if(xhr.status === 401)
+    //             {
+    //                 browserHistory.push('/Account/SignIn');
+    //             }
+    //         }.bind(this)
+    //     });
+    // },
 
     getCloudwords() {
         let data = [],
@@ -337,48 +360,108 @@ var OrphanReview = React.createClass({
             this.setState(update(this.state, {
                 documentPreview: {$set: document},
             }));
-            $('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
-            $('#embedURL').gdocsViewer();
+            //$('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
+            //$('#embedURL').gdocsViewer();
             console.log("afasdccccc: ", this.state.listDocument[index], index);
         }
     },
 
-    handleTableRowOnChange: (event, docIndex) => {
-        let element = event.target;
-
+    handleTableRowOnChange: function(event, index) {
+        let element = event.target, that = this;
+        //debugger
         switch(element.id) {
             case 'selectCategory': {
-                let index = element.value;
+                let index = element.value, that = this;
+                debugger
+                this.onChangeCategory(event, index);
+            }
+            break;
+            case 'selectConfidentialities': {
+                this.onChangeConfidential(event, index);
+            }
+            break;
+            case 'checkbox': {
+                this.onClickCheckbox(event, index);
             }
         }
+    },
+
+    handleTableRowOnClick: function(event, index) {
+        debugger
+        switch(event.target.id) {
+            case 'documentName': {
+                this.setState({ openPreview: true });
+            }
+            break;
+        }
+    },
+
+    handleOnChangeSelectOrphan: function(event) {
+        this.changeOrphan(event);
+    },
+
+    closePreview() {
+        this.setState({ openPreview: false });
+    },
+
+    fileDistribution: function() {
+        let data = [
+            { name: 'Word', color: 'yellow', total: 5015 },
+            { name: 'Excel', color: 'red', total: 3299 },
+            { name: 'Power Point', color: 'purple', total: 3991 },
+            { name: 'PDF', color: 'green', total: 3842 },
+            { name: 'Other', color: 'blue', total: 1067 }
+        ],
+        total = 0,
+        children = [];
+
+        data.map(function(e) {
+            total += e.total;
+        });
+
+        for(let i = data.length - 1; i >= 0; i--) {
+            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+                            {data[i].name}
+                            <span className="item-legend">{data[i].total}</span>
+                        </div>;
+        }
+
+        return(
+            <div className="file-distribution clearfix">
+                {children}
+            </div>
+        );
     },
 
     onChangeCategory: function(event, docIndex) {
         let element = event.target,
             index = element.value,
-            { listDocument, stackChange } = this.state;
+            { stackChange } = this.state,
+            { listDocument } = this.state.orphanData;
 
         var categoryIndex = event.target.value;
         var samplesDefault = this.state.samplesDefault;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
+        var saveDocument = $.extend(true, {}, listDocument[docIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
-            index: sampleIndex,
+            index: docIndex,
             contents: saveDocument
         });
-            listDocument[sampleIndex].current.category = categoryIndex;
-        if(categoryIndex == samplesDefault[sampleIndex].current.category || listDocument[sampleIndex].current.confidential > -1 ) {
-            listDocument[sampleIndex].current.status = "accept";
+            listDocument[docIndex].current.category = categoryIndex;
+        if(categoryIndex == samplesDefault[docIndex].current.category || listDocument[docIndex].current.confidential > -1 ) {
+            listDocument[docIndex].current.status = "accept";
         }
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument }
+            orphanData: {
+                listDocument: { $set: listDocument }
+            }
         }));
-        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + sampleIndex});
+        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + docIndex});
     },
     onChangeConfidential: function(event, sampleIndex) {
         var confidentialIndex = event.target.value;
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var samplesDefault = this.state.samplesDefault;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
@@ -393,24 +476,30 @@ var OrphanReview = React.createClass({
         //     listDocument[sampleIndex].current.status = "accept";
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: { $set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateConfidential_' + confidentialIndex + '_' + sampleIndex}); 
     },
     checkedNumber: function() {
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var numb = 0;
         for(var i = 0; i < listDocument.length; i++) {
             if(listDocument[i].current.checked == true) {
                 numb++;
             }
         }
-        this.setState({ checkedNumber: numb});
+        let updateOrphanData = update(this.state.orphanData, {
+            checkNum: { $set: numb }
+        });
+        debugger
+        this.setState({ orphanData: updateOrphanData});
     },
     onClickCheckbox: function(event, sampleIndex) {
         var checked = event.target.checked;
-        var listDocument = this.state.listDocument;
+        var listDocument = this.state.orphanData.listDocument;
         var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
         var stackList = this.state.stackChange;
         stackList.push({
@@ -420,7 +509,9 @@ var OrphanReview = React.createClass({
         listDocument[sampleIndex].current.checked = checked;
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: {$set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.checkedNumber();
@@ -450,7 +541,9 @@ var OrphanReview = React.createClass({
         }
         var setUpdate = update(this.state,{
             stackChange: {$set: stackList },
-            listDocument: {$set: listDocument}
+            orphanData: {
+                listDocument: {$set: listDocument}
+            }
         });
         this.setState(setUpdate);
         this.setState({shouldUpdate: 'updateValidate' + '_' + 'accept' + '_' + sampleIndex});
@@ -519,13 +612,23 @@ var OrphanReview = React.createClass({
         }
     },
 
+    handleOnSelectTab: function(eventKey, event) {
+        switch(eventKey) {
+            case 'first': {
+                this.drawChart();
+                debugger
+            }
+            break;
+        }
+    },
+
     drawCloud: function() {
         let { cloudWords } = this.state.orphanData,
             wordList = [];
 
             for(let i = cloudWords.length - 1; i >= 0; i--) {
                 wordList[i] = {
-                    text: cloudWords[i].name, weight: Math.floor((Math.random() * 15))
+                    text: cloudWords[i].name, weight: Math.floor((Math.random() * 9))
                 }
             }
 

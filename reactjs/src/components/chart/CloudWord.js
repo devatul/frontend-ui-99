@@ -14,6 +14,12 @@ var CloudWord = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.data != nextProps.data;
     },
+
+    componentDidMount() {
+        var wordframe = $(this.refs.wordframe);
+        window.addEventListener('resize', this.draw);
+    },
+    
     
     componentDidUpdate(prevProps, prevState) {
         if(this.props.data != prevProps.data) {
@@ -21,13 +27,18 @@ var CloudWord = React.createClass({
         }  
     },
     
+    componentWillUnmount() {
+        debugger
+        window.removeEventListener('resize', this.draw);
+    },
 
     draw() {
         var wordframe = $(this.refs.wordframe);
         var data = this.props.data;
         $(wordframe).html('');
         $(wordframe).jQCloud(data, {
-          autoResize: true
+          autoResize: true,
+          delay: 50
         });
         
     },
@@ -35,8 +46,8 @@ var CloudWord = React.createClass({
     render() {
         return (
             <div>
-                <h4 class="review_cloud_p">{this.props.title}
-                    <HelpButton classNote="review_question_chart" classIcon="fa-question-circle"
+                <h4 className="review_cloud_p">{this.props.title}
+                    <HelpButton
                         setValue={this.props.help && this.props.help} />
                 </h4>
                 <div ref="wordframe" id="words-cloud"></div>

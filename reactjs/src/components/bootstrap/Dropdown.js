@@ -88,12 +88,10 @@ var DropdownCustom = React.createClass({
             { elementType, hasChild } = this.props,
             _props = this.props,
             showBack = open ? 'block' : 'none',
-            hasChildren = hasChild ? true : false,
             show = open ? ' open' : '',
             children = React.Children.map(this.props.children,
                     (child) => React.cloneElement(child, {
                         isOpen: open,
-                        hasChild: hasChildren,
                         setToggle: this.handleSetToggle,
                         ref: 'dropdown_' + child.type.displayName
                     })
@@ -138,7 +136,6 @@ var Toggle = React.createClass({
     },
 
     handleClick: function(e) {
-        let { hasChild } = this.props;
         //debugger
         this.props.setToggle(this);
         e.preventDefault();
@@ -147,7 +144,7 @@ var Toggle = React.createClass({
 
     render() {
         let _props = this.props, { noCaret, elementType, isOpen } = this.props;
-        let classCaret = _props.isOpen && 'dropup',
+        let classCaret = _props.isOpen ? 'dropup' : '',
             child = React.createElement(
                     elementType, Object.assign({}, this.props, {
                         ref: 'Toggle',
@@ -184,7 +181,7 @@ var Menu = React.createClass({
     },
 
     handleOnClick: function(event) {
-        let { hasChild } = this.props;
+        let { noClose } = this.props;
         this.props.setToggle(this);
         event.stopPropagation();
     },

@@ -37,7 +37,9 @@ var GroupReview = React.createClass({
                 },
                 centroidChart: [],
                 cloudWords: []
-            }
+            },
+
+            openPreview: false
     	};
     },
     componentWillMount() {
@@ -51,16 +53,16 @@ var GroupReview = React.createClass({
             $(this).removeClass('btn-green').addClass('btn-disabled');
             $(this).parent().find('.refine-progress').show();
         });
-        $('#choose_cluster').select2();
-        $('#choose_cluster').on('change', function(event) {
-            this.changeGroup(event);
-        }.bind(this));
+        //$('#choose_cluster').select2();
+        // $('#choose_cluster').on('change', function(event) {
+        //     this.changeGroup(event);
+        // }.bind(this));
 
-        $("#select2-choose_cluster-container").attr({
-            title: 'Group 1',
-        });
-        $("#select2-choose_cluster-container").text("Group 1");
-
+        // $("#select2-choose_cluster-container").attr({
+        //     title: 'Group 1',
+        // });
+        // $("#select2-choose_cluster-container").text("Group 1");
+        this.drawCloud();
     },
     // shouldComponentUpdate: function(nextProps, nextState) {
     //     if(this.state.groupCurrent != nextState.groupCurrent) {
@@ -121,9 +123,9 @@ var GroupReview = React.createClass({
             $('.select-group select').blur(function(){
                 $('.table-my-actions tr').removeClass('inactive');
             });
-            $('[data-toggle="tooltip"]').tooltip({
-                template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
-            });
+            // $('[data-toggle="tooltip"]').tooltip({
+            //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
+            // });
             console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
         }
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
@@ -141,6 +143,23 @@ var GroupReview = React.createClass({
             return a.toUpperCase();
         });
     },
+
+    closePreview() {
+        this.setState({ openPreview: false });
+    },
+
+    handleTableRowOnClick: function(event, index) {
+        debugger
+        switch(event.target.id) {
+            case 'documentName': {
+                let document = this.state.samplesDocument[index];
+                    document.index = index;
+                this.setState({ openPreview: true, documentPreview: document });
+            }
+            break;
+        }
+    },
+
     getListGroup: function() {
     	$.ajax({
             method: 'GET',
@@ -192,6 +211,34 @@ var GroupReview = React.createClass({
     },
     parseInt: function(num) {
         return Math.round(num);
+    },
+    fileDistribution: function() {
+        let data = [
+            { name: 'Word', color: 'yellow', total: 5015 },
+            { name: 'Excel', color: 'red', total: 3299 },
+            { name: 'Power Point', color: 'purple', total: 3991 },
+            { name: 'PDF', color: 'green', total: 3842 },
+            { name: 'Other', color: 'blue', total: 1067 }
+        ],
+        total = 0,
+        children = [];
+
+        data.map(function(e) {
+            total += e.total;
+        });
+
+        for(let i = data.length - 1; i >= 0; i--) {
+            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+                            {data[i].name}
+                            <span className="item-legend">{data[i].total}</span>
+                        </div>;
+        }
+
+        return(
+            <div className="file-distribution clearfix">
+                {children}
+            </div>
+        );
     },
     getStatistics: function() {
         var totalDocument = [880,768,743,
@@ -358,11 +405,8 @@ var GroupReview = React.createClass({
         if(document != null) {
             document.index = index;
             this.setState(update(this.state, {
-                documentPreview: {$set: document},
-                shouldUpdate: {$set: "PreviewDocument_" + index}
+                documentPreview: { $set: document }
             }));
-            $('#previewModal .file-preview').html('<a href="'+ document.image_url +'" id="embedURL"></a>');
-            $('#embedURL').gdocsViewer();
         }
     },
     

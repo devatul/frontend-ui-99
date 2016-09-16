@@ -36,7 +36,11 @@ module.exports = function () {
         console.log($(e.target));
         setTimeout(function(){
             if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
-                $(e.target).append('<span class="dropdown-backdrop"></span>');
+                if(!$(e.target).hasClass('is-child')) {
+                    $(e.target).append('<span class="dropdown-backdrop"></span>');
+                } else {
+                    $(e.target).append('<span class="dropdown-backdrop" style="background-color: transparent"></span>');
+                }
             }
 
         });

@@ -144,8 +144,8 @@ var ColumnChart = React.createClass({
         return (
             <div>
                 <h4 className="chart-title">{title}
-                    <HelpButton classNote="note_chart_content_review"
-                        classIcon="fa-question-circle"
+                    <HelpButton
+                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                         setValue={help} />
                 </h4>
                 <div id={id}></div>
