@@ -7,11 +7,24 @@ import Constant from '../Constant.js';
 var AnomalyDetection = React.createClass({
     getInitialState() {
         return{
-            styleList: 'none',
-            styleShow: 'block',
+            styleList: {
+                line1: 'none',
+                line2: 'none',
+                line3: 'none',
+                line4: 'none',
+                line5: 'none',
+
+            },
+            styleShow: {
+                line1:  'block',
+                line2:  'block',
+                line3:  'block',
+                line4:  'block',
+                line5:  'block',
+            }
         }
     },
-    shouldComponentUpdate(nextProps , nextState){
+    /*shouldComponentUpdate(nextProps , nextState){
         if(this.state.styleShow != nextState.styleShow){
             return  true
         }
@@ -26,15 +39,32 @@ var AnomalyDetection = React.createClass({
             }else {
                  this.setState({styleList: 'none'})
             }
-            
+
             console.log(this.state.styleList)
         }
+    },*/
+    changeStyle(value){
+        debugger
+        var style = update(this.state , {
+            styleList : {
+                [value] : {$set : 'block'}
+            },
+            styleShow : {
+                [value] : {$set : 'none'}
+            }
+        })
+        this.setState(style)
     },
-    changeStyle(){
-        this.setState({styleShow : 'none'})
-    },
-    showLess(){
-         this.setState({styleShow : 'block'})
+    showLess(value){
+          var style = update(this.state , {
+             styleList : {
+                [value] : {$set : 'none'}
+            },
+            styleShow : {
+                [value] : {$set : 'block'}
+            }
+        })
+        this.setState(style)
     },
     componentDidMount() {
             $('body').on('click', '.anomaly-state.selected', function(){
@@ -45,7 +75,7 @@ var AnomalyDetection = React.createClass({
                     append: true,
                     afterInsert: function(elem){
                     $(elem).find('.'+currentStateClass).addClass('active');
-                   
+
                     $(elem).find('.current-state').html( $(elem).find('.'+currentStateClass).attr('data-label') );
                      $('[data-label]').css('font-weight','normal')
                     }
@@ -59,7 +89,7 @@ var AnomalyDetection = React.createClass({
                 var parent = $(this).parents('.anomaly-state-select');
                 parent.find('.anomaly-state').removeClass('active');
                 $(this).addClass('active');
-                
+
                 parent.find('.current-state').html( $(this).attr('data-label') );
                  $('[data-label]').css('font-weight','normal')
             });
@@ -276,7 +306,7 @@ var AnomalyDetection = React.createClass({
                 }
             });
     },
-    
+
 
     render:template
 });

@@ -34,7 +34,7 @@ var multiselectBox = React.createClass({
     componentDidMount() {
         var dropdown = this.refs.dropdown
         var dropdownmenu = this.refs.dropdownmenu
-        
+
         $(dropdown).on('show.bs.dropdown', function() {
             $('#dropdownFilter').css({
                 display: 'block',
@@ -68,11 +68,11 @@ var multiselectBox = React.createClass({
         } else {
             this.setState({checkall : false})
         }*/
-           
+
         /*var field = {
-           
+
             selectId: this.props.id,
-           
+
         }*/
     	this.props.onSelectAll(this.props.id);
     },
@@ -109,13 +109,16 @@ var multiselectBox = React.createClass({
 					<li className={'multiselect-item multiselect-all'}>
 						<a tabIndex="0" className="multiselect-all">
 						<label className="checkbox" onClick={this.handleSelectAll} style={{'marginLeft':'0px'}}>
-							
+
 							Clear all
 						</label>
 						</a>
+                        <div className="dropdown-backdrop-custom" ></div>
 					</li>
 					{children}
+
 				</ul>
+
 			</div>
         );
     }

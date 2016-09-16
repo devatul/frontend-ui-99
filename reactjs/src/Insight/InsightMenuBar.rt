@@ -7,7 +7,7 @@
 <div>
   <header class="panel-heading">
       <Title title={this.props.title} helpInfo={this.props.helpInfo} />
-     
+
       <ul class="filter-buttons list-unstyled">
       <li class="dropdown">
         <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
