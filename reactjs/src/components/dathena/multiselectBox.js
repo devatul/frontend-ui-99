@@ -78,6 +78,16 @@ var multiselectBox = React.createClass({
             };
     	this.props.onSelectAll(field);
     },
+
+    handleClear: function(event) {
+        var { id, title, data, checkDefault } = this.props, { checked } = event.target,
+            field = {
+                id: id,
+                title: title,
+                data: data
+            };
+    	this.props.onClear(field);
+    },
     render() {
             var children = [];
             _.forEach(this.props.data, function(obj, index) {
@@ -96,7 +106,7 @@ var multiselectBox = React.createClass({
                                 </li>;
             }.bind(this));
         return (
-        	<div ref="dropdown" className="btn-group dropdown">
+        	<div ref="dropdown" className="btn-group dropdown is-child">
 				<button type="button"
 					key={this.props.key + '_'}
 					onClick={this.handleOnClick}
@@ -109,20 +119,15 @@ var multiselectBox = React.createClass({
 				</button>
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
 					<li className={'multiselect-item multiselect-all'}>
-						<a tabIndex="0" className="multiselect-all">
-						<label className="checkbox">
-							<input ref="checkall"
-                                name={'select_all'}
-                                key={this.props.id + '_select_all'}
-                                checked={this.state.checkall}
-								onChange={this.handleSelectAll}
-								type="checkbox" value="multiselect-all"/>
-							Clear all
-						</label>
+						<a href="#" tabIndex="0" className="multiselect-all" onClick={this.handleClear}>
+                            <label className="checkbox">
+                                <strong>Clear all</strong>
+                            </label>
 						</a>
 					</li>
 					{children}
 				</ul>
+                <span className="dropdown-backdrop" style={{ display: 'none' }}></span>
 			</div>
         );
     }
