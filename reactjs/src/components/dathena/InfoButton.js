@@ -33,7 +33,8 @@ var InfoButton = React.createClass({
         $(dropdownMenu).css({
                 'display': 'block',
                 'top': eOffset.top + $(dropdown).outerHeight(),
-                'left': eOffset.left
+                'left': eOffset.left,
+                'maxWidth' :'400px'
             });
         this.setState({ setOpen: 'open', expanded: true });
     },

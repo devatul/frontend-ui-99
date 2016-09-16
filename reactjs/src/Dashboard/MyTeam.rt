@@ -1,8 +1,9 @@
 <rt-import name="HelpButton" from="../Insight/components/MyTeamHelpButton"/>
+<rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
 <section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
   <header class="panel-heading">
     <h2 class="panel-title">My Team
-      <HelpButton className="r dropdown inline-block-item" type="my-team-note dropdown-menu has-arrow dd-md full-mobile" content={this.state.content} />
+      <HelpButton className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content={this.state.content} />
     </h2>
   </header>
 
@@ -14,17 +15,17 @@
             <tr role="row">
               <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Reviewer
               </th>
-              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed within SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_content dropdown-menu has-arrow dd-md full-mobile" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 280px;">Number of Documents Reviewed within SLA
+               <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
               </th>
-              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Number of Documents Reviewed outside of SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 290px;">Number of Documents Reviewed outside of SLA
+               <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item  " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
               </th>
               <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed
-                <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_th " type="my_team help_question_bottom dropdown-menu has-arrow dd-md full-mobile" content="This presents a summary of all the documents reviewed."/>
+                <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item  " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="This presents a summary of all the documents reviewed."/>
               </th>
               <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Progress
-                <HelpButton className="r dropdown dropdown-file-info-holder inline-block-item edit_right" type="my_team note_chart_content_review dropdown-menu has-arrow dd-md full-mobile" content="This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed."/>
+                <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item edit_right" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed."/>
               </th>
             </tr>
           </thead>

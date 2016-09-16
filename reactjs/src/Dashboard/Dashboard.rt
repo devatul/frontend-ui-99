@@ -49,8 +49,8 @@
                                 <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.pending_action.list.length}</h4>
                                 <h4 class="col-sm-5 pull-right">
                                     <div class="row">
-                                        <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'hight')}" ></i> : {this.state.pending_action.warning}</span>
-                                        <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'veryhight')}"></i> : {this.state.pending_action.danger}</span>
+                                        <span class="ml-md mr-md" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'hight' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'hight')}" ></i> : {this.state.pending_action.warning}</span>
+                                        <span class="mr-md" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very hight' "><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'very hight')}"></i> : {this.state.pending_action.danger}</span>
                                         <HelpButton className="dropdown-file-info-holder"
                                             classNote="overview_timeframe fix-overview-help-button"
                                             setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." />

@@ -14,7 +14,7 @@ var TabName = React.createClass({
 		};
 	},
 	onMouseOver(value){
-		
+
 		let color = this.state.color
 		for( let i = 0 ; i < this.state.color.length ; i++) {
 			if( i == value) {
@@ -41,9 +41,9 @@ var TabName = React.createClass({
 			})
 			this.setState(colorUpdate)
 
-		
-		
-		
+
+
+
 	},
 	onClick(value){
 		let color = this.state.color
@@ -63,19 +63,19 @@ var TabName = React.createClass({
 			click : {$set : click}
 		})
 		this.setState(update)
-		
+
 	},
 	render(){
 		let children = [];
 		let active = ['active' , '#' , '#']
 		let language = ['English', 'French' ,'Germany']
-		
+
 		for( let i=0 ; i<3; i++){
-			children[i] = <li className={active[i]} 
+			children[i] = <li className={active[i]}
 			onMouseOver = {this.onMouseOver.bind(this, i)} onMouseOut = {this.onMouseOut.bind(this, i)} onClick={this.onClick.bind(this,i)}>
-			<a href="#" data-toggle="tab" aria-expanded="true"><span style={{'color' : this.state.color[i]}}>{this.props.name}</span></a>
+			<a href="#" data-toggle="tab" aria-expanded="true"><span style={{'color' : this.state.color[i]}}>{language[i]}</span></a>
 			</li>
-		}	
+		}
 
 		return(
 			<ul className="my-profile-header nav nav-tabs" style={{'marginLeft':'4px'}}>

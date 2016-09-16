@@ -21,7 +21,7 @@ module.exports = {
 	},
 	progressValue: {
 		level1: 30,
-		level2: 80
+		level2: 50
 	}
 	,
 	iconCategories:
@@ -40,11 +40,11 @@ module.exports = {
 	],
 	status: [
 		{normal: { name: "normal", color: "#999"} },
-		
+
 		{editing: {name: "editing", color: "#ffc200"} },
-		
+
 		{accept: {name: "accept", color: "#4fca9d"} },
-		
+
 		{reject: {name: "reject", color: "#ff2d00"} }
 	]
 };

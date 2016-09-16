@@ -172,7 +172,6 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-                          <i class="fa fa-caret-down"></i>
                         </th>
                       </tr>
                     </thead>
@@ -232,11 +231,11 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="extra-block" style="display : {this.state.styleShow}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                <div class="extra-block" style="display : {this.state.styleShow.line1}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= "{this.changeStyle.bind(this, 'line1')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
               </div>
-              <div class="anomaly-block" style="display : {this.state.styleList}">
+              <div class="anomaly-block" style="display : {this.state.styleList.line1}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
@@ -317,7 +316,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line1')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -362,7 +361,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-                          <i class="fa fa-caret-down"></i>
+
                         </th>
                       </tr>
                     </thead>
@@ -422,11 +421,11 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="extra-block" style="display : {this.state.styleShow}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ={this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+                <div class="extra-block" style="display : {this.state.styleShow.line2}">
+                  <a href=" javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ="{this.changeStyle.bind(this, 'line2')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
               </div>
-              <div class="anomaly-block" style="display : {this.state.styleList}">
+              <div class="anomaly-block" style="display : {this.state.styleList.line2}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - Security Settings at Risk
@@ -508,7 +507,7 @@
                 </div>
 
                 <div class="extra-block">
-                 <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                 <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line2')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -552,7 +551,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-                          <i class="fa fa-caret-down"></i>
+
                         </th>
                       </tr>
                     </thead>
@@ -620,10 +619,10 @@
                   </table>
                 </div>
               </div>
-               <div class="extra-block" style="display : {this.state.styleShow}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+               <div class="extra-block" style="display : {this.state.styleShow.line3}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= "{this.changeStyle.bind(this, 'line3')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
-              <div class="anomaly-block" style="display : {this.state.styleList}">
+              <div class="anomaly-block" style="display : {this.state.styleList.line3}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
@@ -704,7 +703,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line3')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -759,7 +758,7 @@
                         <th>Folder at Risk</th>
                         <th>User Anomaly</th>
                         <th>Category at Risk
-                          <i class="fa fa-caret-down"></i>
+
                         </th>
                       </tr>
                     </thead>
@@ -837,10 +836,10 @@
                   </table>
                 </div>
               </div>
-               <div class="extra-block" style="display : {this.state.styleShow}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+               <div class="extra-block" style="display : {this.state.styleShow.line4}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= "{this.changeStyle.bind(this, 'line4')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
-              <div class="anomaly-block" style="display : {this.state.styleList}">
+              <div class="anomaly-block" style="display : {this.state.styleList.line4}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
@@ -921,7 +920,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo"  onClick={this.showLess}><i class="fa fa-caret-right mr-xs" ></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo"  onClick="{this.showLess.bind(this, 'line4')}"<i class="fa fa-caret-right mr-xs" ></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>
@@ -965,7 +964,7 @@
                         <th>Folder at Risk</th>
                         <th>Active Directory at Risk</th>
                         <th>User Access Right Accuracy
-                          <i class="fa fa-caret-down"></i>
+
                         </th>
                       </tr>
                     </thead>
@@ -1026,10 +1025,10 @@
                   </table>
                 </div>
               </div>
-               <div class="extra-block" style="display : {this.state.styleShow}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= {this.changeStyle}><i class="fa fa-caret-right mr-xs"></i>Show details</a>
+               <div class="extra-block" style="display : {this.state.styleShow.line5}">
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= "{this.changeStyle.bind(this, 'line5')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
                 </div>
-              <div class="anomaly-block" style="display : {this.state.styleList}">
+              <div class="anomaly-block" style="display : {this.state.styleList.line5}">
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
@@ -1110,7 +1109,7 @@
                 </div>
 
                 <div class="extra-block">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick={this.showLess}><i class="fa fa-caret-right mr-xs"></i>Show less</a>
+                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line5')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
                   <a href="#" class="pull-right btn btn-green">Extract</a>
                 </div>

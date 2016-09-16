@@ -33,11 +33,11 @@ var DocumentReview = React.createClass({
     componentDidMount() {
 
          this.getChallengedDocument();
-          
-         
+
+
     },
     shouldComponentUpdate(nextProps, nextState) {
-        
+
         if(this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
             return true;
         }
@@ -59,13 +59,13 @@ var DocumentReview = React.createClass({
         if(this.state.iconChallengedPreview != nextState.iconChallengedPreview){
             return true;
         }
-        return false;  
+        return false;
     },
     componentDidUpdate(prevProps, prevState) {
         if(this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate;
             if(update.name === 'updateValidate' || update.name === 'undoAction' || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
-              
+
                 this.validateNumber(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === 'undoAction' || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -75,7 +75,7 @@ var DocumentReview = React.createClass({
         if(this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
             var update = this.state.shouldUpdateChall;
             if(update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon' ) {
-                
+
                 this.validateNumberChallenged(update.actionIndex);
             }
             if(update.name === 'updateCheckBox' || update.name === "undoActionChallenged" || update.name === "updateCheckAll" || update.name === 'approveButon') {
@@ -101,13 +101,13 @@ var DocumentReview = React.createClass({
             $('.file-name-1[data-toggle="tooltip"]').tooltip({
                 template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
             });
-            $("a.more").click(function(){ 
+            $("a.more").click(function(){
                 $(this).prev().toggleClass("height-2nd");
                 $(this).children(".more1").toggleClass("display-none");
                 $(this).children(".zoom-out").toggleClass("zoom-out-block");
             });
             $( ".my-doc-path" ).each(function( index ) {
-                var hi = "18"; 
+                var hi = "18";
                 var h = $(this).height();
                 if(h>hi){
                     $(this).css('height', hi);
@@ -135,7 +135,7 @@ var DocumentReview = React.createClass({
 
                 data[1].category = "Legal/Compliance/ Confidential";
                 data[1].urgency = "high";
-                var listIcon = []; 
+                var listIcon = [];
                 for(var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
@@ -147,8 +147,8 @@ var DocumentReview = React.createClass({
                             }
                         );
                        /* data[i].documents[j].name = this.getIcon(data[i].documents[j].name);*/
-                        data[i].documents[j].confidential_confidence_level = Math.floor(Math.random()*(99-70+1)+70);
-                        data[i].documents[j].confidence_level = Math.floor(Math.random()*(99-70+1)+70);
+                        data[i].documents[j].confidential_confidence_level = Math.floor(Math.random()*(99-70+1)+40);
+                        data[i].documents[j].confidence_level = Math.floor(Math.random()*(99-70+1)+25);
                         data[i].documents[j].current = {
                             checked: false,
                             category: 4,
@@ -158,7 +158,7 @@ var DocumentReview = React.createClass({
                     }
                 }
                 console.log('listIcon', listIcon)
-                
+
                 var documentPreview = data[0].documents[0];
                 console.log('documentPreview', documentPreview)
                 documentPreview.index = { actionIndex: 0, docIndex: 0};
@@ -180,19 +180,19 @@ var DocumentReview = React.createClass({
         });
     },
     setDocumentPreview: function(actionIndex, docIndex, icon) {
-       
+
         console.log('iconReview_begin : ', icon)
-     
-        
+
+
         var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
         if(documentCurrent != null) {
             documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
             var setDocumentCurrent = update(this.state, {
                 documentPreview: { $set: documentCurrent },
-                 
+
             });
-            
-            
+
+
             $('#previewModal .file-preview').html('<a href="'+documentCurrent.image_url+'" id="embedURL"></a>');
             $('#embedURL').gdocsViewer();
         }
@@ -200,14 +200,15 @@ var DocumentReview = React.createClass({
         this.setState({iconReview : icon})
         console.log('iconReview', this.state.iconReview)
     },
-   
+
     progressbar: function(value) {
+        debugger
         if(value <= Constant.progressValue.level1) {
-            return Constant.progressBar.level1;
+            return Constant.progressBar.danger;
         } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
-            return Constant.progressBar.level2;
+            return Constant.progressBar.warning;
         }
-        return Constant.progressBar.level3;
+        return Constant.progressBar.success;
     },
     onChangeCategory: function(event, actionIndex, docIndex) {
 
@@ -225,7 +226,7 @@ var DocumentReview = React.createClass({
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-      
+
         this.setState(update(this.state,{
             stackChange: {$set: stackList },
             Actions: {$set: actions }
@@ -253,13 +254,13 @@ var DocumentReview = React.createClass({
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-        
+
         var setUpdate = update(this.state,{
             stackChange: {$set:  stackList },
             Actions: {$set: actions}
         });
         this.setState(setUpdate);
-        this.setState({ shouldUpdate: { name: 'updateConfidential', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
+        this.setState({ shouldUpdate: { name: 'updateConfidential', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }});
     },
     checkedNumber: function(actionIndex) {
         var actions = this.state.Actions;
@@ -273,7 +274,7 @@ var DocumentReview = React.createClass({
         this.setState(update(this.state, {
             Actions: {$set: actions }
         }));
-        this.setState({shouldUpdate: { name: 'checkedNumber', actionIndex: actionIndex }}); 
+        this.setState({shouldUpdate: { name: 'checkedNumber', actionIndex: actionIndex }});
     },
     onClickCheckbox: function(event, actionIndex, docIndex) {
         var checked = event.target.checked;
@@ -352,7 +353,7 @@ var DocumentReview = React.createClass({
         .always(function() {
             console.log("complete");
         });
-        
+
         this.setState(setUpdate);
         this.setState({shouldUpdate: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' }});
         //debugger;
@@ -453,7 +454,7 @@ var DocumentReview = React.createClass({
                             status: "normal",
                             comment: 'Explain your choice',
                             prevCategory: null,
-                            prevConfidential: null
+                            prevConfidential: 1
                         };
                     }
                 }
@@ -496,7 +497,7 @@ var DocumentReview = React.createClass({
         var actions = this.state.ChallengedDocuments;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
         var stackList = this.state.stackChangeChallenged;
-        
+
         stackList.push({
             index: { actionIndex: actionIndex,docIndex: docIndex },
             contents: saveDocument
@@ -511,7 +512,7 @@ var DocumentReview = React.createClass({
         } else {
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-       
+
        /* if(actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
         else
@@ -536,14 +537,14 @@ var DocumentReview = React.createClass({
         //}
         actions[actionIndex].documents[docIndex].current.confidential = confidentialIndex;
         if(actions[actionIndex].documents[docIndex].current.confidential == 0) {
-            actions[actionIndex].documents[docIndex].current.prevConfidential = null;
+           /* actions[actionIndex].documents[docIndex].current.prevConfidential = null;*/
             actions[actionIndex].documents[docIndex].current.status = "accept";
         } else {
-            
+
             actions[actionIndex].documents[docIndex].current.status = "editing";
         }
-     
-        
+
+
         /*if(actions[actionIndex].documents[docIndex].current.confidential == 0 && actions[actionIndex].documents[docIndex].current.category == 0)
             actions[actionIndex].documents[docIndex].current.status = "accept";
         else
@@ -553,7 +554,7 @@ var DocumentReview = React.createClass({
             ChallengedDocuments: {$set: actions}
         });
         this.setState(setUpdate);
-        this.setState({ shouldUpdateChall: { name: 'updateConfidentialChall', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }}); 
+        this.setState({ shouldUpdateChall: { name: 'updateConfidentialChall', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex }});
     },
     checkedNumberChallenged: function(actionIndex) {
         var actions = this.state.ChallengedDocuments;
@@ -567,7 +568,7 @@ var DocumentReview = React.createClass({
         this.setState(update(this.state, {
             ChallengedDocuments: {$set: actions }
         }));
-        this.setState({shouldUpdateChall: { name: 'checkedNumber', actionIndex: actionIndex }}); 
+        this.setState({shouldUpdateChall: { name: 'checkedNumber', actionIndex: actionIndex }});
     },
     onClickCheckboxChallenged: function(event, actionIndex, docIndex) {
         var checked = event.target.checked;
@@ -654,7 +655,6 @@ var DocumentReview = React.createClass({
         this.setState({ shouldUpdateChall: {name: 'updateCheckAll', actionIndex: actionIndex, checked: checked }});
     },
     undoHandleChallenged: function() {
-
         console.log('stackChange' , this.state.stackChangeChallenged);
         if(this.state.stackChangeChallenged.length > 0) {
             var newStackChange = this.state.stackChangeChallenged;
@@ -670,8 +670,6 @@ var DocumentReview = React.createClass({
             this.setState(setUpdate);
             this.setState({shouldUpdateChall: { name: 'undoActionChallenged', actionIndex:documentOld.index.actionIndex, docIndex: documentOld.index.docIndex, stack: newStackChange.length }})
         }
-       
-
     },
     getIcon(value){
        if(_.endsWith(value,'.ppt')){

@@ -1,16 +1,19 @@
 <rt-import name="Chart" from="./components/chart"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
+<rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
 <rt-import name="BarMenu" from='./InsightMenuBar'/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
- 
+
 
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
-      <h2 class="panel-title">Risk Insights 
-       <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
+      <h2 class="panel-title">Risk Insights
+       <!-- <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/> -->
+        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99." />
 
      </h2>
    </header>
@@ -19,8 +22,10 @@
       <div class="col-md-4">
         <section class="panel">
           <div class="panel-body bg-secondary widget-panel insight-panel">
-            <h4 class="widget-title">Unidentifiable Files 
-             <HelpButton type="overview_question_a" content="Number of files that can not be identified."/>
+            <h4 class="widget-title">Unidentifiable Files
+            <!--  <HelpButton type="overview_question_a" content="Number of files that can not be identified."/> -->
+              <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of files that can not be identified." />
 
            </h4>
            <div class="insight-stat">
@@ -43,7 +48,9 @@
       <section class="panel">
         <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
           <h4 class="widget-title">Access Rights Anomaly
-           <HelpButton type="overview_question_a" content="Number of users who have abnormal access rights."/>
+<!--            <HelpButton type="overview_question_a" content="Number of users who have abnormal access rights."/> -->
+             <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of users who have abnormal access rights." />
          </h4>
          <div class="insight-stat">
           <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -65,8 +72,9 @@
     <section class="panel">
       <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
         <h4 class="widget-title">Twin Files
-         <HelpButton type="overview_question_a" content="Duplicates files with different names."/>
-
+        <!--  <HelpButton type="overview_question_a" content="Duplicates files with different names."/> -->
+         <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Duplicates files with different names." />
        </h4>
        <div class="insight-stat">
         <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -90,8 +98,9 @@
     <section class="panel">
       <div class="panel-body bg-secondary-2 widget-panel insight-panel">
         <h4 class="widget-title">Document Retention
-          <HelpButton type="overview_question_a" content="Number of files past outside their retention dates."/>
-
+          <!-- <HelpButton type="overview_question_a" content="Number of files past outside their retention dates."/> -->
+            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of files past outside their retention dates." />
         </h4>
         <div class="insight-stat">
           <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -113,8 +122,9 @@
     <section class="panel">
       <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
         <h4 class="widget-title">Document Aging
-          <HelpButton type="overview_question_a" content="Number of files outside their retention dates."/>
-
+          <!-- <HelpButton type="overview_question_a" content="Number of files outside their retention dates."/> -->
+          <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of files outside their retention dates." />
         </h4>
         <div class="insight-stat">
           <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -136,8 +146,9 @@
     <section class="panel">
       <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
         <h4 class="widget-title">Duplicate Files
-          <HelpButton type="overview_question_a" content="Number of duplicate files."/>
-
+        <!--   <HelpButton type="overview_question_a" content="Number of duplicate files."/> -->
+            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of duplicate files." />
         </h4>
         <div class="insight-stat">
           <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -161,8 +172,9 @@
     <section class="panel">
       <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
         <h4 class="widget-title">Document Repository Anomaly
-          <HelpButton type="overview_question_a" content="Number of folders which have content anomalies."/>
-
+         <!--  <HelpButton type="overview_question_a" content="Number of folders which have content anomalies."/> -->
+           <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of folders which have content anomalies." />
         </h4>
         <div class="insight-stat">
           <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -184,8 +196,9 @@
     <section class="panel">
       <div class="panel-body bg-secondary widget-panel insight-panel">
         <h4 class="widget-title">Cost Savings
-         <HelpButton type="overview_question_a" content="Storage Space with obsolete data."/>
-
+       <!--   <HelpButton type="overview_question_a" content="Storage Space with obsolete data."/> -->
+            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Storage Space with obsolete data." />
        </h4>
        <div class="insight-stat">
         <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -207,8 +220,9 @@
   <section class="panel">
     <div class="panel-body bg-secondary-2 widget-panel insight-panel">
       <h4 class="widget-title">Stale Files
-       <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/>
-
+       <!-- <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/> -->
+        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Number of aging files that have not been accessed." />
      </h4>
      <div class="insight-stat">
       <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -253,8 +267,9 @@
     <div style="margin-top:20px"></div>
     <div class="col-md-6">
       <h3>High Risk User with Client Data Access
-       <HelpButton type="overview_question_a" content="Users with direct access to a large number of files which provide access to client data."/>
-
+    <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of files which provide access to client data."/> -->
+        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users with direct access to a large number of files which provide access to client data." />
      </h3>
      <div class="panel panel-chart">
       <div class="panel-body">
@@ -264,8 +279,9 @@
   </div>
   <div class="col-md-6">
     <h3>High Risk Active Directory Access with Client Data
-     <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/>
-
+  <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/> -->
+      <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users with direct access to a large number of directories which contain files with client data." />
    </h3>
    <div class="panel panel-chart">
     <div class="panel-body">
@@ -277,8 +293,10 @@
 <div class="row">
   <div class="col-md-12">
     <h3>Key Content Contributor
-      <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/>
-      
+ <!--      <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/> -->
+       <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users having contributed the most to document creation and document editing." />
+   </h3>
     </h3>
     <div class="panel panel-chart">
       <div class="panel-body">

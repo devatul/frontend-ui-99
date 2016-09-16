@@ -61,7 +61,7 @@
                                         <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-{actionIndex}" role="grid" aria-describedby="datatable-default_info">
                                             <thead>
                                                 <tr role="row" class="">
-                                                    <th>
+                                                    <th style="width: 39px">
                                                         <div class="checkbox-custom checkbox-primary">
                                                             <input type="checkbox" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event, actionIndex)" checked="{action.checkAll}">
                                                             <label></label>
@@ -69,19 +69,19 @@
                                                     </th>
                                                      <th class="review_note">Type
                                                     </th>
-                                                    <th class="review_note">Document
+                                                    <th class="review_note" style="width: 18vw;">Document
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
 
-                                                    <th class="review_note">Proposed Category (confidence level)
+                                                    <th class="review_note">Proposed Category
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="Category proposed by Dathena 99." />
+                                                            setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
                                                     </th>
-                                                    <th class="review_note">Proposed Confidentiality (confidence level)
-                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Confidentiality level proposed by Dathena."/>
+                                                    <th class="review_note">Proposed Confidentiality
+                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. "/>
                                                     </th>
                                                     <th class="text-center" style="max-width: 70px;">Status
                                                         <!-- <HelpButton className="dropdown-file-info-holder"
@@ -125,7 +125,7 @@
                                                         </span>
                                                         <InfoButton className="dropdown-file-info-holder-edit2">
                                                             <li>Name: <b>{doc.name}</b></li>
-                                                            <li>Path: {doc.path}</li>
+                                                            <li>Path: <span>/{doc.path}</span></li>
                                                             <li>Owner: <b>{doc.owner}</b></li>
                                                             <li>Creation Date: <b>{doc.creation_date}</b></li>
                                                             <li>Modifitcation Date: <b>{doc.modification_date}</b></li>
@@ -357,7 +357,7 @@
                                                     </td>
                                                     <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
                                                         <span class="doc-path my-doc-path">Level of Confidentiality is too low for this type of document</span>
-                                                        <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
+                                                        <a class="more" href="javascript:void(0)"><span class="more1">Show details</span><span class="zoom-out">Show less</span></a>
 
                                                     </td>
                                                     <td class="opa-child fix-1st-pading-comment-table">
