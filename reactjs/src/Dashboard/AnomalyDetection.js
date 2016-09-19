@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import template from './AnomalyDetection.rt'
 import update from 'react/lib/update'
 import Constant from '../Constant.js';
+import _ from 'lodash'
 
 var AnomalyDetection = React.createClass({
     getInitialState() {
@@ -21,7 +22,8 @@ var AnomalyDetection = React.createClass({
                 line3:  'block',
                 line4:  'block',
                 line5:  'block',
-            }
+            },
+            anomaly_rick : {}
         }
     },
     /*shouldComponentUpdate(nextProps , nextState){
@@ -43,6 +45,9 @@ var AnomalyDetection = React.createClass({
             console.log(this.state.styleList)
         }
     },*/
+    componentWillMount(){
+          this.getAnomaylyRick()
+    },
     changeStyle(value){
         debugger
         var style = update(this.state , {
@@ -66,7 +71,54 @@ var AnomalyDetection = React.createClass({
         })
         this.setState(style)
     },
+    getAnomaylyRick(){
+
+         $.ajax({
+            url: Constant.SERVER_API + 'api/anomaly/risk/',
+            dataType: 'json',
+            type: 'GET',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            },
+            success: function(data) {
+
+                this.setState( {anomaly_rick: data});
+
+                console.log("photo: ",data);
+            }.bind(this),
+            error: function(xhr, status, error) {
+                /*console.log(xhr);*/
+                /*var jsonResponse = JSON.parse(xhr.responseText);
+                console.log(jsonResponse);
+                if(xhr.status === 401)
+                {
+                    browserHistory.push('/Account/SignIn');
+                }*/
+            }.bind(this)
+        });
+    },
+    upperFirst(value){
+        return _.upperFirst(value)
+    },
+    getRickType(value){
+        switch(value){
+            case 'access rights anomaly'|| 'documents risk'  :
+                return { color : ' bg-quartenary-3', info : 'This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types.' };
+            case 'data repository anomaly' :
+                return { color : ' bg-secondary', info : 'This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective.' };
+            case 'client data access anomaly' :
+                return { color :' bg-secondary-2', info : 'This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as client identifying.' };
+            case 'users at risk' :
+                return { color :'bg-quartenary-2', info : 'This details the number of users who have access to a range of data categories that do not align to their job type, or present an incorrect access pattern based on organisational role types.' };
+            case 'active directory group at risk' :
+                return { color :'bg-tertiary-3', info : 'This details the number of documents that have been detected by Dathena 99 as being at risk.' };
+            case 'documents risk'  :
+                return { color :' bg-quartenary-3', info : 'This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types.' };
+        }
+    },
+
     componentDidMount() {
+
             $('body').on('click', '.anomaly-state.selected', function(){
                 var parent = $(this).parent();
                 var currentStateClass = $(this).attr('data-state');

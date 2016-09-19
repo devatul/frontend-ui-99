@@ -17,8 +17,8 @@ module.exports = React.createClass({
 		return {
 			photo :{},
 			profile: {},
-			Department: '', Location: '',  Corporate_phone:'', 
-			Corporate_mobile:'' ,Use_active_directory: false, 	
+			Department: '', Location: '',  Corporate_phone:'',
+			Corporate_mobile:'' ,Use_active_directory: false,
 			Enable_sso: false,
 			NewEmail:'',
 			CurrentPassforChangePass:'',
@@ -30,18 +30,18 @@ module.exports = React.createClass({
 			CurrentPass:'',
 			user:{},
 			changeEmail: {
-				
+
 			},
-			
+
 		};
 	},
-	
+
 	getWindowID(event) {
-		
+
 		var update_scan_status = update(this.state, {
 			profile: {
 				windows_id: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -50,7 +50,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				company_name: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -58,7 +58,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				corporate_email: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -66,7 +66,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				department: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -74,7 +74,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				location: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -82,7 +82,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				corporate_phone: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -90,7 +90,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				corporate_mobile: {$set: event.target.value}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -98,7 +98,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				use_active_directory: {$set: event.target.checked}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -106,7 +106,7 @@ module.exports = React.createClass({
 		var update_scan_status = update(this.state, {
 			profile: {
 				enable_sso: {$set: event.target.checked}
-			} 
+			}
 		});
 		this.setState(update_scan_status);
 	},
@@ -129,10 +129,10 @@ module.exports = React.createClass({
 	  if (path) {
 	    return createHandler(component, key, path);
 	  }
-	 
+
 	  const cache = component.__linkStateHandlers ||
 	    (component.__linkStateHandlers = {});
-	 
+
 	  return cache[key] || (cache[key] = createHandler(component, key));
 	},
 	createHandler(component, key, path) {
@@ -146,8 +146,8 @@ module.exports = React.createClass({
 	},*/
 
 	editProfile(){
-		
-		
+
+
 		var checkNull=0;
 		if(this.state.profile.windows_id == ""|| this.state.profile.windows_id  == undefined){
 			$('#WindowID').css('border', '1px solid #B94A48');
@@ -157,7 +157,7 @@ module.exports = React.createClass({
 				$('#WindowIDErr').text("")
 			})
 			checkNull++;
-			
+
 		}else {
 			$('#WindowID').css('border', '1px solid #dde3ec');
 		}
@@ -234,7 +234,7 @@ module.exports = React.createClass({
 		}else {
 			$('#WindowID').css('border', '1px solid #dde3ec');
 		}
-		
+
 		if(checkNull!=0){
 			return;
 		}
@@ -244,14 +244,14 @@ module.exports = React.createClass({
 			$('#EmailErr').text("Your email is invalid")
 			$('#Email').blur(function(){
 				$('#Email').css('border', '1px solid #dde3ec');
-				$('#EmailErr').text("");      
+				$('#EmailErr').text("");
 			})
 			return;
 		}
 		else {
 			$('#Email').css('border', '1px solid #dde3ec');
 		}
-		
+
 		if(isNaN(this.state.profile.corporate_phone)){
 			$('#Corporate_phone').css('border', '1px solid #B94A48');
 			$('#Corporate_phoneErr').text(" Corporate Phone is invalid")
@@ -263,7 +263,7 @@ module.exports = React.createClass({
 
 		}else {
 			$('#Corporate_phone').css('border', '1px solid #dde3ec');
-			
+
 		}
 		if(isNaN(this.state.profile.corporate_mobile)){
 			$('#Corporate_mobile').css('border', '1px solid #B94A48');
@@ -276,10 +276,10 @@ module.exports = React.createClass({
 
 		}else {
 			$('#Corporate_mobile').css('border', '1px solid #dde3ec');
-			
+
 		}
-		
-		
+
+
 		$.ajax({
 			url: Constant.SERVER_API + 'api/account/profile/',
 			dataType: 'json',
@@ -347,7 +347,7 @@ module.exports = React.createClass({
 
 	ChangeEmail:function(){
 		this.setState({success: ""});
-		var i=0;	
+		var i=0;
 		if(this.state.CurrentPass == ""|| this.state.CurrentPass == undefined){
 			$('#currentPass').css('border', '1px solid #B94A48');
 			$('#currentPassErr').text("Please enter your Current Password")
@@ -365,7 +365,7 @@ module.exports = React.createClass({
 			$('#newEmailErr').text("Please enter new Email Address")
 			$('#newEmail').blur(function(){
 				$('#newEmail').css('border', '1px solid #dde3ec');
-				$('#newEmailErr').text("")         
+				$('#newEmailErr').text("")
 			})
 			i++;
 
@@ -378,7 +378,7 @@ module.exports = React.createClass({
 			$('#newEmailErr').text("Email your enter is invalid");
 			$('#newEmail').blur(function(){
 				$('#newEmail').css('border', '1px solid #dde3ec');
-				$('#newEmailErr').text("")         
+				$('#newEmailErr').text("")
 			})
 			return;
 		}
@@ -403,7 +403,7 @@ module.exports = React.createClass({
 				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
-				
+
 			/*	this.setState({success: data.statusText});
 			console.log("ChangeEmail: ", data);*/
 		}.bind(this),
@@ -422,7 +422,7 @@ module.exports = React.createClass({
 		});
 
 	},
-	
+
 
 	changePassword:function(){
 		var i=0;
@@ -467,7 +467,7 @@ module.exports = React.createClass({
 			return;
 		}
 		if(this.state.NewPass != this.state.ConfirmPass ){
-			
+
 			$('#errorPass').text('Please enter the same Password');
 			return;
 		}else{
@@ -591,7 +591,7 @@ imgError(){
 	this.image.src = "/assets/images/post-thumb-1.png";
 	return true;
 },
-componentDidMount() 
+componentDidMount()
 {
 
        // this.ChangeEmail();
@@ -612,8 +612,8 @@ componentDidMount()
 			$("div.ios-switch").click(function(){
 				$("div.my-profile-check-none").toggleClass("my-profile-check");
 			});
-			
-			
+
+
 			$("div.off").click(function(){
 				$(this).toggleClass("on");
 			});

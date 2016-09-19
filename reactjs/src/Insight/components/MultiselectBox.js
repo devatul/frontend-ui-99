@@ -105,7 +105,7 @@ var multiselectBox = React.createClass({
 					<span className="multiselect-selected-text">{this.props.title}</span>
 					<b className="caret"></b>
 				</button>
-				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
+				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu ">
 					<li className={'multiselect-item multiselect-all'}>
 						<a tabIndex="0" className="multiselect-all">
 						<label className="checkbox" onClick={this.handleSelectAll} style={{'marginLeft':'0px'}}>
@@ -113,10 +113,9 @@ var multiselectBox = React.createClass({
 							Clear all
 						</label>
 						</a>
-                        <div className="dropdown-backdrop-custom" ></div>
 					</li>
 					{children}
-
+                     <div className="dropdown-backdrop-custom" ></div>
 				</ul>
 
 			</div>

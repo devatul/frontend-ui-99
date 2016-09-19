@@ -8,24 +8,24 @@ var NumberUser = React.createClass({
 	 getInitialState: function() {
         return {
             checkList: [],
-            checked: 0, 
+            checked: 0,
             selected :0,
             newIdArr:[],
             data : this.props.data
         };
     },
-  
+
 
     shouldComponentUpdate: function(nextProps, nextState) {
         if(this.props.data != nextProps.data) {
-          
+
             return true;
         }
         return false;
     },
     handleOnClick(){
-              
-              $("#radio_filter_"+this.props.checked).prop("checked", true); 
+
+              $("#radio_filter_"+this.props.checked).prop("checked", true);
     },
     componentDidMount() {
         var dropdown = this.refs.dropdown
@@ -65,7 +65,7 @@ var NumberUser = React.createClass({
         var newIdArr = [];
         var className = this.state.clicked ? 'active' : 'no-active';
         console.log('data',this.props.data)
-       
+
             _.forEach(this.props.data, function(obj, index) {
                 var newID = 'radio' + index;
                 var size =_.size(this.props.data)
@@ -76,15 +76,15 @@ var NumberUser = React.createClass({
                                             name="radio_filter"
                                             onClick={(event)=>this.handleOnChange(event,index,size)}
                                             value={index}
-                                            
-                                            
+
+
                                             /> {obj.name}
 
                                         </label>
                                     </a>
                                 </li> ;
             }.bind(this));
-           
+
 		return(
 			<div ref="dropdown" className="btn-group dropdown">
 				<button type="button"
@@ -100,6 +100,7 @@ var NumberUser = React.createClass({
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
 					{children}
 				</ul>
+                 <div className="dropdown-backdrop-custom"></div>
 			</div>
 		)
 	},

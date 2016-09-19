@@ -186,22 +186,44 @@
 .help_timeframe.has-arrow.fix_helpbutton_myteam {
         margin-top: 20px;
 }
-.visuallyhidden {
+.fix_filter {
     position: absolute;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 1px solid transparent;
-    transition: 0.3s ease-in-out;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
-.foo {
-  margin: 0px auto;
-  margin-top: 30px;
-  border: 1px solid gray;
-  padding: 15px;
-  max-width: 500px;
-  transition: 0.3s ease-in-out;
+.dropdown-file-info-holder.fix_infoButton {
+    float: left;
+    margin-right: 3px;
+}
+.dropdown-menu.dd-md.fix_infoButton {
+        width: 41vw;
+}
+.fix_text_infoButton {
+    float: right;
+}
+.help_timeframe.has-arrow.fix_text_infoButton{
+    margin-left: -8px;
+}
+.fa-2x {
+    font-size: 1.5em;
+}
+.fix_whitespace{
+  white-space: normal;
+  display: inline-block;
 }

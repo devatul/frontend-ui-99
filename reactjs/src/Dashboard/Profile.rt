@@ -80,7 +80,7 @@
                 <li class="left3">System User</li>
                 <li>
                  <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
-                  
+
                 </li>
                 <li class="left1">
                   <div class="switch switch-sm switch-primary">
@@ -94,12 +94,12 @@
                 </li>
                 <li class="left2">
                   <ul class="content_profile_note_ul">
-                    <li>  
+                    <li>
                       <p class="content_profile_note">Active Directory</p>
                     </li>
                     <li class="left4">
                      <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
-                     
+
                     </li>
                   </ul>
                   <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check">
@@ -110,7 +110,7 @@
               </ul>
             </div>
         </div>
-       
+
       </div>
     </div>
 

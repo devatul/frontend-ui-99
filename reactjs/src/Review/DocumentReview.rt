@@ -196,7 +196,7 @@
                                                             class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }"
                                                             onClick="(event)=>this.onClickValidationButton(event, actionIndex, docIndex)">
                                                             <i rt-if="(current.status == 'normal')"
-                                                                class="fa fa-clock-o"
+                                                                class="fa fa-clock-o fa-2x"
                                                                 aria-hidden="true">
                                                             </i>
                                                             <i class="fa fa-check"
