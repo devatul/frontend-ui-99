@@ -1,34 +1,40 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach, upperFirst } from 'lodash'
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex } from 'lodash'
 import template from './GroupReview.rt'
 import update from 'react/lib/update'
+import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js'
 
 var GroupReview = React.createClass({
     displayName: 'GroupReview',
+
     getInitialState: function() {
     	return {
     		listGroup:[],
-    		groupCurrent: null,
+            groups: [],
+    		groupCurrent: {
+                id: 0,
+                name: 'group name',
+                index: 0
+            },
     		statistics: {},
     		cloudwords: [],
     		centroids: [],
-            data: {},
-            status: 0,
-    		samplesDocument: [],
-            samplesDefault: [],
-    		categoriesInfo: [],
-            documentPreview: null,
-            shouldUpdate: null,
+            reviewStatus: 0,
+            documents: [],
+            categories: [],
+            confidentialities: [],
+    		categoryInfo: [],
+            documentPreview: -1,
+            shouldUpdate: false,
             checkedNumber: 0,
             validateNumber: 0,
             checkBoxAll: false,
             stackChange: [],
-            store: {
-                centroids: []
-            },
+            showLoading: "none",
+            
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -42,101 +48,52 @@ var GroupReview = React.createClass({
             openPreview: false
     	};
     },
-    componentWillMount() {
-        //this.getGroup();
-        
-    },
-    componentDidMount() {
-        this.getListGroup(); 
-        $('.btn-refine').on('click', function(e){
-            e.preventDefault();
-            $(this).removeClass('btn-green').addClass('btn-disabled');
-            $(this).parent().find('.refine-progress').show();
-        });
-        //$('#choose_cluster').select2();
-        // $('#choose_cluster').on('change', function(event) {
-        //     this.changeGroup(event);
-        // }.bind(this));
 
-        // $("#select2-choose_cluster-container").attr({
-        //     title: 'Group 1',
-        // });
-        // $("#select2-choose_cluster-container").text("Group 1");
+    componentDidMount() {
+        this.getGroups();
+        this.getCategories();
+        this.getConfidentialities();
         this.drawCloud();
     },
-    // shouldComponentUpdate: function(nextProps, nextState) {
-    //     if(this.state.groupCurrent != nextState.groupCurrent) {
-    //         return true;
-    //     }
-    //     if(this.state.samplesDocument != nextState.samplesDocument) {
-    //         return true;
-    //     }
-    //     if(this.state.stackChange != nextState.stackChange) {
-    //         return true;
-    //     }
-    //     if(this.state.shouldUpdate != nextState.shouldUpdate) {
-    //         return true;
-    //     }
-    //     if(this.state.checkedNumber != nextState.checkedNumber) {
-    //         return true;
-    //     }
-    //     if(this.state.validateNumber != nextState.validateNumber) {
-    //         return true;
-    //     }
-    //     if(this.state.documentPreview != nextState.documentPreview) {
-    //         return true;
-    //     }
-    //     if(this.state.categoriesInfo != nextState.categoriesInfo) {
-    //         return true;
-    //     }
-    //     if(this.state.centroids != nextState.centroids) {
-    //         return true;
-    //     }
-    //     if(this.state.cloudwords != nextState.cloudwords) {
-    //         return true;
-    //     }
-    //     if(this.state.status != nextState.status) {
-    //         return true;
-    //     }
-    //     return false;
-    // },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.shouldUpdate;  
+    },
+    
     componentDidUpdate: function(prevProps, prevState) {
-        var { store, categoriesInfo } = this.state;
-        if(this.state.groupCurrent != prevState.groupCurrent){
+        
+        if(this.state.shouldUpdate ===  true) {
+            this.setState({ shouldUpdate: false });
+        }
+
+        if(!isEqual(this.state.groupCurrent, prevState.groupCurrent)) {
+            this.getDocuments()
             this.getStatistics();
-            this.getSamplesDocument();
-            this.getcategoriesInfo();
+            this.getCategoryInfo();
             this.getCentroids();
         }
-        if(this.state.samplesDocument != prevState.samplesDocument) {
-            //javascript_todo();
-            $('.select-group select').focus(function(){
-            var selectedRow = $(this).parents('tr');
-                $('.table-my-actions tr').each(function(){
-                    if(!$(this).find('.checkbox-item').prop('checked')){
-                        $(this).addClass('inactive');
-                    }
-                });
-                selectedRow.removeClass('inactive');
-            });
 
-            $('.select-group select').blur(function(){
-                $('.table-my-actions tr').removeClass('inactive');
+        if(!isEqual(this.state.documents, prevState.documents)) {
+            let validNumber = this.validateNumber(),
+                checkNumber = this.checkedNumber(),
+                docNumber = this.state.documents.length;
+                
+            this.setState({
+                validateNumber: validNumber,
+                checkedNumber: checkNumber,
+                checkBoxAll: (checkNumber === docNumber ? true : false),
+                reviewStatus: Math.round((validNumber * 100) / docNumber),
+                shouldUpdate: true
             });
-            // $('[data-toggle="tooltip"]').tooltip({
-            //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large" style="max-width: 500px; width: auto;"></div></div>'
-            // });
-            console.log("dddddd", this.state.samplesDocument, 'ssssssss', prevState.samplesDocument);
         }
-        if(this.state.shouldUpdate != prevState.shouldUpdate) {
-            this.validateNumber();   
-        }
-        if(store.centroids != prevState.store.centroids) {
-            this.drawCentroid();
-        }
-        if(categoriesInfo != prevState.categoriesInfo) {
-            this.drawChart();
-        }
+
+        // if(store.centroids != prevState.store.centroids) {
+        //     this.drawCentroid();
+        // }
+        // if(categoriesInfo != prevState.categoriesInfo) {
+        //     this.drawChart();
+        // }
+
     },
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
@@ -145,73 +102,207 @@ var GroupReview = React.createClass({
     },
 
     closePreview() {
-        this.setState({ openPreview: false });
+        this.setState({ openPreview: false, shouldUpdate: true });
     },
 
-    handleTableRowOnClick: function(event, index) {
-        debugger
-        switch(event.target.id) {
-            case 'documentName': {
-                let document = this.state.samplesDocument[index];
-                    document.index = index;
-                this.setState({ openPreview: true, documentPreview: document });
-            }
-            break;
+    handleClickRefineButton(event) {
+        this.setState({ showLoading: 'block', shouldUpdate: true });
+    },
+
+    handleOnChangeSelectGroup(event) {
+        let { groups } = this.state,
+            index = event.target.value,
+            group = Object.assign({}, groups[index], { index: parseInt(index) });
+
+        this.setState({ groupCurrent: group, shouldUpdate: true });
+    },
+
+    handleNextGroup() {
+        let { index } = this.state.groupCurrent,
+            group = Object.assign({}, this.state.groups[index + 1], { index: index + 1 });
+            
+        if(index < (this.state.groups.length - 1)) {
+            this.setState({
+                groupCurrent: group,
+                shouldUpdate: true
+            });
         }
     },
 
-    getListGroup: function() {
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/",
-            dataType: 'json',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log(data);
-                var category = [0,
-                                2,
-                                0,
-                                5,
-                                5,
-                                1,
-                                5,
-                                5,
-                                5,
-                                1,
-                                5,
-                                1,
-                                5,
-                                1,
-                                5,
-                                5,
-                                1,
-                                1,
-                                1,
-                                1];
+    handleTableRowOnClick(event, index) {
+        switch(event.currentTarget.id) {
+            case 'documentName': {
+                this.onClickDocumentName(index);
+            }
+            break;
+            case 'documentStatus': {
+                this.onClickButtonStatus(index);
+            }
+        }
+    },
 
-                for(var i = 0; i < data.length; i++) {
-                    data[i].category = category[i];
+    onClickDocumentName(index) {
+        if(index <= (this.state.documents.length - 1)) {
+            this.setState({
+                openPreview: true,
+                documentPreview: index,
+                shouldUpdate: true
+            });
+        }
+    },
+
+    onClickButtonStatus(index) {
+        let document = this.state.documents[index];
+        if(document.status === 'invalid') {
+            let updateDocuments = update(this.state.documents, {
+                [index]: {
+                    status: { $set: 'valid' }
                 }
-                var updateState = update(this.state, {
-                    listGroup: {$set: data},
-                    groupCurrent: {$set: data[0]},
+            }),
+            updateStack = update(this.state.stackChange, {
+                $push: [{
+                    id: index,
+                    data: Object.assign({}, this.state.documents[index])
+                }]
+            });
+            //debugger
+            this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+        }
+    },
+
+    handleTableRowOnChange(event, index) {
+        
+        switch(event.target.id) {
+            case 'checkbox': {
+                this.onChangeCheckBox(event, index);
+            }
+            break;
+
+            case 'selectCategory': {
+                this.onChangeCategory(event, index);
+            }
+            break;
+
+            case 'selectConfidentiality': {
+                this.onChangeConfidentiality(event, index);
+            }
+        }
+    },
+
+    onChangeCheckBox(event, index) {
+        let { documents } = this.state,
+            updateDocuments = update(this.state.documents, {
+                [index]: {
+                    checked: { $set: event.target.checked }
+                }
+            }), 
+            updateStack = update(this.state.stackChange, {
+                $push: [{
+                    id: index,
+                    data: Object.assign({}, documents[index])
+                }]
+            });
+
+        this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+    },
+
+    onChangeCategory(event, index) {
+        let categoryIndex = event.target.value,
+
+            { categories, documents } = this.state,
+
+            updateDocuments = update(documents, {
+                [index]: {
+                    category: {
+                        $set: categories[categoryIndex]
+                    },
+                    status: {
+                        $set: 'valid'
+                    }
+                }
+            }),
+
+            updateStack = update(this.state.stackChange, {
+                $push: [{
+                    id: index,
+                    data: Object.assign({}, documents[index])
+                }]
+            });
+        this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+    },
+
+    onChangeConfidentiality(event, index) {
+        let confidentialityIndex = event.target.value,
+
+            { confidentialities, documents } = this.state,
+
+            updateDocuments = update(documents, {
+                [index]: {
+                    confidentiality: {
+                        $set: confidentialities[confidentialityIndex]
+                    },
+                    status: {
+                        $set: 'valid'
+                    }
+                }
+            }),
+
+            updateStack = update(this.state.stackChange, {
+                $push: [{
+                    id: index,
+                    data: Object.assign({}, documents[index])
+                }]
+            });
+        this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+    },
+
+    handleSelectAll(event) {
+        let updateDocuments = update(this.state.documents, {
+            $apply: (data) => {
+                data = cloneDeep(data);
+                for(let i = data.length - 1; i >= 0; i--) {
+                    data[i].checked = event.target.checked
+                }
+
+                return data;
+            }
+        });
+        
+        this.setState({ documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true });
+    },
+
+    handleUndo() {
+        if(this.state.stackChange.length > 0) {
+            let { documents, stackChange } = this.state,
+
+                item = stackChange[stackChange.length - 1],
+
+                updateDocuments = update(documents, {
+                    [item.id]: {
+                        $set: item.data
+                    }
+                }),
+
+                updateStack = update(stackChange, {
+                    $splice: [[stackChange.length - 1, 1]]
                 });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+
+            this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+        }
+    },
+
+    getGroups() {
+        let data = [];
+
+        makeRequest({
+            path: "api/group/",
+            success: (res) => {
+                let group = Object.assign({}, res[0], { index: 0 });
+                this.setState({ groups: res, groupCurrent: group, shouldUpdate: true });
+            }
         });
     },
-    parseInt: function(num) {
-        return Math.round(num);
-    },
+
     fileDistribution: function() {
         let data = [
             { name: 'Word', color: 'yellow', total: 5015 },
@@ -240,174 +331,183 @@ var GroupReview = React.createClass({
             </div>
         );
     },
+    
     getStatistics: function() {
-        var totalDocument = [880,768,743,
-                            722,710,703,
-                            694,693,688,
-                            674,623,589,
-                            587,499,455,
-                            402,395,394,
-                            333,288,285,
-                            235,226,213,
-                            193,170,150,
-                            127,114,59];
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/statistics/",
-            dataType: 'json',
-            data: { "id":this.state.groupCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+        makeRequest({
+            path: "api/group/statistics/",
+            params: {
+                "id": this.state.groupCurrent.id
             },
-            success: function(data) {
-                data.total_number_documents = totalDocument[this.state.groupCurrent.id - 1];
-                var updateState = update(this.state, {
-                    statistics: {$set: data}
-                });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            success: (res) => {
+                this.setState({ statistics: res, shouldUpdate: true });
+            }
         });
     },
-    selectGroup: function(event) {
-        debugger;
-        $('option#defaultSelect').css('display', 'none');
-    },
+
     getCloudwords: function() {
-        /*
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/cloudwords/",
-            dataType: 'json',
-            data: { "id":this.state.groupCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+        makeRequest({
+            path: "api/group/cloudwords/",
+            params: {
+                "id": this.state.groupCurrent.id
             },
-            success: function(data) {
-                this.setState({ cloudwords: [] });
-                for (var i = 0; i < data.length; i++) {
-                    var updateState = update(this.state, {
-                        cloudwords: {$push: [{text: data[i].name, weight: data[i].count, html: { "data-tooltip": "1"} }]}
-                    });
-                    this.setState(updateState);
+            success: (res) => {
+                let arr = [];
+                for(let i = res.length - 1; i >= 0; i--) {
+                    arr[i] = {
+                        text: res[i].name,
+                        weight: res[i].count
+                    }
                 }
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+
+                this.setState({ cloudwords: arr, shouldUpdate: true });
+            }
         });
-        */
     },
     getCentroids: function() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/centroids/",
-            dataType: 'json',
-            data: { "id":this.state.groupCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+        makeRequest({
+            path: "api/group/centroids/",
+            params: {
+                "id": this.state.groupCurrent.id
             },
-            success: function(data) {
-                var updateStore = update(this.state.store, {
-                    centroids: {$set: data }
-                });
-                this.setState({ store: updateStore });
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            success: (res) => {
+                this.setState({ centroids: res, shouldUpdate: true });
+            }
         });
     },
-    getSamplesDocument: function() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/samples/",
-            dataType: 'json',
-            data: { "id":this.state.groupCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+    getDocuments() {
+        let data = [
+            {
+                confidence_level: 87,
+                confidentiality_label: "yes/no",
+                creation_date: "2012-04-23",
+                image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                legal_retention_until: "2012-04-23",
+                modification_date: "2012-04-23",
+                name: "IonaTechnologiesPlcG07.doc",
+                number_of_classification_challenge: 1,
+                owner: "owner_name",
+                path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+                category: {
+                    id: 1,
+                    name: "Accounting/Tax"
+                },
+                confidentiality: {
+                    id: 1, 
+                    name: "Confidential"
+                }
             },
-            success: function(data) {
-                for(var i = 0, total = data.documents.length; i < total; i++) {
-                    data.documents[i].confidence_level = (data.documents[i].confidence_level - 10)
-                    data.documents[i].confidentiality_confidence_level = (data.documents[i].confidentiality_confidence_level-10)
-                    data.documents[i].current = {
-                        checked: false,
-                        category: this.state.groupCurrent.category,
-                        confidential: Math.floor((Math.random() * 4)),
-                        status: "normal"
-                    };
+            {
+                confidence_level: 87,
+                confidentiality_label: "yes/no",
+                creation_date: "2012-04-23",
+                image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                legal_retention_until: "2012-04-23",
+                modification_date: "2012-04-23",
+                name: "IonaTechnologiesPlcG07.doc",
+                number_of_classification_challenge: 1,
+                owner: "owner_name",
+                path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+                category: {
+                    id: 1,
+                    name: "Accounting/Tax"
+                },
+                confidentiality: {
+                    id: 1, 
+                    name: "Confidential"
                 }
-                var documentPreview = data.documents[0];
-                documentPreview.index = 0;
-                var updateState = update(this.state, {
-                    data: {$set: data },
-                    samplesDocument: {$set: data.documents},
-                    samplesDefault: {$set: $.extend(true, {}, data.documents) },
-                    documentPreview: {$set: data.documents[0]}
-                });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
-        });
-    },
-    getcategoriesInfo: function() {
-        debugger
-    	$.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/group/categories/",
-            dataType: 'json',
-            data: { "id":this.state.groupCurrent.id },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
-            success: function(data) {
-                var updateState = update(this.state, {
-                    categoriesInfo: {$set: data} 
-                });
-                this.setState(updateState);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
+            {
+                confidence_level: 87,
+                confidentiality_label: "yes/no",
+                creation_date: "2012-04-23",
+                image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                legal_retention_until: "2012-04-23",
+                modification_date: "2012-04-23",
+                name: "IonaTechnologiesPlcG07.doc",
+                number_of_classification_challenge: 1,
+                owner: "owner_name",
+                path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+                category: {
+                    id: 1,
+                    name: "Accounting/Tax"
+                },
+                confidentiality: {
+                    id: 1, 
+                    name: "Confidential"
                 }
-            }.bind(this)
-        });
-    },
-    changeGroup: function(event) {
-        var val = event.target.value;
-        var updateState = update(this.state, {
-            groupCurrent: {$set: this.state.listGroup[val]},
-            status: {$set: 0 },
-            validateNumber: { $set: 0 }     
-        });
-        this.setState(updateState);
-    },
-    setDocumentPreview: function(index) {
-        var document = this.state.samplesDocument[index];
-        if(document != null) {
-            document.index = index;
-            this.setState(update(this.state, {
-                documentPreview: { $set: document }
-            }));
+            },
+            {
+                confidence_level: 87,
+                confidentiality_label: "yes/no",
+                creation_date: "2012-04-23",
+                image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                legal_retention_until: "2012-04-23",
+                modification_date: "2012-04-23",
+                name: "IonaTechnologiesPlcG07.doc",
+                number_of_classification_challenge: 1,
+                owner: "owner_name",
+                path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+                category: {
+                    id: 1,
+                    name: "Accounting/Tax"
+                },
+                confidentiality: {
+                    id: 1, 
+                    name: "Confidential"
+                }
+            }
+        ],
+        
+        { id } = this.state.groupCurrent;
+
+        for(let i = data.length - 1; i >= 0; i--) {
+            data[i].checked  = false;
+            data[i].status = 'invalid';
         }
+
+        makeRequest({
+            path: "api/group/samples/",
+            params: { "id": id },
+            success: (res) => {
+                //data = res;
+                debugger
+                this.setState({ documents: data, shouldUpdate: true });
+            }
+        });
+
+        return data;
+    },
+
+    getCategories() {
+        let arr = [];
+        makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+                this.setState({ categories: data, shouldUpdate: true });
+            }
+        });
+    },
+
+    getConfidentialities() {
+        let arr = [];
+        makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                this.setState({ confidentialities: data, shouldUpdate: true });
+            }
+        });
+    },
+
+    getCategoryInfo: function() {
+        makeRequest({
+            path: "api/group/categories/",
+            params: {
+                "id": this.state.groupCurrent.id
+            },
+            success: (res) => {
+                this.setState({ categoryInfo: res })
+            }
+        });
     },
     
     progressbar: function(value) {
@@ -429,218 +529,99 @@ var GroupReview = React.createClass({
             }
         }
     },
-    saveStack: function() {
+    
+    checkedNumber() {
+        let num = 0,
+            { documents } = this.state;
 
-    },
-    onChangeCategory: function(event, sampleIndex) {
-        var categoryIndex = event.target.value;
-        var samplesDefault = this.state.samplesDefault;
-        var listDocument = this.state.samplesDocument;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
-        var stackList = this.state.stackChange;
-        stackList.push({
-            index: sampleIndex,
-            contents: saveDocument
-        });
-        listDocument[sampleIndex].current.category = categoryIndex;
-        if(categoryIndex == samplesDefault[sampleIndex].current.category) {
-            listDocument[sampleIndex].current.status = "accept";
-        } else {
-            listDocument[sampleIndex].current.status = "editing";
-        }
-        this.setState(update(this.state,{
-            stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument }
-        }));
-        this.setState({shouldUpdate: 'updateCategory_' + categoryIndex + '_' + sampleIndex});
-    },
-    onChangeConfidential: function(event, sampleIndex) {
-        var confidentialIndex = event.target.value;
-        var samplesDefault = this.state.samplesDefault;
-        var listDocument = this.state.samplesDocument;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
-        var stackList = this.state.stackChange;
-        stackList.push({
-            index: sampleIndex,
-            contents: saveDocument
-        });
-        listDocument[sampleIndex].current.confidential = confidentialIndex;
-        if(confidentialIndex == samplesDefault[sampleIndex].current.confidential)
-            listDocument[sampleIndex].current.status = "accept";
-        else
-            listDocument[sampleIndex].current.status = "editing";
-        var setUpdate = update(this.state,{
-            stackChange: {$set:  stackList },
-            samplesDocument: {$set: listDocument}
-        });
-        this.setState(setUpdate);
-        this.setState({shouldUpdate: 'updateConfidential_' + confidentialIndex + '_' + sampleIndex}); 
-    },
-    checkedNumber: function() {
-        var samplesDocument = this.state.samplesDocument;
-        var num = 0;
-        for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.checked === true) {
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].checked === true) {
                 num++;
             }
         }
-        this.setState({ checkedNumber: num });
+        
+        return num;
     },
-    onClickCheckbox: function(event, sampleIndex) {
-        var checked = event.target.checked;
-        var listDocument = this.state.samplesDocument;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
-        var stackList = this.state.stackChange;
-        stackList.push({
-            index: sampleIndex,
-            contents: saveDocument
-        });
-        listDocument[sampleIndex].current.checked = checked;
-        var setUpdate = update(this.state,{
-            stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument}
-        });
-        this.setState(setUpdate);
-        this.checkedNumber();
-        this.setState({shouldUpdate: 'updateCheckBox_' + sampleIndex  + '_' + checked});
-    },
-    validateNumber: function() {
-        var samplesDocument = this.state.samplesDocument;
-        var num = 0;
-        for(var i = 0; i < samplesDocument.length; i++) {
-            if(samplesDocument[i].current.status === "editing" || samplesDocument[i].current.status === "accept") {
+
+    validateNumber() {
+        let num = 0,
+            { documents } = this.state;
+            
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].status === "valid") {
                 num++;
             }
         }
-        var status = this.parseInt((num * 100) / this.state.samplesDocument.length);
-        this.setState(update(this.state, { validateNumber: {$set: num }, status: {$set: status } } ));
+
+        return num;
     },
-    onClickValidationButton: function(event, sampleIndex) {
-        var listDocument = this.state.samplesDocument;
-        var saveDocument = $.extend(true, {}, listDocument[sampleIndex]);
-        var stackList = this.state.stackChange;
-        stackList.push({
-            index: sampleIndex,
-            contents: saveDocument
-        });
-        listDocument[sampleIndex].current.status = "accept";
-        var setUpdate = update(this.state,{
-            stackChange: {$set: stackList },
-            samplesDocument: {$set: listDocument}
-        });
-        this.setState(setUpdate);
-        this.setState({shouldUpdate: 'updateValidate' + '_' + 'accept' + '_' + sampleIndex});
-    },
-    approveButon: function(event) {
-        var documents = this.state.samplesDocument;
-        var approveIndex = '';
-        for(var i = 0; i < documents.length; i++) {
-            if(documents[i].current.checked === true) {
-                documents[i].current.status = "accept";
-                documents[i].current.checked = false;
-                approveIndex += "_" + i;
+
+    handleClickApproveButton() {
+
+        let documents = cloneDeep(this.state.documents);
+
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].checked) {
+                documents[i].status = 'valid';
+                documents[i].checked = false;
             }
         }
-        var setUpdate = update(this.state,{
-            samplesDocument: {$set: documents},
-            checkBoxAll: {$set: false }
-        });
-        this.setState(setUpdate);
-        this.checkedNumber();
-        this.setState({ shouldUpdate: 'approveButon_' + approveIndex });
+
+        this.setState({ documents: documents, shouldUpdate: true });
     },
-    checkAllButton: function(event) {
-        var checked = event.target.checked;
-        console.log(checked);
-        var documents = this.state.samplesDocument;
-        for (var i = 0; i < documents.length; i++) {
-            documents[i].current.checked = checked;
-        }
-        var setUpdate = update(this.state,{
-            samplesDocument: {$set: documents},
-            checkBoxAll: {$set: checked }
-        });
-        this.setState(setUpdate);
-        this.checkedNumber();
-        this.setState({ shouldUpdate: 'updateCheckAll_' + checked});
-    },
-    undoHandle: function() {
-        console.log('stackChange' , this.state.stackChange);
-        if(this.state.stackChange.length > 0) {
-            var newStackChange = this.state.stackChange;
-            var newSamplesDocument = this.state.samplesDocument;
-            var documentOld = newStackChange[this.state.stackChange.length - 1];
-            newSamplesDocument[documentOld.index] = documentOld.contents;
-            newStackChange.pop();
-            var setUpdate = update(this.state, {
-                samplesDocument: {$set: newSamplesDocument },
-                stackChange: {$set: newStackChange },
-                documentPreview: {$set: newSamplesDocument[documentOld.index] }
-            });
-            this.setState(setUpdate);
-            this.setState({shouldUpdate: 'undoAction_' + newStackChange.length })
-        }
-    },
-    alertClose: function() {
-        $(".alert-close[data-hide]").closest(".alert-success").hide();
-    },
-    cutPath: function(str) {
-        if(str.length > 0) {
-            return str.substring(0,str.lastIndexOf('/') + 1);
-        }
-    },
+
     drawCloud: function() {
-        //var word_list = this.state.cloudwords;
         var word_list = [
-    {text: "Entity", weight: 13},
-    {text: "matter", weight: 10.5},
-    {text: "science", weight: 9.4},
-    {text: "properties", weight: 8},
-    {text: "speed", weight: 6.2},
-    {text: "Accounting", weight: 5},
-    {text: "interactions", weight: 5},
-    {text: "nature", weight: 5},
-    {text: "branch", weight: 5},
-    {text: "concerned", weight: 4},
-    {text: "Sapien", weight: 4},
-    {text: "Pellentesque", weight: 3},
-    {text: "habitant", weight: 3},
-    {text: "morbi", weight: 3},
-    {text: "tristisque", weight: 3},
-    {text: "senectus", weight: 3},
-    {text: "et netus", weight: 3},
-    {text: "et malesuada", weight: 3},
-    {text: "fames", weight: 2},
-    {text: "ac turpis", weight: 2},
-    {text: "egestas", weight: 2},
-    {text: "Aenean", weight: 2},
-    {text: "vestibulum", weight: 2},
-    {text: "elit", weight: 2},
-    {text: "sit amet", weight: 2},
-    {text: "metus", weight: 2},
-    {text: "adipiscing", weight: 2},
-    {text: "ut ultrices", weight: 2},
-    {text: "justo", weight: 1},
-    {text: "dictum", weight: 1},
-    {text: "Ut et leo", weight: 1},
-    {text: "metus", weight: 1},
-    {text: "at molestie", weight: 1},
-    {text: "purus", weight: 1},
-    {text: "Curabitur", weight: 1},
-    {text: "diam", weight: 1},
-    {text: "dui", weight: 1},
-    {text: "ullamcorper", weight: 1},
-    {text: "id vuluptate ut", weight: 1},
-    {text: "mattis", weight: 1},
-    {text: "et nulla", weight: 1},
-    {text: "Sed", weight: 1}
-  ];
+            {text: "Entity", weight: 13},
+            {text: "matter", weight: 10.5},
+            {text: "science", weight: 9.4},
+            {text: "properties", weight: 8},
+            {text: "speed", weight: 6.2},
+            {text: "Accounting", weight: 5},
+            {text: "interactions", weight: 5},
+            {text: "nature", weight: 5},
+            {text: "branch", weight: 5},
+            {text: "concerned", weight: 4},
+            {text: "Sapien", weight: 4},
+            {text: "Pellentesque", weight: 3},
+            {text: "habitant", weight: 3},
+            {text: "morbi", weight: 3},
+            {text: "tristisque", weight: 3},
+            {text: "senectus", weight: 3},
+            {text: "et netus", weight: 3},
+            {text: "et malesuada", weight: 3},
+            {text: "fames", weight: 2},
+            {text: "ac turpis", weight: 2},
+            {text: "egestas", weight: 2},
+            {text: "Aenean", weight: 2},
+            {text: "vestibulum", weight: 2},
+            {text: "elit", weight: 2},
+            {text: "sit amet", weight: 2},
+            {text: "metus", weight: 2},
+            {text: "adipiscing", weight: 2},
+            {text: "ut ultrices", weight: 2},
+            {text: "justo", weight: 1},
+            {text: "dictum", weight: 1},
+            {text: "Ut et leo", weight: 1},
+            {text: "metus", weight: 1},
+            {text: "at molestie", weight: 1},
+            {text: "purus", weight: 1},
+            {text: "Curabitur", weight: 1},
+            {text: "diam", weight: 1},
+            {text: "dui", weight: 1},
+            {text: "ullamcorper", weight: 1},
+            {text: "id vuluptate ut", weight: 1},
+            {text: "mattis", weight: 1},
+            {text: "et nulla", weight: 1},
+            {text: "Sed", weight: 1}
+        ];
 
         var updateChart = update(this.state.dataChart, {
             cloudWords: {$set: word_list }
         });
         this.setState({ dataChart: updateChart });
     },
+
     drawCentroid() {
         var centroids = []
         forEach(this.state.store.centroids, (val, index) => {
@@ -681,9 +662,7 @@ var GroupReview = React.createClass({
         });
         this.setState({ dataChart: updateChart });
     },
-    endReviewHandle: function() {
-        browserHistory.push('/Dashboard/OverView');
-    },
+
     render:template
 });
 

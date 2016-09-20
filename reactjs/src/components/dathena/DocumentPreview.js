@@ -7,23 +7,27 @@ import { cloneDeep, isEqual } from 'lodash'
 
 var documentPreview = React.createClass({
 
-    getInitialState() {
+    PropTypes: {
+        undo: PropTypes.func,
+        nextDocument: PropTypes.func,
+        open: PropTypes.bool,
+        document: PropTypes.object
+    },
+
+    getDefaultProps() {
         return {
-            setOpen: false
-        }
+            undo: function() {},
+            nextDocument: function() {},
+            document: {}
+        };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.setOpen != nextState.setOpen || !isEqual(this.props.document, nextProps.document);
+        return this.props.open != nextProps.open || !isEqual(this.props.document, nextProps.document);
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.open != prevProps.open) {
-            this.setState({ setOpen: this.props.open });
-        }
-
-        if(this.props.open === true) {
-            debugger
+        if((prevProps.open === false && this.props.open) || (this.props.document != null && !isEqual(this.props.document.image_url, prevProps.document.image_url))) {
             $(this.refs.link).gdocsViewer();
         }
     },
@@ -41,20 +45,20 @@ var documentPreview = React.createClass({
     },
 
     cutPath(str) {
-        if(str.length > 0) {
+        if(str !== undefined && str.length > 0) {
             return str.substring(0,str.lastIndexOf('/') + 1);
         }
     },
 
     render() {
-
+        
         let { open, document } = this.props;
-        debugger
+        
         return(
             <Modal
                 role="dialog"
                 animation
-                show={this.state.setOpen}
+                show={open}
                 dialogClassName="modal-preview">
                 <Modal.Header>
                     <Row>
@@ -63,12 +67,19 @@ var documentPreview = React.createClass({
                             Document Preview
                         </Modal.Title>
                         <div className="col-sm-4 modal-info text-center">
-                            <span className="text-itatic">{document.name}</span><br/>
-                            <span>Folder {this.cutPath(document.path)}</span>
+                            <span className="text-itatic">
+                                { document &&
+                                    document.name
+                                }
+                            </span><br/>
+                            <span>Folder
+                            { document &&
+                                this.cutPath(document.path)
+                            }</span>
                         </div>
                         <div className="col-sm-4 modal-actions text-right">
                             <Button className="mb-xs mr-xs btn btn-green" bsClass={false} onClick={this.props.nextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-                            <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass={false} onClick={this.props.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
+                            <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass={false} onClick={this.props.undo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                             <Button className="modal-button" bsClass={false} onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
                         </div>
                     </Row>
@@ -76,7 +87,9 @@ var documentPreview = React.createClass({
                 <Modal.Body>
                     {this.props.children}
                     <div className="file-preview mt-md">
-                        <a ref="link" href={document.image_url}></a>
+                        { document &&
+                            <a ref="link" href={document.image_url}></a>
+                        }
                     </div>
                 </Modal.Body>
             </Modal>

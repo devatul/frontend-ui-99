@@ -35,6 +35,28 @@ var Select2 = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return !isEqual(this.props, nextProps);
     },
+    
+    componentDidUpdate(prevProps, prevState) {
+        if(!isEqual(this.props, prevProps)) {
+            let { events } = this.constructor,
+            {
+                adaptDropdownCssClass, 
+                containerCssClass,
+                minimumResultsForSearch
+            } = this.props,
+
+            _props = Object.assign({}, this.props, {
+                minimumResultsForSearch: minimumResultsForSearch && Infinity,
+                containerCssClass: containerCssClass && "dathena-select",
+                adaptDropdownCssClass: adaptDropdownCssClass ? adaptDropdownCssClass : function() {
+                    return "dathena-select-dropdown";
+                }
+            });
+            
+            $(this.refs.select2).select2(_props);
+        }
+    },
+    
 
     componentDidMount() {
         let {

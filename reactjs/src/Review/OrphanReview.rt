@@ -1,3 +1,4 @@
+<rt-import name="Const" from="../Constant.js"/>
 <rt-import name="PieChart" from="../components/chart/PieChart"/>
 <rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
 <rt-import name="CentroidChart" from="../components/chart/CentroidChart"/>
@@ -18,8 +19,10 @@
 <rt-import name="Button" from="react-bootstrap/lib/Button" />
 <rt-import name="Table" from="react-bootstrap/lib/Table" />
 <rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup" />
+<rt-import name="Alert" from="../components/bootstrap/alert"/>
 <rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup" />
 <rt-import name="select2" from="../components/dathena/Select2" />
+<rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
 <section>
@@ -30,9 +33,12 @@
                     <InputGroup class="mb-md">
                         <label for="choose_cluster">
                             <b class="mr-md">Select a orphan to review</b>
-                            <select2 id="choose_cluster" onChange={this.handleOnChangeSelectOrphan}>
-                                <option rt-repeat="orphan in this.state.orphan.list" value="{orphanIndex}" key="{orphanIndex}">
-                                    {this.cutString(orphan.name)}
+                            <select2 id="chosse_cluster" onChange={this.handleOnChangeSelectOrphan} value={this.state.orphanCurrent.index}>
+                                <option
+                                    rt-repeat="orphan in this.state.orphans"
+                                    value="{orphanIndex}"
+                                    key="{orphanIndex}">
+                                    {orphan.name}
                                 </option>
                             </select2>
                         </label>
@@ -52,12 +58,12 @@
                             <Col md={5} class="review-status-block">
                                 <span>Review Status</span>
                                 <ProgressBar class="dathena-progress">
-                                    <ProgressBar bsStyle="danger" now={25} label={'25%'}>
+                                    <ProgressBar bsStyle="danger" now={this.state.reviewStatus} label="{this.state.reviewStatus + '%'}" />
                                 </ProgressBar>
                             </Col>
                             <Col md={3} class="text-right">
                                 <span>Detect Language: <b>English</b></span>
-                                <Button class="btn btn-green ml-md" bsClass={false}>Edit</Button>
+                                <Button class="btn btn-green ml-md" bsClass="false">Edit</Button>
                             </Col>
                         </Row>
                     </Panel.head>
@@ -81,7 +87,7 @@
                                         </div>
 
                                         <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
-                                            <tbody rt-scope="this.state.orphanData.statistics as statistics">
+                                            <tbody rt-scope="this.state.statistics as statistics">
                                                 <tr>
                                                     <td class="text-left"><span>Total Number of Documents</span>
                                                         <HelpButton className="dropdown-file-info-holder"
@@ -134,22 +140,12 @@
                                         </table>
 
                                         <div class="mt-lg">
-                                        <a href="#" class="btn btn-green btn-refine">Refine Group</a>
+                                        <Button onClick={this.handleClickRefineButton} class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Group</Button>
                                         <HelpButton className=""
                                                 classNote="review_question_chart"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
-                                        <div class="refine-progress">
-                                            <div id="circularG" class="inline-block-item">
-                                                <div id="circularG_1" class="circularG"></div>
-                                                <div id="circularG_2" class="circularG"></div>
-                                                <div id="circularG_3" class="circularG"></div>
-                                                <div id="circularG_4" class="circularG"></div>
-                                                <div id="circularG_5" class="circularG"></div>
-                                                <div id="circularG_6" class="circularG"></div>
-                                                <div id="circularG_7" class="circularG"></div>
-                                                <div id="circularG_8" class="circularG"></div>
-                                            </div>
-                                        </div>
+                                        <div class="refine-progress" style="display: {this.state.showLoading}">
+                                            <LoadingButton open={true} elementType="div"/>
                                         </div>
                                     </div>
                                 </section>
@@ -182,28 +178,38 @@
                     <Panel.head>
                         <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
                         <div class="panel-actions my-actions-btn-group">
-                            <span class="mr-md">Orphan Review: <b>Orphan 0</b></span>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" bsClass={false}>Next Orphan</Button>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" bsClass={false}>
+                            <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleNextOrphan} bsClass="">Next Orphan</Button>
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo} bsClass="">
                                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
                             </Button>
                         </div>
                     </Panel.head>
                     <Panel.body>
-                        <p class="document_note">You have <span class="num">10</span> documents to assign in Orphan 0 by latest 28th June</p>
+                        <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.orphanCurrent && this.state.orphanCurrent.name} by latest 15th August</p>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                            <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all approve-button">Approve</button>
-                            <div class="alert alert-success actions-success">
-                                <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+
+                            <Button
+                                rt-if="this.state.checkedNumber > 0"
+                                onClick={this.handleClickApproveButton}
+                                class="mb-md mr-xs btn btn-green approve-button"
+                                bsClass="">
+                                Approve
+                            </Button>
+
+                            <Alert bsStyle="success" open="{this.state.documents && (this.state.validateNumber == this.state.documents.length)}">
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
-                            </div>
+                            </Alert>
 
                             <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions" responsive bordered striped>
                                 <thead>
                                     <tr role="row" class="">
                                         <th class="fix-padding-th-checkbox">
                                             <div class="checkbox-custom checkbox-primary">
-                                                <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
+                                                <input type="checkbox"
+                                                    class="checkbox-all-1"
+                                                    onChange={this.handleSelectAll}
+                                                    checked="{this.state.checkBoxAll}">
                                                 <label for="checkboxAllExample2"></label>
                                             </div>
                                         </th>
@@ -219,14 +225,14 @@
                                                 classNote="note_chart_content"
                                                 setValue="This displays the name of each individual document, as it exists in its current state." />
                                         </th>
-                                        <th class="review_note fix-max-width-category-confident">Category
+                                        <th class="review_note fix-max-width-category-confident">Proposed Category
                                             <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
                                                         setValue="User is required to assign category for orphan documents." />
                                         </th>
-                                        <th class="review_note fix-max-width-category-confident">Confidentiality
+                                        <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
                                             <HelpButton
-                                                className="dropdown-file-info-holder"
                                                 classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                className="dropdown-file-info-holder"
                                                 setValue="User is required to assign confidentiality level for orphan documents." />
                                         </th>
                                         <th class="text-center">Status 
@@ -235,74 +241,84 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody rt-scope="this.state.orphanData.listDocument as listDocument" class="fix-td-checkbox">
-                                    <table.row rt-repeat=" document in listDocument "
+                                <tbody class="fix-td-checkbox">
+                                    <table.row rt-repeat=" document in this.state.documents "
                                         document={document} index={documentIndex}
+                                        categories={this.state.categories}
+                                        confidentialities={this.state.confidentialities}
                                         onClick={this.handleTableRowOnClick}
                                         onChange={this.handleTableRowOnChange}
                                         noConfidence
-                                        numberChecked={this.state.orphanData.checkNum} />
+                                        numberChecked={this.state.checkedNumber} />
                                 </tbody>
                             </Table>
                         </div>
                         <div class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0">
-                            <ProgressBar class="dathena-progress style-2 pull-left">
-                                25%
-                                <ProgressBar bsStyle="danger" now={25} label={'Progress'} />
+                            <ProgressBar class="dathena-progress style-2 fix-label pull-left">
+                                <span class="label-percent">{this.state.reviewStatus + '%'}</span>
+                                <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>
                             </ProgressBar>
 
-                            <Button class="mb-md mr-xs btn btn-green" bsClass={false}>Next Orphan</Button>
-                            <Button class="mb-md btn btn-green" bsClass={false}>Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
+                            <Button class="mb-md mr-xs btn btn-green" onClick={this.handleNextOrphan} bsClass="">Next Orphan</Button>
+                            <Button class="mb-md btn btn-green" onClick={this.handleUndo} bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                         </div>
                     </Panel.body>
                 </Panel.custom>
             </Col>
         </Row>
     </div>
-<!--Document preview-->
-<div rt-if="this.state.orphanData.docPreview >= 0">
+<!--<div rt-if="this.state.documentPreview >= 0">-->
 <DocumentPreview
     open={this.state.openPreview}
-    document={this.state.orphanData.listDocument[this.state.orphanData.docPreview]}
+    document={this.state.documents[this.state.documentPreview]}
+    nextDocument="{() => this.onClickDocumentName(this.state.documentPreview + 1)}"
+    undo={this.handleUndo}
     closeModal={this.closePreview}>
-    <div class="table-responsive">
-        <table class="review_table table review_table_no_progress table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-            <thead>
-                <tr role="row" class="">
-                    <th>
-                        <div class="checkbox-custom checkbox-primary">
-                            <input type="checkbox" id="checkboxAllExample2" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event)" checked="{this.state.checkBoxAll}">
-                            <label for="checkboxAllExample2"></label>
-                        </div>
-                    </th>
-                    <th class="review_note fix-width">Type
-                    </th>
-                    <th class="review_note">Document
-                        <HelpButton
-                            className="dropdown-file-info-holder"
-                            setValue="This displays the name of each individual document, as it exists in its current state." />
-                    </th>
-                    <th class="review_note fix-max-width-category-confident">Proposed Category (confidence level)
-                        <HelpButton
-                            className="dropdown-file-info-holder"
-                            setValue="User is required to assign category for orphan documents." />
-                    </th>
-                    <th class="review_note fix-max-width-category-confident">Proposed Confidentiality (confidence level)
-                        <HelpButton
-                            className="dropdown-file-info-holder"
-                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                            setValue="User is required to assign confidentiality level for orphan documents." />
-                    </th>
-                    <th class="text-center">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <table.row
-                    document={this.state.orphanData.listDocument[this.state.orphanData.docPreview]}
-                    noConfidence
-                    index={this.state.orphanData.docPreview}/>
-            </tbody>
-        </table>
-</DocumentPreview>
+<div class="table-responsive">
+    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+            <tr role="row" class="">
+                <th>
+                    <div class="checkbox-custom checkbox-primary">
+                        <input type="checkbox"
+                            class="checkbox-all-1"
+                            onChange={this.handleSelectAll}
+                            checked={this.state.checkBoxAll}>
+                        <label for="checkboxAllExample2"></label>
+                    </div>
+                </th>
+                <th class="review_note fix-width">Type
+                </th>
+                <th class="review_note">Document
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Category
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        setValue="User is required to assign category for orphan documents." />
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                        setValue="User is required to assign confidentiality level for orphan documents." />
+                </th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <table.row
+                document={this.state.documents[this.state.documentPreview]}
+                categories={this.state.categories}
+                confidentialities={this.state.confidentialities}
+                onClick={this.handleTableRowOnClick}
+                onChange={this.handleTableRowOnChange}
+                index={this.state.documentPreview} />
+        </tbody>
+    </table>
 </div>
+</DocumentPreview>
+<!--</div>-->
 </section>

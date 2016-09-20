@@ -144,6 +144,10 @@ table.docPreview > thead > tr > th:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
 }
 
+/*Fix helpButton document preview popup*/
+.modal-preview div.dropdown-menu.has-arrow {
+    padding: 5px;
+}
 /* Fix help icon overview */
 .fix-overview-help-button {
     color: #000011;
@@ -202,3 +206,40 @@ table.docPreview > thead > tr > th:nth-child(1) {
     border-radius: 50%;
     background-color: #DADADA;
 }
+
+/* fix label progress bar */
+.dathena-progress.style-2.fix-label {
+    padding-right: 0px;
+}
+.dathena-progress .progress-bar.fix-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.dathena-progress.style-2 .label-percent {
+    position: absolute;
+    margin-left: -35px;
+}
+
+/**/
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+/*clock*/
+.table-challenge.size-timer-clock .fa-clock-o {
+    font-size: 25px;
+}
+
+/*custom select2*/
+.filter-buttons .dropdown-menu .select2.select2-container {
+    min-width: 135px;
+}
+
+.filter-buttons .dropdown-menu .select2-selection {
+    min-height: 34px;
+}
+
+.filter-buttons .dropdown-menu .select2-selection .select2-selection__rendered {
+    line-height: 34px;
+}
+
