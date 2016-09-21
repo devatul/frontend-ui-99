@@ -72,9 +72,9 @@ var documentPreview = React.createClass({
                                     document.name
                                 }
                             </span><br/>
-                            <span>Folder
+                            <span>
                             { document &&
-                                this.cutPath(document.path)
+                                'Folder ' + this.cutPath(document.path)
                             }</span>
                         </div>
                         <div className="col-sm-4 modal-actions text-right">

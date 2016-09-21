@@ -83,11 +83,11 @@ var Row3 = React.createClass({
     renderValidation(valid) {
         switch(valid) {
             case 'editing':
-                return (<i className="fa fa-check icon-danger"></i>);
+                return "icon-danger";
             case 'accepted':
-                return (<i className="fa fa-check icon-success"></i>);
+                return "icon-success";
             default: 
-                return (<i className="fa fa-check"></i>);
+                return "";
         }
     },
 
@@ -176,7 +176,7 @@ var Row3 = React.createClass({
                         id="validationButton"
                         onClick={this.handleOnclick}
                         className="challenge-btn validation-btn btn btn-default">
-                        {this.renderValidation(document['2nd_line_validation'])}
+                        <i className={'fa fa-check ' + this.renderValidation(document['2nd_line_validation'])}></i>
                     </a>
                 </td>
             </tr>

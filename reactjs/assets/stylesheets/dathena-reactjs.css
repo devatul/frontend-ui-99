@@ -243,3 +243,6 @@ table.docPreview > thead > tr > th:nth-child(1) {
     line-height: 34px;
 }
 
+.tab-content.br-radius {
+    border-radius: 5px;
+}

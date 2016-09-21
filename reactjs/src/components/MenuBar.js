@@ -27,6 +27,14 @@ var MenuBar = React.createClass
                 },
                 labels: []
             },
+
+            value: {
+                category: 'label',
+                confidentiality: "label"
+            },
+
+            shouldUpdate: false,
+
             scanResult: {},
 	    };
 	},
@@ -39,13 +47,17 @@ var MenuBar = React.createClass
 
     componentDidMount() {
         if(this.props.showFilter) {
-            let updateLabel = update(this.state.listLabel, {
-                categories: { $set: this.getCategory() },
-                confidentialities: { $set: this.getConfidentiality() },
-                'doc-types': { $set: this.getDoctypes() },
-                languages: { $set: this.getLanguages() }
-            });
-            this.setState({ listLabel: updateLabel });
+            // let updateLabel = update(this.state.listLabel, {
+            //     categories: { $set: this.getCategory() },
+            //     confidentialities: { $set: this.getConfidentiality() },
+            //     'doc-types': { $set: this.getDoctypes() },
+            //     languages: { $set: this.getLanguages() }
+            // });
+            // this.setState({ listLabel: updateLabel });
+            this.getCategories();
+            this.getConfidentialities();
+            this.getDoctypes();
+            this.getLanguages();
         }
         if(this.props.showInfo) {
             this.getscanResult();
@@ -53,16 +65,15 @@ var MenuBar = React.createClass
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { filter, scanResult, listLabel } = this.state;
+        var { filter, scanResult, listLabel, value } = this.state;
         var {title} = this.props;
-        return !isEqual( scanResult, nextState.scanResult )
-            || !isEqual( listLabel, nextState.listLabel )
-            || !isEqual( filter.labels, nextState.filter.labels )
-            || !isEqual( filter.params, nextState.filter.params )
-            || !isEqual( title, nextProps.title );
+        return nextState.shouldUpdate;
     },
 
     componentDidUpdate(prevProps, prevState) {
+        if(this.state.shouldUpdate === true) {
+            this.setState({ shouldUpdate: false });
+        }
         if(!isEqual( this.state.filter.params, prevState.filter.params )) {
             var { params } = this.state.filter,
                 {
@@ -94,50 +105,70 @@ var MenuBar = React.createClass
             data[i].checked = false;
         }
     },
-	getCategory: function(async) {
-        let arr = [];
+	getCategories: function(async) {
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
                 this.configListLabel(data);
-                arr = data;
+
+                let updateList = update(this.state.listLabel, {
+                    categories: {
+                        $set: data
+                    }
+                });
+
+                this.setState({ listLabel: updateList, shouldUpdate: true });
             }
         });
-        return arr;
     },
-    getConfidentiality: function(async) {
-        let arr = [];
+    getConfidentialities: function(async) {
         makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.configListLabel(data);
-                arr = data;
+                let updateList = update(this.state.listLabel, {
+                    confidentialities: {
+                        $set: data
+                    }
+                });
+                
+                this.setState({ listLabel: updateList, shouldUpdate: true });
             }
         });
-        return arr;
     },
     getDoctypes: function(async) {
-        let arr = [];
         makeRequest({
             path: 'api/label/doctypes/',
             success: (data) => {
                 this.configListLabel(data);
-                arr = data;
+
+                let updateList = update(this.state.listLabel, {
+                    'doc-types': {
+                        $set: data
+                    }
+                });
+
+                this.setState({ listLabel: updateList, shouldUpdate: true });
             }
         });
-        return arr;
     },
     getLanguages: function(async) {
-        let arr = [];
         makeRequest({
             path: 'api/label/languages/',
             success: (data) => {
                 this.configListLabel(data);
-                arr = data;
+
+                let updateList = update(this.state.listLabel, {
+                    'languages': {
+                        $set: data
+                    }
+                });
+
+                this.setState({ listLabel: updateList, shouldUpdate: true });
             }
         });
-        return arr;
     },
+
     onclearFilter: function() {
         let { listLabel, filter } = this.state,
             { labels, params } = this.state.filter;
@@ -241,35 +272,74 @@ var MenuBar = React.createClass
         return update(this.state.filter.labels, { $splice: [[indexLabel, 1]] });
     },
 
-    handleSelectBoxChange: function(field) {
-        let property = field.id,
-            { listLabel } = this.state,
-            { index, checked } = field.contextChange;
+    handleOnUnSelect(field) {
+        debugger
+    },
+
+    handleOnSelecting(event) {
+        let updateValue = update(this.state.value, {
+            confidentiality: { $set: event.target.value }
+        });
+        debugger
+        this.setState({ value: updateValue, shouldUpdate: true });
+    },
+
+    handleOnSelect: function(event) {
+        
+
+        let updateValue = update(this.state.value, {
+            confidentiality: { $set: 'label' }
+        });
+
+        debugger
+
+        this.setState({ value: updateValue, shouldUpdate: true });
             
-        if(property) {
-            var updateList = update(this.state.listLabel, {
-                    [property]: {
-                        [index]: {
-                            checked: { $set: checked }
-                        }
-                    }
-                }),
+        // switch(field.id) {
+        //     case "SelectConfidentiality": {
+        //         property = 'confidentialities';
+        //     }
+        //     break;
+
+        //     case "SelectCategory": {
+        //         property = 'categories';
+        //     }
+        //     break;
+
+        //     case "SelectDoctype": {
+        //         property = 'doc-types';
+        //     }
+        //     break;
+
+        //     case "SelectLanguage": {
+        //         property = 'languages';
+        //     }
+        // }
+            
+        // if(property) {
+        //     var updateList = update(this.state.listLabel, {
+        //             [property]: {
+        //                 [index]: {
+        //                     checked: { $set: checked }
+        //                 }
+        //             }
+        //         }),
                 
-                label = {
-                    id: field.id + '_' + index,
-                    name: listLabel[property][index].name
-                },
+        //         label = {
+        //             id: field.id + '_' + index,
+        //             name: listLabel[property][index].name
+        //         },
 
-                updateLabel = checked ? this.addLabel(label) : this.deleteLabel(label.id),
+        //         updateLabel = checked ? this.addLabel(label) : this.deleteLabel(label.id),
 
-                updateParam = this.updateFilterParams( property, field.contextChange ),
+        //         updateParam = this.updateFilterParams( property, field.contextChange ),
 
-                updateFilter = update(this.state.filter, {
-                    params: { $set: updateParam },
-                    labels: { $set: updateLabel }
-                });
-            this.setState({ filter: updateFilter, listLabel: updateList });
-        }
+        //         updateFilter = update(this.state.filter, {
+        //             params: { $set: updateParam },
+        //             labels: { $set: updateLabel }
+        //         });
+        //     this.setState({ filter: updateFilter, listLabel: updateList });
+        // }
     },
 
     handleSelectAll: function(field) {

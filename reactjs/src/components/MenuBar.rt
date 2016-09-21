@@ -2,6 +2,7 @@
 <rt-import name="FilterLabel" from="./dathena/FilterLabel"/>
 <rt-import name="func" from="../utils/function" />
 <rt-import name="HelpButton" from="./dathena/HelpButton"/>
+<rt-import name="Select2" from="./dathena/Select2" />
 
 <div rt-scope="this.state.scanResult as scanResult">
 <div class="my_main bar_menu container">
@@ -26,47 +27,143 @@
                                 <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state.listLabel as listLabel ">
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <MultiSelectBox
+                                            <Select2
+                                                value="{this.state.value.confidentiality}"
+                                                onSelect={this.handleOnSelect}
+                                                onSelecting={this.handleOnSelecting}
+                                                width="off"
+                                                minimumResultsForSearch="Infinity"
+                                                closeOnSelect={false}>
+                                                    <option
+                                                        value="label"
+                                                        key="label">
+                                                        Confidentiality
+                                                    </option>
+                                                    <option
+                                                        value="-1"
+                                                        key="selectall">
+                                                        Select All
+                                                    </option>
+                                                    <option
+                                                        rt-repeat="confidentiality in listLabel.confidentialities"
+                                                        value="{confidentialityIndex}"
+                                                        key="{confidentialityIndex}">
+                                                        {confidentiality.name}
+                                                    </option>
+                                            </Select2>
+                                            <!--<MultiSelectBox
                                                 id="confidentialities"
                                                 title="Confidentiality"
                                                 onChange={this.handleSelectBoxChange}
                                                 onClear={this.handleClearAll}
                                                 checkDefault={true}
-                                                data={listLabel.confidentialities} />
+                                                data={listLabel.confidentialities} />-->
                                         </div>
                                     </li>
                                     
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <MultiSelectBox
+                                            <Select2
+                                                value="{this.state.value.confidentiality}"
+                                                onSelect={this.handleOnSelect}
+                                                onSelecting={this.handleOnSelecting}
+                                                width="off"
+                                                minimumResultsForSearch="Infinity"
+                                                closeOnSelect={false}>
+                                                    <option
+                                                        value="label"
+                                                        key="label">
+                                                        Category
+                                                    </option>
+                                                    <option
+                                                        value="-1"
+                                                        key="selectall">
+                                                        Select All
+                                                    </option>
+                                                    <option
+                                                        rt-repeat="category in listLabel.categories"
+                                                        value="{categoryIndex}"
+                                                        key="{categoryIndex}">
+                                                        {category.name}
+                                                    </option>
+                                            </Select2>
+                                            <!--<MultiSelectBox
                                                 id="categories"
                                                 title="Category"
                                                 onChange={this.handleSelectBoxChange}
                                                 onClear={this.handleClearAll}
                                                 checkDefault={true}
-                                                data={listLabel.categories} />
+                                                data={listLabel.categories} />-->
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <MultiSelectBox
+                                            <Select2
+                                                value="{this.state.value.confidentiality}"
+                                                onSelect={this.handleOnSelect}
+                                                onSelecting={this.handleOnSelecting}
+                                                width="off"
+                                                minimumResultsForSearch="Infinity"
+                                                closeOnSelect={false}>
+                                                    <option
+                                                        value="label"
+                                                        key="label">
+                                                        Languages
+                                                    </option>
+                                                    <option
+                                                        value="-1"
+                                                        key="selectall">
+                                                        Select All
+                                                    </option>
+                                                    <option
+                                                        rt-repeat="language in listLabel.languages"
+                                                        value="{languageIndex}"
+                                                        key="{languageIndex}">
+                                                        {language.name}
+                                                    </option>
+                                            </Select2>
+                                            <!--<MultiSelectBox
                                                 id="languages"
                                                 title="Languages"
                                                 onChange={this.handleSelectBoxChange}
                                                 onClear={this.handleClearAll}
                                                 checkDefault={true}
-                                                data={listLabel.languages} />
+                                                data={listLabel.languages} />-->
                                         </div>
                                     </li>
                                     <li class="mb-sm">
                                         <div class="form-group">
-                                            <MultiSelectBox
+                                            <Select2
+                                                value="{this.state.value.confidentiality}"
+                                                onSelect={this.handleOnSelect}
+                                                onSelecting={this.handleOnSelecting}
+                                                width="off"
+                                                minimumResultsForSearch="Infinity"
+                                                closeOnSelect={false}>
+                                                    <option
+                                                        value="label"
+                                                        key="label">
+                                                        Document Type
+                                                    </option>
+                                                    <option
+                                                        value="-1"
+                                                        key="selectall">
+                                                        Select All
+                                                    </option>
+                                                    <option
+                                                        rt-repeat="doctype in listLabel['doc-types']"
+                                                        value="{doctypeIndex}"
+                                                        key="{doctypeIndex}">
+                                                        {doctype.name}
+                                                    </option>
+                                            </Select2>
+                                            <!--<MultiSelectBox
                                                 id="doc-types"
                                                 title="Document Type"
                                                 onChange={this.handleSelectBoxChange}
                                                 onClear={this.handleClearAll}
                                                 checkDefault={true}
-                                                data={listLabel['doc-types']} />
+                                                data={listLabel['doc-types']} />-->
                                         </div>
                                     </li>
                                 </ul>
