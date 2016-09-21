@@ -67,7 +67,7 @@
                                                             <label></label>
                                                         </div>
                                                     </th>
-                                                     <th class="review_note">Type
+                                                     <th class="review_note" style="width: 4vw;">Type
                                                     </th>
                                                     <th class="review_note" style="width: 18vw;">Document
                                                         <HelpButton className="dropdown-file-info-holder"
@@ -75,19 +75,19 @@
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
 
-                                                    <th class="review_note">Proposed Category
+                                                    <th class="review_note" style="width: 20vw;">Proposed Category
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="overview_timeframe fix-anomaly-help-button"
                                                             setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
                                                     </th>
-                                                    <th class="review_note">Proposed Confidentiality
+                                                    <th class="review_note" style="width: 20vw;">Proposed Confidentiality
                                                              <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. "/>
                                                     </th>
                                                     <th class="text-center" style="max-width: 70px;">Status
                                                         <!-- <HelpButton className="dropdown-file-info-holder"
                                                             classNote="note_chart_content_review "
                                                             setValue="This represent the status of the review for each file." /> -->
-                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="This represent the status of the review for each file."/>
+                                                           <!--   <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="This represent the status of the review for each file."/> -->
 
                                                     </th>
                                                 </tr>
@@ -111,7 +111,7 @@
                                                     <td class="text-left">
                                                         <!--http://www.snee.com/xml/xslt/sample.doc-->
                                                          <span
-                                                            class="text-italic file-name doc-path"
+                                                            class="text-italic file-name doc-path fix_docpath"
                                                             data-toggle="modal"
                                                             data-target="#previewModal"
                                                             onClick="()=>this.setDocumentPreview(actionIndex, docIndex,this.state.icon[docIndex].type)"
@@ -119,7 +119,7 @@
                                                                 <span class="file-name-1"
                                                                     rel="tooltip"
                                                                     data-toggle="tooltip"
-                                                                    data-original-title="{doc.name}">
+                                                                    data-original-title="{doc.name} ">
                                                                     {doc.name}
                                                                 </span>
                                                         </span>
@@ -288,9 +288,12 @@
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment
+                                                        <HelpButton className="dropdown-file-info-holder"
+                                                            classNote="overview_timeframe fix-anomaly-help-button"
+                                                            setValue="Comment of your coordinator to explain the reason of the rejection." />
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
-
+                                                           <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Add a comment to justify your acceptation or your rejection of the challenge. "/>
                                                     </th>
                                                     <th class="review_note" style="max-width: 120px;">Validation
 
@@ -343,7 +346,7 @@
                                                             <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
                                                               <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
-                                                            <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docChall.categories[current.prevCategory].name}</span>
+                                                           <!--  <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docChall.categories[current.prevCategory].name}</span> -->
                                                         </div>
                                                     </td>
                                                     <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">

@@ -227,3 +227,12 @@
   white-space: normal;
   display: inline-block;
 }
+.dropdown-menu.dd-md.fix_filter_insight{
+    width: 21vw;
+}
+.dropdown-menu.fix_ulFilter_insight {
+    left: 25px
+}
+.doc-path.fix_docpath {
+    max-width: 170px;
+}

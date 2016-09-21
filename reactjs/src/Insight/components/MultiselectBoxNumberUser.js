@@ -34,7 +34,7 @@ var NumberUser = React.createClass({
         $(dropdown).on('show.bs.dropdown', function() {
             $('#dropdownFilter').css({
                 display: 'block',
-                height: $(dropdownmenu).height() + 120 + 'px'
+                height: $(dropdownmenu).height() + 90 + 'px'
             });
         }.bind(this));
 
@@ -97,7 +97,7 @@ var NumberUser = React.createClass({
 					<span className="multiselect-selected-text">{this.props.title} </span>
 					<b className="caret"></b>
 				</button>
-				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu">
+				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu fix_ulFilter_insight">
 					{children}
 				</ul>
                  <div className="dropdown-backdrop-custom"></div>

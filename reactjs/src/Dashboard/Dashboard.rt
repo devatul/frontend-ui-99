@@ -193,9 +193,25 @@
                 </li>
                 <li><span class="badge">4</span>
                     <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
-                    <li>
-                        <a href="#">Insights</a>
-                    </li>
+                     <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+
+                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><!--<li class="active">-->
+
+                            <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
             </div>
 

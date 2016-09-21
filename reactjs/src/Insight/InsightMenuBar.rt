@@ -12,9 +12,9 @@
       <li class="dropdown">
         <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
         <div class="dropdown-backdrop-custom" style="display:none"></div>
-        <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+        <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md fix_filter_insight dd-right">
           <ul class="filter-list list-unstyled pt-xs">
-            <li class="mb-sm">
+            <!-- <li class="mb-sm">
               <div class="form-group">
                <MultiSelectBox
                  id={this.static.categoryId}
@@ -47,7 +47,7 @@
               checked={false}
               data={this.state.dataSelectBox[this.static.doctypeId]} />
              </div>
-          </li>
+          </li> -->
           <li class="mb-sm">
              <div class="form-group">
                 <NumberUser onChange="{this.handleSelectNumber}"  id={this.static.numberId}
