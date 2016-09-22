@@ -33,7 +33,7 @@
                         rt-repeat="review in this.state.dataReview"
                         class="panel-bordered actions-panel">
                         <Panel.head>
-                            <h2 class="panel-title inline-block-item mr-sm"><i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                            <h2 class="panel-title inline-block-item mr-sm"><i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
                                 <span class="text-capitalize">{ ' [' + review.language + '] ' + review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
                                 <HelpButton classIcon="overview_question_a help_question_a" setValue="Help content"/>
                             </h2>
@@ -72,7 +72,7 @@
                                             <th class="review_note fix-width">
                                                 Type
                                             </th>
-                                            <th class="review_note">Document Name
+                                            <th class="review_note">Document name
                                                 <HelpButton
                                                     className="dropdown-file-info-holder"
                                                     setValue="This displays the name of each individual document, as it exists in its current state." />
@@ -133,7 +133,7 @@
                 </th>
                 <th class="review_note fix-width">Type
                 </th>
-                <th class="review_note">Document
+                <th class="review_note">Document name
                     <HelpButton
                         className="dropdown-file-info-holder"
                         setValue="This displays the name of each individual document, as it exists in its current state." />

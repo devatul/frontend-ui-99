@@ -122,11 +122,11 @@ var Row3 = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width doc-path">{document.name}</span>
                     </OverlayTrigger>
                     <InfoButton>
                         <li>Name: <b>{document.name}</b></li>
-                        <li>Path: <a href="#">{document.path}</a></li>
+                        <li>Path: <span><a href="#">{document.path}</a></span></li>
                         <li>Owner: <b>{document.owner}</b></li>
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
@@ -164,10 +164,10 @@ var Row3 = React.createClass({
                     {this.renderComment('The classification should be Confidential because. The classification should be Confidential because')}
                     <a className="more" onClick={this.onClickMoreLess} style={{ display: 'initial', cursor: 'pointer' }}>
                         { !this.state.showText &&
-                            <span className="more1">more</span>
+                            <span className="more1">Show details</span>
                         }
                         { this.state.showText &&
-                            <span className="zoom-out" style={{ display: 'initial' }}>less</span>
+                            <span className="zoom-out" style={{ display: 'initial' }}>Show less</span>
                         }
                     </a>
                 </td>
@@ -235,11 +235,11 @@ var Row2 = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic fix-max-width file-name doc-path">{document.name}</span>
                     </OverlayTrigger>
                     <InfoButton>
                         <li>Name: <b>{document.name}</b></li>
-                        <li>Path: <a href="#">{document.path}</a></li>
+                        <li>Path: <span><a href="#">{document.path}</a></span></li>
                         <li>Owner: <b>{document.owner}</b></li>
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
@@ -357,12 +357,12 @@ var Row = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width doc-path">{document.name}</span>
                     </OverlayTrigger>
 
                     <InfoButton>
                         <li>Name: <b>{document.name}</b></li>
-                        <li>Path: <a href="#">{document.path}</a></li>
+                        <li>Path: <span><a href="#">{document.path}</a></span></li>
                         <li>Owner: <b>{document.owner}</b></li>
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
@@ -418,7 +418,7 @@ var Row = React.createClass({
                     </div>
                 </td>
                 <td>
-                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check ' + (document.status == 'valid' ? 'validated' : '')}>
+                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status == 'valid' ? 'validated' : '')}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         <i className="fa fa-check" aria-hidden="true"></i>
                     </a>

@@ -86,9 +86,9 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
+                <li class="dropdown">
                     <span class="badge">40</span>
-                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <!--<li>
@@ -137,9 +137,9 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li class="dropdown" className="{this.getActive() === 'Review' && 'active'}">
+                <li class="dropdown">
                     <span class="badge">40</span>
-                    <a href="#"  id="review" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <li>

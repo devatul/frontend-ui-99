@@ -43,7 +43,7 @@
                               <div class="clearfix">
                                     <strong>Reviewers List </strong>
                                     <HelpButton
-                                        setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name}" />
+                                        setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
                                     <Select2 id="chosse_cluster"
                                         onChange={this.setReviewerCurrent}
                                         value={this.state.current.reviewer}
@@ -96,7 +96,7 @@
                                         <li class="document_panel-title">
                                             <h2 class="document_panel-title panel-title">Challenge
                                               <HelpButton
-                                                setValue="Documents challenged by reviewers are displayed in this section." />
+                                                setValue="This summarises all the documents challenged. Users must review each challenge to accept or reject it." />
                                             </h2>
                                         </li>
                                     </ul>
@@ -108,11 +108,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="review_note">Status
-                                                            <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" 
-                                                                setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                                                            <!--<HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" 
+                                                                setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                                                         </th>
                                                         <th class="review_note">Type</th>
-                                                        <th class="review_note">Document Name
+                                                        <th class="review_note">Document name
                                                             <HelpButton className="dropdown-file-info-holder" 
                                                                 setValue="This displays the name of each individual document, as it exists in its current state." />
                                                         </th>
@@ -174,12 +174,12 @@
                                                 <thead>
                                                     <tr role="row" class="">
                                                         <th class="review_note">Status
-                                                          <HelpButton className="dropdown-file-info-holder"
-                                                              setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                                                          <!--<HelpButton className="dropdown-file-info-holder"
+                                                              setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                                                         </th>
                                                         <th class="review_note">Type
                                                         </th>
-                                                        <th class="review_note">Document Name
+                                                        <th class="review_note">Document name
                                                           <HelpButton className="dropdown-file-info-holder"
                                                               setValue="This displays the name of each individual document, as it exists in its current state." />
                                                         </th>
@@ -239,7 +239,7 @@
                               <thead>
                                 <tr>
                                     <th class="col50">Number of Assigned Reviewers:</th>
-                                    <th class="col25">Number of Documetns Challenged</th>
+                                    <th class="col25">Number of Documents Challenged</th>
                                     <th class="col25">Total Numbers of Documents Classified</th>
                                 </tr>
                               </thead>
@@ -287,89 +287,6 @@
                       </div>
                   </Panel.body>
               </Panel.custom>
-              <!--<section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Accounting/ Tax</h2>
-                    <div class="panel-actions">
-                        <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                    </div>
-                </header>
-                <div class="panel-body">
-                  <div class="table-responsive">
-                    <table class="table table-condensed table-reviewer-summary">
-                      <thead>
-                        <tr>
-                          <th class="col50">Number of Assigned Reviewers:</th>
-                          <th class="col25">Number of Documetns Challenged</th>
-                          <th class="col25">Total Numbers of Documents Classified</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td class="no-border-top"><span class="assigned-num">4</span> <a data-toggle="collapse" data-target="#reviewerList1" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                            <td class="no-border-top text-center">30</td>
-                            <td class="no-border-top text-center">12,031</td>
-                        </tr>
-                        <tr class="child-table">
-                          <td colspan="4" class="hiddenRow">
-                            <div class="accordian-body collapse" id="reviewerList1"> 
-                              <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <td class="col50">Chris.Muffat (Last Modified)</td>
-                                    <td class="col25">&nbsp;</td>
-                                    <td class="col25 chart-col">
-                                      <div class="progress progress-xl progress-squared light">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                            <span class="percent">73</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="col50">Matt.Nixon (Last Modified)</td>
-                                    <td class="col25">&nbsp;</td>
-                                    <td class="col25 no-border-top chart-col">
-                                      <div class="progress progress-xl progress-squared light">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                            <span class="percent">55</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="col50">Tony.Gomes (Last Modified)</td>
-                                    <td class="col25">&nbsp;</td>
-                                    <td class="col25 no-border-top chart-col">
-                                      <div class="progress progress-xl progress-squared light">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                            <span class="percent">50</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="col50">Stan.Slow (Last Modified)</td>
-                                    <td class="col25">&nbsp;</td>
-                                    <td class="col25 no-border-top chart-col">
-                                      <div class="progress progress-xl progress-squared light">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                                            <span class="percent">2</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            
-                            </div> 
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </section>-->
               <div class="clearfix">
                   <div class="pull-right">
                       <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
@@ -391,11 +308,11 @@
           <thead>
               <tr>
                   <th class="review_note">Status
-                      <HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" 
-                          setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                      <!--<HelpButton className="dropdown-file-info-holder" classNote="note_chart_content" 
+                          setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                   </th>
                   <th class="review_note">Type</th>
-                  <th class="review_note">Document Name
+                  <th class="review_note">Document name
                       <HelpButton className="dropdown-file-info-holder" 
                           setValue="This displays the name of each individual document, as it exists in its current state." />
                   </th>
@@ -434,12 +351,12 @@
         <thead>
             <tr role="row" class="">
                 <th class="review_note">Status
-                  <HelpButton className="dropdown-file-info-holder"
-                      setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  
+                  <!--<HelpButton className="dropdown-file-info-holder"
+                      setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                 </th>
                 <th class="review_note">Type
                 </th>
-                <th class="review_note">Document Name
+                <th class="review_note">Document name
                   <HelpButton className="dropdown-file-info-holder"
                       setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>

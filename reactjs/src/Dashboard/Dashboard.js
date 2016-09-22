@@ -247,8 +247,6 @@ module.exports = React.createClass({
                 return 'Review';
             case insight.test(path) === true:
                 return 'Insight';
-            default:
-                ''
         }
     },
 
