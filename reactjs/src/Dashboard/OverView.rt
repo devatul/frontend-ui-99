@@ -97,6 +97,7 @@
                     <StackedChart
                         id="categoryLanguagePieChart"
                         title="Category & Language"
+                        help="A summarised view of each category and document language type for all the documents scanned."
                         config={configChart.categoryLanguage} />
                 </div>
                 <div class="col-md-4">

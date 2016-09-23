@@ -175,7 +175,7 @@ var StackedChart = React.createClass({
                 <div className="panel-body widget-panel">
                     <h4 className="widget-title">{title + ' '}
                         <HelpButton classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Of the total number of documents scanned, when 99 detects two or more files, these are considered duplicates and are registered here." />
+                                    setValue="A summarised view of each category and document language type for all the documents scanned." />
                     </h4>
                     <div className="widget-chart chart-stacked">
                         <div className="chart chart-md" id={id}></div>
