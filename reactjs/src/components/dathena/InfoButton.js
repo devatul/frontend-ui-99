@@ -64,7 +64,6 @@ var InfoButton = React.createClass({
                 <div ref="dropdownMenu" className="dropdown-menu has-arrow dropdown-file-info append-to-body fix-z-index-info-button">
                     {this.props.children}
                 </div>
-                <span class="dropdown-backdrop"></span>
             </div>
         );
     }

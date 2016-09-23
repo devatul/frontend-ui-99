@@ -32,7 +32,11 @@
                 <FormGroup>
                     <InputGroup class="mb-md">
                         <label for="choose_cluster">
-                            <b class="mr-md">Select a group to review</b>
+                            <b class="mr-md">
+                                Select a group to review
+                                <HelpButton
+                                    setValue="User is required to review category and confidentiality level for the documents in the groups."/>
+                            </b>
                             <select2 id="chosse_cluster" onChange={this.handleOnChangeSelectGroup} value={this.state.groupCurrent.index}>
                                 <option
                                     rt-repeat="group in this.state.groups"
@@ -158,10 +162,13 @@
                                 </Row>
                                 <Row>
                                     <div id="fileDistribution" class="mb-md">
-                                        <h4 class="chart-title">File Distribution</h4>
+                                        <h4 class="chart-title">File Distribution
+                                            <HelpButton setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
+                                        </h4>
                                         {this.fileDistribution()}
                                     </div>
-                                    <CentroidChart />
+                                    <CentroidChart
+                                        help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid." />
                                 </Row>
                             </Col>
                         </Row>
@@ -219,7 +226,7 @@
                                                 classNote="note_chart_content"
                                                 setValue="This displays the name of each individual document, as it exists in its current state." />-->
                                         </th>
-                                        <th class="review_note">Document Name
+                                        <th class="review_note">Document name
                                             <HelpButton
                                                 className="dropdown-file-info-holder"
                                                 classNote="note_chart_content"
@@ -227,13 +234,13 @@
                                         </th>
                                         <th class="review_note fix-max-width-category-confident">Proposed Category
                                             <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
-                                                        setValue="User is required to assign category for orphan documents." />
+                                                        setValue="Category proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                         </th>
                                         <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
                                             <HelpButton
                                                 classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                                                 className="dropdown-file-info-holder"
-                                                setValue="User is required to assign confidentiality level for orphan documents." />
+                                                setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                         </th>
                                         <th class="text-center">Status 
                                             <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
@@ -288,7 +295,7 @@
                 </th>
                 <th class="review_note fix-width">Type
                 </th>
-                <th class="review_note">Document
+                <th class="review_note">Document name
                     <HelpButton
                         className="dropdown-file-info-holder"
                         setValue="This displays the name of each individual document, as it exists in its current state." />

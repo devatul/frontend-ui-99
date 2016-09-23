@@ -15,6 +15,13 @@ var CentroidChart = React.createClass({
         data: PropTypes.array
     },
 
+    getDefaultProps() {
+        return {
+            title: "title",
+            help: "help content"
+        };
+    },
+
     // componentDidUpdate(prevProps, prevState) {
     //     if(this.props.data != prevProps.data) {
     //         this.draw();
@@ -362,7 +369,10 @@ var CentroidChart = React.createClass({
     render() {
         return (
             <div id="centroid" className="cendroid-frame">
-                <h4 className="chart-title">Centroid Distance Histogram</h4>
+                <h4 className="chart-title">
+                    Centroid Distance Histogram
+                    <HelpButton setValue={this.props.help} />
+                </h4>
                 <Row>
                     <Col md={9} sm={9}>
                         <div id="centroidChartWrapper">

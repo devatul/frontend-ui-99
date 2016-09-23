@@ -243,6 +243,27 @@ table.docPreview > thead > tr > th:nth-child(1) {
     line-height: 34px;
 }
 
+.select2-dropdown ul.select2-results__options li[id$="-label"] {
+    display: none;
+}
+
+/*Fix timer button*/
+
+.table-my-actions .doc-check.fix-size {
+    font-size: 25px;
+}
+
+.panel-title i.fa.fa-clock-o.fix-size {
+    font-size: 25px;
+}
+
+/*Fix document name*/
+
+.table-my-actions span.file-name.fix-max-width {
+    max-width: 0px;
+    overflow: initial;
+}
 .tab-content.br-radius {
     border-radius: 5px;
 }
+
