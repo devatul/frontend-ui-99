@@ -22,7 +22,7 @@ var DocumentReview = React.createClass({
             icon : [],
             iconChallengedDocument: [],
             iconReview : '',
-            iconChallengedPreview : ''
+            iconChallengedPreview : '',
 
         };
     },
@@ -202,7 +202,7 @@ var DocumentReview = React.createClass({
     },
 
     progressbar: function(value) {
-        debugger
+
         if(value <= Constant.progressValue.level1) {
             return Constant.progressBar.danger;
         } else if(value > Constant.progressValue.level1 && value <= Constant.progressValue.level2) {
@@ -688,6 +688,7 @@ var DocumentReview = React.createClass({
          return "fa fa-file-word-o action-file-icon"
        }
     },
+
     render:template
 });
 module.exports = DocumentReview;

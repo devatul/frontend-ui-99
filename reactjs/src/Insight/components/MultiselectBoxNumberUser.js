@@ -11,7 +11,8 @@ var NumberUser = React.createClass({
             checked: 0,
             selected :0,
             newIdArr:[],
-            data : this.props.data
+            data : this.props.data,
+            class: 'dropdown-backdrop-custom'
         };
     },
 
@@ -30,12 +31,14 @@ var NumberUser = React.createClass({
     componentDidMount() {
         var dropdown = this.refs.dropdown
         var dropdownmenu = this.refs.dropdownmenu
+        console.log('dropdown', dropdown)
 
         $(dropdown).on('show.bs.dropdown', function() {
             $('#dropdownFilter').css({
                 display: 'block',
                 height: $(dropdownmenu).height() + 90 + 'px'
             });
+
         }.bind(this));
 
         $(dropdown).on('hide.bs.dropdown', function() {
@@ -43,6 +46,7 @@ var NumberUser = React.createClass({
                 display: 'block',
                 height: ''
             });
+
         }.bind(this));
     },
     handleOnChange: function(event, index, size) {
@@ -60,6 +64,7 @@ var NumberUser = React.createClass({
 	isActive(value){
         return ((value===this.state.selected) ?'active':'default');
     },
+
 	render(){
 		var children = [];
         var newIdArr = [];
@@ -86,7 +91,7 @@ var NumberUser = React.createClass({
             }.bind(this));
 
 		return(
-			<div ref="dropdown" className="btn-group dropdown">
+			<div ref="dropdown" className="btn-group dropdown" id="dr">
 				<button type="button"
 					key={this.props.key + '_'}
 					onClick={this.handleOnClick}
@@ -100,7 +105,7 @@ var NumberUser = React.createClass({
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu fix_ulFilter_insight">
 					{children}
 				</ul>
-                 <div className="dropdown-backdrop-custom"></div>
+
 			</div>
 		)
 	},

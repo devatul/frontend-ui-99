@@ -5,7 +5,7 @@ import update from 'react-addons-update'
 import _ from 'lodash'
 
 var HelpButton = React.createClass({
-	
+
 	propTypes :{
 		content: PropTypes.string,
 	},
@@ -25,10 +25,10 @@ var HelpButton = React.createClass({
 	handleOnMouseOut(){
 		this.setState({ open: '', expanded: 'false' });
 		this.setState({ backdrop: '' });
-		
+
 	},
 	render(){
-	
+
 		return(
 
 			<div className={this.props.className+' '+this.state.open}
@@ -36,7 +36,7 @@ var HelpButton = React.createClass({
 			>
 		       <a className="review_question_a help_question_a" aria-expanded="false"><i className="fa fa-question-circle" aria-hidden="true"></i></a>
 		       <div className={this.props.type}>
-		        <p>{this.props.content}</p>
+		        <p style = {{'fontWeight' : 'normal' }}>{this.props.content}</p>
 		      </div>
 		       </div>
 			)

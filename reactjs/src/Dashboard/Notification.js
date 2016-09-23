@@ -11,7 +11,8 @@ import _ from 'lodash'
 var Notification = React.createClass({
     getInitialState() {
         return {
-            content: 'Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority',
+           /* content: 'Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority',*/
+           content: '',
             notification: {
                 today: [],
                 yesterday: [],
@@ -586,7 +587,8 @@ var Notification = React.createClass({
                 },
                 warningNoti: { $set: 3 },
                 dangerNoti: { $set: 1 },
-                total: { $set: 6 }
+                total: { $set: 6 },
+                content : {$set : 'Number of actions pending for you to complete. 1 action is required with high priority and 3 action are required with medium priority'}
             });
         } else if (role === Constant.role.IS_2ND) {
             var update_notification = update(this.state, {
@@ -607,7 +609,8 @@ var Notification = React.createClass({
                 },
                 warningNoti: { $set: 1 },
                 dangerNoti: { $set: 0 },
-                total: { $set: 1 }
+                total: { $set: 1 },
+                content : {$set : 'Number of actions pending for you to complete. 0 action is required with high priority and 1 action are required with medium priority'}
             });
         }
         this.setState(update_notification);

@@ -3,6 +3,8 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
+<rt-import name="ShowHide" from="../Insight/components/showhide"/>
+
 <div>
     <div class="container">
         <div class="tabs tabs-primary">
@@ -359,8 +361,11 @@
 
                                                     </td>
                                                     <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                                                        <span class="doc-path my-doc-path">Level of Confidentiality is too low for this type of document</span>
-                                                        <a class="more" href="javascript:void(0)"><span class="more1">Show details</span><span class="zoom-out">Show less</span></a>
+                                                      <!--   <span class={this.state.doc_path} style="margin-bottom: 5px;">Level of Confidentiality is too low for this type of document</span>
+ -->
+
+                                                       <!--    <a href="javascript:;" class="details-toggle" onClick={this.showHide} style><i class="fa fa-caret-right mr-xs"><span style="font-family: 'Roboto', 'Helvetica', sans-serif; margin-left: 2px">{this.state.doc_path == '' ? 'Show less' : 'Show details'}</span></i></a> -->
+                                                       <ShowHide content="Level of Confidentiality is too low for this type of document"/>
 
                                                     </td>
                                                     <td class="opa-child fix-1st-pading-comment-table">
@@ -592,15 +597,17 @@
                                     setValue="Comment of your coordinator to explain the reason of the rejection" />
                             </th>
                             <th class="review_note review_note_r">Comment
-                                <HelpButton className="dropdown-file-info-holder"
+                               <!--  <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content_review"
-                                    setValue="Add a comment to justify your acceptation or your rejection of the challenge." />
+                                    setValue="Add a comment to justify your acceptation or your rejection of the challenge." /> -->
+                                    <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Add a comment to justify your acceptation or your rejection of the challenge. "/>
 
                             </th>
                             <th class="review_note" style="max-width: 100px;">Validation
-                                <HelpButton className="dropdown-file-info-holder"
+                                <!-- <HelpButton className="dropdown-file-info-holder"
                                     classNote="note_chart_content_review"
-                                    setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." />
+                                    setValue="Status of the challenge: Green means Accepted, grey means pending, Red means Rejected." /> -->
+
                             </th>
                         </tr>
                     </thead>
@@ -654,7 +661,7 @@
                                     <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
                                       <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                     </select>
-                                    <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docPreview.categories[current.prevCategory].name}</span>
+                                   <!--  <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docPreview.categories[current.prevCategory].name}</span> -->
                                 </div>
                             </td>
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">

@@ -1,5 +1,6 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/HelpButton"/>
+<rt-import name="Anomaly" from="../Insight/components/anomalyStateSelect"/>
 
 <section>
     <div class="container">
@@ -266,8 +267,10 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                    <div  class="fix_whitespace">
                        <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                     setValue="This presents a list of users based on their Windows Account name, raking them by number of anomalies detected. A full list of user exceptions can be extracted." />
+                    </div>
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -301,8 +304,11 @@
                         <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,1)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[1] != null ?  this.state.display_anomaly[1] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 1">
+                              <Anomaly onChange = {this.changeAnomaly} number = 1 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -312,8 +318,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected false" data-state="false"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,2)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[2] != null ?  this.state.display_anomaly[2] : 'false'}" data-state="false"></span>
+                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 2">
+                                <Anomaly onChange = {this.changeAnomaly} number = 2 />
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -323,8 +332,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,3)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[3] != null ?  this.state.display_anomaly[3] : 'investigation'}" data-state="investigation"></span>
+                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 3">
+                                <Anomaly onChange = {this.changeAnomaly} number = 3 />
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -334,8 +346,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,4)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[4] != null ?  this.state.display_anomaly[4] : 'not-reviewed'}" data-state="not-reviewed"></span>
+                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 4">
+                                <Anomaly onChange = {this.changeAnomaly} number = 4 />
+                            </div>
                         </td>
                       </tr>
                     </tbody>
@@ -494,9 +509,13 @@
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>4774</span></td>
                         <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,5)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[5] != null ?  this.state.display_anomaly[5] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 5">
+                              <Anomaly onChange = {this.changeAnomaly} number = 5 />
+                          </div>
                         </td>
+
                       </tr>
                       <tr>
                         <td><span>1075</span></td>
@@ -505,8 +524,11 @@
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>4774</span></td>
                         <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,8)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[8] != null ?  this.state.display_anomaly[8] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 8">
+                              <Anomaly onChange = {this.changeAnomaly} number = 8 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -516,8 +538,11 @@
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>256</span></td>
                         <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,6)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[6] != null ?  this.state.display_anomaly[6] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 6">
+                              <Anomaly onChange = {this.changeAnomaly} number = 6 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -527,8 +552,11 @@
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>2014</span></td>
                         <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,7)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[7] != null ?  this.state.display_anomaly[7] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 7">
+                              <Anomaly onChange = {this.changeAnomaly} number = 7 />
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -693,8 +721,11 @@
                         <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,9)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[9] != null ?  this.state.display_anomaly[9] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 9">
+                              <Anomaly onChange = {this.changeAnomaly} number = 9 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -704,8 +735,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected false" data-state="false"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,10)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[10] != null ?  this.state.display_anomaly[10] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 10">
+                              <Anomaly onChange = {this.changeAnomaly} number = 10 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -715,8 +749,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,11)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[11] != null ?  this.state.display_anomaly[11] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 11">
+                              <Anomaly onChange = {this.changeAnomaly} number = 11 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -726,8 +763,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,12)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[12] != null ?  this.state.display_anomaly[12] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 12">
+                              <Anomaly onChange = {this.changeAnomaly} number = 12 />
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -912,8 +952,11 @@
                         <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                       <td class="relative" onClick="{this.clickAnomaly.bind(this,13)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[13] != null ?  this.state.display_anomaly[13] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 13">
+                              <Anomaly onChange = {this.changeAnomaly} number = 13 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -923,8 +966,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected false" data-state="false"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,14)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[14] != null ?  this.state.display_anomaly[14] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 14">
+                              <Anomaly onChange = {this.changeAnomaly} number = 14 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -934,8 +980,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,15)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[15] != null ?  this.state.display_anomaly[15] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 15">
+                              <Anomaly onChange = {this.changeAnomaly} number = 15 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -945,8 +994,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,16)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[16] != null ?  this.state.display_anomaly[16] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 16">
+                              <Anomaly onChange = {this.changeAnomaly} number = 16 />
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -1103,8 +1155,11 @@
                         <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
                         <td class="text-left"><span>8</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected true" data-state="true"></span>
+                       <td class="relative" onClick="{this.clickAnomaly.bind(this,17)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[17] != null ?  this.state.display_anomaly[17] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 17">
+                              <Anomaly onChange = {this.changeAnomaly} number = 17 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -1114,8 +1169,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected false" data-state="false"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,18)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[18] != null ?  this.state.display_anomaly[18] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 18">
+                              <Anomaly onChange = {this.changeAnomaly} number = 18 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -1125,8 +1183,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected investigation" data-state="investigation"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,19)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[19] != null ?  this.state.display_anomaly[19] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 19">
+                              <Anomaly onChange = {this.changeAnomaly} number = 19 />
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -1136,8 +1197,11 @@
                         <td class="text-left"><span>Banking Secrecy</span></td>
                         <td class="text-left"><span>5</span></td>
                         <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative">
-                          <span class="anomaly-state selected not-reviewed" data-state="not-reviewed"></span>
+                        <td class="relative" onClick="{this.clickAnomaly.bind(this,20)}">
+                          <span class="anomaly-state selected {this.state.display_anomaly[20] != null ?  this.state.display_anomaly[20] : 'true'}" data-state="true"></span>
+                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 20">
+                              <Anomaly onChange = {this.changeAnomaly} number = 20 />
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -1157,8 +1221,8 @@
 
     </div>
 
-    <div id="anomalyStateSelect">
-      <div class="anomaly-state-select">
+   <!--  <div id="anomalyStateSelect">
+      <div class="anomaly-state-select"  style="display: block">
         <div class="states">
           <span class="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed"></span>
           <span class="anomaly-state investigation" data-state="investigation" data-label="Under Investigation"></span>
@@ -1167,5 +1231,5 @@
         </div>
         <span class="current-state"  style="font-weight : normal"></span>
       </div>
-    </div>
+    </div> -->
 </section>
