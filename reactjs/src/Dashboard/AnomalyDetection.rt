@@ -686,8 +686,10 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
+                     <div  class="fix_whitespace">
                        <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
                                     setValue="This details the list of user having the most access to document at Risk." />
+                        </div>
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -917,8 +919,10 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the list of user having access to the most document repository anomaly." />
+                        <div  class="fix_whitespace">
+                           <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                        setValue="This details the list of user having access to the most document repository anomaly." />
+                        </div>
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -1120,8 +1124,10 @@
                 <div class="block-header row">
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
-                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults." />
+                     <div  class="fix_whitespace">
+                          <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                        setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults." />
+                        </div>
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">

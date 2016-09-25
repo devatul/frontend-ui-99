@@ -51,11 +51,11 @@ var RickInsight = React.createClass({
 
     },
     getRickType(value) {
-
+        debugger
         switch (value) {
-            case 'unidentifiable files':
+            case 'unidentified files':
                 return { color: ' bg-secondary', info: 'Number of files that can not be identified.' };
-            case 'access right anomaly':
+            case 'access rights anomaly':
                 return { color: ' bg-quartenary-2', info: 'Number of users who have abnormal access rights.' };
             case 'twin files':
                 return { color: '  bg-tertiary-2', info: 'Duplicates files with different names.' };
@@ -78,7 +78,8 @@ var RickInsight = React.createClass({
         let children = [];
 
         _.forEach(this.state.rickInsight.risks, function(object , index){
-            let className = "panel-body " + this.getRickType(object.name).color + " widget-panel insight-panel"
+            let  color  = this.getRickType(object.name).color
+            let className = "panel-body " + color + " widget-panel insight-panel"
             let name = this.upperFirst(object.name)
             let content = this.getRickType(object.name).info
             let previous = this.formatNumber(object.previous_scan_value)

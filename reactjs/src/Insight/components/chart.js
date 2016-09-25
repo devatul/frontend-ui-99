@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 var Chart = React.createClass({
 	displayName:'Chart',
-	
+
 	getInitialState() {
 
 		return {
@@ -16,8 +16,8 @@ var Chart = React.createClass({
 	componentDidMount(){
 		var datas = [
 		{
-			categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley'],
-			data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 45, color: '#7986cb'},{y: 40, color: '#ed9c28'},{y: 10, color: '#E36159'}]
+			categories: ['Jack.Giford', 'Judith.McConnell', 'Farley.Granger', 'Bob.Hope', 'Alice.Ghostley','abc'],
+			data: [{y: 70, color: '#5bc0de'},{y: 54, color: '#349da2'},{y: 45, color: '#7986cb'},{y: 40, color: '#ed9c28'},{y: 10, color: '#E36159'}, {y: 10, color: '#E36159'}]
 		},
 		{
 			categories: ['ADCompl.WE', 'ADHR.WR', 'ADHR.WR', 'ADHR.WR', 'ADHR.WE'],
@@ -148,7 +148,7 @@ var Chart = React.createClass({
   var ellipsestext = "...";
   var moretext = "more keywords";
   var lesstext = "less keywords";
-  
+
   $('.more').each(function() {
   	var content = $(this).html();
 
@@ -191,13 +191,13 @@ render(){
 		<div id="identityChart" className="identity-chart" style= {style} ></div>
 		<a href="#" className="btn btn-green btn-extract">Extract</a>
 		</div>
-		
+
 		);
 	},
 
-	
 
-	
+
+
 			/*/*var chart_data = {
 				"key_contributor": [
 				{
@@ -251,7 +251,7 @@ render(){
 				]
 			}*/
 			/*console.log('chart_data',this.state.chart_data);
-			var datas = []; 
+			var datas = [];
 			var data = [];
 			var data1 = [];
 			var one_dataTable = {};
@@ -260,7 +260,7 @@ render(){
 			var categories1 = [];
 
 			var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240'];
-			for(var i=0; i< _.size(chart_data.high_risk_users) ;i++){	
+			for(var i=0; i< _.size(chart_data.high_risk_users) ;i++){
 
 				categories.push(chart_data.high_risk_users[i].name);
 				data.push(
@@ -275,7 +275,7 @@ render(){
 				categories: categories,
 				data: data
 			})
-			for(var i=0; i< _.size(chart_data.high_risk_directory) ;i++){	
+			for(var i=0; i< _.size(chart_data.high_risk_directory) ;i++){
 
 				categories1.push(chart_data.high_risk_directory[i].name);
 				data1.push(
@@ -301,7 +301,7 @@ render(){
 				categories: this.state.chart_data.high_risk_users[i].name,
 				data : data
 			}*/
-			
+
 
 
 
