@@ -470,7 +470,7 @@ $(function () {
   }];
 
   var div = $('#confidentialityChart');
-  var parentDiv = div.closest('.tab-pane');
+  var parentDiv = div.hasClass('legend-under') ? div.closest('[class^="col-"') : div.closest('.tab-pane');
   if (div.length){
     div.highcharts({
       chart: {
