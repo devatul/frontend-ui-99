@@ -5,35 +5,37 @@ import update from 'react-addons-update'
 import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './MenuBar.rt'
-import { assignIn, isEqual, forEach, concat, find, remove, cloneDeep } from 'lodash'
+import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var MenuBar = React.createClass
 ({
 	getInitialState() {
 	    return {
-            listLabel: {
+            categories: [],
+            confidentialities: [],
+            'doc-types': [],
+            languages: [],
+
+            params: {
                 categories: [],
                 confidentialities: [],
                 'doc-types': [],
                 languages: []
             },
-            filter: {
-                params: {
-                    categories: [],
-                    confidentialities: [],
-                    'doc-types': [],
-                    languages: []
-                },
-                labels: []
-            },
+
+            labels: [],
 
             value: {
                 category: 'label',
-                confidentiality: "label"
+                confidentiality: "label",
+                language: "label",
+                doctype: 'label'
             },
 
             shouldUpdate: false,
+
+            selectOpened: false,
 
             scanResult: {},
 	    };
@@ -70,18 +72,23 @@ var MenuBar = React.createClass
         return nextState.shouldUpdate;
     },
 
+    componentWillUpdate(nextProps, nextState) {
+        if(!isEqual(this.state.categories, nextState.categories)) {
+
+        }
+    },
+
     componentDidUpdate(prevProps, prevState) {
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
-        if(!isEqual( this.state.filter.params, prevState.filter.params )) {
-            var { params } = this.state.filter,
+        if(!isEqual( this.state.params, prevState.params )) {
+            var { params } = this.state,
                 {
                     categories,
                     languages,
                     confidentialities
-                } = this.state.filter.params;
-
+                } = this.state.params;
             if(categories && categories.length === 0) {
                 delete params.categories;
             }
@@ -99,6 +106,14 @@ var MenuBar = React.createClass
             }
             this.props.handleFilter(params);
         }
+
+        if(!isEqual(this.state.labels, prevState.labels)) {
+            debugger
+        }
+
+        if(this.state.selectOpened) {
+            
+        }
     },
     configListLabel: function(data) {
         for(let i = data.length - 1; i >= 0; i--) {
@@ -111,13 +126,7 @@ var MenuBar = React.createClass
             success: (data) => {
                 this.configListLabel(data);
 
-                let updateList = update(this.state.listLabel, {
-                    categories: {
-                        $set: data
-                    }
-                });
-
-                this.setState({ listLabel: updateList, shouldUpdate: true });
+                this.setState({ categories: data, shouldUpdate: true });
             }
         });
     },
@@ -126,13 +135,7 @@ var MenuBar = React.createClass
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.configListLabel(data);
-                let updateList = update(this.state.listLabel, {
-                    confidentialities: {
-                        $set: data
-                    }
-                });
-                
-                this.setState({ listLabel: updateList, shouldUpdate: true });
+                this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });
     },
@@ -142,13 +145,7 @@ var MenuBar = React.createClass
             success: (data) => {
                 this.configListLabel(data);
 
-                let updateList = update(this.state.listLabel, {
-                    'doc-types': {
-                        $set: data
-                    }
-                });
-
-                this.setState({ listLabel: updateList, shouldUpdate: true });
+                this.setState({ ['doc-types']: data, shouldUpdate: true });
             }
         });
     },
@@ -158,142 +155,264 @@ var MenuBar = React.createClass
             success: (data) => {
                 this.configListLabel(data);
 
-                let updateList = update(this.state.listLabel, {
-                    'languages': {
-                        $set: data
-                    }
-                });
-
-                this.setState({ listLabel: updateList, shouldUpdate: true });
+                this.setState({ languages: data, shouldUpdate: true });
             }
         });
     },
 
     onclearFilter: function() {
-        let { listLabel, filter } = this.state,
-            { labels, params } = this.state.filter;
+        let { labels, params } = this.state;
 
         for(let i = labels.length - 1; i >= 0; i--) {
-            let propertyIndex = labels[i].id.split('_');
+            let splitId = labels[i].id.split('_');
 
-            listLabel = update(listLabel, {
-                [propertyIndex[0]]: {
-                    [propertyIndex[1]]: { checked: { $set: false } }
-                }
-            });
+            let array = this.state[splitId[0]];
+
+            array[splitId[1]].checked = false;
         }
         
-        filter = update(filter, {
-            params: { $set: {} },
-            labels: { $set: [] }
-        });
-
-        this.setState({ listLabel: listLabel, filter: filter });
+        this.setState({ labels: [], params: {}, shouldUpdate: true });
     },
 
-    onClickLabel: function(label, index) {
-        let { labels } = this.state.filter,
-            { listLabel } = this.state,
-            propertyIndex = label.id.split('_'),
+    onClickLabel: function(label, indexLabel) {
+        let { labels } = this.state,
+            splitId = label.id.split('_'),
+            property = splitId[0],
+            index = splitId[1];
 
-            updateLabel = update(this.state.filter, {
-                labels: { $splice: [[index, 1]] },
-                params: {
-                    [propertyIndex[0]]: {
-                        $apply: (arr) => {
-                            let label = listLabel[propertyIndex[0]][propertyIndex[1]];
-                            arr = cloneDeep(arr);
-                            
-                            for(let i = arr.length - 1; i >= 0; i--) {
-                                if(arr[i].id === label.id) {
-                                    arr.splice(i, 1);
-                                    break;
-                                }
+            let updateParam = update(this.state.params, {
+                [property]: {
+                    $apply: (arr) => {
+                        let label = this.state.labels[indexLabel];
+                        arr = cloneDeep(arr);
+                        
+                        for(let i = arr.length - 1; i >= 0; i--) {
+                            if(arr[i].id === label.id) {
+                                arr.splice(i, 1);
+                                break;
                             }
-                            return arr;
                         }
+                        return arr;
                     }
                 }
-            }),
-            updateList = update(listLabel, {
-                [propertyIndex[0]]: {
-                    [propertyIndex[1]]: { checked: { $set: false } }
+            });
+            debugger
+            let updateList = update(this.state[property], {
+                [index]: {
+                    checked: { $set: false } 
                 }
             });
 
-        this.setState({ filter: updateLabel, listLabel: updateList });
+            labels.splice(indexLabel, 1);
+
+        this.setState({ [property]: updateList, params: updateParam, shouldUpdate: true });
     },
 
-    updateFilterParams: function(property, contextChange) {
-        let param,
-            indexParam,
-            { index, checked } = contextChange,
-            params = this.state.filter.params,
-            listLabel = this.state.listLabel[property];
+    addLabel: function(label) {
+        let { labels } = this.state;
+        labels.push(label);
+    },
 
-        if(!checked) {
-            var arr = params[property];
-            for(let i = arr.length - 1; i >= 0; i--) {
-                if(arr[i].id === listLabel[index].id) {
-                    indexParam = i;
+    deleteLabel(index) {
+        let { labels } = this.state;
+        labels.splice(index, 1);
+    },
+
+    onOpenSelect(event) {
+        let intervalID;
+        intervalID = setInterval(function() {
+            this.handleOpenSelect(event, intervalID);
+        }.bind(this), 300);
+    },
+
+    handleOpenSelect(event, intervalID) {
+        let selection = document.getElementsByClassName('select2-results__option'),
+            property = "",
+            array = [];
+        
+        switch(event.target.id) {
+            case "selectConfidentiality": 
+                property = "confidentialities";
+            break;
+            case "selectCategory":
+                property = "categories";
+            break;
+            case "selectLanguage":
+                property = "languages";
+            break;
+            case "selectDoctype":
+                property = "doc-types"
+        }
+
+        array = this.state[property];
+            debugger
+        for(let i = selection.length - 1; i >= 0; i--) {
+
+            let splitId = selection[i].id.split('-'),
+                indexObject = parseInt(splitId[splitId.length - 1]);
+
+            if( array['checkall'] || (indexObject >= 0 && array[indexObject].checked)) {
+                selection[i].className = "select2-results__option select2-results__option--highlighted-a";
+            } else {
+                //debugger
+                selection[i].className = "select2-results__option";
+            }
+        }
+        clearInterval(intervalID);
+    },
+
+    handleOnChangeConfidentiality(event) {
+        
+        let index = event.target.value,
+            property = "",
+            array = [],
+            selection = document.getElementsByClassName('select2-results__option'),
+            length = event.target.length;
+
+        switch(event.target.id) {
+            case "selectConfidentiality": 
+                property = "confidentialities";
+            break;
+            case "selectCategory":
+                property = "categories";
+            break;
+            case "selectLanguage":
+                property = "languages";
+            break;
+            case "selectDoctype":
+                property = "doc-types"
+        }
+
+        array = this.state[property];
+        switch(true) {
+            
+            case index === 'all': {
+                array['checkall'] = !array['checkall'];
+                
+                for(let i = selection.length - 1; i >= 0; i--) {
+                    let a = selection[i].id.split('-'),
+                        indexCategory = parseInt(a[a.length-1]);
+
+                        if(indexCategory >= 0) {
+                            array[indexCategory].checked = array['checkall'];
+                        }
+                }
+            }
+            break;
+            case parseInt(index) >= 0: {
+                //debugger
+
+                array[index].checked = !array[index].checked;
+                //debugger
+
+                for(let i = array.length - 1; i >= 0; i--) {
+                    if(!array[i].checked) {
+                        array['checkall'] = false;
+                    }
                 }
             }
         }
+
+        this.updateLabels(property);
+
+        //debugger
+        for(let i = selection.length - 1; i >= 0; i--) {
+
+            let splitId = selection[i].id.split('-'),
+                indexObject = parseInt(splitId[splitId.length - 1]);
+
+            if( array['checkall'] || (indexObject >= 0 && array[indexObject].checked)) {
+                selection[i].className = "select2-results__option select2-results__option--highlighted-a";
+            } else {
+                //debugger
+                selection[i].className = "select2-results__option";
+            }
+        }
+
+        for(let i = length - 1; i >= 0; i--) {
+            if(event.target[i].value === 'label') {
+                event.target[i].selected = true;
+            }
+        }
+        
+        this.setState({ params: this.updateParams(property), shouldUpdate: true });
+
+        event.stopImmediatePropagation();
+        //debugger
+    },
+
+    updateLabels(property) {
+        let array = this.state[property],
+            { labels } = this.state,
+            indexLabel = 0;
+        debugger
+
+        if(!array['checkall']) {
+
+            for(let i = array.length - 1; i >= 0; i--) {
+                indexLabel = findIndex(labels, { id: property + '_' + i });
+
+                if(indexLabel === -1 && array[i].checked) {
+                    labels.push({
+                        id: property + '_' + i,
+                        name: array[i].name
+                    })
+                }
+                if(indexLabel > -1 && !array[i].checked) {
+                    labels.splice(indexLabel, 1);
+                }
+            }
+        }
+        debugger
+    },
+
+    updateParams(property) {
+        let { params } = this.state;
+        let array = this.state[property];
 
         if(!params[property]) {
             params[property] = [];
         }
+        
+        let updateParam = update(params, {
+            [property]: {
+                $apply: (data) => {
+                    data = cloneDeep(data);
+                    //let indexParam = -1;
+                    //debugger
+                    for(let i = array.length - 1; i >= 0; i--) {
 
-        param = {
-            id: listLabel[index].id,
-            name: listLabel[index].name
-        };
+                        let indexParam = findIndex(data, { id: array[i].id });
 
-        return update(params, {
-            [property]: checked ? { $push: [param] } : { $splice: [[indexParam, 1]] }
-        });
-    },
-
-    addLabel: function(label) {
-        return update(this.state.filter.labels, { 
-            $push: [label] 
-        });
-    },
-
-    deleteLabel(id) {
-        let indexLabel = 0, { labels } = this.state.filter;
-
-        for( let i = labels.length - 1; i >= 0; i-- ) {
-            if(labels[i].id === id) {
-                indexLabel = i;
+                        if(array[i].checked && indexParam === -1) {
+                            data.push({
+                                id: array[i].id,
+                                name: array[i].name
+                            });
+                        }
+                        if(!array[i].checked && indexParam >= 0) {
+                            data.splice(indexParam, 1);
+                        }
+                    }
+                    //debugger
+                    return data;
+                }
             }
-        }
-
-        return update(this.state.filter.labels, { $splice: [[indexLabel, 1]] });
-    },
-
-    handleOnUnSelect(field) {
-        debugger
-    },
-
-    handleOnSelecting(event) {
-        let updateValue = update(this.state.value, {
-            confidentiality: { $set: event.target.value }
         });
-        debugger
-        this.setState({ value: updateValue, shouldUpdate: true });
+        //debugger
+        return updateParam;
     },
 
     handleOnSelect: function(event) {
         
 
-        let updateValue = update(this.state.value, {
-            confidentiality: { $set: 'label' }
-        });
+        // let updateValue = update(this.state.value, {
+        //     confidentiality: { $set: event.target.value }
+        // });
 
-        debugger
+        // debugger
 
-        this.setState({ value: updateValue, shouldUpdate: true });
+        //this.setState({ value: updateValue });
             
         // switch(field.id) {
         //     case "SelectConfidentiality": {
@@ -334,7 +453,7 @@ var MenuBar = React.createClass
 
         //         updateParam = this.updateFilterParams( property, field.contextChange ),
 
-        //         updateFilter = update(this.state.filter, {
+        //         updateFilter = update(this.state, {
         //             params: { $set: updateParam },
         //             labels: { $set: updateLabel }
         //         });
@@ -354,7 +473,7 @@ var MenuBar = React.createClass
                     } 
                 }
             }),
-            updateFilter = update(this.state.filter, {
+            updateFilter = update(this.state, {
                params: {
                     [field.id]: field.checked ? {
                         $apply: () => {
@@ -404,7 +523,7 @@ var MenuBar = React.createClass
                     } 
                 }
             }),
-            updateFilter = update(this.state.filter, {
+            updateFilter = update(this.state, {
                params: {
                     [field.id]: { $set: [] }
                     // [field.id]: field.checked ? {

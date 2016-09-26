@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
 import Constant from '../Constant.js'
-import { cloneDeep, isEqual } from 'lodash'
+import { cloneDeep, isEqual, find } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var ClassificationReview = React.createClass({
@@ -18,6 +18,10 @@ var ClassificationReview = React.createClass({
             current: {
                 doc: 0,
                 review: 0
+            },
+            init: {
+                categories: [],
+                confidentialities: []
             },
             stackChange: []
         };
@@ -53,7 +57,7 @@ var ClassificationReview = React.createClass({
             if(documents[i].checked === true) {
                 numCheck++;
             }
-            if(documents[i].status === "valid") {
+            if(documents[i].status === "accepted") {
                 numValid++;
             }
         }
@@ -85,7 +89,7 @@ var ClassificationReview = React.createClass({
                         debugger
                         for(let i = data.length - 1; i >= 0; i--) {
                             if(data[i].checked) {
-                                data[i].status = 'valid';
+                                data[i].status = 'accepted';
                                 data[i].checked = false;
                             }
                         }
@@ -141,26 +145,35 @@ var ClassificationReview = React.createClass({
             docIndex = parseInt(idx[1]),
             document = this.state.dataReview[reviewIndex].documents[docIndex];
             debugger
-        if(document.status === 'invalid') {
+        //if(document.status === 'reject') {
             let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
-                            status: { $set: 'valid' }
+                            status: { $set: 'accepted' }
                         }
                     }
                 }
             }),
 
-            updateStack = update(this.state.stackChange, {
-                $set: {
-                    [reviewIndex]: []
+            updateStack = this.state.stackChange[reviewIndex] ? 
+
+            update(this.state.stackChange, {
+                [reviewIndex]: {
+                    $push: [{
+                        id: docIndex,
+                        data: document
+                    }]
                 }
-            });
-            
-            updateStack[reviewIndex].push({
-                id: docIndex,
-                data: Object.assign({}, document)
+            })
+            :
+            update(this.state.stackChange, {
+                $set: {
+                    [reviewIndex]: [{
+                        id: docIndex,
+                        data: document
+                    }]
+                }
             });
             //debugger
             this.setState({
@@ -172,35 +185,61 @@ var ClassificationReview = React.createClass({
                 },
                 shouldUpdate: true
             });
-        }
+        //}
     },
 
     handleTableRowOnChange(event, index) {
+        debugger
+        let { stackChange } = this.state,
+            splitIndex = index.split('_'), reviewIndex = splitIndex[0], docIndex = splitIndex[1],
+            document = this.state.dataReview[reviewIndex].documents[docIndex];
+
+        let updateStack = [];
+
+        if(stackChange[reviewIndex]) {
+            updateStack = update(stackChange, {
+                [reviewIndex]: {
+                    $push: [{
+                        id: docIndex,
+                        data: document
+                    }]
+                }
+            })
+        } else {
+            updateStack = update(stackChange, {
+                $set: {
+                    [reviewIndex]: [{
+                        id: docIndex,
+                        data: document
+                    }]
+                }
+            });
+        }
+
+        this.setState({
+            stackChange: updateStack
+        });
+
         switch(event.target.id) {
             case 'checkbox': {
-                this.onChangeCheckBox(event, index);
+                this.onChangeCheckBox(event, reviewIndex, docIndex, document);
             }
             break;
 
             case 'selectCategory': {
-                this.onChangeCategory(event, index);
+                this.onChangeCategory(event, reviewIndex, docIndex, document);
             }
             break;
 
             case 'selectConfidentiality': {
-                this.onChangeConfidentiality(event, index);
+                this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
             }
         }
     },
 
-    onChangeCheckBox(event, index) {
+    onChangeCheckBox(event, reviewIndex, docIndex, document) {
         debugger
-        let idx = index.split('_'),
-            reviewIndex = parseInt(idx[0]),
-            docIndex = parseInt(idx[1]),
-            document = this.state.dataReview[reviewIndex].documents[docIndex],
-            
-            updateData = update(this.state.dataReview, {
+        let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
@@ -208,22 +247,11 @@ var ClassificationReview = React.createClass({
                         }
                     }
                 }
-            }),
-
-            updateStack = update(this.state.stackChange, {
-                $set: {
-                    [reviewIndex]: []
-                }
             });
             
-            updateStack[reviewIndex].push({
-                id: docIndex,
-                data: Object.assign({}, document)
-            });
 
         this.setState({
             dataReview: updateData,
-            stackChange: updateStack,
             current: {
                 doc: docIndex,
                 review: reviewIndex
@@ -232,13 +260,9 @@ var ClassificationReview = React.createClass({
         });
     },
 
-    onChangeCategory(event, index) {
-        let idx = index.split('_'),
-            reviewIndex = parseInt(idx[0]),
-            docIndex = parseInt(idx[1]),
-            document = this.state.dataReview[reviewIndex].documents[docIndex],
-            
-            categoryIndex = event.target.value,
+    onChangeCategory(event, reviewIndex, docIndex, document) {
+        let categoryIndex = event.target.value,
+            initCategory = find(this.state.init.categories, { id: reviewIndex + '_' + docIndex }),
 
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
@@ -248,26 +272,24 @@ var ClassificationReview = React.createClass({
                                 $set: this.state.categories[categoryIndex]
                             },
                             status: {
-                                $set: 'valid'
+                                $set: initCategory && isEqual(initCategory.data, this.state.categories[categoryIndex]) ? 'accepted' : 'editing'
                             }
                         }
                     }
                 }
-            }),
-
-            updateStack = update(this.state.stackChange, {
-                $set: {
-                    [reviewIndex]: []
-                }
             });
-            
-            updateStack[reviewIndex].push({
-                id: docIndex,
-                data: Object.assign({}, document)
+        
+        
+        if(!initCategory) {
+            let { categories } = this.state.init;
+            categories.push({
+                id: reviewIndex + '_' + docIndex,
+                data: Object.assign({}, document.category)
             });
+        }
+        debugger
         this.setState({
             dataReview: updateData,
-            stackChange: updateStack,
             current: {
                 doc: docIndex,
                 review: reviewIndex
@@ -276,13 +298,9 @@ var ClassificationReview = React.createClass({
         });
     },
 
-    onChangeConfidentiality(event, index) {
-        let idx = index.split('_'),
-            reviewIndex = parseInt(idx[0]),
-            docIndex = parseInt(idx[1]),
-            document = this.state.dataReview[reviewIndex].documents[docIndex],
-
-            confidentialityIndex = event.target.value,
+    onChangeConfidentiality(event, reviewIndex, docIndex, document) {
+        let confidentialityIndex = event.target.value,
+            initConfidentiality = find(this.state.init.confidentialities, { id: reviewIndex + '_' + docIndex }),
 
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
@@ -292,27 +310,24 @@ var ClassificationReview = React.createClass({
                                 $set: this.state.confidentialities[confidentialityIndex]
                             },
                             status: {
-                                $set: 'valid'
+                                $set: initConfidentiality && isEqual(initConfidentiality.data, this.state.confidentialities[confidentialityIndex]) ? 'accepted' : 'editing'
                             }
                         }
                     }
                 }
-            }),
+            });
 
-            updateStack = update(this.state.stackChange, {
-                $set: {
-                    [reviewIndex]: []
-                }
+        if(!initConfidentiality) {
+            let { confidentialities } = this.state.init;
+            debugger
+            confidentialities.push({
+                id: reviewIndex + '_' + docIndex,
+                data: Object.assign({}, document.confidentiality)
             });
-            
-            updateStack[reviewIndex].push({
-                id: docIndex,
-                data: Object.assign({}, document)
-            });
+        }
             debugger
         this.setState({
             dataReview: updateData,
-            stackChange: updateStack,
             current: {
                 doc: docIndex,
                 review: reviewIndex
@@ -340,8 +355,14 @@ var ClassificationReview = React.createClass({
                 }
             }
         });
+
+        let updateCurrent = update(this.state.current, {
+            review: {
+                $set: index
+            }
+        });
         debugger
-        this.setState({ dataReview: updateData, shouldUpdate: true });
+        this.setState({ dataReview: updateData, current: updateCurrent, shouldUpdate: true });
     },
 
     handleUndo(reviewIndex) {
@@ -383,7 +404,88 @@ var ClassificationReview = React.createClass({
     },
 
     getClassificationReview() {
-        let data = [
+
+        let data = [  
+            {
+                "language": {
+                "id": 1,
+                "short_name": "EN"
+                },
+                "category": {
+                "id": 1,
+                "name": "Accounting/Tax"
+                },
+                "confidentiality": {
+                "id": 1,
+                "name": "Banking Secrecy"
+                },
+                "documents": [
+                {
+                    "name": "doc_name.doc",
+                    "path": "/doc_path/doc_name.doc",
+                    "owner": "owner_name",
+                    "confidence_level": 40,
+                    "centroid_distance": 1.5,
+                    "group_min_centroid_distance": 1.6,
+                    "group_max_centroid_distance": 2,
+                    "group_avg_centroid_distance": 42,
+                    "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                    "creation_date": "2012-04-23",
+                    "modification_date": "2012-04-23",
+                    "legal_retention_until": "2012-04-23",
+                    "number_of_classification_challenge": 1,
+                    "category": {
+                    "id": 1,
+                    "name": "Accounting/Tax"
+                    },
+                    "confidentiality": {
+                    "id": 1,
+                    "name": "Public"
+                    }
+                }
+                ]
+            },
+            {
+                "language": {
+                "id": 1,
+                "short_name": "FR"
+                },
+                "category": {
+                "id": 1,
+                "name": "Accounting/Tax"
+                },
+                "confidentiality": {
+                "id": 1,
+                "name": "Banking Secrecy"
+                },
+                "documents": [
+                {
+                    "name": "doc_name.doc",
+                    "path": "/doc_path/doc_name.doc",
+                    "owner": "owner_name",
+                    "confidence_level": 40,
+                    "centroid_distance": 1.5,
+                    "group_min_centroid_distance": 1.6,
+                    "group_max_centroid_distance": 2,
+                    "group_avg_centroid_distance": 42,
+                    "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+                    "creation_date": "2012-04-23",
+                    "modification_date": "2012-04-23",
+                    "number_of_classification_challenge": 1,
+                    "legal_retention_until": "2012-04-23",
+                    "category": {
+                    "id": 1,
+                    "name": "Accounting/Tax"
+                    },
+                    "confidentiality": {
+                    "id": 1,
+                    "name": "Public"
+                    }
+                }
+                ]
+            }
+        ];
+        let data1 = [
             {
                 "urgency": "high",
                 "language": "EN",
@@ -453,12 +555,12 @@ var ClassificationReview = React.createClass({
                 ]
             }
         ]
-        // makeRequest({
-        //     path: "api/classification_review/",
-        //     success: (res) => {
-
-        //     }
-        // });
+        makeRequest({
+            path: "api/classification_review/",
+            success: (res) => {
+                debugger
+            }
+        });
 
         for(let i = data.length - 1; i >= 0; i--) {
             data[i].validateNumber = 0;
@@ -467,7 +569,7 @@ var ClassificationReview = React.createClass({
 
             for(let j = data[i].documents.length - 1; j >= 0; j--) {
                 data[i].documents[j].checked = false;
-                data[i].documents[j].status = 'invalid';
+                data[i].documents[j].status = 'reject';
             }
         }
         //debugger

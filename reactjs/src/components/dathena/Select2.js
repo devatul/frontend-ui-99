@@ -15,7 +15,8 @@ var Select2 = React.createClass({
         onSelect: PropTypes.func,
         onSelecting: PropTypes.func,
         onUnSelect: PropTypes.func,
-        onUnSelecting: PropTypes.func
+        onUnSelecting: PropTypes.func,
+        onLoaded: PropTypes.func
     },
 
     statics: {
@@ -24,12 +25,21 @@ var Select2 = React.createClass({
                 { react: 'onOpen', select2: 'select2:open' },
                 { react: 'onClose', select2: 'select2:close' },
                 { react: 'onClosing', select2: 'select2:closing' },
-                { react: 'onOpening', select2: 'elect2:opening' },
+                { react: 'onOpening', select2: 'select2:opening' },
                 { react: 'onSelect', select2: 'select2:select' },
                 { react: 'onSelecting', select2: 'select2:selecting' },
                 { react: 'onUnSelect', select2: 'select2:unselect' },
                 { react: 'onUnSelecting', select2: 'select2:unselecting' },
+                { react: 'onLoaded', select2: 'select2-loaded' },
             ]
+    },
+
+    getDefaultProps() {
+        return {
+            minimumResultsForSearch: Infinity,
+            containerCssClass: "dathena-select",
+            dropdownCssClass: "dathena-select-dropdown"
+        };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -45,13 +55,7 @@ var Select2 = React.createClass({
                 minimumResultsForSearch
             } = this.props,
 
-            _props = Object.assign({}, this.props, {
-                minimumResultsForSearch: minimumResultsForSearch && Infinity,
-                containerCssClass: containerCssClass && "dathena-select",
-                adaptDropdownCssClass: adaptDropdownCssClass ? adaptDropdownCssClass : function() {
-                    return "dathena-select-dropdown";
-                }
-            });
+            _props = Object.assign({}, this.props);
             
             $(this.refs.select2).select2(_props);
         }
@@ -67,13 +71,7 @@ var Select2 = React.createClass({
 
             { events } = this.constructor,
 
-            _props = Object.assign({}, this.props, {
-                minimumResultsForSearch: minimumResultsForSearch && Infinity,
-                containerCssClass: containerCssClass && "dathena-select",
-                adaptDropdownCssClass: adaptDropdownCssClass ? adaptDropdownCssClass : function() {
-                    return "dathena-select-dropdown";
-                }
-            }),
+            _props = Object.assign({}, this.props),
             select = $(this.refs.select2).select2(_props);
 
             for(let i = events.length - 1; i >= 0; i--) {
@@ -81,6 +79,10 @@ var Select2 = React.createClass({
                     select.on(events[i].select2, this.props[events[i].react]);
                 }
             }
+    },
+
+    componentWillUnmount() {
+        $(this.refs.select2).select2('close');
     },
 
     render() {

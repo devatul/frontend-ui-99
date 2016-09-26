@@ -23,9 +23,8 @@ var OverView = React.createClass
 	},
 
     componentWillMount() {
-        if(this.state.scan.result.scan_status == Constant.scan.IS_NO_SCAN) {
-           this.startScan();
-        }
+
+        this.startScan();
     },
 
 	componentDidMount() {
@@ -52,8 +51,11 @@ var OverView = React.createClass
             var { iconCategories } = Constant
 
             forEach(result.categories, (val, index) => {
-                if( val.name == iconCategories[index].name )
+                if( val.name == iconCategories[index].name ) {
                     val.class = iconCategories[index].class
+                    //debugger
+                }
+                debugger
             })
 
             this.updateChart( result, prevResult );
@@ -62,6 +64,7 @@ var OverView = React.createClass
 
     startScan() {
         makeRequest({
+            sync: false,
             method: 'POST',
             path: 'api/scan/',
             success: (data) => {
@@ -79,6 +82,7 @@ var OverView = React.createClass
                 var setResult = update(this.state.scan, {
                     result: { $set: data }
                 });
+                console.log('data', data);
                 this.setState({ scan: setResult });
             }
         })
@@ -88,18 +92,18 @@ var OverView = React.createClass
         var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
             { categoryLanguage, confidentiality, doctypes } = this.state.configChart;
         
-        if( !isEqual( result.categories_chart_data, prevResult.categories_chart_data )
+        if( !isEqual( result.categories, prevResult.categories )
             || !isEqual( result.languages, prevResult.languages) ) {
             categoryLanguageData = this.categoryLanguageChart();
         } else {
             categoryLanguageData = categoryLanguage;
         }
-        if( !isEqual( result.confidentialities_chart_data, prevResult.confidentialities_chart_data )) {
+        if( !isEqual( result.confidentialities, prevResult.confidentialities )) {
             confidentialityData = this.confidentialityChart();
         } else {
             confidentialityData = confidentiality;
         }
-        if( !isEqual( result['doc-types'], prevResult['doc-types'] ) ) {
+        if( !isEqual( result.doctypes, prevResult.doctypes ) ) {
             doctypeData = this.doctypesChart();
         } else {
             doctypeData = doctypes;
@@ -110,7 +114,7 @@ var OverView = React.createClass
             confidentiality: { $set: confidentialityData },
             doctypes: { $set: doctypeData }
         });
-
+        debugger
         this.setState({ configChart: updateData });
     },
 
@@ -155,16 +159,17 @@ var OverView = React.createClass
                 },
                 data: []
             },
+
             categoryLanguageChart = [],
             categoryNumber = 0,
             languageNumber = 0,
             { dataChart } = this.state,
-            { languages, categories_chart_data } = this.state.scan.result;
+            { languages, categories } = this.state.scan.result;
         //add categories
-        for(let i = categories_chart_data.length - 1; i >= 0; i--) {
+        for(let i = categories.length - 1; i >= 0; i--) {
             categoryChart.data[i] = {
-                name: upperFirst(categories_chart_data[i].name),
-                y: categories_chart_data[i].total_docs
+                name: upperFirst(categories[i].name),
+                y: categories[i].total_reviewed_docs
             };
         }
         //add languages
@@ -214,19 +219,19 @@ var OverView = React.createClass
             colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
             colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
             data: []
-        }, { confidentialities_chart_data } = this.state.scan.result;
-        
-        for( let i = confidentialities_chart_data.length - 1; i >= 0; i-- ) {
+        }, { confidentialities } = this.state.scan.result;
+        debugger
+        for( let i = confidentialities.length - 1; i >= 0; i-- ) {
             confidentialityChart.data[i] = {
-                name: upperFirst(confidentialities_chart_data[i].name),
-                y: confidentialities_chart_data[i].total_docs
+                name: upperFirst(confidentialities[i].name),
+                y: confidentialities[i].total_validated_docs
             };
         }
 
         if( confidentialityChart.data.length <= 1 ) {
             confidentialityChart.disabled = true;
         }
-
+        debugger
         return confidentialityChart;
     },
 
@@ -239,7 +244,7 @@ var OverView = React.createClass
                 colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
                 data: []
             },
-            doctypes = this.state.scan.result['doc-types'];
+            { doctypes } = this.state.scan.result;
         
         for( let i = doctypes.length - 1; i >= 0; i-- ) {
             doctypesChart.data[i] = {

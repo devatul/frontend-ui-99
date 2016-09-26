@@ -22,7 +22,7 @@
   <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
           <ul class="nav nav-tabs cat-list">
-              <li rt-repeat="category in this.state.categories"
+              <li rt-repeat="category in this.state.categoriesReview"
                   key="{categoryIndex}"
                   class="{(category.id == this.state.categoryCurrent.id) && 'active'}">
                     <a href="#categoryInfo"
@@ -43,10 +43,13 @@
                               <div class="clearfix">
                                     <strong>Reviewers List </strong>
                                     <HelpButton
+                                        classMenu="fix-overview-help-button-table"
                                         setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
                                     <Select2 id="chosse_cluster"
                                         onChange={this.setReviewerCurrent}
-                                        value={this.state.current.reviewer}
+                                        value={this.state.currentIndex.reviewer}
+                                        containerCssClass="dathena-select select-user-review"
+                                        dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
                                         width="120">
                                         <option disabled
                                             value="default">
@@ -64,7 +67,7 @@
                             <Col rt-if="this.state.dataReview != null"
                                 sm={8} xs={6} class="text-right text-capitalize">
                                   {this.state.categoryCurrent.name} Review Status: 
-                                  <b class="mr-lg">{this.state.reviewers.total_reviewers} Users - {this.state.dataReview.documents.length} Documents Challenged</b>
+                                  <!--<b class="mr-lg">{this.state.reviewers.total_reviewers} Users - {this.state.dataReview.challenge_docs.length} Documents Challenged</b>-->
                                   Progress:
                                   <div class="progress-radial small progress{'-' + this.state.dataReview.validation_progress}">
                                       <div class="overlay"></div>
@@ -78,10 +81,10 @@
                             <div class="reviewer-info clearfix">
                                 <span>
                                     <span class="doc-num">
-                                      {(this.state.dataReview.documents.length - this.state.dataReview.totalValid)}
+                                      {(this.state.dataReview.challenged_docs)}
                                     </span> Documents Challenged - Validation Progress:
                                 </span>
-                                <div class="progress-radial small progress{'-' + this.state.reviewerProgress}">
+                                <div class="progress-radial small progress{'-' + this.state.dataReview.validation_progress}">
                                     <div class="overlay"></div>
                                 </div>
 
@@ -96,6 +99,7 @@
                                         <li class="document_panel-title">
                                             <h2 class="document_panel-title panel-title">Challenge
                                               <HelpButton
+                                                classMenu="fix-overview-help-button-table"
                                                 setValue="This summarises all the documents challenged. Users must review each challenge to accept or reject it." />
                                             </h2>
                                         </li>
@@ -112,17 +116,20 @@
                                                                 setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                                                         </th>
                                                         <th class="review_note">Type</th>
-                                                        <th class="review_note">Document name
-                                                            <HelpButton className="dropdown-file-info-holder" 
+                                                        <th class="review_note">Document
+                                                            <HelpButton className="dropdown-file-info-holder"
+                                                                classMenu="fix-overview-help-button-table"
                                                                 setValue="This displays the name of each individual document, as it exists in its current state." />
                                                         </th>
                                                         <th class="review_note">Category
                                                             <HelpButton className="dropdown-file-info-holder"
+                                                                classMenu="fix-overview-help-button-table"
                                                                 setValue="This display the category chose by the reviewer." />
                                                         </th>
                                                         <th class="review_note">Confidentiality
                                                             <HelpButton className="dropdown-file-info-holder"
-                                                              setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                                                classMenu="fix-overview-help-button-table"
+                                                                setValue="This displays the confidentiality levels assigned by the reviewer." />
                                                         </th>
                                                         <th class="review_note">Coordinator's Comment
                                                             <HelpButton className="dropdown-file-info-holder"
@@ -138,7 +145,7 @@
                                                 </thead>
                                             <tbody rt-if="this.state.dataReview != null">
                                                 <table.row2
-                                                    rt-repeat="document in this.state.dataReview.documents"
+                                                    rt-repeat="document in this.state.dataReview.challenge_docs"
                                                     document={document}
                                                     onClick={this.handleTableRowOnClick}
                                                     onChange={this.handleTableRowOnChange}
@@ -157,6 +164,7 @@
                                         <li class="document_panel-title">
                                             <h2 class="document_panel-title panel-title">Challenge Back - Last Review
                                                 <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
                                                     setValue="Documents challenged a 2nd time by a reviewer are displayed in this section. This status represents the final review for documents at this point of the workflow" />
                                             </h2>
                                         </li>
@@ -179,17 +187,20 @@
                                                         </th>
                                                         <th class="review_note">Type
                                                         </th>
-                                                        <th class="review_note">Document name
+                                                        <th class="review_note">Document
                                                           <HelpButton className="dropdown-file-info-holder"
-                                                              setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                                classMenu="fix-overview-help-button-table"
+                                                                setValue="This displays the name of each individual document, as it exists in its current state." />
                                                         </th>
                                                         <th class="review_note">Category
-                                                          <HelpButton className="dropdown-file-info-holder"
-                                                              setValue="This display the category chose by the reviewer." />
+                                                            <HelpButton className="dropdown-file-info-holder"
+                                                                classMenu="fix-overview-help-button-table"
+                                                                setValue="This display the category chose by the reviewer." />
                                                         </th>
                                                         <th class="review_note">Confidentiality
                                                             <HelpButton className="dropdown-file-info-holder"
-                                                              setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                                                classMenu="fix-overview-help-button-table"
+                                                                setValue="This displays the confidentiality levels assigned by the reviewer." />
                                                         </th>
                                                         <th class="review_note">Reviewer's Comment
                                                             <HelpButton className="dropdown-file-info-holder"
@@ -203,9 +214,9 @@
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody rt-if="this.state.dataReview != null">
                                                     <table.row3
-                                                        rt-repeat="document in this.state.backReview.documents"
+                                                        rt-repeat="document in this.state.dataReview.challenge_back_docs"
                                                         document={document}
                                                         onClick={this.handleTableRowOnClick}
                                                         onChange={this.handleTableRowOnChange}
@@ -220,7 +231,7 @@
                           </Panel.custom>
                           <div class="clearfix">
                               <Button bsClass="false" class="btn btn-green btn-next-cat pull-right ml-md"
-                                  onClick="{() => this.setCategoryCurrent(this.state.current.category + 1)}">Go to Next Category</Button>
+                                  onClick="{() => this.setCategoryCurrent(this.state.currentIndex.category + 1)}">Go to Next Category</Button>
                               <Button bsClass="false" class="btn btn-green btn-next-reviewer pull-right"
                                   onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>    
                           </div>                     
@@ -289,22 +300,23 @@
               </Panel.custom>
               <div class="clearfix">
                   <div class="pull-right">
-                      <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
+                      <Button onClick={this.confirmValidation} class="btn btn-green btn-ok mb-sm mt-md" bsClass="mybtn">Confirm and Notify all Reviewers</Button>
                   </div>
               </div>
           </div>
       </div>
   </div>
 </div>
+
 <DocumentPreview
-    rt-scope="this.state[(this.state.current.panel === this.constructor.challenge ? 'dataReview' : 'backReview')].documents[this.state.current.doc] as docPreview"
+    rt-scope="this.state.dataReview[this.state.currentIndex.documents][this.state.currentIndex.docIndex] as docPreview"
     open={this.state.openPreview}
     document="{docPreview}"
     nextDocument="{this.handleNextDocument}"
     undo="{() => this.handleUndo()}"
     closeModal={this.closePreview}>
   <div class="table-responsive">
-      <table rt-if="this.constructor.challenge === this.state.current.panel" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
+      <table rt-if="this.constructor.challenge === this.state.currentIndex.panel" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
           <thead>
               <tr>
                   <th class="review_note">Status
@@ -312,7 +324,7 @@
                           setValue="The Status of a challenged document can be accepted, rejected or remain pending." />  -->
                   </th>
                   <th class="review_note">Type</th>
-                  <th class="review_note">Document name
+                  <th class="review_note">Document
                       <HelpButton className="dropdown-file-info-holder" 
                           setValue="This displays the name of each individual document, as it exists in its current state." />
                   </th>
@@ -343,10 +355,10 @@
               onChange={this.handleTableRowOnChange}
               categories={this.state.categories}
               confidentialities={this.state.confidentialities}
-              index="{this.constructor.challenge + '_' + this.state.current.doc}" />
+              index="{this.constructor.challenge + '_' + this.state.currentIndex.docIndex}" />
       </tbody>
     </table>
-    <table rt-if="this.constructor.challengeBack === this.state.current.panel"
+    <table rt-if="this.constructor.challengeBack === this.state.currentIndex.panel"
         class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
         <thead>
             <tr role="row" class="">
@@ -356,7 +368,7 @@
                 </th>
                 <th class="review_note">Type
                 </th>
-                <th class="review_note">Document name
+                <th class="review_note">Document
                   <HelpButton className="dropdown-file-info-holder"
                       setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>
@@ -387,7 +399,7 @@
                 onChange={this.handleTableRowOnChange}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}
-                index="{this.constructor.challengeBack + '_' + this.state.current.doc}" />
+                index="{this.constructor.challengeBack + '_' + this.state.currentIndex.docIndex}" />
       </tbody>
   </table>
 </div>

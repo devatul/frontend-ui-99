@@ -311,9 +311,11 @@ $(function () {
   var renderFilterBlock = function(){
     if ($('.filter-tags .filter-label').length){
       $('.filter-tags-block label').show();
+      $('.filter-clear').show();
     }
     else{
       $('.filter-tags-block label').hide();
+      $('.filter-clear').hide();
     }
   };
 
@@ -358,6 +360,12 @@ $(function () {
     var value = $(this).parents('.filter-label').attr('data-value');
     $(this).parents('.filter-label').remove();
     $('.select-multiple[name="'+filterCriteria+'"]').multiselect('deselect', [value]);
+    renderFilterBlock();
+  });
+
+  $('body').on('click', '.filter-clear', function(){
+    $('.filter-label').not($(this)).remove();
+    $('.select-multiple').multiselect('deselectAll', false);
     renderFilterBlock();
   });
 

@@ -81,12 +81,12 @@ var HelpButton = React.createClass({
             //debugger
         return(
 
-            <div className={className + ' inline-block-item dropdown ' + setOpen }
-                onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
+            <div ref="dropdown" className={className + ' inline-block-item dropdown ' + setOpen }
+                onMouseOver={this.handleOnMouseOver} onMouseOut={this.handleOnMouseOut}>
                 <a className={classIcon ? classIcon : 'review_question_a help_question_a'} aria-expanded={this.state.expanded}>
                     <i className="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
-                <div className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
+                <div ref="dropdownMenu" className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
                     <p dangerouslySetInnerHTML={{ __html: value }} style={{'fontSize' :'13px'}}/>
                 </div>
 
