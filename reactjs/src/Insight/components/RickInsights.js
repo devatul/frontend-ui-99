@@ -51,23 +51,23 @@ var RickInsight = React.createClass({
 
     },
     getRickType(value) {
-        debugger
+
         switch (value) {
-            case 'unidentified files':
+            case 0:
                 return { color: ' bg-secondary', info: 'Number of files that can not be identified.' };
-            case 'access rights anomaly':
+            case 1:
                 return { color: ' bg-quartenary-2', info: 'Number of users who have abnormal access rights.' };
-            case 'twin files':
+            case 2:
                 return { color: '  bg-tertiary-2', info: 'Duplicates files with different names.' };
-            case 'document retention':
+            case 3:
                 return { color: 'bg-secondary-2', info: 'Number of files past outside their retention dates.' };
-            case 'document aging':
+            case 4:
                 return { color: 'bg-tertiary-3', info: 'Number of files outside their retention dates.' };
-            case 'duplicate files':
+            case 5:
                 return { color: ' bg-quartenary-3', info: 'Number of duplicate files.' };
-            case 'document repository anomaly':
+            case 6:
                 return { color: ' bg-quartenary-2', info: 'Number of folders which have content anomalies.' };
-            case 'cost savings':
+            case 7:
                 return { color: ' bg-secondary', info: 'Storage Space with obsolete data.' };
         }
     },
@@ -78,12 +78,13 @@ var RickInsight = React.createClass({
         let children = [];
 
         _.forEach(this.state.rickInsight.risks, function(object , index){
-            let  color  = this.getRickType(object.name).color
+            let  color  = this.getRickType(index).color
             let className = "panel-body " + color + " widget-panel insight-panel"
             let name = this.upperFirst(object.name)
-            let content = this.getRickType(object.name).info
+            let content = this.getRickType(index).info
             let previous = this.formatNumber(object.previous_scan_value)
             let current = this.formatNumber(object.current_scan_value)
+
             children[index] = <div className="col-md-4">
                                 <section className="panel">
 

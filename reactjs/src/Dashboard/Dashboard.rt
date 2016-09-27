@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-sm-6 col-noti ">
                             <div class='row'>
-                                <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.pending_action.list.length}</h4>
+                                <h4 class="col-sm-7 pull-left" >My Pending Action: 4</h4>
                                 <h4 class="col-sm-5 pull-right">
                                     <div class="row">
                                         <span class="ml-md mr-md" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'hight' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'hight')}" ></i> : {this.state.pending_action.warning}</span>

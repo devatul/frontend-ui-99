@@ -68,7 +68,7 @@
         <FilterLabel
           id="Confidential"
           data={this.state.filterLabel}
-          onClick={this.onClickLabel}
+          onClick={this.clearFilter}
           onClear={this.clearFilter} />
     </div>
     </div>

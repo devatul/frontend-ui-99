@@ -528,12 +528,7 @@ var Notification = React.createClass({
                             "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.",
                             "urgency": "low"
                         },
-                        {
-                            "created": "older",
-                            "id": 8,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.",
-                            "urgency": "hight"
-                        }]
+                       ]
                     },
                     yesterday: {
                         $set: [{
@@ -542,12 +537,7 @@ var Notification = React.createClass({
                             "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.",
                             "urgency": "low"
                         },
-                        {
-                            "created": "older",
-                            "id": 8,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.",
-                            "urgency": "hight"
-                        }]
+                       ]
                     },
                     last_7_days: {
                         $set: [{
@@ -585,10 +575,10 @@ var Notification = React.createClass({
                         ]
                     }
                 },
-                warningNoti: { $set: 3 },
+                warningNoti: { $set: 1 },
                 dangerNoti: { $set: 1 },
-                total: { $set: 6 },
-                content : {$set : 'Number of actions pending for you to complete. 1 action is required with high priority and 3 action are required with medium priority'}
+                total: { $set: 4 },
+                content : {$set : 'Number of actions pending for you to complete. 1 action is required with high priority and 1 action are required with medium priority'}
             });
         } else if (role === Constant.role.IS_2ND) {
             var update_notification = update(this.state, {

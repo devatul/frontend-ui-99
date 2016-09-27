@@ -47,6 +47,9 @@ var DocumentReview = React.createClass({
         if (this.state.Actions != nextState.Actions) {
             return true
         }
+        if (this.state.documentPreview != nextState.documentPreview) {
+            return true;
+        }
         if (this.state.confidentialities != nextState.confidentialities) {
             return true
         }
@@ -56,9 +59,7 @@ var DocumentReview = React.createClass({
         if (this.state.ChallengedDocuments != nextState.ChallengedDocuments) {
             return true;
         }
-        if (this.state.documentPreview != nextState.documentPreview) {
-            return true;
-        }
+
         if (this.state.challengedPreview != nextState.challengedPreview) {
             return true;
         }
@@ -214,7 +215,7 @@ var DocumentReview = React.createClass({
                     "group_min_centroid_distance": 1.6,
                     "group_max_centroid_distance": 2,
                     "group_avg_centroid_distance": 2,
-                    "image_url": "http://backend-host/doc.jpg",
+                    "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
                     "creation_date": "2012-04-23",
                     "modification_date": "2012-04-23",
                     "legal_retention_until": "2012-04-23",
@@ -239,7 +240,7 @@ var DocumentReview = React.createClass({
                     "group_min_centroid_distance": 1.6,
                     "group_max_centroid_distance": 2,
                     "group_avg_centroid_distance": 2,
-                    "image_url": "http://backend-host/doc.jpg",
+                    "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
                     "creation_date": "2012-04-23",
                     "modification_date": "2012-04-23",
                     "legal_retention_until": "2012-04-23",
@@ -262,7 +263,7 @@ var DocumentReview = React.createClass({
                     "group_min_centroid_distance": 1.6,
                     "group_max_centroid_distance": 2,
                     "group_avg_centroid_distance": 2,
-                    "image_url": "http://backend-host/doc.jpg",
+                    "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
                     "creation_date": "2012-04-23",
                     "modification_date": "2012-04-23",
                     "legal_retention_until": "2012-04-23",
@@ -292,7 +293,7 @@ var DocumentReview = React.createClass({
                 "group_min_centroid_distance": 1.6,
                 "group_max_centroid_distance": 2,
                 "group_avg_centroid_distance": 2,
-                "image_url": "http://backend-host/doc.jpg",
+                "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
                 "creation_date": "2012-04-23",
                 "modification_date": "2012-04-23",
                 "legal_retention_until": "2012-04-23",
@@ -322,8 +323,11 @@ var DocumentReview = React.createClass({
         this.setState({ Action1: data });
         /*console.log(this.state)*/
     },
+
     setDocumentPreview: function( actionIndex, docIndex) {
         debugger
+        $('#previewModal').modal('show')
+     /*   loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js")*/
         var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
         if (documentCurrent != null) {
             documentCurrent.index = { actionIndex: actionIndex, docIndex: docIndex };
@@ -331,14 +335,39 @@ var DocumentReview = React.createClass({
                 documentPreview: { $set: documentCurrent },
 
             });
-            this.setState(setDocumentCurrent)
-
-            $('#previewModal .file-preview').html('<a href="' + documentCurrent.image_url + '" id="embedURL"></a>');
+            $('#previewModal .file-preview').html('<a href="'+documentCurrent.image_url+'" id="embedURL"></a>');
             $('#embedURL').gdocsViewer();
+          /*  loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js", function() {
+*/
+
+                //get data-id attribute of the clicked element
+
+
+          /*      $('#previewModal .file-preview').html('<a href="'+fileURL+'" id="embedURL"></a>');
+                $('#embedURL').gdocsViewer();*/
+           /* }).bind(this);*/
+
+           /* $('#previewModal .file-preview').html('<a href="' + documentCurrent.image_url + '" id="embedURL"></a>');
+            $('#embedURL').gdocsViewer();*/
         }
+         this.setState(setDocumentCurrent)
 
             /* this.setState({ iconReview: icon })*/
 
+    },
+     setChallengedPreview: function(challengedIndex, docChallIndex, icon) {
+
+        var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
+        if (challengedCurrent != null) {
+            challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
+            var setChallengedCurrent = update(this.state, {
+                challengedPreview: { $set: challengedCurrent },
+            });
+            this.setState(setChallengedCurrent);
+            this.setState({ iconChallengedPreview: icon })
+            $('#previewModal3 .file-preview').html('<a href="' + challengedCurrent.image_url + '" id="embedURL3"></a>');
+            $('#embedURL3').gdocsViewer();
+        }
     },
 
     progressbar: function(value, value1, value2, value3) {
@@ -795,20 +824,7 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
-    setChallengedPreview: function(challengedIndex, docChallIndex, icon) {
 
-        var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
-        if (challengedCurrent != null) {
-            challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
-            var setChallengedCurrent = update(this.state, {
-                challengedPreview: { $set: challengedCurrent },
-            });
-            this.setState(setChallengedCurrent);
-            this.setState({ iconChallengedPreview: icon })
-            $('#previewModal3 .file-preview').html('<a href="' + challengedCurrent.image_url + '" id="embedURL3"></a>');
-            $('#embedURL3').gdocsViewer();
-        }
-    },
     onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
 
         var categoryIndex = event.target.value;

@@ -82,8 +82,9 @@ var MenuBar1 = React.createClass({
     },
     componentDidUpdate(prevProps, prevState) {
         if (this.state.filter != prevState.filter) {
+            debugger
             var filter = this.state.filter;
-            if (filter.languages != null) {
+            /*if (filter.languages != null) {
                 filter.languages.length === 0 && delete this.state.filter.languages;
             }
             if (filter["doc-types"] != null) {
@@ -94,10 +95,17 @@ var MenuBar1 = React.createClass({
             }
             if (filter.categories != null) {
                 filter.categories.length === 0 && delete this.state.filter.categories;
+            }*/
+            if(filter == null){
+                this.props.handleFilter({ number_users : 'Top 5'});
             }
             this.props.handleFilter(this.state.filter);
+
+
+
         }
         if (this.state.dataSelectBox != prevState.dataSelectBox) {
+            debugger
             this.state.eventContext.length > 1 && this.updateFilterList(this.state.eventContext)
                 /*  this.updateNumberUser(this.state.eventContext)*/
         }
@@ -248,6 +256,7 @@ var MenuBar1 = React.createClass({
         });
     },
     clearFilter: function() {
+        debugger
         var data = this.state.dataSelectBox;
         _.forEach(this.state.filterLabel, function(object, index) {
             var updateData = update(data, {
@@ -263,8 +272,10 @@ var MenuBar1 = React.createClass({
         }.bind(this));
         this.setState({
             dataSelectBox: data,
-            filterLabel: []
+            filterLabel: [],
+            filter : null
         });
+        this.copyNumberOfUser()
     },
     onClickLabel: function(label, index) {
         var listLabel = _.concat(this.state.filterLabel);
@@ -283,7 +294,10 @@ var MenuBar1 = React.createClass({
             filterLabel: listLabel
         });
     },
+
+
     updateFilterList: function(selectId) {
+        debugger
         var filter = _.assignIn({}, this.state.filter);
         var arr = [];
         var number = this.state.numberUser;

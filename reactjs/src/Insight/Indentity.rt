@@ -228,7 +228,7 @@
      </h4>
      <div class="insight-stat">
       <i class="fa fa-chevron-down" aria-hidden="true"></i>
-      <span></span>
+      <span>121212</span>
     </div>
     <div class="widget-summary">
       <div class="widget-summary-col">
@@ -275,7 +275,7 @@
      </h3>
      <div class="panel panel-chart">
       <div class="panel-body">
-        <Chart/>
+        <Chart  dataChart= {this.state.dataChart.high_risk_users} id="-2"  exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.high_risk_users)}" />
       </div>
     </div>
   </div>
@@ -287,7 +287,8 @@
    </h3>
    <div class="panel panel-chart">
     <div class="panel-body">
-     <Chart/>
+     <Chart  dataChart= {this.state.dataChart.high_risk_directory} id="-1"
+     exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.high_risk_directory)}" />
    </div>
  </div>
 </div>
@@ -303,22 +304,24 @@
     <div class="panel panel-chart">
       <div class="panel-body">
        <div class="row">
-        <div class="col-md-6 col-chart-item">
-          <h4>Accounting / Tax</h4>
-          <Chart/>
+        <div class="col-md-6 col-chart-item" rt-repeat="contributor in this.state.dataChart.key_contributor" key={contributorIndex}
+        key={contributorIndex}>
+          <h4>{contributor.category_name}</h4>
+          <Chart dataChart={contributor.contributors} id={contributorIndex}
+           exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.key_contributor[contributorIndex].contributors)}" />
         </div>
 
-        <div class="col-md-6 col-chart-item">
+      <!--   <div class="col-md-6 col-chart-item">
           <h4>Corporate Entity</h4>
-          <Chart/>
+           <Chart  dataChart= {this.state.dataChart.key_contributor.contributors} id="-3" />
         </div>
 
         <div class="col-md-6 col-chart-item">
           <h4>Client / Customer</h4>
-          <Chart/>
-        </div>
+           <Chart  dataChart= {this.state.dataChart.key_contributor.contributors} id="-4" />
+        </div> -->
 
-        <div class="col-md-6 col-chart-item">
+      <!--   <div class="col-md-6 col-chart-item">
           <h4>Employee</h4>
           <Chart/>
         </div>
@@ -331,7 +334,7 @@
         <div class="col-md-6 col-chart-item">
           <h4>Transaction</h4>
           <Chart/>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

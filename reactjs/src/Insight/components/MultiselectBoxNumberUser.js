@@ -24,10 +24,13 @@ var NumberUser = React.createClass({
         }
         return false;
     },
-    handleOnClick(){
+   /* componentDidUpdate(prevProps , prevState){
+        this.state.data = this.props.data
+    }*/
+   /* handleOnClick(){
 
               $("#radio_filter_"+this.props.checked).prop("checked", true);
-    },
+    },*/
     componentDidMount() {
         var dropdown = this.refs.dropdown
         var dropdownmenu = this.refs.dropdownmenu
@@ -66,12 +69,14 @@ var NumberUser = React.createClass({
     },
 
 	render(){
+
 		var children = [];
         var newIdArr = [];
         var className = this.state.clicked ? 'active' : 'no-active';
         console.log('data',this.props.data)
-
+        debugger
             _.forEach(this.props.data, function(obj, index) {
+
                 var newID = 'radio' + index;
                 var size =_.size(this.props.data)
                 children[index] =  <li className={obj.checked && 'active'} key ={index}>
@@ -81,7 +86,7 @@ var NumberUser = React.createClass({
                                             name="radio_filter"
                                             onClick={(event)=>this.handleOnChange(event,index,size)}
                                             value={index}
-
+                                            checked = {obj.checked}
 
                                             /> {obj.name}
 
