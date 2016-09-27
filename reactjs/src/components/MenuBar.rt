@@ -12,8 +12,8 @@
                 <div class="col-sm-8">
                     <p class="page-heading-sm">{this.props.title}</p>
                     <div class="filter-tags-block">
-                        <label rt-if="this.state.filter.labels.length > 0" class="pull-left mr-md">Filters:</label>
-                        <div rt-scope="this.state.filter.labels as listLabel" class="pull-left filter-tags" style="text-transform: capitalize">
+                        <label rt-if="this.state.labels.length > 0" class="pull-left mr-md">Filters:</label>
+                        <div rt-scope="this.state.labels as listLabel" class="pull-left filter-tags" style="text-transform: capitalize">
                             <FilterLabel data={listLabel} onClick={this.onClickLabel} onClear={this.onclearFilter} />
                         </div>
                     </div>
@@ -24,14 +24,17 @@
                             <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                             <div class="dropdown-backdrop-custom" style="display:none"></div>
                             <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
-                                <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state.listLabel as listLabel ">
+                                <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state as listLabel ">
                                     <li class="mb-sm">
                                         <div class="form-group">
                                             <Select2
+                                                id="selectConfidentiality"
                                                 value="{this.state.value.confidentiality}"
-                                                onSelect={this.handleOnSelect}
-                                                onSelecting={this.handleOnSelecting}
+                                                onOpen={this.onOpenSelect}
+                                                onChange={this.handleOnChangeConfidentiality}
                                                 width="off"
+                                                containerCssClass="dathena"
+                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
                                                 minimumResultsForSearch="Infinity"
                                                 closeOnSelect={false}>
                                                     <option
@@ -40,12 +43,12 @@
                                                         Confidentiality
                                                     </option>
                                                     <option
-                                                        value="-1"
+                                                        value="all"
                                                         key="selectall">
                                                         Select All
                                                     </option>
                                                     <option
-                                                        rt-repeat="confidentiality in listLabel.confidentialities"
+                                                        rt-repeat="confidentiality in this.state.confidentialities"
                                                         value="{confidentialityIndex}"
                                                         key="{confidentialityIndex}">
                                                         {confidentiality.name}
@@ -64,10 +67,13 @@
                                     <li class="mb-sm">
                                         <div class="form-group">
                                             <Select2
-                                                value="{this.state.value.confidentiality}"
-                                                onSelect={this.handleOnSelect}
-                                                onSelecting={this.handleOnSelecting}
+                                                id="selectCategory"
+                                                value="{this.state.value.category}"
+                                                onOpen={this.onOpenSelect}
+                                                onChange={this.handleOnChangeConfidentiality}
                                                 width="off"
+                                                containerCssClass="dathena"
+                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
                                                 minimumResultsForSearch="Infinity"
                                                 closeOnSelect={false}>
                                                     <option
@@ -76,12 +82,12 @@
                                                         Category
                                                     </option>
                                                     <option
-                                                        value="-1"
+                                                        value="all"
                                                         key="selectall">
                                                         Select All
                                                     </option>
                                                     <option
-                                                        rt-repeat="category in listLabel.categories"
+                                                        rt-repeat="category in this.state.categories"
                                                         value="{categoryIndex}"
                                                         key="{categoryIndex}">
                                                         {category.name}
@@ -99,10 +105,13 @@
                                     <li class="mb-sm">
                                         <div class="form-group">
                                             <Select2
-                                                value="{this.state.value.confidentiality}"
-                                                onSelect={this.handleOnSelect}
-                                                onSelecting={this.handleOnSelecting}
+                                                id="selectLanguage"
+                                                value="{this.state.value.language}"
+                                                onOpen={this.onOpenSelect}
+                                                onChange={this.handleOnChangeConfidentiality}
                                                 width="off"
+                                                containerCssClass="dathena"
+                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
                                                 minimumResultsForSearch="Infinity"
                                                 closeOnSelect={false}>
                                                     <option
@@ -111,12 +120,12 @@
                                                         Languages
                                                     </option>
                                                     <option
-                                                        value="-1"
+                                                        value="all"
                                                         key="selectall">
                                                         Select All
                                                     </option>
                                                     <option
-                                                        rt-repeat="language in listLabel.languages"
+                                                        rt-repeat="language in this.state.languages"
                                                         value="{languageIndex}"
                                                         key="{languageIndex}">
                                                         {language.name}
@@ -134,10 +143,13 @@
                                     <li class="mb-sm">
                                         <div class="form-group">
                                             <Select2
-                                                value="{this.state.value.confidentiality}"
-                                                onSelect={this.handleOnSelect}
-                                                onSelecting={this.handleOnSelecting}
+                                                id="selectDoctype"
+                                                value="{this.state.value.doctype}"
+                                                onOpen={this.onOpenSelect}
+                                                onChange={this.handleOnChangeConfidentiality}
                                                 width="off"
+                                                containerCssClass="dathena"
+                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
                                                 minimumResultsForSearch="Infinity"
                                                 closeOnSelect={false}>
                                                     <option
@@ -146,12 +158,12 @@
                                                         Document Type
                                                     </option>
                                                     <option
-                                                        value="-1"
+                                                        value="all"
                                                         key="selectall">
                                                         Select All
                                                     </option>
                                                     <option
-                                                        rt-repeat="doctype in listLabel['doc-types']"
+                                                        rt-repeat="doctype in this.state['doc-types']"
                                                         value="{doctypeIndex}"
                                                         key="{doctypeIndex}">
                                                         {doctype.name}
@@ -171,80 +183,100 @@
                         </li>
                         <li rt-if="this.props.showInfo" class="dropdown">
                             <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-md full-mobile dd-right">
+                            <div class="dropdown-menu has-arrow dd-md full-mobile dd-right info-scan">
                                 <div class="table-responsive">
                                     <table class="table general-table mb-none">
                                         <tbody>
                                         <tr>
-                                            <td>Last Data Scan:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Time of the last data scan by Dathena 99." />
+                                            <td class="text-left">Last Data Scan:
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Time of the last data scan by Dathena 99." />
                                             </td>
-                                            <td colspan="3">{scanResult.last_data_scan}</td>
+                                            <td class="text-right" colspan="3">{scanResult.last_data_scan}</td>
                                         </tr>
                                         <tr>
                                             <td>Country in Scope:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Country(s) in scope for the last scan." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Country(s) in scope for the last scan." />
                                             </td>
-                                            <td colspan="3">{scanResult.country}</td>
+                                            <td class="text-right" colspan="3">{scanResult.country}</td>
                                         </tr>
                                         <tr>
                                             <td>Business in Scope:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Business unit(s) in scope for the last scan." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Business unit(s) in scope for the last scan." />
                                             </td>
-                                            <td colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
+                                            <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
                                         </tr>
                                         <tr>
                                             <td>Scan Status:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Details whether the scan was successful or not." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Details whether the scan was successful or not." />
                                             </td>
-                                            <td colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
+                                            <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
                                         </tr>
                                         <tr>
                                             <td>Documents Analyzed:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="The total number of documents that were detected by 99 during the scan process." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="The total number of documents that were detected by 99 during the scan process." />
                                             </td>
-                                            <td colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
+                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
                                         </tr>
                                         <tr>
                                         <td>File Extension Processed:
-                                            <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
+                                            <HelpButton
+                                                class="help-info-button"
+                                                classIcon="review_question_a help_question_a"
+                                                setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
                                         </td>
-                                            <td colspan="3">{scanResult.file_extensions_processed}</td>
+                                            <td class="text-right" colspan="3">{scanResult.file_extensions_processed}</td>
                                         </tr>
                                         <tr>
                                             <td>Duplicate Documents:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Two or more files with identical content and file names." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Two or more files with identical content and file names." />
                                             </td>
-                                            <td colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
+                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
                                         </tr>
                                         <tr>
                                         <td>Twins Documents:
-                                            <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Two or more files with identical content, but with different file names." />
+                                            <HelpButton
+                                                class="help-info-button"
+                                                classIcon="review_question_a help_question_a"
+                                                setValue="Two or more files with identical content, but with different file names." />
                                         </td>
-                                            <td colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
+                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
                                         </tr>
 
                                         <tr>
                                             <td>Encrypted Documents or Archives:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
                                             </td>
-                                            <td colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
+                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
                                         </tr>
                                         <tr>
                                             <td>Documents Skipped:
-                                                <HelpButton classNote="help_question_content" className="dropdown-file-info-holder"
-                                                        setValue="Documents in the data repository that have not been scanned by Dathena 99." />
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classIcon="review_question_a help_question_a"
+                                                    setValue="Documents in the data repository that have not been scanned by Dathena 99." />
                                             </td>
-                                            <td colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>
+                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>
                                         </tr>
                                         </tbody>
                                     </table>

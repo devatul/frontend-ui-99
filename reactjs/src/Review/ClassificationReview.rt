@@ -26,7 +26,11 @@
         <Col md={12}>
             <Panel.custom class="panel-has-child actions-panel">
                 <Panel.head>
-                    <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
+                    <h2 class="panel-title inline-block-item mr-sm">My Review
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="This summarises all the actions assigned to the user. Users must review each document of this section."/>
+                    </h2>
                 </Panel.head>
                 <Panel.body>
                     <Panel.custom
@@ -34,15 +38,18 @@
                         class="panel-bordered actions-panel">
                         <Panel.head>
                             <h2 class="panel-title inline-block-item mr-sm"><i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
-                                <span class="text-capitalize">{ ' [' + review.language + '] ' + review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
-                                <HelpButton classIcon="overview_question_a help_question_a" setValue="Help content"/>
+                                <span class="text-capitalize">{ ' [' + review.language.short_name + '] ' + review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"
+                                    setValue="{'All the documents in this section have been classified ' + review.category.name + ' with a ' + review.confidentiality.name + ' level of Confidentiality.'}" />
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
                                 <button onClick="() => this.handleUndo(reviewIndex)" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>
                         <Panel.body>
-                            <p class="document_note">You have {review.documents.length - review.validateNumber} documents to review within  <span class="text-capitalize">{review.category.name}</span> category with <span class="text-capitalize">{review.confidentiality.name}</span> confidentiality by latest 15th August</p>
+                            <!--<p class="document_note">You have {review.documents.length - review.validateNumber} documents to review within  <span class="text-capitalize">{review.category.name}</span> category with <span class="text-capitalize">{review.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                                 <Button
@@ -53,7 +60,7 @@
                                     Approve
                                 </Button>
 
-                                <Alert bsStyle="success" open="{review.documents && (review.validateNumber == review.documents.length)}">
+                                <Alert bsStyle="success" open="{review.documents && review.documents.length > 0 && (review.validateNumber == review.documents.length)}">
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                 </Alert>
 
@@ -74,12 +81,14 @@
                                             </th>
                                             <th class="review_note">Document name
                                                 <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
                                                     className="dropdown-file-info-holder"
                                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                                             </th>
                                             <th class="review_note fix-max-width-category-confident">Proposed Category
                                                 <HelpButton className="dropdown-file-info-holder"
-                                                            setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                                    classMenu="fix-overview-help-button-table"
+                                                    setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                             </th>
                                             <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
                                                 <HelpButton
@@ -141,13 +150,13 @@
                 <th class="review_note fix-max-width-category-confident">Proposed Category
                     <HelpButton
                         className="dropdown-file-info-holder"
-                        setValue="User is required to assign category for orphan documents." />
+                        setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                 </th>
                 <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
                     <HelpButton
                         className="dropdown-file-info-holder"
                         classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                        setValue="User is required to assign confidentiality level for orphan documents." />
+                        setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                 </th>
                 <th class="text-center">Status</th>
             </tr>

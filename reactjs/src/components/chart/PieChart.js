@@ -21,7 +21,9 @@ var PieChart = React.createClass({
             config: {
                 colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
                 colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE']
-            }
+            },
+            help: "help content",
+            title: "title"
         };
     },
 
@@ -43,7 +45,7 @@ var PieChart = React.createClass({
         var { config, data, id } = this.props,
             { colors, colorsHover } = config;
         var div = $('#' + id);
-        var parentDiv = div.closest('.tab-pane');
+        var divLegend = div.closest('.chart-pane');
         div.highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -67,7 +69,7 @@ var PieChart = React.createClass({
 
                             }
 
-                            $(legendChart).appendTo(parentDiv);
+                            $(legendChart).appendTo(divLegend);
                         }
                     }
                 },
@@ -86,7 +88,7 @@ var PieChart = React.createClass({
                     if(percent < 5.0) {
                         return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
                     } else {
-                        return '<span style="color:' + this.color + '; font-weight: bold;">Documents: </span>' + this.y;
+                        return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + this.y + ' Documents';
                     }
                 }
             },
@@ -155,11 +157,15 @@ var PieChart = React.createClass({
     },
 
     render() {
-        var { title, id, help } = this.props;
+        var { title, id, help, children } = this.props;
+            React.Children.map(children, (child) => {
+                return React.cloneElement();
+            })
         return (
             <div>
                 <h4 className="chart-title">{title}
-                    <HelpButton classNote="review_question_chart"
+                    <HelpButton
+                        classMenu="fix-overview-help-button-table"
                         setValue={help} />
                 </h4>
                 <div id={id} ></div>

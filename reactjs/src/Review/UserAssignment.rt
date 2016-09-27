@@ -1,9 +1,10 @@
+<rt-import name="func" from='../utils/function.js'/>
 <rt-import name="SelectButton" from="../components/dathena/SelectButton"/>
 <rt-import name="SelectBox" from="../components/dathena/SelectBox"/>
 <rt-import name="FilterLabel" from="../components/dathena/FilterLabel"/>
 <rt-import name="ValidationButton" from="../components/dathena/ValidationButton"/>
 <rt-import name="PieChart" from="../components/chart/PieChart"/>
-<rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
+<rt-import name="StackBarChart" from="../components/chart/StackBarChart"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="BarChart" from="../components/chart/BarChart"/>
 <section>
@@ -18,13 +19,303 @@
               data-toggle="tab" aria-expanded="true" 
               style="text-transform: capitalize;">{category.name}</a>
           </li>
-          <li class="">
-            <a id='summarytab' href="#summary" onClick={this.getSummary} data-toggle="tab" aria-expanded="false">Summary</a>
-          </li>
         </ul>
         <div class="help_guide_sub tab-content">
-          <div id="categoryInfo" class="help_guide tab-pane active">
+          <div id="categoryInfo" class="help_guide tab-pane {this.state.category.current.id != 'summary' ? 'active' : ''}">
+						<div class="row">
+              <div class="col-md-12">
+                <section class="panel panel-featured panel-has-child panel-featured-primary panel-featured-compact panel-bordered">
+                  <header class="panel-heading">
+                      <h2 class="panel-title">Document Category Information</h2>
+                      <div class="panel-actions">
+                          <span>Number of Documents: <strong>{func.formatNumber(this.state.category.info.number_docs)}</strong></span>
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      </div>
+                  </header>
+                  <div class="panel-body tab-content tab-pane">
+                    <div class="row">
+                      <div class="col-md-7">
+                        <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                          <header class="panel-heading">
+                              <h2 class="panel-title">
+                                Sample Parameters
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
+                                <!--<div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow full-mobile">
+                                        <p>This will determine the size of the document sample, which will generate the list of documents to be reviewed</p>
+                                    </div>
+                                </div>-->
+                              </h2>
+                              <div class="panel-actions">
+                                  <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                              </div>
+                          </header>
+                          <div class="panel-body sample-params clearfix">
+                            <div class="form-group user-assign-valid-btn left">
+                              <label class="">Fixed Number of Document</label>
+                              <select ref="fixedNumberDoc" name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
+                                <option rt-repeat="docPercentage in this.state.category.info.doc_percentage"
+                                  class="lt"
+                                  key="{docPercentageIndex}"
+                                  value="{docPercentage.number_docs}">
+                                  {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(2)}%)
+                                </option>
+                              </select>
+                              <ValidationButton
+                                  id='category'
+                                  onClick={this.handleOnClickValidationButton}
+                                  status={this.state.buttonSample.category} />
+                            </div>
+                            <!--<div class="form-group left">
+                              <label class="">Fixed Number of Documents</label>
+                              <select name="state" class="form-control ddList">
+                                <option class="lt" value="">10 Documents (0.17%)</option>
+                                <option class="lt" value="">20 Documents (0.34%)</option>
+                              </select>
+                              <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                            </div>-->
+                            <div class="or-divider"><span>OR</span></div>
+                            <div class="form-group user-assign-valid-btn right">
+                              <label class="">As % of overall {this.state.category.current.name}</label>
+                              <select ref="overallCategory" name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
+                                <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc" class="lt" key="{percentageDocIndex}" value="{percentageDoc.number_docs}">
+                                  {percentageDoc.percentage.toFixed(2)}% ({percentageDoc.number_docs} Documents)
+                                </option>
+                              </select>
+                              <ValidationButton
+                                  id='fixedNumber'
+                                  onClick={this.handleOnClickValidationButton}
+                                  status={this.state.buttonSample.fixedNumber} />
+                              <!--<select name="state" class="form-control ddList">
+                                <option class="lt" value="">0.01% (17 Documents)</option>
+                                <option class="lt" value="">0.02% (34 Documents)</option>
+                              </select>
+                              <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>-->
+                            </div>
+                          </div>
+                        </section>
+                        <div rt-scope=" this.state.dataChart.documentType as doctype " class="">
+                          <StackBarChart
+                              id="doctypeChartUserAssignment"
+                              title="Document Type per Confidentiality Level"
+                              help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name} category."
+                              categories={doctype.categories}
+                              series={doctype.series} />
+                          <!--<h4 class="chart-title">
+                            Document Type per Confidentiality Level
+                            <div class="inline-block-item dropdown dropdown-help">
+                                <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu has-arrow full-mobile">
+                                    <p>Summary of the Confidentiality ratings assigned to each document type for the document within the Accounting/Tax category</p>
+                                </div>
+                            </div>
+                          </h4>
+                          <div id="confidentialityLevelChartHorizon" style="height:250px"></div>-->
+                        </div>
+                      </div>
+                      <div class="col-sm-5 chart-pane chart-user-assignment">
+                          <PieChart
+                              id="confidentialityChart"
+                              title="Confidentiality"
+                              data={this.state.dataChart.confidentiality}
+                              help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                        <!--<h4 class="chart-title">
+                          Confidentiality
+                          <div class="inline-block-item dropdown dropdown-help">
+                              <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="dropdown-menu has-arrow full-mobile">
+                                  <p>Distributions in term of confidentiality ratings assigned to all the documents within the Accounting/Tax category</p>
+                              </div>
+                          </div>
+                        </h4>
+                        <!-- <div id="confidentialityOverviewChart" class="document-chart"></div> -->
+                        <!--<div id="confidentialityChart" class="legend-under"></div>-->
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>  
+            </div>
             <div class="row">
+              <div class="col-md-12">
+                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                  <header class="panel-heading">
+                      <h2 class="panel-title">User Selection - Key Contributor for {this.state.category.current.name}
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name} category." />
+                        <!--<div class="inline-block-item dropdown dropdown-help">
+                            <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                <p>You have to chose the user assigned to review the sample of document in the Accounting/Tax category.Most active users creating or modifying Accounting/Tax document</p>
+                            </div>
+                        </div>-->
+                      </h2>
+                      <div class="panel-actions">
+                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                      </div>
+                  </header>
+                  <div class="panel-body">
+                    <div class="row">
+
+                      <div class="col-xs-12">
+                          <div class="row mt-md">
+                            <div class="col-xs-9">
+                              <div class="clearfix">
+                                <ul class="filter-buttons list-unstyled pull-left">
+                                    <li class="dropdown">
+                                        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                        <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                        <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 620px;">
+                                            <ul class="filter-list list-unstyled pt-xs filter-list-with-help">
+                                                <li>
+                                                  <!--<select name="timeframe" class="assigment-select form-control ddList inline-block-item">
+                                                    <option selected disabled value="">Timeframe</option>
+                                                    <option class="lt" value="">1 Year</option>
+                                                    <option class="lt" value="">6 Months</option>
+                                                    <option class="lt" value="">3 Months</option>
+                                                    <option class="lt" value="">1 Months</option>
+                                                  </select>-->
+                                                  <SelectBox
+                                                    id={this.static.selectId.timeframe}
+                                                    name="timeframe"
+                                                    className="assigment-select form-control ddList inline-block-item"
+                                                    data={this.state.datafilter.timeFrame}
+                                                    value={this.state.datafilter.setValue.timeframe}
+                                                    onOpen={this.selectBoxOnOpen}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
+
+                                                    <HelpButton
+                                                        className="dropdown-help"
+                                                        classMenu="fix-overview-help-button-table"
+                                                        classIcon="overview_question_a"
+                                                        setValue="This will filter the list of in scope documents based on the selected timeframe."/>
+
+                                                  <!--<div class="inline-block-item dropdown dropdown-help">
+                                                      <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                      <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                                          <p>This will filter the list of in scope documents based on the selected timeframe.</p>
+                                                      </div>
+                                                  </div>-->
+                                                </li>
+                                                <li>
+                                                  <!--<select name="usersnum" class="assigment-select form-control ddList inline-block-item">
+                                                    <option selected disabled value="">Number of Users</option>
+                                                    <option class="lt" value="" selected="">Top 30</option>
+                                                    <option class="lt" value="">Top 2</option>
+                                                    <option class="lt" value="">Top 20</option>
+                                                    <option class="lt" value="">Top 15</option>
+                                                    <option class="lt" value="">Top 10</option>
+                                                    <option class="lt" value="">Top 5</option>
+                                                  </select>-->
+                                                  <SelectBox
+                                                    id={this.static.selectId.users}
+                                                    name="usersnum"
+                                                    class="assigment-select form-control ddList inline-block-item"
+                                                    data={this.state.datafilter.usersNumber}
+                                                    value={this.state.datafilter.setValue.users}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
+                                                  <HelpButton
+                                                        className="dropdown-help"
+                                                        classMenu="fix-overview-help-button-table"
+                                                        classIcon="overview_question_a"
+                                                        setValue="Number of users that are displayed as suggested reviewers, ranked by activity"/>
+                                                </li>
+                                                <li>
+                                                  <!--<select name="reviewertype" class="assigment-select form-control ddList inline-block-item">
+                                                    <option selected disabled value="">Type of Reviewer</option>
+                                                    <option class="lt" value="">Document Last Modified</option>
+                                                    <option class="lt" value="">Document Creator</option>
+                                                  </select>-->
+                                                  <SelectBox
+                                                    id={this.static.selectId.type}
+                                                    name="type"
+                                                    class="assigment-select form-control ddList inline-block-item"
+                                                    data={this.state.datafilter.type}
+                                                    value={this.state.datafilter.setValue.type}
+                                                    defaultValue={0}
+                                                    className="assignent-select form-control ddList"
+                                                    onChange={this.handleOnChangeSelectBox} />
+                                                  <HelpButton
+                                                        className="dropdown-help"
+                                                        classMenu="fix-overview-help-button-table"
+                                                        classIcon="overview_question_a"
+                                                        setValue="Filter the list of document users, based on who created the document or who last modified the document."/>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="filter-tags-block pull-left">
+                                    <div class="pull-left filter-tags">
+                                      <FilterLabel
+                                          onClear={this.handleClearLabel}
+                                          data={this.state.datafilter.filterLabel}
+                                          onClick={this.handleClickFilterLabel} />
+                                    </div>
+                                    <!--<div class="pull-left filter-tags-clear">
+                                      <span class="filter-label filter-clear label label-info">Clear all</span>
+                                    </div>-->
+                                </div>
+
+                              </div>
+                              <BarChart
+                                  id="userReviewBarChart"
+                                  config={this.state.dataChart.reviewerChart.config}
+                                  categories={this.state.dataChart.reviewerChart.categories}
+                                  data={this.state.dataChart.reviewerChart.data} />
+                            </div>
+                            <div class="col-xs-3 select-reviewers">
+                              <h4 style="margin-bottom:5px">Select the Reviewer(s)
+                                <HelpButton
+                                  classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                  setValue="Users who are selected will have to review the sample of document in
+                                  {this.state.category.current.name}" />
+                                <!--<div class="inline-block-item dropdown dropdown-help">
+                                  <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                  <div class="dropdown-menu has-arrow full-mobile">
+                                      <p>Users who are selected will have to review the sample of document in Accounting/Tax category</p>
+                                  </div>
+                                </div>-->
+                              </h4>
+                              <SelectButton
+                                    key="{'select_all'}"
+                                    title="Select All"
+                                    setSelected="{this.state.datafilter.request.reviewers.length >= this.state.reviewer.list.length ? 'on' : 'off'}"
+                                    onChange="(e)=>this.handleOnChangeSelectAll(e)" />
+                                <SelectButton
+                                    rt-repeat="review in this.state.reviewer.list"
+                                    key="{'select_' + reviewIndex}"
+                                    title="{ review.first_name + '.' + review.last_name }"
+                                    setSelected="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
+                                    onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <button
+                        class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
+                        type="button"
+                        onClick={this.handleValidateButton}>
+                          Validate and Go to Next Category
+                    </button>
+                  </div>
+                </section>
+              </div>
+            </div>
+					</div>
+          <!--<div id="categoryInfo" class="help_guide tab-pane active">-->
+            <!--<div class="row">
               <div class="col-md-3">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
@@ -41,7 +332,9 @@
                     <div class="form-group">
                       <label class="">Fixed Number of Document</label>
                       <select name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
-                       <option rt-repeat="docPercentage in this.state.category.info.doc_percentage " class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">{docPercentage.number_docs} Documents ({docPercentage.percentage}%)</option>
+                        <option rt-repeat="docPercentage in this.state.category.info.doc_percentage" class="lt" key="{docPercentageIndex}" value="{docPercentageIndex}">
+                          {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(2)}%)
+                        </option>
                       </select>
                       <ValidationButton
                           id='category'
@@ -52,7 +345,9 @@
                     <div class="form-group">
                       <label class="">As % of overall {this.state.category.current.name} Category</label>
                       <select name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
-                        <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc " class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">{percentageDoc.percentage}% ({percentageDoc.number_docs} Documents)</option>
+                        <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc" class="lt" key="{percentageDocIndex}" value="{percentageDocIndex}">
+                          {percentageDoc.percentage.toFixed(2)}% ({percentageDoc.number_docs} Documents)
+                        </option>
                       </select>
                       <ValidationButton
                           id='fixedNumber'
@@ -77,7 +372,7 @@
                         <div class="col-sm-6">
                           <PieChart
                               id="confidentialityChart"
-                              title="Confidentiality Overview"
+                              title="Confidentiality"
                               data={this.state.dataChart.confidentiality}
                               help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
                         </div>
@@ -93,12 +388,12 @@
                     </div>
                 </section>
               </div>  
-            </div>
-            <div class="row">
+            </div>-->
+            <!--<div class="row">
               <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">User Selection
+                      <h2 class="panel-title">User Selection - Key contributor for {this.state.category.current.name}
                         <HelpButton
                               classNote="note_chart_content"
                               setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name} category." />
@@ -113,16 +408,16 @@
                           <div class="row mt-md">
                             <div class="col-xs-8">
                               <div class="clearfix">
-                                <h4 class="chart-title pull-left mt-sm mr-md">Users
+                                <!--<h4 class="chart-title pull-left mt-sm mr-md">Users
                                   <HelpButton
                                     classNote="note_chart_content"
                                     setValue="Most active users creating or modifying (depending on the type of Reviewer chose) {this.state.category.current.name} document" />
-                                </h4>
+                                </h4>-
                                 <ul class="filter-buttons list-unstyled pull-left">
                                     <li class="dropdown">
                                       <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                         <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                        <div ref="backDropFilter" id="backDropFilter" onClick={this.handleClickBackDrop} class="dropdown-menu has-child has-arrow dd-md">
+                                        <div ref="backDropFilter" id="backDropFilter" style="width: 560px;" onClick={this.handleClickBackDrop} class="dropdown-menu has-child has-arrow dd-md">
                                             <ul class="filter-list list-unstyled pt-xs">
                                                 <li>
                                                   <SelectBox
@@ -137,20 +432,20 @@
                                                 </li>
                                                 <li>
                                                 <SelectBox
-                                                    id={this.static.selectId.numberuser}
+                                                    id={this.static.selectId.users}
                                                     name="usersnum"
                                                     data={this.state.datafilter.usersNumber}
-                                                    value={this.state.datafilter.setValue.numberuser}
+                                                    value={this.state.datafilter.setValue.users}
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
                                                     onChange={this.handleOnChangeSelectBox} />
                                                 </li>
                                                 <li>
                                                   <SelectBox
-                                                    id={this.static.selectId.reviewertype}
-                                                    name="reviewertype"
-                                                    data={this.state.datafilter.reviewerType}
-                                                    value={this.state.datafilter.setValue.reviewertype}
+                                                    id={this.static.selectId.type}
+                                                    name="type"
+                                                    data={this.state.datafilter.type}
+                                                    value={this.state.datafilter.setValue.type}
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
                                                     onChange={this.handleOnChangeSelectBox} />
@@ -163,6 +458,7 @@
                                 <div class="filter-tags-block pull-left">
                                     <div class="pull-left filter-tags">
                                       <FilterLabel
+                                          onClear={this.handleClearLabel}
                                           data={this.state.datafilter.filterLabel}
                                           onClick={this.handleClickFilterLabel} />
                                     </div>
@@ -177,7 +473,7 @@
                             <div class="col-xs-4 select-reviewers">
                                 <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)
                                   <HelpButton
-                                    classNote="note_chart_content_review"
+                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                                     setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name}" />
                                 </h4>
                                 <SelectButton
@@ -205,10 +501,10 @@
                       </button>
                     </div>
               </section>
-            </div>
-          </div>
-          </div>
-          <div id="summary" class="tab-pane">
+              </div>
+            </div>-->
+          <!--</div>-->
+          <div id="summary" class="tab-pane {this.state.category.current.id == 'summary' ? 'active' : ''}">
             <section rt-repeat="summary in this.state.summary.data" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
                   <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>

@@ -12,18 +12,21 @@ var UserAssignment = React.createClass({
     static: {
         selectId: {
             timeframe: 'timeframe',
-            numberuser: 'numberuser',
-            reviewertype: 'reviewertype'
+            users: 'users',
+            type: 'type'
         }
     },
     getInitialState() {
         return {
             category: {
                 list: [],
-                reviewers: [],
                 current: {},
                 info: {},
                 default: 0
+            },
+            reviewer: {
+                list: [],
+                current: {}
             },
             buttonSample: {
                 category: '',
@@ -33,7 +36,7 @@ var UserAssignment = React.createClass({
                 params: {
                     id: 0,
                     timeframe: 6,
-                    numberuser: 10,
+                    users: 10,
                     type: 'last_modifier'
                 },
                 request: {
@@ -51,7 +54,7 @@ var UserAssignment = React.createClass({
                     {name: 'Top 5', value: 5 },
                     {name: 'Top 2', value: 2 }
                 ],
-                reviewerType: [
+                type: [
                     {name: 'Type of Reviewer', value: 0 },
                     {name: 'Document Last Modified', value: 'last_modifier'},
                     {name: 'Document Creator', value: 'creator'}
@@ -65,8 +68,8 @@ var UserAssignment = React.createClass({
                 ],
                 setValue: {
                     timeframe: 0,
-                    numberuser: 0,
-                    reviewertype: 0
+                    users: 0,
+                    type: 0
                 },
                 filterLabel: []
             },
@@ -75,7 +78,7 @@ var UserAssignment = React.createClass({
                 data: []
             },
             dataChart: {
-                barChart: {
+                reviewerChart: {
                     config: {
                         name: 'Documents',
                         colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
@@ -106,42 +109,43 @@ var UserAssignment = React.createClass({
     	console.log(this.state);
     	javascript();
     },
-    addCommas(nStr)
-    {
-        nStr += '';
-        var x = nStr.split('.');
-        var x1 = x[0];
-        var x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-          x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        return x1 + x2;
-    },
+
     componentDidUpdate(prevProps, prevState) {
         var { category } = this.state;
+
+
     	
         if(category.current != prevState.category.current) {
+            if(category.current.id === "summary") {
+                this.getSummary();
+            } else {
+                this.getReviewers();
 
-            var info = this.getCategoryInfo(),
+                setTimeout(this.getCategoryInfo, 10);
+            }
 
-                reviewers = this.getReviewers(),
+            //this.getCategoryInfo();
 
-                updateData = update(this.state.category, {
-                    info: { $set: info },
-                    reviewers: { $set: reviewers }
-                }),
+            // var info = this.getCategoryInfo(),
+
+            //     reviewers = this.getReviewers(),
+
+            //     updateData = update(this.state.category, {
+            //         info: { $set: info },
+            //         reviewers: { $set: reviewers }
+            //     }),
                 
-                updateChart = update(this.state.dataChart, {
-                    documentType: { $set: this.documentTypeChart(info) },
-                    confidentiality: { $set: this.categoryInfoChart(info) }
-                });
+            //     updateChart = update(this.state.dataChart, {
+            //         documentType: { $set: this.documentTypeChart(info) },
+            //         confidentiality: { $set: this.categoryInfoChart(info) }
+            //     });
 
-            this.setState({ category: updateData, dataChart: updateChart });
+            // this.setState({ category: updateData, dataChart: updateChart });
 
         }
-        if(category.reviewers != prevState.category.reviewers) {
-            this.updateDataChart();
+        debugger
+        if(this.state.reviewer.current != prevState.reviewer.current) {
+            //this.getCategoryInfo();
         }
         
     },
@@ -156,10 +160,11 @@ var UserAssignment = React.createClass({
         if(indexLabel == -1) {
             indexLabel = filterLabel.length;
         }
+        debugger
         switch(field.id) {
-            case selectId.numberuser: 
+            case selectId.users: 
                 params = update(params, {
-                    numberuser: {$set: data.value }
+                    users: {$set: data.value }
                 });
                 break;
             case selectId.timeframe:
@@ -167,7 +172,7 @@ var UserAssignment = React.createClass({
                     timeframe: {$set: data.value }
                 });
                 break;
-            case selectId.reviewertype:
+            case selectId.type:
                 params = update(params, {
                     type: {$set: data.value }
                 });
@@ -194,9 +199,9 @@ var UserAssignment = React.createClass({
             indexLabel = findIndex(filterLabel, {id: label.id });
             
         switch(label.id) {
-            case selectId.numberuser: 
+            case selectId.users: 
                 params = update(params, {
-                    numberuser: {$set: 10 }
+                    users: {$set: 10 }
                 });
                 break;
             case selectId.timeframe:
@@ -204,7 +209,7 @@ var UserAssignment = React.createClass({
                     timeframe: {$set: 6 }
                 });
                 break;
-            case selectId.reviewertype:
+            case selectId.type:
                 params = update(params, {
                     type: {$set: 'last_modifier' }
                 });
@@ -226,12 +231,21 @@ var UserAssignment = React.createClass({
         this.setState({ datafilter: updateData, category: updateReviewer });
     },
     handleOnClickValidationButton: function(id) {
-        var set = (id == 'category') ? 'fixedNumber' : 'category';
+        var set = (id == 'category') ? 'fixedNumber' : 'category',
+            number_docs = (id == 'category') ? this.refs.fixedNumberDoc.value : this.refs.overallCategory.value;
+
         var updateButton = update(this.state.buttonSample, {
              [id]: {$set: 'success' },
              [set]: {$set: 'normal' }
         });
-        this.setState({ buttonSample: updateButton });
+
+        var updateRequest = update(this.state.datafilter, {
+            request: {
+                docs_sampled: { $set: parseInt(number_docs) }
+            }
+        });
+
+        this.setState({ buttonSample: updateButton, datafilter: updateRequest });
     },
 
     handleSelectFixedNumber: function() {
@@ -254,69 +268,84 @@ var UserAssignment = React.createClass({
         var { current, info, list } = this.state.category;
         var indexCurrent = findIndex(list, { id: current.id, name: current.name });
         var { request } = this.state.datafilter;
-            request.id = current.id;
-            request.name = current.name;
-            request.docs_sampled = info.number_docs;
+
         if(request.reviewers.length > 0) {
-            if(list.length === indexCurrent + 1) {
 
-                var summary = {
-                    id: 'summary'
-                },
-                updateCurrent = update(this.state.category, {
-                    current: { $set: updateCurrent }
-                });
+            makeRequest({
+                path: "/api/assign/reviewer/",
+                method: "POST",
+                params: request,
+                success: (res) => {
+                    console.log('assign done');
+                }
+            });
 
-                this.setState({ category: updateState });
-                
-            // $.ajax({
-            //     method: 'POST',
-            //     url: Constant.SERVER_API + "api/assign/reviewer/",
-            //     dataType: "json",
-            //     data: JSON.stringify(request),
-            //     beforeSend: function(xhr) {
-            //         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            //     },
-            //     success: function(data) {
-            //         console.log("assign user", data);
-            //     }.bind(this),
-            //     error: function(xhr,error) {
-            //         if(xhr.status === 401)
-            //         {
-            //             browserHistory.push('/Account/SignIn');
-            //         }
-            //     }.bind(this)
-            // });
-            } else {
+            if(indexCurrent < list.length) {
+
                 var setCurrent = update(this.state.category, {
-                    current: { $set: (list.length === indexCurrent + 1) ? {} : list[indexCurrent + 1] }
+                    current: { $set: list[indexCurrent + 1] }
                 });
                 var setReviewer = update(this.state.datafilter, {
                     request: {
                         reviewers: { $set: [] }
                     },
-                    filterLabel: { $set: [] },
+                    //filterLabel: { $set: [] },
 
-                    setValue: {
-                        timeframe: { $set: 0 },
-                        numberuser: { $set: 0 },
-                        reviewertype: { $set: 0 }
-                    },
-                    params: {
+                    // setValue: {
+                    //     timeframe: { $set: 0 },
+                    //     users: { $set: 0 },
+                    //     type: { $set: 0 }
+                    // },
+                    // params: {
                         
-                        $set: {
-                            id: 0,
-                            timeframe: 6,
-                            numberuser: 10,
-                            type: 'last_modifier'
-                        }
-                    }
+                    //     $set: {
+                    //         id: current.id,
+                    //         timeframe: 6,
+                    //         users: 10,
+                    //         type: 'last_modifier'
+                    //     }
+                    // }
                 });
                 this.setState({ category: setCurrent, datafilter: setReviewer });
             }
 
         }
     },
+    handleClearLabel: function() {
+        var { current, info, list } = this.state.category;
+        var setReviewer = update(this.state.datafilter, {
+                filterLabel: { $set: [] },
+
+                setValue: {
+                    timeframe: { $set: 0 },
+                    users: { $set: 0 },
+                    type: { $set: 0 }
+                },
+                params: {
+                    
+                    $set: {
+                        id: current.id,
+                        timeframe: 6,
+                        users: 10,
+                        type: 'last_modifier'
+                    }
+                }
+            }),
+
+            updateReviewer = update(this.state.category, {
+
+                reviewers: { $set: this.getReviewers({
+                        id: current.id,
+                        timeframe: 6,
+                        users: 10,
+                        type: 'last_modifier'
+                    }) }
+
+            });
+            debugger
+        this.setState({ datafilter: setReviewer, category: updateReviewer });
+    },
+
     setCategoryCurrent: function(categoryIndex) {
         var category = this.state.category.list[categoryIndex];
         var setCategory = update(this.state.category, {
@@ -329,49 +358,49 @@ var UserAssignment = React.createClass({
             filterLabel: { $set: [] },
             setValue: {
                 timeframe: { $set: 0 },
-                numberuser: { $set: 0 },
-                reviewertype: { $set: 0 }
+                users: { $set: 0 },
+                type: { $set: 0 }
             }
         });
         this.setState({ category: setCategory, datafilter: datafilter });
     },
 
-    updateDataChart() {
-        var categories = [],
-            data = [], 
-            { reviewers } = this.state.category;
-
-        for(var i = 0, total = reviewers.length; i < total; i++) {
-            categories[i] = reviewers[i].first_name + '.' + reviewers[i].last_name;
-            data[i] = reviewers[i].number_hits;
+    reviewerChart(list) {
+        let data = [], categories = [];
+        for(var i = 0, total = list.length; i < total; i++) {
+            categories[i] = list[i].first_name + '.' + list[i].last_name;
+            data[i] = list[i].number_hits;
         }
 
-        var updateData = update(this.state.dataChart, {
-            barChart: {
-                categories: { $set: categories },
-                data: { $set: data }
+        return update(this.state.dataChart, {
+            reviewerChart: {
+                categories: {
+                    $set: categories
+                },
+                data: {
+                    $set: data
+                }
             }
         });
-        this.setState({ dataChart: updateData });
     },
 
     documentTypeChart(info) {
-        var { doc_type } = info, 
+        var { documents_types } = info, 
             documentType = {
                 categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
                 series: []
             };
 
-        for(let i = 0, total = doc_type.length; i < total; i++) {
+        for(let i = 0, total = documents_types.length; i < total; i++) {
 
             documentType.series[i] = {
-                name: doc_type[i].name,
+                name: documents_types[i].name,
                 data: []
             };
 
-            for( let j = doc_type[i].types.length - 1; j >= 0; j-- ) {
+            for( let j = documents_types[i].doctypes.length - 1; j >= 0; j-- ) {
 
-                documentType.series[i].data[j] = doc_type[i].types[j].number;
+                documentType.series[i].data[j] = documents_types[i].doctypes[j].number_docs;
 
             }
 
@@ -380,12 +409,12 @@ var UserAssignment = React.createClass({
         return documentType;
     },
 
-    categoryInfoChart(info) {
+    confidentialityChart(info) {
         var { confidentialities } = info, confidentiality = [];
         for(let i = 0, total = confidentialities.length; i < total; i++) {
             confidentiality[i] = {
                 name: upperFirst( confidentialities[i].name ),
-                y: confidentialities[i].number
+                y: confidentialities[i].number_docs
             };
         }
         
@@ -393,23 +422,23 @@ var UserAssignment = React.createClass({
     },
     
     handleOnChangeSelectButton: function(checked, index) {
-        var { reviewers } = this.state.category, 
+        var { list } = this.state.reviewer, 
             { request } = this.state.datafilter,
-            indexReviewer = findIndex(request.reviewers, {id: reviewers[index].id }),
+            indexReviewer = findIndex(request.reviewers, {id: list[index].id }),
             
             updateRequest = update(this.state.datafilter, {
                 request: {
-                    reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [reviewers[index]] } : {$splice: [[indexReviewer, 1]]}
+                    reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [list[index]] } : {$splice: [[indexReviewer, 1]]}
                 }
             });
         this.setState({ datafilter: updateRequest });
     },
     handleOnChangeSelectAll: function(checked) {
-        var { reviewers } = this.state.category;
+        var { list } = this.state.reviewer;
 
         var updateRequest = update(this.state.datafilter, {
             request: {
-                reviewers: {$set: (checked == 'on') ? reviewers : [] }
+                reviewers: {$set: (checked == 'on') ? list : [] }
             }
         });
         this.setState({ datafilter: updateRequest });
@@ -432,26 +461,61 @@ var UserAssignment = React.createClass({
 
 
     getReviewers( params ) {
-        var { datafilter, category }  = this.state,
-        reviewers = [];
-        datafilter.params.id = category.current.id;
+        var { datafilter, category }  = this.state;
+            
+            datafilter.params.id = category.current.id;
 
-        makeRequest({
-            path: 'api/assign/reviewer/',
-            params: params ? params : datafilter.params,
-            success: (data) => {
-                reviewers = data;
-            }
-        });
+        var data = [
+                {
+                "number_hits": 20,
+                "first_name": "chris",
+                "last_name": "muffat",
+                "type": "last_modifier",
+                "id": 1
+                },
+                {
+                "number_hits": 15,
+                "first_name": "tony",
+                "last_name": "gomez",
+                "type": "last_modifier",
+                "id": 2
+                },
+                {
+                "number_hits": 10,
+                "first_name": "chris",
+                "last_name": "columbus",
+                "type": "last_modifier",
+                "id": 3
+                }
+            ];
 
-        return reviewers;
-
+        // makeRequest({
+        //     path: 'api/assign/reviewer/',
+        //     params: params ? params : datafilter.params,
+        //     success: (data) => {
+                let updateListReviewer = update(this.state.reviewer, {
+                    list: {
+                        $set: data
+                    },
+                    current: {
+                        $set: data[0]
+                    }
+                });
+                debugger
+                this.setState({ reviewer: updateListReviewer, dataChart: this.reviewerChart(data) });
+        //     }
+        // });
     },
     getCategoryList() {
 
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data[data.length] = {
+                    id: "summary",
+                    name: "Summary"
+                }
+
                 var updateData = update(this.state.category, {
                     list: {$set: data},
                     current: {$set: data[this.state.category.default] }
@@ -463,41 +527,263 @@ var UserAssignment = React.createClass({
     	
     },
     getCategoryInfo() {
-        var {current} = this.state.category, info = {};
+        var {current} = this.state.category;
 
-        makeRequest({
-            path: 'api/assign/category/',
-            params: { "id": current.id },
-            success: (data) => {
-                info = data;
-            }
-        });
+        var data = {
+                "percentage_doc": [
+                    {
+                    "percentage": 0.17,
+                    "number_docs": 10
+                    },
+                    {
+                    "percentage": 0.34,
+                    "number_docs": 20
+                    }
+                ],
+                "doc_percentage": [
+                    {
+                    "percentage": 0.17,
+                    "number_docs": 10
+                    },
+                    {
+                    "percentage": 0.34,
+                    "number_docs": 20
+                    }
+                ],
+                "number_docs": 168000,
+                "confidentialities": [
+                    {
+                    "name": "Banking Secrecy",
+                    "number_docs": 20,
+                    "percentage": 10
+                    },
+                    {
+                    "name": "Secret",
+                    "number_docs": 20,
+                    "percentage": 20
+                    },
+                    {
+                    "name": "Confidential",
+                    "number_docs": 20,
+                    "percentage": 30
+                    },
+                    {
+                    "name": "Internal",
+                    "number_docs": 20,
+                    "percentage": 20
+                    },
+                    {
+                    "name": "Public",
+                    "number_docs": 20,
+                    "percentage": 20
+                    }
+                ],
+                "documents_types": [
+                    {
+                    "name": "Banking Secrecy",
+                    "doctypes": [
+                        {
+                        "name": "Word",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Excel",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "PDF",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Power Point",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Others",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        }
+                    ]
+                    },
+                    {
+                    "name": "Secret",
+                    "doctypes": [
+                        {
+                        "name": "Word",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Excel",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "PDF",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Power Point",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Others",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        }
+                    ]
+                    },
+                    {
+                    "name": "Confidential",
+                    "doctypes": [
+                        {
+                        "name": "Word",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Excel",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "PDF",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Power Point",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Others",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        }
+                    ]
+                    },
+                    {
+                    "name": "Internal",
+                    "doctypes": [
+                        {
+                        "name": "Word",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Excel",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "PDF",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Power Point",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Others",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        }
+                    ]
+                    },
+                    {
+                    "name": "Public",
+                    "doctypes": [
+                        {
+                        "name": "Word",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Excel",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "PDF",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Power Point",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        },
+                        {
+                        "name": "Others",
+                        "number_docs": 20,
+                        "percentage_of_all_docs_in_this_doc_type": 10
+                        }
+                    ]
+                    }
+                ]
+            };
 
-        return info;
-    	
+        // makeRequest({
+        //     path: 'api/assign/category/',
+        //     params: { "id": current.id },
+        //     success: (res) => {
+                let updateCategoryInfo = update(this.state.category, {
+                    info: {
+                        $set: data
+                    }
+                });
+
+                let updateDataChart = update(this.state.dataChart, {
+                    confidentiality: {
+                        $set: this.confidentialityChart(data)
+                    },
+                    documentType: {
+                        $set: this.documentTypeChart(data)
+                    }
+                });
+
+                this.setState({ category: updateCategoryInfo, dataChart: updateDataChart });
+        //     }
+        // });
     },
     getSummary() {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/assign/summary/",
-            dataType: 'json',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                // var updateState = update(this.state, {
-                //     summary: {$set: data},
-                // });
-                // this.setState(updateState);
-                console.log("summary ok: ", data);
-            }.bind(this),
-            error: function(xhr,error) {
-                if(xhr.status === 401)
-                {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        makeRequest({
+            path: "api/assign/summary/",
+            success: (res) => {
+                debugger
+                this.setState({ summary: res });
+            }
         });
+        // $.ajax({
+        //     method: 'GET',
+        //     url: Constant.SERVER_API + "api/assign/summary/",
+        //     dataType: 'json',
+        //     beforeSend: function(xhr) {
+        //         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+        //     },
+        //     success: function(data) {
+        //         // var updateState = update(this.state, {
+        //         //     summary: {$set: data},
+        //         // });
+        //         // this.setState(updateState);
+        //         console.log("summary ok: ", data);
+        //     }.bind(this),
+        //     error: function(xhr,error) {
+        //         if(xhr.status === 401)
+        //         {
+        //             browserHistory.push('/Account/SignIn');
+        //         }
+        //     }.bind(this)
+        // });
     },
     render:template
 });

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <meta name="keywords" content="HTML5 Admin Template" />
+    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
+    <meta name="author" content="okler.net">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+        <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="assets/vendor/chartist/chartist.min.css" />
+    <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-toggle-master/css/bootstrap-toggle.min.css"/>
+    <link rel="stylesheet" href="assets/vendor/jqcloud/jqcloud.css"/>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    <link rel="stylesheet" href="assets/stylesheets/style-dathena.css">
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+
+  </head>
+  <body>
+
+    <!--my_header start-->
+    <div class="my_header">
+        <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header dropdown">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                    <a class="bell" id="bell" data-toggle="dropdown"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-noti has-arrow dd-md full-mobile">
+                        <div class="row">
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Notification</h4>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Today</h3>
+                                    <ul class="list-unstyled noti-list">
+                                        <li data-noti-type="waiting">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <p>You have 10 documents to review within the Accouting/ Tax category with Internal confidentiality by latest 10th May</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="noti-block">
+                                    <h3 class="noti-date">Yesterday</h3>
+                                    <ul class="list-unstyled noti-list">
+                                        <li data-noti-type="danger">
+                                            <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                            <p>You have 30 documents to review within the Client/ Customer category with Internal confidentiality by latest 16th May</p>
+                                        </li>
+                                        <li data-noti-type="success">
+                                            <i class="fa fa-check icon-success" aria-hidden="true"></i>
+                                            <p>You have completed the review of 30 documents in Accouting/ Tax category </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-noti">
+                                <h4>My Pending Actions: 7
+                                    <span class="ml-md mr-md"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="warning"></i> : 2</span>
+                                    <span class="mr-md"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="danger"></i> : 3</span>
+                                </h4>
+                                <span class="actions-percentage">Action completed on Time: 100%</span>
+                                <div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow dd-md full-mobile">
+                                        <p>Help content</p>
+                                    </div>
+                                </div>
+                                <ul class="list-unstyled noti-list">
+                                    <li data-noti-type="danger">
+                                        <i class="fa fa-clock-o icon-danger" aria-hidden="true"></i>
+                                        <p>You have 30 documents to review within the Client/ Customer category with Internal confidentiality by latest 16th May</p>
+                                    </li>
+                                    <li data-noti-type="warning">
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 25th June</p>
+                                    </li>
+                                    <li data-noti-type="waiting">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 25th May</p>
+                                    </li>
+                                    <li  data-noti-type="warning">
+                                        <i class="fa fa-clock-o icon-warning" aria-hidden="true"></i>
+                                        <p>You have 10 documents to review within the Accounting/ Tax category with Internal confidentiality by latest 16th May</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 text-center mt-md">
+                                <a href="#">See all Notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Dashboard</a></li>
+                        <li class="dropdown active"><span class="badge">1</span><a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                              <li><a href="#">Orphan Review</a></li>
+                              <li class="active"><a href="#">Group Review</a></li>
+                              <li><span class="badge">1</span><a href="#">User Assignment</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Insights <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                              <li><a href="99_2nd Line_Insight_IAM.html">Identity and Access Management</a></li>
+                              <li><a href="99_2nd Line_Insight_DRM.html">Data Risk Management</a></li>
+                              <li><a href="99_2nd Line_Insight_DLP.html">Data Lost Prevention</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#">Anomaly Detection</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+                
+                <div class="header-right">
+                    <div id="userbox" class="userbox">
+                        <a href="#" data-toggle="dropdown" aria-expanded="true">
+                            <figure class="profile-picture">
+                                <img src="assets/images/!logged-user.jpg" alt="Chris" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg">
+                            </figure>
+                            <div class="profile-info">
+                                <span class="name">Chris Muffat</span>
+                                <span class="role">administrator</span>
+                            </div>
+            
+                            <i class="fa custom-caret"></i>
+                        </a>
+            
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"></i> My Profile</a>
+                                </li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <div class="panel panel-error">
+            <div class="panel-body p-xlg">
+                <div class="row">
+                    <div class="col-sm-6 col-img">
+                        <img class="img-responsive" src="assets/images/error/400.png" alt="400 Bad Request">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="error-block">
+                            <span class="error-code">400</span>
+                            <span class="error-type">Bad Request Error</span>
+                        </div>
+                        <p class="error-text mt-md mb-lg">You've found yourself in a weird place.<br>Probably not the place you were looking for.</p>
+                        <div class="error-action">
+                            <a href="#" class="btn btn-md btn-green">Go Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <p class="text-center text-muted mt-md mb-md">Copyright © 2016 by Dathena Science</p>
+    </div>
+    
+
+    <!-- Vendor -->
+    <script src="assets/vendor/jquery/jquery.js"></script>
+    <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    
+    <script src="assets/vendor/flot/jquery.flot.js"></script>
+    <script src="assets/vendor/flot.tooltip/flot.tooltip.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="assets/vendor/chartist/chartist.min.js"></script>
+    <script src="assets/vendor/highcharts/js/highcharts.js"></script>
+        <script src="assets/vendor/highcharts/js/highcharts-more.js"></script>
+    <script src="assets/vendor/snap.svg/snap.svg.js"></script>
+    <script src="assets/vendor/liquid-meter/liquid.meter.js"></script>
+
+    <script src="assets/vendor/select2/js/select2.full.min.js"></script>
+    <script src="assets/vendor/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
+    <script src="assets/vendor/jqcloud/jqcloud-1.0.4.min.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="assets/javascripts/theme.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="assets/javascripts/theme.init.js"></script>
+
+    <script src="assets/javascripts/javascript.js"></script>
+        <script src="assets/javascripts/javascript.overview.js"></script>
+    <script src="assets/javascripts/javascript.todo.js"></script>
+    <script src="assets/javascripts/javascript.cluster.js"></script>
+    <script src="assets/javascripts/help_guide.js"></script>
+  </body>
+</html>

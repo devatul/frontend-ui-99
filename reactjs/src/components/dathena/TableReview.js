@@ -122,7 +122,7 @@ var Row3 = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row2 doc-path">{document.name}</span>
                     </OverlayTrigger>
                     <InfoButton>
                         <li>Name: <b>{document.name}</b></li>
@@ -131,45 +131,45 @@ var Row3 = React.createClass({
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
                         <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
-                        <li>Confidentiality Label: <b>{document.confidentiality_label}</b></li>
                         <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
                     </InfoButton>
                 </td>
                 <td className="vertical-top text-left">
                     <SelectBox
                         id="SelectCategory"
-                        className={'form-control challenge-category' + (changedCategory && ' changed')}
+                        className={'form-control challenge-category' + (document.previous_category && ' changed')}
                         data={categories}
                         value={findIndex(categories, document.current_category)} />
-                    { changedCategory &&
+
                         <span className="text-italic previous-status">
                             Previous: {document.previous_category && document.previous_category.name}
                         </span>
-                    }
                 </td>
                 <td className="vertical-top text-left">
                     <SelectBox
                         id="SelectConfidentiality"
-                        className={'form-control challenge-confidentiality' + (changedConfidentiality && ' changed')}
+                        className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
                         value={findIndex(confidentialities, document.current_confidentiality)} />
 
-                    { changedConfidentiality &&
                         <span className="text-italic previous-status">
                             Previous: {document.current_confidentiality && document.previous_confidentiality.name}
                         </span>
-                    }
                 </td>
                 <td className="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
                     {this.renderComment('The classification should be Confidential because. The classification should be Confidential because')}
-                    <a className="more" onClick={this.onClickMoreLess} style={{ display: 'initial', cursor: 'pointer' }}>
-                        { !this.state.showText &&
-                            <span className="more1">Show details</span>
-                        }
-                        { this.state.showText &&
-                            <span className="zoom-out" style={{ display: 'initial' }}>Show less</span>
-                        }
-                    </a>
+                    <span className="extra-block show-less-comment">
+                        <a className="details-toggle" onClick={this.onClickMoreLess} style={{ cursor: 'pointer' }}>
+                            <i className="fa fa-caret-right mr-xs"></i>
+                            { !this.state.showText &&
+                                <span>Show details</span>
+                            }
+                            { this.state.showText &&
+                                <span>Show less</span>
+                            }
+                        </a>
+                    </span>
+                    
                 </td>
                 <td>
                     <a style={{cursor: 'pointer'}}
@@ -235,7 +235,7 @@ var Row2 = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic fix-max-width file-name doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic fix-max-width-row2 file-name doc-path">{document.name}</span>
                     </OverlayTrigger>
                     <InfoButton>
                         <li>Name: <b>{document.name}</b></li>
@@ -244,37 +244,33 @@ var Row2 = React.createClass({
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
                         <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
-                        <li>Confidentiality Label: <b>{document.confidentiality_label}</b></li>
                         <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
                     </InfoButton>
                 </td>
                 <td className="vertical-top text-left">
                     <SelectBox
                         id="SelectCategory"
-                        className={'form-control challenge-category' + (changedCategory && ' changed')}
+                        className={'form-control challenge-category' + (document.previous_category && ' changed')}
                         data={categories}
                         value={findIndex(categories, document.current_category)} />
-                    { changedCategory &&
+
                         <span className="text-italic previous-status">
                             Previous: {document.previous_category && document.previous_category.name}
                         </span>
-                    }
                 </td>
                 <td className="vertical-top text-left">
                     <SelectBox
                         id="SelectConfidentiality"
-                        className={'form-control challenge-confidentiality' + (changedConfidentiality && ' changed')}
+                        className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
                         value={findIndex(confidentialities, document.current_confidentiality)} />
 
-                    { changedConfidentiality &&
                         <span className="text-italic previous-status">
                             Previous: {document.current_confidentiality && document.previous_confidentiality.name}
                         </span>
-                    }
                 </td>
                 <td className="fix-1st-pading-comment-table">
-                    <textarea id="CommentBox" className="form-control" placeholder="Challenge's rationale details">
+                    <textarea id="CommentBox" value={(document.comments ? document.comments : '')} className="form-control" placeholder="Challenge's rationale details">
                     </textarea>
                 </td>
                 <td>
@@ -340,6 +336,39 @@ var Row = React.createClass({
             this.props.onClick(event, this.props.index);
     },
 
+    renderColorConfidence(doc) {
+        let {
+            confidence_level,
+            group_avg_centroid_distance,
+            group_max_centroid_distance,
+            group_min_centroid_distance
+        } = doc;
+
+        if(doc != null) {
+            switch(true) {
+                case confidence_level < group_avg_centroid_distance:
+                    return "success";
+                case confidence_level > group_avg_centroid_distance && confidence_level < (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+                    return "warning"
+                case confidence_level > (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+                    return "danger"
+            }
+        }
+    },
+
+    renderStatus(status) {
+        let color = "";
+
+        switch(status) {
+            case "editing":
+                color = "#ffc200";
+            break;
+
+        }
+
+        return <i className="fa fa-check" style={{ color: color }} aria-hidden="true"></i>
+    },
+
     render() {
         let { document, numberChecked, noConfidence } = this.props;
         return (
@@ -357,7 +386,7 @@ var Row = React.createClass({
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width doc-path">{document.name}</span>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
                     </OverlayTrigger>
 
                     <InfoButton>
@@ -367,7 +396,6 @@ var Row = React.createClass({
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
                         <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
-                        <li>Confidentiality Label: <b>{document.confidentiality_label}</b></li>
                         <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
                     </InfoButton>
                 </td>
@@ -377,12 +405,12 @@ var Row = React.createClass({
                             <div className="selected-info">
                                 <ProgressBar className="progress-striped light">
                                     <ProgressBar
-                                        bsStyle="warning"
+                                        bsStyle={this.renderColorConfidence(document)}
                                         min={0}
                                         max={100}
-                                        now={50}
+                                        now={document.confidence_level}
                                         active
-                                        label={<span className="progress-percentage">(50%)</span>} />
+                                        label={<span className="progress-percentage">{'(' + document.confidence_level + '%)'}</span>} />
                                 </ProgressBar>
                             </div>
                         }
@@ -400,12 +428,12 @@ var Row = React.createClass({
                                 <div className="selected-info">
                                     <ProgressBar className="progress-striped light">
                                         <ProgressBar
-                                            bsStyle="warning"
+                                            bsStyle={this.renderColorConfidence(document)}
                                             min={0}
                                             max={100}
-                                            now={50}
+                                            now={document.confidence_level}
                                             active
-                                            label={<span className="progress-percentage">(50%)</span>} />
+                                            label={<span className="progress-percentage">{'(' + document.confidence_level + '%)'}</span>} />
                                     </ProgressBar>
                                 </div>
                             }
@@ -418,9 +446,9 @@ var Row = React.createClass({
                     </div>
                 </td>
                 <td>
-                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status == 'valid' ? 'validated' : '')}>
+                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status != 'reject' ? 'validated' : '')}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
-                        <i className="fa fa-check" aria-hidden="true"></i>
+                        {this.renderStatus(document.status)}
                     </a>
                 </td>
             </tr>

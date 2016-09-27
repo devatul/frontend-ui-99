@@ -422,7 +422,7 @@ var OrphanReview = React.createClass({
                 image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
                 legal_retention_until: "2012-04-23",
                 modification_date: "2012-04-23",
-                name: "IonaTechnologiesPlcG07.doc",
+                name: "IonaTechnologiesPlcG07-IonaTechnologiesPlcG07_122344354.doc",
                 number_of_classification_challenge: 1,
                 owner: "owner_name",
                 path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
@@ -482,6 +482,11 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data[6] = {
+                    id: 6,
+                    name: "Select"
+                };
+                debugger
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });

@@ -259,10 +259,78 @@ table.docPreview > thead > tr > th:nth-child(1) {
 
 /*Fix document name*/
 
-.table-my-actions span.file-name.fix-max-width {
-    max-width: 0px;
-    overflow: initial;
+.table-my-actions span.file-name.fix-max-width-row2 {
+    max-width: 180px;
+    margin-right: -35px;
 }
+
+.table-my-actions span.file-name.fix-max-width-row {
+    max-width: 250px;
+    margin-right: -110px;
+}
+
+/* height select2 filter */
+
+.dathena-select-dropdown.dropdown-select-filter .select2-results__options {
+    max-height: 250px !important;
+}
+
+.dathena-select-dropdown .select2-results__options .select2-results__option.select2-results__option--highlighted-a:before {
+    background-color: #4fca9d;
+}
+
+.dathena-select-dropdown .select2-results__options .select2-results__option.select2-results__option--highlighted {
+    background-color: rgba(15, 14, 14, 0.08) !important;
+}
+
+.dathena-select-dropdown .select2-results__options .select2-results__option.select2-results__option--highlighted {
+    background-color: rgba(15, 14, 14, 0.08) !important;
+}
+
+.dathena-select-dropdown.background-option-highlighted .select2-results__options .select2-results__option.select2-results__option--highlighted::before {
+    background-color: #D6D6D6 !important;
+}
+
+.dathena-select.select-user-review .select2-selection__rendered:before {
+    background-color: #D6D6D6 !important;
+}
+
+div#doctypeChartUserAssignment {
+    height: 250px;
+}
+
+.chart-pane.chart-user-assignment .chart-legend li {
+    margin-right: 10px !important;
+}
+
+select.assigment-select.form-control {
+    margin-right: 5px;
+}
+
+.user-assign-valid-btn .validation-btn:hover,
+.user-assign-valid-btn .validation-btn:hover .fa {
+    color: #0D9FD6 !important;
+}
+
+/* design show less comment */
+
+.extra-block.show-less-comment .details-toggle {
+    float: right;
+    border-top: none;
+    margin-bottom: -7px;
+    padding: 6px 0px 0px 0;
+}
+
+/* info button new design */
+
+.dropdown-menu.info-scan .help-info-button {
+    float: left;
+}
+
+.dropdown-menu.info-scan .general-table > tbody > tr > td.text-right {
+    text-align: right;
+}
+
 .tab-content.br-radius {
     border-radius: 5px;
 }

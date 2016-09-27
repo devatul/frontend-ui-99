@@ -267,38 +267,8 @@
 				<div class="help_guide_sub tab-content">
 					<div id="accounting_tax" class="help_guide tab-pane active">
 						<div class="row">
-              <div class="col-md-3">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">Sample Parameters</h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body sample-params">
-                    <div class="form-group">
-                      <label class="">As % of overall Accounting/ Tax Category</label>
-                      <select name="state" class="form-control ddList">
-                        <option class="lt" value="">0.01% (17 Documents)</option>
-                        <option class="lt" value="">0.02% (34 Documents)</option>
-                      </select>
-                      <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
-                    </div>
-                    <div class="or-divider"><span>OR</span></div>
-                    <div class="form-group">
-                      <label class="">Fixed Number of Documents</label>
-                      <select name="state" class="form-control ddList">
-                        <option class="lt" value="">10 Documents (0.17%)</option>
-                        <option class="lt" value="">20 Documents (0.34%)</option>
-                      </select>
-                      <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
-                    </div>
-                  </div>
-                </section>
-              </div>    
-
-              <div class="col-md-9">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+              <div class="col-md-12">
+                <section class="panel panel-featured panel-has-child panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
                       <h2 class="panel-title">Document Category Information</h2>
                       <div class="panel-actions">
@@ -308,15 +278,67 @@
                   </header>
                   <div class="panel-body tab-content tab-pane">
                     <div class="row">
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Confidentiality Overview</h4>
-                        <!-- <div id="confidentialityOverviewChart" class="document-chart"></div> -->
-                        <div id="confidentialityChartLegend"></div>
-                        <div id="confidentialityChart"></div>
+                      <div class="col-md-7">
+                        <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+                          <header class="panel-heading">
+                              <h2 class="panel-title">
+                                Sample Parameters
+                                <div class="inline-block-item dropdown dropdown-help">
+                                    <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="dropdown-menu has-arrow full-mobile">
+                                        <p>This will determine the size of the document sample, which will generate the list of documents to be reviewed</p>
+                                    </div>
+                                </div>
+                              </h2>
+                              <div class="panel-actions">
+                                  <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                              </div>
+                          </header>
+                          <div class="panel-body sample-params clearfix">
+                            <div class="form-group left">
+                              <label class="">Fixed Number of Documents</label>
+                              <select name="state" class="form-control ddList">
+                                <option class="lt" value="">10 Documents (0.17%)</option>
+                                <option class="lt" value="">20 Documents (0.34%)</option>
+                              </select>
+                              <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                            </div>
+                            <div class="or-divider"><span>OR</span></div>
+                            <div class="form-group right">
+                              <label class="">As % of overall Accounting/ Tax Category</label>
+                              <select name="state" class="form-control ddList">
+                                <option class="lt" value="">0.01% (17 Documents)</option>
+                                <option class="lt" value="">0.02% (34 Documents)</option>
+                              </select>
+                              <a href="#" class="validation-btn btn btn-default"><i class="fa fa-check"></i></a>
+                            </div>
+                          </div>
+                        </section>
+                        <div class="">
+                          <h4 class="chart-title">
+                            Document Type per Confidentiality Level
+                            <div class="inline-block-item dropdown dropdown-help">
+                                <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu has-arrow full-mobile">
+                                    <p>Summary of the Confidentiality ratings assigned to each document type for the document within the Accounting/Tax category</p>
+                                </div>
+                            </div>
+                          </h4>
+                          <div id="confidentialityLevelChartHorizon" style="height:250px"></div>
+                        </div>
                       </div>
-                      <div class="col-sm-6">
-                        <h4 class="chart-title">Document Type per Confidentiality Level</h4>
-                        <div id="confidentialityLevelChart"></div>
+                      <div class="col-sm-5">
+                        <h4 class="chart-title">
+                          Confidentiality
+                          <div class="inline-block-item dropdown dropdown-help">
+                              <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                              <div class="dropdown-menu has-arrow full-mobile">
+                                  <p>Distributions in term of confidentiality ratings assigned to all the documents within the Accounting/Tax category</p>
+                              </div>
+                          </div>
+                        </h4>
+                        <!-- <div id="confidentialityOverviewChart" class="document-chart"></div> -->
+                        <div id="confidentialityChart" class="legend-under"></div>
                       </div>
                     </div>
                   </div>
@@ -327,7 +349,14 @@
               <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
                   <header class="panel-heading">
-                      <h2 class="panel-title">User Selection</h2>
+                      <h2 class="panel-title">User Selection - Key Contributor for Accounting/ Tax Documents
+                        <div class="inline-block-item dropdown dropdown-help">
+                            <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                <p>You have to chose the user assigned to review the sample of document in the Accounting/Tax category.Most active users creating or modifying Accounting/Tax document</p>
+                            </div>
+                        </div>
+                      </h2>
                       <div class="panel-actions">
                           <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                       </div>
@@ -343,34 +372,52 @@
                                     <li class="dropdown">
                                         <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                         <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                        <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 560px;">
-                                            <ul class="filter-list list-unstyled pt-xs">
+                                        <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 620px;">
+                                            <ul class="filter-list list-unstyled pt-xs filter-list-with-help">
                                                 <li>
-                                                  <select name="timeframe" class="assignent-select form-control ddList">
+                                                  <select name="timeframe" class="assigment-select form-control ddList inline-block-item">
                                                     <option selected disabled value="">Timeframe</option>
                                                     <option class="lt" value="">1 Year</option>
                                                     <option class="lt" value="">6 Months</option>
                                                     <option class="lt" value="">3 Months</option>
                                                     <option class="lt" value="">1 Months</option>
                                                   </select>
+                                                  <div class="inline-block-item dropdown dropdown-help">
+                                                      <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                      <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                                          <p>This will filter the list of in scope documents based on the selected timeframe.</p>
+                                                      </div>
+                                                  </div>
                                                 </li>
                                                 <li>
-                                                  <select name="usersnum" class="assignent-select form-control ddList">
+                                                  <select name="usersnum" class="assigment-select form-control ddList inline-block-item">
                                                     <option selected disabled value="">Number of Users</option>
-                                                    <option class="lt" value="">Top 30</option>
+                                                    <option class="lt" value="" selected="">Top 30</option>
                                                     <option class="lt" value="">Top 2</option>
                                                     <option class="lt" value="">Top 20</option>
                                                     <option class="lt" value="">Top 15</option>
                                                     <option class="lt" value="">Top 10</option>
                                                     <option class="lt" value="">Top 5</option>
                                                   </select>
+                                                  <div class="inline-block-item dropdown dropdown-help">
+                                                      <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                      <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                                          <p>Number of users that are displayed as suggested reviewers, ranked by activity.</p>
+                                                      </div>
+                                                  </div>
                                                 </li>
                                                 <li>
-                                                  <select name="reviewertype" class="assignent-select form-control ddList">
+                                                  <select name="reviewertype" class="assigment-select form-control ddList inline-block-item">
                                                     <option selected disabled value="">Type of Reviewer</option>
                                                     <option class="lt" value="">Document Last Modified</option>
                                                     <option class="lt" value="">Document Creator</option>
                                                   </select>
+                                                  <div class="inline-block-item dropdown dropdown-help">
+                                                      <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                                      <div class="dropdown-menu has-arrow dd-sm full-mobile">
+                                                          <p>Filter the list of document users, based on who created the document or who last modified the document.</p>
+                                                      </div>
+                                                  </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -379,6 +426,10 @@
 
                                 <div class="filter-tags-block pull-left">
                                     <div class="pull-left filter-tags">
+                                      <span class="filter-label label label-info" data-value="Top 30" data-crit="usersnum"><a class="filter-remove"><i class="fa fa-times"></i></a><span class="option-name">Top 30</span></span>
+                                    </div>
+                                    <div class="pull-left filter-tags-clear">
+                                      <span class="filter-label filter-clear label label-info">Clear all</span>
                                     </div>
                                 </div>
 
@@ -386,7 +437,14 @@
                               <div id="userReviewChart"></div>
                             </div>
                             <div class="col-xs-3 select-reviewers">
-                              <h4 style="margin-bottom:5px">Select the Reviewer(s)</h4>
+                              <h4 style="margin-bottom:5px">Select the Reviewer(s)
+                                <div class="inline-block-item dropdown dropdown-help">
+                                  <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                  <div class="dropdown-menu has-arrow full-mobile">
+                                      <p>Users who are selected will have to review the sample of document in Accounting/Tax category</p>
+                                  </div>
+                                </div>
+                              </h4>
                               <div class="switch switch-sm switch-success">
                                 <span class="switch-label">Select All</span>
                                 <div class="ios-switch off select-all">
@@ -396,6 +454,256 @@
                                 </div>
                                 <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
                                 
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">todd.smith</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">tony.gomes</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">stan.siow</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">matt.nixon</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">chris.muffat</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">todd.smith</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">tony.gomes</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">stan.siow</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">matt.nixon</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">chris.muffat</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">todd.smith</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">tony.gomes</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">stan.siow</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">matt.nixon</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">chris.muffat</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">todd.smith</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">tony.gomes</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">stan.siow</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">matt.nixon</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">chris.muffat</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">todd.smith</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">tony.gomes</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">stan.siow</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">matt.nixon</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="switch switch-sm switch-success">
+                                <span class="switch-label">chris.muffat</span>
+                                <div class="ios-switch off">
+                                  <div class="on-background background-fill"></div><div class="state-background background-fill">
+                                  </div>
+                                  <div class="handle"></div>
+                                </div>
+                                  <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
                               </div>
                               <div class="clearfix"></div>
                               <div class="switch switch-sm switch-success">
