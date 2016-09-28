@@ -174,7 +174,7 @@ var StackedChart = React.createClass({
             <section className="panel">
                 <div className="panel-body widget-panel">
                     <h4 className="widget-title">{title + ' '}
-                        <HelpButton classNote="overview_timeframe fix-overview-help-button"
+                        <HelpButton classMenu="overview_timeframe fix-overview-help-button"
                                     setValue="A summarised view of each category and document language type for all the documents scanned." />
                     </h4>
                     <div className="widget-chart chart-stacked">

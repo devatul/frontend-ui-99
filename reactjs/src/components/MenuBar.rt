@@ -10,7 +10,14 @@
         <div class="col-md-12 mb-md">
             <div class="row">
                 <div class="col-sm-8">
-                    <p class="page-heading-sm">{this.props.title}</p>
+                    <div class="page-heading-sm title-heading">{this.props.title}
+                        <HelpButton
+                            rt-if="this.props.help"
+                            class="help-info-button"
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="review_question_a help_question_a"
+                            setValue="{this.props.help}"/>
+                    </div>
                     <div class="filter-tags-block">
                         <label rt-if="this.state.labels.length > 0" class="pull-left mr-md">Filters:</label>
                         <div rt-scope="this.state.labels as listLabel" class="pull-left filter-tags" style="text-transform: capitalize">
@@ -45,7 +52,7 @@
                                                     <option
                                                         value="all"
                                                         key="selectall">
-                                                        Select All
+                                                        Clear All
                                                     </option>
                                                     <option
                                                         rt-repeat="confidentiality in this.state.confidentialities"
@@ -84,7 +91,7 @@
                                                     <option
                                                         value="all"
                                                         key="selectall">
-                                                        Select All
+                                                        Clear All
                                                     </option>
                                                     <option
                                                         rt-repeat="category in this.state.categories"
@@ -122,7 +129,7 @@
                                                     <option
                                                         value="all"
                                                         key="selectall">
-                                                        Select All
+                                                        Clear All
                                                     </option>
                                                     <option
                                                         rt-repeat="language in this.state.languages"
@@ -160,7 +167,7 @@
                                                     <option
                                                         value="all"
                                                         key="selectall">
-                                                        Select All
+                                                        Clear All
                                                     </option>
                                                     <option
                                                         rt-repeat="doctype in this.state['doc-types']"
@@ -191,6 +198,7 @@
                                             <td class="text-left">Last Data Scan:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Time of the last data scan by Dathena 99." />
                                             </td>
@@ -200,6 +208,7 @@
                                             <td>Country in Scope:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Country(s) in scope for the last scan." />
                                             </td>
@@ -209,6 +218,7 @@
                                             <td>Business in Scope:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Business unit(s) in scope for the last scan." />
                                             </td>
@@ -218,6 +228,7 @@
                                             <td>Scan Status:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Details whether the scan was successful or not." />
                                             </td>
@@ -227,6 +238,7 @@
                                             <td>Documents Analyzed:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="The total number of documents that were detected by 99 during the scan process." />
                                             </td>
@@ -236,6 +248,7 @@
                                         <td>File Extension Processed:
                                             <HelpButton
                                                 class="help-info-button"
+                                                classMenu="fix-overview-help-button-table"
                                                 classIcon="review_question_a help_question_a"
                                                 setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
                                         </td>
@@ -245,6 +258,7 @@
                                             <td>Duplicate Documents:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Two or more files with identical content and file names." />
                                             </td>
@@ -254,6 +268,7 @@
                                         <td>Twins Documents:
                                             <HelpButton
                                                 class="help-info-button"
+                                                classMenu="fix-overview-help-button-table"
                                                 classIcon="review_question_a help_question_a"
                                                 setValue="Two or more files with identical content, but with different file names." />
                                         </td>
@@ -264,6 +279,7 @@
                                             <td>Encrypted Documents or Archives:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
                                             </td>
@@ -273,6 +289,7 @@
                                             <td>Documents Skipped:
                                                 <HelpButton
                                                     class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table"
                                                     classIcon="review_question_a help_question_a"
                                                     setValue="Documents in the data repository that have not been scanned by Dathena 99." />
                                             </td>

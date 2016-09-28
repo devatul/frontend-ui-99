@@ -29,7 +29,7 @@ var UserAssignment = React.createClass({
                 current: {}
             },
             buttonSample: {
-                category: '',
+                category: 'success',
                 fixedNumber: ''
             },
             datafilter: {
@@ -42,7 +42,7 @@ var UserAssignment = React.createClass({
                 request: {
                     id: 0,
                     name:"name category",
-                    docs_sampled: 0,
+                    docs_sampled: 10,
                     reviewers:[]
                 },
                 usersNumber: [
@@ -73,10 +73,7 @@ var UserAssignment = React.createClass({
                 },
                 filterLabel: []
             },
-            summary: {
-                id: 'summary',
-                data: []
-            },
+            summary: [],
             dataChart: {
                 reviewerChart: {
                     config: {
@@ -92,13 +89,14 @@ var UserAssignment = React.createClass({
                     series: []
                 },
                 confidentiality: []
-            }
+            },
+            shouldUpdate: false
         };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
         var { category, datafilter, dataChart, buttonSample } = this.state;
-        return !isEqual(category, nextState.category)
+        return nextState.shouldUpdate || !isEqual(category, nextState.category)
         || !isEqual( datafilter, nextState.datafilter )
         || !isEqual( dataChart, nextState.dataChart )
         || !isEqual( buttonSample, nextState.buttonSample );
@@ -111,41 +109,22 @@ var UserAssignment = React.createClass({
     },
 
     componentDidUpdate(prevProps, prevState) {
-        var { category } = this.state;
+        var { category, datafilter } = this.state;
 
-
+        if(this.state.shouldUpdate) {
+            this.setState({ shouldUpdate: false });
+        }
     	
         if(category.current != prevState.category.current) {
             if(category.current.id === "summary") {
                 this.getSummary();
             } else {
-                this.getReviewers();
-
-                setTimeout(this.getCategoryInfo, 10);
+                this.getCategoryInfo();
             }
 
-            //this.getCategoryInfo();
-
-            // var info = this.getCategoryInfo(),
-
-            //     reviewers = this.getReviewers(),
-
-            //     updateData = update(this.state.category, {
-            //         info: { $set: info },
-            //         reviewers: { $set: reviewers }
-            //     }),
-                
-            //     updateChart = update(this.state.dataChart, {
-            //         documentType: { $set: this.documentTypeChart(info) },
-            //         confidentiality: { $set: this.categoryInfoChart(info) }
-            //     });
-
-            // this.setState({ category: updateData, dataChart: updateChart });
-
         }
-        debugger
-        if(this.state.reviewer.current != prevState.reviewer.current) {
-            //this.getCategoryInfo();
+        if(!isEqual(datafilter.params, prevState.datafilter.params)) {
+            this.getReviewers();
         }
         
     },
@@ -178,7 +157,9 @@ var UserAssignment = React.createClass({
                 });
             }
         var updateData = update(this.state.datafilter, {
-                params: {$set: params },
+                params: {
+                    $set: params
+                },
                 
                 setValue: {
                     [field.id]: {$set: field.value }
@@ -186,12 +167,8 @@ var UserAssignment = React.createClass({
                 filterLabel: {
                     [indexLabel]: {$set: label}
                 }
-            }),
-            
-            updateReviewer = update(this.state.category, {
-                reviewers: { $set: this.getReviewers( params ) }
             });
-        this.setState({ datafilter: updateData, category: updateReviewer });
+        this.setState({ datafilter: updateData, shouldUpdate: true });
     },
     handleClickFilterLabel: function(label, index) {
         var { selectId } = this.static,
@@ -215,20 +192,17 @@ var UserAssignment = React.createClass({
                 });
             }
         var updateData = update(this.state.datafilter, {
-                params: {$set: params },
+                params: {
+                    $set: params
+                },
 
                 setValue: {
                     [label.id]: {$set: 0 }
                 },
                 filterLabel: {$splice: [[indexLabel, 1]]}
-            }),
-
-            updateReviewer = update(this.state.category, {
-
-                reviewers: { $set: this.getReviewers(params) }
-
             });
-        this.setState({ datafilter: updateData, category: updateReviewer });
+
+        this.setState({ datafilter: updateData, shouldUpdate: true });
     },
     handleOnClickValidationButton: function(id) {
         var set = (id == 'category') ? 'fixedNumber' : 'category',
@@ -268,13 +242,14 @@ var UserAssignment = React.createClass({
         var { current, info, list } = this.state.category;
         var indexCurrent = findIndex(list, { id: current.id, name: current.name });
         var { request } = this.state.datafilter;
-
+        debugger
         if(request.reviewers.length > 0) {
-
+            console.log('request', request)
             makeRequest({
-                path: "/api/assign/reviewer/",
+                sync: false,
+                path: "api/assign/reviewer/",
                 method: "POST",
-                params: request,
+                params: JSON.stringify(request),
                 success: (res) => {
                     console.log('assign done');
                 }
@@ -296,17 +271,13 @@ var UserAssignment = React.createClass({
                     //     users: { $set: 0 },
                     //     type: { $set: 0 }
                     // },
-                    // params: {
-                        
-                    //     $set: {
-                    //         id: current.id,
-                    //         timeframe: 6,
-                    //         users: 10,
-                    //         type: 'last_modifier'
-                    //     }
-                    // }
+                    params: {
+                        id: {
+                            $set: list[indexCurrent + 1].id,
+                        }
+                    }
                 });
-                this.setState({ category: setCurrent, datafilter: setReviewer });
+                this.setState({ category: setCurrent, datafilter: setReviewer, shouldUpdate: true });
             }
 
         }
@@ -334,12 +305,14 @@ var UserAssignment = React.createClass({
 
             updateReviewer = update(this.state.category, {
 
-                reviewers: { $set: this.getReviewers({
+                reviewers: {
+                    $set: this.getReviewers({
                         id: current.id,
                         timeframe: 6,
                         users: 10,
                         type: 'last_modifier'
-                    }) }
+                    })
+                }
 
             });
             debugger
@@ -348,21 +321,39 @@ var UserAssignment = React.createClass({
 
     setCategoryCurrent: function(categoryIndex) {
         var category = this.state.category.list[categoryIndex];
+
         var setCategory = update(this.state.category, {
             current: { $set: category }
         });
+
         var datafilter = update(this.state.datafilter, {
             request: {
-                reviewers: { $set: [] }
+                id: {
+                    $set: category.id
+                },
+                name: {
+                    $set: category.name
+                },
+                reviewers: {
+                    $set: []
+                }
             },
+
             filterLabel: { $set: [] },
+
             setValue: {
                 timeframe: { $set: 0 },
                 users: { $set: 0 },
                 type: { $set: 0 }
+            },
+            params: {
+                id: {
+                    $set: category.id
+                }
             }
         });
-        this.setState({ category: setCategory, datafilter: datafilter });
+        debugger
+        this.setState({ category: setCategory, datafilter: datafilter, shouldUpdate: true });
     },
 
     reviewerChart(list) {
@@ -431,11 +422,12 @@ var UserAssignment = React.createClass({
                     reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [list[index]] } : {$splice: [[indexReviewer, 1]]}
                 }
             });
+            debugger
         this.setState({ datafilter: updateRequest });
     },
     handleOnChangeSelectAll: function(checked) {
         var { list } = this.state.reviewer;
-
+        debugger
         var updateRequest = update(this.state.datafilter, {
             request: {
                 reviewers: {$set: (checked == 'on') ? list : [] }
@@ -462,37 +454,36 @@ var UserAssignment = React.createClass({
 
     getReviewers( params ) {
         var { datafilter, category }  = this.state;
-            
-            datafilter.params.id = category.current.id;
 
-        var data = [
-                {
-                "number_hits": 20,
-                "first_name": "chris",
-                "last_name": "muffat",
-                "type": "last_modifier",
-                "id": 1
-                },
-                {
-                "number_hits": 15,
-                "first_name": "tony",
-                "last_name": "gomez",
-                "type": "last_modifier",
-                "id": 2
-                },
-                {
-                "number_hits": 10,
-                "first_name": "chris",
-                "last_name": "columbus",
-                "type": "last_modifier",
-                "id": 3
-                }
-            ];
+        // var data = [
+        //     {
+        //     "number_hits": 20,
+        //     "first_name": "chris",
+        //     "last_name": "muffat",
+        //     "type": "last_modifier",
+        //     "id": 1
+        //     },
+        //     {
+        //     "number_hits": 15,
+        //     "first_name": "tony",
+        //     "last_name": "gomez",
+        //     "type": "last_modifier",
+        //     "id": 2
+        //     },
+        //     {
+        //     "number_hits": 10,
+        //     "first_name": "chris",
+        //     "last_name": "columbus",
+        //     "type": "last_modifier",
+        //     "id": 3
+        //     }
+        // ];
 
-        // makeRequest({
-        //     path: 'api/assign/reviewer/',
-        //     params: params ? params : datafilter.params,
-        //     success: (data) => {
+        makeRequest({
+            path: 'api/assign/reviewer/',
+            params: datafilter.params,
+            success: (data) => {
+                debugger
                 let updateListReviewer = update(this.state.reviewer, {
                     list: {
                         $set: data
@@ -502,9 +493,9 @@ var UserAssignment = React.createClass({
                     }
                 });
                 debugger
-                this.setState({ reviewer: updateListReviewer, dataChart: this.reviewerChart(data) });
-        //     }
-        // });
+                this.setState({ reviewer: updateListReviewer, shouldUpdate: true, dataChart: this.reviewerChart(data) });
+            }
+        });
     },
     getCategoryList() {
 
@@ -521,7 +512,23 @@ var UserAssignment = React.createClass({
                     current: {$set: data[this.state.category.default] }
                 });
 
-               	this.setState({ category: updateData });
+                var updateParam = update(this.state.datafilter, {
+                    params: {
+                        id: {
+                            $set: data[this.state.category.default].id,
+                        }
+                    },
+                    request: {
+                        id: {
+                            $set: data[this.state.category.default].id,
+                        },
+                        name: {
+                            $set: data[this.state.category.default].name
+                        }
+                    }
+                });
+
+               	this.setState({ category: updateData, datafilter: updateParam, shouldUpdate: true });
             }
         });
     	
@@ -529,7 +536,7 @@ var UserAssignment = React.createClass({
     getCategoryInfo() {
         var {current} = this.state.category;
 
-        var data = {
+        var res = {
                 "percentage_doc": [
                     {
                     "percentage": 0.17,
@@ -736,55 +743,92 @@ var UserAssignment = React.createClass({
         //     path: 'api/assign/category/',
         //     params: { "id": current.id },
         //     success: (res) => {
+                debugger
                 let updateCategoryInfo = update(this.state.category, {
                     info: {
-                        $set: data
+                        $set: res
                     }
                 });
 
                 let updateDataChart = update(this.state.dataChart, {
                     confidentiality: {
-                        $set: this.confidentialityChart(data)
+                        $set: this.confidentialityChart(res)
                     },
                     documentType: {
-                        $set: this.documentTypeChart(data)
+                        $set: this.documentTypeChart(res)
                     }
                 });
 
-                this.setState({ category: updateCategoryInfo, dataChart: updateDataChart });
+                this.setState({ category: updateCategoryInfo, dataChart: updateDataChart, shouldUpdate: true });
         //     }
         // });
     },
     getSummary() {
+        // let data = [{"id":1,
+        //         "name":"Accounting/Tax",
+        //         "docs_sampled" : 20,
+        //         "total_number_document_classified": 10000,
+        //         "reviewers": [
+        //         {"id":1,
+        //         "first_name":"chris",
+        //         "last_name":"muffat",
+        //         "number_docs":10},
+        //         {"id":2,
+        //         "first_name":"matt",
+        //         "last_name":"nixon",
+        //         "number_docs":9},
+        //         {"id":3,
+        //         "first_name":"tony",
+        //         "last_name":"gomez",
+        //         "number_docs":7}
+        //         ]},
+        //         {"id":2,
+        //         "name":"Corporate Entity",
+        //         "docs_sampled" : 20,
+        //         "total_number_document_classified": 10000,
+        //         "reviewers": [
+        //         {"id":1,
+        //         "first_name":"chris",
+        //         "last_name":"muffat",
+        //         "number_docs":10},
+        //         {"id":2,
+        //         "first_name":"matt",
+        //         "last_name":"nixon",
+        //         "number_docs":9},
+        //         {"id":3,
+        //         "first_name":"tony",
+        //         "last_name":"gomez",
+        //         "number_docs":7}
+        //         ]}];
         makeRequest({
             path: "api/assign/summary/",
             success: (res) => {
                 debugger
-                this.setState({ summary: res });
+                this.setState({ summary: res, shouldUpdate: true });
             }
         });
-        // $.ajax({
-        //     method: 'GET',
-        //     url: Constant.SERVER_API + "api/assign/summary/",
-        //     dataType: 'json',
-        //     beforeSend: function(xhr) {
-        //         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-        //     },
-        //     success: function(data) {
-        //         // var updateState = update(this.state, {
-        //         //     summary: {$set: data},
-        //         // });
-        //         // this.setState(updateState);
-        //         console.log("summary ok: ", data);
-        //     }.bind(this),
-        //     error: function(xhr,error) {
-        //         if(xhr.status === 401)
-        //         {
-        //             browserHistory.push('/Account/SignIn');
-        //         }
-        //     }.bind(this)
-        // });
     },
+
+    confirmNotify() {
+        let { summary } = this.state,
+            bodyRequest = [];
+
+        for(let i = summary.length - 1; i >= 0; i--) {
+            bodyRequest[i] = {
+                id: summary[i].id,
+                name: summary[i].name
+            }
+        }
+        makeRequest({
+            method: "POST",
+            path: "api/assign/notify/",
+            params: JSON.stringify(bodyRequest),
+            success: (res) => {
+                debugger
+            }
+        });
+    },
+
     render:template
 });
 

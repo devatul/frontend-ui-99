@@ -2,13 +2,11 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Dropdown from '../bootstrap/Dropdown'
 import _ from 'lodash'
 
 var HelpButton = React.createClass({
     displayName: 'selectButton',
-    mixins: [PureRenderMixin],
 
     getInitialState: function() {
         return {
@@ -46,6 +44,7 @@ var HelpButton = React.createClass({
         var dropdownMenu = this.refs.dropdownMenu
         var eOffset = $(dropdown).offset();
         $(dropdown).append($(dropdownMenu).detach());
+
         $(dropdownMenu).css({
                 'display': 'none',
                 'top': eOffset.top + $(dropdown).outerHeight(),
@@ -81,9 +80,8 @@ var HelpButton = React.createClass({
             //debugger
         return(
 
-            <div ref="dropdown" className={className + ' inline-block-item dropdown ' + setOpen }
-                onMouseOver={this.handleOnMouseOver} onMouseOut={this.handleOnMouseOut}>
-                <a className={classIcon ? classIcon : 'review_question_a help_question_a'} aria-expanded={this.state.expanded}>
+            <div ref="dropdown" className={className + ' inline-block-item dropdown ' + setOpen }>
+                <a onMouseOver={this.handleOnMouseOver} onMouseOut={this.handleOnMouseOut} className={classIcon ? classIcon : 'review_question_a help_question_a'} aria-expanded={this.state.expanded}>
                     <i className="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
                 <div ref="dropdownMenu" className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>

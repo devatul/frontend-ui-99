@@ -33,12 +33,22 @@ var ValidationButton = React.createClass({
         id: PropTypes.string
     },
 
-    componentDidUpdate: function(prevProps, prevState) {
-        if(this.props.status != prevProps.status) {
-            var status = this.static.status[this.props.status];
+    componentWillReceiveProps(nextProps) {
+        debugger
+        if(nextProps.status) {
+            var status = this.static.status[nextProps.status];
+            debugger
             this.setState({ statusClass: status.className });
         }
     },
+    
+
+    // componentDidUpdate: function(prevProps, prevState) {
+    //     if(this.props.status != prevProps.status) {
+    //         var status = this.static.status[this.props.status];
+    //         this.setState({ statusClass: status.className });
+    //     }
+    // },
     
     handleOnClick: function() {
         this.props.onClick &&

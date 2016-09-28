@@ -38,7 +38,8 @@
                             <h4 class="widget-title">Duplicates / Twins 
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates :  Two or more files with identical content and file names. Twins : Two or more files with identical content, but with different file names." />
+                                    setValue="Duplicates:  Two or more files with identical content and file names.
+                                            Twins : Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -137,11 +138,15 @@
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Reviewed Documents
-                                                    <HelpButton setValue="Percentage of documents reviewed for each level of confidentiality." />
+                                                    <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
+                                                        setValue="Percentage of documents reviewed for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Validated Documents
-                                                    <HelpButton setValue="Percentage of documents validated and classify for each level of confidentiality." />
+                                                    <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
+                                                        setValue="Percentage of documents validated and classify for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
@@ -179,7 +184,7 @@
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
-                            <h2 class="panel-title">Categorisation Summary</h2>
+                            <h2 class="panel-title">Accuracy of Dathena 99 document classification expressed as a percentage</h2>
                             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                                 <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
                             </div>
@@ -198,11 +203,13 @@
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Reviewed Documents
                                                     <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
                                                         setValue="Percentage of documents reviewed for each category" />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Validated Documents
                                                     <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
                                                         setValue="Percentage of documents validated and classified for each category." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"

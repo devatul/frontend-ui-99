@@ -1,5 +1,5 @@
  <rt-import name="MenuBar" from="../components/MenuBar"/>
  <div>
- <MenuBar title="Document Categorisation and Classification Review" showInfo={true} showFilter={false}></MenuBar>
+ <MenuBar title="Document Categorisation and Classification Review" help="This summarises all the documents challenged. Users must review each challenge to accept or reject it." showInfo={true} showFilter={false}></MenuBar>
 	{this.props.children}
 </div>

@@ -277,8 +277,7 @@
                               <h4 style="margin-bottom:5px">Select the Reviewer(s)
                                 <HelpButton
                                   classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                  setValue="Users who are selected will have to review the sample of document in
-                                  {this.state.category.current.name}" />
+                                  setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name} category." />
                                 <!--<div class="inline-block-item dropdown dropdown-help">
                                   <a data-toggle="dropdown" class="overview_question_a" aria-expanded="false"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                   <div class="dropdown-menu has-arrow full-mobile">
@@ -295,7 +294,7 @@
                                     rt-repeat="review in this.state.reviewer.list"
                                     key="{'select_' + reviewIndex}"
                                     title="{ review.first_name + '.' + review.last_name }"
-                                    setSelected="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
+                                    setSelected="{_.findIndex(this.state.datafilter.request.reviewers, { id: review.id, first_name: review.first_name, last_name: review.last_name }) == -1 ? 'off' : 'on'}"
                                     onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
                             </div>
                           </div>
@@ -474,7 +473,7 @@
                                 <h4 class="chart-title" style="margin-bottom:3px">Select the Reviewer(s)
                                   <HelpButton
                                     classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                    setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name}" />
+                                    setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name} category." />
                                 </h4>
                                 <SelectButton
                                     key="{'select_all'}"
@@ -482,7 +481,7 @@
                                     setSelected="{this.state.datafilter.request.reviewers.length >= this.state.category.reviewers.length ? 'on' : 'off'}"
                                     onChange="(e)=>this.handleOnChangeSelectAll(e)" />
                                 <SelectButton
-                                    rt-repeat="review in this.state.category.reviewers"
+                                    rt-repeat="review in this.state.reviewer.list"
                                     key="{'select_' + reviewIndex}"
                                     title="{ review.first_name + '.' + review.last_name }"
                                     setSelected="{_.findIndex(this.state.datafilter.request.reviewers, {id: review.id}) == -1 ? 'off' : 'on'}"
@@ -505,7 +504,7 @@
             </div>-->
           <!--</div>-->
           <div id="summary" class="tab-pane {this.state.category.current.id == 'summary' ? 'active' : ''}">
-            <section rt-repeat="summary in this.state.summary.data" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
+            <section rt-repeat="summary in this.state.summary" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
               <header class="panel-heading">
                   <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
                   <div class="panel-actions">
@@ -528,7 +527,7 @@
                           <td class="no-border-top border-bottom" style="text-transform: capitalize">{summary.name}</td>
                           <td class="no-border-top"><span class="assigned-num">{summary.reviewers.length}</span> <a data-toggle="collapse" data-target="#reviewerList{summaryIndex+1}" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
                           <td class="no-border-top text-center">{summary.docs_sampled}</td>
-                          <td class="no-border-top text-center">{this.addCommas(summary.total_number_document_classified)}</td>
+                          <td class="no-border-top text-center">{func.formatNumber(summary.total_number_document_classified)}</td>
                       </tr>
                       <tr class="child-table">
                         <td colspan="4" class="hiddenRow">
@@ -560,7 +559,7 @@
             </section>
             <div class="clearfix">
               <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
+                <button onClick={this.confirmNotify} class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
               </div>
             </div>
           </div>

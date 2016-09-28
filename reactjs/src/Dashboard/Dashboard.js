@@ -47,6 +47,7 @@ module.exports = React.createClass({
     logOut() {
         //console.log(sessionStorage.getItem('token'));
         sessionStorage.removeItem('token');
+        debugger
         browserHistory.push('/Account/SignIn');
     },
     componentDidUpdate(prevProps, prevState) {

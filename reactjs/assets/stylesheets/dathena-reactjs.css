@@ -331,6 +331,13 @@ select.assigment-select.form-control {
     text-align: right;
 }
 
+/* title menu bar */
+.my_main.bar_menu .title-heading {
+    margin-top: 12px;
+    font-weight: 300;
+    color: #15213C;
+    font-size: 24px;
+}
 .tab-content.br-radius {
     border-radius: 5px;
 }

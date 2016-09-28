@@ -47,6 +47,12 @@ var ReviewValidation = React.createClass({
                 reviewer: "default",
                 category: 0
             },
+            bodyRequest: {
+                reviewer_id: 0,
+                category_id: 0,
+                challenge_docs: [],
+                challenge_back_docs: []
+            },
             stackChange: [],
             openPreview: false,
             shouldUpdate: false
@@ -94,9 +100,16 @@ var ReviewValidation = React.createClass({
                     name: 'Summary'
                 }
 
+                let bodyRequest = update(this.state.bodyRequest, {
+                    category_id: { 
+                        $set: res[0].id 
+                    }
+                });
+
                 this.setState({
                     categories: res,
                     categoriesReview: categoriesReview,
+                    bodyRequest: bodyRequest,
                     categoryCurrent: res[0],
                     shouldUpdate: true
                 });
@@ -142,19 +155,26 @@ var ReviewValidation = React.createClass({
             },
             success: (res) => {
                 debugger
-                // this.setState({
-                //     reviewers: data,
-                //     reviewerCurrent: data.reviewers[0],
-                //     shouldUpdate: true
-                // });
+                let bodyRequest = update(this.state.bodyRequest, {
+                        reviewer_id: {
+                            $set: data.reviewers[0].id
+                        }
+                    });
+                this.setState({
+                    reviewers: res,
+                    reviewerCurrent: res.reviewers[0],
+                    bodyRequest: bodyRequest,
+                    shouldUpdate: true
+                });
             }
         });
         
-        this.setState({
-            reviewers: data,
-            reviewerCurrent: data.reviewers[0],
-            shouldUpdate: true
-        });
+        // this.setState({
+        //     reviewers: data,
+        //     reviewerCurrent: data.reviewers[0],
+        //     bodyRequest: bodyRequest,
+        //     shouldUpdate: true
+        // });
     },
 
     setReviewerCurrent: function(event) {
@@ -238,6 +258,10 @@ var ReviewValidation = React.createClass({
         debugger
         let current = (this.constructor.challenge === panel ? 'challenge_docs' : 'challenge_back_docs'),
 
+            document = this.state.dataReview[current][docIndex],
+
+            indexDoc = findIndex(this.state.bodyRequest[current], { id: document.id }),
+
             updateData = update(this.state.dataReview, {
                 [current]: {
                     [docIndex]: {
@@ -248,14 +272,38 @@ var ReviewValidation = React.createClass({
                 }
             }),
 
+            updateRequest = update(this.state.bodyRequest, {
+                [current]: (indexDoc === -1) ? {
+                    $push: [{
+                        id: document.id,
+                        name: document.name,
+                        path: document.path,
+                        owner: document.owner,
+                        category: document.current_category,
+                        confidentiality: document.current_confidentiality,
+                        comment: document.comment
+                    }]
+                } : {
+                    $splice: [[indexDoc, 1, {
+                        id: document.id,
+                        name: document.name,
+                        path: document.path,
+                        owner: document.owner,
+                        category: document.current_category,
+                        confidentiality: document.current_confidentiality,
+                        comment: document.comments
+                    }]]
+                }
+            }),
+
             updateStack = update(this.state.stackChange, {
                 $push: [{
                     id: panel + '_' + docIndex,
-                    data: this.state.dataReview[current][docIndex]
+                    data: document
                 }]
             });
-        
-        this.setState({ dataReview: updateData, stackChange: updateStack, shouldUpdate: true });
+            debugger
+        this.setState({ dataReview: updateData, bodyRequest: updateRequest, stackChange: updateStack, shouldUpdate: true });
     },
 
     handleTableRowOnChange(event, index) {
@@ -287,7 +335,11 @@ var ReviewValidation = React.createClass({
         let updateComment = update(this.state.dataReview, {
             [current]: {
                 [docIndex]: {
-                    comments: { $set: value }
+                    comments: { $set: value },
+
+                    ['2nd_line_validation']: {
+                        $set: 'editing'
+                    }
                 }
             }
         });
@@ -457,8 +509,8 @@ var ReviewValidation = React.createClass({
         makeRequest({
             path: "api/review/review_validation/",
             params: {
-                "category_id": this.state.categoryCurrent.id,
-                "reviewer_id": this.state.reviewerCurrent.id
+                'category_id': this.state.categoryCurrent.id,
+                'reviewer_id': this.state.reviewerCurrent.id
             },
             success: (res) => {
                 debugger
@@ -556,48 +608,11 @@ var ReviewValidation = React.createClass({
     },
 
     validateDocuments() {
-        let dataRequest = {
-            "reviewer_id": "reviewer_id",
-            "category_id": "category_id",
-            "challenge_docs": [
-                {
-                "id": "document_id",
-                "name": "document_name",
-                "path": "doc_path",
-                "owner": "owner_name",
-                "category": {
-                    "id": 1,
-                    "name": "Accounting/Tax"
-                },
-                "confidentiality": {
-                    "id": 1,
-                    "name": "secret"
-                },
-                "comment": "comment from 2nd line user"     
-                }
-            ],
-            "challenge_back_docs": [
-                {
-                "id": "document_id",
-                "name": "document_name",
-                "path": "doc_path",
-                "owner": "owner_name",
-                "category": {
-                    "id": 1,
-                    "name": "Accounting/Tax"
-                },
-                "confidentiality": {
-                    "id": 1,
-                    "name": "secret"
-                }
-                }
-            ]
-        };
 
         makeRequest({
             method: 'PUT',
-            path: "/api/review/review_validation/",
-            params: dataRequest,
+            path: "api/review/review_validation/",
+            params: JSON.stringify(this.state.bodyRequest),
             success: (res) => {
                 debugger
             }
@@ -621,63 +636,64 @@ var ReviewValidation = React.createClass({
         this.setState({ currentIndex: updateCurrent, shouldUpdate: true });
     },
     getSummary() {
-        let data = [
-            {
-                "id": 1,
-                "name": "accounting/tax",
-                "total_challenged_docs": 20,
-                "number_of_assigned": 2,
-                "total_classified_docs": 70,
-                "reviewers": [
-                    {
-                        "id": 1,
-                        "first_name": "chris",
-                        "last_name": "muffat",
-                        "number_challenged_docs": 10,
-                        "number_classified_docs": 50
-                    },
-                    {
-                        "id": 1,
-                        "first_name": "tony",
-                        "last_name": "gomez",
-                        "number_challenged_docs": 10,
-                        "number_classified_docs": 20
-                    }
-                ]
-            },
-            {
-                "id": 1,
-                "name": "corporate entity",
-                "total_challenged_docs": 20,
-                "number_of_assigned": 2,
-                "total_classified_docs": 40,
-                "reviewers": [
-                    {
-                        "id": 1,
-                        "first_name": "chris",
-                        "last_name": "muffat",
-                        "number_challenged_docs": 10,
-                        "number_classified_docs": 20,
-                        "type": "last_modifier"
-                    },
-                    {
-                        "id": 1,
-                        "first_name": "tony",
-                        "last_name": "gomez",
-                        "number_challenged_docs": 10,
-                        "number_classified_docs": 20,
-                        "type": "last_modifier"
-                    }
-                ]
-            }
-        ];
+        // let data = [
+        //     {
+        //         "id": 1,
+        //         "name": "accounting/tax",
+        //         "total_challenged_docs": 20,
+        //         "number_of_assigned": 2,
+        //         "total_classified_docs": 70,
+        //         "reviewers": [
+        //             {
+        //                 "id": 1,
+        //                 "first_name": "chris",
+        //                 "last_name": "muffat",
+        //                 "number_challenged_docs": 10,
+        //                 "number_classified_docs": 50
+        //             },
+        //             {
+        //                 "id": 1,
+        //                 "first_name": "tony",
+        //                 "last_name": "gomez",
+        //                 "number_challenged_docs": 10,
+        //                 "number_classified_docs": 20
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         "id": 1,
+        //         "name": "corporate entity",
+        //         "total_challenged_docs": 20,
+        //         "number_of_assigned": 2,
+        //         "total_classified_docs": 40,
+        //         "reviewers": [
+        //             {
+        //                 "id": 1,
+        //                 "first_name": "chris",
+        //                 "last_name": "muffat",
+        //                 "number_challenged_docs": 10,
+        //                 "number_classified_docs": 20,
+        //                 "type": "last_modifier"
+        //             },
+        //             {
+        //                 "id": 1,
+        //                 "first_name": "tony",
+        //                 "last_name": "gomez",
+        //                 "number_challenged_docs": 10,
+        //                 "number_classified_docs": 20,
+        //                 "type": "last_modifier"
+        //             }
+        //         ]
+        //     }
+        // ];
         makeRequest({
             path: "api/review/review_validation/summary/",
             success: (res) => {
-                this.setState({ summary: res });
+                debugger
+                this.setState({ summary: res, shouldUpdate: true });
             }
         });
-        this.setState({ summary: data, shouldUpdate: true });
+        //this.setState({ summary: data, shouldUpdate: true });
     },
     confirmValidation() {
         makeRequest({

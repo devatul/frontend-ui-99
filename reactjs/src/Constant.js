@@ -1,6 +1,6 @@
 module.exports = {
-	// SERVER_API:'http://54.179.166.78/',
-	SERVER_API:'http://54.254.145.121/',
+	SERVER_API:'http://54.179.166.78/',
+	// SERVER_API:'http://54.254.145.121/',
 	// SERVER_API: 'http://54.169.142.202',
 	TIMEVALIDTOKEN :300000,
 	scan: {
@@ -10,7 +10,7 @@ module.exports = {
 	},
 	role: {
 		IS_1ST: 'doc_owner',
-		IS_ADMIN: 'risk_lead',
+		IS_ADMIN: 'admin',
 		IS_2ND: 'risk_officer',
 		IS_3RD: 'audit',
 	},
@@ -27,8 +27,8 @@ module.exports = {
 	iconCategories:
 	[
 		{ name:"Accounting/Tax", class:'fa-calculator'},
-		{ name:"Corporate Entity", class:'fa-university'},
 		{ name:"Client/Customer", class:'fa-users'},
+		{ name:"Corporate Entity", class:'fa-university'},
 		{ name:"Employee", class:'fa-male'},
 		{ name:"Legal/Compliance", class:'fa-balance-scale'},
 		{ name:"Transaction", class:'fa-usd'}

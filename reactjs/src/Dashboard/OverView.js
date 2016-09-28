@@ -51,11 +51,13 @@ var OverView = React.createClass
             var { iconCategories } = Constant
 
             forEach(result.categories, (val, index) => {
-                if( val.name == iconCategories[index].name ) {
-                    val.class = iconCategories[index].class
+                //debugger
+                //if( val.name == iconCategories[index].name ) {
+                    val.class = "";
+                    // val.class = iconCategories[index].class;
                     //debugger
-                }
-                debugger
+                //}
+                //debugger
             })
 
             this.updateChart( result, prevResult );

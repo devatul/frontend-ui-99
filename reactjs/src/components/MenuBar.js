@@ -42,6 +42,7 @@ var MenuBar = React.createClass
 	},
 	propTypes: {
 		title: React.PropTypes.string,
+        help: React.PropTypes.string,
 	    handleFilter: React.PropTypes.func,
 	    showFilter: React.PropTypes.bool,
 	    showInfo: React.PropTypes.bool
@@ -287,14 +288,20 @@ var MenuBar = React.createClass
         switch(true) {
             
             case index === 'all': {
-                array['checkall'] = !array['checkall'];
+                //array['checkall'] = !array['checkall'];
                 
                 for(let i = selection.length - 1; i >= 0; i--) {
                     let a = selection[i].id.split('-'),
                         indexCategory = parseInt(a[a.length-1]);
 
+                        // if(indexCategory >= 0) {
+                        //     array[indexCategory].checked = array['checkall'];
+                        // }
+
+                        //set false all item
                         if(indexCategory >= 0) {
-                            array[indexCategory].checked = array['checkall'];
+                            array[indexCategory].checked = false;
+                            debugger
                         }
                 }
             }
@@ -570,8 +577,8 @@ var MenuBar = React.createClass
                     updateResult = update(scanResult, {
                         $set: data
                     });
-                
-                this.setState({ scanResult: updateResult });
+                debugger
+                this.setState({ scanResult: updateResult, shouldUpdate: true });
             }
         });  
     },

@@ -2,10 +2,11 @@ import Constants from '../Constant'
 import { browserHistory } from 'react-router'
 
 module.exports = {
-    makeRequest: function({ sync = true, method = 'GET', path, params = {}, success, error }) {
+    makeRequest: function({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error }) {
         $.ajax({
 				url: Constants.SERVER_API + path,
-				dataType: 'json',
+				dataType: dataType,
+				contentType: contentType,
                 async: sync,
 				type: method,
 				data: params,

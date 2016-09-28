@@ -37,15 +37,17 @@
                         rt-repeat="review in this.state.dataReview"
                         class="panel-bordered actions-panel">
                         <Panel.head>
-                            <h2 class="panel-title inline-block-item mr-sm"><i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
-                                <span class="text-capitalize">{ ' [' + review.language.short_name + '] ' + review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
+                            <h2 class="panel-title inline-block-item mr-sm">
+                                <!--<i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>-->
+                                <span class="text-capitalize">{ review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
                                 <HelpButton
                                     classMenu="fix-overview-help-button-table"
                                     classIcon="overview_question_a help_question_a"
                                     setValue="{'All the documents in this section have been classified ' + review.category.name + ' with a ' + review.confidentiality.name + ' level of Confidentiality.'}" />
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
-                                <button onClick="() => this.handleUndo(reviewIndex)" class="mb-xs mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <span>Language: <b>English</b></span>
+                                <button onClick="() => this.handleUndo(reviewIndex)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>
                         <Panel.body>
@@ -79,7 +81,7 @@
                                             <th class="review_note fix-width">
                                                 Type
                                             </th>
-                                            <th class="review_note">Document name
+                                            <th class="review_note">Document
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
                                                     className="dropdown-file-info-holder"
@@ -142,14 +144,16 @@
                 </th>
                 <th class="review_note fix-width">Type
                 </th>
-                <th class="review_note">Document name
+                <th class="review_note">Document
                     <HelpButton
                         className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
                         setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>
                 <th class="review_note fix-max-width-category-confident">Proposed Category
                     <HelpButton
                         className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
                         setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                 </th>
                 <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
