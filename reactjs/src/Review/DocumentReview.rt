@@ -552,7 +552,7 @@
                                           <span class="progress-percentage" style="color: #000">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
-                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value={docPreview.category.name}>
+                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value={docPreview.category.name}>
                                                                 <option
                                                                     rt-repeat="categories in this.state.categories"
                                                                     key="{categoriesIndex}"
@@ -577,7 +577,7 @@
                                     <!-- <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
                                       <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select> -->
-                                    <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)" value = {docPreview.confidentiality.name}>
+                                    <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value = {docPreview.confidentiality.name}>
                                                               <!-- <option selected>{doc.confidentiality.name}</option> -->
                                                               <option
                                                                     rt-repeat="Confidential in this.state.confidentialities"

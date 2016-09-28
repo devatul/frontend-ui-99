@@ -468,7 +468,8 @@ var DocumentReview = React.createClass({
 
                     category : {
                         name : {$set : categoryIndex }
-                    }
+                    },
+                    status: { $set: status },
 
             }
           /*  shouldUpdate: {
@@ -526,7 +527,8 @@ var DocumentReview = React.createClass({
 
                     confidentiality : {
                         name : {$set : categoryIndex }
-                    }
+                    },
+                    status: { $set: status },
 
             }
         })
