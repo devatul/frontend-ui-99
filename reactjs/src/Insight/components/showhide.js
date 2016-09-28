@@ -8,7 +8,12 @@ var ShowHide = React.createClass({
       getInitialState() {
         return {
                doc_path: 'doc-path my-doc-path',
-               style : { "font-family" : " 'Roboto', 'Helvetica', sans-serif "}
+               style : {
+                    "fontFamily" : " 'Roboto', 'Helvetica', sans-serif ",
+                       'marginLeft' : '100px',
+                        'color': '#777'
+           },
+
         }
     },
     showHide(){

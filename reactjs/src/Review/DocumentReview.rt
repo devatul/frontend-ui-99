@@ -11,10 +11,12 @@
             <ul class="line_document_header">
                 <li class="dropdown">
                     <a class="line_document review_title">My Review</a>
-                    <HelpButton
+                    <!-- <HelpButton
                        classNote="overview_timeframe fix-overview-help-button"
-                        setValue="This summarises all the actions assigned to the user. Users must review each document of this section." />
-
+                        setValue="This summarises all the actions assigned to the user. Users must review each document of this section." /> -->
+                    <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="This summarises all the actions assigned to the user. Users must review each document of this section."/>
                 </li>
             </ul>
             <div class="tab-content" rt-if="(this.state.Actions != null)">
@@ -27,12 +29,18 @@
                                         <i class="fa {this.urgency(action.urgency)}" aria-hidden="true"></i>
                                     </li>
                                     <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">[EN] {action.category} / {action.confidentiality}</h2>
+                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize"> {action.category.name} - {action.confidentiality.name}</h2>
                                     </li>
                                     <li class="document_panel-title">
-                                        <HelpButton className="dropdown-file-info-holder"
+                                        <!-- <HelpButton className="dropdown-file-info-holder"
                                             classNote="overview_timeframe fix-overview-help-button"
-                                            setValue="All the documents in this section have been classified {action.category} with a Secret level of Confidentiality" />
+                                            setValue="All the documents in this section have been classified {action.category} with a Secret level of Confidentiality" /> -->
+                                            <HelpButton
+                                                classMenu="fix-overview-help-button-table"
+                                                classIcon="overview_question_a help_question_a"  setValue="All the documents in this section have been classified {action.category.name} with a Secret level of Confidentiality"/>
+                                    </li>
+                                    <li class="document_panel-title panel-actions-fix">
+                                        Language : <b>{ action.language.short_name == 'EN' ? 'English' : (action.language.short_name == 'FR' ? 'Français' : 'Deutsch')}</b>
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
@@ -42,11 +50,11 @@
                             </header>
                      <div class="panel-body nav-collapse collapse in" id="action{'_panel_' + actionIndex}">
                                 <p class="document_note">
-                                    You have to review {action.docLength} documents in {action.category} Category of  {action.confidentiality} Confidentiality by latest {action.latest_date}
+                                    You have to review {action.docLength} documents in {action.category.name} Category of  {action.confidentiality.name} Confidentiality by latest {action.latest_date}
                                 </p>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                     <button
-                                        rt-if="(action.checkedNumber > 0 && action.docLength >0)"
+                                        rt-if="(action.checkedNumber > 0)"
                                         type="button" class="mb-md mr-xs btn btn-green"
                                         onClick="(event)=>this.approveButon(actionIndex)">
                                             Approve
@@ -71,18 +79,22 @@
                                                      <th class="review_note" style="width: 4vw;">Type
                                                     </th>
                                                     <th class="review_note" style="width: 18vw;">Document
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
+                                                        <HelpButton
+                                                            classMenu="fix-overview-help-button-table"
+                                                            className="dropdown-file-info-holder"
                                                             setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
 
                                                     <th class="review_note" style="width: 20vw;">Proposed Category
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. " />
+                                                         <HelpButton className="dropdown-file-info-holder"
+                                                            classMenu="fix-overview-help-button-table"
+                                                            setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                                     </th>
                                                     <th class="review_note" style="width: 20vw;">Proposed Confidentiality
-                                                             <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification. "/>
+                                                            <HelpButton
+                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                className="dropdown-file-info-holder"
+                                                                setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                                     </th>
                                                     <th class="text-center" style="max-width: 70px;">Status
 
@@ -153,11 +165,11 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)">
-                                                             <option
+                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{doc.category.name}">
+                                                                <option
                                                                     rt-repeat="categories in this.state.categories"
                                                                     key="{categoriesIndex}"
-                                                                    value="{categoriesIndex}">
+                                                                    value="{categories.name}">
                                                                     {categories.name}
                                                                 </option>
                                                             </select>
@@ -180,12 +192,12 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)">
+                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)" value="{doc.confidentiality.name}">
                                                               <!-- <option selected>{doc.confidentiality.name}</option> -->
                                                               <option
                                                                     rt-repeat="Confidential in this.state.confidentialities"
                                                                     key="{ConfidentialIndex}"
-                                                                    value="{ConfidentialIndex}">
+                                                                    value="{Confidential.name}">
                                                                     {Confidential.name}
                                                                 </option>
                                                             </select>
@@ -265,13 +277,17 @@
                                     </li>
                                     <li class="document_panel-title">
                                         <h2 class="document_panel-title panel-title" style="text-transform: capitalize">
-                                            {(challenged.sla == null ) ? '[EN] '+ challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
+                                            {(challenged.sla == null ) ?  challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
                                             <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content"
                                             setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality." />
                                         </h2>
                                     </li>
+                                     <li class="document_panel-title panel-actions-fix">
+                                        Language : <b>English</b>
+                                    </li>
                                 </ul>
+
                                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
                                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                                     <!--<button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
@@ -312,9 +328,10 @@
 
                                                     </th>
                                                     <th class="my_review_note review_note">Document
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                            <HelpButton
+                                                                classMenu="fix-overview-help-button-table"
+                                                                className="dropdown-file-info-holder"
+                                                                setValue="This displays the name of each individual document, as it exists in its current state." />
                                                     </th>
 
                                                     <th class="review_note">Category
@@ -328,9 +345,10 @@
                                                             setValue="Confidentiality level proposed by Dathena." />
                                                     </th>
                                                     <th class="review_note review_note_r">Coordinator's Comment
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="Comment of your coordinator to explain the reason of the rejection." />
+                                                             <HelpButton
+                                                                classMenu="fix-overview-help-button-table"
+                                                                className="dropdown-file-info-holder"
+                                                                setValue="Comment of your coordinator to explain the reason of the rejection." />
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
                                                            <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Add a comment to justify your acceptation or your rejection of the challenge. "/>
@@ -534,11 +552,11 @@
                                           <span class="progress-percentage" style="color: #000">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
-                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)">
+                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value={docPreview.category.name}>
                                                                 <option
                                                                     rt-repeat="categories in this.state.categories"
                                                                     key="{categoriesIndex}"
-                                                                    value="{categoriesIndex}">
+                                                                    value="{categories.name}">
                                                                     {categories.name}
                                                                 </option>
                                                             </select>
@@ -559,12 +577,12 @@
                                     <!-- <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
                                       <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select> -->
-                                    <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)">
+                                    <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)" value = {docPreview.confidentiality.name}>
                                                               <!-- <option selected>{doc.confidentiality.name}</option> -->
                                                               <option
                                                                     rt-repeat="Confidential in this.state.confidentialities"
                                                                     key="{ConfidentialIndex}"
-                                                                    value="{ConfidentialIndex}">
+                                                                    value="{Confidential.name}">
                                                                     {Confidential.name}
                                                                 </option>
                                                             </select>
