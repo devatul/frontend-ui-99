@@ -485,7 +485,7 @@ var Indentity = React.createClass({
         });
         if (csv == null) return;
 
-        filename = value || 'export.csv';
+        filename = value+'.csv' || 'export.csv';
 
         if (!csv.match(/^data:text\/csv/i)) {
             csv = 'data:text/csv;charset=utf-8,' + csv;

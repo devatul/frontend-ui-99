@@ -11,7 +11,7 @@
       <ul class="filter-buttons list-unstyled">
       <li class="dropdown">
         <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-        <!-- <div id="dr" class="dropdown-backdrop-custom" style="display:none"></div> -->
+       <!--  <div id="dr" class="dropdown-backdrop-custom" style="display:none"></div> -->
         <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md fix_filter_insight dd-right">
           <ul class="filter-list list-unstyled pt-xs">
             <!-- <li class="mb-sm">

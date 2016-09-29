@@ -67,6 +67,11 @@ var NumberUser = React.createClass({
 	isActive(value){
         return ((value===this.state.selected) ?'active':'default');
     },
+    /*handleOnClick(){
+         $('body').click(function(){
+            $('#dr').hide()
+        });
+    },*/
 
 	render(){
 
@@ -96,10 +101,10 @@ var NumberUser = React.createClass({
             }.bind(this));
 
 		return(
-			<div ref="dropdown" className="btn-group dropdown" id="dr">
+			<div ref="dropdown" className="btn-group dropdown" >
 				<button type="button"
 					key={this.props.key + '_'}
-					onClick={this.handleOnClick}
+
 					className="multiselect dropdown-toggle btn btn-default"
 					data-toggle="dropdown"
 					title={this.props.title}
@@ -107,10 +112,12 @@ var NumberUser = React.createClass({
 					<span className="multiselect-selected-text">{this.props.title} </span>
 					<b className="caret"></b>
 				</button>
+
 				<ul ref="dropdownmenu" className="multiselect-container dropdown-menu fix_ulFilter_insight">
 					{children}
-				</ul>
 
+				</ul>
+                <span className="dropdown-backdrop" style={{ display: 'none' }}></span>
 			</div>
 		)
 	},

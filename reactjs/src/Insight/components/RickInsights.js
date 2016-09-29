@@ -85,7 +85,7 @@ var RickInsight = React.createClass({
             let previous = this.formatNumber(object.previous_scan_value)
             let current = this.formatNumber(object.current_scan_value)
 
-            children[index] = <div className="col-md-4">
+            children[index] = <div className="col-md-4" key={index}>
                                 <section className="panel">
 
                                   <div className={className}>

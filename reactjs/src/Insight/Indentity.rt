@@ -24,203 +24,6 @@
    <div class="panel-body pb-none">
     <div class="row">
         <Risk/>
-      <!-- <div class="col-md-4" rt-repeat="risk in this.state.rickInsight.risks">
-        <section class="panel">
-          <div class="panel-body {this.getRickType(risk.name).color} widget-panel insight-panel">
-            <h4 class="widget-title">{this.upperFirst(risk.name)}
-
-              <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="{this.getRickType(risk.name).info}" />
-
-           </h4>
-           <div class="insight-stat">
-            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            <span>{this.formatNumber(risk.previous_scan_value)}</span>
-          </div>
-          <div class="widget-summary">
-            <div class="widget-summary-col">
-              <div class="summary">
-                <div class="info">
-                  <strong class="amount">{this.formatNumber(risk.current_scan_value)}</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div> -->
-   <!--  <div class="col-md-4">
-      <section class="panel">
-        <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-          <h4 class="widget-title">Access Rights Anomaly
-<!--
-             <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of users who have abnormal access rights." />
-         </h4>
-         <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>0</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">138</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Twin Files
-
-         <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates files with different names." />
-       </h4>
-       <div class="insight-stat">
-        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-        <span>200</span>
-      </div>
-      <div class="widget-summary">
-        <div class="widget-summary-col">
-          <div class="summary">
-            <div class="info">
-              <strong class="amount">430</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Document Retention
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of files past outside their retention dates." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>750</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">420</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-        <h4 class="widget-title">Document Aging
-
-          <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of files outside their retention dates." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-up" aria-hidden="true"></i>
-          <span>750</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">9,000</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-        <h4 class="widget-title">Duplicate Files
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of duplicate files." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>10,720</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">10,000</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Document Repository Anomaly
-
-           <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of folders which have content anomalies." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-up" aria-hidden="true"></i>
-          <span>0</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">99</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-secondary widget-panel insight-panel">
-        <h4 class="widget-title">Cost Savings
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Storage Space with obsolete data." />
-       </h4>
-       <div class="insight-stat">
-        <i class="fa fa-chevron-down" aria-hidden="true"></i>
-        <span>980MB</span>
-      </div>
-      <div class="widget-summary">
-        <div class="widget-summary-col">
-          <div class="summary">
-            <div class="info">
-              <strong class="amount">1.2TB</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div> -->
 
 </div>
 </div>
@@ -234,32 +37,26 @@
     <div style="margin-top:20px"></div>
     <div class="col-md-6">
       <h3>High Risk User with Client Data Access
-    <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of files which provide access to client data."/> -->
-     <!--    <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users with direct access to a large number of files which provide access to client data." /> -->
          <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of files which provide access to client data."/>
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of files which provide access to client data."/>
      </h3>
      <div class="panel panel-chart">
       <div class="panel-body">
-        <Chart  dataChart= {this.state.dataChart.high_risk_users} id="-2"  exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.high_risk_users)}" />
+        <Chart  dataChart= {this.state.dataChart.high_risk_users} id="-2"  exports = "{this.downloadCSV.bind(this, 'High Risk User with Client Data Access' , this.state.data_exports.high_risk_users)}" />
       </div>
     </div>
   </div>
   <div class="col-md-6">
     <h3>High Risk Active Directory Access with Client Data
-  <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/> -->
-      <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users with direct access to a large number of directories which contain files with client data." /> -->
         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of directories which contain files with client data."/>
-   </h3>
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of directories which contain files with client data."/>
+    </h3>
    <div class="panel panel-chart">
     <div class="panel-body">
      <Chart  dataChart= {this.state.dataChart.high_risk_directory} id="-1"
-     exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.high_risk_directory)}" />
+     exports = "{this.downloadCSV.bind(this, 'High Risk Active Directory Access with Client Data' , this.state.data_exports.high_risk_directory)}" />
    </div>
  </div>
 </div>
@@ -267,12 +64,9 @@
 <div class="row">
   <div class="col-md-12">
     <h3>Key Content Contributor
- <!--      <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/> -->
-       <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users having contributed the most to document creation and document editing." /> -->
         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="Users having contributed the most to document creation and document editing."/>
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a" setValue="Users having contributed the most to document creation and document editing."/>
    </h3>
     </h3>
     <div class="panel panel-chart">
@@ -282,33 +76,8 @@
         key={contributorIndex}>
           <h4>{contributor.category_name}</h4>
           <Chart dataChart={contributor.contributors} id={contributorIndex}
-           exports = "{this.downloadCSV.bind(this, 'data.csv' , this.state.data_exports.key_contributor[contributorIndex].contributors)}" />
+           exports = "{this.downloadCSV.bind(this, contributor.category_name , this.state.data_exports.key_contributor[contributorIndex].contributors)}" />
         </div>
-
-      <!--   <div class="col-md-6 col-chart-item">
-          <h4>Corporate Entity</h4>
-           <Chart  dataChart= {this.state.dataChart.key_contributor.contributors} id="-3" />
-        </div>
-
-        <div class="col-md-6 col-chart-item">
-          <h4>Client / Customer</h4>
-           <Chart  dataChart= {this.state.dataChart.key_contributor.contributors} id="-4" />
-        </div> -->
-
-      <!--   <div class="col-md-6 col-chart-item">
-          <h4>Employee</h4>
-          <Chart/>
-        </div>
-
-        <div class="col-md-6 col-chart-item">
-          <h4>Legal / Compliance</h4>
-          <Chart/>
-        </div>
-
-        <div class="col-md-6 col-chart-item">
-          <h4>Transaction</h4>
-          <Chart/>
-        </div> -->
       </div>
     </div>
   </div>

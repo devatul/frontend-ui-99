@@ -48,10 +48,10 @@
                                     <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#action{'_panel_' + actionIndex}"></a>
                                 </div>
                             </header>
-                     <div class="panel-body nav-collapse collapse in" id="action{'_panel_' + actionIndex}">
-                                <p class="document_note">
+                     <div class="panel-body nav-collapse collapse in" id="action{'_panel_' + actionIndex}" style="margin-top : 10px">
+                               <!--  <p class="document_note">
                                     You have to review {action.docLength} documents in {action.category.name} Category of  {action.confidentiality.name} Confidentiality by latest {action.latest_date}
-                                </p>
+                                </p> -->
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                     <button
                                         rt-if="(action.checkedNumber > 0)"

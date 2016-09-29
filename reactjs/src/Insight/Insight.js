@@ -8,10 +8,10 @@ module.exports = React.createClass({
   	mixins: [LinkedStateMixin],
   	getInitialState() {
 	    return {
-	    	
+
 	    };
 	},
-	componentDidMount() 
+	componentDidMount()
 	{
 	},
     render:template

@@ -13,6 +13,12 @@ var TabName = React.createClass({
 
 		};
 	},
+    shouldComponentUpdate(nextProps , nextState){
+        if(this.props.language != nextState.language){
+            return true;
+        }
+        return false
+    },
 	onMouseOver(value){
 
 		let color = this.state.color
@@ -27,7 +33,7 @@ var TabName = React.createClass({
 		this.setState(colorUpdate)
 	},
 	onMouseOut(value){
-			debugger
+
 			let color = this.state.color
 			let click = this.state.click
 			for( let i = 0 ; i < this.state.color.length ; i++) {
@@ -45,8 +51,11 @@ var TabName = React.createClass({
 
 
 	},
+    clickHandle(language){
+        this.props.click(language)
+    },
 	onClick(value){
-		let color = this.state.color
+		/*let color = this.state.color
 		let click = this.state.click
 		console.log('color', color)
 		for( let i = 0 ; i < color.length ; i++){
@@ -57,23 +66,29 @@ var TabName = React.createClass({
 				color[i] = '#4fca9d'
 				click[i] = 'true'
 			}
-		}
-		let update = update(this.state , {
+		}*/
+		/*let update = update(this.state , {
 			color : {$set : color},
 			click : {$set : click}
 		})
-		this.setState(update)
+		this.setState(update)*/
 
 	},
 	render(){
-		let children = [];
-		let active = ['active' , '#' , '#']
-		let language = ['English', 'French' ,'Germany']
 
-		for( let i=0 ; i<3; i++){
-			children[i] = <li className={active[i]}
+		let children = [];
+		let active = []
+        active[0] = 'active'
+
+		let language = this.props.language
+        for(let i = 1 ;  i <language.length ; i++){
+            active[i] = '#'
+        }
+
+		for( let i=0 ; i<language.length; i++){
+			children[i] = <li className={active[i]} key={i}
 			onMouseOver = {this.onMouseOver.bind(this, i)} onMouseOut = {this.onMouseOut.bind(this, i)} onClick={this.onClick.bind(this,i)}>
-			<a href="#" data-toggle="tab" aria-expanded="true"><span style={{'color' : this.state.color[i]}}>{language[i]}</span></a>
+			<a href="#" data-toggle="tab" aria-expanded="true" onClick={this.clickHandle.bind(this , language[i])}><span style={{}} >{language[i]}</span></a>
 			</li>
 		}
 
