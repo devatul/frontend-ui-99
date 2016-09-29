@@ -470,7 +470,7 @@
                 </div>
                 <div class="col-sm-4 modal-actions text-right">
                     <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex , index.docIndex - 1)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex , index.docIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
 
                     <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
@@ -481,7 +481,7 @@
                <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
                     <thead>
                         <tr role="row" class="">
-                            <th style="padding:10px 12px 0px 10px;">
+                            <th style="padding:10px 12px 0px 10px; width: 42px;">
                                 <div class="checkbox-custom checkbox-primary">
                                     <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
                                     <label></label>
@@ -490,9 +490,11 @@
                              <th class="review_note">Type
                             </th>
                             <th class="my_review_note review_note">Document
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
+                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
 
                             <th class="review_note">Proposed Category
@@ -502,6 +504,7 @@
                             </th>
                             <th class="review_note">Proposed Confidentiality
                                      <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix2 full-mobile" content="Confidentiality level proposed by Dathena."/>
+
                             </th>
                             <th class="text-center">Status
 <!--

@@ -8,8 +8,9 @@
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
        <!-- <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/> -->
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99." />
+        <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
 
      </h2>
    </header>
@@ -213,58 +214,22 @@
     </div>
   </section>
 </div> -->
-<div class="col-md-4">
-  <section class="panel">
-    <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-      <h4 class="widget-title">Stale Files
-       <!-- <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/> -->
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of aging files that have not been accessed." />
-     </h4>
-     <div class="insight-stat">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-      <span></span>
-    </div>
-    <div class="widget-summary">
-      <div class="widget-summary-col">
-        <ul class="list-unstyled summary-list">
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
-              <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>3+ Years</span></div>
-              <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>Total</span></div>
-              <div class="col-xs-6 text-right"><span class="bold"></span></div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
+
 </div>
 </div>
 </section>
 
   <section class="panel panel-featured panel-featured-primary panel-identity">
 
-    <BarMenu title="Data Risk Management" showFilter={true} handleFilter={this.handleFilter} helpInfo="aa" />
+    <BarMenu title="Data Risk Management" showFilter={true} handleFilter={this.handleFilter} helpInfo="This represents an overview of the risk key indicators of the data repositories scanned by Dathena 99" />
     <div class="panel-body" id="toggle">
       <div style="margin-top : 40px"></div>
       <h3 >Capacity Management Risk
        <!--  <HelpButton type="overview_question_a" content="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity."/> -->
-         <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity." />
+
+         <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity." />
       </h3>
       <div class="row">
         <div class="col-md-3 col-sm-6">
@@ -272,8 +237,10 @@
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title">Duplicated
               <!-- <HelpButton type="overview_question_a" content="Duplicates are files that have been detected with 2 or more having identical information and file names."/> -->
-               <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates are files that have been detected with 2 or more having identical information and file names." />
+
+                  <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="Duplicates are files that have been detected with 2 or more having identical information and file names." />
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
@@ -296,8 +263,11 @@
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title">Twins
                 <!-- <HelpButton type="overview_question_a" content="Twins are files that have been detected with 2 or more having identical information but with different file names."/> -->
-                 <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Twins are files that have been detected with 2 or more having identical information but with different file names." />
+
+                <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue="Twins are files that have been detected with 2 or more having identical information but with different file names." />
+              </h4>
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
@@ -319,8 +289,10 @@
           <section class="panel">
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title">Number of Stale Files
-               <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                    setValue="Stale files are files which have not been accessed for a defined period of time. This indicates that the data is stale, and may no longer have a need to be retained by the organisation." />
+
+                  <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="Stale files are files which have not been accessed for a defined period of time. This indicates that the data is stale, and may no longer have a need to be retained by the organisation." />
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
@@ -342,12 +314,10 @@
           <section class="panel">
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title"> Storage Cost Saving Opportunity
-                   <!--  <HelpButton1
-                        classNote="note_chart_content_review fix fix-overview-help-button-table"
-                        className="dropdown-file-info-holder"
-                        setValue="This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files."/> -->
-
-                         <HelpButton2 className="r dropdown inline-block-item" type="my-team-note dropdown-menu has-arrow icon_help_noti dd-md dropdown_menu dd-md fix_width_notification full-mobile" content="This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files." />
+                       <HelpButton1
+                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                            className="dropdown-file-info-holder"
+                            setValue="This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files." />
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
@@ -368,16 +338,19 @@
       </div>
 
       <h3>File Identification Risk
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-        setValue="This represents the number of documents that 99 has detected and scanned as part of the initial document classification activity." />
+
+         <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the unreadable file and the client data repositories." />
       </h3>
       <div class="row">
         <div class="col-md-6 col-sm-6">
           <section class="panel">
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title">Number of Unreadable Files
-              <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99." />
+              <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99." />
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
@@ -399,8 +372,10 @@
           <section class="panel">
             <div class="panel-body bg-white widget-panel insight-panel">
               <h4 class="widget-title">High Volume of Client Data per Repository
-                 <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                setValue="This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets." />
+
+                <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets."  />
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">

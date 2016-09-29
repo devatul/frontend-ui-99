@@ -13,8 +13,11 @@
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
        <!-- <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/> -->
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99." />
+        <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99." /> -->
+        <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
 
      </h2>
    </header>
@@ -218,45 +221,7 @@
     </div>
   </section>
 </div> -->
-<div class="col-md-4">
-  <section class="panel">
-    <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-      <h4 class="widget-title">Stale Files
-       <!-- <HelpButton type="overview_question_a" content="Number of aging files that have not been accessed."/> -->
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of aging files that have not been accessed." />
-     </h4>
-     <div class="insight-stat">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-      <span>121212</span>
-    </div>
-    <div class="widget-summary">
-      <div class="widget-summary-col">
-        <ul class="list-unstyled summary-list">
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>1-2 Years</span></div>
-              <div class="col-xs-6 text-right"><span class="bold text-right">150,000</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>3+ Years</span></div>
-              <div class="col-xs-6 text-right"><span class="bold">15,860</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-xs-6 text-left"><span>Total</span></div>
-              <div class="col-xs-6 text-right"><span class="bold"></span></div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
+
 </div>
 </div>
 </section>
@@ -270,8 +235,11 @@
     <div class="col-md-6">
       <h3>High Risk User with Client Data Access
     <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of files which provide access to client data."/> -->
-        <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users with direct access to a large number of files which provide access to client data." />
+     <!--    <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users with direct access to a large number of files which provide access to client data." /> -->
+         <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of files which provide access to client data."/>
      </h3>
      <div class="panel panel-chart">
       <div class="panel-body">
@@ -282,8 +250,11 @@
   <div class="col-md-6">
     <h3>High Risk Active Directory Access with Client Data
   <!--    <HelpButton type="overview_question_a" content="Users with direct access to a large number of directories which contain files with client data."/> -->
-      <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users with direct access to a large number of directories which contain files with client data." />
+      <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users with direct access to a large number of directories which contain files with client data." /> -->
+        <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of directories which contain files with client data."/>
    </h3>
    <div class="panel panel-chart">
     <div class="panel-body">
@@ -297,8 +268,11 @@
   <div class="col-md-12">
     <h3>Key Content Contributor
  <!--      <HelpButton type="overview_question_a" content="Users having contributed the most to document creation and document editing."/> -->
-       <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Users having contributed the most to document creation and document editing." />
+       <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                    setValue="Users having contributed the most to document creation and document editing." /> -->
+        <HelpButton1
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue="Users having contributed the most to document creation and document editing."/>
    </h3>
     </h3>
     <div class="panel panel-chart">

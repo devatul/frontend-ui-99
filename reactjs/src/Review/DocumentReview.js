@@ -24,6 +24,7 @@ var DocumentReview = React.createClass({
             shouldUpdateChall: null,
             stackChange: [],
             oldActions: [],
+            oldReview : [],
             undo: '',
             confidentialities: [],
             categories: [],
@@ -441,8 +442,17 @@ var DocumentReview = React.createClass({
         var valueChange = [actionIndex, docIndex]
         var categoryIndex = event.target.value;
         var status = ''
-        var actions = this.state.Actions;
+
         var action1 = this.state.Action1;
+
+        var stackList = [];
+        var actions = _.cloneDeep(this.state.Actions);
+        if (this.state.oldActions != null) {
+            stackList = _.cloneDeep(this.state.oldActions)
+
+        }
+        stackList.push(actions)
+
         if (categoryIndex == action1[actionIndex].documents[docIndex].category.name) {
             status = 'accept'
         } else {
@@ -456,26 +466,27 @@ var DocumentReview = React.createClass({
                     documents: {
                         [docIndex]: {
                             status: { $set: status },
-                            category : {
-                                name : {$set : categoryIndex }
+                            category: {
+                                name: { $set: categoryIndex }
                             }
                         }
 
                     }
                 }
             },
-            documentPreview : {
+            documentPreview: {
 
-                    category : {
-                        name : {$set : categoryIndex }
-                    },
-                    status: { $set: status },
+                category: {
+                    name: { $set: categoryIndex }
+                },
+                status: { $set: status },
 
-            }
-          /*  shouldUpdate: {
-                type: { $set: 'category' },
-                valueChange: { $set: valueChange }
-            }*/
+            },
+            oldActions: { $set: stackList }
+            /*  shouldUpdate: {
+                  type: { $set: 'category' },
+                  valueChange: { $set: valueChange }
+              }*/
 
         })
         this.setState(updateCategory)
@@ -503,8 +514,14 @@ var DocumentReview = React.createClass({
         debugger
         var categoryIndex = event.target.value;
         var status = ''
-        var actions = this.state.Actions;
         var action1 = this.state.Action1;
+        var stackList = [];
+        var actions = _.cloneDeep(this.state.Actions);
+        if (this.state.oldActions != null) {
+            stackList = _.cloneDeep(this.state.oldActions)
+
+        }
+        stackList.push(actions)
         if (categoryIndex == action1[actionIndex].documents[docIndex].confidentiality.name) {
             status = 'accept'
         } else {
@@ -516,21 +533,22 @@ var DocumentReview = React.createClass({
                     documents: {
                         [docIndex]: {
                             status: { $set: status },
-                            confidentiality : {
-                                name : {$set : categoryIndex }
+                            confidentiality: {
+                                name: { $set: categoryIndex }
                             }
                         }
                     }
                 }
             },
-            documentPreview : {
+            documentPreview: {
 
-                    confidentiality : {
-                        name : {$set : categoryIndex }
-                    },
-                    status: { $set: status },
+                confidentiality: {
+                    name: { $set: categoryIndex }
+                },
+                status: { $set: status },
 
-            }
+            },
+            oldActions: { $set: stackList }
         })
         this.setState(updateCategory)
             /*console.log('actionIndex: ', actionIndex)
@@ -579,15 +597,20 @@ var DocumentReview = React.createClass({
         debugger
         var documentPreview = _.cloneDeep(this.state.documentPreview)
             /*var valueChange = [actionIndex , docIndex]*/
-        var stackList = []
+
         var checked = event.target.checked;
+        var stackList = [];
+        var reviewList = [];
+
         var actions = _.cloneDeep(this.state.Actions);
+
         if (this.state.oldActions != null) {
             stackList = _.cloneDeep(this.state.oldActions)
 
         }
 
         stackList.push(actions)
+        reviewList.push(documentPreview)
 
         if (checked == true) {
             var numberCheck = this.state.Actions[actionIndex].checkedNumber + 1
@@ -859,16 +882,19 @@ var DocumentReview = React.createClass({
 
         console.log('stackChange', this.state.oldActions);
         var old = []
+        var oldDoc = []
         old = _.cloneDeep(this.state.oldActions)
-
+        oldDoc = old[old.length - 1][actionIndex].documents[docIndex]
+       /* var documentPreview = _.cloneDeep(this.setState.documentPreview)
+*/
 
         if (old.length > 0) {
             var oldActions = old[old.length - 1];
             old.pop()
             var updateUndo = update(this.state, {
                 Actions: { $set: oldActions },
-
-                oldActions: { $set: old }
+                oldActions: { $set: old },
+                documentPreview : {$set : oldDoc}
             })
             this.setState(updateUndo)
         }

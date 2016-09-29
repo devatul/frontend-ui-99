@@ -76,8 +76,8 @@ var RickInsight = React.createClass({
     },
 	render(){
         let children = [];
-
-        _.forEach(this.state.rickInsight.risks, function(object , index){
+        if(this.state.rickInsight != null) {
+             _.forEach(this.state.rickInsight.risks, function(object , index){
             let  color  = this.getRickType(index).color
             let className = "panel-body " + color + " widget-panel insight-panel"
             let name = this.upperFirst(object.name)
@@ -112,11 +112,56 @@ var RickInsight = React.createClass({
                               </section>
                             </div>
         }.bind(this));
+        }
+
 		return(
 
             <div>
+
                 {children}
+                   <div className="col-md-4">
+                      <section class="panel">
+                        <div className="panel-body bg-secondary-2 widget-panel insight-panel">
+                          <h4 className="widget-title">Stale Files
+
+                            <HelpButton1
+                                                classMenu="fix-overview-help-button-table"
+                                                classIcon="overview_question_a help_question_a" setValue="Number of aging files that have not been accessed."/>
+                         </h4>
+                         <div className="insight-stat">
+                          <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                          <span>{this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.previous_scan_value}</span>
+                        </div>
+                        <div className="widget-summary">
+                          <div className="widget-summary-col">
+                            <ul className="list-unstyled summary-list">
+                              <li>
+                                <div className="row">
+                                  <div className="col-xs-6 text-left"><span>1-2 Years</span></div>
+                                  <div className="col-xs-6 text-right"><span class="bold text-right"> {this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[0].value)}</span></div>
+                                </div>
+                              </li>
+                              <li>
+                                <div className="row">
+                                  <div className="col-xs-6 text-left"><span>3+ Years</span></div>
+                                  <div className="col-xs-6 text-right"><span class="bold">{ this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[1].value)}</span></div>
+                                </div>
+                              </li>
+                              <li>
+                                <div className="row">
+                                  <div className="col-xs-6 text-left"><span>Total</span></div>
+                                  <div className="col-xs-6 text-right"><span class="bold">{this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.total}</span></div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    </div>
+
             </div>
+
         )
 
 

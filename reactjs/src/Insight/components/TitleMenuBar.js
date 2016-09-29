@@ -10,9 +10,9 @@ var Title = React.createClass({
 		return(
 			<h2 className="panel-title">
 			      {this.props.title} <span style={{'marginLeft':'3px'}}></span>
-
-                   <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue={this.props.helpInfo} />
+                    <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a" setValue={this.props.helpInfo}/>
 
 			</h2>
 		)
