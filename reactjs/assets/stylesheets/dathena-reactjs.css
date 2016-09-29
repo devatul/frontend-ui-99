@@ -295,6 +295,12 @@ table.docPreview > thead > tr > th:nth-child(1) {
     background-color: #D6D6D6 !important;
 }
 
+.dathena-select-dropdown ::-webkit-scrollbar {
+    height: 6px;
+}
+
+/**/
+
 div#doctypeChartUserAssignment {
     height: 250px;
 }
@@ -337,6 +343,12 @@ select.assigment-select.form-control {
     font-weight: 300;
     color: #15213C;
     font-size: 24px;
+}
+
+/* Fix width tooltip */
+.tooltip .tooltip-inner {
+    max-width: none;
+    width: auto;
 }
 .tab-content.br-radius {
     border-radius: 5px;

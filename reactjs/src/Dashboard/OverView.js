@@ -125,8 +125,8 @@ var OverView = React.createClass
                 name: 'Category',
                 innerSize: '70%',
                 disabled: false,
-                colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896'],
-                colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6'],
+                colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#3c5896', '#020a1d'],
+                colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#E4E7F6', '#91949a'],
                 dataLabels: {
                     formatter: function () {
                         var percent = this.percentage.toFixed(1);
@@ -148,8 +148,8 @@ var OverView = React.createClass
                 size: '65%',
                 innerSize: '55%',
                 disabled: false,
-                colors: [ '#2ecd71', '#9b58b5', '#33495e'],
-                colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad'],
+                colors: [ '#2ecd71', '#9b58b5', '#33495e', '#3d2dc3', '#0da8c1'],
+                colorsHover: [ '#94e5b7', '#ccaada', '#98a2ad', '#c1bcee', '#8fd1dc'],
                 dataLabels: {
                     formatter: function () {
                         var percent = this.percentage.toFixed(1);
@@ -218,8 +218,8 @@ var OverView = React.createClass
             name: 'Confidentiality',
             disabled: false,
             innerSize: '60%',
-            colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
-            colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+            colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159', '#89cd6c'],
+            colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#c1f9a9'],
             data: []
         }, { confidentialities } = this.state.scan.result;
         debugger

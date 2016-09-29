@@ -106,7 +106,7 @@
                         id="documentPieChart"
                         config={configChart.doctypes}
                         help="Summarised list of all Document extensions detected by Dathena 99. Document types can contain the following file extensions:
-                            Word :  .doc, .dotx, .dot, .docm, .dotm, .rtf.
+                            Word :  .doc, .dotx, .dot, .docm, .dotm, .rtf, .txt.
                             Excel : .xlsx, .xls, .xltx, .xlt, .csv, .xlsb, .xlsm, .xltm, .xml, .xlam, .xla.
                             PDF : .pdf
                             Power Point : .pptx, .ppt, .potx, .pot, .ppsx, .pps, .pptm, .potm, .ppsm

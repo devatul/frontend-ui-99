@@ -46,7 +46,7 @@
                                     setValue="{'All the documents in this section have been classified ' + review.category.name + ' with a ' + review.confidentiality.name + ' level of Confidentiality.'}" />
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
-                                <span>Language: <b>English</b></span>
+                                <span>Language: <b>{review.language.name}</b></span>
                                 <button onClick="() => this.handleUndo(reviewIndex)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>

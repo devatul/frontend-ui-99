@@ -410,7 +410,7 @@ var Row = React.createClass({
                                         max={100}
                                         now={document.confidence_level}
                                         active
-                                        label={<span className="progress-percentage">{'(' + document.confidence_level + '%)'}</span>} />
+                                        label={<span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                                 </ProgressBar>
                             </div>
                         }
@@ -433,7 +433,7 @@ var Row = React.createClass({
                                             max={100}
                                             now={document.confidence_level}
                                             active
-                                            label={<span className="progress-percentage">{'(' + document.confidence_level + '%)'}</span>} />
+                                            label={<span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                                     </ProgressBar>
                                 </div>
                             }

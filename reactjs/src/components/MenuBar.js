@@ -67,6 +67,13 @@ var MenuBar = React.createClass
         }
     },
 
+    componentWillReceiveProps(nextProps) {
+        if(!isEqual(this.props.title != nextProps.title)) {
+            this.setState({ shouldUpdate: true });
+        }
+    },
+    
+
     shouldComponentUpdate(nextProps, nextState) {
         var { filter, scanResult, listLabel, value } = this.state;
         var {title} = this.props;

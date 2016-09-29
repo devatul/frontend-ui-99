@@ -405,176 +405,104 @@ var ClassificationReview = React.createClass({
 
     getClassificationReview() {
 
-        let data = [  
-            {
-                "language": {
-                "id": 1,
-                "short_name": "EN"
-                },
-                "category": {
-                "id": 1,
-                "name": "Accounting/Tax"
-                },
-                "confidentiality": {
-                "id": 1,
-                "name": "Banking Secrecy"
-                },
-                "documents": [
-                {
-                    "name": "doc_name.doc",
-                    "path": "/doc_path/doc_name.doc",
-                    "owner": "owner_name",
-                    "confidence_level": 40,
-                    "centroid_distance": 1.5,
-                    "group_min_centroid_distance": 1.6,
-                    "group_max_centroid_distance": 2,
-                    "group_avg_centroid_distance": 42,
-                    "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-                    "creation_date": "2012-04-23",
-                    "modification_date": "2012-04-23",
-                    "legal_retention_until": "2012-04-23",
-                    "number_of_classification_challenge": 1,
-                    "category": {
-                    "id": 1,
-                    "name": "Accounting/Tax"
-                    },
-                    "confidentiality": {
-                    "id": 1,
-                    "name": "Public"
-                    }
-                }
-                ]
-            },
-            {
-                "language": {
-                "id": 1,
-                "short_name": "FR"
-                },
-                "category": {
-                "id": 1,
-                "name": "Accounting/Tax"
-                },
-                "confidentiality": {
-                "id": 1,
-                "name": "Banking Secrecy"
-                },
-                "documents": [
-                {
-                    "name": "doc_name.doc",
-                    "path": "/doc_path/doc_name.doc",
-                    "owner": "owner_name",
-                    "confidence_level": 40,
-                    "centroid_distance": 1.5,
-                    "group_min_centroid_distance": 1.6,
-                    "group_max_centroid_distance": 2,
-                    "group_avg_centroid_distance": 42,
-                    "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-                    "creation_date": "2012-04-23",
-                    "modification_date": "2012-04-23",
-                    "number_of_classification_challenge": 1,
-                    "legal_retention_until": "2012-04-23",
-                    "category": {
-                    "id": 1,
-                    "name": "Accounting/Tax"
-                    },
-                    "confidentiality": {
-                    "id": 1,
-                    "name": "Public"
-                    }
-                }
-                ]
-            }
-        ];
-        let data1 = [
-            {
-                "urgency": "high",
-                "language": "EN",
-                "category": {
-                    "id": 1,
-                    "name": "accounting/tax"
-                },
-                "confidentiality": {
-                    "id": 1,
-                    "name": "public"
-                },
-                "documents": [
-                    {
-                        confidence_level: 87,
-                        confidentiality_label: "yes/no",
-                        creation_date: "2012-04-23",
-                        image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                        legal_retention_until: "2012-04-23",
-                        modification_date: "2012-04-23",
-                        name: "IonaTechnologiesPlcG07.doc",
-                        number_of_classification_challenge: 1,
-                        owner: "owner_name",
-                        path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                        category: {
-                            id: 1,
-                            name: "Accounting/Tax"
-                        },
-                        confidentiality: {
-                            id: 1, 
-                            name: "Confidential"
-                        }
-                    }
-                ]
-            },
-            {
-                "urgency": "high",
-                "language": "EN",
-                "category": {
-                    "id": 1,
-                    "name": "accounting/tax"
-                },
-                "confidentiality": {
-                    "id": 1,
-                    "name": "public"
-                },
-                "documents": [
-                    {
-                        confidence_level: 87,
-                        confidentiality_label: "yes/no",
-                        creation_date: "2012-04-23",
-                        image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                        legal_retention_until: "2012-04-23",
-                        modification_date: "2012-04-23",
-                        name: "IonaTechnologiesPlcG07.doc",
-                        number_of_classification_challenge: 1,
-                        owner: "owner_name",
-                        path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                        category: {
-                            id: 1,
-                            name: "Accounting/Tax"
-                        },
-                        confidentiality: {
-                            id: 1, 
-                            name: "Confidential"
-                        }
-                    }
-                ]
-            }
-        ]
+        // let data = [  
+        //     {
+        //         "language": {
+        //         "id": 1,
+        //         "short_name": "EN"
+        //         },
+        //         "category": {
+        //         "id": 1,
+        //         "name": "Accounting/Tax"
+        //         },
+        //         "confidentiality": {
+        //         "id": 1,
+        //         "name": "Banking Secrecy"
+        //         },
+        //         "documents": [
+        //         {
+        //             "name": "doc_name.doc",
+        //             "path": "/doc_path/doc_name.doc",
+        //             "owner": "owner_name",
+        //             "confidence_level": 40,
+        //             "centroid_distance": 1.5,
+        //             "group_min_centroid_distance": 1.6,
+        //             "group_max_centroid_distance": 2,
+        //             "group_avg_centroid_distance": 42,
+        //             "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+        //             "creation_date": "2012-04-23",
+        //             "modification_date": "2012-04-23",
+        //             "legal_retention_until": "2012-04-23",
+        //             "number_of_classification_challenge": 1,
+        //             "category": {
+        //             "id": 1,
+        //             "name": "Accounting/Tax"
+        //             },
+        //             "confidentiality": {
+        //             "id": 1,
+        //             "name": "Public"
+        //             }
+        //         }
+        //         ]
+        //     },
+        //     {
+        //         "language": {
+        //         "id": 1,
+        //         "short_name": "FR"
+        //         },
+        //         "category": {
+        //         "id": 1,
+        //         "name": "Accounting/Tax"
+        //         },
+        //         "confidentiality": {
+        //         "id": 1,
+        //         "name": "Banking Secrecy"
+        //         },
+        //         "documents": [
+        //         {
+        //             "name": "doc_name.doc",
+        //             "path": "/doc_path/doc_name.doc",
+        //             "owner": "owner_name",
+        //             "confidence_level": 40,
+        //             "centroid_distance": 1.5,
+        //             "group_min_centroid_distance": 1.6,
+        //             "group_max_centroid_distance": 2,
+        //             "group_avg_centroid_distance": 42,
+        //             "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+        //             "creation_date": "2012-04-23",
+        //             "modification_date": "2012-04-23",
+        //             "number_of_classification_challenge": 1,
+        //             "legal_retention_until": "2012-04-23",
+        //             "category": {
+        //             "id": 1,
+        //             "name": "Accounting/Tax"
+        //             },
+        //             "confidentiality": {
+        //             "id": 1,
+        //             "name": "Public"
+        //             }
+        //         }
+        //         ]
+        //     }
+        // ];
         makeRequest({
             path: "api/classification_review/",
-            success: (res) => {
+            success: (data) => {
                 debugger
+                for(let i = data.length - 1; i >= 0; i--) {
+                    data[i].validateNumber = 0;
+                    data[i].checkedNumber = 0;
+                    data[i].checkedAll = false;
+
+                    for(let j = data[i].documents.length - 1; j >= 0; j--) {
+                        data[i].documents[j].checked = false;
+                        data[i].documents[j].status = 'reject';
+                    }
+                }
+                //debugger
+                this.setState({ dataReview: data, shouldUpdate: true });
             }
         });
-
-        for(let i = data.length - 1; i >= 0; i--) {
-            data[i].validateNumber = 0;
-            data[i].checkedNumber = 0;
-            data[i].checkedAll = false;
-
-            for(let j = data[i].documents.length - 1; j >= 0; j--) {
-                data[i].documents[j].checked = false;
-                data[i].documents[j].status = 'reject';
-            }
-        }
-        //debugger
-        this.setState({ dataReview: data, shouldUpdate: true });
-
 
     },
 

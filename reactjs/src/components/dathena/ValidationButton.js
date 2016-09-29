@@ -34,10 +34,10 @@ var ValidationButton = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        debugger
+        //debugger
         if(nextProps.status) {
             var status = this.static.status[nextProps.status];
-            debugger
+            //debugger
             this.setState({ statusClass: status.className });
         }
     },

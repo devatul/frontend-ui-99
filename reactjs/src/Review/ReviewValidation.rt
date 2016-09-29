@@ -67,9 +67,9 @@
                             <Col rt-if="this.state.dataReview != null"
                                 sm={8} xs={6} class="text-right text-capitalize">
                                   {this.state.categoryCurrent.name} Review Status: 
-                                  <!--<b class="mr-lg">{this.state.reviewers.total_reviewers} Users - {this.state.dataReview.challenge_docs.length} Documents Challenged</b>-->
+                                  <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
                                   Progress:
-                                  <div class="progress-radial small progress{'-' + this.state.dataReview.validation_progress}">
+                                  <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
                                       <div class="overlay"></div>
                                   </div>
                                   <!--<div class="progress-radial small progress{'-' + this.parseInt(this.state.categoryCurrent.totalValidate * 100 / (this.state.reviewers.length * this.size(this.state.reviewCurrent.documents)))}">

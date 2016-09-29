@@ -12,9 +12,9 @@ module.exports = {
     },
 
     renderClassType: (documentName) => {
-        let word = /(.doc|.docx)$/gi,
-            excel = /(.xlsx|.xlsm|.xlsb|.xls)$/gi,
-            powerPoint = /(.pptx|.pptm|.ppt)$/gi,
+        let word = /(.doc|.dotx|.dot|.docm|.dotm|.rtf)$/gi,
+            excel = /(.xlsx|.xls|.xltx|.xlt|.csv|.xlsb|.xlsm|.xltm|.xml|.xlam|.xla)$/gi,
+            powerPoint = /(.pptx|.ppt|.potx|.pot|.ppsx|.pps|.pptm|.potm|.ppsm)$/gi,
             pdf = /.pdf$/gi,
             text = /.txt$/gi;
         switch(true) {

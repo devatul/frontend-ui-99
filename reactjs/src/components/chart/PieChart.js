@@ -36,7 +36,9 @@ var PieChart = React.createClass({
     // },
 
     componentDidUpdate(prevProps, prevState) {
-        this.options();  
+        if(!isEqual(this.props.data, prevProps.data)) {
+            this.options();
+        } 
     },
     
     

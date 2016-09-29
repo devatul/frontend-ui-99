@@ -5,7 +5,7 @@ import template from './UserAssignment.rt'
 import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
-import { upperFirst, findIndex, assignIn, isEqual } from 'lodash'
+import { upperFirst, findIndex, assignIn, isEqual, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var UserAssignment = React.createClass({
@@ -104,24 +104,28 @@ var UserAssignment = React.createClass({
     
     componentDidMount() {
     	this.getCategoryList();
+        this.getSummary();
     	console.log(this.state);
     	javascript();
     },
 
     componentDidUpdate(prevProps, prevState) {
-        var { category, datafilter } = this.state;
+        var { category, datafilter, reviewer } = this.state;
 
         if(this.state.shouldUpdate) {
             this.setState({ shouldUpdate: false });
         }
     	
         if(category.current != prevState.category.current) {
-            if(category.current.id === "summary") {
-                this.getSummary();
-            } else {
+            // if(category.current.id === 'summary') {
+            //     this.getSummary();
+            // } else {
+            //     this.getCategoryInfo();
+            // }
+            this.getSummary(false);
+            if(category.current.id != 'summary') {
                 this.getCategoryInfo();
             }
-
         }
         if(!isEqual(datafilter.params, prevState.datafilter.params)) {
             this.getReviewers();
@@ -413,27 +417,59 @@ var UserAssignment = React.createClass({
     },
     
     handleOnChangeSelectButton: function(checked, index) {
+        //add reviewer into request
         var { list } = this.state.reviewer, 
             { request } = this.state.datafilter,
-            indexReviewer = findIndex(request.reviewers, {id: list[index].id }),
+            indexReviewer = findIndex(request.reviewers, list[index]),
+
+            reviewer = update(list[index], {
+                id: {
+                    $set: parseInt(list[index].id)
+                }
+            }),
             
             updateRequest = update(this.state.datafilter, {
                 request: {
-                    reviewers: (checked == 'on' && indexReviewer == -1) ? {$push: [list[index]] } : {$splice: [[indexReviewer, 1]]}
+                    reviewers: (checked === 'on' && indexReviewer == -1) ? {$push: [reviewer] } : {$splice: [[indexReviewer, 1]]}
+                }
+            }),
+
+            updateReviewer = update(this.state.reviewer, {
+                list: {
+                    [index]: {
+                        selected: {
+                            $set: checked
+                        }
+                    }
                 }
             });
             debugger
-        this.setState({ datafilter: updateRequest });
+        this.setState({ datafilter: updateRequest, reviewer: updateReviewer, shouldUpdate: true });
     },
     handleOnChangeSelectAll: function(checked) {
-        var { list } = this.state.reviewer;
+        var { list } = this.state.reviewer,
+            newList = [];
         debugger
         var updateRequest = update(this.state.datafilter, {
             request: {
                 reviewers: {$set: (checked == 'on') ? list : [] }
             }
         });
-        this.setState({ datafilter: updateRequest });
+
+        var updateListReviewer = update(this.state.reviewer, {
+            list: {
+                $apply: (list) => {
+                    let newList = [];
+                    for(let i = list.length - 1; i >= 0; i--) {
+                        newList[i] = Object.assign({}, list[i], {
+                            selected: checked
+                        });
+                    }
+                    return newList;
+                }
+            }
+        });
+        this.setState({ datafilter: updateRequest, reviewer: updateListReviewer, shouldUpdate: true });
     },
 
     handleClickBackDrop: function(event) {
@@ -484,6 +520,25 @@ var UserAssignment = React.createClass({
             params: datafilter.params,
             success: (data) => {
                 debugger
+                let index = findIndex(this.state.summary, {
+                    id: this.state.category.current.id + "",
+                    name: this.state.category.current.name
+                });
+
+                let summary = this.state.summary[index];
+
+                for(let i = data.length - 1; i >= 0; i--) {
+                    let indexReviewer = findIndex(summary, {
+                        id: parseInt(data[i].id),
+                        first_name: data[i].first_name,
+                        last_name: data[i].last_name
+                    });
+
+                    if(indexReviewer > -1) {
+                        data[i].selected = 'on';
+                    }
+                }
+
                 let updateListReviewer = update(this.state.reviewer, {
                     list: {
                         $set: data
@@ -739,10 +794,10 @@ var UserAssignment = React.createClass({
                 ]
             };
 
-        // makeRequest({
-        //     path: 'api/assign/category/',
-        //     params: { "id": current.id },
-        //     success: (res) => {
+        makeRequest({
+            path: 'api/assign/category/',
+            params: { "id": current.id },
+            success: (res) => {
                 debugger
                 let updateCategoryInfo = update(this.state.category, {
                     info: {
@@ -758,52 +813,18 @@ var UserAssignment = React.createClass({
                         $set: this.documentTypeChart(res)
                     }
                 });
-
+                debugger
                 this.setState({ category: updateCategoryInfo, dataChart: updateDataChart, shouldUpdate: true });
-        //     }
-        // });
+            }
+        });
     },
-    getSummary() {
-        // let data = [{"id":1,
-        //         "name":"Accounting/Tax",
-        //         "docs_sampled" : 20,
-        //         "total_number_document_classified": 10000,
-        //         "reviewers": [
-        //         {"id":1,
-        //         "first_name":"chris",
-        //         "last_name":"muffat",
-        //         "number_docs":10},
-        //         {"id":2,
-        //         "first_name":"matt",
-        //         "last_name":"nixon",
-        //         "number_docs":9},
-        //         {"id":3,
-        //         "first_name":"tony",
-        //         "last_name":"gomez",
-        //         "number_docs":7}
-        //         ]},
-        //         {"id":2,
-        //         "name":"Corporate Entity",
-        //         "docs_sampled" : 20,
-        //         "total_number_document_classified": 10000,
-        //         "reviewers": [
-        //         {"id":1,
-        //         "first_name":"chris",
-        //         "last_name":"muffat",
-        //         "number_docs":10},
-        //         {"id":2,
-        //         "first_name":"matt",
-        //         "last_name":"nixon",
-        //         "number_docs":9},
-        //         {"id":3,
-        //         "first_name":"tony",
-        //         "last_name":"gomez",
-        //         "number_docs":7}
-        //         ]}];
+    getSummary(sync = true) {
         makeRequest({
+            sync: sync,
             path: "api/assign/summary/",
             success: (res) => {
                 debugger
+
                 this.setState({ summary: res, shouldUpdate: true });
             }
         });

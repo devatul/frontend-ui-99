@@ -53,6 +53,11 @@ var ReviewValidation = React.createClass({
                 challenge_docs: [],
                 challenge_back_docs: []
             },
+            reviewInfo: {
+                progress: 0,
+                total_docs: 0,
+                total_users: 0
+            },
             stackChange: [],
             openPreview: false,
             shouldUpdate: false
@@ -131,7 +136,7 @@ var ReviewValidation = React.createClass({
     },
 
     getReviewers() {
-        var data = {
+        var res = {
                 "total_reviewers": 2,
                 "reviewers": [
                     {
@@ -157,7 +162,7 @@ var ReviewValidation = React.createClass({
                 debugger
                 let bodyRequest = update(this.state.bodyRequest, {
                         reviewer_id: {
-                            $set: data.reviewers[0].id
+                            $set: res.reviewers[0].id
                         }
                     });
                 this.setState({
@@ -505,7 +510,7 @@ var ReviewValidation = React.createClass({
                     }
                 ]
             };
-
+            
         makeRequest({
             path: "api/review/review_validation/",
             params: {
@@ -523,6 +528,21 @@ var ReviewValidation = React.createClass({
         this.setState({
             dataReview: data,
             shouldUpdate: true
+        });
+    },
+
+    getReviewInfo() {
+        makeRequest({
+            path: "api/review/review_validation_meta/",
+            params: {
+                "category_id": this.state.categoryCurrent.id
+            },
+            success: (res) => {
+                res = Object.assign({}, res, {
+                    progress: Math.round(res.progress)
+                });
+                this.setState({ reviewInfo: res, shouldUpdate: true });
+            }
         });
     },
 
@@ -636,64 +656,12 @@ var ReviewValidation = React.createClass({
         this.setState({ currentIndex: updateCurrent, shouldUpdate: true });
     },
     getSummary() {
-        // let data = [
-        //     {
-        //         "id": 1,
-        //         "name": "accounting/tax",
-        //         "total_challenged_docs": 20,
-        //         "number_of_assigned": 2,
-        //         "total_classified_docs": 70,
-        //         "reviewers": [
-        //             {
-        //                 "id": 1,
-        //                 "first_name": "chris",
-        //                 "last_name": "muffat",
-        //                 "number_challenged_docs": 10,
-        //                 "number_classified_docs": 50
-        //             },
-        //             {
-        //                 "id": 1,
-        //                 "first_name": "tony",
-        //                 "last_name": "gomez",
-        //                 "number_challenged_docs": 10,
-        //                 "number_classified_docs": 20
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         "id": 1,
-        //         "name": "corporate entity",
-        //         "total_challenged_docs": 20,
-        //         "number_of_assigned": 2,
-        //         "total_classified_docs": 40,
-        //         "reviewers": [
-        //             {
-        //                 "id": 1,
-        //                 "first_name": "chris",
-        //                 "last_name": "muffat",
-        //                 "number_challenged_docs": 10,
-        //                 "number_classified_docs": 20,
-        //                 "type": "last_modifier"
-        //             },
-        //             {
-        //                 "id": 1,
-        //                 "first_name": "tony",
-        //                 "last_name": "gomez",
-        //                 "number_challenged_docs": 10,
-        //                 "number_classified_docs": 20,
-        //                 "type": "last_modifier"
-        //             }
-        //         ]
-        //     }
-        // ];
         makeRequest({
             path: "api/review/review_validation/summary/",
             success: (res) => {
-                debugger
                 this.setState({ summary: res, shouldUpdate: true });
             }
         });
-        //this.setState({ summary: data, shouldUpdate: true });
     },
     confirmValidation() {
         makeRequest({
