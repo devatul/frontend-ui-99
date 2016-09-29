@@ -184,7 +184,7 @@
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
-                            <h2 class="panel-title">Accuracy of Dathena 99 document classification expressed as a percentage</h2>
+                            <h2 class="panel-title">Categorisation Summary</h2>
                             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                                 <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
                             </div>
@@ -222,7 +222,7 @@
                                                     rowspan="1" colspan="1">Accuracy
                                                     <HelpButton
                                                         classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                        setValue="Percentage of accuracy of Dathena 99 for each category." />
+                                                        setValue="Accuracy of Dathena 99 document classification expressed as a percentage." />
                                                 </th>
                                             </tr>
                                         </thead>

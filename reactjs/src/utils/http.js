@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 
 module.exports = {
     makeRequest: function({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error }) {
-        $.ajax({
+       return $.ajax({
 				url: Constants.SERVER_API + path,
 				dataType: dataType,
 				contentType: contentType,
