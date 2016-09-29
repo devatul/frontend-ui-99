@@ -35,8 +35,10 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Access Rights Anomaly
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
+
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"  setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
 
                   </h4>
                   <div class="widget-summary">
@@ -55,8 +57,9 @@
               <section class="panel">
                 <div class="panel-body bg-secondary widget-panel insight-panel">
                   <h4 class="widget-title">Data Repository Anomaly
-                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                     <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."/>
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -74,8 +77,9 @@
               <section class="panel">
                 <div class="panel-body bg-secondary-2 widget-panel insight-panel">
                   <h4 class="widget-title">Client Data Access Anomaly
-                      <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as client identifying." />
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as Client."/>
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -95,8 +99,9 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
                   <h4 class="widget-title">Users at Risk
-                     <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present an incorrect access pattern based on organisational role types." />
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -114,8 +119,10 @@
               <section class="panel">
                 <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Documents Risk
-                      <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the number of documents that have been detected by Dathena 99 as being at risk." />
+
+                         <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue="This details the number of document that are involved in anomalies."/>
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -134,7 +141,7 @@
                 <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
                   <h4 class="widget-title">Active Directory Group at Risk
                      <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types." />
+                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
                   </h4>
                   <div class="widget-summary">
                       <div class="widget-summary-col">
@@ -155,9 +162,10 @@
       <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
           <h2 class="panel-title">Identity and Access Management Anomaly
-            <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present an incorrect pattern based on organisational role types." />
-          </h2>
+            <HelpButton
+                classMenu="fix-overview-help-button-table"
+                classIcon="overview_question_a help_question_a"   setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
+            </h2>
         </header>
         <div class="panel-body">
           <div class="row">
@@ -166,8 +174,9 @@
                   <div class="col-md-5" style="margin-left: 3px">
                     <h4 class="anomaly-title ">User - Client Data Access Anomaly
                         <div class="fix_whitespace">
-                              <HelpButton className="" classNote="overview_timeframe fix-overview-help-button "
-                                    setValue="This details a list of users who have access to client data types, but their role description or department position indicates this access may be erroneous." />
+                                  <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on user perspective."/>
                         </div>
 
                                     <!-- <HelpButton1 type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/> -->
@@ -268,8 +277,9 @@
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
                     <div  class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This presents a list of users based on their Windows Account name, raking them by number of anomalies detected. A full list of user exceptions can be extracted." />
+                        <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"   setValue="This details the list of users at risk having the most access to client document at risk."/>
                     </div>
                     </h4>
                   </div>
@@ -371,8 +381,9 @@
                   <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
                     <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
                     <div class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details client data access anomalies, based on the access rights assigned to AD groups. Where AD groups have access to client data types, and Dathena 99 has detected that one of more members of the AD group should not have these access rights, the AD group will be flagged here." />
+                        <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
                         </div>
                     </h4>
                   </div>
@@ -477,8 +488,9 @@
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
-                   <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the list of active directory group at risk having the most client document at risk." />
+                     <HelpButton
+                        classMenu="fix-overview-help-button-table"
+                        classIcon="overview_question_a help_question_a"   setValue="This details the list of active directory group at risk having the most client document at risk."/>
                     Display:
                     <a href="#">All</a> -
                     <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
@@ -579,9 +591,11 @@
 
                     <h4 class="anomaly-title">User - Access Right Anomaly
                      <div class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the access rights anomaly." />
+                      <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue=" This details the access rights anomaly."/>
                         </div>
+
                     </h4>
                   </div>
                 </div>
@@ -687,9 +701,9 @@
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
                      <div  class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the list of user having the most access to document at Risk." />
-                        </div>
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"   setValue="This details the list of user having the most access to document at Risk." />
                     </h4>
                   </div>
                   <div class="col-md-8 filter-state">
@@ -790,8 +804,9 @@
       <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
           <h2 class="panel-title">Data Architecture Risk Management
-             <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the document repository anomalies for all the documents and for client data." />
+            <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies for all the documents and for client data." />
           </h2>
         </header>
         <div class="panel-body">
@@ -802,8 +817,9 @@
                   <div class="col-md-5" style="margin-left: 3px">
                     <h4 class="anomaly-title">Document Repository Anomaly
                         <div class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                            <HelpButton
+                                classMenu="fix-overview-help-button-table"
+                                classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
                         </div>
                     </h4>
                   </div>
@@ -920,8 +936,10 @@
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
                         <div  class="fix_whitespace">
-                           <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                        setValue="This details the list of user having access to the most document repository anomaly." />
+
+                             <HelpButton
+                                classMenu="fix-overview-help-button-table"
+                                classIcon="overview_question_a help_question_a"     setValue="This details the list of user having access to the most document repository anomaly." />
                         </div>
                     </h4>
                   </div>
@@ -1024,8 +1042,10 @@
                   <div class="col-md-5" style="margin-left: 8px">
                     <h4 class="anomaly-title">Client Data Repository Anomaly
                     <div class="fix_whitespace">
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+
+                          <HelpButton
+                                classMenu="fix-overview-help-button-table"
+                                classIcon="overview_question_a help_question_a"     setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."  />
                         </div>
                     </h4>
                   </div>
@@ -1125,8 +1145,10 @@
                   <div class="col-md-4">
                     <h4 class="anomaly-title">Anomaly Details - List of Users at Risk
                      <div  class="fix_whitespace">
-                          <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                        setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults." />
+
+                            <HelpButton
+                                classMenu="fix-overview-help-button-table"
+                                classIcon="overview_question_a help_question_a"    setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults."   />
                         </div>
                     </h4>
                   </div>

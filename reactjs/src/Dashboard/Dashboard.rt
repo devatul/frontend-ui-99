@@ -1,5 +1,6 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="contant" from="../Constant.js"/>
 <section>
     <!--my_header start-->
@@ -51,9 +52,8 @@
                                     <div class="row">
                                         <span class="ml-md mr-md" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'hight' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'hight')}" ></i> : {this.state.pending_action.warning}</span>
                                         <span class="mr-md" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very hight' "><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'very hight')}"></i> : {this.state.pending_action.danger}</span>
-                                        <HelpButton className="dropdown-file-info-holder"
-                                            classNote="overview_timeframe fix-overview-help-button"
-                                            setValue="Number of actions pending for you to complete. {this.state.pending_action.danger} {this.state.pending_action.danger >1 ? 'actions are' : 'action is'} required with high priority and {this.state.pending_action.warning} {this.state.pending_action.warning >1 ? 'actions are' : 'action is'} required with medium priority." />
+
+                                         <HelpButton1 className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="Number of actions pending for you to complete. {this.state.pending_action.danger} {this.state.pending_action.danger >1 ? 'actions are' : 'action is'} required with high priority and {this.state.pending_action.warning} {this.state.pending_action.warning >1 ? 'actions are' : 'action is'} required with medium priority." />
                                        <!--  <HelpButton className="" classNote="overview_timeframe help_timeframe"
                                             setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." /> -->
                                     </div>
