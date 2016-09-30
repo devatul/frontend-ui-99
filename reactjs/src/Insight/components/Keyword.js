@@ -91,7 +91,7 @@ var Keywords = React.createClass({
                 debugger
                 if(i != object.keywords.length - 1 ){
 
-                    key = key+object.keywords[i]+' , '
+                    key = key+object.keywords[i]+' ; '
                 }
                 else {
                     key += object.keywords[i]

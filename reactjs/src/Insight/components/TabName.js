@@ -92,10 +92,9 @@ var TabName = React.createClass({
 		let language = [];
         for(let i = 0 ; i< this.props.language.length ; i++){
              language[i] = this.configLanguage(this.props.language[i])
-        }
-        for(let i = 1 ;  i <this.props.language.length ; i++){
-            active[i] = '#'
-
+             if( i>=1 ){
+                active[i] = '#'
+             }
         }
 
 		for( let i=0 ; i<language.length; i++){
