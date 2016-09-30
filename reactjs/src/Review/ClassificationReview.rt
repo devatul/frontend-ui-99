@@ -38,8 +38,8 @@
                         class="panel-bordered actions-panel">
                         <Panel.head>
                             <h2 class="panel-title inline-block-item mr-sm">
-                                <!--<i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>-->
-                                <span class="text-capitalize">{ review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
+                                <i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
+                                <span class="ml-md text-capitalize">{ review.category.name + ' - ' + review.confidentiality.name + ' '}</span>
                                 <HelpButton
                                     classMenu="fix-overview-help-button-table"
                                     classIcon="overview_question_a help_question_a"

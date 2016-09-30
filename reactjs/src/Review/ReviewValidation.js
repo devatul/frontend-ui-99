@@ -153,7 +153,7 @@ var ReviewValidation = React.createClass({
                     }
                 ]
             };
-        makeRequest({
+        return makeRequest({
             path: "api/review/reviewer_list/",
             params: {
                 "id": this.state.categoryCurrent.id
@@ -173,13 +173,6 @@ var ReviewValidation = React.createClass({
                 });
             }
         });
-        
-        // this.setState({
-        //     reviewers: data,
-        //     reviewerCurrent: data.reviewers[0],
-        //     bodyRequest: bodyRequest,
-        //     shouldUpdate: true
-        // });
     },
 
     setReviewerCurrent: function(event) {

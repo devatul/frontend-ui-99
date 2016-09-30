@@ -100,7 +100,7 @@
                                             <h2 class="document_panel-title panel-title">Challenge
                                               <HelpButton
                                                 classMenu="fix-overview-help-button-table"
-                                                setValue="This summarises all the documents challenged. Users must review each challenge to accept or reject it." />
+                                                setValue="Documents challenged by reviewers are displayed in this section." />
                                             </h2>
                                         </li>
                                     </ul>

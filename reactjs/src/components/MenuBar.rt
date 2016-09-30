@@ -192,80 +192,80 @@
                             <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                             <div class="dropdown-menu has-arrow dd-md full-mobile dd-right info-scan">
                                 <div class="table-responsive">
-                                    <table class="table general-table mb-none">
+                                    <table class="table general-table table-info table-bordered table-striped mb-none">
                                         <tbody>
                                         <tr>
                                             <td class="text-left">Last Data Scan:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Time of the last data scan by Dathena 99." />
                                             </td>
                                             <td class="text-right" colspan="3">{scanResult.last_data_scan}</td>
                                         </tr>
                                         <tr>
-                                            <td>Country in Scope:
+                                            <td class="text-left">Country in Scope:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Country(s) in scope for the last scan." />
                                             </td>
                                             <td class="text-right" colspan="3">{scanResult.country}</td>
                                         </tr>
                                         <tr>
-                                            <td>Business in Scope:
+                                            <td class="text-left">Business in Scope:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Business unit(s) in scope for the last scan." />
                                             </td>
                                             <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
                                         </tr>
                                         <tr>
-                                            <td>Scan Status:
+                                            <td class="text-left">Scan Status:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Details whether the scan was successful or not." />
                                             </td>
                                             <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
                                         </tr>
                                         <tr>
-                                            <td>Documents Analyzed:
+                                            <td class="text-left">Documents Analyzed:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="The total number of documents that were detected by 99 during the scan process." />
                                             </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
                                         </tr>
                                         <tr>
-                                        <td>File Extension Processed:
+                                        <td class="text-left">File Extension Processed:
                                             <HelpButton
                                                 class="help-info-button"
                                                 classMenu="fix-overview-help-button-table"
-                                                classIcon="review_question_a help_question_a"
+                                                classIcon="review_question_a help_question_a mr-md"
                                                 setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
                                         </td>
                                             <td class="text-right" colspan="3">{scanResult.file_extensions_processed}</td>
                                         </tr>
                                         <tr>
-                                            <td>Duplicate Documents:
+                                            <td class="text-left">Duplicated Documents:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Two or more files with identical content and file names." />
                                             </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
                                         </tr>
-                                        <tr>
-                                        <td>Twins Documents:
+                                        <!--<tr>
+                                        <td class="text-left">Twins Documents:
                                             <HelpButton
                                                 class="help-info-button"
                                                 classMenu="fix-overview-help-button-table"
@@ -273,24 +273,24 @@
                                                 setValue="Two or more files with identical content, but with different file names." />
                                         </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
-                                        </tr>
+                                        </tr>-->
 
                                         <tr>
-                                            <td>Encrypted Documents or Archives:
+                                            <td class="text-left">Encrypted Documents or Archives:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
                                             </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
                                         </tr>
                                         <tr>
-                                            <td>Documents Skipped:
+                                            <td class="text-left">Documents Skipped:
                                                 <HelpButton
                                                     class="help-info-button"
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="review_question_a help_question_a"
+                                                    classIcon="review_question_a help_question_a mr-md"
                                                     setValue="Documents in the data repository that have not been scanned by Dathena 99." />
                                             </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>

@@ -55,7 +55,7 @@
                           </header>
                           <div class="panel-body sample-params clearfix">
                             <div class="form-group user-assign-valid-btn left">
-                              <label class="">Fixed Number of Document</label>
+                              <label class="">Fixed Number of Documents</label>
                               <select ref="fixedNumberDoc" name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
                                 <option rt-repeat="docPercentage in this.state.category.info.doc_percentage"
                                   class="lt"

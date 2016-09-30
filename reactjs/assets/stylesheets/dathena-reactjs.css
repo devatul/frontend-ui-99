@@ -337,6 +337,11 @@ select.assigment-select.form-control {
     text-align: right;
 }
 
+.dropdown-menu.info-scan .table-info > tbody > tr > td:nth-child(1) {
+    background-color: initial;
+    font-weight: 600;
+}
+
 /* title menu bar */
 .my_main.bar_menu .title-heading {
     margin-top: 12px;
