@@ -10,8 +10,8 @@
 
       <ul class="filter-buttons list-unstyled">
       <li class="dropdown">
-        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-       <!--  <div id="dr" class="dropdown-backdrop-custom" style="display:none"></div> -->
+        <a class="toggle-button btn btn-default" id="showList" onClick={this.OnClick}><i class="fa fa-filter" aria-hidden="true"></i></a>
+        <div class="dropdown-backdrop" style="display:none"></div>
         <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md fix_filter_insight dd-right">
           <ul class="filter-list list-unstyled pt-xs">
             <!-- <li class="mb-sm">
@@ -49,7 +49,7 @@
              </div>
           </li> -->
           <li class="mb-sm">
-             <div class="form-group">
+             <div class="form-group" id='dr'>
                 <NumberUser onChange="{this.handleSelectNumber}"  id={this.static.numberId}
                 title="Number of users & AD group" data={this.state.dataSelectBox[this.static.numberId]}  checked={this.state.checked} />
             </div>

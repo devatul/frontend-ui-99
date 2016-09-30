@@ -132,8 +132,6 @@
                                                                     {doc.name}
                                                                 </span>
                                                         </span>
-
-
                                                         <InfoButton className="dropdown-file-info-holder-edit2">
                                                             <li>Name: <b>{doc.name}</b></li>
                                                             <li>Path: <span>/{doc.path}</span></li>
@@ -144,10 +142,7 @@
                                                             <li>Confidentiality Label: <b>{doc.confidentiality_label}</b></li>
                                                             <li>Number of Classification Challenge: <b> {doc.number_of_classification_challenge}</b></li>
                                                         </InfoButton>
-
-
                                                     </td>
-
                                                     <td >
                                                         <div class="select-group" style="height: 34px">
                                                             <div class="selected-info">
@@ -193,7 +188,6 @@
                                                                 </div>
                                                             </div>
                                                             <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)" value="{doc.confidentiality.name}">
-                                                              <!-- <option selected>{doc.confidentiality.name}</option> -->
                                                               <option
                                                                     rt-repeat="Confidential in this.state.confidentialities"
                                                                     key="{ConfidentialIndex}"
@@ -202,50 +196,8 @@
                                                                 </option>
                                                             </select>
                                                         </div>
-                                                        <!-- <div class="select-group">
-                                                            <div class="selected-info">
-                                                                <div class="progress progress-striped light">
-                                                                <div
-                                                                    class="progress-bar {this.progressbar(doc.confidential_confidence_level)}"
-                                                                    role="progressbar"
-                                                                    aria-valuenow="{doc.confidentialities[current.confidential].confidence_level}"
-                                                                    aria-valuemin="0"
-                                                                    aria-valuemax="100"
-                                                                    style="width: {doc.confidential_confidence_level}%;">
-                                                                </div>
-                                                                <span class="progress-percentage" style="color: #000">
-                                                                ({doc.confidential_confidence_level}%)
-
-                                                                </span>
-                                                                </div>
-                                                            </div>
-                                                            <select
-                                                                style="text-transform: capitalize"
-                                                                class="form-control"
-                                                                onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)"
-                                                                value="{current.confidential} ">
-                                                                <option
-                                                                    rt-repeat="Confidential in doc.confidentialities"
-                                                                    key="{ConfidentialIndex}"
-                                                                    value="{ConfidentialIndex}">
-                                                                    {Confidential.name}
-                                                                </option>
-                                                            </select>
-                                                        </div> -->
                                                     </td>
                                                     <td >
-                                                       <!--  <a style="cursor: pointer"
-                                                            class="doc-check {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }"
-                                                            onClick="(event)=>this.onClickValidationButton(event, actionIndex, docIndex)">
-                                                            <i rt-if="(current.status == 'normal')"
-                                                                class="fa fa-clock-o fa-2x"
-                                                                aria-hidden="true">
-                                                            </i>
-                                                            <i class="fa fa-check"
-                                                                aria-hidden="true"
-                                                                rt-props="(current.status == 'editing') ? {style: { color: '#ffc200'}} : ''">
-                                                            </i>
-                                                        </a> -->
                                                          <a style="cursor: pointer"
                                                             class="doc-check {(doc.status == 'accept' || doc.status == 'editing') ? 'validated' : '' }"
                                                             onClick="(event)=>this.onClickValidationButton(event, actionIndex, docIndex)">

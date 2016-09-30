@@ -27,30 +27,12 @@ var NumberUser = React.createClass({
    /* componentDidUpdate(prevProps , prevState){
         this.state.data = this.props.data
     }*/
-   /* handleOnClick(){
+    /*handleOnClick(){
 
               $("#radio_filter_"+this.props.checked).prop("checked", true);
     },*/
     componentDidMount() {
-        var dropdown = this.refs.dropdown
-        var dropdownmenu = this.refs.dropdownmenu
-        console.log('dropdown', dropdown)
-
-        $(dropdown).on('show.bs.dropdown', function() {
-            $('#dropdownFilter').css({
-                display: 'block',
-                height: $(dropdownmenu).height() + 90 + 'px'
-            });
-
-        }.bind(this));
-
-        $(dropdown).on('hide.bs.dropdown', function() {
-            $('#dropdownFilter').css({
-                display: 'block',
-                height: ''
-            });
-
-        }.bind(this));
+        this.changeHeight()
     },
     handleOnChange: function(event, index, size) {
         var field = {
@@ -67,9 +49,45 @@ var NumberUser = React.createClass({
 	isActive(value){
         return ((value===this.state.selected) ?'active':'default');
     },
-    /*handleOnClick(){
+    changeHeight(){
+
+        var dropdown = this.refs.dropdown
+        var dropdownmenu = this.refs.dropdownmenu
+        console.log('dropdown', dropdown)
+
+        $(dropdown).on('show.bs.dropdown', function() {
+            $('#dropdownFilter').css({
+                display: 'block',
+                height: $(dropdownmenu).height() + 90 + 'px'
+            });
+            /*$('.dropdown-backdrop-custom').css({
+                display: 'none'
+            })*/
+
+        }.bind(this));
+
+        $(dropdown).on('hide.bs.dropdown', function() {
+            $('#dropdownFilter').css({
+                display: 'block',
+                height: ''
+            });
+            $('body').click(function(){
+                $("#dropdownFilter").hide()
+            })
+
+        }.bind(this));
+    },
+    onClick(){
+        this.changeHeight()
+    },
+   /* handleOnClick(){
+         $('.dropdown-backdrop-custom').css({
+                display: 'block'
+            })
          $('body').click(function(){
-            $('#dr').hide()
+            $('.dropdown-backdrop-custom').css({
+                display: 'none'
+            })
         });
     },*/
 
@@ -101,10 +119,10 @@ var NumberUser = React.createClass({
             }.bind(this));
 
 		return(
-			<div ref="dropdown" className="btn-group dropdown" >
-				<button type="button"
+			<div ref="dropdown" className="btn-group dropdown">
+				<button type="button" id="button"
 					key={this.props.key + '_'}
-
+                    onClick = {this.onClick}
 					className="multiselect dropdown-toggle btn btn-default"
 					data-toggle="dropdown"
 					title={this.props.title}
@@ -117,8 +135,8 @@ var NumberUser = React.createClass({
 					{children}
 
 				</ul>
-                <span className="dropdown-backdrop" style={{ display: 'none' }}></span>
-			</div>
+
+            </div>
 		)
 	},
 

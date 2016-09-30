@@ -60,6 +60,10 @@ var MenuBar1 = React.createClass({
         showFilter: React.PropTypes.bool,
         showInfo: React.PropTypes.bool
     },
+     OnClick(){
+
+        $("#dropdownFilter").show()
+    },
     addCommas(nStr) {
         nStr += '';
         var x = nStr.split('.');

@@ -87,7 +87,7 @@ var DocumentReview = React.createClass({
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
-        debugger
+
         /*if(this.state.Actions != prevState.Actions){
             var arr = _.cloneDeep(this.state.stackChange)
             arr.push(this.state.Actions)
@@ -96,28 +96,7 @@ var DocumentReview = React.createClass({
         }*/
         if (this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate.value;
-            /*if (update.name === 'updateValidate' || update.name === 'undoAction' || update.name === 'approveButon' || update.name === "updateCategory" || update.name === "updateConfidential") {
-
-                this.validateNumber(update.actionIndex);
-            }
-            if (update.name === 'updateCheckBox' || update.name === 'undoAction' || update.name === "updateCheckAll" || update.name === 'approveButon') {
-                this.checkedNumber(update.actionIndex);
-
-            }*/
             this.setState({ documentPreview: this.state.Actions[update[0]].documents[1] })
-
-
-
-            /* if (this.state.shouldUpdateChall != prevState.shouldUpdateChall) {
-                 var update = this.state.shouldUpdateChall;
-                 if (update.name === 'updateValidate' || update.name === "undoActionChallenged" || update.name === 'approveButon') {
-
-                     this.validateNumberChallenged(update.actionIndex);
-                 }
-                 if (update.name === 'updateCheckBox' || update.name === "undoActionChallenged" || update.name === "updateCheckAll" || update.name === 'approveButon') {
-                     this.checkedNumberChallenged(update.actionIndex);
-                 }
-             }*/
         }
         if (this.state.oldActions != prevState.oldActions) {
             this.setState({ stackChange: this.state.oldActions })
@@ -244,7 +223,7 @@ var DocumentReview = React.createClass({
                     },
                     "confidentiality": {
                         "id": 1,
-                        "name": "Public"
+                        "name": "Banking Secrecy"
                     },
                     "confidence_level": 40,
                     "centroid_distance": 1.5,
@@ -269,7 +248,7 @@ var DocumentReview = React.createClass({
                     },
                     "confidentiality": {
                         "id": 1,
-                        "name": "Public"
+                        "name": "Banking Secrecy"
                     },
                     "confidence_level": 40,
                     "centroid_distance": 1.5,
@@ -292,7 +271,7 @@ var DocumentReview = React.createClass({
                     },
                     "confidentiality": {
                         "id": 1,
-                        "name": "Public"
+                        "name": "Banking Secrecy"
                     },
                     "confidence_level": 40,
                     "centroid_distance": 1.5,
@@ -334,7 +313,7 @@ var DocumentReview = React.createClass({
                 },
                 "confidentiality": {
                     "id": 1,
-                    "name": "Public"
+                    "name": "Banking Secrecy"
                 },
                 "confidence_level": 40,
                 "centroid_distance": 1.5,
@@ -380,7 +359,7 @@ var DocumentReview = React.createClass({
     },
 
     setDocumentPreview: function(actionIndex, docIndex) {
-        debugger
+
 
         /*   loadScript("/assets/vendor/gdocsviewer/jquery.gdocsviewer.min.js")*/
         var documentCurrent = this.state.Actions[actionIndex].documents[docIndex];
@@ -441,6 +420,12 @@ var DocumentReview = React.createClass({
         debugger
         var valueChange = [actionIndex, docIndex]
         var categoryIndex = event.target.value;
+        /*var categoryID = this.getIDCategory(categoryIndex);*/
+        for(var i =0; i< this.state.categories.length ; i++){
+            if(categoryIndex == this.state.categories[i].name){
+                var categoryID = this.state.categories[i].id
+            }
+        }
         var status = ''
 
         var action1 = this.state.Action1;
@@ -451,7 +436,12 @@ var DocumentReview = React.createClass({
             stackList = _.cloneDeep(this.state.oldActions)
 
         }
-        stackList.push(actions)
+        stackList.push(
+            {
+                docID : docIndex,
+                contents : actions
+            }
+        )
 
         if (categoryIndex == action1[actionIndex].documents[docIndex].category.name) {
             status = 'accept'
@@ -467,6 +457,7 @@ var DocumentReview = React.createClass({
                         [docIndex]: {
                             status: { $set: status },
                             category: {
+                                id : {$set : categoryID},
                                 name: { $set: categoryIndex }
                             }
                         }
@@ -477,38 +468,16 @@ var DocumentReview = React.createClass({
             documentPreview: {
 
                 category: {
+                    id : {$set : categoryID},
                     name: { $set: categoryIndex }
                 },
                 status: { $set: status },
 
             },
             oldActions: { $set: stackList }
-            /*  shouldUpdate: {
-                  type: { $set: 'category' },
-                  valueChange: { $set: valueChange }
-              }*/
 
         })
         this.setState(updateCategory)
-
-        /* var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
-         var stackList = this.state.stackChange;
-         stackList.push({
-             index: { actionIndex: actionIndex, docIndex: docIndex },
-             contents: saveDocument
-         });
-         actions[actionIndex].documents[docIndex].current.category = categoryIndex;
-         if (actions[actionIndex].documents[docIndex].current.category == 4) {
-             actions[actionIndex].documents[docIndex].current.status = "accept";
-         } else {
-             actions[actionIndex].documents[docIndex].current.status = "editing";
-         }
-
-         this.setState(update(this.state, {
-             stackChange: { $set: stackList },
-             Actions: { $set: actions }
-         }));
-         this.setState({ shouldUpdate: { name: 'updateCategory', actionIndex: actionIndex, docIndex: docIndex, categoryIndex: categoryIndex } });*/
     },
     onChangeConfidential: function(event, actionIndex, docIndex) {
         debugger
@@ -516,12 +485,22 @@ var DocumentReview = React.createClass({
         var status = ''
         var action1 = this.state.Action1;
         var stackList = [];
+        for(var i =0; i< this.state.confidentialities.length ; i++){
+            if(categoryIndex == this.state.confidentialities[i].name){
+                var categoryID = this.state.confidentialities[i].id
+            }
+        }
         var actions = _.cloneDeep(this.state.Actions);
         if (this.state.oldActions != null) {
             stackList = _.cloneDeep(this.state.oldActions)
 
         }
-        stackList.push(actions)
+        stackList.push(
+            {
+                docID : docIndex,
+                contents : actions
+            }
+        )
         if (categoryIndex == action1[actionIndex].documents[docIndex].confidentiality.name) {
             status = 'accept'
         } else {
@@ -534,6 +513,7 @@ var DocumentReview = React.createClass({
                         [docIndex]: {
                             status: { $set: status },
                             confidentiality: {
+                                id : {$set : categoryID},
                                 name: { $set: categoryIndex }
                             }
                         }
@@ -543,6 +523,7 @@ var DocumentReview = React.createClass({
             documentPreview: {
 
                 confidentiality: {
+                    id : {$set : categoryID},
                     name: { $set: categoryIndex }
                 },
                 status: { $set: status },
@@ -600,7 +581,7 @@ var DocumentReview = React.createClass({
 
         var checked = event.target.checked;
         var stackList = [];
-        var reviewList = [];
+
 
         var actions = _.cloneDeep(this.state.Actions);
 
@@ -609,8 +590,13 @@ var DocumentReview = React.createClass({
 
         }
 
-        stackList.push(actions)
-        reviewList.push(documentPreview)
+        stackList.push(
+            {
+                docID : docIndex,
+                contents : actions
+            }
+        )
+
 
         if (checked == true) {
             var numberCheck = this.state.Actions[actionIndex].checkedNumber + 1
@@ -668,7 +654,8 @@ var DocumentReview = React.createClass({
         this.setState({ shouldUpdate: { name: 'validateNumber', actionIndex: actionIndex, number: num } });
     },
     onClickValidationButton: function(event, actionIndex, docIndex) {
-
+        debugger
+        this.postDocument(actionIndex, docIndex);
         var valueChange = [actionIndex, docIndex]
         var docLength = this.state.Actions[actionIndex].docLength
         if (docLength > 0) {
@@ -682,7 +669,12 @@ var DocumentReview = React.createClass({
 
         }
 
-        stackList.push(actions)
+        stackList.push(
+            {
+                docID : docIndex,
+                contents : actions
+            }
+        )
 
         /* var actions = this.state.Actions;
          var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
@@ -731,7 +723,7 @@ var DocumentReview = React.createClass({
          this.setState(setUpdate);
          this.setState({ shouldUpdate: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' } });*/
         //debugger;
-        debugger
+
         if (this.state.documentPreview != undefined) {
             var setUpdate = update(this.state, {
                 /* stackChange: { $set: stackList },*/
@@ -779,7 +771,7 @@ var DocumentReview = React.createClass({
 
     },
     approveButon: function(actionIndex) {
-        debugger
+
         var actions = _.cloneDeep(this.state.Actions);
         if ((actions[actionIndex].docLength > 0)) {
             var docLength = actions[actionIndex].docLength - 1
@@ -813,7 +805,7 @@ var DocumentReview = React.createClass({
 
         } else {
             for (let i = 0; i < actions[actionIndex].documents.length; i++) {
-                debugger
+
                 if (actions[actionIndex].documents[i].checked == true && actions[actionIndex].documents[i].status != 'accept') {
                     /*  var updateApprove = update(this.state, {
                           Actions: {
@@ -840,7 +832,7 @@ var DocumentReview = React.createClass({
         }
     },
     checkAllButton: function(event, actionIndex) {
-        debugger
+
         var checked = event.target.checked;
         var actions = _.cloneDeep(this.state.Actions);
         var length = actions[actionIndex].documents.length
@@ -877,19 +869,26 @@ var DocumentReview = React.createClass({
 
 
     },
-    undoHandle: function(actionIndex, docIndex) {
-        debugger
+    undoHandle: function(actionIndex,docIndex) {
 
+        debugger
         console.log('stackChange', this.state.oldActions);
+
         var old = []
         var oldDoc = []
         old = _.cloneDeep(this.state.oldActions)
-        oldDoc = old[old.length - 1][actionIndex].documents[docIndex]
+       /* oldDoc = old[old.length-1][actionIndex].documents[old]*/
        /* var documentPreview = _.cloneDeep(this.setState.documentPreview)
 */
 
         if (old.length > 0) {
-            var oldActions = old[old.length - 1];
+            if(docIndex == undefined){
+                 var docIndex = old[old.length - 1].docID
+            }
+
+
+            var oldActions = old[old.length - 1].contents
+            oldDoc = old[old.length-1].contents[actionIndex].documents[docIndex]
             old.pop()
             var updateUndo = update(this.state, {
                 Actions: { $set: oldActions },
@@ -1068,6 +1067,40 @@ var DocumentReview = React.createClass({
         }));
         this.setState({ shouldUpdateChall: { name: 'checkedNumber', actionIndex: actionIndex } });
     },
+    postDocument(actionIndex, docIndex){
+        debugger
+        let documentPost = _.cloneDeep(this.state.Actions[actionIndex].documents[docIndex])
+        let dataPost = {
+              "document_id": docIndex+1,
+              "name": documentPost.name,
+              "path": documentPost.path,
+              "owner": documentPost.owner,
+              "category": documentPost.category,
+              "confidentiality": documentPost.confidentiality
+        }
+        $.ajax({
+
+            url: Constant.SERVER_API + 'api/review/documents/',
+            dataType: 'json',
+            type: 'PUT',
+            data: JSON.stringify(dataPost),
+
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            },
+            success: function(data) {
+
+                console.log('data', data)
+
+            }.bind(this),
+            error: function(xhr, error) {
+                if (xhr.status === 401) {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
+
+    },
     onClickCheckboxChallenged: function(event, actionIndex, docIndex) {
         var checked = event.target.checked;
         var actions = this.state.ChallengedDocuments;
@@ -1187,6 +1220,26 @@ var DocumentReview = React.createClass({
                 this.setState({ confidentialities: data });
             }
         });
+    },
+    getIDCategory(value){
+        switch(value){
+            case "Accounting/Tax" : return 1;
+            case "Client/Customer" : return 2;
+            case "Corporate Entity" : return 3;
+            case "Employee" : return 4;
+            case "Legal/Compliance" : return 5;
+            case "Transaction" : return 6
+        }
+    },
+    getIDConfidentialities(value){
+        switch(value){
+            case "Banking Secrecy" : return 1;
+            case "Confidential" : return 2;
+            case "Internal" : return 3;
+            case "Public" : return 4;
+            case "Secret" : return 5;
+            case "Unrestricted" : return 7
+        }
     },
     getIcon(value) {
         if (_.endsWith(value, '.ppt')) {

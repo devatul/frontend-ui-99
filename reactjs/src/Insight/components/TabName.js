@@ -51,6 +51,15 @@ var TabName = React.createClass({
 
 
 	},
+    configLanguage(language){
+        switch(language){
+            case 'gl' : return 'Galician' ;
+            case 'hu' : return 'Hungarian' ;
+            case 'it' : return 'Italian' ;
+            case 'no' : return 'Norwegian' ;
+            case 'pt' : return 'Portuguese' ;
+        }
+    },
     clickHandle(language){
         this.props.click(language)
     },
@@ -80,15 +89,19 @@ var TabName = React.createClass({
 		let active = []
         active[0] = 'active'
 
-		let language = this.props.language
-        for(let i = 1 ;  i <language.length ; i++){
+		let language = [];
+        for(let i = 0 ; i< this.props.language.length ; i++){
+             language[i] = this.configLanguage(this.props.language[i])
+        }
+        for(let i = 1 ;  i <this.props.language.length ; i++){
             active[i] = '#'
+
         }
 
 		for( let i=0 ; i<language.length; i++){
 			children[i] = <li className={active[i]} key={i}
 			onMouseOver = {this.onMouseOver.bind(this, i)} onMouseOut = {this.onMouseOut.bind(this, i)} onClick={this.onClick.bind(this,i)}>
-			<a href="#" data-toggle="tab" aria-expanded="true" onClick={this.clickHandle.bind(this , language[i])}><span style={{}} >{language[i]}</span></a>
+			<a href="#" data-toggle="tab" aria-expanded="true" onClick={this.clickHandle.bind(this , this.props.language[i])}><span style={{}} >{language[i]}</span></a>
 			</li>
 		}
 

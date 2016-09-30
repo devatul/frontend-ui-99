@@ -9,12 +9,12 @@
     <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
     <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
-        <div class="charts container mt-lg"> 
+        <div class="charts container mt-lg">
             <div class="row">
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-secondary widget-panel">
-                            <h4 class="widget-title">Scan 
+                            <h4 class="widget-title">Scan
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
                                     setValue="Percentage of documents detected and scanned by Dathena 99 compared against total number of documents detected." />
@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-quartenary widget-panel">
-                            <h4 class="widget-title">Duplicates / Twins 
+                            <h4 class="widget-title">Duplicates / Twins
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
                                     setValue="Duplicates:  Two or more files with identical content and file names.
@@ -70,12 +70,12 @@
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-tertiary widget-panel">
-                            <h4 class="widget-title">Accuracy  
+                            <h4 class="widget-title">Accuracy
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
                                     setValue="Level of confidence that 99 has in its initial classification. The higher the accuracy level, the greater the level of confidence that 99’s classification is correct." />
                             </h4>
-                            <div class="widget-summary"> 
+                            <div class="widget-summary">
                                 <div class="widget-summary-col">
                                     <div class="summary">
                                         <div class="info">
@@ -189,7 +189,7 @@
                                 <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
                             </div>
                         </header>
-                        
+
                         <div class="panel-body" id="overview-panel-2">
                             <div id="datatable-editable_wrapper" class="no-footer">
                                 <div class="table-responsive">

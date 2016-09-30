@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './DataLoss.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import update from 'react-addons-update'
 //import javascript from '../script/script.insights.js'
 import Constant from '../Constant.js'
 import $ from 'jquery'
@@ -46,13 +47,19 @@ import $ from 'jquery'
 
                 console.log('data', data)
                 let arr = []
-                this.setState({ dataLoss: data })
-                this.setState({ default_data: data[0] })
+               /* this.setState({ dataLoss: data })
+                this.setState({ default_data: data[0] })*/
                 for(let i = 0 ; i< data.length ; i++){
 
                     arr.push(data[i].language)
                 }
-                this.setState({language : arr})
+              /*  this.setState({language : arr})*/
+                let updateDataLoss = update(this.state , {
+                    dataLoss : {$set : data},
+                    default_data : {$set : data[0]},
+                    language : {$set : arr}
+                })
+                this.setState(updateDataLoss)
                 console.log('data' , data)
                 console.log('default_data' , this.state.default_data)
 

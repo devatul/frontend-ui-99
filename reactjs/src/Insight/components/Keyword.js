@@ -175,7 +175,7 @@ var Keywords = React.createClass({
 
             }
 
-            child[index] = <tr>
+            child[index] = <tr key={index}>
                 <td className = "text-left"> { object.name } </td>
                 <td className = "text-left kw-list"><span>{keywords}</span></td>
                 <td>
