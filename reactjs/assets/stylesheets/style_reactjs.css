@@ -241,3 +241,6 @@
     position: absolute;
     top: 15px;
 }
+.fix_center p {
+    margin-top : 10px;
+}

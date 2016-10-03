@@ -45,7 +45,8 @@ var DocumentReview = React.createClass({
     componentDidMount() {
         this.getCategories();
         this.getConfidentialities();
-        this.getChallengedDocument();
+        this.getDummyChalengge();
+        /*this.getChallengedDocument();*/
 
 
     },
@@ -78,22 +79,11 @@ var DocumentReview = React.createClass({
         if (this.state.shouldUpdateChall != nextState.shouldUpdateChall) {
             return true;
         }
-        if (this.state.iconReview != nextState.iconReview) {
-            return true;
-        }
-        if (this.state.iconChallengedPreview != nextState.iconChallengedPreview) {
-            return true;
-        }
+
         return false;
     },
     componentDidUpdate(prevProps, prevState) {
 
-        /*if(this.state.Actions != prevState.Actions){
-            var arr = _.cloneDeep(this.state.stackChange)
-            arr.push(this.state.Actions)
-            this.setState({stackChange : arr})
-            console.log(this.state.stackChange)
-        }*/
         if (this.state.shouldUpdate != prevState.shouldUpdate) {
             var update = this.state.shouldUpdate.value;
             this.setState({ documentPreview: this.state.Actions[update[0]].documents[1] })
@@ -199,7 +189,8 @@ var DocumentReview = React.createClass({
         let data = [{
             "language": {
                 "id": 1,
-                "short_name": "EN"
+                "short_name": "EN",
+                "name":"English"
             },
             "category": {
                 "id": 1,
@@ -289,7 +280,8 @@ var DocumentReview = React.createClass({
         }, {
             "language": {
                 "id": 1,
-                "short_name": "EN"
+                "short_name": "EN",
+                "name":"English"
             },
             "category": {
                 "id": 1,
@@ -389,8 +381,8 @@ var DocumentReview = React.createClass({
         /* this.setState({ iconReview: icon })*/
 
     },
-    setChallengedPreview: function(challengedIndex, docChallIndex, icon) {
-
+    setChallengedPreview: function(challengedIndex, docChallIndex) {
+        debugger
         var challengedCurrent = this.state.ChallengedDocuments[challengedIndex].documents[docChallIndex];
         if (challengedCurrent != null) {
             challengedCurrent.index = { actionIndex: challengedIndex, docIndex: docChallIndex }
@@ -398,7 +390,7 @@ var DocumentReview = React.createClass({
                 challengedPreview: { $set: challengedCurrent },
             });
             this.setState(setChallengedCurrent);
-            this.setState({ iconChallengedPreview: icon })
+
             $('#previewModal3 .file-preview').html('<a href="' + challengedCurrent.image_url + '" id="embedURL3"></a>');
             $('#embedURL3').gdocsViewer();
         }
@@ -987,9 +979,88 @@ var DocumentReview = React.createClass({
             }.bind(this)
         });
     },
+    getDummyChalengge(){
+        debugger
+        let data=[
+                  {
+                    "language": {
+                      "id": 1,
+                      "short_name": "EN",
+                      "name":"English"
+                    },
+                    "category": {
+                      "id": 1,
+                      "name": "Accounting/Tax"
+                    },
+                    "confidentiality": {
+                      "id": 1,
+                      "name": "Banking Secrecy"
+                    },
+                    "urgency": "very high",
+                    "latest_date": "5 July",
+                    "documents": [
+                      {
+                        "id": 1,
+                        "name": "doc_name",
+                        "path": "doc_path",
+                        "owner": "owner_name",
+                        "image_url": "http://backend-host/doc.jpg",
+                        "creation_date": "2012-04-23",
+                        "modification_date": "2012-04-23",
+                        "legal_retention_until": "2012-04-23",
+                        "comment": "comment from 2nd line user",
+                        "number_of_classification_challenge": 1,
+                        "current_category": {
+                          "id": 1,
+                          "name": "Accounting/Tax"
+                        },
+                        "current_confidentiality": {
+                          "id": 1,
+                          "name": "Public"
+                        },
+                        "previous_category": {
+                          "id": 1,
+                          "name": "Accounting/Tax"
+                        },
+                        "previous_confidentiality": {
+                          "id": 1,
+                          "name": "Public"
+                        }
+                      }
+                    ]
+                  }
+                ]
 
+        for (var i = 0; i < data.length; i++) {
+                    data[i].checkAll = false;
+                    data[i].checkedNumber = 0;
+                    data[i].validateNumber = 0;
+
+                    for (var j = 0; j < data[i].documents.length; j++) {
+                        data[i].documents[j].icon = this.getIcon(data[i].documents[j].name)
+                        data[i].documents[j].current = {
+                            checked: false,
+                            category: 4,
+                            confidential: 0,
+                            status: "normal",
+                            comment: 'Explain your choice',
+                            prevCategory: null,
+                            prevConfidential: 1
+                        };
+                    }
+                }
+
+                var challengedPreview = data[0].documents[0];
+                challengedPreview.index = { actionIndex: 0, docIndex: 0 };
+                var updateState = update(this.state, {
+                    ChallengedDocuments: { $set: data },
+                    challengedPreview: { $set: challengedPreview },
+
+                });
+                this.setState(updateState);
+    },
     onChangeCategoryChallenged: function(event, actionIndex, docIndex) {
-
+        debugger
         var categoryIndex = event.target.value;
         var actions = this.state.ChallengedDocuments;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
@@ -999,9 +1070,9 @@ var DocumentReview = React.createClass({
             index: { actionIndex: actionIndex, docIndex: docIndex },
             contents: saveDocument
         });
-        //if(actions[actionIndex].documents[docIndex].current.prevCategory == null) {
+
         actions[actionIndex].documents[docIndex].current.prevCategory = actions[actionIndex].documents[docIndex].current.category;
-        //}
+
         actions[actionIndex].documents[docIndex].current.category = categoryIndex;
         if (actions[actionIndex].documents[docIndex].current.category == 4) {
             actions[actionIndex].documents[docIndex].current.prevCategory = null;
@@ -1102,6 +1173,7 @@ var DocumentReview = React.createClass({
 
     },
     onClickCheckboxChallenged: function(event, actionIndex, docIndex) {
+        debugger
         var checked = event.target.checked;
         var actions = this.state.ChallengedDocuments;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
@@ -1111,6 +1183,16 @@ var DocumentReview = React.createClass({
             contents: saveDocument
         });
         actions[actionIndex].documents[docIndex].current.checked = checked;
+        if(checked == true){
+            actions[actionIndex].checkedNumber += 1 ;
+        }else {
+            if(actions[actionIndex].checkedNumber > 0) {
+                actions[actionIndex].checkedNumber -= 1
+            }else {
+                actions[actionIndex].checkedNumber = 0
+            }
+
+        }
         var setUpdate = update(this.state, {
             stackChangeChallenged: { $set: stackList },
             ChallengedDocuments: { $set: actions }
@@ -1133,6 +1215,7 @@ var DocumentReview = React.createClass({
         this.setState({ shouldUpdateChall: { name: 'validateNumber', actionIndex: actionIndex, number: num } });
     },
     onClickValidationButtonChallenged: function(event, actionIndex, docIndex) {
+        debugger
         var actions = this.state.ChallengedDocuments;
         var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
         var stackList = this.state.stackChangeChallenged;
@@ -1147,6 +1230,7 @@ var DocumentReview = React.createClass({
             actions[actionIndex].documents[docIndex].current.prevCategory = null;
         }
         actions[actionIndex].documents[docIndex].current.status = "accept";
+        actions[actionIndex].validateNumber += 1
         var setUpdate = update(this.state, {
             stackChangeChallenged: { $set: stackList },
             ChallengedDocuments: { $set: actions }
@@ -1163,9 +1247,12 @@ var DocumentReview = React.createClass({
                 actions[actionIndex].documents[i].current.status = "accept";
                 actions[actionIndex].documents[i].current.checked = false;
                 approveIndex += "_" + i;
+                 actions[actionIndex].validateNumber ++ ;
             }
         }
         actions[actionIndex].checkAll = false;
+        actions[actionIndex].checkedNumber = 0
+
         var setUpdate = update(this.state, {
             ChallengedDocuments: { $set: actions }
         });
@@ -1177,6 +1264,11 @@ var DocumentReview = React.createClass({
         var actions = this.state.ChallengedDocuments;
         for (var i = 0; i < actions[actionIndex].documents.length; i++) {
             actions[actionIndex].documents[i].current.checked = checked;
+        }
+        if(checked == true){
+            actions[actionIndex].checkedNumber =  actions[actionIndex].documents.length
+        }else {
+            actions[actionIndex].checkedNumber =  0
         }
         actions[actionIndex].checkAll = checked;
         var setUpdate = update(this.state, {

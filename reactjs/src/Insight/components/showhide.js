@@ -27,8 +27,8 @@ var ShowHide = React.createClass({
     render(){
         return(
             <div>
-             <span className={this.state.doc_path} style={{'marginBottom': '5px'}}>{this.props.content}</span>
-                <a href="javascript:;" className="details-toggle" onClick={this.showHide}   style={this.state.style}><i className="fa fa-caret-right mr-xs"><span>{this.state.doc_path == '' ? 'Show less' : 'Show details'}</span></i></a>
+             <span className={this.state.doc_path} style={{'marginBottom': '5px', 'height' : '18px'}}>{this.props.content}</span>
+                <a href="javascript:;" className="details-toggle" onClick={this.showHide}   style={this.state.style}><i className="fa fa-caret-right mr-xs"><span style={{fontWeight : 'bold'}}>{this.state.doc_path == '' ? 'Show less' : 'Show details'}</span></i></a>
 
             </div>
         )

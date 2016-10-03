@@ -40,7 +40,7 @@
                                                 classIcon="overview_question_a help_question_a"  setValue="All the documents in this section have been classified {action.category.name} with a Secret level of Confidentiality"/>
                                     </li>
                                     <li class="document_panel-title panel-actions-fix">
-                                        Language : <b>{ action.language.short_name == 'EN' ? 'English' : (action.language.short_name == 'FR' ? 'Français' : 'Deutsch')}</b>
+                                        Language : <b>{ action.language.name}</b>
                                     </li>
                                 </ul>
                                 <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
@@ -228,15 +228,21 @@
                                         <i class="fa {this.urgency(challenged.urgency)} challenged" aria-hidden="true"></i>
                                     </li>
                                     <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">
-                                            {(challenged.sla == null ) ?  challenged.category + ' - ' + challenged.confidentiality : challenged.sla}
-                                            <HelpButton className="dropdown-file-info-holder"
+                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">  {challenged.category.name} - {challenged.confidentiality.name}</h2>
+                                    </li>
+                                    <li class="document_panel-title">
+
+                                            <!-- {(challenged.sla == null ) ?  challenged.category + ' - ' + challenged.confidentiality : challenged.sla} -->
+                                            <HelpButton
+                                                classMenu="fix-overview-help-button-table"
+                                                classIcon="overview_question_a help_question_a"  setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality."/>
+                                           <!--  <HelpButton className="dropdown-file-info-holder"
                                             classNote="note_chart_content"
-                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality." />
-                                        </h2>
+                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality." /> -->
+
                                     </li>
                                      <li class="document_panel-title panel-actions-fix">
-                                        Language : <b>English</b>
+                                        Language : <b>{challenged.language.name}</b>
                                     </li>
                                 </ul>
 
@@ -248,9 +254,9 @@
                             </header>
                             <div class="panel-body nav-collapse collapse in" id="challenged{'_panel_' + challengedIndex}">
                                 <p class="document_note"></p>
-                                <p class="document_note">
+                               <!--  <p class="document_note">
                                     Stan challenged classification of {challenged.documents.length - challenged.validateNumber} documents - You have to review it by latest 10th July
-                                </p>
+                                </p> -->
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                     <button
                                         rt-if="(challenged.checkedNumber > 0 && challenged.validateNumber < challenged.documents.length)"
@@ -303,7 +309,11 @@
                                                                 setValue="Comment of your coordinator to explain the reason of the rejection." />
                                                     </th>
                                                     <th class="review_note review_note_r">Comment
-                                                           <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Add a comment to justify your acceptation or your rejection of the challenge. "/>
+
+                                                           <HelpButton
+                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                className="dropdown-file-info-holder"
+                                                                setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
                                                     </th>
                                                     <th class="review_note" style="max-width: 120px;">Validation
 
@@ -322,14 +332,14 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <i class="{this.state.iconChallengedDocument[docChallIndex].type}"></i>
+                                                        <i class="{docChall.icon}"></i>
                                                     </td>
                                                     <td class="text-left my_file-name">
                                                         <span style="margin-left: 10px"
                                                             class="text-italic file-name doc-path"
                                                             data-toggle="modal"
-                                                            data-target="#previewModal3"
-                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex,this.state.iconChallengedDocument[docChallIndex].type)"
+                                                            data-target="#previewModal1"
+                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex)"
                                                             data-file-url="{docChall.image_url}">
                                                             <span class="file-name-1"
                                                                 rel="tooltip"
@@ -354,18 +364,18 @@
                                                     <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
                                                             <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
-                                                              <option rt-repeat="category in docChall.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
+                                                              <option rt-repeat="category in this.state.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                                             </select>
-                                                           <!--  <span rt-if="current.prevCategory != null" class="text-italic previous-status">Previous: {docChall.categories[current.prevCategory].name}</span> -->
+
                                                         </div>
                                                     </td>
                                                     <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
                                                         <div class="select-group">
                                                             <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
-                                                              <option rt-repeat="Confidential in docChall.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
+                                                              <option rt-repeat="Confidential in this.state.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                                             </select>
                                                           <!--   <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docChall.confidentialities[current.prevConfidential].name}</span> -->
-                                                          <span class="text-italic previous-status">Previous: Secret</span>
+                                                          <span class="text-italic previous-status">Previous: {docChall.previous_confidentiality.name}</span>
                                                         </div>
 
                                                     </td>
@@ -373,7 +383,7 @@
                                                       <!--   <span class={this.state.doc_path} style="margin-bottom: 5px;">Level of Confidentiality is too low for this type of document</span>
  -->
 
-                                                       <!--    <a href="javascript:;" class="details-toggle" onClick={this.showHide} style><i class="fa fa-caret-right mr-xs"><span style="font-family: 'Roboto', 'Helvetica', sans-serif; margin-left: 2px">{this.state.doc_path == '' ? 'Show less' : 'Show details'}</span></i></a> -->
+
                                                        <ShowHide content="Level of Confidentiality is too low for this type of document"/>
 
                                                     </td>
@@ -458,10 +468,7 @@
                                      <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix2 full-mobile" content="Confidentiality level proposed by Dathena."/>
 
                             </th>
-                            <th class="text-center">Status
-<!--
-                                     <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content help_question_content has-arrow fixLeft dropdown-menu has-arrow dd-md dd-md fix1 full-mobile" content="This represent the status of the review for each file."/>
-                            </th> -->
+                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -502,22 +509,19 @@
                                 <div class="select-group">
                                     <div class="selected-info">
                                         <div class="progress progress-striped light">
-                                          <div class="progress-bar {docPreview.color} active progress-bar-striped" role="progressbar" aria-valuenow="{docPreview.confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%;">
+                                          <div class="progress-bar {docPreview.color} active progress-bar-striped" role="progressbar" aria-valuenow="{docPreview.confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%">
                                           </div>
-                                          <span class="progress-percentage" style="color: #000">({docPreview.confidence_level}%)</span>
+                                          <span class="progress-percentage" style="color: white">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
                                      <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value={docPreview.category.name}>
-                                                                <option
-                                                                    rt-repeat="categories in this.state.categories"
-                                                                    key="{categoriesIndex}"
-                                                                    value="{categories.name}">
-                                                                    {categories.name}
-                                                                </option>
-                                                            </select>
-                                    <!-- <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value="{current.category}">
-                                      <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
-                                    </select> -->
+                                        <option
+                                            rt-repeat="categories in this.state.categories"
+                                            key="{categoriesIndex}"
+                                            value="{categories.name}">
+                                            {categories.name}
+                                        </option>
+                                    </select>
                                 </div>
                             </td>
                             <td rt-scope="docPreview.current as current">
@@ -526,21 +530,18 @@
                                         <div class="progress progress-striped light">
                                           <div class="progress-bar {docPreview.color} active progress-bar-striped" role="progressbar" aria-valuenow="{docPreview.confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%;">
                                           </div>
-                                          <span class="progress-percentage" style="color: #000">({docPreview.confidence_level}%)</span>
+                                          <span class="progress-percentage" style="color: white">({docPreview.confidence_level}%)</span>
                                         </div>
                                     </div>
-                                    <!-- <select style="text-transform: capitalize" class="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
-                                      <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
-                                    </select> -->
                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value = {docPreview.confidentiality.name}>
                                                               <!-- <option selected>{doc.confidentiality.name}</option> -->
-                                                              <option
-                                                                    rt-repeat="Confidential in this.state.confidentialities"
-                                                                    key="{ConfidentialIndex}"
-                                                                    value="{Confidential.name}">
-                                                                    {Confidential.name}
-                                                                </option>
-                                                            </select>
+                                          <option
+                                                rt-repeat="Confidential in this.state.confidentialities"
+                                                key="{ConfidentialIndex}"
+                                                value="{Confidential.name}">
+                                                {Confidential.name}
+                                            </option>
+                                        </select>
                                 </div>
                             </td>
                             <td >
@@ -564,7 +565,7 @@
 
 <!--previewModal3 - challenged document-->
 
-    <div id="previewModal3" class="modal fade in" role="dialog">
+    <div id="previewModal1" class="modal fade in" role="dialog">
       <div class="modal-dialog modal-preview">
 
         <!-- Modal content-->
@@ -603,29 +604,39 @@
 
                             </th>
                             <th class="review_note">Document
-                                <HelpButton className="dropdown-file-info-holder"
+                                <!-- <HelpButton className="dropdown-file-info-holder"
                                     classNote="overview_timeframe fix-anomaly-help-button"
+                                    setValue="This displays the name of each individual document, as it exists in its current state." /> -->
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
                                     setValue="This displays the name of each individual document, as it exists in its current state." />
                             </th>
 
                             <th class="review_note">Category
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
                                     setValue="Category proposed by Dathena 99." />
+
                             </th>
                             <th class="review_note">Confidentiality
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="Confidentiality level proposed by Dathena." />
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
+                                     setValue="Confidentiality level proposed by Dathena." />
                             </th>
                             <th class="review_note review_note_r">Coordinator's Comment
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
                                     setValue="Comment of your coordinator to explain the reason of the rejection" />
                             </th>
                             <th class="review_note review_note_r">Comment
-
-                                    <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="Add a comment to justify your acceptation or your rejection of the challenge. "/>
+                                <HelpButton
+                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
+                                    setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
 
                             </th>
                             <th class="review_note" style="max-width: 100px;">Validation
@@ -646,7 +657,7 @@
                                 </div>
                             </td>
                              <td class="text-center">
-                                <i class="{this.state.iconChallengedPreview}"></i>
+                                <i class="{docPreview.icon}"></i>
                             </td>
                             <td class="text-left my_file-name">
                                 <span style="margin-left: 10px"
@@ -673,24 +684,35 @@
                                 </InfoButton>
                             </td>
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
-                                <div class="select-group">
+                               <!--  <div class="select-group">
                                     <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
                                       <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
+                                    </select>
+
+                                </div> -->
+                                 <div class="select-group">
+                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
+                                      <option rt-repeat="category in this.state.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
                                     </select>
 
                                 </div>
                             </td>
                             <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
-                                <div class="select-group">
+                                <!-- <div class="select-group">
                                     <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
                                       <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
                                     </select>
                                     <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docPreview.confidentialities[current.prevConfidential].name}</span>
+                                </div> -->
+                                <div class="select-group">
+                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
+                                      <option rt-repeat="Confidential in this.state.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
+                                    </select>
+                                    <span class="text-italic previous-status">Previous: {docPreview.previous_confidentiality.name}</span>
                                 </div>
                             </td>
                             <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                                <span class="my-doc-path">Level of Confidentiality is too low/high for this type of document</span>
-                                <a class="more" href="javascript:void(0)"><span class="more1">more</span><span class="zoom-out">less</span></a>
+                                <ShowHide content="Level of Confidentiality is too low for this type of document"/>
 
                             </td>
                             <td class="opa-child fix-1st-pading-comment-table">
