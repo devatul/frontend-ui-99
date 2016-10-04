@@ -21,11 +21,11 @@
                 <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
                 <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
-                    <span rt-if="this.state.role === contant.role.IS_2ND" id="total_notification" class="badge">{this.state.notification.total}</span>
-                    <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span>
+                    <span id="total_notification" class="badge">{this.state.total_notification}</span>
+                    <!-- <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span> -->
                     <i class="fa fa-bell-o" aria-hidden="true"></i>
                 </a>
-                <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile">
+                <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw">
                     <div class="row noti-popup">
                         <div class="col-sm-6 col-noti noti-div">
                             <h4>My Notification</h4>
@@ -40,7 +40,7 @@
                                         'fa-clock-o icon-warning': notification.urgency === 'hight',
                                         'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
                                         aria-hidden="true"></i>
-                                        <p>{notification.message}</p>
+                                        <p style="font-size: 13px">{notification.message}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -69,7 +69,7 @@
                                     'fa-clock-o icon-warning': notification.urgency === 'high',
                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}"
                                     aria-hidden="true"></i>
-                                    <p>{notification.message}</p>
+                                    <p style="font-size: 13px">{notification.message}</p>
                                 </li>
                             </ul>
 
@@ -87,7 +87,7 @@
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
                 <li class="dropdown">
-                    <span class="badge">40</span>
+                    <span class="badge">{this.state.total_notification}</span>
                     <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
@@ -96,7 +96,7 @@
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                         </li>-->
                         <li>
-                            <span class="badge">20</span>
+                           <!--  <span class="badge">20</span> -->
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
@@ -138,19 +138,19 @@
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
                 <li class="dropdown">
-                    <span class="badge">40</span>
+                    <span class="badge">{this.state.total_notification}</span>
                     <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <li>
-                            <span class="badge">20</span>
+                            <!-- <span class="badge">20</span> -->
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                         </li>
                         <li>
                             <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                         </li>
                         <li>
-                            <span class="badge">20</span>
+                            <!-- <span class="badge">20</span> -->
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
@@ -191,7 +191,7 @@
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
-                <li><span class="badge">4</span>
+                <li><span class="badge">{this.state.total_notification}</span>
                     <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                      <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
 

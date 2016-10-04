@@ -23,6 +23,7 @@ module.exports = React.createClass({
                 list: []
             },
             total_pending : 0,
+            total_notification : 0 ,
             pending_list: [],
             role: '',
             typeAlert: 'none',
@@ -122,6 +123,8 @@ module.exports = React.createClass({
             var pending = [] ;
             var warning = 0 ;
             var danger = 0 ;
+            var total_pending = 0 ;
+            var total_notification = 0;
             $.ajax({
                 url: Constant.SERVER_API + 'api/notification/?period=completed',
                 dataType: 'json',
@@ -131,7 +134,9 @@ module.exports = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-                    completed = data;
+                    debugger
+                    total_notification += data.length
+                    completed = data.slice(0, 3);
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
@@ -146,7 +151,10 @@ module.exports = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-                    pending = data;
+                    debugger
+                    total_pending =  data.length
+                    total_notification += data.length
+                    pending =  data.slice(0, 3);
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
@@ -199,7 +207,10 @@ module.exports = React.createClass({
                     danger: { $set: danger }
                 },
                 total_pending : {
-                    $set: pending.length
+                    $set: total_pending
+                },
+                total_notification : {
+                    $set : total_notification
                 }
             });
 
