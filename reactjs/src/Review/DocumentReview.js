@@ -137,7 +137,9 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-
+                if(!data.length) {
+                    return;
+                }
                 for (let i = data.length - 1; i >= 0; i--) {
                     data[i].validateNumber = 0;
                     data[i].checkedNumber = 0;
@@ -967,6 +969,9 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
                 debugger
+                if(!data.length) {
+                    return;
+                }
                 for (var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
