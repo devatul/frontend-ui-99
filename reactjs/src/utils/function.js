@@ -11,6 +11,16 @@ module.exports = {
         return x1 + x2;
     },
 
+    orderByIndex: (array, orders) => {
+        let newArray = [];
+
+        for(let i = orders.length - 1; i >= 0; i--) {
+            newArray[i] = array[orders[i]];
+        }
+
+        return newArray;
+    },
+
     renderClassType: (documentName) => {
         let word = /(.doc|.dotx|.dot|.docm|.dotm|.rtf)$/gi,
             excel = /(.xlsx|.xls|.xltx|.xlt|.csv|.xlsb|.xlsm|.xltm|.xml|.xlam|.xla)$/gi,

@@ -23,7 +23,8 @@ var ClassificationReview = React.createClass({
                 categories: [],
                 confidentialities: []
             },
-            stackChange: []
+            stackChange: [],
+            dataRequest: []
         };
     },
 
@@ -46,6 +47,22 @@ var ClassificationReview = React.createClass({
         if(prevState.dataReview[current.review] && !isEqual(dataReview[current.review].documents, prevState.dataReview[current.review].documents)) {
             this.checkValidNumber(dataReview[current.review].documents);
         }
+    },
+
+    componentWillUnmount() {
+        if(this.getClassificationReview && this.getClassificationReview.abort) {
+            console.log('abort')
+            this.getClassificationReview.abort();
+        }
+        if(this.getCategories && this.getCategories.abort) {
+            console.log('abort')
+            this.getCategories.abort();
+        }
+        if(this.getConfidentialities && this.getConfidentialities.abort) {
+            console.log('abort')
+            this.getConfidentialities.abort();
+        }
+        debugger        
     },
 
     checkValidNumber(documents) {
@@ -150,7 +167,9 @@ var ClassificationReview = React.createClass({
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
-                            status: { $set: 'accepted' }
+                            $merge: {
+                                status: 'accepted'
+                            }
                         }
                     }
                 }
@@ -204,7 +223,7 @@ var ClassificationReview = React.createClass({
                         data: document
                     }]
                 }
-            })
+            });
         } else {
             updateStack = update(stackChange, {
                 $set: {
@@ -271,15 +290,15 @@ var ClassificationReview = React.createClass({
                             category: {
                                 $set: this.state.categories[categoryIndex]
                             },
-                            status: {
-                                $set: initCategory && isEqual(initCategory.data, this.state.categories[categoryIndex]) ? 'accepted' : 'editing'
+                            $merge: {
+                                status: initCategory && isEqual(initCategory.data, this.state.categories[categoryIndex]) ? 'accepted' : 'editing'
                             }
                         }
                     }
                 }
             });
         
-        
+        debugger
         if(!initCategory) {
             let { categories } = this.state.init;
             categories.push({
@@ -309,8 +328,11 @@ var ClassificationReview = React.createClass({
                             confidentiality: {
                                 $set: this.state.confidentialities[confidentialityIndex]
                             },
-                            status: {
-                                $set: initConfidentiality && isEqual(initConfidentiality.data, this.state.confidentialities[confidentialityIndex]) ? 'accepted' : 'editing'
+                            $merge: {
+                                status: initConfidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
+                                    id: pardeInt(initConfidentiality.data.id),
+                                    name: initConfidentiality.data.name
+                                }) ? 'accepted' : 'editing'
                             }
                         }
                     }
@@ -403,6 +425,17 @@ var ClassificationReview = React.createClass({
         this.setState({ openPreview: false, shouldUpdate: true });
     },
 
+    assignCategoryAndConfidentiality2nd() {
+        return makeRequest({
+            method: "POST",
+            params: this.state.bodyRequest,
+            path: "api/classification_review/",
+            success: (res) => {
+                console.log("assign success", res);
+            }
+        });
+    },
+
     getClassificationReview() {
 
         // let data = [  
@@ -485,7 +518,7 @@ var ClassificationReview = React.createClass({
         //         ]
         //     }
         // ];
-        makeRequest({
+        return makeRequest({
             path: "api/classification_review/",
             success: (data) => {
                 debugger
@@ -496,7 +529,7 @@ var ClassificationReview = React.createClass({
 
                     for(let j = data[i].documents.length - 1; j >= 0; j--) {
                         data[i].documents[j].checked = false;
-                        data[i].documents[j].status = 'reject';
+                        //data[i].documents[j].status = 'reject';
                     }
                 }
                 //debugger
@@ -508,7 +541,7 @@ var ClassificationReview = React.createClass({
 
     getCategories() {
         let arr = [];
-        makeRequest({
+        return makeRequest({
             path: 'api/label/category/',
             success: (data) => {
                 this.setState({ categories: data, shouldUpdate: true });
@@ -518,7 +551,7 @@ var ClassificationReview = React.createClass({
 
     getConfidentialities() {
         let arr = [];
-        makeRequest({
+        return makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.setState({ confidentialities: data, shouldUpdate: true });

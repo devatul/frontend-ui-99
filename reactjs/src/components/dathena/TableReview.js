@@ -71,7 +71,7 @@ var Row3 = React.createClass({
 
     renderStatus(status) {
         switch(true) {
-            case status && (status > 66 && status < 100):
+            case status && (status > 66 && status <= 100):
                 return (<i className="fa fa-clock-o icon-danger"></i>);
             case status && (status > 33 && status < 66): 
                 return (<i className="fa fa-clock-o icon-warning"></i>);
@@ -157,7 +157,7 @@ var Row3 = React.createClass({
                         </span>
                 </td>
                 <td className="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                    {this.renderComment('The classification should be Confidential because. The classification should be Confidential because')}
+                    {document.reviewer_comment && this.renderComment(document.reviewer_comment)}
                     <span className="extra-block show-less-comment">
                         <a className="details-toggle" onClick={this.onClickMoreLess} style={{ cursor: 'pointer' }}>
                             <i className="fa fa-caret-right mr-xs"></i>
@@ -188,7 +188,7 @@ var Row2 = React.createClass({
 
     renderStatus(status) {
         switch(true) {
-            case status && (status > 66 && status < 100):
+            case status && (status > 66 && status <= 100):
                 return (<i className="fa fa-clock-o icon-danger"></i>);
             case status && (status > 33 && status < 66): 
                 return (<i className="fa fa-clock-o icon-warning"></i>);
@@ -263,7 +263,10 @@ var Row2 = React.createClass({
                         id="SelectConfidentiality"
                         className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
-                        value={findIndex(confidentialities, document.current_confidentiality)} />
+                        value={findIndex(confidentialities, {
+                            id: parseInt(document.current_confidentiality.id),
+                            name: document.current_confidentiality.name
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.current_confidentiality && document.previous_confidentiality.name}
@@ -370,7 +373,7 @@ var Row = React.createClass({
     },
 
     render() {
-        let { document, numberChecked, noConfidence } = this.props;
+        let { document, numberChecked, noConfidence, categories, confidentialities } = this.props;
         return (
             <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
                 <td>
@@ -417,8 +420,11 @@ var Row = React.createClass({
                         <SelectBox
                             id="selectCategory"
                             className="form-control"
-                            data={this.props.categories}
-                            value={findIndex(this.props.categories, document.category)}/>
+                            data={categories}
+                            value={findIndex(categories, {
+                                id: parseInt(document.category.id),
+                                name: document.category.name
+                            })}/>
                     </div>
                 </td>
                 <td>
@@ -441,12 +447,15 @@ var Row = React.createClass({
                         <SelectBox
                             id="selectConfidentiality"
                             className="form-control"
-                            data={this.props.confidentialities}
-                            value={findIndex(this.props.confidentialities, document.confidentiality)} />
+                            data={confidentialities}
+                            value={findIndex(confidentialities, {
+                                id: parseInt(document.confidentiality.id),
+                                name: document.confidentiality.name
+                            })} />
                     </div>
                 </td>
                 <td>
-                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status != 'reject' ? 'validated' : '')}>
+                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
                         <i className="fa fa-clock-o" aria-hidden="true"></i>
                         {this.renderStatus(document.status)}
                     </a>

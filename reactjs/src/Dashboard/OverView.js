@@ -6,6 +6,7 @@ import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
+import { orderByIndex } from '../utils/function'
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
@@ -52,11 +53,11 @@ var OverView = React.createClass
 
             forEach(result.categories, (val, index) => {
                 //debugger
-                //if( val.name == iconCategories[index].name ) {
-                    val.class = "";
-                    // val.class = iconCategories[index].class;
+                if( val.name == iconCategories[index].name ) {
+                    //val.class = "";
+                    val.class = iconCategories[index].class;
                     //debugger
-                //}
+                }
                 //debugger
             })
 
@@ -81,10 +82,15 @@ var OverView = React.createClass
         makeRequest({
             path: 'api/scan/',
             success: (data) => {
-                var setResult = update(this.state.scan, {
+                let confidentialities = data.confidentialities;
+
+                data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2,3,5]);
+
+                let setResult = update(this.state.scan, {
                     result: { $set: data }
                 });
                 console.log('data', data);
+                debugger
                 this.setState({ scan: setResult });
             }
         })
@@ -171,7 +177,7 @@ var OverView = React.createClass
         for(let i = categories.length - 1; i >= 0; i--) {
             categoryChart.data[i] = {
                 name: upperFirst(categories[i].name),
-                y: categories[i].total_reviewed_docs
+                y: categories[i].total_classified_docs
             };
         }
         //add languages
@@ -226,7 +232,7 @@ var OverView = React.createClass
         for( let i = confidentialities.length - 1; i >= 0; i-- ) {
             confidentialityChart.data[i] = {
                 name: upperFirst(confidentialities[i].name),
-                y: confidentialities[i].total_validated_docs
+                y: confidentialities[i].total_classified_docs
             };
         }
 

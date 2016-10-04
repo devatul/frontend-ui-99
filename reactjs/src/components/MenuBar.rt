@@ -264,16 +264,16 @@
                                             </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
                                         </tr>
-                                        <!--<tr>
+                                        <tr>
                                         <td class="text-left">Twins Documents:
                                             <HelpButton
                                                 class="help-info-button"
                                                 classMenu="fix-overview-help-button-table"
-                                                classIcon="review_question_a help_question_a"
+                                                classIcon="review_question_a help_question_a mr-md"
                                                 setValue="Two or more files with identical content, but with different file names." />
                                         </td>
                                             <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
-                                        </tr>-->
+                                        </tr>
 
                                         <tr>
                                             <td class="text-left">Encrypted Documents or Archives:

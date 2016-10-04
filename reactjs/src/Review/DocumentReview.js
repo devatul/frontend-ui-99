@@ -39,14 +39,14 @@ var DocumentReview = React.createClass({
     componentWillMount() {
         /*   this.getActions();*/
 
-        this.getDummyAction()
+        //this.getDummyAction()
         this.getActions()
     },
     componentDidMount() {
         this.getCategories();
         this.getConfidentialities();
-        this.getDummyChalengge();
-        /*this.getChallengedDocument();*/
+        // this.getDummyChalengge();
+        this.getChallengedDocument();
 
 
     },
@@ -138,6 +138,34 @@ var DocumentReview = React.createClass({
             },
             success: function(data) {
 
+                for (let i = data.length - 1; i >= 0; i--) {
+                    data[i].validateNumber = 0;
+                    data[i].checkedNumber = 0;
+                    data[i].checkedAll = false;
+                    data[i].docLength = data[i].documents.length
+                    for (let j = data[i].documents.length - 1; j >= 0; j--) {
+                        data[i].documents[j].color = this.progressbar(data[i].documents[j].centroid_distance, data[i].documents[j].group_avg_centroid_distance, data[i].documents[j].group_max_centroid_distance, data[i].documents[j].group_min_centroid_distance);
+                        data[i].documents[j].checked = false;
+                        data[i].documents[j].status = 'normal';
+                        data[i].documents[j].icon = this.getIcon(data[i].documents[j].name)
+                    }
+                }
+                debugger
+                var documentPreview = data[0].documents[0];
+                documentPreview.index = { actionIndex: 0, docIndex: 0 };
+                var oldActions = []
+                oldActions.push(data)
+                    /*  var updateState = update(this.state, {
+                                Actions: { $set: data },
+                                documentPreview: { $set: documentPreview },
+                                icon: { $set: listIcon }
+                            });*/
+                this.setState({ Actions: data });
+                this.setState({ Action1: data });
+                /* this.setState({oldActions : oldActions})*/
+                this.setState({ documentPreview: documentPreview })
+                
+                
                 /*console.log('dataaaa', data);
                 data[0].category = "Legal/Compliance/ Secret";
                 data[0].urgency = "very high";
@@ -938,18 +966,14 @@ var DocumentReview = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                console.log('dataaaattt', data);
-                let listIcon = [];
-                console.log('length: ', data.length)
+                debugger
                 for (var i = 0; i < data.length; i++) {
                     data[i].checkAll = false;
                     data[i].checkedNumber = 0;
                     data[i].validateNumber = 0;
 
                     for (var j = 0; j < data[i].documents.length; j++) {
-                        listIcon.push({
-                            'type': this.getIcon(data[i].documents[j].name)
-                        });
+                        data[i].documents[j].icon = this.getIcon(data[i].documents[j].name)
                         data[i].documents[j].current = {
                             checked: false,
                             category: 4,
@@ -967,7 +991,7 @@ var DocumentReview = React.createClass({
                 var updateState = update(this.state, {
                     ChallengedDocuments: { $set: data },
                     challengedPreview: { $set: challengedPreview },
-                    iconChallengedDocument: { $set: listIcon }
+
                 });
                 this.setState(updateState);
                 console.log("Doc ok: ", this.state.ChallengedDocuments);
@@ -1124,6 +1148,27 @@ var DocumentReview = React.createClass({
         this.setState(setUpdate);
         this.setState({ shouldUpdateChall: { name: 'updateConfidentialChall', actionIndex: actionIndex, docIndex: docIndex, confidentialIndex: confidentialIndex } });
     },
+
+    onChangeCommentChallenged(event, actionIndex, docIndex) {
+        let document = this.state.ChallengedDocuments[actionIndex].documents[docIndex];
+
+        if(document) {
+            let updateDocument = update(this.state.ChallengedDocuments, {
+                [actionIndex]: {
+                    documents: {
+                        [docIndex]:{
+                            $merge: {
+                                reviewer_comment: event.target.value
+                            }
+                        }
+                    }
+                }
+            });
+            debugger
+            this.setState({ ChallengedDocuments: updateDocument });
+        }
+    },
+
     checkedNumberChallenged: function(actionIndex) {
         var actions = this.state.ChallengedDocuments;
         var num = 0;
@@ -1140,35 +1185,24 @@ var DocumentReview = React.createClass({
     },
     postDocument(actionIndex, docIndex){
         debugger
-        let documentPost = _.cloneDeep(this.state.Actions[actionIndex].documents[docIndex])
-        let dataPost = {
-              "document_id": docIndex+1,
+        let documentPost = this.state.Actions[actionIndex].documents[docIndex];
+        let dataPost = [{
+              "document_id": documentPost.id,
               "name": documentPost.name,
               "path": documentPost.path,
               "owner": documentPost.owner,
               "category": documentPost.category,
               "confidentiality": documentPost.confidentiality
-        }
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/review/documents/',
-            dataType: 'json',
-            type: 'PUT',
-            data: JSON.stringify(dataPost),
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-
-                console.log('data', data)
-
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        }]
+        console.log('data request', dataPost);
+        debugger
+        makeRequest({
+            method: 'PUT',
+            path: 'api/review/documents/',
+            params: JSON.stringify(dataPost),
+            success: (res) => {
+                console.log('update document', res)
+            }
         });
 
     },
@@ -1217,20 +1251,24 @@ var DocumentReview = React.createClass({
     onClickValidationButtonChallenged: function(event, actionIndex, docIndex) {
         debugger
         var actions = this.state.ChallengedDocuments;
-        var saveDocument = $.extend(true, {}, actions[actionIndex].documents[docIndex]);
+        var document =  actions[actionIndex].documents[docIndex];
         var stackList = this.state.stackChangeChallenged;
+
         stackList.push({
             index: { actionIndex: actionIndex, docIndex: docIndex },
-            contents: saveDocument
+            contents: Object.assign({}, document)
         });
-        if (actions[actionIndex].documents[docIndex].current.prevConfidential != null) {
-            actions[actionIndex].documents[docIndex].current.prevConfidential = null;
+        if (document.current.prevConfidential != null) {
+            document.current.prevConfidential = null;
         }
-        if (actions[actionIndex].documents[docIndex].current.prevCategory != null) {
-            actions[actionIndex].documents[docIndex].current.prevCategory = null;
+        if (document.current.prevCategory != null) {
+            document.current.prevCategory = null;
         }
-        actions[actionIndex].documents[docIndex].current.status = "accept";
+        document.current.status = "accept";
         actions[actionIndex].validateNumber += 1
+        debugger
+        this.challengeDocument(document)
+
         var setUpdate = update(this.state, {
             stackChangeChallenged: { $set: stackList },
             ChallengedDocuments: { $set: actions }
@@ -1238,6 +1276,28 @@ var DocumentReview = React.createClass({
         this.setState(setUpdate);
         this.setState({ shouldUpdateChall: { name: 'updateValidate', actionIndex: actionIndex, docIndex: docIndex, status: 'accept' } });
         //debugger;
+    },
+    challengeDocument(document){
+        let dataPost = [{
+              "document_id": document.id,
+              "name": document.name,
+              "path": document.path,
+              "owner": document.owner,
+              "comment": document.reviewer_comment ? document.reviewer_comment : " ",
+              "category": this.state.categories[document.current.category],
+              "confidentiality": this.state.confidentialities[document.current.confidential]
+        }]
+        console.log('data request', dataPost);
+        debugger
+        return makeRequest({
+            method: 'PUT',
+            path: 'api/review/challenged_docs/',
+            params: JSON.stringify(dataPost),
+            success: (res) => {
+                console.log('update document', res)
+            }
+        });
+
     },
     approveButonChallenged: function(actionIndex) {
         var actions = this.state.ChallengedDocuments;

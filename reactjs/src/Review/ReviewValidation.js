@@ -87,10 +87,14 @@ var ReviewValidation = React.createClass({
         if(this.state.reviewerCurrent != prevState.reviewerCurrent) {
             debugger
             this.getReviewValidation();
+            this.getReviewInfo();
         }
         if(!isEqual(this.state.dataReview, prevState.dataReview)) {
             debugger
-            this.reviewerProgress();
+            //this.reviewerProgress();
+        }
+        if(!isEqual(this.state.bodyRequest, prevState.bodyRequest)) {
+            this.validateDocuments();
         }
     },
 
@@ -171,6 +175,17 @@ var ReviewValidation = React.createClass({
                     bodyRequest: bodyRequest,
                     shouldUpdate: true
                 });
+            },
+            error: (err) => {
+                debugger
+                if(err.status === 400) {
+                    
+                    this.setState({
+                        reviewers: [],
+                        reviewerCurrent: {},
+                        shouldUpdate: true
+                    });
+                }
             }
         });
     },
@@ -300,8 +315,22 @@ var ReviewValidation = React.createClass({
                     data: document
                 }]
             });
+
             debugger
         this.setState({ dataReview: updateData, bodyRequest: updateRequest, stackChange: updateStack, shouldUpdate: true });
+    },
+
+    validateDocuments() {
+        console.log('bodyRequest', this.state.bodyRequest)
+        debugger
+        return makeRequest({
+            method: "PUT",
+            path: "api/review/review_validation/",
+            params: JSON.stringify(this.state.bodyRequest),
+            success: (res) => {
+                console.log('validateDocument: success');
+            }
+        });
     },
 
     handleTableRowOnChange(event, index) {
@@ -503,25 +532,41 @@ var ReviewValidation = React.createClass({
                     }
                 ]
             };
-            
-        makeRequest({
-            path: "api/review/review_validation/",
-            params: {
-                'category_id': this.state.categoryCurrent.id,
-                'reviewer_id': this.state.reviewerCurrent.id
-            },
-            success: (res) => {
-                debugger
-                // this.setState({
-                //     dataReview: res
-                // });
-            }
-        });
+        if(this.state.reviewerCurrent && this.state.categoryCurrent) {
+            makeRequest({
+                path: "api/review/review_validation/",
+                params: {
+                    'category_id': this.state.categoryCurrent.id,
+                    'reviewer_id': this.state.reviewerCurrent.id
+                },
+                success: (res) => {
+                    debugger
 
-        this.setState({
-            dataReview: data,
-            shouldUpdate: true
-        });
+                    res.validation_progress = Math.round(res.validation_progress)
+
+                    this.setState({
+                        dataReview: res,
+                        shouldUpdate: true
+                    });
+                }
+            });
+        } else {
+            let updateDataReview = update(this.state.dataReview, {
+                challenge_docs: {
+                    $set: []
+                },
+                challenge_back_docs: {
+                    $set: []
+                }
+            });
+
+            this.setState({ dataReview: updateDataReview, shouldUpdate: true });
+        }   
+
+        // this.setState({
+        //     dataReview: data,
+        //     shouldUpdate: true
+        // });
     },
 
     getReviewInfo() {
@@ -594,41 +639,29 @@ var ReviewValidation = React.createClass({
             challengeLength = challenge_docs.length, challengeBackLength = challenge_back_docs.length;
 
         for(let i = challengeLength - 1; i >= 0; i--) {
-            if(challenge_docs[i]["2nd_line_validation"] === "accepted" || challenge_docs[i]["2nd_line_validation"] === "editing") {
+            if(challenge_docs[i]["2nd_line_validation"] !== "accepted" || challenge_docs[i]["2nd_line_validation"] !== "editing") {
                 num++;
             }
         }
 
         for(let i = challengeBackLength - 1; i >= 0; i--) {
-            if(challenge_back_docs[i]["2nd_line_validation"] === "accepted" || challenge_back_docs[i]["2nd_line_validation"] === "editing") {
+            if(challenge_back_docs[i]["2nd_line_validation"] !== "accepted" || challenge_back_docs[i]["2nd_line_validation"] !== "editing") {
                 num++;
             }
         }
 
         updateData = update(this.state.dataReview, {
-            validation_progress: {
-                $set: Math.round((num * 100) / (challengeLength + challengeBackLength))
-            },
+            // validation_progress: {
+            //     $set: Math.round((num * 100) / (challengeLength + challengeBackLength))
+            // },
             challenged_docs: {
-                $set: num
+                $set: this.state.dataReview.challenged_docs - num
             }
         });
         debugger
         this.setState({
             dataReview: updateData,
             shouldUpdate: true
-        });
-    },
-
-    validateDocuments() {
-
-        makeRequest({
-            method: 'PUT',
-            path: "api/review/review_validation/",
-            params: JSON.stringify(this.state.bodyRequest),
-            success: (res) => {
-                debugger
-            }
         });
     },
     
@@ -638,7 +671,7 @@ var ReviewValidation = React.createClass({
             indexReviewer = currentIndex.reviewer == 'default' ? 0 : parseInt(currentIndex.reviewer);
         debugger
 
-        this.validateDocuments();
+        //this.validateDocuments();
 
         let updateCurrent = update(currentIndex, {
                 reviewer: {

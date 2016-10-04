@@ -384,12 +384,12 @@
  -->
 
 
-                                                       <ShowHide content="Level of Confidentiality is too low for this type of document"/>
+                                                       <ShowHide content="{docChall && docChall.comment}" />
 
                                                     </td>
                                                     <td class="opa-child fix-1st-pading-comment-table">
                                                         <div class="select-group">
-                                                            <textarea style="min-width: 160px;" class="form-control" placeholder="Challenge’s rationale details"></textarea>
+                                                            <textarea onChange="(event)=>this.onChangeCommentChallenged(event, challengedIndex, docChallIndex)" style="min-width: 160px;" class="form-control" placeholder="Challenge’s rationale details"></textarea>
                                                         </div>
                                                     </td>
                                                     <td rt-scope="docChall.current as current">

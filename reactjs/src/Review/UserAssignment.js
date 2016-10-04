@@ -109,6 +109,11 @@ var UserAssignment = React.createClass({
     	javascript();
     },
 
+    componentWillUpdate(nextProps, nextState) {
+        
+    },
+    
+
     componentDidUpdate(prevProps, prevState) {
         var { category, datafilter, reviewer } = this.state;
 
@@ -122,7 +127,7 @@ var UserAssignment = React.createClass({
             // } else {
             //     this.getCategoryInfo();
             // }
-            this.getSummary(false);
+            //this.getSummary(false);
             if(category.current.id != 'summary') {
                 this.getCategoryInfo();
             }
@@ -242,6 +247,18 @@ var UserAssignment = React.createClass({
         this.setState({ buttonSample: updateButton })
     },
 
+    assignReviewersToCategory() {
+        return makeRequest({
+            sync: false,
+            path: "api/assign/reviewer/",
+            method: "POST",
+            params: JSON.stringify(this.state.datafilter.request),
+            success: (res) => {
+                console.log('assign done');
+            }
+        });
+    },
+
     handleValidateButton: function() {
         var { current, info, list } = this.state.category;
         var indexCurrent = findIndex(list, { id: current.id, name: current.name });
@@ -249,15 +266,7 @@ var UserAssignment = React.createClass({
         debugger
         if(request.reviewers.length > 0) {
             console.log('request', request)
-            makeRequest({
-                sync: false,
-                path: "api/assign/reviewer/",
-                method: "POST",
-                params: JSON.stringify(request),
-                success: (res) => {
-                    console.log('assign done');
-                }
-            });
+            this.assignReviewersToCategory();
 
             if(indexCurrent < list.length) {
 
@@ -343,12 +352,20 @@ var UserAssignment = React.createClass({
                 }
             },
 
-            filterLabel: { $set: [] },
+            filterLabel: {
+                $set: []
+            },
 
             setValue: {
-                timeframe: { $set: 0 },
-                users: { $set: 0 },
-                type: { $set: 0 }
+                timeframe: {
+                    $set: 0
+                },
+                users: {
+                    $set: 0
+                },
+                type: {
+                    $set: 0
+                }
             },
             params: {
                 id: {
@@ -520,22 +537,23 @@ var UserAssignment = React.createClass({
             params: datafilter.params,
             success: (data) => {
                 debugger
-                let index = findIndex(this.state.summary, {
+                let indexSummaryCatgory = findIndex(this.state.summary, {
                     id: this.state.category.current.id + "",
                     name: this.state.category.current.name
                 });
+                if(indexSummaryCatgory > -1) {
+                    let reviewers = this.state.summary[indexSummaryCatgory].reviewers;
+                    debugger
+                    for(let i = data.length - 1; i >= 0; i--) {
+                        let indexReviewer = findIndex(reviewers, {
+                            id: parseInt(data[i].id),
+                            first_name: data[i].first_name,
+                            last_name: data[i].last_name
+                        });
 
-                let summary = this.state.summary[index];
-
-                for(let i = data.length - 1; i >= 0; i--) {
-                    let indexReviewer = findIndex(summary, {
-                        id: parseInt(data[i].id),
-                        first_name: data[i].first_name,
-                        last_name: data[i].last_name
-                    });
-
-                    if(indexReviewer > -1) {
-                        data[i].selected = 'on';
+                        if(indexReviewer > -1) {
+                            data[i].selected = 'on';
+                        }
                     }
                 }
 
@@ -794,7 +812,7 @@ var UserAssignment = React.createClass({
                 ]
             };
 
-        makeRequest({
+        return makeRequest({
             path: 'api/assign/category/',
             params: { "id": current.id },
             success: (res) => {

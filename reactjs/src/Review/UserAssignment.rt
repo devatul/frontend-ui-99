@@ -28,7 +28,11 @@
                   <header class="panel-heading">
                       <h2 class="panel-title">Document Category Information</h2>
                       <div class="panel-actions">
-                          <span>Number of Documents: <strong>{func.formatNumber(this.state.category.info.number_docs)}</strong></span>
+                          <span>Number of Documents:
+                            <strong>{ this.state.category.info.number_docs &&
+                                          func.formatNumber(this.state.category.info.number_docs)}
+                            </strong>
+                          </span>
                           <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                       </div>
                   </header>
@@ -362,7 +366,7 @@
                   <header class="panel-heading">
                       <h2 class="panel-title">Document Category Information</h2>
                       <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                          <span>Number of Documents: <strong>{this.addCommas(this.state.category.info.number_docs)}</strong></span>
+                          <span>Number of Documents: <strong>{this.state.category.info != null && func.formatNumber(this.state.category.info.number_docs)}</strong></span>
                           <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#panelCategoryInfo"></a>
                       </div>
                   </header>

@@ -108,7 +108,7 @@
                                 <Panel.body>
                                     <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
+                                            <table rt-if="this.state.dataReview && this.state.dataReview.challenge_docs.length" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
                                                 <thead>
                                                     <tr>
                                                         <th class="review_note">Status
@@ -178,7 +178,7 @@
                                             <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                                            <table rt-if="this.state.dataReview && this.state.dataReview.challenge_back_docs.length" class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
                                                 <thead>
                                                     <tr role="row" class="">
                                                         <th class="review_note">Status

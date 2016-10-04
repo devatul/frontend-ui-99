@@ -9,8 +9,9 @@ module.exports = {
 		IS_COMPLETED: 'completed'
 	},
 	role: {
-		IS_1ST: 'doc_owner',
+		RISK_LEAD: 'risk_lead',
 		IS_ADMIN: 'admin',
+		IS_1ST: 'doc_owner',
 		IS_2ND: 'risk_officer',
 		IS_3RD: 'audit',
 	},
