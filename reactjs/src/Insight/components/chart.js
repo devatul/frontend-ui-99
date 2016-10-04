@@ -38,7 +38,8 @@ var Chart = React.createClass({
 
         $('#' + this.props.id).highcharts({
             chart: {
-                type: 'bar'
+                type: 'bar',
+                height: data.length * 40
             },
             title: {
                 text: ''
@@ -113,6 +114,11 @@ var Chart = React.createClass({
                             });
                         }
                     }
+                },
+                 series: {
+                    pointWidth: 18,
+                    pointPadding: 0,
+                    groupPadding: 0
                 }
             },
             tooltip: {
@@ -171,12 +177,25 @@ var Chart = React.createClass({
         this.props.exports();
     },
     render() {
+
         let height = ''
-        if (_.size(this.props.dataChart.categories) == 5) {
-            height = '200px'
+        if(this.props.height != null){
+            height = this.props.height +'px'
         } else {
-            height = '450px'
+            if(this.props.numberUser == 5) {
+            height = '200px'
+            }
+            if(this.props.numberUser == 15) {
+                height = '450px'
+            }
+            if(this.props.numberUser == 25) {
+                height = '450px'
+            }
+            if(this.props.numberUser == 50) {
+                height = '450px'
+            }
         }
+
 
         var style = {
             'height': height,

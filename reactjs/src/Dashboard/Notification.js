@@ -73,12 +73,12 @@ var Notification = React.createClass({
         console.log('notification_local', notification1);
 
         if (this.state.filter != prevState.filter) {
-            if (this.state.filter.alert == 'hight') {
+            if (this.state.filter.alert == 'high') {
 
                 this.setState({ filtersAlert: 'none' })
                 this.filterHight(notification1);
             }
-            if (this.state.filter.alert == 'veryhight') {
+            if (this.state.filter.alert == 'veryhigh') {
                 this.setState({ filtersAlert: 'none' })
                 this.filtersVeryHight(notification1);
                 console.log('content' , this.state.content)
@@ -112,7 +112,7 @@ var Notification = React.createClass({
                         older: { $set: 'block' }
                     },
                 })
-                this.setState({content: 'Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority',})
+                this.setState({content: 'Number of actions pending for you to complete. '+  this.state.dangerNoti  + (this.state.dangerNoti > 1 ? " actions are" : " action is") + ' required with high priority and '+  this.state.warningNoti  + (this.state.warningNoti > 1 ? " actions are" : " action is") + ' required with medium priority',})
             }
         }
         if (this.state.selected != prevState.selected) {
@@ -138,7 +138,7 @@ var Notification = React.createClass({
 
     componentDidMount() {
         javascriptTodo();
-        this.getDummyNotification();
+        this.getNotification();
         //this.getNotification();
     },
 
@@ -153,20 +153,20 @@ var Notification = React.createClass({
         this.setState(alertUpdate);
 
 
-        if(value == 'hight'){
-            this.setState({content : 'Number of actions pending for you to complete. $nbamberaction action(s) is(are) required with medium priority.'})
+        if(value == 'high'){
+            this.setState({content : 'Number of actions pending for you to complete. '+ this.state.warningNoti + (this.state.warningNoti > 1 ? ' actions are' : ' action is') +' required with medium priority.'})
             if( alert == 'none'){
-                 this.setState({ filtersAlert: 'hight' })
+                 this.setState({ filtersAlert: 'high' })
              }else{
                  this.setState({ filtersAlert: 'none' })
 
              }
 
         }
-        if(value == 'veryhight'){
-            this.setState({content : 'Number of actions pending for you to complete. $nbamberaction action(s) is(are) required with hight priority.'})
+        if(value == 'veryhigh'){
+            this.setState({content : 'Number of actions pending for you to complete.  '+ this.state.dangerNoti + (this.state.dangerNoti > 1 ? ' actions are' : ' action is') +' required with hight priority.'})
              if( alert == 'none'){
-                this.setState({ filtersAlert : 'veryhight'})
+                this.setState({ filtersAlert : 'veryhigh'})
              }else{
                   this.setState({ filtersAlert: 'none' })
              }
@@ -371,7 +371,7 @@ var Notification = React.createClass({
             this.setState(updateStyle)
             this.setState({ filterUpdate: value })
         }
-        if (value == 'update-pending' && alert == 'veryhight') {
+        if (value == 'update-pending' && alert == 'veryhigh') {
 
             let updateStyle = update(
                 this.state, {
@@ -390,7 +390,7 @@ var Notification = React.createClass({
             this.setState({ filterUpdate: value })
 
         }
-        if (value == 'update-pending' && alert == 'hight') {
+        if (value == 'update-pending' && alert == 'high') {
 
           /*  let updateStyle = update(
                 this.state, {
@@ -409,7 +409,7 @@ var Notification = React.createClass({
             this.setState({ filterUpdate: value })
 
         }
-        if (value == 'update-completed' && alert == 'hight') {
+        if (value == 'update-completed' && alert == 'high') {
             let updateStyle = update(
                 this.state, {
                     styleList: {
@@ -459,7 +459,7 @@ var Notification = React.createClass({
 
             if (_.isObject(object)) {
                 for (let i = 0; i < object.length; i++) {
-                    if (object[i].urgency != 'hight') {
+                    if (object[i].urgency != 'high') {
                         arr.push(i)
                     }
                 }
@@ -481,7 +481,7 @@ var Notification = React.createClass({
 
             if (_.isObject(object)) {
                 for (let i = 0; i < object.length; i++) {
-                    if (object[i].urgency != 'very hight') {
+                    if (object[i].urgency != 'very high') {
                         arr.push(i)
                     }
                 }
@@ -495,13 +495,19 @@ var Notification = React.createClass({
         }))
     },
 
-    getDummyNotification() {
+    getNotification() {
+        debugger
         //temproary for dummy data
-
-        function getRole() {
-            var result = "";
+            var last_thirty_days = [] ;
+            var today = [] ;
+            var last_seven_days = [] ;
+            var yesterday = [];
+            var older = [];
+            var pending = 0;
+            var high = 0 ;
+            var veryhigh = 0
             $.ajax({
-                url: Constant.SERVER_API + 'api/account/role/',
+                url: Constant.SERVER_API + 'api/notification/?period=last_thirty_days',
                 dataType: 'json',
                 type: 'GET',
                 async: false,
@@ -509,103 +515,114 @@ var Notification = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-                    result = data;
+                    last_thirty_days = data;
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
                 }
             });
-            return result.role
-        }
-        var role = getRole();
-        if (role === Constant.role.IS_1ST) {
+             $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?period=last_seven_days',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    last_seven_days = data;
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+              $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?period=today',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    today = data;
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+               $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?period=pending',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    pending = data.length
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+                $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?urgency=high',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    high = data.length;
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+                $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?urgency=very_high',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    veryhigh = data.length;
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+
             var update_notification = update(this.state, {
                 notification: {
                     today: {
-                        $set: [{
-                            "created": "today",
-                            "id": 1,
-                            "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.",
-                            "urgency": "low"
-                        },
-                       ]
+                        $set: today
                     },
                     yesterday: {
-                        $set: [{
-                            "created": "yesterday",
-                            "id": 2,
-                            "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.",
-                            "urgency": "low"
-                        },
-                       ]
+                        $set: yesterday
                     },
                     last_7_days: {
-                        $set: [{
-                            "created": "7_days_ago",
-                            "id": 3,
-                            "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.",
-                            "urgency": "done"
-                        }, {
-                            "created": "7_days_ago",
-                            "id": 4,
-                            "message": "You have challenged the classification of the document cyber_security_healthcheck_-_cs149981.xls",
-                            "urgency": "done"
-                        }, {
-                            "created": "7_days_ago",
-                            "id": 5,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.",
-                            "urgency": "hight"
-                        },
-                        ]
+                        $set: last_seven_days
                     },
-                    last_30_days: { $set: [] },
+                    last_30_days: { $set: last_thirty_days },
                     older: {
-                        $set: [{
-                            "created": "older",
-                            "id": 6,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.",
-                            "urgency": "very hight"
-                        }, {
-                            "created": "older",
-                            "id": 7,
-                            "message": "You have completed the review of 10 document in Legal/Compliance category.",
-                            "urgency": "done"
-                        },
+                        $set: older
+                    }
+                },
+                warningNoti: { $set: high },
+                dangerNoti: { $set: veryhigh },
+                total: { $set: pending },
+                content : {$set : 'Number of actions pending for you to complete. '+  veryhigh  + (veryhigh > 1 ? " actions are" : " action is") + ' required with high priority and '+  high  + (high > 1 ? " actions are" : " action is") + ' required with medium priority'}
+            });
 
-                        ]
-                    }
-                },
-                warningNoti: { $set: 1 },
-                dangerNoti: { $set: 1 },
-                total: { $set: 4 },
-                content : {$set : 'Number of actions pending for you to complete. 1 action is required with high priority and 1 action are required with medium priority'}
-            });
-        } else if (role === Constant.role.IS_2ND) {
-            var update_notification = update(this.state, {
-                notification: {
-                    last_7_days: {
-                        $set: [{
-                            "created": "7_days_ago",
-                            "id": 8,
-                            "message": "Scan Finished- You are required to review the classification and to assign a reviewer.",
-                            "urgency": "hight"
-                        }, {
-                            "created": "7_days_ago",
-                            "id": 9,
-                            "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.",
-                            "urgency": "done"
-                        }]
-                    }
-                },
-                warningNoti: { $set: 1 },
-                dangerNoti: { $set: 0 },
-                total: { $set: 1 },
-                content : {$set : 'Number of actions pending for you to complete. 0 action is required with high priority and 1 action are required with medium priority'}
-            });
-        }
         this.setState(update_notification);
         localStorage.setItem('notification', JSON.stringify(update_notification))
     },
+
 
     render: template
 });

@@ -22,6 +22,7 @@ module.exports = React.createClass({
                 danger: 0,
                 list: []
             },
+            total_pending : 0,
             pending_list: [],
             role: '',
             typeAlert: 'none',
@@ -116,10 +117,13 @@ module.exports = React.createClass({
 
     getDummyNotification() {
         //temproary for dummy data
-        function getRole() {
-            var result = "";
+            debugger
+            var completed = [];
+            var pending = [] ;
+            var warning = 0 ;
+            var danger = 0 ;
             $.ajax({
-                url: Constant.SERVER_API + 'api/account/role/',
+                url: Constant.SERVER_API + 'api/notification/?period=completed',
                 dataType: 'json',
                 type: 'GET',
                 async: false,
@@ -127,93 +131,78 @@ module.exports = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-                    result = data;
+                    completed = data;
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
                 }
             });
-            return result.role
-        }
-        var role = getRole();
-        if (role === Constant.role.IS_1ST) {
-            var update_notification = update(this.state, {
-                notification: {
-                    list: {
-                        $set: [{
-                            "created": "today",
-                            "id": 1,
-                            "message": "You have completed the review of 10 document in Legal/Compliance category.",
-                            "urgency": "done"
-                        }, {
-                            "created": "today",
-                            "id": 2,
-                            "message": "You have challenged the classification of the document 02-Suspicious-Activity-Reporting-RIS.doc.",
-                            "urgency": "adone"
-                        }, {
-                            "created": "today",
-                            "id": 3,
-                            "message": "You have completed the review of 10 document in Legal/Compliance category.",
-                            "urgency": "done"
-                        }]
-                    },
-                    total: { $set: 4 }
+            $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?period=pending',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
-                pending_action: {
-                    list: {
-                        $set: [{
-                            "created": "today",
-                            "id": 4,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 15th August.",
-                            "urgency": "very hight"
-                        }, {
-                            "created": "today",
-                            "id": 5,
-                            "message": "Review - You are required to review 10 document(s) in Legal/Compliance category by the  latest 25th August.",
-                            "urgency": "hight"
-                        }, {
-                            "created": "today",
-                            "id": 6,
-                            "message": "Your original challenge has been passed back to you - You are required to review the document 02-Suspicious-Activity-Reporting-RIS.doc by the latest 29th August.",
-                            "urgency": "low"
-                        }, {
-                            "created": "today",
-                            "id": 6,
-                            "message": "Your original challenge has been passed back to you - You are required to review the document cyber_security_healthcheck_-_cs149981.xls by the latest 5th September.",
-                            "urgency": "low"
-                        }]
-                    },
-                    warning: { $set: 1 },
-                    danger: { $set: 1 }
+                success: function(data) {
+                    pending = data;
                 },
-            });
-        } else if (role === Constant.role.IS_2ND) {
-            var update_notification = update(this.state, {
-                notification: {
-                    list: {
-                        $set: [{
-                            "created": "today",
-                            "id": 1,
-                            "message": "Scan in Progress - You are responsible of the classification of the data repository demo. You will be informed shortly what the next required steps will be.",
-                            "urgency": "done"
-                        }]
-                    },
-                    total: { $set: 40 }
-                },
-                pending_action: {
-                    list: {
-                        $set: [{
-                            "created": "today",
-                            "id": 2,
-                            "message": "Scan Finished- You are required to review the classification and to assign a reviewer.",
-                            "urgency": "hight"
-                        }]
-                    },
-                    warning: { $set: 1 },
-                    danger: { $set: 0 }
+                error: function(xhr, status, err) {
+                    console.log(err);
                 }
             });
-        }
+            $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?urgency=high',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    warning = data.length
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+            $.ajax({
+                url: Constant.SERVER_API + 'api/notification/?urgency=very_high',
+                dataType: 'json',
+                type: 'GET',
+                async: false,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+                },
+                success: function(data) {
+                    danger = data.length
+                },
+                error: function(xhr, status, err) {
+                    console.log(err);
+                }
+            });
+
+
+            var update_notification = update(this.state, {
+                notification: {
+                    list: {
+                        $set: completed
+                    },
+
+                },
+                pending_action: {
+                    list: {
+                        $set: pending
+                    },
+                    warning: { $set: warning },
+                    danger: { $set: danger }
+                },
+                total_pending : {
+                    $set: pending.length
+                }
+            });
+
         this.setState(update_notification);
         localStorage.setItem('pending_list', JSON.stringify(update_notification.pending_action))
 

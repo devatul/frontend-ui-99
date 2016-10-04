@@ -12,22 +12,18 @@
   <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
-       <!-- <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/> -->
-        <!-- <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99." /> -->
         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
 
      </h2>
    </header>
-   <div class="panel-body pb-none">
-    <div class="row">
-        <Risk/>
-
-</div>
-</div>
-</section>
+    <div class="panel-body pb-none">
+        <div class="row">
+            <Risk/>
+        </div>
+    </div>
+  </section>
 
 <section class="panel panel-featured panel-featured-primary panel-identity">
  <BarMenu title="Identity and Access Management " showFilter={true} handleFilter={this.handleFilter} helpInfo="Overview of the users access in the data repositoty(ies) scanned by Dathena 99."/>
@@ -43,7 +39,7 @@
      </h3>
      <div class="panel panel-chart">
       <div class="panel-body">
-        <Chart  dataChart= {this.state.dataChart.high_risk_users} id="-2"  exports = "{this.downloadCSV.bind(this, 'High Risk User with Client Data Access' , this.state.data_exports.high_risk_users)}" />
+        <Chart  dataChart= {this.state.dataChart.high_risk_users} id="-2"  exports = "{this.downloadCSV.bind(this, 'High Risk User with Client Data Access' , this.state.data_exports.high_risk_users)}" numberUser = {this.state.numberUser} height={this.state.height_0} />
       </div>
     </div>
   </div>
@@ -51,12 +47,12 @@
     <h3>High Risk Active Directory Access with Client Data
         <HelpButton1
             classMenu="fix-overview-help-button-table"
-            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of directories which contain files with client data."/>
+            classIcon="overview_question_a help_question_a" setValue="Users with direct access to a large number of directories which contain files with client data." />
     </h3>
    <div class="panel panel-chart">
     <div class="panel-body">
      <Chart  dataChart= {this.state.dataChart.high_risk_directory} id="-1"
-     exports = "{this.downloadCSV.bind(this, 'High Risk Active Directory Access with Client Data' , this.state.data_exports.high_risk_directory)}" />
+     exports = "{this.downloadCSV.bind(this, 'High Risk Active Directory Access with Client Data' , this.state.data_exports.high_risk_directory)}"  numberUser = {this.state.numberUser} height={this.state.height_0} />
    </div>
  </div>
 </div>
@@ -76,7 +72,7 @@
         key={contributorIndex}>
           <h4>{contributor.category_name}</h4>
           <Chart dataChart={contributor.contributors} id={contributorIndex}
-           exports = "{this.downloadCSV.bind(this, contributor.category_name , this.state.data_exports.key_contributor[contributorIndex].contributors)}" />
+           exports = "{this.downloadCSV.bind(this, contributor.category_name , this.state.data_exports.key_contributor[contributorIndex].contributors)}" numberUser = {this.state.numberUser} />
         </div>
       </div>
     </div>

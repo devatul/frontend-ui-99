@@ -1,4 +1,5 @@
 <rt-import name="BarMenu" from='./InsightMenuBar'/>
+<rt-import name="func" from='../utils/function.js'/>
 <rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton" from="./components/HelpButton"/>
 <rt-import name="HelpButton2" from="../Insight/components/MyTeamHelpButton"/>
@@ -7,214 +8,16 @@
   <section class="panel panel-featured panel-featured-primary">
     <header class="panel-heading">
       <h2 class="panel-title">Risk Insights
-       <!-- <HelpButton type="overview_question_a" content="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/> -->
+
         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
 
      </h2>
    </header>
    <div class="panel-body pb-none">
     <div class="row">
         <Risk/>
-      <!-- <div class="col-md-4" rt-repeat="risk in this.state.rickInsight.risks">
-        <section class="panel">
-          <div class="panel-body {this.getRickType(risk.name).color} widget-panel insight-panel">
-            <h4 class="widget-title">{this.upperFirst(risk.name)}
-
-              <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="{this.getRickType(risk.name).info}" />
-
-           </h4>
-           <div class="insight-stat">
-            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            <span>{this.formatNumber(risk.previous_scan_value)}</span>
-          </div>
-          <div class="widget-summary">
-            <div class="widget-summary-col">
-              <div class="summary">
-                <div class="info">
-                  <strong class="amount">{this.formatNumber(risk.current_scan_value)}</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div> -->
-   <!--  <div class="col-md-4">
-      <section class="panel">
-        <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-          <h4 class="widget-title">Access Rights Anomaly
-<!--
-             <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of users who have abnormal access rights." />
-         </h4>
-         <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>0</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">138</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-tertiary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Twin Files
-
-         <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates files with different names." />
-       </h4>
-       <div class="insight-stat">
-        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-        <span>200</span>
-      </div>
-      <div class="widget-summary">
-        <div class="widget-summary-col">
-          <div class="summary">
-            <div class="info">
-              <strong class="amount">430</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Document Retention
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of files past outside their retention dates." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>750</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">420</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-        <h4 class="widget-title">Document Aging
-
-          <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of files outside their retention dates." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-up" aria-hidden="true"></i>
-          <span>750</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">9,000</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-        <h4 class="widget-title">Duplicate Files
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of duplicate files." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          <span>10,720</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">10,000</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-        <h4 class="widget-title">Document Repository Anomaly
-
-           <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Number of folders which have content anomalies." />
-        </h4>
-        <div class="insight-stat">
-          <i class="fa fa-chevron-up" aria-hidden="true"></i>
-          <span>0</span>
-        </div>
-        <div class="widget-summary">
-          <div class="widget-summary-col">
-            <div class="summary">
-              <div class="info">
-                <strong class="amount">99</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-md-4">
-    <section class="panel">
-      <div class="panel-body bg-secondary widget-panel insight-panel">
-        <h4 class="widget-title">Cost Savings
-
-            <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="Storage Space with obsolete data." />
-       </h4>
-       <div class="insight-stat">
-        <i class="fa fa-chevron-down" aria-hidden="true"></i>
-        <span>980MB</span>
-      </div>
-      <div class="widget-summary">
-        <div class="widget-summary-col">
-          <div class="summary">
-            <div class="info">
-              <strong class="amount">1.2TB</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div> -->
-
 </div>
 </div>
 </section>
@@ -244,15 +47,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-23 style-2 pie-blue">
-                    <span class="label">10,897<span class="smaller">files</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.duplicated && this.floor(this.state.dataRisk.duplicated.percentage)} style-2 pie-blue">
+                    <span class="label">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.value}<span class="smaller">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.label}</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">23% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -271,15 +74,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-7 style-2 pie-green">
-                    <span class="label">2,354<span class="smaller">files</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.twins && this.floor(this.state.dataRisk.twins.percentage)} style-2 pie-green">
+                    <span class="label">{this.state.dataRisk.twins && this.state.dataRisk.twins.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.twins.label}</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">6,8% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.twins && this.formatNumber(this.state.dataRisk.twins.percentage)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -296,15 +99,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-23 style-2 pie-yellow">
-                    <span class="label">10,897<span class="smaller">files</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.stale_files && this.floor(this.state.dataRisk.stale_files.percentage)} style-2 pie-yellow">
+                    <span class="label">{this.state.dataRisk.stale_files && this.state.dataRisk.stale_files.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.stale_files.label}</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">23% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.stale_files && this.formatNumber(this.state.dataRisk.stale_files.percentage)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -321,15 +124,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-16 style-2 pie-red">
-                    <span class="label">1.4TB<span class="smaller">of data</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.storage_cost_saving_opportunity && this.floor(this.state.dataRisk.storage_cost_saving_opportunity.percentage)} style-2 pie-red">
+                    <span class="label">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.size}{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'terabytes' ? 'TB' : (this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'kilobytes' ? 'KB' : 'B') }<span class="smaller">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.label}</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">16% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.storage_cost_saving_opportunity && this.formatNumber(this.state.dataRisk.storage_cost_saving_opportunity.percentage)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -354,15 +157,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-23 style-2 pie-blue">
-                    <span class="label">10,897<span class="smaller">files</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[0].percentage)} style-2 pie-blue">
+                    <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[0].num_files}<span class="smaller">files</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">23% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[0].percentage)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -379,15 +182,15 @@
               </h4>
               <div class="widget-summary">
                 <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-3 style-2 pie-green">
-                    <span class="label">854<span class="smaller">folders</span></span>
+                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[1].percentage)} style-2 pie-green">
+                    <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[1].num_files}<span class="smaller">folders</span></span>
                     <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
                     </div>
                     <div class="shadow"></div>
                   </div>
-                  <span class="pie-info">3% against total folders scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[1].percentage)}% against total folders scanned</span>
                 </div>
               </div>
             </div>

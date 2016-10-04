@@ -16,8 +16,11 @@ var Indentity = React.createClass({
     getInitialState() {
 
         return {
+            numberUser : 5,
             data_exports: {},
             sizeFilter: 0,
+            height_0  : 0,
+            height_1  : 0,
             save_dataChart: {},
             save_cvs: {},
             scan_result: {},
@@ -54,7 +57,7 @@ var Indentity = React.createClass({
          }
      },*/
     handleFilter: function(bodyRequest) {
-
+        debugger
         /* let dataChart = _.cloneDeep(this.state.dataChart)*/
         let value = bodyRequest.number_users;
         console.log('bodyRequest', bodyRequest)
@@ -70,305 +73,120 @@ var Indentity = React.createClass({
         if (value == 'Top 50') {
             value = 50
         }
-        this.filterData(value);
-    },
-    filterData(value) {
-        debugger
-        let new_key_contributor = []
-        let dataChart = _.cloneDeep(this.state.save_dataChart)
-        let new_risk_users = {
-            categories: _.slice(dataChart.high_risk_users.categories, 0, value),
-            data: _.slice(dataChart.high_risk_users.data, 0, value)
-        }
-        let new_risk_directory = {
-            categories: _.slice(dataChart.high_risk_directory.categories, 0, value),
-            data: _.slice(dataChart.high_risk_directory.data, 0, value)
-        }
-        for (let i = 0; i < dataChart.key_contributor.length; i++) {
-            new_key_contributor.push({
-                category_name: dataChart.key_contributor[i].category_name,
-                contributors: {
-                    categories: _.slice(dataChart.key_contributor[i].contributors.categories, 0, value),
-                    data: _.slice(dataChart.key_contributor[i].contributors.data, 0, value)
-                }
+        this.setState({numberUser : value})
+        $.ajax({
 
-            })
-        }
+            url: Constant.SERVER_API + 'api/insight/iam?number_users='+value,
+            dataType: 'json',
+            type: 'GET',
 
-        let new_key_contributor_cvs = []
-        let data_cvs = _.cloneDeep(this.state.save_cvs)
-        let new_risk_users_cvs = _.slice(data_cvs.high_risk_users, 0, value)
-        let new_risk_directory_cvs = _.slice(data_cvs.high_risk_directory, 0, value)
-        for (let i = 0; i < data_cvs.key_contributor.length; i++) {
-            new_key_contributor_cvs.push({
-                category_name: data_cvs.key_contributor[i].category_name,
-                contributors:  _.slice(data_cvs.key_contributor[i].contributors, 0, value)
-
-            })
-        }
-        /*  let new_key_contributor = {
-              categories: _.slice(dataChart.key_contributor.contributors.categories, 0, value),
-              data: _.slice(dataChart.key_contributor.contributors.data, 0, value)
-          }*/
-        let updateFilter = update(this.state, {
-            dataChart: {
-                high_risk_users: { $set: new_risk_users },
-                high_risk_directory: { $set: new_risk_directory },
-                key_contributor: { $set: new_key_contributor }
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
-             data_exports: {
-                high_risk_users: { $set: new_risk_users_cvs },
-                high_risk_directory: { $set: new_risk_directory_cvs },
-                key_contributor: { $set: new_key_contributor_cvs }
-            }
-        })
-        this.setState(updateFilter)
+            success: function(data) {
+                debugger
+                console.log('data', data)
+                this.updateChartData(data)
+               /* this.setState({ rickInsight: data })*/
+
+            }.bind(this),
+            error: function(xhr, error) {
+                if (xhr.status === 401) {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
+       /* this.filterData(value);*/
     },
-    filterData_cvs(value){
-        debugger
 
-        let new_key_contributor = []
-        let data_cvs = _.cloneDeep(this.state.save_cvs)
-        let new_risk_users = _.slice(data_cvs.high_risk_users, 0, value)
-        let new_risk_directory = _.slice(data_cvs.high_risk_directory, 0, value)
-        for (let i = 0; i < data_cvs.key_contributor.length; i++) {
-            new_key_contributor.push({
-                category_name: data_cvs.key_contributor[i].category_name,
-                contributors:  _.slice(data_cvs.key_contributor[i].contributors, 0, value)
+    getData() {
+        $.ajax({
 
-            })
-        }
-        let updateData_cvs = update(this.state, {
-            data_exports: {
-                high_risk_users: { $set: new_risk_users },
-                high_risk_directory: { $set: new_risk_directory },
-                key_contributor: { $set: new_key_contributor }
-            }
-        })
-        this.setState(updateData_cvs)
-    },
-    getDummyData() {
+            url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
+            dataType: 'json',
+            type: 'GET',
 
-        var data = {
-                "high_risk_users": [{
-                    "name": "Jack Gilford",
-                    "docs": 90
-                }, {
-                    "name": "Judith McConnell",
-                    "docs": 85
-                }, {
-                    "name": "Farley.Granger",
-                    "docs": 80
-                }, {
-                    "name": "Bob.Hope",
-                    "docs": 75
-                }, {
-                    "name": "Alice.Ghostley",
-                    "docs": 74
-                }, {
-                    "name": "Jack Gilford",
-                    "docs": 69
-                }, {
-                    "name": "Judith McConnell",
-                    "docs": 67
-                }, {
-                    "name": "Farley.Granger",
-                    "docs": 62
-                }, {
-                    "name": "Alice.Ghostley",
-                    "docs": 60
-                }, {
-                    "name": "Jack Gilford",
-                    "docs": 55
-                }, {
-                    "name": "Judith McConnell",
-                    "docs": 54
-                }, {
-                    "name": "Farley.Granger",
-                    "docs": 52
-                }, {
-                    "name": "Alice.Ghostley",
-                    "docs": 50
-                }, {
-                    "name": "Bob.Hope",
-                    "docs": 44
-                }, {
-                    "name": "Judith McConnell",
-                    "docs": 36
-                }],
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            },
+            success: function(data) {
+                console.log('data', data)
+                this.updateChartData(data)
+               /* this.setState({ rickInsight: data })*/
 
-                "high_risk_directory": [{
-                    "name": "ADCompl.WE",
-                    "docs": 93
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 90
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 88
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 82
-                }, {
-                    "name": "ADHR.WE",
-                    "docs": 79
-                }, {
-                    "name": "ADCompl.WE",
-                    "docs": 73
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 73
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 70
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 67
-                }, {
-                    "name": "ADHR.WE",
-                    "docs": 63
-                }, {
-                    "name": "ADCompl.WE",
-                    "docs": 60
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 56
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 45
-                }, {
-                    "name": "ADHR.WR",
-                    "docs": 40
-                }, {
-                    "name": "ADHR.WE",
-                    "docs": 39
-                }],
-                "key_contributor": [{
-                    "category_name": "accounting",
-                    "contributors": [{
-                        "name": "Jack Gilford",
-                        "docs": 90
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 85
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 80
-                    }, {
-                        "name": "Bob.Hope",
-                        "docs": 75
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 74
-                    }, {
-                        "name": "Jack Gilford",
-                        "docs": 69
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 67
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 62
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 60
-                    }, {
-                        "name": "Jack Gilford",
-                        "docs": 55
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 54
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 52
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 50
-                    }, {
-                        "name": "Bob.Hope",
-                        "docs": 44
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 36
-                    }]
-                }, {
-                    "category_name": "corporate entity",
-                    "contributors": [{
-                        "name": "Jack Gilford",
-                        "docs": 90
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 85
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 80
-                    }, {
-                        "name": "Bob.Hope",
-                        "docs": 75
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 74
-                    }, {
-                        "name": "Jack Gilford",
-                        "docs": 69
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 67
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 62
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 60
-                    }, {
-                        "name": "Jack Gilford",
-                        "docs": 55
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 54
-                    }, {
-                        "name": "Farley.Granger",
-                        "docs": 52
-                    }, {
-                        "name": "Alice.Ghostley",
-                        "docs": 50
-                    }, {
-                        "name": "Bob.Hope",
-                        "docs": 44
-                    }, {
-                        "name": "Judith McConnell",
-                        "docs": 36
-                    }]
-                }]
-            }
-        this.updateChartData(data)
+            }.bind(this),
+            error: function(xhr, error) {
+                if (xhr.status === 401) {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
+        });
 
     },
     updateChartData(datas) {
-
+        debugger
         var high_risk_users = {}
         var high_risk_directory = {}
         var key_contributor = []
-        var arr = [];
+        var arr = []
+        var height_0 = 0
+        var height_1 = 0
 
         high_risk_users = this.configChart(datas.high_risk_users)
         high_risk_directory = this.configChart(datas.high_risk_directory)
 
+        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users)*100 : _.size(high_risk_directory)*100
+
         for (var i = 0; i < _.size(datas.key_contributor); i++) {
-            if (datas.key_contributor[i].category_name == "accounting") {
+            if (datas.key_contributor[i].category_name == "Accounting/Tax") {
                 arr["accounting"] = datas.key_contributor[i]
                 key_contributor.push({
                     category_name: 'Accounting / Tax',
                     contributors: (this.configChart(arr["accounting"].contributors))
                 })
             }
-            if (datas.key_contributor[i].category_name == "corporate entity") {
+            if (datas.key_contributor[i].category_name == "Corporate Entity") {
                 arr["corporate_entity"] = datas.key_contributor[i];
                 key_contributor.push({
                     category_name: 'Corporate Entity',
                     contributors: (this.configChart(arr["corporate_entity"].contributors))
                 })
-            };
+            }
+            if (datas.key_contributor[i].category_name == "Client/Customer") {
+                arr["client/customer"] = datas.key_contributor[i]
+                key_contributor.push({
+                    category_name: 'Client/Customer',
+                    contributors: (this.configChart(arr["client/customer"].contributors))
+                })
+            }
+            if (datas.key_contributor[i].category_name == "Employee") {
+                arr["employee"] = datas.key_contributor[i]
+                key_contributor.push({
+                    category_name: 'Employee',
+                    contributors: (this.configChart(arr["employee"].contributors))
+                })
+            }
+            if (datas.key_contributor[i].category_name == "Legal/Compliance") {
+                arr["Legal/Compliance"] = datas.key_contributor[i]
+                key_contributor.push({
+                    category_name: 'Legal/Compliance',
+                    contributors: (this.configChart(arr["Legal/Compliance"].contributors))
+                })
+            }
+            if (datas.key_contributor[i].category_name == "Transaction") {
+                arr["Transaction"] = datas.key_contributor[i]
+                key_contributor.push({
+                    category_name: "Transaction",
+                    contributors: (this.configChart(arr["Transaction"].contributors))
+                })
+            }
+            if (datas.key_contributor[i].category_name == "Undefined") {
+                arr["Undefined"] = datas.key_contributor[i]
+                key_contributor.push({
+                    category_name: "Undefined",
+                    contributors: (this.configChart(arr["Undefined"].contributors))
+                })
+            }
         }
         var updateData_config = update(this.state, {
             dataChart: {
@@ -382,7 +200,8 @@ var Indentity = React.createClass({
                 key_contributor: { $set: key_contributor }
             },
             data_exports: { $set: datas },
-            save_cvs: { $set: datas }
+            save_cvs: { $set: datas },
+            height_0 : {$set : height_0}
         })
         this.setState(updateData_config)
 
@@ -501,10 +320,11 @@ var Indentity = React.createClass({
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     },
     componentWillMount() {
-        this.getDummyData();
+         this.getData();
     },
     componentDidMount() {
-        this.handleFilter({ number_users: 'Top 5' });
+          this.getData();
+       /* this.handleFilter({ number_users: 'Top 5' });*/
         javascript();
         javascriptOver();
 

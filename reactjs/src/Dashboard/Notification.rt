@@ -29,8 +29,8 @@
 
                             <span class="mr-md">Action completed on time: <b>100% </b></span>
                             <span class="mr-md">Pending Actions: <b>{this.state.total}</b></span>
-                            <span class="mr-md" rt-if="this.state.filtersAlert != 'veryhight'"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="hight" onClick="()=>this.filterAlert('hight')"></i> : {this.state.warningNoti}</span>
-                            <span class="mr-md" rt-if="this.state.filtersAlert != 'hight'"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very hight" onClick="()=>this.filterAlert('veryhight')"></i> : {this.state.dangerNoti}</span>
+                            <span class="mr-md" rt-if="this.state.filtersAlert != 'veryhigh'"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="high" onClick="()=>this.filterAlert('high')"></i> : {this.state.warningNoti}</span>
+                            <span class="mr-md" rt-if="this.state.filtersAlert != 'high'"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very high" onClick="()=>this.filterAlert('veryhigh')"></i> : {this.state.dangerNoti}</span>
                             <HelpButton1 className="r dropdown inline-block-item" type="my-team-note dropdown-menu has-arrow icon_help_noti dd-md dropdown_menu dd-md fix_width_notification full-mobile fix_center" content={this.state.content} />
 
                 </div>
@@ -45,8 +45,8 @@
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
-                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                                                     'fa-clock-o icon-warning': notification.urgency === 'high',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}">
                             </i>
                         </span>
                         <span class="noti-center">
@@ -54,7 +54,7 @@
                         </span>
                         <span class="noti-right">
                             <i class="fa " rt-if="notification.urgency !== 'done'"
-                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very high', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'high' }"
                                 data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
@@ -70,8 +70,8 @@
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
-                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                                                     'fa-clock-o icon-warning': notification.urgency === 'high',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}">
                             </i>
                         </span>
                         <span class="noti-center">
@@ -79,7 +79,7 @@
                         </span>
                         <span class="noti-right">
                             <i class="fa " rt-if="notification.urgency !== 'done'"
-                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very high', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'high' }"
                                 data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
@@ -95,8 +95,8 @@
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
-                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                                                     'fa-clock-o icon-warning': notification.urgency === 'high',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}">
                             </i>
                         </span>
                         <span class="noti-center">
@@ -104,7 +104,7 @@
                         </span>
                         <span class="noti-right">
                             <i class="fa " rt-if="notification.urgency !== 'done'"
-                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very high', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'high' }"
                                 data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
@@ -120,8 +120,8 @@
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
-                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                                                     'fa-clock-o icon-warning': notification.urgency === 'high',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}">
                             </i>
                         </span>
                         <span class="noti-center">
@@ -129,7 +129,7 @@
                         </span>
                         <span class="noti-right">
                             <i class="fa " rt-if="notification.urgency !== 'done'"
-                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very high', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'high' }"
                                 data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>
@@ -145,8 +145,8 @@
                         <span class="noti-left">
                             <i class="fa" rt-class="{'fa-check icon-success': notification.urgency === 'done',
                                                      'fa-clock-o': notification.urgency === 'low',
-                                                     'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                                     'fa-clock-o icon-danger': notification.urgency === 'very hight'}">
+                                                     'fa-clock-o icon-warning': notification.urgency === 'high',
+                                                     'fa-clock-o icon-danger': notification.urgency === 'very high'}">
                             </i>
                         </span>
                         <span class="noti-center">
@@ -154,7 +154,7 @@
                         </span>
                         <span class="noti-right">
                             <i class="fa " rt-if="notification.urgency !== 'done'"
-                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very hight', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'hight' }"
+                                rt-class="{'fa-alert-danger fa-exclamation-triangle': notification.urgency === 'very high', 'fa-alert-warning fa-exclamation-triangle': notification.urgency === 'high' }"
                                 data-toggle="tooltip" data-placement="top" title="" data-original-title="" ></i>
                         </span>
                     </div>

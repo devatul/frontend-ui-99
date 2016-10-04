@@ -40,7 +40,7 @@
               <ToggleButton setDefault="open" setTarget="#toggle" />
             </div>
           </header>
-            <div class="tabs tabs-primary" style="margin-top:15px;" >
+            <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
                <Tab language =  {this.state.language} click = {this.changeDefaul} />
 
                <div id="lossIndex">
