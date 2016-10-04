@@ -24,9 +24,6 @@ var Chart = React.createClass({
         return false
     },
     componentDidUpdate() {
-
-        console.log('new_data', this.props.dataChart)
-        console.log('new_data', this.props.id)
         var categories = [];
         var data = [];
         var categories = this.props.dataChart.categories;

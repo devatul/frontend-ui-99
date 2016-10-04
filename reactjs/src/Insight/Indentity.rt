@@ -68,11 +68,41 @@
     <div class="panel panel-chart">
       <div class="panel-body">
        <div class="row">
-        <div class="col-md-6 col-chart-item" rt-repeat="contributor in this.state.dataChart.key_contributor" key={contributorIndex}
-        key={contributorIndex}>
-          <h4>{contributor.category_name}</h4>
-          <Chart dataChart={contributor.contributors} id={contributorIndex}
-           exports = "{this.downloadCSV.bind(this, contributor.category_name , this.state.data_exports.key_contributor[contributorIndex].contributors)}" numberUser = {this.state.numberUser} />
+       <!--Chart 1-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].contributors}" id=0
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[0].contributors)}" height={this.state.height_1} />
+        </div>
+        <!--Chart 2-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].contributors}" id=1
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[1].contributors)}" height={this.state.height_1} />
+        </div>
+        <!--Chart 3-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].contributors}" id=2
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[2].contributors)}" height={this.state.height_2} />
+        </div>
+        <!--Chart 4-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].contributors}" id=3
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[3].contributors)}" height={this.state.height_2} />
+        </div>
+        <!--Chart 5-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].contributors}" id=4
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[4].contributors)}" height={this.state.height_3} />
+        </div>
+        <!--Chart 6-->
+        <div class="col-md-6 col-chart-item">
+          <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name)}</h4>
+          <Chart dataChart="{this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].contributors}" id=5
+           exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[5].contributors)}" height={this.state.height_3} />
         </div>
       </div>
     </div>

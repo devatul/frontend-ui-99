@@ -21,6 +21,8 @@ var Indentity = React.createClass({
             sizeFilter: 0,
             height_0  : 0,
             height_1  : 0,
+            height_2  : 0,
+            height_3  : 0,
             save_dataChart: {},
             save_cvs: {},
             scan_result: {},
@@ -131,6 +133,8 @@ var Indentity = React.createClass({
         var arr = []
         var height_0 = 0
         var height_1 = 0
+        var height_2 = 0
+        var height_3 = 0
 
         high_risk_users = this.configChart(datas.high_risk_users)
         high_risk_directory = this.configChart(datas.high_risk_directory)
@@ -138,14 +142,14 @@ var Indentity = React.createClass({
         height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users)*100 : _.size(high_risk_directory)*100
 
         for (var i = 0; i < _.size(datas.key_contributor); i++) {
-            if (datas.key_contributor[i].category_name == "Accounting/Tax") {
-                arr["accounting"] = datas.key_contributor[i]
+         /*   if (datas.key_contributor[i].category_name == "Accounting/Tax") {*/
+                arr[i] = datas.key_contributor[i]
                 key_contributor.push({
-                    category_name: 'Accounting / Tax',
-                    contributors: (this.configChart(arr["accounting"].contributors))
+                    category_name: arr[i].category_name ,
+                    contributors: (this.configChart(arr[i].contributors))
                 })
-            }
-            if (datas.key_contributor[i].category_name == "Corporate Entity") {
+           /* }*/
+           /* if (datas.key_contributor[i].category_name == "Corporate Entity") {
                 arr["corporate_entity"] = datas.key_contributor[i];
                 key_contributor.push({
                     category_name: 'Corporate Entity',
@@ -186,8 +190,16 @@ var Indentity = React.createClass({
                     category_name: "Undefined",
                     contributors: (this.configChart(arr["Undefined"].contributors))
                 })
-            }
+            }*/
         }
+        console.log('key_contributor',key_contributor)
+
+        height_1 = _.size(key_contributor[0].contributors.categories) > _.size(key_contributor[1].contributors.categories) ? _.size(key_contributor[0].contributors.categories)*40 : _.size(key_contributor[1].contributors.categories)*40
+
+        height_2 = _.size(key_contributor[2].contributors.categories) > _.size(key_contributor[3].contributors.categories) ? _.size(key_contributor[2].contributors.categories)*40 : _.size(key_contributor[3].contributors.categories)*40
+
+        height_3 = _.size(key_contributor[4].contributors.categories) > _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories)*40 : _.size(key_contributor[5].contributors.categories)*40
+
         var updateData_config = update(this.state, {
             dataChart: {
                 high_risk_users: { $set: high_risk_users },
@@ -201,7 +213,10 @@ var Indentity = React.createClass({
             },
             data_exports: { $set: datas },
             save_cvs: { $set: datas },
-            height_0 : {$set : height_0}
+            height_0 : {$set : height_0},
+            height_1 : {$set : height_1},
+            height_2 : {$set : height_2},
+            height_3 : {$set : height_3}
         })
         this.setState(updateData_config)
 
@@ -315,6 +330,9 @@ var Indentity = React.createClass({
         link.setAttribute('href', data);
         link.setAttribute('download', filename);
         link.click();
+    },
+    formatNameCategory(str){
+        return _.replace(str, '/', ' / ')
     },
     formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
