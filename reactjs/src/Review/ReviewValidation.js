@@ -532,7 +532,7 @@ var ReviewValidation = React.createClass({
                     }
                 ]
             };
-        if(this.state.reviewerCurrent && this.state.categoryCurrent) {
+        if(this.state.reviewerCurrent.id && this.state.categoryCurrent.id) {
             makeRequest({
                 path: "api/review/review_validation/",
                 params: {
@@ -552,6 +552,12 @@ var ReviewValidation = React.createClass({
             });
         } else {
             let updateDataReview = update(this.state.dataReview, {
+                challenged_docs: {
+                    $set: 0
+                },
+                validation_progress: {
+                    $set: 0
+                },
                 challenge_docs: {
                     $set: []
                 },
