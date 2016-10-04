@@ -155,7 +155,7 @@ var Indentity = React.createClass({
             if (datas.key_contributor[i].category_name == "Client/Customer") {
                 arr["client/customer"] = datas.key_contributor[i]
                 key_contributor.push({
-                    category_name: 'Client/Customer',
+                    category_name: 'Client / Customer',
                     contributors: (this.configChart(arr["client/customer"].contributors))
                 })
             }
@@ -169,7 +169,7 @@ var Indentity = React.createClass({
             if (datas.key_contributor[i].category_name == "Legal/Compliance") {
                 arr["Legal/Compliance"] = datas.key_contributor[i]
                 key_contributor.push({
-                    category_name: 'Legal/Compliance',
+                    category_name: 'Legal / Compliance',
                     contributors: (this.configChart(arr["Legal/Compliance"].contributors))
                 })
             }
