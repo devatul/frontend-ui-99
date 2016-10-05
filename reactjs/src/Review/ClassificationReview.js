@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
 import Constant from '../Constant.js'
-import { cloneDeep, isEqual, find } from 'lodash'
+import { cloneDeep, isEqual, find, findIndex } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var ClassificationReview = React.createClass({
@@ -46,6 +46,9 @@ var ClassificationReview = React.createClass({
         debugger
         if(prevState.dataReview[current.review] && !isEqual(dataReview[current.review].documents, prevState.dataReview[current.review].documents)) {
             this.checkValidNumber(dataReview[current.review].documents);
+        }
+        if(!isEqual(this.state.dataRequest, prevState.dataRequest)) {
+            this.assignCategoryAndConfidentiality2nd();
         }
     },
 
@@ -160,7 +163,22 @@ var ClassificationReview = React.createClass({
         let idx = index.split('_'),
             reviewIndex = parseInt(idx[0]),
             docIndex = parseInt(idx[1]),
-            document = this.state.dataReview[reviewIndex].documents[docIndex];
+            document = this.state.dataReview[reviewIndex].documents[docIndex],
+            indexDocumentRequest = findIndex(this.state.dataRequest, {
+                name: document.name,
+                owner: document.owner,
+                path: document.path
+            }),
+            documentRequest = {
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "number_of_classification_challenge": 1,
+                "initial_category": this.state.dataReview[reviewIndex].category,
+                "initial_confidentiality": this.state.dataReview[reviewIndex].confidentiality,
+                "validated_category": document.category,
+                "validated_confidentiality": document.confidentiality
+            };
             debugger
         //if(document.status === 'reject') {
             let updateData = update(this.state.dataReview, {
@@ -194,10 +212,19 @@ var ClassificationReview = React.createClass({
                     }]
                 }
             });
+
+            let addIntoDataRequest = update(this.state.dataRequest,
+                indexDocumentRequest > -1 ?
+                    {
+                        $splice: [[indexDocumentRequest, 1, documentRequest]]
+                    } : {
+                        $push: [documentRequest]
+                });
             //debugger
             this.setState({
                 dataReview: updateData,
                 stackChange: updateStack,
+                dataRequest: addIntoDataRequest,
                 current: {
                     doc: docIndex,
                     review: reviewIndex
@@ -426,9 +453,10 @@ var ClassificationReview = React.createClass({
     },
 
     assignCategoryAndConfidentiality2nd() {
+        debugger
         return makeRequest({
             method: "POST",
-            params: this.state.bodyRequest,
+            params: JSON.stringify(this.state.dataRequest),
             path: "api/classification_review/",
             success: (res) => {
                 console.log("assign success", res);

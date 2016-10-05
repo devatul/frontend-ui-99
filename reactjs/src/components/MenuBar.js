@@ -7,6 +7,7 @@ import Constant from '../Constant.js'
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { orderByIndex } from '../utils/function'
 
 var MenuBar = React.createClass
 ({
@@ -143,6 +144,7 @@ var MenuBar = React.createClass
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.configListLabel(data);
+                data = orderByIndex(data, [0, 4, 1, 2, 3, 5]);
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

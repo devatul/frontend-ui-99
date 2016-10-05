@@ -104,7 +104,7 @@
                         <div rt-scope=" this.state.dataChart.documentType as doctype " class="">
                           <StackBarChart
                               id="doctypeChartUserAssignment"
-                              title="Document Type per Confidentiality Level"
+                              title="Document Type per Level of Confidentiality"
                               help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name} category."
                               categories={doctype.categories}
                               series={doctype.series} />
