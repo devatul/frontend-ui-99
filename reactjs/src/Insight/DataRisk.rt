@@ -24,9 +24,9 @@
 
   <section class="panel panel-featured panel-featured-primary panel-identity">
 
-    <BarMenu title="Data Risk Management" showFilter={true} handleFilter={this.handleFilter} helpInfo="This represents an overview of the risk key indicators of the data repositories scanned by Dathena 99" />
+    <BarMenu title="Data Risk Management" showFilter={false} handleFilter={this.handleFilter} helpInfo="This represents an overview of the risk key indicators of the data repositories scanned by Dathena 99" />
     <div class="panel-body" id="toggle">
-      <div style="margin-top : 40px"></div>
+   <!--    <div style="margin-top : 40px"></div> -->
       <h3 >Capacity Management Risk
        <!--  <HelpButton type="overview_question_a" content="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity."/> -->
 

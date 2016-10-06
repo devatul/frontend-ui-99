@@ -86,6 +86,7 @@ var Notification = React.createClass({
         }
 
         if(this.state.filtersAlert != prevState.filtersAlert){
+            debugger
             if(this.state.filtersAlert == 'none'){
                 this.setState({
                 notification: notification1
@@ -105,11 +106,11 @@ var Notification = React.createClass({
                 })
                 this.setState({
                       styleList: {
-                        today: { $set: 'block' },
-                        yesterday: { $set: 'block' },
-                        last_7_days: { $set: 'block' },
-                        last_30_days: { $set: 'block' },
-                        older: { $set: 'block' }
+                        today: 'block',
+                        yesterday: 'block',
+                        last_7_days: 'block',
+                        last_30_days: 'block',
+                        older: 'block'
                     },
                 })
                 this.setState({content: 'Number of actions pending for you to complete. '+  this.state.dangerNoti  + (this.state.dangerNoti > 1 ? " actions are" : " action is") + ' required with high priority and '+  this.state.warningNoti  + (this.state.warningNoti > 1 ? " actions are" : " action is") + ' required with medium priority',})
@@ -143,7 +144,7 @@ var Notification = React.createClass({
     },
 
     filterAlert(value) {
-
+        debugger
         let alert = this.state.filtersAlert
         let alertUpdate = update(this.state, {
             filter : {
