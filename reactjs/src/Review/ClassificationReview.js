@@ -164,21 +164,8 @@ var ClassificationReview = React.createClass({
             reviewIndex = parseInt(idx[0]),
             docIndex = parseInt(idx[1]),
             document = this.state.dataReview[reviewIndex].documents[docIndex],
-            indexDocumentRequest = findIndex(this.state.dataRequest, {
-                name: document.name,
-                owner: document.owner,
-                path: document.path
-            }),
-            documentRequest = {
-                "name": document.name,
-                "path": document.path,
-                "owner": document.owner,
-                "number_of_classification_challenge": 1,
-                "initial_category": this.state.dataReview[reviewIndex].category,
-                "initial_confidentiality": this.state.dataReview[reviewIndex].confidentiality,
-                "validated_category": document.category,
-                "validated_confidentiality": document.confidentiality
-            };
+            { stackChange } = this.state;
+
             debugger
         //if(document.status === 'reject') {
             let updateData = update(this.state.dataReview, {
@@ -193,38 +180,24 @@ var ClassificationReview = React.createClass({
                 }
             }),
 
-            updateStack = this.state.stackChange[reviewIndex] ? 
+            updateStackChange = update(stackChange, {});
 
-            update(this.state.stackChange, {
-                [reviewIndex]: {
-                    $push: [{
-                        id: docIndex,
-                        data: document
-                    }]
-                }
-            })
-            :
-            update(this.state.stackChange, {
-                $set: {
-                    [reviewIndex]: [{
-                        id: docIndex,
-                        data: document
-                    }]
-                }
-            });
-
-            let addIntoDataRequest = update(this.state.dataRequest,
-                indexDocumentRequest > -1 ?
-                    {
-                        $splice: [[indexDocumentRequest, 1, documentRequest]]
-                    } : {
-                        $push: [documentRequest]
+            if(updateStackChange[reviewIndex]) {
+                updateStackChange[reviewIndex].push({
+                    id: docIndex,
+                    data: document
                 });
-            //debugger
+            } else {
+                updateStackChange[reviewIndex] = [{
+                    id: docIndex,
+                    data: document
+                }]
+            }
+
             this.setState({
                 dataReview: updateData,
-                stackChange: updateStack,
-                dataRequest: addIntoDataRequest,
+                stackChange: updateStackChange,
+                dataRequest: this.addDocIntoRequest(document),
                 current: {
                     doc: docIndex,
                     review: reviewIndex
@@ -234,36 +207,52 @@ var ClassificationReview = React.createClass({
         //}
     },
 
+    addDocIntoRequest(document) {
+        let documentRequest = {
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "number_of_classification_challenge": 1,
+                "initial_category": document.init_category,
+                "initial_confidentiality": document.init_confidentiality,
+                "validated_category": document.category,
+                "validated_confidentiality": document.confidentiality
+            },
+            indexDocumentRequest = findIndex(this.state.dataRequest, {
+                name: document.name,
+                owner: document.owner,
+                path: document.path
+            });
+
+        return update(this.state.dataRequest, indexDocumentRequest > -1 ?
+            {
+                $splice: [[indexDocumentRequest, 1, documentRequest]]
+            } : {
+                $push: [documentRequest]
+        });
+    },
+
     handleTableRowOnChange(event, index) {
-        debugger
+        //debugger
         let { stackChange } = this.state,
             splitIndex = index.split('_'), reviewIndex = splitIndex[0], docIndex = splitIndex[1],
             document = this.state.dataReview[reviewIndex].documents[docIndex];
+        let updateStackChange = update(stackChange, {});
 
-        let updateStack = [];
-
-        if(stackChange[reviewIndex]) {
-            updateStack = update(stackChange, {
-                [reviewIndex]: {
-                    $push: [{
-                        id: docIndex,
-                        data: document
-                    }]
-                }
-            });
+        if(!stackChange[reviewIndex]) {
+            updateStackChange[reviewIndex] = [{
+                id: docIndex,
+                data: document
+            }];
         } else {
-            updateStack = update(stackChange, {
-                $set: {
-                    [reviewIndex]: [{
-                        id: docIndex,
-                        data: document
-                    }]
-                }
+            updateStackChange[reviewIndex].push({
+                id: docIndex,
+                data: document
             });
         }
-
+        debugger
         this.setState({
-            stackChange: updateStack
+            stackChange: updateStackChange
         });
 
         switch(event.target.id) {
@@ -308,7 +297,6 @@ var ClassificationReview = React.createClass({
 
     onChangeCategory(event, reviewIndex, docIndex, document) {
         let categoryIndex = event.target.value,
-            initCategory = find(this.state.init.categories, { id: reviewIndex + '_' + docIndex }),
 
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
@@ -318,22 +306,15 @@ var ClassificationReview = React.createClass({
                                 $set: this.state.categories[categoryIndex]
                             },
                             $merge: {
-                                status: initCategory && isEqual(initCategory.data, this.state.categories[categoryIndex]) ? 'accepted' : 'editing'
+                                status: document.init_category && isEqual(this.state.categories[categoryIndex], {
+                                    id: parseInt(document.init_category.id)
+                                }) ? 'accepted' : 'editing',
+                                init_category: document.init_category ? document.init_category : document.category
                             }
                         }
                     }
                 }
             });
-        
-        debugger
-        if(!initCategory) {
-            let { categories } = this.state.init;
-            categories.push({
-                id: reviewIndex + '_' + docIndex,
-                data: Object.assign({}, document.category)
-            });
-        }
-        debugger
         this.setState({
             dataReview: updateData,
             current: {
@@ -346,7 +327,6 @@ var ClassificationReview = React.createClass({
 
     onChangeConfidentiality(event, reviewIndex, docIndex, document) {
         let confidentialityIndex = event.target.value,
-            initConfidentiality = find(this.state.init.confidentialities, { id: reviewIndex + '_' + docIndex }),
 
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
@@ -356,9 +336,10 @@ var ClassificationReview = React.createClass({
                                 $set: this.state.confidentialities[confidentialityIndex]
                             },
                             $merge: {
-                                status: initConfidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
-                                    id: pardeInt(initConfidentiality.data.id),
-                                    name: initConfidentiality.data.name
+                                init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+
+                                status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
+                                    id: parseInt(document.init_confidentiality.data.id)
                                 }) ? 'accepted' : 'editing'
                             }
                         }
@@ -366,15 +347,6 @@ var ClassificationReview = React.createClass({
                 }
             });
 
-        if(!initConfidentiality) {
-            let { confidentialities } = this.state.init;
-            debugger
-            confidentialities.push({
-                id: reviewIndex + '_' + docIndex,
-                data: Object.assign({}, document.confidentiality)
-            });
-        }
-            debugger
         this.setState({
             dataReview: updateData,
             current: {
