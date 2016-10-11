@@ -1,307 +1,369 @@
+<rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<div class="admin-page">
+   <div class="container">
+      <div class="wizard-progress wizard-progress-lg">
+        <div class="steps-progress">
+          <div class="progress-indicator" style="width: 25%;"></div>
+      </div>
+      <ul class="wizard-steps">
+          <li class="completed" style="padding-left: 30px">
+            <a href="javascript:;"><span>1</span></a>
+            <p align="center" style="font-weight: bold;">Business</p>
+        </li>
+        <li class="active" style="padding-left: 192px">
+            <a href="javascript:;"><span>2</span></a>
+            <p align="center" style="white-space: nowrap;    margin-left: -24px; font-weight: bold;">Technology</p>
+        </li>
+        <li style="padding-left: 202px">
+            <a><span>3</span></a>
+            <p align="center" style="    margin-left: -9px; font-weight: bold;">Team</p>
+        </li>
+        <li style="padding-left: 202px">
+            <a><span>4</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
+        </li>
+        <li style="padding-left: 198px">
+            <a><span>5</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="bar_menu admin_header container">
+  <div class="row">
+    <div class="col-md-12 mb-md">
+      <div class="row">
+          <div class="col-sm-8">
+              <h4 class="inline-block-item">Technology Settings Progress: {this.state.complete}/4</h4>
+              <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="As part of the administration set up process, 99 will need to establish working connections with servers and other organizational infrastructure. To ensure that 99 is correctly set up and configured prior to ‘go live’, each step will require positive confirmation in the form of a connection test. Once the connection test has been successfully performed, then progress to the next step can take place. This is to ensure that at each phase, the target infrastructure paths are correct, and that any connectivity or permissioning issues for infrastructure access can be identifiedand remediated prior to the ‘go live’ of 99." />
+              <div class="progress-radial progress-{this.state.complete == 1 ? '25' : (this.state.complete == 2 ? '50' : (this.state.complete == 3 ? '75' : (this.state.complete == 4 ? '100' : '0')))}"></div>
+          </div>
+
+      </div>
+  </div>
+</div>
+</div>
 <div class="container">
 
-      <section class="panel panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="fa fa-clock-o icon-success"></i>1. Domain Details
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
-            </h2>
-            <div class="panel-actions">
-                <div class="btn-group-admin">
-                  <button class="btn btn-green btn-edit-step">Edit</button>
-                  <button class="btn btn-green btn-save-step">Save</button>
-                </div>
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-            </div>
-        </header>
-        <div class="panel-body add-detail-section">
-          <div class="row detail-row domain-block">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label">Domain Details </label>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <input type="text" placeholder="Domain Name" class="form-control">
+  <section class="panel panel-featured panel-featured-primary panel-bordered">
+    <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-clock-o icon-success"></i>1. Domain Details
+          <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="99 will attempt to access the root folder paths provided to ensure that the file path is correct, and 99 has the correct permissions to access the root folder and its associated sub directories." />
+        </h2>
+      <div class="panel-actions">
 
-                  <input type="text" placeholder="Domain Location" class="form-control">
+          <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
 
-                  <input type="text" placeholder="Domain OS" class="form-control">
-
-                  <input type="text" placeholder="Domain Owner" class="form-control">
-
-                  <input type="text" placeholder="Domain Administrator" class="form-control">
-
-                  <a href="#" class="mb-md inline-block-item add-domain-admin"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Domain Administrator </a>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-4 domain-admin-block">
-              <div class="row">
-                <div class="col-sm-12 col-md-8 detail-right">
-                  <input type="text" placeholder="Domain Administrator Name" class="form-control">
-                  <input type="text" placeholder="Domain Administrator Email" class="form-control">
-                </div>
-              </div>
-            </div>
+        <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+    </div>
+  </header>
+  <div class="panel-body add-detail-section" id="block1">
+      <div class="row detail-row domain-block">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-4 detail-left clearfix">
+              <label class="control-label">Domain Details </label>
           </div>
-          <div class="text-right">
-            <a href="99_Admin_Settings_Step2.2.html" class="btn btn-green validate-btn">Validate</a>
+          <div class="col-sm-8 detail-right" >
+
+               <Input   id="input1" placeholder="Domain Name" className="form-control" />
+
+               <Input   id="input1" placeholder="Domain Location" className="form-control" />
+
+               <Input   id="input1" placeholder="Domain OS"  className="form-control" />
+
+               <Input  id="input1" placeholder="Domain Owner"  className="form-control" />
+
+               <Input   placeholder="Domain Administrator" className="form-control" />
+              <a href="javascript:;" class="mb-md inline-block-item add-domain-admin" onClick = {this.add.bind(this,1)}><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Domain Administrator </a>
+
           </div>
+      </div>
+  </div>
+  <div class="col-md-6 col-md-offset-3 col-sm-offset-4 domain-admin-block" rt-repeat= "rt in this.state.add_DomainDetails"  key="{rt.key}">
+      <div class="row" >
+
+        <div class="col-sm-12 col-md-8 detail-right"  >
+            <Input id="input1" placeholder="Domain Administrator Name" className="form-control" key="{rt.key}" />
+            <Input  id="input1" placeholder="Domain Administrator Email"  className="form-control" key="{rt.key +1}"/>
+      </div>
+  </div>
+</div>
+</div>
+<div class="text-right">
+    <a href="javascript:;" class="btn btn-green validate-btn" onClick = {this.clickValidate_step1} rt-if="this.state.complete == 0">Validate</a>
+</div>
+</div>
+</section>
+
+<section class="panel panel-featured panel-featured-primary panel-bordered  {this.state.complete >= 1 ? '' : 'disabled'}">
+    <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-arrow-circle-right icon-success"></i>2. Folder Details
+          <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="99 will attempt to access the root folder paths provided to ensure that the file path is correct, and 99 has the correct permissions to access the root folder and its associated sub directories." />
+        </h2>
+        <div class="panel-actions">
+
+              <button class="btn btn-green" rt-if="this.state.complete >= 2" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
+
+            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
         </div>
-      </section>
-
-      <section class="panel panel-featured panel-featured-primary panel-bordered disabled">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="fa fa-arrow-circle-right icon-success"></i>2. Folder Details
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
-            </h2>
-            <div class="panel-actions">
-                <div class="btn-group-admin">
-                  <button class="btn btn-green btn-edit-step">Edit</button>
-                  <button class="btn btn-green btn-save-step">Save</button>
-                </div>
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-            </div>
-        </header>
-        <div class="panel-body add-detail-section">
-          <div class="row detail-row folder-block">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label">Folder Paths </label>
-                  <a href="#" class="add-folder"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Folder</a>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <input type="text" placeholder="Folder Name" class="form-control">
-
-                  <input type="text" placeholder="Full Folder Path" class="form-control">
-
-                  <input type="text" placeholder="Windows Username" class="form-control">
-
-                  <input type="text" placeholder="Windows Password" class="form-control">
-
-                  <input type="text" placeholder="Folder Owner" class="form-control">
-
-                </div>
-              </div>
-            </div>
+  </header>
+  <div class="panel-body add-detail-section" id="block2">
+      <div class="row detail-row folder-block">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-4 detail-left clearfix">
+              <label class="control-label">Folder Paths </label>
+              <a href="#" class="add-folder"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Folder</a>
           </div>
+          <div class="col-sm-8 detail-right">
 
-          <div class="text-right">
-            <a href="#" class="btn btn-green validate-btn">Validate</a>
+              <Input  placeholder="Folder Name"  className="form-control" />
+
+              <Input  placeholder="Full Folder Path"  className="form-control" />
+
+              <Input  placeholder="Windows Username"  className="form-control" />
+
+              <Input  placeholder="Windows Password"  className="form-control" />
+
+              <Input  placeholder="Folder Owner"  className="form-control" />
           </div>
+      </div>
+  </div>
+</div>
+
+<div class="text-right">
+    <a href="javascript:;" class="btn btn-green validate-btn" onClick={this.validate_step2} rt-if="this.state.complete == 1">Validate</a>
+</div>
+</div>
+</section>
+
+<section class="panel panel-featured panel-featured-primary panel-bordered {this.state.complete >= 2 ? '' : 'disabled'}">
+    <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-arrow-circle-right icon-success"></i>3. Email Server Details
+          <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="As part of the email validation process, 99 requires a successful test email to be sent in order to confirm that the server path that has been provided is operational, and a successful link from 99 has been established." />
+        </h2>
+         <div class="panel-actions">
+
+              <button class="btn btn-green" rt-if="this.state.complete >= 3" onClick = "{this.editButton.bind(this,3, this.state.readOnly2)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
+
+            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
         </div>
-      </section>
+  </header>
+  <div class="panel-body add-detail-section" id="block3">
 
-      <section class="panel panel-featured panel-featured-primary panel-bordered disabled">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="fa fa-arrow-circle-right icon-success"></i>3. Email Server Details
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
-            </h2>
-            <div class="panel-actions">
-                <div class="btn-group-admin">
-                  <button class="btn btn-green btn-edit-step">Edit</button>
-                  <button class="btn btn-green btn-save-step">Save</button>
-                </div>
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-            </div>
-        </header>
-        <div class="panel-body add-detail-section">
-
-          <div class="row detail-row">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label">Email Server
-                    <span class="help_question_li dropdown inline-block-item">
-                      <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                          <p>This will determine whether the suggested users selected are based on who created the document
-                          OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                      </div>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <select id="email-server" class="form-control populate placeholder" >
-                    <option value="exchange">Exchange</option>
-                    <option value="lotus">Lotus</option>
-                  </select>
-                  <input type="text" placeholder="Name" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="Email Address" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="User Name" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="Password" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="Internal URL" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="External URL" class="form-control" data-show-for="exchange">
-
-                  <input type="text" placeholder="Home/Mail Server" class="form-control" data-show-for="lotus">
-
-                  <input type="text" placeholder="Passthru Server" class="form-control" data-show-for="lotus">
-
-                  <input type="text" placeholder="Catalog/Domain Search Server" class="form-control" data-show-for="lotus">
-
-                  <input type="text" placeholder="Domino Directory Server" class="form-control" data-show-for="lotus">
-
-                </div>
-              </div>
-            </div>
+      <div class="row detail-row" >
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-sm-4 detail-left clearfix">
+              <label class="control-label">Email Server
+                <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="As part of the email validation process, 99 requires a successful test email to be sent in order to confirm that the server path that has been provided is operational, and a successful link from 99 has been established." />
+              </label>
           </div>
+          <div class="col-sm-8 detail-right">
+              <select id="email-server" class="form-control populate placeholder" >
+                <option value="exchange">Exchange</option>
+                <option value="lotus">Lotus</option>
+            </select>
 
-          <div class="row detail-row" data-show-for="lotus">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label">Mail File Location
-                  </label>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <select class="form-control populate placeholder">
-                    <option value="">On Server</option>
-                  </select>
-                  <input type="text" placeholder="Mail File" class="form-control">
+             <Input  placeholder="Name"  className="form-control" />
 
-                  <input type="text" placeholder="Domino Mail Domain" class="form-control">
+            <Input  placeholder="Email Address"  className="form-control" />
 
-                  <input type="text" placeholder="Format for Messages Addressed to Internal Addresses" class="form-control">
+            <Input  placeholder="User Name"  className="form-control" />
 
-                  <input type="text" class="id-file-name form-control" placeholder="Browse id file">
-                  <input type="file" class="id-file">
+            <Input  placeholder="Password"  className="form-control" />
 
-                </div>
-              </div>
-            </div>
-          </div>
+            <Input  placeholder="Internal URL"  className="form-control" />
 
-          <div class="row detail-row">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label" style="padding-left:24px">Internet Proxy Server
-                    <span class="help_question_li dropdown inline-block-item">
-                      <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                      <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                          <p>This will determine whether the suggested users selected are based on who created the document
-                          OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                      </div>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <input type="text" placeholder="Name" class="form-control">
+            <Input  placeholder="External URL"  className="form-control" />
 
-                  <input type="text" placeholder="Username" class="form-control">
+            <Input  placeholder="Home/Mail Server"  className="form-control" />
 
-                  <input type="text" placeholder="Password" class="form-control">
+            <Input  placeholder="Passthru Server"  className="form-control" />
 
-                  <input type="text" placeholder="Servername" class="form-control">
+            <Input  placeholder="Catalog/Domain Search Server" className="form-control" />
 
-                  <input type="text" placeholder="Sharename" class="form-control">
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
-              <div class="row">
-                <div class="col-sm-12 col-md-8 detail-right">
-                  <input type="text" placeholder="Business Unit (optional)" class="form-control">
-                  <input type="text" placeholder="Department (optional)" class="form-control">
-                  <input type="text" placeholder="Team (optional)" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="text-right">
-            <a href="#" class="btn btn-green validate-btn">Validate</a>
-          </div>
+            <Input  placeholder="Domino Directory Server"  className="form-control" />
         </div>
-      </section>
+    </div>
+</div>
+</div>
 
-      <section class="panel panel-featured panel-featured-primary panel-bordered disabled">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="fa fa-arrow-circle-right icon-success"></i>4. HDP Server Details
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
-            </h2>
-            <div class="panel-actions">
-                <div class="btn-group-admin">
-                  <button class="btn btn-green btn-edit-step">Edit</button>
-                  <button class="btn btn-green btn-save-step">Save</button>
-                </div>
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-            </div>
-        </header>
-        <div class="panel-body add-detail-section">
-          <div class="row detail-row">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-sm-4 detail-left clearfix">
-                  <label class="control-label">HDP Server </label>
-                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Server </a>
-                </div>
-                <div class="col-sm-8 detail-right">
-                  <input type="text" placeholder="Server Name" class="form-control">
+<div class="row detail-row" data-show-for="lotus">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-sm-4 detail-left clearfix">
+          <label class="control-label">Mail File Location
+          </label>
+      </div>
+      <div class="col-sm-8 detail-right">
+          <select class="form-control populate placeholder">
+            <option value="">On Server</option>
+        </select>
 
-                  <input type="text" placeholder="Server ID" class="form-control">
+         <Input  placeholder="Mail Filer"  className="form-control" />
 
-                  <input type="text" placeholder="Server Key" class="form-control">
+         <Input  placeholder="Domino Mail Domain"  className="form-control" />
 
-                  <input type="text" placeholder="Server Owner" class="form-control">
+         <Input  placeholder="Format for Messages Addressed to Internal Addresses" disabled={this.state.readOnly2} className="form-control" />
 
-                  <input type="text" placeholder="Server Administrator" class="form-control">
+         <Input  placeholder="Browse id file"  className="id-file-name form-control" />
+        <input type="file" class="id-file">
 
-                  <a href="#" class="mb-md inline-block-item"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Server Administrator</a>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
-              <div class="row">
-                <div class="col-sm-12 col-md-8 detail-right">
-                  <input type="text" placeholder="Server Administrator Name" class="form-control">
-                  <input type="text" placeholder="Server Administrator Email" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-right">
-            <a href="#" class="btn btn-green validate-btn">Validate</a>
-          </div>
-        </div>
-      </section>
 
     </div>
+</div>
+</div>
+</div>
+
+<div class="row detail-row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-sm-4 detail-left clearfix">
+          <label class="control-label" style="padding-left:24px">Internet Proxy Server
+            <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="99 will attempt to establish an outbound connection via the stated internet proxy to ensure that a working connection can be established." />
+          </label>
+      </div>
+      <div class="col-sm-8 detail-right">
+
+           <Input  placeholder="Name"  className="form-control" />
+
+           <Input  placeholder="Username"  className="form-control" />
+
+           <Input  placeholder="Password"  className="form-control" />
+
+           <Input  placeholder="Servername"  className="form-control" />
+
+           <Input  placeholder="Sharename"  className="form-control" />
+      </div>
+  </div>
+</div>
+<div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 detail-right">
+
+      <Input  placeholder="Business Unit (optional)"  className="form-control" />
+
+      <Input  placeholder="Department (optional)"  className="form-control" />
+
+      <Input  placeholder="Team (optional)" className="form-control" />
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="text-right">
+    <a href="javascript:;" class="btn btn-green validate-btn" onClick={this.validate_step3}>Validate</a>
+</div>
+</div>
+</section>
+
+<section class="panel panel-featured panel-featured-primary panel-bordered {this.state.complete >= 3 ? '' : 'disabled'}">
+    <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-arrow-circle-right icon-success"></i>4. HDP Server Details
+           <HelpButton
+                classMenu="overview_timeframe fix-overview-help-button"
+                setValue="99 will attempt to establish a connection with the stated HDP server, testing connectivity and that the correct permissions have been applied to provided 99 with the necessary permissions to undertake the scan." />
+        </h2>
+        <div class="panel-actions">
+            <div class="btn-group-admin">
+              <button class="btn btn-green btn-edit-step">Edit</button>
+              <button class="btn btn-green btn-save-step">Save</button>
+          </div>
+          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+      </div>
+  </header>
+  <div class="panel-body add-detail-section">
+      <div class="row detail-row" rt-repeat="ser in this.state.add_Server">
+        <div class="col-md-6" key={serIndex}>
+          <div class="row">
+            <div class="col-sm-4 detail-left clearfix">
+              <label class="control-label">HDP Server </label>
+              <!-- <a href="javascript:;" class="mb-md inline-block-item" onClick= "{this.add.bind(this , 3)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Server </a> -->
+          </div>
+          <div class="col-sm-8 detail-right">
+              <input type="text" placeholder="Server Name" class="form-control">
+
+              <input type="text" placeholder="Server ID" class="form-control">
+
+              <input type="text" placeholder="Server Key" class="form-control">
+
+              <input type="text" placeholder="Server Owner" class="form-control">
+
+              <input type="text" placeholder="Server Administrator" class="form-control">
+
+              <a href="javascript:;" class="mb-md inline-block-item" onClick= "{this.addAdmin.bind(this , serIndex+1)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Server Administrator</a>
+
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 detail-right">
+          <input type="text" placeholder="Server Administrator Name" class="form-control">
+          <input type="text" placeholder="Server Administrator Email" class="form-control">
+      </div>
+  </div>
+</div>
+</div>
+<div class="row detail-row" >
+        <div class="col-md-6" >
+          <div class="row">
+            <div class="col-sm-4 detail-left clearfix">
+              <label class="control-label">HDP Server </label>
+              <a rt-if=" this.state.add_Server.length <= 1 " href="javascript:;" class="mb-md inline-block-item" onClick= "{this.add.bind(this , 3)}"><i class="fa fa-plus-circle" aria-hidden="true" ></i> Add Server </a>
+          </div>
+          <div class="col-sm-8 detail-right">
+              <input type="text" placeholder="Server Name" class="form-control">
+
+              <input type="text" placeholder="Server ID" class="form-control">
+
+              <input type="text" placeholder="Server Key" class="form-control">
+
+              <input type="text" placeholder="Server Owner" class="form-control">
+
+              <input type="text" placeholder="Server Administrator" class="form-control">
+
+              <a href="javascript:;" class="mb-md inline-block-item" onClick= "{this.addAdmin.bind(this , 0)}"><i class="fa fa-plus-circle" aria-hidden="true" ></i> Add Server Administrator</a>
+
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6 col-md-offset-3 col-sm-offset-4">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 detail-right">
+          <input type="text" placeholder="Server Administrator Name" class="form-control">
+          <input type="text" placeholder="Server Administrator Email" class="form-control">
+      </div>
+  </div>
+</div>
+</div>
+<div class="text-right">
+          <button class="btn btn-green btn-edit-step"><Link to="/Admin/Admin_Step3" activeClassName="active"><span style="color : white">Validate</span></Link></button>
+          <!--   <a href="#" class="btn btn-green validate-btn"> <Link to="/Insight/DataLoss" activeClassName="active"><span style="color : white">Validate</span></Link></a> -->
+          </div>
+</div>
+</section>
+
+</div>
+</div>

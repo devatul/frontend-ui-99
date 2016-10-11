@@ -244,3 +244,7 @@
 .fix_center p {
     margin-top : 10px;
 }
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}

@@ -1,0 +1,104 @@
+<rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<div class="admin-page">
+     <div class="container">
+          <div class="wizard-progress wizard-progress-lg">
+            <div class="steps-progress">
+              <div class="progress-indicator" style="width: 75%;"></div>
+          </div>
+          <ul class="wizard-steps">
+              <li class="completed" style="padding-left: 30px">
+                <a href="javascript:;"><span>1</span></a>
+                <p align="center" style="font-weight: bold;">Business</p>
+            </li>
+            <li class="completed" style="padding-left: 192px">
+                <a href="javascript:;"><span>2</span></a>
+                <p align="center" style="white-space: nowrap;    margin-left: -24px; font-weight: bold;">Technology</p>
+            </li>
+            <li class="completed" style="padding-left: 202px">
+                <a><span>3</span></a>
+                <p align="center" style="    margin-left: -9px; font-weight: bold;">Team</p>
+            </li>
+            <li class="active" style="padding-left: 202px">
+                <a><span>4</span></a>
+                <p align="center" style="white-space: nowrap;     margin-left: -30px; font-weight: bold;">Data Scientist</p>
+            </li>
+            <li style="padding-left: 198px">
+                <a><span>5</span></a>
+                <p align="center" style="white-space: nowrap;     margin-left: -15px; font-weight: bold;">Run Scan</p>
+            </li>
+        </ul>
+        </div>
+    </div>
+    <div class="bar_menu admin_header container">
+      <div class="row">
+        <div class="col-md-12 mb-md">
+          <div class="row">
+              <div class="col-sm-8">
+                  <h4 class="inline-block-item">Data Scientist Parameters Progress: 0/1</h4>
+                   <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="Define the machine learning parameters used by 99." />
+                  <div class="progress-radial progress-0"></div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+
+      <section class="panel panel-featured panel-featured-primary panel-bordered">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+              <i class="fa fa-clock-o icon-success"></i>1. Cluster Parameters
+               <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents.” (May need to add more info here or a link to the wiki, as this is a more complex thing to complete)." />
+            </h2>
+            <div class="panel-actions">
+                <div class="btn-group-admin">
+                  <button class="btn btn-green btn-edit-step">Edit</button>
+                  <button class="btn btn-green btn-save-step">Save</button>
+                </div>
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </div>
+        </header>
+        <div class="panel-body add-detail-section">
+          <div class="row detail-row">
+            <div class="col-md-8">
+              <form class="form-horizontal">
+
+                <div class="form-group">
+                  <div class="col-sm-4 detail-left clearfix">
+                    <label class="control-label">Minimum Number of Clusters</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" name="minimum" class="form-control" value="From 2 to 100">
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="col-sm-4 detail-left clearfix">
+                    <label class="control-label">Maximum Number of Clusters</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" name="maximum" class="form-control" value="From 2 to 100">
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="text-right">
+              <button class="btn btn-green btn-edit-step"><Link to="/Admin/Admin_Step5" activeClassName="active"><span style="color : white">Validate</span></Link></button>
+              <!--   <a href="#" class="btn btn-green validate-btn"> <Link to="/Insight/DataLoss" activeClassName="active"><span style="color : white">Validate</span></Link></a> -->
+              </div>
+        </div>
+      </section>
+
+    </div>
+
+</div>

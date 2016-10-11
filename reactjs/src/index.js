@@ -29,6 +29,9 @@ var DataLoss = require('./Insight/DataLoss');
 var Admin = require('./Admin/Admin')
 var Admin_Step1 = require('./Admin/Admin_Step1')
 var Admin_Step2 = require('./Admin/Admin_Step2')
+var Admin_Step3 = require('./Admin/Admin_Step3')
+var Admin_Step4 = require('./Admin/Admin_Step4')
+var Admin_Step5 = require('./Admin/Admin_Step5')
 
 render((
   	<Router history={browserHistory}>
@@ -50,6 +53,9 @@ render((
 				<Route path="/Admin/Admin" component={Admin}>
                     <Route path="/Admin/Admin_Step1" component={Admin_Step1}/>
                     <Route path="/Admin/Admin_Step2" component={Admin_Step2}/>
+                    <Route path="/Admin/Admin_Step3" component={Admin_Step3}/>
+                    <Route path="/Admin/Admin_Step4" component={Admin_Step4}/>
+                    <Route path="/Admin/Admin_Step5" component={Admin_Step5}/>
                 </Route>
 				<Route path="/Review/Review" component={Review}>
 					<Route path="/Review/OrphanReview" component={OrphanReview}/>

@@ -1,20 +1,46 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 
 <div class="admin-page">
+    <div class="container">
+      <div class="wizard-progress wizard-progress-lg">
+        <div class="steps-progress">
+          <div class="progress-indicator" style="width: 0%;"></div>
+      </div>
+      <ul class="wizard-steps">
+          <li class="active" style="padding-left: 30px">
+            <a href="javascript:;"><span>1</span></a>
+            <p align="center" style="font-weight: bold;">Business</p>
+        </li>
+        <li  style="padding-left: 192px">
+            <a href="javascript:;"><span>2</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -24px; font-weight: bold;">Technology</p>
+        </li>
+        <li style="padding-left: 202px">
+            <a><span>3</span></a>
+            <p align="center" style="margin-left: -9px; font-weight: bold;">Team</p>
+        </li>
+        <li style="padding-left: 202px">
+            <a><span>4</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
+        </li>
+        <li style="padding-left: 198px">
+            <a><span>5</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
+        </li>
+    </ul>
+</div>
+</div>
    <div class="bar_menu admin_header container">
       <div class="row">
         <div class="col-md-12 mb-md">
           <div class="row">
               <div class="col-sm-8">
                   <h4 class="inline-block-item">Business Settings Progress: {this.state.complete}/3</h4>
-                  <span class="help_question_li dropdown inline-block-item">
-                    <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                    <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                      <p>This will determine whether the suggested users selected are based on who created the document
-                      OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                    </div>
-                  </span>
+                  <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="As part of the administration set up process, 99 will need to know more about your organisation. To ensure that 99 is set up correctly and configured prior to ‘go live’, each step will require positive confirmation before you can move to the next one. This is to ensure that technical details and links are functional prior to implementing 99." />
                   <div class="{this.state.cycleProgress}"></div>
               </div>
 
@@ -27,13 +53,9 @@
         <header class="panel-heading">
             <h2 class="panel-title">
               <i class="{this.state.complete != 0 ? 'fa fa-check icon-succes' : 'fa fa-clock-o icon-succes'}"></i>1. Organisation Details
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
+              <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="User provided information of the organisation scanned by 99." />
             </h2>
             <div class="panel-actions">
 
@@ -89,13 +111,9 @@
         <header class="panel-heading">
             <h2 class="panel-title">
               <i  class="{this.state.complete == 2  ? 'fa fa-check icon-succes' : 'fa fa-arrow-circle-right icon-success '}"></i>2. Policies and Framework
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
+               <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="Chose the default confidentiality level labels used by Dathena 99 to classify your data. You can rename the default 99 confidentiality levels via the customized confidentiality boxes." />
             </h2>
             <div class="panel-actions">
 
@@ -134,7 +152,7 @@
                       </div>
                       <div class="col-xs-3">
                          <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox" checked="" id="checkbox1">
+                          <input type="checkbox" id="checkbox1">
                           <label for="checkbox1"></label>
                         </div>
                       </div>
@@ -153,7 +171,7 @@
                       </div>
                       <div class="col-xs-3">
                         <div class="checkbox-custom">
-                          <input type="checkbox" checked="" id="checkbox2" disabled="">
+                          <input type="checkbox"  id="checkbox2" >
                           <label for="checkbox2"></label>
                         </div>
                       </div>
@@ -172,7 +190,7 @@
                       </div>
                       <div class="col-xs-3">
                         <div class="checkbox-custom">
-                          <input type="checkbox" checked="" id="checkbox3" disabled="">
+                          <input type="checkbox"  id="checkbox3" >
                           <label for="checkbox3"></label>
                         </div>
                       </div>
@@ -191,7 +209,7 @@
                       </div>
                       <div class="col-xs-3">
                         <div class="checkbox-custom">
-                          <input type="checkbox" checked="" id="checkbox4" disabled="">
+                          <input type="checkbox"  id="checkbox4" >
                           <label for="checkbox4"></label>
                         </div>
                       </div>
@@ -210,7 +228,7 @@
                       </div>
                       <div class="col-xs-3">
                         <div class="checkbox-custom">
-                          <input type="checkbox" checked="" id="checkbox5" disabled="">
+                          <input type="checkbox"  id="checkbox5" >
                           <label for="checkbox5"></label>
                         </div>
                       </div>
@@ -234,13 +252,9 @@
         <header class="panel-heading">
             <h2 class="panel-title">
               <i class="fa fa-arrow-circle-right icon-success"></i>3. Service Level Agreement
-              <span class="help_question_li dropdown inline-block-item">
-                <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                    <p>This will determine whether the suggested users selected are based on who created the document
-                    OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                </div>
-              </span>
+              <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="This will allow you to add a time bound SLA to each respective action within 99. Once the specified time has passed, and no action has been taken, 99 will automatically email the user to remind them to complete their required actions. Users can define a SLA for each confidentiality level and for each document category. In case of conflict between SLAs, the SLA that is applied will always be the SLA linked to the highest confidentiality level." />
             </h2>
             <div class="panel-actions">
                 <div class="btn-group-admin">
@@ -261,13 +275,9 @@
 
                   <div class="sub-block-title">
                     <h4>1. Document Reviewer
-                      <span class="help_question_li dropdown inline-block-item">
-                        <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This will determine whether the suggested users selected are based on who created the document
-                            OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                        </div>
-                      </span>
+                      <HelpButton
+                        classMenu="overview_timeframe fix-overview-help-button"
+                        setValue="SLA assigned to the document reviewer to review the category and classification predicted by 99." />
                     </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
@@ -285,14 +295,11 @@
                         <div class="col-xs-3">Week(s)</div>
                         <div class="col-xs-3">Day(s)</div>
                         <div class="col-xs-3">Hours(s)
-                          <span class="help_question_li dropdown inline-block-item">
-                            <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine whether the suggested users selected are based on who created the document
-                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                            </div>
-                          </span>
+                            <HelpButton
+                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -623,13 +630,9 @@
 
                   <div class="sub-block-title">
                     <h4>2. Classification Review Coordinator
-                      <span class="help_question_li dropdown inline-block-item">
-                        <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This will determine whether the suggested users selected are based on who created the document
-                            OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                        </div>
-                      </span>
+                      <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="SLA assigned to the coordinator to review the category and classification predicted by 99." />
                     </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
@@ -647,13 +650,9 @@
                         <div class="col-xs-3">Week(s)</div>
                         <div class="col-xs-3">Day(s)</div>
                         <div class="col-xs-3">Hours(s)
-                          <span class="help_question_li dropdown inline-block-item">
-                            <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine whether the suggested users selected are based on who created the document
-                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                            </div>
-                          </span>
+                          <HelpButton
+                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
                         </div>
                       </div>
                     </div>
@@ -987,13 +986,9 @@
 
                   <div class="sub-block-title">
                     <h4>3. Security Anomaly Review Coordinator
-                      <span class="help_question_li dropdown inline-block-item">
-                        <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                            <p>This will determine whether the suggested users selected are based on who created the document
-                            OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                        </div>
-                      </span>
+                      <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="SLA assigned to the coordinator to review the security anomaly detected by 99." />
                     </h4>
                   </div>
                   <div class="form-group hidden-sm hidden-xs">
@@ -1011,13 +1006,9 @@
                         <div class="col-xs-3">Week(s)</div>
                         <div class="col-xs-3">Day(s)</div>
                         <div class="col-xs-3">Hours(s)
-                          <span class="help_question_li dropdown inline-block-item">
-                            <a data-toggle="dropdown" class="help_question_a"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <div class="help_question_content dropdown-menu has-arrow dd-md full-mobile">
-                                <p>This will determine whether the suggested users selected are based on who created the document
-                                OR who last modified the document. A document can only have one name assigned to each of these categories.</p>
-                            </div>
-                          </span>
+                          <HelpButton
+                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
                         </div>
                       </div>
                     </div>

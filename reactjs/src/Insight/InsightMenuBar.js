@@ -77,10 +77,10 @@ var MenuBar1 = React.createClass({
     },
     componentDidMount() {
         if (this.props.showFilter) {
-            this.getConfidentiality(true);
+          /*  this.getConfidentiality(true);
             this.getCategory(true);
             this.getDoctypes(true);
-            this.getLanguages(true);
+            this.getLanguages(true);*/
             this.copyNumberOfUser(true);
         }
     },

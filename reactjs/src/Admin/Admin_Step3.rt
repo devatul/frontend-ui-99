@@ -1,0 +1,359 @@
+<rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-require dependency="react-router/lib/Link" as="Link"/>
+<div class="admin-page">
+     <div class="container">
+          <div class="wizard-progress wizard-progress-lg">
+            <div class="steps-progress">
+              <div class="progress-indicator" style="width: 50%;"></div>
+          </div>
+          <ul class="wizard-steps">
+              <li class="completed" style="padding-left: 30px">
+                <a href="javascript:;"><span>1</span></a>
+                <p align="center" style="font-weight: bold;">Business</p>
+            </li>
+            <li class="completed" style="padding-left: 192px">
+                <a href="javascript:;"><span>2</span></a>
+                <p align="center" style="white-space: nowrap;    margin-left: -24px; font-weight: bold;">Technology</p>
+            </li>
+            <li class="active" style="padding-left: 202px">
+                <a><span>3</span></a>
+                <p align="center" style="    margin-left: -9px; font-weight: bold;">Team</p>
+            </li>
+            <li style="padding-left: 202px">
+                <a><span>4</span></a>
+                <p align="center" style="white-space: nowrap;     margin-left: -30px; font-weight: bold;">Data Scientist</p>
+            </li>
+            <li style="padding-left: 198px">
+                <a><span>5</span></a>
+                <p align="center" style="white-space: nowrap;     margin-left: -15px; font-weight: bold;">Run Scan</p>
+            </li>
+        </ul>
+        </div>
+    </div>
+    <div class="bar_menu admin_header container">
+      <div class="row">
+        <div class="col-md-12 mb-md">
+          <div class="row">
+              <div class="col-sm-8">
+                  <h4 class="inline-block-item">Business and Risk Management Team Settings Progress: {this.state.complete}/3</h4>
+                  <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="As part of the administration set up process, 99 will need to know more about your business and risk management team. To ensure that 99 is correctly set up and configured prior to ‘go live’, each step will require positive confirmation." />
+                  <div class="progress-radial progress-{this.state.complete == 1 ? '33' : (this.state.complete == 2 ? '66' : '0')}"></div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="container">
+
+          <section class="panel panel-featured panel-featured-primary panel-bordered">
+            <header class="panel-heading">
+                <h2 class="panel-title">
+                  <i class="fa fa-clock-o icon-success"></i>1.Business and Data Owner Registration
+                   <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="Users will need to define the data repository(s) that will be scanned by 99. Repositories are usually folders." />
+                </h2>
+                <div class="panel-actions">
+
+                  <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
+
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </div>
+            </header>
+            <div class="panel-body add-detail-section" id="block1">
+              <div class="row detail-row resposity-block" >
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Data Repository </label>
+                      <a href="#" class="mb-md inline-block-item add-resposity"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Data Repository </a>
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                       <Input  placeholder="Name"  className="form-control" />
+
+                       <Input  placeholder="Root Repository"  className="form-control" />
+
+                       <Input  placeholder="Path"  className="form-control" />
+
+                       <Input  placeholder="Department"  className="form-control" />
+
+                       <Input  placeholder="Functional Owner"  className="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <a href="javascript:;" class="btn btn-green validate-btn" onClick={this.validate_step1} rt-if="this.state.complete == 0">Validate</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel panel-featured panel-featured-primary panel-bordered {this.state.complete >= 1 ? '' : 'disabled'}">
+            <header class="panel-heading">
+                <h2 class="panel-title">
+                  <i class="fa fa-arrow-circle-right icon-success"></i>2. Classification Coordinator Team
+                  <HelpButton
+                    classMenu="overview_timeframe fix-overview-help-button"
+                    setValue="Define the details of each member of the team and select the permission levels that will be applied to each individual team member." />
+                </h2>
+                <div class="panel-actions">
+
+                  <button class="btn btn-green" rt-if="this.state.complete >= 1" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
+
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+            </header>
+            <div class="panel-body add-detail-section" id="block2">
+
+              <div class="row detail-row" rt-repeat= "rt in this.state.add_Classification"  key="{rt.key}" >
+                <div class="col-md-6" >
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Team Lead
+                        <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="The Team Leader is the responsible of the classification for the data repository selected." />
+                      </label>
+
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                       <Input  placeholder="Name"  className="form-control" />
+
+                       <Input  placeholder="Job Title"  className="form-control" />
+
+                       <Input  placeholder="Email Address(SMTP)"  className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+               <div class="row detail-row" >
+                <div class="col-md-6" >
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Team Lead
+                        <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="The Team Leader is the responsible of the classification for the data repository selected." />
+                      </label>
+                      <a href="javascript:;" class="mb-md inline-block-item" onClick ="{this.add.bind(this,1)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Team Lead </a>
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                       <Input  placeholder="Name"  className="form-control" />
+
+                       <Input  placeholder="Job Title"  className="form-control" />
+
+                       <Input  placeholder="Email Address(SMTP)"  className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <hr>
+
+              <div class="row detail-row" rt-repeat= "rt in this.state.add_Coordinator"  key="{rt.key}">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix" >
+                      <label class="control-label">Coordinator
+                         <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="The coordinator is the responsible of the classification for the data repository selected. The coordinator has to review the classification predicted by Dathena 99 and to assign reviewer to review a sample of documents for each Group." />
+                      </label>
+
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                      <Input  placeholder="Name" className="form-control" />
+
+                      <Input  placeholder="Job Title" className="form-control" />
+
+                      <Input  placeholder="Email Address(SMTP)" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+               <div class="row detail-row" >
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix" >
+                      <label class="control-label">Coordinator
+                        <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="The coordinator is the responsible of the classification for the data repository selected. The coordinator has to review the classification predicted by Dathena 99 and to assign reviewer to review a sample of documents for each Group." />
+                      </label>
+                      <a href="javascript:;" class="mb-md inline-block-item"  onClick ="{this.add.bind(this,2)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Coordinator </a>
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                      <Input  placeholder="Name" className="form-control" />
+
+                      <Input  placeholder="Job Title" className="form-control" />
+
+                      <Input  placeholder="Email Address(SMTP)" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+
+              <div class="text-right">
+                <a href="javascript:;" class="btn btn-green validate-btn" onClick = {this.validate_step2} rt-if="this.state.complete == 1">Validate</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel panel-featured panel-featured-primary panel-bordered {this.state.complete >= 2 ? '' : 'disabled'}">
+            <header class="panel-heading">
+                <h2 class="panel-title">
+                  <i class="fa fa-arrow-circle-right icon-success"></i>3.Audit Team
+                 <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="." />
+                </h2>
+                <div class="panel-actions">
+                    <div class="btn-group-admin">
+                      <button class="btn btn-green btn-edit-step">Edit</button>
+                      <button class="btn btn-green btn-save-step">Save</button>
+                    </div>
+                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                </div>
+            </header>
+            <div class="panel-body add-detail-section">
+             <div class="row detail-row" rt-repeat="ad in this.state.add_Audit" key="{ad.key}">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Audit Officer
+                        <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="." />
+                      </label>
+
+                    </div>
+                    <div class="col-sm-8 detail-right">
+                      <input type="text" placeholder="Name" class="form-control">
+
+                      <input type="text" placeholder="Job Title" class="form-control">
+
+                      <input type="text" placeholder="Email Address(SMTP)" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="row detail-row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Audit Officer
+                        <HelpButton
+                            classMenu="overview_timeframe fix-overview-help-button"
+                            setValue="." />
+                      </label>
+                      <a href="javascript:;" class="mb-md inline-block-item" onClick="{this.add.bind(this,3)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Audit Officer </a>
+                    </div>
+                    <div class="col-sm-8 detail-right">
+                      <input type="text" placeholder="Name" class="form-control">
+
+                      <input type="text" placeholder="Job Title" class="form-control">
+
+                      <input type="text" placeholder="Email Address(SMTP)" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-success">
+                    <header class="panel-heading">
+                      <h2 class="panel-title">Select Permission(s) Required</h2>
+                    </header>
+                    <div class="panel-body">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1">Data Repository 1</label>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+              <div class="text-right">
+              <button class="btn btn-green btn-edit-step"><Link to="/Admin/Admin_Step4" activeClassName="active"><span style="color : white">Validate</span></Link></button>
+              <!--   <a href="#" class="btn btn-green validate-btn"> <Link to="/Insight/DataLoss" activeClassName="active"><span style="color : white">Validate</span></Link></a> -->
+              </div>
+            </div>
+          </section>
+
+    </div>
+</div>
