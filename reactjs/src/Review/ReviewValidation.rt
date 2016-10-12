@@ -402,6 +402,9 @@
                 index="{this.constructor.challengeBack + '_' + this.state.currentIndex.docIndex}" />
       </tbody>
   </table>
+  <p rt-if="docPreview">
+    <a href="{docPreview.image_url}">{docPreview.path}</a>
+</p>
 </div>
 </DocumentPreview>
 </section>

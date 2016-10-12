@@ -136,12 +136,17 @@
 .table-my-actions tbody.fix-td-checkbox > tr td:nth-child(1) {
      width: 41px;
 }
-table.docPreview > tbody > tr > td:nth-child(1) {
+/*Table document preview*/
+/*table.docPreview > tbody > tr > td:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
 }
 
 table.docPreview > thead > tr > th:nth-child(1) {
     padding: 12px 7px 12px 13px !important;
+}*/
+
+table.docPreview > thead > tr > th:nth-child(2) {
+    min-width: 325px;
 }
 
 /*Fix helpButton document preview popup*/
@@ -299,7 +304,7 @@ table.docPreview > thead > tr > th:nth-child(1) {
     height: 6px;
 }
 
-/**/
+/*User Asignment page*/
 
 div#doctypeChartUserAssignment {
     height: 250px;
@@ -316,6 +321,10 @@ select.assigment-select.form-control {
 .user-assign-valid-btn .validation-btn:hover,
 .user-assign-valid-btn .validation-btn:hover .fa {
     color: #0D9FD6 !important;
+}
+
+.select-reviewers {
+    margin-top: -14px;
 }
 
 /* design show less comment */
@@ -355,7 +364,15 @@ select.assigment-select.form-control {
     max-width: none;
     width: auto;
 }
+/*Fix table classification review*/
+.table-my-actions.table-classification-width > tbody > tr > td.select-confidentiality,
+.table-my-actions.table-classification-width > tbody > tr > td.select-category {
+    width: 300px;
+}
 .tab-content.br-radius {
     border-radius: 5px;
 }
-
+/* Document review 1st line*/
+.table-my-actions.docPreview > thead tr th:nth-child(2) {
+    width: initial;
+}

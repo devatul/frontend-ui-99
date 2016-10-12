@@ -7,6 +7,7 @@
 <rt-import name="StackBarChart" from="../components/chart/StackBarChart"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="BarChart" from="../components/chart/BarChart"/>
+<rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
 <section>
   <div class="container">
       <div class="tabs tabs-primary">
@@ -65,7 +66,7 @@
                                   class="lt"
                                   key="{docPercentageIndex}"
                                   value="{docPercentage.number_docs}">
-                                  {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(2)}%)
+                                  {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(3)}%)
                                 </option>
                               </select>
                               <ValidationButton
@@ -86,7 +87,7 @@
                               <label class="">As % of overall {this.state.category.current.name}</label>
                               <select ref="overallCategory" name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
                                 <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc" class="lt" key="{percentageDocIndex}" value="{percentageDoc.number_docs}">
-                                  {percentageDoc.percentage.toFixed(2)}% ({percentageDoc.number_docs} Documents)
+                                  {percentageDoc.percentage.toFixed(3)}% ({percentageDoc.number_docs} Documents)
                                 </option>
                               </select>
                               <ValidationButton
@@ -563,7 +564,10 @@
             </section>
             <div class="clearfix">
               <div class="pull-right">
-                <button onClick={this.confirmNotify} class="btn btn-green btn-ok mb-sm mt-md" type="button">Confirm and Notify all Reviewers</button>
+                <button onClick={this.confirmNotify} class="btn btn-green btn-ok mb-sm mt-md" type="button">
+                  Confirm and Notify all Reviewers
+                  <LoadingButton rt-if="this.state.isConfirming" color="white" style="display: inline-block;float: right;margin-left: 10px;" open={true} elementType="span" />
+                </button>
               </div>
             </div>
           </div>

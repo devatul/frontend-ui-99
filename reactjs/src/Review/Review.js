@@ -14,5 +14,19 @@ module.exports = React.createClass({
 	componentDidMount() 
 	{
 	},
+
+	title() {
+		let paths = window.location.pathname.split('/');
+
+		switch(paths[paths.length - 1]) {
+			case 'ReviewValidation':
+				return 'Document Classification Challenge - Coordinator’s Review Validation';
+			case 'UserAssignment':
+				return 'Document Classification - User Assignment';
+			default:
+				return 'Document Categorisation and Classification Review'
+		}
+	},
+
     render:template
 });
