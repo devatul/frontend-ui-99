@@ -1,35 +1,7 @@
 <rt-import name = " Input" from="./components/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
-<div class="admin-page">
-     <div class="container">
-          <div class="wizard-progress wizard-progress-lg">
-            <div class="steps-progress">
-              <div class="progress-indicator" style="width: 100%;"></div>
-          </div>
-          <ul class="wizard-steps">
-              <li class="completed" style="padding-left: 30px">
-                <a href="javascript:;"><span>1</span></a>
-                <p align="center" style="font-weight: bold;">Business</p>
-            </li>
-            <li class="completed" style="padding-left: 192px">
-                <a href="javascript:;"><span>2</span></a>
-                <p align="center" style="white-space: nowrap;    margin-left: -24px; font-weight: bold;">Technology</p>
-            </li>
-            <li class="completed" style="padding-left: 202px">
-                <a><span>3</span></a>
-                <p align="center" style="    margin-left: -9px; font-weight: bold;">Team</p>
-            </li>
-            <li class="completed" style="padding-left: 202px">
-                <a><span>4</span></a>
-                <p align="center" style="white-space: nowrap;     margin-left: -30px; font-weight: bold;">Data Scientist</p>
-            </li>
-            <li class="active" style="padding-left: 198px">
-                <a><span>5</span></a>
-                <p align="center" style="white-space: nowrap;     margin-left: -15px; font-weight: bold;">Run Scan</p>
-            </li>
-        </ul>
-        </div>
-    </div>
+<div>
+
     <div class="bar_menu admin_header container">
       <div class="row">
         <div class="col-md-12 mb-md">
@@ -56,6 +28,7 @@
             </header>
             <div class="panel-body summary-section">
               <table class="table table-no-border table-align-left mb-none">
+                <tbody>
                 <tr>
                   <td>Company Name: </td>
                   <td>Dathena Singapore</td>
@@ -68,6 +41,7 @@
                   <td>Country: </td>
                   <td>Singapore</td>
                 </tr>
+                </tbody>
               </table>
             </div>
           </section>
@@ -80,6 +54,7 @@
             </header>
             <div class="panel-body summary-section">
               <table class="table table-no-border table-align-left mb-none">
+              <tbody>
                 <tr>
                   <td>1. Banking Secrecy</td>
                 </tr>
@@ -95,6 +70,7 @@
                 <tr>
                   <td>5. Public</td>
                 </tr>
+                </tbody>
               </table>
             </div>
           </section>
@@ -324,6 +300,7 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Domain Name: </td>
                             <td>Domain Name</td>
@@ -352,6 +329,7 @@
                             <td>Domain Administrator Email: </td>
                             <td>Domain Administrator Email</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -364,6 +342,7 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Folder Name: </td>
                             <td>Folder Name</td>
@@ -384,6 +363,7 @@
                             <td>Folder Owner: </td>
                             <td>Folder Owner</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -396,6 +376,7 @@
                     <div class="panel-body">
                       <div class="table-responsive mb-lg">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Email Server: </td>
                             <td>Exchange</td>
@@ -424,10 +405,12 @@
                             <td>External URL: </td>
                             <td>External URL</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                       <div class="table-responsive mb-lg">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Mail File Location: </td>
                             <td>On Server</td>
@@ -444,11 +427,13 @@
                             <td>Format for Messages Addresses to Internet Addresses: </td>
                             <td>To Internet Addresses to Internet Addresses</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                       <div class="table-responsive">
                         <h5>Internet Proxy Server</h5>
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Name:</td>
                             <td>Name</td>
@@ -481,6 +466,7 @@
                             <td>Team:</td>
                             <td>Team</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -493,6 +479,7 @@
                     <div class="panel-body">
                       <div class="table-responsive mb-lg">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Email Server: </td>
                             <td>Lotus</td>
@@ -513,11 +500,13 @@
                             <td>Domino Directory Server:</td>
                             <td>Domino Directory Server</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                       <div class="table-responsive">
                         <h5>Internet Proxy Server</h5>
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Name:</td>
                             <td>Name</td>
@@ -550,6 +539,7 @@
                             <td>Team:</td>
                             <td>Team</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -562,6 +552,7 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Server Name:</td>
                             <td>Server Name</td>
@@ -590,6 +581,7 @@
                             <td>Server Administrator Email:</td>
                             <td>Server Administrator Email</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -624,6 +616,7 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left mb-lg">
+                        <tbody>
                           <tr>
                             <td>Data Repository 1:</td>
                             <td>Data Repository 1</td>
@@ -644,8 +637,10 @@
                             <td>Data Owner:</td>
                             <td>Data Owner</td>
                           </tr>
+                          </tbody>
                         </table>
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Data Repository 2:</td>
                             <td>Data Repository 2</td>
@@ -666,6 +661,7 @@
                             <td>Data Owner:</td>
                             <td>Data Owner</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -677,6 +673,7 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left mb-lg">
+                        <tbody>
                           <tr>
                             <td>Team Lead:</td>
                             <td>Team Lead</td>
@@ -693,8 +690,10 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
+                          </tbody>
                         </table>
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Coordinator:</td>
                             <td>Coordinator</td>
@@ -711,6 +710,7 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -723,6 +723,7 @@
                       <div class="table-responsive">
                         <h5>Audit Officer 1</h5>
                         <table class="table table-no-border table-align-left mb-lg">
+                        <tbody>
                           <tr>
                             <td>Job Title: </td>
                             <td>Job Title</td>
@@ -735,11 +736,13 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                       <div class="table-responsive">
                         <h5>Audit Officer 2</h5>
                         <table class="table table-no-border table-align-left">
+                        <tbody>
                           <tr>
                             <td>Job Title: </td>
                             <td>Job Title</td>
@@ -752,6 +755,7 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
+                          </tbody>
                         </table>
                       </div>
                     </div>
@@ -779,6 +783,7 @@
                 <div class="col-md-8 col-md-offset-2">
                   <div class="table-responsive">
                     <table class="table table-no-border table-align-left mb-lg">
+                    <tbody>
                       <tr>
                         <td>Minimum Number of Cluster:</td>
                         <td>from 2 to 100</td>
@@ -787,6 +792,7 @@
                         <td>Maximum Number of Cluster:</td>
                         <td>from 2 to 100</td>
                       </tr>
+                      </tbody>
                     </table>
                   </div>
                 </div>

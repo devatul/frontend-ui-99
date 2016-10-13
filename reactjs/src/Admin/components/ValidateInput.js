@@ -57,11 +57,10 @@ var Input = React.createClass({
         }
     },
     render() {
-        debugger
         var disabled = this.props.disabled;
         return ( < div key={this.props.key}>
            <input type = {this.props.type} className={this.props.className} id={this.props.id} checked = {this.props.checked}
-           disabled = {disabled} value= {this.props.value} placeholder = {this.props.placeholder} /></div>
+           disabled = {disabled}  placeholder = {this.props.placeholder} /></div>
 
         )
     }

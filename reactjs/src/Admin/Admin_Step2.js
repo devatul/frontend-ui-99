@@ -14,6 +14,7 @@ var Admin_Step2 = React.createClass({
             readOnly: false,
             readOnly1: false,
             readOnly2: false,
+            readOnly3: false,
             add_DomainDetails  : [{key : 0}],
             add_Folder  : [{key : 0}],
             add_Server : [],
@@ -22,28 +23,20 @@ var Admin_Step2 = React.createClass({
         }
 
     },
-    shouldComponentupdate(nextProps , nextState){
-        if(this.state.readOnly != nextState.readOnly){
-            return true
-        }
-        if(this.state.add_DomainDetails != nextState.add_DomainDetails){
-            return true
-        }
-        return false
-    },
+
     clickValidate_step1(){
-        $( "#block1" ).find( "input" ).prop('readonly', true);
+        $( "#block1" ).find( "input" ).prop('disabled', true);
         $( "#block1" ).find( "a" ).css('pointer-events', 'none');
 
         this.setState({complete: 1 , readOnly: true})
     },
     validate_step2 () {
-         $( "#block2" ).find( "input" ).prop('readonly', true);
+         $( "#block2" ).find( "input" ).prop('disabled', true);
           $( "#block2" ).find( "a" ).css('pointer-events', 'none');
         this.setState({complete: 2, readOnly1 : true})
     },
     validate_step3 () {
-        $( "#block3" ).find( "input" ).prop('readonly', true);
+        $( "#block3" ).find( "input" ).prop('disabled', true);
          $( "#block3" ).find( "select" ).attr("disabled", true);
         this.setState({complete: 3 , readOnly2 : true})
     },
@@ -81,39 +74,54 @@ var Admin_Step2 = React.createClass({
         debugger
         if (value == 1) {
             this.setState({ readOnly: false })
-            $( "#block1" ).find( "input" ).prop('readonly', false);
+            $( "#block1" ).find( "input" ).prop('disabled', false);
             $( "#block1" ).find( "a" ).css('pointer-events', 'auto');
             if (!readOnly) {
-                $( "#block1" ).find( "input" ).prop('readonly', true);
+                $( "#block1" ).find( "input" ).prop('disabled', true);
                 $( "#block1" ).find( "a" ).css('pointer-events', 'none');
                 this.setState({ readOnly: true })
             }
         }
         if (value == 2) {
-            $( "#block2" ).find( "input" ).prop('readonly', false);
+            $( "#block2" ).find( "input" ).prop('disabled', false);
              $( "#block2" ).find( "a" ).css('pointer-events', 'auto');
             this.setState({ readOnly1: false })
             if (!readOnly) {
-                $( "#block2" ).find( "input" ).prop('readonly', true);
+                $( "#block2" ).find( "input" ).prop('disabled', true);
                  $( "#block2" ).find( "a" ).css('pointer-events', 'none');
                 this.setState({ readOnly1: true })
             }
         }
         if (value == 3) {
+
             this.setState({ readOnly2: false })
-            $( "#block3" ).find( "input,selected" ).prop('readonly', false);
+            $( "#block3" ).find( "input" ).prop('disabled', false);
              $( "#block3" ).find( "select" ).attr("disabled", false);
             if (!readOnly) {
-                $( "#block3" ).find( "input , selected" ).prop('readonly', true);
+                $( "#block3" ).find( "input" ).prop('disabled', true);
                  $( "#block3" ).find( "select" ).attr("disabled", true);
                 this.setState({ readOnly2: true })
+            }}
+        if (value == 4) {
+
+            $( "#block4" ).find( "input" ).prop('disabled', false);
+              this.setState({ readOnly3: false })
+            if (!readOnly) {
+                $( "#block4" ).find( "input" ).prop('disabled', true);
+                this.setState({ readOnly3: true })
             }
+
         }
 
     },
-    componentDidUpdate(){
+    nextStep(){
+        this.setState({ complete: 4 , readOnly3: true}),
+        $( "#block4" ).find( "input" ).prop('disabled', true);
+
+        this.props.nextStep(3)
 
     },
+
     render: template
 })
 

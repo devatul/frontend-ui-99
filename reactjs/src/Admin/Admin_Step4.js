@@ -5,10 +5,9 @@ import update from 'react-addons-update'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import _ from 'lodash'
 import template from './Admin_Step4.rt'
-import loadScript from '../script/javascript.admin.js';
 import 'jquery'
 
-var Admin_Step3 = React.createClass({
+var Admin_Step4 = React.createClass({
     getInitialState() {
         return {
             complete: 0,
@@ -24,7 +23,7 @@ var Admin_Step3 = React.createClass({
     componentDidMount(){
        /* this.loadScript();*/
     },
-    validate_step1(){
+   /* validate_step1(){
 
         this.setState({complete: 1 , readOnly : true})
     },
@@ -62,9 +61,11 @@ var Admin_Step3 = React.createClass({
             }
         }
 
+    },*/
+    nextStep(){
+        this.props.nextStep(5)
     },
-
     render: template
 })
 
-module.exports = Admin_Step3
+module.exports = Admin_Step4

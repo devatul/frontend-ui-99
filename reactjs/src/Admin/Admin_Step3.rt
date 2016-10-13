@@ -1,36 +1,9 @@
-<rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-import name = "Input" from="./components/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-require dependency="react-router/lib/Link" as="Link"/>
-<div class="admin-page">
-     <div class="container">
-          <div class="wizard-progress wizard-progress-lg">
-            <div class="steps-progress">
-              <div class="progress-indicator" style="width: 50%;"></div>
-          </div>
-          <ul class="wizard-steps">
-              <li class="completed" style="padding-left: 30px">
-                <a href="javascript:;"><span>1</span></a>
-                <p align="center" style="font-weight: bold;">Business</p>
-            </li>
-            <li class="completed" style="padding-left: 192px">
-                <a href="javascript:;"><span>2</span></a>
-                <p align="center" style="white-space: nowrap;    margin-left: -24px; font-weight: bold;">Technology</p>
-            </li>
-            <li class="active" style="padding-left: 202px">
-                <a><span>3</span></a>
-                <p align="center" style="    margin-left: -9px; font-weight: bold;">Team</p>
-            </li>
-            <li style="padding-left: 202px">
-                <a><span>4</span></a>
-                <p align="center" style="white-space: nowrap;     margin-left: -30px; font-weight: bold;">Data Scientist</p>
-            </li>
-            <li style="padding-left: 198px">
-                <a><span>5</span></a>
-                <p align="center" style="white-space: nowrap;     margin-left: -15px; font-weight: bold;">Run Scan</p>
-            </li>
-        </ul>
-        </div>
-    </div>
+
+<div>
+
     <div class="bar_menu admin_header container">
       <div class="row">
         <div class="col-md-12 mb-md">
@@ -64,8 +37,8 @@
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
             </div>
             </header>
-            <div class="panel-body add-detail-section" id="block1">
-              <div class="row detail-row resposity-block" >
+            <div class="panel-body add-detail-section" id="block1_step3">
+              <div class="row detail-row resposity-block"  >
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-sm-4 detail-left clearfix">
@@ -74,15 +47,15 @@
                     </div>
                     <div class="col-sm-8 detail-right">
 
-                       <Input  placeholder="Name"  className="form-control" />
+                       <Input  placeholder="Name" className="form-control"/>
 
-                       <Input  placeholder="Root Repository"  className="form-control" />
+                       <Input  placeholder="Root Repository" className="form-control" />
 
-                       <Input  placeholder="Path"  className="form-control" />
+                       <Input  placeholder="Path" className="form-control" />
 
-                       <Input  placeholder="Department"  className="form-control" />
+                       <Input  placeholder="Department" className="form-control" />
 
-                       <Input  placeholder="Functional Owner"  className="form-control" />
+                       <Input  placeholder="Functional Owner" className="form-control" />
                     </div>
                   </div>
                 </div>
@@ -103,11 +76,12 @@
                 </h2>
                 <div class="panel-actions">
 
-                  <button class="btn btn-green" rt-if="this.state.complete >= 1" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
+                  <button class="btn btn-green" rt-if="this.state.complete >= 2" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
 
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                </div>
             </header>
-            <div class="panel-body add-detail-section" id="block2">
+            <div class="panel-body add-detail-section" id="block2_step3">
 
               <div class="row detail-row" rt-repeat= "rt in this.state.add_Classification"  key="{rt.key}" >
                 <div class="col-md-6" >
@@ -269,14 +243,13 @@
                             setValue="." />
                 </h2>
                 <div class="panel-actions">
-                    <div class="btn-group-admin">
-                      <button class="btn btn-green btn-edit-step">Edit</button>
-                      <button class="btn btn-green btn-save-step">Save</button>
-                    </div>
-                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+
+                  <button class="btn btn-green" rt-if="this.state.complete >= 3" onClick = "{this.editButton.bind(this,3, this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
+
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                 </div>
             </header>
-            <div class="panel-body add-detail-section">
+            <div class="panel-body add-detail-section" id="block3_step3">
              <div class="row detail-row" rt-repeat="ad in this.state.add_Audit" key="{ad.key}">
                 <div class="col-md-6">
                   <div class="row">
@@ -349,9 +322,11 @@
               </div>
 
               <div class="text-right">
-              <button class="btn btn-green btn-edit-step"><Link to="/Admin/Admin_Step4" activeClassName="active"><span style="color : white">Validate</span></Link></button>
-              <!--   <a href="#" class="btn btn-green validate-btn"> <Link to="/Insight/DataLoss" activeClassName="active"><span style="color : white">Validate</span></Link></a> -->
-              </div>
+                      <button class="btn btn-green validate-btn" onClick = {this.nextStep}>
+                          Validate
+                    </button>
+                </div>
+
             </div>
           </section>
 

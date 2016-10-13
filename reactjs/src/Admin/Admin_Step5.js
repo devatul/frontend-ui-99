@@ -8,7 +8,7 @@ import template from './Admin_Step5.rt'
 import loadScript from '../script/javascript.admin.js';
 import 'jquery'
 
-var Admin_Step3 = React.createClass({
+var Admin_Step5 = React.createClass({
     getInitialState() {
         return {
             complete: 0,
@@ -67,4 +67,4 @@ var Admin_Step3 = React.createClass({
     render: template
 })
 
-module.exports = Admin_Step3
+module.exports = Admin_Step5
