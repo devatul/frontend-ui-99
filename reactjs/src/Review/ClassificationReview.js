@@ -307,7 +307,7 @@ var ClassificationReview = React.createClass({
                             },
                             $merge: {
                                 status: document.init_category && isEqual(this.state.categories[categoryIndex], {
-                                    id: parseInt(document.init_category.id)
+                                    name: document.init_category.name
                                 }) ? 'accepted' : 'editing',
                                 init_category: document.init_category ? document.init_category : document.category
                             }
@@ -315,6 +315,7 @@ var ClassificationReview = React.createClass({
                     }
                 }
             });
+            debugger
         this.setState({
             dataReview: updateData,
             current: {
@@ -339,7 +340,7 @@ var ClassificationReview = React.createClass({
                                 init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
 
                                 status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
-                                    id: parseInt(document.init_confidentiality.data.id)
+                                    id: parseInt(document.init_confidentiality.id)
                                 }) ? 'accepted' : 'editing'
                             }
                         }

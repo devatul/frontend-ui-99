@@ -66,7 +66,7 @@
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                 </Alert>
 
-                                <Table class="review_table mb-none no-footer table-my-actions" responsive bordered striped>
+                                <Table class="review_table mb-none no-footer table-my-actions table-classification-width" responsive bordered striped>
                                     <thead>
                                         <tr role="row" class="">
                                             <th class="fix-padding-th-checkbox">
@@ -130,10 +130,10 @@
     undo="{() => this.handleUndo(this.state.current.review)}"
     closeModal={this.closePreview}>
 <div class="table-responsive">
-    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
             <tr role="row" class="">
-                <th>
+                <!--<th>
                     <div class="checkbox-custom checkbox-primary">
                         <input type="checkbox"
                             class="checkbox-all-1"
@@ -141,10 +141,10 @@
                             checked={this.state.checkBoxAll}>
                         <label for="checkboxAllExample2"></label>
                     </div>
-                </th>
+                </th>-->
                 <th class="review_note fix-width">Type
                 </th>
-                <th class="review_note">Document
+                <th class="review_note doc-name">Document
                     <HelpButton
                         className="dropdown-file-info-holder"
                         classMenu="fix-overview-help-button-table"
@@ -172,9 +172,13 @@
                 confidentialities={this.state.confidentialities}
                 onClick={this.handleTableRowOnClick}
                 onChange={this.handleTableRowOnChange}
+                hide="{{ checkbox: true }}"
                 index="{this.state.current.review + '_' + this.state.current.doc}" />
         </tbody>
     </table>
+    <p rt-if="this.state.dataReview[this.state.current.review]" rt-scope="this.state.dataReview[this.state.current.review].documents[this.state.current.doc] as doc">
+        <a href="{doc.image_url}">{doc.path}</a>
+    </p>
 </div>
 </DocumentPreview>
 </section>

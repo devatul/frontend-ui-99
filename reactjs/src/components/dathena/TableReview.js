@@ -32,7 +32,7 @@ var Table = React.createClass({
 //     );
 // });
 
-var Row3 = React.createClass({
+var RowChallenged = React.createClass({
 
     getInitialState() {
         return {
@@ -57,6 +57,11 @@ var Row3 = React.createClass({
             numberText: 18
         };
     },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps);
+    },
+    
 
     renderComment(comment) {
         if(!this.state.showText) {
@@ -109,6 +114,171 @@ var Row3 = React.createClass({
         let { document, categories, confidentialities } = this.props,
             changedCategory = !isEqual(document.current_category, document.previous_category),
             changedConfidentiality = !isEqual(document.current_confidentiality, document.previous_confidentiality);
+
+        return(
+            <tr className="opa" onChange={this.handleOnChange}>
+                <td>
+                    <div className="checkbox-custom checkbox-default">
+                        <input type="checkbox"
+                            className="checkbox-item-1"
+                            checked={document.checked} />
+                        <label></label>
+                    </div>
+                </td>
+                <td>
+                    <i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i>
+                </td>
+                <td className="text-left my_file-name">
+                    <OverlayTrigger placement="top" overlay={
+                        <Tooltip id="tooltip">{document.name}</Tooltip>
+                    }>
+                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row2 doc-path">{document.name}</span>
+                    </OverlayTrigger>
+                    <InfoButton>
+                        <li>Name: <b>{document.name}</b></li>
+                        <li>Path: <span><a href="#">{document.path}</a></span></li>
+                        <li>Owner: <b>{document.owner}</b></li>
+                        <li>Creation Date: <b>{document.creation_date}</b></li>
+                        <li>Modification Date: <b>{document.modification_date}</b></li>
+                        <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
+                        <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
+                    </InfoButton>
+                </td>
+                <td className="vertical-top text-left opa-child fix-1st-pading-comment-table">
+                    <SelectBox
+                        id="SelectCategory"
+                        className={'form-control challenge-category' + (document.previous_category && ' changed')}
+                        data={categories}
+                        value={findIndex(categories, document.current_category)} />
+
+                        <span className="text-italic previous-status">
+                            Previous: {document.previous_category && document.previous_category.name}
+                        </span>
+                </td>
+                <td className="vertical-top text-left opa-child fix-1st-pading-comment-table">
+                    <SelectBox
+                        id="SelectConfidentiality"
+                        className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
+                        data={confidentialities}
+                        value={findIndex(confidentialities, document.current_confidentiality)} />
+
+                        <span className="text-italic previous-status">
+                            Previous: {document.current_confidentiality && document.previous_confidentiality.name}
+                        </span>
+                </td>
+                <td className="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
+                    {document.reviewer_comment && this.renderComment(document.reviewer_comment)}
+                    <span className="extra-block show-less-comment">
+                        <a className="details-toggle" onClick={this.onClickMoreLess} style={{ cursor: 'pointer' }}>
+                            <i className="fa fa-caret-right mr-xs"></i>
+                            { !this.state.showText &&
+                                <span>Show details</span>
+                            }
+                            { this.state.showText &&
+                                <span>Show less</span>
+                            }
+                        </a>
+                    </span>
+                    
+                </td>
+                <td className="opa-child fix-1st-pading-comment-table">
+                    <div className="select-group">
+                        <textarea style={{minWidth: '160px'}} id="CommentBox" value={(document.comments ? document.comments : '')} className="form-control" placeholder="Challenge’s rationale details"></textarea>
+                    </div>
+                </td>
+                <td>
+                    <a style={{cursor: 'pointer'}}
+                        id="validationButton"
+                        onClick={this.handleOnclick}
+                        className="challenge-btn validation-btn btn btn-default">
+                        <i className={'fa fa-check ' + this.renderValidation(document['2nd_line_validation'])}></i>
+                    </a>
+                </td>
+            </tr>
+        );
+    }
+});
+
+var Row3 = React.createClass({
+
+    getInitialState() {
+        return {
+            showText: this.props.showText,
+            numberText: this.props.numberText
+        };
+    },
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.showText != nextProps.showText) {
+            this.setState({ showText: nextProps.showText });
+        }
+
+        if(this.props.numberText != nextProps.numberText) {
+            this.setState({ numberText: nextProps.numberText });
+        }
+    },
+
+    getDefaultProps() {
+        return {
+            showText: false,
+            numberText: 18
+        };
+    },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps);
+    },
+    
+
+    renderComment(comment) {
+        if(!this.state.showText) {
+            comment = comment.substring(0, this.state.numberText) + '...';
+        }
+        return(
+            <span className="doc-path my-doc-path">
+                {comment}
+            </span>
+        );
+    },
+
+    renderStatus(status) {
+        switch(true) {
+            case status && (status > 66 && status <= 100):
+                return (<i className="fa fa-clock-o icon-danger"></i>);
+            case status && (status > 33 && status < 66): 
+                return (<i className="fa fa-clock-o icon-warning"></i>);
+            case status && (status > 0 && status < 33):
+                return (<i className="fa fa-clock-o icon-success"></i>);
+        }
+    },
+
+    renderValidation(valid) {
+        switch(valid) {
+            case 'editing':
+                return "icon-danger";
+            case 'accepted':
+                return "icon-success";
+            default: 
+                return "";
+        }
+    },
+
+    onClickMoreLess() {
+        this.setState({ showText: !this.state.showText });
+    },
+
+    handleOnChange: function(event) {
+        this.props.onChange &&
+            this.props.onChange(event, this.props.index);
+    },
+
+    handleOnclick: function(event) {
+        this.props.onClick &&
+            this.props.onClick(event, this.props.index);
+    },
+
+    render() {
+        let { document, categories, confidentialities } = this.props;
 
         return(
             <tr className="opa" onChange={this.handleOnChange}>
@@ -185,6 +355,10 @@ var Row3 = React.createClass({
 });
 
 var Row2 = React.createClass({
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps);
+    },
 
     renderStatus(status) {
         switch(true) {
@@ -300,6 +474,10 @@ var Row = React.createClass({
 
     },
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps);
+    },
+
     getCategories: function() {
         let arr = [];
         makeRequest({
@@ -373,15 +551,15 @@ var Row = React.createClass({
     },
 
     render() {
-        let { document, numberChecked, noConfidence, categories, confidentialities } = this.props;
+        let { document, numberChecked, noConfidence, categories, confidentialities, hide } = this.props;
         return (
             <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
-                <td>
+                { (hide && hide.checkbox) ? '' : <td>
                     <div className="checkbox-custom checkbox-default">
                         <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
                         <label></label>
                     </div>
-                </td>
+                </td> }
                 <td className="text-center">
                     <i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i>
                 </td>
@@ -402,7 +580,7 @@ var Row = React.createClass({
                         <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
                     </InfoButton>
                 </td>
-                <td>
+                <td className="select-category">
                     <div className="select-group">
                         { !noConfidence &&
                             <div className="selected-info">
@@ -427,7 +605,7 @@ var Row = React.createClass({
                             })}/>
                     </div>
                 </td>
-                <td>
+                <td className="select-confidentiality">
                     <div className="select-group">
                         <div className="selected-info">
                             { !noConfidence &&
@@ -468,6 +646,7 @@ var Row = React.createClass({
 module.exports = {
     table: Table,
     //head: Head,
+    RowChallenged: RowChallenged,
     row: Row,
     row2: Row2,
     row3: Row3

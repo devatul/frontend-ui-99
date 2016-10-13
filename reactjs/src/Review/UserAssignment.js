@@ -90,7 +90,8 @@ var UserAssignment = React.createClass({
                 },
                 confidentiality: []
             },
-            shouldUpdate: false
+            shouldUpdate: false,
+            isConfirming: false
         };
     },
 
@@ -130,6 +131,8 @@ var UserAssignment = React.createClass({
             //this.getSummary(false);
             if(category.current.id != 'summary') {
                 this.getCategoryInfo();
+            } else {
+                this.getSummary();
             }
         }
         if(!isEqual(datafilter.params, prevState.datafilter.params)) {
@@ -851,7 +854,8 @@ var UserAssignment = React.createClass({
     confirmNotify() {
         let { summary } = this.state,
             bodyRequest = [];
-
+        
+        this.setState({ isConfirming: true, shouldUpdate: true });
         for(let i = summary.length - 1; i >= 0; i--) {
             bodyRequest[i] = {
                 id: summary[i].id,
@@ -864,6 +868,13 @@ var UserAssignment = React.createClass({
             params: JSON.stringify(bodyRequest),
             success: (res) => {
                 debugger
+            },
+            error: (err) => {
+                if(err.status === 201) {
+                    setTimeout(() => {
+                        this.setState({ isConfirming: false, shouldUpdate: true });
+                    }, 3000);
+                }
             }
         });
     },

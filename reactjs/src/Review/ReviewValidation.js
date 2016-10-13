@@ -245,7 +245,7 @@ var ReviewValidation = React.createClass({
 
             let document = this.state.dataReview[current][docIndex],
 
-                updateCurrent = update(this.state.current, {
+                updateCurrent = update(this.state.currentIndex, {
                     panel: {
                         $set: panel
                     },

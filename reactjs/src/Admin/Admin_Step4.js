@@ -5,6 +5,9 @@ import update from 'react-addons-update'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import _ from 'lodash'
 import template from './Admin_Step4.rt'
+
+import loadScript from '../script/javascript.admin.js';
+
 import 'jquery'
 
 var Admin_Step4 = React.createClass({
