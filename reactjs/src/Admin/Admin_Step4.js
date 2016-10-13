@@ -6,7 +6,6 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import _ from 'lodash'
 import template from './Admin_Step4.rt'
 
-import loadScript from '../script/javascript.admin.js';
 
 import 'jquery'
 
