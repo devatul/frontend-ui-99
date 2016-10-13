@@ -92,9 +92,9 @@ var Notification = React.createClass({
                 notification: notification1
 
                 })
-                this.setState({
+               /* this.setState({
                     filterUpdate: 'update-default'
-                })
+                })*/
                 this.setState({
                     filtersAlert: 'none',
                 })
@@ -104,7 +104,7 @@ var Notification = React.createClass({
                         alert: ''
                     },
                 })
-                this.setState({
+               /* this.setState({
                       styleList: {
                         today: 'block',
                         yesterday: 'block',
@@ -112,7 +112,7 @@ var Notification = React.createClass({
                         last_30_days: 'block',
                         older: 'block'
                     },
-                })
+                })*/
                 this.setState({content: 'Number of actions pending for you to complete. '+  this.state.dangerNoti  + (this.state.dangerNoti > 1 ? " actions are" : " action is") + ' required with high priority and '+  this.state.warningNoti  + (this.state.warningNoti > 1 ? " actions are" : " action is") + ' required with medium priority',})
             }
         }
@@ -348,9 +348,7 @@ var Notification = React.createClass({
                          last_30_days: { $set: 'none' },
                          older: { $set: 'none' }
                      },
-
                 }
-
             )
             this.setState(updateStyle)
             this.setState({ filterUpdate: 'update-week' })
@@ -364,9 +362,7 @@ var Notification = React.createClass({
                          last_7_days: { $set: 'block' },
                          last_30_days: { $set: 'block' },
                          older: { $set: 'block' }
-                     },
-
-
+                    },
                 }
             )
             this.setState(updateStyle)
@@ -386,27 +382,11 @@ var Notification = React.createClass({
                 }
             )
             this.setState(updateStyle)
-
-            /*this.pendingAction();*/
             this.setState({ filterUpdate: value })
 
         }
         if (value == 'update-pending' && alert == 'high') {
 
-          /*  let updateStyle = update(
-                this.state, {
-                    styleList: {
-                        today: { $set: 'none' },
-                        yesterday: { $set: 'none' },
-                        last_7_days: { $set: 'none' },
-                        last_30_days: { $set: 'none' },
-                        older: { $set: 'none' }
-                    },
-                }
-            )
-            this.setState(updateStyle)
-*/
-            /*this.pendingAction();*/
             this.setState({ filterUpdate: value })
 
         }

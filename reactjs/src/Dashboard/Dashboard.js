@@ -82,6 +82,7 @@ module.exports = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
+                debugger
                 this.setState({ role: data.role });
                 console.log("role: ", this.state.role);
             }.bind(this),

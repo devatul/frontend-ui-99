@@ -50,7 +50,7 @@ render((
 				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
 				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
 				<Route path="/AnomalyDetection" component={AnomalyDetection}/>
-				<Route path="/Admin/Admin" component={Admin} />
+				<Route path="/Admin" component={Admin} />
 
 
 				<Route path="/Review/Review" component={Review}>

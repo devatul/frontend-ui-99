@@ -236,8 +236,8 @@
                             <li>
                                <Link to="/Dashboard/Profile" role="menuitem" tabindex="-1"><i class="fa fa-user"></i> My Profile</Link>
                            </li>
-                           <li rt-if="this.state.role === contant.role.IS_ADMIN">
-                            <Link to="/Admin/Admin_Step1" role="menuitem" tabindex="-1"><i class="fa fa-cog"></i> Settings </Link>
+                           <li rt-if="this.state.role === contant.role.IS_ADMIN || this.state.role === contant.role.RISK_LEAD">
+                            <Link to="/Admin" role="menuitem" tabindex="-1"><i class="fa fa-cog"></i> Settings </Link>
                             </li>
                            <li>
                             <a role="menuitem" tabindex="-1" onClick={this.logOut} style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a>
