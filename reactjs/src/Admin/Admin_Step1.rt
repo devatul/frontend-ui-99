@@ -229,7 +229,7 @@
             </h2>
             <div class="panel-actions">
 
-                  <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 3" onClick="{this.editButton.bind(this,3,this.state.readOnly2)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
+                  <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 3" onClick="{this.editButton.bind(this,3,this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
 
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
             </div>

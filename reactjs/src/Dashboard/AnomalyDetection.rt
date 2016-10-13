@@ -1148,7 +1148,7 @@
 
                             <HelpButton
                                 classMenu="fix-overview-help-button-table"
-                                classIcon="overview_question_a help_question_a"    setValue="This presents a list of users based on their Windows User Name, and who have access to document repositories with security configuration faults."   />
+                                classIcon="overview_question_a help_question_a"    setValue="This details the list of user having the most access to document at Risk."   />
                         </div>
                     </h4>
                   </div>

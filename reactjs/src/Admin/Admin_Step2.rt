@@ -59,12 +59,12 @@
           </div>
       </div>
   </div>
-  <div class="col-md-6 col-md-offset-3 col-sm-offset-4 domain-admin-block" rt-repeat= "rt in this.state.add_DomainDetails"  key="{rt.key}">
+  <div class="col-md-6 col-md-offset-3 col-sm-offset-4 domain-admin-block" rt-repeat= "rt in this.state.add_DomainDetails">
       <div class="row" >
 
         <div class="col-sm-12 col-md-8 detail-right"  >
-            <Input id="input1" placeholder="Domain Administrator Name" className="form-control" key="{rt.key}" />
-            <Input  id="input1" placeholder="Domain Administrator Email"  className="form-control" key="{rt.key +1}"/>
+            <Input id="input1" placeholder="Domain Administrator Name" className="form-control"/>
+            <Input  id="input1" placeholder="Domain Administrator Email"  className="form-control"/>
       </div>
   </div>
 </div>
@@ -91,12 +91,34 @@
         </div>
   </header>
   <div class="panel-body add-detail-section" id="block2">
+    <div class="row detail-row folder-block" rt-repeat="fd in this.state.add_Folder">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Folder Paths </label>
+                 <!--  <a href="javascript:;" class="add-folder" onClick = {this.add.bind(this,2)}><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Folder</a> -->
+              </div>
+              <div class="col-sm-8 detail-right">
+
+                  <Input  placeholder="Folder Name"  className="form-control" />
+
+                  <Input  placeholder="Full Folder Path"  className="form-control" />
+
+                  <Input  placeholder="Windows Username"  className="form-control" />
+
+                  <Input  placeholder="Windows Password"  className="form-control" />
+
+                  <Input  placeholder="Folder Owner"  className="form-control" />
+              </div>
+          </div>
+      </div>
+    </div>
       <div class="row detail-row folder-block">
         <div class="col-md-6">
           <div class="row">
             <div class="col-sm-4 detail-left clearfix">
               <label class="control-label">Folder Paths </label>
-              <a href="#" class="add-folder"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Folder</a>
+              <a href="javascript:;" class="add-folder" onClick = {this.add.bind(this,2)}><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Folder</a>
           </div>
           <div class="col-sm-8 detail-right">
 

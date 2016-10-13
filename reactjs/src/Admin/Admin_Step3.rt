@@ -38,12 +38,34 @@
             </div>
             </header>
             <div class="panel-body add-detail-section" id="block1_step3">
-              <div class="row detail-row resposity-block"  >
+            <div class="row detail-row resposity-block"  rt-repeat="rt in this.state.add_Business">
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-sm-4 detail-left clearfix">
                       <label class="control-label">Data Repository </label>
-                      <a href="#" class="mb-md inline-block-item add-resposity"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Data Repository </a>
+
+                    </div>
+                    <div class="col-sm-8 detail-right">
+
+                       <Input  placeholder="Name" className="form-control"/>
+
+                       <Input  placeholder="Root Repository" className="form-control" />
+
+                       <Input  placeholder="Path" className="form-control" />
+
+                       <Input  placeholder="Department" className="form-control" />
+
+                       <Input  placeholder="Functional Owner" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row detail-row resposity-block" >
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-4 detail-left clearfix">
+                      <label class="control-label">Data Repository </label>
+                      <a href="javascript:;" class="mb-md inline-block-item add-resposity" onClick= "{this.add.bind(this,4)}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Data Repository </a>
                     </div>
                     <div class="col-sm-8 detail-right">
 

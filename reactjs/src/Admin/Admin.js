@@ -14,7 +14,7 @@ module.exports = React.createClass({
         };
     },
     changeStep(value){
-        if(value <= this.state.step)
+     /*   if(value <= this.state.step)*/
         this.setState({step : value})
     },
     nextStep(value){

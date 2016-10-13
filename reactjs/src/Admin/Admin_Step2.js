@@ -16,7 +16,7 @@ var Admin_Step2 = React.createClass({
             readOnly2: false,
             readOnly3: false,
             add_DomainDetails  : [{key : 0}],
-            add_Folder  : [{key : 0}],
+            add_Folder  : [],
             add_Server : [],
             add_Server_Administrator : [{}],
             count : 0
@@ -43,14 +43,18 @@ var Admin_Step2 = React.createClass({
     add(value){
         debugger
         if(value == 1 ){
-            let addNdew = _.cloneDeep(this.state.add_DomainDetails)
+            /*let addNdew = _.cloneDeep(this.state.add_DomainDetails)
             addNdew[0] = {key : addNdew[0].key + 1}
-            this.setState({add_DomainDetails : addNdew})
+            this.setState({add_DomainDetails : addNdew})*/
+            let addNdew = { key: this.state.add_DomainDetails.length};
+            this.setState({add_DomainDetails : _.concat(addNdew ,this.state.add_DomainDetails)})
         }
         if(value == 2 ){
-            let addNdew = _.cloneDeep(this.state.add_Folder)
+            /*let addNdew = _.cloneDeep(this.state.add_Folder)
             addNdew[0] = {key : addNdew[0].key + 1}
-            this.setState({add_Folder : addNdew})
+            this.setState({add_Folder : addNdew})*/
+            let addNdew = { key: this.state.add_Folder.length};
+            this.setState({add_Folder : _.concat(addNdew ,this.state.add_Folder)})
 
         }
         if(value == 3){

@@ -15,6 +15,7 @@ var Admin_Step3 = React.createClass({
             readOnly: false,
             readOnly1: false,
             readOnly2: false,
+            add_Business : [],
             add_Classification  :  [],
             add_Coordinator  :  [],
             add_Audit : [],
@@ -51,6 +52,9 @@ var Admin_Step3 = React.createClass({
         if(value == 3 ){
            let addNdew = { key: this.state.add_Audit.length};
             this.setState({add_Audit : _.concat(addNdew ,this.state.add_Audit)})}
+        if(value == 4 ){
+           let addNdew = { key: this.state.add_Business.length};
+            this.setState({add_Business : _.concat(addNdew ,this.state.add_Business)})}
     },
     editButton(value, readOnly) {
         debugger
