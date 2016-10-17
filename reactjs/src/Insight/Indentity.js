@@ -8,21 +8,19 @@ import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
-
 import $, { JQuery } from 'jquery'
-/*import loadScript from '../script/load.scripts.js';*/
+
 var Indentity = React.createClass({
     mixins: [LinkedStateMixin],
     getInitialState() {
-
         return {
-            numberUser : 5,
+            numberUser: 5,
             data_exports: {},
             sizeFilter: 0,
-            height_0  : 0,
-            height_1  : 0,
-            height_2  : 0,
-            height_3  : 0,
+            height_0: 0,
+            height_1: 0,
+            height_2: 0,
+            height_3: 0,
             save_dataChart: {},
             save_cvs: {},
             scan_result: {},
@@ -34,9 +32,7 @@ var Indentity = React.createClass({
             },
         };
     },
-     componentWillMount(){
-         this.getRickInsight()
-     },
+
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.dataChart != nextState.dataChart) {
             return true
@@ -47,20 +43,10 @@ var Indentity = React.createClass({
         if (this.state.data_exports != nextState.data_exports) {
             return true
         }
-        /*if (this.state.save_cvs != nextState.save_cvs) {
-            return true
-        }*/
         return false
     },
-    /* componentDidUpdate(prevProps, prevState) {
-         if (this.state.sizeFilter != prevState.sizeFilter) {
-             debugger
-             this.changeChart(this.state.sizeFilter)
-         }
-     },*/
     handleFilter: function(bodyRequest) {
         debugger
-        /* let dataChart = _.cloneDeep(this.state.dataChart)*/
         let value = bodyRequest.number_users;
         console.log('bodyRequest', bodyRequest)
         if (value == 'Top 5') {
@@ -75,10 +61,10 @@ var Indentity = React.createClass({
         if (value == 'Top 50') {
             value = 50
         }
-        this.setState({numberUser : value})
+
         $.ajax({
 
-            url: Constant.SERVER_API + 'api/insight/iam?number_users='+value,
+            url: Constant.SERVER_API + 'api/insight/iam?number_users=' + value,
             dataType: 'json',
             type: 'GET',
 
@@ -89,7 +75,7 @@ var Indentity = React.createClass({
                 debugger
                 console.log('data', data)
                 this.updateChartData(data)
-               /* this.setState({ rickInsight: data })*/
+                    /* this.setState({ rickInsight: data })*/
 
             }.bind(this),
             error: function(xhr, error) {
@@ -98,7 +84,7 @@ var Indentity = React.createClass({
                 }
             }.bind(this)
         });
-       /* this.filterData(value);*/
+        /* this.filterData(value);*/
     },
 
     getData() {
@@ -114,7 +100,7 @@ var Indentity = React.createClass({
             success: function(data) {
                 console.log('data', data)
                 this.updateChartData(data)
-               /* this.setState({ rickInsight: data })*/
+                    /* this.setState({ rickInsight: data })*/
 
             }.bind(this),
             error: function(xhr, error) {
@@ -139,66 +125,22 @@ var Indentity = React.createClass({
         high_risk_users = this.configChart(datas.high_risk_users)
         high_risk_directory = this.configChart(datas.high_risk_directory)
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users)*100 : _.size(high_risk_directory)*100
+        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100
 
         for (var i = 0; i < _.size(datas.key_contributor); i++) {
-         /*   if (datas.key_contributor[i].category_name == "Accounting/Tax") {*/
-                arr[i] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: arr[i].category_name ,
-                    contributors: (this.configChart(arr[i].contributors))
-                })
-           /* }*/
-           /* if (datas.key_contributor[i].category_name == "Corporate Entity") {
-                arr["corporate_entity"] = datas.key_contributor[i];
-                key_contributor.push({
-                    category_name: 'Corporate Entity',
-                    contributors: (this.configChart(arr["corporate_entity"].contributors))
-                })
-            }
-            if (datas.key_contributor[i].category_name == "Client/Customer") {
-                arr["client/customer"] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: 'Client / Customer',
-                    contributors: (this.configChart(arr["client/customer"].contributors))
-                })
-            }
-            if (datas.key_contributor[i].category_name == "Employee") {
-                arr["employee"] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: 'Employee',
-                    contributors: (this.configChart(arr["employee"].contributors))
-                })
-            }
-            if (datas.key_contributor[i].category_name == "Legal/Compliance") {
-                arr["Legal/Compliance"] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: 'Legal / Compliance',
-                    contributors: (this.configChart(arr["Legal/Compliance"].contributors))
-                })
-            }
-            if (datas.key_contributor[i].category_name == "Transaction") {
-                arr["Transaction"] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: "Transaction",
-                    contributors: (this.configChart(arr["Transaction"].contributors))
-                })
-            }
-            if (datas.key_contributor[i].category_name == "Undefined") {
-                arr["Undefined"] = datas.key_contributor[i]
-                key_contributor.push({
-                    category_name: "Undefined",
-                    contributors: (this.configChart(arr["Undefined"].contributors))
-                })
-            }*/
+            arr[i] = datas.key_contributor[i]
+            key_contributor.push({
+                category_name: arr[i].category_name,
+                contributors: (this.configChart(arr[i].contributors))
+            })
         }
-        console.log('key_contributor',key_contributor)
+        console.log('key_contributor', key_contributor)
 
-        height_1 = _.size(key_contributor[0].contributors.categories) > _.size(key_contributor[1].contributors.categories) ? _.size(key_contributor[0].contributors.categories)*40 : _.size(key_contributor[1].contributors.categories)*40
+        height_1 = _.size(key_contributor[0].contributors.categories) > _.size(key_contributor[1].contributors.categories) ? _.size(key_contributor[0].contributors.categories) * 40 : _.size(key_contributor[1].contributors.categories) * 40
 
-        height_2 = _.size(key_contributor[2].contributors.categories) > _.size(key_contributor[3].contributors.categories) ? _.size(key_contributor[2].contributors.categories)*40 : _.size(key_contributor[3].contributors.categories)*40
+        height_2 = _.size(key_contributor[2].contributors.categories) > _.size(key_contributor[3].contributors.categories) ? _.size(key_contributor[2].contributors.categories) * 40 : _.size(key_contributor[3].contributors.categories) * 40
 
-        height_3 = _.size(key_contributor[4].contributors.categories) > _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories)*40 : _.size(key_contributor[5].contributors.categories)*40
+        height_3 = _.size(key_contributor[4].contributors.categories) > _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40
 
         var updateData_config = update(this.state, {
             dataChart: {
@@ -213,10 +155,10 @@ var Indentity = React.createClass({
             },
             data_exports: { $set: datas },
             save_cvs: { $set: datas },
-            height_0 : {$set : height_0},
-            height_1 : {$set : height_1},
-            height_2 : {$set : height_2},
-            height_3 : {$set : height_3}
+            height_0: { $set: height_0 },
+            height_1: { $set: height_1 },
+            height_2: { $set: height_2 },
+            height_3: { $set: height_3 }
         })
         this.setState(updateData_config)
 
@@ -239,12 +181,6 @@ var Indentity = React.createClass({
             categories: categories,
             data: dataChart
         }
-
-        /* high_risk_users.push({
-     categories: categories,
-     data: dataChart
- })
-*/
     },
     getRickInsight() {
 
@@ -319,7 +255,7 @@ var Indentity = React.createClass({
         });
         if (csv == null) return;
 
-        filename = value+'.csv' || 'export.csv';
+        filename = value + '.csv' || 'export.csv';
 
         if (!csv.match(/^data:text\/csv/i)) {
             csv = 'data:text/csv;charset=utf-8,' + csv;
@@ -331,18 +267,17 @@ var Indentity = React.createClass({
         link.setAttribute('download', filename);
         link.click();
     },
-    formatNameCategory(str){
+    formatNameCategory(str) {
         return _.replace(str, '/', ' / ')
     },
     formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     },
     componentWillMount() {
-         this.getData();
+        this.getRickInsight()
     },
     componentDidMount() {
-          this.getData();
-       /* this.handleFilter({ number_users: 'Top 5' });*/
+        this.getData();
         javascript();
         javascriptOver();
 

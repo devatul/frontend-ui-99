@@ -4,200 +4,189 @@
 <rt-import name="HelpButton" from="./components/HelpButton"/>
 <rt-import name="HelpButton2" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="Risk" from="./components/RickInsights"/>
+
 <div class="container">
-  <section class="panel panel-featured panel-featured-primary">
-    <header class="panel-heading">
-      <h2 class="panel-title">Risk Insights
-
-        <HelpButton1
-            classMenu="fix-overview-help-button-table"
-            classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
-
-     </h2>
-   </header>
-   <div class="panel-body pb-none">
-    <div class="row">
-        <Risk/>
-</div>
-</div>
-</section>
-
-  <section class="panel panel-featured panel-featured-primary panel-identity">
-
-    <BarMenu title="Data Risk Management" showFilter={false} handleFilter={this.handleFilter} helpInfo="This represents an overview of the risk key indicators of the data repositories scanned by Dathena 99" />
-    <div class="panel-body" id="toggle">
-   <!--    <div style="margin-top : 40px"></div> -->
-      <h3 >Capacity Management Risk
-       <!--  <HelpButton type="overview_question_a" content="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity."/> -->
-
-         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity." />
-      </h3>
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title">Duplicated
-              <!-- <HelpButton type="overview_question_a" content="Duplicates are files that have been detected with 2 or more having identical information and file names."/> -->
-
-                  <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="Duplicates are files that have been detected with 2 or more having identical information and file names." />
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.duplicated && this.floor(this.state.dataRisk.duplicated.percentage)} style-2 pie-blue">
-                    <span class="label">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.value}<span class="smaller">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.label}</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage)}% against total files scanned</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title">Twins
-                <!-- <HelpButton type="overview_question_a" content="Twins are files that have been detected with 2 or more having identical information but with different file names."/> -->
-
+    <section class="panel panel-featured panel-featured-primary">
+        <header class="panel-heading">
+            <h2 class="panel-title">Risk Insights
                 <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"   setValue="Twins are files that have been detected with 2 or more having identical information but with different file names." />
-              </h4>
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.twins && this.floor(this.state.dataRisk.twins.percentage)} style-2 pie-green">
-                    <span class="label">{this.state.dataRisk.twins && this.state.dataRisk.twins.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.twins.label}</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.twins && this.formatNumber(this.state.dataRisk.twins.percentage)}% against total files scanned</span>
-                </div>
-              </div>
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
+            </h2>
+        </header>
+        <div class="panel-body pb-none">
+            <div class="row">
+                <Risk/>
             </div>
-          </section>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title">Number of Stale Files
-
-                  <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="Stale files are files which have not been accessed for a defined period of time. This indicates that the data is stale, and may no longer have a need to be retained by the organisation." />
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.stale_files && this.floor(this.state.dataRisk.stale_files.percentage)} style-2 pie-yellow">
-                    <span class="label">{this.state.dataRisk.stale_files && this.state.dataRisk.stale_files.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.stale_files.label}</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.stale_files && this.formatNumber(this.state.dataRisk.stale_files.percentage)}% against total files scanned</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title"> Storage Cost Saving Opportunity
-                       <HelpButton1
-                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                            className="dropdown-file-info-holder"
-                            setValue="This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files." />
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.storage_cost_saving_opportunity && this.floor(this.state.dataRisk.storage_cost_saving_opportunity.percentage)} style-2 pie-red">
-                    <span class="label">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.size}{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'terabytes' ? 'TB' : (this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'kilobytes' ? 'KB' : 'B') }<span class="smaller">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.label}</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.storage_cost_saving_opportunity && this.formatNumber(this.state.dataRisk.storage_cost_saving_opportunity.percentage)}% against total files scanned</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <h3>File Identification Risk
-
-         <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the unreadable file and the client data repositories." />
-      </h3>
-      <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title">Number of Unreadable Files
-              <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99." />
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[0].percentage)} style-2 pie-blue">
-                    <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[0].num_files}<span class="smaller">files</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[0].percentage)}% against total files scanned</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div class="col-md-6 col-sm-6">
-          <section class="panel">
-            <div class="panel-body bg-white widget-panel insight-panel">
-              <h4 class="widget-title">High Volume of Client Data per Repository
-
+    </section>
+    <section class="panel panel-featured panel-featured-primary panel-identity">
+        <BarMenu title="Data Risk Management" showFilter={false} handleFilter={this.handleFilter} helpInfo="This represents an overview of the risk key indicators of the data repositories scanned by Dathena 99" />
+        <div class="panel-body" id="toggle">
+            <h3 >Capacity Management Risk
                 <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets."  />
-              </h4>
-              <div class="widget-summary">
-                <div class="widget-summary-col">
-                  <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[1].percentage)} style-2 pie-green">
-                    <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[1].num_files}<span class="smaller">folders</span></span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[1].percentage)}% against total folders scanned</span>
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the duplicate files, twins files and stale files and the storage cost saving opportunity." />
+            </h3>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <section class="panel">
+                        <div class="panel-body bg-white widget-panel insight-panel">
+                            <h4 class="widget-title">Duplicated
+                                <HelpButton1
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Duplicates are files that have been detected with 2 or more having identical information and file names." />
+                            </h4>
+                            <div class="widget-summary">
+                                <div class="widget-summary-col">
+                                    <div class="pie-wrapper pie-progress-{this.state.dataRisk.duplicated && this.floor(this.state.dataRisk.duplicated.percentage)} style-2 pie-blue">
+                                        <span class="label">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.value}<span class="smaller">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.label}</span></span>
+                                        <div class="pie">
+                                          <div class="left-side half-circle"></div>
+                                          <div class="right-side half-circle"></div>
+                                        </div>
+                                        <div class="shadow"></div>
+                                    </div>
+                                    <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage)}% against total files scanned</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div class="col-md-3 col-sm-6">
+                  <section class="panel">
+                    <div class="panel-body bg-white widget-panel insight-panel">
+                      <h4 class="widget-title">Twins
+                        <!-- <HelpButton type="overview_question_a" content="Twins are files that have been detected with 2 or more having identical information but with different file names."/> -->
 
+                        <HelpButton1
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"   setValue="Twins are files that have been detected with 2 or more having identical information but with different file names." />
+                      </h4>
+                      </h4>
+                      <div class="widget-summary">
+                        <div class="widget-summary-col">
+                          <div class="pie-wrapper pie-progress-{this.state.dataRisk.twins && this.floor(this.state.dataRisk.twins.percentage)} style-2 pie-green">
+                            <span class="label">{this.state.dataRisk.twins && this.state.dataRisk.twins.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.twins.label}</span></span>
+                            <div class="pie">
+                              <div class="left-side half-circle"></div>
+                              <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                          </div>
+                          <span class="pie-info">{this.state.dataRisk.twins && this.formatNumber(this.state.dataRisk.twins.percentage)}% against total files scanned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <section class="panel">
+                    <div class="panel-body bg-white widget-panel insight-panel">
+                      <h4 class="widget-title">Number of Stale Files
+
+                          <HelpButton1
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Stale files are files which have not been accessed for a defined period of time. This indicates that the data is stale, and may no longer have a need to be retained by the organisation." />
+                      </h4>
+                      <div class="widget-summary">
+                        <div class="widget-summary-col">
+                          <div class="pie-wrapper pie-progress-{this.state.dataRisk.stale_files && this.floor(this.state.dataRisk.stale_files.percentage)} style-2 pie-yellow">
+                            <span class="label">{this.state.dataRisk.stale_files && this.state.dataRisk.stale_files.value}<span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.stale_files.label}</span></span>
+                            <div class="pie">
+                              <div class="left-side half-circle"></div>
+                              <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                          </div>
+                          <span class="pie-info">{this.state.dataRisk.stale_files && this.formatNumber(this.state.dataRisk.stale_files.percentage)}% against total files scanned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <section class="panel">
+                    <div class="panel-body bg-white widget-panel insight-panel">
+                      <h4 class="widget-title"> Storage Cost Saving Opportunity
+                               <HelpButton1
+                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                    className="dropdown-file-info-holder"
+                                    setValue="This represents the volume of twin, duplicate, stale, and records past their retentiondate date files, expressed in total file size. They present candidates for deletion, freeing up the volume of data that these files." />
+                      </h4>
+                      <div class="widget-summary">
+                        <div class="widget-summary-col">
+                          <div class="pie-wrapper pie-progress-{this.state.dataRisk.storage_cost_saving_opportunity && this.floor(this.state.dataRisk.storage_cost_saving_opportunity.percentage)} style-2 pie-red">
+                            <span class="label">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.size}{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'terabytes' ? 'TB' : (this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'kilobytes' ? 'KB' : 'B') }<span class="smaller">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.label}</span></span>
+                            <div class="pie">
+                              <div class="left-side half-circle"></div>
+                              <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                          </div>
+                          <span class="pie-info">{this.state.dataRisk.storage_cost_saving_opportunity && this.formatNumber(this.state.dataRisk.storage_cost_saving_opportunity.percentage)}% against total files scanned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+            </div>
+            <h3>File Identification Risk
+                <HelpButton1
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a"  setValue="This represents an overview of the unreadable file and the client data repositories." />
+            </h3>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <section class="panel">
+                    <div class="panel-body bg-white widget-panel insight-panel">
+                      <h4 class="widget-title">Number of Unreadable Files
+                      <HelpButton1
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99." />
+                      </h4>
+                      <div class="widget-summary">
+                        <div class="widget-summary-col">
+                          <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[0].percentage)} style-2 pie-blue">
+                            <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[0].num_files}<span class="smaller">files</span></span>
+                            <div class="pie">
+                              <div class="left-side half-circle"></div>
+                              <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                          </div>
+                          <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[0].percentage)}% against total files scanned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <section class="panel">
+                    <div class="panel-body bg-white widget-panel insight-panel">
+                      <h4 class="widget-title">High Volume of Client Data per Repository
+
+                        <HelpButton1
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets."  />
+                      </h4>
+                      <div class="widget-summary">
+                        <div class="widget-summary-col">
+                          <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[1].percentage)} style-2 pie-green">
+                            <span class="label">{this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[1].num_files}<span class="smaller">folders</span></span>
+                            <div class="pie">
+                              <div class="left-side half-circle"></div>
+                              <div class="right-side half-circle"></div>
+                            </div>
+                            <div class="shadow"></div>
+                          </div>
+                          <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[1].percentage)}% against total folders scanned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

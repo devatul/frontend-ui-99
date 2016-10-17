@@ -4,35 +4,28 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './DataLoss.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
-//import javascript from '../script/script.insights.js'
 import Constant from '../Constant.js'
 import $ from 'jquery'
 
- var DataLost = React.createClass({
-  	mixins: [LinkedStateMixin],
-  	getInitialState() {
-	    return {
-            dataLoss : {},
-            language : [],
+var DataLost = React.createClass({
+    mixins: [LinkedStateMixin],
+    getInitialState() {
+        return {
+            dataLoss: {},
+            language: [],
             default_data: []
-	    };
-	},
-    /*shouldComponentUpdate(nextProps , nextState){
-        if(this.state.default_data != nextState.default_data){
-            return true
-        }
-        return false
-    },*/
-    changeDefaul(language){
+        };
+    },
+    changeDefaul(language) {
         debugger
-        let dataLoss = _.cloneDeep(this.state.dataLoss) ;
-        for(let i = 0 ; i<dataLoss.length ; i++){
-            if(dataLoss[i].language == language){
-                this.setState({default_data : dataLoss[i]})
+        let dataLoss = _.cloneDeep(this.state.dataLoss);
+        for (let i = 0; i < dataLoss.length; i++) {
+            if (dataLoss[i].language == language) {
+                this.setState({ default_data: dataLoss[i] })
             }
         }
     },
-    getDataLoss(){
+    getDataLoss() {
 
         $.ajax({
 
@@ -47,21 +40,21 @@ import $ from 'jquery'
 
                 console.log('data', data)
                 let arr = []
-               /* this.setState({ dataLoss: data })
-                this.setState({ default_data: data[0] })*/
-                for(let i = 0 ; i< data.length ; i++){
+                    /* this.setState({ dataLoss: data })
+                     this.setState({ default_data: data[0] })*/
+                for (let i = 0; i < data.length; i++) {
 
                     arr.push(data[i].language)
                 }
-              /*  this.setState({language : arr})*/
-                let updateDataLoss = update(this.state , {
-                    dataLoss : {$set : data},
-                    default_data : {$set : data[0]},
-                    language : {$set : arr}
+                /*  this.setState({language : arr})*/
+                let updateDataLoss = update(this.state, {
+                    dataLoss: { $set: data },
+                    default_data: { $set: data[0] },
+                    language: { $set: arr }
                 })
                 this.setState(updateDataLoss)
-                console.log('data' , data)
-                console.log('default_data' , this.state.default_data)
+                console.log('data', data)
+                console.log('default_data', this.state.default_data)
 
             }.bind(this),
             error: function(xhr, error) {
@@ -71,14 +64,11 @@ import $ from 'jquery'
             }.bind(this)
         });
     },
-    componentWillMount(){
-        this.getDataLoss()
-    },
-	componentDidMount()
-	{
 
-		//javascript();
-	},
-    render:template
+    componentWillMount() {
+        this.getDataLoss()
+            //javascript();
+    },
+    render: template
 });
- module.exports = DataLost;
+module.exports = DataLost;

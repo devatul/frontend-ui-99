@@ -38,7 +38,7 @@ import javascript from '../script/javascript.js'
             }.bind(this)
         });
     },
-     handleFilter: function(bodyRequest) {
+    handleFilter: function(bodyRequest) {
         debugger
         /* let dataChart = _.cloneDeep(this.state.dataChart)*/
         let value = bodyRequest.number_users;
@@ -90,9 +90,7 @@ import javascript from '../script/javascript.js'
     componentWillMount(){
         this.getData();
     },
-	componentDidMount()
-	{
-
+	componentDidMount(){
 		javascript();
 		javascriptOver();
 	},

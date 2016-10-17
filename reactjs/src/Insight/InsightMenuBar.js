@@ -60,7 +60,7 @@ var MenuBar1 = React.createClass({
         showFilter: React.PropTypes.bool,
         showInfo: React.PropTypes.bool
     },
-     OnClick(){
+    OnClick() {
 
         $("#dropdownFilter").show()
     },
@@ -77,10 +77,10 @@ var MenuBar1 = React.createClass({
     },
     componentDidMount() {
         if (this.props.showFilter) {
-          /*  this.getConfidentiality(true);
-            this.getCategory(true);
-            this.getDoctypes(true);
-            this.getLanguages(true);*/
+            /*  this.getConfidentiality(true);
+              this.getCategory(true);
+              this.getDoctypes(true);
+              this.getLanguages(true);*/
             this.copyNumberOfUser(true);
         }
     },
@@ -100,8 +100,8 @@ var MenuBar1 = React.createClass({
             if (filter.categories != null) {
                 filter.categories.length === 0 && delete this.state.filter.categories;
             }*/
-            if(filter == null){
-                this.props.handleFilter({ number_users : 'Top 5'});
+            if (filter == null) {
+                this.props.handleFilter({ number_users: 'Top 5' });
             }
             this.props.handleFilter(this.state.filter);
 
@@ -277,7 +277,7 @@ var MenuBar1 = React.createClass({
         this.setState({
             dataSelectBox: data,
             filterLabel: [],
-            filter : null
+            filter: null
         });
         this.copyNumberOfUser()
     },
