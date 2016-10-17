@@ -45,7 +45,7 @@
                     <label class="control-label">Company Name </label>
                   </div>
                   <div class="col-sm-8">
-                   <Input  value="Dathena" disabled={this.state.readOnly} className="form-control" />
+                   <Input  block = 1 fieldId = 1 disabled={this.state.readOnly} className="form-control" onChange="{this.onChangeInput}"/>
                   </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     <label class="control-label" >Region </label>
                   </div>
                   <div class="col-sm-8">
-                      <Input value="Asia"  disabled={this.state.readOnly} className="form-control"/>
+                      <Input block = 1 fieldId = 2 disabled={this.state.readOnly} onChange="{this.onChangeInput}" className="form-control"/>
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@
                     <label class="control-label">Country </label>
                   </div>
                   <div class="col-sm-8">
-                      <Input value="Singapore"  disabled={this.state.readOnly} className="form-control"/>
+                      <Input block = 1 fieldId = 3 disabled={this.state.readOnly} onChange="{this.onChangeInput}" className="form-control"/>
                   </div>
                 </div>
 
@@ -130,7 +130,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <Input type="text" value="Top Secret (example)" disabled={this.state.readOnly1} className="form-control">
+                    <Input type="text" block = 2 fieldId = 1  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
                   </div>
                 </div>
 
@@ -149,7 +149,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                      <Input type="text" disabled={this.state.readOnly1} className="form-control">
+                      <Input type="text"  block = 2 fieldId = 2  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
                   </div>
                 </div>
 
@@ -168,7 +168,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                      <Input type="text" disabled={this.state.readOnly1} className="form-control">
+                      <Input type="text"  block = 2 fieldId = 3  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
                   </div>
                 </div>
 
@@ -187,7 +187,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                     <Input type="text" disabled={this.state.readOnly1} className="form-control">
+                     <Input type="text" disabled={this.state.readOnly1}  block = 2 fieldId = 4  onChange="{this.onChangeInput}" className="form-control">
                   </div>
                 </div>
 
@@ -206,7 +206,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <Input type="text"  value="Public (example)" disabled={this.state.readOnly1}  className="form-control">
+                    <Input type="text"   block = 2 fieldId = 5  onChange="{this.onChangeInput}" disabled={this.state.readOnly1}  className="form-control">
                   </div>
                 </div>
 
