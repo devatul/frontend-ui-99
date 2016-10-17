@@ -5,7 +5,7 @@ import template from './UserAssignment.rt'
 import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
-import { upperFirst, findIndex, assignIn, isEqual, cloneDeep } from 'lodash'
+import { upperFirst, findIndex, assignIn, isEqual, cloneDeep, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var UserAssignment = React.createClass({
@@ -91,16 +91,12 @@ var UserAssignment = React.createClass({
                 confidentiality: []
             },
             shouldUpdate: false,
-            isConfirming: false
+            isConfirming: 0
         };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        var { category, datafilter, dataChart, buttonSample } = this.state;
-        return nextState.shouldUpdate || !isEqual(category, nextState.category)
-        || !isEqual( datafilter, nextState.datafilter )
-        || !isEqual( dataChart, nextState.dataChart )
-        || !isEqual( buttonSample, nextState.buttonSample );
+        return nextState.shouldUpdate;
     },
     
     componentDidMount() {
@@ -111,7 +107,15 @@ var UserAssignment = React.createClass({
     },
 
     componentWillUpdate(nextProps, nextState) {
-        
+        if(this.state.category.current != nextState.category.current) {
+            var { reviewers } = this.state.datafilter.request;
+            var { current } = this.state.category;
+            debugger
+            if(reviewers.length > 0 && current.id !== "summary") {
+                
+                this.assignReviewersToCategory();
+            }
+        }
     },
     
 
@@ -123,16 +127,10 @@ var UserAssignment = React.createClass({
         }
     	
         if(category.current != prevState.category.current) {
-            // if(category.current.id === 'summary') {
-            //     this.getSummary();
-            // } else {
-            //     this.getCategoryInfo();
-            // }
-            //this.getSummary(false);
+            this.getSummary(false);
+
             if(category.current.id != 'summary') {
                 this.getCategoryInfo();
-            } else {
-                this.getSummary();
             }
         }
         if(!isEqual(datafilter.params, prevState.datafilter.params)) {
@@ -219,7 +217,7 @@ var UserAssignment = React.createClass({
     handleOnClickValidationButton: function(id) {
         var set = (id == 'category') ? 'fixedNumber' : 'category',
             number_docs = (id == 'category') ? this.refs.fixedNumberDoc.value : this.refs.overallCategory.value;
-
+            debugger
         var updateButton = update(this.state.buttonSample, {
              [id]: {$set: 'success' },
              [set]: {$set: 'normal' }
@@ -231,23 +229,33 @@ var UserAssignment = React.createClass({
             }
         });
 
-        this.setState({ buttonSample: updateButton, datafilter: updateRequest });
+        this.setState({ buttonSample: updateButton, datafilter: updateRequest, shouldUpdate: true });
     },
 
-    handleSelectFixedNumber: function() {
+    handleSelectFixedNumber: function(event) {
         let updateButton = update(this.state.buttonSample, {
             fixedNumber: { $set: 'normal' },
             category: { $set: 'success' }
         });
-        this.setState({ buttonSample: updateButton })
+        var updateRequest = update(this.state.datafilter, {
+            request: {
+                docs_sampled: { $set: parseInt(event.target.value) }
+            }
+        });
+        this.setState({ buttonSample: updateButton, datafilter: updateRequest, shouldUpdate: true })
     },
 
-    handleSelectOverall: function() {
+    handleSelectOverall: function(event) {
         let updateButton = update(this.state.buttonSample, {
             fixedNumber: { $set: 'success' },
             category: { $set: 'normal' }
         });
-        this.setState({ buttonSample: updateButton })
+        var updateRequest = update(this.state.datafilter, {
+            request: {
+                docs_sampled: { $set: parseInt(event.target.value) }
+            }
+        });
+        this.setState({ buttonSample: updateButton, datafilter: updateRequest, shouldUpdate: true })
     },
 
     assignReviewersToCategory() {
@@ -268,16 +276,17 @@ var UserAssignment = React.createClass({
         var { request } = this.state.datafilter;
         debugger
         if(request.reviewers.length > 0) {
-            console.log('request', request)
-            this.assignReviewersToCategory();
-
             if(indexCurrent < list.length) {
 
+                var nextCategory = list[indexCurrent + 1];
+
                 var setCurrent = update(this.state.category, {
-                    current: { $set: list[indexCurrent + 1] }
+                    current: { $set: nextCategory }
                 });
                 var setReviewer = update(this.state.datafilter, {
                     request: {
+                        id: { $set: nextCategory.id },
+                        name: { $set: nextCategory.name },
                         reviewers: { $set: [] }
                     },
                     //filterLabel: { $set: [] },
@@ -309,7 +318,6 @@ var UserAssignment = React.createClass({
                     type: { $set: 0 }
                 },
                 params: {
-                    
                     $set: {
                         id: current.id,
                         timeframe: 6,
@@ -317,22 +325,9 @@ var UserAssignment = React.createClass({
                         type: 'last_modifier'
                     }
                 }
-            }),
-
-            updateReviewer = update(this.state.category, {
-
-                reviewers: {
-                    $set: this.getReviewers({
-                        id: current.id,
-                        timeframe: 6,
-                        users: 10,
-                        type: 'last_modifier'
-                    })
-                }
-
             });
             debugger
-        this.setState({ datafilter: setReviewer, category: updateReviewer });
+        this.setState({ datafilter: setReviewer, shouldUpdate: true });
     },
 
     setCategoryCurrent: function(categoryIndex) {
@@ -355,10 +350,6 @@ var UserAssignment = React.createClass({
                 }
             },
 
-            filterLabel: {
-                $set: []
-            },
-
             setValue: {
                 timeframe: {
                     $set: 0
@@ -376,7 +367,6 @@ var UserAssignment = React.createClass({
                 }
             }
         });
-        debugger
         this.setState({ category: setCategory, datafilter: datafilter, shouldUpdate: true });
     },
 
@@ -469,7 +459,7 @@ var UserAssignment = React.createClass({
     handleOnChangeSelectAll: function(checked) {
         var { list } = this.state.reviewer,
             newList = [];
-        debugger
+
         var updateRequest = update(this.state.datafilter, {
             request: {
                 reviewers: {$set: (checked == 'on') ? list : [] }
@@ -492,70 +482,28 @@ var UserAssignment = React.createClass({
         this.setState({ datafilter: updateRequest, reviewer: updateListReviewer, shouldUpdate: true });
     },
 
-    handleClickBackDrop: function(event) {
-        if(event.target.id == 'backDropFilter') {
-            event.target.style.height = "200px";
-        }
-        
-        //debugger
-    },
 
-    selectBoxOnOpen: function(field) {
-        //this.refs.backDropFilter.style.width = '560px';
-        this.refs.backDropFilter.style.height = '300px';
-        //debugger
-    },
-
-
-
-    getReviewers( params ) {
+    getReviewers() {
         var { datafilter, category }  = this.state;
-
-        // var data = [
-        //     {
-        //     "number_hits": 20,
-        //     "first_name": "chris",
-        //     "last_name": "muffat",
-        //     "type": "last_modifier",
-        //     "id": 1
-        //     },
-        //     {
-        //     "number_hits": 15,
-        //     "first_name": "tony",
-        //     "last_name": "gomez",
-        //     "type": "last_modifier",
-        //     "id": 2
-        //     },
-        //     {
-        //     "number_hits": 10,
-        //     "first_name": "chris",
-        //     "last_name": "columbus",
-        //     "type": "last_modifier",
-        //     "id": 3
-        //     }
-        // ];
 
         makeRequest({
             path: 'api/assign/reviewer/',
             params: datafilter.params,
             success: (data) => {
                 debugger
-                let indexSummaryCatgory = findIndex(this.state.summary, {
-                    id: this.state.category.current.id + "",
-                    name: this.state.category.current.name
-                });
+                let indexSummaryCatgory = findIndex(this.state.summary, { id: this.state.category.current.id + "" });
                 if(indexSummaryCatgory > -1) {
-                    let reviewers = this.state.summary[indexSummaryCatgory].reviewers;
+                    let reviewers = this.state.summary[indexSummaryCatgory].reviewers,
+                        { request } = this.state.datafilter;
                     debugger
                     for(let i = data.length - 1; i >= 0; i--) {
                         let indexReviewer = findIndex(reviewers, {
-                            id: parseInt(data[i].id),
-                            first_name: data[i].first_name,
-                            last_name: data[i].last_name
+                            id: parseInt(data[i].id)
                         });
 
                         if(indexReviewer > -1) {
                             data[i].selected = 'on';
+                            request.reviewers.push(data[i]);
                         }
                     }
                 }
@@ -612,214 +560,13 @@ var UserAssignment = React.createClass({
     getCategoryInfo() {
         var {current} = this.state.category;
 
-        var res = {
-                "percentage_doc": [
-                    {
-                    "percentage": 0.17,
-                    "number_docs": 10
-                    },
-                    {
-                    "percentage": 0.34,
-                    "number_docs": 20
-                    }
-                ],
-                "doc_percentage": [
-                    {
-                    "percentage": 0.17,
-                    "number_docs": 10
-                    },
-                    {
-                    "percentage": 0.34,
-                    "number_docs": 20
-                    }
-                ],
-                "number_docs": 168000,
-                "confidentialities": [
-                    {
-                    "name": "Banking Secrecy",
-                    "number_docs": 20,
-                    "percentage": 10
-                    },
-                    {
-                    "name": "Secret",
-                    "number_docs": 20,
-                    "percentage": 20
-                    },
-                    {
-                    "name": "Confidential",
-                    "number_docs": 20,
-                    "percentage": 30
-                    },
-                    {
-                    "name": "Internal",
-                    "number_docs": 20,
-                    "percentage": 20
-                    },
-                    {
-                    "name": "Public",
-                    "number_docs": 20,
-                    "percentage": 20
-                    }
-                ],
-                "documents_types": [
-                    {
-                    "name": "Banking Secrecy",
-                    "doctypes": [
-                        {
-                        "name": "Word",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Excel",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "PDF",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Power Point",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Others",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        }
-                    ]
-                    },
-                    {
-                    "name": "Secret",
-                    "doctypes": [
-                        {
-                        "name": "Word",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Excel",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "PDF",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Power Point",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Others",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        }
-                    ]
-                    },
-                    {
-                    "name": "Confidential",
-                    "doctypes": [
-                        {
-                        "name": "Word",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Excel",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "PDF",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Power Point",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Others",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        }
-                    ]
-                    },
-                    {
-                    "name": "Internal",
-                    "doctypes": [
-                        {
-                        "name": "Word",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Excel",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "PDF",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Power Point",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Others",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        }
-                    ]
-                    },
-                    {
-                    "name": "Public",
-                    "doctypes": [
-                        {
-                        "name": "Word",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Excel",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "PDF",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Power Point",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        },
-                        {
-                        "name": "Others",
-                        "number_docs": 20,
-                        "percentage_of_all_docs_in_this_doc_type": 10
-                        }
-                    ]
-                    }
-                ]
-            };
-
         return makeRequest({
             path: 'api/assign/category/',
             params: { "id": current.id },
             success: (res) => {
                 debugger
+                res.percentage_doc = orderBy(res.percentage_doc, ['percentage'], ['asc']);
+
                 let updateCategoryInfo = update(this.state.category, {
                     info: {
                         $set: res
@@ -845,17 +592,23 @@ var UserAssignment = React.createClass({
             path: "api/assign/summary/",
             success: (res) => {
                 debugger
+                res = orderBy(res, ['name'], ['asc']);
 
-                this.setState({ summary: res, shouldUpdate: true });
+                this.setState({ summary: res, isConfirming: 0, shouldUpdate: true });
             }
         });
     },
 
+    onHideModal() {
+        this.setState({ isConfirming: 0, shouldUpdate: true });
+    },
+
     confirmNotify() {
+        if(this.state.isConfirming === 2) return;
+         
         let { summary } = this.state,
             bodyRequest = [];
         
-        this.setState({ isConfirming: true, shouldUpdate: true });
         for(let i = summary.length - 1; i >= 0; i--) {
             bodyRequest[i] = {
                 id: summary[i].id,
@@ -871,8 +624,13 @@ var UserAssignment = React.createClass({
             },
             error: (err) => {
                 if(err.status === 201) {
-                    setTimeout(() => {
-                        this.setState({ isConfirming: false, shouldUpdate: true });
+                    this.setState({ isConfirming: 1, shouldUpdate: true });
+                    let closeModal = 0;
+
+                    closeModal = setTimeout(() => {
+                        this.setState({ isConfirming: 2, shouldUpdate: true });
+                        debugger
+                        clearTimeout(closeModal);
                     }, 3000);
                 }
             }

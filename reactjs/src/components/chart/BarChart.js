@@ -30,7 +30,8 @@ var BarChart = React.createClass({
            $(div).highcharts({
                 chart: {
                     type: 'bar',
-                    height: data.length * 36.5
+                    height: data.length * 39,
+                    verticalAlign: 'top'
                 },
                 title: {
                     text: ''
@@ -46,7 +47,7 @@ var BarChart = React.createClass({
                     minPadding: 0,
                     maxPadding: 0,
                     gridLineWidth: 0,
-                    tickmarkPlacement: 'on',
+                    tickmarkPlacement: 'off',
                     labels: {
                         style: {
                             font: '11px Roboto, Helvetica, sans-serif'
@@ -63,7 +64,7 @@ var BarChart = React.createClass({
                     }
                 },
                 legend: {
-                enabled:  false
+                    enabled:  false
                 },
                 credits: {
                     enabled: false
@@ -82,7 +83,8 @@ var BarChart = React.createClass({
                         series: {
                             pointWidth: 20,
                             pointPadding: 0,
-                            groupPadding: 0
+                            groupPadding: 0,
+                            verticalAlign: 'top'
                         },
                         point:  {
                             events: {
