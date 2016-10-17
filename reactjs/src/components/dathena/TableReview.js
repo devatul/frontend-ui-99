@@ -6,7 +6,7 @@ import SelectBox from '../dathena/SelectBox'
 import ProgressBar from 'react-bootstrap/lib/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 import Tooltip from 'react-bootstrap/lib/Tooltip'
-import { renderClassType } from '../../utils/function'
+import { renderClassType, orderByIndex } from '../../utils/function'
 import makeRequest from '../../utils/http'
 import { findIndex, isEqual } from 'lodash'
 
@@ -59,7 +59,7 @@ var RowChallenged = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.props, nextProps);
+        return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
     },
     
 
@@ -146,10 +146,12 @@ var RowChallenged = React.createClass({
                 </td>
                 <td className="vertical-top text-left opa-child fix-1st-pading-comment-table">
                     <SelectBox
-                        id="SelectCategory"
+                        id="selectCategory"
                         className={'form-control challenge-category' + (document.previous_category && ' changed')}
                         data={categories}
-                        value={findIndex(categories, document.current_category)} />
+                        value={findIndex(categories, (c) => {
+                            return c.id == document.current_category.id
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.previous_category && document.previous_category.name}
@@ -157,17 +159,19 @@ var RowChallenged = React.createClass({
                 </td>
                 <td className="vertical-top text-left opa-child fix-1st-pading-comment-table">
                     <SelectBox
-                        id="SelectConfidentiality"
+                        id="selectConfidentiality"
                         className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
-                        value={findIndex(confidentialities, document.current_confidentiality)} />
+                        value={findIndex(confidentialities, (c) => {
+                            return c.id == document.current_confidentiality.id
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.current_confidentiality && document.previous_confidentiality.name}
                         </span>
                 </td>
                 <td className="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                    {document.reviewer_comment && this.renderComment(document.reviewer_comment)}
+                    {document.comment && this.renderComment(document.comment)}
                     <span className="extra-block show-less-comment">
                         <a className="details-toggle" onClick={this.onClickMoreLess} style={{ cursor: 'pointer' }}>
                             <i className="fa fa-caret-right mr-xs"></i>
@@ -226,7 +230,7 @@ var Row3 = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.props, nextProps);
+        return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
     },
     
 
@@ -279,7 +283,7 @@ var Row3 = React.createClass({
 
     render() {
         let { document, categories, confidentialities } = this.props;
-
+        debugger
         return(
             <tr className="opa" onChange={this.handleOnChange}>
                 <td>
@@ -309,7 +313,9 @@ var Row3 = React.createClass({
                         id="SelectCategory"
                         className={'form-control challenge-category' + (document.previous_category && ' changed')}
                         data={categories}
-                        value={findIndex(categories, document.current_category)} />
+                        value={findIndex(categories, (c) => {
+                            return (c.id == document.current_category.id)
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.previous_category && document.previous_category.name}
@@ -320,7 +326,9 @@ var Row3 = React.createClass({
                         id="SelectConfidentiality"
                         className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
-                        value={findIndex(confidentialities, document.current_confidentiality)} />
+                        value={findIndex(confidentialities, (c) => {
+                            return (c.id == document.current_confidentiality.id)
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.current_confidentiality && document.previous_confidentiality.name}
@@ -426,7 +434,9 @@ var Row2 = React.createClass({
                         id="SelectCategory"
                         className={'form-control challenge-category' + (document.previous_category && ' changed')}
                         data={categories}
-                        value={findIndex(categories, document.current_category)} />
+                        value={findIndex(categories, (c) => {
+                            return (c.id == document.current_category.id)
+                        })} />
 
                         <span className="text-italic previous-status">
                             Previous: {document.previous_category && document.previous_category.name}
@@ -437,9 +447,8 @@ var Row2 = React.createClass({
                         id="SelectConfidentiality"
                         className={'form-control challenge-confidentiality' + (document.current_confidentiality && ' changed')}
                         data={confidentialities}
-                        value={findIndex(confidentialities, {
-                            id: parseInt(document.current_confidentiality.id),
-                            name: document.current_confidentiality.name
+                        value={findIndex(confidentialities, (c) => {
+                            return (c.id == document.current_confidentiality.id)
                         })} />
 
                         <span className="text-italic previous-status">
@@ -474,32 +483,18 @@ var Row = React.createClass({
 
     },
 
+    componentDidMount() {
+          
+    },
+
     shouldComponentUpdate(nextProps, nextState) {
         return !isEqual(this.props, nextProps);
     },
 
-    getCategories: function() {
-        let arr = [];
-        makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
-                this.configListLabel(data);
-                arr = data;
-            }
-        });
-        return arr;
-    },
-
-    getConfidentiality: function(async) {
-        let arr = [];
-        makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
-                this.configListLabel(data);
-                arr = data;
-            }
-        });
-        return arr;
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.confidentialities != prevProps.confidentialities) {
+            orderByIndex(confidentialities, [4,3,2,1,0])
+        }
     },
 
     handleSelectBoxOnchange: function(valSelect, event) {
@@ -599,9 +594,8 @@ var Row = React.createClass({
                             id="selectCategory"
                             className="form-control"
                             data={categories}
-                            value={findIndex(categories, {
-                                id: parseInt(document.category.id),
-                                name: document.category.name
+                            value={findIndex(categories, (c) => {
+                                return (c.id == document.category.id)
                             })}/>
                     </div>
                 </td>
@@ -626,10 +620,10 @@ var Row = React.createClass({
                             id="selectConfidentiality"
                             className="form-control"
                             data={confidentialities}
-                            value={findIndex(confidentialities, {
-                                id: parseInt(document.confidentiality.id),
-                                name: document.confidentiality.name
-                            })} />
+                            value={findIndex(confidentialities, (c) => {
+                                return (c.id == document.confidentiality.id)
+                            })}
+                        />
                     </div>
                 </td>
                 <td>

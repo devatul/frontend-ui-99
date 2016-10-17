@@ -40,7 +40,6 @@ var SelectBox = React.createClass({
             _props = Object.assign({}, this.props),
             name = binding ? binding.name : 'name',
             value = binding ? binding.value : 'index';
-            debugger
         _props.data && 
             delete _props.data;
          _props.binding &&

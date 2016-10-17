@@ -260,7 +260,6 @@ var UserAssignment = React.createClass({
 
     assignReviewersToCategory() {
         return makeRequest({
-            sync: false,
             path: "api/assign/reviewer/",
             method: "POST",
             params: JSON.stringify(this.state.datafilter.request),

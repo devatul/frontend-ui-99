@@ -112,7 +112,7 @@ var ReviewValidation = React.createClass({
 
                 let bodyRequest = update(this.state.bodyRequest, {
                     category_id: { 
-                        $set: res[0].id 
+                        $set: parseInt(res[0].id) 
                     }
                 });
 
@@ -297,7 +297,7 @@ var ReviewValidation = React.createClass({
                         owner: document.owner,
                         category: document.current_category,
                         confidentiality: document.current_confidentiality,
-                        comment: document.comment
+                        comment: document.comments ? document.comments  : ""
                     }]
                 } : {
                     $splice: [[indexDoc, 1, {
@@ -307,7 +307,7 @@ var ReviewValidation = React.createClass({
                         owner: document.owner,
                         category: document.current_category,
                         confidentiality: document.current_confidentiality,
-                        comment: document.comments
+                        comment: document.comments ? document.comments : ""
                     }]]
                 }
             }),

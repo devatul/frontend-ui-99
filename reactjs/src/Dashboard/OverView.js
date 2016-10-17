@@ -25,14 +25,14 @@ var OverView = React.createClass
 
     componentWillMount() {
 
-        this.startScan();
+        //this.startScan();
     },
 
 	componentDidMount() {
         javascriptTodo();
-        if(this.state.scan.result.scan_status != Constant.scan.IS_NO_SCAN) {
+        //if(this.state.scan.result.scan_status != Constant.scan.IS_NO_SCAN) {
             this.getScanResult();
-        }
+        //}
                       
   	},
 
