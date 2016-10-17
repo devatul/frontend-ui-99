@@ -56,11 +56,16 @@ var Input = React.createClass({
             this.setState({ error: '' });
         }
     },
+    onChange(event){
+        let value = event.target.value
+        this.props.onChange(this.props.block , this.props.fieldId ,value)
+    },
     render() {
         var disabled = this.props.disabled;
         return ( < div key={this.props.key}>
            <input type = {this.props.type} className={this.props.className} id={this.props.id} checked = {this.props.checked}
-           disabled = {disabled}  placeholder = {this.props.placeholder} /></div>
+           disabled = {disabled}  placeholder = {this.props.placeholder} onChange={this.onChange}
+           /></div>
 
         )
     }

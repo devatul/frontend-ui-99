@@ -17,52 +17,38 @@ var Admin_Step5 = React.createClass({
             readOnly1: false,
             readOnly2: false,
             add_DomainDetails  : [''],
-            count : 0
+            count : 0,
+            data : null
         }
 
+    },
+    shouldComponentUpdate(nextProps , nextState){
+        debugger
+        if(this.props.dataBlock != nextProps.dataBlock){
+            return true
+        }
+        return false
+    },
+    componentDidUpdate(prevProps, prevState){
+        debugger
+        if(this.props.dataBlock != prevProps.dataBlock){
+            let updatedata = update(this.state , {
+                data : {$set : this.props.dataBlock}
+            })
+            this.setState(updatedata)
+        }
+    },
+    getValue( arr , key ){
+        for(let i = 0  ; i < arr.length ; i++){
+            if(arr[i].id == key){
+                return arr[i].value
+            }
+        }
     },
     componentDidMount(){
        /* this.loadScript();*/
     },
-    validate_step1(){
 
-        this.setState({complete: 1 , readOnly : true})
-    },
-    validate_step2 () {
-        this.setState({complete: 2,readOnly1 : true})
-    },
-    validate_step3 () {
-        this.setState({complete: 3 , readOnly2 : true})
-    },
-    add(value){
-        debugger
-        if(value == 1 ){
-            let addNdew = { key: this.state.add_DomainDetails.length};
-            this.setState({add_DomainDetails : _.concat(addNdew ,this.state.add_DomainDetails)})
-        }
-    },
-    editButton(value, readOnly) {
-        debugger
-        if (value == 1) {
-            this.setState({ readOnly: false })
-            if (!readOnly) {
-                this.setState({ readOnly: true })
-            }
-        }
-        if (value == 2) {
-            this.setState({ readOnly1: false })
-            if (!readOnly) {
-                this.setState({ readOnly1: true })
-            }
-        }
-        if (value == 3) {
-            this.setState({ readOnly2: false })
-            if (!readOnly) {
-                this.setState({ readOnly2: true })
-            }
-        }
-
-    },
 
     render: template
 })

@@ -31,15 +31,15 @@
                 <tbody>
                 <tr>
                   <td>Company Name: </td>
-                  <td>Dathena Singapore</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 1 )}</td>
                 </tr>
                 <tr>
                   <td>Region: </td>
-                  <td>Asia</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 2 )}</td>
                 </tr>
                 <tr>
                   <td>Country: </td>
-                  <td>Singapore</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 3 )}</td>
                 </tr>
                 </tbody>
               </table>
@@ -56,19 +56,24 @@
               <table class="table table-no-border table-align-left mb-none">
               <tbody>
                 <tr>
-                  <td>1. Banking Secrecy</td>
+                    <td>1. Banking Secrecy</td>
+                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 1 )}</td>
                 </tr>
                 <tr>
-                  <td>2. Secret</td>
+                    <td>2. Secret</td>
+                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 2 )}</td>
                 </tr>
                 <tr>
-                  <td>3. Confidentiality</td>
+                    <td>3. Confidentiality</td>
+                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 3 )}</td>
                 </tr>
                 <tr>
-                  <td>4. Internal</td>
+                    <td>4. Internal</td>
+                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 4 )}</td>
                 </tr>
                 <tr>
-                  <td>5. Public</td>
+                    <td>5. Public</td>
+                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 5 )}</td>
                 </tr>
                 </tbody>
               </table>
