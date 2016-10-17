@@ -84,7 +84,7 @@ var OverView = React.createClass
             success: (data) => {
                 let confidentialities = data.confidentialities;
 
-                data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2,3,5]);
+                data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2,3]);
 
                 let setResult = update(this.state.scan, {
                     result: { $set: data }

@@ -18,6 +18,7 @@
 <rt-import name="Select2" from="../components/dathena/Select2" />
 <rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
+<rt-import name="Modal" from="react-bootstrap/lib/Modal" />
 <section>
   <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
@@ -300,13 +301,22 @@
               </Panel.custom>
               <div class="clearfix">
                   <div class="pull-right">
-                      <Button onClick={this.confirmValidation} class="btn btn-green btn-ok mb-sm mt-md" bsClass="mybtn">Confirm and Notify all Reviewers</Button>
+                      <Button onClick={this.confirmValidation} class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled':'')}" bsClass="mybtn">Confirm and Notify all Reviewers</Button>
                   </div>
               </div>
           </div>
       </div>
   </div>
 </div>
+
+<Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide={this.onHideModal} dialogClassName="custom-modal">
+    <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-lg" style="color: #3c763d;">Well done!</Modal.Title>
+    </Modal.Header>
+    <Modal.Body class="text-center">
+        <p style="color: #3c763d;"><b>You have completed the user assignment!</b></p>
+    </Modal.Body>
+</Modal>
 
 <DocumentPreview
     rt-scope="this.state.dataReview[this.state.currentIndex.documents][this.state.currentIndex.docIndex] as docPreview"

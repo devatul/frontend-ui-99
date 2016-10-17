@@ -376,3 +376,33 @@ select.assigment-select.form-control {
 .table-my-actions.docPreview > thead tr th:nth-child(2) {
     width: initial;
 }
+/*tooltip chart*/
+/*.highcharts-container {
+  position: inherit !important;
+}*/
+.highcharts-tooltip {
+  z-index: 9998;
+  position: absolute;
+}
+/*modal-backdrop*/
+.modal-backdrop {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: 1;
+}
+.modal-well-done {
+    top: 50%;
+    margin-top: -100px;
+}
+ 
+.custom-modal {
+    max-width: 400px;
+}
+
+.custom-modal .modal-content {
+    border: 1px solid #c2e1f5;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    min-height: 110px;
+}

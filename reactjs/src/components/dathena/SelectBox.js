@@ -9,8 +9,7 @@ var SelectBox = React.createClass({
 
     getInitialState: function() {
         return {
-            checked: this.props.checked,
-            open: false
+            checked: this.props.checked
         };
     },
 
@@ -21,42 +20,31 @@ var SelectBox = React.createClass({
         binding: PropTypes.object,
         className: PropTypes.string,
         onChange: PropTypes.func,
-        onOpen: PropTypes.func,
         value: PropTypes.string
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.open != nextState.open || !isEqual( this.props.value, nextProps.value ) || !isEqual( this.props.data, nextProps.data );        
+        return !isEqual( this.props.value, nextProps.value ) || !isEqual( this.props.data, nextProps.data );        
     },
 
-    handleOnChange: function(event) {
+    handleOnChange: function(event, index) {
         var valueSelect = this.props.data[event.target.value];
         this.props.onChange &&
-            this.props.onChange(valueSelect, event);
+            this.props.onChange(valueSelect, event, index);
     },
 
-    handleOnClick: function(event) {
-        let { open } = this.state,
-            { id } = this.props,
-            filed = {
-                id: id,
-                event: event
-            };
-        
-        if(!open) {
-            this.props.onOpen &&
-                this.props.onOpen(filed);
-            this.setState({ open: true });
-        } else {
-            this.setState({ open: false });
-        }
-    },
 
     render: function() {
         let children = [],
             { binding, defaultValue, data } = this.props,
+            _props = Object.assign({}, this.props),
             name = binding ? binding.name : 'name',
             value = binding ? binding.value : 'index';
+            debugger
+        _props.data && 
+            delete _props.data;
+         _props.binding &&
+            delete _props.binding;
         for(let i = data.length - 1; i >= 0; i--) {
 
             children[i] = <option
@@ -68,9 +56,8 @@ var SelectBox = React.createClass({
                             </option>;
         }
         return(
-            <select {...this.props}
-                onChange={this.handleOnChange}
-                key="Index">
+            <select {..._props}
+                onChange={this.handleOnChange}>
                 {children}
             </select>
             );

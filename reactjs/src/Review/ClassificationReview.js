@@ -77,7 +77,7 @@ var ClassificationReview = React.createClass({
             if(documents[i].checked === true) {
                 numCheck++;
             }
-            if(documents[i].status === "accepted") {
+            if(documents[i].status === "accepted" || documents[i].status === "editing") {
                 numValid++;
             }
         }
@@ -307,7 +307,7 @@ var ClassificationReview = React.createClass({
                             },
                             $merge: {
                                 status: document.init_category && isEqual(this.state.categories[categoryIndex], {
-                                    name: document.init_category.name
+                                    id: document.init_category.id
                                 }) ? 'accepted' : 'editing',
                                 init_category: document.init_category ? document.init_category : document.category
                             }

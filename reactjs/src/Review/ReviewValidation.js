@@ -60,7 +60,8 @@ var ReviewValidation = React.createClass({
             },
             stackChange: [],
             openPreview: false,
-            shouldUpdate: false
+            shouldUpdate: false,
+            isConfirming: 0
         };
     },
     
@@ -164,9 +165,11 @@ var ReviewValidation = React.createClass({
             },
             success: (res) => {
                 debugger
+                if(!res.total_reviewers) return;
+
                 let bodyRequest = update(this.state.bodyRequest, {
                         reviewer_id: {
-                            $set: res.reviewers[0].id
+                            $set: res.reviewers[0].id 
                         }
                     });
                 this.setState({
@@ -568,11 +571,6 @@ var ReviewValidation = React.createClass({
 
             this.setState({ dataReview: updateDataReview, shouldUpdate: true });
         }   
-
-        // this.setState({
-        //     dataReview: data,
-        //     shouldUpdate: true
-        // });
     },
 
     getReviewInfo() {
@@ -672,35 +670,58 @@ var ReviewValidation = React.createClass({
     },
     
     handleNextReviewer() {
+
         let { currentIndex } = this.state,
             { total_reviewers } = this.state.reviewers,
             indexReviewer = currentIndex.reviewer == 'default' ? 0 : parseInt(currentIndex.reviewer);
         debugger
-
-        //this.validateDocuments();
-
-        let updateCurrent = update(currentIndex, {
-                reviewer: {
-                    $set: (indexReviewer + 1) < total_reviewers ? indexReviewer + 1 : 0
-                }
-            });
-            
-        this.setState({ currentIndex: updateCurrent, shouldUpdate: true });
+        if((indexReviewer + 1) < total_reviewers) {
+            let updateCurrent = update(currentIndex, {
+                    reviewer: {
+                        $set: indexReviewer + 1
+                    }
+                });
+                
+            this.setState({ currentIndex: updateCurrent, reviewerCurrent: this.state.reviewers.reviewers[indexReviewer + 1], shouldUpdate: true });
+        } else {
+            let updateCurrent = update(currentIndex, {
+                    reviewer: {
+                        $set: 0
+                    }
+                });
+                debugger
+            this.setState({ currentIndex: updateCurrent, reviewerCurrent: this.state.reviewers.reviewers[0], shouldUpdate: true });
+        }
     },
     getSummary() {
         makeRequest({
             path: "api/review/review_validation/summary/",
             success: (res) => {
-                this.setState({ summary: res, shouldUpdate: true });
+                this.setState({ summary: res, isConfirming: 0, shouldUpdate: true });
             }
         });
     },
+
+    onHideModal() {
+        this.setState({ isConfirming: 0, shouldUpdate: true });
+    },
+
     confirmValidation() {
+        if(this.state.isConfirming === 2) return;
+
         makeRequest({
             path: "api/review/review_validation/confirm/",
             method: 'POST',
             success: (res) => {
                 debugger
+            },
+            error: (err) => {
+                if(err.status === 200) {
+                    this.setState({ isConfirming: 1, shouldUpdate: true });
+                    setTimeout(() => {
+                        this.setState({ isConfirming: 2, shouldUpdate: true });
+                    }, 3000);
+                }
             }
         });
     },

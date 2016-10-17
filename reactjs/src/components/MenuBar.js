@@ -144,7 +144,7 @@ var MenuBar = React.createClass
             path: 'api/label/confidentiality/',
             success: (data) => {
                 this.configListLabel(data);
-                data = orderByIndex(data, [0, 4, 1, 2, 3, 5]);
+                data = orderByIndex(data, [4,3,2,1,0]);
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });
