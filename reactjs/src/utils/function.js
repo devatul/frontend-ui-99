@@ -15,7 +15,9 @@ module.exports = {
         let newArray = [];
 
         for(let i = orders.length - 1; i >= 0; i--) {
-            newArray[i] = array[orders[i]];
+            if(array[orders[i]]) {
+                newArray[i] = array[orders[i]];
+            }
         }
 
         return newArray;
