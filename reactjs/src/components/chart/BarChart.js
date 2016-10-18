@@ -22,15 +22,30 @@ var BarChart = React.createClass({
         this.draw()
     },
 
+    heightChart(length) {
+        switch(true) {
+            case length > 0 && length <= 10:
+                return length * 40
+            case length >= 15 && length < 20:
+                return length * 39
+            case length >= 20 && length < 30:
+                return length * 38.5
+            case length >= 30:
+                return length * 38
+        }
+    },
+
     draw() {
         var { id, config, data, categories } = this.props
+
+        var height = this.heightChart(data.length);
 
         var div = $('#' + id);
         if (div.length){
            $(div).highcharts({
                 chart: {
                     type: 'bar',
-                    height: data.length * 39,
+                    height: height,
                     verticalAlign: 'top'
                 },
                 title: {
@@ -81,7 +96,7 @@ var BarChart = React.createClass({
                             }
                         },
                         series: {
-                            pointWidth: 20,
+                            pointWidth: 22,
                             pointPadding: 0,
                             groupPadding: 0,
                             verticalAlign: 'top'

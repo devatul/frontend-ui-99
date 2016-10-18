@@ -111,20 +111,21 @@ var RowChallenged = React.createClass({
     },
 
     render() {
-        let { document, categories, confidentialities } = this.props,
+        let { document, categories, numberCheck, confidentialities, hide } = this.props,
             changedCategory = !isEqual(document.current_category, document.previous_category),
             changedConfidentiality = !isEqual(document.current_confidentiality, document.previous_confidentiality);
 
         return(
-            <tr className="opa" onChange={this.handleOnChange}>
-                <td>
+            <tr className={"opa " + ((numberCheck > 0 && !document.checked) ? 'inactive' : '')} onChange={this.handleOnChange}>
+                { (hide && hide.checkbox) ? null : <td>
                     <div className="checkbox-custom checkbox-default">
                         <input type="checkbox"
+                            id="checkbox"
                             className="checkbox-item-1"
                             checked={document.checked} />
                         <label></label>
                     </div>
-                </td>
+                </td> }
                 <td>
                     <i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i>
                 </td>
@@ -187,7 +188,7 @@ var RowChallenged = React.createClass({
                 </td>
                 <td className="opa-child fix-1st-pading-comment-table">
                     <div className="select-group">
-                        <textarea style={{minWidth: '160px'}} id="CommentBox" value={(document.comments ? document.comments : '')} className="form-control" placeholder="Challenge’s rationale details"></textarea>
+                        <textarea style={{minWidth: '160px'}} id="CommentBox" value={(document.reviewer_comment ? document.reviewer_comment : '')} className="form-control" placeholder="Challenge’s rationale details"></textarea>
                     </div>
                 </td>
                 <td>

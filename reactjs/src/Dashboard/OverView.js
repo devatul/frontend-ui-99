@@ -177,7 +177,7 @@ var OverView = React.createClass
         for(let i = categories.length - 1; i >= 0; i--) {
             categoryChart.data[i] = {
                 name: upperFirst(categories[i].name),
-                y: categories[i].total_classified_docs
+                y: categories[i].total_validated_docs
             };
         }
         //add languages
@@ -232,7 +232,7 @@ var OverView = React.createClass
         for( let i = confidentialities.length - 1; i >= 0; i-- ) {
             confidentialityChart.data[i] = {
                 name: upperFirst(confidentialities[i].name),
-                y: confidentialities[i].total_classified_docs
+                y: confidentialities[i].total_validated_docs
             };
         }
 

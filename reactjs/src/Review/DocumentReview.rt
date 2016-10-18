@@ -1,743 +1,344 @@
-<rt-require dependency="react-router/lib/Link" as="Link"/>
-<rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
+<rt-import name="Const" from="../Constant.js"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-<rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
-<rt-import name="ShowHide" from="../Insight/components/showhide"/>
+<rt-import name="SelectBox" from="../components/dathena/SelectBox"/>
+<rt-import name="table" from="../components/dathena/TableReview" />
+<rt-import name="Tab" from ="react-bootstrap/lib/Tab" />
+<rt-import name="Col" from="react-bootstrap/lib/Col" />
+<rt-import name="Row" from="react-bootstrap/lib/Row" />
+<rt-import name="Nav" from="react-bootstrap/lib/Nav" />
+<rt-import name="NavItem" from="react-bootstrap/lib/NavItem" />
+<rt-import name="Panel" from="../components/bootstrap/panel" />
+<rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar" />
+<rt-import name="Button" from="react-bootstrap/lib/Button" />
+<rt-import name="Table" from="react-bootstrap/lib/Table" />
+<rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup" />
+<rt-import name="Alert" from="../components/bootstrap/alert"/>
+<rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup" />
+<rt-import name="select2" from="../components/dathena/Select2" />
+<rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
+<rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
-<div>
-    <div class="container">
-        <div class="tabs tabs-primary">
-            <ul class="line_document_header">
-                <li class="dropdown">
-                    <a class="line_document review_title">My Review</a>
-                    <!-- <HelpButton
-                       classNote="overview_timeframe fix-overview-help-button"
-                        setValue="This summarises all the actions assigned to the user. Users must review each document of this section." /> -->
-                    <HelpButton
+<section>
+<div class="container">
+    <Row>
+        <Col md={12}>
+            <Panel.custom class="panel-has-child actions-panel">
+                <Panel.head>
+                    <h2 class="panel-title inline-block-item mr-sm">My Review
+                        <HelpButton
                             classMenu="fix-overview-help-button-table"
                             classIcon="overview_question_a help_question_a" setValue="This summarises all the actions assigned to the user. Users must review each document of this section."/>
-                </li>
-            </ul>
-            <div class="tab-content" rt-if="(this.state.Actions != null)">
-                <div class="row" rt-repeat="action in this.state.Actions" key="{actionIndex}" id="{'section_action_' + actionIndex}">
-                    <div class="col-md-12">
-                        <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">
-                            <header class="document_panel-heading panel-heading">
-                                <ul class="line_document_content_header">
-                                    <li>
-                                        <i class="fa {this.urgency(action.urgency)}" aria-hidden="true"></i>
-                                    </li>
-                                    <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize"> {action.category.name} - {action.confidentiality.name}</h2>
-                                    </li>
-                                    <li class="document_panel-title">
-                                        <!-- <HelpButton className="dropdown-file-info-holder"
-                                            classNote="overview_timeframe fix-overview-help-button"
-                                            setValue="All the documents in this section have been classified {action.category} with a Secret level of Confidentiality" /> -->
-                                            <HelpButton
-                                                classMenu="fix-overview-help-button-table"
-                                                classIcon="overview_question_a help_question_a"  setValue="All the documents in this section have been classified {action.category.name} with a Secret level of Confidentiality"/>
-                                    </li>
-                                    <li class="document_panel-title panel-actions-fix">
-                                        Language : <b>{ action.language.name}</b>
-                                    </li>
-                                </ul>
-                                <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
-                                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(actionIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#action{'_panel_' + actionIndex}"></a>
-                                </div>
-                            </header>
-                     <div class="panel-body nav-collapse collapse in" id="action{'_panel_' + actionIndex}" style="margin-top : 10px">
-                               <!--  <p class="document_note">
-                                    You have to review {action.docLength} documents in {action.category.name} Category of  {action.confidentiality.name} Confidentiality by latest {action.latest_date}
-                                </p> -->
-                                <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button
-                                        rt-if="(action.checkedNumber > 0)"
-                                        type="button" class="mb-md mr-xs btn btn-green"
-                                        onClick="(event)=>this.approveButon(actionIndex)">
-                                            Approve
-                                    </button>
-                                    <div
-                                        rt-if="(action.docLength == 0)"
-                                        class="alert alert-success">
-                                        <button onClick={this.alertClose} type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                        <strong>Well done, you have completed the classification review!</strong>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-{actionIndex}" role="grid" aria-describedby="datatable-default_info">
-                                            <thead>
-                                                <tr role="row" class="">
-                                                    <th style="width: 39px">
-                                                        <div class="checkbox-custom checkbox-primary">
-                                                            <input type="checkbox" class="checkbox-all-1" data-target="#groupReview" onChange="(event)=>this.checkAllButton(event, actionIndex)" checked="{action.checkedAll}">
-                                                            <label></label>
-                                                        </div>
-                                                    </th>
-                                                     <th class="review_note" style="width: 4vw;">Type
-                                                    </th>
-                                                    <th class="review_note" style="width: 18vw;">Document
+                    </h2>
+                </Panel.head>
+                <Panel.body>
+                    <Panel.custom
+                        rt-repeat="action in this.state.actionsReview"
+                        class="panel-bordered actions-panel">
+                        <Panel.head>
+                            <h2 class="panel-title inline-block-item mr-sm">
+                                <i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
+                                <span class="ml-md text-capitalize">{ action.category.name + ' - ' + action.confidentiality.name + ' '}</span>
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"
+                                    setValue="{'All the documents in this section have been classified ' + action.category.name + ' with a ' + action.confidentiality.name + ' level of Confidentiality.'}" />
+                            </h2>
+                            <div class="panel-actions my-actions-btn-group">
+                                <span>Language: <b>{action.language.name}</b></span>
+                                <button onClick="() => this.handleUndo(actionIndex, this.constructor.actions)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                            </div>
+                        </Panel.head>
+                        <Panel.body>
+                            <!--<p class="document_note">You have {action.documents.length - action.validateNumber} documents to review within  <span class="text-capitalize">{action.category.name}</span> category with <span class="text-capitalize">{action.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
+                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+
+                                <Button
+                                    rt-if="action.checkedNumber > 0"
+                                    onClick="() => this.handleApproveButton(actionIndex, this.constructor.actions)"
+                                    class="mb-md mr-xs btn btn-green approve-button"
+                                    bsClass="">
+                                    Approve
+                                </Button>
+
+                                <Alert bsStyle="success" open="{action.documents && action.documents.length > 0 && (action.validateNumber == action.documents.length)}">
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                </Alert>
+
+                                <Table class="review_table mb-none no-footer table-my-actions table-classification-width" responsive bordered striped>
+                                    <thead>
+                                        <tr role="row" class="">
+                                            <th class="fix-padding-th-checkbox">
+                                                <div class="checkbox-custom checkbox-primary">
+                                                    <input type="checkbox"
+                                                        class="checkbox-all-1"
+                                                        onChange="(event) => this.handleCheckAll(event, actionIndex, this.constructor.actions)"
+                                                        checked="{action.checkAll}">
+                                                    <label for="checkboxAllExample2"></label>
+                                                </div>
+                                            </th>
+                                            <th class="review_note fix-width">
+                                                Type
+                                            </th>
+                                            <th class="review_note">Document
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                                            </th>
+                                            <th class="review_note fix-max-width-category-confident">Proposed Category
+                                                <HelpButton className="dropdown-file-info-holder"
+                                                    classMenu="fix-overview-help-button-table"
+                                                    setValue="Category proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                            </th>
+                                            <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                                                <HelpButton
+                                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                    className="dropdown-file-info-holder"
+                                                    setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                                            </th>
+                                            <th class="text-center">Status 
+                                                <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                                                            setValue="This represent the status of the review for each file." />-->
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fix-td-checkbox">
+                                        <table.row rt-repeat=" document in action.documents "
+                                            document={document}
+                                            index="{documentIndex}"
+                                            key="{this.constructor.actions + '_' + actionIndex + '_' + documentIndex}"
+                                            categories={this.state.categories}
+                                            confidentialities={this.state.confidentialities}
+                                            onClick="{(event) => this.handleTableRowOnClick(event, actionIndex, documentIndex, this.constructor.actions)}"
+                                            onChange="{(event) => this.handleTableRowOnChange(event, actionIndex, documentIndex, this.constructor.actions)}"
+                                            numberChecked={action.checkedNumber} />
+                                    </tbody>
+                                </Table>
+                            </div>
+                        </Panel.body>
+                    </Panel.custom>
+                    <Panel.custom
+                        rt-repeat="challenge in this.state.challengedDocs"
+                        class="panel-bordered actions-panel">
+                        <Panel.head>
+                            <h2 class="panel-title inline-block-item mr-sm">
+                                <i class="fa fa-clock-o fix-size icon-danger" aria-hidden="true"></i>
+                                <span class="ml-md text-capitalize">{ challenge.category.name + ' - ' + challenge.confidentiality.name + ' '}</span>
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"
+                                    setValue="{'All the documents in this section have been classified ' + challenge.category.name + ' with a ' + challenge.confidentiality.name + ' level of Confidentiality.'}" />
+                            </h2>
+                            <div class="panel-actions my-actions-btn-group">
+                                <span>Language: <b>{challenge.language.name}</b></span>
+                                <button onClick="() => this.handleUndo(challengeIndex, this.constructor.challenge)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                            </div>
+                        </Panel.head>
+                        <Panel.body>
+                            <!--<p class="document_note">You have {action.documents.length - action.validateNumber} documents to review within  <span class="text-capitalize">{action.category.name}</span> category with <span class="text-capitalize">{action.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
+                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+
+                                <Button
+                                    rt-if="challenge.checkedNumber > 0"
+                                    onClick="() => this.handleApproveButton(challengeIndex, this.constructor.challenge)"
+                                    class="mb-md mr-xs btn btn-green approve-button"
+                                    bsClass="">
+                                    Approve
+                                </Button>
+
+                                <Alert bsStyle="success" open="{challenge.documents && challenge.documents.length > 0 && (challenge.validateNumber == challenge.documents.length)}">
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                </Alert>
+                                
+                                <table class="table-my-actions document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" role="grid" aria-describedby="datatable-default_info">
+                                    <thead>
+                                        <tr role="row" class="">
+                                            <th class="fix">
+                                                <div class="checkbox-custom checkbox-primary">
+                                                    <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.handleCheckAll(event, challengeIndex, this.constructor.challenge)" checked="{challenge.checkAll}">
+                                                    <label></label>
+                                                </div>
+                                            </th>
+                                            <th class="review_note">Type
+
+                                            </th>
+                                            <th class="my_review_note review_note">Document
+                                                    <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
+                                                        className="dropdown-file-info-holder"
+                                                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                                            </th>
+
+                                            <th class="review_note">Category
+                                                <HelpButton className="dropdown-file-info-holder"
+                                                    classNote="overview_timeframe fix-anomaly-help-button"
+                                                    setValue="Category proposed by Dathena 99." />
+                                            </th>
+                                            <th class="review_note">Confidentiality
+                                                <HelpButton className="dropdown-file-info-holder"
+                                                    classNote="overview_timeframe fix-anomaly-help-button"
+                                                    setValue="Confidentiality level proposed by Dathena." />
+                                            </th>
+                                            <th class="review_note review_note_r" style="width: initial">Coordinator's Comment
                                                         <HelpButton
-                                                            classMenu="fix-overview-help-button-table"
-                                                            className="dropdown-file-info-holder"
-                                                            setValue="This displays the name of each individual document, as it exists in its current state." />
-                                                    </th>
+                                                        classMenu="fix-overview-help-button-table"
+                                                        className="dropdown-file-info-holder"
+                                                        setValue="Comment of your coordinator to explain the reason of the rejection." />
+                                            </th>
+                                            <th class="review_note review_note_r">Comment
+                                                    <HelpButton
+                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                        className="dropdown-file-info-holder"
+                                                        setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
+                                            </th>
+                                            <th class="review_note" style="max-width: 120px;">Validation
 
-                                                    <th class="review_note" style="width: 20vw;">Proposed Category
-                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="fix-overview-help-button-table"
-                                                            setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
-                                                    </th>
-                                                    <th class="review_note" style="width: 20vw;">Proposed Confidentiality
-                                                            <HelpButton
-                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                                className="dropdown-file-info-holder"
-                                                                setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
-                                                    </th>
-                                                    <th class="text-center" style="max-width: 70px;">Status
-
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody >
-                                                <tr
-
-                                                    rt-repeat="doc in action.documents"
-                                                    key="{docIndex}"
-                                                    class="{(action.checkedNumber > 0 && doc.checked == false) ? 'inactive':''}">
-                                                    <td>
-                                                        <div class="checkbox-custom checkbox-default">
-                                                            <input type="checkbox" class="checkbox-item-1"  onChange="(event)=>this.onClickCheckbox(event, actionIndex, docIndex)" checked="{doc.checked}">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-
-                                                    <td class="text-center">
-                                                        <i class="{doc.icon}"></i>
-                                                    </td>
-                                                    <td class="text-left">
-
-                                                         <span
-                                                            class="text-italic file-name doc-path fix_docpath"
-                                                            data-toggle="modal"
-                                                            data-target="#previewModal"
-                                                            onClick="()=>this.setDocumentPreview(actionIndex, docIndex)"
-                                                            data-file-url="{doc.image_url}">
-                                                                <span class="file-name-1"
-                                                                    rel="tooltip"
-                                                                    data-toggle="tooltip"
-                                                                    data-original-title="{doc.name} ">
-                                                                    {doc.name}
-                                                                </span>
-                                                        </span>
-                                                        <InfoButton className="dropdown-file-info-holder-edit2">
-                                                            <li>Name: <b>{doc.name}</b></li>
-                                                            <li>Path: <span>/{doc.path}</span></li>
-                                                            <li>Owner: <b>{doc.owner}</b></li>
-                                                            <li>Creation Date: <b>{doc.creation_date}</b></li>
-                                                            <li>Modifitcation Date: <b>{doc.modification_date}</b></li>
-                                                            <li>Required Legal Retention until: <b>{doc.legal_retention_until}</b></li>
-                                                            <li>Confidentiality Label: <b>{doc.confidentiality_label}</b></li>
-                                                            <li>Number of Classification Challenge: <b> {doc.number_of_classification_challenge}</b></li>
-                                                        </InfoButton>
-                                                    </td>
-                                                    <td >
-                                                        <div class="select-group" style="height: 34px">
-                                                            <div class="selected-info">
-                                                                <div class="progress-striped light progress">
-                                                                    <div
-                                                                        class="progress-bar {doc.color} active progress-bar-striped"
-                                                                        role="progressbar"
-                                                                        aria-valuenow="{doc.confidence_level}"
-                                                                        aria-valuemin="0"
-                                                                        aria-valuemax="100"
-                                                                        style="width: {doc.confidence_level}%;">
-                                                                    </div>
-                                                                    <span class="progress-percentage" style="color: white">
-                                                                        ({doc.confidence_level}%)
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, actionIndex, docIndex)" value="{doc.category.name}">
-                                                                <option
-                                                                    rt-repeat="categories in this.state.categories"
-                                                                    key="{categoriesIndex}"
-                                                                    value="{categories.name}">
-                                                                    {categories.name}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td rt-scope="doc.current as current">
-                                                     <div class="select-group" style="height: 34px">
-                                                            <div class="selected-info">
-                                                                <div class="progress-striped light progress">
-                                                                    <div
-                                                                        class="progress-bar {doc.color} active progress-bar-striped"
-                                                                        role="progressbar"
-                                                                        aria-valuenow="{doc.confidence_level}"
-                                                                        aria-valuemin="0"
-                                                                        aria-valuemax="100"
-                                                                        style="width: {doc.confidence_level}%;">
-                                                                    </div>
-                                                                    <span class="progress-percentage" style= " color: white" >
-                                                                        ({doc.confidence_level}%)
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, actionIndex, docIndex)" value="{doc.confidentiality.name}">
-                                                              <option
-                                                                    rt-repeat="Confidential in this.state.confidentialities"
-                                                                    key="{ConfidentialIndex}"
-                                                                    value="{Confidential.name}">
-                                                                    {Confidential.name}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td >
-                                                         <a style="cursor: pointer"
-                                                            class="doc-check {(doc.status == 'accept' || doc.status == 'editing') ? 'validated' : '' }"
-                                                            onClick="(event)=>this.onClickValidationButton(event, actionIndex, docIndex)">
-
-                                                            <i  rt-if="(doc.status == 'normal')" class="fa {this.urgency(action.urgency)}" aria-hidden="true" style="font-size: 24px"></i>
-                                                            <i class="fa fa-check"
-                                                                aria-hidden="true"
-                                                                rt-props="(doc.status == 'editing') ? {style: { color: '#ffc200'}} : ''">
-                                                            </i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <table.RowChallenged
+                                            rt-repeat="document in challenge.documents"
+                                            key="{this.constructor.challenge + '_' + challengeIndex + '_' + documentIndex}"
+                                            document="{document}"
+                                            categories={this.state.categories}
+                                            confidentialities={this.state.confidentialities}
+                                            numberCheck="{challenge.checkedNumber}"
+                                            onChange="{(event) => this.handleTableRowOnChange(event, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onClick="{(event) => this.handleTableRowOnClick(event, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            />
+                                    </tbody>
+                                </table>
                             </div>
-                        </section>
-                    </div>
-                </div>
-                <!-- Challenged Documents -->
-                <div class="row" rt-repeat="challenged in this.state.ChallengedDocuments" key="{challengedIndex}">
-                    <div class="col-md-12">
-                        <section class="legal_secret panel panel-featured panel-featured-primary actions-panel">
-                            <header class="document_panel-heading panel-heading">
-                                <ul class="line_document_content_header">
-                                    <li>
-                                        <i class="fa {this.urgency(challenged.urgency)} challenged" aria-hidden="true"></i>
-                                    </li>
-                                    <li class="document_panel-title">
-                                        <h2 class="document_panel-title panel-title" style="text-transform: capitalize">  {challenged.category.name} - {challenged.confidentiality.name}</h2>
-                                    </li>
-                                    <li class="document_panel-title">
-
-                                            <!-- {(challenged.sla == null ) ?  challenged.category + ' - ' + challenged.confidentiality : challenged.sla} -->
-                                            <HelpButton
-                                                classMenu="fix-overview-help-button-table"
-                                                classIcon="overview_question_a help_question_a"  setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality."/>
-                                           <!--  <HelpButton className="dropdown-file-info-holder"
-                                            classNote="note_chart_content"
-                                            setValue="All the documents in this section have challenged back to you. They have been classified by your coordinator Legal/Compliance with a Banking Secrecy level of confidentiality." /> -->
-
-                                    </li>
-                                     <li class="document_panel-title panel-actions-fix">
-                                        Language : <b>{challenged.language.name}</b>
-                                    </li>
-                                </ul>
-
-                                <div class="panel-actions my-actions-btn-group collapse-stat-table fix-arrow-collapse-stat-table">
-                                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-                                    <!--<button onClick={this.endReviewHandle} class="mb-xs mr-xs btn btn-green btn-disabled btn-end-review">End Review</button>-->
-                                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapse" data-toggle="collapse" data-target="#challenged{'_panel_' + challengedIndex}"></a>
-                                </div>
-                            </header>
-                            <div class="panel-body nav-collapse collapse in" id="challenged{'_panel_' + challengedIndex}">
-                                <p class="document_note"></p>
-                               <!--  <p class="document_note">
-                                    Stan challenged classification of {challenged.documents.length - challenged.validateNumber} documents - You have to review it by latest 10th July
-                                </p> -->
-                                <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                    <button
-                                        rt-if="(challenged.checkedNumber > 0 && challenged.validateNumber < challenged.documents.length)"
-                                        type="button" class="mb-md mr-xs btn btn-green"
-                                        onClick="(event)=>this.approveButonChallenged(challengedIndex)">
-                                            Approve
-                                    </button>
-                                    <div
-                                        rt-if="(challenged.validateNumber == challenged.documents.length)"
-                                        class="alert alert-success">
-                                        <button onClick={this.alertClose} type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                        <strong>Well done, you have completed the classification review!</strong>
-                                    </div>
-                                    <div class="table-responsive">
-
-                                        <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-challenged-{challengedIndex}" role="grid" aria-describedby="datatable-default_info">
-                                            <thead>
-                                                <tr role="row" class="">
-                                                    <th class="fix">
-                                                        <div class="checkbox-custom checkbox-primary">
-                                                            <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
-                                                            <label></label>
-                                                        </div>
-                                                    </th>
-                                                    <th class="review_note">Type
-
-                                                    </th>
-                                                    <th class="my_review_note review_note">Document
-                                                            <HelpButton
-                                                                classMenu="fix-overview-help-button-table"
-                                                                className="dropdown-file-info-holder"
-                                                                setValue="This displays the name of each individual document, as it exists in its current state." />
-                                                    </th>
-
-                                                    <th class="review_note">Category
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="Category proposed by Dathena 99." />
-                                                    </th>
-                                                    <th class="review_note">Confidentiality
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="overview_timeframe fix-anomaly-help-button"
-                                                            setValue="Confidentiality level proposed by Dathena." />
-                                                    </th>
-                                                    <th class="review_note review_note_r">Coordinator's Comment
-                                                             <HelpButton
-                                                                classMenu="fix-overview-help-button-table"
-                                                                className="dropdown-file-info-holder"
-                                                                setValue="Comment of your coordinator to explain the reason of the rejection." />
-                                                    </th>
-                                                    <th class="review_note review_note_r">Comment
-
-                                                           <HelpButton
-                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                                className="dropdown-file-info-holder"
-                                                                setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
-                                                    </th>
-                                                    <th class="review_note" style="max-width: 120px;">Validation
-
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="opa" rt-repeat="docChall in challenged.documents" key="{docChallIndex}">
-                                                    <td>
-                                                        <div class="checkbox-custom checkbox-default">
-                                                            <input type="checkbox"
-                                                                class="checkbox-item-1"
-                                                                checked="{docChall.current.checked}"
-                                                                onChange="(event)=>this.onClickCheckboxChallenged(event, challengedIndex, docChallIndex)">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <i class="{docChall.icon}"></i>
-                                                    </td>
-                                                    <td class="text-left my_file-name">
-                                                        <span style="margin-left: 10px"
-                                                            class="text-italic file-name doc-path"
-                                                            data-toggle="modal"
-                                                            data-target="#previewModal1"
-                                                            onClick="()=>this.setChallengedPreview(challengedIndex, docChallIndex)"
-                                                            data-file-url="{docChall.image_url}">
-                                                            <span class="file-name-1"
-                                                                rel="tooltip"
-                                                                data-toggle="tooltip"
-                                                                data-original-title="{docChall.name}">
-                                                                {docChall.name}
-                                                            </span>
-                                                        </span>
-                                                        <InfoButton>
-                                                            <li>Name: <b>{docChall.name}<b/></li>
-                                                            <li>Path: {docChall.path}</li>
-                                                            <li>Owner: <b>{docChall.owner}</b></li>
-                                                            <li>Creation Date: <b>{docChall.creation_date}</b></li>
-                                                            <li>Modifitcation Date: <b>{docChall.modification_date}</b></li>
-                                                            <li>Required Legal Retention until: <b>{docChall.legal_retention_until}</b></li>
-                                                            <li>Confidentiality Label: <b>{docChall.confidentiality_label}</b></li>
-                                                            <li>Number of Classification Challenge: <b>{docChall.number_of_classification_challenge}</b></li>
-                                                        </InfoButton>
-                                                    </td>
-
-
-                                                    <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
-                                                        <div class="select-group">
-                                                            <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, challengedIndex, docChallIndex)" value="{current.category}">
-                                                              <option rt-repeat="category in this.state.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
-                                                            </select>
-
-                                                        </div>
-                                                    </td>
-                                                    <td class="vertical-top opa-child fix-1st-pading-comment-table" rt-scope="docChall.current as current">
-                                                        <div class="select-group">
-                                                            <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, challengedIndex, docChallIndex)" value="{current.confidential}">
-                                                              <option rt-repeat="Confidential in this.state.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
-                                                            </select>
-                                                          <!--   <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docChall.confidentialities[current.prevConfidential].name}</span> -->
-                                                          <span class="text-italic previous-status">Previous: {docChall.previous_confidentiality.name}</span>
-                                                        </div>
-
-                                                    </td>
-                                                    <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                                                      <!--   <span class={this.state.doc_path} style="margin-bottom: 5px;">Level of Confidentiality is too low for this type of document</span>
- -->
-
-
-                                                       <ShowHide content="{docChall && docChall.comment}" />
-
-                                                    </td>
-                                                    <td class="opa-child fix-1st-pading-comment-table">
-                                                        <div class="select-group">
-                                                            <textarea onChange="(event)=>this.onChangeCommentChallenged(event, challengedIndex, docChallIndex)" style="min-width: 160px;" class="form-control" placeholder="Challenge’s rationale details"></textarea>
-                                                        </div>
-                                                    </td>
-                                                    <td rt-scope="docChall.current as current">
-                                                        <!--<a href="#" class="challenge-btn validation-btn btn btn-default"><i class="fa fa-check"></i></a>-->
-                                                        <a style="cursor: pointer" class="challenge-btn validation-btn btn btn-default {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButtonChallenged(event, challengedIndex, docChallIndex)">
-                                                          <i class="fa fa-check {(current.status == 'accept') ? 'icon-success' : '' }{(current.status == 'editing') ? 'icon-danger' : ''}" aria-hidden="true"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!--Modal-->
-
-    <div id="previewModal" class="modal fade in" role="dialog" rt-if="(this.state.documentPreview != null)">
-      <div class="modal-dialog modal-preview">
-
-        <!-- Modal content-->
-        <div class="modal-content" rt-scope="this.state.documentPreview as docPreview; this.state.documentPreview.index as index">
-          <div class="modal-header">
-            <div class="row">
-                <div class="col-sm-4 modal-title">
-                    <i class="fa fa-search"></i>
-                    Document Preview
-                </div>
-                <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic" >{docPreview.name}</span><br>
-                    <span >Folder {this.cutPath(docPreview.path)}</span>
-                </div>
-                <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setDocumentPreview(index.actionIndex, index.docIndex + 1)">Go to Next Document</button>
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandle(index.actionIndex , index.docIndex)">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-
-                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-            </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-               <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-                    <thead>
-                        <tr role="row" class="">
-                            <th style="padding:10px 12px 0px 10px; width: 42px;">
-                                <div class="checkbox-custom checkbox-primary">
-                                    <input type="checkbox" class="checkbox-all-1" data-target="#table-my-actions-1">
-                                    <label></label>
-                                </div>
-                            </th>
-                             <th class="review_note">Type
-                            </th>
-                            <th class="my_review_note review_note">Document
-
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                     setValue="This displays the name of each individual document, as it exists in its current state." />
-                            </th>
-
-                            <th class="review_note">Proposed Category
-                                <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="Category proposed by Dathena 99." />
-                            </th>
-                            <th class="review_note">Proposed Confidentiality
-                                     <HelpButton1 className="r dropdown dropdown-file-info-holder inline-block-item" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix2 full-mobile" content="Confidentiality level proposed by Dathena."/>
-
-                            </th>
-                            <th class="text-center">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="">
-                            <td>
-                                <div class="checkbox-custom checkbox-default">
-                                    <input type="checkbox" class="checkbox-item-1" checked="{docPreview.checked}" onChange="(event)=>this.onClickCheckbox(event, index.actionIndex, index.docIndex)">
-                                    <label></label>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <i class="{docPreview.icon}"></i>
-                            </td>
-                            <td class="text-left">
-
-                                <span class="text-italic file-name doc-path" data-toggle="modal" data-target="#previewModal" data-file-url="{docPreview.image_url}">
-                                    <span class="file-name-1"
-                                        rel="tooltip"
-                                        data-toggle="tooltip"
-                                        data-original-title="{docPreview.name}">
-                                        {docPreview.name}
-                                    </span>
-                                </span>
-                                <InfoButton>
-                                    <li>Name: <b>{docPreview.name}</b></li>
-                                    <li>Path: {docPreview.path}</li>
-                                    <li>Owner: <b>{docPreview.owner}</b></li>
-                                    <li>Creation Date: <b>{docPreview.creation_date}</b></li>
-                                    <li>Modifitcation Date: <b>{docPreview.modification_date}</b></li>
-                                    <li>Required Legal Retention until: <b>{docPreview.legal_retention_until}</b></li>
-                                    <li>Confidentiality Label: <b>{docPreview.confidentiality_label}</b></li>
-                                    <li>Number of Classification Challenge: <b>{docPreview.number_of_classification_challenge}</b></li>
-                                </InfoButton>
-                            </td>
-
-
-                            <td rt-scope="docPreview.current as current">
-                                <div class="select-group">
-                                    <div class="selected-info">
-                                        <div class="progress progress-striped light">
-                                          <div class="progress-bar {docPreview.color} active progress-bar-striped" role="progressbar" aria-valuenow="{docPreview.confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%">
-                                          </div>
-                                          <span class="progress-percentage" style="color: white">({docPreview.confidence_level}%)</span>
-                                        </div>
-                                    </div>
-                                     <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeCategory(event, index.actionIndex, index.docIndex)" value={docPreview.category.name}>
-                                        <option
-                                            rt-repeat="categories in this.state.categories"
-                                            key="{categoriesIndex}"
-                                            value="{categories.name}">
-                                            {categories.name}
-                                        </option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td rt-scope="docPreview.current as current">
-                                <div class="select-group">
-                                    <div class="selected-info">
-                                        <div class="progress progress-striped light">
-                                          <div class="progress-bar {docPreview.color} active progress-bar-striped" role="progressbar" aria-valuenow="{docPreview.confidence_level}" aria-valuemin="0" aria-valuemax="100" style="width: {docPreview.confidence_level}%;">
-                                          </div>
-                                          <span class="progress-percentage" style="color: white">({docPreview.confidence_level}%)</span>
-                                        </div>
-                                    </div>
-                                    <select style="text-transform: capitalize" class ="form-control" onChange="(event)=>this.onChangeConfidential(event, index.actionIndex, index.docIndex)" value = {docPreview.confidentiality.name}>
-                                                              <!-- <option selected>{doc.confidentiality.name}</option> -->
-                                          <option
-                                                rt-repeat="Confidential in this.state.confidentialities"
-                                                key="{ConfidentialIndex}"
-                                                value="{Confidential.name}">
-                                                {Confidential.name}
-                                            </option>
-                                        </select>
-                                </div>
-                            </td>
-                            <td >
-                                <a style="cursor: pointer" class="doc-check {(docPreview.status == 'accept' || docPreview.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButton(event, docPreview.index.actionIndex, docPreview.index.docIndex)">
-                                  <i rt-if="(docPreview.status == 'normal')" class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
-                                  <i class="fa fa-check" aria-hidden="true" rt-props="(docPreview.status == 'editing') ? {style: { color: '#ffc200'}} : ''"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="file-preview mt-md">
-                <p>File Preview Content</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-<!--previewModal3 - challenged document-->
-
-    <div id="previewModal1" class="modal fade in" role="dialog">
-      <div class="modal-dialog modal-preview">
-
-        <!-- Modal content-->
-        <div class="modal-content" rt-if="this.state.challengedPreview != null" rt-scope="this.state.challengedPreview as docPreview; docPreview.index as index">
-          <div class="modal-header">
-            <div class="row">
-                <div class="col-sm-4 modal-title">
-                    <i class="fa fa-search"></i>
-                    Document Preview
-                </div>
-                <div class="col-sm-4 modal-info text-center">
-                    <span class="text-itatic" >{docPreview.name}</span><br>
-                    <span >Folder {this.cutPath(docPreview.path)}</span>
-                </div>
-                <div class="col-sm-4 modal-actions text-right">
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.setChallengedPreview(index.actionIndex, index.docIndex + 1,this.state.icon[index.docIndex + 1].type)">Go to Next Document</button>
-                    <button type="button" class="mb-xs mr-xs btn btn-green" onClick="()=>this.undoHandleChallenged()">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
-
-                    <button type="button" class="modal-button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-            </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-
-                <table class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
-                    <thead>
-                        <tr role="row" class="">
-                            <th style="padding: 10px 15px 10px 10px;" class="fix">
-                                <div class="checkbox-custom checkbox-primary">
-                                    <input type="checkbox" class="checkbox-all" data-target="#table-my-actions-3">
-                                    <label></label>
-                                </div>
-                            </th>
-                            <th class="review_note">Type
-
-                            </th>
-                            <th class="review_note">Document
-                                <!-- <HelpButton className="dropdown-file-info-holder"
-                                    classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="This displays the name of each individual document, as it exists in its current state." /> -->
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                    setValue="This displays the name of each individual document, as it exists in its current state." />
-                            </th>
-
-                            <th class="review_note">Category
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                    setValue="Category proposed by Dathena 99." />
-
-                            </th>
-                            <th class="review_note">Confidentiality
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                     setValue="Confidentiality level proposed by Dathena." />
-                            </th>
-                            <th class="review_note review_note_r">Coordinator's Comment
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                    setValue="Comment of your coordinator to explain the reason of the rejection" />
-                            </th>
-                            <th class="review_note review_note_r">Comment
-                                <HelpButton
-                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                    className="dropdown-file-info-holder"
-                                    setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
-
-                            </th>
-                            <th class="review_note" style="max-width: 100px;">Validation
-
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="opa">
-                            <td>
-                                <div class="checkbox-custom checkbox-default">
-                                    <input
-                                        type="checkbox"
-                                        class="checkbox-item-1"
-                                        checked="{docPreview.current.checked}"
-                                        onChange="(event)=>this.onClickCheckboxChallenged(event, index.actionIndex, index.docIndex)">
-                                    <label></label>
-                                </div>
-                            </td>
-                             <td class="text-center">
-                                <i class="{docPreview.icon}"></i>
-                            </td>
-                            <td class="text-left my_file-name">
-                                <span style="margin-left: 10px"
-                                    class="text-italic file-name doc-path"
-                                    data-toggle="modal"
-                                    data-target="#previewModal3"
-                                    data-file-url="{docPreview.image_url}">
-                                    <span class="file-name-1"
-                                        rel="tooltip"
-                                        data-toggle="tooltip"
-                                        data-original-title="{docPreview.name}">
-                                        {docPreview.name}
-                                    </span>
-                                </span>
-                                <InfoButton>
-                                    <li>Name: <b>{docPreview.name}</b></li>
-                                    <li>Path: {docPreview.path}</li>
-                                    <li>Owner: <b>{docPreview.owner}</b></li>
-                                    <li>Creation Date: <b>{docPreview.creation_date}</b></li>
-                                    <li>Modifitcation Date: <b>{docPreview.modification_date}</b></li>
-                                    <li>Required Legal Retention until: <b>{docPreview.legal_retention_until}</b></li>
-                                    <li>Confidentiality Label: <b>{docPreview.confidentiality_label}</b></li>
-                                    <li>Number of Classification Challenge: <b>{docPreview.number_of_classification_challenge}</b></li>
-                                </InfoButton>
-                            </td>
-                            <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
-                               <!--  <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
-                                      <option rt-repeat="category in docPreview.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
-                                    </select>
-
-                                </div> -->
-                                 <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control black" onChange="(event)=>this.onChangeCategoryChallenged(event, index.actionIndex, index.docIndex)" value="{current.category}">
-                                      <option rt-repeat="category in this.state.categories" key="{categoryIndex}" value="{categoryIndex}">{category.name}</option>
-                                    </select>
-
-                                </div>
-                            </td>
-                            <td class="vertical-top opa-child" rt-scope="docPreview.current as current">
-                                <!-- <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
-                                      <option rt-repeat="Confidential in docPreview.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
-                                    </select>
-                                    <span rt-if="current.prevConfidential != null" class="text-italic previous-status">Previous: {docPreview.confidentialities[current.prevConfidential].name}</span>
-                                </div> -->
-                                <div class="select-group">
-                                    <select style="text-transform: capitalize" class="form-control red challenge-confidentiality" onChange="(event)=>this.onChangeConfidentialChallenged(event, index.actionIndex, index.docIndex)" value="{current.confidential}">
-                                      <option rt-repeat="Confidential in this.state.confidentialities" key="{ConfidentialIndex}" value="{ConfidentialIndex}">{Confidential.name}</option>
-                                    </select>
-                                    <span class="text-italic previous-status">Previous: {docPreview.previous_confidentiality.name}</span>
-                                </div>
-                            </td>
-                            <td class="vertical-top document_2nd first-ch max-witdh-coordinator-comment">
-                                <ShowHide content="Level of Confidentiality is too low for this type of document"/>
-
-                            </td>
-                            <td class="opa-child fix-1st-pading-comment-table">
-                                <div class="select-group">
-                                    <textarea class="form-control" placeholder="Challenge’s rationale details"></textarea>
-                                </div>
-                            </td>
-                            <td rt-scope="docPreview.current as current">
-
-                                <a style="cursor: pointer" class="challenge-btn validation-btn btn btn-default {(current.status == 'accept' || current.status == 'editing') ? 'validated' : '' }" onClick="(event)=>this.onClickValidationButtonChallenged(event, index.actionIndex, index.docIndex)">
-                                  <i class="fa fa-check {(current.status == 'accept') ? 'icon-success' : '' }{(current.status == 'editing') ? 'icon-danger' : ''}" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="file-preview mt-md">
-                <p>File Preview Content</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+                        </Panel.body>
+                    </Panel.custom>
+                </Panel.body>
+            </Panel.custom>
+        </Col>
+    </Row>
 </div>
+<DocumentPreview
+    rt-scope="this.state.current as current; this.state[current.review][current.actionIndex] && this.state[current.review][current.actionIndex].documents[current.docIndex] as document"
+    open={this.state.openPreview}
+    document="{document}"
+    nextDocument="{() => this.handleNextDocumentName(current.actionIndex, current.docIndex, current.review)}"
+    undo="{() => this.handleUndo(current.actionIndex, current.review)}"
+    closeModal={this.closePreview}>
+<div class="table-responsive">
+    <table
+        rt-if="current.review === this.constructor.actions"
+        class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+            <tr role="row" class="">
+                <!--<th>
+                    <div class="checkbox-custom checkbox-primary">
+                        <input type="checkbox"
+                            class="checkbox-all-1"
+                            onChange={this.handleSelectAll}
+                            checked={this.state.checkBoxAll}>
+                        <label for="checkboxAllExample2"></label>
+                    </div>
+                </th>-->
+                <th class="review_note fix-width">Type
+                </th>
+                <th class="review_note doc-name">Document
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Category
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="Category proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                        setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                </th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <table.row
+                document="{document}"
+                key="{current.docIndex}"
+                categories={this.state.categories}
+                confidentialities={this.state.confidentialities}
+                onClick="{(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                onChange="{(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                hide="{{ checkbox: true }}"
+                index="{current.docIndex}" />
+        </tbody>
+    </table>
+    <table
+        rt-if="current.review === this.constructor.challenge"
+        class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+            <tr role="row" class="">
+                <!--<th class="fix">
+                    <div class="checkbox-custom checkbox-primary">
+                        <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
+                        <label></label>
+                    </div>
+                </th>-->
+                <th class="review_note">Type
 
+                </th>
+                <th class="my_review_note review_note">Document
+                        <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            className="dropdown-file-info-holder"
+                            setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
+
+                <th class="review_note">Category
+                    <HelpButton className="dropdown-file-info-holder"
+                        classNote="overview_timeframe fix-anomaly-help-button"
+                        setValue="Category proposed by Dathena 99." />
+                </th>
+                <th class="review_note">Confidentiality
+                    <HelpButton className="dropdown-file-info-holder"
+                        classNote="overview_timeframe fix-anomaly-help-button"
+                        setValue="Confidentiality level proposed by Dathena." />
+                </th>
+                <th class="review_note review_note_r">Coordinator's Comment
+                            <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            className="dropdown-file-info-holder"
+                            setValue="Comment of your coordinator to explain the reason of the rejection." />
+                </th>
+                <th class="review_note review_note_r">Comment
+                        <HelpButton
+                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                            className="dropdown-file-info-holder"
+                            setValue="Add a comment to justify your acceptation or your rejection of the challenge. " />
+                </th>
+                <th class="review_note" style="max-width: 120px;">Validation
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <table.RowChallenged
+                document="{document}"
+                key="{current.docIndex}"
+                categories={this.state.categories}
+                confidentialities={this.state.confidentialities}
+                hide="{{checkbox: true}}"
+                onChange="{(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onClick="{(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                />
+        </tbody>
+    </table>
+    <p>
+        <a href="{document && document.image_url}">{document && document.path}</a>
+    </p>
+</div>
+</DocumentPreview>
+</section>
