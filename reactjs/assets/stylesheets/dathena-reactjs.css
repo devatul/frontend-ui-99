@@ -2,7 +2,7 @@
     max-width: 170px;
 }
 
-.fix-1st-pading-comment-table {
+.table-my-actions > tbody > tr > td.fix-1st-pading-comment-table {
 	padding: 3px !important;
 }
 .center-padding-table-overview {
@@ -324,7 +324,11 @@ select.assigment-select.form-control {
 }
 
 .select-reviewers {
-    margin-top: -14px;
+    margin-top: -16px;
+}
+
+.select-reviewers .switch {
+    margin: 6px 0;
 }
 
 /* design show less comment */
