@@ -12,7 +12,7 @@
             <li class="dropdown">
                 <a class="toggle-button btn btn-default" id="showList" onClick={this.OnClick}><i class="fa fa-filter" aria-hidden="true"></i></a>
                 <div class="dropdown-backdrop-custom" style="display:none"></div>
-                <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md fix_filter_insight dd-right" >
+                <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right fix1" >
                 <ul class="filter-list list-unstyled pt-xs">
                     <li class="mb-sm">
                         <div class="form-group" id='dr'>
@@ -28,7 +28,7 @@
         </div>
     </header>
     <div rt-if="this.state.filterLabel.length > 0" style="position: absolute;
-    margin: 10px 0px 10px 15px;">
+    margin: 15px 0px 10px 15px;">
         <label class="pull-left mr-md">Filters:</label>
         <div class="pull-left filter-tags" style="text-transform: capitalize">
             <FilterLabel

@@ -1,6 +1,7 @@
-<rt-require dependency="react-router/lib/Link" as="Link"/>
-<rt-import name = " Input" from="./components/ValidateInput"/>
+
+<rt-import name = "Input" from="./components/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
 <div>
    <div class="bar_menu admin_header container">
@@ -32,10 +33,10 @@
 
                   <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+               <ToggleButton setDefault="open" setTarget="#toggle1" />
             </div>
         </header>
-        <div class="panel-body">
+        <div class="panel-body" id="toggle1">
           <div class="row">
             <div class="col-md-6">
               <form class="form-horizontal">
@@ -90,10 +91,10 @@
 
                   <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 2" onClick="{this.editButton.bind(this,2,this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <ToggleButton setDefault="open" setTarget="#toggle2" />
             </div>
         </header>
-        <div class="panel-body">
+        <div class="panel-body" id="toggle2">
           <div class="row">
             <div class="col-xs-12">
               <form class="form-horizontal">
@@ -231,7 +232,7 @@
 
                   <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 3" onClick="{this.editButton.bind(this,3,this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <ToggleButton setDefault="open" setTarget="#block1_step1" />
             </div>
         </header>
         <div class="panel-body" id="block1_step1">

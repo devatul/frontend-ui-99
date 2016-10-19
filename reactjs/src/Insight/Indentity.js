@@ -182,29 +182,6 @@ var Indentity = React.createClass({
             data: dataChart
         }
     },
-    getRickInsight() {
-
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/insight/risk/',
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('data', data)
-                this.setState({ rickInsight: data })
-
-            }.bind(this),
-            error: function(xhr, error) {
-                /* if (xhr.status === 401) {
-                     browserHistory.push('/Account/SignIn');
-                 }*/
-            }.bind(this)
-        });
-    },
     upperFirst(value) {
         let sp = _.split(value, ' ');
         let rt = ''
@@ -272,9 +249,6 @@ var Indentity = React.createClass({
     },
     formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    },
-    componentWillMount() {
-        this.getRickInsight()
     },
     componentDidMount() {
         this.getData();

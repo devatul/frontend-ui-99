@@ -1,65 +1,74 @@
-#err{
-	color:#B94A48;
-	text-align: center;
+#err {
+    color: #B94A48;
+    text-align: center;
 }
-.err{
-  color:#B94A48;
-}
-.has-error{
-  border-color: #B94A48;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-}
-.has-error:focus {
-  border-color: #ccc;
 
+.err {
+    color: #B94A48;
 }
+
+.has-error {
+    border-color: #B94A48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.has-error:focus {
+    border-color: #ccc;
+}
+
 #submitForm .error {
-  color:#B94A48;
-  border-color: #B94A48;
+    color: #B94A48;
+    border-color: #B94A48;
 }
+
 #submitForm .error:focus {
-  border-color: #ccc;
+    border-color: #ccc;
 }
-#messageUnAgree{
-	color:#B94A48;
+
+#messageUnAgree {
+    color: #B94A48;
 }
+
 .loading-dot {
     display: inline-block;
     font-size: 1.6em;
     font-weight: 600;
     opacity: 0.7;
     font-style: italic;
-     margin-top: 15px;
+    margin-top: 15px;
 }
+
 .my_header .navbar-default.nav-custom .navbar-nav > li > a.active {
     color: #34495e;
     text-decoration: underline;
 }
-.my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li a.active{
+
+.my_header .navbar-default.nav-custom .navbar-nav > li .dropdown-menu li a.active {
     background-color: #349da2;
 }
+
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
-
     display: block;
 }
+
 .widget-panel .widget-chart:not(.in-progress) .loading-dot {
-
     display: block;
 }
 
-.dropdown-menu.dd-md.custom-dd{
+.dropdown-menu.dd-md.custom-dd {
     width: 565px;
 }
 
-.dropdown-menu.dd-md.custom-dd .filter-list{
-  text-align: left;
+.dropdown-menu.dd-md.custom-dd .filter-list {
+    text-align: left;
 }
 
 .user-selection-titles {
     font-size: 1.6rem;
     font-weight: 500;
 }
+
 .table-my-actions .doc-path-2 {
     display: inline-block;
     max-width: 200px;
@@ -67,6 +76,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .widget-panel .widget-chart .chart-disabled-overlay {
     width: 100%;
     height: 95%;
@@ -76,6 +86,7 @@
     position: absolute;
     background-color: rgba(255, 255, 255, 0.8);
 }
+
 .toggle-button {
     border-radius: 50%;
     width: 40px;
@@ -89,15 +100,18 @@
     padding-top: 1px;
     padding-left: 0.5px;
 }
+
 .help_guide_sub .filter-tags-userassign {
     padding-top: 10px;
     padding-left: 15px;
 }
+
 .filter-tags-userassign .filter-label-assign .filter-remove-assign {
     color: #fff;
     margin-right: 5px;
     cursor: pointer;
 }
+
 .filter-tags-userassign .filter-label-assign {
     margin-right: 5px;
     font-size: 100%;
@@ -105,87 +119,109 @@
     display: inline-block;
     margin-bottom: 5px;
 }
+
 #userReviewChart {
     height: auto;
     margin-top: 12px;
 }
+
 .center-padding {
     text-align: left;
     padding-left: 95px !important;
-
 }
+
 .table-my-actions > tbody > tr > td {
     vertical-align: middle;
     position: relative;
     /* padding: 10px !important; */
 }
+
+
 /*.vertical-top.document_2nd.first-ch {
      min-width: 160px;
     max-width: 150px;
 }*/
 
-.table-challenge thead th.fix:first-child{
+.table-challenge thead th.fix:first-child {
     width: 40px;
 }
+
 
 /*.dataTables_wrapper table thead th {
     padding-right: 17px !important;
 }*/
+
 .anomaly-icon.fix-icon-user {
     background-position: -21px -25px;
 }
+
 .anomaly-icon-fix {
     background-size: 346px;
 }
-.anomaly-icon.fix-icon-window{
+
+.anomaly-icon.fix-icon-window {
     background-position: -23px -74px
 }
-.anomaly-icon.fix-icon-folder{
+
+.anomaly-icon.fix-icon-folder {
     background-position: -19px -143px;
 }
- .legend.fix {
+
+.legend.fix {
     left: 14px;
 }
+
 .fix-anomaly-help-button {
     color: #000011;
     font-weight: normal;
     width: 270px !important;
     min-width: 250px;
 }
-.dd-md.fix{
+
+.dd-md.fix {
     width: 20vw
 }
-.
-.dd-md.fix1{
+
+. .dd-md.fix1 {
     width: 24vw
 }
-.dd-md.fix2{
+
+.dd-md.fix2 {
     width: 21vw
 }
+
 .help_question_content.has-arrow.fixLeft {
     margin-left: -295px
 }
+
 .dropdown-menu.has-arrow.fix_notification {
     margin-left: -24px;
     margin-top: -24px;
 }
-.dropdown_menu.has-arrow.icon_help_noti{
+
+.dropdown_menu.has-arrow.icon_help_noti {
     margin-left: -130px;
 }
-.dropdown_menu.dd-md.icon_help_noti{
-        width: 20vw;
+
+.dropdown_menu.dd-md.icon_help_noti {
+    width: 20vw;
 }
-.dropdown_menu.has-arrow.icon_help_noti:after, .dropdown-menu.has-arrow.icon_help_noti:before{
-        left: -148px;
+
+.dropdown_menu.has-arrow.icon_help_noti:after,
+.dropdown-menu.has-arrow.icon_help_noti:before {
+    left: -148px;
 }
+
 .dropdown-file-info-holder.fix_myteam {
     top: -12px;
     left: 3px;
     float: none;
 }
+
 .help_timeframe.has-arrow.fix_helpbutton_myteam {
-        margin-top: 4px;
+    margin-top: 4px;
 }
+
 .fix_filter {
     position: absolute;
     top: 100%;
@@ -207,44 +243,80 @@
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
+
 .dropdown-file-info-holder.fix_infoButton {
     float: left;
     margin-right: 3px;
 }
+
 .dropdown-menu.dd-md.fix_infoButton {
-        width: 41vw;
+    width: 41vw;
 }
+
 .fix_text_infoButton {
     float: right;
 }
-.help_timeframe.has-arrow.fix_text_infoButton{
+
+.help_timeframe.has-arrow.fix_text_infoButton {
     margin-left: -8px;
 }
+
 .fa-2x {
     font-size: 1.5em;
 }
-.fix_whitespace{
-  white-space: normal;
-  display: inline-block;
+
+.fix_whitespace {
+    white-space: normal;
+    display: inline-block;
 }
-.dropdown-menu.dd-md.fix_filter_insight{
+
+.dropdown-menu.dd-md.fix_filter_insight {
     width: 21vw;
 }
+
 .dropdown-menu.fix_ulFilter_insight {
     left: 25px
 }
+
 .doc-path.fix_docpath {
     max-width: 170px;
 }
+
 .panel-actions-fix {
     right: 150px;
     position: absolute;
     top: 15px;
 }
+
 .fix_center p {
-    margin-top : 10px;
+    margin-top: 10px;
 }
+
 .not-active {
-   pointer-events: none;
-   cursor: default;
+    pointer-events: none;
+    cursor: default;
+}
+
+@media (min-width: 997px) {
+    .dropdown-menu.dd-md.dd-right {
+        width: 21vw;
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (max-width: 996px) {
+    .dropdown-menu.dd-md.dd-right.fix1 {
+        width: 30vw;
+        right: 0;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-menu.dd-md.dd-right.fix1 {
+        width: 50vw;
+        right: 0;
+        margin-left: auto;
+    }
 }

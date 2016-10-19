@@ -87,10 +87,8 @@ import javascript from '../script/javascript.js'
     floor(number){
         return Math.floor(number)
     },
-    componentWillMount(){
-        this.getData();
-    },
 	componentDidMount(){
+        this.getData();
 		javascript();
 		javascriptOver();
 	},

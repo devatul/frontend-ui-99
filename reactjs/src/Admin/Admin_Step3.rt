@@ -1,6 +1,7 @@
 <rt-import name = "Input" from="./components/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-require dependency="react-router/lib/Link" as="Link"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
 <div>
 
@@ -34,7 +35,7 @@
 
                   <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <ToggleButton setDefault="open" setTarget="#block1_step3" />
             </div>
             </header>
             <div class="panel-body add-detail-section" id="block1_step3">
@@ -100,7 +101,7 @@
 
                   <button class="btn btn-green" rt-if="this.state.complete >= 2" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <ToggleButton setDefault="open" setTarget="#block2_step3" />
                 </div>
             </header>
             <div class="panel-body add-detail-section" id="block2_step3">
@@ -268,7 +269,7 @@
 
                   <button class="btn btn-green" rt-if="this.state.complete >= 3" onClick = "{this.editButton.bind(this,3, this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
 
-                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <ToggleButton setDefault="open" setTarget="#block3_step3" />
                 </div>
             </header>
             <div class="panel-body add-detail-section" id="block3_step3">

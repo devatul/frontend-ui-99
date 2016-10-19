@@ -1,4 +1,5 @@
 <rt-import name = " Input" from="./components/ValidateInput"/>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <div>
 
@@ -93,10 +94,10 @@
                     <button class="btn btn-green btn-edit-step">Edit</button>
                     <button class="btn btn-green btn-save-step">Save</button>
                   </div>
-                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                    <ToggleButton setDefault="open" setTarget="#block1_step5" />
                 </div>
             </header>
-            <div class="panel-body summary-section">
+            <div class="panel-body summary-section" id="block1_step5">
               <div class="table-responsive">
                 <h4>1. Document Reviewer</h4>
                 <table class="table table-no-border table-align-left">
@@ -292,10 +293,11 @@
                     <button class="btn btn-green btn-edit-step">Edit</button>
                     <button class="btn btn-green btn-save-step">Save</button>
                   </div>
-                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+
+                    <ToggleButton setDefault="open" setTarget="#block2_step5" />
                 </div>
             </header>
-            <div class="panel-body summary-section">
+            <div class="panel-body summary-section" id="block2_step5">
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                   <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
@@ -608,10 +610,11 @@
                       <button class="btn btn-green btn-edit-step">Edit</button>
                       <button class="btn btn-green btn-save-step">Save</button>
                     </div>
-                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+
+                    <ToggleButton setDefault="open" setTarget="#block3_step5" />
                 </div>
             </header>
-            <div class="panel-body summary-section">
+            <div class="panel-body summary-section" id="block3_step5">
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                   <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
@@ -780,10 +783,11 @@
                       <button class="btn btn-green btn-edit-step">Edit</button>
                       <button class="btn btn-green btn-save-step">Save</button>
                     </div>
-                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+
+                    <ToggleButton setDefault="open" setTarget="#block4_step5" />
                 </div>
             </header>
-            <div class="panel-body summary-section">
+            <div class="panel-body summary-section" id="block4_step5">
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                   <div class="table-responsive">

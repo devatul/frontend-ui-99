@@ -65,9 +65,8 @@ var DataLost = React.createClass({
         });
     },
 
-    componentWillMount() {
+    componentDidMount() {
         this.getDataLoss()
-            //javascript();
     },
     render: template
 });
