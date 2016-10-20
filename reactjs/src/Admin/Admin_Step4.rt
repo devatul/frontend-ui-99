@@ -30,12 +30,15 @@
                     classMenu="overview_timeframe fix-overview-help-button"
                     setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents.” (May need to add more info here or a link to the wiki, as this is a more complex thing to complete)." />
             </h2>
-            <div class="panel-actions">
+            <div class="panel-actions" style="margin-right: 25px">
                 <div class="btn-group-admin">
                   <button class="btn btn-green btn-edit-step">Edit</button>
                   <button class="btn btn-green btn-save-step">Save</button>
                 </div>
-                <ToggleButton setDefault="open" setTarget="#block_step4" />
+
+            </div>
+             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block1_step1" />
             </div>
         </header>
         <div class="panel-body add-detail-section" id="block_step4">

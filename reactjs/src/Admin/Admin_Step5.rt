@@ -89,13 +89,16 @@
           <section class="panel panel-featured panel-featured-primary panel-bordered">
             <header class="panel-heading">
                 <h2 class="panel-title">Service Level Agreement</h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
                   <div class="btn-group-admin">
                     <button class="btn btn-green btn-edit-step">Edit</button>
                     <button class="btn btn-green btn-save-step">Save</button>
                   </div>
-                    <ToggleButton setDefault="open" setTarget="#block1_step5" />
+
                 </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block1_step5" />
+                 </div>
             </header>
             <div class="panel-body summary-section" id="block1_step5">
               <div class="table-responsive">
@@ -288,14 +291,15 @@
           <section class="panel panel-featured panel-featured-primary panel-bordered">
             <header class="panel-heading">
                 <h2 class="panel-title">Technology</h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
                   <div class="btn-group-admin">
                     <button class="btn btn-green btn-edit-step">Edit</button>
                     <button class="btn btn-green btn-save-step">Save</button>
                   </div>
-
-                    <ToggleButton setDefault="open" setTarget="#block2_step5" />
                 </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block2_step5" />
+                 </div>
             </header>
             <div class="panel-body summary-section" id="block2_step5">
               <div class="row">
@@ -605,14 +609,17 @@
           <section class="panel panel-featured panel-featured-primary panel-bordered">
             <header class="panel-heading">
                 <h2 class="panel-title">Team</h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
                     <div class="btn-group-admin">
                       <button class="btn btn-green btn-edit-step">Edit</button>
                       <button class="btn btn-green btn-save-step">Save</button>
                     </div>
 
-                    <ToggleButton setDefault="open" setTarget="#block3_step5" />
+
                 </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block3_step5" />
+            </div>
             </header>
             <div class="panel-body summary-section" id="block3_step5">
               <div class="row">
@@ -778,12 +785,13 @@
           <section class="panel panel-featured panel-featured-primary panel-bordered">
             <header class="panel-heading">
                 <h2 class="panel-title">Data Scientist</h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
                     <div class="btn-group-admin">
                       <button class="btn btn-green btn-edit-step">Edit</button>
                       <button class="btn btn-green btn-save-step">Save</button>
                     </div>
-
+                </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                     <ToggleButton setDefault="open" setTarget="#block4_step5" />
                 </div>
             </header>

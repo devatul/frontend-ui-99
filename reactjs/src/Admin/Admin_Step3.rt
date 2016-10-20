@@ -31,11 +31,14 @@
                     classMenu="overview_timeframe fix-overview-help-button"
                     setValue="Users will need to define the data repository(s) that will be scanned by 99. Repositories are usually folders." />
                 </h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
 
                   <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
 
-                <ToggleButton setDefault="open" setTarget="#block1_step3" />
+
+            </div>
+             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block1_step3" />
             </div>
             </header>
             <div class="panel-body add-detail-section" id="block1_step3">
@@ -97,11 +100,13 @@
                     classMenu="overview_timeframe fix-overview-help-button"
                     setValue="Define the details of each member of the team and select the permission levels that will be applied to each individual team member." />
                 </h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
 
                   <button class="btn btn-green" rt-if="this.state.complete >= 2" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
 
-                <ToggleButton setDefault="open" setTarget="#block2_step3" />
+                </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block2_step3" />
                 </div>
             </header>
             <div class="panel-body add-detail-section" id="block2_step3">
@@ -265,11 +270,14 @@
                             classMenu="overview_timeframe fix-overview-help-button"
                             setValue="." />
                 </h2>
-                <div class="panel-actions">
+                <div class="panel-actions" style="margin-right: 25px">
 
                   <button class="btn btn-green" rt-if="this.state.complete >= 3" onClick = "{this.editButton.bind(this,3, this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
 
-                <ToggleButton setDefault="open" setTarget="#block3_step3" />
+
+                </div>
+                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block3_step3" />
                 </div>
             </header>
             <div class="panel-body add-detail-section" id="block3_step3">

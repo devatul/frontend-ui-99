@@ -31,11 +31,14 @@
                 classMenu="overview_timeframe fix-overview-help-button"
                 setValue="99 will attempt to access the root folder paths provided to ensure that the file path is correct, and 99 has the correct permissions to access the root folder and its associated sub directories." />
         </h2>
-      <div class="panel-actions">
+      <div class="panel-actions" style="margin-right: 25px">
 
           <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
 
-        <ToggleButton setDefault="open" setTarget="#block1" />
+
+    </div>
+     <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+            <ToggleButton setDefault="open" setTarget="#block1" />
     </div>
   </header>
   <div class="panel-body add-detail-section" id="block1">
@@ -85,12 +88,14 @@
                 classMenu="overview_timeframe fix-overview-help-button"
                 setValue="99 will attempt to access the root folder paths provided to ensure that the file path is correct, and 99 has the correct permissions to access the root folder and its associated sub directories." />
         </h2>
-        <div class="panel-actions">
+        <div class="panel-actions" style="margin-right: 25px">
 
               <button class="btn btn-green" rt-if="this.state.complete >= 2" onClick = "{this.editButton.bind(this,2, this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
 
-            <ToggleButton setDefault="open" setTarget="#block2" />
         </div>
+         <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block2" />
+            </div>
   </header>
   <div class="panel-body add-detail-section" id="block2">
     <div class="row detail-row folder-block" rt-repeat="fd in this.state.add_Folder">
@@ -152,12 +157,13 @@
                 classMenu="overview_timeframe fix-overview-help-button"
                 setValue="As part of the email validation process, 99 requires a successful test email to be sent in order to confirm that the server path that has been provided is operational, and a successful link from 99 has been established." />
         </h2>
-         <div class="panel-actions">
+         <div class="panel-actions" style="margin-right: 25px">
 
               <button class="btn btn-green" rt-if="this.state.complete >= 3" onClick = "{this.editButton.bind(this,3, this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
-
-            <ToggleButton setDefault="open" setTarget="#block3" />
         </div>
+         <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block3" />
+            </div>
   </header>
   <div class="panel-body add-detail-section" id="block3">
 
@@ -281,12 +287,15 @@
                 classMenu="overview_timeframe fix-overview-help-button"
                 setValue="99 will attempt to establish a connection with the stated HDP server, testing connectivity and that the correct permissions have been applied to provided 99 with the necessary permissions to undertake the scan." />
         </h2>
-        <div class="panel-actions">
+        <div class="panel-actions" style="margin-right: 25px">
 
           <button class="btn btn-green" rt-if="this.state.complete >= 4" onClick = "{this.editButton.bind(this,4, this.state.readOnly3)}">{this.state.readOnly3 == true ? 'Edit' : 'Save'}</button>
 
-        <ToggleButton setDefault="open" setTarget="#block4" />
+
     </div>
+     <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                    <ToggleButton setDefault="open" setTarget="#block4" />
+            </div>
   </header>
   <div class="panel-body add-detail-section" id="block4">
       <div class="row detail-row" rt-repeat="ser in this.state.add_Server">
