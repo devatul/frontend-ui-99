@@ -579,17 +579,20 @@ var MenuBar = React.createClass
     },
     
     getscanResult() {
-        makeRequest({
-            path: 'api/scan/',
-            success: (data) => {
-                let { scanResult } = this.state,
-                    updateResult = update(scanResult, {
-                        $set: data
-                    });
-                debugger
-                this.setState({ scanResult: updateResult, shouldUpdate: true });
-            }
-        });  
+        if(sessionStorage.getItem('dataScan')) {
+            this.setState({ scanResult: JSON.parse(localStorage.getItem('dataScan')), shouldUpdate: true })
+        }
+        // makeRequest({
+        //     path: 'api/scan/',
+        //     success: (data) => {
+        //         let { scanResult } = this.state,
+        //             updateResult = update(scanResult, {
+        //                 $set: data
+        //             });
+        //         debugger
+        //         this.setState({ scanResult: updateResult, shouldUpdate: true });
+        //     }
+        // });  
     },
 	 render:template
 });

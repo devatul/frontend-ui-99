@@ -23,17 +23,15 @@ module.exports = {
 	progressValue: {
 		level1: 30,
 		level2: 50
-	}
-	,
-	iconCategories:
-	[
-		{ name:"Accounting/Tax", class:'fa-calculator'},
-		{ name:"Client/Customer", class:'fa-users'},
-		{ name:"Corporate Entity", class:'fa-university'},
-		{ name:"Employee", class:'fa-male'},
-		{ name:"Legal/Compliance", class:'fa-balance-scale'},
-		{ name:"Transaction", class:'fa-usd'}
-	],
+	},
+	icons: {
+		accounting: { name: "Accounting/Tax", class:'fa-calculator'},
+		client: { name: "Client/Customer", class:'fa-users'},
+		corporate: { name: "Corporate Entity", class:'fa-university'},
+		employee: { name: "Employee", class:'fa-male'},
+		legal: { name: "Legal/Compliance", class:'fa-balance-scale'},
+		transaction: { name: "Transaction", class:'fa-usd'}
+	},
 	urgency: [
 		{ name: "low",  class: ""},
 		{ name: "high", class: "fa-clock-o only" },

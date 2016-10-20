@@ -4,7 +4,7 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
-import Constant from '../Constant.js';
+import { icons } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
 import { orderByIndex } from '../utils/function'
 import $, { JQuery } from 'jquery';
@@ -19,29 +19,36 @@ var OverView = React.createClass
                 categoryLanguage: [],
                 confidentiality: {},
                 doctypes: {}
-            }
+            },
+            loading: 0
 		};
 	},
 
-    componentWillMount() {
-
-        //this.startScan();
+    xhr: {
+        getScan: null
     },
 
 	componentDidMount() {
         javascriptTodo();
-        //if(this.state.scan.result.scan_status != Constant.scan.IS_NO_SCAN) {
-            this.getScanResult();
-        //}
+        this.setLoading();
+        this.xhr.getScan = this.getScanResult();
                       
   	},
+
+    componentWillUnmount() {
+        if(this.xhr.getScan && this.xhr.getScan.abort) {
+            this.xhr.getScan.abort();
+        }
+
+        this.xhr = null;
+    },
 
     shouldComponentUpdate(nextProps, nextState) {
         var { scan, dataChart, configChart } = this.state,
             { categoryLanguageChart, confidentiality, doctypes } = configChart,
             nextConfig = nextState.configChart;
-
-        return !isEqual(scan.result, nextState.scan.result) || !isEqual( configChart, nextConfig );
+            debugger
+        return this.state.loading != nextState.loading || !isEqual(scan.result, nextState.scan.result) || !isEqual( configChart, nextConfig );
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -49,18 +56,6 @@ var OverView = React.createClass
             result = this.state.scan.result;
 
         if(!isEqual( result, prevResult )) {
-            var { iconCategories } = Constant
-
-            forEach(result.categories, (val, index) => {
-                //debugger
-                if( val.name == iconCategories[index].name ) {
-                    //val.class = "";
-                    val.class = iconCategories[index].class;
-                    //debugger
-                }
-                //debugger
-            })
-
             this.updateChart( result, prevResult );
         }
     },
@@ -78,8 +73,34 @@ var OverView = React.createClass
             }
         })
     },
+    setLoading() {
+        let delay = 0;
+        if(this.state.loading < 100) {
+            delay = setInterval(() => {
+                let { loading } = this.state;
+                this.setState({ loading: ++loading })
+                clearInterval(delay)
+                this.setLoading()
+            },0.5);
+        }
+    },
+
+    checkLoadingToSetState(state, data) {
+        let delay = 0;
+        if(this.state.loading < 100) {
+            delay = setInterval(() => {
+                clearInterval(delay)
+                this.checkLoadingToSetState(state, data)
+            }, 100)
+        } else {
+            if(data) {
+                this.setState({ [state]: data, loading: 100 });
+            }
+        }
+    },
+
     getScanResult(){
-        makeRequest({
+        return makeRequest({
             path: 'api/scan/',
             success: (data) => {
                 let confidentialities = data.confidentialities;
@@ -89,9 +110,12 @@ var OverView = React.createClass
                 let setResult = update(this.state.scan, {
                     result: { $set: data }
                 });
+
+                localStorage.setItem('dataScan', JSON.stringify(data)); 
                 console.log('data', data);
                 debugger
-                this.setState({ scan: setResult });
+                this.checkLoadingToSetState('scan', setResult);
+                
             }
         })
     },
@@ -266,6 +290,27 @@ var OverView = React.createClass
         }
 
         return doctypesChart;
+    },
+
+    renderIcon(name) {
+        name = name.toLowerCase();
+
+        switch(name) {
+            case icons.accounting.name.toLowerCase():
+                return icons.accounting.class;
+            case icons.client.name.toLowerCase():
+                return icons.client.class;
+            case icons.corporate.name.toLowerCase():
+                return icons.corporate.class;
+            case icons.employee.name.toLowerCase():
+                return icons.employee.class;
+            case icons.legal.name.toLowerCase():
+                return icons.legal.class;
+            case icons.transaction.name.toLowerCase():
+                return icons.transaction.class;
+            default:
+                return icons.corporate.class;
+        }
     },
 
     handleFilter: function(bodyRequest) {

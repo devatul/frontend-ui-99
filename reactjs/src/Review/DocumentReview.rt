@@ -19,6 +19,7 @@
 <rt-import name="select2" from="../components/dathena/Select2" />
 <rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
+<rt-import name="ProgressLabel" from="../components/dathena/progress-label" />
 
 <section>
 <div class="container">

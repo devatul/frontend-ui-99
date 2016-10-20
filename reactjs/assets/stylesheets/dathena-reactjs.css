@@ -410,3 +410,68 @@ select.assigment-select.form-control {
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     min-height: 110px;
 }
+
+/* progress lable */
+
+.progress-label-container {
+    background-color: #fff;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    z-index: 999;
+}
+
+.progress-label-container .progress-example {
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    top: 45%;
+    left: 50%;
+    z-index: 999;
+    background-color: transparent;
+}
+
+.loading-label {
+    display: block;
+    line-height: 65px;
+    margin-left: -5px;
+    padding-top: 60%;
+    color: #c6c6c6;
+    font-weight: bold;
+}
+
+.loading-label-2 {
+    position: absolute;
+    z-index: 999;
+    margin-top: 85px;
+    margin-left: -25px;
+    text-align: center;
+    width: 100px;
+    font-weight: bold;
+}
+
+.loading-label-2 .pls {
+    color: #7fbdc0;
+}
+
+.progress-label-container .label-1 {
+    top: 0;
+    left: 0;
+}
+.progress-label-container .label-2 {
+    top: 6px;
+    left: 6px;
+}
+.progress-label-container svg {
+    position: absolute;
+}
+
+.loading-backdrop-custom {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 990;
+    background-color: rgba(255, 255, 255, 0.9);
+}
