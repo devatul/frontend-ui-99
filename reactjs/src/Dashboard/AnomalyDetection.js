@@ -284,7 +284,7 @@ var AnomalyDetection = React.createClass({
             });
         });
 
-        $('.anomaly-radial').each(function() {
+        /*$('.anomaly-radial').each(function() {
             var innerChart = $(this).find('.anomaly-radial-inner');
             var innerChartValue = parseInt(innerChart.attr('data-value'));
             var outerChart = $(this).find('.anomaly-radial-outer');
@@ -307,7 +307,7 @@ var AnomalyDetection = React.createClass({
                 roundCorner: true,
                 displayNumber: false
             });
-        });
+        });*/
 
 
         var data = [{
