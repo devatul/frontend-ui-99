@@ -1,9 +1,10 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/HelpButton"/>
 <rt-import name="Anomaly" from="../Insight/components/anomalyStateSelect"/>
+<rt-import name="TableAnomaly" from = "../components/dathena/TableAnomaly"/>
 
 <section>
-    <div class="container">
+    <div class="container" onClick = {this.hideAll}>
       <section class="panel panel-featured panel-featured-primary panel-bordered">
         <header class="panel-heading">
             <h2 class="panel-title">Anomaly Overview</h2>
@@ -285,88 +286,15 @@
                   </div>
                   <div class="col-md-8 filter-state">
                     Display:
-                    <a href="#">All</a> -
-                    <a href="#"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
-                    <a href="#"><span class="anomaly-state investigation"></span> Under Investigation </a> -
-                    <a href="#"><span class="anomaly-state true"></span> True Positive </a> -
-                    <a href="#"><span class="anomaly-state false"></span> False Positive </a>
+                    <a href="javascript:;" onClick="{this.filterTable.bind(this,0)}">All</a> -
+                    <a href="javascript:;" onClick="{this.filterTable.bind(this,1)}"><span class="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                    <a href="javascript:;" onClick="{this.filterTable.bind(this,2)}"><span class="anomaly-state investigation"></span> Under Investigation </a> -
+                    <a href="javascript:;" onClick="{this.filterTable.bind(this,3)}"><span class="anomaly-state true"></span> True Positive </a> -
+                    <a href="javascript:;" onClick="{this.filterTable.bind(this,4)}"><span class="anomaly-state false"></span> False Positive </a>
                   </div>
                 </div>
-
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th class="text-left">Windows User Account</th>
-                        <th class="text-left">Document at Risk</th>
-                        <th class="text-left">Confidentiality</th>
-                        <th class="text-left">Folder at Risk</th>
-                        <th class="text-left">Security in Fault</th>
-                        <th>Review Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span>1</span></td>
-                        <td class="text-left"><span>Jack.Gilford</span></td>
-                        <td class="text-left"><span>62</span></td>
-                        <td class="text-left"><span>Banking Secrecy. Confidential</span></td>
-                        <td class="text-left"><span>8</span></td>
-                        <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative" onClick="{this.clickAnomaly.bind(this,1)}">
-                          <span class="anomaly-state selected {this.state.display_anomaly[1] != null ?  this.state.display_anomaly[1] : 'true'}" data-state="true"></span>
-                          <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 1">
-                              <Anomaly onChange = {this.changeAnomaly} number = 1 />
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span>2</span></td>
-                        <td class="text-left"><span>Judith.McConnell</span></td>
-                        <td class="text-left"><span>34</span></td>
-                        <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="text-left"><span>5</span></td>
-                        <td class="text-left"><span>.ADCompliance_RW</span></td>
-                        <td class="relative" onClick="{this.clickAnomaly.bind(this,2)}">
-                          <span class="anomaly-state selected {this.state.display_anomaly[2] != null ?  this.state.display_anomaly[2] : 'false'}" data-state="false"></span>
-                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 2">
-                                <Anomaly onChange = {this.changeAnomaly} number = 2 />
-                            </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span>3</span></td>
-                        <td class="text-left" class="text-left"><span>Farley.Granger</span></td>
-                        <td class="text-left"><span>21</span></td>
-                        <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="text-left"><span>5</span></td>
-                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative" onClick="{this.clickAnomaly.bind(this,3)}">
-                          <span class="anomaly-state selected {this.state.display_anomaly[3] != null ?  this.state.display_anomaly[3] : 'investigation'}" data-state="investigation"></span>
-                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 3">
-                                <Anomaly onChange = {this.changeAnomaly} number = 3 />
-                            </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span>4</span></td>
-                        <td class="text-left"><span>Sid.Haig</span></td>
-                        <td class="text-left"><span>21</span></td>
-                        <td class="text-left"><span>Banking Secrecy</span></td>
-                        <td class="text-left"><span>5</span></td>
-                        <td class="text-left"><span>.ADCompliance_RW,ADCo.</span></td>
-                        <td class="relative" onClick="{this.clickAnomaly.bind(this,4)}">
-                          <span class="anomaly-state selected {this.state.display_anomaly[4] != null ?  this.state.display_anomaly[4] : 'not-reviewed'}" data-state="not-reviewed"></span>
-                            <div id="anomalyStateSelect" rt-if="this.state.check_anomaly == 4">
-                                <Anomaly onChange = {this.changeAnomaly} number = 4 />
-                            </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
+                <TableAnomaly hide = {this.state.hideReview} filter={this.state.filterTable}/>
+ -->
                 <div class="extra-block">
                   <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line1')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
                   <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>

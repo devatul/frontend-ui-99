@@ -9,8 +9,22 @@ var StateSelect = React.createClass({
 
         change: PropTypes.func
     },
-     handleClick(value){
-         this.props.onChange(value, this.props.number);
+    getInitialState(){
+        return{
+            display : 'none'
+        }
+
+    },
+    componentDidUpdate(prevProps , prevState){
+        if (this.props.show != prevProps.show) {
+            let value = this.props.show == null ? 'none' :  this.props.show
+            this.setState({display : value})
+        }
+    },
+    handleClick(value){
+        this.setState({display : 'none'})
+        this.props.onChange(value, this.props.number);
+
     },
     componentDidMount(){
       $('body').on('mouseover', '.anomaly-state-select .anomaly-state', function(){
@@ -27,18 +41,14 @@ var StateSelect = React.createClass({
                 $(this).parents('.anomaly-state-select').find('.current-state').html('');
 
             });
-             /*$('body').on('click', '.anomaly-state-select .anomaly-state', function(){
-                var parent = $(this).parents('td');
-                $(this).addClass('selected');
-                parent.html($(this));
-            });*/
-
 
     },
 
     render(){
+        debugger
+
         return(
-            <div className="anomaly-state-select"  style={{'display': 'block', 'left': '90%'}}>
+            <div className="anomaly-state-select"  style={{'display': this.state.display, 'left': '90%'}}>
                 <div className="states">
                   <span className="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed" onClick={()=>this.handleClick('not-reviewed')}></span>
                   <span className="anomaly-state investigation" data-state="investigation" data-label="Under Investigation" onClick={()=>this.handleClick('investigation')}></span>

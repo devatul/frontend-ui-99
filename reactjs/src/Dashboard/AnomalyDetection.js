@@ -25,8 +25,16 @@ var AnomalyDetection = React.createClass({
             },
             anomaly_rick: {},
             check_anomaly: 0,
-            display_anomaly: [null]
+            display_anomaly: [null],
+            hideReview : false,
+            filterTable : 0
         }
+    },
+    hideAll(){
+        this.setState({hideReview : true})
+    },
+    filterTable(value){
+        this.setState({filterTable : value})
     },
     /*shouldComponentUpdate(nextProps , nextState){
         if(this.state.styleShow != nextState.styleShow){
@@ -50,6 +58,9 @@ var AnomalyDetection = React.createClass({
     componentWillMount() {
         this.getAnomaylyRick()
     },
+ /*   componentDidMount() {
+        this.getAnomaylyRick()
+    },*/
     changeStyle(value) {
         debugger
         var style = update(this.state, {

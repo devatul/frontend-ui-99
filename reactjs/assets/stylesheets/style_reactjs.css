@@ -298,7 +298,7 @@
 }
 
 @media (min-width: 997px) {
-    .dropdown-menu.dd-md.dd-right {
+    .dropdown-menu.dd-md.dd-right.fix1 {
         width: 21vw;
         right: 0;
         left: auto;
