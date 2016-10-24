@@ -15,7 +15,7 @@
 					<div class="form-group mb-lg">
 						<label>Username</label>
 						<div class="input-group input-group-icon">
-							<input name="username" id="username" class="form-control input-md" type="text" value={this.state.email} onChange={this.emailChange} class="form-control input-md" />
+							<input name="username" id="username" class="form-control input-md" type="text" value={this.state.email} onChange={this.emailChange} class="form-control input-md" autofocus/>
 							<span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-user"></i>
@@ -26,11 +26,11 @@
 
 					<div class="form-group mb-lg">
 						<div class="clearfix">
-							<label class="pull-left">Password</label>
-							<Link to="/Account/recoverPassword" class="pull-right">Lost Password?</Link>
+							<label for="password" class="pull-left">Password</label>
+							<Link to="/Account/recoverPassword" class="pull-right" tabindex="-1">Lost Password?</Link>
 						</div>
 						<div class="input-group input-group-icon">
-							<input name="password" id="password" type="password" value={this.state.password} onChange={this.passwordChange}  class="form-control input-md"/>
+							<input name="password" id="password" type="password" value={this.state.password} onChange={this.passwordChange} class="form-control input-md" tabindex="0"/>
 							<span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-lock"></i>
@@ -44,13 +44,13 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="checkbox-custom checkbox-default">
-								<input id="isRemember" name="isRemember" value={this.state.isRemember} onChange={this.isRememberChange} type="checkbox"/>
+								<input id="isRemember" name="isRemember" value={this.state.isRemember} onChange={this.isRememberChange} type="checkbox" tabindex="0"/>
 								<label for="isRemember">Remember Me</label>
 							</div>
 						</div>
 						<div class="col-sm-4 text-right">
-							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green hidden-xs">Sign In</button>
-							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green btn-block btn-lg visible-xs mt-lg">Sign In</button>
+							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green hidden-xs" tabindex="0">Sign In</button>
+							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green btn-block btn-lg visible-xs mt-lg" tabindex="0">Sign In</button>
 						</div>
 					</div>
 
