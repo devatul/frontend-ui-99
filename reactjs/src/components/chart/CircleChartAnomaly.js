@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import HelpButton from '../dathena/HelpButton'
+import 'jquery'
 
 var CircleChart = React.createClass({
     displayName: 'LiquidMeter',
@@ -28,7 +29,7 @@ var CircleChart = React.createClass({
 
 
     draw() {
-            debugger
+
             var innerChart = $('#' + this.props.id).find('.anomaly-radial-inner');
            /* var innerChartValue = parseInt(innerChart.attr('data-value'));*/
             var outerChart = $('#' + this.props.id).find('.anomaly-radial-outer');

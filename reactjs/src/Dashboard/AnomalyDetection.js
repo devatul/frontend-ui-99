@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './AnomalyDetection.rt'
 import update from 'react/lib/update'
-import Constant from '../Constant.js';
+import Constant from '../Constant.js'
 import _ from 'lodash'
+import  'jquery'
 
 var AnomalyDetection = React.createClass({
     getInitialState() {
@@ -62,7 +63,7 @@ var AnomalyDetection = React.createClass({
         this.getAnomaylyRick()
     },*/
     changeStyle(value) {
-        debugger
+
         var style = update(this.state, {
             styleList: {
                 [value]: { $set: 'block' }
@@ -130,7 +131,7 @@ var AnomalyDetection = React.createClass({
         }
     },
     changeAnomaly(value, number) {
-        debugger
+
         /* var anomaly_arr = []
          anomaly_arr[number] = value*/
         var updateAnomaly = update(this.state, {
@@ -143,9 +144,9 @@ var AnomalyDetection = React.createClass({
     },
 
     componentDidMount() {
-        $('body').on('click', function() {
+       /* $('body').on('click', function() {
                 $('#anomalyStateSelect').hide()
-            })
+            })*/
             /*
                         $('body').on('click', '.anomaly-state.selected', function(){
                             var parent = $(this).parent();
@@ -189,7 +190,7 @@ var AnomalyDetection = React.createClass({
 
         // CHART
 
-        var anomalyChartData = [{
+     /*   var anomalyChartData = [{
             xTitle: 'Anomaly Occurence',
             yTitle: 'Document',
             data: [{ y: 6, color: '#27C57F' }, { y: 8, color: '#EB9428' }, { y: 14, color: '#E1605B' }, { y: 12, color: '#EB9428' }, { y: 18, color: '#E1605B' }, { y: 21, color: '#E1605B' }, { y: 23, color: '#E1605B' }, { y: 22, color: '#E1605B' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }]
@@ -282,7 +283,7 @@ var AnomalyDetection = React.createClass({
                     data: anomalyChartData[i].data
                 }]
             });
-        });
+        });*/
 
         /*$('.anomaly-radial').each(function() {
             var innerChart = $(this).find('.anomaly-radial-inner');

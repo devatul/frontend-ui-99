@@ -24,7 +24,7 @@ module.exports = React.createClass({
         };
     },
     getDataPage1(data) {
-        debugger
+
         console.log(data)
         let updateData = update(this.state, {
             data : {
@@ -34,17 +34,17 @@ module.exports = React.createClass({
         this.setState(updateData)
     },
     getDataPage2(data) {
-        debugger
+
         console.log(data)
         this.setState({ data_step2: data })
     },
     getDataPage3(data) {
-        debugger
+
         console.log(data)
         this.setState({ data_step3: data })
     },
     getDataPage4(data) {
-        debugger
+
         console.log(data)
         this.setState({ data_step4: data })
     },
@@ -54,7 +54,7 @@ module.exports = React.createClass({
         this.setState({ step: value })
     },
     nextStep(value) {
-        debugger
+
         this.setState({ step: value })
         console.log(this.state.step)
     },

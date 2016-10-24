@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
+import $ from 'jquery'
 
 var NumberUser = React.createClass({
 	 getInitialState: function() {
@@ -49,7 +50,7 @@ var NumberUser = React.createClass({
     },
 
     onClick(value){
-        debugger
+
         var updateOpen = update(this.state , {
             open : {$set : ! value}
         })
@@ -78,7 +79,7 @@ var NumberUser = React.createClass({
         var newIdArr = [];
         var className = this.state.clicked ? 'active' : 'no-active';
         console.log('data',this.props.data)
-        debugger
+
             _.forEach(this.props.data, function(obj, index) {
 
             var newID = 'radio' + index;

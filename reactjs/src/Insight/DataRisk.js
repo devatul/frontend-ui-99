@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './DataRisk.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import $ from 'jquery'
+import 'jquery'
 import Constant from '../Constant.js'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
@@ -39,7 +39,7 @@ import javascript from '../script/javascript.js'
         });
     },
     handleFilter: function(bodyRequest) {
-        debugger
+
         /* let dataChart = _.cloneDeep(this.state.dataChart)*/
         let value = bodyRequest.number_users;
         console.log('bodyRequest', bodyRequest)
@@ -66,7 +66,7 @@ import javascript from '../script/javascript.js'
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                debugger
+
                 console.log('data', data)
                 this.setState({dataRisk : data})
                /* this.setState({ rickInsight: data })*/

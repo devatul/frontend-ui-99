@@ -6,714 +6,676 @@
 
 <section>
     <div class="container" onClick = {this.hideAll}>
-      <section class="panel panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-            <h2 class="panel-title">Anomaly Overview</h2>
-        </header>
-        <div class="panel-body pb-none">
-          <div class="row">
-          <!-- Code API Anomaly Review-->
-           <!--  <div class="col-md-4" rt-repeat = "rick in this.state.anomaly_rick" >
-              <section class="panel" key="rickIndex">
-                <div class="panel-body {this.getRickType(rick.name).color} widget-panel insight-panel">
-                  <h4 class="widget-title">{ this.upperFirst(rick.name) }
-                       <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                    setValue="{this.getRickType(rick.name).info}" />
+        <section class="panel panel-featured panel-featured-primary panel-bordered">
+            <header class="panel-heading">
+                <h2 class="panel-title">Anomaly Overview</h2>
+            </header>
+            <div class="panel-body pb-none">
+                <div class="row">
+                    <!-- Code API Anomaly Review-->
+                    <!--  <div class="col-md-4" rt-repeat = "rick in this.state.anomaly_rick" >
+                      <section class="panel" key="rickIndex">
+                        <div class="panel-body {this.getRickType(rick.name).color} widget-panel insight-panel">
+                          <h4 class="widget-title">{ this.upperFirst(rick.name) }
+                               <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
+                                            setValue="{this.getRickType(rick.name).info}" />
 
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
+                          </h4>
+                          <div class="widget-summary">
+                              <div class="widget-summary-col">
+                                  <div class="summary">
+                                      <div class="info">
+                                          <strong class="amount">138</strong>
+                                      </div>
+                                  </div>
                               </div>
                           </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div> -->
-             <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Access Rights Anomaly
-
-                        <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"  setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
-
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary widget-panel insight-panel">
-                  <h4 class="widget-title">Data Repository Anomaly
-                     <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"   setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."/>
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">99</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Client Data Access Anomaly
-                        <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"   setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as Client."/>
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">12</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                  <h4 class="widget-title">Users at Risk
-                        <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">1.4k</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Documents Risk
-
-                         <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"   setValue="This details the number of document that are involved in anomalies."/>
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div class="col-md-4">
-              <section class="panel">
-                <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-                  <h4 class="widget-title">Active Directory Group at Risk
-                     <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
-                                    setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
-                  </h4>
-                  <div class="widget-summary">
-                      <div class="widget-summary-col">
-                          <div class="summary">
-                              <div class="info">
-                                  <strong class="amount">138</strong>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-          <h2 class="panel-title">Identity and Access Management Anomaly
-            <HelpButton
-                classMenu="fix-overview-help-button-table"
-                classIcon="overview_question_a help_question_a"   setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
-            </h2>
-        </header>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-3">
-             <div class="block-header row">
-                  <div class="col-md-5" style="margin-left: 3px">
-                    <h4 class="anomaly-title ">User - Client Data Access Anomaly
-                        <div class="fix_whitespace">
-                                  <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on user perspective."/>
                         </div>
-
-                                    <!-- <HelpButton1 type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/> -->
-                    </h4>
-                  </div>
-                </div>
-                 <Circle id = 'chart_1' value_inner= 50  value_outer = 40 className = "anomaly-icon anomaly-icon-fix fix-icon-user"/>
-            </div>
-            <div class="col-md-9">
-              <div class="anomaly-block" style="margin-top: 50px">
-
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>User with Anomaly</th>
-                        <th>Confidentiality at Risk</th>
-                        <th>Folder at Risk</th>
-                        <th>Active Directory at Risk</th>
-                        <th>User Access Right Accuracy
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="text-big">65</span></td>
-                        <td><span class="text-normal">Banking Secrecy</span></td>
-                        <td><span class="text-big">3</span></td>
-                        <td><span class="text-big">2</span></td>
-                        <td><span class="text-big text-light-green">75,47%</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-big">23</span></td>
-                        <td class="text-left"><span class="text-normal"  style="margin-left : 25px">Confidential</span></td>
-                        <td><span class="text-big">5</span></td>
-                        <td><span class="text-big">1</span></td>
-                        <td><span class="text-big text-light-green">67,14%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Total Anomaly</th>
-                        <th>Client Data at Risk</th>
-                        <th>Security Settings at Risk</th>
-                        <th>User Client Data Access Anomaly Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">1,4 k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows User Account</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Documents</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">3</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows Active Directory Group</span>
-                        </td>
-                        <td class="td-chart">
-                            <High id_hight = "highChart_1"/>
-                         <!--  <div class="anomaly-chart"></div> -->
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-              </div>
-              <div class="anomaly-block" >
-                 <TableAnomaly />
-                <!-- <div class="extra-block" style="display : {this.state.styleShow.line1}">
-                  <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick= "{this.changeStyle.bind(this, 'line1')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
-                </div>
-                <div style="display : {this.state.styleList.line1}">
-                    <TableAnomaly />
-                    <div class="extra-block">
-                      <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line1')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
-                      <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
-                      <a href="#" class="pull-right btn btn-green">Extract</a>
-                    </div>
-                </div> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-lg">
-           <div class="block-header row" >
-                  <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
-                    <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
-                    <div class="fix_whitespace">
-                        <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
-                        </div>
-                    </h4>
-                  </div>
-                </div>
-            <div class="col-md-3">
-              <Circle id = 'chart_2' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-window" />
-            </div>
-            <div class="col-md-9">
-              <div class="anomaly-block" style="margin-top: 50px">
-
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>User with Anomaly</th>
-                        <th>Confidentiality at Risk</th>
-                        <th>Folder at Risk</th>
-                        <th>Active Directory at Risk</th>
-                        <th>User Access Right Accuracy
-
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="text-big">52</span></td>
-                        <td><span class="text-normal">Banking Secrecy</span></td>
-                        <td><span class="text-big">3</span></td>
-                        <td><span class="text-big">76</span></td>
-                        <td><span class="text-big text-light-green">75,89%</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-big">102</span></td>
-                        <td class="text-left"><span class="text-normal" style="margin-left : 25px">Confidential</span></td>
-                        <td><span class="text-big">5</span></td>
-                        <td><span class="text-big">54</span></td>
-                        <td><span class="text-big text-light-green">56,57%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Total Anomaly</th>
-                        <th>Document at Risk</th>
-                        <th>Total Users at Risk</th>
-                        <th>Anomaly Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">154</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows Active Directory Group</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Documents</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">3</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows Users Account</span>
-                        </td>
-                        <td class="td-chart">
-                          <div class="anomaly-chart"></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-              </div>
-              <div class="anomaly-block" >
-                <!-- <div class="extra-block" style="display : {this.state.styleShow.line2}">
-                  <a href=" javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick ="{this.changeStyle.bind(this, 'line2')}"><i class="fa fa-caret-right mr-xs"></i>Show details</a>
-                </div>
-                <div style="display : {this.state.styleList.line2}"> -->
-                    <TableAnomaly />
-                    <!-- <div class="extra-block">
-                     <a href="javascript:;" class="details-toggle" data-toggle="collapse" data-target="#demo" onClick="{this.showLess.bind(this, 'line2')}"><i class="fa fa-caret-right mr-xs"></i>Show less</a>
-                      <span class="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
-                      <a href="#" class="pull-right btn btn-green">Extract</a>
+                      </section>
                     </div> -->
-                <!-- </div> -->
-              </div>
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+                                <h4 class="widget-title">Access Rights Anomaly
+                                    <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"  setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">138</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-secondary widget-panel insight-panel">
+                                <h4 class="widget-title">Data Repository Anomaly
+                                <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"   setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."/>
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">99</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
+                                <h4 class="widget-title">Client Data Access Anomaly
+                                    <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"   setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as Client."/>
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">12</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
+                                <h4 class="widget-title">Users at Risk
+                                    <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">1.4k</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
+                                <h4 class="widget-title">Documents Risk
+                                    <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"   setValue="This details the number of document that are involved in anomalies."/>
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">138</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="panel">
+                            <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
+                                <h4 class="widget-title">Active Directory Group at Risk
+                                    <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
+                                        setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
+                                </h4>
+                                <div class="widget-summary">
+                                    <div class="widget-summary-col">
+                                        <div class="summary">
+                                            <div class="info">
+                                                <strong class="amount">138</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+        <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+            <header class="panel-heading">
+              <h2 class="panel-title">Identity and Access Management Anomaly
+                <HelpButton
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
+                </h2>
+            </header>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3">
+                 <div class="block-header row">
+                      <div class="col-md-5" style="margin-left: 3px">
+                        <h4 class="anomaly-title ">User - Client Data Access Anomaly
+                            <div class="fix_whitespace">
+                                      <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on user perspective."/>
+                            </div>
+                        </h4>
+                      </div>
+                    </div>
+                     <Circle id = 'chart_1' value_inner= 50  value_outer = 40 className = "anomaly-icon anomaly-icon-fix fix-icon-user"/>
+                </div>
+                <div class="col-md-9">
+                  <div class="anomaly-block" style="margin-top: 50px">
 
-          <div class="row mt-lg">
-            <div class="col-md-3">
-            <div class="block-header row">
-                  <div class="col-md-5" style="margin-left:8px">
+                    <div class="table-responsive">
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>User with Anomaly</th>
+                            <th>Confidentiality at Risk</th>
+                            <th>Folder at Risk</th>
+                            <th>Active Directory at Risk</th>
+                            <th>User Access Right Accuracy
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><span class="text-big">65</span></td>
+                            <td><span class="text-normal">Banking Secrecy</span></td>
+                            <td><span class="text-big">3</span></td>
+                            <td><span class="text-big">2</span></td>
+                            <td><span class="text-big text-light-green">75,47%</span></td>
+                          </tr>
+                          <tr>
+                            <td><span class="text-big">23</span></td>
+                            <td class="text-left"><span class="text-normal"  style="margin-left : 25px">Confidential</span></td>
+                            <td><span class="text-big">5</span></td>
+                            <td><span class="text-big">1</span></td>
+                            <td><span class="text-big text-light-green">67,14%</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>Total Anomaly</th>
+                            <th>Client Data at Risk</th>
+                            <th>Security Settings at Risk</th>
+                            <th>User Client Data Access Anomaly Trend</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">1,4 k</span>
+                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Windows User Account</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">88</span>
+                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Documents</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">3</span>
+                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Windows Active Directory Group</span>
+                            </td>
+                            <td class="td-chart">
+                                <High id_hight = "highChart_1"/>
+                             <!--  <div class="anomaly-chart"></div> -->
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
 
-                    <h4 class="anomaly-title">User - Access Right Anomaly
-                     <div class="fix_whitespace">
-                      <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"   setValue=" This details the access rights anomaly."/>
-                        </div>
-
-                    </h4>
+                  </div>
+                  <div class="anomaly-block" >
+                     <TableAnomaly />
                   </div>
                 </div>
-              <div class="anomaly-radial">
-                <Circle id = 'chart_3' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-user" />
               </div>
-            </div>
-            <div class="col-md-9" style="margin-top: 50px">
-              <div class="anomaly-block">
 
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>User Anomaly</th>
-                        <th>Confidentiality at Risk</th>
-                        <th>Folder at Risk</th>
-                        <th>Active Directory at Risk</th>
-                        <th>User Access Right Accuracy
-
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="text-big">830</span></td>
-                        <td><span class="text-normal">Secret</span></td>
-                        <td><span class="text-big">132</span></td>
-                        <td><span class="text-big">54</span></td>
-                        <td><span class="text-big text-light-green">99,25%</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-big">2,1k</span></td>
-                        <td><span class="text-normal">Confidential</span></td>
-                        <td><span class="text-big">804</span></td>
-                        <td><span class="text-big">1470</span></td>
-                        <td><span class="text-big text-light-green">75,89%</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-big">170</span></td>
-                        <td><span class="text-normal">Internal</span></td>
-                        <td><span class="text-big">454</span></td>
-                        <td><span class="text-big">54</span></td>
-                        <td><span class="text-big text-light-green">56,57%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Total Anomaly</th>
-                        <th>Document at Risk</th>
-                        <th>Total Active Directory Group at Risk</th>
-                        <th>Access Right Anomaly Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">3,1k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows User Account</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Documents</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">130</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Active Directory Group</span>
-                        </td>
-                        <td class="td-chart">
-                          <div class="anomaly-chart"></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="anomaly-block">
-                    <TableAnomaly />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-          <h2 class="panel-title">Data Architecture Risk Management
-            <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies for all the documents and for client data." />
-          </h2>
-        </header>
-        <div class="panel-body">
-
-          <div class="row">
-            <div class="col-md-3">
-            <div class="block-header row">
-                  <div class="col-md-5" style="margin-left: 3px">
-                    <h4 class="anomaly-title">Document Repository Anomaly
+              <div class="row mt-lg">
+               <div class="block-header row" >
+                      <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
+                        <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
                         <div class="fix_whitespace">
                             <HelpButton
-                                classMenu="fix-overview-help-button-table"
-                                classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
-                        </div>
-                    </h4>
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
+                            </div>
+                        </h4>
+                      </div>
+                    </div>
+                <div class="col-md-3">
+                  <Circle id = 'chart_2' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-window" />
+                </div>
+                <div class="col-md-9">
+                  <div class="anomaly-block" style="margin-top: 50px">
+
+                    <div class="table-responsive">
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>User with Anomaly</th>
+                            <th>Confidentiality at Risk</th>
+                            <th>Folder at Risk</th>
+                            <th>Active Directory at Risk</th>
+                            <th>User Access Right Accuracy
+
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><span class="text-big">52</span></td>
+                            <td><span class="text-normal">Banking Secrecy</span></td>
+                            <td><span class="text-big">3</span></td>
+                            <td><span class="text-big">76</span></td>
+                            <td><span class="text-big text-light-green">75,89%</span></td>
+                          </tr>
+                          <tr>
+                            <td><span class="text-big">102</span></td>
+                            <td class="text-left"><span class="text-normal" style="margin-left : 25px">Confidential</span></td>
+                            <td><span class="text-big">5</span></td>
+                            <td><span class="text-big">54</span></td>
+                            <td><span class="text-big text-light-green">56,57%</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>Total Anomaly</th>
+                            <th>Document at Risk</th>
+                            <th>Total Users at Risk</th>
+                            <th>Anomaly Trend</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">154</span>
+                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Windows Active Directory Group</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">88</span>
+                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Documents</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">3</span>
+                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Windows Users Account</span>
+                            </td>
+                            <td class="td-chart">
+                               <High id_hight = "highChart_2"/>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                  <div class="anomaly-block" >
+                        <TableAnomaly />
                   </div>
                 </div>
-              <div class="anomaly-radial">
-                 <Circle id = 'chart_4' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
               </div>
-            </div>
-            <div class="col-md-9">
-              <div class="anomaly-block" style="margin-top: 50px">
 
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Confidentiality at Risk</th>
-                        <th>Document at Risk</th>
-                        <th>Folder at Risk</th>
-                        <th>User Anomaly</th>
-                        <th>Category at Risk
+              <div class="row mt-lg">
+                <div class="col-md-3">
+                <div class="block-header row">
+                      <div class="col-md-5" style="margin-left:8px">
 
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="text-normal">Secret</span></td>
-                        <td><span class="text-big">1,4k</span></td>
-                        <td><span class="text-big">132</span></td>
-                        <td><span class="text-big">830</span></td>
-                        <td style="width: 250px" rowspan="3">
-                          <div class="anomaly-pie-chart"></div>
-                          <div class="anomaly-pie-chart-legend">
-                            <ul class="list-unstyled clearfix">
-                              <li><span class="symbol" style="background-color: #09B3B5"></span> Accounting/Tax</li>
-                              <li><span class="symbol" style="background-color: #51CFE8"></span> Employees</li>
-                              <li><span class="symbol" style="background-color: #FBAC08"></span> Corporate Entity</li>
-                              <li><span class="symbol" style="background-color: #9295D7"></span> Legal/Compliance</li>
-                              <li><span class="symbol" style="background-color: #4F6AE7"></span> Client/Customer</li>
-                              <li><span class="symbol" style="background-color: #FF503F"></span> Accounting/Tax</li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-normal">Confidential</span></td>
-                        <td><span class="text-big">7,6k</span></td>
-                        <td><span class="text-big">804</span></td>
-                        <td><span class="text-big">2,1k</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-normal">Internal</span></td>
-                        <td><span class="text-big">2,6k</span></td>
-                        <td><span class="text-big">454</span></td>
-                        <td><span class="text-big">170</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Total Anomaly</th>
-                        <th>Total User at Risk</th>
-                        <th>Total Folder at Risk</th>
-                        <th>Document Repository Anomaly Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">11,6k</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Documents</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">1,39k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows User Account</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">1,39k</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Folders</span>
-                        </td>
-                        <td class="td-chart">
-                          <div class="anomaly-chart"></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="anomaly-block">
-                    <TableAnomaly />
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-lg">
-            <div class="col-md-3">
-             <div class="block-header row">
-                  <div class="col-md-5" style="margin-left: 8px">
-                    <h4 class="anomaly-title">Client Data Repository Anomaly
-                    <div class="fix_whitespace">
-
+                        <h4 class="anomaly-title">User - Access Right Anomaly
+                         <div class="fix_whitespace">
                           <HelpButton
                                 classMenu="fix-overview-help-button-table"
-                                classIcon="overview_question_a help_question_a"     setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."  />
-                        </div>
-                    </h4>
+                                classIcon="overview_question_a help_question_a"   setValue=" This details the access rights anomaly."/>
+                            </div>
+
+                        </h4>
+                      </div>
+                    </div>
+                  <div class="anomaly-radial">
+                    <Circle id = 'chart_3' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-user" />
                   </div>
                 </div>
-              <div class="anomaly-radial">
-                <Circle id = 'chart_5' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="anomaly-block" style="margin-top:50px">
+                <div class="col-md-9" style="margin-top: 50px">
+                  <div class="anomaly-block">
 
-                <div class="table-responsive">
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>User Anomaly</th>
-                        <th>Confidentiality at Risk</th>
-                        <th>Folder at Risk</th>
-                        <th>Active Directory at Risk</th>
-                        <th>User Access Right Accuracy
+                    <div class="table-responsive">
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>User Anomaly</th>
+                            <th>Confidentiality at Risk</th>
+                            <th>Folder at Risk</th>
+                            <th>Active Directory at Risk</th>
+                            <th>User Access Right Accuracy
 
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><span class="text-big">830</span></td>
-                        <td><span class="text-normal">Banking Secrecy</span></td>
-                        <td><span class="text-big">132</span></td>
-                        <td><span class="text-big">54</span></td>
-                        <td><span class="text-big text-light-green">99,25%</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="text-big">2,1k</span></td>
-                        <td><span class="text-normal">Confidential</span></td>
-                        <td><span class="text-big">804</span></td>
-                        <td><span class="text-big">1470</span></td>
-                        <td><span class="text-big text-light-green">75,89%</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table anomaly-table">
-                    <thead>
-                      <tr>
-                        <th>Total Anomaly</th>
-                        <th>Document at Risk</th>
-                        <th>Active Directory at Risk</th>
-                        <th>User Client Data Access Anomaly Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">3,1 k</span>
-                            <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Windows User Account</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">88</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Documents</span>
-                        </td>
-                        <td>
-                          <span class="text-block">
-                            <span class="text-big text-red">130</span>
-                            <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                          </span>
-                          <span>Active Directory Group</span>
-                        </td>
-                        <td class="td-chart">
-                          <div class="anomaly-chart"></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><span class="text-big">830</span></td>
+                            <td><span class="text-normal">Secret</span></td>
+                            <td><span class="text-big">132</span></td>
+                            <td><span class="text-big">54</span></td>
+                            <td><span class="text-big text-light-green">99,25%</span></td>
+                          </tr>
+                          <tr>
+                            <td><span class="text-big">2,1k</span></td>
+                            <td><span class="text-normal">Confidential</span></td>
+                            <td><span class="text-big">804</span></td>
+                            <td><span class="text-big">1470</span></td>
+                            <td><span class="text-big text-light-green">75,89%</span></td>
+                          </tr>
+                          <tr>
+                            <td><span class="text-big">170</span></td>
+                            <td><span class="text-normal">Internal</span></td>
+                            <td><span class="text-big">454</span></td>
+                            <td><span class="text-big">54</span></td>
+                            <td><span class="text-big text-light-green">56,57%</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table class="table anomaly-table">
+                        <thead>
+                          <tr>
+                            <th>Total Anomaly</th>
+                            <th>Document at Risk</th>
+                            <th>Total Active Directory Group at Risk</th>
+                            <th>Access Right Anomaly Trend</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">3,1k</span>
+                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Windows User Account</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">88</span>
+                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Documents</span>
+                            </td>
+                            <td>
+                              <span class="text-block">
+                                <span class="text-big text-red">130</span>
+                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                              </span>
+                              <span>Active Directory Group</span>
+                            </td>
+                            <td class="td-chart">
+                               <High id_hight = "highChart_3"/>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="anomaly-block">
+                        <TableAnomaly />
+                  </div>
                 </div>
               </div>
-
-              <div class="anomaly-block">
-                    <TableAnomaly />
-
-
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
+        <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+            <header class="panel-heading">
+                <h2 class="panel-title">Data Architecture Risk Management
+                    <HelpButton
+                            classMenu="fix-overview-help-button-table"
+                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies for all the documents and for client data." />
+                </h2>
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="block-header row">
+                            <div class="col-md-5" style="margin-left: 3px">
+                                <h4 class="anomaly-title">Document Repository Anomaly
+                                    <div class="fix_whitespace">
+                                        <HelpButton
+                                            classMenu="fix-overview-help-button-table"
+                                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="anomaly-radial">
+                            <Circle id = 'chart_4' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
+                        </div>
+                    </div>
+                <div class="col-md-9">
+                    <div class="anomaly-block" style="margin-top: 50px">
+                        <div class="table-responsive">
+                          <table class="table anomaly-table">
+                            <thead>
+                              <tr>
+                                <th>Confidentiality at Risk</th>
+                                <th>Document at Risk</th>
+                                <th>Folder at Risk</th>
+                                <th>User Anomaly</th>
+                                <th>Category at Risk
 
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><span class="text-normal">Secret</span></td>
+                                <td><span class="text-big">1,4k</span></td>
+                                <td><span class="text-big">132</span></td>
+                                <td><span class="text-big">830</span></td>
+                                <td style="width: 250px" rowspan="3">
+                                  <div class="anomaly-pie-chart"></div>
+                                  <div class="anomaly-pie-chart-legend">
+                                    <ul class="list-unstyled clearfix">
+                                      <li><span class="symbol" style="background-color: #09B3B5"></span> Accounting/Tax</li>
+                                      <li><span class="symbol" style="background-color: #51CFE8"></span> Employees</li>
+                                      <li><span class="symbol" style="background-color: #FBAC08"></span> Corporate Entity</li>
+                                      <li><span class="symbol" style="background-color: #9295D7"></span> Legal/Compliance</li>
+                                      <li><span class="symbol" style="background-color: #4F6AE7"></span> Client/Customer</li>
+                                      <li><span class="symbol" style="background-color: #FF503F"></span> Accounting/Tax</li>
+                                    </ul>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><span class="text-normal">Confidential</span></td>
+                                <td><span class="text-big">7,6k</span></td>
+                                <td><span class="text-big">804</span></td>
+                                <td><span class="text-big">2,1k</span></td>
+                              </tr>
+                              <tr>
+                                <td><span class="text-normal">Internal</span></td>
+                                <td><span class="text-big">2,6k</span></td>
+                                <td><span class="text-big">454</span></td>
+                                <td><span class="text-big">170</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table class="table anomaly-table">
+                            <thead>
+                              <tr>
+                                <th>Total Anomaly</th>
+                                <th>Total User at Risk</th>
+                                <th>Total Folder at Risk</th>
+                                <th>Document Repository Anomaly Trend</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span class="text-block">
+                                    <span class="text-big text-red">11,6k</span>
+                                    <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                  </span>
+                                  <span>Documents</span>
+                                </td>
+                                <td>
+                                  <span class="text-block">
+                                    <span class="text-big text-red">1,39k</span>
+                                    <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                  </span>
+                                  <span>Windows User Account</span>
+                                </td>
+                                <td>
+                                  <span class="text-block">
+                                    <span class="text-big text-red">1,39k</span>
+                                    <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                  </span>
+                                  <span>Folders</span>
+                                </td>
+                                <td class="td-chart">
+                                   <High id_hight = "highChart_4"/>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                    <div class="anomaly-block">
+                        <TableAnomaly />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-lg">
+                <div class="col-md-3">
+                    <div class="block-header row">
+                        <div class="col-md-5" style="margin-left: 8px">
+                            <h4 class="anomaly-title">Client Data Repository Anomaly
+                                <div class="fix_whitespace">
+                                    <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        classIcon="overview_question_a help_question_a"     setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."  />
+                                </div>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="anomaly-radial">
+                        <Circle id = 'chart_5' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="anomaly-block" style="margin-top:50px">
+                        <div class="table-responsive">
+                            <table class="table anomaly-table">
+                                <thead>
+                                    <tr>
+                                        <th>User Anomaly</th>
+                                        <th>Confidentiality at Risk</th>
+                                        <th>Folder at Risk</th>
+                                        <th>Active Directory at Risk</th>
+                                        <th>User Access Right Accuracy
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="text-big">830</span></td>
+                                        <td><span class="text-normal">Banking Secrecy</span></td>
+                                        <td><span class="text-big">132</span></td>
+                                        <td><span class="text-big">54</span></td>
+                                        <td><span class="text-big text-light-green">99,25%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="text-big">2,1k</span></td>
+                                        <td><span class="text-normal">Confidential</span></td>
+                                        <td><span class="text-big">804</span></td>
+                                        <td><span class="text-big">1470</span></td>
+                                        <td><span class="text-big text-light-green">75,89%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table anomaly-table">
+                                <thead>
+                                    <tr>
+                                    <th>Total Anomaly</th>
+                                    <th>Document at Risk</th>
+                                    <th>Active Directory at Risk</th>
+                                    <th>User Client Data Access Anomaly Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <span class="text-block">
+                                        <span class="text-big text-red">3,1 k</span>
+                                        <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                      </span>
+                                      <span>Windows User Account</span>
+                                    </td>
+                                    <td>
+                                      <span class="text-block">
+                                        <span class="text-big text-red">88</span>
+                                        <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                      </span>
+                                      <span>Documents</span>
+                                    </td>
+                                    <td>
+                                      <span class="text-block">
+                                        <span class="text-big text-red">130</span>
+                                        <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                      </span>
+                                      <span>Active Directory Group</span>
+                                    </td>
+                                    <td class="td-chart">
+                                       <High id_hight = "highChart_5"/>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="anomaly-block">
+                        <TableAnomaly />
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </section>

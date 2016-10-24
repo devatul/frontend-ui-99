@@ -312,6 +312,11 @@
         margin-left: auto;
     }
 }
+@media (max-width: 767px) {
+    .panel-title {
+        max-width: 189px;
+    }
+}
 
 @media (max-width: 480px) {
     .dropdown-menu.dd-md.dd-right.fix1 {

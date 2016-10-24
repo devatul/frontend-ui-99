@@ -3,45 +3,45 @@ import React, { Component,PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
+import $ from 'jquery'
 
 var StateSelect = React.createClass({
     propTypes: {
 
-        change: PropTypes.func
-    },
-    getInitialState(){
-        return{
-            display : 'none'
-        }
+         change: PropTypes.func
+     },
+     getInitialState() {
+         return {
+             display: 'none'
+         }
 
-    },
-    componentDidUpdate(prevProps , prevState){
-        if (this.props.show != prevProps.show) {
-            let value = this.props.show == null ? 'none' :  this.props.show
-            this.setState({display : value})
-        }
-    },
-    handleClick(value){
-        this.setState({display : 'none'})
-        this.props.onChange(value, this.props.number);
+     },
+     componentDidUpdate(prevProps, prevState) {
+         if (this.props.show != prevProps.show) {
+             let value = this.props.show == null ? 'none' : this.props.show
+             this.setState({ display: value })
+         }
+     },
+     handleClick(value) {
+         this.setState({ display: 'none' })
+         this.props.onChange(value, this.props.number);
 
-    },
-    componentDidMount(){
-      $('body').on('mouseover', '.anomaly-state-select .anomaly-state', function(){
-                var parent = $(this).parents('.anomaly-state-select');
-                parent.find('.anomaly-state').removeClass('active');
-                $(this).addClass('active');
+     },
+     componentDidMount() {
+         $('body').on('mouseover', '.anomaly-state-select .anomaly-state', function() {
+             var parent = $(this).parents('.anomaly-state-select');
+             parent.find('.anomaly-state').removeClass('active');
+             $(this).addClass('active');
 
-                parent.find('.current-state').html( $(this).attr('data-label') );
-                 $('[data-label]').css('font-weight','normal')
-            });
+             parent.find('.current-state').html($(this).attr('data-label'));
+             $('[data-label]').css('font-weight', 'normal')
+         });
 
-            $('body').on('mouseleave', '.anomaly-state-select .anomaly-state', function(){
-                $(this).removeClass('active');
-                $(this).parents('.anomaly-state-select').find('.current-state').html('');
+         $('body').on('mouseleave', '.anomaly-state-select .anomaly-state', function() {
+             $(this).removeClass('active');
+             $(this).parents('.anomaly-state-select').find('.current-state').html('');
 
-            });
-
+         });
     },
 
     render(){

@@ -7,6 +7,7 @@ import update from 'react/lib/update'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js'
 import _ from 'lodash'
+import $ from 'jquery'
 
 var Notification = React.createClass({
     getInitialState() {
@@ -86,7 +87,7 @@ var Notification = React.createClass({
         }
 
         if (this.state.filtersAlert != prevState.filtersAlert) {
-            debugger
+
             if (this.state.filtersAlert == 'none') {
                 this.setState({
                         notification: notification1
@@ -117,7 +118,7 @@ var Notification = React.createClass({
             }
         }
         if (this.state.selected != prevState.selected) {
-            debugger
+
             this.setState({
                 notification: notification1
 
@@ -144,7 +145,7 @@ var Notification = React.createClass({
     },
 
     filterAlert(value) {
-        debugger
+
         let alert = this.state.filtersAlert
         let alertUpdate = update(this.state, {
             filter: {
@@ -178,7 +179,7 @@ var Notification = React.createClass({
 
         let value = event.target.value;
         if (this.state.filter.alert != '') {
-            debugger
+
             let alert = this.state.filter.alert
             this.filter(alert, value);
         } else {
@@ -246,7 +247,7 @@ var Notification = React.createClass({
                 this.setState({ filterUpdate: value })
             }
             if (value == 'update-pending') {
-                debugger
+
                 let updateStyle = update(
                     this.state, {
                         styleList: {
@@ -321,7 +322,6 @@ var Notification = React.createClass({
 
     },
     filter(alert, value) {
-        debugger
         if (value == 'update-today') {
             let updateStyle = update(this.state, {
 
@@ -477,7 +477,6 @@ var Notification = React.createClass({
     },
 
     getNotification() {
-        debugger
         //temproary for dummy data
         var last_thirty_days = [];
         var today = [];

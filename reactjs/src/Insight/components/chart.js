@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
+import 'jquery'
 
 var Chart = React.createClass({
     displayName: 'Chart',

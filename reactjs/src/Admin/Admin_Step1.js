@@ -33,7 +33,7 @@ var Admin_Step1 = React.createClass({
         this.props.changeDatapage(this.state.data_block)
     },*/
     onChangeInput(block, fieldId, value) {
-        debugger
+
         /* let name =  'block'+block*/
 
         let data = this.state.data_block
@@ -105,7 +105,7 @@ var Admin_Step1 = React.createClass({
         this.props.changeDatapage(this.state.data_block)
     },
     clickComfirm() {
-        debugger
+
         this.setState({ complete: 1, readOnly: true }),
             console.log('readOnly', this.state.readOnly)
     },
@@ -148,7 +148,7 @@ var Admin_Step1 = React.createClass({
 
     },
     addSLA(value) {
-        debugger
+
         if (value == 1) {
             let newSLA = { key: this.state.SLA.length };
             this.setState({ SLA: _.concat(newSLA, this.state.SLA) })

@@ -6,6 +6,8 @@ import SelectBox from '../dathena/SelectBox'
 import makeRequest from '../../utils/http'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
+import $ from 'jquery'
+
 import Anomaly from '../../components/dathena/anomalyStateSelect'
 var TableAnomaly = React.createClass({
     getInitialState(){
@@ -75,9 +77,6 @@ var TableAnomaly = React.createClass({
     },
     changeAnomaly(value, number) {
         debugger
-
-        /* var anomaly_arr = []
-         anomaly_arr[number] = value*/
         let updateAnomaly = update(this.state, {
             datas: {
                 [number]: {
@@ -88,13 +87,11 @@ var TableAnomaly = React.createClass({
         })
         this.setState(updateAnomaly)
     },
-    showSelect(number){
+    showSelect(datas , number){
         debugger
-        let datas = _.cloneDeep(this.state.datas)
-
+       /* let datas = _.cloneDeep(this.state.datas)*/
         let style = datas[number].selected == null || datas[number].selected ==  'none' ? 'block' : 'none'
         for(let i =0 ; i < datas.length ; i++){
-            debugger
             datas[i].selected = ( i == number ? style : 'none')
         }
         let updateStyle = update(this.state , {
@@ -103,10 +100,9 @@ var TableAnomaly = React.createClass({
         this.setState(updateStyle)
     },
     getfilterValue(value){
-        debugger
         this.setState({filterValue : value})
     },
-     convertArrayOfObjectsToCSV(args) {
+    convertArrayOfObjectsToCSV(args) {
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
@@ -138,9 +134,7 @@ var TableAnomaly = React.createClass({
     },
 
     downloadCSV(value, datas) {
-
         var data, filename, link;
-
         var csv = this.convertArrayOfObjectsToCSV({
             data: datas
         });
@@ -167,7 +161,6 @@ var TableAnomaly = React.createClass({
         return data_export
     },
     render(){
-        debugger
         let {datas , filterValue} = this.state , newData = filterValue == 0 ? datas : this.filterTable(datas , filterValue)
             , child = []
             , style = !this.state.show ?  'block' : 'none'
@@ -184,7 +177,7 @@ var TableAnomaly = React.createClass({
                             <td className="text-left"><span>4774</span></td>
                             <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
                             <td className="relative">
-                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,i-1)}></span>
+                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,newData,i-1)}></span>
                               <div class="anomaly-showhide">
                                   <Anomaly onChange = {this.changeAnomaly} number = {key} show={newData[i-1].selected}/>
                               </div>

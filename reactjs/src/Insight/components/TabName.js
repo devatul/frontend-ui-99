@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
 import HelpButton from './HelpButton'
+import $ from 'jquery'
 
 var TabName = React.createClass({
 	getInitialState(){

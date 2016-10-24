@@ -26,7 +26,7 @@ var Keywords = React.createClass({
         return false
     },
     convertArrayOfObjectsToCSV(args) {
-        debugger
+
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
@@ -58,7 +58,7 @@ var Keywords = React.createClass({
     },
 
     downloadCSV(value, datas) {
-        debugger
+
         var data, filename, link;
 
         var csv = this.convertArrayOfObjectsToCSV({
@@ -79,16 +79,16 @@ var Keywords = React.createClass({
         link.click();
     },
     configData_exports(data) {
-        debugger
+
         let dataExports = []
         let confidentiality = ''
          let keywords = ''
           _.forEach(data, function(object, index) {
-            /*debugger*/
+
             let key= ''
             confidentiality= object.name
             for (let i = 0; i < object.keywords.length; i++) {
-                debugger
+
                 if(i != object.keywords.length - 1 ){
 
                     key = key+object.keywords[i]+' ; '
@@ -156,14 +156,14 @@ var Keywords = React.createClass({
 
     },
     render() {
-        debugger
+
         let dataTable = this.props.data
 
         let data_exports = this.configData_exports(this.props.data)
 
         let child = [];
         _.forEach(dataTable, function(object, index) {
-            debugger
+
             let keywords = null
             let className = "pie-wrapper pie-progress-" + object['predicted efficiency'] + " style-1 pie-sm"
             for (let i = 0; i < object.keywords.length; i++) {

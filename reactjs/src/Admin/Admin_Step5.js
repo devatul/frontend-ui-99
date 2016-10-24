@@ -23,14 +23,14 @@ var Admin_Step5 = React.createClass({
 
     },
     shouldComponentUpdate(nextProps , nextState){
-        debugger
+
         if(this.props.dataBlock != nextProps.dataBlock){
             return true
         }
         return false
     },
     componentDidUpdate(prevProps, prevState){
-        debugger
+
         if(this.props.dataBlock != prevProps.dataBlock){
             let updatedata = update(this.state , {
                 data : {$set : this.props.dataBlock}

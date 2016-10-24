@@ -115,7 +115,7 @@
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
 
-                            <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
                         </li>
                         <li>
 
@@ -169,7 +169,7 @@
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
 
-                            <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
                         </li>
                         <li>
 
@@ -200,7 +200,7 @@
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
 
-                            <Link to="/Insight/Indentity" activeClassName="active">Identity and Access Management</Link>
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
                         </li>
                         <li>
 

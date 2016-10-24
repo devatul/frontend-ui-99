@@ -5,7 +5,7 @@ import template from './DataLoss.rt'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import Constant from '../Constant.js'
-import $ from 'jquery'
+import 'jquery'
 
 var DataLost = React.createClass({
     mixins: [LinkedStateMixin],

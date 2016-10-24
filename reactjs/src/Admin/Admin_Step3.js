@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import update from 'react-addons-update'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import _ from 'lodash'
+import 'jquery'
 import template from './Admin_Step3.rt'
 
 
@@ -42,7 +43,7 @@ var Admin_Step3 = React.createClass({
         this.setState({complete: 3 , readOnly2 : true})
     },*/
     add(value){
-        debugger
+
         if(value == 1 ){
            let addNdew = { key: this.state.add_Classification.length};
             this.setState({add_Classification : _.concat(addNdew ,this.state.add_Classification)})}
@@ -57,7 +58,7 @@ var Admin_Step3 = React.createClass({
             this.setState({add_Business : _.concat(addNdew ,this.state.add_Business)})}
     },
     editButton(value, readOnly) {
-        debugger
+
         if (value == 1) {
             this.setState({ readOnly: false })
              $( "#block1_step3" ).find( "input" ).prop('disabled', false);

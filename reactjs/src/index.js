@@ -23,7 +23,7 @@ var ClassificationReview = require('./Review/ClassificationReview');
 var Notification = require('./Dashboard/Notification');
 var DocumentReview = require('./Review/DocumentReview');
 var Insight = require('./Insight/Insight');
-var Indentity = require('./Insight/Indentity');
+var Identity = require('./Insight/Identity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
 var Admin = require('./Admin/Admin')
@@ -62,7 +62,7 @@ render((
 					<Route path="/Review/ReviewValidation" component={ReviewValidation}/>
 				</Route>
 				<Route path="/Insight/Insight" component={Insight}>
-					<Route path="/Insight/Indentity" component={Indentity}/>
+					<Route path="/Insight/Identity" component={Identity}/>
 					<Route path="/Insight/DataRisk" component={DataRisk}/>
 					<Route path="/Insight/DataLoss" component={DataLoss}/>
 				</Route>

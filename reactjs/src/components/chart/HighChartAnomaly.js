@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import HelpButton from '../dathena/HelpButton'
+import  'jquery'
 
 var HighChart = React.createClass({
     displayName: 'LiquidMeter',
@@ -25,7 +26,7 @@ var HighChart = React.createClass({
 
 
     draw() {
-            debugger
+
             var anomalyChartData = [{
             xTitle: 'Anomaly Occurence',
             yTitle: 'Document',
