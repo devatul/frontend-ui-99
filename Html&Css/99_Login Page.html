@@ -53,7 +53,7 @@
 								<div class="form-group mb-lg">
 									<label>Username</label>
 									<div class="input-group input-group-icon">
-										<input name="username" type="text" class="form-control input-md" />
+										<input name="username" type="text" class="form-control input-md" autofocus />
 										<span class="input-group-addon">
 											<span class="icon icon-md">
 												<i class="fa fa-user"></i>
@@ -64,11 +64,11 @@
 
 								<div class="form-group mb-lg">
 									<div class="clearfix">
-										<label class="pull-left">Password</label>
-										<a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
+										<label for="password" class="pull-left">Password</label>
+										<a href="pages-recover-password.html" class="pull-right" tabindex="-1">Lost Password?</a>
 									</div>
 									<div class="input-group input-group-icon">
-										<input name="pwd" type="password" class="form-control input-md" />
+										<input name="pwd" id="password" type="password" class="form-control input-md" tabindex="0"/>
 										<span class="input-group-addon">
 											<span class="icon icon-md">
 												<i class="fa fa-lock"></i>
@@ -80,13 +80,13 @@
 								<div class="row">
 									<div class="col-sm-8">
 										<div class="checkbox-custom checkbox-default">
-											<input id="RememberMe" name="rememberme" type="checkbox"/>
+											<input id="RememberMe" name="rememberme" type="checkbox" tabindex="0"/>
 											<label for="RememberMe">Remember Me</label>
 										</div>
 									</div>
 									<div class="col-sm-4 text-right">
-										<button type="submit" class="btn btn-green hidden-xs">Sign In</button>
-										<button type="submit" class="btn btn-green btn-block btn-lg visible-xs mt-lg">Sign In</button>
+										<button type="submit" class="btn btn-green hidden-xs" tabindex="0">Sign In</button>
+										<button type="submit" class="btn btn-green btn-block btn-lg visible-xs mt-lg" tabindex="0">Sign In</button>
 									</div>
 								</div>
 

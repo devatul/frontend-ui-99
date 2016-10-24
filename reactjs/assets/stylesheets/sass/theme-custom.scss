@@ -1964,6 +1964,10 @@ div[id^='legendContainer']{
   border: 1px solid #bbb!important;
 }
 
+.checkbox-custom input[type="checkbox"]:focus + label:before{
+  border-color: #0FABE6 !important;
+}
+
 .document_note {
     font-size: 14px;
     padding-left: 30px;

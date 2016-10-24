@@ -1474,6 +1474,9 @@ div[id^='legendContainer'] {
   background-color: #ecedf0 !important;
   border-color: #ecedf0 !important; }
 
+.checkbox-custom input[type="checkbox"]:not(:checked):focus + label:before{
+  border-color: #0FABE6 !important; }
+
 .checkbox-custom input[type="checkbox"]:disabled + label:before {
   border: 1px solid #bbb !important; }
 
