@@ -111,7 +111,7 @@ var OverView = React.createClass
                     result: { $set: data }
                 });
 
-                localStorage.setItem('dataScan', JSON.stringify(data)); 
+                
                 console.log('data', data);
                 debugger
                 this.checkLoadingToSetState('scan', setResult);

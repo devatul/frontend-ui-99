@@ -25,11 +25,11 @@ module.exports = {
 		level2: 50
 	},
 	icons: {
-		accounting: { name: "Accounting/Tax", class:'fa-calculator'},
-		client: { name: "Client/Customer", class:'fa-users'},
+		accounting: { name: "Accounting / Tax", class:'fa-calculator'},
+		client: { name: "Client / Customer", class:'fa-users'},
 		corporate: { name: "Corporate Entity", class:'fa-university'},
 		employee: { name: "Employee", class:'fa-male'},
-		legal: { name: "Legal/Compliance", class:'fa-balance-scale'},
+		legal: { name: "Legal / Compliance", class:'fa-balance-scale'},
 		transaction: { name: "Transaction", class:'fa-usd'}
 	},
 	urgency: [

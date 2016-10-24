@@ -40,7 +40,7 @@ module.exports = React.createClass({
     			
 	    	}, Constant.TIMEVALIDTOKEN);
 	    	
-			//browserHistory.push('/Dashboard/ReviewValidation');	
+			browserHistory.push('/Dashboard/OverView');	
 		}else
 		{
 			console.log("noToken");
