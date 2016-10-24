@@ -61,7 +61,7 @@ var TableAnomaly = React.createClass({
         }
     },*/
     filterTable(data , value){
-        debugger
+
         let dataNew = []
         _.forEach(data , function(object , index){
 
@@ -72,11 +72,11 @@ var TableAnomaly = React.createClass({
         return dataNew
     },
     show(value){
-        debugger
+
         this.setState({show : value})
     },
     changeAnomaly(value, number) {
-        debugger
+
         let updateAnomaly = update(this.state, {
             datas: {
                 [number]: {
@@ -88,7 +88,7 @@ var TableAnomaly = React.createClass({
         this.setState(updateAnomaly)
     },
     showSelect(datas , number){
-        debugger
+
        /* let datas = _.cloneDeep(this.state.datas)*/
         let style = datas[number].selected == null || datas[number].selected ==  'none' ? 'block' : 'none'
         for(let i =0 ; i < datas.length ; i++){
@@ -155,7 +155,7 @@ var TableAnomaly = React.createClass({
     configDataCVS(data){
         let data_export = []
         _.forEach(data , function(object , index) {
-            debugger
+
             data_export.push(_.omit(object ,["selected" , "status"]))
         })
         return data_export
