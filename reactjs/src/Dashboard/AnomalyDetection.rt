@@ -1,5 +1,4 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
-<rt-import name="HelpButton1" from="../Insight/components/HelpButton"/>
 <rt-import name="TableAnomaly" from = "../components/dathena/TableAnomaly"/>
 <rt-import name="Circle" from= "../components/chart/CircleChartAnomaly"/>
 <rt-import name="High" from= "../components/chart/HighChartAnomaly"/>

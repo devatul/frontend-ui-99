@@ -1,5 +1,5 @@
 <rt-import name="Keyword" from="./components/Keyword"/>
-<rt-import name="HelpButton" from="./components/HelpButton"/>
+
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="Tab" from = "./components/TabName"/>
 <rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>

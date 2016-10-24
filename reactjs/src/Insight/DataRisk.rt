@@ -1,7 +1,7 @@
 <rt-import name="BarMenu" from='./InsightMenuBar'/>
 <rt-import name="func" from='../utils/function.js'/>
 <rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
-<rt-import name="HelpButton" from="./components/HelpButton"/>
+
 <rt-import name="HelpButton2" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="Risk" from="./components/RickInsights"/>
 

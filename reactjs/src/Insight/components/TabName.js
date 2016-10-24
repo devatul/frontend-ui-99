@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
-import HelpButton from './HelpButton'
 import $ from 'jquery'
 
 var TabName = React.createClass({
@@ -59,6 +58,7 @@ var TabName = React.createClass({
             case 'it' : return 'Italian' ;
             case 'no' : return 'Norwegian' ;
             case 'pt' : return 'Portuguese' ;
+            default : return language
         }
     },
     clickHandle(language){

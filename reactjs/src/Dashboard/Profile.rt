@@ -1,6 +1,6 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name ="MyTeam" from ="./MyTeam"/>
-<rt-import name="HelpButton" from="../Insight/components/HelpButton"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <div class="container">
   <div class="tabs tabs-primary">
     <ul class="my-profile-header nav nav-tabs">
@@ -79,7 +79,9 @@
               <ul class="my-profile-ul">
                 <li class="left3">System User</li>
                 <li>
-                 <HelpButton type="review_question_a help_question_a" content="Use your user name and password provided by Dathena to connect into Dathena99."/>
+                 <HelpButton
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a" setValue="Use your user name and password provided by Dathena to connect into Dathena99." />
 
                 </li>
                 <li class="left1">
@@ -98,8 +100,9 @@
                       <p class="content_profile_note">Active Directory</p>
                     </li>
                     <li class="left4">
-                     <HelpButton type="review_question_a help_question_a" content="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials."/>
-
+                    <HelpButton
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a" setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
                     </li>
                   </ul>
                   <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check">
