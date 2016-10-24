@@ -482,11 +482,6 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
-                data[6] = {
-                    id: 6,
-                    name: "Select"
-                };
-                debugger
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });

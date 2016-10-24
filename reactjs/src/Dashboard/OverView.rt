@@ -7,7 +7,7 @@
 <rt-import name="ProgressLabel" from="../components/dathena/progress-label" />
 <section>
     <!--bar_menu start-->
-    <MenuBar title="Dashboard Overview" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
+    <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
     <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
         <div class="charts container mt-lg">

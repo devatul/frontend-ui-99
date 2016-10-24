@@ -27,16 +27,10 @@ var Identity = require('./Insight/Identity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
 var Admin = require('./Admin/Admin')
-/*var Admin_Step1 = require('./Admin/Admin_Step1')
-var Admin_Step2 = require('./Admin/Admin_Step2')
-var Admin_Step3 = require('./Admin/Admin_Step3')
-var Admin_Step4 = require('./Admin/Admin_Step4')
-var Admin_Step5 = require('./Admin/Admin_Step5')*/
 
 render((
   	<Router history={browserHistory}>
     	<Route path="/" component={App}>
-    		<IndexRoute component={SignIn}/>
 		  	<Route path="/Account/signIn" component={SignIn}/>
 		  	<Route path="/Account/signUp" component={SignUp}/>
 		  	<Route path="/Account/passwordNew" component={PasswordNew}/>

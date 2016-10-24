@@ -44,6 +44,7 @@ var MenuBar = React.createClass
 	propTypes: {
 		title: React.PropTypes.string,
         help: React.PropTypes.string,
+        dataScan: React.PropTypes.object,
 	    handleFilter: React.PropTypes.func,
 	    showFilter: React.PropTypes.bool,
 	    showInfo: React.PropTypes.bool
@@ -51,19 +52,12 @@ var MenuBar = React.createClass
 
     componentDidMount() {
         if(this.props.showFilter) {
-            // let updateLabel = update(this.state.listLabel, {
-            //     categories: { $set: this.getCategory() },
-            //     confidentialities: { $set: this.getConfidentiality() },
-            //     'doc-types': { $set: this.getDoctypes() },
-            //     languages: { $set: this.getLanguages() }
-            // });
-            // this.setState({ listLabel: updateLabel });
             this.getCategories();
             this.getConfidentialities();
             this.getDoctypes();
             this.getLanguages();
         }
-        if(this.props.showInfo) {
+        if(this.props.showInfo && !this.props.dataScan) {
             this.getscanResult();
         }
     },
@@ -71,6 +65,10 @@ var MenuBar = React.createClass
     componentWillReceiveProps(nextProps) {
         if(!isEqual(this.props.title != nextProps.title)) {
             this.setState({ shouldUpdate: true });
+        }
+
+        if(this.props.dataScan && !isEqual(this.props.dataScan, nextProps.dataScan)) {
+            this.setState({ scanResult: nextProps.dataScan, shouldUpdate: true });
         }
     },
     
@@ -82,9 +80,7 @@ var MenuBar = React.createClass
     },
 
     componentWillUpdate(nextProps, nextState) {
-        if(!isEqual(this.state.categories, nextState.categories)) {
-
-        }
+        
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -114,14 +110,6 @@ var MenuBar = React.createClass
                 delete params["doc-types"];
             }
             this.props.handleFilter(params);
-        }
-
-        if(!isEqual(this.state.labels, prevState.labels)) {
-            debugger
-        }
-
-        if(this.state.selectOpened) {
-            
         }
     },
     configListLabel: function(data) {
@@ -206,7 +194,7 @@ var MenuBar = React.createClass
                     }
                 }
             });
-            debugger
+            
             let updateList = update(this.state[property], {
                 [index]: {
                     checked: { $set: false } 
@@ -255,7 +243,7 @@ var MenuBar = React.createClass
         }
 
         array = this.state[property];
-            debugger
+            
         for(let i = selection.length - 1; i >= 0; i--) {
 
             let splitId = selection[i].id.split('-'),
@@ -264,7 +252,7 @@ var MenuBar = React.createClass
             if( array['checkall'] || (indexObject >= 0 && array[indexObject].checked)) {
                 selection[i].className = "select2-results__option select2-results__option--highlighted-a";
             } else {
-                //debugger
+                //
                 selection[i].className = "select2-results__option";
             }
         }
@@ -310,16 +298,16 @@ var MenuBar = React.createClass
                         //set false all item
                         if(indexCategory >= 0) {
                             array[indexCategory].checked = false;
-                            debugger
+                            
                         }
                 }
             }
             break;
             case parseInt(index) >= 0: {
-                //debugger
+                //
 
                 array[index].checked = !array[index].checked;
-                //debugger
+                //
 
                 for(let i = array.length - 1; i >= 0; i--) {
                     if(!array[i].checked) {
@@ -331,7 +319,7 @@ var MenuBar = React.createClass
 
         this.updateLabels(property);
 
-        //debugger
+        //
         for(let i = selection.length - 1; i >= 0; i--) {
 
             let splitId = selection[i].id.split('-'),
@@ -340,7 +328,7 @@ var MenuBar = React.createClass
             if( array['checkall'] || (indexObject >= 0 && array[indexObject].checked)) {
                 selection[i].className = "select2-results__option select2-results__option--highlighted-a";
             } else {
-                //debugger
+                //
                 selection[i].className = "select2-results__option";
             }
         }
@@ -354,14 +342,14 @@ var MenuBar = React.createClass
         this.setState({ params: this.updateParams(property), shouldUpdate: true });
 
         event.stopImmediatePropagation();
-        //debugger
+        //
     },
 
     updateLabels(property) {
         let array = this.state[property],
             { labels } = this.state,
             indexLabel = 0;
-        debugger
+        
 
         if(!array['checkall']) {
 
@@ -379,7 +367,7 @@ var MenuBar = React.createClass
                 }
             }
         }
-        debugger
+        
     },
 
     updateParams(property) {
@@ -395,7 +383,7 @@ var MenuBar = React.createClass
                 $apply: (data) => {
                     data = cloneDeep(data);
                     //let indexParam = -1;
-                    //debugger
+                    //
                     for(let i = array.length - 1; i >= 0; i--) {
 
                         let indexParam = findIndex(data, { id: array[i].id });
@@ -410,12 +398,12 @@ var MenuBar = React.createClass
                             data.splice(indexParam, 1);
                         }
                     }
-                    //debugger
+                    //
                     return data;
                 }
             }
         });
-        //debugger
+        //
         return updateParam;
     },
 
@@ -426,7 +414,7 @@ var MenuBar = React.createClass
         //     confidentiality: { $set: event.target.value }
         // });
 
-        // debugger
+        // 
 
         //this.setState({ value: updateValue });
             
@@ -579,20 +567,16 @@ var MenuBar = React.createClass
     },
     
     getscanResult() {
-        if(sessionStorage.getItem('dataScan')) {
-            this.setState({ scanResult: JSON.parse(localStorage.getItem('dataScan')), shouldUpdate: true })
-        }
-        // makeRequest({
-        //     path: 'api/scan/',
-        //     success: (data) => {
-        //         let { scanResult } = this.state,
-        //             updateResult = update(scanResult, {
-        //                 $set: data
-        //             });
-        //         debugger
-        //         this.setState({ scanResult: updateResult, shouldUpdate: true });
-        //     }
-        // });  
+        makeRequest({
+            path: 'api/scan/',
+            success: (data) => {
+                let { scanResult } = this.state,
+                    updateResult = update(scanResult, {
+                        $set: data
+                    });
+                this.setState({ scanResult: updateResult, shouldUpdate: true });
+            }
+        });  
     },
 	 render:template
 });
