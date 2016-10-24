@@ -53,11 +53,14 @@ var TabName = React.createClass({
 	},
     configLanguage(language){
         switch(language){
+            case 'OTHER' : return 'Other' ;
             case 'gl' : return 'Galician' ;
             case 'hu' : return 'Hungarian' ;
             case 'it' : return 'Italian' ;
             case 'no' : return 'Norwegian' ;
             case 'pt' : return 'Portuguese' ;
+            case 'en' : return 'English' ;
+            case 'fr' : return 'French' ;
             default : return language
         }
     },

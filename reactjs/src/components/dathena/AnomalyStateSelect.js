@@ -45,7 +45,7 @@ var StateSelect = React.createClass({
     },
 
     render(){
-        debugger
+
 
         return(
             <div className="anomaly-state-select"  style={{'display': this.state.display, 'left': '90%'}}>

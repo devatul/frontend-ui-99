@@ -112,15 +112,7 @@ var RickInsight = React.createClass({
                                 </div>
                               </section>
                             </div>
-        }.bind(this));
-        }
-
-		return(
-
-            <div>
-
-                {children}
-                   <div className="col-md-4">
+               children +=  <div className="col-md-4">
                       <section class="panel">
                         <div className="panel-body bg-secondary-2 widget-panel insight-panel">
                           <h4 className="widget-title">Stale Files
@@ -160,7 +152,13 @@ var RickInsight = React.createClass({
                       </div>
                     </section>
                     </div>
+        }.bind(this));
+        }
 
+		return(
+
+            <div>
+                {children}
             </div>
 
         )
