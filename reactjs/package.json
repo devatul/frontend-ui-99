@@ -29,9 +29,9 @@
   "author": "Cuong Nguyen",
   "license": "1.0",
   "bugs": {
-    "url": "http://bugs.dathena.com"
+    "url": "http://bugs.dathena.io"
   },
-  "homepage": "http://dathena.com",
+  "homepage": "http://dathena.io",
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-core": "^6.6.5",
