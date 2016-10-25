@@ -570,105 +570,105 @@ $(function () {
     });
   }
 
-  if ($('#confidentialityLevelChart').length){
-    $('#confidentialityLevelChart').highcharts({
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: ''
-        },
-        credits: {
-          enabled: false
-        },
-        colors: colors,
-        xAxis: {
-            categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
-            labels:{
-              autoRotation: false,
-              style: {
-                color: '#272727',
-                'font-size': '10px'
-              },
-            },
-            tickInterval: 1,
-            tickWidth: 0,
-            lineWidth: 0,
-            minPadding: 0,
-            maxPadding: 0,
-            gridLineWidth: 0,
-            tickmarkPlacement: 'on'
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: ''
-            },
-            stackLabels: {
-                enabled: false
-            }
-        },
-        legend: {
-          enabled: false
-        },
-        tooltip: {
-            headerFormat: '<b>{point.x}</b><br/>',
-            decimalPoints: 2,
-            pointFormat: '{series.name}: {point.percentage:.1f}% / {point.y} Documents<br/>Total: {point.stackTotal} Documents'
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: false,
-                },
-                point: {
-                  events: {
-                    mouseOver: function(){
-                      console.log(this);
-                      var columnIndex = this.index;
-                    }
-                  }
-                },
-                events: {
-                  mouseOver: function(){
-                    console.log(this);
-                    // var serie = this.points;
-                    // $.each(serie, function (i, e) {
-                    //     this.graphic.attr({
-                    //         fill: colorsHover[i]
-                    //     });
-                    // });
-                  },
-                  mouseOut: function(){
-                    var serie = this.points;
-                    // $.each(serie, function (i, e) {
-                    //     this.graphic.attr({
-                    //         fill: colors[i]
-                    //     });
-                    // });
-                  }
-                }
-            }
-        },
-        series: [{
-            name: 'Public',
-            data: [400,420,390,410, 414]
-        }, {
-            name: 'Internal',
-            data: [80,100,123,90, 300]
-        }, {
-            name: 'Confidential',
-            data: [200,210,180,188, 310]
-        },{
-            name: 'Secret',
-            data: [400,420,390,410, 404]
-        }, {
-            name: 'Banking Secrecy',
-            data: [80,100,123,90, 111]
-        }]
-    });
-  }
+  // if ($('#confidentialityLevelChart').length){
+  //   $('#confidentialityLevelChart').highcharts({
+  //       chart: {
+  //           type: 'column'
+  //       },
+  //       title: {
+  //           text: ''
+  //       },
+  //       credits: {
+  //         enabled: false
+  //       },
+  //       colors: colors,
+  //       xAxis: {
+  //           categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
+  //           labels:{
+  //             autoRotation: false,
+  //             style: {
+  //               color: '#272727',
+  //               'font-size': '10px'
+  //             },
+  //           },
+  //           tickInterval: 1,
+  //           tickWidth: 0,
+  //           lineWidth: 0,
+  //           minPadding: 0,
+  //           maxPadding: 0,
+  //           gridLineWidth: 0,
+  //           tickmarkPlacement: 'on'
+  //       },
+  //       yAxis: {
+  //           min: 0,
+  //           title: {
+  //               text: ''
+  //           },
+  //           stackLabels: {
+  //               enabled: false
+  //           }
+  //       },
+  //       legend: {
+  //         enabled: false
+  //       },
+  //       tooltip: {
+  //           headerFormat: '<b>{point.x}</b><br/>',
+  //           decimalPoints: 2,
+  //           pointFormat: '{series.name}: {point.percentage:.1f}% / {point.y} Documents<br/>Total: {point.stackTotal} Documents'
+  //       },
+  //       plotOptions: {
+  //           column: {
+  //               stacking: 'normal',
+  //               dataLabels: {
+  //                   enabled: false,
+  //               },
+  //               point: {
+  //                 events: {
+  //                   mouseOver: function(){
+  //                     console.log(this);
+  //                     var columnIndex = this.index;
+  //                   }
+  //                 }
+  //               },
+  //               events: {
+  //                 mouseOver: function(){
+  //                   console.log(this);
+  //                   // var serie = this.points;
+  //                   // $.each(serie, function (i, e) {
+  //                   //     this.graphic.attr({
+  //                   //         fill: colorsHover[i]
+  //                   //     });
+  //                   // });
+  //                 },
+  //                 mouseOut: function(){
+  //                   var serie = this.points;
+  //                   // $.each(serie, function (i, e) {
+  //                   //     this.graphic.attr({
+  //                   //         fill: colors[i]
+  //                   //     });
+  //                   // });
+  //                 }
+  //               }
+  //           }
+  //       },
+  //       series: [{
+  //           name: 'Public',
+  //           data: [400,420,390,410, 414]
+  //       }, {
+  //           name: 'Internal',
+  //           data: [80,100,123,90, 300]
+  //       }, {
+  //           name: 'Confidential',
+  //           data: [200,210,180,188, 310]
+  //       },{
+  //           name: 'Secret',
+  //           data: [400,420,390,410, 404]
+  //       }, {
+  //           name: 'Banking Secrecy',
+  //           data: [80,100,123,90, 111]
+  //       }]
+  //   });
+  // }
 
   $('.btn-refine').on('click', function(e){
     e.preventDefault();
