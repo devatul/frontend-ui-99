@@ -15,7 +15,7 @@
 					<div class="form-group mb-lg">
 						<label>Username</label>
 						<div class="input-group input-group-icon">
-							<input name="username" id="username" class="form-control input-md" type="text" value={this.state.email} onChange={this.emailChange} class="form-control input-md" autofocus/>
+							<input name="username" id="username" class="form-control input-md" type="text" value={this.state.email} onChange={this.emailChange} class="form-control input-md" autoFocus={true}/>
 							<span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-user"></i>
