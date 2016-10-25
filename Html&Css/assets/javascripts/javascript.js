@@ -72,7 +72,6 @@ $(function () {
 
     // and when you hide it, reattach the drop down, and hide it normally                                                   
     $(window).on('hide.bs.dropdown', function (e) {
-        console.log('1');
         var windowWidth = $(window).innerWidth();
 
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
@@ -136,6 +135,14 @@ $(function () {
 
     $('.dropdown-noti .overview_question_a').on('click', function(e){
         e.preventDefault();
+    });
+
+    $('body').on('mouseover', '.overview_question_a, .review_question_a', function(){
+        $(this).parents('.dropdown').addClass('open');
+    });
+
+    $('body').on('mouseleave', '.overview_question_a, .review_question_a', function(){
+        $(this).parents('.dropdown').removeClass('open');
     });
 
 });

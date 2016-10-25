@@ -150,3 +150,13 @@ html.dark {
 		border-color: darken($dark-color-3, 2%);
 	}
 }
+
+.btn-blue-rv{
+	border: 1px solid #1BC3E1;
+	color: #1BC3E1;
+}
+
+.btn-disabled-rv{
+	border: 1px solid #dddddd!important;
+	color: #dddddd!important;
+}

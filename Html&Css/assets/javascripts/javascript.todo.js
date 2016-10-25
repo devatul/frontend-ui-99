@@ -203,6 +203,7 @@ $('.checkbox-item-1').on('change', function(){
     $('.cat-list > .active').next('li').find('a').trigger('click');
   });
 
+  var dropdownMenu;
   $(window).on('show.bs.dropdown', function (e) {
 
       var windowWidth = $(window).innerWidth();
@@ -234,7 +235,7 @@ $('.checkbox-item-1').on('change', function(){
   $(window).on('hide.bs.dropdown', function (e) {
         var windowWidth = $(window).innerWidth();
 
-        if ( dropdownMenu.hasClass('append-to-body') ){
+        if ( dropdownMenu && dropdownMenu.hasClass('append-to-body') ){
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
             $('.table-my-actions tr').removeClass('inactive');
