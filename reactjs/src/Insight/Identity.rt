@@ -94,7 +94,7 @@
                                    exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[4].contributors)}" height={this.state.height_3} />
                                 </div>
                                 <!--Chart 6-->
-                                <div class="col-md-6 col-chart-item">
+                                <div class="col-md-6 col-chart-item" rt-if="this.state.dataChart.key_contributor[5] != null">
                                   <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name)}</h4>
                                   <Chart dataChart="{this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].contributors}" id=5
                                    exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[5].contributors)}" height={this.state.height_3} />
