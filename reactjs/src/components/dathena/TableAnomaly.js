@@ -231,7 +231,7 @@ var TableAnomaly = React.createClass({
                 <div className="extra-block">
                      <a href="javascript:;" className="details-toggle" data-toggle="collapse" data-target="#demo" onClick = {this.show.bind(this, false )}><i className="fa fa-caret-right mr-xs"></i>Show less</a>
                       <span className="inline-block-item ml-md">*100 anomalies are being displayed, full report available through extraction only</span>
-                      <a href="#" className="pull-right btn btn-green" onClick={this.downloadCSV.bind(this,'data', data_export )}>Extract</a>
+                      <a href="javascript:;" className="pull-right btn btn-green" onClick={this.downloadCSV.bind(this,'data', data_export )}>Extract</a>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import update from 'react-addons-update'
 import _ from 'lodash'
 import $ from 'jquery'
 import Constant from '../../Constant.js'
+import { makeRequest } from '../../utils/http'
 import HelpButton1 from "../../components/dathena/HelpButton"
 
 var RickInsight = React.createClass({
@@ -13,32 +14,19 @@ var RickInsight = React.createClass({
 	getInitialState(){
 		return {
              rickInsight: {},
+             classIcon : ''
 	    };
 	},
 	componentDidMount(){
         this.getRickInsight()
 	},
     getRickInsight() {
-
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/insight/risk/',
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('data', data)
-                this.setState({ rickInsight: data })
-
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+        return makeRequest({
+            path: 'api/insight/risk/',
+            success: (data) => {
+                let classIcon_StaleFiles= data.stale_files.total > data.stale_files.previous_scan_value ? 'fa fa-chevron-up' : (data.stale_files.total < data.stale_files.previous_scan_value ? 'fa fa-chevron-down' : 'fa fa-minus')
+                 this.setState({ rickInsight: data , classIcon : classIcon_StaleFiles})
+            }
         });
     },
     upperFirst(value) {
@@ -77,7 +65,7 @@ var RickInsight = React.createClass({
     },
 	render(){
         let children = [];
-        if(this.state.rickInsight != null) {
+        if(this.state.rickInsight != null && this.state.rickInsight.stale_files != null) {
              _.forEach(this.state.rickInsight.risks, function(object , index){
             let  color  = this.getRickType(index).color
             let className = "panel-body " + color + " widget-panel insight-panel"
@@ -85,6 +73,8 @@ var RickInsight = React.createClass({
             let content = this.getRickType(index).info
             let previous = this.formatNumber(object.previous_scan_value)
             let current = this.formatNumber(object.current_scan_value)
+
+            let classIcon = object.current_scan_value > object.previous_scan_value ? 'fa fa-chevron-up' : (object.current_scan_value == object.previous_scan_value ? 'fa fa-minus' : 'fa fa-chevron-down')
 
             children[index] = <div className="col-md-4" key={index}>
                                 <section className="panel">
@@ -97,7 +87,7 @@ var RickInsight = React.createClass({
 
                                    </h4>
                                    <div className="insight-stat">
-                                    <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                                    <i className={classIcon} aria-hidden="true"></i>
                                     <span>{previous}</span>
                                   </div>
                                   <div className="widget-summary">
@@ -129,7 +119,7 @@ var RickInsight = React.createClass({
                                                 classIcon="overview_question_a help_question_a" setValue="Number of aging files that have not been accessed."/>
                          </h4>
                          <div className="insight-stat">
-                          <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                          <i className={this.state.classIcon} aria-hidden="true"></i>
                           <span>{this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.previous_scan_value}</span>
                         </div>
                         <div className="widget-summary">
