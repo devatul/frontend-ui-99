@@ -1,5 +1,6 @@
 import Constants from '../Constant'
 import { browserHistory } from 'react-router'
+import $ from 'jquery'
 
 module.exports = {
     makeRequest: function({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error }) {

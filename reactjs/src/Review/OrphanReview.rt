@@ -192,7 +192,7 @@
                         </div>
                     </Panel.head>
                     <Panel.body>
-                        <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.orphanCurrent && this.state.orphanCurrent.name} by latest 15th August</p>
+                        <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.orphanCurrent && this.state.orphanCurrent.name} by latest 15th November</p>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                             <Button

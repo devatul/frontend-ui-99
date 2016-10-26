@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
 import template from './App.rt'
-import $ from 'jquery'
-import validate from 'jquery-validation';
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
+import { makeRequest } from './utils/http'
 
 
 module.exports = React.createClass({
@@ -19,48 +18,49 @@ module.exports = React.createClass({
 				loading: 100,
 				isFetching: fetching.SUCCESS,
 				error: {}
-			}
+			},
+			tokenAuth: ""
 		};
 	},
     componentWillMount() 
     {
-    	if(sessionStorage.getItem('token'))
+		let { pathname } = this.props.location
+    	var token = sessionStorage.getItem('token');
+    	if(token)
 		{
-			setInterval(function()
-    		{
-    			var token = sessionStorage.getItem('token');
-    			if(sessionStorage.getItem('token')){
-    				$.ajax({
-			            url: Constant.SERVER_API + 'api/token/api-token-refresh/',
-			            dataType: 'json',
-			            type: 'POST',
-			            data:{
-			            	token:token
-			            },
-			            success: function(data) 
-			            {
-			            	sessionStorage.setItem('token', data.token);
-			            }.bind(this),
-			            error: function(xhr, status, err) 
-			            {
-			            	browserHistory.push('/Account/Signin');
-			            }.bind(this)
-		        	});
-    			}
-    			
+			switch(true)
+			{
+				case pathname == '/':
+					browserHistory.push('/Dashboard/OverView');
+					break;
+				case pathname != '/':
+					browserHistory.push(pathname);
+					break;
+			}
+
+			setInterval(() => {
+    			if(token)
+				{
+					makeRequest({
+						path: 'api/token/api-token-refresh/',
+						params: {
+							token: token
+						},
+						success: (data) => {
+							sessionStorage.setItem('token', data.token);
+						}
+					});
+				}
 	    	}, Constant.TIMEVALIDTOKEN);
-	    	
-			browserHistory.push('/Dashboard/OverView');	
-		}else
-		{
+			
+		} else {
 			console.log("noToken");
 			browserHistory.push('/Account/Signin');	
 		}
     },
-    componentDidMount() {
-    },
 
 	componentWillUnmount() {
+		debugger
 		sessionStorage.removeItem('token')
 	},
 	

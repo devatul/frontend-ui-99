@@ -353,6 +353,7 @@ select.assigment-select.form-control {
 .dropdown-menu.info-scan .table-info > tbody > tr > td:nth-child(1) {
     background-color: initial;
     font-weight: 600;
+    width: 30%;
 }
 
 /* title menu bar */
