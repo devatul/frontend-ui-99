@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './SignIn.rt';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import Constant from '../Constant.js';
 import javascript from '../script/javascript.js';
 import 'jquery';

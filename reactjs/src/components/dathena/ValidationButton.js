@@ -2,12 +2,10 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import _ from 'lodash'
 
 var ValidationButton = React.createClass({
     displayName: 'selectButton',
-    mixins: [PureRenderMixin],
 
     static: {
         status: {

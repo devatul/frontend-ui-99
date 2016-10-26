@@ -9,7 +9,7 @@ module.exports = {
     'eventsource-polyfill',
     // listen to code updates emitted by hot middleware:
     'webpack-hot-middleware/client',
-    // your code:
+    // source code:
     './src/index'
   ],
   output: {
@@ -22,16 +22,17 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   module: {
-    loaders: [{
-		test: /\.js$/,
-		loaders: ['babel'],
-		include: path.join(__dirname, 'src')
-    },
-	{
-		test: /\.rt$/, 
-		loaders: ['react-templates-loader'], 
-		include: path.join(__dirname, 'src')
-	}
-	]
+    loaders: [
+      {
+      test: /\.js/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.rt/, 
+        loaders: ['react-templates-loader'], 
+        include: path.join(__dirname, 'src')
+      }
+    ]
   }
 };

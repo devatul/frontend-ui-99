@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './DataLoss.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react-addons-update'
 import Constant from '../Constant.js'
 import 'jquery'
 
 var DataLost = React.createClass({
-    mixins: [LinkedStateMixin],
     getInitialState() {
         return {
             dataLoss: {},

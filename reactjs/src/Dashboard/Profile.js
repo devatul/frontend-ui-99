@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Profile.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import Constant from '../Constant.js';
 import $, { JQuery } from 'jquery';
 module.exports = React.createClass({
-  	mixins: [LinkedStateMixin],
   	getInitialState() {
-
 	    return {
 	   		 profile:{},
 	    };

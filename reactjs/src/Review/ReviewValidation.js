@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './ReviewValidation.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
-//import javascript from '../script/javascript.js';
 import Constant from '../Constant.js';
-import 'jquery'
-//import javascriptTodo from '../script/javascript.todo.js'
-import loadScript from '../script/load.scripts.js';
 import { isEqual, findIndex, find, cloneDeep } from 'lodash';
 
 var ReviewValidation = React.createClass({

@@ -1,4 +1,3 @@
-		<!-- start: page -->
 		<rt-require dependency="react-router/lib/Link" as="Link"/>
 		<section class="body-sign">
 			<div class="center-sign">
@@ -29,4 +28,3 @@
 				
 			</div>
 		</section>
-		<!-- end: page -->

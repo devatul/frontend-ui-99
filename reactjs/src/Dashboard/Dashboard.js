@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Dashboard.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react/lib/update'
 import _ from 'lodash'
 import $ from 'jquery'
 import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
-    mixins: [LinkedStateMixin],
     getInitialState() {
         return {
             newsfeed: {},

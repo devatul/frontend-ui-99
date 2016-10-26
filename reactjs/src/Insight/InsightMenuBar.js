@@ -1,14 +1,13 @@
 'Use Strict';
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react/lib/update'
 import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './InsightMenuBar.rt'
 import javascript from '../script/javascript.js'
 import _, { isEqual } from 'lodash'
-import 'jquery'
+import $ from 'jquery'
 
 var MenuBar1 = React.createClass({
     static: {

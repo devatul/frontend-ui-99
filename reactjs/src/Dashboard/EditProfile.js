@@ -1,15 +1,12 @@
 import React, { Component , PropTypes } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import Constant from '../Constant.js';
 import $, { JQuery } from 'jquery';
 import update from 'react/lib/update';
 
-//const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
-	mixins: [LinkedStateMixin],
 	propTypes : {
 		changeImage: PropTypes.func,
 	},

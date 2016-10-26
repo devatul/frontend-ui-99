@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import template from './App.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import $ from 'jquery'
 import validate from 'jquery-validation';
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
-module.exports = React.createClass({
-    mixins: [LinkedStateMixin],
 
+
+module.exports = React.createClass({
 	getInitialState() {
 		return {
 			xhr: {
@@ -71,7 +70,8 @@ module.exports = React.createClass({
 			xhr
 		} = this.state;
 		if(xhr.isFetching != prevState.xhr.isFetching) {
-			switch(xhr.isFetching) {
+			var { isFetching } = xhr;
+			switch(isFetching) {
 				case fetching.START:
 					this.setState({
 						xhr: update(this.state.xhr, {

@@ -1,14 +1,12 @@
 'use strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import HelpButton from '../dathena/HelpButton'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 
 var CentroidChart = React.createClass({
     displayName: 'CentroidChart',
-    mixins: [PureRenderMixin],
     
     PropTypes: {
         title: PropTypes.string,

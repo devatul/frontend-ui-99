@@ -1,13 +1,18 @@
 var path = require('path');
 var webpack = require('webpack');
 
+const paths = {
+    output: 'dist',
+    source: './src/'
+}
+
 module.exports = {
   devtool: 'source-map',
   entry: [
-    './src/index'
+    paths.source + 'index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, paths.output),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
@@ -19,17 +24,27 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
+      compress: {
+        warnings: false,
+        drop_console: true
+      },
+
+      beautify: false,
+
+      comments: false,
     })
   ],
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'src')
+      include: path.join(__dirname, 'src'),
+      exclude: /node_modules/
     },
-	{test: /\.rt$/, loaders: ['react-templates-loader'], include: path.join(__dirname, 'src')}]
+    {
+      test: /\.rt$/,
+      loaders: ['react-templates-loader'],
+      include: path.join(__dirname, 'src')
+    }]
   }
 };

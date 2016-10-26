@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './Notification.rt'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import update from 'react/lib/update'
 import javascriptTodo from '../script/javascript.todo.js';
 import Constant from '../Constant.js'

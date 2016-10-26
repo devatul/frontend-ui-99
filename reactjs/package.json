@@ -1,5 +1,5 @@
 {
-  "name": "react-dathena",
+  "name": "dathena99",
   "version": "1.0.0",
   "description": "dathena",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-transform-boilerplate.git"
+    "url": "https://bitbucket.org/dathena99v1beta/frontend-ui-dathena99"
   },
   "keywords": [
     "react",
@@ -45,34 +45,22 @@
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.11.3",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.13.3",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.0.2",
-    "gulp-babel": "^5.2.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-filter": "^3.0.1",
-    "gulp-newer": "^0.5.1",
-    "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.0.1",
-    "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.5.2",
-    "react-addons-pure-render-mixin": "^15.3.0",
-    "react-templates-loader": "^0.5.0",
+    "express": "^4.14.0",
     "rimraf": "^2.4.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.9.1"
-  },
-  "dependencies": {
-    "jquery": "^2.2.4",
+    "webpack-hot-middleware": "^2.9.1",
     "jquery-validation": "^1.15.0",
-    "react": "^0.14.7",
-    "react-addons-linked-state-mixin": "^15.1.0",
     "react-addons-update": "^15.2.1",
     "react-bootstrap": "^0.30.3",
-    "react-dom": "^0.14.7",
-    "react-router": "^2.4.1",
-    "react-templates": "^0.5.2"
+    "jquery": "^2.2.4",
+    "select2": "^4.0.3"
+  },
+  "dependencies": {
+    "react": ">=0.14.7",
+    "react-dom": ">=0.14.7",
+    "react-router": ">=2.4.1",
+    "react-templates": "v0.5.2",
+    "react-templates-loader": "v0.5.1"
   }
 }

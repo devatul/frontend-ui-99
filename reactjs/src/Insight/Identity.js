@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Identity.rt'
 import Constant from '../Constant.js'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
@@ -11,7 +10,6 @@ import _ from 'lodash'
 import $, { JQuery } from 'jquery'
 
 var Indentity = React.createClass({
-    mixins: [LinkedStateMixin],
     getInitialState() {
         return {
             numberUser: 5,

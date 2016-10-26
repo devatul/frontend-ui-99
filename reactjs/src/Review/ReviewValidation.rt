@@ -29,7 +29,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <!--<div class="{(this.state.categoryCurrent.id != 'summary' ? 'tab-pane active' : 'tab-pane')}" id="catInfo">
+            <div class="{(this.state.categoryCurrent.id != 'summary' ? 'tab-pane active' : 'tab-pane')}" id="catInfo">
                 <Row>
                     <Col md={12}>
                         <Row class="mb-sm">
@@ -224,7 +224,7 @@
                         </div>
                     </Col>
                 </Row>
-            </div>-->
+            </div>
             <div id="summary" class="tab-pane{(this.state.categoryCurrent.id == 'summary') && ' active'}">
                 <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
                     <Panel.head>

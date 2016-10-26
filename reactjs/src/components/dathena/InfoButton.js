@@ -2,13 +2,11 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import $ from 'jquery'
 import _ from 'lodash'
 
 var InfoButton = React.createClass({
     displayName: 'selectButton',
-    mixins: [PureRenderMixin],
 
     getInitialState: function() {
         return {
