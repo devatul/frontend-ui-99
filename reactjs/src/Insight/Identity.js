@@ -9,6 +9,7 @@ import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
 import $, { JQuery } from 'jquery'
+import { makeRequest } from '../utils/http'
 
 var Indentity = React.createClass({
     mixins: [LinkedStateMixin],
@@ -61,29 +62,16 @@ var Indentity = React.createClass({
         if (value == 'Top 50') {
             value = 50
         }
-
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/insight/iam?number_users=' + value,
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-
-                console.log('data', data)
+        let call= makeRequest({
+            path: 'api/insight/iam?number_users=' + value,
+            success: (data) => {
+                debugger
                 this.updateChartData(data)
-                    /* this.setState({ rickInsight: data })*/
-
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            }
         });
+        call.abort()
+
+
         /* this.filterData(value);*/
     },
 
