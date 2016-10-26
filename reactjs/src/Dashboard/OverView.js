@@ -4,7 +4,7 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
-import { icons } from '../Constant.js';
+import { icons, fetching } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
 import { orderByIndex } from '../utils/function'
 import $, { JQuery } from 'jquery';
@@ -30,7 +30,7 @@ var OverView = React.createClass
 
 	componentDidMount() {
         javascriptTodo();
-        this.setLoading();
+        //this.setLoading();
         this.xhr.getScan = this.getScanResult();
                       
   	},
@@ -39,6 +39,15 @@ var OverView = React.createClass
         if(this.xhr.getScan && this.xhr.getScan.abort) {
             this.xhr.getScan.abort();
         }
+
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.SUCCESS
+                }
+            })
+        });
 
         this.xhr = null;
     },
@@ -100,21 +109,32 @@ var OverView = React.createClass
     },
 
     getScanResult(){
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.START
+                }
+            })
+        });
         return makeRequest({
             path: 'api/scan/',
             success: (data) => {
                 let confidentialities = data.confidentialities;
 
                 data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2,3]);
-
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.SUCCESS
+                        }
+                    })
+                });
                 let setResult = update(this.state.scan, {
                     result: { $set: data }
                 });
-
-                
-                console.log('data', data);
-                debugger
-                this.checkLoadingToSetState('scan', setResult);
+                this.setState({ scan: setResult })
                 
             }
         })
@@ -201,7 +221,7 @@ var OverView = React.createClass
         for(let i = categories.length - 1; i >= 0; i--) {
             categoryChart.data[i] = {
                 name: upperFirst(categories[i].name),
-                y: categories[i].total_validated_docs
+                y: categories[i].total_reviewed_docs
             };
         }
         //add languages
@@ -256,7 +276,7 @@ var OverView = React.createClass
         for( let i = confidentialities.length - 1; i >= 0; i-- ) {
             confidentialityChart.data[i] = {
                 name: upperFirst(confidentialities[i].name),
-                y: confidentialities[i].total_validated_docs
+                y: confidentialities[i].total_reviewed_docs
             };
         }
 
@@ -309,7 +329,7 @@ var OverView = React.createClass
             case icons.transaction.name.toLowerCase():
                 return icons.transaction.class;
             default:
-                return icons.corporate.class;
+                return " ";
         }
     },
 

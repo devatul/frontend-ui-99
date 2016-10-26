@@ -28,7 +28,7 @@ module.exports = {
 		accounting: { name: "Accounting / Tax", class:'fa-calculator'},
 		client: { name: "Client / Customer", class:'fa-users'},
 		corporate: { name: "Corporate Entity", class:'fa-university'},
-		employee: { name: "Employee", class:'fa-male'},
+		employee: { name: "Employee / Personal Data", class:'fa-male'},
 		legal: { name: "Legal / Compliance", class:'fa-balance-scale'},
 		transaction: { name: "Transaction", class:'fa-usd'}
 	},
@@ -45,5 +45,11 @@ module.exports = {
 		{accept: {name: "accept", color: "#4fca9d"} },
 
 		{reject: {name: "reject", color: "#ff2d00"} }
-	]
+	],
+	fetching: {
+		START: 0.3,
+		STARTED: 0.6,
+		SUCCESS: 1,
+		ERROR: -1
+	}
 };

@@ -250,5 +250,5 @@
 </nav>
 </div>
 
-        <div>{this.props.children}</div>
+        <div>{this.props.mapStateToProps(this.props.children, ['xhr'])}</div>
     </section>

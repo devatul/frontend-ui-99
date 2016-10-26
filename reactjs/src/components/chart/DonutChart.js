@@ -71,11 +71,11 @@ var DonutChart = React.createClass({
                     pointFormatter: function() {
                         var percent = this.percentage.toFixed(1);
 
-                        if(percent < 5.0) {
+                        //if(percent < 5.0) {
                             return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
-                        } else {
-                            return 'Documents: ' + this.y;
-                        }
+                        // } else {
+                        //     return 'Documents: ' + this.y;
+                        // }
                     }
                 },
                 plotOptions: {

@@ -247,7 +247,7 @@
             </div>
         </div>
     </div>
-    <div rt-if="this.state.loading < 100" class="progress-label-container">
+    <!--<div rt-if="this.state.loading < 100" class="progress-label-container">
         <div class="progress-example">
             <ProgressLabel
                 className="label-1"
@@ -277,5 +277,5 @@
         </div>
         <p class="loading-label-2">Report is loading<br/><span class="pls">Please wait!</span></p>
         <span class="loading-backdrop-custom" style=""></span>
-    </div>
+    </div>-->
 </section>

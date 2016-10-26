@@ -1,4 +1,37 @@
+ <rt-import name="ProgressLabel" from="./components/dathena/progress-label" />
+
  <div>
-	{this.props.children}
+	{this.mapStateToProps(this.props.children, ['xhr'])}
 	<p class="text-center text-muted mb-md">Copyright &#169; 2016 by Dathena Science</p>
+	<div rt-if="this.state.xhr.loading < 100 && this.state.xhr.isFetching !== 0" class="progress-label-container">
+        <div class="progress-example">
+            <ProgressLabel
+                className="label-1"
+                progress={this.state.xhr.loading}
+                startDegree={-45}
+                progressWidth={3.5}
+                trackWidth={4}
+                cornersWidth={2}
+                progressColor="#3f989a"
+                trackColor="transparent"
+                fillColor="transparent"
+                size={45}>
+            </ProgressLabel>
+            <ProgressLabel
+                className="label-2"
+                progress={this.state.xhr.loading}
+                startDegree={-90}
+                progressWidth={3.5}
+                trackWidth={4}
+                cornersWidth={2}
+                progressColor="#3f989a"
+                trackColor="transparent"
+                fillColor="transparent"
+                size={33}>
+            </ProgressLabel>
+            <span class="loading-label">Loading...</span>
+        </div>
+        {this.renderMessage()}
+        <span class="loading-backdrop-custom" style=""></span>
+    </div>
 </div>
