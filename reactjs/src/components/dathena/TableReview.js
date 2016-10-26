@@ -513,6 +513,25 @@ var Row = React.createClass({
             this.props.onClick(event, this.props.index);
     },
 
+    // renderColorConfidence(doc) {
+    //     let {
+    //         confidence_level,
+    //         group_avg_centroid_distance,
+    //         group_max_centroid_distance,
+    //         group_min_centroid_distance
+    //     } = doc;
+
+    //     if(doc != null) {
+    //         switch(true) {
+    //             case confidence_level < group_avg_centroid_distance:
+    //                 return "success";
+    //             case confidence_level > group_avg_centroid_distance && confidence_level < (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+    //                 return "warning"
+    //             case confidence_level > (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+    //                 return "danger"
+    //         }
+    //     }
+    // },
     renderColorConfidence(doc) {
         let {
             confidence_level,
@@ -523,14 +542,39 @@ var Row = React.createClass({
 
         if(doc != null) {
             switch(true) {
-                case confidence_level < group_avg_centroid_distance:
+                case confidence_level > 66:
                     return "success";
-                case confidence_level > group_avg_centroid_distance && confidence_level < (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+                case confidence_level > 33 && confidence_level < 66:
                     return "warning"
-                case confidence_level > (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+                case confidence_level < 33:
                     return "danger"
             }
         }
+    },
+
+    replace(str, s, e) {
+        var i = 0, len = str.length;
+        while(i < len) {
+            str = str.replace(s, e);
+            i++;
+        }
+        return str;
+    },
+
+    getIndex(array, name2) {
+        debugger
+        let index = -1;
+        name2 = this.replace(name2, ' ', '').toLowerCase()
+        if(array && array.length > 0) {
+            for(let i = array.lenth - 1; i >= 0; i--) {
+                if(array[i] && this.replace(array[i].name, ' ', '').toLowerCase() == name2)
+                {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
     },
 
     renderStatus(status) {
@@ -547,7 +591,7 @@ var Row = React.createClass({
     },
 
     render() {
-        let { document, numberChecked, noConfidence, categories, confidentialities, hide } = this.props;
+        let { action, document, numberChecked, noConfidence, categories, confidentialities, hide } = this.props;
         return (
             <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
                 { (hide && hide.checkbox) ? '' : <td>
@@ -595,8 +639,8 @@ var Row = React.createClass({
                             id="selectCategory"
                             className="form-control"
                             data={categories}
-                            value={findIndex(categories, (c) => {
-                                return (c.id == document.category.id)
+                            value={findIndex(categories, (cat) => {
+                                return (this.replace(cat.name, ' ', '').toLowerCase() == this.replace(document.category.name, ' ', '').toLowerCase())
                             })}/>
                     </div>
                 </td>
@@ -621,8 +665,8 @@ var Row = React.createClass({
                             id="selectConfidentiality"
                             className="form-control"
                             data={confidentialities}
-                            value={findIndex(confidentialities, (c) => {
-                                return (c.id == document.confidentiality.id)
+                            value={findIndex(confidentialities, (con) => {
+                                return (this.replace(con.name, ' ', '').toLowerCase() == this.replace(document.confidentiality.name, ' ', '').toLowerCase())
                             })}
                         />
                     </div>

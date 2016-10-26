@@ -338,6 +338,7 @@ var OrphanReview = React.createClass({
                 "id": this.state.orphanCurrent.id
             },
             success: (res) => {
+                debugger
                 this.setState({ statistics: res, shouldUpdate: true });
             }
         });

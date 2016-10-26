@@ -308,3 +308,50 @@
     margin-left: -6px;
   }
 }
+
+.review-status-table{
+  tbody{
+    tr{
+      td{
+        text-align: left;
+      }
+    }
+  }
+  .border-top{
+    border-top: 1px solid #eee;
+  }
+}
+
+.review-status-cat-table{
+  tbody{
+    tr{
+      td{
+        padding: 3px;
+        &:last-child{
+          text-align: right;
+        }
+      }
+    }
+  }
+  border-bottom: 1px solid #ddd; 
+}
+
+.search-box-wrap{
+  position: relative;
+  width: 220px;
+  vertical-align: top;
+  top: -3px;
+  .fa-search{
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+}
+.search-box-input{
+  border: 1px solid #aaaaaa;
+  width: 220px;
+  height: 32px;
+  border-radius: 3px;
+  padding: 0 5px;
+  position: absolute;
+}

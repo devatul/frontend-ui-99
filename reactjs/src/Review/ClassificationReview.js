@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
-import Constant from '../Constant.js'
+import Constant, { fetching } from '../Constant'
 import { cloneDeep, isEqual, find, findIndex } from 'lodash'
 import { makeRequest } from '../utils/http'
 
@@ -19,20 +19,24 @@ var ClassificationReview = React.createClass({
                 doc: 0,
                 review: 0
             },
-            init: {
-                categories: [],
-                confidentialities: []
-            },
             stackChange: [],
             dataRequest: []
         };
     },
 
-    componentDidMount() {
-        this.getCategories();
-        this.getConfidentialities();
-        this.getClassificationReview();
+    xhr: {
+        getReview: null,
+        getCat: null,
+        getConfident: null
     },
+
+    componentDidMount() {
+        this.xhr.getCat = this.getCategories();
+        this.xhr.getConfident  = this.getConfidentialities();
+        this.xhr.getReview = this.getClassificationReview();
+        debugger
+    },
+
 
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;  
@@ -40,6 +44,7 @@ var ClassificationReview = React.createClass({
 
     componentDidUpdate(prevProps, prevState) {
         let { dataReview, current } = this.state;
+
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
@@ -53,19 +58,29 @@ var ClassificationReview = React.createClass({
     },
 
     componentWillUnmount() {
-        if(this.getClassificationReview && this.getClassificationReview.abort) {
-            console.log('abort')
-            this.getClassificationReview.abort();
+        let {
+            getReview,
+            getCat,
+            getConfident
+        } = this.xhr;
+
+        if(getReview && getReview.abort) {
+            getReview.abort();
         }
-        if(this.getCategories && this.getCategories.abort) {
-            console.log('abort')
-            this.getCategories.abort();
+        if(getCat && getCat.abort) {
+            getCat.abort();
         }
-        if(this.getConfidentialities && this.getConfidentialities.abort) {
-            console.log('abort')
-            this.getConfidentialities.abort();
+        if(getConfident && getConfident.abort) {
+            getConfident.abort();
         }
-        debugger        
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.SUCCESS
+                }
+            })
+        });
     },
 
     checkValidNumber(documents) {
@@ -84,14 +99,10 @@ var ClassificationReview = React.createClass({
 
         updateData = update(dataReview, {
             [current.review]: {
-                checkedNumber: {
-                    $set: numCheck
-                },
-                validateNumber: {
-                    $set: numValid
-                },
-                checkedAll: {
-                    $set: (numCheck === docLength)
+                $merge: {
+                    checkedNumber: numCheck,
+                    validateNumber: numValid,
+                    checkedAll: (numCheck === docLength)
                 }
             }
         });
@@ -278,7 +289,9 @@ var ClassificationReview = React.createClass({
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
-                            checked: { $set: event.target.checked }
+                            $merge: {
+                                checked: event.target.checked
+                            }
                         }
                     }
                 }
@@ -372,8 +385,8 @@ var ClassificationReview = React.createClass({
                     }
                 },
 
-                checkedAll: {
-                    $set: event.target.checked
+                $merge: {
+                    checkedAll: event.target.checked
                 }
             }
         });
@@ -383,7 +396,6 @@ var ClassificationReview = React.createClass({
                 $set: index
             }
         });
-        debugger
         this.setState({ dataReview: updateData, current: updateCurrent, shouldUpdate: true });
     },
 
@@ -426,7 +438,6 @@ var ClassificationReview = React.createClass({
     },
 
     assignCategoryAndConfidentiality2nd() {
-        debugger
         return makeRequest({
             method: "POST",
             params: JSON.stringify(this.state.dataRequest),
@@ -438,103 +449,38 @@ var ClassificationReview = React.createClass({
     },
 
     getClassificationReview() {
-
-        // let data = [  
-        //     {
-        //         "language": {
-        //         "id": 1,
-        //         "short_name": "EN"
-        //         },
-        //         "category": {
-        //         "id": 1,
-        //         "name": "Accounting/Tax"
-        //         },
-        //         "confidentiality": {
-        //         "id": 1,
-        //         "name": "Banking Secrecy"
-        //         },
-        //         "documents": [
-        //         {
-        //             "name": "doc_name.doc",
-        //             "path": "/doc_path/doc_name.doc",
-        //             "owner": "owner_name",
-        //             "confidence_level": 40,
-        //             "centroid_distance": 1.5,
-        //             "group_min_centroid_distance": 1.6,
-        //             "group_max_centroid_distance": 2,
-        //             "group_avg_centroid_distance": 42,
-        //             "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-        //             "creation_date": "2012-04-23",
-        //             "modification_date": "2012-04-23",
-        //             "legal_retention_until": "2012-04-23",
-        //             "number_of_classification_challenge": 1,
-        //             "category": {
-        //             "id": 1,
-        //             "name": "Accounting/Tax"
-        //             },
-        //             "confidentiality": {
-        //             "id": 1,
-        //             "name": "Public"
-        //             }
-        //         }
-        //         ]
-        //     },
-        //     {
-        //         "language": {
-        //         "id": 1,
-        //         "short_name": "FR"
-        //         },
-        //         "category": {
-        //         "id": 1,
-        //         "name": "Accounting/Tax"
-        //         },
-        //         "confidentiality": {
-        //         "id": 1,
-        //         "name": "Banking Secrecy"
-        //         },
-        //         "documents": [
-        //         {
-        //             "name": "doc_name.doc",
-        //             "path": "/doc_path/doc_name.doc",
-        //             "owner": "owner_name",
-        //             "confidence_level": 40,
-        //             "centroid_distance": 1.5,
-        //             "group_min_centroid_distance": 1.6,
-        //             "group_max_centroid_distance": 2,
-        //             "group_avg_centroid_distance": 42,
-        //             "image_url": "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-        //             "creation_date": "2012-04-23",
-        //             "modification_date": "2012-04-23",
-        //             "number_of_classification_challenge": 1,
-        //             "legal_retention_until": "2012-04-23",
-        //             "category": {
-        //             "id": 1,
-        //             "name": "Accounting/Tax"
-        //             },
-        //             "confidentiality": {
-        //             "id": 1,
-        //             "name": "Public"
-        //             }
-        //         }
-        //         ]
-        //     }
-        // ];
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.START
+                }
+            })
+        });
         return makeRequest({
             path: "api/classification_review/",
             success: (data) => {
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.SUCCESS
+                        }
+                    })
+                });
                 debugger
-                for(let i = data.length - 1; i >= 0; i--) {
-                    data[i].validateNumber = 0;
-                    data[i].checkedNumber = 0;
-                    data[i].checkedAll = false;
-
-                    for(let j = data[i].documents.length - 1; j >= 0; j--) {
-                        data[i].documents[j].checked = false;
-                        //data[i].documents[j].status = 'reject';
-                    }
-                }
-                //debugger
                 this.setState({ dataReview: data, shouldUpdate: true });
+            },
+            error: (err) => {
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.ERROR
+                        }
+                    }),
+                    error: err
+                });
             }
         });
 

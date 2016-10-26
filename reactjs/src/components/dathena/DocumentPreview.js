@@ -88,7 +88,7 @@ var documentPreview = React.createClass({
                         {this.props.children}
                         <div className="file-preview mt-md">
                             { document &&
-                                <a ref="link" href={document.image_url}></a>
+                                <a ref="link" href={(document.image_url)}></a>
                             }
                         </div>
                     </Modal.Body>

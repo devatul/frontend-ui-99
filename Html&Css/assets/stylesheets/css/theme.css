@@ -2598,9 +2598,6 @@ html.dark .text-muted {
 .float-none {
   float: none !important; }
 
-.overflow-hidden {
-  overflow: hidden; }
-
 .bg-default {
   background: #ebebeb;
   color: #777; }
@@ -3819,10 +3816,6 @@ html.dark .open > .dropdown-toggle.btn-default {
 .btn-blue-rv {
   border: 1px solid #1BC3E1;
   color: #1BC3E1; }
-
-.btn-disabled-rv {
-  border: 1px solid #dddddd !important;
-  color: #dddddd !important; }
 
 /* Notifications */
 .notifications {

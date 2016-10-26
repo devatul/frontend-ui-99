@@ -1628,6 +1628,36 @@ div[id^='legendContainer']{
   vertical-align: middle;
 }
 
+.cl_checker_table{
+  th{
+    .dropdown{
+      vertical-align: middle;
+      &.r{
+        .dropdown-menu{
+          left: auto;
+          right: -10px;
+          &.has-arrow{
+            &:before, &:after{
+              left: auto;
+              right: 10px;
+            }
+          }
+        }
+      }
+    }
+    .dropdown-menu{
+      width: 35vw;
+      white-space: normal;
+    }
+  }
+  .file-name{
+    @include calc(width, '100% - 20px');
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 .review_table_no_progress{
   .select-group select{
     color: #777;
@@ -1962,10 +1992,6 @@ div[id^='legendContainer']{
 
 .checkbox-custom input[type="checkbox"]:disabled + label:before{
   border: 1px solid #bbb!important;
-}
-
-.checkbox-custom input[type="checkbox"]:focus + label:before{
-  border-color: #0FABE6 !important;
 }
 
 .document_note {

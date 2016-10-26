@@ -108,6 +108,7 @@
                                         <table.row rt-repeat=" document in review.documents "
                                             document={document}
                                             index="{reviewIndex + '_' + documentIndex}"
+                                            action={review}
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
                                             onClick={this.handleTableRowOnClick}
