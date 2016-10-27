@@ -125,6 +125,10 @@
 
                             <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
                         </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
+                        </li>
                     </ul>
                 </li>
 
@@ -179,6 +183,10 @@
 
                             <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
                         </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -209,6 +217,10 @@
                         <li>
 
                             <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
                         </li>
                     </ul>
                 </li>

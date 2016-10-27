@@ -60,6 +60,10 @@ var RickInsight = React.createClass({
                 return { color: ' bg-secondary', info: 'Storage Space with obsolete data.' };
         }
     },
+    formatString(str){
+        debugger
+        return parseInt(_.split(str , ' ' , -1))
+    },
     formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     },
@@ -67,41 +71,39 @@ var RickInsight = React.createClass({
         let children = [];
         if(this.state.rickInsight != null && this.state.rickInsight.stale_files != null) {
              _.forEach(this.state.rickInsight.risks, function(object , index){
-            let  color  = this.getRickType(index).color
-            let className = "panel-body " + color + " widget-panel insight-panel"
-            let name = this.upperFirst(object.name)
-            let content = this.getRickType(index).info
-            let previous = this.formatNumber(object.previous_scan_value)
-            let current = this.formatNumber(object.current_scan_value)
+                debugger
+                let className = "panel-body " + this.getRickType(index).color + " widget-panel insight-panel"
+                let previous = this.formatNumber(object.previous_scan_value)
+                let current = this.formatNumber(object.current_scan_value)
 
-            let classIcon = object.current_scan_value > object.previous_scan_value ? 'fa fa-chevron-up' : (object.current_scan_value == object.previous_scan_value ? 'fa fa-minus' : 'fa fa-chevron-down')
+                let classIcon = this.formatString(current) > this.formatString(previous) ? 'fa fa-chevron-up' : (this.formatString(current) == this.formatString(previous) ? 'fa fa-minus' : 'fa fa-chevron-down')
 
-            children[index] = <div className="col-md-4" key={index}>
-                                <section className="panel">
+                children[index] = <div className="col-md-4" key={index}>
+                                    <section className="panel">
 
-                                  <div className={className}>
-                                    <h4 className="widget-title">{name}
+                                      <div className={className}>
+                                        <h4 className="widget-title">{this.upperFirst(object.name)}
 
-                                      <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
-                                                            setValue={content} />
+                                          <HelpButton1 className="" classNote="overview_timeframe fix-overview-help-button"
+                                                                setValue={this.getRickType(index).info} />
 
-                                   </h4>
-                                   <div className="insight-stat">
-                                    <i className={classIcon} aria-hidden="true"></i>
-                                    <span>{previous}</span>
-                                  </div>
-                                  <div className="widget-summary">
-                                    <div className="widget-summary-col">
-                                      <div className="summary">
-                                        <div className="info">
-                                          <strong className="amount">{current}</strong>
+                                       </h4>
+                                       <div className="insight-stat">
+                                        <i className={classIcon} aria-hidden="true"></i>
+                                        <span>{previous}</span>
+                                      </div>
+                                      <div className="widget-summary">
+                                        <div className="widget-summary-col">
+                                          <div className="summary">
+                                            <div className="info">
+                                              <strong className="amount">{current}</strong>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  </section>
                                 </div>
-                              </section>
-                            </div>
             }.bind(this));
         }
 
@@ -110,7 +112,7 @@ var RickInsight = React.createClass({
             <div>
                 {children}
                 <div className="col-md-4">
-                      <section class="panel pb-none">
+                      <section className="panel">
                         <div className="panel-body bg-secondary-2 widget-panel insight-panel">
                           <h4 className="widget-title">Stale Files
 
@@ -128,19 +130,19 @@ var RickInsight = React.createClass({
                               <li>
                                 <div className="row">
                                   <div className="col-xs-6 text-left"><span>1-2 Years</span></div>
-                                  <div className="col-xs-6 text-right"><span class="bold text-right"> {this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[0].value)}</span></div>
+                                  <div className="col-xs-6 text-right"><span className="bold text-right"> {this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[0].value)}</span></div>
                                 </div>
                               </li>
                               <li>
                                 <div className="row">
                                   <div className="col-xs-6 text-left"><span>3+ Years</span></div>
-                                  <div className="col-xs-6 text-right"><span class="bold">{ this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[1].value)}</span></div>
+                                  <div className="col-xs-6 text-right"><span className="bold">{ this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.years[1].value)}</span></div>
                                 </div>
                               </li>
                               <li>
                                 <div className="row">
                                   <div className="col-xs-6 text-left"><span>Total</span></div>
-                                  <div className="col-xs-6 text-right"><span class="bold">{this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.total}</span></div>
+                                  <div className="col-xs-6 text-right"><span className="bold">{this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.total}</span></div>
                                 </div>
                               </li>
                             </ul>

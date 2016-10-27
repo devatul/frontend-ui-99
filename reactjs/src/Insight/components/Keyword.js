@@ -197,7 +197,7 @@ var Keywords = React.createClass({
                     <tr>
                     <th> Confidentiality Level </th>
                     <th style = {{ width: '50vw'}}> Keywords </th>
-                    <th class = "text-center" style = {{ textAlign: 'center' }}> Predicted Efficiency </th>
+                    <th className = "text-center" style = {{ textAlign: 'center' }}> Predicted Efficiency </th>
                     </tr>
                 </thead>
                 <tbody>{child}</tbody>

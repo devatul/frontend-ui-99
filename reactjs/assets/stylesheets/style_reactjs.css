@@ -325,6 +325,25 @@
         margin-left: auto;
     }
 }
-.pb-none {
+/*.pb-none {
     padding-bottom: 10px !important;
+}*/
+.search-box-wrap {
+    position: relative;
+    width: 220px;
+    vertical-align: top;
+    top: -3px;
+}
+.search-box-input {
+    border: 1px solid #aaaaaa;
+    width: 220px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 0 5px;
+    position: absolute;
+}
+.search-box-wrap .fa-search {
+    position: absolute;
+    right: 8px;
+    top: 8px;
 }
