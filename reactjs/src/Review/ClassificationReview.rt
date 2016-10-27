@@ -23,7 +23,7 @@
 <section>
 <div class="container">
     <Row>
-        <Col md={12}>
+        <Col md="{12}">
             <Panel.custom class="panel-has-child actions-panel">
                 <Panel.head>
                     <h2 class="panel-title inline-block-item mr-sm">My Review
@@ -51,7 +51,6 @@
                             </div>
                         </Panel.head>
                         <Panel.body>
-                            <!--<p class="document_note">You have {review.documents.length - review.validateNumber} documents to review within  <span class="text-capitalize">{review.category.name}</span> category with <span class="text-capitalize">{review.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                                 <Button
@@ -99,21 +98,19 @@
                                                     setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                             </th>
                                             <th class="text-center">Status 
-                                                <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
-                                                            setValue="This represent the status of the review for each file." />-->
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="fix-td-checkbox">
-                                        <table.row rt-repeat=" document in review.documents "
-                                            document={document}
+                                        <table.row rt-repeat="document in review.documents"
+                                            document="{document}"
                                             index="{reviewIndex + '_' + documentIndex}"
-                                            action={review}
-                                            categories={this.state.categories}
-                                            confidentialities={this.state.confidentialities}
-                                            onClick={this.handleTableRowOnClick}
-                                            onChange={this.handleTableRowOnChange}
-                                            numberChecked={review.checkedNumber} />
+                                            action="{review}"
+                                            categories="{this.state.categories}"
+                                            confidentialities="{this.state.confidentialities}"
+                                            onClick="{this.handleTableRowOnClick}"
+                                            onChange="{this.handleTableRowOnChange}"
+                                            numberChecked="{review.checkedNumber}" />
                                     </tbody>
                                 </Table>
                             </div>
@@ -125,11 +122,11 @@
     </Row>
 </div>
 <DocumentPreview
-    open={this.state.openPreview}
+    open="{this.state.openPreview}"
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-    nextDocument="{() => this.onClickDocumentName(this.state.current.review + '_' + (this.state.current.doc + 1))}"
-    undo="{() => this.handleUndo(this.state.current.review)}"
-    closeModal={this.closePreview}>
+    nextDocument="() => this.onClickDocumentName(this.state.current.review + '_' + (this.state.current.doc + 1))"
+    undo="() => this.handleUndo(this.state.current.review)"
+    closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
@@ -169,10 +166,10 @@
         <tbody>
             <table.row
                 document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-                categories={this.state.categories}
-                confidentialities={this.state.confidentialities}
-                onClick={this.handleTableRowOnClick}
-                onChange={this.handleTableRowOnChange}
+                categories="{this.state.categories}"
+                confidentialities="{this.state.confidentialities}"
+                onClick="{this.handleTableRowOnClick}"
+                onChange="{this.handleTableRowOnChange}"
                 hide="{{ checkbox: true }}"
                 index="{this.state.current.review + '_' + this.state.current.doc}" />
         </tbody>

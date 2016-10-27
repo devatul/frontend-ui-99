@@ -28,7 +28,7 @@ var documentPreview = React.createClass({
 
     componentDidUpdate(prevProps, prevState) {
         if((prevProps.open === false && this.props.open) || (this.props.document != null && !isEqual(this.props.document.image_url, prevProps.document.image_url))) {
-            $(this.refs.link).gdocsViewer();
+            this.loadDocument()
         }
     },
 
@@ -38,6 +38,25 @@ var documentPreview = React.createClass({
 
     handleUndo(event) {
 
+    },
+
+    loadDocument() {
+        let {
+            preview
+        } = this.refs,
+        {
+            document
+        } = this.props;
+
+        render(React.createElement('div', {
+            className: "gdocsviewer"
+        },
+        React.createElement('iframe', {
+            src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
+            width: 600,
+            height: 700,
+            style: { border: 'none' }
+        })), preview)
     },
 
     closeModal(event) {
@@ -86,10 +105,7 @@ var documentPreview = React.createClass({
                     </Modal.Header>
                     <Modal.Body>
                         {this.props.children}
-                        <div className="file-preview mt-md">
-                            { document &&
-                                <a ref="link" href={(document.image_url)}></a>
-                            }
+                        <div ref="preview" className="file-preview mt-md">
                         </div>
                     </Modal.Body>
                 </Modal>
