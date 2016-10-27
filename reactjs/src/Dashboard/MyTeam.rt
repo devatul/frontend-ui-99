@@ -3,7 +3,7 @@
 <section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
   <header class="panel-heading">
     <h2 class="panel-title">My Team
-      <HelpButton className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content={this.state.content} />
+      <HelpButton className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile" content={this.state.content} />
     </h2>
   </header>
 

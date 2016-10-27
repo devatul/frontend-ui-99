@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Identity.rt'
 import Constant from '../Constant.js'
-import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
@@ -45,32 +44,30 @@ var Indentity = React.createClass({
         return false
     },
     handleFilter: function(bodyRequest) {
-
-        let value = bodyRequest.number_users;
-        console.log('bodyRequest', bodyRequest)
-        if (value == 'Top 5') {
-            value = 5
-        }
-        if (value == 'Top 15') {
-            value = 15
-        }
-        if (value == 'Top 25') {
-            value = 25
-        }
-        if (value == 'Top 50') {
-            value = 50
-        }
-        let call= makeRequest({
-            path: 'api/insight/iam?number_users=' + value,
-            success: (data) => {
-                debugger
-                this.updateChartData(data)
+        debugger
+        console.log(bodyRequest)
+        if(!_.isNull(bodyRequest)){
+            let value = bodyRequest.number_users;
+            if (value == 'Top 5') {
+                value = 5
             }
-        });
-        call.abort()
+            if (value == 'Top 15') {
+                value = 15
+            }
+            if (value == 'Top 25') {
+                value = 25
+            }
+            if (value == 'Top 50') {
+                value = 50
+            }
+            let call= makeRequest({
+                path: 'api/insight/iam?number_users=' + value,
+                success: (data) => {
+                    this.updateChartData(data)
+                }
+            });
+        }
 
-
-        /* this.filterData(value);*/
     },
 
     getData() {
@@ -239,8 +236,6 @@ var Indentity = React.createClass({
     componentDidMount() {
         this.getData();
         javascript();
-        javascriptOver();
-
     },
     render: template
 });

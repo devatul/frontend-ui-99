@@ -347,3 +347,6 @@
     right: 8px;
     top: 8px;
 }
+.fix_helpbutton_popup {
+    margin-top: 4px;
+}

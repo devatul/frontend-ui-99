@@ -22,7 +22,7 @@ module.exports = React.createClass({
 			tokenAuth: ""
 		};
 	},
-    componentWillMount() 
+    componentWillMount()
     {
 		let { pathname } = this.props.location
     	var token = sessionStorage.getItem('token');
@@ -43,6 +43,7 @@ module.exports = React.createClass({
 				{
 					makeRequest({
 						path: 'api/token/api-token-refresh/',
+                        method : 'POST',
 						params: {
 							token: token
 						},
@@ -52,18 +53,18 @@ module.exports = React.createClass({
 					});
 				}
 	    	}, Constant.TIMEVALIDTOKEN);
-			
+
 		} else {
 			console.log("noToken");
-			browserHistory.push('/Account/Signin');	
+			browserHistory.push('/Account/Signin');
 		}
     },
 
 	componentWillUnmount() {
-		debugger
+
 		sessionStorage.removeItem('token')
 	},
-	
+
 
 	componentDidUpdate(prevProps, prevState) {
 		let {
@@ -102,7 +103,7 @@ module.exports = React.createClass({
 					});
 					break;
 				case fetching.STARTED:
-					
+
 					break;
 				case fetching.SUCCESS:
 				debugger
@@ -128,7 +129,7 @@ module.exports = React.createClass({
 
 		if(xhr.loading < 100)
 		{
-			this.setLoading()	
+			this.setLoading()
 		}
     },
 

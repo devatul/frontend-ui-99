@@ -76,10 +76,6 @@ var MenuBar1 = React.createClass({
     },
     componentDidMount() {
         if (this.props.showFilter) {
-            /*  this.getConfidentiality(true);
-              this.getCategory(true);
-              this.getDoctypes(true);
-              this.getLanguages(true);*/
             this.copyNumberOfUser(true);
         }
     },
@@ -452,29 +448,7 @@ var MenuBar1 = React.createClass({
         console.log("filterLabel_after:", this.state.filterLabel)
 
     },
-    getScanResult() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/scan/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var update_scan_result = update(this.state, {
-                    scan_result: {
-                        $set: data
-                    }
-                });
-                this.setState(update_scan_result);
-            }.bind(this),
-            error: function(xhr, status, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
-        });
-    },
+
     render: template
 });
 module.exports = MenuBar1;
