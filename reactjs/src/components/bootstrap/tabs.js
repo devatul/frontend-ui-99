@@ -10,7 +10,6 @@ var tabs = React.createClass({
     },
 
     render() {
-        debugger
         let _props = this.props,
 
             children = React.Children.map(this.props.children,
@@ -33,7 +32,6 @@ var tabs = React.createClass({
 
 var nav = React.createClass({
     render() {
-        debugger
         let _props = this.props,
             children = React.Children.map(this.props.children,
                     (child) => React.cloneElement(child, {

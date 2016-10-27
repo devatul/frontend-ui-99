@@ -42,7 +42,6 @@ var Admin_Step2 = React.createClass({
         this.setState({complete: 3 , readOnly2 : true})
     },
     add(value){
-        debugger
         if(value == 1 ){
             /*let addNdew = _.cloneDeep(this.state.add_DomainDetails)
             addNdew[0] = {key : addNdew[0].key + 1}
@@ -76,7 +75,6 @@ var Admin_Step2 = React.createClass({
 
     },
     editButton(value, readOnly) {
-        debugger
         if (value == 1) {
             this.setState({ readOnly: false })
             $( "#block1" ).find( "input" ).prop('disabled', false);

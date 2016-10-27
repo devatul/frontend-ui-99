@@ -106,8 +106,7 @@ module.exports = function () {
   $('.more').each(function() {
       var content = $(this).html();
 
-      if(content.length > showChar) {
-
+      if (content.length > showChar) {
           var c = content.substr(0, showChar);
           var h = content.substr(showChar, content.length - showChar);
 
@@ -115,11 +114,10 @@ module.exports = function () {
 
           $(this).html(html);
       }
-
   });
-debugger
+
   $(".morelink").click(function(){
-      if($(this).hasClass("less")) {
+      if ($(this).hasClass("less")) {
           $(this).removeClass("less");
           $(this).html(moretext);
           $(this).parents('tr').find('.pie-wrapper').removeClass('pie-md').addClass('pie-sm');
@@ -128,9 +126,11 @@ debugger
           $(this).html(lesstext);
           $(this).parents('tr').find('.pie-wrapper').removeClass('pie-sm').addClass('pie-md');
       }
+
       $(this).parent().prev().toggle();
       $(this).prev().toggle();
+
       return false;
   });
 
-}
+};

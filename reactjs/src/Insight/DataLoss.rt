@@ -8,11 +8,11 @@
 <div class="container">
     <section class="panel panel-featured panel-featured-primary">
         <header class="panel-heading">
-            <h2 class="panel-title">Risk Insights
+            <h2 class="panel-title">
+                Risk Insights
                 <HelpButton1
-                classMenu="fix-overview-help-button-table"
-                classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
-
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
             </h2>
         </header>
         <div class="panel-body pb-none">

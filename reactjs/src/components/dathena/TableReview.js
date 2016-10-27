@@ -284,7 +284,6 @@ var Row3 = React.createClass({
 
     render() {
         let { document, categories, confidentialities } = this.props;
-        debugger
         return(
             <tr className="opa" onChange={this.handleOnChange}>
                 <td>
@@ -562,7 +561,6 @@ var Row = React.createClass({
     },
 
     getIndex(array, name2) {
-        debugger
         let index = -1;
         name2 = this.replace(name2, ' ', '').toLowerCase()
         if(array && array.length > 0) {

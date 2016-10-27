@@ -81,12 +81,10 @@ var ReviewValidation = React.createClass({
             }
         }
         if(this.state.reviewerCurrent != prevState.reviewerCurrent) {
-            debugger
             this.getReviewValidation();
             this.getReviewInfo();
         }
         if(!isEqual(this.state.dataReview, prevState.dataReview)) {
-            debugger
             //this.reviewerProgress();
         }
         if(!isEqual(this.state.bodyRequest, prevState.bodyRequest)) {
@@ -98,7 +96,6 @@ var ReviewValidation = React.createClass({
         makeRequest({
             path: "api/label/category/",
             success: (res) => {
-                debugger
                 let categoriesReview = cloneDeep(res);
                 categoriesReview[res.length] = {
                     id: 'summary',
@@ -159,7 +156,6 @@ var ReviewValidation = React.createClass({
                 "id": this.state.categoryCurrent.id
             },
             success: (res) => {
-                debugger
                 if(!res.total_reviewers) return;
 
                 let bodyRequest = update(this.state.bodyRequest, {
@@ -175,7 +171,6 @@ var ReviewValidation = React.createClass({
                 });
             },
             error: (err) => {
-                debugger
                 if(err.status === 400) {
                     
                     this.setState({
@@ -196,7 +191,6 @@ var ReviewValidation = React.createClass({
     },
 
     setCategoryCurrent(categoryIndex) {
-        debugger
         if(categoryIndex < this.state.categoriesReview.length) {
             let updateCurrent = update(this.state.currentIndex, {
                 category: {
@@ -266,7 +260,6 @@ var ReviewValidation = React.createClass({
     },
 
     onClickValidationButton(panel, docIndex) {
-        debugger
         let current = (this.constructor.challenge === panel ? 'challenge_docs' : 'challenge_back_docs'),
 
             document = this.state.dataReview[current][docIndex],
@@ -313,14 +306,11 @@ var ReviewValidation = React.createClass({
                     data: document
                 }]
             });
-
-            debugger
         this.setState({ dataReview: updateData, bodyRequest: updateRequest, stackChange: updateStack, shouldUpdate: true });
     },
 
     validateDocuments() {
         console.log('bodyRequest', this.state.bodyRequest)
-        debugger
         return makeRequest({
             method: "PUT",
             path: "api/review/review_validation/",
@@ -342,7 +332,6 @@ var ReviewValidation = React.createClass({
                     id: panel + '_' + docIndex,
                     data: this.state.dataReview[current][docIndex]
                 });
-                debugger
         switch(event.target.id) {
             case 'SelectCategory':
                 this.onChangeCategory(panel, docIndex, event.target.value);
@@ -368,7 +357,6 @@ var ReviewValidation = React.createClass({
                 }
             }
         });
-        debugger
         this.setState({ dataReview: updateComment, shouldUpdate: true });
     },
 
@@ -390,10 +378,8 @@ var ReviewValidation = React.createClass({
                     }
                 }
             });
-            debugger
         if(!initCategory) {
             let { categories } = this.state.init;
-            debugger
             categories.push({
                 id: panel + '_' + docIndex,
                 data: Object.assign({}, document.current_category)
@@ -423,7 +409,6 @@ var ReviewValidation = React.createClass({
 
             if(!initConfidentiality) {
                 let { confidentialities } = this.state.init;
-                debugger
                 confidentialities.push({
                     id: panel + '_' + docIndex,
                     data: Object.assign({}, document.current_confidentiality)
@@ -437,7 +422,6 @@ var ReviewValidation = React.createClass({
         let { docIndex, panel } = this.state.current,
             current = (this.constructor.challenge === panel ? "challenge_docs" : "challenge_back_docs");
             docIndex = parseInt(docIndex);
-        debugger
         if(doc < this.state.dataReview[current].length - 1) {
 
             let updateCurrent = update(this.state.current, {
@@ -538,8 +522,6 @@ var ReviewValidation = React.createClass({
                     'reviewer_id': this.state.reviewerCurrent.id
                 },
                 success: (res) => {
-                    debugger
-
                     res.validation_progress = Math.round(res.validation_progress)
 
                     this.setState({
@@ -584,7 +566,6 @@ var ReviewValidation = React.createClass({
     },
 
     handleUndo() {
-        debugger
         let { stackChange } = this.state,
             stackLength = stackChange.length - 1;
         if(stackLength >= 0) {
@@ -657,7 +638,6 @@ var ReviewValidation = React.createClass({
                 $set: this.state.dataReview.challenged_docs - num
             }
         });
-        debugger
         this.setState({
             dataReview: updateData,
             shouldUpdate: true
@@ -669,7 +649,6 @@ var ReviewValidation = React.createClass({
         let { currentIndex } = this.state,
             { total_reviewers } = this.state.reviewers,
             indexReviewer = currentIndex.reviewer == 'default' ? 0 : parseInt(currentIndex.reviewer);
-        debugger
         if((indexReviewer + 1) < total_reviewers) {
             let updateCurrent = update(currentIndex, {
                     reviewer: {
@@ -684,7 +663,6 @@ var ReviewValidation = React.createClass({
                         $set: 0
                     }
                 });
-                debugger
             this.setState({ currentIndex: updateCurrent, reviewerCurrent: this.state.reviewers.reviewers[0], shouldUpdate: true });
         }
     },
@@ -708,7 +686,6 @@ var ReviewValidation = React.createClass({
             path: "api/review/review_validation/confirm/",
             method: 'POST',
             success: (res) => {
-                debugger
             },
             error: (err) => {
                 if(err.status === 200) {

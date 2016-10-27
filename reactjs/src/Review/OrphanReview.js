@@ -140,7 +140,6 @@ var OrphanReview = React.createClass({
     },
 
     onClickDocumentName(index) {
-        debugger
         if(index <= (this.state.documents.length - 1)) {
             this.setState({
                 openPreview: true,
@@ -338,7 +337,6 @@ var OrphanReview = React.createClass({
                 "id": this.state.orphanCurrent.id
             },
             success: (res) => {
-                debugger
                 this.setState({ statistics: res, shouldUpdate: true });
             }
         });
@@ -470,7 +468,6 @@ var OrphanReview = React.createClass({
             params: { "id": id },
             success: (res) => {
                 //data = res;
-                debugger
                 this.setState({ documents: data, shouldUpdate: true });
             }
         });

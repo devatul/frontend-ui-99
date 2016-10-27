@@ -69,7 +69,6 @@ var HelpButton = React.createClass({
     },
 
     handleClick: function(e) {
-        debugger
         e.stopPropagation();
     },
 

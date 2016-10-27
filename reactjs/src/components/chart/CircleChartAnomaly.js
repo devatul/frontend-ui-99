@@ -30,7 +30,6 @@ var CircleChart = React.createClass({
 
 
     draw() {
-            debugger
             var innerChart = $('#' + this.props.id).find('.anomaly-radial-inner');
            /* var innerChartValue = parseInt(innerChart.attr('data-value'));*/
             var outerChart = $('#' + this.props.id).find('.anomaly-radial-outer');

@@ -106,7 +106,6 @@ module.exports = React.createClass({
 
 					break;
 				case fetching.SUCCESS:
-				debugger
 					this.setState({
 						xhr: update(this.state.xhr, {
 							loading:
@@ -122,7 +121,6 @@ module.exports = React.createClass({
 					break;
 				case fetching.ERROR:
 					let { xhr } = this.state
-					debugger
 					break;
 			}
 		}

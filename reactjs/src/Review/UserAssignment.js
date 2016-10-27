@@ -110,7 +110,6 @@ var UserAssignment = React.createClass({
         if(this.state.category.current != nextState.category.current) {
             var { reviewers } = this.state.datafilter.request;
             var { current } = this.state.category;
-            debugger
             if(reviewers.length > 0 && current.id !== "summary") {
                 
                 this.assignReviewersToCategory();
@@ -149,7 +148,6 @@ var UserAssignment = React.createClass({
         if(indexLabel == -1) {
             indexLabel = filterLabel.length;
         }
-        debugger
         switch(field.id) {
             case selectId.users: 
                 params = update(params, {
@@ -217,7 +215,6 @@ var UserAssignment = React.createClass({
     handleOnClickValidationButton: function(id) {
         var set = (id == 'category') ? 'fixedNumber' : 'category',
             number_docs = (id == 'category') ? this.refs.fixedNumberDoc.value : this.refs.overallCategory.value;
-            debugger
         var updateButton = update(this.state.buttonSample, {
              [id]: {$set: 'success' },
              [set]: {$set: 'normal' }
@@ -273,7 +270,6 @@ var UserAssignment = React.createClass({
         var { current, info, list } = this.state.category;
         var indexCurrent = findIndex(list, { id: current.id, name: current.name });
         var { request } = this.state.datafilter;
-        debugger
         if(request.reviewers.length > 0) {
             if(indexCurrent < list.length) {
 
@@ -325,7 +321,6 @@ var UserAssignment = React.createClass({
                     }
                 }
             });
-            debugger
         this.setState({ datafilter: setReviewer, shouldUpdate: true });
     },
 
@@ -452,7 +447,6 @@ var UserAssignment = React.createClass({
                     }
                 }
             });
-            debugger
         this.setState({ datafilter: updateRequest, reviewer: updateReviewer, shouldUpdate: true });
     },
     handleOnChangeSelectAll: function(checked) {
@@ -489,12 +483,10 @@ var UserAssignment = React.createClass({
             path: 'api/assign/reviewer/',
             params: datafilter.params,
             success: (data) => {
-                debugger
                 let indexSummaryCatgory = findIndex(this.state.summary, { id: this.state.category.current.id + "" });
                 if(indexSummaryCatgory > -1) {
                     let reviewers = this.state.summary[indexSummaryCatgory].reviewers,
                         { request } = this.state.datafilter;
-                    debugger
                     for(let i = data.length - 1; i >= 0; i--) {
                         let indexReviewer = findIndex(reviewers, {
                             id: parseInt(data[i].id)
@@ -515,7 +507,6 @@ var UserAssignment = React.createClass({
                         $set: data[0]
                     }
                 });
-                debugger
                 this.setState({ reviewer: updateListReviewer, shouldUpdate: true, dataChart: this.reviewerChart(data) });
             }
         });
@@ -563,7 +554,6 @@ var UserAssignment = React.createClass({
             path: 'api/assign/category/',
             params: { "id": current.id },
             success: (res) => {
-                debugger
                 res.percentage_doc = orderBy(res.percentage_doc, ['percentage'], ['asc']);
 
                 let updateCategoryInfo = update(this.state.category, {
@@ -580,7 +570,6 @@ var UserAssignment = React.createClass({
                         $set: this.documentTypeChart(res)
                     }
                 });
-                debugger
                 this.setState({ category: updateCategoryInfo, dataChart: updateDataChart, shouldUpdate: true });
             }
         });
@@ -590,7 +579,6 @@ var UserAssignment = React.createClass({
             sync: sync,
             path: "api/assign/summary/",
             success: (res) => {
-                debugger
                 res = orderBy(res, ['name'], ['asc']);
 
                 this.setState({ summary: res, isConfirming: 0, shouldUpdate: true });
@@ -619,7 +607,6 @@ var UserAssignment = React.createClass({
             path: "api/assign/notify/",
             params: JSON.stringify(bodyRequest),
             success: (res) => {
-                debugger
             },
             error: (err) => {
                 if(err.status === 201) {
@@ -628,7 +615,6 @@ var UserAssignment = React.createClass({
 
                     closeModal = setTimeout(() => {
                         this.setState({ isConfirming: 2, shouldUpdate: true });
-                        debugger
                         clearTimeout(closeModal);
                     }, 3000);
                 }

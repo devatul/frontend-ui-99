@@ -56,7 +56,6 @@ var OverView = React.createClass
         var { scan, dataChart, configChart } = this.state,
             { categoryLanguageChart, confidentiality, doctypes } = configChart,
             nextConfig = nextState.configChart;
-            debugger
         return this.state.loading != nextState.loading || !isEqual(scan.result, nextState.scan.result) || !isEqual( configChart, nextConfig );
     },
 
@@ -166,7 +165,6 @@ var OverView = React.createClass
             confidentiality: { $set: confidentialityData },
             doctypes: { $set: doctypeData }
         });
-        debugger
         this.setState({ configChart: updateData });
     },
 
@@ -272,7 +270,6 @@ var OverView = React.createClass
             colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#c1f9a9'],
             data: []
         }, { confidentialities } = this.state.scan.result;
-        debugger
         for( let i = confidentialities.length - 1; i >= 0; i-- ) {
             confidentialityChart.data[i] = {
                 name: upperFirst(confidentialities[i].name),
@@ -283,7 +280,6 @@ var OverView = React.createClass
         if( confidentialityChart.data.length <= 1 ) {
             confidentialityChart.disabled = true;
         }
-        debugger
         return confidentialityChart;
     },
 

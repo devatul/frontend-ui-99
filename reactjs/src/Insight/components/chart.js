@@ -1,4 +1,5 @@
-'Use Strict';
+'use strict';
+
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
@@ -9,30 +10,27 @@ var Chart = React.createClass({
     displayName: 'Chart',
 
     getInitialState() {
-
         return {
             chart_data: this.props.chart_data,
         }
     },
-    shouldComponentUpdate(nextProps, nextState) {
 
+    shouldComponentUpdate(nextProps, nextState) {
         if (this.props.dataChart != nextProps.dataChart) {
             return true
         }
         if (this.props.id != nextProps.id) {
             return true
         }
+
         return false
     },
+
     componentDidUpdate() {
-        var categories = [];
-        var data = [];
-        var categories = this.props.dataChart.categories;
-        var data = this.props.dataChart.data;
-
-
-        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'];
-        var colorsHover = ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
+        let categories = this.props.dataChart.categories,
+            data = this.props.dataChart.data,
+            colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
+            colorsHover = ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE', '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'];
 
         $('#' + this.props.id).highcharts({
             chart: {
@@ -130,27 +128,23 @@ var Chart = React.createClass({
             }]
         });
 
-
         // CONTENT TOGGLE
         // Configure/customize these variables.
-        var showChar = 42; // How many characters are shown by default
-        var ellipsestext = "...";
-        var moretext = "more keywords";
-        var lesstext = "less keywords";
+        let showChar = 42, // How many characters are shown by default
+            ellipsestext = "...",
+            moretext = "more keywords",
+            lesstext = "less keywords";
 
         $('.more').each(function() {
-            var content = $(this).html();
+            let content = $(this).html();
 
             if (content.length > showChar) {
-
-                var c = content.substr(0, showChar);
-                var h = content.substr(showChar, content.length - showChar);
-
-                var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+                let c = content.substr(0, showChar),
+                    h = content.substr(showChar, content.length - showChar),
+                    html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
 
                 $(this).html(html);
             }
-
         });
 
         $(".morelink").click(function() {
@@ -163,48 +157,47 @@ var Chart = React.createClass({
                 $(this).html(lesstext);
                 $(this).parents('tr').find('.pie-wrapper').removeClass('pie-sm').addClass('pie-md');
             }
+
             $(this).parent().prev().toggle();
             $(this).prev().toggle();
+
             return false;
         });
-
-
     },
-    exports(){
 
+    exports(){
         this.props.exports();
     },
-    render() {
 
-        let height = ''
-        if(this.props.height != null){
+    render() {
+        let height = '';
+
+        if (this.props.height != null) {
             height = this.props.height +'px'
         } else {
-            if(this.props.numberUser == 5) {
-            height = '200px'
+            if (this.props.numberUser == 5) {
+                height = '200px'
             }
-            if(this.props.numberUser == 15) {
+            if (this.props.numberUser == 15) {
                 height = '450px'
             }
-            if(this.props.numberUser == 25) {
+            if (this.props.numberUser == 25) {
                 height = '450px'
             }
-            if(this.props.numberUser == 50) {
+            if (this.props.numberUser == 50) {
                 height = '450px'
             }
         }
 
-
-        var style = {
+        let style = {
             'height': height,
-        }
-        return ( < div >
-            < div id = { this.props.id }
-            className = "identity-chart"
-            style = { style } > < /div> < a href = "javascript:;"
-            className = "btn btn-green btn-extract"
-            onClick = { this.exports } > Extract < /a> < /div>
+        };
 
+        return (
+            <div>
+                <div id={ this.props.id } className="identity-chart" style={ style }></div>
+                <a href="javascript:;" className="btn btn-green btn-extract" onClick={ this.exports }>Extract</a>
+            </div>
         );
     },
 });

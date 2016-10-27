@@ -148,7 +148,6 @@ var DocumentReview = React.createClass({
     },
 
     handleTableRowOnClick(event, actionIndex, docIndex, Review) {
-        debugger
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
         switch(event.currentTarget.id) {
@@ -294,7 +293,6 @@ var DocumentReview = React.createClass({
                     }
                 }
             });
-        debugger
         this.setState({
             stackChange: newStack,
             current: {
@@ -323,7 +321,6 @@ var DocumentReview = React.createClass({
     },
 
     onChangeCheckBox(event, actionIndex, docIndex, Review) {
-        debugger
         this.setState({
             [Review]: update(this.state[Review], {
                 [actionIndex]:
@@ -391,7 +388,6 @@ var DocumentReview = React.createClass({
                 }
             });
         }
-            debugger
         this.setState({
             [Review]: updateData,
             shouldUpdate: true
@@ -449,7 +445,6 @@ var DocumentReview = React.createClass({
     },
 
     onChangeCommentBox(event, actionIndex, docIndex, Review) {
-        debugger
         this.setState({
             [Review]: update(this.state[Review], {
                 [actionIndex]:
@@ -473,8 +468,6 @@ var DocumentReview = React.createClass({
     },
 
     handleCheckAll(event, actionIndex, Review) {
-        debugger
-
         this.setState({
             [Review]: update(this.state[Review], {
                 [actionIndex]:
@@ -525,11 +518,9 @@ var DocumentReview = React.createClass({
 
     handleUndo(actionIndex, Review) {
         let stack = this.state.stackChange[Review];
-        debugger
         if(stack[actionIndex].length > 0) {
             let stackAction = stack[actionIndex];
             let lastItem = stackAction[stackAction.length - 1];
-            debugger
             this.setState({
                 [Review]: update(this.state[Review], {
                     [actionIndex]:
@@ -564,7 +555,6 @@ var DocumentReview = React.createClass({
     },
 
     assignCategoryAndConfidentiality2nd() {
-        debugger
         return makeRequest({
             method: "POST",
             params: JSON.stringify(this.state.dataRequest),
@@ -579,7 +569,6 @@ var DocumentReview = React.createClass({
         return makeRequest({
             path: "api/review/documents/",
             success: (data) => {
-                debugger
                 this.setState({ actionsReview: data, shouldUpdate: true });
             }
         });
@@ -590,7 +579,6 @@ var DocumentReview = React.createClass({
         return makeRequest({
             path: "api/review/challenged_docs/",
             success: (data) => {
-                debugger
                 this.setState({ challengedDocs: data, shouldUpdate: true });
             }
         });
@@ -600,7 +588,6 @@ var DocumentReview = React.createClass({
         return makeRequest({
             path: 'api/label/category/',
             success: (data) => {
-                debugger
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
@@ -610,7 +597,6 @@ var DocumentReview = React.createClass({
         return makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
-                debugger
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

@@ -12,7 +12,6 @@ var alert = React.createClass({
 
     componentWillReceiveProps(nextProps) {
         if(this.props.open != nextProps.open) {
-            debugger
             this.setState({ visible: nextProps.open });
         }
     },

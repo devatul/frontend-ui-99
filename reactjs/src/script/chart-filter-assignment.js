@@ -38,7 +38,6 @@ module.exports = function(reviewers) {
                 events: {
                     load: function() {
                         //this.options.chart.height = 800;
-                        debugger
                         //$(this.container).css({ height: '800px' });
                         //$( window ).resize()
                     }

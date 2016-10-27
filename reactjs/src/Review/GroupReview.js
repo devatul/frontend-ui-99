@@ -470,7 +470,6 @@ var GroupReview = React.createClass({
             params: { "id": id },
             success: (res) => {
                 //data = res;
-                debugger
                 this.setState({ documents: data, shouldUpdate: true });
             }
         });

@@ -47,14 +47,12 @@ module.exports = React.createClass({
     logOut() {
         //console.log(sessionStorage.getItem('token'));
         sessionStorage.removeItem('token');
-
         browserHistory.push('/Account/SignIn');
     },
     componentDidUpdate(prevProps, prevState) {
         let pending_list = JSON.parse(localStorage.getItem('pending_list') || '{}');
-        console.log(pending_list)
+        // console.log(pending_list)
         if (this.state.typeAlert != prevState.typeAlert) {
-
             this.setState({
                 pending_action: pending_list
             })
@@ -80,7 +78,6 @@ module.exports = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-
                 this.setState({ role: data.role });
                 console.log("role: ", this.state.role);
             }.bind(this),
@@ -117,7 +114,6 @@ module.exports = React.createClass({
 
     getDummyNotification() {
         //temproary for dummy data
-
             var completed = [];
             var pending = [] ;
             var warning = 0 ;
@@ -133,7 +129,6 @@ module.exports = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-
                     total_notification += data.length
                     completed = data.slice(0, 3);
                 },
@@ -150,7 +145,6 @@ module.exports = React.createClass({
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
-
                     total_pending =  data.length
                     total_notification += data.length
                     pending =  data.slice(0, 3);
@@ -269,7 +263,6 @@ module.exports = React.createClass({
 
     },
     filter(data, alert) {
-
         let pending = _.cloneDeep(data.list);
         let arr = []
 

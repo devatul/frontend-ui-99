@@ -26,9 +26,8 @@ var CloudWord = React.createClass({
             this.draw();
         }  
     },
-    
+
     componentWillUnmount() {
-        debugger
         window.removeEventListener('resize', this.draw);
     },
 

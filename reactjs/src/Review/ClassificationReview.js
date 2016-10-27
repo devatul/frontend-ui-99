@@ -34,7 +34,6 @@ var ClassificationReview = React.createClass({
         this.xhr.getCat = this.getCategories();
         this.xhr.getConfident  = this.getConfidentialities();
         this.xhr.getReview = this.getClassificationReview();
-        debugger
     },
 
 
@@ -48,7 +47,6 @@ var ClassificationReview = React.createClass({
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
-        debugger
         if(prevState.dataReview[current.review] && !isEqual(dataReview[current.review].documents, prevState.dataReview[current.review].documents)) {
             this.checkValidNumber(dataReview[current.review].documents);
         }
@@ -117,7 +115,6 @@ var ClassificationReview = React.createClass({
                 documents: {
                     $apply: (data) => {
                         data = cloneDeep(data);
-                        debugger
                         for(let i = data.length - 1; i >= 0; i--) {
                             if(data[i].checked) {
                                 data[i].status = 'accepted';
@@ -130,7 +127,6 @@ var ClassificationReview = React.createClass({
                 }
             }
         });
-        debugger
         this.setState({
             dataReview: updateData,
             current: {
@@ -176,8 +172,6 @@ var ClassificationReview = React.createClass({
             docIndex = parseInt(idx[1]),
             document = this.state.dataReview[reviewIndex].documents[docIndex],
             { stackChange } = this.state;
-
-            debugger
         //if(document.status === 'reject') {
             let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
@@ -261,7 +255,6 @@ var ClassificationReview = React.createClass({
                 data: document
             });
         }
-        debugger
         this.setState({
             stackChange: updateStackChange
         });
@@ -284,7 +277,6 @@ var ClassificationReview = React.createClass({
     },
 
     onChangeCheckBox(event, reviewIndex, docIndex, document) {
-        debugger
         let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
@@ -328,7 +320,6 @@ var ClassificationReview = React.createClass({
                     }
                 }
             });
-            debugger
         this.setState({
             dataReview: updateData,
             current: {
@@ -372,7 +363,6 @@ var ClassificationReview = React.createClass({
     },
 
     handleCheckAll(event, index) {
-        debugger
         let updateData = update(this.state.dataReview, {
             [index]: {
                 documents: {
@@ -420,7 +410,6 @@ var ClassificationReview = React.createClass({
                         $splice: [[stackLength - 1, 1]]
                     }
                 });
-                debugger
             this.setState({
                 dataReview: updateData,
                 stackChange: updateStack,
@@ -468,7 +457,6 @@ var ClassificationReview = React.createClass({
                         }
                     })
                 });
-                debugger
                 this.setState({ dataReview: data, shouldUpdate: true });
             },
             error: (err) => {

@@ -9,7 +9,7 @@ import _ from 'lodash'
 import $, { JQuery } from 'jquery'
 import { makeRequest } from '../utils/http'
 
-var Indentity = React.createClass({
+let Indentity = React.createClass({
     getInitialState() {
         return {
             numberUser: 5,
@@ -28,26 +28,22 @@ var Indentity = React.createClass({
                 high_risk_directory: {},
                 key_contributor: []
             },
+            loading: true
         };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.dataChart != nextState.dataChart) {
-            return true
-        }
-        if (this.setState.sizeFilter != nextState.sizeFilter) {
-            return true
-        }
-        if (this.state.data_exports != nextState.data_exports) {
-            return true
-        }
+        if (this.state.dataChart != nextState.dataChart) return true;
+        if (this.setState.sizeFilter != nextState.sizeFilter) return true;
+        if (this.state.data_exports != nextState.data_exports) return true;
+
         return false
     },
+
     handleFilter: function(bodyRequest) {
-        debugger
-        console.log(bodyRequest)
         if(!_.isNull(bodyRequest)){
             let value = bodyRequest.number_users;
+
             if (value == 'Top 5') {
                 value = 5
             }
@@ -60,6 +56,7 @@ var Indentity = React.createClass({
             if (value == 'Top 50') {
                 value = 50
             }
+
             let call= makeRequest({
                 path: 'api/insight/iam?number_users=' + value,
                 success: (data) => {
@@ -67,24 +64,21 @@ var Indentity = React.createClass({
                 }
             });
         }
-
     },
 
     getData() {
         $.ajax({
-
             url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
             dataType: 'json',
             type: 'GET',
-
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                console.log('data', data)
-                this.updateChartData(data)
-                    /* this.setState({ rickInsight: data })*/
-
+                console.log('data', data);
+                this.setState({ loading: false });
+                this.updateChartData(data);
+                /* this.setState({ rickInsight: data })*/
             }.bind(this),
             error: function(xhr, error) {
                 if (xhr.status === 401) {
@@ -92,40 +86,38 @@ var Indentity = React.createClass({
                 }
             }.bind(this)
         });
-
     },
+
     updateChartData(datas) {
+        let high_risk_users = {},
+            high_risk_directory = {},
+            arr = [],
+            key_contributor = [],
+            height_0 = 0,
+            height_1 = 0,
+            height_2 = 0,
+            height_3 = 0;
 
-        var high_risk_users = {}
-        var high_risk_directory = {}
-        var key_contributor = []
-        var arr = []
-        var height_0 = 0
-        var height_1 = 0
-        var height_2 = 0
-        var height_3 = 0
+        high_risk_users = this.configChart(datas.high_risk_users);
+        high_risk_directory = this.configChart(datas.high_risk_directory);
 
-        high_risk_users = this.configChart(datas.high_risk_users)
-        high_risk_directory = this.configChart(datas.high_risk_directory)
+        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100
-
-        for (var i = 0; i < _.size(datas.key_contributor); i++) {
-            arr[i] = datas.key_contributor[i]
+        for (let i = 0; i < _.size(datas.key_contributor); i++) {
+            arr[i] = datas.key_contributor[i];
             key_contributor.push({
                 category_name: arr[i].category_name,
                 contributors: (this.configChart(arr[i].contributors))
             })
         }
-        console.log('key_contributor', key_contributor)
 
-        height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40
+        console.log('key_contributor', key_contributor);
 
-        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40
+        height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
+        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+        height_3 = _.size(key_contributor[4].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
 
-        height_3 =  _.size(key_contributor[4].contributors.categories)* 40 /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
-
-        var updateData_config = update(this.state, {
+        let updateData_config = update(this.state, {
             dataChart: {
                 high_risk_users: { $set: high_risk_users },
                 high_risk_directory: { $set: high_risk_directory },
@@ -142,41 +134,42 @@ var Indentity = React.createClass({
             height_1: { $set: height_1 },
             height_2: { $set: height_2 },
             height_3: { $set: height_3 }
-        })
-        this.setState(updateData_config)
+        });
 
+        this.setState(updateData_config)
     },
 
     configChart(object) {
-        var colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'];
-        var dataChart = [];
-        var categories = [];
-        for (var i = 0; i < _.size(object); i++) {
+        let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
+            dataChart = [],
+            categories = [];
 
+        for (let i = 0; i < _.size(object); i++) {
             categories.push(object[i].name);
             dataChart.push({
                 y: object[i].docs,
                 color: colors[i],
             })
-
         }
+
         return {
             categories: categories,
             data: dataChart
         }
     },
-    upperFirst(value) {
-        let sp = _.split(value, ' ');
-        let rt = ''
-        for (let i = 0; i < sp.length; i++) {
 
+    upperFirst(value) {
+        let sp = _.split(value, ' '), rt = '';
+
+        for (let i = 0; i < sp.length; i++) {
             rt += _.upperFirst(sp[i]) + ' ';
         }
-        return rt
 
+        return rt
     },
+
     convertArrayOfObjectsToCSV(args) {
-        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+        let result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
         if (data == null || !data.length) {
@@ -207,12 +200,11 @@ var Indentity = React.createClass({
     },
 
     downloadCSV(value, datas) {
+        let data, filename, link,
+            csv = this.convertArrayOfObjectsToCSV({
+                data: datas
+            });
 
-        var data, filename, link;
-
-        var csv = this.convertArrayOfObjectsToCSV({
-            data: datas
-        });
         if (csv == null) return;
 
         filename = value + '.csv' || 'export.csv';
@@ -220,6 +212,7 @@ var Indentity = React.createClass({
         if (!csv.match(/^data:text\/csv/i)) {
             csv = 'data:text/csv;charset=utf-8,' + csv;
         }
+
         data = encodeURI(csv);
 
         link = document.createElement('a');
@@ -227,16 +220,20 @@ var Indentity = React.createClass({
         link.setAttribute('download', filename);
         link.click();
     },
+
     formatNameCategory(str) {
         return _.replace(str, '/', ' / ')
     },
+
     formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     },
+
     componentDidMount() {
         this.getData();
         javascript();
     },
+
     render: template
 });
 
