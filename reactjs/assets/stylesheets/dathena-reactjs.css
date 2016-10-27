@@ -476,3 +476,10 @@ select.assigment-select.form-control {
     z-index: 990;
     background-color: rgba(255, 255, 255, 0.9);
 }
+
+/* Fix position menu */
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        position: relative;
+    }
+}
