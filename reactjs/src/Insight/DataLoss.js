@@ -15,7 +15,6 @@ var DataLost = React.createClass({
         };
     },
     changeDefaul(language) {
-        debugger
         let dataLoss = _.cloneDeep(this.state.dataLoss);
         for (let i = 0; i < dataLoss.length; i++) {
             if (dataLoss[i].language == language) {

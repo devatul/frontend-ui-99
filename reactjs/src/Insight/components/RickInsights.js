@@ -61,7 +61,6 @@ var RickInsight = React.createClass({
         }
     },
     formatString(str){
-        debugger
         return parseInt(_.split(str , ' ' , -1))
     },
     formatNumber(num) {
@@ -71,7 +70,6 @@ var RickInsight = React.createClass({
         let children = [];
         if(this.state.rickInsight != null && this.state.rickInsight.stale_files != null) {
              _.forEach(this.state.rickInsight.risks, function(object , index){
-                debugger
                 let className = "panel-body " + this.getRickType(index).color + " widget-panel insight-panel"
                 let previous = this.formatNumber(object.previous_scan_value)
                 let current = this.formatNumber(object.current_scan_value)
