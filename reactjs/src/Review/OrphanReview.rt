@@ -36,7 +36,7 @@
                                 <HelpButton
                                     setValue="User is required to assign category and confidentiality Level for orphaned documents."/>
                             </b>
-                            <select2 id="chosse_cluster" onChange={this.handleOnChangeSelectOrphan} value={this.state.orphanCurrent.index}>
+                            <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
                                 <option
                                     rt-repeat="orphan in this.state.orphans"
                                     value="{orphanIndex}"
@@ -143,7 +143,7 @@
                                         </table>
 
                                         <div class="mt-lg">
-                                        <Button onClick={this.handleClickRefineButton} class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Orphan</Button>
+                                        <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Orphan</Button>
                                         <HelpButton className=""
                                                 classNote="review_question_chart"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
@@ -185,8 +185,8 @@
                         <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
                         <div class="panel-actions my-actions-btn-group">
                             <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleNextOrphan} bsClass="">Next Orphan</Button>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo} bsClass="">
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="">Next Orphan</Button>
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="">
                                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
                             </Button>
                         </div>
@@ -197,7 +197,7 @@
 
                             <Button
                                 rt-if="this.state.checkedNumber > 0"
-                                onClick={this.handleClickApproveButton}
+                                onClick="{this.handleClickApproveButton}"
                                 class="mb-md mr-xs btn btn-green approve-button"
                                 bsClass="">
                                 Approve
@@ -214,7 +214,7 @@
                                             <div class="checkbox-custom checkbox-primary">
                                                 <input type="checkbox"
                                                     class="checkbox-all-1"
-                                                    onChange={this.handleSelectAll}
+                                                    onChange="{this.handleSelectAll}"
                                                     checked="{this.state.checkBoxAll}">
                                                 <label for="checkboxAllExample2"></label>
                                             </div>
@@ -251,8 +251,8 @@
                                         document={document} index={documentIndex}
                                         categories={this.state.categories}
                                         confidentialities={this.state.confidentialities}
-                                        onClick={this.handleTableRowOnClick}
-                                        onChange={this.handleTableRowOnChange}
+                                        onClick="{this.handleTableRowOnClick}"
+                                        onChange="{this.handleTableRowOnChange}"
                                         noConfidence
                                         numberChecked={this.state.checkedNumber} />
                                 </tbody>
@@ -264,8 +264,8 @@
                                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>
                             </ProgressBar>
 
-                            <Button class="mb-md mr-xs btn btn-green" onClick={this.handleNextOrphan} bsClass="">Next Orphan</Button>
-                            <Button class="mb-md btn btn-green" onClick={this.handleUndo} bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
+                            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="">Next Orphan</Button>
+                            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                         </div>
                     </Panel.body>
                 </Panel.custom>
@@ -276,9 +276,9 @@
 <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="{() => this.onClickDocumentName(this.state.documentPreview + 1)}"
-    undo={this.handleUndo}
-    closeModal={this.closePreview}>
+    nextDocument="() => this.onClickDocumentName(this.state.documentPreview + 1)"
+    undo="{this.handleUndo}"
+    closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
@@ -287,8 +287,8 @@
                     <div class="checkbox-custom checkbox-primary">
                         <input type="checkbox"
                             class="checkbox-all-1"
-                            onChange={this.handleSelectAll}
-                            checked={this.state.checkBoxAll}>
+                            onChange="{this.handleSelectAll}"
+                            checked="{this.state.checkBoxAll}">
                         <label for="checkboxAllExample2"></label>
                     </div>
                 </th>
@@ -318,8 +318,8 @@
                 document={this.state.documents[this.state.documentPreview]}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}
-                onClick={this.handleTableRowOnClick}
-                onChange={this.handleTableRowOnChange}
+                onClick="{this.handleTableRowOnClick}"
+                onChange="{this.handleTableRowOnChange}"
                 index={this.state.documentPreview} />
         </tbody>
     </table>

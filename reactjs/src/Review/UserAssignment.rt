@@ -138,10 +138,10 @@
                                                     className="assigment-select form-control ddList inline-block-item"
                                                     data={this.state.datafilter.timeFrame}
                                                     value={this.state.datafilter.setValue.timeframe}
-                                                    onOpen={this.selectBoxOnOpen}
+                                                    onOpen="{this.selectBoxOnOpen}"
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
-                                                    onChange={this.handleOnChangeSelectBox} />
+                                                    onChange="{this.handleOnChangeSelectBox}" />
 
                                                     <HelpButton
                                                         className="dropdown-help"
@@ -158,7 +158,7 @@
                                                     value={this.state.datafilter.setValue.users}
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
-                                                    onChange={this.handleOnChangeSelectBox} />
+                                                    onChange="{this.handleOnChangeSelectBox}" />
                                                   <HelpButton
                                                         className="dropdown-help"
                                                         classMenu="fix-overview-help-button-table"
@@ -174,7 +174,7 @@
                                                     value={this.state.datafilter.setValue.type}
                                                     defaultValue={0}
                                                     className="assignent-select form-control ddList"
-                                                    onChange={this.handleOnChangeSelectBox} />
+                                                    onChange="{this.handleOnChangeSelectBox}" />
                                                   <HelpButton
                                                         className="dropdown-help"
                                                         classMenu="fix-overview-help-button-table"
@@ -189,9 +189,9 @@
                                 <div class="filter-tags-block pull-left">
                                     <div class="pull-left filter-tags">
                                       <FilterLabel
-                                          onClear={this.handleClearLabel}
+                                          onClear="{this.handleClearLabel}"
                                           data={this.state.datafilter.filterLabel}
-                                          onClick={this.handleClickFilterLabel} />
+                                          onClick="{this.handleClickFilterLabel}" />
                                     </div>
                                 </div>
 
@@ -228,7 +228,7 @@
                     <button
                         class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
                         type="button"
-                        onClick={this.handleValidateButton}>
+                        onClick="{this.handleValidateButton}">
                           Validate and Go to Next Category
                     </button>
                   </div>
@@ -292,7 +292,7 @@
             </section>
             <div class="clearfix">
               <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled' : '')}" onClick={this.confirmNotify} type="button">
+                <button class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled' : '')}" onClick="{this.confirmNotify}" type="button">
                   Confirm and Notify all Reviewers
                 </button>
               </div>
@@ -301,7 +301,7 @@
         </div>
       </div>
     </div>
-    <Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide={this.onHideModal} dialogClassName="custom-modal">
+    <Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide="{this.onHideModal}" dialogClassName="custom-modal">
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg" style="color: #3c763d;">Well done!</Modal.Title>
         </Modal.Header>

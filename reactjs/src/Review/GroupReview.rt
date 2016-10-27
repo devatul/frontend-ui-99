@@ -28,7 +28,7 @@
 <section>
     <div class="container">
         <Row>
-            <Col sm={8} md={6} class="review_choose-cluster-block choose-cluster-block clearfix">
+            <Col sm="{8}" md="{6}" class="review_choose-cluster-block choose-cluster-block clearfix">
                 <FormGroup>
                     <InputGroup class="mb-md">
                         <label for="choose_cluster">
@@ -37,7 +37,7 @@
                                 <HelpButton
                                     setValue="User is required to review category and confidentiality level for the documents in the groups."/>
                             </b>
-                            <select2 id="chosse_cluster" onChange={this.handleOnChangeSelectGroup} value={this.state.groupCurrent.index}>
+                            <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectGroup}" value="{this.state.groupCurrent.index}">
                                 <option
                                     rt-repeat="group in this.state.groups"
                                     value="{groupIndex}"
@@ -52,20 +52,20 @@
         </Row>
         
         <Row>
-            <Col sm={12}>
+            <Col sm="{12}">
                 <Panel.custom class="panel-has-child cluster-block">
                     <Panel.head class="panel-heading-cluster">
                         <Row>
-                            <Col md={4}>
+                            <Col md="{4}">
                                 <h2 class="panel-title">Group Statistics</h2>
                             </Col>
-                            <Col md={5} class="review-status-block">
+                            <Col md="{5}" class="review-status-block">
                                 <span>Review Status</span>
                                 <ProgressBar class="dathena-progress">
-                                    <ProgressBar bsStyle="danger" now={this.state.reviewStatus} label="{this.state.reviewStatus + '%'}" />
+                                    <ProgressBar bsStyle="danger" now="{this.state.reviewStatus}" label="{this.state.reviewStatus + '%'}" />
                                 </ProgressBar>
                             </Col>
-                            <Col md={3} class="text-right">
+                            <Col md="{3}" class="text-right">
                                 <span>Detect Language: <b>English</b></span>
                                 <Button class="btn btn-green ml-md" bsClass="false">Edit</Button>
                             </Col>
@@ -74,7 +74,7 @@
 
                     <Panel.body id="panelOrphanStatistics" class="review_panel-body">
                         <Row>
-                            <Col md={3}>
+                            <Col md="{3}">
                                  <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                                     <header class="panel-heading">
                                         <h2 class="panel-title">Basic Statistics</h2>
@@ -144,12 +144,12 @@
                                         </table>
 
                                         <div class="mt-lg">
-                                        <Button onClick={this.handleClickRefineButton} class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Group</Button>
+                                        <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Group</Button>
                                         <HelpButton className=""
                                                 classNote="review_question_chart"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
                                         <div class="refine-progress" style="display: {this.state.showLoading}">
-                                            <LoadingButton open={true} elementType="div"/>
+                                            <LoadingButton open="{true}" elementType="div"/>
                                         </div>
                                     </div>
                                 </section>
@@ -158,7 +158,7 @@
                                 <Row>
                                     <CloudWord title="Significant Words Cloud"
                                         help="This presents a grouping of targeted key words that have been detected by Dathena 99 as being common across the selected orphan."
-                                        data={this.state.dataChart.cloudWords} />
+                                        data="{this.state.dataChart.cloudWords}" />
                                 </Row>
                                 <Row>
                                     <div id="fileDistribution" class="mb-md">
@@ -180,14 +180,14 @@
 
     <div class="container">
         <Row>
-            <Col md={12}>
+            <Col md="{12}">
                 <Panel.custom class="actions-panel">
                     <Panel.head>
                         <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
                         <div class="panel-actions my-actions-btn-group">
                             <span class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.name}</b></span>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleNextGroup} bsClass="">Next Group</Button>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo} bsClass="">
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="">Next Group</Button>
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="">
                                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
                             </Button>
                         </div>
@@ -198,7 +198,7 @@
 
                             <Button
                                 rt-if="this.state.checkedNumber > 0"
-                                onClick={this.handleClickApproveButton}
+                                onClick="{this.handleClickApproveButton}"
                                 class="mb-md mr-xs btn btn-green approve-button"
                                 bsClass="">
                                 Approve
@@ -215,7 +215,7 @@
                                             <div class="checkbox-custom checkbox-primary">
                                                 <input type="checkbox"
                                                     class="checkbox-all-1"
-                                                    onChange={this.handleSelectAll}
+                                                    onChange="{this.handleSelectAll}"
                                                     checked="{this.state.checkBoxAll}">
                                                 <label for="checkboxAllExample2"></label>
                                             </div>
@@ -253,8 +253,8 @@
                                         document={document} index={documentIndex}
                                         categories={this.state.categories}
                                         confidentialities={this.state.confidentialities}
-                                        onClick={this.handleTableRowOnClick}
-                                        onChange={this.handleTableRowOnChange}
+                                        onClick="{this.handleTableRowOnClick}"
+                                        onChange="{this.handleTableRowOnChange}"
                                         numberChecked={this.state.checkedNumber} />
                                 </tbody>
                             </Table>
@@ -265,8 +265,8 @@
                                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>
                             </ProgressBar>
 
-                            <Button class="mb-md mr-xs btn btn-green" onClick={this.handleNextGroup} bsClass="">Next Group</Button>
-                            <Button class="mb-md btn btn-green" onClick={this.handleUndo} bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
+                            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="">Next Group</Button>
+                            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                         </div>
                     </Panel.body>
                 </Panel.custom>
@@ -277,9 +277,9 @@
 <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="{() => this.onClickDocumentName(this.state.documentPreview + 1)}"
-    undo={this.handleUndo}
-    closeModal={this.closePreview}>
+    nextDocument="() => this.onClickDocumentName(this.state.documentPreview + 1)"
+    undo="{this.handleUndo}"
+    closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
@@ -288,8 +288,8 @@
                     <div class="checkbox-custom checkbox-primary">
                         <input type="checkbox"
                             class="checkbox-all-1"
-                            onChange={this.handleSelectAll}
-                            checked={this.state.checkBoxAll}>
+                            onChange="{this.handleSelectAll}"
+                            checked="{this.state.checkBoxAll}">
                         <label for="checkboxAllExample2"></label>
                     </div>
                 </th>
@@ -319,8 +319,8 @@
                 document={this.state.documents[this.state.documentPreview]}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}
-                onClick={this.handleTableRowOnClick}
-                onChange={this.handleTableRowOnChange}
+                onClick="{this.handleTableRowOnClick}"
+                onChange="{this.handleTableRowOnChange}"
                 index={this.state.documentPreview} />
         </tbody>
     </table>

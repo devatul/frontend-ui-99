@@ -24,7 +24,7 @@
 <section>
 <div class="container">
     <Row>
-        <Col md={12}>
+        <Col md="{12}">
             <Panel.custom class="panel-has-child actions-panel">
                 <Panel.head>
                     <h2 class="panel-title inline-block-item mr-sm">My Review
@@ -52,7 +52,6 @@
                             </div>
                         </Panel.head>
                         <Panel.body>
-                            <!--<p class="document_note">You have {action.documents.length - action.validateNumber} documents to review within  <span class="text-capitalize">{action.category.name}</span> category with <span class="text-capitalize">{action.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                                 <Button
@@ -107,13 +106,13 @@
                                     </thead>
                                     <tbody class="fix-td-checkbox">
                                         <table.row rt-repeat=" document in action.documents "
-                                            document={document}
+                                            document="{document}"
                                             index="{documentIndex}"
                                             key="{this.constructor.actions + '_' + actionIndex + '_' + documentIndex}"
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
-                                            onClick="{(event) => this.handleTableRowOnClick(event, actionIndex, documentIndex, this.constructor.actions)}"
-                                            onChange="{(event) => this.handleTableRowOnChange(event, actionIndex, documentIndex, this.constructor.actions)}"
+                                            onClick="(event) => this.handleTableRowOnClick(event, actionIndex, documentIndex, this.constructor.actions)"
+                                            onChange="(event) => this.handleTableRowOnChange(event, actionIndex, documentIndex, this.constructor.actions)"
                                             numberChecked={action.checkedNumber} />
                                     </tbody>
                                 </Table>
@@ -138,7 +137,6 @@
                             </div>
                         </Panel.head>
                         <Panel.body>
-                            <!--<p class="document_note">You have {action.documents.length - action.validateNumber} documents to review within  <span class="text-capitalize">{action.category.name}</span> category with <span class="text-capitalize">{action.confidentiality.name}</span> confidentiality by latest 15th August</p>-->
                             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                                 <Button
@@ -207,8 +205,8 @@
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
                                             numberCheck="{challenge.checkedNumber}"
-                                            onChange="{(event) => this.handleTableRowOnChange(event, challengeIndex, documentIndex, this.constructor.challenge)}"
-                                            onClick="{(event) => this.handleTableRowOnClick(event, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onChange="(event) => this.handleTableRowOnChange(event, challengeIndex, documentIndex, this.constructor.challenge)"
+                                            onClick="(event) => this.handleTableRowOnClick(event, challengeIndex, documentIndex, this.constructor.challenge)"
                                             />
                                     </tbody>
                                 </table>
@@ -222,11 +220,11 @@
 </div>
 <DocumentPreview
     rt-scope="this.state.current as current; this.state[current.review][current.actionIndex] && this.state[current.review][current.actionIndex].documents[current.docIndex] as document"
-    open={this.state.openPreview}
+    open="{this.state.openPreview}"
     document="{document}"
-    nextDocument="{() => this.handleNextDocumentName(current.actionIndex, current.docIndex, current.review)}"
-    undo="{() => this.handleUndo(current.actionIndex, current.review)}"
-    closeModal={this.closePreview}>
+    nextDocument="() => this.handleNextDocumentName(current.actionIndex, current.docIndex, current.review)"
+    undo="() => this.handleUndo(current.actionIndex, current.review)"
+    closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table
         rt-if="current.review === this.constructor.actions"
@@ -269,10 +267,10 @@
             <table.row
                 document="{document}"
                 key="{current.docIndex}"
-                categories={this.state.categories}
-                confidentialities={this.state.confidentialities}
-                onClick="{(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.actions)}"
-                onChange="{(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                categories="{this.state.categories}"
+                confidentialities="{this.state.confidentialities}"
+                onClick="(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.actions)"
+                onChange="(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.actions)"
                 hide="{{ checkbox: true }}"
                 index="{current.docIndex}" />
         </tbody>
@@ -329,11 +327,11 @@
             <table.RowChallenged
                 document="{document}"
                 key="{current.docIndex}"
-                categories={this.state.categories}
-                confidentialities={this.state.confidentialities}
+                categories="{this.state.categories}"
+                confidentialities="{this.state.confidentialities}"
                 hide="{{checkbox: true}}"
-                onChange="{(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
-                onClick="{(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onChange="(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.challenge)"
+                onClick="(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.challenge)"
                 />
         </tbody>
     </table>
