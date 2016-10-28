@@ -154,7 +154,9 @@ var OrphanReview = React.createClass({
         if(document.status === 'invalid') {
             let updateDocuments = update(this.state.documents, {
                 [index]: {
-                    status: { $set: 'valid' }
+                    $merge: {
+                        status: status.ACCEPTED.name
+                    }
                 }
             }),
             updateStack = update(this.state.stackChange, {
@@ -191,7 +193,9 @@ var OrphanReview = React.createClass({
         let { documents } = this.state,
             updateDocuments = update(this.state.documents, {
                 [index]: {
-                    checked: { $set: event.target.checked }
+                    $merge: {
+                        checked: event.target.checked
+                    }
                 }
             }), 
             updateStack = update(this.state.stackChange, {
@@ -214,8 +218,8 @@ var OrphanReview = React.createClass({
                     category: {
                         $set: categories[categoryIndex]
                     },
-                    status: {
-                        $set: 'valid'
+                    $merge: {
+                        status: status.EDITING.name
                     }
                 }
             }),
@@ -239,8 +243,8 @@ var OrphanReview = React.createClass({
                     confidentiality: {
                         $set: confidentialities[confidentialityIndex]
                     },
-                    status: {
-                        $set: 'valid'
+                    $merge: {
+                        status: status.EDITING.name
                     }
                 }
             }),
@@ -458,11 +462,6 @@ var OrphanReview = React.createClass({
         
         { id } = this.state.orphanCurrent;
 
-        for(let i = data.length - 1; i >= 0; i--) {
-            data[i].checked  = false;
-            data[i].status = 'invalid';
-        }
-
         makeRequest({
             path: "api/group/orphan/samples/",
             params: { "id": id },
@@ -545,7 +544,7 @@ var OrphanReview = React.createClass({
             { documents } = this.state;
             
         for(let i = documents.length - 1; i >= 0; i--) {
-            if(documents[i].status === "valid") {
+            if(documents[i].status === status.ACCEPTED.name) {
                 num++;
             }
         }
@@ -559,7 +558,7 @@ var OrphanReview = React.createClass({
 
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].checked) {
-                documents[i].status = 'valid';
+                documents[i].status = status.ACCEPTED.name;
                 documents[i].checked = false;
             }
         }

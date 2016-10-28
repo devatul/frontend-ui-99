@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './DocumentReview.rt'
 import update from 'react/lib/update'
-import Constant from '../Constant.js'
+import Constant, { status } from '../Constant.js'
 import { cloneDeep, isEqual, find, findIndex } from 'lodash'
 import { makeRequest } from '../utils/http'
 
@@ -86,13 +86,13 @@ var DocumentReview = React.createClass({
         let numCheck = 0, numValid = 0, updateData = {},
             { current } = this.state,
             { documents } = this.state[current.review][current.actionIndex],
-            status = current.review === this.constructor.actions ? 'status' : '2nd_line_validation';
+            _status = current.review === this.constructor.actions ? 'status' : '2nd_line_validation';
 
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].checked) {
                 numCheck++;
             }
-            if(documents[i][status] === "accepted" || documents[i][status] === "editing") {
+            if(documents[i][_status] === status.ACCEPTED.name || documents[i][_status] === status.EDITING.name) {
                 numValid++;
             }
         }
@@ -123,11 +123,11 @@ var DocumentReview = React.createClass({
                     {
                         $apply: (data) => {
                             data = cloneDeep(data);
-                            let status = Review === this.constructor.actions ? 'status' : '2nd_line_validation';
+                            let _status = Review === this.constructor.actions ? 'status' : '2nd_line_validation';
 
                             for(let i = data.length - 1; i >= 0; i--) {
                                 if(data[i].checked) {
-                                    data[i][status] = 'accepted';
+                                    data[i][_status] = status.ACCEPTED.name;
                                     data[i].checked = false;
                                 }
                             }
@@ -177,7 +177,7 @@ var DocumentReview = React.createClass({
     onClickButtonStatus(event, actionIndex, docIndex, Review) {
         let document = this.state[Review][actionIndex].documents[docIndex],
             { stackChange } = this.state,
-            status = "";
+            _status = "";
 
         if(Review === this.constructor.actions)
         {
@@ -190,7 +190,7 @@ var DocumentReview = React.createClass({
                 "confidentiality": document.confidentiality
             }]);
             
-            status = 'status';
+            _status = 'status';
 
         } else {
             this.challengeDocuments([{
@@ -203,7 +203,7 @@ var DocumentReview = React.createClass({
                 "confidentiality": document.current_confidentiality
             }]);
 
-            status = '2nd_line_validation';
+            _status = '2nd_line_validation';
         }
         
 
@@ -214,7 +214,7 @@ var DocumentReview = React.createClass({
                         [docIndex]: {
                             $merge:
                             {
-                                [status]: 'accepted'
+                                [_status]: status.ACCEPTED.name
                             }
                         }
                     }
@@ -363,7 +363,7 @@ var DocumentReview = React.createClass({
                             $merge: {
                                 status: document.init_category && isEqual(this.state.categories[categoryIndex], {
                                     id: document.init_category.id
-                                }) ? 'accepted' : 'editing',
+                                }) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category && document.category
                             }
                         }
@@ -381,7 +381,7 @@ var DocumentReview = React.createClass({
                             $merge: {
                                 ['2nd_line_validation']: isEqual(this.state.categories[categoryIndex], {
                                     id: document.previous_category.id
-                                }) ? 'accepted' : 'editing'
+                                }) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
@@ -413,7 +413,7 @@ var DocumentReview = React.createClass({
 
                                 status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
                                     id: document.init_confidentiality.id
-                                }) ? 'accepted' : 'editing'
+                                }) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
@@ -430,7 +430,7 @@ var DocumentReview = React.createClass({
                             $merge: {
                                 ['2nd_line_validation']: isEqual(this.state.confidentialities[confidentialityIndex], {
                                     id: document.previous_confidentiality.id
-                                }) ? 'accepted' : 'editing'
+                                }) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
@@ -456,7 +456,7 @@ var DocumentReview = React.createClass({
                             $merge:
                             {
                                 reviewer_comment: event.target.value,
-                                ['2nd_line_validation']: 'editing'
+                                ['2nd_line_validation']: status.EDITING.name
                             }
                         }
                     }

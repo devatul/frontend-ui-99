@@ -4,7 +4,7 @@ import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './ReviewValidation.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
-import Constant from '../Constant.js';
+import Constant, { status } from '../Constant.js';
 import { isEqual, findIndex, find, cloneDeep } from 'lodash';
 
 var ReviewValidation = React.createClass({
@@ -270,7 +270,7 @@ var ReviewValidation = React.createClass({
                 [current]: {
                     [docIndex]: {
                         ['2nd_line_validation']: {
-                            $set: 'accepted'
+                            $set: status.ACCEPTED.name
                         }
                     }
                 }
@@ -352,7 +352,7 @@ var ReviewValidation = React.createClass({
                     comments: { $set: value },
 
                     ['2nd_line_validation']: {
-                        $set: 'editing'
+                        $set: status.EDITING.name
                     }
                 }
             }
@@ -373,7 +373,7 @@ var ReviewValidation = React.createClass({
                             $set: this.state.categories[categoryIndex]
                         },
                         ['2nd_line_validation']: {
-                            $set: initCategory && isEqual(initCategory.data, categories[categoryIndex]) ? 'accepted' : 'editing'
+                            $set: initCategory && isEqual(initCategory.data, categories[categoryIndex]) ? status.ACCEPTED.name : status.EDITING.name
                         }
                     }
                 }
@@ -401,7 +401,7 @@ var ReviewValidation = React.createClass({
                             $set: confidentialities[confidentialityIndex]
                         },
                         ['2nd_line_validation']: {
-                            $set: initConfidentiality && isEqual(initConfidentiality.data, confidentialities[confidentialityIndex]) ? 'accepted' : 'editing'
+                            $set: initConfidentiality && isEqual(initConfidentiality.data, confidentialities[confidentialityIndex]) ? status.ACCEPTED.name : status.EDITING.name
                         }
                     }
                 }
@@ -619,13 +619,13 @@ var ReviewValidation = React.createClass({
             challengeLength = challenge_docs.length, challengeBackLength = challenge_back_docs.length;
 
         for(let i = challengeLength - 1; i >= 0; i--) {
-            if(challenge_docs[i]["2nd_line_validation"] !== "accepted" || challenge_docs[i]["2nd_line_validation"] !== "editing") {
+            if(challenge_docs[i]["2nd_line_validation"] !== status.ACCEPTED.name || challenge_docs[i]["2nd_line_validation"] !== status.EDITING.name) {
                 num++;
             }
         }
 
         for(let i = challengeBackLength - 1; i >= 0; i--) {
-            if(challenge_back_docs[i]["2nd_line_validation"] !== "accepted" || challenge_back_docs[i]["2nd_line_validation"] !== "editing") {
+            if(challenge_back_docs[i]["2nd_line_validation"] !== status.ACCEPTED.name || challenge_back_docs[i]["2nd_line_validation"] !== status.EDITING.name) {
                 num++;
             }
         }

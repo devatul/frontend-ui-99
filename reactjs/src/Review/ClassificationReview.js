@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
-import Constant, { fetching } from '../Constant'
+import Constant, { fetching, status } from '../Constant'
 import { cloneDeep, isEqual, find, findIndex } from 'lodash'
 import { makeRequest } from '../utils/http'
 
@@ -90,7 +90,7 @@ var ClassificationReview = React.createClass({
             if(documents[i].checked === true) {
                 numCheck++;
             }
-            if(documents[i].status === "accepted" || documents[i].status === "editing") {
+            if(documents[i].status === status.ACCEPTED.name || documents[i].status === status.EDITING.name) {
                 numValid++;
             }
         }
@@ -117,7 +117,7 @@ var ClassificationReview = React.createClass({
                         data = cloneDeep(data);
                         for(let i = data.length - 1; i >= 0; i--) {
                             if(data[i].checked) {
-                                data[i].status = 'accepted';
+                                data[i].status = status.ACCEPTED.name;
                                 data[i].checked = false;
                             }
                         }
@@ -178,7 +178,7 @@ var ClassificationReview = React.createClass({
                     documents: {
                         [docIndex]: {
                             $merge: {
-                                status: 'accepted'
+                                status: status.ACCEPTED.name
                             }
                         }
                     }
@@ -313,7 +313,7 @@ var ClassificationReview = React.createClass({
                             $merge: {
                                 status: document.init_category && isEqual(this.state.categories[categoryIndex], {
                                     id: document.init_category.id
-                                }) ? 'accepted' : 'editing',
+                                }) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category ? document.init_category : document.category
                             }
                         }
@@ -345,7 +345,7 @@ var ClassificationReview = React.createClass({
 
                                 status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
                                     id: parseInt(document.init_confidentiality.id)
-                                }) ? 'accepted' : 'editing'
+                                }) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }

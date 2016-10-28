@@ -153,12 +153,12 @@ var GroupReview = React.createClass({
 
     onClickButtonStatus(index) {
         let document = this.state.documents[index];
-        if(document.status !== 'accepted' ) {
+        if(document.status !== status.ACCEPTED.name ) {
             let updateDocuments = update(this.state.documents, {
                 [index]:
                 {
                     $merge: {
-                        status: 'accepted'
+                        status: status.ACCEPTED.name
                     }
                 }
             }),
@@ -222,7 +222,7 @@ var GroupReview = React.createClass({
                         $set: categories[categoryIndex]
                     },
                     $merge: {
-                        status: 'editing'
+                        status: status.EDITING.name
                     }
                 }
             }),
@@ -248,7 +248,7 @@ var GroupReview = React.createClass({
                     },
                     $merge:
                     {
-                        status: 'editing'
+                        status: status.EDITING.name
                     }
                 }
             }),
@@ -555,7 +555,7 @@ var GroupReview = React.createClass({
             { documents } = this.state;
             
         for(let i = documents.length - 1; i >= 0; i--) {
-            if(documents[i].status === "accepted") {
+            if(documents[i].status === status.ACCEPTED.name) {
                 num++;
             }
         }
@@ -569,7 +569,7 @@ var GroupReview = React.createClass({
 
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].checked) {
-                documents[i].status = 'accepted';
+                documents[i].status = status.ACCEPTED.name;
                 documents[i].checked = false;
             }
         }
