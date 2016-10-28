@@ -124,8 +124,8 @@
 <DocumentPreview
     open="{this.state.openPreview}"
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-    nextDocument="() => this.onClickDocumentName(this.state.current.review + '_' + (this.state.current.doc + 1))"
-    undo="() => this.handleUndo(this.state.current.review)"
+    nextDocument="{this.onClickDocumentName.bind(this, this.state.current.review + '_' + (this.state.current.doc + 1))}"
+    undo="{this.handleUndo.bind(this, this.state.current.review)}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">

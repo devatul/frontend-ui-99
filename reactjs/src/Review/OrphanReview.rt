@@ -251,8 +251,8 @@
                                         document={document} index={documentIndex}
                                         categories={this.state.categories}
                                         confidentialities={this.state.confidentialities}
-                                        onClick="{this.handleTableRowOnClick}"
-                                        onChange="{this.handleTableRowOnChange}"
+                                        onClick={this.handleTableRowOnClick}
+                                        onChange={this.handleTableRowOnChange}
                                         noConfidence
                                         numberChecked={this.state.checkedNumber} />
                                 </tbody>
@@ -318,8 +318,8 @@
                 document={this.state.documents[this.state.documentPreview]}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}
-                onClick="{this.handleTableRowOnClick}"
-                onChange="{this.handleTableRowOnChange}"
+                onClick={this.handleTableRowOnClick}
+                onChange={this.handleTableRowOnChange}
                 index={this.state.documentPreview} />
         </tbody>
     </table>

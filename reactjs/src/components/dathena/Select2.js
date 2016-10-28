@@ -2,8 +2,8 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import { isEqual } from 'lodash'
-import $ from 'jquery'
-import 'select2/dist/js/select2.full'
+// import $ from 'jquery'
+// import 'select2/'
 var Select2 = React.createClass({
 
     PropTypes: {

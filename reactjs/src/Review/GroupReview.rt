@@ -253,8 +253,8 @@
                                         document={document} index={documentIndex}
                                         categories={this.state.categories}
                                         confidentialities={this.state.confidentialities}
-                                        onClick="{this.handleTableRowOnClick}"
-                                        onChange="{this.handleTableRowOnChange}"
+                                        onClick={this.handleTableRowOnClick}
+                                        onChange={this.handleTableRowOnChange}
                                         numberChecked={this.state.checkedNumber} />
                                 </tbody>
                             </Table>
@@ -277,14 +277,14 @@
 <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="() => this.onClickDocumentName(this.state.documentPreview + 1)"
-    undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
+    nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    undo={this.handleUndo}
+    closeModal={this.closePreview}>
 <div class="table-responsive">
-    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
             <tr role="row" class="">
-                <th>
+                <!--<th>
                     <div class="checkbox-custom checkbox-primary">
                         <input type="checkbox"
                             class="checkbox-all-1"
@@ -292,7 +292,7 @@
                             checked="{this.state.checkBoxAll}">
                         <label for="checkboxAllExample2"></label>
                     </div>
-                </th>
+                </th>-->
                 <th class="review_note fix-width">Type
                 </th>
                 <th class="review_note">Document name
@@ -319,8 +319,9 @@
                 document={this.state.documents[this.state.documentPreview]}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}
-                onClick="{this.handleTableRowOnClick}"
-                onChange="{this.handleTableRowOnChange}"
+                onClick={this.handleTableRowOnClick}
+                hide="{{ checkbox: true }}"
+                onChange={this.handleTableRowOnChange}
                 index={this.state.documentPreview} />
         </tbody>
     </table>

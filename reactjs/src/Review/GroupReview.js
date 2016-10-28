@@ -153,10 +153,13 @@ var GroupReview = React.createClass({
 
     onClickButtonStatus(index) {
         let document = this.state.documents[index];
-        if(document.status === 'invalid') {
+        if(document.status !== 'accepted' ) {
             let updateDocuments = update(this.state.documents, {
-                [index]: {
-                    status: { $set: 'valid' }
+                [index]:
+                {
+                    $merge: {
+                        status: 'accepted'
+                    }
                 }
             }),
             updateStack = update(this.state.stackChange, {
@@ -165,7 +168,6 @@ var GroupReview = React.createClass({
                     data: Object.assign({}, this.state.documents[index])
                 }]
             });
-            //debugger
             this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
         }
     },
@@ -192,8 +194,11 @@ var GroupReview = React.createClass({
     onChangeCheckBox(event, index) {
         let { documents } = this.state,
             updateDocuments = update(this.state.documents, {
-                [index]: {
-                    checked: { $set: event.target.checked }
+                [index]:
+                {
+                    $merge: {
+                        checked: event.target.checked
+                    }
                 }
             }), 
             updateStack = update(this.state.stackChange, {
@@ -216,8 +221,8 @@ var GroupReview = React.createClass({
                     category: {
                         $set: categories[categoryIndex]
                     },
-                    status: {
-                        $set: 'valid'
+                    $merge: {
+                        status: 'editing'
                     }
                 }
             }),
@@ -241,8 +246,9 @@ var GroupReview = React.createClass({
                     confidentiality: {
                         $set: confidentialities[confidentialityIndex]
                     },
-                    status: {
-                        $set: 'valid'
+                    $merge:
+                    {
+                        status: 'editing'
                     }
                 }
             }),
@@ -460,21 +466,23 @@ var GroupReview = React.createClass({
         
         { id } = this.state.groupCurrent;
 
-        for(let i = data.length - 1; i >= 0; i--) {
-            data[i].checked  = false;
-            data[i].status = 'invalid';
-        }
+        // for(let i = data.length - 1; i >= 0; i--) {
+        //     data[i].checked  = false;
+        //     data[i].status = 'invalid';
+        // }
 
-        makeRequest({
-            path: "api/group/samples/",
-            params: { "id": id },
-            success: (res) => {
-                //data = res;
-                this.setState({ documents: data, shouldUpdate: true });
-            }
-        });
+        this.setState({ documents: data, shouldUpdate: true });
 
-        return data;
+        // makeRequest({
+        //     path: "api/group/samples/",
+        //     params: { "id": id },
+        //     success: (res) => {
+        //         //data = res;
+        //         this.setState({ documents: data, shouldUpdate: true });
+        //     }
+        // });
+
+        // return data;
     },
 
     getCategories() {
@@ -547,7 +555,7 @@ var GroupReview = React.createClass({
             { documents } = this.state;
             
         for(let i = documents.length - 1; i >= 0; i--) {
-            if(documents[i].status === "valid") {
+            if(documents[i].status === "accepted") {
                 num++;
             }
         }
@@ -561,7 +569,7 @@ var GroupReview = React.createClass({
 
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].checked) {
-                documents[i].status = 'valid';
+                documents[i].status = 'accepted';
                 documents[i].checked = false;
             }
         }
