@@ -25,7 +25,7 @@
     <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs cat-list">
             <li rt-repeat="category in this.state.categoriesReview" key="{categoryIndex}" class="{(category.id == this.state.categoryCurrent.id ? 'active' : '')}">
-                <a href="#catInfo" onClick="(e)=>this.setCategoryCurrent(categoryIndex)" class="text-capitalize">{category.name}</a>
+                <a href="#catInfo" onClick="{this.setCategoryCurrent.bind(this, categoryIndex)}" class="text-capitalize">{category.name}</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -217,7 +217,7 @@
                             </Panel.custom>
                             <div class="clearfix">
                                 <Button bsClass="false" class="btn btn-green btn-next-cat pull-right ml-md"
-                                    onClick="() => this.setCategoryCurrent(this.state.currentIndex.category + 1)">Go to Next Category</Button>
+                                    onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
                                 <Button bsClass="false" class="btn btn-green btn-next-reviewer pull-right"
                                     onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>    
                             </div>                     
@@ -308,7 +308,7 @@
     open="{this.state.openPreview}"
     document="{docPreview}"
     nextDocument="{this.handleNextDocument}"
-    undo="() => this.handleUndo()"
+    undo="{this.handleUndo}"
     closeModal="{this.closePreview}">
     <div class="table-responsive">
         <table rt-if="this.constructor.challenge === this.state.currentIndex.panel" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
