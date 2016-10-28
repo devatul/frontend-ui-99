@@ -31,10 +31,10 @@
             <Col sm={8} md={6} class="review_choose-cluster-block choose-cluster-block clearfix">
                 <FormGroup>
                     <InputGroup class="mb-md">
-                        <label for="choose_cluster">
-                            <b class="mr-md">Select a orphan to review
-                                <HelpButton
-                                    setValue="User is required to assign category and confidentiality Level for orphaned documents."/>
+                        <label>
+                            <b class="mr-md">
+                                Select a orphan to review
+                                <HelpButton setValue="User is required to assign category and confidentiality Level for orphaned documents."/>
                             </b>
                             <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
                                 <option
@@ -80,27 +80,29 @@
                                     </header>
 
                                     <div class="panel-body" id="stat-block">
-                                        <h4 class="mt-none">Orphan Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>  
-                                            <HelpButton
-                                                setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
+                                        <h4 class="mt-none">
+                                            Orphan Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
+                                            <HelpButton setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
                                         </h4>
 
                                         <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                                        <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                                            <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
                                         </div>
 
                                         <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
                                             <tbody rt-scope="this.state.statistics as statistics">
                                                 <tr>
-                                                    <td class="text-left"><span>Total Number of Documents</span>
+                                                    <td class="text-left">
+                                                        <span>Total Number of Documents</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                        classNote="review_question_chart"
-                                                        setValue="Total Number of Documents in the selected group." />
+                                                            classNote="review_question_chart"
+                                                            setValue="Total Number of Documents in the selected group." />
                                                     </td>
                                                     <td class="text-right text-num">{statistics.total_number_documents}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><span>Number of Documents Reviewed</span>
+                                                    <td class="text-left">
+                                                        <span>Number of Documents Reviewed</span>
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="review_question_chart"
                                                             setValue="Number of Documents reviewed in the selected group." />
@@ -108,31 +110,35 @@
                                                     <td class="text-right text-num">{this.state.validateNumber}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><span>Average Centroid Distance</span>
-                                                    <HelpButton className="dropdown-file-info-holder"
+                                                    <td class="text-left">
+                                                        <span>Average Centroid Distance</span>
+                                                        <HelpButton className="dropdown-file-info-holder"
                                                             classNote="review_question_chart"
                                                             setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
                                                     </td>
                                                     <td class="text-right text-num">{statistics.avg_centroid_distance}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><span>Maximum Centroid Distance</span>
+                                                    <td class="text-left">
+                                                        <span>Maximum Centroid Distance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                                classNote="review_question_chart"
-                                                                setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
-                                                </td>
+                                                            classNote="review_question_chart"
+                                                            setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
+                                                    </td>
                                                     <td class="text-right text-num">{statistics.max_centroid_distance}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><span>Minimum Centroid Distance</span>
+                                                    <td class="text-left">
+                                                        <span>Minimum Centroid Distance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                                classNote="review_question_chart"
-                                                                setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
+                                                            classNote="review_question_chart"
+                                                            setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                                                     </td>
                                                     <td class="text-right text-num">{statistics.min_centroid_distance}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><span>Centroid Distance Variance</span>
+                                                    <td class="text-left">
+                                                        <span>Centroid Distance Variance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
                                                             classNote="review_question_chart"
                                                             setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
@@ -143,10 +149,11 @@
                                         </table>
 
                                         <div class="mt-lg">
-                                        <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Orphan</Button>
-                                        <HelpButton className=""
+                                            <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Orphan</Button>
+                                            <HelpButton className=""
                                                 classNote="review_question_chart"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
+                                        </div>
                                         <div class="refine-progress" style="display: {this.state.showLoading}">
                                             <LoadingButton open={true} elementType="div"/>
                                         </div>
@@ -161,9 +168,9 @@
                                 </Row>
                                 <Row>
                                     <div id="fileDistribution" class="mb-md">
-                                        <h4 class="chart-title">File Distribution
-                                            <HelpButton
-                                                setValue="Summary of the document type for the documents within the selected orphan."/>
+                                        <h4 class="chart-title">
+                                            File Distribution
+                                            <HelpButton setValue="Summary of the document type for the documents within the selected orphan."/>
                                         </h4>
                                         {this.fileDistribution()}
                                     </div>
@@ -194,7 +201,6 @@
                     <Panel.body>
                         <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.orphanCurrent && this.state.orphanCurrent.name} by latest 15th November</p>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-
                             <Button
                                 rt-if="this.state.checkedNumber > 0"
                                 onClick="{this.handleClickApproveButton}"
@@ -213,34 +219,41 @@
                                         <th class="fix-padding-th-checkbox">
                                             <div class="checkbox-custom checkbox-primary">
                                                 <input type="checkbox"
+                                                    id="checkboxAllExample2"
                                                     class="checkbox-all-1"
                                                     onChange="{this.handleSelectAll}"
                                                     checked="{this.state.checkBoxAll}">
                                                 <label for="checkboxAllExample2"></label>
                                             </div>
                                         </th>
-                                        <th class="review_note fix-width">Type
+                                        <th class="review_note fix-width">
+                                            Type
                                             <!--<HelpButton
                                                 className="dropdown-file-info-holder"
                                                 classNote="note_chart_content"
                                                 setValue="This displays the name of each individual document, as it exists in its current state." />-->
                                         </th>
-                                        <th class="review_note">Document name
+                                        <th class="review_note">
+                                            Document name
                                             <HelpButton
                                                 className="dropdown-file-info-holder"
                                                 setValue="This displays the name of each individual document, as it exists in its current state." />
                                         </th>
-                                        <th class="review_note fix-max-width-category-confident">Proposed Category
-                                            <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
-                                                        setValue="User is required to assign category for orphan documents." />
+                                        <th class="review_note fix-max-width-category-confident">
+                                            Proposed Category
+                                            <HelpButton classNote="help_question_bottom"
+                                                className="dropdown-file-info-holder"
+                                                setValue="User is required to assign category for orphan documents." />
                                         </th>
-                                        <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                                        <th class="review_note fix-max-width-category-confident">
+                                            Proposed Confidentiality
                                             <HelpButton
                                                 classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                                                 className="dropdown-file-info-holder"
                                                 setValue="User is required to assign confidentiality level for orphan documents." />
                                         </th>
-                                        <th class="text-center">Status 
+                                        <th class="text-center">
+                                            Status
                                             <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
                                                         setValue="This represent the status of the review for each file." />-->
                                         </th>
@@ -272,58 +285,59 @@
             </Col>
         </Row>
     </div>
-<!--<div rt-if="this.state.documentPreview >= 0">-->
-<DocumentPreview
-    open={this.state.openPreview}
-    document={this.state.documents[this.state.documentPreview]}
-    nextDocument="() => this.onClickDocumentName(this.state.documentPreview + 1)"
-    undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
-<div class="table-responsive">
-    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
-        <thead>
-            <tr role="row" class="">
-                <th>
-                    <div class="checkbox-custom checkbox-primary">
-                        <input type="checkbox"
-                            class="checkbox-all-1"
-                            onChange="{this.handleSelectAll}"
-                            checked="{this.state.checkBoxAll}">
-                        <label for="checkboxAllExample2"></label>
-                    </div>
-                </th>
-                <th class="review_note fix-width">Type
-                </th>
-                <th class="review_note">Document name
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        setValue="This displays the name of each individual document, as it exists in its current state." />
-                </th>
-                <th class="review_note fix-max-width-category-confident">Proposed Category
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        setValue="User is required to assign category for orphan documents." />
-                </th>
-                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                        setValue="User is required to assign confidentiality level for orphan documents." />
-                </th>
-                <th class="text-center">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <table.row
-                document={this.state.documents[this.state.documentPreview]}
-                categories={this.state.categories}
-                confidentialities={this.state.confidentialities}
-                onClick="{this.handleTableRowOnClick}"
-                onChange="{this.handleTableRowOnChange}"
-                index={this.state.documentPreview} />
-        </tbody>
-    </table>
-</div>
-</DocumentPreview>
-<!--</div>-->
+
+    <DocumentPreview
+        open={this.state.openPreview}
+        document={this.state.documents[this.state.documentPreview]}
+        nextDocument="() => this.onClickDocumentName(this.state.documentPreview + 1)"
+        undo="{this.handleUndo}"
+        closeModal="{this.closePreview}">
+        <div class="table-responsive">
+            <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+                <thead>
+                    <tr role="row" class="">
+                        <th>
+                            <div class="checkbox-custom checkbox-primary">
+                                <input type="checkbox"
+                                    class="checkbox-all-1"
+                                    onChange="{this.handleSelectAll}"
+                                    checked="{this.state.checkBoxAll}">
+                                <label for="checkboxAllExample2"></label>
+                            </div>
+                        </th>
+                        <th class="review_note fix-width">Type</th>
+                        <th class="review_note">
+                            Document name
+                            <HelpButton
+                                className="dropdown-file-info-holder"
+                                setValue="This displays the name of each individual document, as it exists in its current state." />
+                        </th>
+                        <th class="review_note fix-max-width-category-confident">
+                            Proposed Category
+                            <HelpButton
+                                className="dropdown-file-info-holder"
+                                setValue="User is required to assign category for orphan documents." />
+                        </th>
+                        <th class="review_note fix-max-width-category-confident">
+                            Proposed Confidentiality
+                            <HelpButton
+                                className="dropdown-file-info-holder"
+                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                setValue="User is required to assign confidentiality level for orphan documents." />
+                        </th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <table.row
+                        document={this.state.documents[this.state.documentPreview]}
+                        categories={this.state.categories}
+                        confidentialities={this.state.confidentialities}
+                        onClick="{this.handleTableRowOnClick}"
+                        onChange="{this.handleTableRowOnChange}"
+                        index={this.state.documentPreview} />
+                </tbody>
+            </table>
+        </div>
+    </DocumentPreview>
 </section>
