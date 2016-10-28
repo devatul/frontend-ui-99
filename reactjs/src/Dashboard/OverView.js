@@ -4,7 +4,7 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
-import { icons, fetching } from '../Constant.js';
+import { _categories, fetching } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
 import { orderByIndex } from '../utils/function'
 import $, { JQuery } from 'jquery';
@@ -312,18 +312,20 @@ var OverView = React.createClass
         name = name.toLowerCase();
 
         switch(name) {
-            case icons.accounting.name.toLowerCase():
-                return icons.accounting.class;
-            case icons.client.name.toLowerCase():
-                return icons.client.class;
-            case icons.corporate.name.toLowerCase():
-                return icons.corporate.class;
-            case icons.employee.name.toLowerCase():
-                return icons.employee.class;
-            case icons.legal.name.toLowerCase():
-                return icons.legal.class;
-            case icons.transaction.name.toLowerCase():
-                return icons.transaction.class;
+            case _categories.ACCOUNTING.name.toLowerCase():
+                return _categories.ACCOUNTING.icon;
+            case _categories.CLIENT.name.toLowerCase():
+                return _categories.CLIENT.icon;
+            case _categories.CORPORATE.name.toLowerCase():
+                return _categories.CORPORATE.icon;
+            case _categories.EMPLOYEE.name.toLowerCase():
+                return _categories.EMPLOYEE.icon;
+            case _categories.LEGAL.name.toLowerCase():
+                return _categories.LEGAL.icon;
+            case _categories.TRANSACTION.name.toLowerCase():
+                return _categories.TRANSACTION.icon;
+            case _categories.UNDEFINED.name.toLocaleLowerCase():
+                return _categories.UNDEFINED.icon;
             default:
                 return " ";
         }

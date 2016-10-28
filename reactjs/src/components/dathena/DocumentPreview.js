@@ -33,11 +33,11 @@ var documentPreview = React.createClass({
     },
 
     handleNextDocument(event) {
-
+        this.props.nextDocument(event)
     },
 
     handleUndo(event) {
-
+        this.props.undo(event)
     },
 
     loadDocument() {
@@ -97,8 +97,8 @@ var documentPreview = React.createClass({
                                 }</span>
                             </div>
                             <div className="col-sm-4 modal-actions text-right">
-                                <Button className="mb-xs mr-xs btn btn-green" bsClass={false} onClick={this.props.nextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-                                <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass={false} onClick={this.props.undo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
+                                <Button className="mb-xs mr-xs btn btn-green" bsClass={false} onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass={false} onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                                 <Button className="modal-button" bsClass={false} onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
                             </div>
                         </Row>

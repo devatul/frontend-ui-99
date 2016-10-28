@@ -24,28 +24,51 @@ module.exports = {
 		level1: 30,
 		level2: 50
 	},
-	icons: {
-		accounting: { name: "Accounting / Tax", class:'fa-calculator'},
-		client: { name: "Client / Customer", class:'fa-users'},
-		corporate: { name: "Corporate Entity", class:'fa-university'},
-		employee: { name: "Employee / Personal Data", class:'fa-male'},
-		legal: { name: "Legal / Compliance", class:'fa-balance-scale'},
-		transaction: { name: "Transaction", class:'fa-usd'}
+	_categories: {
+		ACCOUNTING: {
+			name: "Accounting / Tax",
+			icon:'fa-calculator'
+		},
+		CLIENT: {
+			name: "Client / Customer",
+			icon:'fa-users'
+		},
+		CORPORATE: {
+			name: "Corporate Entity",
+			icon:'fa-university'
+		},
+		EMPLOYEE: {
+			name: "Employee / Personal Data",
+			icon:'fa-male'
+		},
+		LEGAL: {
+			name: "Legal / Compliance",
+			icon:'fa-balance-scale'
+		},
+		TRANSACTION: {
+			name: "Transaction",
+			icon:'fa-usd'
+		},
+		UNDEFINED: {
+			name: 'Undefined',
+			icon: 'fa-ban'
+		}, 
 	},
 	urgency: [
 		{ name: "low",  class: ""},
 		{ name: "high", class: "fa-clock-o only" },
 		{ name: "very high", class: "fa-clock-o" }
 	],
-	status: [
-		{normal: { name: "normal", color: "#999"} },
-
-		{editing: {name: "editing", color: "#ffc200"} },
-
-		{accept: {name: "accept", color: "#4fca9d"} },
-
-		{reject: {name: "reject", color: "#ff2d00"} }
-	],
+	status: {
+		EDITING: {
+			name: 'editing',
+			color: '#ffc200'
+		},
+		ACCEPTED: {
+			name: 'accepted',
+			color: '#4fca9d'
+		}
+	},
 	fetching: {
 		START: 0.3,
 		STARTED: 0.6,

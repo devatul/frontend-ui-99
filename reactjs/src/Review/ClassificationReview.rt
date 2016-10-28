@@ -35,6 +35,7 @@
                 <Panel.body>
                     <Panel.custom
                         rt-repeat="review in this.state.dataReview"
+                        key="action_review_{reviewIndex}"
                         class="panel-bordered actions-panel">
                         <Panel.head>
                             <h2 class="panel-title inline-block-item mr-sm">
@@ -47,7 +48,7 @@
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
                                 <span>Language: <b>{review.language.name}</b></span>
-                                <button onClick="() => this.handleUndo(reviewIndex)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button onClick="{this.handleUndo.bind(this, reviewIndex)}" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>
                         <Panel.body>
@@ -55,7 +56,7 @@
 
                                 <Button
                                     rt-if="review.checkedNumber > 0"
-                                    onClick="() => this.handleClickApproveButton(reviewIndex)"
+                                    onClick="{this.handleClickApproveButton.bind(this, reviewIndex)}"
                                     class="mb-md mr-xs btn btn-green approve-button"
                                     bsClass="">
                                     Approve
@@ -72,7 +73,7 @@
                                                 <div class="checkbox-custom checkbox-primary">
                                                     <input type="checkbox"
                                                         class="checkbox-all-1"
-                                                        onChange="(event) => this.handleCheckAll(event, reviewIndex)"
+                                                        onChange="{this.handleCheckAll.bind(this, event, reviewIndex)}"
                                                         checked="{review.checkedAll}">
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
@@ -103,7 +104,8 @@
                                     </thead>
                                     <tbody class="fix-td-checkbox">
                                         <table.row rt-repeat="document in review.documents"
-                                            document="{document}"
+                                            document={document}
+                                            key="document_{documentIndex}"
                                             index="{reviewIndex + '_' + documentIndex}"
                                             action="{review}"
                                             categories="{this.state.categories}"
@@ -124,8 +126,8 @@
 <DocumentPreview
     open="{this.state.openPreview}"
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-    nextDocument="() => this.onClickDocumentName(this.state.current.review + '_' + (this.state.current.doc + 1))"
-    undo="() => this.handleUndo(this.state.current.review)"
+    nextDocument="{this.onClickDocumentName.bind(this, this.state.current.review + '_' + (this.state.current.doc + 1))}"
+    undo="{this.handleUndo.bind(this, this.state.current.review)}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">

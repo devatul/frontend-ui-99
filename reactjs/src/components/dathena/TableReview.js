@@ -7,6 +7,7 @@ import ProgressBar from 'react-bootstrap/lib/ProgressBar'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 import Tooltip from 'react-bootstrap/lib/Tooltip'
 import { renderClassType, orderByIndex } from '../../utils/function'
+import { status } from '../../Constant'
 import makeRequest from '../../utils/http'
 import { findIndex, isEqual } from 'lodash'
 
@@ -87,9 +88,9 @@ var RowChallenged = React.createClass({
 
     renderValidation(valid) {
         switch(valid) {
-            case 'editing':
+            case status.EDITING.name:
                 return "icon-danger";
-            case 'accepted':
+            case status.ACCEPTED.name:
                 return "icon-success";
             default: 
                 return "";
@@ -259,9 +260,9 @@ var Row3 = React.createClass({
 
     renderValidation(valid) {
         switch(valid) {
-            case 'editing':
+            case status.EDITING.name:
                 return "icon-danger";
-            case 'accepted':
+            case status.ACCEPTED.name:
                 return "icon-success";
             default: 
                 return "";
@@ -381,9 +382,9 @@ var Row2 = React.createClass({
 
     renderValidation(valid) {
         switch(valid) {
-            case 'editing':
+            case status.EDITING.name:
                 return (<i className="fa fa-check icon-danger"></i>);
-            case 'accepted':
+            case status.ACCEPTED.name:
                 return (<i className="fa fa-check icon-success"></i>);
             default: 
                 return (<i className="fa fa-check"></i>);
@@ -575,12 +576,12 @@ var Row = React.createClass({
         return index;
     },
 
-    renderStatus(status) {
+    renderStatus(_status) {
         let color = "";
 
-        switch(status) {
-            case "editing":
-                color = "#ffc200";
+        switch(_status) {
+            case status.EDITING.name:
+                color = status.EDITING.color;
             break;
 
         }

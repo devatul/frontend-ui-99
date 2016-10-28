@@ -48,7 +48,7 @@
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
                                 <span>Language: <b>{action.language.name}</b></span>
-                                <button onClick="() => this.handleUndo(actionIndex, this.constructor.actions)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button onClick="{this.handleUndo.bind(this, actionIndex, this.constructor.actions)}" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>
                         <Panel.body>
@@ -56,7 +56,7 @@
 
                                 <Button
                                     rt-if="action.checkedNumber > 0"
-                                    onClick="() => this.handleApproveButton(actionIndex, this.constructor.actions)"
+                                    onClick="{this.handleApproveButton.bind(this, actionIndex, this.constructor.actions)}"
                                     class="mb-md mr-xs btn btn-green approve-button"
                                     bsClass="">
                                     Approve
@@ -73,7 +73,7 @@
                                                 <div class="checkbox-custom checkbox-primary">
                                                     <input type="checkbox"
                                                         class="checkbox-all-1"
-                                                        onChange="(event) => this.handleCheckAll(event, actionIndex, this.constructor.actions)"
+                                                        onChange="{this.handleCheckAll.bind(this, event, actionIndex, this.constructor.actions)}"
                                                         checked="{action.checkAll}">
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
@@ -111,8 +111,8 @@
                                             key="{this.constructor.actions + '_' + actionIndex + '_' + documentIndex}"
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
-                                            onClick="(event) => this.handleTableRowOnClick(event, actionIndex, documentIndex, this.constructor.actions)"
-                                            onChange="(event) => this.handleTableRowOnChange(event, actionIndex, documentIndex, this.constructor.actions)"
+                                            onClick="{this.handleTableRowOnClick.bind(this, event, actionIndex, documentIndex, this.constructor.actions)}"
+                                            onChange="{this.handleTableRowOnChange.bind(this, event, actionIndex, documentIndex, this.constructor.actions)}"
                                             numberChecked={action.checkedNumber} />
                                     </tbody>
                                 </Table>
@@ -133,7 +133,7 @@
                             </h2>
                             <div class="panel-actions my-actions-btn-group">
                                 <span>Language: <b>{challenge.language.name}</b></span>
-                                <button onClick="() => this.handleUndo(challengeIndex, this.constructor.challenge)" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
+                                <button onClick="{this.handleUndo.bind(this, challengeIndex, this.constructor.challenge)}" class="mb-xs ml-md mt-none mr-xs btn btn-green">Undo <i class="fa fa-undo" aria-hidden="true"></i></button>
                             </div>
                         </Panel.head>
                         <Panel.body>
@@ -141,7 +141,7 @@
 
                                 <Button
                                     rt-if="challenge.checkedNumber > 0"
-                                    onClick="() => this.handleApproveButton(challengeIndex, this.constructor.challenge)"
+                                    onClick="{this.handleApproveButton.bind(this, challengeIndex, this.constructor.challenge)}"
                                     class="mb-md mr-xs btn btn-green approve-button"
                                     bsClass="">
                                     Approve
@@ -156,7 +156,7 @@
                                         <tr role="row" class="">
                                             <th class="fix">
                                                 <div class="checkbox-custom checkbox-primary">
-                                                    <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.handleCheckAll(event, challengeIndex, this.constructor.challenge)" checked="{challenge.checkAll}">
+                                                    <input type="checkbox" class="checkbox-all-1" onChange="{this.handleCheckAll(this, event, challengeIndex, this.constructor.challenge)}" checked="{challenge.checkAll}">
                                                     <label></label>
                                                 </div>
                                             </th>
@@ -205,8 +205,8 @@
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
                                             numberCheck="{challenge.checkedNumber}"
-                                            onChange="(event) => this.handleTableRowOnChange(event, challengeIndex, documentIndex, this.constructor.challenge)"
-                                            onClick="(event) => this.handleTableRowOnClick(event, challengeIndex, documentIndex, this.constructor.challenge)"
+                                            onChange="{this.handleTableRowOnChange.bind(this, event, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onClick="{this.handleTableRowOnClick.bind(this, event, challengeIndex, documentIndex, this.constructor.challenge)}"
                                             />
                                     </tbody>
                                 </table>
@@ -222,8 +222,8 @@
     rt-scope="this.state.current as current; this.state[current.review][current.actionIndex] && this.state[current.review][current.actionIndex].documents[current.docIndex] as document"
     open="{this.state.openPreview}"
     document="{document}"
-    nextDocument="() => this.handleNextDocumentName(current.actionIndex, current.docIndex, current.review)"
-    undo="() => this.handleUndo(current.actionIndex, current.review)"
+    nextDocument="{this.handleNextDocumentName.bind(this, current.actionIndex, current.docIndex, current.review)}"
+    undo="{this.handleUndo.bind(this, current.actionIndex, current.review)}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table
@@ -269,8 +269,8 @@
                 key="{current.docIndex}"
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
-                onClick="(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.actions)"
-                onChange="(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.actions)"
+                onClick="{this.handleTableRowOnClick.bind(this, event, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                onChange="{this.handleTableRowOnChange.bind(this, event, current.actionIndex, current.docIndex, this.constructor.actions)}"
                 hide="{{ checkbox: true }}"
                 index="{current.docIndex}" />
         </tbody>
@@ -330,8 +330,8 @@
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
                 hide="{{checkbox: true}}"
-                onChange="(event) => this.handleTableRowOnChange(event, current.actionIndex, current.docIndex, this.constructor.challenge)"
-                onClick="(event) => this.handleTableRowOnClick(event, current.actionIndex, current.docIndex, this.constructor.challenge)"
+                onChange="{this.handleTableRowOnChange.bind(this, event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onClick="{this.handleTableRowOnClick.bind(this, event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
                 />
         </tbody>
     </table>
