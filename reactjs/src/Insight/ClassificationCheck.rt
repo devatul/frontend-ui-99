@@ -1,7 +1,7 @@
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
-
+<rt-import name="func" from='../utils/function.js'/>
 
 <div>
     <div class="container">
@@ -12,7 +12,7 @@
                         <div class="search-box mb-lg">
                           <label>Search</label>
                           <div class="inline-block-item ml-sm search-box-wrap">
-                            <input class="search-box-input" type="text" placeholder="Contract Bank">
+                            <input class="search-box-input" type="text" placeholder="Contract Bank" onChange = "{this.search}">
                             <i class="fa fa-search text-green"></i>
                           </div>
                         </div>
@@ -61,9 +61,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
+                                        <tr class="" rt-repeat="rt in this.state.data">
                                             <td class="text-center">
-                                                <i class="fa fa-file-word-o action-file-icon"></i>
+                                                <i class="fa {func.renderClassType(rt.name)} action-file-icon"></i>
                                             </td>
                                             <td class="text-left overflow-hidden">
                                                 <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
@@ -80,107 +80,28 @@
                                                         </InfoButton>
 
                                                 </div>
-                                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.doc</span>
+                                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
                                             </td>
                                             <td class="text-left">
-                                                <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
+                                                <span class="text-italic doc-path">{rt.path}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>Accounting/Tax</span>
+                                              <span>{rt.category}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>Confidentiality</span>
+                                              <span>{rt.Confidentiality}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>John.Hayt</span>
+                                              <span>{rt['Last Modify by']}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>Billy.Barty</span>
+                                              <span>{rt.Reviewer}</span>
                                             </td>
                                             <td>
-                                              <span class="text-red">Yes</span>
+                                              <span class="text-{rt['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{rt['Involved in Anomaly']}</span>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td class="text-center">
-                                                <i class="fa fa-file-powerpoint-o action-file-icon"></i>
-                                            </td>
-                                            <td class="text-left overflow-hidden">
-                                                <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
 
-                                                        <InfoButton>
-                                                            <li>Name: <b>Contract</b></li>
-                                                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                                                            <li>Owner: <b>Todd_Smith</b></li>
-                                                            <li>Creation Date: <b>2015-01-01</b></li>
-                                                            <li>Modification Date: <b>2015-05-28</b></li>
-                                                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                                                            <li>Confidentiality Label: <b>Yes/No</b></li>
-                                                            <li>Number of Classification Challenge: <b>1</b></li>
-                                                        </InfoButton>
-
-                                                </div>
-                                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.ppt</span>
-                                            </td>
-                                            <td class="text-left">
-                                                <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Accounting/Tax</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Confidentiality</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>John.Hayt</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Billy.Barty</span>
-                                            </td>
-                                            <td>
-                                              <span class="text-green">No</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="">
-                                            <td class="text-center">
-                                                <i class="fa fa-file-excel-o action-file-icon"></i>
-                                            </td>
-                                            <td class="text-left overflow-hidden">
-                                                <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
-
-                                                        <InfoButton>
-                                                            <li>Name: <b>Contract</b></li>
-                                                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                                                            <li>Owner: <b>Todd_Smith</b></li>
-                                                            <li>Creation Date: <b>2015-01-01</b></li>
-                                                            <li>Modification Date: <b>2015-05-28</b></li>
-                                                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                                                            <li>Confidentiality Label: <b>Yes/No</b></li>
-                                                            <li>Number of Classification Challenge: <b>1</b></li>
-                                                        </InfoButton>
-
-                                                </div>
-                                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.xls</span>
-                                            </td>
-                                            <td class="text-left">
-                                                <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Accounting/Tax</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Confidentiality</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>John.Hayt</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Billy.Barty</span>
-                                            </td>
-                                            <td>
-                                              <span class="text-green">No</span>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

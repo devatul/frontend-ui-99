@@ -110,11 +110,11 @@ var CircleChart = React.createClass({
                     </div>
                 <span className={this.props.className}></span>
                 <div className="anomaly-legend outer-legend">
-                  <span className="legend orange legend fix" style={{ color: this.colorOuter(this.props.value_outer) }}>Medium Risk</span>
-                  <span className="outer-indicator orange" style={{ backgroundColor: this.colorOuter(this.props.value_outer) }}></span>
+                  <span className="legend orange legend fix" style={{ color: this.colorOuter(this.props.value_outer) }}>{this.props.content_outer}</span>
+                  <span className="outer-indicator orange" style={{ backgroundColor: this.colorOuter(this.props.value_outer) , marginLeft : this.props.marginLeft}}></span>
                 </div>
                 <div className="anomaly-legend inner-legend">
-                  <span className="legend green" style={{ color: this.colorInner(this.props.value_outer) }}>Prediction Quality: High</span>
+                  <span className="legend green" style={{ color: this.colorInner(this.props.value_in) }}>{this.props.content_inner}</span>
                   <span className="inner-indicator green" style={{ backgroundColor: this.colorInner(this.props.value_outer) }}></span>
                 </div>
               </div>

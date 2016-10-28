@@ -6,10 +6,10 @@ import $ from 'jquery'
 module.exports = React.createClass({
   	getInitialState() {
 	    return {
-	    	
+
 	    };
 	},
-	componentDidMount() 
+	componentDidMount()
 	{
 	},
 
@@ -21,6 +21,8 @@ module.exports = React.createClass({
 				return 'Document Classification Challenge - Coordinator’s Review Validation';
 			case 'UserAssignment':
 				return 'Document Classification - User Assignment';
+            case 'ReviewStatus':
+                return 'Document Classification - Review Status';
 			default:
 				return 'Document Categorisation and Classification Review'
 		}

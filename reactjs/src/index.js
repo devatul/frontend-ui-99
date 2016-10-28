@@ -20,6 +20,7 @@ var OrphanReview = require('./Review/OrphanReview');
 var GroupReview = require('./Review/GroupReview');
 var UserAssignment = require('./Review/UserAssignment');
 var ClassificationReview = require('./Review/ClassificationReview');
+var ReviewStatus = require('./Review/ReviewStatus');
 var Notification = require('./Dashboard/Notification');
 var DocumentReview = require('./Review/DocumentReview');
 var Insight = require('./Insight/Insight');
@@ -55,6 +56,7 @@ render((
 					<Route path="/Review/ClassificationReview" component={ClassificationReview}/>
 					<Route path="/Review/DocumentReview" component={DocumentReview}/>
 					<Route path="/Review/ReviewValidation" component={ReviewValidation}/>
+                    <Route path="/Review/ReviewStatus" component={ReviewStatus}/>
 				</Route>
 				<Route path="/Insight/Insight" component={Insight}>
 					<Route path="/Insight/Identity" component={Identity}/>

@@ -178,7 +178,7 @@
                         </h4>
                       </div>
                     </div>
-                     <Circle id = 'chart_1' value_inner= 50  value_outer = 40 className = "anomaly-icon anomaly-icon-fix fix-icon-user"/>
+                     <Circle id = 'chart_1' value_inner= 50  value_outer = 40 className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
@@ -273,7 +273,7 @@
                       </div>
                     </div>
                 <div class="col-md-3">
-                  <Circle id = 'chart_2' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-window" />
+                  <Circle id = 'chart_2' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-window" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
@@ -371,7 +371,7 @@
                       </div>
                     </div>
                   <div class="anomaly-radial">
-                    <Circle id = 'chart_3' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-user" />
+                    <Circle id = 'chart_3' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                   </div>
                 </div>
                 <div class="col-md-9" style="margin-top: 50px">
@@ -484,7 +484,7 @@
                             </div>
                         </div>
                         <div class="anomaly-radial">
-                            <Circle id = 'chart_4' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
+                            <Circle id = 'chart_4' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                         </div>
                     </div>
                 <div class="col-md-9">
@@ -595,7 +595,7 @@
                         </div>
                     </div>
                     <div class="anomaly-radial">
-                        <Circle id = 'chart_5' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" />
+                        <Circle id = 'chart_5' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High "/>
                     </div>
                 </div>
                 <div class="col-md-9">

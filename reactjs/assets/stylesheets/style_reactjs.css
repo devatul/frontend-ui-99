@@ -350,3 +350,42 @@
 .fix_helpbutton_popup {
     margin-top: 4px;
 }
+.btn-blue-rv {
+    border: 1px solid #1BC3E1;
+    color: #1BC3E1;
+}
+.review-status-cat-table {
+    border-bottom: 1px solid #ddd;
+}
+.anomaly-icon-fixReview {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url(../images/anomaly_charts2.png);
+    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+}
+.anomaly-icon-fixReview.icon-progress {
+    background-position: -120px 0;
+}
+.review-status-table .border-top {
+    border-top: 1px solid #eee;
+}
+.review-status-table tbody tr td {
+    text-align: left;
+        padding: 4px;
+}
+.review-status-table tbody tr {
+    max-height: 46px
+}
+/*.anomaly-table-fixReview {
+    margin-bottom: 0;
+    font-size: 13px;
+}*/
+.anomaly-table.fixReview > thead > tr > th {
+    white-space: nowrap;
+}

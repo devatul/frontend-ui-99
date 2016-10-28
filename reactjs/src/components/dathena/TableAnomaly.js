@@ -1,8 +1,6 @@
 import React,  { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import InfoButton from '../dathena/InfoButton'
-import SelectBox from '../dathena/SelectBox'
 import makeRequest from '../../utils/http'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
@@ -178,7 +176,7 @@ var TableAnomaly = React.createClass({
                             <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
                             <td className="relative">
                               <span className= {className} data-state="true" onClick={this.showSelect.bind(this,newData,i-1)}></span>
-                              <div class="anomaly-showhide">
+                              <div className="anomaly-showhide">
                                   <Anomaly onChange = {this.changeAnomaly} number = {key} show={newData[i-1].selected}/>
                               </div>
                             </td>

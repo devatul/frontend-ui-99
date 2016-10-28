@@ -106,6 +106,9 @@
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
+                         <li>
+                            <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
@@ -163,6 +166,9 @@
                         </li>
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
                         </li>
                     </ul>
                 </li>

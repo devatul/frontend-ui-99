@@ -1,0 +1,594 @@
+<rt-import name="Circle" from= "../components/chart/CircleChartAnomaly"/>
+<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+
+<div class="container">
+      <div class="tabs tabs-primary reviewer-tab">
+        <ul class="nav nav-tabs cat-list">
+          <li class="active">
+            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Accounting / Tax</a>
+          </li>
+          <li class="">
+            <a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
+          </li>
+          <li class="">
+            <a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
+          </li>
+          <li class="">
+            <a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
+          </li>
+          <li class="">
+            <a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Compliance</a>
+          </li>
+          <li class="">
+            <a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
+          </li>
+          <li class="">
+            <a href="#summary" data-toggle="tab" aria-expanded="true">Summary</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="accounting_tax" class="tab-pane active">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row mb-sm">
+                  <div class="col-md-3">
+                    <Circle id = 'chart_1' value_inner=50 value_outer = 40  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
+                  </div>
+
+                  <div class="col-md-9">
+                    <p class="text-right">Accounting/ Tax Review Status: <b class="mr-lg">10 users - 23 documents/user - 68/100 Reviews Documents</b></p>
+
+                    <div class="table-responsive">
+                      <table class="table anomaly-table review-status-table review-status-cat-table">
+                        <thead>
+                          <tr>
+                            <th class="text-left">Reviewer
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left">Status
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left">Reviewed Documents
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left">Challenged Documents
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left">Progress
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>50%/5</td>
+                            <td>1 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>100%/10</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>50%/5</td>
+                            <td>1 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>100%/10</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>50%/5</td>
+                            <td>1 Document</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              Jack.GilFord
+                            </td>
+                            <td>Not Started</td>
+                            <td>100%/10</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <button class="btn btn-green btn-next-cat pull-right mt-sm">Go to Next Category</button>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div id="corporate_entity" class="tab-pane">
+          </div>
+          <div id="client_customer" class="tab-pane">
+          </div>
+          <div id="employee" class="tab-pane">
+          </div>
+          <div id="legal_regulatory" class="tab-pane">
+          </div>
+          <div id="transaction" class="tab-pane">
+          </div>
+          <div id="summary" class="tab-pane">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row mb-sm">
+                  <div class="col-md-3">
+                    <h4><b>Review Status:</b></h4>
+                    <Circle id = 'chart_2' value_inner=50 value_outer = 40  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
+                  </div>
+
+                  <div class="col-md-9">
+                    <p>Accounting/ Tax Review Status: <b class="mr-lg">60 Users - 23 documents/user - 532/600 Reviewed Documents</b></p>
+
+                    <div class="table-responsive">
+                      <table class="table anomaly-table fixReview review-status-table">
+                        <thead>
+                          <tr>
+                            <th class="text-left">Category
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left">Status
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left" style="max-width: 120px;">Number of Users
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left" style="max-width: 140px;">Reviewed Documents
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left" style="max-width: 150px;">Challenged Documents
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th class="text-left" style="max-width: 80px;">Progress
+                              <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                            </th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td rowspan="3">
+                              <b>Accounting/Tax</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Under Review</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+
+                          <tr class="border-top">
+                            <td rowspan="3">
+                              <b>Corporate Entity</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-40 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Under Review</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+
+                          <tr class="border-top">
+                            <td rowspan="3">
+                              <b>Client/Customer</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Under Review</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+
+                          <tr class="border-top">
+                            <td rowspan="3">
+                              <b>Employee</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-40 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Legal Compliance</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+
+                          <tr class="border-top">
+                            <td rowspan="3">
+                              <b>Legal/Compliance</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-99 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Under Review</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+
+                          <tr class="border-top">
+                            <td rowspan="3">
+                              <b>Transaction</b>
+                            </td>
+                            <td>Not Started</td>
+                            <td>20%/2</td>
+                            <td>0%/0</td>
+                            <td>0 Document</td>
+                            <td rowspan="3">
+                              <div class="pie-wrapper pie-progress-40 style-1 pie-sm">
+                                <span class="label"></span>
+                                <div class="pie">
+                                  <div class="left-side half-circle"></div>
+                                  <div class="right-side half-circle"></div>
+                                </div>
+                                <div class="shadow"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Under Review</td>
+                            <td>60%/6</td>
+                            <td>45%/45</td>
+                            <td>1 Document</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap">Send a Reminder</a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Completed</td>
+                            <td>20%/20</td>
+                            <td>20%/20</td>
+                            <td>2 Documents</td>
+                            <td>
+                              <a href="#" class="btn btn-sm btn-blue-rv nowrap btn-disabled-rv">Send a Reminder</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
