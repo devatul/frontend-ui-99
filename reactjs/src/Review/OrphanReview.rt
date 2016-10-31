@@ -36,7 +36,7 @@
               Select a orphan to review
               <HelpButton setValue="User is required to assign category and confidentiality Level for orphaned documents." />
             </b>
-            <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
+            <select2 id="chosse_cluster" width="{300}" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
               <option
                 rt-repeat="orphan in this.state.orphans"
                 value="{orphanIndex}"
@@ -79,7 +79,7 @@
                   <h2 class="panel-title">Basic Statistics</h2>
                 </header>
 
-                <div class="panel-body" id="stat-block">
+                <div rt-if=" this.state.statistics.total_number_documents != null " class="panel-body" id="stat-block">
                   <h4 class="mt-none">
                     Orphan Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
                     <HelpButton setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
@@ -200,7 +200,7 @@
                   </h4>
                   {this.fileDistribution()}
                 </div>
-                <CentroidChart help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
+                <CentroidChart series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
               </Row>
             </Col>
           </Row>
