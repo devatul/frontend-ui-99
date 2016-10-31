@@ -420,7 +420,7 @@ var UserAssignment = React.createClass({
         return confidentiality;
     },
     
-    handleOnChangeSelectButton: function(checked, index) {
+    handleOnChangeSelectButton: function(index, checked) {
         //add reviewer into request
         var { list } = this.state.reviewer, 
             { request } = this.state.datafilter,
