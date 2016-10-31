@@ -483,3 +483,18 @@ select.assigment-select.form-control {
         position: relative;
     }
 }
+
+/* Fix select orphan and group */
+.review_choose-cluster-block > .form-group,
+.review_choose-cluster-block > .form-group > .input-group ,
+.review_choose-cluster-block > .form-group > .input-group > label {
+    width: 100%;
+}
+
+.choose-cluster-block > .form-group .select2-container {
+    width: auto !important;
+}
+/* chart legend overview */
+.chart-legend li {
+    padding-left: 15px;
+}
