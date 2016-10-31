@@ -14,12 +14,6 @@ module.exports = {
   entry: {
     'main': [
       paths.source + 'index'
-    ],
-    'vendor': [
-      paths.vendor + 'jquery/jquery.js'
-    ],
-    'styles': [
-      paths.css + 'theme.css'
     ]
   },
   output: {
@@ -43,8 +37,7 @@ module.exports = {
       beautify: false,
 
       comments: false,
-    }),
-    new ExtractTextPlugin('main.css')
+    })
   ],
   module: {
     loaders: [
@@ -61,13 +54,6 @@ module.exports = {
         test: /\.rt$/,
         loaders: ['react-templates-loader'],
         include: path.join(__dirname, 'src')
-      },
-
-      //CSS, SCSS
-      {
-        test: /\.css$/,
-        loaders: ExtractTextPlugin.extract("style-loader","css-loader"),
-        include: path.join(__dirname, 'assets/stylesheets')
       }
     ]
   }
