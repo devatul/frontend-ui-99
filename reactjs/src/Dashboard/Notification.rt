@@ -18,7 +18,7 @@
             <div class="notification-filter row">
                 <div class="col-sm-4 mb-md">
                     <label style="margin-right:3px">Last update</label>
-                    <select class="form-control filter-noti" onChange="{this.filterNotification.bind(this, event)}" value="{this.state.filterUpdate}">
+                    <select class="form-control filter-noti" onChange="{this.filterNotification}" value="{this.state.filterUpdate}">
                         <option value="update-today">Today</option>
                         <option value="update-week">Last 7 Days</option>
                         <option value="update-default" >Last 30 Days</option>

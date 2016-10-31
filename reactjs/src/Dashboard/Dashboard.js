@@ -5,6 +5,7 @@ import template from './Dashboard.rt'
 import update from 'react/lib/update'
 import _ from 'lodash'
 import $ from 'jquery'
+import { makeRequest } from '../utils/http'
 import Constant from '../Constant.js';
 //const ACTIVE = {background-color: '#0088cc'}
 module.exports = React.createClass({
@@ -23,6 +24,7 @@ module.exports = React.createClass({
             total_pending : 0,
             total_notification : 0 ,
             pending_list: [],
+            save_list : [],
             role: '',
             typeAlert: 'none',
             checkAlert : 'none'
@@ -50,11 +52,12 @@ module.exports = React.createClass({
         browserHistory.push('/Account/SignIn');
     },
     componentDidUpdate(prevProps, prevState) {
-        let pending_list = JSON.parse(localStorage.getItem('pending_list') || '{}');
+        /*let pending_list = JSON.parse(localStorage.getItem('pending_list') || '{}');*/
         // console.log(pending_list)
+        let default_list = _.cloneDeep(this.state.save_list)
         if (this.state.typeAlert != prevState.typeAlert) {
             this.setState({
-                pending_action: pending_list
+                pending_action: default_list
             })
             let alert = this.state.typeAlert
             if(this.state.typeAlert != 'none'){
@@ -85,7 +88,7 @@ module.exports = React.createClass({
                 console.log(err);
             }.bind(this)
         });
-        this.getDummyNotification();
+       /* this.getDummyNotification();*/
 
     },
     getNotification() {
@@ -124,13 +127,13 @@ module.exports = React.createClass({
                 url: Constant.SERVER_API + 'api/notification/?period=completed',
                 dataType: 'json',
                 type: 'GET',
-                async: false,
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
                 success: function(data) {
                     total_notification += data.length
                     completed = data.slice(0, 3);
+                    console.log('done')
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
@@ -140,7 +143,6 @@ module.exports = React.createClass({
                 url: Constant.SERVER_API + 'api/notification/?period=pending',
                 dataType: 'json',
                 type: 'GET',
-                async: false,
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
                 },
@@ -148,12 +150,13 @@ module.exports = React.createClass({
                     total_pending =  data.length
                     total_notification += data.length
                     pending =  data.slice(0, 3);
+                    console.log('done1')
                 },
                 error: function(xhr, status, err) {
                     console.log(err);
                 }
             });
-            $.ajax({
+ /*           $.ajax({
                 url: Constant.SERVER_API + 'api/notification/?urgency=high',
                 dataType: 'json',
                 type: 'GET',
@@ -183,7 +186,7 @@ module.exports = React.createClass({
                     console.log(err);
                 }
             });
-
+*/
 
             var update_notification = update(this.state, {
                 notification: {
@@ -204,11 +207,14 @@ module.exports = React.createClass({
                 },
                 total_notification : {
                     $set : total_notification
+                },
+                save_list : {
+                    $set : pending
                 }
             });
-
+        console.log('update' , update_notification)
         this.setState(update_notification);
-        localStorage.setItem('pending_list', JSON.stringify(update_notification.pending_action))
+     /*   localStorage.setItem('pending_list', JSON.stringify(update_notification.pending_action))*/
 
         /*this.setState({pending_list : update_notification})
         console.log(this.state.pending_list)*/
@@ -218,8 +224,25 @@ module.exports = React.createClass({
         // close notification-menu when changes route
         $('.dropdown-backdrop').click()
     },
+    getNotiComplete(){
+        return makeRequest({
+            path: 'api/notification/?period=completed',
+            success: (data) => {
+                return data
+            }
+        });
+    },
+    getNotiPending(){
+        return makeRequest({
+            path: 'api/notification/?period=pending',
+            success: (data) => {
+                return data
+            }
+        });
+    },
     notificationHandle() {
-        $("#total_notification").hide();
+       /* $("#total_notification").hide();*/
+
     },
     changeToggle(event) {
 
