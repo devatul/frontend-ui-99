@@ -108,8 +108,8 @@
                                             key="document_{documentIndex}"
                                             index="{reviewIndex + '_' + documentIndex}"
                                             action="{review}"
-                                            categories="{this.state.categories}"
-                                            confidentialities="{this.state.confidentialities}"
+                                            categories="{this.props.categories}"
+                                            confidentialities="{this.props.confidentialities}"
                                             onClick="{this.handleTableRowOnClick}"
                                             onChange="{this.handleTableRowOnChange}"
                                             numberChecked="{review.checkedNumber}" />
@@ -128,6 +128,7 @@
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
     nextDocument="{this.onClickDocumentName.bind(this, this.state.current.review + '_' + (this.state.current.doc + 1))}"
     undo="{this.handleUndo.bind(this, this.state.current.review)}"
+    onHide="{this.closePreview}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
@@ -168,8 +169,8 @@
         <tbody>
             <table.row
                 document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-                categories="{this.state.categories}"
-                confidentialities="{this.state.confidentialities}"
+                categories="{this.props.categories}"
+                confidentialities="{this.props.confidentialities}"
                 onClick="{this.handleTableRowOnClick}"
                 onChange="{this.handleTableRowOnChange}"
                 hide="{{ checkbox: true }}"

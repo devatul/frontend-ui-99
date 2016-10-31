@@ -128,7 +128,8 @@ var OverView = React.createClass
                         {
                             $set: fetching.SUCCESS
                         }
-                    })
+                    }),
+                    scanResult: data
                 });
                 let setResult = update(this.state.scan, {
                     result: { $set: data }

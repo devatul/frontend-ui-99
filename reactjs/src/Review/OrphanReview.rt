@@ -40,7 +40,7 @@
               <option
                 rt-repeat="orphan in this.state.orphans"
                 value="{orphanIndex}"
-                key="{orphanIndex}">
+                key="orphan_{orphanIndex}">
                 {orphan.name}
               </option>
             </select2>
@@ -66,7 +66,7 @@
             </Col>
             <Col md={3} class="text-right">
               <span>Detect Language: <b>English</b></span>
-              <Button class="btn btn-green ml-md" bsClass="false">Edit</Button>
+              <Button class="btn btn-green ml-md" bsClass="my-btn">Edit</Button>
             </Col>
           </Row>
         </Panel.head>
@@ -99,7 +99,11 @@
                             classNote="review_question_chart"
                             setValue="Total Number of Documents in the selected group." />
                         </td>
-                        <td class="text-right text-num">{statistics.total_number_documents}</td>
+                        <td class="text-right text-num">
+                          { statistics.total_number_documents &&
+                            statistics.total_number_documents
+                          }
+                        </td>
                       </tr>
                       <tr>
                         <td class="text-left">
@@ -117,7 +121,11 @@
                             classNote="review_question_chart"
                             setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
                         </td>
-                        <td class="text-right text-num">{statistics.avg_centroid_distance}</td>
+                        <td class="text-right text-num">
+                          { statistics.avg_centroid_distance &&
+                            statistics.avg_centroid_distance.toFixed(2)
+                          }
+                        </td>
                       </tr>
                       <tr>
                         <td class="text-left">
@@ -126,7 +134,11 @@
                             classNote="review_question_chart"
                             setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
                         </td>
-                        <td class="text-right text-num">{statistics.max_centroid_distance}</td>
+                        <td class="text-right text-num">
+                          { statistics.max_centroid_distance &&
+                            statistics.max_centroid_distance.toFixed(2)
+                          }
+                        </td>
                       </tr>
                       <tr>
                         <td class="text-left">
@@ -135,7 +147,11 @@
                             classNote="review_question_chart"
                             setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                         </td>
-                        <td class="text-right text-num">{statistics.min_centroid_distance}</td>
+                        <td class="text-right text-num">
+                          { statistics.min_centroid_distance &&
+                            statistics.min_centroid_distance.toFixed(2)
+                          }
+                        </td>
                       </tr>
                       <tr>
                         <td class="text-left">
@@ -144,7 +160,11 @@
                             classNote="review_question_chart"
                             setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
                         </td>
-                        <td class="text-right text-num">{statistics.centroid_distance_variance}</td>
+                        <td class="text-right text-num">
+                          { statistics.centroid_distance_variance &&
+                            statistics.centroid_distance_variance.toFixed(2)
+                          }
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -153,7 +173,7 @@
                     <Button
                       onClick="{this.handleClickRefineButton}"
                       class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
-                      bsClass="false">
+                      bsClass="my-btn">
                       Refine Orphan
                     </Button>
                     <HelpButton className=""
@@ -198,8 +218,8 @@
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
             <div class="panel-actions my-actions-btn-group">
               <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
-              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="">Next Orphan</Button>
-              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="">
+              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
             </div>
@@ -211,7 +231,7 @@
                 rt-if="this.state.checkedNumber > 0"
                 onClick="{this.handleClickApproveButton}"
                 class="mb-md mr-xs btn btn-green approve-button"
-                bsClass="">
+                bsClass="my-btn">
                 Approve
               </Button>
 
@@ -259,7 +279,9 @@
                 <tbody class="fix-td-checkbox">
                   <table.row
                     rt-repeat=" document in this.state.documents "
-                    document={document} index={documentIndex}
+                    document={document}
+                    index={documentIndex}
+                    key={document.id}
                     categories={this.state.categories}
                     confidentialities={this.state.confidentialities}
                     onClick={this.handleTableRowOnClick}
@@ -275,8 +297,8 @@
                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress" />
               </ProgressBar>
 
-              <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="">Next Orphan</Button>
-              <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="">
+              <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
             </div>
@@ -331,7 +353,7 @@
         </thead>
         <tbody>
           <table.row
-            document={this.state.documents[this.state.documentPreview]}
+            document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
             onClick={this.handleTableRowOnClick}

@@ -297,7 +297,7 @@ var OrphanReview = React.createClass({
         let data = [];
 
         makeRequest({
-            path: "api/group/orphan/",
+            path: "api/group/orphan",
             success: (res) => {
                 let orphan = Object.assign({}, res[0], { index: 0 });
                 this.setState({ orphans: res, orphanCurrent: orphan, shouldUpdate: true });
@@ -321,7 +321,7 @@ var OrphanReview = React.createClass({
         });
 
         for(let i = data.length - 1; i >= 0; i--) {
-            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+            children[i] = <div key={'item_' + i} className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
                             {data[i].name}
                             <span className="item-legend">{data[i].total}</span>
                         </div>;
@@ -336,7 +336,7 @@ var OrphanReview = React.createClass({
     
     getStatistics: function() {
         makeRequest({
-            path: "api/group/orphan/statistics/",
+            path: "api/group/orphan/statistics",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -348,7 +348,7 @@ var OrphanReview = React.createClass({
 
     getCloudwords: function() {
         makeRequest({
-            path: "api/group/orphan/cloudwords/",
+            path: "api/group/orphan/cloudwords",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -367,7 +367,7 @@ var OrphanReview = React.createClass({
     },
     getCentroids: function() {
         makeRequest({
-            path: "api/group/orphan/centroids/",
+            path: "api/group/orphan/centroids",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -463,7 +463,7 @@ var OrphanReview = React.createClass({
         { id } = this.state.orphanCurrent;
 
         makeRequest({
-            path: "api/group/orphan/samples/",
+            path: "api/group/orphan/samples",
             params: { "id": id },
             success: (res) => {
                 //data = res;
@@ -496,7 +496,7 @@ var OrphanReview = React.createClass({
 
     getCategoryInfo: function() {
         makeRequest({
-            path: "api/group/orphan/categories/",
+            path: "api/group/orphan/categories",
             params: {
                 "id": this.state.orphanCurrent.id
             },

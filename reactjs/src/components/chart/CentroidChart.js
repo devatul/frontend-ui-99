@@ -382,12 +382,12 @@ var CentroidChart = React.createClass({
                         <Row>
                             <div className="cendroid-chart-legend new">
                                 <h5>Distance</h5>
-                                <span className="symbol" style={{ 'background-color': '#45A446' }}>0</span>
-                                <span className="symbol" style={{ 'background-color': '#98A33A' }}>5</span>
-                                <span className="symbol" style={{ 'background-color': '#DAA525' }}>10</span>
-                                <span className="symbol" style={{ 'background-color': '#EC892B' }}>15</span>
-                                <span className="symbol" style={{ 'background-color': '#E15E29' }}>20</span>
-                                <span className="symbol" style={{ 'background-color': '#D0352D' }}>25</span>
+                                <span className="symbol" style={{ backgroundColor: '#45A446' }}>0</span>
+                                <span className="symbol" style={{ backgroundColor: '#98A33A' }}>5</span>
+                                <span className="symbol" style={{ backgroundColor: '#DAA525' }}>10</span>
+                                <span className="symbol" style={{ backgroundColor: '#EC892B' }}>15</span>
+                                <span className="symbol" style={{ backgroundColor: '#E15E29' }}>20</span>
+                                <span className="symbol" style={{ backgroundColor: '#D0352D' }}>25</span>
                                 <span className="more-legend">more</span>
                             </div>
                         </Row>

@@ -11,8 +11,6 @@ var ClassificationReview = React.createClass({
     getInitialState() {
         return {
             dataReview: [],
-            categories: [],
-            confidentialities: [],
             shouldUpdate: false,
             openPreview: false,
             current: {
@@ -25,14 +23,10 @@ var ClassificationReview = React.createClass({
     },
 
     xhr: {
-        getReview: null,
-        getCat: null,
-        getConfident: null
+        getReview: null
     },
 
     componentDidMount() {
-        this.xhr.getCat = this.getCategories();
-        this.xhr.getConfident  = this.getConfidentialities();
         this.xhr.getReview = this.getClassificationReview();
     },
 
@@ -57,20 +51,18 @@ var ClassificationReview = React.createClass({
 
     componentWillUnmount() {
         let {
-            getReview,
-            getCat,
-            getConfident
+            getReview
         } = this.xhr;
 
         if(getReview && getReview.abort) {
             getReview.abort();
         }
-        if(getCat && getCat.abort) {
-            getCat.abort();
-        }
-        if(getConfident && getConfident.abort) {
-            getConfident.abort();
-        }
+        // if(getCat && getCat.abort) {
+        //     getCat.abort();
+        // }
+        // if(getConfident && getConfident.abort) {
+        //     getConfident.abort();
+        // }
         this.props.updateStore({
             xhr: update(this.props.xhr, {
                 isFetching:
@@ -302,16 +294,16 @@ var ClassificationReview = React.createClass({
 
     onChangeCategory(event, reviewIndex, docIndex, document) {
         let categoryIndex = event.target.value,
-
+            { categories } = this.props,
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
                             category: {
-                                $set: this.state.categories[categoryIndex]
+                                $set: categories[categoryIndex]
                             },
                             $merge: {
-                                status: document.init_category && isEqual(this.state.categories[categoryIndex], {
+                                status: document.init_category && isEqual(categories[categoryIndex], {
                                     id: document.init_category.id
                                 }) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category ? document.init_category : document.category
@@ -333,17 +325,19 @@ var ClassificationReview = React.createClass({
     onChangeConfidentiality(event, reviewIndex, docIndex, document) {
         let confidentialityIndex = event.target.value,
 
+            { confidentialities } = this.props,
+
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
                             confidentiality: {
-                                $set: this.state.confidentialities[confidentialityIndex]
+                                $set: confidentialities[confidentialityIndex]
                             },
                             $merge: {
                                 init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
 
-                                status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
+                                status: document.init_confidentiality && isEqual(confidentialities[confidentialityIndex], {
                                     id: parseInt(document.init_confidentiality.id)
                                 }) ? status.ACCEPTED.name : status.EDITING.name
                             }
@@ -390,7 +384,7 @@ var ClassificationReview = React.createClass({
     },
 
     handleUndo(reviewIndex) {
-        if(this.state.stackChange[reviewIndex].length > 0) {
+        if(this.state.stackChange[reviewIndex] && this.state.stackChange[reviewIndex].length > 0) {
             let { stackChange } = this.state,
                 stackLength = stackChange[reviewIndex].length,
                 item = stackChange[reviewIndex][stackLength - 1],
@@ -474,25 +468,25 @@ var ClassificationReview = React.createClass({
 
     },
 
-    getCategories() {
-        let arr = [];
-        return makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
-                this.setState({ categories: data, shouldUpdate: true });
-            }
-        });
-    },
+    // getCategories() {
+    //     let arr = [];
+    //     return makeRequest({
+    //         path: 'api/label/category/',
+    //         success: (data) => {
+    //             this.setState({ categories: data, shouldUpdate: true });
+    //         }
+    //     });
+    // },
 
-    getConfidentialities() {
-        let arr = [];
-        return makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
-                this.setState({ confidentialities: data, shouldUpdate: true });
-            }
-        });
-    },
+    // getConfidentialities() {
+    //     let arr = [];
+    //     return makeRequest({
+    //         path: 'api/label/confidentiality/',
+    //         success: (data) => {
+    //             this.setState({ confidentialities: data, shouldUpdate: true });
+    //         }
+    //     });
+    // },
 
     render:template
 });

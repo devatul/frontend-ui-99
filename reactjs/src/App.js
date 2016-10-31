@@ -5,11 +5,15 @@ import template from './App.rt'
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
 import { makeRequest } from './utils/http'
+import { orderByIndex } from './utils/function'
+import { orderBy } from 'lodash'
 
 
 module.exports = React.createClass({
 	getInitialState() {
 		return {
+			categories: [],
+			confidentialities: [],
 			xhr: {
 				status: "Report is loading",
 				message: "Please wait!",
@@ -19,6 +23,7 @@ module.exports = React.createClass({
 				isFetching: fetching.SUCCESS,
 				error: {}
 			},
+			scanResult: {},
 			tokenAuth: ""
 		};
 	},
@@ -64,6 +69,12 @@ module.exports = React.createClass({
 
 		sessionStorage.removeItem('token')
 	},
+
+	componentDidMount() {
+		this.getCategories();
+		this.getConfidentialities();
+	},
+	
 
 
 	componentDidUpdate(prevProps, prevState) {
@@ -155,6 +166,24 @@ module.exports = React.createClass({
         		</p>
     },
 
+	getCategories: function() {
+        return makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+				data = orderBy(data, ['name'], ['asc']);
+                this.setState({ categories: data });
+            }
+        });
+    },
+    getConfidentialities: function(async) {
+        return makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                data = orderByIndex(data, [4,3,2,1,0]);
+                this.setState({ confidentialities: data });
+            }
+        });
+    },
 
 	updateStore(state) {
 		let { xhr } = this.state;
