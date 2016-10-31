@@ -18,7 +18,7 @@
 <rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <section>
     <div class="container">
-        <Tab.Container id="tabs-assigment" defaultActiveKey="tab_1">
+        <Tab.Container id="tabs-assigment" activeKey="tab_{this.state.category.current.id}" defaultActiveKey="tab_1">
             <div class="tabs tabs-primary">
                 <Nav bsClass="nav" class="cat-list nav-tabs">
                     <NavItem rt-repeat="category in this.state.category.list"
@@ -96,7 +96,7 @@
                                                 </Panel.custom>
                                                 <div rt-scope="this.state.dataChart.documentType as doctype " class="">
                                                     <StackBarChart
-                                                        id="doctypeChartUserAssignment_category"
+                                                        id="doctypeChartUserAssignment"
                                                         key="chart_category"
                                                         classContainer="doctype-chart-user-assignment"
                                                         title="Document Type per Level of Confidentiality"
