@@ -45,27 +45,27 @@
                             <th class="text-left">Reviewer
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="In this column all the reviewers assigned to review accounting/tax documents should be displayed." />
                             </th>
                             <th class="text-left">Status
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This represents the status of the review for each reviewer. The status “Not Started” means that the reviewer didn’t start to review documents. The status “Under Review” means that the reviewer has started to review some documents but he/she still have some documents to review (in the section My review or my challenge). The status completed means all the document assigned to the reviewer in the section My review and my challenge have been reviewed." />
                             </th>
                             <th class="text-left">Reviewed Documents
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This column display the number and the percentage of documents reviewed by each Reviewer. This includes all the document reviewed in the section my review (classification of dathena 99 accepted and rejected" />
                             </th>
                             <th class="text-left">Challenged Documents
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This column displays the progress and the number of documents challenged by each reviewer." />
                             </th>
                             <th class="text-left">Progress
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This display the progress of the review for each Reviewers. That means it summarises the progress of the classification process and the progress of challenged documents process." />
                             </th>
                             <th></th>
                           </tr>
@@ -77,7 +77,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>0%/0</td>
-                            <td>0 Document</td>
+                            <td>0/0 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
                                 <span class="label"></span>
@@ -98,7 +98,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>50%/5</td>
-                            <td>1 Document</td>
+                            <td>1/2 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
                                 <span class="label"></span>
@@ -119,7 +119,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>100%/10</td>
-                            <td>2 Documents</td>
+                            <td>2/2 Documents</td>
                             <td>
                               <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
                                 <span class="label"></span>
@@ -140,7 +140,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>0%/0</td>
-                            <td>0 Document</td>
+                            <td>0/0 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
                                 <span class="label"></span>
@@ -161,7 +161,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>50%/5</td>
-                            <td>1 Document</td>
+                            <td>1/2 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
                                 <span class="label"></span>
@@ -182,7 +182,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>100%/10</td>
-                            <td>2 Documents</td>
+                            <td>2/2 Documents</td>
                             <td>
                               <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
                                 <span class="label"></span>
@@ -203,7 +203,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>0%/0</td>
-                            <td>0 Document</td>
+                            <td>0/0 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-10 style-1 pie-sm">
                                 <span class="label"></span>
@@ -224,7 +224,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>50%/5</td>
-                            <td>1 Document</td>
+                            <td>1/1 Document</td>
                             <td>
                               <div class="pie-wrapper pie-progress-50 style-1 pie-sm">
                                 <span class="label"></span>
@@ -245,7 +245,7 @@
                             </td>
                             <td>Not Started</td>
                             <td>100%/10</td>
-                            <td>2 Documents</td>
+                            <td>2/2 Documents</td>
                             <td>
                               <div class="pie-wrapper pie-progress-100 style-1 pie-sm">
                                 <span class="label"></span>
@@ -307,27 +307,27 @@
                             <th class="text-left">Status
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This represents the status of the review for each Category. The status “Not Started” means that the reviewer didn’t start to review documents. The status “Under Review” means that the reviewer has started to review some documents but he/she still have some documents to review (in the section My review or my challenge). The status completed means all the document assigned to the reviewer in the section My review and my challenge have been reviewed." />
                             </th>
                             <th class="text-left" style="max-width: 120px;">Number of Users
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This represents the percentage and the number of reviewers that are in this status for each category" />
                             </th>
                             <th class="text-left" style="max-width: 140px;">Reviewed Documents
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This column displays the number and the percentage of documents reviewed by all the reviewers includes in the corresponding status and category. This includes all the document reviewed in the section my review by reviewers that are in the corresponding status and in the corresponding category. (classification of dathena 99 accepted and rejected." />
                             </th>
                             <th class="text-left" style="max-width: 150px;">Challenged Documents
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="This column displays the progress and the number of documents challenged by all the reviewers includes in the corresponding status and category." />
                             </th>
                             <th class="text-left" style="max-width: 80px;">Progress
                               <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This display the progress of the review for each category. That means it summarises the progress of the classification process and the progress of challenged documents process for all the reviewer in the category." />
                             </th>
                             <th></th>
                           </tr>
