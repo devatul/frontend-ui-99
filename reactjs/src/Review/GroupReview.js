@@ -71,6 +71,7 @@ var GroupReview = React.createClass({
             this.getStatistics();
             this.getCategoryInfo();
             this.getCentroids();
+            this.getCloudwords();
         }
 
         if(!isEqual(this.state.documents, prevState.documents)) {
@@ -351,7 +352,7 @@ var GroupReview = React.createClass({
     },
 
     getCloudwords: function() {
-        makeRequest({
+        return makeRequest({
             path: "api/group/cloudwords/",
             params: {
                 "id": this.state.groupCurrent.id
@@ -375,8 +376,38 @@ var GroupReview = React.createClass({
             params: {
                 "id": this.state.groupCurrent.id
             },
-            success: (res) => {
-                this.setState({ centroids: res, shouldUpdate: true });
+            success: (centroids) => {
+                var series = [], total = centroids.length;
+                for(var i = 0; i < total; i++) {
+                    if(centroids[i]) {
+                        series[i] = {
+                            type: 'scatter',
+                            lineWidth: 2,
+                            marker: {
+                                symbol: 'circle'
+                            },
+                            data: [
+                                [45 * i, centroids[i].end], 
+                                {
+                                x: 45 * i,
+                                y: 0,
+                                document: centroids[i].number_docs,
+                                weight: i+1,
+                                marker: {
+                                    enabled: false,
+                                    states: {
+                                        hover: {
+                                            enabled: false
+                                        }
+                                    }
+                                }
+                                },
+                                null
+                            ]
+                        };
+                    }
+                }
+                this.setState({ centroids: series, shouldUpdate: true });
             }
         });
     },
@@ -466,23 +497,17 @@ var GroupReview = React.createClass({
         
         { id } = this.state.groupCurrent;
 
-        // for(let i = data.length - 1; i >= 0; i--) {
-        //     data[i].checked  = false;
-        //     data[i].status = 'invalid';
-        // }
+//        this.setState({ documents: data, shouldUpdate: true });
 
-        this.setState({ documents: data, shouldUpdate: true });
+        return makeRequest({
+            path: "api/group/samples/",
+            params: { "id": id },
+            success: (res) => {
+                //data = res;
+                this.setState({ documents: res, shouldUpdate: true });
+            }
+        });
 
-        // makeRequest({
-        //     path: "api/group/samples/",
-        //     params: { "id": id },
-        //     success: (res) => {
-        //         //data = res;
-        //         this.setState({ documents: data, shouldUpdate: true });
-        //     }
-        // });
-
-        // return data;
     },
 
     getCategories() {

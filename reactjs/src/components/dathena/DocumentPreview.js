@@ -55,16 +55,17 @@ var documentPreview = React.createClass({
         {
             document
         } = this.props;
-
-        render(React.createElement('div', {
-            className: "gdocsviewer"
-        },
-        React.createElement('iframe', {
-            src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
-            width: 600,
-            height: 700,
-            style: { border: 'none' }
-        })), preview)
+        if(preview) {
+            render(React.createElement('div', {
+                className: "gdocsviewer"
+            },
+            React.createElement('iframe', {
+                src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
+                width: 600,
+                height: 700,
+                style: { border: 'none' }
+            })), preview)
+        }
     },
 
     closeModal(event) {

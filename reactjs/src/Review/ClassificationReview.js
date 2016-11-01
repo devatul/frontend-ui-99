@@ -10,6 +10,8 @@ var ClassificationReview = React.createClass({
 
     getInitialState() {
         return {
+            confidentialities: [],
+            categories: [],
             dataReview: [],
             shouldUpdate: false,
             openPreview: false,
@@ -23,11 +25,23 @@ var ClassificationReview = React.createClass({
     },
 
     xhr: {
-        getReview: null
+        getReview: null,
+        getConfident: null,
+        getCat: null
     },
 
     componentDidMount() {
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.START
+                }
+            })
+        });
         this.xhr.getReview = this.getClassificationReview();
+        this.xhr.getCat = this.getCategories();
+        this.xhr.getConfident = this.getConfidentialities();
     },
 
 
@@ -51,18 +65,20 @@ var ClassificationReview = React.createClass({
 
     componentWillUnmount() {
         let {
+            getCat,
+            getConfident,
             getReview
         } = this.xhr;
 
         if(getReview && getReview.abort) {
             getReview.abort();
         }
-        // if(getCat && getCat.abort) {
-        //     getCat.abort();
-        // }
-        // if(getConfident && getConfident.abort) {
-        //     getConfident.abort();
-        // }
+        if(getCat && getCat.abort) {
+            getCat.abort();
+        }
+        if(getConfident && getConfident.abort) {
+            getConfident.abort();
+        }
         this.props.updateStore({
             xhr: update(this.props.xhr, {
                 isFetching:
@@ -356,7 +372,7 @@ var ClassificationReview = React.createClass({
         });
     },
 
-    handleCheckAll(event, index) {
+    handleCheckAll(index, event) {
         let updateData = update(this.state.dataReview, {
             [index]: {
                 documents: {
@@ -432,14 +448,6 @@ var ClassificationReview = React.createClass({
     },
 
     getClassificationReview() {
-        this.props.updateStore({
-            xhr: update(this.props.xhr, {
-                isFetching:
-                {
-                    $set: fetching.START
-                }
-            })
-        });
         return makeRequest({
             path: "api/classification_review/",
             success: (data) => {
@@ -468,25 +476,25 @@ var ClassificationReview = React.createClass({
 
     },
 
-    // getCategories() {
-    //     let arr = [];
-    //     return makeRequest({
-    //         path: 'api/label/category/',
-    //         success: (data) => {
-    //             this.setState({ categories: data, shouldUpdate: true });
-    //         }
-    //     });
-    // },
+    getCategories() {
+        let arr = [];
+        return makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+                this.setState({ categories: data, shouldUpdate: true });
+            }
+        });
+    },
 
-    // getConfidentialities() {
-    //     let arr = [];
-    //     return makeRequest({
-    //         path: 'api/label/confidentiality/',
-    //         success: (data) => {
-    //             this.setState({ confidentialities: data, shouldUpdate: true });
-    //         }
-    //     });
-    // },
+    getConfidentialities() {
+        let arr = [];
+        return makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                this.setState({ confidentialities: data, shouldUpdate: true });
+            }
+        });
+    },
 
     render:template
 });

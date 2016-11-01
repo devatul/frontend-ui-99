@@ -336,7 +336,7 @@ var OrphanReview = React.createClass({
     
     getStatistics: function() {
         makeRequest({
-            path: "api/group/orphan/statistics",
+            path: "api/group/orphan/statistics/",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -348,7 +348,7 @@ var OrphanReview = React.createClass({
 
     getCloudwords: function() {
         makeRequest({
-            path: "api/group/orphan/cloudwords",
+            path: "api/group/orphan/cloudwords/",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -367,111 +367,56 @@ var OrphanReview = React.createClass({
     },
     getCentroids: function() {
         makeRequest({
-            path: "api/group/orphan/centroids",
+            path: "api/group/orphan/centroids/",
             params: {
                 "id": this.state.orphanCurrent.id
             },
-            success: (res) => {
-                this.setState({ centroids: res, shouldUpdate: true });
+            success: (centroids) => {
+                var series = [], total = centroids.length;
+                for(var i = 0; i < total; i++) {
+                    if(centroids[i]) {
+                        series[i] = {
+                            type: 'scatter',
+                            lineWidth: 2,
+                            marker: {
+                                symbol: 'circle'
+                            },
+                            data: [
+                                [45 * i, centroids[i].end], 
+                                {
+                                x: 45 * i,
+                                y: 0,
+                                document: centroids[i].number_docs,
+                                weight: i+1,
+                                marker: {
+                                    enabled: false,
+                                    states: {
+                                        hover: {
+                                            enabled: false
+                                        }
+                                    }
+                                }
+                                },
+                                null
+                            ]
+                        };
+                    }
+                }
+                this.setState({ centroids: series, shouldUpdate: true });
             }
         });
     },
     getDocuments() {
-        let data = [
-            {
-                confidence_level: 87,
-                confidentiality_label: "yes/no",
-                creation_date: "2012-04-23",
-                image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                legal_retention_until: "2012-04-23",
-                modification_date: "2012-04-23",
-                name: "IonaTechnologiesPlcG07.doc",
-                number_of_classification_challenge: 1,
-                owner: "owner_name",
-                path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                category: {
-                    id: 1,
-                    name: "Accounting/Tax"
-                },
-                confidentiality: {
-                    id: 1, 
-                    name: "Confidential"
-                }
-            },
-            {
-                confidence_level: 87,
-                confidentiality_label: "yes/no",
-                creation_date: "2012-04-23",
-                image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                legal_retention_until: "2012-04-23",
-                modification_date: "2012-04-23",
-                name: "IonaTechnologiesPlcG07.doc",
-                number_of_classification_challenge: 1,
-                owner: "owner_name",
-                path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                category: {
-                    id: 1,
-                    name: "Accounting/Tax"
-                },
-                confidentiality: {
-                    id: 1, 
-                    name: "Confidential"
-                }
-            },
-            {
-                confidence_level: 87,
-                confidentiality_label: "yes/no",
-                creation_date: "2012-04-23",
-                image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                legal_retention_until: "2012-04-23",
-                modification_date: "2012-04-23",
-                name: "IonaTechnologiesPlcG07-IonaTechnologiesPlcG07_122344354.doc",
-                number_of_classification_challenge: 1,
-                owner: "owner_name",
-                path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                category: {
-                    id: 1,
-                    name: "Accounting/Tax"
-                },
-                confidentiality: {
-                    id: 1, 
-                    name: "Confidential"
-                }
-            },
-            {
-                confidence_level: 87,
-                confidentiality_label: "yes/no",
-                creation_date: "2012-04-23",
-                image_url: "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                legal_retention_until: "2012-04-23",
-                modification_date: "2012-04-23",
-                name: "IonaTechnologiesPlcG07.doc",
-                number_of_classification_challenge: 1,
-                owner: "owner_name",
-                path: "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                category: {
-                    id: 1,
-                    name: "Accounting/Tax"
-                },
-                confidentiality: {
-                    id: 1, 
-                    name: "Confidential"
-                }
-            }
-        ],
-        
-        { id } = this.state.orphanCurrent;
+        let { id } = this.state.orphanCurrent;
 
-        makeRequest({
-            path: "api/group/orphan/samples",
+        return makeRequest({
+            path: "api/group/orphan/samples/",
             params: { "id": id },
             success: (res) => {
-                //data = res;
-                this.setState({ documents: data, shouldUpdate: true });
+                this.setState({ documents: res, shouldUpdate: true });
             }
         });
 
-        return data;
     },
 
     getCategories() {
@@ -495,8 +440,8 @@ var OrphanReview = React.createClass({
     },
 
     getCategoryInfo: function() {
-        makeRequest({
-            path: "api/group/orphan/categories",
+        return makeRequest({
+            path: "api/group/orphan/categories/",
             params: {
                 "id": this.state.orphanCurrent.id
             },
@@ -619,8 +564,38 @@ var OrphanReview = React.createClass({
     },
 
     drawCentroid() {
-        var centroids = []
-        forEach(this.state.store.centroids, (val, index) => {
+        var {
+            centroids
+        } = this.state, series = [];
+        for(var i = centroids.length - 1; i >= 0; i--) {
+            if(series[i]) {
+                series[i] = {
+                    type: 'scatter',
+                    lineWidth: 2,
+                    marker: {
+                        symbol: 'circle'
+                    },
+                    data: [
+                        [10, series[i].end], 
+                        {
+                        x: 10,
+                        y: 0,
+                        document: series[i].number_docs,
+                        marker: {
+                            enabled: false,
+                            states: {
+                                hover: {
+                                    enabled: false
+                                }
+                            }
+                        }
+                        },
+                        null
+                    ]
+                };
+            }
+        }
+        forEach(this.state.centroids, (val, index) => {
             centroids.push([index + 1, val.number_docs]);
         });
         var updateChart = update(this.state.dataChart, {

@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import { forEach, isEqual } from 'lodash'
+import { forEach, isEqual, orderBy } from 'lodash'
 import HelpButton from '../dathena/HelpButton'
 
 var StackedChart = React.createClass({
@@ -156,18 +156,26 @@ var StackedChart = React.createClass({
         if(config) {
             for(let i = config.length - 1; i >= 0; i--) {
                 var children = [];
-                for(let j = config[i].data.length - 1; j >= 0; j--) {
+                var data = orderBy(config[i].data, ['name'], ['esc']);
+
+                for(let j = data.length - 1; j >= 0; j--) {
                     let colorSymbol = disabled === true ? colorDisabled[j] : config[i].colors[j];
-                    children[j] = <li style={config[i].data.length <= 3 ? {
+                    children[j] = <li key={'legend_' + j} style={data.length <= 3 ? {
                                         margin: '0 auto 5px',
-                                        width: config[i].data[0].name.length * 8,
-                                        float: 'none'
-                                    } : {}}>
+                                        width: data[0].name.length * 8,
+                                        float: 'none',
+                                        textTransform: 'capitalize'
+                                    } : { 
+                                        textTransform: 'capitalize'
+                                    } }>
                                         <i className={'legend-symbol'} style={{backgroundColor: colorSymbol }}></i>
-                                    {config[i].data[j].name}
+                                    {data[j].name}
                                 </li>;
                 }
-                legendChart[i] = React.createElement('ul', { className: 'list-unstyled chart-legend serie-' + i }, children);
+                legendChart[i] = React.createElement('ul', {
+                    className: 'list-unstyled chart-legend serie-' + i,
+                    style: { textTransform: 'lowercase' }
+                }, children);
             }
         }
         return (

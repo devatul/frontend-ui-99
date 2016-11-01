@@ -73,7 +73,7 @@
                                                 <div class="checkbox-custom checkbox-primary">
                                                     <input type="checkbox"
                                                         class="checkbox-all-1"
-                                                        onChange="{this.handleCheckAll.bind(this, event, actionIndex, this.constructor.actions)}"
+                                                        onChange="{this.handleCheckAll.bind(this, actionIndex, this.constructor.actions)}"
                                                         checked="{action.checkAll}">
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
@@ -111,8 +111,8 @@
                                             key="{this.constructor.actions + '_' + actionIndex + '_' + documentIndex}"
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
-                                            onClick="{this.handleTableRowOnClick.bind(this, event, actionIndex, documentIndex, this.constructor.actions)}"
-                                            onChange="{this.handleTableRowOnChange.bind(this, event, actionIndex, documentIndex, this.constructor.actions)}"
+                                            onClick="{this.handleTableRowOnClick.bind(this, actionIndex, documentIndex, this.constructor.actions)}"
+                                            onChange="{this.handleTableRowOnChange.bind(this, actionIndex, documentIndex, this.constructor.actions)}"
                                             numberChecked={action.checkedNumber} />
                                     </tbody>
                                 </Table>
@@ -205,8 +205,8 @@
                                             categories={this.state.categories}
                                             confidentialities={this.state.confidentialities}
                                             numberCheck="{challenge.checkedNumber}"
-                                            onChange="{this.handleTableRowOnChange.bind(this, event, challengeIndex, documentIndex, this.constructor.challenge)}"
-                                            onClick="{this.handleTableRowOnClick.bind(this, event, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onChange="{this.handleTableRowOnChange.bind(this, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onClick="{this.handleTableRowOnClick.bind(this, challengeIndex, documentIndex, this.constructor.challenge)}"
                                             />
                                     </tbody>
                                 </table>
@@ -224,6 +224,7 @@
     document="{document}"
     nextDocument="{this.handleNextDocumentName.bind(this, current.actionIndex, current.docIndex, current.review)}"
     undo="{this.handleUndo.bind(this, current.actionIndex, current.review)}"
+    onHide="{this.closePreview}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
     <table
@@ -269,8 +270,8 @@
                 key="{current.docIndex}"
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
-                onClick="{this.handleTableRowOnClick.bind(this, event, current.actionIndex, current.docIndex, this.constructor.actions)}"
-                onChange="{this.handleTableRowOnChange.bind(this, event, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                onClick="{this.handleTableRowOnClick.bind(this, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                onChange="{this.handleTableRowOnChange.bind(this, current.actionIndex, current.docIndex, this.constructor.actions)}"
                 hide="{{ checkbox: true }}"
                 index="{current.docIndex}" />
         </tbody>
@@ -330,8 +331,8 @@
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
                 hide="{{checkbox: true}}"
-                onChange="{this.handleTableRowOnChange.bind(this, event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
-                onClick="{this.handleTableRowOnClick.bind(this, event, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onChange="{this.handleTableRowOnChange.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onClick="{this.handleTableRowOnClick.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
                 />
         </tbody>
     </table>

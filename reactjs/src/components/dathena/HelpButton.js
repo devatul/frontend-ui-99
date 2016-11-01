@@ -84,7 +84,7 @@ var HelpButton = React.createClass({
                     <i className="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
                 <div ref="dropdownMenu" className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
-                    <p dangerouslySetInnerHTML={{ __html: value }} style={{'fontSize' :'13px'}}/>
+                    <p dangerouslySetInnerHTML={{ __html: value }} style={{'fontSize' :'13px', marginBottom: '0px'}}/>
                 </div>
 
             </div>

@@ -20,18 +20,22 @@ var CentroidChart = React.createClass({
         };
     },
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(this.props.data != prevProps.data) {
-    //         this.draw();
-    //     }
-    // },
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.series != prevProps.series) {
+            this.draw();
+        }
+    },
 
     componentDidMount() {
         this.draw();
     },
 
     draw() {
-        var colorsCentroid = [ '#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'];
+        var colorsCentroid = [ '#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'],
+            {
+                series
+            } = this.props;
+
         $('#centroidChart').highcharts({
             chart: {
             polar: true,
@@ -39,7 +43,7 @@ var CentroidChart = React.createClass({
                 load: function () {
                 var chart = this;
                 $(chart.series).each(function (i, serie) {
-                    var documentNum = serie.data[1].document;
+                    var documentNum = serie.data[1].weight;
                     var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
                     var points = serie.points;
                     serie.color = colorsCentroid[distance-1];
@@ -138,228 +142,7 @@ var CentroidChart = React.createClass({
             useHTML: true
             },
 
-            series: [{
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [
-                [10, 3], 
-                {
-                x: 10,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [90, 3], 
-                {
-                x: 90,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [120, 5], 
-                {
-                x: 120,
-                y: 0,
-                document: 3,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            }, 
-            data: [  
-                [180, 8], 
-                {
-                x: 180,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [210, 10], 
-                {
-                x: 210,
-                y: 0,
-                document: 2,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null
-            ]
-            },{
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [270, 12], 
-                {
-                x: 270,
-                y: 0,
-                document: 2,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [290, 25], 
-                {
-                x: 290,
-                y: 0,
-                document: 4,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [ 
-                [310, 18], 
-                {
-                x: 310,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [  
-                [330, 19], 
-                {
-                x: 330,
-                y: 0,
-                document: 5,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [  
-                [350, 22], 
-                {
-                x: 350,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }]
+            series: series
 
         });
     },

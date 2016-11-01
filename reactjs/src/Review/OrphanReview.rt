@@ -224,7 +224,10 @@
               </Button>
             </div>
           </Panel.head>
-          <Panel.body>
+          <Panel.body rt-if="this.state.documents.length <= 0">
+            <p class="document_note">You have not document to review</p>
+          </Panel.body>
+          <Panel.body rt-if="this.state.documents.length > 0" rt-scope="this.state.documents as documents; documents.length as docLength" >
             <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within Accounting / Tax category in {this.state.orphanCurrent && this.state.orphanCurrent.name} by latest 15th November</p>
             <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
               <Button
@@ -235,7 +238,7 @@
                 Approve
               </Button>
 
-              <Alert bsStyle="success" open="{this.state.documents && (this.state.validateNumber == this.state.documents.length)}">
+              <Alert bsStyle="success" open="{docLength && (this.state.validateNumber == docLength)}">
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 <strong>Well done, you have completed the classification review!</strong>
               </Alert>

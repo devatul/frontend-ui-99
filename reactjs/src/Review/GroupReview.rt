@@ -75,7 +75,7 @@
                     <Panel.body id="panelOrphanStatistics" class="review_panel-body">
                         <Row>
                             <Col md="{3}">
-                                 <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+                                 <section rt-if="this.state.statistics.total_number_documents != null" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                                     <header class="panel-heading">
                                         <h2 class="panel-title">Basic Statistics</h2>
                                     </header>
@@ -87,7 +87,7 @@
                                         </h4>
 
                                         <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                                        <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                                            <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
                                         </div>
 
                                         <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
@@ -98,7 +98,10 @@
                                                         classNote="review_question_chart"
                                                         setValue="Total Number of Documents in the selected group." />
                                                     </td>
-                                                    <td class="text-right text-num">{statistics.total_number_documents}</td>
+                                                    <td class="text-right text-num">
+                                                        { statistics.total_number_documents &&
+                                                            statistics.total_number_documents }
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><span>Number of Documents Reviewed</span>
@@ -106,7 +109,9 @@
                                                             classNote="review_question_chart"
                                                             setValue="Number of Documents reviewed in the selected group." />
                                                     </td>
-                                                    <td class="text-right text-num">{this.state.validateNumber}</td>
+                                                    <td class="text-right text-num">
+                                                        { this.state.validateNumber }
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><span>Average Centroid Distance</span>
@@ -114,7 +119,10 @@
                                                             classNote="review_question_chart"
                                                             setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
                                                     </td>
-                                                    <td class="text-right text-num">{statistics.avg_centroid_distance}</td>
+                                                    <td class="text-right text-num">
+                                                        { statistics.avg_centroid_distance &&
+                                                            statistics.avg_centroid_distance.toFixed(2) }
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><span>Maximum Centroid Distance</span>
@@ -122,7 +130,10 @@
                                                                 classNote="review_question_chart"
                                                                 setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
                                                 </td>
-                                                    <td class="text-right text-num">{statistics.max_centroid_distance}</td>
+                                                    <td class="text-right text-num">
+                                                        { statistics.max_centroid_distance &&
+                                                            statistics.max_centroid_distance.toFixed(2) }
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><span>Minimum Centroid Distance</span>
@@ -130,7 +141,10 @@
                                                                 classNote="review_question_chart"
                                                                 setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                                                     </td>
-                                                    <td class="text-right text-num">{statistics.min_centroid_distance}</td>
+                                                    <td class="text-right text-num">
+                                                        { statistics.min_centroid_distance &&
+                                                            statistics.min_centroid_distance.toFixed(2) }
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><span>Centroid Distance Variance</span>
@@ -138,16 +152,20 @@
                                                             classNote="review_question_chart"
                                                             setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
                                                     </td>
-                                                    <td class="text-right text-num">{statistics.centroid_distance_variance}</td>
+                                                    <td class="text-right text-num">
+                                                        { statistics.centroid_distance_variance &&
+                                                            statistics.centroid_distance_variance.toFixed(2) }
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
 
                                         <div class="mt-lg">
-                                        <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="false">Refine Group</Button>
-                                        <HelpButton className=""
+                                            <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="my-btn">Refine Group</Button>
+                                            <HelpButton className=""
                                                 classNote="review_question_chart"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
+                                        </div>
                                         <div class="refine-progress" style="display: {this.state.showLoading}">
                                             <LoadingButton open="{true}" elementType="div"/>
                                         </div>
@@ -168,6 +186,8 @@
                                         {this.fileDistribution()}
                                     </div>
                                     <CentroidChart
+                                        rt-if=""
+                                        series="{this.state.centroids}"
                                         help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid." />
                                 </Row>
                             </Col>
@@ -192,7 +212,10 @@
                             </Button>
                         </div>
                     </Panel.head>
-                    <Panel.body>
+                    <Panel.body rt-if="this.state.documents.length === 0">
+                        <p class="document_note">You have not document to review</p>
+                    </Panel.body>
+                    <Panel.body rt-if="this.state.documents.length > 0">
                         <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.groupCurrent && this.state.groupCurrent.name} by latest 15th August</p>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 

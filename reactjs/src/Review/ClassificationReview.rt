@@ -73,7 +73,7 @@
                                                 <div class="checkbox-custom checkbox-primary">
                                                     <input type="checkbox"
                                                         class="checkbox-all-1"
-                                                        onChange="{this.handleCheckAll.bind(this, event, reviewIndex)}"
+                                                        onChange="{this.handleCheckAll.bind(this, reviewIndex)}"
                                                         checked="{review.checkedAll}">
                                                     <label for="checkboxAllExample2"></label>
                                                 </div>
@@ -108,7 +108,7 @@
                                             key="document_{documentIndex}"
                                             index="{reviewIndex + '_' + documentIndex}"
                                             action="{review}"
-                                            categories="{this.props.categories}"
+                                            categories="{this.state.categories}"
                                             confidentialities="{this.props.confidentialities}"
                                             onClick="{this.handleTableRowOnClick}"
                                             onChange="{this.handleTableRowOnChange}"
@@ -170,7 +170,7 @@
             <table.row
                 document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
                 categories="{this.props.categories}"
-                confidentialities="{this.props.confidentialities}"
+                confidentialities="{this.state.confidentialities}"
                 onClick="{this.handleTableRowOnClick}"
                 onChange="{this.handleTableRowOnChange}"
                 hide="{{ checkbox: true }}"
