@@ -35,6 +35,7 @@
                             <b class="mr-md">
                                 Select a group to review
                                 <HelpButton
+                                    classMenu="fix-overview-help-button-table"
                                     setValue="User is required to review category and confidentiality level for the documents in the groups."/>
                             </b>
                             <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectGroup}" value="{this.state.groupCurrent.index}">
@@ -83,6 +84,7 @@
                                     <div class="panel-body" id="stat-block">
                                         <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>  
                                             <HelpButton
+                                                classMenu="fix-overview-help-button-table"
                                                 setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
                                         </h4>
 
@@ -95,8 +97,8 @@
                                                 <tr>
                                                     <td class="text-left"><span>Total Number of Documents</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                        classNote="review_question_chart"
-                                                        setValue="Total Number of Documents in the selected group." />
+                                                            classMenu="fix-overview-help-button-table"
+                                                            setValue="Total Number of Documents in the selected group." />
                                                     </td>
                                                     <td class="text-right text-num">
                                                         { statistics.total_number_documents &&
@@ -106,7 +108,7 @@
                                                 <tr>
                                                     <td class="text-left"><span>Number of Documents Reviewed</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="review_question_chart"
+                                                            classMenu="fix-overview-help-button-table"
                                                             setValue="Number of Documents reviewed in the selected group." />
                                                     </td>
                                                     <td class="text-right text-num">
@@ -116,7 +118,7 @@
                                                 <tr>
                                                     <td class="text-left"><span>Average Centroid Distance</span>
                                                     <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="review_question_chart"
+                                                            classMenu="fix-overview-help-button-table"
                                                             setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
                                                     </td>
                                                     <td class="text-right text-num">
@@ -127,7 +129,7 @@
                                                 <tr>
                                                     <td class="text-left"><span>Maximum Centroid Distance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                                classNote="review_question_chart"
+                                                                classMenu="fix-overview-help-button-table"
                                                                 setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
                                                 </td>
                                                     <td class="text-right text-num">
@@ -138,7 +140,7 @@
                                                 <tr>
                                                     <td class="text-left"><span>Minimum Centroid Distance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                                classNote="review_question_chart"
+                                                                classMenu="fix-overview-help-button-table"
                                                                 setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
                                                     </td>
                                                     <td class="text-right text-num">
@@ -149,7 +151,7 @@
                                                 <tr>
                                                     <td class="text-left"><span>Centroid Distance Variance</span>
                                                         <HelpButton className="dropdown-file-info-holder"
-                                                            classNote="review_question_chart"
+                                                            classMenu="fix-overview-help-button-table"
                                                             setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
                                                     </td>
                                                     <td class="text-right text-num">
@@ -163,7 +165,7 @@
                                         <div class="mt-lg">
                                             <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="my-btn">Refine Group</Button>
                                             <HelpButton className=""
-                                                classNote="review_question_chart"
+                                                classMenu="fix-overview-help-button-table"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
                                         </div>
                                         <div class="refine-progress" style="display: {this.state.showLoading}">
@@ -181,12 +183,11 @@
                                 <Row>
                                     <div id="fileDistribution" class="mb-md">
                                         <h4 class="chart-title">File Distribution
-                                            <HelpButton setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
+                                            <HelpButton classMenu="fix-overview-help-button-table" setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
                                         </h4>
                                         {this.fileDistribution()}
                                     </div>
                                     <CentroidChart
-                                        rt-if=""
                                         series="{this.state.centroids}"
                                         help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid." />
                                 </Row>
@@ -212,12 +213,9 @@
                             </Button>
                         </div>
                     </Panel.head>
-                    <Panel.body rt-if="this.state.documents.length === 0">
-                        <p class="document_note">You don't have any document to review</p>
-                    </Panel.body>
-                    <Panel.body rt-if="this.state.documents.length > 0">
-                        <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.groupCurrent && this.state.groupCurrent.name} by latest 15th August</p>
-                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                    <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength">
+                        <p rt-if=" docLength === 0 " class="document_note">You have don't have document to review</p>
+                        <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
                             <Button
                                 rt-if="this.state.checkedNumber > 0"
@@ -282,7 +280,7 @@
                                 </tbody>
                             </Table>
                         </div>
-                        <div class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0">
+                        <div rt-if="docLength > 0" class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0">
                             <ProgressBar class="dathena-progress style-2 fix-label pull-left">
                                 <span class="label-percent">{this.state.reviewStatus + '%'}</span>
                                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>

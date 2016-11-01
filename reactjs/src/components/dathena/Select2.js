@@ -93,6 +93,10 @@ var Select2 = React.createClass({
                 delete _props.minimumResultsForSearch;
             _props.dropdownCssClass &&
                 delete _props.dropdownCssClass;
+            _props.closeOnSelect &&
+                delete _props.closeOnSelect;
+            _props.onOpen &&
+                delete _props.onOpen;
         return(
             <select ref="select2" {..._props} className="js-example-basic-single js-states form-control dathena-select">
                 {this.props.children}

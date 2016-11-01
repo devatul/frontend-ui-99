@@ -98,7 +98,7 @@ var ReviewValidation = React.createClass({
             success: (res) => {
                 let categoriesReview = cloneDeep(res);
 
-                res = orderBy(res, ['name'], ['asc']);
+                categoriesReview = orderBy(categoriesReview, ['name'], ['asc']);
 
                 categoriesReview[res.length] = {
                     id: 'summary',

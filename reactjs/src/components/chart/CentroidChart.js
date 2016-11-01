@@ -152,7 +152,7 @@ var CentroidChart = React.createClass({
             <div id="centroid" className="cendroid-frame">
                 <h4 className="chart-title">
                     Centroid Distance Histogram
-                    <HelpButton setValue={this.props.help} />
+                    <HelpButton classMenu="fix-overview-help-button-table" setValue={this.props.help} />
                 </h4>
                 <Row>
                     <Col md={9} sm={9}>

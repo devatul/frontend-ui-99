@@ -17,11 +17,11 @@ module.exports = React.createClass({
 			xhr: {
 				status: "Report is loading",
 				message: "Please wait!",
-				timer: 40,
+				timer: 50,
 				counting: 0,
 				loading: 100,
 				isFetching: fetching.SUCCESS,
-				error: {}
+				error: false
 			},
 			scanResult: {},
 			tokenAuth: ""
@@ -70,12 +70,20 @@ module.exports = React.createClass({
 		sessionStorage.removeItem('token')
 	},
 
-	componentDidMount() {
-		this.getCategories();
-		this.getConfidentialities();
-	},
+	// componentDidMount() {
+	// 	this.getCategories();
+	// 	this.getConfidentialities();
+	// },
 	
+	componentWillUpdate(nextProps, nextState) {
+		let {
+			categories
+		} = this.state;
 
+		// if( !categories.length ) {
+		// 	this.getCategories()
+		// }
+	},
 
 	componentDidUpdate(prevProps, prevState) {
 		let {
@@ -108,7 +116,7 @@ module.exports = React.createClass({
 								$set: "Please wait!"
 							},
 							error: {
-								$set: {}
+								$set: false
 							}
 						})
 					});
@@ -126,12 +134,32 @@ module.exports = React.createClass({
 							timer:
 							{
 								$set: 0
+							},
+							error:
+							{
+								$set: false
 							}
 						})
 					});
 					break;
 				case fetching.ERROR:
 					let { xhr } = this.state
+					this.setState({
+						xhr: update(this.state.xhr, {
+							status: 
+							{
+								$set: 'Oops!'
+							},
+							message:
+							{
+								$set: "We're sorry, but something went wrong."
+							},
+							error:
+							{
+								$set: true
+							}
+						})
+					});
 					break;
 			}
 		}
@@ -144,7 +172,7 @@ module.exports = React.createClass({
 
 	setLoading() {
         let delay = 0, { xhr } = this.state;
-        if( xhr.loading < 100 && xhr.error.status == null ) {
+        if( xhr.loading < 100 && !xhr.error ) {
             delay = setInterval(() => {
                 let { loading } = this.state.xhr;
                 this.setState({

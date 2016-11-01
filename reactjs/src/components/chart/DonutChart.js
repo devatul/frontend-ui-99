@@ -143,7 +143,7 @@ var DonutChart = React.createClass({
             if( config.data ) {
                 for( let i = config.data.length - 1; i >= 0; i-- ) {
                     let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
-                    legendChart[i] = <li style={config.data.length <= 3 ? {
+                    legendChart[i] = <li key={'legend_' + i} style={config.data.length <= 3 ? {
                                             margin: '0 auto 5px',
                                             width: config.data[0].name.length * 8,
                                             float: 'none'

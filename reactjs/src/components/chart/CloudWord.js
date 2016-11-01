@@ -47,6 +47,7 @@ var CloudWord = React.createClass({
             <div>
                 <h4 className="review_cloud_p">{this.props.title}
                     <HelpButton
+                        classMenu="fix-overview-help-button-table"
                         setValue={this.props.help && this.props.help} />
                 </h4>
                 <div ref="wordframe" id="words-cloud"></div>

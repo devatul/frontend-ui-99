@@ -196,17 +196,19 @@ table.docPreview > thead > tr > th:nth-child(2) {
     }
 
     .user-assignment-filter .filter-list > li {
-        min-width: none;
+        min-width: 100% !important;
         width: 100%;
     }
 }
 
 .user-assignment-filter.list-unstyled .dropdown-menu {
     min-width: 230px;
+    width: 52vw;
 }
 
 .user-assignment-filter .filter-list > li {
     text-align: left;
+    min-width: 140px;
 }
 
 .user-assignment-filter .filter-list > li:nth-child(1) {
