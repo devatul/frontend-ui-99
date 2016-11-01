@@ -24,7 +24,7 @@ var StateSelect = React.createClass({
      },
      handleClick(value) {
          this.setState({ display: 'none' })
-         this.props.onChange(value, this.props.number);
+         this.props.onChange(this.props.data , value, this.props.number);
 
      },
      componentDidMount() {

@@ -59,7 +59,7 @@ var TableAnomaly = React.createClass({
         }
     },*/
     filterTable(data , value){
-
+        debugger
         let dataNew = []
         _.forEach(data , function(object , index){
 
@@ -73,8 +73,8 @@ var TableAnomaly = React.createClass({
 
         this.setState({show : value})
     },
-    changeAnomaly(value, number) {
-
+    changeAnomaly(datas, value, number) {
+        debugger
         let updateAnomaly = update(this.state, {
             datas: {
                 [number]: {
@@ -86,7 +86,7 @@ var TableAnomaly = React.createClass({
         this.setState(updateAnomaly)
     },
     showSelect(datas , number){
-
+        debugger
        /* let datas = _.cloneDeep(this.state.datas)*/
         let style = datas[number].selected == null || datas[number].selected ==  'none' ? 'block' : 'none'
         for(let i =0 ; i < datas.length ; i++){
@@ -159,7 +159,9 @@ var TableAnomaly = React.createClass({
         return data_export
     },
     render(){
-        let {datas , filterValue} = this.state , newData = filterValue == 0 ? datas : this.filterTable(datas , filterValue)
+        let {filterValue} = this.state
+            , data = _.cloneDeep(this.state.datas)
+            , newData = filterValue == 0 ? data : this.filterTable(data , filterValue)
             , child = []
             , style = !this.state.show ?  'block' : 'none'
             , style1 = this.state.show ?  'block' : 'none'
@@ -175,9 +177,9 @@ var TableAnomaly = React.createClass({
                             <td className="text-left"><span>4774</span></td>
                             <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
                             <td className="relative">
-                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,newData,i-1)}></span>
+                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,i-1)}></span>
                               <div className="anomaly-showhide">
-                                  <Anomaly onChange = {this.changeAnomaly} number = {key} show={newData[i-1].selected}/>
+                                  <Anomaly onChange = {this.changeAnomaly} number = {key} show={newData[i-1].selected} data = {data} />
                               </div>
                             </td>
                           </tr>
