@@ -213,7 +213,7 @@
                         </div>
                     </Panel.head>
                     <Panel.body rt-if="this.state.documents.length === 0">
-                        <p class="document_note">You have not document to review</p>
+                        <p class="document_note">You don't have any document to review</p>
                     </Panel.body>
                     <Panel.body rt-if="this.state.documents.length > 0">
                         <p class="document_note">You have {this.state.documents.length - this.state.validateNumber} documents to review within  Accounting / Tax category in {this.state.groupCurrent && this.state.groupCurrent.name} by latest 15th August</p>
