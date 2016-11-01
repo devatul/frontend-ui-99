@@ -7,27 +7,20 @@ import _ from 'lodash'
 import $ from 'jquery'
 import { makeRequest } from '../utils/http'
 import Constant from '../Constant.js';
-//const ACTIVE = {background-color: '#0088cc'}
+
 module.exports = React.createClass({
     getInitialState() {
         return {
             newsfeed: {},
-            notification: {
-                total: 0,
-                list: []
-            },
-            pending_action: {
-                warning: 0,
-                danger: 0,
-                list: []
-            },
-            total_pending : 0,
-            total_notification : 0 ,
+            unseen_notiData: {},
+            total_pending: 0,
+            total_notification: 0,
+            number_pending : {},
             pending_list: [],
-            save_list : [],
+            save_list: [],
             role: '',
             typeAlert: 'none',
-            checkAlert : 'none'
+            checkAlert: 'none'
         };
     },
     propTypes: {
@@ -52,24 +45,39 @@ module.exports = React.createClass({
         browserHistory.push('/Account/SignIn');
     },
     componentDidUpdate(prevProps, prevState) {
-        /*let pending_list = JSON.parse(localStorage.getItem('pending_list') || '{}');*/
-        // console.log(pending_list)
         let default_list = _.cloneDeep(this.state.save_list)
         if (this.state.typeAlert != prevState.typeAlert) {
-            this.setState({
-                pending_action: default_list
+            debugger
+            let updateDefault = update(this.state , {
+                unseen_notiData : {
+                    actions : {$set : default_list}
+                }
             })
+            this.setState(updateDefault)
             let alert = this.state.typeAlert
-            if(this.state.typeAlert != 'none'){
-                this.filter(pending_list, alert);
+            if (this.state.typeAlert != 'none') {
+                this.filter(default_list, alert);
             }
 
         }
-        /*if(this.state.checkAlert != prevState.checkAlert ){
-             this.setState({
-                pending_action: pending_list
-            })
-        }*/
+    },
+    componentWillMount() {
+        let token = sessionStorage.getItem('token');
+        if (token) {
+            setInterval(() => {
+                if (token) {
+                    makeRequest({
+                        path: 'api/notification/bubble',
+                        success: (data) => {
+                            this.setState({ total_notification: data.notifications })
+                        }
+                    });
+                }
+            }, 2016);
+        } else {
+            console.log("noToken");
+            browserHistory.push('/Account/Signin');
+        }
     },
     componentDidMount() {
         console.log("Didcmoit");
@@ -88,161 +96,37 @@ module.exports = React.createClass({
                 console.log(err);
             }.bind(this)
         });
-       /* this.getDummyNotification();*/
-
     },
-    getNotification() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                var update_notification = update(this.state, {
-                    notification: {
-                        total: { $set: data.length },
-                        list: { $set: data }
-                    }
-                });
-                this.setState(update_notification);
-                console.log("notification: ", this.state.notification);
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.log(err);
-            }.bind(this)
-        });
-    },
-
-    getDummyNotification() {
-        //temproary for dummy data
-            var completed = [];
-            var pending = [] ;
-            var warning = 0 ;
-            var danger = 0 ;
-            var total_pending = 0 ;
-            var total_notification = 0;
-            $.ajax({
-                url: Constant.SERVER_API + 'api/notification/?period=completed',
-                dataType: 'json',
-                type: 'GET',
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-                },
-                success: function(data) {
-                    total_notification += data.length
-                    completed = data.slice(0, 3);
-                    console.log('done')
-                },
-                error: function(xhr, status, err) {
-                    console.log(err);
-                }
-            });
-            $.ajax({
-                url: Constant.SERVER_API + 'api/notification/?period=pending',
-                dataType: 'json',
-                type: 'GET',
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-                },
-                success: function(data) {
-                    total_pending =  data.length
-                    total_notification += data.length
-                    pending =  data.slice(0, 3);
-                    console.log('done1')
-                },
-                error: function(xhr, status, err) {
-                    console.log(err);
-                }
-            });
- /*           $.ajax({
-                url: Constant.SERVER_API + 'api/notification/?urgency=high',
-                dataType: 'json',
-                type: 'GET',
-                async: false,
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-                },
-                success: function(data) {
-                    warning = data.length
-                },
-                error: function(xhr, status, err) {
-                    console.log(err);
-                }
-            });
-            $.ajax({
-                url: Constant.SERVER_API + 'api/notification/?urgency=very_high',
-                dataType: 'json',
-                type: 'GET',
-                async: false,
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-                },
-                success: function(data) {
-                    danger = data.length
-                },
-                error: function(xhr, status, err) {
-                    console.log(err);
-                }
-            });
-*/
-
-            var update_notification = update(this.state, {
-                notification: {
-                    list: {
-                        $set: completed
-                    },
-
-                },
-                pending_action: {
-                    list: {
-                        $set: pending
-                    },
-                    warning: { $set: warning },
-                    danger: { $set: danger }
-                },
-                total_pending : {
-                    $set: total_pending
-                },
-                total_notification : {
-                    $set : total_notification
-                },
-                save_list : {
-                    $set : pending
-                }
-            });
-        console.log('update' , update_notification)
-        this.setState(update_notification);
-     /*   localStorage.setItem('pending_list', JSON.stringify(update_notification.pending_action))*/
-
-        /*this.setState({pending_list : update_notification})
-        console.log(this.state.pending_list)*/
-    },
-
     hideMenu() {
         // close notification-menu when changes route
         $('.dropdown-backdrop').click()
     },
-    getNotiComplete(){
-        return makeRequest({
-            path: 'api/notification/?period=completed',
-            success: (data) => {
-                return data
-            }
-        });
-    },
-    getNotiPending(){
-        return makeRequest({
-            path: 'api/notification/?period=pending',
-            success: (data) => {
-                return data
-            }
-        });
-    },
-    notificationHandle() {
-       /* $("#total_notification").hide();*/
 
+    // Show notification popup
+    notificationHandle() {
+        makeRequest({
+            path: 'api/notification/popup',
+            success: (data) => {
+                this.setState({ unseen_notiData: data, save_list: data.actions , total_pending : data.actions.length})
+                this.countNumber(data.actions)
+                console.log(this.state.unseen_notiData)
+            }
+        })
+    },
+    countNumber(data){
+        let total = 0 ;
+        let high = 0 ;
+        let veryHight = 0 ;
+        _.forEach(data , function(object , index){
+           switch(object.urgency){
+                case 'high' : high++ ; break ;
+                case 'very high' : veryHight++ ; break ;
+           }
+        })
+        this.setState({number_pending : {
+            'high' : high ,
+            'very_high' : veryHight
+        }})
     },
     changeToggle(event) {
 
@@ -268,42 +152,40 @@ module.exports = React.createClass({
     },
 
     getfilterAlert(type) {
-        if(this.state.typeAlert == 'none'){
-             this.setState({ typeAlert: type })
+        debugger
+        if (this.state.typeAlert == 'none') {
+            this.setState({ typeAlert: type })
         } else {
-              let pending_list = JSON.parse(localStorage.getItem('pending_list') || '{}');
-                this.setState({
+            let pending_list = _.cloneDeep(this.state.save_list)
+            this.setState({
                 pending_action: pending_list
 
             })
-                this.setState({
-                    typeAlert : 'none'
-                })
+            this.setState({
+                typeAlert: 'none'
+            })
         }
-
-
-
-
     },
     filter(data, alert) {
-        let pending = _.cloneDeep(data.list);
+        debugger
         let arr = []
 
-        _.forEach(pending, function(object, index) {
+        _.forEach(data, function(object, index) {
             if (object.urgency != alert) {
                 arr.push(index)
             }
         })
-        _.pullAt(pending, arr);
+        _.pullAt(data, arr);
         arr = [];
-        console.log('pending_list', pending)
-        this.setState(update(this.state, {
-            pending_action: {
-                list: { $set: pending }
-            },
+        console.log('pending_list', data)
+        if (this.state.unseen_notiData.actions != null) {
+            this.setState(update(this.state, {
+                unseen_notiData: {
+                    actions: { $set: data }
+                },
 
-        }))
-        console.log(this.state.pending_action)
+            }))
+        }
     },
 
     render: template

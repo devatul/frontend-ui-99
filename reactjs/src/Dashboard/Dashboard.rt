@@ -25,20 +25,21 @@
                     <!-- <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span> -->
                     <i class="fa fa-bell-o" aria-hidden="true"></i>
                 </a>
-                <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw">
-                    <div class="row noti-popup">
-                        <div class="col-sm-6 col-noti noti-div">
+                <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw" >
+                    <div class="row noti-popup" >
+                        <div class="col-sm-6 col-noti noti-div" rt-scope ="this.state.unseen_notiData as unseen_notiData">
                             <h4>My Notification</h4>
                             <div class="noti-block">
                                 <h3 class="noti-date">Last Update</h3>
-                                <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.notification.list">
-                                    <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                        <i class="fa"
-                                        rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                        'fa-check icon-warning': notification.urgency === 'adone',
-                                        'fa-clock-o': notification.urgency === 'low',
-                                        'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                        'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
+                                <ul class="list-unstyled noti-list" rt-if="unseen_notiData.notifications != null" >
+                                    <li rt-repeat="notification in unseen_notiData.notifications">
+                                        <i rt-class="{
+                                            'fa': true,
+                                            'fa-check icon-success': notification.urgency === 'done',
+                                            'fa-clock-o': notification.urgency === 'low',
+                                            'fa-clock-o icon-warning': notification.urgency === 'high',
+                                            'fa-clock-o icon-danger': notification.urgency === 'very high'
+                                            }"
                                         aria-hidden="true"></i>
                                         <p style="font-size: 13px">{notification.message}</p>
                                     </li>
@@ -48,12 +49,12 @@
                         <div class="col-sm-6 col-noti ">
                             <div class='row'>
                                 <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.total_pending}</h4>
-                                <h4 class="col-sm-5 pull-right">
+                                <h4 class="col-sm-5 pull-right" rt-scope="this.state.number_pending as number_pending">
                                     <div class="row">
-                                        <span class="ml-md" style="margin-right: 15px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'high' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'high')}" ></i> : {this.state.pending_action.warning}</span>
-                                        <span style="margin-right: 5px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very high' "><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'very high')}"></i> : {this.state.pending_action.danger}</span>
+                                        <span class="ml-md" style="margin-right: 15px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'high' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'high')}" ></i> : {number_pending &&number_pending.high}</span>
+                                        <span style="margin-right: 5px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very high' "><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'very high')}"></i> : {number_pending &&number_pending.very_high}</span>
 
-                                         <HelpButton1 className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile" content="Number of actions pending for you to complete. {this.state.pending_action.danger} {this.state.pending_action.danger >1 ? 'actions are' : 'action is'} required with high priority and {this.state.pending_action.warning} {this.state.pending_action.warning >1 ? 'actions are' : 'action is'} required with medium priority." />
+                                         <HelpButton1 className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile" content="Number of actions pending for you to complete. {number_pending &&number_pending.very_high} {number_pending && number_pending.very_high >1 ? 'actions are' : 'action is'} required with high priority and {number_pending &&number_pending.high} {number_pending && number_pending.high >1 ? 'actions are' : 'action is'} required with medium priority." />
                                        <!--  <HelpButton className="" classNote="overview_timeframe help_timeframe"
                                             setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." /> -->
                                     </div>
@@ -61,15 +62,16 @@
                                 </h4>
                             </div>
                             <span class="actions-percentage">Action completed on time: <b>100%</b></span>
-                            <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.pending_action.list">
-                                <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                                    <i class="fa"
-                                    rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                    'fa-clock-o': notification.urgency === 'low',
-                                    'fa-clock-o icon-warning': notification.urgency === 'high',
-                                    'fa-clock-o icon-danger': notification.urgency === 'very high'}"
-                                    aria-hidden="true"></i>
-                                    <p style="font-size: 13px">{notification.message}</p>
+                            <ul class="list-unstyled noti-list" rt-if="this.state.unseen_notiData.actions != null">
+                                <li rt-repeat="actions in this.state.unseen_notiData.actions">
+                                    <i rt-class="{
+                                        'fa': true,
+                                        'fa-check icon-success': actions.urgency === 'done',
+                                        'fa-clock-o': actions.urgency === 'low',
+                                        'fa-clock-o icon-warning': actions.urgency === 'high',
+                                        'fa-clock-o icon-danger': actions.urgency === 'very high'}"
+                                        aria-hidden="true"></i>
+                                    <p style="font-size: 13px">{actions.message}</p>
                                 </li>
                             </ul>
 
