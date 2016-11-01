@@ -37,14 +37,12 @@ var Admin_Step4 = React.createClass({
         this.setState({complete: 3 , readOnly2 : true})
     },
     add(value){
-        debugger
         if(value == 1 ){
             let addNdew = { key: this.state.add_DomainDetails.length};
             this.setState({add_DomainDetails : _.concat(addNdew ,this.state.add_DomainDetails)})
         }
     },
     editButton(value, readOnly) {
-        debugger
         if (value == 1) {
             this.setState({ readOnly: false })
             if (!readOnly) {
