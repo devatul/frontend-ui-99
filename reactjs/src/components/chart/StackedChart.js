@@ -178,6 +178,7 @@ var StackedChart = React.createClass({
                                 </li>;
                 }
                 legendChart[i] = React.createElement('ul', {
+                    key: 'chart-legend-' + i,
                     className: 'list-unstyled chart-legend serie-' + i,
                     style: { textTransform: 'lowercase' }
                 }, children);

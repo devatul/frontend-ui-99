@@ -410,7 +410,7 @@ var OrphanReview = React.createClass({
         let { id } = this.state.orphanCurrent;
 
         return makeRequest({
-            path: "api/group/orphan/samples/",
+            path: "api/group/orphan/samples",
             params: { "id": id },
             success: (res) => {
                 this.setState({ documents: res, shouldUpdate: true });
@@ -441,7 +441,7 @@ var OrphanReview = React.createClass({
 
     getCategoryInfo: function() {
         return makeRequest({
-            path: "api/group/orphan/categories/",
+            path: "api/group/orphan/categories",
             params: {
                 "id": this.state.orphanCurrent.id
             },

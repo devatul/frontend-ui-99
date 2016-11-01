@@ -90,7 +90,7 @@
                 </li>
                 <li class="dropdown">
                     <span class="badge">{this.state.total_notification}</span>
-                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <!--<li>
@@ -115,7 +115,7 @@
                 </li>
                 <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
 
-                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
@@ -148,7 +148,7 @@
                 </li>
                 <li class="dropdown">
                     <span class="badge">{this.state.total_notification}</span>
-                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" activeClassName="active" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <li>
@@ -176,7 +176,7 @@
                 </li>
                 <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
 
-                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->
@@ -211,7 +211,7 @@
                     <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
                      <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
 
-                    <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><!--<li class="active">-->

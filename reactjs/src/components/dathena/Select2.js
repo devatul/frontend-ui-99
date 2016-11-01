@@ -93,7 +93,7 @@ var Select2 = React.createClass({
                 delete _props.minimumResultsForSearch;
             _props.dropdownCssClass &&
                 delete _props.dropdownCssClass;
-            _props.closeOnSelect &&
+            if(_props.closeOnSelect === false || _props.closeOnSelect === true)
                 delete _props.closeOnSelect;
             _props.onOpen &&
                 delete _props.onOpen;
