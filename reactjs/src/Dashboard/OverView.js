@@ -6,7 +6,7 @@ import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import { _categories, fetching } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
-import { orderByIndex } from '../utils/function'
+import { orderByIndex, orderConfidentialities } from '../utils/function'
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
@@ -121,7 +121,7 @@ var OverView = React.createClass
             success: (data) => {
                 let confidentialities = data.confidentialities;
 
-                data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2,3]);
+                data.confidentialities = orderConfidentialities(confidentialities);
                 this.props.updateStore({
                     xhr: update(this.props.xhr, {
                         isFetching:

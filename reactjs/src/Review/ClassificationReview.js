@@ -3,8 +3,9 @@ import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
 import Constant, { fetching, status } from '../Constant'
-import { cloneDeep, isEqual, find, findIndex } from 'lodash'
+import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { orderConfidentialities } from '../utils/function'
 
 var ClassificationReview = React.createClass({
 
@@ -468,8 +469,7 @@ var ClassificationReview = React.createClass({
                         {
                             $set: fetching.ERROR
                         }
-                    }),
-                    error: err
+                    })
                 });
             }
         });
@@ -481,6 +481,7 @@ var ClassificationReview = React.createClass({
         return makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
@@ -491,6 +492,7 @@ var ClassificationReview = React.createClass({
         return makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
+                data = orderConfidentialities(data)
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

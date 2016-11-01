@@ -109,7 +109,7 @@
                                             index="{reviewIndex + '_' + documentIndex}"
                                             action="{review}"
                                             categories="{this.state.categories}"
-                                            confidentialities="{this.props.confidentialities}"
+                                            confidentialities="{this.state.confidentialities}"
                                             onClick="{this.handleTableRowOnClick}"
                                             onChange="{this.handleTableRowOnChange}"
                                             numberChecked="{review.checkedNumber}" />
@@ -169,7 +169,7 @@
         <tbody>
             <table.row
                 document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
-                categories="{this.props.categories}"
+                categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
                 onClick="{this.handleTableRowOnClick}"
                 onChange="{this.handleTableRowOnChange}"

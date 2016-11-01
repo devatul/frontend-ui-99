@@ -478,7 +478,7 @@ var Row2 = React.createClass({
 var Row = React.createClass({
 
     propTypes: {
-        document: PropTypes.object.isRequired,
+        document: PropTypes.object,
     },
     
     componentWillMount() {

@@ -54,6 +54,28 @@ module.exports = {
 			icon: 'fa-ban'
 		}, 
 	},
+	_confidentialities: {
+		BANKING: {
+			name: 'Banking Secrecy',
+			pos: 0
+		},
+		SECRET: {
+			name: 'Secret',
+			pos: 1
+		},
+		CONFIDENTIAL: {
+			name: 'Confidential',
+			pos: 2
+		},
+		INTERNAL: {
+			name: 'Internal',
+			pos: 3
+		},
+		PUBLIC: {
+			name: 'Public',
+			pos: 4
+		}
+	},
 	urgency: [
 		{ name: "low",  class: ""},
 		{ name: "high", class: "fa-clock-o only" },

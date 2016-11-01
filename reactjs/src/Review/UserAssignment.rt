@@ -141,7 +141,7 @@
                                                                 <li class="dropdown">
                                                                     <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                                                     <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                                                    <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 670px;">
+                                                                    <div class="dropdown-menu has-child has-arrow dd-md">
                                                                         <ul class="filter-list list-unstyled pt-xs filter-list-with-help">
                                                                             <li>
                                                                               <SelectBox

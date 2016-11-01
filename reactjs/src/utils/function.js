@@ -1,3 +1,5 @@
+import { _confidentialities } from '../Constant'
+
 module.exports = {
     formatNumber: (nStr) => {
         nStr += '';
@@ -12,14 +14,51 @@ module.exports = {
     },
 
     orderByIndex: (array, orders) => {
-        let newArray = [];
+        let newArray = [], total = orders.length;
 
-        for(let i = orders.length - 1; i >= 0; i--) {
+        for(let i = 0; i < total; i++) {
             if(array[orders[i]]) {
-                newArray[orders[i]] = array[orders[i]];
+                newArray[i] = array[orders[i]];
             }
         }
 
+        return newArray;
+    },
+
+    orderConfidentialities(array) {
+        let newArray = [],
+            {
+                BANKING,
+                SECRET,
+                CONFIDENTIAL,
+                INTERNAL,
+                PUBLIC
+            } = _confidentialities;
+
+        for( let i = array.length - 1; i >= 0; i-- ) {
+            if(array[i]) {
+                var name = array[i].name.toLowerCase();
+
+                if( name ==  BANKING.name.toLowerCase() )
+                {
+                    newArray[BANKING.pos] = array[i];
+                } else if( name ==  SECRET.name.toLowerCase() )
+                {
+                    newArray[SECRET.pos] = array[i];
+                } else if( name ==  CONFIDENTIAL.name.toLowerCase() )
+                {
+                    newArray[CONFIDENTIAL.pos] = array[i];
+                } else if( name ==  INTERNAL.name.toLowerCase() )
+                {
+                    newArray[INTERNAL.pos] = array[i];
+                } else if( name ==  PUBLIC.name.toLowerCase() )
+                {
+                    newArray[PUBLIC.pos] = array[i];
+                } else {
+                    newArray[i] = array[i];
+                }
+            }
+        }
         return newArray;
     },
 
