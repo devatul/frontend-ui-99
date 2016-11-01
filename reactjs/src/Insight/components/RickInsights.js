@@ -33,14 +33,12 @@ var RickInsight = React.createClass({
         });
     },
 
-    upperFirst(value) {
+     upperFirst(value) {
         let sp = _.split(value, ' '),
             rt = '';
-
         for (let i = 0; i < sp.length; i++) {
-            rt += _.upperFirst(sp[i]) + ' ';
+             rt += _.upperFirst(sp[i]) + ' ';
         }
-
         return rt;
     },
 
@@ -73,7 +71,7 @@ var RickInsight = React.createClass({
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     },
 
-	  render(){
+	render(){
         let children = [];
 
         if (this.state.rickInsight != null && this.state.rickInsight.stale_files != null) {

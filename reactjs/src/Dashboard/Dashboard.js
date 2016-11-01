@@ -20,7 +20,8 @@ module.exports = React.createClass({
             save_list: [],
             role: '',
             typeAlert: 'none',
-            checkAlert: 'none'
+            checkAlert: 'none',
+            interval :  null
         };
     },
     propTypes: {
@@ -42,7 +43,12 @@ module.exports = React.createClass({
     logOut() {
         //console.log(sessionStorage.getItem('token'));
         sessionStorage.removeItem('token');
+
         browserHistory.push('/Account/SignIn');
+    },
+    componentWillUnmount() {
+
+         clearInterval(this.state.interval);
     },
     componentDidUpdate(prevProps, prevState) {
         let default_list = _.cloneDeep(this.state.save_list)
@@ -63,8 +69,8 @@ module.exports = React.createClass({
     },
     componentWillMount() {
         let token = sessionStorage.getItem('token');
-        if (token) {
-            setInterval(() => {
+        if (token != null) {
+           this.setState({interval : setInterval(() => {
                 if (token) {
                     makeRequest({
                         path: 'api/notification/bubble',
@@ -73,7 +79,7 @@ module.exports = React.createClass({
                         }
                     });
                 }
-            }, 2016);
+            }, 2016)})
         } else {
             console.log("noToken");
             browserHistory.push('/Account/Signin');

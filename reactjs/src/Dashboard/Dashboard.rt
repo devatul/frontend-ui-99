@@ -61,7 +61,7 @@
 
                                 </h4>
                             </div>
-                            <span class="actions-percentage">Action completed on time: <b>100%</b></span>
+                            <span class="actions-percentage">Action completed on time: 100%</span>
                             <ul class="list-unstyled noti-list" rt-if="this.state.unseen_notiData.actions != null">
                                 <li rt-repeat="actions in this.state.unseen_notiData.actions">
                                     <i rt-class="{
