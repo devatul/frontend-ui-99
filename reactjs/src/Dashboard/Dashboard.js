@@ -47,7 +47,6 @@ module.exports = React.createClass({
     componentDidUpdate(prevProps, prevState) {
         let default_list = _.cloneDeep(this.state.save_list)
         if (this.state.typeAlert != prevState.typeAlert) {
-            debugger
             let updateDefault = update(this.state , {
                 unseen_notiData : {
                     actions : {$set : default_list}
@@ -152,7 +151,6 @@ module.exports = React.createClass({
     },
 
     getfilterAlert(type) {
-        debugger
         if (this.state.typeAlert == 'none') {
             this.setState({ typeAlert: type })
         } else {
@@ -167,7 +165,6 @@ module.exports = React.createClass({
         }
     },
     filter(data, alert) {
-        debugger
         let arr = []
 
         _.forEach(data, function(object, index) {

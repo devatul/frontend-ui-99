@@ -34,12 +34,10 @@ var ClassificationCheck = React.createClass({
         };
     },
     search(event) {
-        debugger
         let value = event.target.value
         let data = _.cloneDeep(this.state.data)
         let newData = []
         _.forEach(data, function(object, index) {
-            debugger
             if ((object['name']).search(value) >= 0) {
                 newData.push(
                     object

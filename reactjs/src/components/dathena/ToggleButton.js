@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 
 var ToggleButton = React.createClass({
-    
+
     getInitialState() {
         return {
             default: this.props.setDefault,
@@ -18,7 +18,6 @@ var ToggleButton = React.createClass({
 
     // componentDidUpdate(prevProps, prevState) {
     //     if(this.state.default != prevState.default) {
-    //         debugger
     //         this.handleToggleButton()
     //     }
     // },
@@ -26,10 +25,10 @@ var ToggleButton = React.createClass({
     componentDidMount() {
         this.handleToggleButton()
     },
-    
+
 
     handleToggleButton() {
-       
+
         if(this.state.default === 'open') {
             $(this.props.setTarget).css('display', 'block');
             this.setState({ default: 'close', style: 'collapse' });
