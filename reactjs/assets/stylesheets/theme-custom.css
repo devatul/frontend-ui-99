@@ -7,18 +7,17 @@ body {
 @media (min-width: 768px) and (max-width: 1199px) {
   .navbar-collapse.collapse {
     display: none !important; }
-
   .navbar-collapse.collapse.in {
     display: block !important; }
-
   .navbar-header .collapse, .navbar-toggle {
     display: block !important; }
-
   .navbar-header {
     float: none; } }
+
 @media only screen and (max-width: 767px) {
   .panel-actions {
     position: absolute; } }
+
 hr {
   margin-top: 10px;
   margin-bottom: 10px; }
@@ -608,6 +607,7 @@ tr td {
     position: absolute;
     top: -4px;
     right: 15px; }
+
 .dropdown-noti .actions-percentage {
   margin-top: 10px;
   display: inline-block; }
@@ -767,15 +767,19 @@ tr td {
   opacity: 0.7;
   word-break: break-word;
   line-height: 2.8rem; }
+
 .widget-panel .widget-summary.unscanned .summary .title a {
   color: #fff;
   text-decoration: underline;
   opacity: 0.7; }
+
 .widget-panel .widget-summary .loading-dot {
   margin-top: 15px;
   font-style: italic; }
+
 .widget-panel .widget-summary:not(.in-progress) .loading-dot {
   display: none; }
+
 .widget-panel .widget-chart {
   min-height: 320px;
   position: relative;
@@ -879,7 +883,8 @@ tr td {
   60% {
     text-shadow: 0.25em 0 0 white, 0.5em 0 0 transparent; }
   80%, 100% {
-    text-shadow: .25em 0 0 white, .5em 0 0 white; } }
+    text-shadow: .25em 0 0 white, .5em 0 0 white; } }
+
 @keyframes dotsblack {
   0%, 20% {
     color: rgba(255, 255, 255, 0);
@@ -890,7 +895,8 @@ tr td {
   60% {
     text-shadow: 0.25em 0 0 #000, 0.5em 0 0 rgba(255, 255, 255, 0); }
   80%, 100% {
-    text-shadow: .25em 0 0 #000, .5em 0 0 #000; } }
+    text-shadow: .25em 0 0 #000, .5em 0 0 #000; } }
+
 .select-group {
   position: relative; }
   .select-group .selected-info {
@@ -940,21 +946,24 @@ tr td {
 
 .table-my-actions .checkbox-custom {
   padding: 0 0 0 5px; }
+
 .table-my-actions > thead tr th:nth-child(2) {
   width: 50px; }
+
 .table-my-actions > thead tr th:nth-child(6) {
   width: 80px;
   padding-right: 5px !important; }
+
 .table-my-actions.orphan-review {
   /*    .doc-check{
-        .fa-clock-o{
-          display: none;
-        }
-        .fa-check{
-          display: inline-block;
-          color: $color-info;
-        }
-      }*/ }
+      .fa-clock-o{
+        display: none;
+      }
+      .fa-check{
+        display: inline-block;
+        color: $color-info;
+      }
+    }*/ }
   @media (min-width: 1024px) {
     .table-my-actions.orphan-review .progress {
       min-width: 100px; } }
@@ -962,6 +971,7 @@ tr td {
     position: relative; }
   .table-my-actions.orphan-review .select-group select {
     color: #777; }
+
 .table-my-actions .doc-check {
   font-size: 18px;
   text-decoration: none; }
@@ -982,16 +992,21 @@ tr td {
     color: #4fca9d; }
   .table-my-actions .doc-check.validated {
     color: #4fca9d; }
+
 .table-my-actions > tbody .dropdown-file-info-holder {
   float: left; }
+
 .table-my-actions > tbody > tr.item-challenged label, .table-my-actions > tbody > tr.item-challenged input[type="checkbox"] {
   pointer-events: none; }
+
 .table-my-actions > tbody > tr.item-validated input, .table-my-actions > tbody > tr.item-validated select, .table-my-actions > tbody > tr.item-validated label {
   pointer-events: none; }
+
 .table-my-actions > tbody > tr > td {
   vertical-align: middle;
   position: relative;
   padding: 10px !important; }
+
 .table-my-actions > tbody > tr.inactive > td:after {
   content: '';
   width: 100%;
@@ -1000,15 +1015,18 @@ tr td {
   top: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.7); }
+
 .table-my-actions .btn-file-info {
   cursor: pointer;
   margin-right: 10px; }
+
 .table-my-actions .doc-path {
   display: inline-block;
   max-width: 90px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; }
+
 .table-my-actions .file-name:hover {
   cursor: pointer; }
 
@@ -1017,6 +1035,7 @@ tr td {
 
 .actions-panel .panel-actions a.panel-action {
   vertical-align: top; }
+
 .actions-panel .panel-actions button {
   margin-top: -4px; }
 
@@ -1067,6 +1086,7 @@ div[id^='legendContainer'] {
 .choose-cluster-block > h5 {
   float: left;
   margin-right: 15px; }
+
 .choose-cluster-block > .form-group {
   margin-top: 3px;
   float: left; }
@@ -1082,11 +1102,13 @@ div[id^='legendContainer'] {
 
 .collapse-stat-table .panel-action {
   cursor: pointer; }
+
 .collapse-stat-table .collapsed:before {
   content: "\f0d8"; }
 
 .view-stat-block .toggle {
   margin-top: 0; }
+
 .view-stat-block .toggle label.toggle-on {
   color: #fff; }
 
@@ -1138,41 +1160,50 @@ div[id^='legendContainer'] {
 
 .add-detail-section .detail-row {
   margin-bottom: 20px; }
+
 .add-detail-section .row {
   margin-left: -5px;
   margin-right: -5px; }
   .add-detail-section .row [class^="col"] {
     padding-left: 5px;
     padding-right: 5px; }
+
 .add-detail-section .detail-left label {
   display: block;
   /*      background-color: $color-tertiary;
-        width: 100%;
-        color: #fff;
-        min-height: 34px;
-        padding: 0 10px;
-        line-height: 34px;
-        border-radius: 3px;*/ }
+      width: 100%;
+      color: #fff;
+      min-height: 34px;
+      padding: 0 10px;
+      line-height: 34px;
+      border-radius: 3px;*/ }
+
 .add-detail-section .detail-left > a {
   /*float: right;*/
   font-size: 12px; }
+
 .add-detail-section .detail-right .form-control {
   margin-bottom: 10px !important; }
+
 .add-detail-section .select2 {
   margin-bottom: 10px;
   width: 100% !important; }
 
 .panel-policies .checkbox-custom {
   float: right; }
+
 .panel-policies .row-title {
   text-align: center; }
   .panel-policies .row-title h5 {
     font-weight: bold;
     margin-bottom: 20px; }
+
 .panel-policies .cat-edit-link {
   vertical-align: middle; }
+
 .panel-policies .row-policies {
   margin-bottom: 15px; }
+
 .panel-policies .col-default {
   padding-top: 5px; }
 
@@ -1186,6 +1217,7 @@ div[id^='legendContainer'] {
     color: #fff;
     margin-right: 5px;
     cursor: pointer; }
+
 .filter-tags .filter-clear, .filter-tags-clear .filter-clear {
   cursor: pointer; }
 
@@ -1311,6 +1343,7 @@ div[id^='legendContainer'] {
   width: 90px;
   display: inline-block;
   font-weight: 500; }
+
 .review-status-block .progress {
   width: -webkit-calc(100% - 100px);
   width: -moz-calc(100% - 100px);
@@ -1321,14 +1354,13 @@ div[id^='legendContainer'] {
   ul.filter-list {
     text-align: left;
     padding-left: 0; }
-
   ul.filter-list > li {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px; }
-
   ul.filter-list > li select.form-control {
     width: auto; } }
+
 @media (min-width: 769px) {
   .my_header .navbar-collapse {
     width: -webkit-calc(100% - 402px);
@@ -1342,22 +1374,22 @@ div[id^='legendContainer'] {
       .my_header .navbar-collapse .navbar-nav > li {
         float: none;
         display: inline-block; } }
+
 @media (max-width: 996px) {
   .dropdown-menu.full-mobile {
     width: 90%;
     left: 5% !important;
     margin-left: 0;
     z-index: 9999; }
-
   .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before {
     display: none; }
-
   .dropdown-menu.dd-filter {
     width: 80vw;
     right: 0;
     margin-left: -70vw; }
     .dropdown-menu.dd-filter:before, .dropdown-menu.dd-filter:after {
       display: none; } }
+
 @media (max-width: 1199px) {
   .header-right {
     position: absolute;
@@ -1365,18 +1397,18 @@ div[id^='legendContainer'] {
     right: 80px; }
     .header-right .userbox:after {
       display: none; } }
+
 @media (max-width: 767px) {
   .header-right {
     position: absolute;
     top: 4px;
     right: 60px; }
-
   .tool-left-xs {
     text-align: left; } }
+
 @media (max-width: 480px) {
   #centroidChart {
     height: 280px; }
-
   .centroid-chart-label {
     margin-left: -20px;
     margin-top: 64px;
@@ -1387,7 +1419,6 @@ div[id^='legendContainer'] {
     text-align: center;
     line-height: 12px;
     padding-top: 5px; }
-
   .page-heading {
     float: none; }
     .page-heading + ul {
@@ -1396,7 +1427,6 @@ div[id^='legendContainer'] {
       .page-heading + ul li {
         margin-left: 0;
         margin-right: 15px; }
-
   .page-heading-sm {
     float: none !important;
     margin-top: 0 !important; }
@@ -1406,25 +1436,19 @@ div[id^='legendContainer'] {
       .page-heading-sm + ul li {
         margin-left: 0;
         margin-right: 15px; }
-
   .navbar-brand {
     width: 100px;
     padding: 15px 10px; }
-
   ul.filter-list {
     text-align: center; }
     ul.filter-list li select.form-control {
       width: 200px; }
-
   .nav-tabs li {
     width: 100%; }
-
   .dropdown-menu.dd-filter {
     width: 90vw; }
-
   .view-stat-block label {
     display: block; }
-
   .my-actions-btn-group {
     position: relative;
     right: -20px; }
@@ -1432,6 +1456,7 @@ div[id^='legendContainer'] {
       top: -100px;
       right: 20px;
       position: relative; } }
+
 .switch.switch-success .ios-switch .on-background {
   background-color: #59D0A7; }
 
@@ -1440,6 +1465,7 @@ div[id^='legendContainer'] {
   width: -moz-calc(100% - 35px);
   width: calc(100% - 35px);
   float: left; }
+
 .sample-params .validation-btn {
   float: right;
   margin-top: 3px;
@@ -1448,6 +1474,7 @@ div[id^='legendContainer'] {
     color: #777; }
     .sample-params .validation-btn i.icon-success {
       color: #59D0A7; }
+
 .sample-params label {
   font-weight: bold;
   font-size: 12px; }
@@ -1455,13 +1482,12 @@ div[id^='legendContainer'] {
 @media (max-width: 400px) {
   .modal-preview .modal-title {
     margin-top: 20px; }
-
   .dropdown-menu.dd-filter {
     margin-left: -60vw; }
-
   .my_header .navbar-default.nav-custom .navbar-brand {
     width: 100px;
     padding-top: 33px; } }
+
 .help_guide_sub .filter-tags, .help_guide_sub .filter-tags-clear {
   padding-top: 10px;
   padding-left: 15px; }
@@ -1477,7 +1503,7 @@ div[id^='legendContainer'] {
 .checkbox-custom input[type="checkbox"]:disabled + label:before {
   border: 1px solid #bbb !important; }
 
-.checkbox-custom input[type="checkbox"]:focus + label:before{
+.checkbox-custom input[type="checkbox"]:focus + label:before {
   border-color: #0FABE6 !important; }
 
 .document_note {
@@ -1488,7 +1514,6 @@ div[id^='legendContainer'] {
 @media (min-width: 992px) {
   .dd-filter {
     min-width: 700px; }
-
   .sample-params {
     padding: 0;
     position: relative; }
@@ -1513,6 +1538,7 @@ div[id^='legendContainer'] {
         font-size: 1.6rem; }
       .sample-params .or-divider:after {
         display: none; } }
+
 .overview_question_a, .review_question_a {
   color: #D3D3D3; }
   .overview_question_a:hover, .review_question_a:hover {
@@ -1565,6 +1591,7 @@ div[id^='legendContainer'] {
   padding: 10px 15px; }
   .panel-noti .panel-heading h2 {
     font-size: 16px; }
+
 .panel-noti .noti-item {
   font-size: 14px;
   margin-bottom: 5px; }
@@ -1581,6 +1608,7 @@ div[id^='legendContainer'] {
     width: -webkit-calc(100% - 50px);
     width: -moz-calc(100% - 50px);
     width: calc(100% - 50px); }
+
 .panel-noti .panel-body {
   padding: 0; }
   .panel-noti .panel-body .noti-item {
@@ -1591,8 +1619,10 @@ div[id^='legendContainer'] {
 
 .panel-featured-compact .panel-heading {
   padding: 10px 18px; }
+
 .panel-featured-compact .panel-title {
   font-size: 16px; }
+
 .panel-featured-compact .panel-actions {
   top: 8px; }
 
@@ -1606,17 +1636,23 @@ div[id^='legendContainer'] {
 
 .table-reviewer-summary thead tr th {
   border-bottom: none; }
+
 .table-reviewer-summary tr td {
   text-align: left; }
+
 .table-reviewer-summary .hiddenRow {
   padding: 0; }
+
 .table-reviewer-summary .assigned-num {
   display: inline-block;
   min-width: 30px; }
+
 .table-reviewer-summary .child-table > td {
   border-top: none !important; }
+
 .table-reviewer-summary .border-bottom {
   border-bottom: 1px solid #ddd; }
+
 .table-reviewer-summary .chart-col {
   padding-left: 0;
   border-left: 1px solid #000; }
@@ -1637,16 +1673,22 @@ div[id^='legendContainer'] {
   .table-reviewer-summary .chart-col .percent {
     position: relative;
     left: 30px; }
+
 .table-reviewer-summary .child-table .progress-bar {
   background-color: #5bc0de; }
+
 .table-reviewer-summary .child-table tr:first-child .progress-bar {
   background-color: #5bc0de; }
+
 .table-reviewer-summary .child-table tr:nth-child(2) .progress-bar {
   background-color: #349da2; }
+
 .table-reviewer-summary .child-table tr:nth-child(3) .progress-bar {
   background-color: #7986cb; }
+
 .table-reviewer-summary .child-table tr:nth-child(4) .progress-bar {
   background-color: #ed9c28; }
+
 .table-reviewer-summary .child-table tr:nth-child(5) .progress-bar {
   background-color: #d2322d; }
 
@@ -1691,8 +1733,10 @@ div[id^='legendContainer'] {
     width: calc(100% - 25px);
     overflow: hidden;
     text-overflow: ellipsis; }
+
 .statistic_table .dropdown-file-info-holder {
   float: left; }
+
 .statistic_table .text-num {
   font-weight: bold; }
 
@@ -1802,40 +1846,51 @@ div[id^='legendContainer'] {
 
 .table-challenge .fa-clock-o {
   font-size: 16px; }
+
 .table-challenge thead th {
   vertical-align: middle !important;
   line-height: 22px !important; }
   .table-challenge thead th:first-child {
     width: 80px; }
+
 .table-challenge tbody .dropdown-file-info-holder {
   float: left; }
+
 .table-challenge .challenge-btn {
   font-size: 18px;
   line-height: 16px;
   color: #777; }
   .table-challenge .challenge-btn:hover {
     color: #0D9FD6 !important; }
+
 .table-challenge .validation-btn:hover .fa {
   color: #0D9FD6 !important; }
+
 .table-challenge .doc-path, .table-challenge .file-name {
   display: inline-block;
   max-width: 90px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; }
+
 .table-challenge .file-name {
   max-width: 100px; }
+
 .table-challenge select.changed {
   color: #d2322d; }
+
 .table-challenge select {
   font-size: 13px;
   padding: 6px; }
+
 .table-challenge textarea {
   font-size: 13px;
   min-width: 200px; }
+
 .table-challenge .previous-status {
   margin-top: 5px;
   font-size: 10px; }
+
 .table-challenge > tbody > tr > td {
   vertical-align: middle; }
 
@@ -1867,12 +1922,16 @@ div[id^='legendContainer'] {
 
 .reviewer-tab .tab-content {
   border: 1px solid #ccc; }
+
 .reviewer-tab .reviewer-info {
   margin-bottom: 10px; }
+
 .reviewer-tab .tabs-vertical > ul li:first-child {
   border-top: 1px solid #DDD; }
+
 .reviewer-tab .tabs-vertical > ul li:last-child {
   border-bottom: 1px solid #DDD; }
+
 .reviewer-tab .c100 {
   display: inline-block;
   vertical-align: middle;
@@ -1899,6 +1958,7 @@ div[id^='legendContainer'] {
 @media (min-width: 996px) {
   .reviewer-tab .tab-content {
     width: 100% !important; } }
+
 @media (max-width: 995px) {
   .reviewer-tab .tabs-vertical {
     display: block; }
@@ -1907,14 +1967,15 @@ div[id^='legendContainer'] {
     float: left; }
   .reviewer-tab .tab-content {
     display: block; } }
+
 @media (max-width: 767px) {
   .reviewer-tab .tabs-vertical ul li {
     border-right: 1px solid #DDD; } }
+
 /*! Select2 Bootstrap Theme v0.1.0-beta.4 | MIT License | github.com/select2/select2-bootstrap-theme */
 .select2-container--bootstrap {
   display: block;
-  /*------------------------------------*\
-          #COMMON STYLES
+  /*------------------------------------*          #COMMON STYLES
   \*------------------------------------*/
   /**
    * Search field in the Select2 dropdown.
@@ -1938,8 +1999,7 @@ div[id^='legendContainer'] {
    * @see https://select2.github.io/examples.html#disabled
    * @see http://getbootstrap.com/css/#forms-control-disabled
    */
-  /*------------------------------------*\
-          #DROPDOWN
+  /*------------------------------------*          #DROPDOWN
   \*------------------------------------*/
   /**
    * Dropdown border color and box-shadow.
@@ -1947,11 +2007,9 @@ div[id^='legendContainer'] {
   /**
    * Limit the dropdown height.
    */
-  /*------------------------------------*\
-          #SINGLE SELECT2
+  /*------------------------------------*          #SINGLE SELECT2
   \*------------------------------------*/
-  /*------------------------------------*\
-      #MULTIPLE SELECT2
+  /*------------------------------------*      #MULTIPLE SELECT2
   \*------------------------------------*/
   /**
    * Address Bootstrap control sizing classes
@@ -1962,8 +2020,7 @@ div[id^='legendContainer'] {
    * @see http://getbootstrap.com/css/#forms-control-sizes
    */
   /* 1 */
-  /*------------------------------------*\
-      #RTL SUPPORT
+  /*------------------------------------*      #RTL SUPPORT
   \*------------------------------------*/ }
 
 .select2-container--bootstrap .select2-selection {
@@ -2483,28 +2540,32 @@ div[id^='legendContainer'] {
     transform: scale(1); }
   100% {
     transform: scale(0.3); } }
+
 @-o-keyframes bounce_circularG {
   0% {
     -o-transform: scale(1); }
   100% {
     -o-transform: scale(0.3); } }
+
 @-ms-keyframes bounce_circularG {
   0% {
     -ms-transform: scale(1); }
   100% {
     -ms-transform: scale(0.3); } }
+
 @-webkit-keyframes bounce_circularG {
   0% {
     -webkit-transform: scale(1); }
   100% {
     -webkit-transform: scale(0.3); } }
+
 @-moz-keyframes bounce_circularG {
   0% {
     -moz-transform: scale(1); }
   100% {
     -moz-transform: scale(0.3); } }
-/*------------------------------------*\
-    #ADDITIONAL GOODIES
+
+/*------------------------------------*    #ADDITIONAL GOODIES
 \*------------------------------------*/
 /**
  * Address Bootstrap's validation states
@@ -2635,6 +2696,7 @@ div[id^='legendContainer'] {
 
 .admin-page .validate-btn {
   margin-top: 10px; }
+
 .admin-page .panel.disabled {
   position: relative; }
   .admin-page .panel.disabled:after {
@@ -2647,30 +2709,41 @@ div[id^='legendContainer'] {
     display: block;
     position: absolute;
     z-index: 9; }
+
 .admin-page .panel hr {
   margin-bottom: 30px; }
+
 .admin-page .panel-title i {
   margin-right: 10px; }
+
 .admin-page .help_question_content {
   letter-spacing: 0;
   color: #777;
   font-weight: normal; }
+
 .admin-page .panel-policies-fr h5 {
   font-weight: 600; }
+
 .admin-page .panel-policies-fr .fa-check-circle {
   font-size: 20px; }
+
 .admin-page .panel-policies-fr .control-label {
   padding-top: 0; }
+
 .admin-page .panel-service-level h4, .admin-page .panel-service-level h5 {
   font-weight: 600; }
+
 .admin-page .panel-service-level h5 {
   font-size: 1.5rem;
   margin-top: 1.5rem; }
+
 .admin-page .panel-service-level .sub-block {
   margin-bottom: 20px; }
+
 .admin-page .panel-service-level .row, .admin-page .panel-service-level .form-horizontal .form-group {
   margin-left: -5px;
   margin-right: -5px; }
+
 .admin-page .panel-service-level [class^="col"] {
   padding-left: 5px;
   padding-right: 5px; }
@@ -2711,7 +2784,7 @@ div[id^='legendContainer'] {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 2px solid #d0d2d9;
+  border: 2px solid #d0d2da;
   background-color: tomato; }
   .progress-radial.small {
     float: none;
@@ -2752,316 +2825,318 @@ div[id^='legendContainer'] {
  * Mixin for progress-% class
  * ------------------------------------- */
 .progress-0 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(90deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(90deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-1 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(93.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(93.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-2 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(97.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(97.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-3 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(100.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(100.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-4 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(104.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(104.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-5 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(108deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(108deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-6 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(111.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(111.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-7 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(115.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(115.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-8 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(118.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(118.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-9 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(122.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(122.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-10 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(126deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(126deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-11 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(129.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(129.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-12 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(133.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(133.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-13 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(136.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(136.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-14 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(140.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(140.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-15 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(144deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(144deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-16 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(147.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(147.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-17 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(151.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(151.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-18 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(154.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(154.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-19 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(158.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(158.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-20 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(162deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(162deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-21 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(165.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(165.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-22 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(169.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(169.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-23 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(172.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(172.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-24 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(176.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(176.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-25 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(180deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(180deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-26 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(183.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(183.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-27 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(187.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(187.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-28 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(190.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(190.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-29 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(194.4deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(194.4deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-30 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(198deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(198deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-31 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(201.6deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(201.6deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-32 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(205.2deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(205.2deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-33 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(208.8deg, #d2322d 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(208.8deg, #d2322d 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-34 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(212.4deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(212.4deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-35 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(216deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(216deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-36 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(219.6deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(219.6deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-37 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(223.2deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(223.2deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-38 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(226.8deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(226.8deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-39 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(230.4deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(230.4deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-40 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(234deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(234deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-41 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(237.6deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(237.6deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-42 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(241.2deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(241.2deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-43 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(244.8deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(244.8deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-44 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(248.4deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(248.4deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-45 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(252deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(252deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-46 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(255.6deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(255.6deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-47 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(259.2deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(259.2deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-48 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(262.8deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(262.8deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-49 {
-  background-image: linear-gradient(90deg, #d0d2d9 50%, transparent 50%, transparent), linear-gradient(266.4deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #d0d2da 50%, transparent 50%, transparent), linear-gradient(266.4deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-50 {
-  background-image: linear-gradient(-90deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-90deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-51 {
-  background-image: linear-gradient(-86.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-86.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-52 {
-  background-image: linear-gradient(-82.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-82.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-53 {
-  background-image: linear-gradient(-79.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-79.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-54 {
-  background-image: linear-gradient(-75.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-75.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-55 {
-  background-image: linear-gradient(-72deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-72deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-56 {
-  background-image: linear-gradient(-68.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-68.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-57 {
-  background-image: linear-gradient(-64.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-64.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-58 {
-  background-image: linear-gradient(-61.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-61.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-59 {
-  background-image: linear-gradient(-57.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-57.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-60 {
-  background-image: linear-gradient(-54deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-54deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-61 {
-  background-image: linear-gradient(-50.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-50.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-62 {
-  background-image: linear-gradient(-46.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-46.8deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-63 {
-  background-image: linear-gradient(-43.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-43.2deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-64 {
-  background-image: linear-gradient(-39.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-39.6deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-65 {
-  background-image: linear-gradient(-36deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-36deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-66 {
-  background-image: linear-gradient(-32.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-32.4deg, #ed9c28 50%, transparent 50%, transparent), linear-gradient(270deg, #ed9c28 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-67 {
-  background-image: linear-gradient(-28.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-28.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-68 {
-  background-image: linear-gradient(-25.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-25.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-69 {
-  background-image: linear-gradient(-21.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-21.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-70 {
-  background-image: linear-gradient(-18deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-18deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-71 {
-  background-image: linear-gradient(-14.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-14.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-72 {
-  background-image: linear-gradient(-10.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-10.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-73 {
-  background-image: linear-gradient(-7.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-7.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-74 {
-  background-image: linear-gradient(-3.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(-3.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-75 {
-  background-image: linear-gradient(0deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(0deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-76 {
-  background-image: linear-gradient(3.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(3.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-77 {
-  background-image: linear-gradient(7.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(7.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-78 {
-  background-image: linear-gradient(10.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(10.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-79 {
-  background-image: linear-gradient(14.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(14.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-80 {
-  background-image: linear-gradient(18deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(18deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-81 {
-  background-image: linear-gradient(21.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(21.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-82 {
-  background-image: linear-gradient(25.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(25.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-83 {
-  background-image: linear-gradient(28.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(28.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-84 {
-  background-image: linear-gradient(32.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(32.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-85 {
-  background-image: linear-gradient(36deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(36deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-86 {
-  background-image: linear-gradient(39.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(39.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-87 {
-  background-image: linear-gradient(43.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(43.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-88 {
-  background-image: linear-gradient(46.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(46.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-89 {
-  background-image: linear-gradient(50.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(50.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-90 {
-  background-image: linear-gradient(54deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(54deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-91 {
-  background-image: linear-gradient(57.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(57.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-92 {
-  background-image: linear-gradient(61.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(61.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-93 {
-  background-image: linear-gradient(64.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(64.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-94 {
-  background-image: linear-gradient(68.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(68.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-95 {
-  background-image: linear-gradient(72deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(72deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-96 {
-  background-image: linear-gradient(75.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(75.6deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-97 {
-  background-image: linear-gradient(79.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(79.2deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-98 {
-  background-image: linear-gradient(82.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(82.8deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-99 {
-  background-image: linear-gradient(86.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(86.4deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 .progress-100 {
-  background-image: linear-gradient(90deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2d9 50%, #d0d2d9); }
+  background-image: linear-gradient(90deg, #47a447 50%, transparent 50%, transparent), linear-gradient(270deg, #47a447 50%, #d0d2da 50%, #d0d2da); }
 
 @media (min-width: 768px) {
   .add-detail-section .detail-left label {
     padding-left: 32px; }
     .add-detail-section .detail-left label + a {
       padding-left: 32px; } }
+
 .validated-step a.disabled-link {
   pointer-events: none;
   color: #777; }
+
 .validated-step .btn-group-admin {
   display: inline-block; }
 
@@ -3080,12 +3155,14 @@ div[id^='legendContainer'] {
   top: 1px;
   left: 1px;
   font-size: 14px; }
+
 .widget-panel.insight-panel .widget-summary .summary {
   min-height: 0;
   padding: 10px; }
   .widget-panel.insight-panel .widget-summary .summary .amount {
     font-size: 4.5rem;
     color: #fff; }
+
 .widget-panel.insight-panel .insight-stat {
   position: absolute;
   right: 0;
@@ -3095,24 +3172,29 @@ div[id^='legendContainer'] {
   font-size: 16px; }
   .widget-panel.insight-panel .insight-stat i {
     margin-right: 5px; }
+
 .widget-panel.insight-panel .summary-list {
   min-height: 70px; }
   .widget-panel.insight-panel .summary-list li:not(:last-child) {
     margin-bottom: 1px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+
 .widget-panel.insight-panel.bg-white {
   border: 1px solid #dadada; }
 
 .panel-identity .toggle-button {
   line-height: 40px; }
+
 .panel-identity h3 {
   color: #ACACAC;
   font-weight: normal;
   margin-bottom: 15px;
   font-size: 17px;
   letter-spacing: 0; }
+
 .panel-identity .panel-title {
   padding-right: 80px; }
+
 .panel-identity .filter-buttons {
   position: absolute;
   top: 8px;
@@ -3253,677 +3335,833 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-0.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-0.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-0 .pie .left-side {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg); }
+
 .pie-wrapper.pie-progress-0 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-1.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-1.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-1 .pie .left-side {
   -moz-transform: rotate(3.6deg);
   -o-transform: rotate(3.6deg);
   -ms-transform: rotate(3.6deg);
   -webkit-transform: rotate(3.6deg);
   transform: rotate(3.6deg); }
+
 .pie-wrapper.pie-progress-1 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-2.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-2.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-2 .pie .left-side {
   -moz-transform: rotate(7.2deg);
   -o-transform: rotate(7.2deg);
   -ms-transform: rotate(7.2deg);
   -webkit-transform: rotate(7.2deg);
   transform: rotate(7.2deg); }
+
 .pie-wrapper.pie-progress-2 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-3.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-3.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-3 .pie .left-side {
   -moz-transform: rotate(10.8deg);
   -o-transform: rotate(10.8deg);
   -ms-transform: rotate(10.8deg);
   -webkit-transform: rotate(10.8deg);
   transform: rotate(10.8deg); }
+
 .pie-wrapper.pie-progress-3 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-4.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-4.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-4 .pie .left-side {
   -moz-transform: rotate(14.4deg);
   -o-transform: rotate(14.4deg);
   -ms-transform: rotate(14.4deg);
   -webkit-transform: rotate(14.4deg);
   transform: rotate(14.4deg); }
+
 .pie-wrapper.pie-progress-4 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-5.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-5.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-5 .pie .left-side {
   -moz-transform: rotate(18deg);
   -o-transform: rotate(18deg);
   -ms-transform: rotate(18deg);
   -webkit-transform: rotate(18deg);
   transform: rotate(18deg); }
+
 .pie-wrapper.pie-progress-5 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-6.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-6.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-6 .pie .left-side {
   -moz-transform: rotate(21.6deg);
   -o-transform: rotate(21.6deg);
   -ms-transform: rotate(21.6deg);
   -webkit-transform: rotate(21.6deg);
   transform: rotate(21.6deg); }
+
 .pie-wrapper.pie-progress-6 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-7.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-7.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-7 .pie .left-side {
   -moz-transform: rotate(25.2deg);
   -o-transform: rotate(25.2deg);
   -ms-transform: rotate(25.2deg);
   -webkit-transform: rotate(25.2deg);
   transform: rotate(25.2deg); }
+
 .pie-wrapper.pie-progress-7 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-8.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-8.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-8 .pie .left-side {
   -moz-transform: rotate(28.8deg);
   -o-transform: rotate(28.8deg);
   -ms-transform: rotate(28.8deg);
   -webkit-transform: rotate(28.8deg);
   transform: rotate(28.8deg); }
+
 .pie-wrapper.pie-progress-8 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-9.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-9.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-9 .pie .left-side {
   -moz-transform: rotate(32.4deg);
   -o-transform: rotate(32.4deg);
   -ms-transform: rotate(32.4deg);
   -webkit-transform: rotate(32.4deg);
   transform: rotate(32.4deg); }
+
 .pie-wrapper.pie-progress-9 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-10.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-10.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-10 .pie .left-side {
   -moz-transform: rotate(36deg);
   -o-transform: rotate(36deg);
   -ms-transform: rotate(36deg);
   -webkit-transform: rotate(36deg);
   transform: rotate(36deg); }
+
 .pie-wrapper.pie-progress-10 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-11.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-11.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-11 .pie .left-side {
   -moz-transform: rotate(39.6deg);
   -o-transform: rotate(39.6deg);
   -ms-transform: rotate(39.6deg);
   -webkit-transform: rotate(39.6deg);
   transform: rotate(39.6deg); }
+
 .pie-wrapper.pie-progress-11 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-12.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-12.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-12 .pie .left-side {
   -moz-transform: rotate(43.2deg);
   -o-transform: rotate(43.2deg);
   -ms-transform: rotate(43.2deg);
   -webkit-transform: rotate(43.2deg);
   transform: rotate(43.2deg); }
+
 .pie-wrapper.pie-progress-12 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-13.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-13.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-13 .pie .left-side {
   -moz-transform: rotate(46.8deg);
   -o-transform: rotate(46.8deg);
   -ms-transform: rotate(46.8deg);
   -webkit-transform: rotate(46.8deg);
   transform: rotate(46.8deg); }
+
 .pie-wrapper.pie-progress-13 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-14.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-14.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-14 .pie .left-side {
   -moz-transform: rotate(50.4deg);
   -o-transform: rotate(50.4deg);
   -ms-transform: rotate(50.4deg);
   -webkit-transform: rotate(50.4deg);
   transform: rotate(50.4deg); }
+
 .pie-wrapper.pie-progress-14 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-15.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-15.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-15 .pie .left-side {
   -moz-transform: rotate(54deg);
   -o-transform: rotate(54deg);
   -ms-transform: rotate(54deg);
   -webkit-transform: rotate(54deg);
   transform: rotate(54deg); }
+
 .pie-wrapper.pie-progress-15 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-16.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-16.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-16 .pie .left-side {
   -moz-transform: rotate(57.6deg);
   -o-transform: rotate(57.6deg);
   -ms-transform: rotate(57.6deg);
   -webkit-transform: rotate(57.6deg);
   transform: rotate(57.6deg); }
+
 .pie-wrapper.pie-progress-16 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-17.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-17.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-17 .pie .left-side {
   -moz-transform: rotate(61.2deg);
   -o-transform: rotate(61.2deg);
   -ms-transform: rotate(61.2deg);
   -webkit-transform: rotate(61.2deg);
   transform: rotate(61.2deg); }
+
 .pie-wrapper.pie-progress-17 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-18.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-18.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-18 .pie .left-side {
   -moz-transform: rotate(64.8deg);
   -o-transform: rotate(64.8deg);
   -ms-transform: rotate(64.8deg);
   -webkit-transform: rotate(64.8deg);
   transform: rotate(64.8deg); }
+
 .pie-wrapper.pie-progress-18 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-19.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-19.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-19 .pie .left-side {
   -moz-transform: rotate(68.4deg);
   -o-transform: rotate(68.4deg);
   -ms-transform: rotate(68.4deg);
   -webkit-transform: rotate(68.4deg);
   transform: rotate(68.4deg); }
+
 .pie-wrapper.pie-progress-19 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-20.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-20.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-20 .pie .left-side {
   -moz-transform: rotate(72deg);
   -o-transform: rotate(72deg);
   -ms-transform: rotate(72deg);
   -webkit-transform: rotate(72deg);
   transform: rotate(72deg); }
+
 .pie-wrapper.pie-progress-20 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-21.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-21.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-21 .pie .left-side {
   -moz-transform: rotate(75.6deg);
   -o-transform: rotate(75.6deg);
   -ms-transform: rotate(75.6deg);
   -webkit-transform: rotate(75.6deg);
   transform: rotate(75.6deg); }
+
 .pie-wrapper.pie-progress-21 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-22.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-22.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-22 .pie .left-side {
   -moz-transform: rotate(79.2deg);
   -o-transform: rotate(79.2deg);
   -ms-transform: rotate(79.2deg);
   -webkit-transform: rotate(79.2deg);
   transform: rotate(79.2deg); }
+
 .pie-wrapper.pie-progress-22 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-23.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-23.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-23 .pie .left-side {
   -moz-transform: rotate(82.8deg);
   -o-transform: rotate(82.8deg);
   -ms-transform: rotate(82.8deg);
   -webkit-transform: rotate(82.8deg);
   transform: rotate(82.8deg); }
+
 .pie-wrapper.pie-progress-23 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-24.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-24.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-24 .pie .left-side {
   -moz-transform: rotate(86.4deg);
   -o-transform: rotate(86.4deg);
   -ms-transform: rotate(86.4deg);
   -webkit-transform: rotate(86.4deg);
   transform: rotate(86.4deg); }
+
 .pie-wrapper.pie-progress-24 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-25.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-25.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-25 .pie .left-side {
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg); }
+
 .pie-wrapper.pie-progress-25 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-26.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-26.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-26 .pie .left-side {
   -moz-transform: rotate(93.6deg);
   -o-transform: rotate(93.6deg);
   -ms-transform: rotate(93.6deg);
   -webkit-transform: rotate(93.6deg);
   transform: rotate(93.6deg); }
+
 .pie-wrapper.pie-progress-26 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-27.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-27.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-27 .pie .left-side {
   -moz-transform: rotate(97.2deg);
   -o-transform: rotate(97.2deg);
   -ms-transform: rotate(97.2deg);
   -webkit-transform: rotate(97.2deg);
   transform: rotate(97.2deg); }
+
 .pie-wrapper.pie-progress-27 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-28.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-28.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-28 .pie .left-side {
   -moz-transform: rotate(100.8deg);
   -o-transform: rotate(100.8deg);
   -ms-transform: rotate(100.8deg);
   -webkit-transform: rotate(100.8deg);
   transform: rotate(100.8deg); }
+
 .pie-wrapper.pie-progress-28 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-29.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-29.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-29 .pie .left-side {
   -moz-transform: rotate(104.4deg);
   -o-transform: rotate(104.4deg);
   -ms-transform: rotate(104.4deg);
   -webkit-transform: rotate(104.4deg);
   transform: rotate(104.4deg); }
+
 .pie-wrapper.pie-progress-29 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-30.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-30.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-30 .pie .left-side {
   -moz-transform: rotate(108deg);
   -o-transform: rotate(108deg);
   -ms-transform: rotate(108deg);
   -webkit-transform: rotate(108deg);
   transform: rotate(108deg); }
+
 .pie-wrapper.pie-progress-30 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-31.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-31.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-31 .pie .left-side {
   -moz-transform: rotate(111.6deg);
   -o-transform: rotate(111.6deg);
   -ms-transform: rotate(111.6deg);
   -webkit-transform: rotate(111.6deg);
   transform: rotate(111.6deg); }
+
 .pie-wrapper.pie-progress-31 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-32.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-32.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-32 .pie .left-side {
   -moz-transform: rotate(115.2deg);
   -o-transform: rotate(115.2deg);
   -ms-transform: rotate(115.2deg);
   -webkit-transform: rotate(115.2deg);
   transform: rotate(115.2deg); }
+
 .pie-wrapper.pie-progress-32 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-33.style-1 .label {
   background-color: #d2322d; }
+
 .pie-wrapper.pie-progress-33.style-1 .pie .half-circle {
   border-color: #db5b57; }
+
 .pie-wrapper.pie-progress-33 .pie .left-side {
   -moz-transform: rotate(118.8deg);
   -o-transform: rotate(118.8deg);
   -ms-transform: rotate(118.8deg);
   -webkit-transform: rotate(118.8deg);
   transform: rotate(118.8deg); }
+
 .pie-wrapper.pie-progress-33 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-34.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-34.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-34 .pie .left-side {
   -moz-transform: rotate(122.4deg);
   -o-transform: rotate(122.4deg);
   -ms-transform: rotate(122.4deg);
   -webkit-transform: rotate(122.4deg);
   transform: rotate(122.4deg); }
+
 .pie-wrapper.pie-progress-34 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-35.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-35.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-35 .pie .left-side {
   -moz-transform: rotate(126deg);
   -o-transform: rotate(126deg);
   -ms-transform: rotate(126deg);
   -webkit-transform: rotate(126deg);
   transform: rotate(126deg); }
+
 .pie-wrapper.pie-progress-35 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-36.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-36.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-36 .pie .left-side {
   -moz-transform: rotate(129.6deg);
   -o-transform: rotate(129.6deg);
   -ms-transform: rotate(129.6deg);
   -webkit-transform: rotate(129.6deg);
   transform: rotate(129.6deg); }
+
 .pie-wrapper.pie-progress-36 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-37.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-37.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-37 .pie .left-side {
   -moz-transform: rotate(133.2deg);
   -o-transform: rotate(133.2deg);
   -ms-transform: rotate(133.2deg);
   -webkit-transform: rotate(133.2deg);
   transform: rotate(133.2deg); }
+
 .pie-wrapper.pie-progress-37 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-38.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-38.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-38 .pie .left-side {
   -moz-transform: rotate(136.8deg);
   -o-transform: rotate(136.8deg);
   -ms-transform: rotate(136.8deg);
   -webkit-transform: rotate(136.8deg);
   transform: rotate(136.8deg); }
+
 .pie-wrapper.pie-progress-38 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-39.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-39.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-39 .pie .left-side {
   -moz-transform: rotate(140.4deg);
   -o-transform: rotate(140.4deg);
   -ms-transform: rotate(140.4deg);
   -webkit-transform: rotate(140.4deg);
   transform: rotate(140.4deg); }
+
 .pie-wrapper.pie-progress-39 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-40.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-40.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-40 .pie .left-side {
   -moz-transform: rotate(144deg);
   -o-transform: rotate(144deg);
   -ms-transform: rotate(144deg);
   -webkit-transform: rotate(144deg);
   transform: rotate(144deg); }
+
 .pie-wrapper.pie-progress-40 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-41.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-41.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-41 .pie .left-side {
   -moz-transform: rotate(147.6deg);
   -o-transform: rotate(147.6deg);
   -ms-transform: rotate(147.6deg);
   -webkit-transform: rotate(147.6deg);
   transform: rotate(147.6deg); }
+
 .pie-wrapper.pie-progress-41 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-42.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-42.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-42 .pie .left-side {
   -moz-transform: rotate(151.2deg);
   -o-transform: rotate(151.2deg);
   -ms-transform: rotate(151.2deg);
   -webkit-transform: rotate(151.2deg);
   transform: rotate(151.2deg); }
+
 .pie-wrapper.pie-progress-42 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-43.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-43.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-43 .pie .left-side {
   -moz-transform: rotate(154.8deg);
   -o-transform: rotate(154.8deg);
   -ms-transform: rotate(154.8deg);
   -webkit-transform: rotate(154.8deg);
   transform: rotate(154.8deg); }
+
 .pie-wrapper.pie-progress-43 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-44.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-44.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-44 .pie .left-side {
   -moz-transform: rotate(158.4deg);
   -o-transform: rotate(158.4deg);
   -ms-transform: rotate(158.4deg);
   -webkit-transform: rotate(158.4deg);
   transform: rotate(158.4deg); }
+
 .pie-wrapper.pie-progress-44 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-45.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-45.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-45 .pie .left-side {
   -moz-transform: rotate(162deg);
   -o-transform: rotate(162deg);
   -ms-transform: rotate(162deg);
   -webkit-transform: rotate(162deg);
   transform: rotate(162deg); }
+
 .pie-wrapper.pie-progress-45 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-46.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-46.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-46 .pie .left-side {
   -moz-transform: rotate(165.6deg);
   -o-transform: rotate(165.6deg);
   -ms-transform: rotate(165.6deg);
   -webkit-transform: rotate(165.6deg);
   transform: rotate(165.6deg); }
+
 .pie-wrapper.pie-progress-46 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-47.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-47.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-47 .pie .left-side {
   -moz-transform: rotate(169.2deg);
   -o-transform: rotate(169.2deg);
   -ms-transform: rotate(169.2deg);
   -webkit-transform: rotate(169.2deg);
   transform: rotate(169.2deg); }
+
 .pie-wrapper.pie-progress-47 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-48.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-48.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-48 .pie .left-side {
   -moz-transform: rotate(172.8deg);
   -o-transform: rotate(172.8deg);
   -ms-transform: rotate(172.8deg);
   -webkit-transform: rotate(172.8deg);
   transform: rotate(172.8deg); }
+
 .pie-wrapper.pie-progress-48 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-49.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-49.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-49 .pie .left-side {
   -moz-transform: rotate(176.4deg);
   -o-transform: rotate(176.4deg);
   -ms-transform: rotate(176.4deg);
   -webkit-transform: rotate(176.4deg);
   transform: rotate(176.4deg); }
+
 .pie-wrapper.pie-progress-49 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-50.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-50.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-50 .pie .left-side {
   -moz-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
+
 .pie-wrapper.pie-progress-50 .pie .right-side {
   display: none; }
 
 .pie-wrapper.pie-progress-51.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-51.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-51 .pie .left-side {
   -moz-transform: rotate(183.6deg);
   -o-transform: rotate(183.6deg);
   -ms-transform: rotate(183.6deg);
   -webkit-transform: rotate(183.6deg);
   transform: rotate(183.6deg); }
+
 .pie-wrapper.pie-progress-51 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-51 .pie .right-side {
@@ -3935,14 +4173,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-52.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-52.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-52 .pie .left-side {
   -moz-transform: rotate(187.2deg);
   -o-transform: rotate(187.2deg);
   -ms-transform: rotate(187.2deg);
   -webkit-transform: rotate(187.2deg);
   transform: rotate(187.2deg); }
+
 .pie-wrapper.pie-progress-52 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-52 .pie .right-side {
@@ -3954,14 +4195,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-53.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-53.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-53 .pie .left-side {
   -moz-transform: rotate(190.8deg);
   -o-transform: rotate(190.8deg);
   -ms-transform: rotate(190.8deg);
   -webkit-transform: rotate(190.8deg);
   transform: rotate(190.8deg); }
+
 .pie-wrapper.pie-progress-53 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-53 .pie .right-side {
@@ -3973,14 +4217,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-54.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-54.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-54 .pie .left-side {
   -moz-transform: rotate(194.4deg);
   -o-transform: rotate(194.4deg);
   -ms-transform: rotate(194.4deg);
   -webkit-transform: rotate(194.4deg);
   transform: rotate(194.4deg); }
+
 .pie-wrapper.pie-progress-54 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-54 .pie .right-side {
@@ -3992,14 +4239,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-55.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-55.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-55 .pie .left-side {
   -moz-transform: rotate(198deg);
   -o-transform: rotate(198deg);
   -ms-transform: rotate(198deg);
   -webkit-transform: rotate(198deg);
   transform: rotate(198deg); }
+
 .pie-wrapper.pie-progress-55 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-55 .pie .right-side {
@@ -4011,14 +4261,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-56.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-56.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-56 .pie .left-side {
   -moz-transform: rotate(201.6deg);
   -o-transform: rotate(201.6deg);
   -ms-transform: rotate(201.6deg);
   -webkit-transform: rotate(201.6deg);
   transform: rotate(201.6deg); }
+
 .pie-wrapper.pie-progress-56 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-56 .pie .right-side {
@@ -4030,14 +4283,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-57.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-57.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-57 .pie .left-side {
   -moz-transform: rotate(205.2deg);
   -o-transform: rotate(205.2deg);
   -ms-transform: rotate(205.2deg);
   -webkit-transform: rotate(205.2deg);
   transform: rotate(205.2deg); }
+
 .pie-wrapper.pie-progress-57 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-57 .pie .right-side {
@@ -4049,14 +4305,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-58.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-58.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-58 .pie .left-side {
   -moz-transform: rotate(208.8deg);
   -o-transform: rotate(208.8deg);
   -ms-transform: rotate(208.8deg);
   -webkit-transform: rotate(208.8deg);
   transform: rotate(208.8deg); }
+
 .pie-wrapper.pie-progress-58 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-58 .pie .right-side {
@@ -4068,14 +4327,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-59.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-59.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-59 .pie .left-side {
   -moz-transform: rotate(212.4deg);
   -o-transform: rotate(212.4deg);
   -ms-transform: rotate(212.4deg);
   -webkit-transform: rotate(212.4deg);
   transform: rotate(212.4deg); }
+
 .pie-wrapper.pie-progress-59 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-59 .pie .right-side {
@@ -4087,14 +4349,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-60.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-60.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-60 .pie .left-side {
   -moz-transform: rotate(216deg);
   -o-transform: rotate(216deg);
   -ms-transform: rotate(216deg);
   -webkit-transform: rotate(216deg);
   transform: rotate(216deg); }
+
 .pie-wrapper.pie-progress-60 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-60 .pie .right-side {
@@ -4106,14 +4371,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-61.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-61.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-61 .pie .left-side {
   -moz-transform: rotate(219.6deg);
   -o-transform: rotate(219.6deg);
   -ms-transform: rotate(219.6deg);
   -webkit-transform: rotate(219.6deg);
   transform: rotate(219.6deg); }
+
 .pie-wrapper.pie-progress-61 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-61 .pie .right-side {
@@ -4125,14 +4393,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-62.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-62.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-62 .pie .left-side {
   -moz-transform: rotate(223.2deg);
   -o-transform: rotate(223.2deg);
   -ms-transform: rotate(223.2deg);
   -webkit-transform: rotate(223.2deg);
   transform: rotate(223.2deg); }
+
 .pie-wrapper.pie-progress-62 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-62 .pie .right-side {
@@ -4144,14 +4415,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-63.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-63.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-63 .pie .left-side {
   -moz-transform: rotate(226.8deg);
   -o-transform: rotate(226.8deg);
   -ms-transform: rotate(226.8deg);
   -webkit-transform: rotate(226.8deg);
   transform: rotate(226.8deg); }
+
 .pie-wrapper.pie-progress-63 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-63 .pie .right-side {
@@ -4163,14 +4437,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-64.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-64.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-64 .pie .left-side {
   -moz-transform: rotate(230.4deg);
   -o-transform: rotate(230.4deg);
   -ms-transform: rotate(230.4deg);
   -webkit-transform: rotate(230.4deg);
   transform: rotate(230.4deg); }
+
 .pie-wrapper.pie-progress-64 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-64 .pie .right-side {
@@ -4182,14 +4459,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-65.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-65.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-65 .pie .left-side {
   -moz-transform: rotate(234deg);
   -o-transform: rotate(234deg);
   -ms-transform: rotate(234deg);
   -webkit-transform: rotate(234deg);
   transform: rotate(234deg); }
+
 .pie-wrapper.pie-progress-65 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-65 .pie .right-side {
@@ -4201,14 +4481,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-66.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-66.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-66 .pie .left-side {
   -moz-transform: rotate(237.6deg);
   -o-transform: rotate(237.6deg);
   -ms-transform: rotate(237.6deg);
   -webkit-transform: rotate(237.6deg);
   transform: rotate(237.6deg); }
+
 .pie-wrapper.pie-progress-66 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-66 .pie .right-side {
@@ -4220,14 +4503,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-67.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-67.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-67 .pie .left-side {
   -moz-transform: rotate(241.2deg);
   -o-transform: rotate(241.2deg);
   -ms-transform: rotate(241.2deg);
   -webkit-transform: rotate(241.2deg);
   transform: rotate(241.2deg); }
+
 .pie-wrapper.pie-progress-67 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-67 .pie .right-side {
@@ -4239,14 +4525,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-68.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-68.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-68 .pie .left-side {
   -moz-transform: rotate(244.8deg);
   -o-transform: rotate(244.8deg);
   -ms-transform: rotate(244.8deg);
   -webkit-transform: rotate(244.8deg);
   transform: rotate(244.8deg); }
+
 .pie-wrapper.pie-progress-68 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-68 .pie .right-side {
@@ -4258,14 +4547,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-69.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-69.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-69 .pie .left-side {
   -moz-transform: rotate(248.4deg);
   -o-transform: rotate(248.4deg);
   -ms-transform: rotate(248.4deg);
   -webkit-transform: rotate(248.4deg);
   transform: rotate(248.4deg); }
+
 .pie-wrapper.pie-progress-69 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-69 .pie .right-side {
@@ -4277,14 +4569,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-70.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-70.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-70 .pie .left-side {
   -moz-transform: rotate(252deg);
   -o-transform: rotate(252deg);
   -ms-transform: rotate(252deg);
   -webkit-transform: rotate(252deg);
   transform: rotate(252deg); }
+
 .pie-wrapper.pie-progress-70 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-70 .pie .right-side {
@@ -4296,14 +4591,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-71.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-71.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-71 .pie .left-side {
   -moz-transform: rotate(255.6deg);
   -o-transform: rotate(255.6deg);
   -ms-transform: rotate(255.6deg);
   -webkit-transform: rotate(255.6deg);
   transform: rotate(255.6deg); }
+
 .pie-wrapper.pie-progress-71 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-71 .pie .right-side {
@@ -4315,14 +4613,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-72.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-72.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-72 .pie .left-side {
   -moz-transform: rotate(259.2deg);
   -o-transform: rotate(259.2deg);
   -ms-transform: rotate(259.2deg);
   -webkit-transform: rotate(259.2deg);
   transform: rotate(259.2deg); }
+
 .pie-wrapper.pie-progress-72 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-72 .pie .right-side {
@@ -4334,14 +4635,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-73.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-73.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-73 .pie .left-side {
   -moz-transform: rotate(262.8deg);
   -o-transform: rotate(262.8deg);
   -ms-transform: rotate(262.8deg);
   -webkit-transform: rotate(262.8deg);
   transform: rotate(262.8deg); }
+
 .pie-wrapper.pie-progress-73 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-73 .pie .right-side {
@@ -4353,14 +4657,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-74.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-74.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-74 .pie .left-side {
   -moz-transform: rotate(266.4deg);
   -o-transform: rotate(266.4deg);
   -ms-transform: rotate(266.4deg);
   -webkit-transform: rotate(266.4deg);
   transform: rotate(266.4deg); }
+
 .pie-wrapper.pie-progress-74 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-74 .pie .right-side {
@@ -4372,14 +4679,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-75.style-1 .label {
   background-color: #ed9c28; }
+
 .pie-wrapper.pie-progress-75.style-1 .pie .half-circle {
   border-color: #f1b257; }
+
 .pie-wrapper.pie-progress-75 .pie .left-side {
   -moz-transform: rotate(270deg);
   -o-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg); }
+
 .pie-wrapper.pie-progress-75 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-75 .pie .right-side {
@@ -4391,14 +4701,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-76.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-76.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-76 .pie .left-side {
   -moz-transform: rotate(273.6deg);
   -o-transform: rotate(273.6deg);
   -ms-transform: rotate(273.6deg);
   -webkit-transform: rotate(273.6deg);
   transform: rotate(273.6deg); }
+
 .pie-wrapper.pie-progress-76 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-76 .pie .right-side {
@@ -4410,14 +4723,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-77.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-77.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-77 .pie .left-side {
   -moz-transform: rotate(277.2deg);
   -o-transform: rotate(277.2deg);
   -ms-transform: rotate(277.2deg);
   -webkit-transform: rotate(277.2deg);
   transform: rotate(277.2deg); }
+
 .pie-wrapper.pie-progress-77 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-77 .pie .right-side {
@@ -4429,14 +4745,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-78.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-78.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-78 .pie .left-side {
   -moz-transform: rotate(280.8deg);
   -o-transform: rotate(280.8deg);
   -ms-transform: rotate(280.8deg);
   -webkit-transform: rotate(280.8deg);
   transform: rotate(280.8deg); }
+
 .pie-wrapper.pie-progress-78 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-78 .pie .right-side {
@@ -4448,14 +4767,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-79.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-79.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-79 .pie .left-side {
   -moz-transform: rotate(284.4deg);
   -o-transform: rotate(284.4deg);
   -ms-transform: rotate(284.4deg);
   -webkit-transform: rotate(284.4deg);
   transform: rotate(284.4deg); }
+
 .pie-wrapper.pie-progress-79 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-79 .pie .right-side {
@@ -4467,14 +4789,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-80.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-80.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-80 .pie .left-side {
   -moz-transform: rotate(288deg);
   -o-transform: rotate(288deg);
   -ms-transform: rotate(288deg);
   -webkit-transform: rotate(288deg);
   transform: rotate(288deg); }
+
 .pie-wrapper.pie-progress-80 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-80 .pie .right-side {
@@ -4486,14 +4811,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-81.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-81.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-81 .pie .left-side {
   -moz-transform: rotate(291.6deg);
   -o-transform: rotate(291.6deg);
   -ms-transform: rotate(291.6deg);
   -webkit-transform: rotate(291.6deg);
   transform: rotate(291.6deg); }
+
 .pie-wrapper.pie-progress-81 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-81 .pie .right-side {
@@ -4505,14 +4833,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-82.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-82.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-82 .pie .left-side {
   -moz-transform: rotate(295.2deg);
   -o-transform: rotate(295.2deg);
   -ms-transform: rotate(295.2deg);
   -webkit-transform: rotate(295.2deg);
   transform: rotate(295.2deg); }
+
 .pie-wrapper.pie-progress-82 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-82 .pie .right-side {
@@ -4524,14 +4855,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-83.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-83.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-83 .pie .left-side {
   -moz-transform: rotate(298.8deg);
   -o-transform: rotate(298.8deg);
   -ms-transform: rotate(298.8deg);
   -webkit-transform: rotate(298.8deg);
   transform: rotate(298.8deg); }
+
 .pie-wrapper.pie-progress-83 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-83 .pie .right-side {
@@ -4543,14 +4877,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-84.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-84.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-84 .pie .left-side {
   -moz-transform: rotate(302.4deg);
   -o-transform: rotate(302.4deg);
   -ms-transform: rotate(302.4deg);
   -webkit-transform: rotate(302.4deg);
   transform: rotate(302.4deg); }
+
 .pie-wrapper.pie-progress-84 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-84 .pie .right-side {
@@ -4562,14 +4899,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-85.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-85.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-85 .pie .left-side {
   -moz-transform: rotate(306deg);
   -o-transform: rotate(306deg);
   -ms-transform: rotate(306deg);
   -webkit-transform: rotate(306deg);
   transform: rotate(306deg); }
+
 .pie-wrapper.pie-progress-85 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-85 .pie .right-side {
@@ -4581,14 +4921,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-86.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-86.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-86 .pie .left-side {
   -moz-transform: rotate(309.6deg);
   -o-transform: rotate(309.6deg);
   -ms-transform: rotate(309.6deg);
   -webkit-transform: rotate(309.6deg);
   transform: rotate(309.6deg); }
+
 .pie-wrapper.pie-progress-86 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-86 .pie .right-side {
@@ -4600,14 +4943,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-87.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-87.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-87 .pie .left-side {
   -moz-transform: rotate(313.2deg);
   -o-transform: rotate(313.2deg);
   -ms-transform: rotate(313.2deg);
   -webkit-transform: rotate(313.2deg);
   transform: rotate(313.2deg); }
+
 .pie-wrapper.pie-progress-87 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-87 .pie .right-side {
@@ -4619,14 +4965,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-88.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-88.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-88 .pie .left-side {
   -moz-transform: rotate(316.8deg);
   -o-transform: rotate(316.8deg);
   -ms-transform: rotate(316.8deg);
   -webkit-transform: rotate(316.8deg);
   transform: rotate(316.8deg); }
+
 .pie-wrapper.pie-progress-88 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-88 .pie .right-side {
@@ -4638,14 +4987,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-89.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-89.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-89 .pie .left-side {
   -moz-transform: rotate(320.4deg);
   -o-transform: rotate(320.4deg);
   -ms-transform: rotate(320.4deg);
   -webkit-transform: rotate(320.4deg);
   transform: rotate(320.4deg); }
+
 .pie-wrapper.pie-progress-89 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-89 .pie .right-side {
@@ -4657,14 +5009,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-90.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-90.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-90 .pie .left-side {
   -moz-transform: rotate(324deg);
   -o-transform: rotate(324deg);
   -ms-transform: rotate(324deg);
   -webkit-transform: rotate(324deg);
   transform: rotate(324deg); }
+
 .pie-wrapper.pie-progress-90 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-90 .pie .right-side {
@@ -4676,14 +5031,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-91.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-91.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-91 .pie .left-side {
   -moz-transform: rotate(327.6deg);
   -o-transform: rotate(327.6deg);
   -ms-transform: rotate(327.6deg);
   -webkit-transform: rotate(327.6deg);
   transform: rotate(327.6deg); }
+
 .pie-wrapper.pie-progress-91 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-91 .pie .right-side {
@@ -4695,14 +5053,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-92.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-92.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-92 .pie .left-side {
   -moz-transform: rotate(331.2deg);
   -o-transform: rotate(331.2deg);
   -ms-transform: rotate(331.2deg);
   -webkit-transform: rotate(331.2deg);
   transform: rotate(331.2deg); }
+
 .pie-wrapper.pie-progress-92 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-92 .pie .right-side {
@@ -4714,14 +5075,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-93.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-93.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-93 .pie .left-side {
   -moz-transform: rotate(334.8deg);
   -o-transform: rotate(334.8deg);
   -ms-transform: rotate(334.8deg);
   -webkit-transform: rotate(334.8deg);
   transform: rotate(334.8deg); }
+
 .pie-wrapper.pie-progress-93 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-93 .pie .right-side {
@@ -4733,14 +5097,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-94.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-94.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-94 .pie .left-side {
   -moz-transform: rotate(338.4deg);
   -o-transform: rotate(338.4deg);
   -ms-transform: rotate(338.4deg);
   -webkit-transform: rotate(338.4deg);
   transform: rotate(338.4deg); }
+
 .pie-wrapper.pie-progress-94 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-94 .pie .right-side {
@@ -4752,14 +5119,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-95.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-95.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-95 .pie .left-side {
   -moz-transform: rotate(342deg);
   -o-transform: rotate(342deg);
   -ms-transform: rotate(342deg);
   -webkit-transform: rotate(342deg);
   transform: rotate(342deg); }
+
 .pie-wrapper.pie-progress-95 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-95 .pie .right-side {
@@ -4771,14 +5141,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-96.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-96.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-96 .pie .left-side {
   -moz-transform: rotate(345.6deg);
   -o-transform: rotate(345.6deg);
   -ms-transform: rotate(345.6deg);
   -webkit-transform: rotate(345.6deg);
   transform: rotate(345.6deg); }
+
 .pie-wrapper.pie-progress-96 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-96 .pie .right-side {
@@ -4790,14 +5163,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-97.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-97.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-97 .pie .left-side {
   -moz-transform: rotate(349.2deg);
   -o-transform: rotate(349.2deg);
   -ms-transform: rotate(349.2deg);
   -webkit-transform: rotate(349.2deg);
   transform: rotate(349.2deg); }
+
 .pie-wrapper.pie-progress-97 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-97 .pie .right-side {
@@ -4809,14 +5185,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-98.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-98.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-98 .pie .left-side {
   -moz-transform: rotate(352.8deg);
   -o-transform: rotate(352.8deg);
   -ms-transform: rotate(352.8deg);
   -webkit-transform: rotate(352.8deg);
   transform: rotate(352.8deg); }
+
 .pie-wrapper.pie-progress-98 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-98 .pie .right-side {
@@ -4828,14 +5207,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-99.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-99.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-99 .pie .left-side {
   -moz-transform: rotate(356.4deg);
   -o-transform: rotate(356.4deg);
   -ms-transform: rotate(356.4deg);
   -webkit-transform: rotate(356.4deg);
   transform: rotate(356.4deg); }
+
 .pie-wrapper.pie-progress-99 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-99 .pie .right-side {
@@ -4847,14 +5229,17 @@ div[id^='legendContainer'] {
 
 .pie-wrapper.pie-progress-100.style-1 .label {
   background-color: #47a447; }
+
 .pie-wrapper.pie-progress-100.style-1 .pie .half-circle {
   border-color: #63bb63; }
+
 .pie-wrapper.pie-progress-100 .pie .left-side {
   -moz-transform: rotate(360deg);
   -o-transform: rotate(360deg);
   -ms-transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg); }
+
 .pie-wrapper.pie-progress-100 .pie {
   clip: rect(auto, auto, auto, auto); }
   .pie-wrapper.pie-progress-100 .pie .right-side {
@@ -4908,6 +5293,7 @@ div[id^='legendContainer'] {
 @media (min-width: 992px) {
   .panel-identity .dd-filter {
     min-width: 800px; } }
+
 .children-open .btn-group:not(.open) {
   position: relative; }
   .children-open .btn-group:not(.open):after {
@@ -5239,6 +5625,7 @@ div[id^='legendContainer'] {
 @media (min-width: 1200px) {
   .panel-anomaly .table-responsive {
     overflow-x: visible; } }
+
 .panel-error {
   max-width: 780px;
   margin: 30px auto 50px;
@@ -5272,15 +5659,10 @@ div[id^='legendContainer'] {
     text-align: center; }
     .col-img img {
       margin: 0 auto 20px; }
-
   .error-block {
     width: 280px;
     margin: auto; }
-
   .error-text {
     text-align: center; }
-
   .error-action {
     text-align: center; } }
-
-/*# sourceMappingURL=theme-custom.css.map */
