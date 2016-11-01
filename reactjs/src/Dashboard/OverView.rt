@@ -39,8 +39,8 @@
                             <h4 class="widget-title">Duplicates / Twins
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates:  Two or more files with identical content and file names.
-                                            Twins : Two or more files with identical content, but with different file names." />
+                                    setValue="Duplicates: Two or more files with identical content and file names.
+                                            Twins: Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
