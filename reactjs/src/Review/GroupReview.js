@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach, upperFirst, isEqual, cloneDeep, findIndex } from 'lodash'
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash'
 import template from './GroupReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
@@ -34,7 +34,7 @@ var GroupReview = React.createClass({
             checkBoxAll: false,
             stackChange: [],
             showLoading: "none",
-            
+
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -57,11 +57,11 @@ var GroupReview = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
-    
+
     componentDidUpdate: function(prevProps, prevState) {
-        
+
         if(this.state.shouldUpdate ===  true) {
             this.setState({ shouldUpdate: false });
         }
@@ -77,13 +77,14 @@ var GroupReview = React.createClass({
         if(!isEqual(this.state.documents, prevState.documents)) {
             let validNumber = this.validateNumber(),
                 checkNumber = this.checkedNumber(),
+                editNumber = this.editNumber(),
                 docNumber = this.state.documents.length;
-                
+
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
                 checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: Math.round((validNumber * 100) / docNumber),
+                reviewStatus: Math.round(( (validNumber + editNumber) * 100) / docNumber),
                 shouldUpdate: true
             });
         }
@@ -121,7 +122,7 @@ var GroupReview = React.createClass({
     handleNextGroup() {
         let { index } = this.state.groupCurrent,
             group = Object.assign({}, this.state.groups[index + 1], { index: index + 1 });
-            
+
         if(index < (this.state.groups.length - 1)) {
             this.setState({
                 groupCurrent: group,
@@ -174,7 +175,7 @@ var GroupReview = React.createClass({
     },
 
     handleTableRowOnChange(event, index) {
-        
+
         switch(event.target.id) {
             case 'checkbox': {
                 this.onChangeCheckBox(event, index);
@@ -201,7 +202,7 @@ var GroupReview = React.createClass({
                         checked: event.target.checked
                     }
                 }
-            }), 
+            }),
             updateStack = update(this.state.stackChange, {
                 $push: [{
                     id: index,
@@ -274,7 +275,7 @@ var GroupReview = React.createClass({
                 return data;
             }
         });
-        
+
         this.setState({ documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true });
     },
 
@@ -338,7 +339,7 @@ var GroupReview = React.createClass({
             </div>
         );
     },
-    
+
     getStatistics: function() {
         makeRequest({
             path: "api/group/statistics/",
@@ -377,7 +378,11 @@ var GroupReview = React.createClass({
                 "id": this.state.groupCurrent.id
             },
             success: (centroids) => {
+                console.log(centroids)
                 var series = [], total = centroids.length;
+                let max = maxBy(centroids, doc => doc.number_docs)
+                let max_circle_size = 6
+                let angle_multiplier = 360 / (total)
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -387,12 +392,12 @@ var GroupReview = React.createClass({
                                 symbol: 'circle'
                             },
                             data: [
-                                [45 * i, centroids[i].end], 
+                                [angle_multiplier * (i + 0.5), centroids[i].end],
                                 {
-                                x: 45 * i,
+                                x: angle_multiplier * (i + 0.5),
                                 y: 0,
                                 document: centroids[i].number_docs,
-                                weight: i+1,
+                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
                                 marker: {
                                     enabled: false,
                                     states: {
@@ -429,7 +434,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -449,7 +454,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -469,7 +474,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -489,12 +494,12 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             }
         ],
-        
+
         { id } = this.state.groupCurrent;
 
 //        this.setState({ documents: data, shouldUpdate: true });
@@ -541,7 +546,7 @@ var GroupReview = React.createClass({
             }
         });
     },
-    
+
     progressbar: function(value) {
         var {
             avg_centroid_distance,
@@ -561,7 +566,7 @@ var GroupReview = React.createClass({
             }
         }
     },
-    
+
     checkedNumber() {
         let num = 0,
             { documents } = this.state;
@@ -571,14 +576,25 @@ var GroupReview = React.createClass({
                 num++;
             }
         }
-        
+
         return num;
     },
+    editNumber() {
+        let num = 0,
+            { documents } = this.state;
 
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].status === status.EDITING.name) {
+                num++;
+            }
+        }
+
+        return num;
+    },
     validateNumber() {
         let num = 0,
             { documents } = this.state;
-            
+
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].status === status.ACCEPTED.name) {
                 num++;
@@ -664,7 +680,7 @@ var GroupReview = React.createClass({
         });
         this.setState({ dataChart: updateChart });
     },
-    
+
     drawChart() {
         var category = this.state.categoriesInfo;
 		var pieChart = [],
@@ -687,7 +703,7 @@ var GroupReview = React.createClass({
                 documentType.series[i].data[j] = data[j].total;
             }
         }
-        
+
         var updateChart = update(this.state.dataChart, {
             pieChart: { $set: pieChart },
             documentType: { $set: documentType }

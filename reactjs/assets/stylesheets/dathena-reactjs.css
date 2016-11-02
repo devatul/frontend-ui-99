@@ -246,9 +246,12 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .cendroid-chart-legend.new .document-symbol i {
     display: inline-block;
     vertical-align: middle;
-    margin-left: 10px;
     border-radius: 50%;
     background-color: #DADADA;
+}
+
+.cendroid-chart-legend.new .document-symbol span {
+    margin-left: 5px;
 }
 
 /* fix label progress bar */
@@ -541,6 +544,10 @@ select.assigment-select.form-control {
 /* chart legend overview */
 .chart-legend li {
     padding-left: 15px;
+}
+
+.panel-body.chart-panel {
+    min-height: 432px;
 }
 
 #overview-panel-2 i.fa {

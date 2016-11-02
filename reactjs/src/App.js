@@ -7,7 +7,7 @@ import update from 'react-addons-update'
 import { makeRequest } from './utils/http'
 import { orderByIndex } from './utils/function'
 import { orderBy } from 'lodash'
-
+import { git_version } from './commit'
 module.exports = React.createClass({
 	getInitialState() {
 		return {
@@ -28,7 +28,7 @@ module.exports = React.createClass({
 	},
     componentWillMount()
     {
-		let { pathname } = this.props.location
+		let { pathname } = this.props.location;
     	var token = sessionStorage.getItem('token');
     	if(token)
 		{
@@ -42,25 +42,31 @@ module.exports = React.createClass({
 					break;
 			}
 
-      setInterval(() => {
-        if (token) {
-          makeRequest({
-            path: 'api/token/api-token-refresh/',
-            method: 'POST',
-            params: {
-              token: token
-            },
-            success: (data) => {
-              sessionStorage.setItem('token', data.token);
-            }
-          });
-        }
-      }, Constant.TIMEVALIDTOKEN);
-    } else {
-      console.log("noToken");
-      browserHistory.push('/Account/Signin');
-    }
-  },
+			setInterval(() => {
+    			if(token)
+				{
+					makeRequest({
+						path: 'api/token/api-token-refresh/',
+						dataType: 'json',
+                        method : 'POST',
+						params: JSON.stringify({
+							token: token
+						}),
+						success: (data) => {
+							sessionStorage.setItem('token', data.token);
+						},
+						error: (data) => {
+							console.log(JSON.parse(data.responseText).detail)
+						}
+					});
+				}
+	    	}, Constant.TIMEVALIDTOKEN);
+
+		} else {
+			console.log("noToken");
+			browserHistory.push('/Account/Signin');
+		}
+    },
 
   componentWillUnmount() {
     sessionStorage.removeItem('token')
@@ -239,10 +245,14 @@ module.exports = React.createClass({
     stateMap['updateStore'] = this.updateStore;
     stateMap['handleError'] = this.handleError;
 
-    return React.Children.map(children, (child) => {
-      return React.cloneElement(child, stateMap)
-    });
-  },
+        return React.Children.map(children,
+            (child) => {
+            	return React.cloneElement(child, stateMap)
+            });
+    },
+	commit() {
+		return git_version;
+	},
+    render:template
 
-  render: template
 });

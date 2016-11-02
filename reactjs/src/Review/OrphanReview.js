@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach, upperFirst, isEqual, cloneDeep, findIndex } from 'lodash'
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash'
 import template from './OrphanReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
@@ -373,6 +373,7 @@ var OrphanReview = React.createClass({
             },
             success: (centroids) => {
                 var series = [], total = centroids.length;
+                let max = maxBy(centroids, doc => doc.number_docs)
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -387,7 +388,7 @@ var OrphanReview = React.createClass({
                                 x: 45 * i,
                                 y: 0,
                                 document: centroids[i].number_docs,
-                                weight: i+1,
+                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * total),
                                 marker: {
                                     enabled: false,
                                     states: {

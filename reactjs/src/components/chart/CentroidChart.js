@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import HelpButton from '../dathena/HelpButton'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
+import {times, each} from 'lodash'
 
 var CentroidChart = React.createClass({
     displayName: 'CentroidChart',
@@ -148,6 +149,21 @@ var CentroidChart = React.createClass({
     },
 
     render() {
+        let max = 0;
+        let max_circle_size = 6;
+        each(this.props.series, (row) => {
+            if(row.data[1].document > max){
+                max = row.data[1].document
+            }
+        })
+        let legends = times(max_circle_size, (i) => {
+            i++;
+            let document_no = Math.ceil(((i - 1) * max / max_circle_size) + 1);
+            let document_no_next = Math.ceil(((i) * max / max_circle_size));
+            return (
+                <span className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} to {document_no_next}</span></span>
+            )
+        })
         return (
             <div id="centroid" className="cendroid-frame">
                 <h4 className="chart-title">
@@ -177,12 +193,7 @@ var CentroidChart = React.createClass({
                         <Row>
                             <div className="cendroid-chart-legend new">
                                 <h5>Number of documents</h5>
-                                <span className="document-symbol">1<i className="size-1"></i></span>
-                                <span className="document-symbol">2<i className="size-2"></i></span>
-                                <span className="document-symbol">3<i className="size-3"></i></span>
-                                <span className="document-symbol">4<i className="size-4"></i></span>
-                                <span className="document-symbol">5<i className="size-5"></i></span>
-                                <span className="document-symbol">6<i className="size-6"></i></span>
+                                {legends}
                             </div>
                         </Row>
                     </Col>
