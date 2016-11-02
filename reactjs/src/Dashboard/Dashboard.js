@@ -78,7 +78,7 @@ module.exports = React.createClass({
                         }
                     });
                 }
-            }, 2016)})
+            }, 5000)})
         } else {
             console.log("noToken");
             browserHistory.push('/Account/Signin');

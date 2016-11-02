@@ -157,12 +157,7 @@ var StackedChart = React.createClass({
         if(config) {
             for(let i = config.length - 1; i >= 0; i--) {
                 var children = [];
-                var data = [];
-                if(config[i].name == "Category") {
-                    data = orderByIndex(config[i].data, [0,2,1,4,3])
-                } else {
-                    data = orderBy(config[i].data, ['name'], ['esc'])
-                }
+                var { data } = config[i];
                 for(let j = data.length - 1; j >= 0; j--) {
                     let colorSymbol = disabled === true ? colorDisabled[j] : config[i].colors[j];
                     children[j] = <li key={'legend_' + j} style={data.length <= 3 ? {
