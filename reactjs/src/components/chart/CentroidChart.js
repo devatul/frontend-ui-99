@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import HelpButton from '../dathena/HelpButton'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
+import {times, each} from 'lodash'
 
 var CentroidChart = React.createClass({
     displayName: 'CentroidChart',
@@ -148,11 +149,18 @@ var CentroidChart = React.createClass({
     },
 
     render() {
-        let legends = this.props.series.map( (row) => {
-            let weight = row.data[1].weight
-            let document_no = row.data[1].document
+        let max = 0;
+        let max_circle_size = 6;
+        each(this.props.series, (row) => {
+            if(row.data[1].document > max){
+                max = row.data[1].document
+            }
+        })
+        let legends = times(max_circle_size, (i) => {
+            i++;
+            let document_no = Math.ceil(((i - 1) * max / max_circle_size) + 1);
             return (
-                <span className="document-symbol">{document_no}<i className={'size-' + weight}></i></span>
+                <span className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} </span></span>
             )
         })
         return (
