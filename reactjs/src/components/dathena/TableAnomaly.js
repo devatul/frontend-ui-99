@@ -6,7 +6,7 @@ import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
 
-import Anomaly from '../../components/dathena/anomalyStateSelect'
+import Anomaly from '../../components/dathena/AnomalyStateSelect'
 var TableAnomaly = React.createClass({
     getInitialState(){
         return{
