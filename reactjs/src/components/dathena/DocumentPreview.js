@@ -94,7 +94,7 @@ var documentPreview = React.createClass({
                         <Row>
                             <Modal.Title className="col-sm-3">
                                 <i className="fa fa-search"></i>
-                                Document Preview
+                                <span>Document Preview</span>
                             </Modal.Title>
                             <div className="col-sm-2 modal-info text-center">
                                 <span className="text-itatic">
