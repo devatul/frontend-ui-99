@@ -227,8 +227,8 @@ var ClassificationReview = React.createClass({
                 "path": document.path,
                 "owner": document.owner,
                 "number_of_classification_challenge": 1,
-                "initial_category": document.init_category,
-                "initial_confidentiality": document.init_confidentiality,
+                "initial_category": document.init_category ? document.init_category : document.category,
+                "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
                 "validated_category": document.category,
                 "validated_confidentiality": document.confidentiality
             },
@@ -311,7 +311,7 @@ var ClassificationReview = React.createClass({
 
     onChangeCategory(event, reviewIndex, docIndex, document) {
         let categoryIndex = event.target.value,
-            { categories } = this.props,
+            { categories } = this.state,
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
@@ -342,7 +342,7 @@ var ClassificationReview = React.createClass({
     onChangeConfidentiality(event, reviewIndex, docIndex, document) {
         let confidentialityIndex = event.target.value,
 
-            { confidentialities } = this.props,
+            { confidentialities } = this.state,
 
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
