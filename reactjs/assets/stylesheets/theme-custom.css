@@ -287,7 +287,12 @@ html body .tabs-primary .nav-tabs li a:hover {
   .modal-preview .modal-title {
     font-size: 20px;
     line-height: 44px;
-    font-weight: bold; }
+    font-weight: bold; 
+  }
+    .modal-preview .modal-title span {
+         padding-left: 10px;
+         font-weight: normal;
+      }
   .modal-preview .file-preview {
     height: 60vh;
     overflow: hidden; }
@@ -883,7 +888,8 @@ tr td {
   60% {
     text-shadow: 0.25em 0 0 white, 0.5em 0 0 transparent; }
   80%, 100% {
-    text-shadow: .25em 0 0 white, .5em 0 0 white; } }
+    text-shadow: .25em 0 0 white,
+ .5em 0 0 white; } }
 
 @keyframes dotsblack {
   0%, 20% {
@@ -895,7 +901,8 @@ tr td {
   60% {
     text-shadow: 0.25em 0 0 #000, 0.5em 0 0 rgba(255, 255, 255, 0); }
   80%, 100% {
-    text-shadow: .25em 0 0 #000, .5em 0 0 #000; } }
+    text-shadow: .25em 0 0 #000,
+ .5em 0 0 #000; } }
 
 .select-group {
   position: relative; }
