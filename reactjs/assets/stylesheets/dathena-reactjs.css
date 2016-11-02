@@ -546,6 +546,10 @@ select.assigment-select.form-control {
     padding-left: 15px;
 }
 
+.panel-body.chart-panel {
+    min-height: 432px;
+}
+
 #overview-panel-2 i.fa {
     text-align: center;
     margin-right: 4px;
