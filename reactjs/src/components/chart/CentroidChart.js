@@ -148,6 +148,13 @@ var CentroidChart = React.createClass({
     },
 
     render() {
+        let legends = this.props.series.map( (row) => {
+            let weight = row.data[1].weight
+            let document_no = row.data[1].document
+            return (
+                <span className="document-symbol">{document_no}<i className={'size-' + weight}></i></span>
+            )
+        })
         return (
             <div id="centroid" className="cendroid-frame">
                 <h4 className="chart-title">
@@ -177,12 +184,7 @@ var CentroidChart = React.createClass({
                         <Row>
                             <div className="cendroid-chart-legend new">
                                 <h5>Number of documents</h5>
-                                <span className="document-symbol">1<i className="size-1"></i></span>
-                                <span className="document-symbol">2<i className="size-2"></i></span>
-                                <span className="document-symbol">3<i className="size-3"></i></span>
-                                <span className="document-symbol">4<i className="size-4"></i></span>
-                                <span className="document-symbol">5<i className="size-5"></i></span>
-                                <span className="document-symbol">6<i className="size-6"></i></span>
+                                {legends}
                             </div>
                         </Row>
                     </Col>
