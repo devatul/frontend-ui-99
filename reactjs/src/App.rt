@@ -1,8 +1,8 @@
- <rt-import name="ProgressLabel" from="./components/dathena/progress-label" />
+<rt-import name="ProgressLabel" from="./components/dathena/progress-label" />
 
  <div>
 	{this.mapStateToProps(this.props.children, ['xhr', 'categories', 'confidentialities'])}
-	<p class="text-center text-muted mb-md">Copyright &#169; 2016 by Dathena Science v1.0-a124203</p>
+	<p class="text-center text-muted mb-md">Copyright &#169; 2016 by Dathena Science {this.commit()}</p>
 	<div rt-if="this.state.xhr.loading < 100 && this.state.xhr.isFetching !== 0" class="progress-label-container">
         <div class="progress-example">
             <ProgressLabel
