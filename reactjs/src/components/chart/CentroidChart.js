@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/lib/Col'
 
 var CentroidChart = React.createClass({
     displayName: 'CentroidChart',
-    
+
     PropTypes: {
         title: PropTypes.string,
         data: PropTypes.array
@@ -47,7 +47,7 @@ var CentroidChart = React.createClass({
                     var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
                     var points = serie.points;
                     serie.color = colorsCentroid[distance-1];
-                    serie.graph.attr({ 
+                    serie.graph.attr({
                         stroke: colorsCentroid[distance-1]
                     });
                     serie.options.marker.radius = documentNum*3+1;
@@ -176,7 +176,7 @@ var CentroidChart = React.createClass({
                         </Row>
                         <Row>
                             <div className="cendroid-chart-legend new">
-                                <h5>Number of the Documents</h5>
+                                <h5>Number of documents</h5>
                                 <span className="document-symbol">1<i className="size-1"></i></span>
                                 <span className="document-symbol">2<i className="size-2"></i></span>
                                 <span className="document-symbol">3<i className="size-3"></i></span>

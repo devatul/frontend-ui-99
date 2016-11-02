@@ -112,7 +112,7 @@
         </div>
     </div>
     <!--Modal-->
-    <div id="previewModal" class="modal fade in" role="dialog">
+    <div id="previewModal" class="modal fade in" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-preview">
 
           <!-- Modal content-->

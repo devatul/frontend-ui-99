@@ -23,7 +23,7 @@ var documentPreview = React.createClass({
             onHide: function() {}
         };
     },
-    
+
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.open != nextProps.open || !isEqual(this.props.document, nextProps.document);
     },
@@ -32,7 +32,7 @@ var documentPreview = React.createClass({
         if((prevProps.open === false && this.props.open) || (this.props.document != null && !isEqual(this.props.document.image_url, prevProps.document.image_url))) {
             this.loadDocument()
         }
-        
+
     },
 
     handleOnHide(event) {
@@ -79,24 +79,33 @@ var documentPreview = React.createClass({
     },
 
     render() {
-        
+
         let { document, open } = this.props
         if(document != null) {
             return(
                 <Modal
                     role="dialog"
                     animation
-                    show={open}
+                    show={open}   
                     onHide={this.handleOnHide}
                     keyboard={true}
                     dialogClassName="modal-preview">
                     <Modal.Header>
                         <Row>
-                            <Modal.Title className="col-sm-4">
+                            <Modal.Title className="col-sm-3">
                                 <i className="fa fa-search"></i>
                                 Document Preview
                             </Modal.Title>
-                            <div className="col-sm-4 modal-info text-center">
+                            <div className="col-sm-2 modal-info text-center">
+                                <span className="text-itatic">
+                                    Proposed Category
+                                </span>
+                                <br/>
+                                <span>
+                                    {document && document.category && document.category.name}
+                                </span>
+                            </div>
+                            <div className="col-sm-3 modal-info text-center">
                                 <span className="text-itatic">
                                     { document &&
                                         document.name

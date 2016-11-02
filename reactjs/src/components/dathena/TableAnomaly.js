@@ -6,7 +6,7 @@ import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
 
-import Anomaly from '../../components/dathena/anomalyStateSelect'
+import Anomaly from '../../components/dathena/AnomalyStateSelect'
 var TableAnomaly = React.createClass({
     getInitialState(){
         return{
@@ -59,12 +59,15 @@ var TableAnomaly = React.createClass({
         }
     },*/
     filterTable(data , value){
-        debugger
+
         let dataNew = []
         _.forEach(data , function(object , index){
 
             if(object.status == value){
-                dataNew.push(object)
+                dataNew.push({
+                    'id' : index,
+                    'data' : object
+                })
             }
         })
         return dataNew
@@ -73,8 +76,14 @@ var TableAnomaly = React.createClass({
 
         this.setState({show : value})
     },
+    getDataFilter(datas){
+        let data = []
+        _.forEach(datas , function(object , index){
+            data.push(object.data)
+        })
+        return data
+    },
     changeAnomaly(datas, value, number) {
-        debugger
         let updateAnomaly = update(this.state, {
             datas: {
                 [number]: {
@@ -86,7 +95,6 @@ var TableAnomaly = React.createClass({
         this.setState(updateAnomaly)
     },
     showSelect(datas , number){
-        debugger
        /* let datas = _.cloneDeep(this.state.datas)*/
         let style = datas[number].selected == null || datas[number].selected ==  'none' ? 'block' : 'none'
         for(let i =0 ; i < datas.length ; i++){
@@ -158,18 +166,22 @@ var TableAnomaly = React.createClass({
         })
         return data_export
     },
+
     render(){
         let {filterValue} = this.state
             , data = _.cloneDeep(this.state.datas)
-            , newData = filterValue == 0 ? data : this.filterTable(data , filterValue)
+            , newData =  filterValue == 0 ? data : this.getDataFilter(this.filterTable(data , filterValue))
             , child = []
             , style = !this.state.show ?  'block' : 'none'
             , style1 = this.state.show ?  'block' : 'none'
             , data_export = this.configDataCVS(newData)
+
+
         for(let i = 1 ; i <= newData.length ; i++) {
             let key = i-1
+            let key_filter = filterValue == 0 ? key : this.filterTable(data , filterValue)[key].id
             let className = "anomaly-state selected " + newData[i-1].status
-            child[i] = <tr key= {i}>
+            child[i] = <tr key = {i}>
                             <td><span>{newData[key].id}</span></td>
                             <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
                             <td className="text-left"><span>62</span></td>
@@ -177,9 +189,9 @@ var TableAnomaly = React.createClass({
                             <td className="text-left"><span>4774</span></td>
                             <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
                             <td className="relative">
-                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,i-1)}></span>
+                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,key_filter)}></span>
                               <div className="anomaly-showhide">
-                                  <Anomaly onChange = {this.changeAnomaly} number = {key} show={newData[i-1].selected} data = {data} />
+                                  <Anomaly onChange = {this.changeAnomaly} number = {key_filter} show={newData[i-1].selected} data = {data} />
                               </div>
                             </td>
                           </tr>
