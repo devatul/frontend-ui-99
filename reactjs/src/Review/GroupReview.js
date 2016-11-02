@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach, upperFirst, isEqual, cloneDeep, findIndex } from 'lodash'
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash'
 import template from './GroupReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
@@ -77,13 +77,14 @@ var GroupReview = React.createClass({
         if(!isEqual(this.state.documents, prevState.documents)) {
             let validNumber = this.validateNumber(),
                 checkNumber = this.checkedNumber(),
+                editNumber = this.editNumber(),
                 docNumber = this.state.documents.length;
                 
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
                 checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: Math.round((validNumber * 100) / docNumber),
+                reviewStatus: Math.round(( (validNumber + editNumber) * 100) / docNumber),
                 shouldUpdate: true
             });
         }
@@ -377,7 +378,10 @@ var GroupReview = React.createClass({
                 "id": this.state.groupCurrent.id
             },
             success: (centroids) => {
+                console.log(centroids)
                 var series = [], total = centroids.length;
+                let max = maxBy(centroids, doc => doc.number_docs)
+                let max_circle_size = 6
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -392,7 +396,7 @@ var GroupReview = React.createClass({
                                 x: 45 * i,
                                 y: 0,
                                 document: centroids[i].number_docs,
-                                weight: i+1,
+                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
                                 marker: {
                                     enabled: false,
                                     states: {
@@ -574,7 +578,18 @@ var GroupReview = React.createClass({
         
         return num;
     },
+    editNumber() {
+        let num = 0,
+            { documents } = this.state;
+            
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].status === status.EDITING.name) {
+                num++;
+            }
+        }
 
+        return num;
+    },
     validateNumber() {
         let num = 0,
             { documents } = this.state;
