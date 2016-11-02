@@ -35,14 +35,28 @@ var DataLost = React.createClass({
             },
             success: function(data) {
 
-                console.log('data', data)
-                let arr = []
+                console.log('data', data);
+                let arr = ['en', 'fr', 'de', 'OTHER']
                     /* this.setState({ dataLoss: data })
                      this.setState({ default_data: data[0] })*/
-                for (let i = 0; i < data.length; i++) {
-
-                    arr.push(data[i].language)
-                }
+                //for (let i = 0; i < data.length; i++) {
+                    //switch(data[i].language){
+                    //    case 'OTHER' :
+                    //        arr[3] = (data[i].language);
+                    //        break;
+                    //    case 'de' :
+                    //        arr[2] = (data[i].language);
+                    //        break;
+                    //    case 'en' :
+                    //        arr[0] = (data[i].language);
+                    //        break;
+                    //    case 'fr' :
+                    //        arr[1] = (data[i].language);
+                    //        break;
+                    //    default : arr.push(data[i].language)
+                    //}
+                    //arr.push(data[i].language)
+                //}
                 /*  this.setState({language : arr})*/
                 let updateDataLoss = update(this.state, {
                     dataLoss: { $set: data },
