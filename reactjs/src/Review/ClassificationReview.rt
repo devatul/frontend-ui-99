@@ -124,6 +124,7 @@
     </Row>
 </div>
 <DocumentPreview
+    currentReview={this.state.dataReview[this.state.current.review]}
     open="{this.state.openPreview}"
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
     hasNextDocument={this.state.current.hasNextDocument}

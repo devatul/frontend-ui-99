@@ -13,7 +13,8 @@ var documentPreview = React.createClass({
         open: PropTypes.bool,
         document: PropTypes.object,
         onHide: PropTypes.func,
-        hasNextDocument: PropTypes.bool
+        hasNextDocument: PropTypes.bool,
+        currentReview: PropTypes.object
     },
 
     getDefaultProps() {
@@ -82,6 +83,7 @@ var documentPreview = React.createClass({
     render() {
         let nextDocumentButton = null
         let { document, open } = this.props
+        let currentReview = this.props.currentReview        
         if(this.props.hasNextDocument){
             nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
         }
@@ -120,7 +122,18 @@ var documentPreview = React.createClass({
                                     'Folder ' + this.cutPath(document.path)
                                 }</span>
                             </div>
-                            <div className="col-sm-4 modal-actions text-right">
+                            <div className="col-sm-1 modal-actions text-center">
+                                <div className="inline-block-item">
+                                    <span className="text-itatic">
+                                        Language
+                                    </span>
+                                    <br/>
+                                    <span>
+                                        {currentReview && currentReview.language && currentReview.language.name}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="col-sm-3 modal-actions text-right">
                                 {nextDocumentButton}
                                 <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                                 <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
