@@ -12,7 +12,8 @@ var documentPreview = React.createClass({
         nextDocument: PropTypes.func,
         open: PropTypes.bool,
         document: PropTypes.object,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        hasNextDocument: PropTypes.bool
     },
 
     getDefaultProps() {
@@ -79,8 +80,11 @@ var documentPreview = React.createClass({
     },
 
     render() {
-
+        let nextDocumentButton = null
         let { document, open } = this.props
+        if(this.props.hasNextDocument){
+            nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+        }
         if(document != null) {
             return(
                 <Modal
@@ -117,7 +121,7 @@ var documentPreview = React.createClass({
                                 }</span>
                             </div>
                             <div className="col-sm-4 modal-actions text-right">
-                                <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                {nextDocumentButton}
                                 <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                                 <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
                             </div>

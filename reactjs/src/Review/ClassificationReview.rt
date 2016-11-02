@@ -126,6 +126,7 @@
 <DocumentPreview
     open="{this.state.openPreview}"
     document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
+    hasNextDocument={this.state.current.hasNextDocument}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.current.review + '_' + (this.state.current.doc + 1))}"
     undo="{this.handleUndo.bind(this, this.state.current.review)}"
     onHide="{this.closePreview}"
