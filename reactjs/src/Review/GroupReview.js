@@ -77,13 +77,14 @@ var GroupReview = React.createClass({
         if(!isEqual(this.state.documents, prevState.documents)) {
             let validNumber = this.validateNumber(),
                 checkNumber = this.checkedNumber(),
+                editNumber = this.editNumber(),
                 docNumber = this.state.documents.length;
                 
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
                 checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: Math.round((validNumber * 100) / docNumber),
+                reviewStatus: Math.round(( (validNumber + editNumber) * 100) / docNumber),
                 shouldUpdate: true
             });
         }
@@ -574,7 +575,18 @@ var GroupReview = React.createClass({
         
         return num;
     },
+    editNumber() {
+        let num = 0,
+            { documents } = this.state;
+            
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].status === status.EDITING.name) {
+                num++;
+            }
+        }
 
+        return num;
+    },
     validateNumber() {
         let num = 0,
             { documents } = this.state;
