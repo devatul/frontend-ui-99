@@ -29,7 +29,7 @@ module.exports = React.createClass({
 	},
     componentWillMount()
     {
-		let { pathname } = this.props.location
+		let { pathname } = this.props.location;
     	var token = sessionStorage.getItem('token');
     	if(token)
 		{
@@ -48,12 +48,16 @@ module.exports = React.createClass({
 				{
 					makeRequest({
 						path: 'api/token/api-token-refresh/',
+						dataType: 'json',
                         method : 'POST',
-						params: {
+						params: JSON.stringify({
 							token: token
-						},
+						}),
 						success: (data) => {
 							sessionStorage.setItem('token', data.token);
+						},
+						error: (data) => {
+							console.log(JSON.parse(data.responseText).detail)
 						}
 					});
 				}
