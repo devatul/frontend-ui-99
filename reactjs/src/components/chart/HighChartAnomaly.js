@@ -103,7 +103,9 @@ var HighChart = React.createClass({
                     enabled: false
                 },
                 tooltip: {
-                    enabled: false
+                       formatter: function() {
+                        return '<br>' + this.series.name + ': ' + this.y;
+                    }
                 },
                 plotOptions: {
                     column: {
@@ -116,7 +118,7 @@ var HighChart = React.createClass({
                     }
                 },
                 series: [{
-                    name: 'Public',
+                    name: 'Documents',
                     data: anomalyChartData[i].data
                 }]
             });

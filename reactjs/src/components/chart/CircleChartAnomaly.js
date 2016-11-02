@@ -115,7 +115,7 @@ var CircleChart = React.createClass({
                 </div>
                 <div className="anomaly-legend inner-legend">
                   <span className="legend green" style={{ color: this.colorInner(this.props.value_in) }}>{this.props.content_inner}</span>
-                  <span className="inner-indicator green" style={{ backgroundColor: this.colorInner(this.props.value_outer) }}></span>
+                  <span className="inner-indicator green" style={{ backgroundColor: this.colorInner(this.props.value_inner) }}></span>
                 </div>
               </div>
             );

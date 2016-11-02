@@ -3,7 +3,7 @@
 
 <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
-        <ul class="nav nav-tabs cat-list">
+        <ul class="nav nav-tabs cat-list" style="float : none">
           <li class="active">
             <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Accounting / Tax</a>
           </li>
