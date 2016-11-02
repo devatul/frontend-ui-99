@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/lib/Col'
 
 var CentroidChart = React.createClass({
     displayName: 'CentroidChart',
-    
+
     PropTypes: {
         title: PropTypes.string,
         data: PropTypes.array
@@ -20,18 +20,22 @@ var CentroidChart = React.createClass({
         };
     },
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(this.props.data != prevProps.data) {
-    //         this.draw();
-    //     }
-    // },
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.series != prevProps.series) {
+            this.draw();
+        }
+    },
 
     componentDidMount() {
         this.draw();
     },
 
     draw() {
-        var colorsCentroid = [ '#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'];
+        var colorsCentroid = [ '#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'],
+            {
+                series
+            } = this.props;
+
         $('#centroidChart').highcharts({
             chart: {
             polar: true,
@@ -39,11 +43,11 @@ var CentroidChart = React.createClass({
                 load: function () {
                 var chart = this;
                 $(chart.series).each(function (i, serie) {
-                    var documentNum = serie.data[1].document;
+                    var documentNum = serie.data[1].weight;
                     var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
                     var points = serie.points;
                     serie.color = colorsCentroid[distance-1];
-                    serie.graph.attr({ 
+                    serie.graph.attr({
                         stroke: colorsCentroid[distance-1]
                     });
                     serie.options.marker.radius = documentNum*3+1;
@@ -138,228 +142,7 @@ var CentroidChart = React.createClass({
             useHTML: true
             },
 
-            series: [{
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [
-                [10, 3], 
-                {
-                x: 10,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [90, 3], 
-                {
-                x: 90,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [120, 5], 
-                {
-                x: 120,
-                y: 0,
-                document: 3,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            }, 
-            data: [  
-                [180, 8], 
-                {
-                x: 180,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [210, 10], 
-                {
-                x: 210,
-                y: 0,
-                document: 2,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null
-            ]
-            },{
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [270, 12], 
-                {
-                x: 270,
-                y: 0,
-                document: 2,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [   
-                [290, 25], 
-                {
-                x: 290,
-                y: 0,
-                document: 4,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [ 
-                [310, 18], 
-                {
-                x: 310,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [  
-                [330, 19], 
-                {
-                x: 330,
-                y: 0,
-                document: 5,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }, {
-            type: 'scatter',
-            lineWidth: 2,
-            marker: {
-                symbol: 'circle'
-            },
-            data: [  
-                [350, 22], 
-                {
-                x: 350,
-                y: 0,
-                document: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: false
-                        }
-                    }
-                }
-                },
-                null]
-            }]
+            series: series
 
         });
     },
@@ -369,7 +152,7 @@ var CentroidChart = React.createClass({
             <div id="centroid" className="cendroid-frame">
                 <h4 className="chart-title">
                     Centroid Distance Histogram
-                    <HelpButton setValue={this.props.help} />
+                    <HelpButton classMenu="fix-overview-help-button-table" setValue={this.props.help} />
                 </h4>
                 <Row>
                     <Col md={9} sm={9}>
@@ -382,18 +165,18 @@ var CentroidChart = React.createClass({
                         <Row>
                             <div className="cendroid-chart-legend new">
                                 <h5>Distance</h5>
-                                <span className="symbol" style={{ 'background-color': '#45A446' }}>0</span>
-                                <span className="symbol" style={{ 'background-color': '#98A33A' }}>5</span>
-                                <span className="symbol" style={{ 'background-color': '#DAA525' }}>10</span>
-                                <span className="symbol" style={{ 'background-color': '#EC892B' }}>15</span>
-                                <span className="symbol" style={{ 'background-color': '#E15E29' }}>20</span>
-                                <span className="symbol" style={{ 'background-color': '#D0352D' }}>25</span>
+                                <span className="symbol" style={{ backgroundColor: '#45A446' }}>0</span>
+                                <span className="symbol" style={{ backgroundColor: '#98A33A' }}>5</span>
+                                <span className="symbol" style={{ backgroundColor: '#DAA525' }}>10</span>
+                                <span className="symbol" style={{ backgroundColor: '#EC892B' }}>15</span>
+                                <span className="symbol" style={{ backgroundColor: '#E15E29' }}>20</span>
+                                <span className="symbol" style={{ backgroundColor: '#D0352D' }}>25</span>
                                 <span className="more-legend">more</span>
                             </div>
                         </Row>
                         <Row>
                             <div className="cendroid-chart-legend new">
-                                <h5>Number of the Documents</h5>
+                                <h5>Number of documents</h5>
                                 <span className="document-symbol">1<i className="size-1"></i></span>
                                 <span className="document-symbol">2<i className="size-2"></i></span>
                                 <span className="document-symbol">3<i className="size-3"></i></span>

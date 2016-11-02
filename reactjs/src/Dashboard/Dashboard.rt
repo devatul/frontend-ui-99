@@ -4,225 +4,237 @@
 <rt-import name="contant" from="../Constant.js"/>
 
 <section>
-  <div class="my_header">
-    <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
-      <div class="container">
+    <!--my_header start-->
 
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header dropdown">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+    <!--my_header start-->
+    <div class="my_header">
+        <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header dropdown">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin" /></a>
+                <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
-          <a class="navbar-brand" href="/"><img src="/assets/images/logo_header.png" width="40%" alt="Porto Admin"/></a>
-          <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
-            <span id="total_notification" class="badge">{this.state.total_notification}</span>
-            <i class="fa fa-bell-o" aria-hidden="true"></i>
-          </a>
+                    <span id="total_notification" class="badge">{this.state.total_notification}</span>
+                    <!-- <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span> -->
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw" >
+                    <div class="row noti-popup" >
+                        <div class="col-sm-6 col-noti noti-div" rt-scope ="this.state.unseen_notiData as unseen_notiData">
+                            <h4>My Notification</h4>
+                            <div class="noti-block">
+                                <h3 class="noti-date">Last Update</h3>
+                                <ul class="list-unstyled noti-list" rt-if="unseen_notiData.notifications != null" >
+                                    <li rt-repeat="notification in unseen_notiData.notifications">
+                                        <i rt-class="{
+                                            'fa': true,
+                                            'fa-check icon-success': notification.urgency === 'done',
+                                            'fa-clock-o': notification.urgency === 'low',
+                                            'fa-clock-o icon-warning': notification.urgency === 'high',
+                                            'fa-clock-o icon-danger': notification.urgency === 'very high'
+                                            }"
+                                        aria-hidden="true"></i>
+                                        <p style="font-size: 13px">{notification.message}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-noti ">
+                            <div class='row'>
+                                <h4 class="col-sm-7 pull-left" >My Pending Action: {this.state.total_pending}</h4>
+                                <h4 class="col-sm-5 pull-right" rt-scope="this.state.number_pending as number_pending">
+                                    <div class="row">
+                                        <span class="ml-md" style="margin-right: 15px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'high' "><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick = "{this.getfilterAlert.bind(this, 'high')}" ></i> : {number_pending &&number_pending.high}</span>
+                                        <span style="margin-right: 5px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very high' "><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight"  onClick="{this.getfilterAlert.bind(this, 'very high')}"></i> : {number_pending &&number_pending.very_high}</span>
 
-          <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw">
-            <div class="row noti-popup">
-              <div class="col-sm-6 col-noti noti-div">
-                <h4>My Notification</h4>
-                <div class="noti-block">
-                  <h3 class="noti-date">Last Update</h3>
-                  <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.notification.list">
-                    <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                      <i class="fa"
-                         rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                    'fa-check icon-warning': notification.urgency === 'adone',
-                                    'fa-clock-o': notification.urgency === 'low',
-                                    'fa-clock-o icon-warning': notification.urgency === 'hight',
-                                    'fa-clock-o icon-danger': notification.urgency === 'very hight'}"
-                         aria-hidden="true"></i>
-                      <p style="font-size: 13px">{notification.message}</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-sm-6 col-noti">
-                <div class="row">
-                  <h4 class="col-sm-7 pull-left">My Pending Action: {this.state.total_pending}</h4>
-                  <h4 class="col-sm-5 pull-right">
-                    <div class="row">
-                      <span class="ml-md" style="margin-right: 15px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'high' ">
-                        <i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon-popup" data-type="hight" onClick="{this.getfilterAlert.bind(this, 'high')}"></i> : {this.state.pending_action.warning}
-                      </span>
-                      <span style="margin-right: 5px" rt-if="this.state.typeAlert == 'none' || this.state.typeAlert == 'very high' ">
-                        <i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon-popup" data-type="very hight" onClick="{this.getfilterAlert.bind(this, 'very high')}"></i> : {this.state.pending_action.danger}
-                      </span>
+                                         <HelpButton1 className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile" content="Number of actions pending for you to complete. {number_pending &&number_pending.very_high} {number_pending && number_pending.very_high >1 ? 'actions are' : 'action is'} required with high priority and {number_pending &&number_pending.high} {number_pending && number_pending.high >1 ? 'actions are' : 'action is'} required with medium priority." />
+                                       <!--  <HelpButton className="" classNote="overview_timeframe help_timeframe"
+                                            setValue="Number of actions pending for you to complete. $nbredaction action(s) is(are) required with high priority and $nbamberaction action(s) is(are) required with medium priority." /> -->
+                                    </div>
 
-                      <HelpButton1 className="r dropdown inline-block-item"
-                        type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile"
-                        content="Number of actions pending for you to complete. {this.state.pending_action.danger} {this.state.pending_action.danger >1 ? 'actions are' : 'action is'} required with high priority and {this.state.pending_action.warning} {this.state.pending_action.warning >1 ? 'actions are' : 'action is'} required with medium priority."/>
-                    </div>
-                  </h4>
-                </div>
-                <span class="actions-percentage">Action completed on time: <b>100%</b></span>
-                <ul class="list-unstyled noti-list" rt-repeat="notification in this.state.pending_action.list">
-                  <li data-noti-type-popup="{notification.urgency}" key="{notification.id}">
-                    <i class="fa"
-                       rt-class="{'fa-check icon-success': notification.urgency === 'done',
-                                  'fa-clock-o': notification.urgency === 'low',
-                                  'fa-clock-o icon-warning': notification.urgency === 'high',
-                                  'fa-clock-o icon-danger': notification.urgency === 'very high'}"
-                       aria-hidden="true"></i>
-                    <p style="font-size: 13px">{notification.message}</p>
-                  </li>
+                                </h4>
+                            </div>
+                            <span class="actions-percentage">Action completed on time: 100%</span>
+                            <ul class="list-unstyled noti-list" rt-if="this.state.unseen_notiData.actions != null">
+                                <li rt-repeat="actions in this.state.unseen_notiData.actions">
+                                    <i rt-class="{
+                                        'fa': true,
+                                        'fa-check icon-success': actions.urgency === 'done',
+                                        'fa-clock-o': actions.urgency === 'low',
+                                        'fa-clock-o icon-warning': actions.urgency === 'high',
+                                        'fa-clock-o icon-danger': actions.urgency === 'very high'}"
+                                        aria-hidden="true"></i>
+                                    <p style="font-size: 13px">{actions.message}</p>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="col-sm-12 text-center mt-md">
+                           <Link to="/Dashboard/Notification" onClick="{this.hideMenu}">See All Notifications</Link>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- Collect the nav links, forms, and other content for toggling -->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
+                <li>
+                    <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
+                </li>
+                <li class="dropdown">
+                    <span class="badge">{this.state.total_notification}</span>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    </a>
+                    <ul class="dropdown-menu fix-review-menu">
+                        <!--<li>
+                            <span class="badge">20</span>
+                            <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
+                        </li>-->
+                        <li>
+                           <!--  <span class="badge">20</span> -->
+                            <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
+                        </li>
+                         <li>
+                            <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><!--<li class="active">-->
+
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
+                </li>
+            </ul>
+
+            <ul rt-if="this.state.role === contant.role.IS_ADMIN || this.state.role === contant.role.RISK_LEAD" class="nav navbar-nav">
+                <li>
+                    <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
+                </li>
+                <li class="dropdown">
+                    <span class="badge">{this.state.total_notification}</span>
+                    <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
+                    </a>
+                    <ul class="dropdown-menu fix-review-menu">
+                        <li>
+                            <!-- <span class="badge">20</span> -->
+                            <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
+                        </li>
+                        <li>
+                            <!-- <span class="badge">20</span> -->
+                            <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
+                        </li>
+                        <li>
+                            <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><!--<li class="active">-->
+
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
+                </li>
+            </ul>
+
+
+            <ul rt-if="this.state.role === contant.role.IS_1ST" class="nav navbar-nav">
+                <li>
+                    <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
+                </li>
+                <li><span class="badge">{this.state.total_notification}</span>
+                    <Link to="/Review/DocumentReview" activeClassName="active">Review</Link></li>
+                     <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
+
+                    <a href="#" id="insights" class="dropdown-toggle" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'insights')} >Insights <b class="fa fa-caret-down" style="font-size:12px;" ></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><!--<li class="active">-->
+
+                            <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
+                        </li>
+                        <li>
+
+                            <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
-              </div>
-              <div class="col-sm-12 text-center mt-md">
-                <Link to="/Dashboard/Notification" onClick="{this.hideMenu}">See All Notifications</Link>
-              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
-            <li>
-              <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
-            </li>
-            <li class="dropdown">
-              <span class="badge">{this.state.total_notification}</span>
-              <a href="#" id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}"
-                 activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'review')}>
-                Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
-              </a>
-              <ul class="dropdown-menu fix-review-menu">
-                <li>
-                  <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
-                </li>
-                <li>
-                  <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
-                </li>
-                <li>
-                  <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
-                </li>
-                <li>
-                  <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
-              <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"
-                 onClick={this.changeToggle.bind(this,'insights')}>
-                Insights <b class="fa fa-caret-down" style="font-size:12px;"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
-            </li>
-          </ul>
-
-          <ul rt-if="this.state.role === contant.role.IS_ADMIN || this.state.role === contant.role.RISK_LEAD" class="nav navbar-nav">
-            <li>
-              <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
-            </li>
-            <li class="dropdown">
-              <span class="badge">{this.state.total_notification}</span>
-              <a href="#" id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}"
-                 activeClassName="active" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'review')}>
-                Review <b b class="fa fa-caret-down" style="font-size:12px;"></b>
-              </a>
-
-              <ul class="dropdown-menu fix-review-menu">
-                <li>
-                  <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
-                </li>
-                <li>
-                  <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
-                </li>
-                <li>
-                  <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
-                </li>
-                <li>
-                  <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
-                </li>
-                <li>
-                  <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
-                </li>
-                <li>
-                  <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
-              <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"
-                 onClick={this.changeToggle.bind(this,'insights')}>
-                Insights <b class="fa fa-caret-down" style="font-size:12px;"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/AnomalyDetection" activeClassName="active">Anomaly Detection</Link>
-            </li>
-          </ul>
-
-          <ul rt-if="this.state.role === contant.role.IS_1ST" class="nav navbar-nav">
-            <li>
-              <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
-            </li>
-            <li>
-              <span class="badge">{this.state.total_notification}</span>
-              <Link to="/Review/DocumentReview" activeClassName="active">Review</Link>
-            </li>
-            <li class="dropdown" className="{this.getActive() === 'Insight' && 'active'}">
-              <a href="#" id="insights" class="dropdown-toggle" activeClassName="active" data-toggle="dropdown"
-                 onClick={this.changeToggle.bind(this,'insights')}>
-                Insights <b class="fa fa-caret-down" style="font-size:12px;"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <Link to="/Insight/Identity" activeClassName="active">Identity and Access Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataRisk" activeClassName="active">Data Risk Management</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/DataLoss" activeClassName="active">Data Loss Prevention</Link>
-                </li>
-                <li>
-                  <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
 
         <div class="header-right">
           <div id="userbox" class="userbox">

@@ -1,19 +1,24 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const paths = {
     output: 'dist',
-    source: './src/'
+    source: './src/',
+    vendor: './assets/vendor/',
+    css: './assets/stylesheets/'
 }
 
 module.exports = {
   devtool: 'source-map',
-  entry: [
-    paths.source + 'index'
-  ],
+  entry: {
+    'main': [
+      paths.source + 'index'
+    ]
+  },
   output: {
     path: path.join(__dirname, paths.output),
-    filename: 'bundle.js',
+    filename: 'bundle-[name].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -35,16 +40,21 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src'),
-      exclude: /node_modules/
-    },
-    {
-      test: /\.rt$/,
-      loaders: ['react-templates-loader'],
-      include: path.join(__dirname, 'src')
-    }]
+    loaders: [
+      //js, jsx
+      {
+        test: /\.js$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, 'src'),
+        exclude: /node_modules/
+      },
+
+      //React templates
+      {
+        test: /\.rt$/,
+        loaders: ['react-templates-loader'],
+        include: path.join(__dirname, 'src')
+      }
+    ]
   }
 };

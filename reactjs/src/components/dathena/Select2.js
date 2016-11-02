@@ -53,11 +53,9 @@ var Select2 = React.createClass({
                 adaptDropdownCssClass, 
                 containerCssClass,
                 minimumResultsForSearch
-            } = this.props,
-
-            _props = Object.assign({}, this.props);
+            } = this.props;
             
-            $(this.refs.select2).select2(_props);
+            $(this.refs.select2).select2(this.props);
         }
     },
     
@@ -86,9 +84,21 @@ var Select2 = React.createClass({
     },
 
     render() {
-        let props = this.props;
+        let _props = Object.assign({}, this.props);
+            _props.adaptDropdownCssClass &&
+                delete _props.adaptDropdownCssClass;
+            _props.containerCssClass &&
+                delete _props.containerCssClass;
+            _props.minimumResultsForSearch &&
+                delete _props.minimumResultsForSearch;
+            _props.dropdownCssClass &&
+                delete _props.dropdownCssClass;
+            if(_props.closeOnSelect === false || _props.closeOnSelect === true)
+                delete _props.closeOnSelect;
+            _props.onOpen &&
+                delete _props.onOpen;
         return(
-            <select ref="select2" {...this.props} className="js-example-basic-single js-states form-control dathena-select">
+            <select ref="select2" {..._props} className="js-example-basic-single js-states form-control dathena-select">
                 {this.props.children}
             </select>
         );

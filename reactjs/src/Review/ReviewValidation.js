@@ -5,7 +5,7 @@ import template from './ReviewValidation.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js';
-import { isEqual, findIndex, find, cloneDeep } from 'lodash';
+import { isEqual, findIndex, find, cloneDeep, orderBy } from 'lodash';
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -97,6 +97,9 @@ var ReviewValidation = React.createClass({
             path: "api/label/category/",
             success: (res) => {
                 let categoriesReview = cloneDeep(res);
+
+                categoriesReview = orderBy(categoriesReview, ['name'], ['asc']);
+
                 categoriesReview[res.length] = {
                     id: 'summary',
                     name: 'Summary'

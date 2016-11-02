@@ -3,8 +3,9 @@
 <rt-import name="Circle" from= "../components/chart/CircleChartAnomaly"/>
 <rt-import name="High" from= "../components/chart/HighChartAnomaly"/>
 
+
 <section>
-    <div class="container" onClick = {this.hideAll}>
+    <div class="container">
         <section class="panel panel-featured panel-featured-primary panel-bordered">
             <header class="panel-heading">
                 <h2 class="panel-title">Anomaly Overview</h2>
@@ -12,146 +13,26 @@
             <div class="panel-body pb-none">
                 <div class="row">
                     <!-- Code API Anomaly Review-->
-                    <!--  <div class="col-md-4" rt-repeat = "rick in this.state.anomaly_rick" >
-                      <section class="panel" key="rickIndex">
-                        <div class="panel-body {this.getRickType(rick.name).color} widget-panel insight-panel">
-                          <h4 class="widget-title">{ this.upperFirst(rick.name) }
-                               <HelpButton className="" classNote="overview_timeframe fix-overview-help-button"
-                                            setValue="{this.getRickType(rick.name).info}" />
+                     <div class="col-md-4" rt-repeat = "risk in this.state.anomaly_rick" >
+                          <section class="panel" key="riskIndex">
+                            <div class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
+                              <h4 class="widget-title">{this.upperFirst(risk.name)}
+                                         <HelpButton
+                                            classMenu="fix-overview-help-button-table"
+                                            classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
 
-                          </h4>
-                          <div class="widget-summary">
-                              <div class="widget-summary-col">
-                                  <div class="summary">
-                                      <div class="info">
-                                          <strong class="amount">138</strong>
+                              </h4>
+                              <div class="widget-summary">
+                                  <div class="widget-summary-col">
+                                      <div class="summary">
+                                          <div class="info">
+                                              <strong class="amount">{risk.value}</strong>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
-                          </div>
-                        </div>
-                      </section>
-                    </div> -->
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                                <h4 class="widget-title">Access Rights Anomaly
-                                    <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"  setValue="This details the number of access rights anomalies that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">138</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </section>
-                    </div>
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-secondary widget-panel insight-panel">
-                                <h4 class="widget-title">Data Repository Anomaly
-                                <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"   setValue="This details the number of data repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."/>
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">99</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-secondary-2 widget-panel insight-panel">
-                                <h4 class="widget-title">Client Data Access Anomaly
-                                    <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"   setValue="This details a subset of the document and access rights anomalies, focusing on the highest value data, which is classified as Client."/>
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">12</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-quartenary-2 widget-panel insight-panel">
-                                <h4 class="widget-title">Users at Risk
-                                    <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"    setValue="This details the number of users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types."/>
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">1.4k</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-quartenary-3 widget-panel insight-panel">
-                                <h4 class="widget-title">Documents Risk
-                                    <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"   setValue="This details the number of document that are involved in anomalies."/>
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">138</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-md-4">
-                        <section class="panel">
-                            <div class="panel-body bg-tertiary-3 widget-panel insight-panel">
-                                <h4 class="widget-title">Active Directory Group at Risk
-                                    <HelpButton className="" classNote="overview_timeframe fix-anomaly-help-button"
-                                        setValue="This details the number of active directory group at risk that have been detected at the file level. These anomalies detail users who have access to a range of data categories that do not align to their job type, or present a logical pattern based on organisational role types." />
-                                </h4>
-                                <div class="widget-summary">
-                                    <div class="widget-summary-col">
-                                        <div class="summary">
-                                            <div class="info">
-                                                <strong class="amount">138</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                          </section>
                     </div>
                 </div>
             </div>
@@ -178,7 +59,13 @@
                         </h4>
                       </div>
                     </div>
-                     <Circle id = 'chart_1' value_inner= 50  value_outer = 40 className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                     <Circle
+                        id = 'chart_1'
+                        className = "anomaly-icon anomaly-icon-fix fix-icon-user"
+                        value_inner= "{this.state.user_Client && this.state.user_Client.prediction_percentage}"
+                        value_outer = "{this.state.user_Client && this.state.user_Client.risk_percentage}"
+                        content_outer= "{this.state.user_Client &&  this.state.user_Client.risk_type}"
+                        content_inner="Prediction Quality: {this.state.user_Client && this.state.user_Client.prediction_quality} " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
@@ -196,19 +83,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td><span class="text-big">65</span></td>
-                            <td><span class="text-normal">Banking Secrecy</span></td>
-                            <td><span class="text-big">3</span></td>
-                            <td><span class="text-big">2</span></td>
-                            <td><span class="text-big text-light-green">75,47%</span></td>
-                          </tr>
-                          <tr>
-                            <td><span class="text-big">23</span></td>
-                            <td class="text-left"><span class="text-normal"  style="margin-left : 25px">Confidential</span></td>
-                            <td><span class="text-big">5</span></td>
-                            <td><span class="text-big">1</span></td>
-                            <td><span class="text-big text-light-green">67,14%</span></td>
+                          <tr rt-if="this.state.user_Client" rt-repeat = "tbl in this.state.user_Client.data_first_table">
+                            <td><span class="text-big">{tbl["User with Anomaly"]}</span></td>
+                            <td><span class="text-normal">{tbl["Confidentiality at Risk"]}</span></td>
+                            <td><span class="text-big">{tbl["Folder at Risk"]}</span></td>
+                            <td><span class="text-big">{tbl["Active Directory at Risk"]}</span></td>
+                            <td><span class="text-big text-light-green">{tbl["User Access Right Accuracy"]}%</span></td>
                           </tr>
                         </tbody>
                       </table>

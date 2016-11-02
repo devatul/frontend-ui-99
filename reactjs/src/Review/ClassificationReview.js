@@ -3,16 +3,17 @@ import { render } from 'react-dom'
 import template from './ClassificationReview.rt'
 import update from 'react/lib/update'
 import Constant, { fetching, status } from '../Constant'
-import { cloneDeep, isEqual, find, findIndex } from 'lodash'
+import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { orderConfidentialities } from '../utils/function'
 
 var ClassificationReview = React.createClass({
 
     getInitialState() {
         return {
-            dataReview: [],
-            categories: [],
             confidentialities: [],
+            categories: [],
+            dataReview: [],
             shouldUpdate: false,
             openPreview: false,
             current: {
@@ -26,14 +27,22 @@ var ClassificationReview = React.createClass({
 
     xhr: {
         getReview: null,
-        getCat: null,
-        getConfident: null
+        getConfident: null,
+        getCat: null
     },
 
     componentDidMount() {
-        this.xhr.getCat = this.getCategories();
-        this.xhr.getConfident  = this.getConfidentialities();
+        this.props.updateStore({
+            xhr: update(this.props.xhr, {
+                isFetching:
+                {
+                    $set: fetching.START
+                }
+            })
+        });
         this.xhr.getReview = this.getClassificationReview();
+        this.xhr.getCat = this.getCategories();
+        this.xhr.getConfident = this.getConfidentialities();
     },
 
 
@@ -57,9 +66,9 @@ var ClassificationReview = React.createClass({
 
     componentWillUnmount() {
         let {
-            getReview,
             getCat,
-            getConfident
+            getConfident,
+            getReview
         } = this.xhr;
 
         if(getReview && getReview.abort) {
@@ -302,16 +311,16 @@ var ClassificationReview = React.createClass({
 
     onChangeCategory(event, reviewIndex, docIndex, document) {
         let categoryIndex = event.target.value,
-
+            { categories } = this.props,
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
                             category: {
-                                $set: this.state.categories[categoryIndex]
+                                $set: categories[categoryIndex]
                             },
                             $merge: {
-                                status: document.init_category && isEqual(this.state.categories[categoryIndex], {
+                                status: document.init_category && isEqual(categories[categoryIndex], {
                                     id: document.init_category.id
                                 }) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category ? document.init_category : document.category
@@ -333,17 +342,19 @@ var ClassificationReview = React.createClass({
     onChangeConfidentiality(event, reviewIndex, docIndex, document) {
         let confidentialityIndex = event.target.value,
 
+            { confidentialities } = this.props,
+
             updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
                         [docIndex]: {
                             confidentiality: {
-                                $set: this.state.confidentialities[confidentialityIndex]
+                                $set: confidentialities[confidentialityIndex]
                             },
                             $merge: {
                                 init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
 
-                                status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
+                                status: document.init_confidentiality && isEqual(confidentialities[confidentialityIndex], {
                                     id: parseInt(document.init_confidentiality.id)
                                 }) ? status.ACCEPTED.name : status.EDITING.name
                             }
@@ -362,7 +373,7 @@ var ClassificationReview = React.createClass({
         });
     },
 
-    handleCheckAll(event, index) {
+    handleCheckAll(index, event) {
         let updateData = update(this.state.dataReview, {
             [index]: {
                 documents: {
@@ -390,7 +401,7 @@ var ClassificationReview = React.createClass({
     },
 
     handleUndo(reviewIndex) {
-        if(this.state.stackChange[reviewIndex].length > 0) {
+        if(this.state.stackChange[reviewIndex] && this.state.stackChange[reviewIndex].length > 0) {
             let { stackChange } = this.state,
                 stackLength = stackChange[reviewIndex].length,
                 item = stackChange[reviewIndex][stackLength - 1],
@@ -438,14 +449,6 @@ var ClassificationReview = React.createClass({
     },
 
     getClassificationReview() {
-        this.props.updateStore({
-            xhr: update(this.props.xhr, {
-                isFetching:
-                {
-                    $set: fetching.START
-                }
-            })
-        });
         return makeRequest({
             path: "api/classification_review/",
             success: (data) => {
@@ -466,8 +469,7 @@ var ClassificationReview = React.createClass({
                         {
                             $set: fetching.ERROR
                         }
-                    }),
-                    error: err
+                    })
                 });
             }
         });
@@ -479,6 +481,7 @@ var ClassificationReview = React.createClass({
         return makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
@@ -489,6 +492,7 @@ var ClassificationReview = React.createClass({
         return makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
+                data = orderConfidentialities(data)
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

@@ -39,8 +39,8 @@
                             <h4 class="widget-title">Duplicates / Twins
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates:  Two or more files with identical content and file names.
-                                            Twins : Two or more files with identical content, but with different file names." />
+                                    setValue="Duplicates: Two or more files with identical content and file names.
+                                            Twins: Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
@@ -164,7 +164,7 @@
                                             </tr>
                                         </thead>
                                         <tbody rt-if="scan.result">
-                                            <tr class="gradeA odd" role="row" rt-repeat="item in scan.result.confidentialities">
+                                            <tr class="gradeA odd" role="row" rt-repeat="item in scan.result.confidentialities" key="item_{itemIndex}">
                                                 <td class="sorting_1 text-left" style="text-transform: capitalize;">{item.name}</td>
                                                 <td class="center-padding-table-overview">{item.percentage_reviewed_docs.toFixed(2)}% ({func.formatNumber(item.total_reviewed_docs)}) </td>
                                                 <td class="center-padding-table-overview">{item.percentage_validated_docs.toFixed(2)}% ({func.formatNumber(item.total_validated_docs)})</td>
@@ -228,7 +228,7 @@
                                             </tr>
                                         </thead>
                                         <tbody rt-if="scan.result">
-                                            <tr class="odd" role="row" rt-repeat="category in scan.result.categories">
+                                            <tr class="odd" role="row" rt-repeat="category in scan.result.categories" key="category_{categoryIndex}">
                                                 <td class="text-left" style="text-transform: capitalize">
                                                     <i class="fa {this.renderIcon(category.name)}" aria-hidden="true"></i>{category.name}
                                                 </td>

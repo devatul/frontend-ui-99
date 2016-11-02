@@ -11,17 +11,19 @@ var documentPreview = React.createClass({
         undo: PropTypes.func,
         nextDocument: PropTypes.func,
         open: PropTypes.bool,
-        document: PropTypes.object
+        document: PropTypes.object,
+        onHide: PropTypes.func
     },
 
     getDefaultProps() {
         return {
             undo: function() {},
             nextDocument: function() {},
-            document: {}
+            document: {},
+            onHide: function() {}
         };
     },
-
+    
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.open != nextProps.open || !isEqual(this.props.document, nextProps.document);
     },
@@ -30,6 +32,12 @@ var documentPreview = React.createClass({
         if((prevProps.open === false && this.props.open) || (this.props.document != null && !isEqual(this.props.document.image_url, prevProps.document.image_url))) {
             this.loadDocument()
         }
+        
+    },
+
+    handleOnHide(event) {
+        this.props.onHide &&
+            this.props.onHide(event);
     },
 
     handleNextDocument(event) {
@@ -47,16 +55,17 @@ var documentPreview = React.createClass({
         {
             document
         } = this.props;
-
-        render(React.createElement('div', {
-            className: "gdocsviewer"
-        },
-        React.createElement('iframe', {
-            src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
-            width: 600,
-            height: 700,
-            style: { border: 'none' }
-        })), preview)
+        if(preview) {
+            render(React.createElement('div', {
+                className: "gdocsviewer"
+            },
+            React.createElement('iframe', {
+                src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
+                width: 600,
+                height: 700,
+                style: { border: 'none' }
+            })), preview)
+        }
     },
 
     closeModal(event) {
@@ -71,13 +80,15 @@ var documentPreview = React.createClass({
 
     render() {
         
-        let { open, document } = this.props;
+        let { document, open } = this.props
         if(document != null) {
             return(
                 <Modal
                     role="dialog"
                     animation
                     show={open}
+                    onHide={this.handleOnHide}
+                    keyboard={true}
                     dialogClassName="modal-preview">
                     <Modal.Header>
                         <Row>
@@ -97,9 +108,9 @@ var documentPreview = React.createClass({
                                 }</span>
                             </div>
                             <div className="col-sm-4 modal-actions text-right">
-                                <Button className="mb-xs mr-xs btn btn-green" bsClass={false} onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-                                <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass={false} onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
-                                <Button className="modal-button" bsClass={false} onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
+                                <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
+                                <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
                             </div>
                         </Row>
                     </Modal.Header>

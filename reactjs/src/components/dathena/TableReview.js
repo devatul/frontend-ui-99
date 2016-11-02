@@ -279,6 +279,7 @@ var Row3 = React.createClass({
     },
 
     handleOnclick: function(event) {
+        
         this.props.onClick &&
             this.props.onClick(event, this.props.index);
     },
@@ -477,7 +478,7 @@ var Row2 = React.createClass({
 var Row = React.createClass({
 
     propTypes: {
-        document: PropTypes.object.isRequired,
+        document: PropTypes.object,
     },
     
     componentWillMount() {
@@ -499,18 +500,30 @@ var Row = React.createClass({
     },
 
     handleSelectBoxOnchange: function(valSelect, event) {
+        let {
+            index
+        } = this.props;
+
         this.props.onChange &&
-            this.props.onChange(event, this.props.index);
+            this.props.onChange(event, index);
     },
 
-    handleOnChange: function(event) {
+    handleOnChange: function(e) {
+        let {
+            index
+        } = this.props;
+
         this.props.onChange &&
-            this.props.onChange(event, this.props.index);
+            this.props.onChange(e, index);
     },
 
-    handleOnclick: function(event) {
+    handleOnclick: function(e) {
+        let {
+            index
+        } = this.props;
+
         this.props.onClick &&
-            this.props.onClick(event, this.props.index);
+            this.props.onClick(e, index);
     },
 
     // renderColorConfidence(doc) {
@@ -561,16 +574,14 @@ var Row = React.createClass({
         return str;
     },
 
-    getIndex(array, name2) {
+    getIndex(array, name) {
         let index = -1;
-        name2 = this.replace(name2, ' ', '').toLowerCase()
-        if(array && array.length > 0) {
-            for(let i = array.lenth - 1; i >= 0; i--) {
-                if(array[i] && this.replace(array[i].name, ' ', '').toLowerCase() == name2)
-                {
-                    index = i;
-                    break;
-                }
+        name = name.toLowerCase()
+        for(let i = array.lenth - 1; i >= 0; i--) {
+            if(array[i] && array[i].toLowerCase().indexOf(name))
+            {
+                index = i;
+                break;
             }
         }
         return index;
@@ -592,7 +603,7 @@ var Row = React.createClass({
     render() {
         let { action, document, numberChecked, noConfidence, categories, confidentialities, hide } = this.props;
         return (
-            <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
+            document.path ? <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
                 { (hide && hide.checkbox) ? '' : <td>
                     <div className="checkbox-custom checkbox-default">
                         <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
@@ -630,7 +641,7 @@ var Row = React.createClass({
                                         max={100}
                                         now={document.confidence_level}
                                         active
-                                        label={<span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                                        label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                                 </ProgressBar>
                             </div>
                         }
@@ -638,9 +649,7 @@ var Row = React.createClass({
                             id="selectCategory"
                             className="form-control"
                             data={categories}
-                            value={findIndex(categories, (cat) => {
-                                return (this.replace(cat.name, ' ', '').toLowerCase() == this.replace(document.category.name, ' ', '').toLowerCase())
-                            })}/>
+                            value={ findIndex(categories, (cat) => { return cat.id == document.category.id }) }/>
                     </div>
                 </td>
                 <td className="select-confidentiality">
@@ -655,7 +664,7 @@ var Row = React.createClass({
                                             max={100}
                                             now={document.confidence_level}
                                             active
-                                            label={<span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                                            label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                                     </ProgressBar>
                                 </div>
                             }
@@ -664,10 +673,7 @@ var Row = React.createClass({
                             id="selectConfidentiality"
                             className="form-control"
                             data={confidentialities}
-                            value={findIndex(confidentialities, (con) => {
-                                return (this.replace(con.name, ' ', '').toLowerCase() == this.replace(document.confidentiality.name, ' ', '').toLowerCase())
-                            })}
-                        />
+                            value={ findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id }) }/>
                     </div>
                 </td>
                 <td>
@@ -676,7 +682,7 @@ var Row = React.createClass({
                         {this.renderStatus(document.status)}
                     </a>
                 </td>
-            </tr>
+            </tr> : <div></div>
         );
     }
 });

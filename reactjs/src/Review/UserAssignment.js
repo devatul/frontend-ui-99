@@ -100,7 +100,7 @@ var UserAssignment = React.createClass({
     },
     
     componentDidMount() {
-    	this.getCategoryList();
+    	this.getCategories();
         this.getSummary();
     	console.log(this.state);
     	javascript();
@@ -420,7 +420,7 @@ var UserAssignment = React.createClass({
         return confidentiality;
     },
     
-    handleOnChangeSelectButton: function(checked, index) {
+    handleOnChangeSelectButton: function(index, checked) {
         //add reviewer into request
         var { list } = this.state.reviewer, 
             { request } = this.state.datafilter,
@@ -511,22 +511,24 @@ var UserAssignment = React.createClass({
             }
         });
     },
-    getCategoryList() {
+    getCategories() {
 
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+
+                data = orderBy(data, ['name'], ['asc']);
+
                 data[data.length] = {
                     id: "summary",
                     name: "Summary"
                 }
 
                 var updateData = update(this.state.category, {
-                    list: {$set: data},
-                    current: {$set: data[this.state.category.default] }
-                });
-
-                var updateParam = update(this.state.datafilter, {
+                        list: {$set: data},
+                        current: {$set: data[this.state.category.default] }
+                    }),
+                    updateParam = update(this.state.datafilter, {
                     params: {
                         id: {
                             $set: data[this.state.category.default].id,

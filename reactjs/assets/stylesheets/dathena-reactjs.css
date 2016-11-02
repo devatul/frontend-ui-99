@@ -178,10 +178,49 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .note_chart_content_review.fix.has-arrow {
     margin-left: -250px;
 }
+
+
 @media (max-width: 768px) {
     .widget-panel .widget-chart .chart.chart-md {
         margin: auto;
     }
+
+
+
+    .user-assignment-filter.list-unstyled .dropdown-menu {
+        width: auto;
+    }
+
+    .user-assignment-filter .filter-list {
+        margin-left: 0px;
+    }
+
+    .user-assignment-filter .filter-list > li {
+        min-width: 100% !important;
+        width: 100%;
+    }
+}
+
+.user-assignment-filter.list-unstyled .dropdown-menu {
+    min-width: 230px;
+    width: 52vw;
+}
+
+.user-assignment-filter .filter-list > li {
+    text-align: left;
+    min-width: 140px;
+}
+
+.user-assignment-filter .filter-list > li:nth-child(1) {
+    width: 22%;
+}
+
+.user-assignment-filter .filter-list > li:nth-child(2) {
+    width: 31%;
+}
+
+.user-assignment-filter .filter-list > li:nth-child(3) {
+    width: 37%;
 }
 
 
@@ -316,6 +355,7 @@ div#doctypeChartUserAssignment {
 
 select.assigment-select.form-control {
     margin-right: 5px;
+    width: 80%;
 }
 
 .user-assign-valid-btn .validation-btn:hover,
@@ -356,6 +396,10 @@ select.assigment-select.form-control {
     width: 30%;
 }
 
+.dropdown-menu.info-scan {
+    max-width: 530px;
+}
+
 /* title menu bar */
 .my_main.bar_menu .title-heading {
     margin-top: 12px;
@@ -381,14 +425,14 @@ select.assigment-select.form-control {
 .table-my-actions.docPreview > thead tr th:nth-child(2) {
     width: initial;
 }
-/*tooltip chart*/
-/*.highcharts-container {
-  position: inherit !important;
-}*/
-.highcharts-tooltip {
-  z-index: 9998;
-  position: absolute;
+/*fix tooltip chart overview*/
+.widget-chart {
+    font-size: 12px;
 }
+.chart-stacked .highcharts-container {
+    z-index: 10 !important;
+}
+
 /*modal-backdrop*/
 .modal-backdrop {
     background-color: rgba(255, 255, 255, 0.5);
@@ -482,4 +526,24 @@ select.assigment-select.form-control {
     .navbar-nav .open .dropdown-menu {
         position: relative;
     }
+}
+
+/* Fix select orphan and group */
+.review_choose-cluster-block > .form-group,
+.review_choose-cluster-block > .form-group > .input-group ,
+.review_choose-cluster-block > .form-group > .input-group > label {
+    width: 100%;
+}
+
+.choose-cluster-block > .form-group .select2-container {
+    width: auto !important;
+}
+/* chart legend overview */
+.chart-legend li {
+    padding-left: 15px;
+}
+
+#overview-panel-2 i.fa {
+    text-align: center;
+    margin-right: 4px;
 }

@@ -147,7 +147,7 @@ var DocumentReview = React.createClass({
         });
     },
 
-    handleTableRowOnClick(event, actionIndex, docIndex, Review) {
+    handleTableRowOnClick(actionIndex, docIndex, Review, event) {
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
         switch(event.currentTarget.id) {
@@ -161,6 +161,7 @@ var DocumentReview = React.createClass({
     },
 
     onClickDocumentName(event, actionIndex, docIndex, Review) {
+        
         if(docIndex <= (this.state[Review][actionIndex].documents.length - 1)) {
             this.setState({
                 openPreview: true,
@@ -270,7 +271,7 @@ var DocumentReview = React.createClass({
 
     },
 
-    handleTableRowOnChange(event, actionIndex, docIndex, Review) {
+    handleTableRowOnChange(actionIndex, docIndex, Review, event) {
         //debugger
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
@@ -467,7 +468,7 @@ var DocumentReview = React.createClass({
         });
     },
 
-    handleCheckAll(event, actionIndex, Review) {
+    handleCheckAll(actionIndex, Review, event) {
         this.setState({
             [Review]: update(this.state[Review], {
                 [actionIndex]:

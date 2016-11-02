@@ -4,37 +4,43 @@ import {browserHistory} from 'react-router'
 import template from './App.rt'
 import Constant, {fetching} from './Constant.js';
 import update from 'react-addons-update'
-import {makeRequest} from './utils/http'
+import { makeRequest } from './utils/http'
+import { orderByIndex } from './utils/function'
+import { orderBy } from 'lodash'
 
 module.exports = React.createClass({
-  getInitialState() {
-    return {
-      xhr: {
-        status: "Report is loading",
-        message: "Please wait!",
-        timer: 40,
-        counting: 0,
-        loading: 100,
-        isFetching: fetching.SUCCESS,
-        error: {}
-      },
-      tokenAuth: ""
-    };
-  },
-
-  componentWillMount() {
-    let {pathname} = this.props.location,
-        token = sessionStorage.getItem('token');
-
-    if (token) {
-      switch (true) {
-        case pathname == '/':
-          browserHistory.push('/Dashboard/OverView');
-          break;
-        case pathname != '/':
-          browserHistory.push(pathname);
-          break;
-      }
+	getInitialState() {
+		return {
+			categories: [],
+			confidentialities: [],
+			xhr: {
+				status: "Report is loading",
+				message: "Please wait!",
+				timer: 50,
+				counting: 0,
+				loading: 100,
+				isFetching: fetching.SUCCESS,
+				error: false
+			},
+			scanResult: {},
+			tokenAuth: ""
+		};
+	},
+    componentWillMount()
+    {
+		let { pathname } = this.props.location
+    	var token = sessionStorage.getItem('token');
+    	if(token)
+		{
+			switch(true)
+			{
+				case pathname == '/':
+					browserHistory.push('/Dashboard/OverView');
+					break;
+				case pathname != '/':
+					browserHistory.push(pathname);
+					break;
+			}
 
       setInterval(() => {
         if (token) {
@@ -60,86 +66,147 @@ module.exports = React.createClass({
     sessionStorage.removeItem('token')
   },
 
-  componentDidUpdate(prevProps, prevState) {
-    let { xhr } = this.state;
+	// componentDidMount() {
+	// 	this.getCategories();
+	// 	this.getConfidentialities();
+	// },
+	
+	componentWillUpdate(nextProps, nextState) {
+		let {
+			categories
+		} = this.state;
 
-    if (xhr.isFetching != prevState.xhr.isFetching) {
-      let {isFetching} = xhr;
+		// if( !categories.length ) {
+		// 	this.getCategories()
+		// }
+	},
 
-      switch (isFetching) {
-        case fetching.START:
-          this.setState({
-            xhr: update(this.state.xhr, {
-              loading: {
-                $set: 0
-              },
-              isFetching: {
-                $set: fetching.STARTED
-              },
-              timer: {
-                $set: 50
-              },
-              status: {
-                $set: "Report is loading"
-              },
-              message: {
-                $set: "Please wait!"
-              },
-              error: {
-                $set: {}
-              }
-            })
-          });
-          break;
-        case fetching.STARTED:
-          break;
-        case fetching.SUCCESS:
-          this.setState({
-            xhr: update(this.state.xhr, {
-              loading: {
-                $set: 90
-              },
-              timer: {
-                $set: 0
-              }
-            })
-          });
-          break;
-        case fetching.ERROR:
-          let {xhr} = this.state;
-          break;
-      }
-    }
+	componentDidUpdate(prevProps, prevState) {
+		let {
+			xhr
+		} = this.state;
+		if(xhr.isFetching != prevState.xhr.isFetching) {
+			var { isFetching } = xhr;
+			switch(isFetching) {
+				case fetching.START:
+					this.setState({
+						xhr: update(this.state.xhr, {
+							loading:
+							{
+								$set: 0
+							},
+							isFetching:
+							{
+								$set: fetching.STARTED
+							},
+							timer:
+							{
+								$set: 50
+							},
+							status:
+							{
+								$set: "Report is loading"
+							},
+							message:
+							{
+								$set: "Please wait!"
+							},
+							error: {
+								$set: false
+							}
+						})
+					});
+					break;
+				case fetching.STARTED:
+
+					break;
+				case fetching.SUCCESS:
+					this.setState({
+						xhr: update(this.state.xhr, {
+							loading:
+							{
+								$set: 90
+							},
+							timer:
+							{
+								$set: 0
+							},
+							error:
+							{
+								$set: false
+							}
+						})
+					});
+					break;
+				case fetching.ERROR:
+					let { xhr } = this.state
+					this.setState({
+						xhr: update(this.state.xhr, {
+							status: 
+							{
+								$set: 'Oops!'
+							},
+							message:
+							{
+								$set: "We're sorry, but something went wrong."
+							},
+							error:
+							{
+								$set: true
+							}
+						})
+					});
+					break;
+			}
+		}
 
     if (xhr.loading < 100) {
       this.setLoading()
     }
   },
 
-  setLoading() {
-    let delay = 0, {xhr} = this.state;
+	setLoading() {
+        let delay = 0, { xhr } = this.state;
+        if( xhr.loading < 100 && !xhr.error ) {
+            delay = setInterval(() => {
+                let { loading } = this.state.xhr;
+                this.setState({
+					xhr: update(this.state.xhr, {
+						loading:
+						{
+							$set:  ++loading
+						}
+					})
+				})
+                clearInterval(delay)
+            }, xhr.timer * (xhr.loading/2));
+        }
+    },
+	renderMessage() {
+        let { message, status } = this.state.xhr;
+        return <p className="loading-label-2">
+        			{status}<br/><span className="pls">{message}</span>
+        		</p>
+    },
 
-    if (xhr.loading < 100 && xhr.error.status == null) {
-      delay = setInterval(() => {
-        let {loading} = this.state.xhr;
-
-        this.setState({
-          xhr: update(this.state.xhr, {
-            loading: {
-              $set: ++loading
+	getCategories: function() {
+        return makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+				data = orderBy(data, ['name'], ['asc']);
+                this.setState({ categories: data });
             }
-          })
         });
-
-        clearInterval(delay);
-      }, xhr.timer * (xhr.loading / 2));
-    }
-  },
-
-  renderMessage() {
-    let {message, status} = this.state.xhr;
-    return <p className="loading-label-2">{status}<br/><span className="pls">{message}</span></p>
-  },
+    },
+    getConfidentialities: function(async) {
+        return makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                data = orderByIndex(data, [4,3,2,1,0]);
+                this.setState({ confidentialities: data });
+            }
+        });
+    },
 
   updateStore(state) {
     let {xhr} = this.state;

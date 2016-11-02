@@ -9,299 +9,309 @@
 <rt-import name="BarChart" from="../components/chart/BarChart"/>
 <rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
 <rt-import name="Modal" from="react-bootstrap/lib/Modal" />
+<rt-import name="Tab" from="react-bootstrap/lib/Tab" />
+<rt-import name="Nav" from="react-bootstrap/lib/Nav" />
+<rt-import name="NavItem" from="react-bootstrap/lib/NavItem" />
+<rt-import name="Row" from="react-bootstrap/lib/Row" />
+<rt-import name="Col" from="react-bootstrap/lib/Col" />
+<rt-import name="Panel" from="../components/bootstrap/panel" />
+<rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <section>
-  <div class="container">
-      <div class="tabs tabs-primary">
-        <ul class="nav nav-tabs cat-list">
-          <li rt-repeat="category in this.state.category.list"
-              key="{categoryIndex}" class="{this.state.category.current.id == category.id && 'active'}">
-            <a id="{'Category_' + category.id}"
-              href="#categoryInfo"
-              onClick="()=>this.setCategoryCurrent(categoryIndex)"
-              data-toggle="tab" aria-expanded="true" 
-              style="text-transform: capitalize;">{category.name}</a>
-          </li>
-        </ul>
-        <div class="help_guide_sub tab-content">
-          <div id="categoryInfo" class="help_guide tab-pane {this.state.category.current.id != 'summary' ? 'active' : ''}">
-						<div class="row">
-              <div class="col-md-12">
-                <section class="panel panel-featured panel-has-child panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">Document Category Information</h2>
-                      <div class="panel-actions">
-                          <span>Number of Documents:
-                            <strong>{ this.state.category.info.number_docs &&
-                                          func.formatNumber(this.state.category.info.number_docs)}
-                            </strong>
-                          </span>
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body tab-content tab-pane">
-                    <div class="row">
-                      <div class="col-md-7">
-                        <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                          <header class="panel-heading">
-                              <h2 class="panel-title">
-                                Sample Parameters
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
-                              </h2>
-                              <div class="panel-actions">
-                                  <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                              </div>
-                          </header>
-                          <div class="panel-body sample-params clearfix">
-                            <div class="form-group user-assign-valid-btn left">
-                              <label class="">Fixed Number of Documents</label>
-                              <select ref="fixedNumberDoc" name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
-                                <option rt-repeat="docPercentage in this.state.category.info.doc_percentage"
-                                  class="lt"
-                                  key="{docPercentageIndex}"
-                                  value="{docPercentage.number_docs}">
-                                  {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(3)}%)
-                                </option>
-                              </select>
-                              <ValidationButton
-                                  id='category'
-                                  onClick={this.handleOnClickValidationButton}
-                                  status={this.state.buttonSample.category} />
-                            </div>
-                            <div class="or-divider"><span>OR</span></div>
-                            <div class="form-group user-assign-valid-btn right">
-                              <label class="">As % of overall {this.state.category.current.name}</label>
-                              <select ref="overallCategory" name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
-                                <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc" class="lt" key="{percentageDocIndex}" value="{percentageDoc.number_docs}">
-                                  {percentageDoc.percentage.toFixed(3)}% ({percentageDoc.number_docs} Documents)
-                                </option>
-                              </select>
-                              <ValidationButton
-                                  id='fixedNumber'
-                                  onClick={this.handleOnClickValidationButton}
-                                  status={this.state.buttonSample.fixedNumber} />
-                            </div>
-                          </div>
-                        </section>
-                        <div rt-scope=" this.state.dataChart.documentType as doctype " class="">
-                          <StackBarChart
-                              id="doctypeChartUserAssignment"
-                              title="Document Type per Level of Confidentiality"
-                              help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name} category."
-                              categories={doctype.categories}
-                              series={doctype.series} />
-                        </div>
-                      </div>
-                      <div class="col-sm-5 chart-pane chart-user-assignment">
-                          <PieChart
-                              id="confidentialityChart"
-                              title="Confidentiality"
-                              data={this.state.dataChart.confidentiality}
-                              help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>  
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-                  <header class="panel-heading">
-                      <h2 class="panel-title">User Selection - Key Contributor for {this.state.category.current.name}
-                        <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name} category." />
-                      </h2>
-                      <div class="panel-actions">
-                          <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                      </div>
-                  </header>
-                  <div class="panel-body">
-                    <div class="row">
-
-                      <div class="col-xs-12">
-                          <div class="row mt-md">
-                            <div class="col-xs-9">
-                              <div class="clearfix">
-                                <ul class="filter-buttons list-unstyled pull-left">
-                                    <li class="dropdown">
-                                        <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                                        <div class="dropdown-backdrop-custom" style="display:none"></div>
-                                        <div class="dropdown-menu has-child has-arrow dd-md" style="max-width: 620px;">
-                                            <ul class="filter-list list-unstyled pt-xs filter-list-with-help">
-                                                <li>
-                                                  <SelectBox
-                                                    id={this.static.selectId.timeframe}
-                                                    name="timeframe"
-                                                    className="assigment-select form-control ddList inline-block-item"
-                                                    data={this.state.datafilter.timeFrame}
-                                                    value={this.state.datafilter.setValue.timeframe}
-                                                    onOpen="{this.selectBoxOnOpen}"
-                                                    defaultValue={0}
-                                                    className="assignent-select form-control ddList"
-                                                    onChange="{this.handleOnChangeSelectBox}" />
-
-                                                    <HelpButton
-                                                        className="dropdown-help"
-                                                        classMenu="fix-overview-help-button-table"
-                                                        classIcon="overview_question_a"
-                                                        setValue="This will filter the list of in scope documents based on the selected timeframe."/>
-                                                </li>
-                                                <li>
-                                                  <SelectBox
-                                                    id={this.static.selectId.users}
-                                                    name="usersnum"
-                                                    class="assigment-select form-control ddList inline-block-item"
-                                                    data={this.state.datafilter.usersNumber}
-                                                    value={this.state.datafilter.setValue.users}
-                                                    defaultValue={0}
-                                                    className="assignent-select form-control ddList"
-                                                    onChange="{this.handleOnChangeSelectBox}" />
-                                                  <HelpButton
-                                                        className="dropdown-help"
-                                                        classMenu="fix-overview-help-button-table"
-                                                        classIcon="overview_question_a"
-                                                        setValue="Number of users that are displayed as suggested reviewers, ranked by activity"/>
-                                                </li>
-                                                <li>
-                                                  <SelectBox
-                                                    id={this.static.selectId.type}
-                                                    name="type"
-                                                    class="assigment-select form-control ddList inline-block-item"
-                                                    data={this.state.datafilter.type}
-                                                    value={this.state.datafilter.setValue.type}
-                                                    defaultValue={0}
-                                                    className="assignent-select form-control ddList"
-                                                    onChange="{this.handleOnChangeSelectBox}" />
-                                                  <HelpButton
-                                                        className="dropdown-help"
-                                                        classMenu="fix-overview-help-button-table"
-                                                        classIcon="overview_question_a"
-                                                        setValue="Filter the list of document users, based on who created the document or who last modified the document."/>
-                                                </li>
-                                            </ul>
+    <div class="container">
+        <Tab.Container id="tabs-assigment" activeKey="tab_{this.state.category.current.id}" defaultActiveKey="tab_1">
+            <div class="tabs tabs-primary">
+                <Nav bsClass="nav" class="cat-list nav-tabs">
+                    <NavItem rt-repeat="category in this.state.category.list"
+                        key="{category.id}"
+                        onSelect="{this.setCategoryCurrent.bind(this, categoryIndex)}"
+                        eventKey="tab_{category.id}">
+                      {category.name}
+                    </NavItem>
+                </Nav>
+                <Tab.Content class="help_guide_sub" animation>
+                    <Tab.Pane
+                        class="help_guide"
+                        key="content_category"
+                        eventKey="tab_{this.state.category.current.id === 'summary' ? 'hide' : this.state.category.current.id}">
+                        <Row>
+                            <Col md={12}>
+                                <Panel.custom class="panel-has-child panel-featured-compact panel-bordered">
+                                    <Panel.head>
+                                        <h2 class="panel-title">Document Category Information</h2>
+                                        <div class="panel-actions">
+                                            <span>Number of Documents:
+                                                <strong>{ this.state.category.info.number_docs &&
+                                                              func.formatNumber(this.state.category.info.number_docs)}</strong>
+                                              </span>
+                                              <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                         </div>
-                                    </li>
-                                </ul>
+                                    </Panel.head>
+                                    <Panel.body class="tab-content tab-pane">
+                                        <Row>
+                                            <Col md={7}>
+                                                <Panel.custom class="panel-has-child panel-featured-compact panel-bordered">
+                                                    <Panel.head>
+                                                        <h2 class="panel-title">
+                                                          Sample Parameters
+                                                          <HelpButton
+                                                              classMenu="fix-overview-help-button-table"
+                                                              setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
+                                                        </h2>
+                                                        <div class="panel-actions">
+                                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                        </div>
+                                                    </Panel.head>
+                                                    <Panel.body class="sample-params clearfix">
+                                                        <div class="panel-body sample-params clearfix">
+                                                            <div class="form-group user-assign-valid-btn left">
+                                                                <label class="">Fixed Number of Documents</label>
+                                                                <select ref="fixedNumberDoc" name="state" class="form-control ddList" onChange={this.handleSelectFixedNumber} >
+                                                                    <option rt-repeat="docPercentage in this.state.category.info.doc_percentage"
+                                                                      class="lt"
+                                                                      key="{docPercentageIndex}"
+                                                                      value="{docPercentage.number_docs}">
+                                                                      {docPercentage.number_docs} Documents ({docPercentage.percentage.toFixed(3)}%)
+                                                                    </option>
+                                                                </select>
+                                                                <ValidationButton
+                                                                    id='category'
+                                                                    onClick={this.handleOnClickValidationButton}
+                                                                    status={this.state.buttonSample.category} />
+                                                            </div>
+                                                            <div class="or-divider"><span>OR</span></div>
+                                                            <div class="form-group user-assign-valid-btn right">
+                                                                <label class="">As % of overall {this.state.category.current.name}</label>
+                                                                <select ref="overallCategory" name="state" class="form-control ddList" onChange={this.handleSelectOverall} >
+                                                                    <option rt-repeat="percentageDoc in this.state.category.info.percentage_doc" class="lt" key="{percentageDocIndex}" value="{percentageDoc.number_docs}">
+                                                                      {percentageDoc.percentage.toFixed(3)}% ({percentageDoc.number_docs} Documents)
+                                                                    </option>
+                                                                </select>
+                                                                <ValidationButton
+                                                                    id='fixedNumber'
+                                                                    onClick={this.handleOnClickValidationButton}
+                                                                    status={this.state.buttonSample.fixedNumber} />
+                                                            </div>
+                                                        </div>
+                                                    </Panel.body>
+                                                </Panel.custom>
+                                                <div rt-scope="this.state.dataChart.documentType as doctype " class="">
+                                                    <StackBarChart
+                                                        id="doctypeChartUserAssignment"
+                                                        key="chart_category"
+                                                        classContainer="doctype-chart-user-assignment"
+                                                        title="Document Type per Level of Confidentiality"
+                                                        help="Summary of the Confidentiality ratings assigned to each document type for the document within the {this.state.category.current.name} category."
+                                                        categories={doctype.categories}
+                                                        series={doctype.series} />
+                                                </div>
+                                            </Col>
+                                            <Col sm={5} class="chart-pane chart-user-assignment">
+                                                <PieChart
+                                                    id="confidentialityChart_category"
+                                                    key="chart2_category"
+                                                    title="Confidentiality"
+                                                    data={this.state.dataChart.confidentiality}
+                                                    help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                                            </Col>
+                                        </Row>
+                                    </Panel.body>
+                                </Panel.custom>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <Panel.custom class="panel-featured-compact panel-bordered">
+                                    <Panel.head>
+                                        <h2 class="panel-title">User Selection - Key Contributor for {this.state.category.current.name}
+                                            <HelpButton
+                                                classMenu="fix-overview-help-button-table"
+                                                setValue="You have to chose the user assigned to review the sample of document in the {this.state.category.current.name} category." />
+                                        </h2>
+                                        <div class="panel-actions">
+                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                        </div>
+                                    </Panel.head>
+                                    <Panel.body>
+                                        <Row>
+                                            <Col xs={12}>
+                                                <Row class="mt-md">
+                                                    <Col xs={9}>
+                                                        <div class="clearfix">
+                                                            <ul class="user-assignment-filter filter-buttons list-unstyled pull-left">
+                                                                <li class="dropdown">
+                                                                    <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                                                    <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                                                    <div class="dropdown-menu has-child has-arrow dd-md">
+                                                                        <ul class="filter-list list-unstyled pt-xs filter-list-with-help">
+                                                                            <li>
+                                                                              <SelectBox
+                                                                                id={this.static.selectId.timeframe}
+                                                                                name="timeframe"
+                                                                                className="assigment-select form-control ddList inline-block-item"
+                                                                                data={this.state.datafilter.timeFrame}
+                                                                                value={this.state.datafilter.setValue.timeframe}
+                                                                                onOpen={this.selectBoxOnOpen}
+                                                                                defaultValue={0}
+                                                                                className="assignent-select form-control ddList"
+                                                                                onChange={this.handleOnChangeSelectBox} />
 
-                                <div class="filter-tags-block pull-left">
-                                    <div class="pull-left filter-tags">
-                                      <FilterLabel
-                                          onClear="{this.handleClearLabel}"
-                                          data={this.state.datafilter.filterLabel}
-                                          onClick="{this.handleClickFilterLabel}" />
+                                                                                <HelpButton
+                                                                                    className="dropdown-help"
+                                                                                    classMenu="fix-overview-help-button-table"
+                                                                                    classIcon="overview_question_a"
+                                                                                    setValue="This will filter the list of in scope documents based on the selected timeframe."/>
+                                                                            </li>
+                                                                            <li>
+                                                                              <SelectBox
+                                                                                id={this.static.selectId.users}
+                                                                                name="usersnum"
+                                                                                class="assigment-select form-control ddList inline-block-item"
+                                                                                data={this.state.datafilter.usersNumber}
+                                                                                value={this.state.datafilter.setValue.users}
+                                                                                defaultValue={0}
+                                                                                className="assignent-select form-control ddList"
+                                                                                onChange={this.handleOnChangeSelectBox} />
+                                                                              <HelpButton
+                                                                                    className="dropdown-help"
+                                                                                    classMenu="fix-overview-help-button-table"
+                                                                                    classIcon="overview_question_a"
+                                                                                    setValue="Number of users that are displayed as suggested reviewers, ranked by activity"/>
+                                                                            </li>
+                                                                            <li>
+                                                                              <SelectBox
+                                                                                id={this.static.selectId.type}
+                                                                                name="type"
+                                                                                class="assigment-select form-control ddList inline-block-item"
+                                                                                data={this.state.datafilter.type}
+                                                                                value={this.state.datafilter.setValue.type}
+                                                                                defaultValue={0}
+                                                                                className="assignent-select form-control ddList"
+                                                                                onChange={this.handleOnChangeSelectBox} />
+                                                                              <HelpButton
+                                                                                    className="dropdown-help"
+                                                                                    classMenu="fix-overview-help-button-table"
+                                                                                    classIcon="overview_question_a"
+                                                                                    setValue="Filter the list of document users, based on who created the document or who last modified the document."/>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+
+                                                            <div class="filter-tags-block pull-left">
+                                                                <div class="pull-left filter-tags">
+                                                                  <FilterLabel
+                                                                      onClear={this.handleClearLabel}
+                                                                      data={this.state.datafilter.filterLabel}
+                                                                      onClick={this.handleClickFilterLabel} />
+                                                                </div>
+                                                            </div>
+
+                                                          </div>
+                                                          <BarChart
+                                                              id="userReviewBarChart_category"
+                                                              config={this.state.dataChart.reviewerChart.config}
+                                                              categories={this.state.dataChart.reviewerChart.categories}
+                                                              data={this.state.dataChart.reviewerChart.data} />
+                                                    </Col>
+                                                    <Col xs={3} class=" select-reviewers">
+                                                        <h4 style="margin-bottom:5px">Select the Reviewer(s)
+                                                        <HelpButton
+                                                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                          setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name} category." />
+                                                        </h4>
+                                                        <SelectButton
+                                                              key="{'select_all'}"
+                                                              title="Select All"
+                                                              setSelected="{this.state.datafilter.request.reviewers.length >= this.state.reviewer.list.length ? 'on' : 'off'}"
+                                                              onChange="{this.handleOnChangeSelectAll}" />
+                                                          <SelectButton
+                                                              rt-repeat="review in this.state.reviewer.list"
+                                                              key="{'select_' + reviewIndex}"
+                                                              title="{ review.first_name + '.' + review.last_name }"
+                                                              setSelected="{review.selected ? review.selected : 'off'}"
+                                                              onChange="{this.handleOnChangeSelectButton.bind(this, reviewIndex)}" />
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+                                    </Panel.body>
+                                    <div class="pull-right">
+                                        <button
+                                            class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
+                                            type="button"
+                                            onClick={this.handleValidateButton}>
+                                              Validate and Go to Next Category
+                                        </button>
                                     </div>
+                                </Panel.custom>
+                            </Col>
+                        </Row>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="tab_summary">
+                        <Panel.custom rt-repeat="summary in this.state.summary" class="panel-featured-compact panel-bordered">
+                            <Panel.head>
+                                <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
+                                <div class="panel-actions">
+                                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                                 </div>
-
-                              </div>
-                              <BarChart
-                                  id="userReviewBarChart"
-                                  config={this.state.dataChart.reviewerChart.config}
-                                  categories={this.state.dataChart.reviewerChart.categories}
-                                  data={this.state.dataChart.reviewerChart.data} />
+                            </Panel.head>
+                            <Panel.body>
+                                <Table responsive condensed class="table-reviewer-summary">
+                                    <thead>
+                                        <tr>
+                                            <th class="col20"></th>
+                                            <th class="col40">Number of Assigned Reviewers:</th>
+                                            <th class="col15">Documents Sampled</th>
+                                            <th class="col25">Total Number of Documents Classified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="no-border-top border-bottom" style="text-transform: capitalize">{summary.name}</td>
+                                            <td class="no-border-top"><span class="assigned-num">{summary.reviewers.length}</span> <a data-toggle="collapse" data-target="#reviewerList{summaryIndex+1}" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
+                                            <td class="no-border-top text-center">{summary.docs_sampled}</td>
+                                            <td class="no-border-top text-center">{func.formatNumber(summary.total_classified_docs)}</td>
+                                        </tr>
+                                        <tr class="child-table">
+                                            <td colspan="4" class="hiddenRow">
+                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr rt-repeat="viewer in summary.reviewers">
+                                                                <td class="col20 no-border-top"></td>
+                                                                <td class="col40" style="text-transform: capitalize">{viewer.first_name}.{viewer.last_name} (Last Modified)</td>
+                                                                <td class="col15"></td>
+                                                                <td class="col25 chart-col">
+                                                                    <div class="progress progress-xl progress-squared light">
+                                                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {viewer.number_docs/summary.total_classified_docs*100}%;">
+                                                                            <span class="percent">{viewer.number_docs}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </Panel.body>
+                        </Panel.custom>
+                        <div class="clearfix">
+                            <div class="pull-right">
+                                <button class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled' : '')}" onClick={this.confirmNotify} type="button">
+                                  Confirm and Notify all Reviewers
+                                </button>
                             </div>
-                            <div class="col-xs-3 select-reviewers">
-                              <h4 style="margin-bottom:5px">Select the Reviewer(s)
-                                <HelpButton
-                                  classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                  setValue="Users who are selected will have to review the sample of document in {this.state.category.current.name} category." />
-                              </h4>
-                              <SelectButton
-                                    key="{'select_all'}"
-                                    title="Select All"
-                                    setSelected="{this.state.datafilter.request.reviewers.length >= this.state.reviewer.list.length ? 'on' : 'off'}"
-                                    onChange="(e)=>this.handleOnChangeSelectAll(e)" />
-                                <SelectButton
-                                    rt-repeat="review in this.state.reviewer.list"
-                                    key="{'select_' + reviewIndex}"
-                                    title="{ review.first_name + '.' + review.last_name }"
-                                    setSelected="{review.selected ? review.selected : 'off'}"
-                                    onChange="(e)=>this.handleOnChangeSelectButton(e, reviewIndex)" />
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pull-right">
-                    <button
-                        class="btn btn-green btn-ok mb-sm mt-md {this.state.datafilter.request.reviewers.length <= 0 && 'disabled'}"
-                        type="button"
-                        onClick="{this.handleValidateButton}">
-                          Validate and Go to Next Category
-                    </button>
-                  </div>
-                </section>
-              </div>
+                        </div>
+                    </Tab.Pane>
+                </Tab.Content>
             </div>
-					</div>
-          <div id="summary" class="tab-pane {this.state.category.current.id == 'summary' ? 'active' : ''}">
-            <section rt-repeat="summary in this.state.summary" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered">
-              <header class="panel-heading">
-                  <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
-                  <div class="panel-actions">
-                      <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                  </div>
-              </header>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-condensed table-reviewer-summary">
-                    <thead>
-                      <tr>
-                        <th class="col20"></th>
-                        <th class="col40">Number of Assigned Reviewers:</th>
-                        <th class="col15">Documents Sampled</th>
-                        <th class="col25">Total Number of Documents Classified</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td class="no-border-top border-bottom" style="text-transform: capitalize">{summary.name}</td>
-                          <td class="no-border-top"><span class="assigned-num">{summary.reviewers.length}</span> <a data-toggle="collapse" data-target="#reviewerList{summaryIndex+1}" class="accordion-toggle ml-md"><i class="fa fa-plus-square" aria-hidden="true"></i></a></td>
-                          <td class="no-border-top text-center">{summary.docs_sampled}</td>
-                          <td class="no-border-top text-center">{func.formatNumber(summary.total_classified_docs)}</td>
-                      </tr>
-                      <tr class="child-table">
-                        <td colspan="4" class="hiddenRow">
-                          <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
-                            <table class="table">
-                              <tbody>
-                                <tr rt-repeat="viewer in summary.reviewers">
-                                  <td class="col20 no-border-top"></td>
-                                  <td class="col40" style="text-transform: capitalize">{viewer.first_name}.{viewer.last_name} (Last Modified)</td>
-                                  <td class="col15"></td>
-                                  <td class="col25 chart-col">
-                                    <div class="progress progress-xl progress-squared light">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {viewer.number_docs/summary.total_classified_docs*100}%;">
-                                          <span class="percent">{viewer.number_docs}</span>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          
-                          </div> 
-                         </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </section>
-            <div class="clearfix">
-              <div class="pull-right">
-                <button class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled' : '')}" onClick="{this.confirmNotify}" type="button">
-                  Confirm and Notify all Reviewers
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </Tab.Container>
     </div>
-    <Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide="{this.onHideModal}" dialogClassName="custom-modal">
+    <Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide={this.onHideModal} dialogClassName="custom-modal">
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg" style="color: #3c763d;">Well done!</Modal.Title>
         </Modal.Header>

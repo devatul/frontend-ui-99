@@ -4,25 +4,25 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import {isEmpty, forEach, isEqual, upperFirst} from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
-import {_categories, fetching} from '../Constant.js';
-import {makeRequest} from '../utils/http.js'
-import {orderByIndex} from '../utils/function'
-import $, {JQuery} from 'jquery';
-
-var OverView = React.createClass({
-  getInitialState() {
-    return {
-      scan: {
-        result: {}
-      },
-      configChart: {
-        categoryLanguage: [],
-        confidentiality: {},
-        doctypes: {}
-      },
-      loading: 0
-    };
-  },
+import { _categories, fetching } from '../Constant.js';
+import { makeRequest } from '../utils/http.js'
+import { orderByIndex, orderConfidentialities } from '../utils/function'
+import $, { JQuery } from 'jquery';
+var OverView = React.createClass
+({
+	getInitialState() {
+	    return {
+            scan: {
+                result: {}
+            },
+            configChart: {
+                categoryLanguage: [],
+                confidentiality: {},
+                doctypes: {}
+            },
+            loading: 0
+		};
+	},
 
   xhr: {
     getScan: null
@@ -124,24 +124,24 @@ var OverView = React.createClass({
       success: (data) => {
         let confidentialities = data.confidentialities;
 
-        data.confidentialities = orderByIndex(confidentialities, [0, 4, 1, 2, 3]);
-
-        this.props.updateStore({
-          xhr: update(this.props.xhr, {
-            isFetching: {
-              $set: fetching.SUCCESS
+                data.confidentialities = orderConfidentialities(confidentialities);
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.SUCCESS
+                        }
+                    }),
+                    scanResult: data
+                });
+                let setResult = update(this.state.scan, {
+                    result: { $set: data }
+                });
+                this.setState({ scan: setResult })
+                
             }
-          })
-        });
-
-        let setResult = update(this.state.scan, {
-          result: {$set: data}
-        });
-
-        this.setState({scan: setResult})
-      }
-    })
-  },
+        })
+    },
 
   updateChart(result, prevResult) {
     var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
