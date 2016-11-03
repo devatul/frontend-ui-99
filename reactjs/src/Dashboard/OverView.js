@@ -28,11 +28,12 @@ var OverView = React.createClass
     getScan: null
   },
 
-  componentDidMount() {
-    javascriptTodo();
-    //this.setLoading();
-    this.xhr.getScan = this.getScanResult();
-  },
+	componentDidMount() {
+        javascriptTodo();
+        //this.setLoading();
+        this.xhr.getScan = this.getScanResult();
+
+  	},
 
   componentWillUnmount() {
     if (this.xhr.getScan && this.xhr.getScan.abort) {
@@ -109,31 +110,31 @@ var OverView = React.createClass
                     result: { $set: data }
                 });
                 this.setState({ scan: setResult })
-                
+
             }
         })
     },
 
-  updateChart(result, prevResult) {
-    var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
-      {categoryLanguage, confidentiality, doctypes} = this.state.configChart;
+    updateChart(result, prevResult) {
+        var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
+            { categoryLanguage, confidentiality, doctypes } = this.state.configChart;
 
-    if (!isEqual(result.categories, prevResult.categories)
-      || !isEqual(result.languages, prevResult.languages)) {
-      categoryLanguageData = this.categoryLanguageChart();
-    } else {
-      categoryLanguageData = categoryLanguage;
-    }
-    if (!isEqual(result.confidentialities, prevResult.confidentialities)) {
-      confidentialityData = this.confidentialityChart();
-    } else {
-      confidentialityData = confidentiality;
-    }
-    if (!isEqual(result.doctypes, prevResult.doctypes)) {
-      doctypeData = this.doctypesChart();
-    } else {
-      doctypeData = doctypes;
-    }
+        if( !isEqual( result.categories, prevResult.categories )
+            || !isEqual( result.languages, prevResult.languages) ) {
+            categoryLanguageData = this.categoryLanguageChart();
+        } else {
+            categoryLanguageData = categoryLanguage;
+        }
+        if( !isEqual( result.confidentialities, prevResult.confidentialities )) {
+            confidentialityData = this.confidentialityChart();
+        } else {
+            confidentialityData = confidentiality;
+        }
+        if( !isEqual( result.doctypes, prevResult.doctypes ) ) {
+            doctypeData = this.doctypesChart();
+        } else {
+            doctypeData = doctypes;
+        }
 
     let updateData = update(this.state.configChart, {
       categoryLanguage: {$set: categoryLanguageData},
@@ -216,6 +217,8 @@ var OverView = React.createClass
         languages[langLen - 1] = other;
         //add to data chart
         for(let i = languages.length - 1; i >= 0; i--) {
+          if (languages[i] == null)
+            continue;
             languageChart.data[i] = {
                 name: upperFirst(languages[i].name),
                 y: languages[i].total_docs
@@ -246,12 +249,12 @@ var OverView = React.createClass
       categoryChart.disabled = true;
       languageChart.disabled = true;
 
-      categoryLanguageChart[0] = categoryChart;
-      categoryLanguageChart[1] = languageChart;
-    }
+            categoryLanguageChart[0] = categoryChart;
+            categoryLanguageChart[1] = languageChart;
+        }
 
-    return categoryLanguageChart;
-  },
+        return categoryLanguageChart;
+    },
 
   confidentialityChart() {
     var confidentialityChart = {
@@ -275,23 +278,23 @@ var OverView = React.createClass
     return confidentialityChart;
   },
 
-  doctypesChart() {
-    var doctypesChart = {
-        name: 'Document Type',
-        disabled: false,
-        innerSize: '60%',
-        colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
-        colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
-        data: []
-      },
-      {doctypes} = this.state.scan.result;
+    doctypesChart() {
+        var doctypesChart = {
+                name: 'Document Type',
+                disabled: false,
+                innerSize: '60%',
+                colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
+                colorsHover: [ '#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+                data: []
+            },
+            { doctypes } = this.state.scan.result;
 
-    for (let i = doctypes.length - 1; i >= 0; i--) {
-      doctypesChart.data[i] = {
-        name: upperFirst(doctypes[i].name),
-        y: doctypes[i].total_docs
-      };
-    }
+        for( let i = doctypes.length - 1; i >= 0; i-- ) {
+            doctypesChart.data[i] = {
+                name: upperFirst(doctypes[i].name),
+                y: doctypes[i].total_docs
+            };
+        }
 
     if (doctypesChart.data.length <= 1) {
       doctypesChart.disabled = true;
@@ -323,24 +326,24 @@ var OverView = React.createClass
     }
   },
 
-  handleFilter(bodyRequest) {
-    if (!isEmpty(bodyRequest)) {
-      makeRequest({
-        method: 'POST',
-        path: 'api/scan/filter/',
-        params: JSON.stringify(bodyRequest),
-        success: (data) => {
-          var setResult = update(this.state.scan, {
-            result: {$set: data}
-          });
-          this.setState({scan: setResult});
+    handleFilter: function(bodyRequest) {
+        if(!isEmpty(bodyRequest)) {
+            makeRequest({
+                method: 'POST',
+                path: 'api/scan/filter/',
+                params: JSON.stringify(bodyRequest),
+                success: (data) => {
+                    var setResult = update(this.state.scan, {
+                        result: { $set: data }
+                    });
+                    this.setState({ scan: setResult });
+                }
+            })
+        } else {
+            this.getScanResult();
         }
-      })
-    } else {
-      this.getScanResult();
-    }
-  },
+    },
 
-  render: template
+	render:template
 });
 module.exports = OverView;
