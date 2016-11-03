@@ -39,12 +39,14 @@
                                     setValue="User is required to review category and confidentiality level for the documents in the groups."/>
                             </b>
                             <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectGroup}" value="{this.state.groupCurrent.index}">
-                                <option
-                                    rt-repeat="group in this.state.groups"
-                                    value="{groupIndex}"
-                                    key="{groupIndex}">
-                                    {group.name}
-                                </option>
+                                <optgroup rt-repeat="group_parent in this.state.group_parent" label={group_parent}>
+                                    <option
+                                        rt-repeat="group in this.state.groups_by_name[group_parent]"
+                                        value="{group.index}"
+                                        key="{group.index}">
+                                        {group.name}
+                                    </option>
+                                </optgroup>
                             </select2>
                         </label>
                     </InputGroup>

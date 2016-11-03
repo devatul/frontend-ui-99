@@ -13,6 +13,8 @@ var OrphanReview = React.createClass({
     getInitialState: function() {
     	return {
             orphans: [],
+            groups_by_name : [],
+            group_parent : [],
     		orphanCurrent: {
                 id: 0,
                 name: 'orphan name',
@@ -300,7 +302,29 @@ var OrphanReview = React.createClass({
             path: "api/group/orphan",
             success: (res) => {
                 let orphan = Object.assign({}, res[0], { index: 0 });
-                this.setState({ orphans: res, orphanCurrent: orphan, shouldUpdate: true });
+
+                let groups_by_name = [];
+                let group_parent = [];
+                forEach(res, (group) => {
+                    let group_id = group.name.split(',')[0];
+                    let name = group.name.split(',')[1];
+                    if(!groups_by_name[group_id]){
+                        groups_by_name[group_id] = [];
+                        group_parent.push(group_id)
+                    }
+                    groups_by_name[group_id].push({
+                        name: name,
+                        index : i
+                    })
+
+                })
+                this.setState({ 
+                    groups_by_name : groups_by_name,
+                    group_parent : group_parent, 
+                    orphans: res, 
+                    orphanCurrent: orphan, 
+                    shouldUpdate: true 
+                });
             }
         });
     },

@@ -14,6 +14,8 @@ var GroupReview = React.createClass({
     	return {
     		listGroup:[],
             groups: [],
+            groups_by_name : [],
+            group_parent : [],
     		groupCurrent: {
                 id: 0,
                 name: 'group name',
@@ -301,12 +303,35 @@ var GroupReview = React.createClass({
 
     getGroups() {
         let data = [];
-
         makeRequest({
             path: "api/group/",
             success: (res) => {
                 let group = Object.assign({}, res[0], { index: 0 });
-                this.setState({ groups: res, groupCurrent: group, shouldUpdate: true });
+                let groups_by_name = [];
+                let group_parent = [];
+                forEach(res, (group,i) => {
+                    let group_id = group.name.split(',')[0];
+                    let name = group.name.split(',')[1];
+                    if(!groups_by_name[group_id]){
+                        groups_by_name[group_id] = [];
+                        group_parent.push(group_id)
+                    }
+                    groups_by_name[group_id].push({
+                        name: name,
+                        index : i
+                    })
+
+                })
+                console.log(groups_by_name)
+                 this.setState(
+                    { 
+                        groups: res,
+                        groups_by_name : groups_by_name,
+                        group_parent : group_parent, 
+                        groupCurrent: group, 
+                        shouldUpdate: true 
+                    }
+                );
             }
         });
     },
@@ -378,7 +403,6 @@ var GroupReview = React.createClass({
                 "id": this.state.groupCurrent.id
             },
             success: (centroids) => {
-                console.log(centroids)
                 var series = [], total = centroids.length;
                 let max = maxBy(centroids, doc => doc.number_docs)
                 let max_circle_size = 6

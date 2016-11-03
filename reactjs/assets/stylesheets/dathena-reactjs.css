@@ -539,7 +539,7 @@ select.assigment-select.form-control {
 }
 
 .choose-cluster-block > .form-group .select2-container {
-    width: auto !important;
+    width: 50% !important;
 }
 /* chart legend overview */
 .chart-legend li {
