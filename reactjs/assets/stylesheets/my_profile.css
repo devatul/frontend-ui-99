@@ -624,8 +624,8 @@ select.record_select {
 }
 .record-align-left>ul>li {
 	display: inline;
-	text-align: left;
 	float: left;
+	text-align: left;
 }
 .record-align-left>ul>li:last-child {
 	text-align: right;
