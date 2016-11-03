@@ -203,7 +203,7 @@
                   </h4>
                   {this.fileDistribution()}
                 </div>
-                <CentroidChart series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
+                <CentroidChart key="Centroid_chart_orphan" series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
               </Row>
             </Col>
           </Row>
