@@ -107,7 +107,7 @@ var OrphanReview = React.createClass({
         this.setState({ showLoading: 'block', shouldUpdate: true });
     },
 
-    handleOnChangeSelectGroup(event) {
+    handleOnChangeSelectOrphan(event) {
         let { orphans } = this.state,
             index = event.target.value,
             orphan = Object.assign({}, orphans[index], { index: parseInt(index) });
