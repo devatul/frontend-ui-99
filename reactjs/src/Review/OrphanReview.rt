@@ -33,7 +33,7 @@
         <InputGroup class="mb-md">
           <label>
             <b class="mr-md">
-              Select a orphan to review
+              Select an orphan to review
               <HelpButton classMenu="fix-overview-help-button-table" setValue="User is required to assign category and confidentiality Level for orphaned documents." />
             </b>
             <select2 id="chosse_cluster" width="{300}" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
