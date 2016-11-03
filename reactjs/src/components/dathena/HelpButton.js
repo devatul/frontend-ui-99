@@ -12,6 +12,12 @@ var HelpButton = React.createClass({
         return {
             setOpen: '',
             expanded: false,
+            styleContent : {
+                'fontSize' :'13px',
+                'marginBottom': '0px',
+                'whiteSpace' : 'normal' ,
+                'fontWeight': 'initial'
+            },
         };
     },
 
@@ -51,13 +57,13 @@ var HelpButton = React.createClass({
                     'margin-right' : right + 'px'
                 });
         }
-        
+
         else {
             $(dropdownMenu).css({
                     'display': 'block'
                 });
         }
-        
+
         this.setState({ setOpen: 'open', expanded: true });
     },
 
@@ -71,7 +77,7 @@ var HelpButton = React.createClass({
         }
         if ($(dropdownMenu).hasClass('none-right')) {
             $(dropdownMenu).removeClass('none-right');
-        } 
+        }
         $(dropdownMenu).css({
                 'display': 'none'
             });
@@ -109,7 +115,7 @@ var HelpButton = React.createClass({
                     <i className="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
                 <div ref="dropdownMenu" className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
-                    <p dangerouslySetInnerHTML={{ __html: value }} style={{'fontSize' :'13px', marginBottom: '0px', whiteSpace : 'normal'}}/>
+                    <p dangerouslySetInnerHTML={{ __html: value }} style={this.state.styleContent}/>
                 </div>
 
             </div>

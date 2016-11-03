@@ -7,8 +7,7 @@ import update from 'react-addons-update'
 import { makeRequest } from './utils/http'
 import { orderByIndex } from './utils/function'
 import { orderBy } from 'lodash'
-
-
+import { git_version } from './commit'
 module.exports = React.createClass({
 	getInitialState() {
 		return {
@@ -253,6 +252,9 @@ module.exports = React.createClass({
             	return React.cloneElement(child, stateMap)
             });
     },
+	commit() {
+		return git_version;
+	},
     render:template
 
 });

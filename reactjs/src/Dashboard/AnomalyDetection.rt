@@ -13,8 +13,8 @@
             <div class="panel-body pb-none">
                 <div class="row">
                     <!-- Code API Anomaly Review-->
-                     <div class="col-md-4" rt-repeat = "risk in this.state.anomaly_rick" >
-                          <section class="panel" key="riskIndex">
+                     <div class="col-md-4" rt-repeat="risk in this.state.anomaly_rick" key="risk_{riskIndex}">
+                          <section class="panel" key="{riskIndex}">
                             <div class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
                               <h4 class="widget-title">{this.upperFirst(risk.name)}
                                          <HelpButton
@@ -60,11 +60,11 @@
                       </div>
                     </div>
                      <Circle
-                        id = 'chart_1'
-                        className = "anomaly-icon anomaly-icon-fix fix-icon-user"
-                        value_inner= "{this.state.user_Client && this.state.user_Client.prediction_percentage}"
-                        value_outer = "{this.state.user_Client && this.state.user_Client.risk_percentage}"
-                        content_outer= "{this.state.user_Client &&  this.state.user_Client.risk_type}"
+                        id='chart_1'
+                        className="anomaly-icon anomaly-icon-fix fix-icon-user"
+                        value_inner="{this.state.user_Client && this.state.user_Client.prediction_percentage}"
+                        value_outer="{this.state.user_Client && this.state.user_Client.risk_percentage}"
+                        content_outer="{this.state.user_Client &&  this.state.user_Client.risk_type}"
                         content_inner="Prediction Quality: {this.state.user_Client && this.state.user_Client.prediction_quality} " />
                 </div>
                 <div class="col-md-9">
@@ -83,7 +83,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr rt-if="this.state.user_Client" rt-repeat = "tbl in this.state.user_Client.data_first_table">
+                          <tr rt-if="this.state.user_Client" rt-repeat="tbl in this.state.user_Client.data_first_table" key="tbl_{tblIndex}">
                             <td><span class="text-big">{tbl["User with Anomaly"]}</span></td>
                             <td><span class="text-normal">{tbl["Confidentiality at Risk"]}</span></td>
                             <td><span class="text-big">{tbl["Folder at Risk"]}</span></td>
@@ -153,7 +153,7 @@
                       </div>
                     </div>
                 <div class="col-md-3">
-                  <Circle id = 'chart_2' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-window" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                  <Circle id = 'chart_2' value_inner={50} value_outer={80}  className = "anomaly-icon anomaly-icon-fix fix-icon-window" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
@@ -251,7 +251,7 @@
                       </div>
                     </div>
                   <div class="anomaly-radial">
-                    <Circle id = 'chart_3' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                    <Circle id = 'chart_3' value_inner={50} value_outer={80}  className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                   </div>
                 </div>
                 <div class="col-md-9" style="margin-top: 50px">
@@ -364,7 +364,7 @@
                             </div>
                         </div>
                         <div class="anomaly-radial">
-                            <Circle id = 'chart_4' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                            <Circle id='chart_4' value_inner={50} value_outer={80}  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
                         </div>
                     </div>
                 <div class="col-md-9">
@@ -475,7 +475,7 @@
                         </div>
                     </div>
                     <div class="anomaly-radial">
-                        <Circle id = 'chart_5' value_inner=50 value_outer = 80  className = "anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High "/>
+                        <Circle id = 'chart_5' value_inner={50} value_outer={80}  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="Medium Risk" content_inner="Prediction Quality: High "/>
                     </div>
                 </div>
                 <div class="col-md-9">

@@ -59,6 +59,7 @@ var TabName = React.createClass({
             case 'it' : return 'Italian' ;
             case 'no' : return 'Norwegian' ;
             case 'pt' : return 'Portuguese' ;
+			case 'de' : return 'German' ;
             case 'en' : return 'English' ;
             case 'fr' : return 'French' ;
             default : return language

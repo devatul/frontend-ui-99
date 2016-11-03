@@ -164,19 +164,22 @@ var ClassificationReview = React.createClass({
             docIndex = parseInt(idx[1]);
 
         let hasNextDocument = false;
+        let isNextCategory = false;
 
         if(docIndex <= (this.state.dataReview[reviewIndex].documents.length - 1)) {
             if(this.state.dataReview[reviewIndex].documents.length > docIndex + 1){
                 hasNextDocument = true;
             }else if(this.state.dataReview[reviewIndex+1] && this.state.dataReview[reviewIndex+1].documents.length){
                 hasNextDocument = true;
+                isNextCategory = true;
             }
             this.setState({
                 openPreview: true,
                 current: {
                     doc: docIndex,
                     review: reviewIndex,
-                    hasNextDocument: hasNextDocument
+                    hasNextDocument: hasNextDocument,
+                    isNextCategory : isNextCategory
                 },
                 shouldUpdate: true
             });
@@ -188,13 +191,15 @@ var ClassificationReview = React.createClass({
                     hasNextDocument = true;
                 }else if(this.state.dataReview[reviewIndex+1] && this.state.dataReview[reviewIndex+1].documents.length){
                     hasNextDocument = true;
+                    isNextCategory = true;
                 }
                 this.setState({
                     openPreview: true,
                     current: {
                         doc: docIndex,
                         review: reviewIndex,
-                        hasNextDocument: hasNextDocument
+                        hasNextDocument: hasNextDocument,
+                        isNextCategory : isNextCategory
                     },
                     shouldUpdate: true
                 });

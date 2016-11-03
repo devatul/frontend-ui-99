@@ -90,7 +90,7 @@ var PieChart = React.createClass({
                     if(percent < 5.0) {
                         return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
                     } else {
-                        return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + this.y + ' Documents';
+                        return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
                     }
                 }
             },
@@ -116,6 +116,8 @@ var PieChart = React.createClass({
                         }
                     },
                     showInLegend: true,
+                    borderColor: data && data.length === 1 ? colors[0] : '#FFF',
+                    size: 310,
                     point:  {
                         events: {
                             mouseOver: function(event){

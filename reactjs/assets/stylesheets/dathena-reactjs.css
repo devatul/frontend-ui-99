@@ -94,6 +94,60 @@
     z-index: 1050
 }
 
+/* Chart overview */
+
+@media (min-width: 992px) {
+    .charts.container .col-md-4 {
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+
+    .container.overview-summary .col-md-12 {
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+    .chart-legend li .legend-symbol {
+        width: 10px;
+        height: 10px;
+    }
+
+    .chart-panel .chart-legend.serie-0 li:nth-child(even) {
+        width: 53%;
+        margin-left: 5px;
+    }
+
+    .chart-panel .chart-legend.serie-0 li:nth-child(odd) {
+        width: 43%;
+    }
+
+    .chart-legend li {
+        padding-left: 12px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .chart-panel {
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .chart-panel .chart.chart-md {
+        margin: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .chart-panel {
+        max-width: 400px;
+        margin: auto;
+    }
+    .charts.container .col-md-4 {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+
 .my-chart-legend-center {
     margin: 0 auto 5px;
     width: 40px;
@@ -101,7 +155,7 @@
 }
 
 .chart-stacked .chart-legend.serie-1 {
-    right: 15px;
+    right: 8px;
     top: -15px;
 }
 
@@ -245,9 +299,12 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .cendroid-chart-legend.new .document-symbol i {
     display: inline-block;
     vertical-align: middle;
-    margin-left: 10px;
     border-radius: 50%;
     background-color: #DADADA;
+}
+
+.cendroid-chart-legend.new .document-symbol span {
+    margin-left: 5px;
 }
 
 /* fix label progress bar */
@@ -551,6 +608,10 @@ select.assigment-select.form-control {
 /* chart legend overview */
 .chart-legend li {
     padding-left: 15px;
+}
+
+.panel-body.chart-panel {
+    min-height: 432px;
 }
 
 #overview-panel-2 i.fa {

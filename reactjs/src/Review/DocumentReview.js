@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import template from './DocumentReview.rt'
 import update from 'react/lib/update'
 import Constant, { status } from '../Constant.js'
-import { cloneDeep, isEqual, find, findIndex } from 'lodash'
+import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var DocumentReview = React.createClass({
@@ -589,6 +589,7 @@ var DocumentReview = React.createClass({
         return makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });

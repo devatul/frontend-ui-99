@@ -26,13 +26,13 @@
                         <option value="update-completed">Completed Actions</option>
                     </select>
                 </div>
-                <div class="col-sm-5 mb-md pull-right">
+                <div class="col-sm-6 mb-md pull-right inline-block-item">
 
-                    <span class="mr-md">Action completed on time: <b>100% </b></span>
+                    <span class="mr-md" style="margin-left: 85px">Action completed on time: <b>100% </b></span>
                     <span class="mr-md">Pending Actions: <b>{this.state.total}</b></span>
                     <span class="mr-md" rt-if="this.state.filtersAlert != 'veryhigh'"><i class="fa fa-exclamation-triangle fa-alert-warning filter-noti-icon" data-type="high" onClick="()=>this.filterAlert('high')"></i> : {this.state.warningNoti}</span>
                     <span class="mr-md" rt-if="this.state.filtersAlert != 'high'"><i class="fa fa-exclamation-triangle fa-alert-danger filter-noti-icon" data-type="very high" onClick="()=>this.filterAlert('veryhigh')"></i> : {this.state.dangerNoti}</span>
-                    <HelpButton1 className="r dropdown inline-block-item" type="my-team-note dropdown-menu has-arrow icon_help_noti dd-md dropdown_menu dd-md fix_width_notification full-mobile fix_center" content={this.state.content} />
+                    <HelpButton1 className="r dropdown inline-block-item " type="my-team-note dropdown-menu has-arrow icon_help_noti dd-md dropdown_menu dd-md fix_width_notification full-mobile fix_center" content={this.state.content} />
 
                 </div>
             </div>

@@ -32,7 +32,7 @@
                             <div class="noti-block">
                                 <h3 class="noti-date">Last Update</h3>
                                 <ul class="list-unstyled noti-list" rt-if="unseen_notiData.notifications != null" >
-                                    <li rt-repeat="notification in unseen_notiData.notifications">
+                                    <li rt-repeat="notification in unseen_notiData.notifications" key="noti_{notificationIndex}">
                                         <i rt-class="{
                                             'fa': true,
                                             'fa-check icon-success': notification.urgency === 'done',
@@ -63,7 +63,7 @@
                             </div>
                             <span class="actions-percentage">Action completed on time: 100%</span>
                             <ul class="list-unstyled noti-list" rt-if="this.state.unseen_notiData.actions != null">
-                                <li rt-repeat="actions in this.state.unseen_notiData.actions">
+                                <li rt-repeat="actions in this.state.unseen_notiData.actions" key="action_{actionsIndex}">
                                     <i rt-class="{
                                         'fa': true,
                                         'fa-check icon-success': actions.urgency === 'done',

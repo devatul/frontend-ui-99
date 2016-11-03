@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
-import { forEach, upperFirst, isEqual, cloneDeep, findIndex } from 'lodash'
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash'
 import template from './OrphanReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
@@ -33,7 +33,7 @@ var OrphanReview = React.createClass({
             checkBoxAll: false,
             stackChange: [],
             showLoading: "none",
-            
+
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -55,11 +55,11 @@ var OrphanReview = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
-    
+
     componentDidUpdate: function(prevProps, prevState) {
-        
+
         if(this.state.shouldUpdate ===  true) {
             this.setState({ shouldUpdate: false });
         }
@@ -75,7 +75,7 @@ var OrphanReview = React.createClass({
             let validNumber = this.validateNumber(),
                 checkNumber = this.checkedNumber(),
                 docNumber = this.state.documents.length;
-                
+
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
@@ -107,7 +107,7 @@ var OrphanReview = React.createClass({
         this.setState({ showLoading: 'block', shouldUpdate: true });
     },
 
-    handleOnChangeSelectGroup(event) {
+    handleOnChangeSelectOrphan(event) {
         let { orphans } = this.state,
             index = event.target.value,
             orphan = Object.assign({}, orphans[index], { index: parseInt(index) });
@@ -118,7 +118,7 @@ var OrphanReview = React.createClass({
     handleNextOrphan() {
         let { index } = this.state.orphanCurrent,
             orphan = Object.assign({}, this.state.orphans[index + 1], { index: index + 1 });
-            
+
         if(index < (this.state.orphans.length - 1)) {
             this.setState({
                 orphanCurrent: orphan,
@@ -171,7 +171,7 @@ var OrphanReview = React.createClass({
     },
 
     handleTableRowOnChange(event, index) {
-        
+
         switch(event.target.id) {
             case 'checkbox': {
                 this.onChangeCheckBox(event, index);
@@ -197,7 +197,7 @@ var OrphanReview = React.createClass({
                         checked: event.target.checked
                     }
                 }
-            }), 
+            }),
             updateStack = update(this.state.stackChange, {
                 $push: [{
                     id: index,
@@ -269,7 +269,7 @@ var OrphanReview = React.createClass({
                 return data;
             }
         });
-        
+
         this.setState({ documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true });
     },
 
@@ -333,7 +333,7 @@ var OrphanReview = React.createClass({
             </div>
         );
     },
-    
+
     getStatistics: function() {
         makeRequest({
             path: "api/group/orphan/statistics/",
@@ -373,6 +373,8 @@ var OrphanReview = React.createClass({
             },
             success: (centroids) => {
                 var series = [], total = centroids.length;
+                let max = maxBy(centroids, doc => doc.number_docs)
+                let angle_multiplier = 360 / (total)
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -382,12 +384,12 @@ var OrphanReview = React.createClass({
                                 symbol: 'circle'
                             },
                             data: [
-                                [45 * i, centroids[i].end], 
+                                [angle_multiplier * (i + 0.5), centroids[i].end],
                                 {
-                                x: 45 * i,
+                                x: angle_multiplier * (i + 0.5),
                                 y: 0,
                                 document: centroids[i].number_docs,
-                                weight: i+1,
+                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * total),
                                 marker: {
                                     enabled: false,
                                     states: {
@@ -450,7 +452,7 @@ var OrphanReview = React.createClass({
             }
         });
     },
-    
+
     progressbar: function(value) {
         var {
             avg_centroid_distance,
@@ -470,7 +472,7 @@ var OrphanReview = React.createClass({
             }
         }
     },
-    
+
     checkedNumber() {
         let num = 0,
             { documents } = this.state;
@@ -480,14 +482,14 @@ var OrphanReview = React.createClass({
                 num++;
             }
         }
-        
+
         return num;
     },
 
     validateNumber() {
         let num = 0,
             { documents } = this.state;
-            
+
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].status === status.ACCEPTED.name) {
                 num++;
@@ -576,7 +578,7 @@ var OrphanReview = React.createClass({
                         symbol: 'circle'
                     },
                     data: [
-                        [10, series[i].end], 
+                        [10, series[i].end],
                         {
                         x: 10,
                         y: 0,
@@ -603,7 +605,7 @@ var OrphanReview = React.createClass({
         });
         this.setState({ dataChart: updateChart });
     },
-    
+
     drawChart() {
         var category = this.state.categoriesInfo;
 		var pieChart = [],
@@ -626,7 +628,7 @@ var OrphanReview = React.createClass({
                 documentType.series[i].data[j] = data[j].total;
             }
         }
-        
+
         var updateChart = update(this.state.dataChart, {
             pieChart: { $set: pieChart },
             documentType: { $set: documentType }
