@@ -299,6 +299,9 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: "api/group/orphan",
             success: (res) => {
+                res.sort(function(a, b) {
+                    return +a.id - (+b.id);
+                });
                 let orphan = Object.assign({}, res[0], { index: 0 });
                 this.setState({ orphans: res, orphanCurrent: orphan, shouldUpdate: true });
             }
