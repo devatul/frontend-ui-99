@@ -327,7 +327,7 @@ var GroupReview = React.createClass({
         });
 
         for(let i = data.length - 1; i >= 0; i--) {
-            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+            children[i] = <div key={'file_' + i} className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
                             {data[i].name}
                             <span className="item-legend">{data[i].total}</span>
                         </div>;

@@ -89,7 +89,7 @@ var NumberUser = React.createClass({
                                     <label className="radio">
                                     <input id={'radio_filter_' + index} type="radio"
                                         name="radio_filter"
-                                        onClick={(event)=>this.handleOnChange(event,index,size)}
+                                        onChange={(event)=>this.handleOnChange(event,index,size)}
                                         value={index}
                                         checked = {obj.checked}
                                     /> {obj.name}

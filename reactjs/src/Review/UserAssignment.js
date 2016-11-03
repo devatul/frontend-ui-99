@@ -5,7 +5,7 @@ import template from './UserAssignment.rt'
 import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
-import { upperFirst, findIndex, assignIn, isEqual, cloneDeep, orderBy } from 'lodash'
+import { upperFirst, findIndex, find, assignIn, isEqual, cloneDeep, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
 
 var UserAssignment = React.createClass({
@@ -324,14 +324,22 @@ var UserAssignment = React.createClass({
         this.setState({ datafilter: setReviewer, shouldUpdate: true });
     },
 
-    setCategoryCurrent: function(categoryIndex) {
-        var category = this.state.category.list[categoryIndex];
+    setCategoryCurrent: function(tab) {
 
-        var setCategory = update(this.state.category, {
-            current: { $set: category }
-        });
+        let {
+            list
+        } = this.state.category,
 
-        var datafilter = update(this.state.datafilter, {
+        category = find(list, { id: tab.split('_')[1] }),
+
+        setCategory = update(this.state.category, {
+            current:
+            {
+                $set: category
+            }
+        }),
+        
+        datafilter = update(this.state.datafilter, {
             request: {
                 id: {
                     $set: category.id

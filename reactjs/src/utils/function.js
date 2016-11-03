@@ -25,6 +25,10 @@ module.exports = {
         return newArray;
     },
 
+  removeUndefined(array) {
+    return array;
+  },
+
     orderConfidentialities(array) {
         let newArray = [],
             {
@@ -59,7 +63,14 @@ module.exports = {
                 }
             }
         }
-        return newArray;
+
+      for (var i = 0; i < newArray.length; i++) {
+        if (newArray[i] == undefined) {
+          newArray.splice(i, 1);
+          i--;
+        }
+      }
+      return newArray;
     },
 
     renderClassType: (documentName) => {

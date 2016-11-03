@@ -58,13 +58,22 @@ var DataLost = React.createClass({
                     //arr.push(data[i].language)
                 //}
                 /*  this.setState({language : arr})*/
+                data.forEach(lang => {
+                    let keywordsArr = [];
+                    lang['most efficient keywords'].forEach(keyword => {
+                        if(keyword.category_name !== 'Undefined') {keywordsArr.push(keyword)}
+                    });
+                    lang['most efficient keywords'] = keywordsArr;
+                });
+
+
                 let updateDataLoss = update(this.state, {
                     dataLoss: { $set: data },
                     default_data: { $set: data[0] },
                     language: { $set: arr }
-                })
+                });
                 this.setState(updateDataLoss)
-                console.log('data', data)
+                console.log('data', this.state.dataLoss);
                 console.log('default_data', this.state.default_data)
 
             }.bind(this),

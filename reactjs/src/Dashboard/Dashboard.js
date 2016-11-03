@@ -112,7 +112,10 @@ module.exports = React.createClass({
         makeRequest({
             path: 'api/notification/popup',
             success: (data) => {
-                this.setState({ unseen_notiData: data, save_list: data.actions , total_pending : data.actions.length})
+                let newData = {}
+                newData.actions = _.slice(data.actions,0,3)
+                newData.notifications = _.slice(data.notifications,0,3)
+                this.setState({ unseen_notiData: newData, save_list: newData.actions, total_pending : data.actions.length})
                 this.countNumber(data.actions)
                 console.log(this.state.unseen_notiData)
             }

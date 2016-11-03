@@ -42,7 +42,7 @@
                     <Tab language =  {this.state.language} click = {this.changeDefaul} />
                     <div id="lossIndex">
                         <div class="panel-body"
-                        rt-if="this.state.default_data['most efficient keywords'] && this.state.default_data['most efficient keywords'][0].category_name !== 'Undefined'"
+
                         rt-repeat = "data in this.state.default_data['most efficient keywords']" key={dataIndex} >
                             <div class="table-responsive table-suggestion-wrapper">
                                 <h4 class="table-title">{data.category_name}</h4>
