@@ -169,6 +169,7 @@
 
 .legend.fix {
     left: 14px;
+    white-space: nowrap;
 }
 
 .fix-anomaly-help-button {
@@ -422,4 +423,7 @@
     font-size:12px;
     color:#333333;
     fill:#333333;
+}
+.fix-mr-md{
+    margin-right: 20px
 }
