@@ -9,7 +9,10 @@ import 'jquery';
 var Signin = React.createClass({
   getInitialState() {
     return {
-      email: '', password: '', isRemember: false, err: ''
+      email: '',
+      password: '',
+      isRemember: false,
+      err: ''
     };
   },
 
@@ -31,7 +34,10 @@ var Signin = React.createClass({
     let email = this.state.email.trim(), //'root@dathena.io';//
         password = this.state.password.trim(); //'dathenaiscool';//
 
-    if (email.length <= 0 || password.length <= 0) return;
+    if (email.length <= 0 || password.length <= 0) {
+      console.log('please wrote some text');
+      return;
+    }
 
     $.ajax({
       url: Constant.SERVER_API + 'api/token/api-token-auth/',
@@ -45,15 +51,16 @@ var Signin = React.createClass({
         sessionStorage.setItem('token', data.token);
         browserHistory.push('/Dashboard/OverView');
       }.bind(this),
-      error: function (xhr, status, err) {
-        var jsonResponse = JSON.parse(xhr.responseText);
-
-        this.setState({err: "The username and password you entered don't match"});
-
-        $('#password').addClass("has-error");
-        $('#username').addClass("has-error");
-
-        console.log(err);
+      error: function (xhr) {
+        if(xhr.status === 400) {
+          this.setState({err: "The username and password you entered don't match"});
+          $('#password').addClass("has-error");
+          $('#username').addClass("has-error");
+        } else if(xhr.status >= 500 && xhr.status <= 599) {
+          this.setState({err: "Connection failed. Please retry later."});
+        } else {
+          this.setState({err: "An error occurred"});
+        }
       }.bind(this)
     });
 
