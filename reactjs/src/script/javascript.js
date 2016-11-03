@@ -28,7 +28,7 @@ module.exports = function () {
 
     // and when you show it, move it to the body                                     
     $(window).on('show.bs.dropdown', function (e) {
-
+        debugger;
         var windowWidth = $(window).innerWidth();
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');

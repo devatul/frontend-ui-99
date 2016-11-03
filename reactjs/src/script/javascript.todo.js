@@ -33,7 +33,8 @@ module.exports = function () {
         var windowWidth = $(window).innerWidth();
         // grab the menu     
         dropdownMenu = $(e.target).find('.dropdown-menu');
-        console.log($(e.target));
+        dropdownMenu = $(dropdownMenu[0]);
+        console.log(dropdownMenu);
         setTimeout(function(){
             if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
                 if(!$(e.target).hasClass('is-child')) {

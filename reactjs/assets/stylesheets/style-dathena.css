@@ -798,7 +798,7 @@ a.help_question_a:hover>i {
 	div[id^='overview-panel'] .table-responsive {
 		overflow-x: auto;
 	}
-	div[id^='overview-panel'] .dropdown-menu.full-mobile {
+	.fix-overview-help-button-table.dropdown-menu.full-mobile {
 		width: 90vw;
 	}
 	a.review_question_a.help_question_a:hover::after {
