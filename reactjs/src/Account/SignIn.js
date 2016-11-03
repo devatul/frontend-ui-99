@@ -43,6 +43,7 @@ var Signin = React.createClass({
       url: Constant.SERVER_API + 'api/token/api-token-auth/',
       dataType: 'json',
       type: 'POST',
+      timeout: 15000,
       data: {
         username: email,
         password: password
