@@ -41,7 +41,7 @@
                 rt-repeat="orphan in this.state.orphans"
                 value="{orphanIndex}"
                 key="orphan_{orphanIndex}">
-                {orphan.name}
+                Orphan {orphan.id}
               </option>
             </select2>
           </label>
