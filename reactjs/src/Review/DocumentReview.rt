@@ -156,7 +156,7 @@
                                         <tr role="row" class="">
                                             <th class="fix">
                                                 <div class="checkbox-custom checkbox-primary">
-                                                    <input type="checkbox" class="checkbox-all-1" onChange="{this.handleCheckAll(this, event, challengeIndex, this.constructor.challenge)}" checked="{challenge.checkAll}">
+                                                    <input type="checkbox" class="checkbox-all-1" onChange="{this.handleCheckAll.bind(this, challengeIndex, this.constructor.challenge)}" checked="{challenge.checkAll}">
                                                     <label></label>
                                                 </div>
                                             </th>

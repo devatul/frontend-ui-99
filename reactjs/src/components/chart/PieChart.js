@@ -116,6 +116,8 @@ var PieChart = React.createClass({
                         }
                     },
                     showInLegend: true,
+                    borderColor: data && data.length === 1 ? colors[0] : '#FFF',
+                    size: 310,
                     point:  {
                         events: {
                             mouseOver: function(event){
