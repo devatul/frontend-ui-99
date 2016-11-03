@@ -76,15 +76,15 @@ module.exports = React.createClass({
 
       _props.size &&
         delete _props.size;
-      _props.startDegree &&
+      _props.startDegree != null &&
         delete _props.startDegree;
-      _props.endDegree &&
+      _props.endDegree != null &&
         delete _props.endDegree;
-      _props.progressWidth &&
+      _props.progressWidth != null &&
         delete _props.progressWidth;
-      _props.trackWidth &&
+      _props.trackWidth != null &&
         delete _props.trackWidth;
-      _props.cornersWidth &&
+      _props.cornersWidth != null &&
         delete _props.cornersWidth;
       _props.progress >= 0 &&
         delete _props.progress;
@@ -92,7 +92,7 @@ module.exports = React.createClass({
         delete _props.fillColor;
       _props.trackColor &&
         delete _props.trackColor;
-      _props.progressColor &&
+      _props.progressColor != "" &&
         delete _props.progressColor;
 
     return (
