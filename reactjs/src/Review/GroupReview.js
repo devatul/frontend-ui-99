@@ -322,7 +322,6 @@ var GroupReview = React.createClass({
                     })
 
                 })
-                console.log(groups_by_name)
                  this.setState(
                     { 
                         groups: res,
