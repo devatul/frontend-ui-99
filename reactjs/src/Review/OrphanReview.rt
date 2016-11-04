@@ -220,7 +220,7 @@
           <Panel.head>
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
             <div class="panel-actions my-actions-btn-group">
-              <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
+              <span class="mr-md">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
               <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
