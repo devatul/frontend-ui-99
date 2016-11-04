@@ -32,20 +32,21 @@ var HelpButton = React.createClass({
     handleOnMouseOver: function() {
         var dropdown = this.refs.dropdown
         var dropdownMenu = this.refs.dropdownMenu
-        var eOffset = $(dropdown).position();
+        var eOffset = $(dropdown).offset();
+        var position = $(dropdown).position();
         var left = 0;
         var right = 0;
         //debugger
 
         // $('body').append($(dropdownMenu).detach());
-        if ($(window).width() <= 996 && $('div[id^="overview-panel"]').hasClass('panel-body')) {
+        if ($(window).width() <= 996 && $(dropdownMenu).hasClass('overview-table-help')) {
 
-            if (eOffset.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
-                right = eOffset.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 64;
+            if (position.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
+                right = position.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 64;
                 $(dropdownMenu).not('none-right').addClass('none-right');
             }
-            else if (eOffset.left - $(dropdownMenu).outerWidth() < 0){
-                left = -1 * eOffset.left;
+            else if (position.left - $(dropdownMenu).outerWidth() < 0){
+                left = -1 * position.left;
                 if ($(dropdownMenu).hasClass('info-scan-submenu')) {
                     left += 15;
                 }
@@ -59,9 +60,13 @@ var HelpButton = React.createClass({
         }
 
         else {
+            $('body').append($(dropdownMenu).detach());
             $(dropdownMenu).css({
-                    'display': 'block'
+                    'display': 'block',
+                    'top': eOffset.top + $(dropdown).outerHeight(),
+                    'left': eOffset.left
                 });
+
         }
 
         this.setState({ setOpen: 'open', expanded: true });
@@ -78,9 +83,18 @@ var HelpButton = React.createClass({
         if ($(dropdownMenu).hasClass('none-right')) {
             $(dropdownMenu).removeClass('none-right');
         }
-        $(dropdownMenu).css({
-                'display': 'none'
-            });
+        if ($(window).width() <= 996 && $(dropdownMenu).hasClass('overview-table-help')) {
+            $(dropdownMenu).css({
+                    'display': 'none'
+                });
+        }
+        else {
+            $(dropdownMenu).css({
+                    'display': 'none',
+                    'top': eOffset.top + $(dropdown).outerHeight(),
+                    'left': eOffset.left
+                });
+        }
         this.setState({ setOpen: '' });
     },
 

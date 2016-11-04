@@ -165,7 +165,7 @@ var ClassificationReview = React.createClass({
 
         let hasNextDocument = false;
         let isNextCategory = false;
-
+        
         if(docIndex <= (this.state.dataReview[reviewIndex].documents.length - 1)) {
             if(this.state.dataReview[reviewIndex].documents.length > docIndex + 1){
                 hasNextDocument = true;
@@ -369,6 +369,7 @@ var ClassificationReview = React.createClass({
             },
             shouldUpdate: true
         });
+        debugger
     },
 
     onChangeConfidentiality(event, reviewIndex, docIndex, document) {
@@ -403,6 +404,7 @@ var ClassificationReview = React.createClass({
             },
             shouldUpdate: true
         });
+        
     },
 
     handleCheckAll(index, event) {
