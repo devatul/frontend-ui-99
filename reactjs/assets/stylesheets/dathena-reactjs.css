@@ -342,7 +342,9 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .filter-buttons .dropdown-menu .select2-selection .select2-selection__rendered {
     line-height: 34px;
 }
-
+.dathena-select {
+   display: inline-flex;
+ }
 .select2-dropdown ul.select2-results__options li[id$="-label"] {
     display: none;
 }
@@ -501,7 +503,7 @@ select.assigment-select.form-control {
     top: 50%;
     margin-top: -100px;
 }
- 
+
 .custom-modal {
     max-width: 400px;
 }
