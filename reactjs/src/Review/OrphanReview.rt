@@ -315,8 +315,10 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    hasNextDocument="{true}"
     undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
+    closeModal="{this.closePreview}"
+    onHide="{this.closePreview}">
     <div class="table-responsive">
       <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
         id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
