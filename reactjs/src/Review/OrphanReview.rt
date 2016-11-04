@@ -315,14 +315,16 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    hasNextDocument="{true}"
     undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
+    closeModal="{this.closePreview}"
+    onHide="{this.closePreview}">
     <div class="table-responsive">
-      <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview"
-        id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+      <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
+        id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
         <thead>
           <tr role="row" class="">
-            <th>
+            <!--<th>
               <div class="checkbox-custom checkbox-primary">
                 <input type="checkbox"
                   class="checkbox-all-1"
@@ -330,7 +332,7 @@
                   checked="{this.state.checkBoxAll}">
                 <label for="checkboxAllExample2"></label>
               </div>
-            </th>
+            </th>-->
             <th class="review_note fix-width">Type</th>
             <th class="review_note">
               Document name
@@ -359,11 +361,13 @@
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
+            hide="{{ checkbox: true }}"
+            noConfidence
             onClick={this.handleTableRowOnClick}
             onChange={this.handleTableRowOnChange}
             index={this.state.documentPreview} />
         </tbody>
-      </table>
+      </Table>
     </div>
   </DocumentPreview>
 </section>

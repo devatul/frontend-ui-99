@@ -594,7 +594,7 @@ tr td {
 .dropdown-menu.dd-sm {
   width: 40vw; }
 
-.dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
+/*.dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
   bottom: 100%;
   left: 30px;
   border: solid transparent;
@@ -602,7 +602,7 @@ tr td {
   height: 0;
   width: 0;
   position: absolute;
-  pointer-events: none; }
+  pointer-events: none; }*/
 
 .dropdown-noti .col-noti {
   position: relative; }
@@ -1385,7 +1385,6 @@ div[id^='legendContainer'] {
 @media (max-width: 996px) {
   .dropdown-menu.full-mobile {
     width: 90%;
-    left: 5% !important;
     margin-left: 0;
     z-index: 9999; }
   .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before {

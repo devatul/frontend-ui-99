@@ -433,3 +433,6 @@
 .display_none {
     display: none
 }
+h2 .panel-title p {
+    font-family: 'Roboto', 'Helvetica', 'sans-serif';
+}

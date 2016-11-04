@@ -520,6 +520,10 @@ var GroupReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
