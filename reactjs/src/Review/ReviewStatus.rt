@@ -287,7 +287,7 @@
                             <th class="text-left">Category
                               <HelpButton
                                     classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a"  setValue="Content" />
+                                    classIcon="overview_question_a help_question_a"  setValue="All the reviewers assigned to review documents are displayed in this section." />
                             </th>
                             <th class="text-left">Status
                               <HelpButton
