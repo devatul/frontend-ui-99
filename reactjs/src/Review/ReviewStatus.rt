@@ -4,39 +4,24 @@
 <div class="container">
       <div class="tabs tabs-primary reviewer-tab">
         <ul class="nav nav-tabs cat-list" style="float : none">
-          <li class="active">
-            <a href="#accounting_tax" data-toggle="tab" aria-expanded="false">Accounting / Tax</a>
+          <li class="{this.state.categories[rtIndex].active}" rt-repeat = "rt in this.state.categories" key = "{rtIndex}">
+            <a href="javascript:;" onClick="{this.changeTitle.bind(this, this.state.categories[rtIndex].name)}">{this.state.categories[rtIndex].name}</a>
           </li>
-          <li class="">
-            <a href="#corporate_entity" data-toggle="tab" aria-expanded="false">Corporate Entity</a>
-          </li>
-          <li class="">
-            <a href="#client_customer" data-toggle="tab" aria-expanded="false">Client / Customer</a>
-          </li>
-          <li class="">
-            <a href="#employee" data-toggle="tab" aria-expanded="false">Employee</a>
-          </li>
-          <li class="">
-            <a href="#legal_regulatory" data-toggle="tab" aria-expanded="false">Legal / Compliance</a>
-          </li>
-          <li class="">
-            <a href="#transaction" data-toggle="tab" aria-expanded="false">Transaction</a>
-          </li>
-          <li class="">
+       <!--    <li class="">
             <a href="#summary" data-toggle="tab" aria-expanded="true">Summary</a>
-          </li>
+          </li> -->
         </ul>
         <div class="tab-content">
-          <div id="accounting_tax" class="tab-pane active">
+          <div id="content_review" rt-if="this.state.default_tab == 'content_review'">
             <div class="row">
               <div class="col-md-12">
                 <div class="row mb-sm">
                   <div class="col-md-3">
-                    <Circle id = 'chart_1' value_inner=50 value_outer = 40  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
+                    <Circle id = 'chart_1' value_inner= {50} value_outer = {40}  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
                   </div>
 
                   <div class="col-md-9">
-                    <p class="text-right">Accounting/ Tax Review Status: <b class="mr-lg">10 users - 23 documents/user - 68/100 Reviews Documents</b></p>
+                    <p class="text-right">{this.state.default_title} Review Status: <b class="mr-lg">10 users - 23 documents/user - 68/100 Reviews Documents</b></p>
 
                     <div class="table-responsive">
                       <table class="table anomaly-table review-status-table review-status-cat-table">
@@ -263,7 +248,7 @@
                         </tbody>
                       </table>
                     </div>
-                    <button class="btn btn-green btn-next-cat pull-right mt-sm">Go to Next Category</button>
+                    <button class="btn btn-green btn-next-cat pull-right mt-sm" onClick = "{this.nextCategory.bind(this , this.state.default_title)}">Go to Next Category</button>
 
                   </div>
                 </div>
@@ -272,7 +257,7 @@
             </div>
 
           </div>
-          <div id="corporate_entity" class="tab-pane">
+         <!--  <div id="corporate_entity" class="tab-pane">
           </div>
           <div id="client_customer" class="tab-pane">
           </div>
@@ -281,15 +266,15 @@
           <div id="legal_regulatory" class="tab-pane">
           </div>
           <div id="transaction" class="tab-pane">
-          </div>
-          <div id="summary" class="tab-pane">
+          </div> -->
+          <div id="summary" rt-if="this.state.default_tab == 'summary'">
 
             <div class="row">
               <div class="col-md-12">
                 <div class="row mb-sm">
                   <div class="col-md-3">
                     <h4><b>Review Status:</b></h4>
-                    <Circle id = 'chart_2' value_inner=50 value_outer = 40  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
+                    <Circle id = 'chart_2' value_inner= {50} value_outer = {40}  className = "anomaly-icon-fixReview icon-progress" content_outer= "Challenged Documents" content_inner="Classification Progress"  marginLeft = '-45px'/>
                   </div>
 
                   <div class="col-md-9">
