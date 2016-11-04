@@ -109,8 +109,10 @@
                                                     id="confidentialityChart_category"
                                                     key="chart2_category"
                                                     title="Confidentiality"
+                                                    legendContainer="pie-chartLegend"
                                                     data={this.state.dataChart.confidentiality}
                                                     help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                                                <div id="pie-chartLegend"></div>
                                             </Col>
                                         </Row>
                                     </Panel.body>

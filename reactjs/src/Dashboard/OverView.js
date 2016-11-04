@@ -111,6 +111,16 @@ var OverView = React.createClass
                 });
                 this.setState({ scan: setResult })
 
+            },
+            error: (err) => {
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.ERROR
+                        }
+                    })
+                })
             }
         })
     },

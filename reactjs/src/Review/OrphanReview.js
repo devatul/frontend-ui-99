@@ -18,6 +18,7 @@ var OrphanReview = React.createClass({
                 name: 'orphan name',
                 index: 0
             },
+            haveNextOrphan: true,
     		statistics: {},
     		cloudwords: [],
     		centroids: [],
