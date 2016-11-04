@@ -1,7 +1,7 @@
 import React,  { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import makeRequest from '../../utils/http'
+import {makeRequest} from '../../utils/http'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
@@ -10,43 +10,7 @@ import Anomaly from '../../components/dathena/AnomalyStateSelect'
 var TableAnomaly = React.createClass({
     getInitialState(){
         return{
-             datas:  [
-                          {
-                            "Security in Fault": ".ADCompliance_RW",
-                            "Confidentiality": "Banking Secrecy",
-                            "id": "11",
-                            "status" : "false",
-                            "selected" : null
-                          },
-                          {
-                            "Security in Fault": ".ADCompliance_RW",
-                            "Confidentiality": "Banking Secrecy",
-                            "id": "21",
-                            "status" : "true",
-                            "selected" : null
-                          },
-                          {
-                            "Security in Fault": ".ADCompliance_RW",
-                            "Confidentiality": "Banking Secrecy",
-                            "id": "31",
-                            "status" : "investigation",
-                            "selected" : null
-                          },
-                          {
-                            "Security in Fault": ".ADCompliance_RW",
-                            "Confidentiality": "Banking Secrecy",
-                            "id": "41",
-                            "status" : "true",
-                            "selected" : null,
-                          },
-                          {
-                            "Security in Fault": ".ADCompliance_RW",
-                            "Confidentiality": "Banking Secrecy",
-                            "id": "51",
-                            "status" : "not-reviewed",
-                            "selected" : null
-                          }
-                    ],
+             datas:  [],
              style : 0,
              filterValue : 0,
              show : false
@@ -59,11 +23,11 @@ var TableAnomaly = React.createClass({
         }
     },*/
     filterTable(data , value){
-
+        debugger
         let dataNew = []
         _.forEach(data , function(object , index){
-
-            if(object.status == value){
+            debugger
+            if(object['Review Status'] == value){
                 dataNew.push({
                     'id' : index,
                     'data' : object
@@ -73,8 +37,16 @@ var TableAnomaly = React.createClass({
         return dataNew
     },
     show(value){
-
+        this.getDataAPI(),
         this.setState({show : value})
+    },
+    getDataAPI(){
+        return makeRequest({
+            path: 'api/anomaly/iam/user-client?filter=all',
+            success: (data) => {
+                this.setState({ datas: data })
+            }
+        });
     },
     getDataFilter(datas){
         let data = []
@@ -175,18 +147,41 @@ var TableAnomaly = React.createClass({
             , style = !this.state.show ?  'block' : 'none'
             , style1 = this.state.show ?  'block' : 'none'
             , data_export = this.configDataCVS(newData)
+            , child1 = null
+            if(this.props.type == 'table1') {
+                child1 = <tr>
+                            <th>ID</th>
+                            <th className="text-left">Windows User Account</th>
+                            <th className="text-left">Document at Risk</th>
+                            <th className="text-left">Confidentiality</th>
+                            <th className="text-left">Folder at Risk</th>
+                            <th className="text-left">Security in Fault</th>
+                            <th>Review Status</th>
+                        </tr>
+
+                    }else {
+                         child1 = <tr>
+                            <th>ID</th>
+                            <th className="text-left">Active Directory Group</th>
+                            <th className="text-left">Document at Risk</th>
+                            <th className="text-left">Folder at Risk</th>
+                            <th className="text-left">User at Risk</th>
+                            <th className="text-left">Confidentiality at Risk</th>
+                            <th>Review Status</th>
+                        </tr>
+                    }
 
 
         for(let i = 1 ; i <= newData.length ; i++) {
             let key = i-1
             let key_filter = filterValue == 0 ? key : this.filterTable(data , filterValue)[key].id
-            let className = "anomaly-state selected " + newData[i-1].status
+            let className = "anomaly-state selected " + newData[i-1]['Review Status']
             child[i] = <tr key = {i}>
-                            <td><span>{newData[key].id}</span></td>
+                            <td><span>{newData[key]['id']}</span></td>
                             <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
-                            <td className="text-left"><span>62</span></td>
-                            <td className="text-left"><span>8</span></td>
-                            <td className="text-left"><span>4774</span></td>
+                            <td className="text-left"><span>{newData[key]['Document at Risk']}</span></td>
+                            <td className="text-left"><span>{newData[key]['Folder at Risk']}</span></td>
+                            <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
                             <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
                             <td className="relative">
                               <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,key_filter)}></span>
@@ -215,7 +210,7 @@ var TableAnomaly = React.createClass({
                     <div className="col-md-8 filter-state">
                         Display:
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,0)}>All</a> -
-                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'not-reviewed')}><span className="anomaly-state not-reviewed"></span> Not Reviewed </a> -
+                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'not_reviewed')}><span className="anomaly-state not-reviewed"></span> Not Reviewed </a> -
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,'investigation')}><span className="anomaly-state investigation"></span> Under Investigation </a> -
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,'true')}><span className="anomaly-state true"></span> True Positive </a> -
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,'false')}><span className="anomaly-state false"></span> False Positive </a>
@@ -224,15 +219,7 @@ var TableAnomaly = React.createClass({
                     <div className="table-responsive">
                         <table className="table anomaly-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th className="text-left">Active Directory Group</th>
-                                    <th className="text-left">Document at Risk</th>
-                                    <th className="text-left">Folder at Risk</th>
-                                    <th className="text-left">User at Risk</th>
-                                    <th className="text-left">Confidentiality at Risk</th>
-                                    <th>Review Status</th>
-                                </tr>
+                                {child1}
                             </thead>
                             <tbody>
                                 {child}
