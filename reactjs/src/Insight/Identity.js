@@ -112,10 +112,10 @@ let Indentity = React.createClass({
         }
 
         console.log('key_contributor', key_contributor);
-
+        
         height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-        height_3 = _.size(key_contributor[4].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+        height_2 = Math.max(_.size(key_contributor[1].contributors.categories), _.size(key_contributor[2].contributors.categories)) * 40;
+        height_3 = _.size(key_contributor[2].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
 
         let updateData_config = update(this.state, {
             dataChart: {
@@ -137,6 +137,7 @@ let Indentity = React.createClass({
         });
 
         this.setState(updateData_config)
+
     },
 
     configChart(object) {
