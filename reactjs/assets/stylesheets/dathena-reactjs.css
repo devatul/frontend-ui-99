@@ -458,6 +458,17 @@ select.assigment-select.form-control {
     max-width: 530px;
 }
 
+.dropdown-menu.info-scan .table-responsive .text {
+    float: left;
+    white-space: normal;
+    width: calc(100% - 40px);
+}
+
+.dropdown-menu.info-scan .table-responsive help-info-button.dropdown {
+    float: left;
+    width: 40px;
+} 
+
 /* title menu bar */
 .my_main.bar_menu .title-heading {
     margin-top: 12px;
