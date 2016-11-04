@@ -626,7 +626,9 @@ var Row = React.createClass({
                         <li>Owner: <b>{document.owner}</b></li>
                         <li>Creation Date: <b>{document.creation_date}</b></li>
                         <li>Modification Date: <b>{document.modification_date}</b></li>
-                        <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li>
+                        {document.legal_retention_until ?
+                            <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li> : ''
+                        }
                         <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
                     </InfoButton>
                 </td>
