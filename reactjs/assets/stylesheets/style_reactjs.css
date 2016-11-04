@@ -427,3 +427,9 @@
 .fix-mr-md{
     margin-right: 20px
 }
+.display_block {
+    display: block;
+}
+.display_none {
+    display: none
+}

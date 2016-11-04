@@ -163,10 +163,7 @@
                             <!-- <span class="badge">20</span> -->
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
-                        <li>
-
-                            <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
-                        </li>
+                        
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>

@@ -63,36 +63,42 @@
                     <div class="panel panel-chart">
                         <div class="panel-body">
                             <p class="text-center" rt-if="this.state.loading">Loading charts data...</p>
-                            <div class="row">
+                            <div class="row" rt-scope = "this.state.dataChart.key_contributor as key_contributor">
                                <!--Chart 1-->
-                                <div class="col-md-6 col-chart-item">
-                                    <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].contributors}" id=0 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[0].contributors)}" height={this.state.height_1} />
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 1,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 1}">
+                                    <h4>{this.formatNameCategory(key_contributor.length >= 1 && key_contributor[0].category_name)}</h4>
+                                    <Chart dataChart="{this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].contributors}" id=0 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[0] && this.state.dataChart.key_contributor[0].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[0].contributors)}" height={this.state.height_1} />
                                 </div>
                                 <!--Chart 2-->
-                                <div class="col-md-6 col-chart-item">
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 2,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 2}">
                                     <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].contributors}" id=1 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[1].contributors)}" height={this.state.height_1} />
+                                    <Chart dataChart="{this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].contributors}" id=1 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[1] && this.state.dataChart.key_contributor[1].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[1].contributors)}" height={this.state.height_1} />
                                 </div>
                                 <!--Chart 3-->
-                                <div class="col-md-6 col-chart-item">
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 3,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 3}">
                                     <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].contributors}" id=2 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[2].contributors)}" height={this.state.height_2} />
+                                    <Chart dataChart="{this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].contributors}" id=2 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[2] && this.state.dataChart.key_contributor[2].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[2].contributors)}" height={this.state.height_2} />
                                 </div>
                                 <!--Chart 4-->
-                                <div class="col-md-6 col-chart-item">
-                                    <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].contributors}" id=3 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[3] && this.state.dataChart.key_contributor[3].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[3].contributors)}" height={this.state.height_2} />
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 4,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 4}">
+                                    <h4>{this.formatNameCategory(key_contributor.length >= 4 && this.state.dataChart.key_contributor[3].category_name)}</h4>
+                                    <Chart  dataChart="{key_contributor.length >= 4 && this.state.dataChart.key_contributor[3].contributors}" id=3 exports = "{this.downloadCSV.bind(this, key_contributor.length >= 4 && this.state.dataChart.key_contributor[3].category_name , key_contributor.length >= 4 && this.state.data_exports.key_contributor[3].contributors)}" height={this.state.height_2} />
                                 </div>
                                 <!--Chart 5-->
-                                <div class="col-md-6 col-chart-item">
-                                    <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].contributors}" id=4 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[4] && this.state.dataChart.key_contributor[4].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[4].contributors)}" height={this.state.height_3} />
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 5,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 5}">
+                                    <h4>{this.formatNameCategory(key_contributor.length >= 5 && this.state.dataChart.key_contributor[4].category_name)}</h4>
+                                    <Chart  dataChart="{key_contributor.length >= 5 && this.state.dataChart.key_contributor[4].contributors}" id=4 exports = "{this.downloadCSV.bind(this, key_contributor.length >= 5 && this.state.dataChart.key_contributor[4].category_name , key_contributor.length >= 5 && this.state.data_exports.key_contributor[4].contributors)}" height={this.state.height_3} />
                                 </div>
                                 <!--Chart 6-->
-                                <div class="col-md-6 col-chart-item" rt-if="this.state.dataChart.key_contributor[5] != null">
-                                    <h4>{this.formatNameCategory(this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name)}</h4>
-                                    <Chart rt-if="!this.state.loading" dataChart="{this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].contributors}" id=5 exports = "{this.downloadCSV.bind(this, this.state.dataChart.key_contributor[5] && this.state.dataChart.key_contributor[5].category_name , this.state.data_exports.key_contributor && this.state.data_exports.key_contributor[5].contributors)}" height={this.state.height_3} />
+                                <div rt-class="{'col-md-6 col-chart-item display_block' : key_contributor.length  >= 6,
+                                                'col-md-6 col-chart-item display_none' : key_contributor.length  < 6}">
+                                    <h4>{this.formatNameCategory(key_contributor.length >= 6 && this.state.dataChart.key_contributor[5].category_name)}</h4>
+                                    <Chart  dataChart="{key_contributor.length >= 6 && this.state.dataChart.key_contributor[5].contributors}" id=5 exports = "{this.downloadCSV.bind(this, key_contributor.length >= 6 && this.state.dataChart.key_contributor[5].category_name , key_contributor.length >= 6 && this.state.data_exports.key_contributor[5].contributors)}" height={this.state.height_3} />
                                 </div>
                             </div>
                         </div>

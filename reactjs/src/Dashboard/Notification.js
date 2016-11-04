@@ -474,7 +474,41 @@ var Notification = React.createClass({
             notification: { $set: notification }
         }))
     },
-
+    configDay(day){
+        let day_cf = _.split(time.created , '-' , 3)
+        switch(day_cf[1]){
+            case 1 : day_cf[1] = 'JAN ' ; break ;
+            case 2 : day_cf[1] = 'Feb ' ; break ;
+            case 3 : day_cf[1] = 'Mar ' ; break ;
+            case 4 : day_cf[1] = 'Apr ' ; break ;
+            case 5 : day_cf[1] = 'May ' ; break ;
+            case 6 : day_cf[1] = 'June ' ; break ;
+            case 7 : day_cf[1] = 'July ' ; break ;
+            case 8 : day_cf[1] = 'Aug ' ; break ;
+            case 9 : day_cf[1] = 'Sept ' ; break ;
+            case 10: day_cf[1] = 'Oct ' ; break ;
+            case 11 : day_cf[1] = 'Nov ' ; break ;
+            case 11 : day_cf[1] = 'Dec ' ; break ;
+        }
+        return day_cf[2] + ' ' + day_cf[1] + day_cf[0]
+    /*    for(let i = 0 ; i < time.length ; i++){
+            time.created = _.split(time.created , 'T' , 2)
+        }*/
+    },
+    getTime(times){
+        debugger
+        let time_cf = _.split(times , 'T' , 2),
+            day = this.configDay(time_cf[0]) ,
+            time = _.split(time , '.' , 2)[0];
+        return time + " " + day
+    },
+    getNewTime(data){
+        debugger
+        for(let i = 0 ; i< data.length ;  i++){
+            data[i].created = this.getTime(data[i].created)
+        }
+        return data
+    },
     getNotification() {
         //temproary for dummy data
         var last_thirty_days = [];
@@ -494,7 +528,12 @@ var Notification = React.createClass({
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
             success: function(data) {
-                last_thirty_days = data;
+                debugger
+                console.log(data)
+
+                last_thirty_days = data
+
+
             },
             error: function(xhr, status, err) {
                 console.log(err);
