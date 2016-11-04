@@ -26,6 +26,7 @@ var OrphanReview = React.createClass({
             categories: [],
             confidentialities: [],
             loadingdocuments:false,
+            getdocumenterror: false,
     		categoryInfo: [],
             documentPreview: -1,
             shouldUpdate: false,
@@ -34,7 +35,6 @@ var OrphanReview = React.createClass({
             checkBoxAll: false,
             stackChange: [],
             showLoading: "none",
-
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -422,7 +422,10 @@ var OrphanReview = React.createClass({
             path: "api/group/orphan/samples",
             params: { "id": id },
             success: (res) => {
-                this.setState({ documents: res, shouldUpdate: true, loadingdocuments: false });
+                this.setState({ documents: res, shouldUpdate: true, loadingdocuments: false, getdocumenterror: false });
+            },
+            error: (err) => {
+              this.setState({documents: [], loadingdocuments: false, getdocumenterror: err})
             }
         });
 
