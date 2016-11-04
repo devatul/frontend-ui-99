@@ -44,11 +44,14 @@ var HelpButton = React.createClass({
         if ($(window).width() <= 996 && $('div[id^="overview-panel"]').hasClass('panel-body')) {
 
             if (eOffset.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
-                right = eOffset.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 60;
+                right = eOffset.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 64;
                 $(dropdownMenu).not('none-right').addClass('none-right');
             }
             else if (eOffset.left - $(dropdownMenu).outerWidth() < 0){
                 left = -1 * eOffset.left;
+                if ($(dropdownMenu).hasClass('info-scan-submenu')) {
+                    left += 15;
+                }
                 $(dropdownMenu).not('none-left').addClass('none-left');
             }
             $(dropdownMenu).css({
