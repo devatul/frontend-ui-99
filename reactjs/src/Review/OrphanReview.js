@@ -305,7 +305,6 @@ var OrphanReview = React.createClass({
                 });
                 let orphan = Object.assign({}, res[0], { index: 0 });
                 this.setState({ orphans: res, orphanCurrent: orphan, shouldUpdate: true });
-                console.log(this.state.lastOrphan);
             }
         });
     },
