@@ -28,7 +28,8 @@ let Indentity = React.createClass({
                 high_risk_directory: {},
                 key_contributor: []
             },
-            loading: true
+            loading: true,
+            display : 0
         };
     },
 
@@ -87,7 +88,6 @@ let Indentity = React.createClass({
             }.bind(this)
         });
     },
-
     updateChartData(datas) {
         let high_risk_users = {},
             high_risk_directory = {},
@@ -110,12 +110,34 @@ let Indentity = React.createClass({
                 contributors: (this.configChart(arr[i].contributors))
             })
         }
-
+        let length = key_contributor.length
         console.log('key_contributor', key_contributor);
-        
+/*
+
         height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
         height_2 = Math.max(_.size(key_contributor[1].contributors.categories), _.size(key_contributor[2].contributors.categories)) * 40;
         height_3 = _.size(key_contributor[2].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+
+        if(length == 1) {
+            height_1 = _.size(key_contributor[0].contributors.categories)* 40;
+        } else{
+            height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
+            if(length == 3) {
+                height_2 = _.size(key_contributor[2].contributors.categories)* 40;
+            } else if(length == 4) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+            } else if( length == 5) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+                height_3 = _.size(key_contributor[5].contributors.categories)* 40;
+            } else if( length == 6) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+                height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
+            }
+        }
+
+        /*height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+        height_3 = _.size(key_contributor[4].contributors.categories)* 40; *//*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+
 
         let updateData_config = update(this.state, {
             dataChart: {
@@ -133,7 +155,8 @@ let Indentity = React.createClass({
             height_0: { $set: height_0 },
             height_1: { $set: height_1 },
             height_2: { $set: height_2 },
-            height_3: { $set: height_3 }
+            height_3: { $set: height_3 },
+            display : {$set : length}
         });
 
         this.setState(updateData_config)

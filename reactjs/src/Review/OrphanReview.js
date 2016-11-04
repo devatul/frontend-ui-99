@@ -429,6 +429,9 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    return a.name - b.name;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
