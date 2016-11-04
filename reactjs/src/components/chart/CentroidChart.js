@@ -159,8 +159,9 @@ var CentroidChart = React.createClass({
         let legends = times(max_circle_size, (i) => {
             i++;
             let document_no = Math.ceil(((i - 1) * max / max_circle_size) + 1);
+            let document_no_next = Math.ceil(((i) * max / max_circle_size));
             return (
-                <span className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} </span></span>
+                <span key={'legend_' + i} className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} to {document_no_next}</span></span>
             )
         })
         return (

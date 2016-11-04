@@ -351,7 +351,7 @@ var GroupReview = React.createClass({
         });
 
         for(let i = data.length - 1; i >= 0; i--) {
-            children[i] = <div className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
+            children[i] = <div key={'file_' + i} className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
                             {data[i].name}
                             <span className="item-legend">{data[i].total}</span>
                         </div>;
@@ -405,32 +405,33 @@ var GroupReview = React.createClass({
                 var series = [], total = centroids.length;
                 let max = maxBy(centroids, doc => doc.number_docs)
                 let max_circle_size = 6
+                let angle_multiplier = 360 / (total)
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
-                            type: 'scatter',
-                            lineWidth: 2,
-                            marker: {
-                                symbol: 'circle'
-                            },
-                            data: [
-                                [45 * i, centroids[i].end],
-                                {
-                                x: 45 * i,
-                                y: 0,
-                                document: centroids[i].number_docs,
-                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
-                                marker: {
-                                    enabled: false,
-                                    states: {
-                                        hover: {
-                                            enabled: false
-                                        }
-                                    }
+                          type: 'scatter',
+                          lineWidth: 2,
+                          marker: {
+                            symbol: 'circle'
+                          },
+                          data: [
+                            [angle_multiplier * (i + 0.5), centroids[i].end],
+                            {
+                              x: angle_multiplier * (i + 0.5),
+                              y: 0,
+                              document: centroids[i].number_docs,
+                              weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
+                              marker: {
+                                enabled: false,
+                                states: {
+                                  hover: {
+                                    enabled: false
+                                  }
                                 }
-                                },
-                                null
-                            ]
+                              }
+                            },
+                            null
+                          ]
                         };
                     }
                 }
@@ -542,6 +543,10 @@ var GroupReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });

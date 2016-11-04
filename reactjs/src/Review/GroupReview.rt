@@ -70,7 +70,7 @@
                             </Col>
                             <Col md="{3}" class="text-right">
                                 <span>Detect Language: <b>English</b></span>
-                                <Button class="btn btn-green ml-md" bsClass="false">Edit</Button>
+                                <Button class="btn btn-green ml-md" bsClass="my-btn">Edit</Button>
                             </Col>
                         </Row>
                     </Panel.head>
@@ -209,8 +209,8 @@
                         <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
                         <div class="panel-actions my-actions-btn-group">
                             <span class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.name}</b></span>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="">Next Group</Button>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="">
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group</Button>
+                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
                             </Button>
                         </div>
@@ -223,7 +223,7 @@
                                 rt-if="this.state.checkedNumber > 0"
                                 onClick="{this.handleClickApproveButton}"
                                 class="mb-md mr-xs btn btn-green approve-button"
-                                bsClass="">
+                                bsClass="my-btn">
                                 Approve
                             </Button>
 
@@ -288,8 +288,8 @@
                                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>
                             </ProgressBar>
 
-                            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="">Next Group</Button>
-                            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
+                            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group</Button>
+                            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                         </div>
                     </Panel.body>
                 </Panel.custom>
@@ -301,7 +301,9 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    hasNextDocument={true}
     undo={this.handleUndo}
+    onHide={this.closePreview}
     closeModal={this.closePreview}>
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">

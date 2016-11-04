@@ -44,6 +44,8 @@ var SelectBox = React.createClass({
             delete _props.data;
          _props.binding &&
             delete _props.binding;
+        (_props.defaultValue >= 0 || defaultValue != "") &&
+            delete _props.defaultValue;
         for(let i = data.length - 1; i >= 0; i--) {
 
             children[i] = <option

@@ -18,12 +18,11 @@
 <rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <section>
     <div class="container">
-        <Tab.Container id="tabs-assigment" activeKey="tab_{this.state.category.current.id}" defaultActiveKey="tab_1">
+        <Tab.Container id="tabs-assigment" activeKey="tab_{this.state.category.current.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1">
             <div class="tabs tabs-primary">
                 <Nav bsClass="nav" class="cat-list nav-tabs">
                     <NavItem rt-repeat="category in this.state.category.list"
                         key="{category.id}"
-                        onSelect="{this.setCategoryCurrent.bind(this, categoryIndex)}"
                         eventKey="tab_{category.id}">
                       {category.name}
                     </NavItem>
@@ -110,8 +109,10 @@
                                                     id="confidentialityChart_category"
                                                     key="chart2_category"
                                                     title="Confidentiality"
+                                                    legendContainer="pie-chartLegend"
                                                     data={this.state.dataChart.confidentiality}
                                                     help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                                                <div id="pie-chartLegend"></div>
                                             </Col>
                                         </Row>
                                     </Panel.body>
@@ -149,9 +150,8 @@
                                                                                 name="timeframe"
                                                                                 className="assigment-select form-control ddList inline-block-item"
                                                                                 data={this.state.datafilter.timeFrame}
-                                                                                value={this.state.datafilter.setValue.timeframe}
-                                                                                onOpen={this.selectBoxOnOpen}
                                                                                 defaultValue={0}
+                                                                                value={this.state.datafilter.setValue.timeframe}
                                                                                 className="assignent-select form-control ddList"
                                                                                 onChange={this.handleOnChangeSelectBox} />
 

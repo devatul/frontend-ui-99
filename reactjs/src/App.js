@@ -7,8 +7,7 @@ import update from 'react-addons-update'
 import { makeRequest } from './utils/http'
 import { orderByIndex } from './utils/function'
 import { orderBy } from 'lodash'
-
-
+import { git_version } from './commit'
 module.exports = React.createClass({
 	getInitialState() {
 		return {
@@ -29,7 +28,7 @@ module.exports = React.createClass({
 	},
     componentWillMount()
     {
-		let { pathname } = this.props.location
+		let { pathname } = this.props.location;
     	var token = sessionStorage.getItem('token');
     	if(token)
 		{
@@ -48,12 +47,16 @@ module.exports = React.createClass({
 				{
 					makeRequest({
 						path: 'api/token/api-token-refresh/',
+						dataType: 'json',
                         method : 'POST',
-						params: {
+						params: JSON.stringify({
 							token: token
-						},
+						}),
 						success: (data) => {
 							sessionStorage.setItem('token', data.token);
+						},
+						error: (data) => {
+							console.log(JSON.parse(data.responseText).detail)
 						}
 					});
 				}
@@ -249,6 +252,9 @@ module.exports = React.createClass({
             	return React.cloneElement(child, stateMap)
             });
     },
+	commit() {
+		return git_version;
+	},
     render:template
 
 });

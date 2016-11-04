@@ -8,7 +8,7 @@
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
-    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
+    <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
         <div class="charts container mt-lg">
             <div class="row">
@@ -117,7 +117,7 @@
 
         </div>
         <!--table start-->
-        <div class="container">
+        <div class="container overview-summary">
             <div class="row">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary">
@@ -180,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container overview-summary">
             <div class="row">
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary">
@@ -247,35 +247,4 @@
             </div>
         </div>
     </div>
-    <!--<div rt-if="this.state.loading < 100" class="progress-label-container">
-        <div class="progress-example">
-            <ProgressLabel
-                className="label-1"
-                progress={this.state.loading}
-                startDegree={-40}
-                progressWidth={3.5}
-                trackWidth={4}
-                cornersWidth={2}
-                progressColor="#3f989a"
-                trackColor="transparent"
-                fillColor="transparent"
-                size={45}>
-            </ProgressLabel>
-            <ProgressLabel
-                className="label-2"
-                progress={this.state.loading}
-                progressWidth={3.5}
-                trackWidth={4}
-                cornersWidth={2}
-                progressColor="#3f989a"
-                trackColor="transparent"
-                fillColor="transparent"
-                size={33}>
-            </ProgressLabel>
-
-            <span class="loading-label">Loading...</span>
-        </div>
-        <p class="loading-label-2">Report is loading<br/><span class="pls">Please wait!</span></p>
-        <span class="loading-backdrop-custom" style=""></span>
-    </div>-->
 </section>

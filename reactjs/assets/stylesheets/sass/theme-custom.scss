@@ -745,16 +745,16 @@ ul.filter-list li{
 .dropdown-menu.dd-sm{
     width: 40vw;
 }
-.dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
-    bottom: 100%;
-    left: 30px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
+// .dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
+//     bottom: 100%;
+//     left: 30px;
+//     border: solid transparent;
+//     content: " ";
+//     height: 0;
+//     width: 0;
+//     position: absolute;
+//     pointer-events: none;
+// }
 
 .dropdown-noti{
   .col-noti{
@@ -1792,7 +1792,6 @@ div[id^='legendContainer']{
 @media (max-width: 996px){
     .dropdown-menu.full-mobile{
         width: 90%;
-        left: 5%!important;
         margin-left: 0;
         z-index: 9999;
     }

@@ -16,6 +16,10 @@ module.exports = React.createClass({
     progressColor: React.PropTypes.string
   },
 
+  _props: {
+
+  },
+
   getDefaultProps() {
     return {
       startDegree: 0,
@@ -68,8 +72,31 @@ module.exports = React.createClass({
       strokeWidth: this.props.trackWidth
     };
 
+    let _props = Object.assign({}, this.props);
+
+      _props.size &&
+        delete _props.size;
+      _props.startDegree != null &&
+        delete _props.startDegree;
+      _props.endDegree != null &&
+        delete _props.endDegree;
+      _props.progressWidth != null &&
+        delete _props.progressWidth;
+      _props.trackWidth != null &&
+        delete _props.trackWidth;
+      _props.cornersWidth != null &&
+        delete _props.cornersWidth;
+      _props.progress >= 0 &&
+        delete _props.progress;
+      _props.fillColor &&
+        delete _props.fillColor;
+      _props.trackColor &&
+        delete _props.trackColor;
+      _props.progressColor != "" &&
+        delete _props.progressColor;
+
     return (
-      <svg {...this.props} width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <svg {..._props} width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <circle
           cx={size/2}
           cy={size/2}

@@ -33,7 +33,7 @@
         <InputGroup class="mb-md">
           <label>
             <b class="mr-md">
-              Select a orphan to review
+              Select an orphan to review
               <HelpButton classMenu="fix-overview-help-button-table" setValue="User is required to assign category and confidentiality Level for orphaned documents." />
             </b>
             <select2 id="chosse_cluster" width="{300}" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
@@ -203,7 +203,7 @@
                   </h4>
                   {this.fileDistribution()}
                 </div>
-                <CentroidChart series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
+                <CentroidChart key="Centroid_chart_orphan" series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
               </Row>
             </Col>
           </Row>
@@ -220,8 +220,8 @@
           <Panel.head>
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
             <div class="panel-actions my-actions-btn-group">
-              <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
-              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <span class="mr-md">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
+              <Button rt-if="this.state.orphanCurrent.id && this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
@@ -300,7 +300,7 @@
                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress" />
               </ProgressBar>
 
-              <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <Button rt-if="this.state.orphanCurrent.id &&this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
@@ -315,14 +315,16 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    hasNextDocument="{true}"
     undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
+    closeModal="{this.closePreview}"
+    onHide="{this.closePreview}">
     <div class="table-responsive">
-      <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview"
-        id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+      <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
+        id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
         <thead>
           <tr role="row" class="">
-            <th>
+            <!--<th>
               <div class="checkbox-custom checkbox-primary">
                 <input type="checkbox"
                   class="checkbox-all-1"
@@ -330,7 +332,7 @@
                   checked="{this.state.checkBoxAll}">
                 <label for="checkboxAllExample2"></label>
               </div>
-            </th>
+            </th>-->
             <th class="review_note fix-width">Type</th>
             <th class="review_note">
               Document name
@@ -359,11 +361,13 @@
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
+            hide="{{ checkbox: true }}"
+            noConfidence
             onClick={this.handleTableRowOnClick}
             onChange={this.handleTableRowOnChange}
             index={this.state.documentPreview} />
         </tbody>
-      </table>
+      </Table>
     </div>
   </DocumentPreview>
 </section>

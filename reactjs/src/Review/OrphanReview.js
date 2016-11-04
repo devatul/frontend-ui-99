@@ -109,7 +109,7 @@ var OrphanReview = React.createClass({
         this.setState({ showLoading: 'block', shouldUpdate: true });
     },
 
-    handleOnChangeSelectGroup(event) {
+    handleOnChangeSelectOrphan(event) {
         let { orphans } = this.state,
             index = event.target.value,
             orphan = Object.assign({}, orphans[index], { index: parseInt(index) });
@@ -301,6 +301,9 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: "api/group/orphan",
             success: (res) => {
+                res.sort(function(a, b) {
+                    return +a.id - (+b.id);
+                });
                 let orphan = Object.assign({}, res[0], { index: 0 });
 
               this.setState({ orphans: res, orphanCurrent: orphan, shouldUpdate: true });
@@ -377,6 +380,7 @@ var OrphanReview = React.createClass({
             success: (centroids) => {
                 var series = [], total = centroids.length;
                 let max = maxBy(centroids, doc => doc.number_docs)
+                let angle_multiplier = 360 / (total)
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -386,9 +390,9 @@ var OrphanReview = React.createClass({
                                 symbol: 'circle'
                             },
                             data: [
-                                [45 * i, centroids[i].end],
+                                [angle_multiplier * (i + 0.5), centroids[i].end],
                                 {
-                                x: 45 * i,
+                                x: angle_multiplier * (i + 0.5),
                                 y: 0,
                                 document: centroids[i].number_docs,
                                 weight: Math.ceil(centroids[i].number_docs / max.number_docs * total),
@@ -428,6 +432,10 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
@@ -438,6 +446,11 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
+                data.forEach(item => {
+                    if(item.name === "Internal Only") {
+                        item.name = "Internal";
+                    }
+                });
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

@@ -169,6 +169,7 @@
 
 .legend.fix {
     left: 14px;
+    white-space: nowrap;
 }
 
 .fix-anomaly-help-button {
@@ -312,6 +313,7 @@
         margin-left: auto;
     }
 }
+
 @media (max-width: 767px) {
     .panel-title {
         max-width: 189px;
@@ -325,15 +327,19 @@
         margin-left: auto;
     }
 }
+
+
 /*.pb-none {
     padding-bottom: 10px !important;
 }*/
+
 .search-box-wrap {
     position: relative;
     width: 220px;
     vertical-align: top;
     top: -3px;
 }
+
 .search-box-input {
     border: 1px solid #aaaaaa;
     width: 220px;
@@ -342,21 +348,26 @@
     padding: 0 5px;
     position: absolute;
 }
+
 .search-box-wrap .fa-search {
     position: absolute;
     right: 8px;
     top: 8px;
 }
+
 .fix_helpbutton_popup {
     margin-top: 4px;
 }
+
 .btn-blue-rv {
     border: 1px solid #1BC3E1;
     color: #1BC3E1;
 }
+
 .review-status-cat-table {
     border-bottom: 1px solid #ddd;
 }
+
 .anomaly-icon-fixReview {
     width: 40px;
     height: 40px;
@@ -369,23 +380,59 @@
     margin-top: -20px;
     margin-left: -20px;
 }
+
 .anomaly-icon-fixReview.icon-progress {
     background-position: -120px 0;
 }
+
 .review-status-table .border-top {
     border-top: 1px solid #eee;
 }
+
 .review-status-table tbody tr td {
     text-align: left;
-        padding: 4px;
+    padding: 4px;
 }
+
 .review-status-table tbody tr {
     max-height: 46px
 }
+
+
 /*.anomaly-table-fixReview {
     margin-bottom: 0;
     font-size: 13px;
 }*/
+
 .anomaly-table.fixReview > thead > tr > th {
     white-space: nowrap;
+}
+
+@media (max-width: 995px) {
+    .reviewer-tab .nav-tabs .fix_responsive {
+        display: block;
+    }
+}
+.style-tooltip {
+    cursor:default;
+    padding:0;
+    pointer-events:none;
+    white-space:nowrap;
+}
+.style-text-tooltip {
+    font-size:12px;
+    color:#333333;
+    fill:#333333;
+}
+.fix-mr-md{
+    margin-right: 20px
+}
+.display_block {
+    display: block;
+}
+.display_none {
+    display: none
+}
+h2 .panel-title p {
+    font-family: 'Roboto', 'Helvetica', 'sans-serif';
 }

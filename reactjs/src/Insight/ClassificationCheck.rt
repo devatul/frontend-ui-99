@@ -31,32 +31,32 @@
                                             <th class="review_note">Path
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the logical folder path to where each document is currently located." />
                                             </th>
                                             <th class="review_note">Category
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the current category of each document." />
                                             </th>
                                             <th class="review_note">Confidentiality
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the current level of confidentiality of each document." />
                                             </th>
                                             <th class="review_note">Last Modify by
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the last user that has modified the content of each document." />
                                             </th>
                                             <th class="review_note">Reviewer
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the name of the reviewer for each document. “None” means this document has not been reviewed." />
                                             </th>
                                             <th class="review_note">Involved in Anomaly
                                                 <HelpButton
                                                     classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display if each document returned by the search has been involved in an anomaly." />
                                             </th>
                                         </tr>
                                     </thead>
@@ -112,7 +112,7 @@
         </div>
     </div>
     <!--Modal-->
-    <div id="previewModal" class="modal fade in" role="dialog">
+    <div id="previewModal" class="modal fade in" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-preview">
 
           <!-- Modal content-->

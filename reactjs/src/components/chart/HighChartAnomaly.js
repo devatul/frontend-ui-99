@@ -29,7 +29,7 @@ var HighChart = React.createClass({
 
             var anomalyChartData = [{
             xTitle: 'Anomaly Occurence',
-            yTitle: 'Document',
+            yTitle: 'Users',
             data: [{ y: 6, color: '#27C57F' }, { y: 8, color: '#EB9428' }, { y: 14, color: '#E1605B' }, { y: 12, color: '#EB9428' }, { y: 18, color: '#E1605B' }, { y: 21, color: '#E1605B' }, { y: 23, color: '#E1605B' }, { y: 22, color: '#E1605B' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }, { y: 6, color: '#D4D4D4' }]
         }, {
             xTitle: 'Anomaly Occurence',
@@ -103,7 +103,9 @@ var HighChart = React.createClass({
                     enabled: false
                 },
                 tooltip: {
-                    enabled: false
+                       formatter: function() {
+                        return '<br>' + this.series.name + ': ' + this.y;
+                    }
                 },
                 plotOptions: {
                     column: {
@@ -116,7 +118,7 @@ var HighChart = React.createClass({
                     }
                 },
                 series: [{
-                    name: 'Public',
+                    name: 'Documents',
                     data: anomalyChartData[i].data
                 }]
             });

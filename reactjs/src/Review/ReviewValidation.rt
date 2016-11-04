@@ -44,7 +44,7 @@
                                         value={this.state.currentIndex.reviewer}
                                         containerCssClass="dathena-select select-user-review"
                                         dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
-                                        width="120">
+                                        width="200">
                                         <option disabled
                                             value="default">
                                             All Reviewers
@@ -60,7 +60,7 @@
                             </Col>
                             <Col rt-if="this.state.dataReview != null"
                                 sm={8} xs={6} class="text-right text-capitalize">
-                                {this.state.categoryCurrent.name} Review Status: 
+                                {this.state.categoryCurrent.name} Review Status:
                                 <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
                                 Progress:
                                 <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="pull-right">
-                                    <Button bsClass="false" class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo}>Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
+                                    <Button bsClass="my-btn" class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo}>Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                                 </div>
                             </div>
                             <Panel.custom class="legal_secret actions-panel">
@@ -135,6 +135,7 @@
                                                 <table.row2
                                                     rt-repeat="document in this.state.dataReview.challenge_docs"
                                                     document="{document}"
+                                                    key="document_{documentIndex}"
                                                     onClick="{this.handleTableRowOnClick}"
                                                     onChange="{this.handleTableRowOnChange}"
                                                     categories="{this.state.categories}"
@@ -204,6 +205,7 @@
                                                     <table.row3
                                                         rt-repeat="document in this.state.dataReview.challenge_back_docs"
                                                         document="{document}"
+                                                        key="document_{documentIndex}"
                                                         onClick="{this.handleTableRowOnClick}"
                                                         onChange="{this.handleTableRowOnChange}"
                                                         categories="{this.state.categories}"
@@ -216,11 +218,11 @@
                                 </Panel.body>
                             </Panel.custom>
                             <div class="clearfix">
-                                <Button bsClass="false" class="btn btn-green btn-next-cat pull-right ml-md"
+                                <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
                                     onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
-                                <Button bsClass="false" class="btn btn-green btn-next-reviewer pull-right"
-                                    onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>    
-                            </div>                     
+                                <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
+                                    onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
+                            </div>
                         </div>
                     </Col>
                 </Row>
@@ -257,7 +259,7 @@
                                     </tr>
                                     <tr class="child-table">
                                         <td colspan="4" class="hiddenRow">
-                                            <div class="accordian-body collapse" id="reviewerList{categoryIndex}"> 
+                                            <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
                                                 <table class="table">
                                                     <tbody>
                                                         <tr rt-repeat="reviewer in category.reviewers">
@@ -276,7 +278,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div> 
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -286,7 +288,7 @@
                 </Panel.custom>
                 <div class="clearfix">
                     <div class="pull-right">
-                        <Button onClick="{this.confirmValidation}" class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled':'')}" bsClass="mybtn">Confirm and Notify all Reviewers</Button>
+                        <Button onClick="{this.confirmValidation}" class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled':'')}" bsClass="my-btn">Confirm and Notify all Reviewers</Button>
                     </div>
                 </div>
             </div>
@@ -318,7 +320,7 @@
                     </th>
                     <th class="review_note">Type</th>
                     <th class="review_note">Document
-                        <HelpButton className="dropdown-file-info-holder" 
+                        <HelpButton className="dropdown-file-info-holder"
                             setValue="This displays the name of each individual document, as it exists in its current state." />
                     </th>
                     <th class="review_note">Category

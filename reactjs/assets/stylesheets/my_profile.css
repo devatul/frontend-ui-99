@@ -187,7 +187,7 @@ body .btn-primary:hover {
 .mpe-tab-content {
 	border: 2px solid #eee;
 	min-height: 300px;
-	
+
 }
 .mpe-tab-pane {
 	padding: 5px 0px 40px 50px;
@@ -384,7 +384,7 @@ th:focus {
 .edit_th_right {
 	margin-top: 0px;
 }
-.my-team-table > thead > tr > th { 
+.my-team-table > thead > tr > th {
 	vertical-align: top;
 	padding: 8px 20px;
 }
@@ -431,7 +431,7 @@ th:focus {
 	border-left: 1px solid #EEE;
 	border-right: 1px solid #EEE;
 	padding-left: 0px;
-	list-style: none; 
+	list-style: none;
 	content: none;
 }
 .line_document>i {
@@ -624,8 +624,8 @@ select.record_select {
 }
 .record-align-left>ul>li {
 	display: inline;
-	text-align: left;
 	float: left;
+	text-align: left;
 }
 .record-align-left>ul>li:last-child {
 	text-align: right;
@@ -665,6 +665,9 @@ select.record_select {
 
 
 @media screen and (max-width: 991px) {
+  .table{
+    width:1091px;
+  }
 	.table-responsive > .document_review_table  > tbody > tr > td.ipab_document {
 	white-space: normal;
 	}
@@ -672,8 +675,9 @@ select.record_select {
 
 
 @media (max-width: 768px) {
+
 	.table-responsive {
-		overflow-x: auto;
+		overflow-x: scroll;
 	}
 	.mpe-content-left {
 	padding-right: 24px;
@@ -720,7 +724,7 @@ select.record_select {
 	.mpe-list-content>li>a {
 		border-top-right-radius: 5px;
 	}
-	
+
 	.profile-details-left {
 		padding-left: 15px;
 	}
@@ -811,7 +815,7 @@ select.record_select {
 @media (min-width: 768px){
 	.my-profile-form-bordered .control-label {
 		text-align: left;
-	}	
+	}
 	.my_header-edit5 .navbar-collapse .navbar-nav {
 		float: left;
 	}
@@ -819,4 +823,3 @@ select.record_select {
 		float: left;
 	}
 }
-

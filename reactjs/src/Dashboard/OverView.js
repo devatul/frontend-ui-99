@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import template from './OverView.rt';
 import update from 'react/lib/update';
-import { isEmpty, forEach, isEqual, upperFirst } from 'lodash'
+import { isEmpty, forEach, isEqual, upperFirst, orderBy } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import { _categories, fetching } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
@@ -32,7 +32,7 @@ var OverView = React.createClass
         javascriptTodo();
         //this.setLoading();
         this.xhr.getScan = this.getScanResult();
-                      
+
   	},
 
     componentWillUnmount() {
@@ -81,31 +81,6 @@ var OverView = React.createClass
             }
         })
     },
-    setLoading() {
-        let delay = 0;
-        if(this.state.loading < 100) {
-            delay = setInterval(() => {
-                let { loading } = this.state;
-                this.setState({ loading: ++loading })
-                clearInterval(delay)
-                this.setLoading()
-            },0.5);
-        }
-    },
-
-    checkLoadingToSetState(state, data) {
-        let delay = 0;
-        if(this.state.loading < 100) {
-            delay = setInterval(() => {
-                clearInterval(delay)
-                this.checkLoadingToSetState(state, data)
-            }, 100)
-        } else {
-            if(data) {
-                this.setState({ [state]: data, loading: 100 });
-            }
-        }
-    },
 
     getScanResult(){
         this.props.updateStore({
@@ -135,7 +110,17 @@ var OverView = React.createClass
                     result: { $set: data }
                 });
                 this.setState({ scan: setResult })
-                
+
+            },
+            error: (err) => {
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.ERROR
+                        }
+                    })
+                })
             }
         })
     },
@@ -143,7 +128,7 @@ var OverView = React.createClass
     updateChart(result, prevResult) {
         var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
             { categoryLanguage, confidentiality, doctypes } = this.state.configChart;
-        
+
         if( !isEqual( result.categories, prevResult.categories )
             || !isEqual( result.languages, prevResult.languages) ) {
             categoryLanguageData = this.categoryLanguageChart();
@@ -216,15 +201,34 @@ var OverView = React.createClass
             languageNumber = 0,
             { dataChart } = this.state,
             { languages, categories } = this.state.scan.result;
-        //add categories
+
+        //add data categories
+        categories = orderByIndex(categories, [0,2,1,3,4,5,6])
         for(let i = categories.length - 1; i >= 0; i--) {
             categoryChart.data[i] = {
                 name: upperFirst(categories[i].name),
                 y: categories[i].total_reviewed_docs
             };
         }
-        //add languages
+        //order languages by percentage
+        let other = null, langLen = languages.length;
+        for( let i = langLen - 1; i >= 0; i-- ) {
+            var name = languages[i].name.toLowerCase();
+            if(name == 'other')
+            {
+                other = languages[i];
+            }
+            if(other != null)
+            {
+                languages[i] = languages[i + 1];
+            }
+        }
+        languages = orderBy(languages, ['total_docs'], ['desc'])
+        languages[langLen - 1] = other;
+        //add to data chart
         for(let i = languages.length - 1; i >= 0; i--) {
+          if (languages[i] == null)
+            continue;
             languageChart.data[i] = {
                 name: upperFirst(languages[i].name),
                 y: languages[i].total_docs
@@ -233,7 +237,7 @@ var OverView = React.createClass
 
         categoryNumber = categoryChart.data.length;
         languageNumber = languageChart.data.length;
-
+        //Check if data is 0 || 1 => disabled
         if(languageNumber > 1 && categoryNumber > 1) {
             categoryLanguageChart[0] = categoryChart;
             categoryLanguageChart[1] = languageChart;
@@ -258,7 +262,7 @@ var OverView = React.createClass
             categoryLanguageChart[0] = categoryChart;
             categoryLanguageChart[1] = languageChart;
         }
-        
+
         return categoryLanguageChart;
     },
 
@@ -294,7 +298,7 @@ var OverView = React.createClass
                 data: []
             },
             { doctypes } = this.state.scan.result;
-        
+
         for( let i = doctypes.length - 1; i >= 0; i-- ) {
             doctypesChart.data[i] = {
                 name: upperFirst(doctypes[i].name),
@@ -349,7 +353,7 @@ var OverView = React.createClass
             this.getScanResult();
         }
     },
-    
+
 	render:template
 });
 module.exports = OverView;
