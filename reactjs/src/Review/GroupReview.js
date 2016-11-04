@@ -36,7 +36,7 @@ var GroupReview = React.createClass({
             checkBoxAll: false,
             stackChange: [],
             showLoading: "none",
-            
+
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -59,11 +59,11 @@ var GroupReview = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
-    
+
     componentDidUpdate: function(prevProps, prevState) {
-        
+
         if(this.state.shouldUpdate ===  true) {
             this.setState({ shouldUpdate: false });
         }
@@ -81,7 +81,7 @@ var GroupReview = React.createClass({
                 checkNumber = this.checkedNumber(),
                 editNumber = this.editNumber(),
                 docNumber = this.state.documents.length;
-                
+
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
@@ -124,7 +124,7 @@ var GroupReview = React.createClass({
     handleNextGroup() {
         let { index } = this.state.groupCurrent,
             group = Object.assign({}, this.state.groups[index + 1], { index: index + 1 });
-            
+
         if(index < (this.state.groups.length - 1)) {
             this.setState({
                 groupCurrent: group,
@@ -177,7 +177,7 @@ var GroupReview = React.createClass({
     },
 
     handleTableRowOnChange(event, index) {
-        
+
         switch(event.target.id) {
             case 'checkbox': {
                 this.onChangeCheckBox(event, index);
@@ -204,7 +204,7 @@ var GroupReview = React.createClass({
                         checked: event.target.checked
                     }
                 }
-            }), 
+            }),
             updateStack = update(this.state.stackChange, {
                 $push: [{
                     id: index,
@@ -277,7 +277,7 @@ var GroupReview = React.createClass({
                 return data;
             }
         });
-        
+
         this.setState({ documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true });
     },
 
@@ -317,18 +317,18 @@ var GroupReview = React.createClass({
                         group_parent.push(group_id)
                     }
                     groups_by_name[group_id].push({
-                        name: name,
-                        index : i
+                      name: group.id + " - " + name,
+                      index : i
                     })
 
                 })
                  this.setState(
-                    { 
+                    {
                         groups: res,
                         groups_by_name : groups_by_name,
-                        group_parent : group_parent, 
-                        groupCurrent: group, 
-                        shouldUpdate: true 
+                        group_parent : group_parent,
+                        groupCurrent: group,
+                        shouldUpdate: true
                     }
                 );
             }
@@ -363,7 +363,7 @@ var GroupReview = React.createClass({
             </div>
         );
     },
-    
+
     getStatistics: function() {
         makeRequest({
             path: "api/group/statistics/",
@@ -414,7 +414,7 @@ var GroupReview = React.createClass({
                                 symbol: 'circle'
                             },
                             data: [
-                                [45 * i, centroids[i].end], 
+                                [45 * i, centroids[i].end],
                                 {
                                 x: 45 * i,
                                 y: 0,
@@ -456,7 +456,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -476,7 +476,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -496,7 +496,7 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             },
@@ -516,12 +516,12 @@ var GroupReview = React.createClass({
                     name: "Accounting/Tax"
                 },
                 confidentiality: {
-                    id: 1, 
+                    id: 1,
                     name: "Confidential"
                 }
             }
         ],
-        
+
         { id } = this.state.groupCurrent;
 
 //        this.setState({ documents: data, shouldUpdate: true });
@@ -568,7 +568,7 @@ var GroupReview = React.createClass({
             }
         });
     },
-    
+
     progressbar: function(value) {
         var {
             avg_centroid_distance,
@@ -588,7 +588,7 @@ var GroupReview = React.createClass({
             }
         }
     },
-    
+
     checkedNumber() {
         let num = 0,
             { documents } = this.state;
@@ -598,13 +598,13 @@ var GroupReview = React.createClass({
                 num++;
             }
         }
-        
+
         return num;
     },
     editNumber() {
         let num = 0,
             { documents } = this.state;
-            
+
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].status === status.EDITING.name) {
                 num++;
@@ -616,7 +616,7 @@ var GroupReview = React.createClass({
     validateNumber() {
         let num = 0,
             { documents } = this.state;
-            
+
         for(let i = documents.length - 1; i >= 0; i--) {
             if(documents[i].status === status.ACCEPTED.name) {
                 num++;
@@ -702,7 +702,7 @@ var GroupReview = React.createClass({
         });
         this.setState({ dataChart: updateChart });
     },
-    
+
     drawChart() {
         var category = this.state.categoriesInfo;
 		var pieChart = [],
@@ -725,7 +725,7 @@ var GroupReview = React.createClass({
                 documentType.series[i].data[j] = data[j].total;
             }
         }
-        
+
         var updateChart = update(this.state.dataChart, {
             pieChart: { $set: pieChart },
             documentType: { $set: documentType }
