@@ -25,6 +25,7 @@ var OrphanReview = React.createClass({
             documents: [],
             categories: [],
             confidentialities: [],
+            loadingdocuments:false,
     		categoryInfo: [],
             documentPreview: -1,
             shouldUpdate: false,
@@ -81,7 +82,7 @@ var OrphanReview = React.createClass({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
                 checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: Math.round(((validNumber + editNumber) * 100) / docNumber),
+                reviewStatus: (docNumber === 0 ? 0 : Math.round(((validNumber + editNumber) * 100) / docNumber)),
                 shouldUpdate: true
             });
         }
@@ -123,7 +124,9 @@ var OrphanReview = React.createClass({
         if(index < (this.state.orphans.length - 1)) {
             this.setState({
                 orphanCurrent: orphan,
-                shouldUpdate: true
+                shouldUpdate: true,
+                documents: [],
+                loadingdocuments:true,
             });
         }
     },
@@ -419,7 +422,7 @@ var OrphanReview = React.createClass({
             path: "api/group/orphan/samples",
             params: { "id": id },
             success: (res) => {
-                this.setState({ documents: res, shouldUpdate: true });
+                this.setState({ documents: res, shouldUpdate: true, loadingdocuments: false });
             }
         });
 

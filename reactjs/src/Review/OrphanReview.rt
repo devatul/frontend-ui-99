@@ -227,8 +227,9 @@
               </Button>
             </div>
           </Panel.head>
-          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength" >
-            <p rt-if=" docLength === 0 " class="document_note">You don't have any document to review</p>
+          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as loadingdocuments" >
+            <p rt-if=" docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
+            <p rt-if=" docLength === 0 && loadingdocuments === true" class="document_note">Loading documents, please wait...</p>
             <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
               <Button
                 rt-if="this.state.checkedNumber > 0"
