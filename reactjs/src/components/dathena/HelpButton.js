@@ -16,7 +16,10 @@ var HelpButton = React.createClass({
                 'fontSize' :'13px',
                 'marginBottom': '0px',
                 'whiteSpace' : 'normal' ,
-                'fontWeight': 'initial'
+                'fontWeight': 'initial',
+                'letterSpacing' : '0.1px',
+                'fontFamily' : ['Roboto', 'Helvetica', 'sans-serif'],
+                'lineHeight' : '1.5'
             },
         };
     },
