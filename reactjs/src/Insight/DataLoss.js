@@ -50,10 +50,6 @@ var DataLost = React.createClass({
                             break;
                         case 'en' :
                             arr.unshift(data[i].language);
-                            if (arr[1] && arr[1].language == 'fr') {
-                              arr[0] = arr[1];
-                              arr[1] = data[i].language;
-                            }
                             break;
                         case 'fr' :
                             arr.unshift(data[i].language);
