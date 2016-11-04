@@ -211,9 +211,15 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .fix-overview-help-button {
     color: #000011;
     font-weight: normal;
-    width: 330px !important;
-    min-width: 300px;
+    width: 330px;
 }
+
+@media (max-width: 996px) {
+    .dropdown-menu.full-mobile.new-help {
+        width: 90%;
+    }
+}
+
 
 .fix-overview-help-button-table {
     max-width: 300px;
@@ -225,7 +231,6 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .help_question_bottom.fix-margin.has-arrow {
     margin-left: 0;
     right: -5px;
-    left: auto !important;
 }
 
 .note_chart_content_review.fix.has-arrow:after {
@@ -606,4 +611,13 @@ select.assigment-select.form-control {
 #overview-panel-2 i.fa {
     text-align: center;
     margin-right: 4px;
+}
+
+/* modal preview */
+.modal-title.modal-title-preview {
+    width: 20%;
+}
+
+.modal-preview .modal-action-preview {
+    width: 28%;
 }

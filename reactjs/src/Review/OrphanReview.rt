@@ -243,7 +243,7 @@
                 <strong>Well done, you have completed the classification review!</strong>
               </Alert>
 
-              <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions" responsive bordered striped>
+              <Table class="review_table review_table_no_progress mb-none no-footer table-classification-width table-my-actions docPreview" responsive bordered striped>
                 <thead>
                   <tr role="row" class="">
                     <th class="fix-padding-th-checkbox">

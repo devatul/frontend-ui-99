@@ -103,7 +103,7 @@ var documentPreview = React.createClass({
                     dialogClassName="modal-preview">
                     <Modal.Header>
                         <Row>
-                            <Modal.Title className="col-sm-3">
+                            <Modal.Title className="col-sm-3 modal-title-preview">
                                 <i className="fa fa-search"></i>
                                 <span>Document Preview</span>
                             </Modal.Title>
@@ -138,7 +138,7 @@ var documentPreview = React.createClass({
                                     </span>
                                 </div>
                             </div>
-                            <div className="col-sm-3 modal-actions text-right">
+                            <div className="col-sm-4 modal-actions modal-action-preview text-right">
                                 {nextDocumentButton}
                                 <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                                 <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>

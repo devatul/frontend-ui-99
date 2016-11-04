@@ -30,36 +30,74 @@ var HelpButton = React.createClass({
     },
 
     handleOnMouseOver: function() {
-        var dropdown = this.refs.dropdown
-        var dropdownMenu = this.refs.dropdownMenu
-        var eOffset = $(dropdown).position();
-        var left = 0;
-        var right = 0;
-        //debugger
+        var eOffset = $(this.refs.dropdown).offset();
+        var { setOpen, expanded } = this.state,
+            { className, classIcon, classMenu } = this.props,
+            value = this.props.setValue.replace(/(?:\r\n|\r|\n)/g, '<br/>'),
 
-        // $('body').append($(dropdownMenu).detach());
-        if ($(window).width() <= 996 && $('div[id^="overview-panel"]').hasClass('panel-body')) {
-
-            if (eOffset.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
-                right = eOffset.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 60;
-                $(dropdownMenu).not('none-right').addClass('none-right');
+            _window = $(window),
+            _outWidth = _window.outerWidth(),
+            _inWidth = _window.innerWidth(),
+            _wWidth = _window.width(),
+            marginLeft = 0,
+            width = 330,
+            left = eOffset.left;
+            
+        if(_wWidth > 550) {
+            if((left + 300) > _wWidth) {
+                marginLeft = -260;
+            } else {
+                marginLeft = -20;
             }
-            else if (eOffset.left - $(dropdownMenu).outerWidth() < 0){
-                left = -1 * eOffset.left;
-                $(dropdownMenu).not('none-left').addClass('none-left');
+        } else if(_wWidth > 375 && _wWidth < 550) {
+            if((left + 300) > _wWidth) {
+                marginLeft = 'auto';
+            } else {
+                marginLeft = -50;
             }
-            $(dropdownMenu).css({
-                    'display': 'block',
-                    'margin-left' : left + 'px',
-                    'margin-right' : right + 'px'
-                });
+        } else {
+            marginLeft = 15;
+            width = '90%';
+            left = 'auto';
         }
+        
+        let menu = React.createElement('div', {
+            style: { 
+                display: 'block',
+                top: eOffset.top,
+                left: left,
+                marginLeft: marginLeft,
+                width: width,
+                marginTop: 25
+            },
+            className: (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'
+        }, <p dangerouslySetInnerHTML={{ __html: value }} style={this.state.styleContent}/>)
 
-        else {
-            $(dropdownMenu).css({
-                    'display': 'block'
-                });
-        }
+            
+        render(menu, document.getElementById('help-render-position'))
+
+        // if ($(window).width() <= 996 && $('div[id^="overview-panel"]').hasClass('panel-body')) {
+
+        //     if (eOffset.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
+        //         right = eOffset.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 60;
+        //         $(dropdownMenu).not('none-right').addClass('none-right');
+        //     }
+        //     else if (eOffset.left - $(dropdownMenu).outerWidth() < 0){
+        //         left = -1 * eOffset.left;
+        //         $(dropdownMenu).not('none-left').addClass('none-left');
+        //     }
+        //     $(dropdownMenu).css({
+        //             'display': 'block',
+        //             'margin-left' : left + 'px',
+        //             'margin-right' : right + 'px'
+        //         });
+        // }
+
+        // else {
+        //     $(dropdownMenu).css({
+        //             'display': 'block'
+        //         });
+        // }
 
         this.setState({ setOpen: 'open', expanded: true });
     },
@@ -67,17 +105,18 @@ var HelpButton = React.createClass({
     handleOnMouseOut: function() {
         var dropdown = this.refs.dropdown
         var dropdownMenu = this.refs.dropdownMenu
-        var eOffset = $(dropdown).offset();
-        // $(dropdown).append($(dropdownMenu).detach());
-        if ($(dropdownMenu).hasClass('none-left')) {
-            $(dropdownMenu).removeClass('none-left');
-        }
-        if ($(dropdownMenu).hasClass('none-right')) {
-            $(dropdownMenu).removeClass('none-right');
-        }
-        $(dropdownMenu).css({
-                'display': 'none'
-            });
+        // var eOffset = $(dropdown).offset();
+        // // $(dropdown).append($(dropdownMenu).detach());
+        // if ($(dropdownMenu).hasClass('none-left')) {
+        //     $(dropdownMenu).removeClass('none-left');
+        // }
+        // if ($(dropdownMenu).hasClass('none-right')) {
+        //     $(dropdownMenu).removeClass('none-right');
+        // }
+        // $(dropdownMenu).css({
+        //         'display': 'none'
+        //     });
+        render(<div></div>, document.getElementById('help-render-position'))
         this.setState({ setOpen: '' });
     },
 
@@ -111,10 +150,6 @@ var HelpButton = React.createClass({
                 <a onMouseOver={this.handleOnMouseOver} onMouseOut={this.handleOnMouseOut} className={classIcon ? classIcon : 'review_question_a help_question_a'} aria-expanded={this.state.expanded}>
                     <i className="fa fa-question-circle" aria-hidden="true"></i>
                 </a>
-                <div ref="dropdownMenu" className={ (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'}>
-                    <p dangerouslySetInnerHTML={{ __html: value }} style={this.state.styleContent}/>
-                </div>
-
             </div>
 
         );
