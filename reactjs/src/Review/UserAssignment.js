@@ -102,7 +102,7 @@ var UserAssignment = React.createClass({
     componentDidMount() {
     	this.getCategories();
         this.getSummary();
-    	console.log(this.state,'sdfsdfsdf');
+    	console.log(this.state);
     	javascript();
     },
 
