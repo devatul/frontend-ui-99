@@ -42,7 +42,7 @@ var HelpButton = React.createClass({
         if ($(window).width() <= 996 && $(dropdownMenu).hasClass('overview-table-help')) {
 
             if (position.left + $(dropdownMenu).outerWidth() + $(dropdown).outerWidth() > $('.container').innerWidth()) {
-                right = position.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 64;
+                right = position.left + $(dropdown).outerWidth() - $('.container').innerWidth() + 50;
                 $(dropdownMenu).not('none-right').addClass('none-right');
             }
             else if (position.left - $(dropdownMenu).outerWidth() < 0){

@@ -350,6 +350,7 @@ var DocumentReview = React.createClass({
     },
 
     onChangeCategory(event, actionIndex, docIndex, Review) {
+        debugger
         let categoryIndex = event.target.value,
             document = this.state[Review][actionIndex].documents[docIndex],
             updateData = [];
