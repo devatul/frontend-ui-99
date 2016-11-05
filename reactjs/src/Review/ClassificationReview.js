@@ -47,7 +47,7 @@ var ClassificationReview = React.createClass({
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -113,7 +113,7 @@ var ClassificationReview = React.createClass({
                 }
             }
         });
-        
+
         this.setState({ dataReview: updateData, shouldUpdate: true });
     },
 
@@ -329,7 +329,7 @@ var ClassificationReview = React.createClass({
                     }
                 }
             });
-            
+
 
         this.setState({
             dataReview: updateData,

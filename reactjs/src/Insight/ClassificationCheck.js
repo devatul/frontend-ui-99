@@ -7,25 +7,28 @@ var ClassificationCheck = React.createClass({
     getInitialState() {
         return {
             data: [{
+                'index': 0,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
+                'category':'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
                 'Involved in Anomaly': 'Yes'
             }, {
+                'index': 1,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
+                'category':'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
                 'Involved in Anomaly': 'Yes'
             }, {
+                'index': 2,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
+                'category':'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
@@ -36,18 +39,16 @@ var ClassificationCheck = React.createClass({
             categories: [],
             confidentialities: [],
             shouldUpdate: false,
-            documentPreview: -1,
+            documentPreview: 0,
             openPreview: false,
         };
     },
     onClickDocumentName(index) {
-        if(index <= (this.state.documents.length - 1)) {
-            this.setState({
+          this.setState({
                 openPreview: true,
                 documentPreview: index,
-                shouldUpdate: true
+                //shouldUpdate: true
             });
-        }
     },
     handleUndo() {
         if(this.state.stackChange.length > 0) {
