@@ -318,16 +318,29 @@ var GroupReview = React.createClass({
                     }
                     groups_by_name[group_id].push({
                       name: group.id + " - " + name,
-                      index : i
+                      index : i,
+                      id: group.id
                     })
-
                 })
+
+              group_parent.sort(function(a, b) {
+                    if (a > b) return 1;
+                    if (a < b) return -1;
+              });
+
+              forEach(group_parent, (i) => {
+                groups_by_name[i].sort(function(a, b) {
+                  if (parseInt(a.id) > parseInt(b.id)) return 1;
+                  if (parseInt(a.id) < parseInt(b.id)) return -1;
+                })
+              })
+
                  this.setState(
                     {
                         groups: res,
                         groups_by_name : groups_by_name,
                         group_parent : group_parent,
-                        groupCurrent: group,
+                        groupCurrent: Object.assign({}, res[groups_by_name[group_parent[0]][0].index], { index: groups_by_name[group_parent[0]][0].index }),
                         shouldUpdate: true
                     }
                 );
