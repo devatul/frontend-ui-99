@@ -14,6 +14,8 @@ var GroupReview = React.createClass({
     	return {
     		listGroup:[],
             groups: [],
+            groups_by_name : [],
+            group_parent : [],
     		groupCurrent: {
                 id: 0,
                 name: 'group name',
@@ -301,12 +303,47 @@ var GroupReview = React.createClass({
 
     getGroups() {
         let data = [];
-
         makeRequest({
             path: "api/group/",
             success: (res) => {
                 let group = Object.assign({}, res[0], { index: 0 });
-                this.setState({ groups: res, groupCurrent: group, shouldUpdate: true });
+                let groups_by_name = [];
+                let group_parent = [];
+                forEach(res, (group,i) => {
+                    let group_id = group.name.split(',')[0];
+                    let name = group.name.split(',')[1];
+                    if(!groups_by_name[group_id]){
+                        groups_by_name[group_id] = [];
+                        group_parent.push(group_id)
+                    }
+                    groups_by_name[group_id].push({
+                      name: group.id + " - " + name,
+                      index : i,
+                      id: group.id
+                    })
+                })
+
+              group_parent.sort(function(a, b) {
+                    if (a > b) return 1;
+                    if (a < b) return -1;
+              });
+
+              forEach(group_parent, (i) => {
+                groups_by_name[i].sort(function(a, b) {
+                  if (parseInt(a.id) > parseInt(b.id)) return 1;
+                  if (parseInt(a.id) < parseInt(b.id)) return -1;
+                })
+              })
+
+                 this.setState(
+                    {
+                        groups: res,
+                        groups_by_name : groups_by_name,
+                        group_parent : group_parent,
+                        groupCurrent: Object.assign({}, res[groups_by_name[group_parent[0]][0].index], { index: groups_by_name[group_parent[0]][0].index }),
+                        shouldUpdate: true
+                    }
+                );
             }
         });
     },
@@ -378,7 +415,6 @@ var GroupReview = React.createClass({
                 "id": this.state.groupCurrent.id
             },
             success: (centroids) => {
-                console.log(centroids)
                 var series = [], total = centroids.length;
                 let max = maxBy(centroids, doc => doc.number_docs)
                 let max_circle_size = 6
@@ -386,29 +422,29 @@ var GroupReview = React.createClass({
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
-                            type: 'scatter',
-                            lineWidth: 2,
-                            marker: {
-                                symbol: 'circle'
-                            },
-                            data: [
-                                [angle_multiplier * (i + 0.5), centroids[i].end],
-                                {
-                                x: angle_multiplier * (i + 0.5),
-                                y: 0,
-                                document: centroids[i].number_docs,
-                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
-                                marker: {
-                                    enabled: false,
-                                    states: {
-                                        hover: {
-                                            enabled: false
-                                        }
-                                    }
+                          type: 'scatter',
+                          lineWidth: 2,
+                          marker: {
+                            symbol: 'circle'
+                          },
+                          data: [
+                            [angle_multiplier * (i + 0.5), centroids[i].end],
+                            {
+                              x: angle_multiplier * (i + 0.5),
+                              y: 0,
+                              document: centroids[i].number_docs,
+                              weight: Math.ceil(centroids[i].number_docs / max.number_docs * max_circle_size),
+                              marker: {
+                                enabled: false,
+                                states: {
+                                  hover: {
+                                    enabled: false
+                                  }
                                 }
-                                },
-                                null
-                            ]
+                              }
+                            },
+                            null
+                          ]
                         };
                     }
                 }
@@ -520,6 +556,10 @@ var GroupReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });

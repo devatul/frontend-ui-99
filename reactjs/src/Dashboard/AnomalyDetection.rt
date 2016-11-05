@@ -92,7 +92,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <table class="table anomaly-table">
+                      <table class="table anomaly-table" rt-if="this.state.user_Client">
                         <thead>
                           <tr>
                             <th>Total Anomaly</th>
@@ -102,25 +102,28 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr rt-if="this.state.user_Client" rt-repeat="tbl in this.state.user_Client.data_second_table" key="tbl_{tblIndex}">
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">1,4 k</span>
-                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl["Total Anomaly"].value}</span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows User Account</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">88</span>
-                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl["Client Data at Risk"].value}</span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Documents</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">3</span>
-                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl["Security Settings at Risk"].value}</span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Active Directory Group</span>
                             </td>
@@ -135,7 +138,7 @@
 
                   </div>
                   <div class="anomaly-block" >
-                     <TableAnomaly />
+                     <TableAnomaly type = "table1"/>
                   </div>
                 </div>
               </div>
@@ -230,7 +233,7 @@
 
                   </div>
                   <div class="anomaly-block" >
-                        <TableAnomaly />
+                        <TableAnomaly type= "table2"/>
                   </div>
                 </div>
               </div>
@@ -335,7 +338,7 @@
                     </div>
                   </div>
                   <div class="anomaly-block">
-                        <TableAnomaly />
+                        <TableAnomaly type = 'table1'/>
                   </div>
                 </div>
               </div>
@@ -457,7 +460,7 @@
                         </div>
                     </div>
                     <div class="anomaly-block">
-                        <TableAnomaly />
+                        <TableAnomaly type='table1'/>
                     </div>
                 </div>
             </div>
@@ -551,7 +554,7 @@
                         </div>
                     </div>
                     <div class="anomaly-block">
-                        <TableAnomaly />
+                        <TableAnomaly type = 'table1'/>
                     </div>
                 </div>
             </div>

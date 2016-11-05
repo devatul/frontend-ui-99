@@ -41,9 +41,7 @@
                 <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
                     <Tab language =  {this.state.language} click = {this.changeDefaul} />
                     <div id="lossIndex">
-                        <div class="panel-body"
-
-                        rt-repeat = "data in this.state.default_data['most efficient keywords']" key={dataIndex} >
+                        <div class="panel-body" rt-repeat = "data in this.state.default_data['most efficient keywords']" key={dataIndex} >
                             <div class="table-responsive table-suggestion-wrapper">
                                 <h4 class="table-title">{data.category_name}</h4>
                                 <Keyword data="{data['confidentiality levels']}" name= {data.category_name} />

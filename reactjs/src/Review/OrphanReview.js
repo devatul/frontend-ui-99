@@ -18,6 +18,7 @@ var OrphanReview = React.createClass({
                 name: 'orphan name',
                 index: 0
             },
+            haveNextOrphan: true,
     		statistics: {},
     		cloudwords: [],
     		centroids: [],
@@ -436,6 +437,10 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/category/',
             success: (data) => {
+                data.sort(function(a, b) {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                });
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
@@ -446,6 +451,11 @@ var OrphanReview = React.createClass({
         makeRequest({
             path: 'api/label/confidentiality/',
             success: (data) => {
+                data.forEach(item => {
+                    if(item.name === "Internal Only") {
+                        item.name = "Internal";
+                    }
+                });
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }
         });

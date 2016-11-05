@@ -19,8 +19,9 @@
               <div class="col-md-4 col-sm-8 col-xs-12">
                   <a class="my-profile-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a>
                   <div class="my-profile-user">
-                    <h4>{this.state.profile.user}</h4>
-                    <p>Job Position: {this.state.profile.job_position}</p>
+                    <h4>Login: {this.state.profile.user}</h4>
+                    <h4>Application Role: {this.state.profile.job_position}</h4>
+                    <h4>Job Title: CEO & Founder</h4>
                   </div>
               </div>
               <div class="my-profile-bottom col-md-8 col-sm-4 col-xs-12">
