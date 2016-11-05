@@ -138,7 +138,6 @@ let Indentity = React.createClass({
         /*height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
         height_3 = _.size(key_contributor[4].contributors.categories)* 40; *//*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
 
-
         let updateData_config = update(this.state, {
             dataChart: {
                 high_risk_users: { $set: high_risk_users },
@@ -167,7 +166,7 @@ let Indentity = React.createClass({
         let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
             dataChart = [],
             categories = [];
-
+            object = _.orderBy(object, ['docs'], ['desc']);
         for (let i = 0; i < _.size(object); i++) {
             categories.push(object[i].name);
             dataChart.push({

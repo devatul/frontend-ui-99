@@ -374,6 +374,9 @@ var UserAssignment = React.createClass({
 
     reviewerChart(list) {
         let data = [], categories = [];
+
+        list = _.orderBy(list, ['number_hits'], ['desc']);
+
         for(var i = 0, total = list.length; i < total; i++) {
             categories[i] = list[i].first_name + '.' + list[i].last_name;
             data[i] = list[i].number_hits;
@@ -404,6 +407,7 @@ var UserAssignment = React.createClass({
                 name: documents_types[i].name,
                 data: []
             };
+            documents_types[i].doctypes = _.orderBy(documents_types[i].doctypes, ['number_docs'], ['desc']);
 
             for( let j = documents_types[i].doctypes.length - 1; j >= 0; j-- ) {
 

@@ -273,7 +273,7 @@
                                         </tr>
                                         <tr class="child-table">
                                             <td colspan="4" class="hiddenRow">
-                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
+                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}">
                                                     <table class="table">
                                                         <tbody>
                                                             <tr rt-repeat="viewer in summary.reviewers">
@@ -290,7 +290,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                </div> 
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
