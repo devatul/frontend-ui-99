@@ -156,7 +156,7 @@ var OrphanReview = React.createClass({
 
     onClickButtonStatus(index) {
         let document = this.state.documents[index];
-        if(document.status === 'invalid') {
+        if(document.status !== status.ACCEPTED.name) {
             let updateDocuments = update(this.state.documents, {
                 [index]: {
                     $merge: {

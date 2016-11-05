@@ -30,9 +30,77 @@ var ClassificationCheck = React.createClass({
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
                 'Involved in Anomaly': 'Yes'
-            }]
+            }],
+            documents: [],
+            stackChange: [],
+            categories: [],
+            confidentialities: [],
+            shouldUpdate: false,
+            documentPreview: -1,
+            openPreview: false,
         };
     },
+    onClickDocumentName(index) {
+        if(index <= (this.state.documents.length - 1)) {
+            this.setState({
+                openPreview: true,
+                documentPreview: index,
+                shouldUpdate: true
+            });
+        }
+    },
+    handleUndo() {
+        if(this.state.stackChange.length > 0) {
+            let { documents, stackChange } = this.state,
+
+                item = stackChange[stackChange.length - 1],
+
+                updateDocuments = update(documents, {
+                    [item.id]: {
+                        $set: item.data
+                    }
+                }),
+
+                updateStack = update(stackChange, {
+                    $splice: [[stackChange.length - 1, 1]]
+                });
+
+            this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+        }
+    },
+    closePreview() {
+        this.setState({ openPreview: false, shouldUpdate: true });
+    },
+    handleTableRowOnClick(event, index) {
+        switch(event.currentTarget.id) {
+            case 'documentName': {
+                this.onClickDocumentName(index);
+            }
+            break;
+            case 'documentStatus': {
+                this.onClickButtonStatus(index);
+            }
+        }
+    },
+    handleTableRowOnChange(event, index) {
+
+        switch(event.target.id) {
+            case 'checkbox': {
+                this.onChangeCheckBox(event, index);
+            }
+            break;
+
+            case 'selectCategory': {
+                this.onChangeCategory(event, index);
+            }
+            break;
+
+            case 'selectConfidentiality': {
+                this.onChangeConfidentiality(event, index);
+            }
+        }
+    },
+
     search(event) {
         let value = event.target.value
         let data = _.cloneDeep(this.state.data)

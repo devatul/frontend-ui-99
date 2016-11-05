@@ -226,7 +226,7 @@
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
             </div>
-          </Panel.head>
+          </Panel.head> 
           <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as loadingdocuments; this.state.getdocumenterror as docError" >
             <p rt-if=" docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
             <p rt-if=" docLength === 0 && loadingdocuments === false && docError !== false" class="document_note">ERROR : { docError }</p>
