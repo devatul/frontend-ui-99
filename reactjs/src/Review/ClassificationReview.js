@@ -47,7 +47,7 @@ var ClassificationReview = React.createClass({
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -113,7 +113,7 @@ var ClassificationReview = React.createClass({
                 }
             }
         });
-        
+
         this.setState({ dataReview: updateData, shouldUpdate: true });
     },
 
@@ -159,14 +159,14 @@ var ClassificationReview = React.createClass({
     },
 
     onClickDocumentName(index) {
-        
+
         let idx = index.split('_'),
             reviewIndex = parseInt(idx[0]),
             docIndex = parseInt(idx[1]);
 
         let hasNextDocument = false;
         let isNextCategory = false;
-        
+
         if(docIndex <= (this.state.dataReview[reviewIndex].documents.length - 1)) {
             if(this.state.dataReview[reviewIndex].documents.length > docIndex + 1){
                 hasNextDocument = true;
@@ -282,7 +282,7 @@ var ClassificationReview = React.createClass({
     handleTableRowOnChange(event, index) {
         let { stackChange } = this.state,
             splitIndex = index.split('_'), reviewIndex = splitIndex[0], docIndex = splitIndex[1],
-            document = this.state.dataReview[reviewIndex].documents[docIndex], 
+            document = this.state.dataReview[reviewIndex].documents[docIndex],
             isNextCategory = this.state.current.isNextCategory, hasNextDocument = this.state.current.hasNextDocument;
         let updateStackChange = update(stackChange, {});
         if(!stackChange[reviewIndex]) {
@@ -329,7 +329,7 @@ var ClassificationReview = React.createClass({
                     }
                 }
             });
-            
+
 
         this.setState({
             dataReview: updateData,
@@ -409,7 +409,7 @@ var ClassificationReview = React.createClass({
             },
             shouldUpdate: true
         });
-        
+
     },
 
     handleCheckAll(index, event) {
