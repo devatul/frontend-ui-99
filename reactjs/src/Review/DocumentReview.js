@@ -49,7 +49,7 @@ var DocumentReview = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -133,7 +133,7 @@ var DocumentReview = React.createClass({
                             }
 
                             return data;
-                        } 
+                        }
                     }
                 }
             }),
@@ -155,13 +155,13 @@ var DocumentReview = React.createClass({
                 return this.onClickDocumentName(event, actionIndex, docIndex, Review);
             case 'documentStatus':
                 return this.onClickButtonStatus(event, actionIndex, docIndex, Review);
-            case 'validationButton': 
+            case 'validationButton':
                 return this.onClickButtonStatus(event, actionIndex, docIndex, Review);
         }
     },
 
     onClickDocumentName(event, actionIndex, docIndex, Review) {
-        
+
         if(docIndex <= (this.state[Review][actionIndex].documents.length - 1)) {
             this.setState({
                 openPreview: true,
@@ -190,7 +190,7 @@ var DocumentReview = React.createClass({
                 "category": document.category,
                 "confidentiality": document.confidentiality
             }]);
-            
+
             _status = 'status';
 
         } else {
@@ -206,7 +206,7 @@ var DocumentReview = React.createClass({
 
             _status = '2nd_line_validation';
         }
-        
+
 
         this.setState({
             [Review]: update(this.state[Review], {
@@ -272,13 +272,12 @@ var DocumentReview = React.createClass({
     },
 
     handleTableRowOnChange(actionIndex, docIndex, Review, event) {
-        //debugger
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
         let { stackChange } = this.state,
 
             document = this.state[Review][actionIndex].documents[docIndex],
-            
+
             newStack = update(stackChange, {
                 [Review]: {
                     $merge: {
@@ -480,7 +479,7 @@ var DocumentReview = React.createClass({
                             for(let i = data.length - 1; i >= 0; i--) {
                                 data[i].checked = event.target.checked
                             }
-                            
+
                             return data;
                         }
                     },

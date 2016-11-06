@@ -45,7 +45,7 @@ var HelpButton = React.createClass({
             marginLeft = 0,
             width = 330,
             left = eOffset.left;
-            
+
         if(_wWidth > 550) {
             if((left + 300) > _wWidth) {
                 marginLeft = -260;
@@ -63,9 +63,9 @@ var HelpButton = React.createClass({
             width = '90%';
             left = 'auto';
         }
-        
+
         let menu = React.createElement('div', {
-            style: { 
+            style: {
                 display: 'block',
                 top: eOffset.top,
                 left: left,
@@ -76,7 +76,7 @@ var HelpButton = React.createClass({
             className: (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'
         }, <p dangerouslySetInnerHTML={{ __html: value }} style={this.state.styleContent}/>)
 
-            
+
         render(menu, document.getElementById('help-render-position'))
 
         // if ($(window).width() <= 996 && $('div[id^="overview-panel"]').hasClass('panel-body')) {
@@ -106,8 +106,6 @@ var HelpButton = React.createClass({
     },
 
     handleOnMouseOut: function() {
-        var dropdown = this.refs.dropdown
-        var dropdownMenu = this.refs.dropdownMenu
         // var eOffset = $(dropdown).offset();
         // // $(dropdown).append($(dropdownMenu).detach());
         // if ($(dropdownMenu).hasClass('none-left')) {

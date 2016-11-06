@@ -137,93 +137,93 @@
               </div>
             <div class="modal-body">
               <div class="table-responsive">
-                                <table class="review_table cl_checker_table table table-bordered table-striped mb-none no-footer"  role="grid" aria-describedby="datatable-default_info">
-                                    <thead>
-                                        <tr role="row" class="">
-                                            <th class="review_note">Type
-                                            </th>
-                                            <th class="review_note">Document
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Path
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Category
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Confidentiality
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Last Modify by
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Reviewer
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                            <th class="review_note">Involved in Anomaly
-                                                <HelpButton
-                                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <td class="text-center">
-                                                <i class="fa fa-file-word-o action-file-icon"></i>
-                                            </td>
-                                            <td class="text-left overflow-hidden">
-                                                <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
+                <table class="review_table cl_checker_table table table-bordered table-striped mb-none no-footer"  role="grid" aria-describedby="datatable-default_info">
+                    <thead>
+                        <tr role="row" class="">
+                            <th class="review_note">Type
+                            </th>
+                            <th class="review_note">Document
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Path
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Category
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Confidentiality
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Last Modify by
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Reviewer
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                            <th class="review_note">Involved in Anomaly
+                                <HelpButton
+                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <td class="text-center">
+                                <i class="fa fa-file-word-o action-file-icon"></i>
+                            </td>
+                            <td class="text-left overflow-hidden">
+                                <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
 
-                                                        <InfoButton>
-                                                            <li>Name: <b>Contract</b></li>
-                                                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                                                            <li>Owner: <b>Todd_Smith</b></li>
-                                                            <li>Creation Date: <b>2015-01-01</b></li>
-                                                            <li>Modification Date: <b>2015-05-28</b></li>
-                                                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                                                            <li>Confidentiality Label: <b>Yes/No</b></li>
-                                                            <li>Number of Classification Challenge: <b>1</b></li>
-                                                        </InfoButton>
+                                        <InfoButton>
+                                            <li>Name: <b>Contract</b></li>
+                                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
+                                            <li>Owner: <b>Todd_Smith</b></li>
+                                            <li>Creation Date: <b>2015-01-01</b></li>
+                                            <li>Modification Date: <b>2015-05-28</b></li>
+                                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
+                                            <li>Confidentiality Label: <b>Yes/No</b></li>
+                                            <li>Number of Classification Challenge: <b>1</b></li>
+                                        </InfoButton>
 
-                                                </div>
-                                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.doc</span>
-                                            </td>
-                                            <td class="text-left">
-                                                <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Accounting/Tax</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Confidentiality</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>John.Hayt</span>
-                                            </td>
-                                            <td class="text-left">
-                                              <span>Billy.Barty</span>
-                                            </td>
-                                            <td>
-                                              <span class="text-red">Yes</span>
-                                            </td>
-                                        </tr>
+                                </div>
+                                <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.doc</span>
+                            </td>
+                            <td class="text-left">
+                                <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
+                            </td>
+                            <td class="text-left">
+                                <span>Accounting/Tax</span>
+                            </td>
+                            <td class="text-left">
+                                <span>Confidentiality</span>
+                            </td>
+                            <td class="text-left">
+                                <span>John.Hayt</span>
+                            </td>
+                            <td class="text-left">
+                                <span>Billy.Barty</span>
+                            </td>
+                            <td>
+                                <span class="text-red">Yes</span>
+                            </td>
+                        </tr>
 
-                                    </tbody>
-                                </table>
-                            </div>
+                    </tbody>
+                </table>
+              </div>
               <div class="file-preview mt-md">
                   <p>File Preview Content</p>
               </div>

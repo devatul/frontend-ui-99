@@ -112,6 +112,12 @@ let Indentity = React.createClass({
         }
         let length = key_contributor.length
         console.log('key_contributor', key_contributor);
+/*
+
+        height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
+        height_2 = Math.max(_.size(key_contributor[1].contributors.categories), _.size(key_contributor[2].contributors.categories)) * 40;
+        height_3 = _.size(key_contributor[2].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+
         if(length == 1) {
             height_1 = _.size(key_contributor[0].contributors.categories)* 40;
         } else{
@@ -153,13 +159,14 @@ let Indentity = React.createClass({
         });
 
         this.setState(updateData_config)
+
     },
 
     configChart(object) {
         let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
             dataChart = [],
             categories = [];
-
+            object = _.orderBy(object, ['docs'], ['desc']);
         for (let i = 0; i < _.size(object); i++) {
             categories.push(object[i].name);
             dataChart.push({

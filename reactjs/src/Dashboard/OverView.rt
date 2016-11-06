@@ -140,25 +140,25 @@
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Reviewed Documents
                                                     <HelpButton
-                                                        classMenu="fix-overview-help-button-table"
+                                                        classMenu="fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of documents reviewed for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Validated Documents
                                                     <HelpButton
-                                                        classMenu="fix-overview-help-button-table"
+                                                        classMenu="fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of documents validated and classify for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
                                                     <HelpButton
-                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of successful challenges compared against all challenges for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Accuracy
                                                     <HelpButton
-                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table overview-table-help"
                                                         setValue="Accuracy of Dathena 99 document classification expressed as a percentage." />
                                                 </th>
                                             </tr>
@@ -204,25 +204,25 @@
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Reviewed Documents
                                                     <HelpButton
-                                                        classMenu="fix-overview-help-button-table"
+                                                        classMenu="fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of documents reviewed for each category" />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1"
                                                     colspan="1">Validated Documents
                                                     <HelpButton
-                                                        classMenu="fix-overview-help-button-table"
+                                                        classMenu="fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of documents validated and classified for each category." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
                                                     <HelpButton
-                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table overview-table-help"
                                                         setValue="Percentage of successful challenges compared to the total level of challenges. " />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Accuracy
                                                     <HelpButton
-                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table overview-table-help"
                                                         setValue="Accuracy of Dathena 99 document classification expressed as a percentage." />
                                                 </th>
                                             </tr>

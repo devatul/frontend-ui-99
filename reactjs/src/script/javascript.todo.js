@@ -60,9 +60,9 @@ module.exports = function () {
         }
     });
 
-    // and when you hide it, reattach the drop down, and hide it normally
     $(window).on('hide.bs.dropdown', function (e) {
         var windowWidth = $(window).innerWidth();
+    // and when you hide it, reattach the drop down, and hide it normally
 
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             $(e.target).append(dropdownMenu.detach());
