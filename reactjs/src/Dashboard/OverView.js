@@ -32,7 +32,7 @@ var OverView = React.createClass
         javascriptTodo();
         //this.setLoading();
         this.xhr.getScan = this.getScanResult();
-                      
+
   	},
 
     componentWillUnmount() {
@@ -110,7 +110,17 @@ var OverView = React.createClass
                     result: { $set: data }
                 });
                 this.setState({ scan: setResult })
-                
+
+            },
+            error: (err) => {
+                this.props.updateStore({
+                    xhr: update(this.props.xhr, {
+                        isFetching:
+                        {
+                            $set: fetching.ERROR
+                        }
+                    })
+                })
             }
         })
     },
@@ -118,7 +128,7 @@ var OverView = React.createClass
     updateChart(result, prevResult) {
         var categoryLanguageData = [], confidentialityData = {}, doctypeData = {},
             { categoryLanguage, confidentiality, doctypes } = this.state.configChart;
-        
+
         if( !isEqual( result.categories, prevResult.categories )
             || !isEqual( result.languages, prevResult.languages) ) {
             categoryLanguageData = this.categoryLanguageChart();
@@ -217,6 +227,8 @@ var OverView = React.createClass
         languages[langLen - 1] = other;
         //add to data chart
         for(let i = languages.length - 1; i >= 0; i--) {
+          if (languages[i] == null)
+            continue;
             languageChart.data[i] = {
                 name: upperFirst(languages[i].name),
                 y: languages[i].total_docs
@@ -250,7 +262,7 @@ var OverView = React.createClass
             categoryLanguageChart[0] = categoryChart;
             categoryLanguageChart[1] = languageChart;
         }
-        
+
         return categoryLanguageChart;
     },
 
@@ -286,7 +298,7 @@ var OverView = React.createClass
                 data: []
             },
             { doctypes } = this.state.scan.result;
-        
+
         for( let i = doctypes.length - 1; i >= 0; i-- ) {
             doctypesChart.data[i] = {
                 name: upperFirst(doctypes[i].name),
@@ -341,7 +353,7 @@ var OverView = React.createClass
             this.getScanResult();
         }
     },
-    
+
 	render:template
 });
 module.exports = OverView;

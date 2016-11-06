@@ -25,17 +25,7 @@ var MenuBar1 = React.createClass({
             scan_result: {},
             filter: {},
             dataSelectBox: {},
-            filterLabel: [
-                /*{
-                                    checked: true,
-                                    id: 1,
-                                    index: 1,
-                                    name: 'Top 5',
-                                    selectId: "number_users",
-                                    value: '1'
-                                }
-                */
-            ],
+            filterLabel: [],
             eventContext: '',
             numberofUser: [{
                 "id": 1,
@@ -81,32 +71,14 @@ var MenuBar1 = React.createClass({
     },
     componentDidUpdate(prevProps, prevState) {
         if (this.state.filter != prevState.filter) {
-
             var filter = this.state.filter;
-            /*if (filter.languages != null) {
-                filter.languages.length === 0 && delete this.state.filter.languages;
-            }
-            if (filter["doc-types"] != null) {
-                filter["doc-types"].length === 0 && delete this.state.filter["doc-types"];
-            }
-            if (filter.confidentialities != null) {
-                filter.confidentialities.length === 0 && delete this.state.filter.confidentialities;
-            }
-            if (filter.categories != null) {
-                filter.categories.length === 0 && delete this.state.filter.categories;
-            }*/
             if (filter == null) {
                 this.props.handleFilter({ number_users: 'Top 5' });
             }
             this.props.handleFilter(this.state.filter);
-
-
-
         }
         if (this.state.dataSelectBox != prevState.dataSelectBox) {
-
             this.state.eventContext.length > 1 && this.updateFilterList(this.state.eventContext)
-                /*  this.updateNumberUser(this.state.eventContext)*/
         }
     },
     copyToDataSelectBox: function(data, id) {

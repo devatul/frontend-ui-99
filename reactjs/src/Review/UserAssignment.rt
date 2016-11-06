@@ -109,8 +109,10 @@
                                                     id="confidentialityChart_category"
                                                     key="chart2_category"
                                                     title="Confidentiality"
+                                                    legendContainer="pie-chartLegend"
                                                     data={this.state.dataChart.confidentiality}
                                                     help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                                                <div id="pie-chartLegend"></div>
                                             </Col>
                                         </Row>
                                     </Panel.body>
@@ -273,7 +275,7 @@
                                         </tr>
                                         <tr class="child-table">
                                             <td colspan="4" class="hiddenRow">
-                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
+                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}">
                                                     <table class="table">
                                                         <tbody>
                                                             <tr rt-repeat="viewer in summary.reviewers">
@@ -290,7 +292,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                </div> 
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

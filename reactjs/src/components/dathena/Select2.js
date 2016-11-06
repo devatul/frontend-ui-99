@@ -68,7 +68,6 @@ var Select2 = React.createClass({
             } = this.props,
 
             { events } = this.constructor,
-
             _props = Object.assign({}, this.props),
             select = $(this.refs.select2).select2(_props);
 

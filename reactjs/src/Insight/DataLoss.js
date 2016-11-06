@@ -36,27 +36,46 @@ var DataLost = React.createClass({
             success: function(data) {
 
                 console.log('data', data);
-                let arr = ['en', 'fr', 'de', 'OTHER']
+                let arr = [];
                     /* this.setState({ dataLoss: data })
                      this.setState({ default_data: data[0] })*/
-                //for (let i = 0; i < data.length; i++) {
-                    //switch(data[i].language){
-                    //    case 'OTHER' :
-                    //        arr[3] = (data[i].language);
-                    //        break;
-                    //    case 'de' :
-                    //        arr[2] = (data[i].language);
-                    //        break;
-                    //    case 'en' :
-                    //        arr[0] = (data[i].language);
-                    //        break;
-                    //    case 'fr' :
-                    //        arr[1] = (data[i].language);
-                    //        break;
-                    //    default : arr.push(data[i].language)
-                    //}
-                    //arr.push(data[i].language)
-                //}
+              let other = null;
+                for (let i = 0; i < data.length; i++) {
+                    switch(data[i].language){
+                        case 'OTHER' :
+                            other = (data[i].language);
+                            break;
+                        case 'de' :
+                            arr.unshift(data[i].language);
+                            break;
+                        case 'en' :
+                            arr.unshift(data[i].language);
+                            break;
+                        case 'fr' :
+                            arr.unshift(data[i].language);
+                            break;
+                        default : arr.push(data[i].language);
+                    }
+                }
+
+              let order = ['fr', 'en', 'de'];
+              for (let i = 0; i < arr.length - 1; ++i) {
+                for (let j = 0; j < order.length; ++j) {
+                  if (arr[i] == order[j])
+                    break;
+                  if (arr[i+1] == order[j]) {
+                    let tmp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = tmp;
+                    i = Math.max(i - 2, -1);
+                    break;
+                  }
+                }
+              }
+              if (other)
+                arr.push(other);
+
+
                 /*  this.setState({language : arr})*/
                 data.forEach(lang => {
                     let keywordsArr = [];

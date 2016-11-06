@@ -8,7 +8,7 @@
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
-    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
+    <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
         <div class="charts container mt-lg">
             <div class="row">

@@ -71,7 +71,7 @@ var MenuBar = React.createClass
             this.setState({ scanResult: nextProps.dataScan, shouldUpdate: true });
         }
     },
-    
+
 
     shouldComponentUpdate(nextProps, nextState) {
         var { filter, scanResult, listLabel, value } = this.state;
@@ -80,7 +80,7 @@ var MenuBar = React.createClass
     },
 
     componentWillUpdate(nextProps, nextState) {
-        
+
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -168,7 +168,7 @@ var MenuBar = React.createClass
 
             array[splitId[1]].checked = false;
         }
-        
+
         this.setState({ labels: [], params: {}, shouldUpdate: true });
     },
 
@@ -183,7 +183,7 @@ var MenuBar = React.createClass
                     $apply: (arr) => {
                         let label = this.state.labels[indexLabel];
                         arr = cloneDeep(arr);
-                        
+
                         for(let i = arr.length - 1; i >= 0; i--) {
                             if(arr[i].id === label.id) {
                                 arr.splice(i, 1);
@@ -194,10 +194,10 @@ var MenuBar = React.createClass
                     }
                 }
             });
-            
+
             let updateList = update(this.state[property], {
                 [index]: {
-                    checked: { $set: false } 
+                    checked: { $set: false }
                 }
             });
 
@@ -227,9 +227,9 @@ var MenuBar = React.createClass
         let selection = document.getElementsByClassName('select2-results__option'),
             property = "",
             array = [];
-        
+
         switch(event.target.id) {
-            case "selectConfidentiality": 
+            case "selectConfidentiality":
                 property = "confidentialities";
             break;
             case "selectCategory":
@@ -243,7 +243,7 @@ var MenuBar = React.createClass
         }
 
         array = this.state[property];
-            
+
         for(let i = selection.length - 1; i >= 0; i--) {
 
             let splitId = selection[i].id.split('-'),
@@ -260,7 +260,7 @@ var MenuBar = React.createClass
     },
 
     handleOnChangeConfidentiality(event) {
-        
+
         let index = event.target.value,
             property = "",
             array = [],
@@ -268,7 +268,7 @@ var MenuBar = React.createClass
             length = event.target.length;
 
         switch(event.target.id) {
-            case "selectConfidentiality": 
+            case "selectConfidentiality":
                 property = "confidentialities";
             break;
             case "selectCategory":
@@ -283,10 +283,10 @@ var MenuBar = React.createClass
 
         array = this.state[property];
         switch(true) {
-            
+
             case index === 'all': {
                 //array['checkall'] = !array['checkall'];
-                
+
                 for(let i = selection.length - 1; i >= 0; i--) {
                     let a = selection[i].id.split('-'),
                         indexCategory = parseInt(a[a.length-1]);
@@ -298,7 +298,7 @@ var MenuBar = React.createClass
                         //set false all item
                         if(indexCategory >= 0) {
                             array[indexCategory].checked = false;
-                            
+
                         }
                 }
             }
@@ -338,7 +338,7 @@ var MenuBar = React.createClass
                 event.target[i].selected = true;
             }
         }
-        
+
         this.setState({ params: this.updateParams(property), shouldUpdate: true });
 
         event.stopImmediatePropagation();
@@ -349,7 +349,7 @@ var MenuBar = React.createClass
         let array = this.state[property],
             { labels } = this.state,
             indexLabel = 0;
-        
+
 
         if(!array['checkall']) {
 
@@ -367,7 +367,7 @@ var MenuBar = React.createClass
                 }
             }
         }
-        
+
     },
 
     updateParams(property) {
@@ -377,7 +377,7 @@ var MenuBar = React.createClass
         if(!params[property]) {
             params[property] = [];
         }
-        
+
         let updateParam = update(params, {
             [property]: {
                 $apply: (data) => {
@@ -408,16 +408,16 @@ var MenuBar = React.createClass
     },
 
     handleOnSelect: function(event) {
-        
+
 
         // let updateValue = update(this.state.value, {
         //     confidentiality: { $set: event.target.value }
         // });
 
-        // 
+        //
 
         //this.setState({ value: updateValue });
-            
+
         // switch(field.id) {
         //     case "SelectConfidentiality": {
         //         property = 'confidentialities';
@@ -438,7 +438,7 @@ var MenuBar = React.createClass
         //         property = 'languages';
         //     }
         // }
-            
+
         // if(property) {
         //     var updateList = update(this.state.listLabel, {
         //             [property]: {
@@ -447,7 +447,7 @@ var MenuBar = React.createClass
         //                 }
         //             }
         //         }),
-                
+
         //         label = {
         //             id: field.id + '_' + index,
         //             name: listLabel[property][index].name
@@ -474,7 +474,7 @@ var MenuBar = React.createClass
                             arr[i].checked = field.checked;
                         }
                         return arr;
-                    } 
+                    }
                 }
             }),
             updateFilter = update(this.state, {
@@ -524,7 +524,7 @@ var MenuBar = React.createClass
                             arr[i].checked = false;
                         }
                         return arr;
-                    } 
+                    }
                 }
             }),
             updateFilter = update(this.state, {
@@ -565,7 +565,7 @@ var MenuBar = React.createClass
 
         this.setState({ listLabel: updateLabel, filter: updateFilter });
     },
-    
+
     getscanResult() {
         makeRequest({
             path: 'api/scan/',
@@ -576,7 +576,7 @@ var MenuBar = React.createClass
                     });
                 this.setState({ scanResult: updateResult, shouldUpdate: true });
             }
-        });  
+        });
     },
 	 render:template
 });

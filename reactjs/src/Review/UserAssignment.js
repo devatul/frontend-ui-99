@@ -98,7 +98,7 @@ var UserAssignment = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;
     },
-    
+
     componentDidMount() {
     	this.getCategories();
         this.getSummary();
@@ -111,12 +111,12 @@ var UserAssignment = React.createClass({
             var { reviewers } = this.state.datafilter.request;
             var { current } = this.state.category;
             if(reviewers.length > 0 && current.id !== "summary") {
-                
+
                 this.assignReviewersToCategory();
             }
         }
     },
-    
+
 
     componentDidUpdate(prevProps, prevState) {
         var { category, datafilter, reviewer } = this.state;
@@ -124,7 +124,7 @@ var UserAssignment = React.createClass({
         if(this.state.shouldUpdate) {
             this.setState({ shouldUpdate: false });
         }
-    	
+
         if(category.current != prevState.category.current) {
             this.getSummary(false);
 
@@ -135,7 +135,7 @@ var UserAssignment = React.createClass({
         if(!isEqual(datafilter.params, prevState.datafilter.params)) {
             this.getReviewers();
         }
-        
+
     },
     handleOnChangeSelectBox: function(data, event) {
         var { params, filterLabel } = this.state.datafilter,
@@ -149,7 +149,7 @@ var UserAssignment = React.createClass({
             indexLabel = filterLabel.length;
         }
         switch(field.id) {
-            case selectId.users: 
+            case selectId.users:
                 params = update(params, {
                     users: {$set: data.value }
                 });
@@ -168,7 +168,7 @@ var UserAssignment = React.createClass({
                 params: {
                     $set: params
                 },
-                
+
                 setValue: {
                     [field.id]: {$set: field.value }
                 },
@@ -182,9 +182,9 @@ var UserAssignment = React.createClass({
         var { selectId } = this.static,
             { params, filterLabel } = this.state.datafilter,
             indexLabel = findIndex(filterLabel, {id: label.id });
-            
+
         switch(label.id) {
-            case selectId.users: 
+            case selectId.users:
                 params = update(params, {
                     users: {$set: 10 }
                 });
@@ -338,7 +338,7 @@ var UserAssignment = React.createClass({
                 $set: category
             }
         }),
-        
+
         datafilter = update(this.state.datafilter, {
             request: {
                 id: {
@@ -374,6 +374,9 @@ var UserAssignment = React.createClass({
 
     reviewerChart(list) {
         let data = [], categories = [];
+
+        list = _.orderBy(list, ['number_hits'], ['desc']);
+
         for(var i = 0, total = list.length; i < total; i++) {
             categories[i] = list[i].first_name + '.' + list[i].last_name;
             data[i] = list[i].number_hits;
@@ -392,7 +395,7 @@ var UserAssignment = React.createClass({
     },
 
     documentTypeChart(info) {
-        var { documents_types } = info, 
+        var { documents_types } = info,
             documentType = {
                 categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
                 series: []
@@ -404,6 +407,7 @@ var UserAssignment = React.createClass({
                 name: documents_types[i].name,
                 data: []
             };
+            documents_types[i].doctypes = _.orderBy(documents_types[i].doctypes, ['number_docs'], ['desc']);
 
             for( let j = documents_types[i].doctypes.length - 1; j >= 0; j-- ) {
 
@@ -424,13 +428,13 @@ var UserAssignment = React.createClass({
                 y: confidentialities[i].number_docs
             };
         }
-        
+
         return confidentiality;
     },
-    
+
     handleOnChangeSelectButton: function(index, checked) {
         //add reviewer into request
-        var { list } = this.state.reviewer, 
+        var { list } = this.state.reviewer,
             { request } = this.state.datafilter,
             indexReviewer = findIndex(request.reviewers, list[index]),
 
@@ -439,7 +443,7 @@ var UserAssignment = React.createClass({
                     $set: parseInt(list[index].id)
                 }
             }),
-            
+
             updateRequest = update(this.state.datafilter, {
                 request: {
                     reviewers: (checked === 'on' && indexReviewer == -1) ? {$push: [reviewer] } : {$splice: [[indexReviewer, 1]]}
@@ -506,7 +510,7 @@ var UserAssignment = React.createClass({
                         }
                     }
                 }
-
+                console.log('data')
                 let updateListReviewer = update(this.state.reviewer, {
                     list: {
                         $set: data
@@ -555,7 +559,7 @@ var UserAssignment = React.createClass({
                	this.setState({ category: updateData, datafilter: updateParam, shouldUpdate: true });
             }
         });
-    	
+
     },
     getCategoryInfo() {
         var {current} = this.state.category;
@@ -602,10 +606,10 @@ var UserAssignment = React.createClass({
 
     confirmNotify() {
         if(this.state.isConfirming === 2) return;
-         
+
         let { summary } = this.state,
             bodyRequest = [];
-        
+
         for(let i = summary.length - 1; i >= 0; i--) {
             bodyRequest[i] = {
                 id: summary[i].id,
