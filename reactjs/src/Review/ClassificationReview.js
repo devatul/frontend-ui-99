@@ -34,8 +34,7 @@ var ClassificationReview = React.createClass({
     componentDidMount() {
         this.props.updateStore({
             xhr: update(this.props.xhr, {
-                isFetching:
-                {
+                isFetching: {
                     $set: fetching.START
                 }
             })

@@ -85,10 +85,10 @@
                     <HelpButton classMenu="fix-overview-help-button-table" setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
                   </h4>
 
-                  <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed"
-                       data-toggle="collapse" data-target="#statisticTable"></a>
-                  </div>
+                    <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                      <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed"
+                         data-toggle="collapse" data-target="#statisticTable"></a>
+                    </div>
 
                   <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
                     <tbody rt-scope="this.state.statistics as statistics">

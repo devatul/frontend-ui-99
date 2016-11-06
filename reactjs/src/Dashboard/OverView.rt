@@ -4,18 +4,21 @@
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="DonutChart" from="../components/chart/DonutChart" />
 <rt-import name="StackedChart" from="../components/chart/StackedChart" />
-<rt-import name="ProgressLabel" from="../components/dathena/progress-label" />
+<rt-import name="Loader" from="../components/dathena/Loader"/>
+
 <section>
-    <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
+
     <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
-        <!--charts start-->
         <div class="charts container mt-lg">
-            <div class="row">
+            <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+
+            <div class="row" rt-if="this.state.xhr.isFetching == 1">
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-secondary widget-panel">
-                            <h4 class="widget-title">Scan
+                            <h4 class="widget-title">
+                                Scan
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
                                     setValue="Percentage of documents detected and scanned by Dathena 99 compared against total number of documents detected." />
@@ -33,18 +36,18 @@
                         </div>
                     </section>
                 </div>
+
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-quartenary widget-panel">
-                            <h4 class="widget-title">Duplicates / Twins
+                            <h4 class="widget-title">
+                                Duplicates / Twins
                                 <HelpButton
                                     classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue="Duplicates: Two or more files with identical content and file names.
-                                            Twins: Two or more files with identical content, but with different file names." />
+                                    setValue="Duplicates: Two or more files with identical content and file names. Twins: Two or more files with identical content, but with different file names." />
                             </h4>
                             <div class="widget-summary">
                                 <div class="widget-summary-col">
-
                                     <div class="row">
                                         <div class="col-xs-6 border-right">
                                             <div class="summary">
@@ -68,6 +71,7 @@
                         </div>
                     </section>
                 </div>
+
                 <div class="col-md-4">
                     <section class="panel">
                         <div class="panel-body bg-tertiary widget-panel">
@@ -89,12 +93,14 @@
                         </div>
                     </section>
                 </div>
+
                 <div class="col-md-4">
                     <DonutChart
                         id="confidentialityPieChart"
                         config={configChart.confidentiality}
                         help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
+
                 <div class="col-md-4">
                     <StackedChart
                         id="categoryLanguagePieChart"
@@ -102,6 +108,7 @@
                         help="A summarised view of each category and document language type for all the documents scanned."
                         config={configChart.categoryLanguage} />
                 </div>
+
                 <div class="col-md-4">
                     <DonutChart
                         id="documentPieChart"
@@ -114,9 +121,8 @@
                             Other : .log, .msg, .eml" />
                 </div>
             </div>
-
         </div>
-        <!--table start-->
+
         <div class="container overview-summary">
             <div class="row">
                 <div class="col-md-12">
@@ -128,7 +134,9 @@
                             </div>
                         </header>
                         <div class="panel-body" id="overview-panel-1">
-                            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                            <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+
+                            <div rt-if="this.state.xhr.isFetching == 1" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped mb-none no-footer"
                                            id="datatable-default" role="grid" aria-describedby="datatable-default_info">
@@ -190,9 +198,10 @@
                                 <ToggleButton setDefault="open" setTarget="#overview-panel-2" />
                             </div>
                         </header>
-
                         <div class="panel-body" id="overview-panel-2">
-                            <div id="datatable-editable_wrapper" class="no-footer">
+                            <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+
+                            <div rt-if="this.state.xhr.isFetching == 1" id="datatable-editable_wrapper" class="no-footer">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped mb-none no-footer"
                                            id="datatable-editable" role="grid" aria-describedby="datatable-default_info">

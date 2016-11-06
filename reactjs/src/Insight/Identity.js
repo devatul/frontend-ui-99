@@ -1,107 +1,116 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { Link, IndexLink, browserHistory } from 'react-router'
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+import {Link, IndexLink, browserHistory} from 'react-router'
 import template from './Identity.rt'
-import Constant from '../Constant.js'
+import Constant, {fetching} from '../Constant.js'
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
-import $, { JQuery } from 'jquery'
-import { makeRequest } from '../utils/http'
+import $, {JQuery} from 'jquery'
+import {makeRequest} from '../utils/http'
 
 let Indentity = React.createClass({
-    getInitialState() {
-        return {
-            numberUser: 5,
-            data_exports: {},
-            sizeFilter: 0,
-            height_0: 0,
-            height_1: 0,
-            height_2: 0,
-            height_3: 0,
-            save_dataChart: {},
-            save_cvs: {},
-            scan_result: {},
-            rickInsight: {},
-            dataChart: {
-                high_risk_users: {},
-                high_risk_directory: {},
-                key_contributor: []
-            },
-            loading: true,
-            display : 0
-        };
-    },
+  getInitialState() {
+    return {
+      numberUser: 5,
+      data_exports: {},
+      sizeFilter: 0,
+      height_0: 0,
+      height_1: 0,
+      height_2: 0,
+      height_3: 0,
+      save_dataChart: {},
+      save_cvs: {},
+      scan_result: {},
+      rickInsight: {},
+      dataChart: {
+        high_risk_users: {},
+        high_risk_directory: {},
+        key_contributor: []
+      },
+      display: 0,
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.dataChart != nextState.dataChart) return true;
-        if (this.setState.sizeFilter != nextState.sizeFilter) return true;
-        if (this.state.data_exports != nextState.data_exports) return true;
+      xhr: {
+        status: "Report is loading",
+        message: "Please wait!",
+        timer: 20,
+        loading: 0,
+        isFetching: fetching.STARTED
+      },
+    };
+  },
 
-        return false
-    },
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.state.dataChart != nextState.dataChart) || (this.setState.sizeFilter != nextState.sizeFilter) || (this.state.data_exports != nextState.data_exports)
+  },
 
-    handleFilter: function(bodyRequest) {
-        if(!_.isNull(bodyRequest)){
-            let value = bodyRequest.number_users;
+  handleFilter(bodyRequest) {
+    if (!_.isNull(bodyRequest)) {
+      let value = bodyRequest.number_users;
 
-            if (value == 'Top 5') {
-                value = 5
-            }
-            if (value == 'Top 15') {
-                value = 15
-            }
-            if (value == 'Top 25') {
-                value = 25
-            }
-            if (value == 'Top 50') {
-                value = 50
-            }
+      if (value == 'Top 5') {
+        value = 5
+      }
+      if (value == 'Top 15') {
+        value = 15
+      }
+      if (value == 'Top 25') {
+        value = 25
+      }
+      if (value == 'Top 50') {
+        value = 50
+      }
 
-            let call= makeRequest({
-                path: 'api/insight/iam?number_users=' + value,
-                success: (data) => {
-                    this.updateChartData(data)
-                }
-            });
+      let call = makeRequest({
+        path: 'api/insight/iam?number_users=' + value,
+        success: (data) => {
+          this.updateChartData(data)
         }
-    },
+      });
+    }
+  },
 
-    getData() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('data', data);
-                this.setState({ loading: false });
-                this.updateChartData(data);
-                /* this.setState({ rickInsight: data })*/
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+  getData() {
+    $.ajax({
+      url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
+      dataType: 'json',
+      type: 'GET',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+      },
+      success: function (data) {
+        this.updateChartData(data);
+      }.bind(this),
+      error: function (xhr, error) {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.ERROR
+            }
+          })
         });
-    },
-    updateChartData(datas) {
-        let high_risk_users = {},
-            high_risk_directory = {},
-            arr = [],
-            key_contributor = [],
-            height_0 = 0,
-            height_1 = 0,
-            height_2 = 0,
-            height_3 = 0;
 
-        high_risk_users = this.configChart(datas.high_risk_users);
-        high_risk_directory = this.configChart(datas.high_risk_directory);
+        if (xhr.status === 401) {
+          browserHistory.push('/Account/SignIn');
+        }
+      }.bind(this)
+    });
+  },
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
+  updateChartData(datas) {
+    var high_risk_users = {},
+        high_risk_directory = {},
+        arr = [],
+        key_contributor = [],
+        height_0 = 0,
+        height_1 = 0,
+        height_2 = 0,
+        height_3 = 0;
+
+    high_risk_users = this.configChart(datas.high_risk_users);
+    high_risk_directory = this.configChart(datas.high_risk_directory);
+
+    height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
 
         for (let i = 0; i < _.size(datas.key_contributor); i++) {
             arr[i] = datas.key_contributor[i];
@@ -135,28 +144,35 @@ let Indentity = React.createClass({
             }
         }
 
-        /*height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-        height_3 = _.size(key_contributor[4].contributors.categories)* 40; *//*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+    /*height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+     height_3 = _.size(key_contributor[4].contributors.categories)* 40; */
+    /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
 
-        let updateData_config = update(this.state, {
-            dataChart: {
-                high_risk_users: { $set: high_risk_users },
-                high_risk_directory: { $set: high_risk_directory },
-                key_contributor: { $set: key_contributor }
-            },
-            save_dataChart: {
-                high_risk_users: { $set: high_risk_users },
-                high_risk_directory: { $set: high_risk_directory },
-                key_contributor: { $set: key_contributor }
-            },
-            data_exports: { $set: datas },
-            save_cvs: { $set: datas },
-            height_0: { $set: height_0 },
-            height_1: { $set: height_1 },
-            height_2: { $set: height_2 },
-            height_3: { $set: height_3 },
-            display : {$set : length}
-        });
+    let updateData_config = update(this.state, {
+      dataChart: {
+        high_risk_users: {$set: high_risk_users},
+        high_risk_directory: {$set: high_risk_directory},
+        key_contributor: {$set: key_contributor}
+      },
+      save_dataChart: {
+        high_risk_users: {$set: high_risk_users},
+        high_risk_directory: {$set: high_risk_directory},
+        key_contributor: {$set: key_contributor}
+      },
+      data_exports: {$set: datas},
+      save_cvs: {$set: datas},
+      height_0: {$set: height_0},
+      height_1: {$set: height_1},
+      height_2: {$set: height_2},
+      height_3: {$set: height_3},
+      display: {$set: length},
+
+      xhr: {
+        isFetching: {
+          $set: fetching.SUCCESS
+        }
+      }
+    });
 
         this.setState(updateData_config)
 
@@ -175,89 +191,85 @@ let Indentity = React.createClass({
             })
         }
 
-        return {
-            categories: categories,
-            data: dataChart
-        }
-    },
+    return {
+      categories: categories,
+      data: dataChart
+    }
+  },
 
-    upperFirst(value) {
-        let sp = _.split(value, ' '), rt = '';
+  upperFirst(value) {
+    let sp = _.split(value, ' '), rt = '';
 
-        for (let i = 0; i < sp.length; i++) {
-            rt += _.upperFirst(sp[i]) + ' ';
-        }
+    for (let i = 0; i < sp.length; i++) {
+      rt += _.upperFirst(sp[i]) + ' ';
+    }
 
-        return rt
-    },
+    return rt;
+  },
 
-    convertArrayOfObjectsToCSV(args) {
-        let result, ctr, keys, columnDelimiter, lineDelimiter, data;
+  convertArrayOfObjectsToCSV(args) {
+    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
-        data = args.data || null;
-        if (data == null || !data.length) {
-            return null;
-        }
+    data = args.data || null;
+    if (data == null || !data.length) {
+      return null;
+    }
 
-        columnDelimiter = args.columnDelimiter || ',';
-        lineDelimiter = args.lineDelimiter || '\n';
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
 
-        keys = Object.keys(data[0]);
+    keys = Object.keys(data[0]);
 
-        result = '';
-        result += keys.join(columnDelimiter);
-        result += lineDelimiter;
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
 
-        data.forEach(function(item) {
-            ctr = 0;
-            keys.forEach(function(key) {
-                if (ctr > 0) result += columnDelimiter;
+    data.forEach(function (item) {
+      ctr = 0;
+      keys.forEach(function (key) {
+        if (ctr > 0) result += columnDelimiter;
 
-                result += item[key];
-                ctr++;
-            });
-            result += lineDelimiter;
-        });
+        result += item[key];
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
 
-        return result;
-    },
+    return result;
+  },
 
-    downloadCSV(value, datas) {
-        let data, filename, link,
-            csv = this.convertArrayOfObjectsToCSV({
-                data: datas
-            });
+  downloadCSV(value, datas) {
+    let data, filename, link,
+      csv = this.convertArrayOfObjectsToCSV({
+        data: datas
+      });
 
-        if (csv == null) return;
+    if (csv == null) return;
 
-        filename = value + '.csv' || 'export.csv';
+    filename = value + '.csv' || 'export.csv';
 
-        if (!csv.match(/^data:text\/csv/i)) {
-            csv = 'data:text/csv;charset=utf-8,' + csv;
-        }
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
 
-        data = encodeURI(csv);
+    data = encodeURI(csv);
 
-        link = document.createElement('a');
-        link.setAttribute('href', data);
-        link.setAttribute('download', filename);
-        link.click();
-    },
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+  },
 
-    formatNameCategory(str) {
-        return _.replace(str, '/', ' / ')
-    },
+  formatNameCategory: (str) => _.replace(str, '/', ' / '),
 
-    formatNumber(num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    },
+  formatNumber: (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
 
-    componentDidMount() {
-        this.getData();
-        javascript();
-    },
+  componentDidMount(prevProps, prevState) {
+    this.getData(prevProps, prevState);
+    javascript();
+  },
 
-    render: template
+  render: template
 });
 
 module.exports = Indentity;
