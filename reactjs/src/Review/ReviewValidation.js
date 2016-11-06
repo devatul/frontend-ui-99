@@ -59,7 +59,7 @@ var ReviewValidation = React.createClass({
             isConfirming: 0
         };
     },
-    
+
     componentDidMount() {
         //console.log("sfdssss", this.state.categories);
         this.getCategories();
@@ -106,8 +106,8 @@ var ReviewValidation = React.createClass({
                 }
 
                 let bodyRequest = update(this.state.bodyRequest, {
-                    category_id: { 
-                        $set: parseInt(res[0].id) 
+                    category_id: {
+                        $set: parseInt(res[0].id)
                     }
                 });
 
@@ -118,7 +118,7 @@ var ReviewValidation = React.createClass({
                     categoryCurrent: res[0],
                     shouldUpdate: true
                 });
-            } 
+            }
         });
     },
 
@@ -163,7 +163,7 @@ var ReviewValidation = React.createClass({
 
                 let bodyRequest = update(this.state.bodyRequest, {
                         reviewer_id: {
-                            $set: res.reviewers[0].id 
+                            $set: res.reviewers[0].id
                         }
                     });
                 this.setState({
@@ -175,7 +175,7 @@ var ReviewValidation = React.createClass({
             },
             error: (err) => {
                 if(err.status === 400) {
-                    
+
                     this.setState({
                         reviewers: [],
                         reviewerCurrent: {},
@@ -550,7 +550,7 @@ var ReviewValidation = React.createClass({
             });
 
             this.setState({ dataReview: updateDataReview, shouldUpdate: true });
-        }   
+        }
     },
 
     getReviewInfo() {
@@ -575,7 +575,7 @@ var ReviewValidation = React.createClass({
             let item = stackChange[stackLength],
                 index = item.id.split('_'),
                 current = (index[0] === this.constructor.challenge ? "challenge_docs" : "challenge_back_docs"),
-            
+
             updateData = update(this.state.dataReview, {
                 [current]: {
                     [index[1]]: {
@@ -646,7 +646,7 @@ var ReviewValidation = React.createClass({
             shouldUpdate: true
         });
     },
-    
+
     handleNextReviewer() {
 
         let { currentIndex } = this.state,
@@ -658,7 +658,7 @@ var ReviewValidation = React.createClass({
                         $set: indexReviewer + 1
                     }
                 });
-                
+
             this.setState({ currentIndex: updateCurrent, reviewerCurrent: this.state.reviewers.reviewers[indexReviewer + 1], shouldUpdate: true });
         } else {
             let updateCurrent = update(currentIndex, {
@@ -673,6 +673,10 @@ var ReviewValidation = React.createClass({
         makeRequest({
             path: "api/review/review_validation/summary/",
             success: (res) => {
+              res.sort(function(a, b){
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+              });
                 this.setState({ summary: res, isConfirming: 0, shouldUpdate: true });
             }
         });
