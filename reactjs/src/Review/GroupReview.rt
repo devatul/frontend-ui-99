@@ -53,7 +53,7 @@
                 </FormGroup>
             </Col>
         </Row>
-        
+
         <Row>
             <Col sm="{12}">
                 <Panel.custom class="panel-has-child cluster-block">
@@ -84,7 +84,7 @@
                                     </header>
 
                                     <div class="panel-body" id="stat-block">
-                                        <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>  
+                                        <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
                                             <HelpButton
                                                 classMenu="fix-overview-help-button-table"
                                                 setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
@@ -264,7 +264,7 @@
                                                 className="dropdown-file-info-holder"
                                                 setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                         </th>
-                                        <th class="text-center">Status 
+                                        <th class="text-center">Status
                                             <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
                                                         setValue="This represent the status of the review for each file." />-->
                                         </th>
@@ -303,6 +303,7 @@
     hasNextDocument={true}
     undo={this.handleUndo}
     onHide={this.closePreview}
+    hideLanguage="{true}"
     closeModal={this.closePreview}>
 <div class="table-responsive">
     <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
@@ -324,6 +325,12 @@
                         className="dropdown-file-info-holder"
                         setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>
+                <th class="review_note full-path">Full Path
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
                 <th class="review_note fix-max-width-category-confident">Proposed Category
                     <HelpButton
                         className="dropdown-file-info-holder"
@@ -339,7 +346,7 @@
             </tr>
         </thead>
         <tbody>
-            <table.row
+            <table.RowPreview
                 document={this.state.documents[this.state.documentPreview]}
                 categories={this.state.categories}
                 confidentialities={this.state.confidentialities}

@@ -98,7 +98,7 @@
                                                     className="dropdown-file-info-holder"
                                                     setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                             </th>
-                                            <th class="text-center">Status 
+                                            <th class="text-center">Status
                                             </th>
                                         </tr>
                                     </thead>
@@ -154,6 +154,12 @@
                         classMenu="fix-overview-help-button-table"
                         setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>
+                <th class="review_note full-path">Full Path
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
                 <th class="review_note fix-max-width-category-confident">Proposed Category
                     <HelpButton
                         className="dropdown-file-info-holder"
@@ -170,7 +176,7 @@
             </tr>
         </thead>
         <tbody>
-            <table.row
+            <table.RowPreview
                 document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
@@ -180,9 +186,7 @@
                 index="{this.state.current.review + '_' + this.state.current.doc}" />
         </tbody>
     </table>
-    <p rt-if="this.state.dataReview[this.state.current.review]" rt-scope="this.state.dataReview[this.state.current.review].documents[this.state.current.doc] as doc">
-        <a href="{doc.image_url}">{doc.path}</a>
-    </p>
+
 </div>
 </DocumentPreview>
 </section>
