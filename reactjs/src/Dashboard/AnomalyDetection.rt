@@ -71,7 +71,7 @@
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" rt-if="this.state.user_Client">
                       <table class="table anomaly-table">
                         <thead>
                           <tr>
@@ -84,7 +84,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr rt-if="this.state.user_Client" rt-repeat="tbl in this.state.user_Client.data_first_table" key="tbl_{tblIndex}">
+                          <tr rt-repeat="tbl in this.state.user_Client.data_first_table" key="tbl_{tblIndex}">
                             <td><span class="text-big">{tbl["User with Anomaly"]}</span></td>
                             <td><span class="text-normal">{tbl["Confidentiality at Risk"]}</span></td>
                             <td><span class="text-big">{tbl["Folder at Risk"]}</span></td>
@@ -93,7 +93,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <table class="table anomaly-table" rt-if="this.state.user_Client">
+                      <table class="table anomaly-table">
                         <thead>
                           <tr>
                             <th>Total Anomaly</th>
@@ -103,7 +103,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr rt-if="this.state.user_Client" rt-repeat="tbl in this.state.user_Client.data_second_table" key="tbl_{tblIndex}">
+                          <tr rt-repeat="tbl in this.state.user_Client.data_second_table" key="tbl_{tblIndex}">
                             <td>
                               <span class="text-block">
                                 <span class="text-big text-red">{tbl["Total Anomaly"].value}</span>
@@ -136,7 +136,6 @@
                         </tbody>
                       </table>
                     </div>
-
                   </div>
                   <div class="anomaly-block" >
                      <TableAnomaly
@@ -149,7 +148,7 @@
 
               <div class="row mt-lg">
                <div class="block-header row" >
-                      <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
+                    <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
                         <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
                         <div class="fix_whitespace">
                             <HelpButton
@@ -157,15 +156,21 @@
                                         classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
                             </div>
                         </h4>
-                      </div>
                     </div>
+                </div>
                 <div class="col-md-3">
-                  <Circle id = 'chart_2' value_inner={50} value_outer={80}  className = "anomaly-icon anomaly-icon-fix fix-icon-window" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                  <Circle
+                        id = 'chart_2'
+                        className = "anomaly-icon anomaly-icon-fix fix-icon-window"
+                        value_inner="{this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_percentage}"
+                        value_outer="{this.state.active_Directory_Group && this.state.active_Directory_Group.risk_percentage}"
+                        content_outer="{this.state.active_Directory_Group &&  this.state.active_Directory_Group.risk_type}"
+                        content_inner="Prediction Quality: {this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_quality} " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" rt-if="this.state.active_Directory_Group">
                       <table class="table anomaly-table">
                         <thead>
                           <tr>
@@ -173,25 +178,16 @@
                             <th>Confidentiality at Risk</th>
                             <th>Folder at Risk</th>
                             <th>Active Directory at Risk</th>
-                            <th>User Access Right Accuracy
-
-                            </th>
+                            <th>User Access Right Accuracy</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td><span class="text-big">52</span></td>
-                            <td><span class="text-normal">Banking Secrecy</span></td>
-                            <td><span class="text-big">3</span></td>
-                            <td><span class="text-big">76</span></td>
-                            <td><span class="text-big text-light-green">75,89%</span></td>
-                          </tr>
-                          <tr>
-                            <td><span class="text-big">102</span></td>
-                            <td class="text-left"><span class="text-normal" style="margin-left : 25px">Confidential</span></td>
-                            <td><span class="text-big">5</span></td>
-                            <td><span class="text-big">54</span></td>
-                            <td><span class="text-big text-light-green">56,57%</span></td>
+                          <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_first_table" key="tbl_1_{tbl_1Index}">
+                            <td><span class="text-big">{tbl_1["AD Group Anomaly"]}</span></td>
+                            <td><span class="text-normal">{tbl_1["Confidentiality at Risk"]}</span></td>
+                            <td><span class="text-big">{tbl_1["Folder at Risk"]}</span></td>
+                            <td><span class="text-big">{tbl_1["Active Directory at Risk"]}</span></td>
+                            <td><span class="text-big text-light-green">{tbl_1["User Access Right Accuracy"]}%</span></td>
                           </tr>
                         </tbody>
                       </table>
@@ -205,25 +201,28 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_second_table" key="tbl_1_{tbl_1Index}">
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">154</span>
-                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_1['Total Anomaly'].value}</span>
+                                <span rt-if="tbl_1['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Active Directory Group</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">88</span>
-                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_1['Document at Risk'].value}</span>
+                                <span rt-if="tbl_1['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Documents</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">3</span>
-                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_1['Total Users at Risk'].value}</span>
+                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Users Account</span>
                             </td>
@@ -248,7 +247,7 @@
               <div class="row mt-lg">
                 <div class="col-md-3">
                 <div class="block-header row">
-                      <div class="col-md-5" style="margin-left:8px">
+                    <div class="col-md-5" style="margin-left:8px">
 
                         <h4 class="anomaly-title">User - Access Right Anomaly
                          <div class="fix_whitespace">
@@ -258,10 +257,17 @@
                             </div>
 
                         </h4>
-                      </div>
+                    </div>
                     </div>
                   <div class="anomaly-radial">
-                    <Circle id = 'chart_3' value_inner={50} value_outer={80}  className = "anomaly-icon anomaly-icon-fix fix-icon-user" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                    <Circle
+                        id = 'chart_3'
+                        className = "anomaly-icon anomaly-icon-fix fix-icon-user"
+                        value_inner="{this.state.user_Access && this.state.user_Access.prediction_percentage}"
+                        value_outer="{this.state.user_Access && this.state.user_Access.risk_percentage}"
+                        content_outer="{this.state.user_Access &&  this.state.user_Access.risk_type}"
+                        content_inner="Prediction Quality: {this.state.user_Access && this.state.user_Access.prediction_quality} "
+                    />
                   </div>
                 </div>
                 <div class="col-md-9" style="margin-top: 50px">

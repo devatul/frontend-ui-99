@@ -10,7 +10,7 @@ var ClassificationCheck = React.createClass({
                 'index': 0,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category':'Accounting/Tax',
+                'category': 'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
@@ -19,7 +19,7 @@ var ClassificationCheck = React.createClass({
                 'index': 1,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category':'Accounting/Tax',
+                'category': 'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
@@ -28,7 +28,7 @@ var ClassificationCheck = React.createClass({
                 'index': 2,
                 'name': 'Contract Bank 2016.doc',
                 'path': '/Document/Dathena99/contract/',
-                'category':'Accounting/Tax',
+                'category': 'Accounting/Tax',
                 'Confidentiality': 'Confidentiality',
                 'Last Modify by': 'John.Hayt',
                 'Reviewer': 'Billy.Barty',
@@ -44,14 +44,17 @@ var ClassificationCheck = React.createClass({
         };
     },
     onClickDocumentName(index) {
-          this.setState({
+        debugger
+        if (index <= this.state.data.length - 1) {
+            this.setState({
                 openPreview: true,
                 documentPreview: index,
                 //shouldUpdate: true
             });
+        }
     },
     handleUndo() {
-        if(this.state.stackChange.length > 0) {
+        if (this.state.stackChange.length > 0) {
             let { documents, stackChange } = this.state,
 
                 item = stackChange[stackChange.length - 1],
@@ -63,7 +66,9 @@ var ClassificationCheck = React.createClass({
                 }),
 
                 updateStack = update(stackChange, {
-                    $splice: [[stackChange.length - 1, 1]]
+                    $splice: [
+                        [stackChange.length - 1, 1]
+                    ]
                 });
 
             this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
