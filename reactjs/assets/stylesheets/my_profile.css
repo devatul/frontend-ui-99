@@ -667,7 +667,11 @@ select.record_select {
 }
 
 
-
+@media screen and (min-width: 1350px) {
+  .docPreview{
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 991px) {
   .table{
