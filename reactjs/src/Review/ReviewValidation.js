@@ -700,7 +700,11 @@ var ReviewValidation = React.createClass({
             }
         });
     },
-
+    changeIcon(event) {
+        console.log(event.target);
+        event.target.classList.toggle('fa-minus-square');
+        event.target.classList.toggle('fa-plus-square');
+    },
     progressSummary(category, reviewer) {
         return Math.round((reviewer.number_classified_docs * 100) / category.total_classified_docs);
     },
