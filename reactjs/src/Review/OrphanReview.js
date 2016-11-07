@@ -144,7 +144,7 @@ var OrphanReview = React.createClass({
         }
     },
 
-    onClickDocumentName(index) { console.log('index',index)
+    onClickDocumentName(index) {
         if(index <= (this.state.documents.length - 1)) {
             this.setState({
                 openPreview: true,

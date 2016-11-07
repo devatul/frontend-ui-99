@@ -124,18 +124,19 @@
       hideLanguage="{true}"
       onHide="{this.closePreview}">
       <div class="table-responsive">
-        <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
-          id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
+
+        <Table class="review_table table table-bordered table-striped  mb-none no-footer table-my-actions table-classification-width docPreview"
+          id="table-my-actions-1"   role="grid" aria-describedby="datatable-default_info">
           <thead>
               <tr role="row" class="">
-                  <th class="review_note">Type
+                  <th class="review_note fix-width">Type
                   </th>
-                  <th class="review_note">Document
+                  <th class="review_note doc-name">Document
                       <HelpButton
                           classMenu="fix-overview-help-button-table"
                           classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
                   </th>
-                  <th class="review_note">Path
+                  <th class="review_note">Full Path
                       <HelpButton
                           classMenu="fix-overview-help-button-table"
                           classIcon="overview_question_a help_question_a"  setValue="This displays the logical folder path to where each document is currently located." />

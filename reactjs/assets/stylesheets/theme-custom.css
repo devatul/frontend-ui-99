@@ -957,9 +957,9 @@ tr td {
 .table-my-actions > thead tr th:nth-child(2) {
   width: 50px; }
 
-.table-my-actions > thead tr th:nth-child(6) {
+/*.table-my-actions > thead tr th:nth-child(6) {
   width: 80px;
-  padding-right: 5px !important; }
+  padding-right: 5px !important; }*/
 
 .table-my-actions.orphan-review {
   /*    .doc-check{
@@ -1029,7 +1029,7 @@ tr td {
 
 .table-my-actions .doc-path {
   display: inline-block;
-  max-width: 90px;
+  max-width:100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; }

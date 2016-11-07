@@ -556,7 +556,6 @@ var GroupReview = React.createClass({
             params: { "id": id },
             success: (res) => {
                 //data = res;
-                console.log('response',res)
                 this.setState({ documents: res, shouldUpdate: true });
             }
         });
