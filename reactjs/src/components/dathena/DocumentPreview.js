@@ -85,14 +85,14 @@ var documentPreview = React.createClass({
         let nextDocumentButton = null
         let { document, open } = this.props
         let currentReview = this.props.currentReview
-       //if(this.props.hasNextDocument){
-       //     if(this.props.isNextCategory){
-       //         nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-       //     }else{
-       //         nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-       //     }
-       // }
-        nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+
+       if(this.props.hasNextDocument){
+            if(this.props.isNextCategory){
+                nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+            }else{
+                nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
+            }
+        }
         if(document != null) {
             return(
                 <Modal

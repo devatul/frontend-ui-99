@@ -125,6 +125,20 @@
     }
 }
 
+.help_question_bottom.fix-margin.has-arrow {
+    margin-left: -260px;
+    left: auto;
+}
+
+@media (max-width: 996px) {
+    .help_question_bottom.fix-margin.has-arrow {
+        margin-left: 0;
+        right: -5px;
+        left: auto !important;
+    }
+}
+
+
 @media (min-width: 768px) {
     .chart-panel {
         max-width: 100%;
@@ -228,6 +242,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .help_question_bottom.fix-margin.has-arrow:after {
 	margin-left: 235px;
 }
+
 .help_question_bottom.fix-margin.has-arrow {
     margin-left: 0;
     right: -5px;

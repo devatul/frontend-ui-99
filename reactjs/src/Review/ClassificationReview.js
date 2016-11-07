@@ -159,6 +159,7 @@ var ClassificationReview = React.createClass({
     },
 
     onClickDocumentName(index) {
+
         let idx = index.split('_'),
             reviewIndex = parseInt(idx[0]),
             docIndex = parseInt(idx[1]);
@@ -279,12 +280,11 @@ var ClassificationReview = React.createClass({
     },
 
     handleTableRowOnChange(event, index) {
-        //debugger
         let { stackChange } = this.state,
             splitIndex = index.split('_'), reviewIndex = splitIndex[0], docIndex = splitIndex[1],
-            document = this.state.dataReview[reviewIndex].documents[docIndex];
+            document = this.state.dataReview[reviewIndex].documents[docIndex],
+            isNextCategory = this.state.current.isNextCategory, hasNextDocument = this.state.current.hasNextDocument;
         let updateStackChange = update(stackChange, {});
-
         if(!stackChange[reviewIndex]) {
             updateStackChange[reviewIndex] = [{
                 id: docIndex,
@@ -302,22 +302,22 @@ var ClassificationReview = React.createClass({
 
         switch(event.target.id) {
             case 'checkbox': {
-                this.onChangeCheckBox(event, reviewIndex, docIndex, document);
+                this.onChangeCheckBox(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
             }
             break;
 
             case 'selectCategory': {
-                this.onChangeCategory(event, reviewIndex, docIndex, document);
+                this.onChangeCategory(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
             }
             break;
 
             case 'selectConfidentiality': {
-                this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
+                this.onChangeConfidentiality(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
             }
         }
     },
 
-    onChangeCheckBox(event, reviewIndex, docIndex, document) {
+    onChangeCheckBox(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
         let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
@@ -335,13 +335,15 @@ var ClassificationReview = React.createClass({
             dataReview: updateData,
             current: {
                 doc: docIndex,
-                review: reviewIndex
+                review: reviewIndex,
+                hasNextDocument: hasNextDocument,
+                isNextCategory: isNextCategory
             },
             shouldUpdate: true
         });
     },
 
-    onChangeCategory(event, reviewIndex, docIndex, document) {
+    onChangeCategory(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
         let categoryIndex = event.target.value,
             { categories } = this.state,
             updateData = update(this.state.dataReview, {
@@ -365,13 +367,15 @@ var ClassificationReview = React.createClass({
             dataReview: updateData,
             current: {
                 doc: docIndex,
-                review: reviewIndex
+                review: reviewIndex,
+                hasNextDocument: hasNextDocument,
+                isNextCategory: isNextCategory
             },
             shouldUpdate: true
         });
     },
 
-    onChangeConfidentiality(event, reviewIndex, docIndex, document) {
+    onChangeConfidentiality(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
         let confidentialityIndex = event.target.value,
 
             { confidentialities } = this.state,
@@ -399,10 +403,13 @@ var ClassificationReview = React.createClass({
             dataReview: updateData,
             current: {
                 doc: docIndex,
-                review: reviewIndex
+                review: reviewIndex,
+                hasNextDocument: hasNextDocument,
+                isNextCategory: isNextCategory
             },
             shouldUpdate: true
         });
+
     },
 
     handleCheckAll(index, event) {

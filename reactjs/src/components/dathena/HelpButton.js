@@ -107,8 +107,6 @@ var HelpButton = React.createClass({
     },
 
     handleOnMouseOut: function() {
-        var dropdown = this.refs.dropdown
-        var dropdownMenu = this.refs.dropdownMenu
         // var eOffset = $(dropdown).offset();
         // // $(dropdown).append($(dropdownMenu).detach());
         // if ($(dropdownMenu).hasClass('none-left')) {
