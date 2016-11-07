@@ -492,6 +492,7 @@ var ClassificationReview = React.createClass({
                         }
                     })
                 });
+                console.log('response',data)
                 this.setState({ dataReview: data, shouldUpdate: true });
             },
             error: (err) => {

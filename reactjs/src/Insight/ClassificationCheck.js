@@ -72,35 +72,7 @@ var ClassificationCheck = React.createClass({
     closePreview() {
         this.setState({ openPreview: false, shouldUpdate: true });
     },
-    handleTableRowOnClick(event, index) {
-        switch(event.currentTarget.id) {
-            case 'documentName': {
-                this.onClickDocumentName(index);
-            }
-            break;
-            case 'documentStatus': {
-                this.onClickButtonStatus(index);
-            }
-        }
-    },
-    handleTableRowOnChange(event, index) {
 
-        switch(event.target.id) {
-            case 'checkbox': {
-                this.onChangeCheckBox(event, index);
-            }
-            break;
-
-            case 'selectCategory': {
-                this.onChangeCategory(event, index);
-            }
-            break;
-
-            case 'selectConfidentiality': {
-                this.onChangeConfidentiality(event, index);
-            }
-        }
-    },
 
     search(event) {
         let value = event.target.value

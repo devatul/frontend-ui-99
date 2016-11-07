@@ -93,7 +93,7 @@ var documentPreview = React.createClass({
        //     }
        // }
         nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-        if(document != null) {console.log(document)
+        if(document != null) {
             return(
                 <Modal
                     role="dialog"

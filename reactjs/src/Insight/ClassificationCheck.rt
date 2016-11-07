@@ -121,6 +121,7 @@
       hasNextDocument="{true}"
       undo="{this.handleUndo}"
       closeModal="{this.closePreview}"
+      hideLanguage="{true}"
       onHide="{this.closePreview}">
       <div class="table-responsive">
         <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
