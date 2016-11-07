@@ -35,7 +35,7 @@ var DataLost = React.createClass({
             },
             success: function(data) {
 
-                console.log('data', data);
+                // TODO: refactor with MenuBar.js
                 let arr = [];
                     /* this.setState({ dataLoss: data })
                      this.setState({ default_data: data[0] })*/
