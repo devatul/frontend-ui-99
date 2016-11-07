@@ -241,10 +241,20 @@ var ClassificationReview = React.createClass({
                 }]
             }
 
+            this.assignCategoryAndConfidentiality2nd([{
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "number_of_classification_challenge": 1,
+                "initial_category": document.init_category ? document.init_category : document.category,
+                "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+                "validated_category": document.category,
+                "validated_confidentiality": document.confidentiality
+            }]);
+
             this.setState({
                 dataReview: updateData,
                 stackChange: updateStackChange,
-                dataRequest: this.addDocIntoRequest(document),
                 current: {
                     doc: docIndex,
                     review: reviewIndex
@@ -354,15 +364,23 @@ var ClassificationReview = React.createClass({
                                 $set: categories[categoryIndex]
                             },
                             $merge: {
-                                status: document.init_category && isEqual(categories[categoryIndex], {
-                                    id: document.init_category.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name,
+                                status: document.init_category && (categories[categoryIndex].id == document.init_category.id) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category ? document.init_category : document.category
                             }
                         }
                     }
                 }
             });
+        this.assignCategoryAndConfidentiality2nd([{
+            "name": document.name,
+            "path": document.path,
+            "owner": document.owner,
+            "number_of_classification_challenge": 1,
+            "initial_category": document.init_category ? document.init_category : document.category,
+            "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+            "validated_category": document.category,
+            "validated_confidentiality": document.confidentiality
+        }]);
         this.setState({
             dataReview: updateData,
             current: {
@@ -390,14 +408,22 @@ var ClassificationReview = React.createClass({
                             $merge: {
                                 init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
 
-                                status: document.init_confidentiality && isEqual(confidentialities[confidentialityIndex], {
-                                    id: parseInt(document.init_confidentiality.id)
-                                }) ? status.ACCEPTED.name : status.EDITING.name
+                                status: document.init_confidentiality && (confidentialities[confidentialityIndex].id == document.init_confidentiality.id) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
                 }
             });
+        this.assignCategoryAndConfidentiality2nd([{
+            "name": document.name,
+            "path": document.path,
+            "owner": document.owner,
+            "number_of_classification_challenge": 1,
+            "initial_category": document.init_category ? document.init_category : document.category,
+            "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+            "validated_category": document.category,
+            "validated_confidentiality": document.confidentiality
+        }]);
 
         this.setState({
             dataReview: updateData,
@@ -476,10 +502,10 @@ var ClassificationReview = React.createClass({
         this.setState({ openPreview: false, shouldUpdate: true });
     },
 
-    assignCategoryAndConfidentiality2nd() {
+    assignCategoryAndConfidentiality2nd(request) {
         return makeRequest({
             method: "POST",
-            params: JSON.stringify(this.state.dataRequest),
+            params: JSON.stringify(request),
             path: "api/classification_review/",
             success: (res) => {
                 console.log("assign success", res);
