@@ -139,7 +139,10 @@
 
                   </div>
                   <div class="anomaly-block" >
-                     <TableAnomaly type = "table1"/>
+                     <TableAnomaly
+                        type = "table1"
+                        path="user-client"
+                    />
                   </div>
                 </div>
               </div>
@@ -234,7 +237,10 @@
 
                   </div>
                   <div class="anomaly-block" >
-                        <TableAnomaly type= "table2"/>
+                        <TableAnomaly
+                            type= "table2"
+                            path= "active-directory"
+                        />
                   </div>
                 </div>
               </div>
@@ -339,7 +345,10 @@
                     </div>
                   </div>
                   <div class="anomaly-block">
-                        <TableAnomaly type = 'table1'/>
+                        <TableAnomaly
+                            type = 'table1'
+                            path = 'user-access'
+                        />
                   </div>
                 </div>
               </div>

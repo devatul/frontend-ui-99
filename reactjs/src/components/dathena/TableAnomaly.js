@@ -5,8 +5,8 @@ import {makeRequest} from '../../utils/http'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
-
 import Anomaly from '../../components/dathena/AnomalyStateSelect'
+
 var TableAnomaly = React.createClass({
     getInitialState(){
         return{
@@ -18,10 +18,8 @@ var TableAnomaly = React.createClass({
         }
     },
     filterTable(data , value){
-        debugger
         let dataNew = []
         _.forEach(data , function(object , index){
-            debugger
             if(object['Review Status'] == value){
                 dataNew.push({
                     'id' : index,
@@ -31,17 +29,19 @@ var TableAnomaly = React.createClass({
         })
         return dataNew
     },
-    show(value){
-        this.getDataAPI(),
+    show(value , path){
+        this.getDataAPI(path),
         this.setState({show : value})
     },
-    getDataAPI(){
-        return makeRequest({
-            path: 'api/anomaly/iam/user-client?filter=all',
+    getDataAPI(path){
+        if(path != undefined){
+            return makeRequest({
+            path: 'api/anomaly/iam/'+path+'?filter=all',
             success: (data) => {
                 this.setState({ datas: data })
             }
         });
+        }
     },
     getDataFilter(datas){
         let data = []
@@ -54,15 +54,30 @@ var TableAnomaly = React.createClass({
         let updateAnomaly = update(this.state, {
             datas: {
                 [number]: {
-                    status : {$set : value} ,
+                    ['Review Status'] : {$set : value} ,
                     selected : {$set : 'none'}
                 }
             },
         })
         this.setState(updateAnomaly)
+        switch(value){
+            case 'not_reviewed': value = 'Not Reviewed ' ; break ;
+            case 'under_investigation': value = 'Under Investigation' ; break ;
+            case 'true_positive': value = 'True Positive' ; break ;
+            case 'false_positive': value = 'False Positive' ; break ;
+        }
+        datas[number]['Review Status'] = value
+        return makeRequest({
+            path: 'api/anomaly/iam/'+this.props.path,
+            method : 'PUT',
+            params : JSON.stringify(_.omit(datas[number], ['selected'])),
+            success: (data) => {
+
+            }
+        });
+
     },
     showSelect(datas , number){
-       /* let datas = _.cloneDeep(this.state.datas)*/
         let style = datas[number].selected == null || datas[number].selected ==  'none' ? 'block' : 'none'
         for(let i =0 ; i < datas.length ; i++){
             datas[i].selected = ( i == number ? style : 'none')
@@ -133,6 +148,15 @@ var TableAnomaly = React.createClass({
         })
         return data_export
     },
+    configClassName(className){
+        switch(className){
+            case  'not_reviewed' : return 'not-reviewed' ;
+            case  'under_investigation' : return 'investigation' ;
+            case  'true_positive' : return 'true' ;
+            case  'false_positive' : return 'false' ;
+
+        }
+    },
 
     render(){
         let {filterValue} = this.state
@@ -144,52 +168,72 @@ var TableAnomaly = React.createClass({
             , data_export = this.configDataCVS(newData)
             , child1 = null
             if(this.props.type == 'table1') {
-                child1 = <tr>
-                            <th>ID</th>
-                            <th className="text-left">Windows User Account</th>
-                            <th className="text-left">Document at Risk</th>
-                            <th className="text-left">Confidentiality</th>
-                            <th className="text-left">Folder at Risk</th>
-                            <th className="text-left">Security in Fault</th>
-                            <th>Review Status</th>
-                        </tr>
-
-                    }else {
-                         child1 = <tr>
-                            <th>ID</th>
-                            <th className="text-left">Active Directory Group</th>
-                            <th className="text-left">Document at Risk</th>
-                            <th className="text-left">Folder at Risk</th>
-                            <th className="text-left">User at Risk</th>
-                            <th className="text-left">Confidentiality at Risk</th>
-                            <th>Review Status</th>
-                        </tr>
+                child1 =
+                <tr>
+                    <th>ID</th>
+                    <th className="text-left">Windows User Account</th>
+                    <th className="text-left">Document at Risk</th>
+                    <th className="text-left">Confidentiality</th>
+                    <th className="text-left">Folder at Risk</th>
+                    <th className="text-left">Security in Fault</th>
+                    <th>Review Status</th>
+                </tr>
+                  for(let i = 1 ; i <= newData.length ; i++) {
+                        let key = i-1
+                        let key_filter = filterValue == 0 ? key : this.filterTable(data , filterValue)[key].id
+                        let className = "anomaly-state selected " + this.configClassName(newData[i-1]['Review Status'])
+                        child[i] = <tr key = {i}>
+                                        <td><span>{newData[key]['id']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Windows User Account']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Document at Risk']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Folder at Risk']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
+                                        <td className="relative">
+                                          <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,key_filter)}></span>
+                                          <div className="anomaly-showhide">
+                                              <Anomaly onChange = {this.changeAnomaly} number = {key_filter} show={newData[i-1].selected} data = {data} />
+                                          </div>
+                                        </td>
+                                      </tr>
                     }
 
+            } else {
+                child1 =
+                <tr>
+                    <th>ID</th>
+                    <th className="text-left">Active Directory Group</th>
+                    <th className="text-left">Document at Risk</th>
+                    <th className="text-left">Folder at Risk</th>
+                    <th className="text-left">User at Risk</th>
+                    <th className="text-left">Confidentiality at Risk</th>
+                    <th>Review Status</th>
+                </tr>
+                for(let i = 1 ; i <= newData.length ; i++) {
+                        let key = i-1
+                        let key_filter = filterValue == 0 ? key : this.filterTable(data , filterValue)[key].id
+                        let className = "anomaly-state selected " + this.configClassName(newData[i-1]['Review Status'])
+                        child[i] = <tr key = {i}>
+                                        <td><span>{newData[key]['id']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Active Directory Group']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Document at Risk']}</span></td>
+                                        <td className="text-left"><span>{newData[key]['Folder at Risk']}</span></td>
+                                        <td className="text-left"></td>
+                                        <td className="text-left"><span>{newData[key]['Confidentiality at Risk']}</span></td>
+                                        <td className="relative">
+                                          <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,key_filter)}></span>
+                                          <div className="anomaly-showhide">
+                                              <Anomaly onChange = {this.changeAnomaly} number = {key_filter} show={newData[i-1].selected} data = {data} />
+                                          </div>
+                                        </td>
+                                      </tr>
+                    }
+            }
 
-        for(let i = 1 ; i <= newData.length ; i++) {
-            let key = i-1
-            let key_filter = filterValue == 0 ? key : this.filterTable(data , filterValue)[key].id
-            let className = "anomaly-state selected " + newData[i-1]['Review Status']
-            child[i] = <tr key = {i}>
-                            <td><span>{newData[key]['id']}</span></td>
-                            <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
-                            <td className="text-left"><span>{newData[key]['Document at Risk']}</span></td>
-                            <td className="text-left"><span>{newData[key]['Folder at Risk']}</span></td>
-                            <td className="text-left"><span>{newData[key]['Security in Fault']}</span></td>
-                            <td className="text-left"><span>{newData[key]['Confidentiality']}</span></td>
-                            <td className="relative">
-                              <span className= {className} data-state="true" onClick={this.showSelect.bind(this,data,key_filter)}></span>
-                              <div className="anomaly-showhide">
-                                  <Anomaly onChange = {this.changeAnomaly} number = {key_filter} show={newData[i-1].selected} data = {data} />
-                              </div>
-                            </td>
-                          </tr>
-        }
         return (
         <div>
             <div className="extra-block" style={{display : style }}>
-                  <a href=" javascript:;" className="details-toggle" data-toggle="collapse" data-target="#demo" onClick = {this.show.bind(this,true)}><i className="fa fa-caret-right mr-xs"></i>Show details</a>
+                  <a href=" javascript:;" className="details-toggle" data-toggle="collapse" data-target="#demo" onClick = {this.show.bind(this,true,this.props.path)}><i className="fa fa-caret-right mr-xs"></i>Show details</a>
             </div>
             <div style={{display : style1 }}>
                 <div className="block-header row">
@@ -206,9 +250,9 @@ var TableAnomaly = React.createClass({
                         Display:
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,0)}>All</a> -
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,'not_reviewed')}><span className="anomaly-state not-reviewed"></span> Not Reviewed </a> -
-                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'investigation')}><span className="anomaly-state investigation"></span> Under Investigation </a> -
-                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'true')}><span className="anomaly-state true"></span> True Positive </a> -
-                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'false')}><span className="anomaly-state false"></span> False Positive </a>
+                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'under_investigation')}><span className="anomaly-state investigation"></span> Under Investigation </a> -
+                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'true_positive')}><span className="anomaly-state true"></span> True Positive </a> -
+                        <a href="javascript:;" onClick={this.getfilterValue.bind(this,'false_positive')}><span className="anomaly-state false"></span> False Positive </a>
                     </div>
 
                     <div className="table-responsive">

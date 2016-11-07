@@ -475,7 +475,6 @@ var Notification = React.createClass({
         }))
     },
     configDay(day){
-        debugger
         let day_cf = _.split(day , '-' , 3)
         switch(day_cf[1]){
             case '1' : day_cf[1] = 'JAN ' ; break ;
@@ -497,7 +496,6 @@ var Notification = React.createClass({
         }*/
     },
     getTime(times){
-        debugger
         let time_cf = _.split(times , 'T' , 2),
             day = this.configDay(time_cf[0]) ,
             time = _.split(time_cf[1] , '.' , 2)[0];

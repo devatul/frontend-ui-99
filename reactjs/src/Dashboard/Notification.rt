@@ -162,6 +162,7 @@
                         </span>
                         <span class="noti-center">
                             {notification.message} ({this.getTime(notification.created)})
+                        </span>
                         <span class="noti-right">
                             <i rt-if="notification.urgency !== 'done'"
                                 rt-class="{
