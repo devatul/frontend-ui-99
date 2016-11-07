@@ -47,7 +47,7 @@
                 </h2>
             </header>
             <div class="panel-body">
-              <div class="row">
+              <div class="row" rt-if="this.state.user_Client">
                 <div class="col-md-3">
                  <div class="block-header row">
                       <div class="col-md-5" style="margin-left: 3px">
@@ -71,7 +71,7 @@
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
 
-                    <div class="table-responsive" rt-if="this.state.user_Client">
+                    <div class="table-responsive" >
                       <table class="table anomaly-table">
                         <thead>
                           <tr>
@@ -146,7 +146,7 @@
                 </div>
               </div>
 
-              <div class="row mt-lg">
+              <div class="row mt-lg" rt-if="this.state.active_Directory_Group">
                <div class="block-header row" >
                     <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
                         <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
@@ -170,7 +170,7 @@
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
 
-                    <div class="table-responsive" rt-if="this.state.active_Directory_Group">
+                    <div class="table-responsive">
                       <table class="table anomaly-table">
                         <thead>
                           <tr>
@@ -244,7 +244,7 @@
                 </div>
               </div>
 
-              <div class="row mt-lg">
+              <div class="row mt-lg" rt-if="this.state.user_Access != null">
                 <div class="col-md-3">
                 <div class="block-header row">
                     <div class="col-md-5" style="margin-left:8px">
@@ -281,32 +281,16 @@
                             <th>Confidentiality at Risk</th>
                             <th>Folder at Risk</th>
                             <th>Active Directory at Risk</th>
-                            <th>User Access Right Accuracy
-
-                            </th>
+                            <th>User Access Right Accuracy</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td><span class="text-big">830</span></td>
-                            <td><span class="text-normal">Secret</span></td>
-                            <td><span class="text-big">132</span></td>
-                            <td><span class="text-big">54</span></td>
-                            <td><span class="text-big text-light-green">99,25%</span></td>
-                          </tr>
-                          <tr>
-                            <td><span class="text-big">2,1k</span></td>
-                            <td><span class="text-normal">Confidential</span></td>
-                            <td><span class="text-big">804</span></td>
-                            <td><span class="text-big">1470</span></td>
-                            <td><span class="text-big text-light-green">75,89%</span></td>
-                          </tr>
-                          <tr>
-                            <td><span class="text-big">170</span></td>
-                            <td><span class="text-normal">Internal</span></td>
-                            <td><span class="text-big">454</span></td>
-                            <td><span class="text-big">54</span></td>
-                            <td><span class="text-big text-light-green">56,57%</span></td>
+                          <tr rt-repeat = "tbl_3 in this.state.user_Access.data_first_table" key="tbl_3{tbl_3Index}">
+                            <td><span class="text-big">{tbl_3['User Anomaly']}</span></td>
+                            <td><span class="text-normal">{tbl_3['Confidentiality at Risk']}</span></td>
+                            <td><span class="text-big">{tbl_3['Folder at Risk']}</span></td>
+                            <td><span class="text-big">{tbl_3['Active Directory Group at Risk']}</span></td>
+                            <td><span class="text-big text-light-green">{tbl_3['User Access Right Accuracy']}%</span></td>
                           </tr>
                         </tbody>
                       </table>
@@ -320,25 +304,28 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr rt-repeat = "tbl_3 in this.state.user_Access.data_second_table" key="tbl_3{tbl_3Index}">
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">3,1k</span>
-                                <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_3['Total Anomaly'].value}</span>
+                                <span rt-if="tbl_3['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_3['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows User Account</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">88</span>
-                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_3['Document at Risk'].value}</span>
+                                <span rt-if="tbl_3['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_3['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Documents</span>
                             </td>
                             <td>
                               <span class="text-block">
-                                <span class="text-big text-red">130</span>
-                                <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span class="text-big text-red">{tbl_3['Total Active Directory Group at Risk'].value}</span>
+                                <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                               </span>
                               <span>Active Directory Group</span>
                             </td>
