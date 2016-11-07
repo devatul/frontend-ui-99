@@ -279,7 +279,7 @@ var Row3 = React.createClass({
     },
 
     handleOnclick: function(event) {
-
+        
         this.props.onClick &&
             this.props.onClick(event, this.props.index);
     },
@@ -475,6 +475,7 @@ var Row2 = React.createClass({
 });
 var RowPreview = React.createClass({
 
+
     propTypes: {
         document: PropTypes.object,
     },
@@ -484,7 +485,6 @@ var RowPreview = React.createClass({
     },
 
     componentDidMount() {
-
     },
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -611,11 +611,11 @@ var RowPreview = React.createClass({
                 <td className="text-center">
                     <i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i>
                 </td>
-                <td className="text-left">
+                <td className="text-left"  ref="documentNameContainer">
                     <OverlayTrigger placement="top" overlay={
                         <Tooltip id="tooltip">{document.name}</Tooltip>
                     }>
-                        <span id="documentName" onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
+                        <span id="documentName" style={{maxWidth: 100+'%'}} onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
                     </OverlayTrigger>
 
                     <InfoButton>
@@ -701,7 +701,6 @@ var Row = React.createClass({
     },
 
     componentDidMount() {
-
     },
 
     shouldComponentUpdate(nextProps, nextState) {
