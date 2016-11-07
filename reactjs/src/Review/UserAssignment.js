@@ -91,10 +91,9 @@ var UserAssignment = React.createClass({
                 confidentiality: []
             },
             shouldUpdate: false,
-            isConfirming: 0
+            isConfirming: 0,
         };
     },
-
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;
     },
