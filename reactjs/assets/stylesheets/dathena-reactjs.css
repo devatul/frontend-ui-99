@@ -389,6 +389,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .table-my-actions span.file-name.fix-max-width-row {
     max-width: 250px;
     margin-right: -110px;
+    padding-right: 10px;
 }
 
 /* height select2 filter */
