@@ -58,7 +58,7 @@
                                     rt-if="review.checkedNumber > 0"
                                     onClick="{this.handleClickApproveButton.bind(this, reviewIndex)}"
                                     class="mb-md mr-xs btn btn-green approve-button"
-                                    bsClass="">
+                                    bsClass="my-btn">
                                     Approve
                                 </Button>
 

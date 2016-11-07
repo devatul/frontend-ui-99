@@ -193,7 +193,12 @@ var ReviewValidation = React.createClass({
         this.setState({ reviewerCurrent: setReviewer, shouldUpdate: true });
     },
 
-    setCategoryCurrent(categoryIndex) {
+    setCategoryCurrent(tab) {
+        let {
+            categoriesReview
+        } = this.state,
+            categoryIndex = findIndex(categoriesReview, { id: tab.split('_')[1] });
+
         if(categoryIndex < this.state.categoriesReview.length) {
             let updateCurrent = update(this.state.currentIndex, {
                 category: {
@@ -202,7 +207,7 @@ var ReviewValidation = React.createClass({
             });
 
             this.setState({
-                categoryCurrent: this.state.categoriesReview[categoryIndex],
+                categoryCurrent: categoriesReview[categoryIndex],
                 currentIndex: updateCurrent,
                 shouldUpdate: true
             });

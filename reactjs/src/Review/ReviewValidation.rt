@@ -22,280 +22,289 @@
 <rt-import name="Modal" from="react-bootstrap/lib/Modal"/>
 <section>
 <div class="container">
-    <div class="tabs tabs-primary reviewer-tab">
-        <ul class="nav nav-tabs cat-list">
-            <li rt-repeat="category in this.state.categoriesReview" key="{categoryIndex}" class="{(category.id == this.state.categoryCurrent.id ? 'active' : '')}">
-                <a href="#catInfo" onClick="{this.setCategoryCurrent.bind(this, categoryIndex)}" class="text-capitalize">{category.name}</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div class="{(this.state.categoryCurrent.id != 'summary' ? 'tab-pane active' : 'tab-pane')}" id="catInfo">
-                <Row>
-                    <Col md={12}>
-                        <Row class="mb-sm">
-                            <Col sm={4} xs={6} class="hidden-xs">
-                                <div class="clearfix">
-                                    <strong>Reviewers List </strong>
-                                    <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
-                                    <Select2 id="chosse_cluster"
-                                        onChange="{this.setReviewerCurrent}"
-                                        value={this.state.currentIndex.reviewer}
-                                        containerCssClass="dathena-select select-user-review"
-                                        dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
-                                        width="200">
-                                        <option disabled
-                                            value="default">
-                                            All Reviewers
-                                        </option>
-                                        <option
-                                            rt-repeat="user in this.state.reviewers.reviewers"
-                                            value="{userIndex}"
-                                            key="{userIndex}">
-                                            {user.first_name + '.' + user.last_name}
-                                        </option>
-                                    </Select2>
-                                </div>
-                            </Col>
-                            <Col rt-if="this.state.dataReview != null"
-                                sm={8} xs={6} class="text-right text-capitalize">
-                                {this.state.categoryCurrent.name} Review Status:
-                                <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
-                                Progress:
-                                <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
-                                    <div class="overlay"></div>
-                                </div>
-                            </Col>
-                        </Row>
-                        <div class="tab-content br-radius">
-                            <div class="reviewer-info clearfix">
-                                <span>
-                                    <span class="doc-num">
-                                    {(this.state.dataReview.challenged_docs)}
-                                    </span> Documents Challenged - Validation Progress:
-                                </span>
-                                <div class="progress-radial small progress{'-' + this.state.dataReview.validation_progress}">
-                                    <div class="overlay"></div>
-                                </div>
-
-                                <div class="pull-right">
-                                    <Button bsClass="my-btn" class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo}>Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
-                                </div>
+    <Tab.Container activeKey="tab_{this.state.categoryCurrent.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1">
+        <div class="tabs tabs-primary reviewer-tab">
+            <Nav bsClass="nav" class="nav-tabs cat-list">
+                <NavItem rt-repeat="category in this.state.categoriesReview"
+                    key="{categoryIndex}"
+                    class="text-capitalize"
+                    eventKey="tab_{category.id}">
+                    {category.name}
+                </NavItem>
+            </Nav>
+            <Tab.Content animation>
+                <Tab.Pane
+                    key="content_category"
+                    eventKey="tab_{this.state.categoryCurrent.id === 'summary' ? 'hide' : this.state.categoryCurrent.id}">
+                    <Row>
+                        <Col md={12}>
+                            <Row class="mb-sm">
+                                <Col sm={4} xs={6} class="hidden-xs">
+                                    <div class="clearfix">
+                                        <strong>Reviewers List </strong>
+                                        <HelpButton
+                                            classMenu="fix-overview-help-button-table"
+                                            setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
+                                        <Select2 id="chosse_cluster"
+                                            onChange="{this.setReviewerCurrent}"
+                                            value={this.state.currentIndex.reviewer}
+                                            containerCssClass="dathena-select select-user-review"
+                                            dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
+                                            width="200">
+                                            <option disabled
+                                                value="default">
+                                                All Reviewers
+                                            </option>
+                                            <option
+                                                rt-repeat="user in this.state.reviewers.reviewers"
+                                                value="{userIndex}"
+                                                key="{userIndex}">
+                                                {user.first_name + '.' + user.last_name}
+                                            </option>
+                                        </Select2>
+                                    </div>
+                                </Col>
+                                <Col rt-if="this.state.dataReview != null"
+                                    sm={8} xs={6} class="text-right text-capitalize">
+                                    {this.state.categoryCurrent.name} Review Status:
+                                    <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
+                                    Progress:
+                                    <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
+                                        <div class="overlay"></div>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <div rt-if="this.state.reviewInfo.total_users <= 0" class="tab-content br-radius">
+                                <p>You have to assign reviewers to {this.state.categoryCurrent.name} to see this report</p>
                             </div>
-                            <Panel.custom class="legal_secret actions-panel">
-                                <Panel.head class="document_panel-heading">
-                                    <ul class="line_document_content_header">
-                                        <li class="document_panel-title">
-                                            <h2 class="document_panel-title panel-title">Challenge
-                                            <HelpButton
-                                                classMenu="fix-overview-help-button-table"
-                                                setValue="Documents challenged by reviewers are displayed in this section." />
-                                            </h2>
-                                        </li>
-                                    </ul>
-                                </Panel.head>
-                                <Panel.body>
-                                    <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                        <div class="table-responsive">
-                                            <table rt-if="this.state.dataReview && this.state.dataReview.challenge_docs.length" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="review_note">Status
-                                                        </th>
-                                                        <th class="review_note">Type</th>
-                                                        <th class="review_note">Document
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This displays the name of each individual document, as it exists in its current state." />
-                                                        </th>
-                                                        <th class="review_note">Category
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This display the category chose by the reviewer." />
-                                                        </th>
-                                                        <th class="review_note">Confidentiality
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This displays the confidentiality levels assigned by the reviewer." />
-                                                        </th>
-                                                        <th class="review_note">Coordinator's Comment
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                                setValue="Add a comment to justify your acceptance or your rejection of the challenge." />
-                                                        </th>
-                                                        <th class="review_note">Validation
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                                setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                            <tbody rt-if="this.state.dataReview != null">
-                                                <table.row2
-                                                    rt-repeat="document in this.state.dataReview.challenge_docs"
-                                                    document="{document}"
-                                                    key="document_{documentIndex}"
-                                                    onClick="{this.handleTableRowOnClick}"
-                                                    onChange="{this.handleTableRowOnChange}"
-                                                    categories="{this.state.categories}"
-                                                    confidentialities="{this.state.confidentialities}"
-                                                    index="{this.constructor.challenge + '_' + documentIndex}" />
-                                            </tbody>
-                                        </table>
+                            <div rt-if="this.state.reviewInfo.total_users > 0" class="tab-content br-radius">
+                                <div class="reviewer-info clearfix">
+                                    <span>
+                                        <span class="doc-num">
+                                        {(this.state.dataReview.challenged_docs)}
+                                        </span> Documents Challenged - Validation Progress:
+                                    </span>
+                                    <div class="progress-radial small progress{'-' + this.state.dataReview.validation_progress}">
+                                        <div class="overlay"></div>
                                     </div>
+
+                                    <div class="pull-right">
+                                        <Button bsClass="my-btn" class="mb-xs mt-none mr-xs btn btn-green" onClick={this.handleUndo}>Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
                                     </div>
-                                </Panel.body>
-                            </Panel.custom>
-                            <Panel.custom class="legal_secret actions-panel">
-                                <Panel.head class="document_panel-heading">
-                                    <ul class="line_document_content_header">
-                                        <li class="document_panel-title">
-                                            <h2 class="document_panel-title panel-title">Challenge Back - Last Review
+                                </div>
+                                <Panel.custom class="legal_secret actions-panel">
+                                    <Panel.head class="document_panel-heading">
+                                        <ul class="line_document_content_header">
+                                            <li class="document_panel-title">
+                                                <h2 class="document_panel-title panel-title">Challenge
                                                 <HelpButton
                                                     classMenu="fix-overview-help-button-table"
-                                                    setValue="Documents challenged a 2nd time by a reviewer are displayed in this section. This status represents the final review for documents at this point of the workflow" />
-                                            </h2>
-                                        </li>
-                                    </ul>
-                                </Panel.head>
-                                <Panel.body>
-                                    <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                                        <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all  approve-button-2" style="display: none;">Approve</button>
-                                        <div class="alert alert-success actions-success">
-                                            <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
-                                            <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <table rt-if="this.state.dataReview && this.state.dataReview.challenge_back_docs.length" class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
-                                                <thead>
-                                                    <tr role="row" class="">
-                                                        <th class="review_note">Status
-                                                        </th>
-                                                        <th class="review_note">Type
-                                                        </th>
-                                                        <th class="review_note">Document
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This displays the name of each individual document, as it exists in its current state." />
-                                                        </th>
-                                                        <th class="review_note">Category
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This display the category chose by the reviewer." />
-                                                        </th>
-                                                        <th class="review_note">Confidentiality
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This displays the confidentiality levels assigned by the reviewer." />
-                                                        </th>
-                                                        <th class="review_note">Reviewer's Comment
-                                                            <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                            setValue="Comments provided by the reviewer are displayed here." />
-                                                        </th>
-                                                        <th class="review_note">Validation
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                            setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody rt-if="this.state.dataReview != null">
-                                                    <table.row3
-                                                        rt-repeat="document in this.state.dataReview.challenge_back_docs"
-                                                        document="{document}"
-                                                        key="document_{documentIndex}"
-                                                        onClick="{this.handleTableRowOnClick}"
-                                                        onChange="{this.handleTableRowOnChange}"
-                                                        categories="{this.state.categories}"
-                                                        confidentialities="{this.state.confidentialities}"
-                                                        index="{this.constructor.challengeBack + '_' + documentIndex}" />
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                </Panel.body>
-                            </Panel.custom>
-                            <div class="clearfix">
-                                <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
-                                    onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
-                                <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
-                                    onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-            </div>
-            <div id="summary" class="tab-pane {(this.state.categoryCurrent.id == 'summary') && 'active'}">
-                <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
-                    <Panel.head>
-                        <h2 class="panel-title text-capitalize">{category.name}</h2>
-                    </Panel.head>
-                    <Panel.body>
-                        <div class="table-responsive">
-                            <table class="table table-condensed table-reviewer-summary">
-                                <thead>
-                                    <tr>
-                                        <th class="col50">Number of Assigned Reviewers:</th>
-                                        <th class="col25">Number of Documents Challenged</th>
-                                        <th class="col25">Total Numbers of Documents Classified</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="no-border-top">
-                                            <span class="assigned-num">{category.number_of_assigned}</span>
-                                            <a data-toggle="collapse" data-target="#reviewerList{categoryIndex}" class="accordion-toggle ml-md">
-                                                <i class="fa fa-plus-square" aria-hidden="true" onClick="{this.changeIcon}"></i>
-                                            </a>
-                                        </td>
-                                        <td class="no-border-top text-center">
-                                            {category.total_challenged_docs}
-                                        </td>
-                                        <td class="no-border-top text-center">
-                                            {category.total_classified_docs}
-                                        </td>
-                                    </tr>
-                                    <tr class="child-table">
-                                        <td colspan="4" class="hiddenRow">
-                                            <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr rt-repeat="reviewer in category.reviewers">
-                                                            <td class="col50">{reviewer.first_name + '.' + reviewer.last_name} (Last Modified)</td>
-                                                            <td class="col25">&#160;</td>
-                                                            <td class="col25 chart-col">
-                                                                <div class="progress progress-xl progress-squared light">
-                                                                <div class="progress-bar progress-bar-info" role="progressbar"
-                                                                    aria-valuenow="{this.progressSummary(category, reviewer)}"
-                                                                    aria-valuemin="0" aria-valuemax="100"
-                                                                    style="width: {this.progressSummary(category, reviewer)}%;">
-                                                                    <span class="percent">{reviewer.number_classified_docs}</span>
-                                                                </div>
-                                                                </div>
-                                                            </td>
+                                                    setValue="Documents challenged by reviewers are displayed in this section." />
+                                                </h2>
+                                            </li>
+                                        </ul>
+                                    </Panel.head>
+                                    <Panel.body>
+                                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                                            <div class="table-responsive">
+                                                <table rt-if="this.state.dataReview && this.state.dataReview.challenge_docs.length" class="table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="review_note">Status
+                                                            </th>
+                                                            <th class="review_note">Type</th>
+                                                            <th class="review_note">Document
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                            </th>
+                                                            <th class="review_note">Category
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This display the category chose by the reviewer." />
+                                                            </th>
+                                                            <th class="review_note">Confidentiality
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                                            </th>
+                                                            <th class="review_note">Coordinator's Comment
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                    setValue="Add a comment to justify your acceptance or your rejection of the challenge." />
+                                                            </th>
+                                                            <th class="review_note">Validation
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                    setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
+                                                            </th>
                                                         </tr>
+                                                    </thead>
+                                                    <tbody rt-if="this.state.dataReview != null">
+                                                        <table.row2
+                                                            rt-repeat="document in this.state.dataReview.challenge_docs"
+                                                            document="{document}"
+                                                            key="document_{documentIndex}"
+                                                            onClick="{this.handleTableRowOnClick}"
+                                                            onChange="{this.handleTableRowOnChange}"
+                                                            categories="{this.state.categories}"
+                                                            confidentialities="{this.state.confidentialities}"
+                                                            index="{this.constructor.challenge + '_' + documentIndex}" />
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </Panel.body>
+                                </Panel.custom>
+                                <Panel.custom class="legal_secret actions-panel">
+                                    <Panel.head class="document_panel-heading">
+                                        <ul class="line_document_content_header">
+                                            <li class="document_panel-title">
+                                                <h2 class="document_panel-title panel-title">Challenge Back - Last Review
+                                                    <HelpButton
+                                                        classMenu="fix-overview-help-button-table"
+                                                        setValue="Documents challenged a 2nd time by a reviewer are displayed in this section. This status represents the final review for documents at this point of the workflow" />
+                                                </h2>
+                                            </li>
+                                        </ul>
+                                    </Panel.head>
+                                    <Panel.body>
+                                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                                            <button type="button" class="mb-md mr-xs btn btn-green show-on-checked-all  approve-button-2" style="display: none;">Approve</button>
+                                            <div class="alert alert-success actions-success">
+                                                <button type="button" class="alert-close close" data-hide="alert" aria-hidden="true">×</button>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table rt-if="this.state.dataReview && this.state.dataReview.challenge_back_docs.length" class="document_review_table table review_table table table-bordered table-striped mb-none no-footer table-my-actions table-challenge size-timer-clock" id="table-my-actions-3" role="grid" aria-describedby="datatable-default_info">
+                                                    <thead>
+                                                        <tr role="row" class="">
+                                                            <th class="review_note">Status
+                                                            </th>
+                                                            <th class="review_note">Type
+                                                            </th>
+                                                            <th class="review_note">Document
+                                                            <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This displays the name of each individual document, as it exists in its current state." />
+                                                            </th>
+                                                            <th class="review_note">Category
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This display the category chose by the reviewer." />
+                                                            </th>
+                                                            <th class="review_note">Confidentiality
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                    classMenu="fix-overview-help-button-table"
+                                                                    setValue="This displays the confidentiality levels assigned by the reviewer." />
+                                                            </th>
+                                                            <th class="review_note">Reviewer's Comment
+                                                                <HelpButton className="dropdown-file-info-holder"
+                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                setValue="Comments provided by the reviewer are displayed here." />
+                                                            </th>
+                                                            <th class="review_note">Validation
+                                                            <HelpButton className="dropdown-file-info-holder"
+                                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                                setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody rt-if="this.state.dataReview != null">
+                                                        <table.row3
+                                                            rt-repeat="document in this.state.dataReview.challenge_back_docs"
+                                                            document="{document}"
+                                                            key="document_{documentIndex}"
+                                                            onClick="{this.handleTableRowOnClick}"
+                                                            onChange="{this.handleTableRowOnChange}"
+                                                            categories="{this.state.categories}"
+                                                            confidentialities="{this.state.confidentialities}"
+                                                            index="{this.constructor.challengeBack + '_' + documentIndex}" />
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </Panel.body>
+                                </Panel.custom>
+                                <div class="clearfix">
+                                    <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
+                                        onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
+                                    <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
+                                        onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </Tab.Pane>
+                <Tab.Pane key="content_summary" eventKey="tab_summary">
+                    <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
+                        <Panel.head>
+                            <h2 class="panel-title text-capitalize">{category.name}</h2>
+                        </Panel.head>
+                        <Panel.body>
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-reviewer-summary">
+                                    <thead>
+                                        <tr>
+                                            <th class="col50">Number of Assigned Reviewers:</th>
+                                            <th class="col25">Number of Documents Challenged</th>
+                                            <th class="col25">Total Numbers of Documents Classified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="no-border-top">
+                                                <span class="assigned-num">{category.number_of_assigned}</span>
+                                                <a data-toggle="collapse" data-target="#reviewerList{categoryIndex}" class="accordion-toggle ml-md">
+                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td class="no-border-top text-center">
+                                                {category.total_challenged_docs}
+                                            </td>
+                                            <td class="no-border-top text-center">
+                                                {category.total_classified_docs}
+                                            </td>
+                                        </tr>
+                                        <tr class="child-table">
+                                            <td colspan="4" class="hiddenRow">
+                                                <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr rt-repeat="reviewer in category.reviewers">
+                                                                <td class="col50">{reviewer.first_name + '.' + reviewer.last_name} (Last Modified)</td>
+                                                                <td class="col25">&#160;</td>
+                                                                <td class="col25 chart-col">
+                                                                    <div class="progress progress-xl progress-squared light">
+                                                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                                                        aria-valuenow="{this.progressSummary(category, reviewer)}"
+                                                                        aria-valuemin="0" aria-valuemax="100"
+                                                                        style="width: {this.progressSummary(category, reviewer)}%;">
+                                                                        <span class="percent">{reviewer.number_classified_docs}</span>
+                                                                    </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Panel.body>
+                    </Panel.custom>
+                    <div class="clearfix">
+                        <div class="pull-right">
+                            <Button onClick="{this.confirmValidation}" class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled':'')}" bsClass="my-btn">Confirm and Notify all Reviewers</Button>
                         </div>
-                    </Panel.body>
-                </Panel.custom>
-                <div class="clearfix">
-                    <div class="pull-right">
-                        <Button onClick="{this.confirmValidation}" class="btn btn-green btn-ok mb-sm mt-md {(this.state.isConfirming === 2 ? 'disabled':'')}" bsClass="my-btn">Confirm and Notify all Reviewers</Button>
                     </div>
-                </div>
-            </div>
+                </Tab.Pane>
+            </Tab.Content>
         </div>
-    </div>
+    </Tab.Container>
 </div>
-
 <Modal class="modal-well-done" show="{(this.state.isConfirming === 1)}" onHide={this.onHideModal} dialogClassName="custom-modal">
     <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-lg" style="color: #3c763d;">Well done!</Modal.Title>
