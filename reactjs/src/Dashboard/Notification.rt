@@ -54,7 +54,7 @@
                             </i>
                         </span>
                         <span class="noti-center">
-                            {notification.message} ({notification.created})
+                            {notification.message} ({this.getTime(notification.created)})
                         </span>
                         <span class="noti-right">
                             <i rt-if="notification.urgency !== 'done'"
@@ -90,7 +90,7 @@
                             </i>
                         </span>
                         <span class="noti-center">
-                            {notification.message} ({notification.created})
+                            {notification.message} ({this.getTime(notification.created)})
                         </span>
                         <span class="noti-right">
                             <i rt-if="notification.urgency !== 'done'"
@@ -126,7 +126,7 @@
                             </i>
                         </span>
                         <span class="noti-center">
-                            {notification.message} ({notification.created})
+                            {notification.message} ({this.getTime(notification.created)})
                         </span>
                         <span class="noti-right">
                             <i rt-if="notification.urgency !== 'done'"
@@ -161,8 +161,7 @@
                             </i>
                         </span>
                         <span class="noti-center">
-                            {notification.message} ({notification.created})
-                        </span>
+                            {notification.message} ({this.getTime(notification.created)})
                         <span class="noti-right">
                             <i rt-if="notification.urgency !== 'done'"
                                 rt-class="{
@@ -197,7 +196,7 @@
                             </i>
                         </span>
                         <span class="noti-center">
-                            {notification.message} ({notification.created})
+                            {notification.message} ({this.getTime(notification.created)})
                         </span>
                         <span class="noti-right">
                             <i rt-class="{

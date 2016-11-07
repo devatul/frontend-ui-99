@@ -227,7 +227,7 @@
                     </Col>
                 </Row>
             </div>
-            <div id="summary" class="tab-pane{(this.state.categoryCurrent.id == 'summary') && ' active'}">
+            <div id="summary" class="tab-pane {(this.state.categoryCurrent.id == 'summary') && 'active'}">
                 <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
                     <Panel.head>
                         <h2 class="panel-title text-capitalize">{category.name}</h2>

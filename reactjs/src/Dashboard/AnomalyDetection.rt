@@ -42,7 +42,8 @@
               <h2 class="panel-title">Identity and Access Management Anomaly
                 <HelpButton
                     classMenu="fix-overview-help-button-table"
-                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
+                    classIcon="overview_question_a help_question_a"
+                    setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
                 </h2>
             </header>
             <div class="panel-body">

@@ -51,7 +51,7 @@ var RickInsight = React.createClass({
             case 2:
                 return { color: '  bg-tertiary-2', info: 'Number of users who have abnormal access rights.' };
             case 3:
-                return { color: 'bg-secondary-2', info: 'Number of files past outside their retention dates.' };
+                return { color: 'bg-secondary-2', info: 'Number of retention rules applied for the existing classification.' };
             case 4:
                 return { color: 'bg-tertiary-3', info: 'Number of files outside their retention dates.' };
             case 5:

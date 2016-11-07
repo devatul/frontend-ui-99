@@ -69,7 +69,7 @@
                                 </ProgressBar>
                             </Col>
                             <Col md="{3}" class="text-right">
-                                <span>Detect Language: <b>English</b></span>
+                                <span>Detected Language: <b>English</b></span>
                                 <Button class="btn btn-green ml-md" bsClass="my-btn">Edit</Button>
                             </Col>
                         </Row>
@@ -208,7 +208,7 @@
                     <Panel.head>
                         <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
                         <div class="panel-actions my-actions-btn-group">
-                            <span class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.name}</b></span>
+                            <span class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
                             <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group</Button>
                             <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
@@ -218,7 +218,6 @@
                     <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength">
                         <p rt-if=" docLength === 0 " class="document_note">You don't have any document to review</p>
                         <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-
                             <Button
                                 rt-if="this.state.checkedNumber > 0"
                                 onClick="{this.handleClickApproveButton}"

@@ -17,11 +17,6 @@ var TableAnomaly = React.createClass({
 
         }
     },
-    /*componentDidUpdate(prevProps,prevState){
-        if(this.props.filter != prevProps.filter){
-
-        }
-    },*/
     filterTable(data , value){
         debugger
         let dataNew = []

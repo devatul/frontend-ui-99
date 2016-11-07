@@ -59,7 +59,7 @@ var ReviewValidation = React.createClass({
             isConfirming: 0
         };
     },
-    
+
     componentDidMount() {
         //console.log("sfdssss", this.state.categories);
         this.getCategories();
@@ -106,8 +106,8 @@ var ReviewValidation = React.createClass({
                 }
 
                 let bodyRequest = update(this.state.bodyRequest, {
-                    category_id: { 
-                        $set: parseInt(res[0].id) 
+                    category_id: {
+                        $set: parseInt(res[0].id)
                     }
                 });
 
@@ -118,7 +118,7 @@ var ReviewValidation = React.createClass({
                     categoryCurrent: res[0],
                     shouldUpdate: true
                 });
-            } 
+            }
         });
     },
 
@@ -136,23 +136,23 @@ var ReviewValidation = React.createClass({
     },
 
     getReviewers() {
-        var res = {
-                "total_reviewers": 2,
-                "reviewers": [
-                    {
-                    "id": 1,
-                    "first_name": "John",
-                    "last_name": "McClane",
-                    "type": "last_modifier"
-                    },
-                    {
-                    "id": 2,
-                    "first_name": "Al",
-                    "last_name": "Molinaro",
-                    "type": "last_modifier"
-                    }
-                ]
-            };
+        //var res = {
+        //        "total_reviewers": 2,
+        //        "reviewers": [
+        //            {
+        //            "id": 1,
+        //            "first_name": "John",
+        //            "last_name": "McClane",
+        //            "type": "last_modifier"
+        //            },
+        //            {
+        //            "id": 2,
+        //            "first_name": "Al",
+        //            "last_name": "Molinaro",
+        //            "type": "last_modifier"
+        //            }
+        //        ]
+        //    };
         return makeRequest({
             path: "api/review/reviewer_list/",
             params: {
@@ -163,7 +163,7 @@ var ReviewValidation = React.createClass({
 
                 let bodyRequest = update(this.state.bodyRequest, {
                         reviewer_id: {
-                            $set: res.reviewers[0].id 
+                            $set: res.reviewers[0].id
                         }
                     });
                 this.setState({
@@ -175,7 +175,7 @@ var ReviewValidation = React.createClass({
             },
             error: (err) => {
                 if(err.status === 400) {
-                    
+
                     this.setState({
                         reviewers: [],
                         reviewerCurrent: {},
@@ -449,74 +449,73 @@ var ReviewValidation = React.createClass({
 
     getReviewValidation() {
         let reviewerId = this.state.reviewerCurrent.id,
-            categoryId = this.state.categoryCurrent.id,
-
-            data = {
-                "challenged_docs": 4,
-                "validation_progress": 55,
-                "challenge_docs": [
-                    {
-                    "id": 1,
-                    "sla_percent": 60,
-                    "name": "IonaTechnologiesPlcG07.doc",
-                    "owner": "owner_name",
-                    "path": "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                    "creation_date": "2012-04-23",
-                    "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                    "legal_retention_until": "2012-04-23",
-                    "modification_date": "2012-04-23",
-                    "comments": "",
-                    "number_of_classification_challenge": 1,
-                    "current_category": {
-                        "id": 1,
-                        "name": "Accounting/Tax"
-                    },
-                    "previous_category": {
-                        "id": 1,
-                        "name": "Accounting/Tax"
-                    },
-                    "current_confidentiality": {
-                        "id": 1,
-                        "name": "Confidential"
-                    },
-                    "previous_confidentiality": {
-                        "id": 1,
-                        "name": "public"
-                    }
-                    }
-                ],
-                "challenge_back_docs": [
-                    {
-                    "id": 1,
-                    "sla_percent": 60,
-                    "name": "IonaTechnologiesPlcG07.doc",
-                    "owner": "owner_name",
-                    "path": "assets/orphan/01/IonaTechnologiesPlcG07.doc",
-                    "reviewer_comment": "this is the comment",
-                    "creation_date": "2012-04-23",
-                    "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
-                    "legal_retention_until": "2012-04-23",
-                    "modification_date": "2012-04-23",
-                    "number_of_classification_challenge": 1,
-                    "current_category": {
-                        "id": 1,
-                        "name": "Accounting/Tax"
-                    },
-                    "previous_category": {
-                        "id": 1,
-                        "name": "Accounting/Tax"
-                    },
-                    "current_confidentiality": {
-                        "id": 1,
-                        "name": "Confidential"
-                    },
-                    "previous_confidentiality": {
-                        "id": 1,
-                        "name": "Confidential"
-                    }
-                    }
-                ]
-            };
+            categoryId = this.state.categoryCurrent.id
+            //data = {
+            //    "challenged_docs": 4,
+            //    "validation_progress": 55,
+            //    "challenge_docs": [
+            //        {
+            //        "id": 1,
+            //        "sla_percent": 60,
+            //        "name": "IonaTechnologiesPlcG07.doc",
+            //        "owner": "owner_name",
+            //        "path": "assets/orphan/01/IonaTechnologiesPlcG07.doc",
+            //        "creation_date": "2012-04-23",
+            //        "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
+            //        "legal_retention_until": "2012-04-23",
+            //        "modification_date": "2012-04-23",
+            //        "comments": "",
+            //        "number_of_classification_challenge": 1,
+            //        "current_category": {
+            //            "id": 1,
+            //            "name": "Accounting/Tax"
+            //        },
+            //        "previous_category": {
+            //            "id": 1,
+            //            "name": "Accounting/Tax"
+            //        },
+            //        "current_confidentiality": {
+            //            "id": 1,
+            //            "name": "Confidential"
+            //        },
+            //        "previous_confidentiality": {
+            //            "id": 1,
+            //            "name": "public"
+            //        }
+            //        }
+            //    ],
+            //    "challenge_back_docs": [
+            //        {
+            //        "id": 1,
+            //        "sla_percent": 60,
+            //        "name": "IonaTechnologiesPlcG07.doc",
+            //        "owner": "owner_name",
+            //        "path": "assets/orphan/01/IonaTechnologiesPlcG07.doc",
+            //        "reviewer_comment": "this is the comment",
+            //        "creation_date": "2012-04-23",
+            //        "image_url": "http://54.254.145.121/static/orphan/01/IonaTechnologiesPlcG07.doc",
+            //        "legal_retention_until": "2012-04-23",
+            //        "modification_date": "2012-04-23",
+            //        "number_of_classification_challenge": 1,
+            //        "current_category": {
+            //            "id": 1,
+            //            "name": "Accounting/Tax"
+            //        },
+            //        "previous_category": {
+            //            "id": 1,
+            //            "name": "Accounting/Tax"
+            //        },
+            //        "current_confidentiality": {
+            //            "id": 1,
+            //            "name": "Confidential"
+            //        },
+            //        "previous_confidentiality": {
+            //            "id": 1,
+            //            "name": "Confidential"
+            //        }
+            //        }
+            //    ]
+            //};
         if(this.state.reviewerCurrent.id && this.state.categoryCurrent.id) {
             makeRequest({
                 path: "api/review/review_validation/",
@@ -550,7 +549,7 @@ var ReviewValidation = React.createClass({
             });
 
             this.setState({ dataReview: updateDataReview, shouldUpdate: true });
-        }   
+        }
     },
 
     getReviewInfo() {
@@ -575,7 +574,7 @@ var ReviewValidation = React.createClass({
             let item = stackChange[stackLength],
                 index = item.id.split('_'),
                 current = (index[0] === this.constructor.challenge ? "challenge_docs" : "challenge_back_docs"),
-            
+
             updateData = update(this.state.dataReview, {
                 [current]: {
                     [index[1]]: {
@@ -646,7 +645,7 @@ var ReviewValidation = React.createClass({
             shouldUpdate: true
         });
     },
-    
+
     handleNextReviewer() {
 
         let { currentIndex } = this.state,
@@ -658,7 +657,7 @@ var ReviewValidation = React.createClass({
                         $set: indexReviewer + 1
                     }
                 });
-                
+
             this.setState({ currentIndex: updateCurrent, reviewerCurrent: this.state.reviewers.reviewers[indexReviewer + 1], shouldUpdate: true });
         } else {
             let updateCurrent = update(currentIndex, {
@@ -673,6 +672,10 @@ var ReviewValidation = React.createClass({
         makeRequest({
             path: "api/review/review_validation/summary/",
             success: (res) => {
+              res.sort(function(a, b){
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+              });
                 this.setState({ summary: res, isConfirming: 0, shouldUpdate: true });
             }
         });

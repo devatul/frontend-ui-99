@@ -19,7 +19,8 @@ var GroupReview = React.createClass({
     		groupCurrent: {
                 id: 0,
                 name: 'group name',
-                index: 0
+                index: 0,
+                lastGroup: false,
             },
     		statistics: {},
     		cloudwords: [],
@@ -118,17 +119,17 @@ var GroupReview = React.createClass({
             index = event.target.value,
             group = Object.assign({}, groups[index], { index: parseInt(index) });
 
-        this.setState({ groupCurrent: group, shouldUpdate: true });
+        this.setState({ groupCurrent: group, shouldUpdate: true, lastGroup: index == (this.state.groups.length - 1) });
     },
 
     handleNextGroup() {
         let { index } = this.state.groupCurrent,
             group = Object.assign({}, this.state.groups[index + 1], { index: index + 1 });
-
-        if(index < (this.state.groups.length - 1)) {
+        if (index < (this.state.groups.length - 1)) {
             this.setState({
                 groupCurrent: group,
-                shouldUpdate: true
+                shouldUpdate: true,
+                lastGroup: index == (this.state.groups.length - 1),
             });
         }
     },
@@ -318,16 +319,39 @@ var GroupReview = React.createClass({
                     }
                     groups_by_name[group_id].push({
                       name: group.id + " - " + name,
-                      index : i
+                      realname: group.name,
+                      index : i,
+                      id: group.id
                     })
-
                 })
+
+              group_parent.sort(function(a, b) {
+                    if (a > b) return 1;
+                    if (a < b) return -1;
+              });
+
+              forEach(group_parent, (i) => {
+                groups_by_name[i].sort(function(a, b) {
+                  if (parseInt(a.id) > parseInt(b.id)) return 1;
+                  if (parseInt(a.id) < parseInt(b.id)) return -1;
+                })
+              })
+
+              let elt_index = 0;
+              let res_groups = []
+              forEach(group_parent, (i) => {
+                forEach(groups_by_name[i], elt => {
+                    elt.index = elt_index++;
+                    res_groups.push(elt);
+                })
+              })
+
                  this.setState(
                     {
-                        groups: res,
-                        groups_by_name : groups_by_name,
-                        group_parent : group_parent,
-                        groupCurrent: group,
+                        groups: res_groups,
+                        group_parent: group_parent,
+                        groups_by_name: groups_by_name,
+                        groupCurrent: Object.assign({}, res_groups[0], { index: 0 }),
                         shouldUpdate: true
                     }
                 );
