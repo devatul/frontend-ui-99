@@ -384,6 +384,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .table-my-actions span.file-name.fix-max-width-row2 {
     max-width: 180px;
     margin-right: -35px;
+    padding-right: 5px;
 }
 
 .table-my-actions span.file-name.fix-max-width-row {
