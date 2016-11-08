@@ -7,28 +7,28 @@
 <rt-import name="Table" from="react-bootstrap/lib/Table" />
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
-<div style="margin-bottom: 40px">
+<div>
     <div class="container">
-        <div class="text-center" rt-if="!this.state.result"  style="background-color: #fff">
-            <img class="logo-small mt-lg" alt="Dathena Logo" src="../assets/images/logo_header.png">
-            <span class="logo-subtitle text-weight-bold">smart cyber risk & data governance</span>
-            <div class="start-page search-box-wrap">
-              <input class="search-box-input" type="text" placeholder="Document name, folder of full path" onKeyPress="{this.search}">
-              <i class="fa fa-search text-green"></i>
-            </div>
-            <a href="javascript:;" class="{this.state.className}" onMouseOver = {this.handleOnMouseOver} onMouseOut = {this.handleOnMouseOut} onClick="{this.search}">I'd rather be smart than lucky</a>
-        </div>
-        <div class="row" rt-if="this.state.result">
+        <div class="row">
             <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary actions-panel">
-                    <div class="panel-body" style="display: block;">
+                     <div class="text-center" rt-if="!this.state.result"  style="background-color: #fff">
+                        <img class="logo-small mt-lg" alt="Dathena Logo" src="../assets/images/logo_header.png">
+                        <span class="logo-subtitle text-weight-bold">smart cyber risk & data governance</span>
+                        <div class="start-page search-box-wrap">
+                          <input class="search-box-input" type="text" placeholder="Document name, folder of full path" onKeyPress="{this.search}">
+                          <i class="fa fa-search text-green"></i>
+                        </div>
+                        <a href="javascript:;" class="{this.state.className}" onMouseOver = "{this.handleOnMouseOver}" onMouseOut = "{this.handleOnMouseOut}" onClick="{this.search}">I'd rather be smart than lucky</a>
+                    </div>
+                    <div class="panel-body" style="display: block;"  rt-if="this.state.result">
                         <div class="search-box mb-lg">
                           <label>Search</label>
                           <div class="inline-block-item ml-sm search-box-wrap">
                             <input class="search-box-input" type="text" placeholder="Contract Bank" onChange = "{this.search}">
                             <i class="fa fa-search text-green"></i>
                           </div>
-                         <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick={this.backScreen} >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                         <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick="{this.backScreen}"" >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                         <div class="results-search">
                             3 results (0.48 seconds)
@@ -97,7 +97,7 @@
                                                         </InfoButton>
 
                                                 </div>
-                                                <span class="text-italic file-name" onClick="{()=>this.onClickDocumentName(rtIndex)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
+                                                <span class="text-italic file-name" onClick="{this.onClickDocumentName.bind(this, rtIndex)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
                                             </td>
                                             <td class="text-left">
                                                 <span class="text-italic doc-path">{rt.path}</span>
@@ -207,7 +207,7 @@
                                 <li>Number of Classification Challenge: <b>1</b></li>
                             </InfoButton>
                         </div>
-                        <span class="text-italic file-name" onClick="{()=>this.onClickDocumentName(rt.index)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
+                        <span class="text-italic file-name" onClick="{this.onClickDocumentName.bind(this, rt.index)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
                     </td>
                     <td class="text-left">
                         <span class="text-italic doc-path">{rt.path}</span>
