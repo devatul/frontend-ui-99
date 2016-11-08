@@ -384,11 +384,13 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .table-my-actions span.file-name.fix-max-width-row2 {
     max-width: 180px;
     margin-right: -35px;
+    padding-right: 5px;
 }
 
 .table-my-actions span.file-name.fix-max-width-row {
     max-width: 250px;
     margin-right: -110px;
+    padding-right: 10px;
 }
 
 /* height select2 filter */
@@ -487,7 +489,7 @@ select.assigment-select.form-control {
 .dropdown-menu.info-scan .table-responsive help-info-button.dropdown {
     float: left;
     width: 40px;
-} 
+}
 
 /* title menu bar */
 .my_main.bar_menu .title-heading {

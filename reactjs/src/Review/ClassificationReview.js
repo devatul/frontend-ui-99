@@ -17,8 +17,8 @@ var ClassificationReview = React.createClass({
             shouldUpdate: false,
             openPreview: false,
             current: {
-                doc: 0,
-                review: 0
+                docIndex: 0,
+                reviewIndex: 0
             },
             stackChange: [],
             dataRequest: []
@@ -55,8 +55,8 @@ var ClassificationReview = React.createClass({
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
-        if(prevState.dataReview[current.review] && !isEqual(dataReview[current.review].documents, prevState.dataReview[current.review].documents)) {
-            this.checkValidNumber(dataReview[current.review].documents);
+        if(prevState.dataReview[current.reviewIndex] && !isEqual(dataReview[current.reviewIndex].documents, prevState.dataReview[current.reviewIndex].documents)) {
+            this.checkValidNumber(dataReview[current.reviewIndex].documents);
         }
         if(!isEqual(this.state.dataRequest, prevState.dataRequest)) {
             this.assignCategoryAndConfidentiality2nd();
@@ -104,7 +104,7 @@ var ClassificationReview = React.createClass({
         }
 
         updateData = update(dataReview, {
-            [current.review]: {
+            [current.reviewIndex]: {
                 $merge: {
                     checkedNumber: numCheck,
                     validateNumber: numValid,
@@ -137,81 +137,114 @@ var ClassificationReview = React.createClass({
         });
         this.setState({
             dataReview: updateData,
-            current: {
-                doc: this.state.current.doc,
-                review: reviewIndex
-            },
+            current: update(this.state.current, {
+                docIndex: this.state.current.docIndex,
+                reviewIndex: reviewIndex
+            }),
             shouldUpdate: true
         });
     },
 
     handleTableRowOnClick(event, index) {
+        let _index = index.split('_'),
+            reviewIndex = parseInt(_index[0]),
+            docIndex = parseInt(_index[1]),
+            {
+                dataReview
+            } = this.state,
+            {
+                documents
+            } = dataReview[reviewIndex],
+
+            docLength = documents.length;
+
+        this.setState({
+            current: update(this.state.current, {
+                $merge: {
+                    docIndex: docIndex,
+                    reviewIndex: reviewIndex,
+                    hasNextDocument: !((docIndex + 1) >= docLength && (reviewIndex + 1) >= dataReview.length),
+                    isNextCategory:  (docLength === (docIndex + 1) ? true : false)
+                }
+            })
+        });
+
         switch(event.currentTarget.id) {
             case 'documentName': {
-                this.onClickDocumentName(index);
+                this.onClickDocumentName(reviewIndex, docIndex);
             }
             break;
             case 'documentStatus': {
-                this.onClickButtonStatus(index);
+                this.onClickButtonStatus(reviewIndex, docIndex);
             }
         }
     },
 
-    onClickDocumentName(index) {
+    handleNextDocument() {
+        let {
+            current,
+            dataReview
+        } = this.state,
+        {
+            documents
+        } = dataReview[current.reviewIndex],
 
-        let idx = index.split('_'),
-            reviewIndex = parseInt(idx[0]),
-            docIndex = parseInt(idx[1]);
+        isNextCategory = !((current.docIndex + 1) < documents.length),
 
-        let hasNextDocument = false;
-        let isNextCategory = false;
+        hasNextDocument = !((current.docIndex + 2) >= documents.length && (current.reviewIndex + 2) >= dataReview.length);
 
-        if(docIndex <= (this.state.dataReview[reviewIndex].documents.length - 1)) {
-            if(this.state.dataReview[reviewIndex].documents.length > docIndex + 1){
-                hasNextDocument = true;
-            }else if(this.state.dataReview[reviewIndex+1] && this.state.dataReview[reviewIndex+1].documents.length){
-                hasNextDocument = true;
-                isNextCategory = true;
-            }
-            this.setState({
-                openPreview: true,
-                current: {
-                    doc: docIndex,
-                    review: reviewIndex,
-                    hasNextDocument: hasNextDocument,
-                    isNextCategory : isNextCategory
-                },
-                shouldUpdate: true
-            });
-        }else{
-            reviewIndex++;
-            docIndex = 0;
-            if(this.state.dataReview[reviewIndex] && this.state.dataReview[reviewIndex].documents.length > 0){
-                if(this.state.dataReview[reviewIndex].documents.length > docIndex + 1){
-                    hasNextDocument = true;
-                }else if(this.state.dataReview[reviewIndex+1] && this.state.dataReview[reviewIndex+1].documents.length){
-                    hasNextDocument = true;
-                    isNextCategory = true;
-                }
+        if(current.isNextCategory)
+        {
+            // if((current.reviewIndex + 1) < dataReview.length)
+            // {
                 this.setState({
-                    openPreview: true,
-                    current: {
-                        doc: docIndex,
-                        review: reviewIndex,
-                        hasNextDocument: hasNextDocument,
-                        isNextCategory : isNextCategory
-                    },
+                    current: update(current, {
+                        reviewIndex: {
+                            $set: ( current.reviewIndex + 1 ) < dataReview.length ? current.reviewIndex + 1 : current.reviewIndex
+                        },
+                        isNextCategory: {
+                            $set: isNextCategory
+                        },
+                        hasNextDocument: {
+                            $set: hasNextDocument
+                        }
+                    }),
                     shouldUpdate: true
                 });
-            }
+            //}
+        } else {
+            // if((current.docIndex + 1) <  documents.length)
+            // {
+                this.setState({
+                    current: update(current, {
+                        reviewIndex: {
+                            $set: (current.docIndex + 1) <  documents.length ? current.docIndex + 1 : current.docIndex
+                        },
+                        isNextCategory: {
+                            $set: isNextCategory
+                        },
+                        hasNextDocument: {
+                            $set: hasNextDocument
+                        }
+                    }),
+                    shouldUpdate: true
+                });
+            // }
         }
     },
 
-    onClickButtonStatus(index) {
-        let idx = index.split('_'),
-            reviewIndex = parseInt(idx[0]),
-            docIndex = parseInt(idx[1]),
-            document = this.state.dataReview[reviewIndex].documents[docIndex],
+    onClickDocumentName(reviewIndex, docIndex) {
+        if(docIndex <= (this.state.dataReview[reviewIndex].documents.length - 1)) {
+            this.setState({
+                openPreview: true,
+                shouldUpdate: true
+            });
+        }
+    },
+
+    onClickButtonStatus(reviewIndex, docIndex) {
+
+        let document = this.state.dataReview[reviewIndex].documents[docIndex],
             { stackChange } = this.state;
         //if(document.status === 'reject') {
             let updateData = update(this.state.dataReview, {
@@ -240,14 +273,20 @@ var ClassificationReview = React.createClass({
                 }]
             }
 
+            this.assignCategoryAndConfidentiality2nd([{
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "number_of_classification_challenge": 1,
+                "initial_category": document.init_category ? document.init_category : document.category,
+                "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+                "validated_category": document.category,
+                "validated_confidentiality": document.confidentiality
+            }]);
+
             this.setState({
                 dataReview: updateData,
                 stackChange: updateStackChange,
-                dataRequest: this.addDocIntoRequest(document),
-                current: {
-                    doc: docIndex,
-                    review: reviewIndex
-                },
                 shouldUpdate: true
             });
         //}
@@ -280,10 +319,14 @@ var ClassificationReview = React.createClass({
 
     handleTableRowOnChange(event, index) {
         let { stackChange } = this.state,
-            splitIndex = index.split('_'), reviewIndex = splitIndex[0], docIndex = splitIndex[1],
-            document = this.state.dataReview[reviewIndex].documents[docIndex],
-            isNextCategory = this.state.current.isNextCategory, hasNextDocument = this.state.current.hasNextDocument;
+            _index = index.split('_'),
+            reviewIndex = parseInt(_index[0]),
+            docIndex = parseInt(_index[1]),
+            document = this.state.dataReview[reviewIndex].documents[docIndex];
+            
+
         let updateStackChange = update(stackChange, {});
+
         if(!stackChange[reviewIndex]) {
             updateStackChange[reviewIndex] = [{
                 id: docIndex,
@@ -295,28 +338,37 @@ var ClassificationReview = React.createClass({
                 data: document
             });
         }
+
         this.setState({
-            stackChange: updateStackChange
+            stackChange: updateStackChange,
+            current: update(this.state.current, {
+                docIndex: {
+                    $set: docIndex
+                },
+                reviewIndex: {
+                    $set: reviewIndex
+                }
+            }) 
         });
 
         switch(event.target.id) {
             case 'checkbox': {
-                this.onChangeCheckBox(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
+                this.onChangeCheckBox(event, reviewIndex, docIndex, document);
             }
             break;
 
             case 'selectCategory': {
-                this.onChangeCategory(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
+                this.onChangeCategory(event, reviewIndex, docIndex, document);
             }
             break;
 
             case 'selectConfidentiality': {
-                this.onChangeConfidentiality(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory);
+                this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
             }
         }
     },
 
-    onChangeCheckBox(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
+    onChangeCheckBox(event, reviewIndex, docIndex, document) {
         let updateData = update(this.state.dataReview, {
                 [reviewIndex]: {
                     documents: {
@@ -332,17 +384,11 @@ var ClassificationReview = React.createClass({
 
         this.setState({
             dataReview: updateData,
-            current: {
-                doc: docIndex,
-                review: reviewIndex,
-                hasNextDocument: hasNextDocument,
-                isNextCategory: isNextCategory
-            },
             shouldUpdate: true
         });
     },
 
-    onChangeCategory(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
+    onChangeCategory(event, reviewIndex, docIndex, document) {
         let categoryIndex = event.target.value,
             { categories } = this.state,
             updateData = update(this.state.dataReview, {
@@ -353,28 +399,30 @@ var ClassificationReview = React.createClass({
                                 $set: categories[categoryIndex]
                             },
                             $merge: {
-                                status: document.init_category && isEqual(categories[categoryIndex], {
-                                    id: document.init_category.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name,
+                                status: document.init_category && (categories[categoryIndex].id == document.init_category.id) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category ? document.init_category : document.category
                             }
                         }
                     }
                 }
             });
+        this.assignCategoryAndConfidentiality2nd([{
+            "name": document.name,
+            "path": document.path,
+            "owner": document.owner,
+            "number_of_classification_challenge": 1,
+            "initial_category": document.init_category ? document.init_category : document.category,
+            "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+            "validated_category": document.category,
+            "validated_confidentiality": document.confidentiality
+        }]);
         this.setState({
             dataReview: updateData,
-            current: {
-                doc: docIndex,
-                review: reviewIndex,
-                hasNextDocument: hasNextDocument,
-                isNextCategory: isNextCategory
-            },
             shouldUpdate: true
         });
     },
 
-    onChangeConfidentiality(event, reviewIndex, docIndex, document, hasNextDocument, isNextCategory) {
+    onChangeConfidentiality(event, reviewIndex, docIndex, document) {
         let confidentialityIndex = event.target.value,
 
             { confidentialities } = this.state,
@@ -389,62 +437,66 @@ var ClassificationReview = React.createClass({
                             $merge: {
                                 init_confidentiality: document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
 
-                                status: document.init_confidentiality && isEqual(confidentialities[confidentialityIndex], {
-                                    id: parseInt(document.init_confidentiality.id)
-                                }) ? status.ACCEPTED.name : status.EDITING.name
+                                status: document.init_confidentiality && (confidentialities[confidentialityIndex].id == document.init_confidentiality.id) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
                 }
             });
+        this.assignCategoryAndConfidentiality2nd([{
+            "name": document.name,
+            "path": document.path,
+            "owner": document.owner,
+            "number_of_classification_challenge": 1,
+            "initial_category": document.init_category ? document.init_category : document.category,
+            "initial_confidentiality": document.init_confidentiality ? document.init_confidentiality : document.confidentiality,
+            "validated_category": document.category,
+            "validated_confidentiality": document.confidentiality
+        }]);
 
         this.setState({
             dataReview: updateData,
-            current: {
-                doc: docIndex,
-                review: reviewIndex,
-                hasNextDocument: hasNextDocument,
-                isNextCategory: isNextCategory
-            },
             shouldUpdate: true
         });
 
     },
 
     handleCheckAll(index, event) {
-        let updateData = update(this.state.dataReview, {
-            [index]: {
-                documents: {
-                    $apply: (data) => {
-                        data = cloneDeep(data);
-                        for(let i = data.length - 1; i >= 0; i--) {
-                            data[i].checked = event.target.checked
+        this.setState({
+            dataReview: update(this.state.dataReview, {
+                [index]: {
+                    documents: {
+                        $apply: (data) => {
+                            data = cloneDeep(data);
+                            for(let i = data.length - 1; i >= 0; i--) {
+                                data[i].checked = event.target.checked
+                            }
+                            return data;
                         }
-                        return data;
+                    },
+
+                    $merge: {
+                        checkedAll: event.target.checked
                     }
-                },
-
-                $merge: {
-                    checkedAll: event.target.checked
                 }
-            }
+            }),
+            current: update(this.state.current, {
+                reviewIndex: {
+                    $set: index
+                }
+            }),
+            shouldUpdate: true
         });
-
-        let updateCurrent = update(this.state.current, {
-            review: {
-                $set: index
-            }
-        });
-        this.setState({ dataReview: updateData, current: updateCurrent, shouldUpdate: true });
     },
 
     handleUndo(reviewIndex) {
         if(this.state.stackChange[reviewIndex] && this.state.stackChange[reviewIndex].length > 0) {
             let { stackChange } = this.state,
                 stackLength = stackChange[reviewIndex].length,
-                item = stackChange[reviewIndex][stackLength - 1],
+                item = stackChange[reviewIndex][stackLength - 1];
 
-                updateData = update(this.state.dataReview, {
+            this.setState({
+                dataReview: update(this.state.dataReview, {
                     [reviewIndex]: {
                         documents: {
                             [item.id]: {
@@ -454,18 +506,20 @@ var ClassificationReview = React.createClass({
                     }
                 }),
 
-                updateStack = update(stackChange, {
+                stackChange: update(stackChange, {
                     [reviewIndex]: {
                         $splice: [[stackLength - 1, 1]]
                     }
-                });
-            this.setState({
-                dataReview: updateData,
-                stackChange: updateStack,
-                current: {
-                    doc: item.id,
-                    review: reviewIndex
-                },
+                }),
+
+                current: update(this.state.current, {
+                    docIndex: {
+                        $set: item.id
+                    },
+                    review: {
+                        $set: reviewIndex
+                    }
+                }),
                 shouldUpdate: true
             });
         }
@@ -475,10 +529,10 @@ var ClassificationReview = React.createClass({
         this.setState({ openPreview: false, shouldUpdate: true });
     },
 
-    assignCategoryAndConfidentiality2nd() {
+    assignCategoryAndConfidentiality2nd(request) {
         return makeRequest({
             method: "POST",
-            params: JSON.stringify(this.state.dataRequest),
+            params: JSON.stringify(request),
             path: "api/classification_review/",
             success: (res) => {
                 console.log("assign success", res);

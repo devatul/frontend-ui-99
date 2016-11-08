@@ -21,7 +21,7 @@ var Table = React.createClass({
                 aria-describedby="datatable-default_info">
 
                 {this.props.children}
-            
+
             </table>
         );
     }
@@ -62,7 +62,7 @@ var RowChallenged = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
     },
-    
+
 
     renderComment(comment) {
         if(!this.state.showText) {
@@ -79,7 +79,7 @@ var RowChallenged = React.createClass({
         switch(true) {
             case status && (status > 66 && status <= 100):
                 return (<i className="fa fa-clock-o icon-danger"></i>);
-            case status && (status > 33 && status < 66): 
+            case status && (status > 33 && status < 66):
                 return (<i className="fa fa-clock-o icon-warning"></i>);
             case status && (status > 0 && status < 33):
                 return (<i className="fa fa-clock-o icon-success"></i>);
@@ -92,7 +92,7 @@ var RowChallenged = React.createClass({
                 return "icon-danger";
             case status.ACCEPTED.name:
                 return "icon-success";
-            default: 
+            default:
                 return "";
         }
     },
@@ -185,7 +185,7 @@ var RowChallenged = React.createClass({
                             }
                         </a>
                     </span>
-                    
+
                 </td>
                 <td className="opa-child fix-1st-pading-comment-table">
                     <div className="select-group">
@@ -234,7 +234,7 @@ var Row3 = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
     },
-    
+
 
     renderComment(comment) {
         if(!this.state.showText) {
@@ -251,7 +251,7 @@ var Row3 = React.createClass({
         switch(true) {
             case status && (status > 66 && status <= 100):
                 return (<i className="fa fa-clock-o icon-danger"></i>);
-            case status && (status > 33 && status < 66): 
+            case status && (status > 33 && status < 66):
                 return (<i className="fa fa-clock-o icon-warning"></i>);
             case status && (status > 0 && status < 33):
                 return (<i className="fa fa-clock-o icon-success"></i>);
@@ -264,7 +264,7 @@ var Row3 = React.createClass({
                 return "icon-danger";
             case status.ACCEPTED.name:
                 return "icon-success";
-            default: 
+            default:
                 return "";
         }
     },
@@ -349,7 +349,7 @@ var Row3 = React.createClass({
                             }
                         </a>
                     </span>
-                    
+
                 </td>
                 <td>
                     <a style={{cursor: 'pointer'}}
@@ -374,7 +374,7 @@ var Row2 = React.createClass({
         switch(true) {
             case status && (status > 66 && status <= 100):
                 return (<i className="fa fa-clock-o icon-danger"></i>);
-            case status && (status > 33 && status < 66): 
+            case status && (status > 33 && status < 66):
                 return (<i className="fa fa-clock-o icon-warning"></i>);
             case status && (status > 0 && status < 33):
                 return (<i className="fa fa-clock-o icon-success"></i>);
@@ -387,7 +387,7 @@ var Row2 = React.createClass({
                 return (<i className="fa fa-check icon-danger"></i>);
             case status.ACCEPTED.name:
                 return (<i className="fa fa-check icon-success"></i>);
-            default: 
+            default:
                 return (<i className="fa fa-check"></i>);
         }
     },
@@ -473,20 +473,234 @@ var Row2 = React.createClass({
         );
     }
 });
+var RowPreview = React.createClass({
 
+
+    propTypes: {
+        document: PropTypes.object,
+    },
+
+    componentWillMount() {
+
+    },
+
+    componentDidMount() {
+    },
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps);
+    },
+
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.confidentialities != prevProps.confidentialities) {
+            orderByIndex(confidentialities, [4,3,2,1,0])
+        }
+    },
+
+    handleSelectBoxOnchange: function(valSelect, event) {
+        let {
+            index
+        } = this.props;
+
+        this.props.onChange &&
+            this.props.onChange(event, index);
+    },
+
+    handleOnChange: function(e) {
+        let {
+            index
+        } = this.props;
+
+        this.props.onChange &&
+            this.props.onChange(e, index);
+    },
+
+    handleOnclick: function(e) {
+        let {
+            index
+        } = this.props;
+
+        this.props.onClick &&
+            this.props.onClick(e, index);
+    },
+
+    // renderColorConfidence(doc) {
+    //     let {
+    //         confidence_level,
+    //         group_avg_centroid_distance,
+    //         group_max_centroid_distance,
+    //         group_min_centroid_distance
+    //     } = doc;
+
+    //     if(doc != null) {
+    //         switch(true) {
+    //             case confidence_level < group_avg_centroid_distance:
+    //                 return "success";
+    //             case confidence_level > group_avg_centroid_distance && confidence_level < (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+    //                 return "warning"
+    //             case confidence_level > (2/3 * (group_max_centroid_distance - group_min_centroid_distance)):
+    //                 return "danger"
+    //         }
+    //     }
+    // },
+    renderColorConfidence(doc) {
+        let {
+            confidence_level,
+            group_avg_centroid_distance,
+            group_max_centroid_distance,
+            group_min_centroid_distance
+        } = doc;
+
+        if(doc != null) {
+            switch(true) {
+                case confidence_level > 66:
+                    return "success";
+                case confidence_level > 33 && confidence_level < 66:
+                    return "warning"
+                case confidence_level < 33:
+                    return "danger"
+            }
+        }
+    },
+
+    replace(str, s, e) {
+        var i = 0, len = str.length;
+        while(i < len) {
+            str = str.replace(s, e);
+            i++;
+        }
+        return str;
+    },
+
+    getIndex(array, name) {
+        let index = -1;
+        name = name.toLowerCase()
+        for(let i = array.lenth - 1; i >= 0; i--) {
+            if(array[i] && array[i].toLowerCase().indexOf(name))
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    },
+
+    renderStatus(_status) {
+        let color = "";
+
+        switch(_status) {
+            case status.EDITING.name:
+                color = status.EDITING.color;
+            break;
+
+        }
+
+        return <i className="fa fa-check" style={{ color: color }} aria-hidden="true"></i>
+    },
+
+    render() {
+        let { action, document, numberChecked, noConfidence, categories, confidentialities, hide } = this.props;
+        return (
+            document.path ? <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
+                { (hide && hide.checkbox) ? '' : <td>
+                    <div className="checkbox-custom checkbox-default">
+                        <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
+                        <label></label>
+                    </div>
+                </td> }
+                <td className="text-center">
+                    <i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i>
+                </td>
+                <td className="text-left"  ref="documentNameContainer">
+                    <OverlayTrigger placement="top" overlay={
+                        <Tooltip id="tooltip">{document.name}</Tooltip>
+                    }>
+                        <span id="documentName" style={{maxWidth: 100+'%'}} onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
+                    </OverlayTrigger>
+
+                    <InfoButton>
+                        <li>Name: <b>{document.name}</b></li>
+                        <li>Path: <span><a href="#">{document.path}</a></span></li>
+                        <li>Owner: <b>{document.owner}</b></li>
+                        <li>Creation Date: <b>{document.creation_date}</b></li>
+                        <li>Modification Date: <b>{document.modification_date}</b></li>
+                        {document.legal_retention_until ?
+                            <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li> : ''
+                        }
+                        <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
+                    </InfoButton>
+                </td>
+                <td className="text-center">
+                  <a href={document.path}>{document.path}</a>
+                </td>
+                <td className="select-category">
+                    <div className="select-group">
+                        { !noConfidence &&
+                            <div className="selected-info">
+                                <ProgressBar className="progress-striped light">
+                                    <ProgressBar
+                                        bsStyle={this.renderColorConfidence(document)}
+                                        min={0}
+                                        max={100}
+                                        now={document.confidence_level}
+                                        active
+                                        label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                                </ProgressBar>
+                            </div>
+                        }
+                        <SelectBox
+                            id="selectCategory"
+                            className="form-control"
+                            data={categories}
+                            value={ findIndex(categories, (cat) => { return cat.id == document.category.id }) }/>
+                    </div>
+                </td>
+                <td className="select-confidentiality">
+                    <div className="select-group">
+                        <div className="selected-info">
+                            { !noConfidence &&
+                                <div className="selected-info">
+                                    <ProgressBar className="progress-striped light">
+                                        <ProgressBar
+                                            bsStyle={this.renderColorConfidence(document)}
+                                            min={0}
+                                            max={100}
+                                            now={document.confidence_level}
+                                            active
+                                            label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                                    </ProgressBar>
+                                </div>
+                            }
+                        </div>
+                        <SelectBox
+                            id="selectConfidentiality"
+                            className="form-control"
+                            data={confidentialities}
+                            value={ findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id }) }/>
+                    </div>
+                </td>
+                <td>
+                    <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
+                        <i className="fa fa-clock-o" aria-hidden="true"></i>
+                        {this.renderStatus(document.status)}
+                    </a>
+                </td>
+            </tr> : <div></div>
+        );
+    }
+});
 
 var Row = React.createClass({
 
     propTypes: {
         document: PropTypes.object,
     },
-    
+
     componentWillMount() {
 
     },
 
     componentDidMount() {
-          
     },
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -692,6 +906,7 @@ var Row = React.createClass({
 module.exports = {
     table: Table,
     //head: Head,
+    RowPreview: RowPreview,
     RowChallenged: RowChallenged,
     row: Row,
     row2: Row2,

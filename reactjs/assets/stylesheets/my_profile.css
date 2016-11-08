@@ -641,7 +641,7 @@ select.record_select {
 	min-width: 150px;
 }
 .table-responsive {
-	overflow-x: hidden;
+	overflow-x: scroll;
 }
 .vertical-top.document_2nd.first-ch {
 	min-width: 160px;
@@ -659,10 +659,19 @@ select.record_select {
 	padding: 12px;
 }
 
+.docPreview{
+  width: 1350px;
+}
+.margin-top-14{
+  margin-top: 14px;
+}
 
 
-
-
+@media screen and (min-width: 1350px) {
+  .docPreview{
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 991px) {
   .table{

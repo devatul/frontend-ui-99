@@ -51,7 +51,7 @@
                                             containerCssClass="dathena-select select-user-review"
                                             dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
                                             width="200">
-                                            <option disabled
+                                            <option
                                                 value="default">
                                                 All Reviewers
                                             </option>

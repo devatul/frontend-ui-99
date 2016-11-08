@@ -71,7 +71,8 @@ var HelpButton = React.createClass({
                 left: left,
                 marginLeft: marginLeft,
                 width: width,
-                marginTop: 25
+                marginTop: 25,
+                zIndex:99999
             },
             className: (classMenu ? classMenu : 'overview_timeframe help_timeframe') + ' dropdown-menu fix-z-index-info-button has-arrow dd-md full-mobile'
         }, <p dangerouslySetInnerHTML={{ __html: value }} style={this.state.styleContent}/>)
@@ -140,7 +141,7 @@ var HelpButton = React.createClass({
         e.stopPropagation();
     },
 
-    render: function() {
+    render: function() { 
         var { setOpen, expanded } = this.state,
             { className, classIcon, classMenu } = this.props,
             value = this.props.setValue.replace(/(?:\r\n|\r|\n)/g, '<br/>');
@@ -159,4 +160,3 @@ var HelpButton = React.createClass({
 });
 
 module.exports = HelpButton;
-

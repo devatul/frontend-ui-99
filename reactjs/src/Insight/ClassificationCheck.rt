@@ -2,256 +2,223 @@
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="func" from='../utils/function.js'/>
+<rt-import name="table" from="../components/dathena/TableReview" />
+
+<rt-import name="Table" from="react-bootstrap/lib/Table" />
+<rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
 <div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <section class="panel panel-featured panel-featured-primary actions-panel">
-          <div class="panel-body" style="display: block;">
-            <div class="search-box mb-lg">
-              <label>Search</label>
-              <div class="inline-block-item ml-sm search-box-wrap">
-                <input class="search-box-input" type="text" placeholder="Contract Bank" onChange="{this.search}">
-                <i class="fa fa-search text-green"></i>
-              </div>
-            </div>
-            <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-              <div class="table-responsive">
-                <table class="review_table cl_checker_table table table-bordered table-striped mb-none no-footer" role="grid" aria-describedby="datatable-default_info">
-                  <thead>
-                    <tr role="row">
-                      <th class="review_note">Type</th>
-                      <th class="review_note">
-                        Document
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This displays the name of each individual document, as it exists in its current state."/>
-                      </th>
-                      <th class="review_note">
-                        Path
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This displays the logical folder path to where each document is currently located."/>
-                      </th>
-                      <th class="review_note">
-                        Category
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This display the current category of each document."/>
-                      </th>
-                      <th class="review_note">
-                        Confidentiality
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This display the current level of confidentiality of each document."/>
-                      </th>
-                      <th class="review_note">
-                        Last Modify by
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This display the last user that has modified the content of each document."/>
-                      </th>
-                      <th class="review_note">
-                        Reviewer
-                        <HelpButton
-                          classMenu="fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This display the name of the reviewer for each document. “None” means this document has not been reviewed."/>
-                      </th>
-                      <th class="review_note">
-                        Involved in Anomaly
-                        <HelpButton
-                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                          classIcon="overview_question_a help_question_a"
-                          setValue="This display if each document returned by the search has been involved in an anomaly."/>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="" rt-repeat="rt in this.state.data">
-                      <td class="text-center">
-                        <i class="fa {func.renderClassType(rt.name)} action-file-icon"></i>
-                      </td>
-                      <td class="text-left overflow-hidden">
-                        <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
-                          <InfoButton>
-                            <li>Name: <b>Contract</b></li>
-                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                            <li>Owner: <b>Todd_Smith</b></li>
-                            <li>Creation Date: <b>2015-01-01</b></li>
-                            <li>Modification Date: <b>2015-05-28</b></li>
-                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                            <li>Confidentiality Label: <b>Yes/No</b></li>
-                            <li>Number of Classification Challenge: <b>1</b></li>
-                          </InfoButton>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel panel-featured panel-featured-primary actions-panel">
+                    <div class="panel-body" style="display: block;">
+                        <div class="search-box mb-lg">
+                          <label>Search</label>
+                          <div class="inline-block-item ml-sm search-box-wrap">
+                            <input class="search-box-input" type="text" placeholder="Contract Bank" onChange = "{this.search}">
+                            <i class="fa fa-search text-green"></i>
+                          </div>
                         </div>
-                        <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
-                      </td>
-                      <td class="text-left">
-                        <span class="text-italic doc-path">{rt.path}</span>
-                      </td>
-                      <td class="text-left">
-                        <span>{rt.category}</span>
-                      </td>
-                      <td class="text-left">
-                        <span>{rt.Confidentiality}</span>
-                      </td>
-                      <td class="text-left">
-                        <span>{rt['Last Modify by']}</span>
-                      </td>
-                      <td class="text-left">
-                        <span>{rt.Reviewer}</span>
-                      </td>
-                      <td>
-                        <span class="text-{rt['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{rt['Involved in Anomaly']}</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
+                        <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+                            <div class="table-responsive">
+                                <table class="review_table cl_checker_table table table-bordered table-striped mb-none no-footer"  role="grid" aria-describedby="datatable-default_info">
+                                    <thead>
+                                        <tr role="row" class="">
+                                            <th class="review_note">Type
+                                            </th>
+                                            <th class="review_note">Document
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
+                                            </th>
+                                            <th class="review_note">Path
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This displays the logical folder path to where each document is currently located." />
+                                            </th>
+                                            <th class="review_note">Category
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the current category of each document." />
+                                            </th>
+                                            <th class="review_note">Confidentiality
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the current level of confidentiality of each document." />
+                                            </th>
+                                            <th class="review_note">Last Modify by
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the last user that has modified the content of each document." />
+                                            </th>
+                                            <th class="review_note">Reviewer
+                                                <HelpButton
+                                                    classMenu="fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display the name of the reviewer for each document. “None” means this document has not been reviewed." />
+                                            </th>
+                                            <th class="review_note">Involved in Anomaly
+                                                <HelpButton
+                                                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                                                    classIcon="overview_question_a help_question_a"  setValue="This display if each document returned by the search has been involved in an anomaly." />
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="" rt-repeat="rt in this.state.data">
+                                            <td class="text-center">
+                                                <i class="fa {func.renderClassType(rt.name)} action-file-icon"></i>
+                                            </td>
+                                            <td class="text-left overflow-hidden">
+                                                <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
 
-  <div id="previewModal" class="modal fade in" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-preview">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <div class="col-sm-4 modal-title">
-              <i class="fa fa-search"></i>
-              Document Preview
+                                                        <InfoButton>
+                                                            <li>Name: <b>Contract</b></li>
+                                                            <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
+                                                            <li>Owner: <b>Todd_Smith</b></li>
+                                                            <li>Creation Date: <b>2015-01-01</b></li>
+                                                            <li>Modification Date: <b>2015-05-28</b></li>
+                                                            <li>Required Legal Retention until: <b>2025-03-03</b></li>
+                                                            <li>Confidentiality Label: <b>Yes/No</b></li>
+                                                            <li>Number of Classification Challenge: <b>1</b></li>
+                                                        </InfoButton>
+
+                                                </div>
+                                                <span class="text-italic file-name" onClick="{()=>this.onClickDocumentName(rt.index)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
+                                            </td>
+                                            <td class="text-left">
+                                                <span class="text-italic doc-path">{rt.path}</span>
+                                            </td>
+                                            <td class="text-left">
+                                              <span>{rt.category}</span>
+                                            </td>
+                                            <td class="text-left">
+                                              <span>{rt.Confidentiality}</span>
+                                            </td>
+                                            <td class="text-left">
+                                              <span>{rt['Last Modify by']}</span>
+                                            </td>
+                                            <td class="text-left">
+                                              <span>{rt.Reviewer}</span>
+                                            </td>
+                                            <td>
+                                              <span class="text-{rt['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{rt['Involved in Anomaly']}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div class="col-sm-4 modal-info text-center">
-              <span class="text-itatic">Contract.doc</span><br>
-              <span>Folder /legal/teamA/</span>
-            </div>
-            <div class="col-sm-4 modal-actions text-right">
-              <button type="button" class="mb-xs mr-xs btn btn-green">
-                Go to Next Document <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </button>
-              <button type="button" class="mb-xs mr-xs btn btn-green">
-                Undo <i class="fa fa-undo" aria-hidden="true"></i>
-              </button>
-              <button type="button" class="modal-button" data-dismiss="modal">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
         </div>
-        <div class="modal-body">
-          <div class="table-responsive">
-            <table class="review_table cl_checker_table table table-bordered table-striped mb-none no-footer" role="grid" aria-describedby="datatable-default_info">
-              <thead>
-                <tr role="row" class="">
-                  <th class="review_note">Type</th>
-                  <th class="review_note">
-                    Document
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+    </div>
+    <DocumentPreview
+      open={this.state.openPreview}
+      document={this.state.data[this.state.documentPreview].path}
+      nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+      hasNextDocument="{true}"
+      undo="{this.handleUndo}"
+      closeModal="{this.closePreview}"
+      hideLanguage="{true}"
+      onHide="{this.closePreview}">
+      <div class="table-responsive">
+
+        <Table class="review_table table table-bordered table-striped  mb-none no-footer table-my-actions table-classification-width docPreview"
+          id="table-my-actions-1"   role="grid" aria-describedby="datatable-default_info">
+          <thead>
+              <tr role="row" class="">
+                  <th class="review_note fix-width">Type
                   </th>
-                  <th class="review_note">
-                    Path
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note doc-name">Document
+                      <HelpButton
+                          className="dropdown-file-info-holder"
+                          classMenu="fix-overview-help-button-table"
+                          classIcon="overview_question_a help_question_a"  setValue="This displays the name of each individual document, as it exists in its current state." />
                   </th>
-                  <th class="review_note">
-                    Category
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note">Full Path
+                      <HelpButton
+                          classMenu="fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This displays the logical folder path to where each document is currently located." />
                   </th>
-                  <th class="review_note">
-                    Confidentiality
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note">Category
+                      <HelpButton
+                          classMenu="fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This display the current category of each document." />
                   </th>
-                  <th class="review_note">
-                    Last Modify by
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note">Confidentiality
+                      <HelpButton
+                          classMenu="fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This display the current level of confidentiality of each document." />
                   </th>
-                  <th class="review_note">
-                    Reviewer
-                    <HelpButton
-                      classMenu="fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note">Last Modify by
+                      <HelpButton
+                          classMenu="fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This display the last user that has modified the content of each document." />
                   </th>
-                  <th class="review_note">
-                    Involved in Anomaly
-                    <HelpButton
-                      classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                      classIcon="overview_question_a help_question_a"
-                      setValue="This displays the name of each individual document, as it exists in its current state."/>
+                  <th class="review_note">Reviewer
+                      <HelpButton
+                          classMenu="fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This display the name of the reviewer for each document. “None” means this document has not been reviewed." />
                   </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="">
+                  <th class="review_note">Involved in Anomaly
+                      <HelpButton
+                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                          className="dropdown-file-info-holder"
+                          classIcon="overview_question_a help_question_a"  setValue="This display if each document returned by the search has been involved in an anomaly." />
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="" rt-scope="this.state.data[this.state.documentPreview] as doc">
                   <td class="text-center">
-                    <i class="fa fa-file-word-o action-file-icon"></i>
+                      <i class="fa {func.renderClassType(doc.name)} action-file-icon"></i>
                   </td>
                   <td class="text-left overflow-hidden">
-                    <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
-                      <InfoButton>
-                        <li>Name: <b>Contract</b></li>
-                        <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                        <li>Owner: <b>Todd_Smith</b></li>
-                        <li>Creation Date: <b>2015-01-01</b></li>
-                        <li>Modification Date: <b>2015-05-28</b></li>
-                        <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                        <li>Confidentiality Label: <b>Yes/No</b></li>
-                        <li>Number of Classification Challenge: <b>1</b></li>
-                      </InfoButton>
-                    </div>
-                    <span class="text-italic file-name" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">Contract Bank 2016.doc</span>
+                      <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
+
+                              <InfoButton>
+                                  <li>Name: <b>Contract</b></li>
+                                  <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
+                                  <li>Owner: <b>Todd_Smith</b></li>
+                                  <li>Creation Date: <b>2015-01-01</b></li>
+                                  <li>Modification Date: <b>2015-05-28</b></li>
+                                  <li>Required Legal Retention until: <b>2025-03-03</b></li>
+                                  <li>Confidentiality Label: <b>Yes/No</b></li>
+                                  <li>Number of Classification Challenge: <b>1</b></li>
+                              </InfoButton>
+
+                      </div>
+                      <span class="text-italic file-name" >{doc.name}</span>
                   </td>
                   <td class="text-left">
-                    <span class="text-italic doc-path">/Document/Dathena99/contract/</span>
+                      <span class="text-italic doc-path">{doc.path}</span>
                   </td>
                   <td class="text-left">
-                    <span>Accounting/Tax</span>
+                    <span>{doc.category}</span>
                   </td>
                   <td class="text-left">
-                    <span>Confidentiality</span>
+                    <span>{doc.Confidentiality}</span>
                   </td>
                   <td class="text-left">
-                    <span>John.Hayt</span>
+                    <span>{doc['Last Modify by']}</span>
                   </td>
                   <td class="text-left">
-                    <span>Billy.Barty</span>
+                    <span>{doc.Reviewer}</span>
                   </td>
                   <td>
-                    <span class="text-red">Yes</span>
+                    <span class="text-{doc['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{doc['Involved in Anomaly']}</span>
                   </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="file-preview mt-md">
-            <p>File Preview Content</p>
-          </div>
-        </div>
+              </tr>
+          </tbody>
+        </Table>
       </div>
-    </div>
-  </div>
+    </DocumentPreview>
+
 </div>

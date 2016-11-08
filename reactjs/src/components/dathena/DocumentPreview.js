@@ -85,6 +85,7 @@ var documentPreview = React.createClass({
         let nextDocumentButton = null
         let { document, open } = this.props
         let currentReview = this.props.currentReview
+
        if(this.props.hasNextDocument){
             if(this.props.isNextCategory){
                 nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
@@ -107,35 +108,23 @@ var documentPreview = React.createClass({
                                 <i className="fa fa-search"></i>
                                 <span>Document Preview</span>
                             </Modal.Title>
-                            <div className="col-sm-2 modal-info text-center">
+                            <div className="col-sm-4 modal-info margin-top-14">
                                 <span className="text-itatic">
-                                    Proposed Category
+                                    Predicted Label:
                                 </span>
-                                <br/>
                                 <span>
-                                    {document && document.category && document.category.name}
+                                    <strong> {document && document.category && document.category.name +' - '+ document.confidentiality.name}</strong>
                                 </span>
                             </div>
-                            <div className="col-sm-3 modal-info text-center">
-                                <span className="text-itatic">
-                                    { document &&
-                                        document.name
-                                    }
-                                </span><br/>
-                                <span>
-                                { document &&
-                                    'Folder ' + this.cutPath(document.path)
-                                }</span>
-                            </div>
-                            <div className="col-sm-1 modal-actions text-center">
+
+                            <div className="col-sm-2 modal-actions margin-top-14">
                                 { this.props.hideLanguage ?
                                     '' : <div className="inline-block-item">
                                             <span className="text-itatic">
-                                                Language
+                                                Detected Language:
                                             </span>
-                                            <br/>
                                             <span>
-                                                {currentReview && currentReview.language && currentReview.language.name}
+                                              <strong>  {currentReview && currentReview.language && currentReview.language.name} </strong>
                                             </span>
                                         </div>
                                 }

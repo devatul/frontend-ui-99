@@ -26,6 +26,8 @@ var OrphanReview = React.createClass({
             documents: [],
             categories: [],
             confidentialities: [],
+            loadingdocuments:false,
+            getdocumenterror: false,
     		categoryInfo: [],
             documentPreview: -1,
             shouldUpdate: false,
@@ -34,7 +36,6 @@ var OrphanReview = React.createClass({
             checkBoxAll: false,
             stackChange: [],
             showLoading: "none",
-
             dataChart: {
                 pieChart: [],
                 documentType: {
@@ -75,13 +76,14 @@ var OrphanReview = React.createClass({
         if(!isEqual(this.state.documents, prevState.documents)) {
             let validNumber = this.validateNumber(),
                 checkNumber = this.checkedNumber(),
+                editNumber = this.editNumber(),
                 docNumber = this.state.documents.length;
 
             this.setState({
                 validateNumber: validNumber,
                 checkedNumber: checkNumber,
                 checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: Math.round((validNumber * 100) / docNumber),
+                reviewStatus: (docNumber === 0 ? 0 : Math.round(((validNumber + editNumber) * 100) / docNumber)),
                 shouldUpdate: true
             });
         }
@@ -123,7 +125,9 @@ var OrphanReview = React.createClass({
         if(index < (this.state.orphans.length - 1)) {
             this.setState({
                 orphanCurrent: orphan,
-                shouldUpdate: true
+                shouldUpdate: true,
+                documents: [],
+                loadingdocuments:true,
             });
         }
     },
@@ -152,7 +156,7 @@ var OrphanReview = React.createClass({
 
     onClickButtonStatus(index) {
         let document = this.state.documents[index];
-        if(document.status === 'invalid') {
+        if(document.status !== status.ACCEPTED.name) {
             let updateDocuments = update(this.state.documents, {
                 [index]: {
                     $merge: {
@@ -419,7 +423,10 @@ var OrphanReview = React.createClass({
             path: "api/group/orphan/samples",
             params: { "id": id },
             success: (res) => {
-                this.setState({ documents: res, shouldUpdate: true });
+                this.setState({ documents: res, shouldUpdate: true, loadingdocuments: false, getdocumenterror: false });
+            },
+            error: (err) => {
+              this.setState({documents: [], loadingdocuments: false, getdocumenterror: err})
             }
         });
 
@@ -498,7 +505,18 @@ var OrphanReview = React.createClass({
 
         return num;
     },
+    editNumber() {
+        let num = 0,
+            { documents } = this.state;
 
+        for(let i = documents.length - 1; i >= 0; i--) {
+            if(documents[i].status === status.EDITING.name) {
+                num++;
+            }
+        }
+
+        return num;
+    },
     validateNumber() {
         let num = 0,
             { documents } = this.state;

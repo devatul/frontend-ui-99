@@ -8,25 +8,17 @@ import {makeRequest} from '../utils/http'
 import 'jquery'
 
 var AnomalyDetection = React.createClass({
-  getInitialState() {
-    return {
-      anomaly_rick: {},
-      check_anomaly: 0,
-      display_anomaly: [null],
-      user_Client: null,
-      active_Directory_Group: null,
-
-      xhr: {
-        status: "Report is loading",
-        message: "Please wait!",
-        timer: 20,
-        loading: 0,
-        isFetching: fetching.STARTED,
-        isAnomalyRiskFetching: fetching.STARTED,
-        isUserClientFetching: fetching.STARTED
-      }
-    }
-  },
+    getInitialState() {
+        return {
+            anomaly_rick: {},
+            check_anomaly: 0,
+            display_anomaly: [null],
+            user_Client : null,
+            active_Directory_Group : null ,
+            user_Access  : null ,
+        }
+    },
+    componentWillMount() {
 
   componentWillUnmount() {
     this.setState({
@@ -98,75 +90,54 @@ var AnomalyDetection = React.createClass({
     for (var i = 0; i < data.length; i++) {
       var end = start + 360 * data[i].y / 100;
 
-      series.push({
-        type: 'pie',
-        size: 120 - 12 * i,
-        innerSize: 0,
-        startAngle: start,
-        endAngle: end,
-        data: [data[i]]
-      });
 
-      start = end;
-    }
-
-    $('.anomaly-pie-chart').highcharts({
-      series: series,
-      chart: {
-        type: 'pie',
-        height: 160,
-        spacing: [0, 0, 0, 0],
-        backgroundColor: 'rgba(255, 255, 255, 0)'
-      },
-      credits: {
-        enabled: false
-      },
-      title: {
-        text: ''
-      },
-      plotOptions: {
-        pie: {
-          borderWidth: 0,
-          dataLabels: {
-            distance: -15,
-            color: 'white',
-            useHTML: true,
-            style: {fontFamily: '\'Roboto\', sans-serif', fontSize: '10px', "fontWeight": "300"},
-            formatter: function () {
-              return this.y >= 15 ? this.y + '%' : this.y;
+            series.push({
+                type: 'pie',
+                size: 120 - 12 * i,
+                innerSize: 0,
+                startAngle: start,
+                endAngle: end,
+                data: [data[i]]
+            });
+            start = end;
+        };
+        $('.anomaly-pie-chart').highcharts({
+            series: series,
+            chart: {
+                type: 'pie',
+                height: 160,
+                spacing: [0, 0, 0, 0],
+                backgroundColor: 'rgba(255, 255, 255, 0)'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            plotOptions: {
+                pie: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        distance: -15,
+                        color: 'white',
+                        useHTML: true,
+                        style: { fontFamily: '\'Roboto\', sans-serif', fontSize: '10px', "fontWeight": "300" },
+                        formatter: function() {
+                            return this.y >= 15 ? this.y + '%' : this.y;
+                        }
+                    }
+                }
+            },
+            tooltip: {
+                enabled: false
             }
-          }
-        }
-      },
-      tooltip: {
-        enabled: false
-      }
-    });
-
-    this.setState({
-      xhr: update(this.state.xhr, {
-        isFetching: {
-          $set: fetching.STARTED
-        },
-        isAnomalyRiskFetching: {
-          $set: fetching.STARTED
-        }
-      })
-    });
-    this.getAnomalyRick();
-
-    this.setState({
-      xhr: update(this.state.xhr, {
-        isFetching: {
-          $set: fetching.STARTED
-        },
-        isUserClientFetching: {
-          $set: fetching.STARTED
-        }
-      })
-    });
-    this.getUserClient();
-  },
+        });
+         this.getAnomaylyRick() ;
+         this.getUserClient() ;
+         this.getActiveDirectory();
+         this.getUserAccess();
+    },
 
   // Get data form APIs
   getAnomalyRick() {
@@ -203,20 +174,24 @@ var AnomalyDetection = React.createClass({
             }
           })
         });
-      }
-    });
-  },
-
-  getActiveDirectory(){
-    return makeRequest({
-      path: 'api/anomaly/iam/active-directory',
-      success: (data) => {
-        this.setState({active_Directory_Group: data})
-      }
-    });
-  },
-
-  render: template
+    },
+    getActiveDirectory(){
+        return makeRequest({
+            path: 'api/anomaly/iam/active-directory',
+            success: (data) => {
+                this.setState({ active_Directory_Group: data })
+            }
+        });
+    },
+    getUserAccess(){
+        return makeRequest({
+            path: 'api/anomaly/iam/user-access',
+            success: (data) => {
+                this.setState({ user_Access: data })
+            }
+        });
+    },
+    render: template
 });
 
 module.exports = AnomalyDetection;

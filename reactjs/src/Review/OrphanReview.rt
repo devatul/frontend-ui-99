@@ -66,7 +66,7 @@
             </Col>
             <Col md={3} class="text-right">
               <span>Detected Language: <b>English</b></span>
-              <Button class="btn btn-green ml-md" bsClass="my-btn">Edit</Button>
+              <Button class="btn btn-green ml-md" bsClass="my-btn" disabled>Edit</Button>
             </Col>
           </Row>
         </Panel.head>
@@ -227,8 +227,10 @@
               </Button>
             </div>
           </Panel.head>
-          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength" >
-            <p rt-if=" docLength === 0 " class="document_note">You don't have any document to review</p>
+          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as loadingdocuments; this.state.getdocumenterror as docError" >
+            <p rt-if=" docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
+            <p rt-if=" docLength === 0 && loadingdocuments === false && docError !== false" class="document_note">ERROR : { docError }</p>
+            <p rt-if=" docLength === 0 && loadingdocuments === true" class="document_note">Loading documents, please wait...</p>
             <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
               <Button
                 rt-if="this.state.checkedNumber > 0"
@@ -320,7 +322,7 @@
     closeModal="{this.closePreview}"
     hideLanguage="{true}"
     onHide="{this.closePreview}">
-    <div class="table-responsive">
+    <div class="table-responsive table-preview-responsive">
       <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
         id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
         <thead>
@@ -341,6 +343,12 @@
                 className="dropdown-file-info-holder"
                 setValue="This displays the name of each individual document, as it exists in its current state." />
             </th>
+            <th class="review_note full-path">Full Path
+                <HelpButton
+                    className="dropdown-file-info-holder"
+                    classMenu="fix-overview-help-button-table"
+                    setValue="This displays the name of each individual document, as it exists in its current state." />
+            </th>
             <th class="review_note fix-max-width-category-confident">
               Proposed Category
               <HelpButton
@@ -358,7 +366,7 @@
           </tr>
         </thead>
         <tbody>
-          <table.row
+          <table.RowPreview
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}

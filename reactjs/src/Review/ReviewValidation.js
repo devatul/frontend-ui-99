@@ -80,7 +80,7 @@ var ReviewValidation = React.createClass({
                 this.getReviewers();
             }
         }
-        if(this.state.reviewerCurrent != prevState.reviewerCurrent) {
+        if(this.state.reviewerCurrent != prevState.reviewerCurrent && this.state.reviewerCurrent) {
             this.getReviewValidation();
             this.getReviewInfo();
         }
@@ -453,6 +453,7 @@ var ReviewValidation = React.createClass({
     },
 
     getReviewValidation() {
+
         let reviewerId = this.state.reviewerCurrent.id,
             categoryId = this.state.categoryCurrent.id
             //data = {
