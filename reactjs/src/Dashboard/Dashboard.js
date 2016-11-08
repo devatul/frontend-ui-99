@@ -117,7 +117,6 @@ module.exports = React.createClass({
                 newData.notifications = _.slice(data.notifications,0,3)
                 this.setState({ unseen_notiData: newData, save_list: newData.actions, total_pending : data.actions.length})
                 this.countNumber(data.actions)
-                console.log(this.state.unseen_notiData)
             }
         })
     },
