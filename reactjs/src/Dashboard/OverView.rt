@@ -147,7 +147,7 @@
                                                     colspan="1">Validated Documents
                                                     <HelpButton
                                                         classMenu="fix-overview-help-button-table overview-table-help"
-                                                        setValue="Percentage of documents validated and classify for each level of confidentiality." />
+                                                        setValue="Percentage of documents validated and classified for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy
