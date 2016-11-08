@@ -7,12 +7,12 @@ import $ from 'jquery'
 
 var StateSelect = React.createClass({
     propTypes: {
-
          change: PropTypes.func
      },
      getInitialState() {
          return {
-             display: 'none'
+             display: 'none',
+
          }
 
      },
@@ -50,10 +50,10 @@ var StateSelect = React.createClass({
         return(
             <div className="anomaly-state-select"  style={{'display': this.state.display, 'left': '90%'}}>
                 <div className="states">
-                  <span className="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed" onClick={()=>this.handleClick('not-reviewed')}></span>
-                  <span className="anomaly-state investigation" data-state="investigation" data-label="Under Investigation" onClick={()=>this.handleClick('investigation')}></span>
-                  <span className="anomaly-state true" data-state="true" data-label="True Positive" onClick={()=>this.handleClick('true')}></span>
-                  <span className="anomaly-state false" data-state="false" data-label="False Positive" onClick={()=>this.handleClick('false')}></span>
+                  <span className="anomaly-state not-reviewed" data-state="not-reviewed" data-label="Not Reviewed" onClick={()=>this.handleClick('not_reviewed')}></span>
+                  <span className="anomaly-state investigation" data-state="investigation" data-label="Under Investigation" onClick={()=>this.handleClick('under_investigation')}></span>
+                  <span className="anomaly-state true" data-state="true" data-label="True Positive" onClick={()=>this.handleClick('true_positive')}></span>
+                  <span className="anomaly-state false" data-state="false" data-label="False Positive" onClick={()=>this.handleClick('false_positive')}></span>
                 </div>
                 <span className="current-state"  style={{'fontWeight' : 'normal'}}></span>
               </div>
