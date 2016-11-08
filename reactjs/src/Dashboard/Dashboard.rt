@@ -2,7 +2,7 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="contant" from="../Constant.js"/>
-<section>
+<section ref='{this.hideDropdownMenu}'>
     <!--my_header start-->
 
     <!--my_header start-->
@@ -83,7 +83,7 @@
                </div>
            </div>
            <!-- Collect the nav links, forms, and other content for toggling -->
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ref='{this.findDropdownMenu}'>
             <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
