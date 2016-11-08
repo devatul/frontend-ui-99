@@ -865,14 +865,15 @@ window.theme = {};
 
 // Panels
 (function($) {
-
 	$(function() {
-		$('.panel').not('.panel-has-child')
-			.on( 'panel:toggle', function() {
+		//$('.panel').not('.panel-has-child')
+			$(document).on( 'panel:toggle','.panel', function() {
 				var $this,
 					direction;
 
 				$this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
 				direction = $this.hasClass( 'panel-collapsed' ) ? 'Down' : 'Up';
 
 				$this.find('.panel-body, .panel-footer')[ 'slide' + direction ]( 200, function() {
@@ -3342,7 +3343,7 @@ window.theme = {};
 	};
 
 	PluginCarousel.defaults = {
-		
+
 	};
 
 	PluginCarousel.prototype = {
