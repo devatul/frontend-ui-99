@@ -68,25 +68,13 @@ let Indentity = React.createClass({
     },
 
     getData() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('data', data);
-                this.setState({ loading: false });
-                this.updateChartData(data);
-                /* this.setState({ rickInsight: data })*/
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
+        return makeRequest({
+                path: 'api/insight/iam?number_users=5',
+                success: (data) => {
+                    this.setState({ loading: false });
+                    this.updateChartData(data);
                 }
-            }.bind(this)
-        });
+            });
     },
     updateChartData(datas) {
         let high_risk_users = {},
@@ -101,8 +89,6 @@ let Indentity = React.createClass({
         high_risk_users = this.configChart(datas.high_risk_users);
         high_risk_directory = this.configChart(datas.high_risk_directory);
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
-
         for (let i = 0; i < _.size(datas.key_contributor); i++) {
             arr[i] = datas.key_contributor[i];
             key_contributor.push({
@@ -111,13 +97,11 @@ let Indentity = React.createClass({
             })
         }
         let length = key_contributor.length
-        console.log('key_contributor', key_contributor);
-/*
 
-        height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-        height_2 = Math.max(_.size(key_contributor[1].contributors.categories), _.size(key_contributor[2].contributors.categories)) * 40;
-        height_3 = _.size(key_contributor[2].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
 
+        /* begin : config hight chart*/
+
+        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
         if(length == 1) {
             height_1 = _.size(key_contributor[0].contributors.categories)* 40;
         } else{
@@ -134,9 +118,7 @@ let Indentity = React.createClass({
                 height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
             }
         }
-
-        /*height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-        height_3 = _.size(key_contributor[4].contributors.categories)* 40; *//*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+        /*end*/
 
         let updateData_config = update(this.state, {
             dataChart: {

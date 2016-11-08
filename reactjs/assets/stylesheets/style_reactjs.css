@@ -436,3 +436,73 @@
 h2 .panel-title p {
     font-family: 'Roboto', 'Helvetica', 'sans-serif';
 }
+.logo-small {
+    max-width: 300px;
+}
+.mt-lg {
+    margin-top: 20px !important;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+.logo-subtitle {
+    color: #000;
+    display: block;
+    position: relative;
+    top: -20px;
+}
+.text-weight-bold {
+    font-weight: 700;
+}
+.search-box-wrap.start-page {
+    top: 0;
+    margin: 40px auto;
+    max-width: 90%;
+    width: 400px;
+}
+.search-box-wrap {
+    position: relative;
+    vertical-align: top;
+}
+.search-box-wrap.start-page .search-box-input {
+    position: relative;
+    width: 100%;
+}
+.smart-link {
+    margin-bottom: 100px;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none !important;
+    border: 1px solid;
+    border-radius: 4px;
+}
+.smart-link1 {
+    margin-bottom: 100px;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none !important;
+ /*   border: 1px solid transparent;
+    border-radius: 4px;*/
+}
+.results-search{
+    margin-bottom: 5px;
+}
+.returned-screen{
+    width: 130px
+}
+@media (max-width: 767px) {
+    .returned-screen{
+        width: 130px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .returned-screen{
+        width: 130px;
+        margin-top: 20px;
+    }
+}
