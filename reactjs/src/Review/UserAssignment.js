@@ -91,10 +91,9 @@ var UserAssignment = React.createClass({
                 confidentiality: []
             },
             shouldUpdate: false,
-            isConfirming: 0
+            isConfirming: 0,
         };
     },
-
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;
     },
@@ -102,7 +101,6 @@ var UserAssignment = React.createClass({
     componentDidMount() {
     	this.getCategories();
         this.getSummary();
-    	console.log(this.state);
     	javascript();
     },
 
@@ -135,7 +133,6 @@ var UserAssignment = React.createClass({
         if(!isEqual(datafilter.params, prevState.datafilter.params)) {
             this.getReviewers();
         }
-
     },
     handleOnChangeSelectBox: function(data, event) {
         var { params, filterLabel } = this.state.datafilter,
