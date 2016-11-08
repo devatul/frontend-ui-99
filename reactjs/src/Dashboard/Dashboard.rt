@@ -2,8 +2,7 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="contant" from="../Constant.js"/>
-
-<section>
+<section ref='{this.hideDropdownMenu}'>
     <!--my_header start-->
 
     <!--my_header start-->
@@ -84,7 +83,7 @@
                </div>
            </div>
            <!-- Collect the nav links, forms, and other content for toggling -->
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ref='{this.findDropdownMenu}'>
             <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
@@ -95,21 +94,23 @@
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <!--<li>
-                            <span class="badge">20</span>
+                            <span class="badge">0</span>
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                         </li>-->
                         <li>
-                           <!--  <span class="badge">20</span> -->
+                            <span class="badge">0</span>
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-
+                            <span class="badge">0</span>
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
+                            <span class="badge">0</span>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
                          <li>
+                            <span class="badge">0</span>
                             <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
                         </li>
                     </ul>
@@ -163,7 +164,7 @@
                             <!-- <span class="badge">20</span> -->
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
-                        
+
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>

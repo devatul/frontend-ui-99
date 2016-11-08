@@ -7,34 +7,68 @@ import $ from 'jquery';
 var ClassificationCheck = React.createClass({
     getInitialState() {
         return {
-            data: [{
-                'index': 0,
-                'name': 'Contract Bank 2016.doc',
-                'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
-                'Confidentiality': 'Confidentiality',
-                'Last Modify by': 'John.Hayt',
-                'Reviewer': 'Billy.Barty',
-                'Involved in Anomaly': 'Yes'
-            }, {
-                'index': 1,
-                'name': 'Contract Bank 2016.doc',
-                'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
-                'Confidentiality': 'Confidentiality',
-                'Last Modify by': 'John.Hayt',
-                'Reviewer': 'Billy.Barty',
-                'Involved in Anomaly': 'Yes'
-            }, {
-                'index': 2,
-                'name': 'Contract Bank 2016.doc',
-                'path': '/Document/Dathena99/contract/',
-                'category': 'Accounting/Tax',
-                'Confidentiality': 'Confidentiality',
-                'Last Modify by': 'John.Hayt',
-                'Reviewer': 'Billy.Barty',
-                'Involved in Anomaly': 'Yes'
-            }],
+            data: {
+                      "number of results": 3,
+                      "elapsed time in second": 0.48,
+                      "documents": [
+                        {
+                          "type": {
+                            "name": "Excel",
+                            "id": 1
+                          },
+                          "name": "document.xls",
+                          "path": "/path/to/document",
+                          "category": {
+                            "name": "Accounting/Tax",
+                            "id": "1"
+                          },
+                          "confidentiality": {
+                            "name": "Banking Secrecy",
+                            "id": "1"
+                          },
+                          "last modifier": "FirstName.LastName",
+                          "reviewer": "FirstName.LastName",
+                          "involved in anomaly": true
+                        },
+                        {
+                          "type": {
+                            "name": "Excel",
+                            "id": 1
+                          },
+                          "name": "document1.xls",
+                          "path": "/path/to/document",
+                          "category": {
+                            "name": "Accounting/Tax",
+                            "id": "1"
+                          },
+                          "confidentiality": {
+                            "name": "Banking Secrecy",
+                            "id": "1"
+                          },
+                          "last modifier": "FirstName.LastName",
+                          "reviewer": "FirstName.LastName",
+                          "involved in anomaly": false
+                        },{
+                          "type": {
+                            "name": "Excel",
+                            "id": 1
+                          },
+                          "name": "document2.xls",
+                          "path": "/path/to/document",
+                          "category": {
+                            "name": "Accounting/Tax",
+                            "id": "1"
+                          },
+                          "confidentiality": {
+                            "name": "Banking Secrecy",
+                            "id": "1"
+                          },
+                          "last modifier": "FirstName.LastName",
+                          "reviewer": "FirstName.LastName",
+                          "involved in anomaly": false
+                        }
+                      ]
+                    },
             documents: [],
             stackChange: [],
             categories: [],
@@ -42,17 +76,39 @@ var ClassificationCheck = React.createClass({
             shouldUpdate: false,
             documentPreview: 0,
             openPreview: false,
+            result : false,
+            className : 'smart-link1',
+            hasNextDocument : true ,
         };
     },
+   /* shouldComponentUpdate(nextProps, nextState) {
+        return nextState.shouldUpdate;
+    },
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state.shouldUpdate === true) {
+            this.setState({ shouldUpdate: false });
+        }
+    },*/
+
     onClickDocumentName(index) {
         debugger
-        if (index <= this.state.data.length - 1) {
+        let hasNextDocument = index == this.state.data.documents.length - 1 ? false : true
+        if (index <= this.state.data.documents.length - 1) {
             this.setState({
                 openPreview: true,
                 documentPreview: index,
-                //shouldUpdate: true
+                hasNextDocument : hasNextDocument
             });
         }
+    },
+    handleOnMouseOver(){
+        this.setState({className : 'smart-link'})
+    },
+    handleOnMouseOut(){
+        this.setState({className : 'smart-link1'})
+    },
+    backScreen(){
+        this.setState({result : false , className : 'smart-link1'})
     },
     handleUndo() {
         if (this.state.stackChange.length > 0) {
@@ -81,7 +137,12 @@ var ClassificationCheck = React.createClass({
 
 
     search(event) {
-        let value = event.target.value
+        debugger
+        if(event.which == 13 || event.type == 'click' ) {
+            this.setState({result : true})
+        }
+       /* this.setState({result : true})*/
+       /* let value = event.target.value
         let data = _.cloneDeep(this.state.data)
         let newData = []
         _.forEach(data, function(object, index) {
@@ -91,12 +152,11 @@ var ClassificationCheck = React.createClass({
                 )
             }
 
-    console.log(newData)
-  },
-
-  componentDidMount() {},
-
-  render: template
+        })
+        console.log(newData)*/
+    },
+    componentDidMount() {},
+    render: template
 });
 
 module.exports = ClassificationCheck;

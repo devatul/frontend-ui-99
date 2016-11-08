@@ -4,7 +4,7 @@ import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Dashboard.rt'
 import update from 'react/lib/update'
 import _ from 'lodash'
-import $ from 'jquery'
+//import $ from 'jquery'
 import { makeRequest } from '../utils/http'
 import Constant from '../Constant.js';
 
@@ -117,7 +117,6 @@ module.exports = React.createClass({
                 newData.notifications = _.slice(data.notifications,0,3)
                 this.setState({ unseen_notiData: newData, save_list: newData.actions, total_pending : data.actions.length})
                 this.countNumber(data.actions)
-                console.log(this.state.unseen_notiData)
             }
         })
     },
@@ -192,6 +191,20 @@ module.exports = React.createClass({
 
             }))
         }
+    },
+    hideDropdownMenu(element) {
+        if(element) {
+            element.addEventListener('click', (event)=>{
+                if(!$(event.target).closest(this.dropdownMenuElement).length) {
+                    if($(this.dropdownMenuElement).is(":visible")) {
+                        $(this.dropdownMenuElement).collapse('hide')
+                    }
+                }
+            });
+        }
+    },
+    findDropdownMenu(element) {
+        this.dropdownMenuElement = element;
     },
 
   render: template

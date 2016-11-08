@@ -42,13 +42,13 @@
                                                 <strong>{ this.state.category.info.number_docs &&
                                                               func.formatNumber(this.state.category.info.number_docs)}</strong>
                                               </span>
-                                              <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                              <!--a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a-->
                                         </div>
                                     </Panel.head>
                                     <Panel.body class="tab-content tab-pane">
                                         <Row>
                                             <Col md={7}>
-                                                <Panel.custom class="panel-has-child panel-featured-compact panel-bordered">
+                                                <Panel.custom class="panel-featured-compact panel-bordered">
                                                     <Panel.head>
                                                         <h2 class="panel-title">
                                                           Sample Parameters
@@ -57,10 +57,10 @@
                                                               setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
                                                         </h2>
                                                         <div class="panel-actions">
-                                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle ></a>
                                                         </div>
                                                     </Panel.head>
-                                                    <Panel.body class="sample-params clearfix">
+                                                    <Panel.body class="sample-params clearfix" >
                                                         <div class="panel-body sample-params clearfix">
                                                             <div class="form-group user-assign-valid-btn left">
                                                                 <label class="">Fixed Number of Documents</label>

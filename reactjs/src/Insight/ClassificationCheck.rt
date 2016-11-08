@@ -12,13 +12,26 @@
         <div class="row">
             <div class="col-md-12">
                 <section class="panel panel-featured panel-featured-primary actions-panel">
-                    <div class="panel-body" style="display: block;">
+                     <div class="text-center" rt-if="!this.state.result"  style="background-color: #fff">
+                        <img class="logo-small mt-lg" alt="Dathena Logo" src="../assets/images/logo_header.png">
+                        <span class="logo-subtitle text-weight-bold">smart cyber risk & data governance</span>
+                        <div class="start-page search-box-wrap">
+                          <input class="search-box-input" type="text" placeholder="Document name, folder of full path" onKeyPress="{this.search}">
+                          <i class="fa fa-search text-green"></i>
+                        </div>
+                        <a href="javascript:;" class="{this.state.className}" onMouseOver = "{this.handleOnMouseOver}" onMouseOut = "{this.handleOnMouseOut}" onClick="{this.search}">I'd rather be smart than lucky</a>
+                    </div>
+                    <div class="panel-body" style="display: block;"  rt-if="this.state.result">
                         <div class="search-box mb-lg">
                           <label>Search</label>
                           <div class="inline-block-item ml-sm search-box-wrap">
                             <input class="search-box-input" type="text" placeholder="Contract Bank" onChange = "{this.search}">
                             <i class="fa fa-search text-green"></i>
                           </div>
+                         <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick="{this.backScreen}"" >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="results-search">
+                            3 results (0.48 seconds)
                         </div>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                             <div class="table-responsive">
@@ -65,7 +78,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="" rt-repeat="rt in this.state.data">
+                                        <tr class="" rt-repeat="rt in this.state.data.documents" key ="{rtIndex}">
                                             <td class="text-center">
                                                 <i class="fa {func.renderClassType(rt.name)} action-file-icon"></i>
                                             </td>
@@ -84,25 +97,25 @@
                                                         </InfoButton>
 
                                                 </div>
-                                                <span class="text-italic file-name" onClick="{()=>this.onClickDocumentName(rt.index)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
+                                                <span class="text-italic file-name" onClick="{this.onClickDocumentName.bind(this, rtIndex)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
                                             </td>
                                             <td class="text-left">
                                                 <span class="text-italic doc-path">{rt.path}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>{rt.category}</span>
+                                              <span>{rt.category.name}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>{rt.Confidentiality}</span>
+                                              <span>{rt.confidentiality.name}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>{rt['Last Modify by']}</span>
+                                              <span>{rt['last modifier']}</span>
                                             </td>
                                             <td class="text-left">
-                                              <span>{rt.Reviewer}</span>
+                                              <span>{rt['reviewer']}</span>
                                             </td>
                                             <td>
-                                              <span class="text-{rt['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{rt['Involved in Anomaly']}</span>
+                                              <span class="text-{rt['involved in anomaly'] ? 'red' : ''}">{rt['involved in anomaly'] ? 'Yes' : 'No'}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -116,12 +129,13 @@
     </div>
     <DocumentPreview
       open={this.state.openPreview}
-      document={this.state.data[this.state.documentPreview].path}
+      document={this.state.data.documents[this.state.documentPreview]}
       nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
-      hasNextDocument="{true}"
+      hasNextDocument="{this.state.hasNextDocument}"
       undo="{this.handleUndo}"
       closeModal="{this.closePreview}"
       hideLanguage="{true}"
+      isInsight = "{true}"
       onHide="{this.closePreview}">
       <div class="table-responsive">
 
@@ -176,47 +190,45 @@
               </tr>
           </thead>
           <tbody>
-              <tr class="" rt-scope="this.state.data[this.state.documentPreview] as doc">
-                  <td class="text-center">
-                      <i class="fa {func.renderClassType(doc.name)} action-file-icon"></i>
-                  </td>
-                  <td class="text-left overflow-hidden">
-                      <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
-
-                              <InfoButton>
-                                  <li>Name: <b>Contract</b></li>
-                                  <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
-                                  <li>Owner: <b>Todd_Smith</b></li>
-                                  <li>Creation Date: <b>2015-01-01</b></li>
-                                  <li>Modification Date: <b>2015-05-28</b></li>
-                                  <li>Required Legal Retention until: <b>2025-03-03</b></li>
-                                  <li>Confidentiality Label: <b>Yes/No</b></li>
-                                  <li>Number of Classification Challenge: <b>1</b></li>
-                              </InfoButton>
-
-                      </div>
-                      <span class="text-italic file-name" >{doc.name}</span>
-                  </td>
-                  <td class="text-left">
-                      <span class="text-italic doc-path">{doc.path}</span>
-                  </td>
-                  <td class="text-left">
-                    <span>{doc.category}</span>
-                  </td>
-                  <td class="text-left">
-                    <span>{doc.Confidentiality}</span>
-                  </td>
-                  <td class="text-left">
-                    <span>{doc['Last Modify by']}</span>
-                  </td>
-                  <td class="text-left">
-                    <span>{doc.Reviewer}</span>
-                  </td>
-                  <td>
-                    <span class="text-{doc['Involved in Anomaly'] == 'Yes' ? 'red' : ''}">{doc['Involved in Anomaly']}</span>
-                  </td>
-              </tr>
-          </tbody>
+                <tr class="" rt-scope =" this.state.data.documents[this.state.documentPreview]  as rt">
+                    <td class="text-center">
+                        <i class="fa {func.renderClassType(rt.name)} action-file-icon"></i>
+                    </td>
+                    <td class="text-left overflow-hidden">
+                        <div class="pull-left mr-xs dropdown dropdown-file-info-holder inline-block-item">
+                           <InfoButton>
+                                <li>Name: <b>Contract</b></li>
+                                <li>Path: <a href="#">/assets/group_1/documents/pdf/Contract.doc</a></li>
+                                <li>Owner: <b>Todd_Smith</b></li>
+                                <li>Creation Date: <b>2015-01-01</b></li>
+                                <li>Modification Date: <b>2015-05-28</b></li>
+                                <li>Required Legal Retention until: <b>2025-03-03</b></li>
+                                <li>Confidentiality Label: <b>Yes/No</b></li>
+                                <li>Number of Classification Challenge: <b>1</b></li>
+                            </InfoButton>
+                        </div>
+                        <span class="text-italic file-name" onClick="{this.onClickDocumentName.bind(this, rt.index)}" data-toggle="modal" data-target="#previewModal" data-file-url="http://www.snee.com/xml/xslt/sample.doc">{rt.name}</span>
+                    </td>
+                    <td class="text-left">
+                        <span class="text-italic doc-path">{rt.path}</span>
+                    </td>
+                    <td class="text-left">
+                      <span>{rt.category.name}</span>
+                    </td>
+                    <td class="text-left">
+                      <span>{rt.confidentiality.name}</span>
+                    </td>
+                    <td class="text-left">
+                      <span>{rt['last modifier']}</span>
+                    </td>
+                    <td class="text-left">
+                      <span>{rt.reviewer}</span>
+                    </td>
+                    <td>
+                      <span class="text-{rt['involved in anomaly'] ? 'red' : ''}">{rt['involved in anomaly'] ? 'Yes' : 'No'}</span>
+                    </td>
+                </tr>
+            </tbody>
         </Table>
       </div>
     </DocumentPreview>
