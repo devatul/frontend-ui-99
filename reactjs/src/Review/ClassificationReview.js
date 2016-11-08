@@ -324,7 +324,7 @@ var ClassificationReview = React.createClass({
             reviewIndex = parseInt(_index[0]),
             docIndex = parseInt(_index[1]),
             document = this.state.dataReview[reviewIndex].documents[docIndex];
-            
+
 
         let updateStackChange = update(stackChange, {});
 
@@ -349,7 +349,7 @@ var ClassificationReview = React.createClass({
                 reviewIndex: {
                     $set: reviewIndex
                 }
-            }) 
+            })
         });
 
         switch(event.target.id) {

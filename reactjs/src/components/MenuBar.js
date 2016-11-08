@@ -55,7 +55,7 @@ var MenuBar = React.createClass
             this.getCategories();
             this.getConfidentialities();
             this.getDoctypes();
-            this.getLanguages();
+            this.getLanguages(); 
         }
         if(this.props.showInfo && !this.props.dataScan) {
             this.getscanResult();
