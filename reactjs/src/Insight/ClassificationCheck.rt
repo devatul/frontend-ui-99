@@ -7,9 +7,9 @@
 <rt-import name="Table" from="react-bootstrap/lib/Table" />
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
-<div>
+<div style="margin-bottom: 40px">
     <div class="container">
-        <div class="text-center" rt-if="!this.state.result">
+        <div class="text-center" rt-if="!this.state.result"  style="background-color: #fff">
             <img class="logo-small mt-lg" alt="Dathena Logo" src="../assets/images/logo_header.png">
             <span class="logo-subtitle text-weight-bold">smart cyber risk & data governance</span>
             <div class="start-page search-box-wrap">
