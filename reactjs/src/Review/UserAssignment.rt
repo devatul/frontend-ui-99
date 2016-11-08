@@ -42,7 +42,7 @@
                                                 <strong>{ this.state.category.info.number_docs &&
                                                               func.formatNumber(this.state.category.info.number_docs)}</strong>
                                               </span>
-                                              <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                              <!--a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a-->
                                         </div>
                                     </Panel.head>
                                     <Panel.body class="tab-content tab-pane">

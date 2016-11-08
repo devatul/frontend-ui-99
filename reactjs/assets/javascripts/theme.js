@@ -883,6 +883,9 @@ window.theme = {};
 			.on( 'panel:dismiss', function() {
 				var $this = $(this);
 
+				if($this.hasClass('panel-has-child'))
+				return;
+
 				if ( !!( $this.parent('div').attr('class') || '' ).match( /col-(xs|sm|md|lg)/g ) && $this.siblings().length === 0 ) {
 					$row = $this.closest('.row');
 					$this.parent('div').remove();
@@ -895,10 +898,17 @@ window.theme = {};
 			})
 			.on( 'click', '[data-panel-toggle]', function( e ) {
 				e.preventDefault();
+				var $this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
+
 				$(this).closest('.panel').trigger( 'panel:toggle' );
 			})
 			.on( 'click', '[data-panel-dismiss]', function( e ) {
 				e.preventDefault();
+				var $this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
 				$(this).closest('.panel').trigger( 'panel:dismiss' );
 			})
 			/* Deprecated */
@@ -906,6 +916,8 @@ window.theme = {};
 				e.preventDefault();
 				var $this = $( this );
 
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this
 					.removeClass( 'fa-caret-up' )
 					.addClass( 'fa-caret-down' );
@@ -915,7 +927,8 @@ window.theme = {};
 			.on( 'click', '.panel-actions a.fa-caret-down', function( e ) {
 				e.preventDefault();
 				var $this = $( this );
-
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this
 					.removeClass( 'fa-caret-down' )
 					.addClass( 'fa-caret-up' );
@@ -925,7 +938,8 @@ window.theme = {};
 			.on( 'click', '.panel-actions a.fa-times', function( e ) {
 				e.preventDefault();
 				var $this = $( this );
-
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this.closest('.panel').trigger( 'panel:dismiss' );
 			});
 	});
