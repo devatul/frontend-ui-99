@@ -18,7 +18,6 @@ var AnomalyDetection = React.createClass({
             user_Access  : null ,
         }
     },
-    componentWillMount() {
 
   componentWillUnmount() {
     this.setState({
@@ -174,7 +173,9 @@ var AnomalyDetection = React.createClass({
             }
           })
         });
-    },
+      },
+    })
+  },
     getActiveDirectory(){
         return makeRequest({
             path: 'api/anomaly/iam/active-directory',
