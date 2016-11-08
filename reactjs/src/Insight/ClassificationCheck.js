@@ -107,7 +107,7 @@ var ClassificationCheck = React.createClass({
         this.setState({className : 'smart-link1'})
     },
     backScreen(){
-        this.setState({result : false})
+        this.setState({result : false , className : 'smart-link1'})
     },
     handleUndo() {
         if (this.state.stackChange.length > 0) {
