@@ -11,7 +11,7 @@ function makeRequest({ sync = true, dataType = 'json', contentType = "applicatio
     return $.ajax({
         url: Constants.SERVER_API + path,
         dataType: dataType,
-        timeout: timeout;
+        timeout: timeout,
         contentType: contentType,
         async: sync,
         type: method,
