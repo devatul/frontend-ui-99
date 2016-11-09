@@ -6,81 +6,83 @@ import $ from 'jquery';
 
 var ClassificationCheck = React.createClass({
     getInitialState() {
-        return {
-            data: {
-                      "number of results": 3,
-                      "elapsed time in second": 0.48,
-                      "documents": [
-                        {
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": true
-                        },
-                        {
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document1.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": false
-                        },{
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document2.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": false
-                        }
-                      ]
-                    },
-            documents: [],
-            stackChange: [],
-            categories: [],
-            confidentialities: [],
-            shouldUpdate: false,
-            documentPreview: 0,
-            openPreview: false,
-            result : false,
-            className : 'smart-link1',
-            hasNextDocument : true ,
-        };
+      return {
+        data: {
+          "number of results": 3,
+          "elapsed time in second": 0.48,
+          "documents": [
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": true
+            },
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document1.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": false
+            },
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document2.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": false
+            }
+          ]
+        },
+        documents: [],
+        stackChange: [],
+        categories: [],
+        confidentialities: [],
+        shouldUpdate: false,
+        documentPreview: 0,
+        openPreview: false,
+        result : false,
+        className : 'smart-link1',
+        hasNextDocument : true ,
+      };
     },
+
    /* shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;
     },
@@ -155,7 +157,9 @@ var ClassificationCheck = React.createClass({
         })
         console.log(newData)*/
     },
+
     componentDidMount() {},
+
     render: template
 });
 

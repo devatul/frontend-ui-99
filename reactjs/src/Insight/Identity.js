@@ -70,58 +70,60 @@ let Indentity = React.createClass({
     }
   },
 
-    getData() {
-        return makeRequest({
-                path: 'api/insight/iam?number_users=5',
-                success: (data) => {
-                    this.setState({ loading: false });
-                    this.updateChartData(data);
-                }
-            });
-    },
-    updateChartData(datas) {
-        let high_risk_users = {},
-            high_risk_directory = {},
-            arr = [],
-            key_contributor = [],
-            height_0 = 0,
-            height_1 = 0,
-            height_2 = 0,
-            height_3 = 0;
+  getData() {
+    return makeRequest({
+      path: 'api/insight/iam?number_users=5',
+      success: (data) => {
+        this.updateChartData(data);
+      }
+    });
+  },
+
+  updateChartData(datas) {
+    let high_risk_users = {},
+        high_risk_directory = {},
+        arr = [],
+        key_contributor = [],
+        height_0 = 0,
+        height_1 = 0,
+        height_2 = 0,
+        height_3 = 0;
 
     high_risk_users = this.configChart(datas.high_risk_users);
     high_risk_directory = this.configChart(datas.high_risk_directory);
 
-        for (let i = 0; i < _.size(datas.key_contributor); i++) {
-            arr[i] = datas.key_contributor[i];
-            key_contributor.push({
-                category_name: arr[i].category_name,
-                contributors: (this.configChart(arr[i].contributors))
-            })
-        }
-        let length = key_contributor.length
+    for (let i = 0; i < _.size(datas.key_contributor); i++) {
+      arr[i] = datas.key_contributor[i];
+      key_contributor.push({
+        category_name: arr[i].category_name,
+        contributors: (this.configChart(arr[i].contributors))
+      })
+    }
+
+    let length = key_contributor.length;
 
 
-        /* begin : config hight chart*/
+    /* begin : config hight chart*/
+    height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
-        if(length == 1) {
-            height_1 = _.size(key_contributor[0].contributors.categories)* 40;
-        } else{
-            height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-            if(length == 3) {
-                height_2 = _.size(key_contributor[2].contributors.categories)* 40;
-            } else if(length == 4) {
-                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-            } else if( length == 5) {
-                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-                height_3 = _.size(key_contributor[5].contributors.categories)* 40;
-            } else if( length == 6) {
-                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-                height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
-            }
-        }
-        /*end*/
+    if(length == 1) {
+      height_1 = _.size(key_contributor[0].contributors.categories)* 40;
+    } else{
+      height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
+
+      if(length == 3) {
+        height_2 = _.size(key_contributor[2].contributors.categories)* 40;
+      } else if(length == 4) {
+        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+      } else if( length == 5) {
+        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+        height_3 = _.size(key_contributor[5].contributors.categories)* 40;
+      } else if( length == 6) {
+        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+        height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
+      }
+    }
+    /*end*/
 
     let updateData_config = update(this.state, {
       dataChart: {
@@ -149,22 +151,23 @@ let Indentity = React.createClass({
       }
     });
 
-        this.setState(updateData_config)
+    this.setState(updateData_config)
 
-    },
+  },
 
-    configChart(object) {
-        let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
-            dataChart = [],
-            categories = [];
-            object = _.orderBy(object, ['docs'], ['desc']);
-        for (let i = 0; i < _.size(object); i++) {
-            categories.push(object[i].name);
-            dataChart.push({
-                y: object[i].docs,
-                color: colors[i],
-            })
-        }
+  configChart(object) {
+    let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
+        dataChart = [],
+        categories = [];
+        object = _.orderBy(object, ['docs'], ['desc']);
+
+    for (let i = 0; i < _.size(object); i++) {
+      categories.push(object[i].name);
+      dataChart.push({
+        y: object[i].docs,
+        color: colors[i],
+      })
+    }
 
     return {
       categories: categories,

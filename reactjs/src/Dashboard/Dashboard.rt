@@ -1,7 +1,8 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
-<rt-import name="contant" from="../Constant.js"/>
+<rt-import name="constant" from="../Constant.js"/>
+
 <section ref='{this.hideDropdownMenu}'>
     <!--my_header start-->
 
@@ -22,7 +23,7 @@
                 <a class="bell" id="bell" data-toggle="dropdown" onClick={this.notificationHandle}>
 
                     <span id="total_notification" class="badge">{this.state.total_notification}</span>
-                    <!-- <span rt-if="this.state.role === contant.role.IS_1ST" id="total_notification" class="badge">4</span> -->
+                    <!-- <span rt-if="this.state.role === constant.role.IS_1ST" id="total_notification" class="badge">4</span> -->
                     <i class="fa fa-bell-o" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu dropdown-noti has-arrow fix_notification dd-md full-mobile" style="width: 51vw" >
@@ -84,7 +85,7 @@
            </div>
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ref='{this.findDropdownMenu}'>
-            <ul rt-if="this.state.role === contant.role.IS_2ND" class="nav navbar-nav">
+            <ul rt-if="this.state.role === constant.role.IS_2ND" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
@@ -144,7 +145,7 @@
                 </li>
             </ul>
 
-            <ul rt-if="this.state.role === contant.role.IS_ADMIN || this.state.role === contant.role.RISK_LEAD" class="nav navbar-nav">
+            <ul rt-if="this.state.role === constant.role.IS_ADMIN || this.state.role === constant.role.RISK_LEAD" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
@@ -202,7 +203,7 @@
             </ul>
 
 
-            <ul rt-if="this.state.role === contant.role.IS_1ST" class="nav navbar-nav">
+            <ul rt-if="this.state.role === constant.role.IS_1ST" class="nav navbar-nav">
                 <li>
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
@@ -255,7 +256,7 @@
                     <i class="fa fa-user"></i> My Profile
                   </Link>
                 </li>
-                <li rt-if="this.state.role === contant.role.IS_ADMIN || this.state.role === contant.role.RISK_LEAD">
+                <li rt-if="this.state.role === constant.role.IS_ADMIN || this.state.role === constant.role.RISK_LEAD">
                   <Link to="/Admin" role="menuitem" tabindex="-1">
                     <i class="fa fa-cog"></i> Settings
                   </Link>
