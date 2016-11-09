@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 import $ from 'jquery'
 
 module.exports = {
-    makeRequest: function({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error }) {
+    makeRequest: function({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error ,timeout }) {
        return $.ajax({
 				url: Constants.SERVER_API + path,
 				dataType: dataType,
@@ -11,6 +11,7 @@ module.exports = {
                 async: sync,
 				type: method,
 				data: params,
+                timeout: timeout,
 				beforeSend: function(xhr) {
 					xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 				},
