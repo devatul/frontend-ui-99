@@ -32,6 +32,24 @@ module.exports = {
         test: /\.rt/, 
         loaders: ['react-templates-loader'], 
         include: path.join(__dirname, 'src')
+      },
+
+      { 
+        test: /\.css$/,
+        loaders: ["style-loader", "css-loader"],
+        include: path.join(__dirname, 'assets') 
+      },
+
+      { 
+        test: /\.png$/, 
+        loader: "url-loader?limit=100000",
+        include: path.join(__dirname, 'assets')
+      },
+
+      { 
+        test: /\.jpg$/, 
+        loader: "file-loader", 
+        include: path.join(__dirname, 'assets')
       }
     ]
   }

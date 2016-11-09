@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect, IndexRoute  } from 'react-router'
+var path = require('path');
 var App = require('./App');
 var SignIn = require('./Account/SignIn');
 var SignUp = require('./Account/SignUp');
@@ -29,6 +30,18 @@ var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
 var ClassificationCheck = require('./Insight/ClassificationCheck');
 var Admin = require('./Admin/Admin')
+
+// import CSS
+
+require('../assets/stylesheets/theme.css'); 
+require("../assets/stylesheets/skins/default.css")
+require("../assets/stylesheets/theme-custom.css")
+require("../assets/stylesheets/dathena-reactjs.css")
+require("../assets/stylesheets/style-dathena.css")
+require("../assets/stylesheets/style_reactjs.css")
+require("../assets/stylesheets/my_profile.css")
+
+
 
 render((
   	<Router history={browserHistory}>
