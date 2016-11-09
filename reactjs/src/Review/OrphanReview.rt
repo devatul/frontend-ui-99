@@ -286,7 +286,7 @@
                     rt-repeat=" document in this.state.documents "
                     document={document}
                     index={documentIndex}
-                    key={document.id}
+                    key={documentIndex}
                     categories={this.state.categories}
                     confidentialities={this.state.confidentialities}
                     onClick={this.handleTableRowOnClick}
@@ -298,9 +298,9 @@
             </div>
             <div rt-if="docLength > 0" class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0">
               <ProgressBar class="dathena-progress style-2 fix-label pull-left">
-                <span class="label-percent">{this.state.reviewStatus + '%'}</span>
                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress" />
               </ProgressBar>
+              <span class="label-percent">{this.state.reviewStatus + '%'}</span>
 
               <Button rt-if="this.state.orphanCurrent.id &&this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
@@ -317,7 +317,7 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
-    hasNextDocument="{true}"
+    hasNextDocument="{this.state.documents[this.state.documentPreview] !== this.state.documents[this.state.documents.length-1]}"
     undo="{this.handleUndo}"
     closeModal="{this.closePreview}"
     hideLanguage="{true}"

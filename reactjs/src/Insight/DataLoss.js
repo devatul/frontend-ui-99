@@ -92,8 +92,6 @@ var DataLost = React.createClass({
                     language: { $set: arr }
                 });
                 this.setState(updateDataLoss)
-                console.log('data', this.state.dataLoss);
-                console.log('default_data', this.state.default_data)
 
             }.bind(this),
             error: function(xhr, error) {

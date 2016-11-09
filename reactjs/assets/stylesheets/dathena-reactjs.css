@@ -314,7 +314,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 }
 
 .file-distribution {
-    margin: 0 15px 0 0;
+    margin: 0 0px 0 0px;
 }
 .cendroid-chart-legend.new .document-symbol i {
     display: inline-block;
@@ -338,6 +338,14 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .dathena-progress.style-2 .label-percent {
     position: absolute;
     margin-left: -35px;
+}
+
+.label-percent {
+    position: absolute;
+    line-height: 35px;
+    font-weight: bold;
+    left: 0;
+    margin-left: 27%;
 }
 
 /**/

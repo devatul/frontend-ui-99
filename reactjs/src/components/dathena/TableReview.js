@@ -279,7 +279,7 @@ var Row3 = React.createClass({
     },
 
     handleOnclick: function(event) {
-        
+
         this.props.onClick &&
             this.props.onClick(event, this.props.index);
     },
@@ -492,7 +492,11 @@ var RowPreview = React.createClass({
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.confidentialities != prevProps.confidentialities) {
+        let {
+            confidentialities
+        } = this.props;
+
+        if(confidentialities != prevProps.confidentialities) {
             orderByIndex(confidentialities, [4,3,2,1,0])
         }
     },
@@ -631,7 +635,7 @@ var RowPreview = React.createClass({
                     </InfoButton>
                 </td>
                 <td className="text-center">
-                  <a href={document.path}>{document.path}</a>
+                  <a href={document.image_url}>{document.path}</a>
                 </td>
                 <td className="select-category">
                     <div className="select-group">
