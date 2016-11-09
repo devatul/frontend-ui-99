@@ -96,5 +96,11 @@ module.exports = {
 		STARTED: 0.6,
 		SUCCESS: 1,
 		ERROR: -1
-	}
+	},
+    messagesError_SignIn : {
+       /* ERROR_Text : "Please wrote some text"*/
+        ERROR_400 : "The username and password you entered don't match" ,
+        ERROR_500_599 : "Connection failed. Please retry later." ,
+        ERROR_ : "An error occurred"
+    }
 };

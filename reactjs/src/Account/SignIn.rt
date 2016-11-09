@@ -15,7 +15,7 @@
 					<div class="form-group mb-lg">
 						<label>Username</label>
 						<div class="input-group input-group-icon">
-							<input name="username" id="username" class="form-control input-md" type="text" value={this.state.email} onChange={this.emailChange} autoFocus={true}/>
+							<input name="username" id="username" class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}" type="text"  onChange={this.getValueInput} autoFocus={true}/>
 							<span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-user"></i>
@@ -30,7 +30,7 @@
 							<Link to="/Account/recoverPassword" class="pull-right" tabindex="-1">Lost Password?</Link>
 						</div>
 						<div class="input-group input-group-icon">
-							<input name="password" id="password" type="password" value={this.state.password} onChange={this.passwordChange} class="form-control input-md" tabindex="0"/>
+							<input name="password" id="password" type="password" onChange={this.getValueInput} class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}" tabindex="0"/>
 							<span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-lock"></i>
@@ -44,7 +44,7 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="checkbox-custom checkbox-default">
-								<input id="isRemember" name="isRemember" value={this.state.isRemember} onChange={this.isRememberChange} type="checkbox" tabindex="0"/>
+								<input id="isRemember" name="isRemember" onChange={this.getValueInput} type="checkbox" tabindex="0"/>
 								<label for="isRemember">Remember Me</label>
 							</div>
 						</div>
