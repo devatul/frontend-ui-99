@@ -104,7 +104,7 @@
                                                         series={doctype.series} />
                                                 </div>
                                             </Col>
-                                            <Col sm={5} class="chart-pane chart-user-assignment">
+                                            <Col md={5} class="chart-pane chart-user-assignment">
                                                 <PieChart
                                                     id="confidentialityChart_category"
                                                     key="chart2_category"
@@ -136,7 +136,7 @@
                                         <Row>
                                             <Col xs={12}>
                                                 <Row class="mt-md">
-                                                    <Col xs={9}>
+                                                    <Col md={9} sm={8} xs={12}>
                                                         <div class="clearfix">
                                                             <ul class="user-assignment-filter filter-buttons list-unstyled pull-left">
                                                                 <li class="dropdown">
@@ -214,7 +214,7 @@
                                                               categories={this.state.dataChart.reviewerChart.categories}
                                                               data={this.state.dataChart.reviewerChart.data} />
                                                     </Col>
-                                                    <Col xs={3} class=" select-reviewers">
+                                                    <Col md={3} sm={4} xs={12} class=" select-reviewers">
                                                         <h4 style="margin-bottom:5px">Select the Reviewer(s)
                                                         <HelpButton
                                                           classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
