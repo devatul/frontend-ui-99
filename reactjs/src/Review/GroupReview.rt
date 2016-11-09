@@ -140,7 +140,7 @@
                                         </table>
 
                                         <div class="mt-lg">
-                                            <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="my-btn">Refine Group</Button>
+                                            <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="my-btn">Refine prediction</Button>
                                             <HelpButton className=""
                                                 classMenu="fix-overview-help-button-table"
                                                 setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />

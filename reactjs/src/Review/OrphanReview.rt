@@ -177,7 +177,7 @@
                       onClick="{this.handleClickRefineButton}"
                       class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
                       bsClass="my-btn">
-                      Refine Orphan
+                      Refine prediction
                     </Button>
                     <HelpButton className=""
                       classNote="review_question_chart"
