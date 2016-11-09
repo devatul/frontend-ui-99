@@ -41,7 +41,6 @@ function makeRequest({ sync = true, dataType = 'json', contentType = "applicatio
 }
 
 
-
 module.exports = {
-    makeRequest
+	makeRequest
 }
