@@ -249,7 +249,7 @@
                         </Row>
                     </Tab.Pane>
                     <Tab.Pane eventKey="tab_summary">
-                        <Panel.custom rt-repeat="summary in this.state.summary" class="panel-featured-compact panel-bordered">
+                        <Panel.custom rt-repeat="summary in this.state.summary" class="panel-featured-compact panel-bordered" key="{summaryIndex}">
                             <Panel.head>
                                 <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
                                 <div class="panel-actions">
@@ -278,7 +278,7 @@
                                                 <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}">
                                                     <table class="table">
                                                         <tbody>
-                                                            <tr rt-repeat="viewer in summary.reviewers">
+                                                            <tr rt-repeat="viewer in summary.reviewers" key="{viewerIndex}">
                                                                 <td class="col20 no-border-top"></td>
                                                                 <td class="col40" style="text-transform: capitalize">{viewer.first_name}.{viewer.last_name} (Last Modified)</td>
                                                                 <td class="col15"></td>
