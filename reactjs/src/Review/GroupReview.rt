@@ -27,7 +27,32 @@
 
 <section>
     <div class="container">
-
+        <Row>
+            <Col sm="{8}" md="{6}" class="review_choose-cluster-block choose-cluster-block clearfix">
+                <FormGroup>
+                    <InputGroup class="mb-md">
+                        <label for="choose_cluster">
+                            <b class="mr-md">
+                                Select a group to review
+                                <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    setValue="User is required to review category and confidentiality level for the documents in the groups."/>
+                            </b>
+                            <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectGroup}" value="{this.state.groupCurrent.index}">
+                                <optgroup rt-repeat="group_parent in this.state.group_parent" label={group_parent}>
+                                    <option
+                                        rt-repeat="group in this.state.groups_by_name[group_parent]"
+                                        value="{group.index}"
+                                        key="{group.index}">
+                                        {group.name}
+                                    </option>
+                                </optgroup>
+                            </select2>
+                        </label>
+                    </InputGroup>
+                </FormGroup>
+            </Col>
+        </Row>
 
         <Row>
             <Col sm="{12}">
