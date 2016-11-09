@@ -323,7 +323,7 @@
     hideLanguage="{true}"
     onHide="{this.closePreview}">
     <div class="table-responsive table-preview-responsive">
-      <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview"
+      <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview table-fixed-width"
         id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
         <thead>
           <tr role="row" class="">
@@ -336,33 +336,33 @@
                 <label for="checkboxAllExample2"></label>
               </div>
             </th>-->
-            <th class="review_note fix-width">Type</th>
-            <th class="review_note">
+            <th class="review_note fix-width column-icon">Type</th>
+            <th class="review_note column-name">
               Document name
               <HelpButton
                 className="dropdown-file-info-holder"
                 setValue="This displays the name of each individual document, as it exists in its current state." />
             </th>
-            <th class="review_note full-path">Full Path
+            <th class="review_note full-path column-path">Full Path
                 <HelpButton
                     className="dropdown-file-info-holder"
                     classMenu="fix-overview-help-button-table"
                     setValue="This displays the name of each individual document, as it exists in its current state." />
             </th>
-            <th class="review_note fix-max-width-category-confident">
+            <th class="review_note fix-max-width-category-confident column-progress">
               Proposed Category
               <HelpButton
                 className="dropdown-file-info-holder"
                 setValue="User is required to assign category for orphan documents." />
             </th>
-            <th class="review_note fix-max-width-category-confident">
+            <th class="review_note fix-max-width-category-confident column-progress">
               Proposed Confidentiality
               <HelpButton
                 className="dropdown-file-info-holder"
                 classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                 setValue="User is required to assign confidentiality level for orphan documents." />
             </th>
-            <th class="text-center">Status</th>
+            <th class="text-center column-icon">Status</th>
           </tr>
         </thead>
         <tbody>
