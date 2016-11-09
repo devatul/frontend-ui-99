@@ -320,7 +320,7 @@ var OrphanReview = React.createClass({
             { name: 'Excel', color: 'red', total: 3299 },
             { name: 'Power Point', color: 'purple', total: 3991 },
             { name: 'PDF', color: 'green', total: 3842 },
-            { name: 'Other', color: 'blue', total: 1067 }
+            { name: 'Other', color: 'blue', total: 1567 }
         ],
         total = 0,
         children = [];
