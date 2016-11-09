@@ -3,7 +3,6 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="func" from='../utils/function.js'/>
 <rt-import name="table" from="../components/dathena/TableReview" />
-
 <rt-import name="Table" from="react-bootstrap/lib/Table" />
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
 
@@ -28,7 +27,7 @@
                             <input class="search-box-input" type="text" placeholder="Contract Bank" onChange = "{this.search}">
                             <i class="fa fa-search text-green"></i>
                           </div>
-                         <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick="{this.backScreen}"" >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                         <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick="{this.backScreen}" >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                         <div class="results-search">
                             3 results (0.48 seconds)

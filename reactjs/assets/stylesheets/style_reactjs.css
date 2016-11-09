@@ -506,3 +506,29 @@ img {
         margin-top: 20px;
     }
 }
+@media (min-width: 1200px){
+    .panel-anomaly .table-responsive-fix-anomaly {
+    overflow-x: visible;
+    }
+}
+
+.table-responsive-fix-anomaly {
+    min-height: .01%;
+
+}
+@media screen and (max-width: 991px){
+     .table-responsive-fix-anomaly {
+        min-height: .01%;
+         overflow-x: auto;
+    }
+}
+@media (max-width: 992px) {
+        .col-md-8 {
+        width: 98.666667%;
+    }
+}
+@media screen and (max-width: 1200px){
+     .col-md-8 {
+        width: 99.666667%;
+    }
+}

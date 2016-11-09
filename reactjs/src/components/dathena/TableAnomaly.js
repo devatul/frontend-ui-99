@@ -255,7 +255,7 @@ var TableAnomaly = React.createClass({
                         <a href="javascript:;" onClick={this.getfilterValue.bind(this,'false_positive')}><span className="anomaly-state false"></span> False Positive </a>
                     </div>
 
-                    <div className="table-responsive">
+                    <div className="table-responsive-fix-anomaly">
                         <table className="table anomaly-table">
                             <thead>
                                 {child1}

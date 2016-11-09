@@ -666,6 +666,33 @@ select.record_select {
   margin-top: 14px;
 }
 
+.table-fixed-width {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.hide-text {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.column-icon {
+	width: 4%;
+}
+
+.column-progress {
+	width: 18%;
+}
+
+.column-name {
+	width: 27% !important;
+}
+
+.column-path {
+	width: 29%;
+}
+
 
 @media screen and (min-width: 1350px) {
   .docPreview{

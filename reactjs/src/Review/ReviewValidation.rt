@@ -22,7 +22,7 @@
 <rt-import name="Modal" from="react-bootstrap/lib/Modal"/>
 <section>
 <div class="container">
-    <Tab.Container activeKey="tab_{this.state.categoryCurrent.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1">
+    <Tab.Container activeKey="tab_{this.state.categoryCurrent.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1" id="reviewValidationTabContainer">
         <div class="tabs tabs-primary reviewer-tab">
             <Nav bsClass="nav" class="nav-tabs cat-list">
                 <NavItem rt-repeat="category in this.state.categoriesReview"

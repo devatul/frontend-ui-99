@@ -318,7 +318,7 @@ var GroupReview = React.createClass({
                         group_parent.push(group_id)
                     }
                     groups_by_name[group_id].push({
-                      name: group.id + " - " + name,
+                      name: "ID:" + group.id + " - " + name,
                       realname: group.name,
                       index : i,
                       id: group.id

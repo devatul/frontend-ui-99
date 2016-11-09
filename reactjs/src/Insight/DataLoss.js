@@ -126,33 +126,22 @@ var DataLost = React.createClass({
           lang['most efficient keywords'] = keywordsArr;
         });
 
-        let updateDataLoss = update(this.state, {
-          dataLoss: {$set: data},
-          default_data: {$set: data[0]},
-          language: {$set: arr}
+
+                let updateDataLoss = update(this.state, {
+                    dataLoss: { $set: data },
+                    default_data: { $set: data[0] },
+                    language: { $set: arr }
+                });
+                this.setState(updateDataLoss)
+
+            }.bind(this),
+            error: function(xhr, error) {
+                if (xhr.status === 401) {
+                    browserHistory.push('/Account/SignIn');
+                }
+            }.bind(this)
         });
-
-        this.setState(updateDataLoss);
-
-        console.log('data', this.state.dataLoss);
-        console.log('default_data', this.state.default_data)
-      }.bind(this),
-      error: function (xhr, error) {
-        this.setState({
-          xhr: update(this.state.xhr, {
-            isFetching:
-            {
-              $set: fetching.ERROR
-            }
-          })
-        });
-
-        if (xhr.status === 401) {
-          browserHistory.push('/Account/SignIn');
-        }
-      }.bind(this)
-    });
-  },
+    },
 
   componentDidMount() {
     this.getDataLoss()

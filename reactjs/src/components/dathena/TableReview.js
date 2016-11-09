@@ -492,7 +492,11 @@ var RowPreview = React.createClass({
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.confidentialities != prevProps.confidentialities) {
+        let {
+            confidentialities
+        } = this.props;
+
+        if(confidentialities != prevProps.confidentialities) {
             orderByIndex(confidentialities, [4,3,2,1,0])
         }
     },
