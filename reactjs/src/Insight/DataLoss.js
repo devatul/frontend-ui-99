@@ -33,7 +33,7 @@ var DataLost = React.createClass({
     });
   },
 
-  changeDefaul(language) {
+  changeDefault(language) {
     let dataLoss = _.cloneDeep(this.state.dataLoss);
 
     for (let i = 0; i < dataLoss.length; i++) {
@@ -60,20 +60,8 @@ var DataLost = React.createClass({
         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
       },
       success: function (data) {
-        this.setState({
-          xhr: update(this.state.xhr, {
-            isFetching: {
-              $set: fetching.SUCCESS
-            }
-          })
-        });
-
-        let arr = [];
-
-        /* this.setState({ dataLoss: data })
-         this.setState({ default_data: data[0] })*/
-
-        let other = null;
+        let arr = [],
+            other = null;
 
         for (let i = 0; i < data.length; i++) {
           switch (data[i].language) {
@@ -112,8 +100,6 @@ var DataLost = React.createClass({
 
         if (other) arr.push(other);
 
-        /*  this.setState({language : arr})*/
-
         data.forEach(lang => {
           let keywordsArr = [];
 
@@ -126,22 +112,35 @@ var DataLost = React.createClass({
           lang['most efficient keywords'] = keywordsArr;
         });
 
+        let updateDataLoss = update(this.state, {
+          dataLoss: { $set: data },
+          default_data: { $set: data[0] },
+          language: { $set: arr },
 
-                let updateDataLoss = update(this.state, {
-                    dataLoss: { $set: data },
-                    default_data: { $set: data[0] },
-                    language: { $set: arr }
-                });
-                this.setState(updateDataLoss)
-
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.SUCCESS
+            }
+          })
         });
-    },
+
+        this.setState(updateDataLoss);
+      }.bind(this),
+      error: function(xhr, error) {
+          this.setState({
+            xhr: update(this.state.xhr, {
+              isFetching:
+              {
+                $set: fetching.ERROR
+              }
+            })
+          });
+          if (xhr.status === 401) {
+              browserHistory.push('/Account/SignIn');
+          }
+      }.bind(this)
+    });
+  },
 
   componentDidMount() {
     this.getDataLoss()

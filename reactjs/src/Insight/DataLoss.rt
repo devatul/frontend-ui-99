@@ -49,7 +49,7 @@
         </header>
 
         <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
-          <Tab language={this.state.language} click={this.changeDefaul} />
+          <Tab language={this.state.language} click={this.changeDefault} />
 
           <div id="lossIndex">
             <div key={dataIndex} class="panel-body" rt-repeat="data in this.state.default_data['most efficient keywords']">
