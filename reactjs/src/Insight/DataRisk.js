@@ -79,8 +79,12 @@ import javascript from '../script/javascript.js'
        /* this.filterData(value);*/
     },
     formatNumber(number){
-        let n = parseFloat(number);
-        return Math.round(n * 1000)/1000;
+        if(number == null){
+            return 0
+        }else {
+            let n = parseFloat(number);
+            return Math.round(n * 1000)/1000;
+        }
     },
     floor(number){
         return Math.floor(number)
