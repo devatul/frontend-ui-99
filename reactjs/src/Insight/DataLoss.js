@@ -117,11 +117,11 @@ var DataLost = React.createClass({
           default_data: { $set: data[0] },
           language: { $set: arr },
 
-          xhr: update(this.state.xhr, {
+          xhr: {
             isFetching: {
               $set: fetching.SUCCESS
             }
-          })
+          }
         });
 
         this.setState(updateDataLoss);
