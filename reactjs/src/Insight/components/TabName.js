@@ -4,15 +4,20 @@ import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
 import $ from 'jquery'
+import { makeRequest } from '../../utils/http'
 
 var TabName = React.createClass({
 	getInitialState(){
 		return {
 			color : ['#4fca9d' , '#ACACAC' , '#ACACAC' ],
-			click : ['true' , 'false' , 'false']
-
+			click : ['true' , 'false' , 'false'],
+			languages:[],
 		};
 	},
+	componentDidMount() {
+		this.getLanguages();
+	},
+
     shouldComponentUpdate(nextProps , nextState){
         if(this.props.language != nextState.language){
             return true;
@@ -46,24 +51,27 @@ var TabName = React.createClass({
 				color : {$set : color}
 			})
 			this.setState(colorUpdate)
-
-
-
-
 	},
+	getLanguages: function(async) {
+			makeRequest({
+					path: 'api/label/languages/',
+					success: (data) => {
+							let arr = [];
+							for (let i = 0; i < data.length; i++) {
+								arr.unshift(data[i]);
+							}
+							this.setState({ languages: arr });
+					}
+			});
+	},
+
     configLanguage(language){
-        switch(language){
-            case 'OTHER' : return 'Other' ;
-            case 'gl' : return 'Galician' ;
-            case 'hu' : return 'Hungarian' ;
-            case 'it' : return 'Italian' ;
-            case 'no' : return 'Norwegian' ;
-            case 'pt' : return 'Portuguese' ;
-			case 'de' : return 'German' ;
-            case 'en' : return 'English' ;
-            case 'fr' : return 'French' ;
-            default : return language
-        }
+			let lang = this.state.languages
+			for (let i = 0; i < lang.length; i++) {
+				if(lang[i].short_name === language.toUpperCase()){
+					return lang[i].name;
+				}
+			}
     },
     clickHandle(language){
         this.props.click(language)
@@ -101,7 +109,6 @@ var TabName = React.createClass({
                 active[i] = '#'
              }
         }
-
 		for( let i=0 ; i<language.length; i++){
 			children[i] = <li className={active[i]} key={i}
 			onMouseOver = {this.onMouseOver.bind(this, i)} onMouseOut = {this.onMouseOut.bind(this, i)} onClick={this.onClick.bind(this,i)}>

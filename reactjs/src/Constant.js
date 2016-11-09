@@ -52,7 +52,7 @@ module.exports = {
 		UNDEFINED: {
 			name: 'Undefined',
 			icon: 'fa-ban'
-		}, 
+		},
 	},
 	_confidentialities: {
 		BANKING: {
