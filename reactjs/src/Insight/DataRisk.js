@@ -25,7 +25,7 @@ import javascript from '../script/javascript.js'
             },
             success: function(data) {
                 console.log('data', data)
-               this.setState({dataRisk : data})
+               this.setState(Object.assign({}, this.state, {dataRisk : data}));
                /* this.setState({ rickInsight: data })*/
 
             }.bind(this),
@@ -53,7 +53,7 @@ import javascript from '../script/javascript.js'
         if (value == 'Top 50') {
             value = 50
         }
-        this.setState({numberUser : value})
+        this.setState(Object.assign({}, this.state, {numberUser : value}));
         $.ajax({
 
             url: Constant.SERVER_API + 'api/insight/data-risk?number_users='+value,
@@ -66,7 +66,7 @@ import javascript from '../script/javascript.js'
             success: function(data) {
 
                 console.log('data', data)
-                this.setState({dataRisk : data})
+                this.setState(Object.assign({}, this.state, {dataRisk : data}));
                /* this.setState({ rickInsight: data })*/
 
             }.bind(this),
