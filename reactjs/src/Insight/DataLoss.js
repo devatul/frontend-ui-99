@@ -86,13 +86,14 @@ var DataLost = React.createClass({
 
         for (let i = 0; i < arr.length - 1; ++i) {
           for (let j = 0; j < order.length; ++j) {
-            if (arr[i] == order[j])
-              break;
+            if (arr[i] == order[j]) break;
             if (arr[i + 1] == order[j]) {
               let tmp = arr[i];
+
               arr[i] = arr[i + 1];
               arr[i + 1] = tmp;
               i = Math.max(i - 2, -1);
+
               break;
             }
           }
@@ -113,9 +114,9 @@ var DataLost = React.createClass({
         });
 
         let updateDataLoss = update(this.state, {
-          dataLoss: { $set: data },
-          default_data: { $set: data[0] },
-          language: { $set: arr },
+          dataLoss: {$set: data},
+          default_data: {$set: data[0]},
+          language: {$set: arr},
 
           xhr: {
             isFetching: {
@@ -126,18 +127,17 @@ var DataLost = React.createClass({
 
         this.setState(updateDataLoss);
       }.bind(this),
-      error: function(xhr, error) {
-          this.setState({
-            xhr: update(this.state.xhr, {
-              isFetching:
-              {
-                $set: fetching.ERROR
-              }
-            })
-          });
-          if (xhr.status === 401) {
-              browserHistory.push('/Account/SignIn');
-          }
+      error: function (xhr, error) {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.ERROR
+            }
+          })
+        });
+        if (xhr.status === 401) {
+          browserHistory.push('/Account/SignIn');
+        }
       }.bind(this)
     });
   },
