@@ -161,7 +161,7 @@
                             <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                         </li>
                         <li>
-                            <!-- <span class="badge">{this.state.review_notification.classification_review}</span> -->
+                            <span class="badge">{this.state.review_notification.classification_review}</span>
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
 
