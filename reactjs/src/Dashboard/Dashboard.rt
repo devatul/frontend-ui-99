@@ -89,7 +89,7 @@
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
                 <li class="dropdown">
-                    <span class="badge">{this.state.total_notification}</span>
+                    <span class="badge">{this.state.review_notification.total}</span>
                     <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown"        onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
@@ -98,17 +98,19 @@
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                         </li>-->
                         <li>
-                           <!--  <span class="badge">20</span> -->
+                            <span class="badge">{this.state.review_notification.classification_review}</span>
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
                         <li>
-
+                            <span class="badge">{this.state.review_notification.user_assignment}</span>
                             <Link to="/Review/UserAssignment" activeClassName="active">User Assignment</Link>
                         </li>
                         <li>
+                            <span class="badge"></span>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
                          <li>
+                            <span class="badge"></span>
                             <Link to="/Review/ReviewStatus" activeClassName="active">Review Status</Link>
                         </li>
                     </ul>
@@ -147,7 +149,7 @@
                     <Link to="/Dashboard/OverView" activeClassName="active">Dashboard</Link>
                 </li>
                 <li class="dropdown">
-                    <span class="badge">{this.state.total_notification}</span>
+                    <span class="badge">{this.state.review_notification.total}</span>
                     <a href="#"  id="review" class="dropdown-toggle {this.getActive() === 'Review' ? 'active' : ''}" data-toggle="dropdown" onClick={this.changeToggle.bind(this,'review')} >Review <b class="fa fa-caret-down" style="font-size:12px;"></b>
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
@@ -159,10 +161,10 @@
                             <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                         </li>
                         <li>
-                            <!-- <span class="badge">20</span> -->
+                            <!-- <span class="badge">{this.state.review_notification.classification_review}</span> -->
                             <Link to="/Review/ClassificationReview" activeClassName="active">Classification Review</Link>
                         </li>
-                        
+
                         <li>
                             <Link to="/Review/ReviewValidation" activeClassName="active">Review Validation</Link>
                         </li>
