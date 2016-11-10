@@ -9,7 +9,7 @@
       </div>
       <div class="panel-body">
         <div class="alert alert-info">
-          <p class="m-none text-weight-semibold h6">If the email is registered, you will recieve a reset email shortly.</p>
+          <p class="m-none text-weight-semibold h6">If the email is registered, you will receive a reset email shortly.</p>
         </div>
         <div class="text-center">
           <p class="m-none text-weight-semibold h6">Return to <a href="pages-signin.html">Login</a> Page</p>
