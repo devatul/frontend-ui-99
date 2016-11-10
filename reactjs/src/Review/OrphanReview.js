@@ -1,102 +1,118 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { browserHistory } from 'react-router'
-import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash'
-import template from './OrphanReview.rt'
-import update from 'react/lib/update'
-import { makeRequest } from '../utils/http'
-import Constant, { status } from '../Constant.js'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { browserHistory } from 'react-router';
+import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodash';
+import template from './OrphanReview.rt';
+import update from 'react/lib/update';
+import { makeRequest } from '../utils/http';
+import Constant, { status, fetching } from '../Constant.js';
 
 var OrphanReview = React.createClass({
-    displayName: 'OrphanReview',
+  displayName: 'OrphanReview',
 
-    getInitialState: function() {
-    	return {
-            orphans: [],
-    		orphanCurrent: {
-                id: 0,
-                name: 'orphan name',
-                index: 0
-            },
-            haveNextOrphan: true,
-    		statistics: {},
-    		cloudwords: [],
-    		centroids: [],
-            reviewStatus: 0,
-            documents: [],
-            categories: [],
-            confidentialities: [],
-            loadingdocuments:false,
-            getdocumenterror: false,
-    		categoryInfo: [],
-            documentPreview: -1,
-            shouldUpdate: false,
-            checkedNumber: 0,
-            validateNumber: 0,
-            checkBoxAll: false,
-            stackChange: [],
-            showLoading: "none",
-            dataChart: {
-                pieChart: [],
-                documentType: {
-                    categories: [],
-                    series: []
-                },
-                centroidChart: [],
-                cloudWords: []
-            },
-            openPreview: false
-    	};
-    },
+  getInitialState: function () {
+    return {
+      orphans: [],
+      orphanCurrent: {
+        id: 0,
+        name: 'orphan name',
+        index: 0
+      },
+      haveNextOrphan: true,
+      statistics: {},
+      cloudwords: [],
+      centroids: [],
+      reviewStatus: 0,
+      documents: [],
+      categories: [],
+      confidentialities: [],
+      loadingdocuments: true,
+      getdocumenterror: false,
+      categoryInfo: [],
+      documentPreview: -1,
+      shouldUpdate: false,
+      checkedNumber: 0,
+      validateNumber: 0,
+      checkBoxAll: false,
+      stackChange: [],
+      showLoading: "none",
+      dataChart: {
+        pieChart: [],
+        documentType: {
+          categories: [],
+          series: []
+        },
+        centroidChart: [],
+        cloudWords: []
+      },
+      openPreview: false,
 
+      xhr: {
+        status: "Report is loading",
+        message: "Please wait!",
+        timer: 20,
+        loading: 0,
+        isFetching: fetching.STARTED
+      }
+    };
+  },
 
-    componentDidMount() {
-        this.getGroups();
-        this.getCategories();
-        this.getConfidentialities();
-        this.drawCloud();
-    },
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;
-    },
-
-    componentDidUpdate: function(prevProps, prevState) {
-
-        if(this.state.shouldUpdate ===  true) {
-            this.setState({ shouldUpdate: false });
+  componentWillUnmount() {
+    this.setState({
+      xhr: update(this.state.xhr, {
+        isFetching: {
+          $set: fetching.SUCCESS
         }
+      })
+    });
+  },
 
-        if(!isEqual(this.state.orphanCurrent, prevState.orphanCurrent)) {
-            this.getDocuments()
-            this.getStatistics();
-            this.getCategoryInfo();
-            this.getCentroids();
-        }
+  componentDidMount() {
+    this.getGroups();
+    this.getCategories();
+    this.getConfidentialities();
+    this.drawCloud();
+  },
 
-        if(!isEqual(this.state.documents, prevState.documents)) {
-            let validNumber = this.validateNumber(),
-                checkNumber = this.checkedNumber(),
-                editNumber = this.editNumber(),
-                docNumber = this.state.documents.length;
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.shouldUpdate;
+  },
 
-            this.setState({
-                validateNumber: validNumber,
-                checkedNumber: checkNumber,
-                checkBoxAll: (checkNumber === docNumber ? true : false),
-                reviewStatus: (docNumber === 0 ? 0 : Math.round(((validNumber + editNumber) * 100) / docNumber)),
-                shouldUpdate: true
-            });
-        }
+  componentDidUpdate: function(prevProps, prevState) {
+    if(this.state.shouldUpdate ===  true) {
+      this.setState({ shouldUpdate: false });
+    }
 
-        // if(store.centroids != prevState.store.centroids) {
-        //     this.drawCentroid();
-        // }
-        // if(categoriesInfo != prevState.categoriesInfo) {
-        //     this.drawChart();
-        // }
+    if(!isEqual(this.state.orphanCurrent, prevState.orphanCurrent)) {
+      this.getDocuments();
+      this.getStatistics();
+      this.getCategoryInfo();
+      this.getCentroids();
+    }
 
+    if (!isEqual(this.state.documents, prevState.documents)) {
+      let validNumber = this.validateNumber(),
+          checkNumber = this.checkedNumber(),
+          editNumber = this.editNumber(),
+          docNumber = this.state.documents.length;
+
+      this.setState({
+        validateNumber: validNumber,
+        checkedNumber: checkNumber,
+        checkBoxAll: (checkNumber === docNumber),
+        reviewStatus: (docNumber === 0 ? 0 : Math.round(((validNumber + editNumber) * 100) / docNumber)),
+        shouldUpdate: true
+      });
+    }
+
+    // if(store.centroids != prevState.store.centroids) {
+    //     this.drawCentroid();
+    // }
+    // if(categoriesInfo != prevState.categoriesInfo) {
+    //     this.drawChart();
+    // }
     },
+
     ucwords:function(str){
         return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
             return a.toUpperCase();
@@ -315,65 +331,65 @@ var OrphanReview = React.createClass({
         });
     },
 
-    fileDistribution: function() {
-        let data = [
-            { name: 'Word', color: 'yellow', total: 5015 },
-            { name: 'Excel', color: 'red', total: 3299 },
-            { name: 'Power Point', color: 'purple', total: 3991 },
-            { name: 'PDF', color: 'green', total: 3842 },
-            { name: 'Other', color: 'blue', total: 1567 }
+  fileDistribution: function () {
+    let data = [
+          {name: 'Word', color: 'yellow', total: 5015},
+          {name: 'Excel', color: 'red', total: 3299},
+          {name: 'Power Point', color: 'purple', total: 3991},
+          {name: 'PDF', color: 'green', total: 3842},
+          {name: 'Other', color: 'blue', total: 1567}
         ],
         total = 0,
         children = [];
 
-        data.map(function(e) {
-            total += e.total;
-        });
+    data.map(function (e) {
+      total += e.total;
+    });
 
-        for(let i = data.length - 1; i >= 0; i--) {
-            children[i] = <div key={'item_' + i} className={'item ' + data[i].color} style={{ width: ((data[i].total / total) * 100).toFixed(2) + '%' }}>
-                            {data[i].name}
-                            <span className="item-legend">{data[i].total}</span>
-                        </div>;
-        }
+    for (let i = data.length - 1; i >= 0; i--) {
+      children[i] =
+          <div key={'item_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
+            {data[i].name}
+            <span className="item-legend">{data[i].total}</span>
+          </div>;
+    }
 
-        return(
-            <div className="file-distribution clearfix">
-                {children}
-            </div>
-        );
-    },
+    return (
+        <div className="file-distribution clearfix">{children}</div>
+    );
+  },
 
     getStatistics: function() {
-        makeRequest({
-            path: "api/group/orphan/statistics/",
-            params: {
-                "id": this.state.orphanCurrent.id
-            },
-            success: (res) => {
-                this.setState({ statistics: res, shouldUpdate: true });
-            }
-        });
+      makeRequest({
+        path: "api/group/orphan/statistics/",
+        params: {
+          "id": this.state.orphanCurrent.id
+        },
+        success: (res) => {
+          this.setState({ statistics: res, shouldUpdate: true });
+        }
+      });
     },
 
     getCloudwords: function() {
-        makeRequest({
-            path: "api/group/orphan/cloudwords/",
-            params: {
-                "id": this.state.orphanCurrent.id
-            },
-            success: (res) => {
-                let arr = [];
-                for(let i = res.length - 1; i >= 0; i--) {
-                    arr[i] = {
-                        text: res[i].name,
-                        weight: res[i].count
-                    }
-                }
+      makeRequest({
+        path: "api/group/orphan/cloudwords/",
+        params: {
+          "id": this.state.orphanCurrent.id
+        },
+        success: (res) => {
+          let arr = [];
 
-                this.setState({ cloudwords: arr, shouldUpdate: true });
+          for(let i = res.length - 1; i >= 0; i--) {
+            arr[i] = {
+              text: res[i].name,
+              weight: res[i].count
             }
-        });
+          }
+
+          this.setState({ cloudwords: arr, shouldUpdate: true });
+        }
+      });
     },
     getCentroids: function() {
         makeRequest({
@@ -382,9 +398,12 @@ var OrphanReview = React.createClass({
                 "id": this.state.orphanCurrent.id
             },
             success: (centroids) => {
-                var series = [], total = centroids.length;
-                let max = maxBy(centroids, doc => doc.number_docs)
-                let angle_multiplier = 360 / (total)
+                var series = [],
+                    total = centroids.length;
+
+                let max = maxBy(centroids, doc => doc.number_docs),
+                    angle_multiplier = 360 / (total);
+
                 for(var i = 0; i < total; i++) {
                     if(centroids[i]) {
                         series[i] = {
@@ -396,18 +415,18 @@ var OrphanReview = React.createClass({
                             data: [
                                 [angle_multiplier * (i + 0.5), centroids[i].end],
                                 {
-                                x: angle_multiplier * (i + 0.5),
-                                y: 0,
-                                document: centroids[i].number_docs,
-                                weight: Math.ceil(centroids[i].number_docs / max.number_docs * total),
-                                marker: {
-                                    enabled: false,
-                                    states: {
-                                        hover: {
-                                            enabled: false
-                                        }
-                                    }
-                                }
+                                  x: angle_multiplier * (i + 0.5),
+                                  y: 0,
+                                  document: centroids[i].number_docs,
+                                  weight: Math.ceil(centroids[i].number_docs / max.number_docs * total),
+                                  marker: {
+                                      enabled: false,
+                                      states: {
+                                          hover: {
+                                              enabled: false
+                                          }
+                                      }
+                                  }
                                 },
                                 null
                             ]
@@ -418,21 +437,31 @@ var OrphanReview = React.createClass({
             }
         });
     },
-    getDocuments() {
-        let { id } = this.state.orphanCurrent;
 
-        return makeRequest({
-            path: "api/group/orphan/samples",
-            params: { "id": id },
-            success: (res) => {
-                this.setState({ documents: res, shouldUpdate: true, loadingdocuments: false, getdocumenterror: false });
-            },
-            error: (err) => {
-              this.setState({documents: [], loadingdocuments: false, getdocumenterror: err})
-            }
+  getDocuments() {
+    let {id} = this.state.orphanCurrent;
+
+    return makeRequest({
+      path: "api/group/orphan/samples",
+      params: {"id": id},
+      success: (res) => {
+        this.setState({
+          documents: res,
+          shouldUpdate: true,
+          oadingdocuments: false,
+          getdocumenterror: false
         });
+      },
+      error: (err) => {
+        this.setState({
+          documents: [],
+          loadingdocuments: false,
+          getdocumenterror: err
+        })
+      }
+    });
 
-    },
+  },
 
     getCategories() {
         let arr = [];
@@ -532,19 +561,18 @@ var OrphanReview = React.createClass({
         return num;
     },
 
-    handleClickApproveButton() {
+  handleClickApproveButton() {
+    let documents = cloneDeep(this.state.documents);
 
-        let documents = cloneDeep(this.state.documents);
+    for(let i = documents.length - 1; i >= 0; i--) {
+      if(documents[i].checked) {
+        documents[i].status = status.ACCEPTED.name;
+        documents[i].checked = false;
+      }
+    }
 
-        for(let i = documents.length - 1; i >= 0; i--) {
-            if(documents[i].checked) {
-                documents[i].status = status.ACCEPTED.name;
-                documents[i].checked = false;
-            }
-        }
-
-        this.setState({ documents: documents, shouldUpdate: true });
-    },
+    this.setState({ documents: documents, shouldUpdate: true });
+  },
 
     drawCloud: function() {
         var word_list = [

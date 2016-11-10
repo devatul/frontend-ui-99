@@ -24,6 +24,7 @@
 <rt-import name="select2" from="../components/dathena/Select2" />
 <rt-import name="LoadingButton" from="../components/dathena/LoadingButton" />
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
+<rt-import name="Loader" from="../components/dathena/Loader" />
 
 <section>
   <div class="container">
@@ -74,21 +75,25 @@
         <Panel.body id="panelOrphanStatistics" class="review_panel-body">
           <Row>
             <Col md={3}>
-              <section rt-if=" this.state.statistics.total_number_documents != null " class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+              <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
                 <header class="panel-heading">
                   <h2 class="panel-title">Basic Statistics</h2>
                 </header>
 
-                <div class="panel-body" id="stat-block">
+                <div class="panel-body" id="stat-block" rt-if="this.state.statistics.total_number_documents == null">
+                  <Loader xhr="{this.state.xhr}"></Loader>
+                </div>
+
+                <div class="panel-body" id="stat-block" rt-if="this.state.statistics.total_number_documents != null">
                   <h4 class="mt-none">
                     Orphan Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
                     <HelpButton classMenu="fix-overview-help-button-table" setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
                   </h4>
 
-                  <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed"
-                       data-toggle="collapse" data-target="#statisticTable"></a>
-                  </div>
+                    <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                      <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed"
+                         data-toggle="collapse" data-target="#statisticTable"></a>
+                    </div>
 
                   <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
                     <tbody rt-scope="this.state.statistics as statistics">
@@ -191,9 +196,12 @@
             </Col>
             <Col md={9}>
               <Row>
-                <CloudWord title="Significant Words Cloud"
+                <CloudWord
+                  title="Significant Words Cloud"
                   help="This presents a grouping of targeted key words that have been detected by Dathena 99 as being common across the selected orphan."
-                  data={this.state.dataChart.cloudWords} />
+                  data={this.state.dataChart.cloudWords}>
+                  <Loader rt-if="!this.state.dataChart.cloudWords.length" xhr="{this.state.xhr}"></Loader>
+                </CloudWord>
               </Row>
               <Row>
                 <div id="fileDistribution" class="mb-md">
@@ -203,7 +211,13 @@
                   </h4>
                   {this.fileDistribution()}
                 </div>
-                <CentroidChart key="Centroid_chart_orphan" series="{this.state.centroids}" help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan." />
+                <CentroidChart
+                  key="Centroid_chart_orphan"
+                  series="{this.state.centroids}"
+                  help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan."
+                  loading="{!this.state.centroids.length}">
+                  <Loader rt-if="!this.state.centroids.length" xhr="{this.state.xhr}"></Loader>
+                </CentroidChart>
               </Row>
             </Col>
           </Row>
@@ -228,9 +242,11 @@
             </div>
           </Panel.head>
           <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as loadingdocuments; this.state.getdocumenterror as docError" >
-            <p rt-if=" docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
-            <p rt-if=" docLength === 0 && loadingdocuments === false && docError !== false" class="document_note">ERROR : { docError }</p>
-            <p rt-if=" docLength === 0 && loadingdocuments === true" class="document_note">Loading documents, please wait...</p>
+
+            <Loader rt-if="docLength === 0 && loadingdocuments === true" xhr="{this.state.xhr}"></Loader>
+
+            <p rt-if="docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
+            <p rt-if="docLength === 0 && loadingdocuments === false && docError !== false" class="document_note">ERROR : { docError }</p>
             <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
               <Button
                 rt-if="this.state.checkedNumber > 0"

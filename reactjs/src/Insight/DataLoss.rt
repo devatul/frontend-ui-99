@@ -1,55 +1,66 @@
 <rt-import name="Keyword" from="./components/Keyword"/>
-
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-<rt-import name="Tab" from = "./components/TabName"/>
+<rt-import name="Tab" from="./components/TabName"/>
 <rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
 <rt-import name="Risk" from="./components/RickInsights"/>
+<rt-import name="Loader" from="../components/dathena/Loader"/>
 
 <div class="container">
-    <section class="panel panel-featured panel-featured-primary">
+  <section class="panel panel-featured panel-featured-primary">
+    <header class="panel-heading">
+      <h2 class="panel-title">
+        Risk Insights
+        <HelpButton1
+          classMenu="fix-overview-help-button-table"
+          classIcon="overview_question_a help_question_a"
+          setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
+      </h2>
+    </header>
+    <div class="panel-body pb-none">
+      <div class="row">
+        <Risk/>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel panel-has-child panel-featured panel-featured-primary">
+    <header class="panel-heading">
+      <h2 class="panel-title">Data Loss Prevention</h2>
+    </header>
+
+    <div class="panel-body" rt-if="this.state.xhr.isFetching != 1">
+      <Loader xhr="{this.state.xhr}"></Loader>
+    </div>
+
+    <div class="panel-body" rt-if="this.state.xhr.isFetching == 1">
+      <section class="panel panel-featured panel-featured-primary panel-identity panel-bordered">
         <header class="panel-heading">
-            <h2 class="panel-title">
-                Risk Insights
-                <HelpButton1
-                    classMenu="fix-overview-help-button-table"
-                    classIcon="overview_question_a help_question_a" setValue="Overview of the key indicators of the data repository(ies) scanned by Dathena 99."/>
-            </h2>
+          <h3 class="panel-title mb-none">
+            Policy Suggestion - Most Efficient Keywords
+            <HelpButton1
+              classMenu="fix-overview-help-button-table"
+              classIcon="overview_question_a help_question_a"
+              setValue="This represents a summary of keywords that Dathena 99 has identified as having commonality across the chosen data confidentiality/category type. Keywords are filtered to exclude common terms such as 'to, and, I ,we', so that the selected words have organisational and documentation relevance. These keywords can be applied to data management/protection controls that utilise key words for detection, providing a set of keywords that have been extracted directly from the documents. This can also assist in tweaking and optimising existing controls that rely on keywords, and can be refreshed on an on-demand basis to gain the most up to date set of keywords from Dathena 99."/>
+          </h3>
+
+          <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+            <ToggleButton setDefault="open" setTarget="#toggle"/>
+          </div>
         </header>
-        <div class="panel-body pb-none">
-            <div class="row">
-                <Risk/>
+
+        <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
+          <Tab language={this.state.language} click={this.changeDefault} />
+
+          <div id="lossIndex">
+            <div key={dataIndex} class="panel-body" rt-repeat="data in this.state.default_data['most efficient keywords']">
+              <div class="table-responsive table-suggestion-wrapper">
+                <h4 class="table-title">{data.category_name}</h4>
+                <Keyword data="{data['confidentiality levels']}" name={data.category_name} />
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-    <section class="panel panel-has-child panel-featured panel-featured-primary">
-        <header class="panel-heading">
-            <h2 class="panel-title">Data Loss Prevention</h2>
-        </header>
-        <div class="panel-body">
-            <section class="panel panel-featured panel-featured-primary panel-identity panel-bordered">
-                <header class="panel-heading">
-                    <h3 class="panel-title mb-none">
-                        Policy Suggestion - Most Efficient Keywords
-                        <HelpButton1
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a" setValue="This represents a summary of keywords that Dathena 99 has identified as having commonality across the chosen data confidentiality/category type. Keywords are filtered to exclude common terms such as 'to, and, I ,we', so that the selected words have organisational and documentation relevance. These keywords can be applied to data management/protection controls that utilise key words for detection, providing a set of keywords that have been extracted directly from the documents. This can also assist in tweaking and optimising existing controls that rely on keywords, and can be refreshed on an on-demand basis to gain the most up to date set of keywords from Dathena 99."/>
-                    </h3>
-                    <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                      <ToggleButton setDefault="open" setTarget="#toggle" />
-                    </div>
-                </header>
-                <div class="tabs tabs-primary" style="margin-top:15px;" id="toggle">
-                    <Tab language =  {this.state.language} click = {this.changeDefaul} />
-                    <div id="lossIndex">
-                        <div class="panel-body" rt-repeat = "data in this.state.default_data['most efficient keywords']" key={dataIndex} >
-                            <div class="table-responsive table-suggestion-wrapper">
-                                <h4 class="table-title">{data.category_name}</h4>
-                                <Keyword data="{data['confidentiality levels']}" name= {data.category_name} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </section>
+      </section>
+    </div>
+  </section>
 </div>

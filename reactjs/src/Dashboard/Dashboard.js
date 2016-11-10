@@ -170,18 +170,18 @@ module.exports = React.createClass({
         })
     },
 
-    getActive: function() {
-        let path = window.location.pathname,
-            review = /^\/Review\//,
-            insight = /^\/Insight\//;
+  getActive: function () {
+    let path = window.location.pathname,
+        review = /^\/Review\//,
+        insight = /^\/Insight\//;
 
-        switch (true) {
-            case review.test(path) === true:
-                return 'Review';
-            case insight.test(path) === true:
-                return 'Insight';
-        }
-    },
+    switch (true) {
+      case review.test(path) === true:
+        return 'Review';
+      case insight.test(path) === true:
+        return 'Insight';
+    }
+  },
 
     getfilterAlert(type) {
         if (this.state.typeAlert == 'none') {
@@ -232,5 +232,5 @@ module.exports = React.createClass({
         this.dropdownMenuElement = element;
     },
 
-    render: template
+  render: template
 });

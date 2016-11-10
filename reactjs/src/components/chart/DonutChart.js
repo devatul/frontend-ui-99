@@ -1,142 +1,142 @@
 'use strict';
-import React, { Component, PropTypes } from 'react'
-import { render } from 'react-dom'
-import { isEqual } from 'lodash'
+import React, {Component, PropTypes} from 'react'
+import {render} from 'react-dom'
+import {isEqual} from 'lodash'
 import HelpButton from '../dathena/HelpButton'
 
 
 var DonutChart = React.createClass({
-    displayName: 'DonutChart',
-    
-    getInitialState() {
-        return {
-            colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1']
-        };
-    },
+  displayName: 'DonutChart',
 
-    PropTypes: {
-        id: PropTypes.string.isRequired,
-        config: PropTypes.object.isRequired,
-        help: PropTypes.string
-    },
+  getInitialState() {
+    return {
+      colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1']
+    };
+  },
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.props.config, nextProps.config);
-    },
+  PropTypes: {
+    id: PropTypes.string.isRequired,
+    config: PropTypes.object.isRequired,
+    help: PropTypes.string
+  },
 
-    componentDidUpdate(prevProps, prevState) {
-        this.draw()
-    },
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.props.config, nextProps.config);
+  },
 
-    draw() {
-        var { id, config } = this.props, { colorDisabled } = this.state;
+  componentDidUpdate(prevProps, prevState) {
+    this.draw()
+  },
 
-        var div = $('#' + id);
+  draw() {
+    var {id, config} = this.props, {colorDisabled} = this.state;
 
-        if (div.length){
-            div.highcharts({
-                chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie',
-                backgroundColor: null,
-                events: {
-                    load: function () {
-                        var chart = this,
-                            series = chart.series;
-                        if (config.disabled){
-                            for( let i = series.length - 1; i >= 0; i-- ) {
-                                for(let j = series[i].points.length - 1; j >= 0; j--) {
+    var div = $('#' + id);
 
-                                    series[i].points[j].graphic.attr({
+    if (div.length) {
+      div.highcharts({
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie',
+          backgroundColor: null,
+          events: {
+            load: function () {
+              var chart = this,
+                series = chart.series;
+              if (config.disabled) {
+                for (let i = series.length - 1; i >= 0; i--) {
+                  for (let j = series[i].points.length - 1; j >= 0; j--) {
 
-                                        fill: colorDisabled[j]
+                    series[i].points[j].graphic.attr({
 
-                                    });
-                                }
-                            }
-                        }
-                    }
+                      fill: colorDisabled[j]
+
+                    });
+                  }
+                }
+              }
+            }
+          },
+        },
+        title: {
+          text: ''
+        },
+        credits: {
+          enabled: false
+        },
+        tooltip: {
+          headerFormat: '',
+          pointFormatter: function () {
+            var percent = this.percentage.toFixed(1);
+
+            //if(percent < 5.0) {
+            return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
+            // } else {
+            //     return 'Documents: ' + this.y;
+            // }
+          }
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: false,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              distance: -30,
+              formatter: function () {
+                var percent = this.percentage.toFixed(1);
+                return percent >= 5.0 ? percent + '%' : '';
+              },
+              style: {
+                fontWeight: 'bold',
+                color: 'white',
+                textShadow: '0px 1px 2px black'
+              }
+            },
+            states: {
+              hover: {
+                brightness: 0,
+              }
+            },
+            showInLegend: true,
+            point: {
+              events: {
+                mouseOver: function (event) {
+                  var {series} = this, {points} = series;
+
+                  this.graphic.attr({
+                    fill: this.color
+                  });
+
+                  for (let i = points.length - 1; i >= 0; i--) {
+                    points[i].graphic.attr({
+                      fill: series.userOptions.colorsHover[i]
+                    });
+                  }
                 },
-                },
-                title: {
-                    text: ''
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    headerFormat: '',
-                    pointFormatter: function() {
-                        var percent = this.percentage.toFixed(1);
 
-                        //if(percent < 5.0) {
-                            return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
-                        // } else {
-                        //     return 'Documents: ' + this.y;
-                        // }
-                    }
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: false,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            distance: -30,
-                            formatter: function() {
-                                var percent = this.percentage.toFixed(1);
-                                return percent >= 5.0 ? percent + '%' : '';
-                            },
-                            style: {
-                                fontWeight: 'bold',
-                                color: 'white',
-                                textShadow: '0px 1px 2px black'
-                            }
-                        },
-                        states: {
-                            hover: {
-                                brightness: 0,
-                            }
-                        },
-                        showInLegend: true,
-                        point:  {
-                            events: {
-                                mouseOver: function(event){
-                                    var { series } = this, { points } = series;
-                                    
-                                    this.graphic.attr({
-                                        fill: this.color
-                                    });
+                mouseOut: function (event) {
+                  var {series} = this, {points} = series;
 
-                                    for(let i = points.length - 1; i >= 0; i--) {
-                                        points[i].graphic.attr({
-                                            fill: series.userOptions.colorsHover[i]
-                                        });
-                                    }
-                                },
-
-                                mouseOut: function(event) {
-                                    var { series } = this, { points } = series;
-
-                                    for(let i = points.length - 1; i >= 0; i--) {
-                                        points[i].graphic.attr({
-                                            fill: points[i].color
-                                        });
-                                    }
-                                }
-                            }
-                        }
-                    },
-                },
-                legend: {
-                    enabled: false,
-                },
-                series: [config]
-            });
-        }
-    },
+                  for (let i = points.length - 1; i >= 0; i--) {
+                    points[i].graphic.attr({
+                      fill: points[i].color
+                    });
+                  }
+                }
+              }
+            }
+          },
+        },
+        legend: {
+          enabled: false,
+        },
+        series: [config]
+      });
+    }
+  },
 
     render() {
         var legendChart = [], { id, config, help } = this.props, { colorDisabled } = this.state;
@@ -178,4 +178,5 @@ var DonutChart = React.createClass({
     }
 
 });
+
 module.exports = DonutChart;
