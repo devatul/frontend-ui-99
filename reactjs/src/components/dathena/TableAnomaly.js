@@ -4,7 +4,7 @@ import update from 'react-addons-update'
 import {makeRequest} from '../../utils/http'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
-import $ from 'jquery'
+//import $ from 'jquery'
 import Anomaly from '../../components/dathena/AnomalyStateSelect'
 
 var TableAnomaly = React.createClass({
@@ -32,6 +32,7 @@ var TableAnomaly = React.createClass({
     show(value , path){
         this.getDataAPI(path),
         this.setState({show : value})
+        $(this.detailsBlock).collapse('toggle')
     },
     getDataAPI(path){
         if(path != undefined){
@@ -157,14 +158,17 @@ var TableAnomaly = React.createClass({
 
         }
     },
+    getDetailsBlock(element) {
+        this.detailsBlock = element;
+    },
 
     render(){
         let {filterValue} = this.state
             , data = _.cloneDeep(this.state.datas)
             , newData =  filterValue == 0 ? data : this.getDataFilter(this.filterTable(data , filterValue))
             , child = []
-            , style = !this.state.show ?  'block' : 'none'
-            , style1 = this.state.show ?  'block' : 'none'
+            , style = !this.state.show ?  { display: 'block' } : { display: 'none' }
+            //, style1 = this.state.show ?  { display: 'block' } : { display: 'none' }
             , data_export = this.configDataCVS(newData)
             , child1 = null
             if(this.props.type == 'table1') {
@@ -232,10 +236,10 @@ var TableAnomaly = React.createClass({
 
         return (
         <div>
-            <div className="extra-block" style={{display : style }}>
+            <div className="extra-block" style={style}>
                   <a href=" javascript:;" className="details-toggle" data-toggle="collapse" data-target="#demo" onClick = {this.show.bind(this,true,this.props.path)}><i className="fa fa-caret-right mr-xs"></i>Show details</a>
             </div>
-            <div style={{display : style1 }}>
+            <div className="collapse" ref={this.getDetailsBlock}>
                 <div className="block-header row">
                     <div className="col-md-4">
                         <h4 className="anomaly-title">Anomaly Details - List of Users at Risk
