@@ -10,7 +10,7 @@ import Constant, {status, fetching} from '../Constant.js';
 var GroupReview = React.createClass({
   displayName: 'GroupReview',
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       listGroup: [],
       groups: [],
@@ -72,14 +72,13 @@ var GroupReview = React.createClass({
     return nextState.shouldUpdate;
   },
 
-  componentDidUpdate: function (prevProps, prevState) {
-
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
 
     if (!isEqual(this.state.groupCurrent, prevState.groupCurrent)) {
-      this.getDocuments()
+      this.getDocuments();
       this.getStatistics();
       this.getCategoryInfo();
       this.getCentroids();
@@ -107,9 +106,9 @@ var GroupReview = React.createClass({
     // if(categoriesInfo != prevState.categoriesInfo) {
     //     this.drawChart();
     // }
-
   },
-  ucwords: function (str) {
+
+  ucwords(str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
       return a.toUpperCase();
     });
@@ -134,6 +133,7 @@ var GroupReview = React.createClass({
   handleNextGroup() {
     let {index} = this.state.groupCurrent,
         group = Object.assign({}, this.state.groups[index + 1], {index: index + 1});
+
     if (index < (this.state.groups.length - 1)) {
       this.setState({
         groupCurrent: group,
@@ -145,13 +145,11 @@ var GroupReview = React.createClass({
 
   handleTableRowOnClick(event, index) {
     switch (event.currentTarget.id) {
-      case 'documentName': {
+      case 'documentName':
         this.onClickDocumentName(index);
-      }
         break;
-      case 'documentStatus': {
+      case 'documentStatus':
         this.onClickButtonStatus(index);
-      }
     }
   },
 
@@ -167,6 +165,7 @@ var GroupReview = React.createClass({
 
   onClickButtonStatus(index) {
     let document = this.state.documents[index];
+
     if (document.status !== status.ACCEPTED.name) {
       let updateDocuments = update(this.state.documents, {
             [index]: {
@@ -181,26 +180,21 @@ var GroupReview = React.createClass({
               data: Object.assign({}, this.state.documents[index])
             }]
           });
+
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
     }
   },
 
   handleTableRowOnChange(event, index) {
-
     switch (event.target.id) {
-      case 'checkbox': {
+      case 'checkbox':
         this.onChangeCheckBox(event, index);
-      }
         break;
-
-      case 'selectCategory': {
+      case 'selectCategory':
         this.onChangeCategory(event, index);
-      }
         break;
-
-      case 'selectConfidentiality': {
+      case 'selectConfidentiality':
         this.onChangeConfidentiality(event, index);
-      }
     }
   },
 
@@ -225,9 +219,7 @@ var GroupReview = React.createClass({
 
   onChangeCategory(event, index) {
     let categoryIndex = event.target.value,
-
         {categories, documents} = this.state,
-
         updateDocuments = update(documents, {
           [index]: {
             category: {
@@ -238,21 +230,19 @@ var GroupReview = React.createClass({
             }
           }
         }),
-
         updateStack = update(this.state.stackChange, {
           $push: [{
             id: index,
             data: Object.assign({}, documents[index])
           }]
         });
+
     this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
   },
 
   onChangeConfidentiality(event, index) {
     let confidentialityIndex = event.target.value,
-
         {confidentialities, documents} = this.state,
-
         updateDocuments = update(documents, {
           [index]: {
             confidentiality: {
@@ -263,13 +253,13 @@ var GroupReview = React.createClass({
             }
           }
         }),
-
         updateStack = update(this.state.stackChange, {
           $push: [{
             id: index,
             data: Object.assign({}, documents[index])
           }]
         });
+
     this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
   },
 
@@ -277,6 +267,7 @@ var GroupReview = React.createClass({
     let updateDocuments = update(this.state.documents, {
       $apply: (data) => {
         data = cloneDeep(data);
+
         for (let i = data.length - 1; i >= 0; i--) {
           data[i].checked = event.target.checked
         }
@@ -291,15 +282,12 @@ var GroupReview = React.createClass({
   handleUndo() {
     if (this.state.stackChange.length > 0) {
       let {documents, stackChange} = this.state,
-
           item = stackChange[stackChange.length - 1],
-
           updateDocuments = update(documents, {
             [item.id]: {
               $set: item.data
             }
           }),
-
           updateStack = update(stackChange, {
             $splice: [[stackChange.length - 1, 1]]
           });
@@ -310,12 +298,14 @@ var GroupReview = React.createClass({
 
   getGroups() {
     let data = [];
+
     makeRequest({
       path: "api/group/",
       success: (res) => {
-        let group = Object.assign({}, res[0], {index: 0});
-        let groups_by_name = [];
-        let group_parent = [];
+        let group = Object.assign({}, res[0], {index: 0}),
+            groups_by_name = [],
+            group_parent = [];
+
         forEach(res, (group, i) => {
           let group_id = group.name.split(',')[0];
           let name = group.name.split(',')[1];
@@ -329,7 +319,7 @@ var GroupReview = React.createClass({
             index: i,
             id: group.id
           })
-        })
+        });
 
         group_parent.sort(function (a, b) {
           if (a > b) return 1;
@@ -341,31 +331,30 @@ var GroupReview = React.createClass({
             if (parseInt(a.id) > parseInt(b.id)) return 1;
             if (parseInt(a.id) < parseInt(b.id)) return -1;
           })
-        })
+        });
 
-        let elt_index = 0;
-        let res_groups = []
+        let elt_index = 0,
+            res_groups = [];
+
         forEach(group_parent, (i) => {
           forEach(groups_by_name[i], elt => {
             elt.index = elt_index++;
             res_groups.push(elt);
           })
-        })
+        });
 
-        this.setState(
-            {
-              groups: res_groups,
-              group_parent: group_parent,
-              groups_by_name: groups_by_name,
-              groupCurrent: Object.assign({}, res_groups[0], {index: 0}),
-              shouldUpdate: true
-            }
-        );
+        this.setState({
+          groups: res_groups,
+          group_parent: group_parent,
+          groups_by_name: groups_by_name,
+          groupCurrent: Object.assign({}, res_groups[0], {index: 0}),
+          shouldUpdate: true
+        });
       }
     });
   },
 
-  fileDistribution: function () {
+  fileDistribution() {
     let data = [
           {name: 'Word', color: 'yellow', total: 5015},
           {name: 'Excel', color: 'red', total: 3299},
@@ -381,21 +370,17 @@ var GroupReview = React.createClass({
     });
 
     for (let i = data.length - 1; i >= 0; i--) {
-      children[i] = <div key={'file_' + i} className={'item ' + data[i].color}
-                         style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
-        {data[i].name}
-        <span className="item-legend">{data[i].total}</span>
-      </div>;
+      children[i] =
+          <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
+            {data[i].name}
+            <span className="item-legend">{data[i].total}</span>
+          </div>;
     }
 
-    return (
-        <div className="file-distribution clearfix">
-          {children}
-        </div>
-    );
+    return (<div className="file-distribution clearfix">{children}</div>);
   },
 
-  getStatistics: function () {
+  getStatistics() {
     makeRequest({
       path: "api/group/statistics/",
       params: {
@@ -407,7 +392,7 @@ var GroupReview = React.createClass({
     });
   },
 
-  getCloudwords: function () {
+  getCloudwords() {
     return makeRequest({
       path: "api/group/cloudwords/",
       params: {
@@ -415,6 +400,7 @@ var GroupReview = React.createClass({
       },
       success: (res) => {
         let arr = [];
+
         for (let i = res.length - 1; i >= 0; i--) {
           arr[i] = {
             text: res[i].name,
@@ -426,7 +412,8 @@ var GroupReview = React.createClass({
       }
     });
   },
-  getCentroids: function () {
+
+  getCentroids() {
     makeRequest({
       path: "api/group/centroids/",
       params: {
@@ -434,9 +421,11 @@ var GroupReview = React.createClass({
       },
       success: (centroids) => {
         var series = [], total = centroids.length;
-        let max = maxBy(centroids, doc => doc.number_docs)
-        let max_circle_size = 6
-        let angle_multiplier = 360 / (total)
+
+        let max = maxBy(centroids, doc => doc.number_docs),
+            max_circle_size = 6,
+            angle_multiplier = 360 / (total);
+
         for (var i = 0; i < total; i++) {
           if (centroids[i]) {
             series[i] = {
@@ -466,97 +455,91 @@ var GroupReview = React.createClass({
             };
           }
         }
+
         this.setState({centroids: series, shouldUpdate: true});
       }
     });
   },
+
   getDocuments() {
-    let data = [
-          {
-            confidence_level: 87,
-            confidentiality_label: "yes/no",
-            creation_date: "2012-04-23",
-            image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-            legal_retention_until: "2012-04-23",
-            modification_date: "2012-04-23",
-            name: "IonaTechnologiesPlcG07.doc",
-            number_of_classification_challenge: 1,
-            owner: "owner_name",
-            path: "assets/group/01/IonaTechnologiesPlcG07.doc",
-            category: {
-              id: 1,
-              name: "Accounting/Tax"
-            },
-            confidentiality: {
-              id: 1,
-              name: "Confidential"
-            }
+    let data = [{
+          confidence_level: 87,
+          confidentiality_label: "yes/no",
+          creation_date: "2012-04-23",
+          image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+          legal_retention_until: "2012-04-23",
+          modification_date: "2012-04-23",
+          name: "IonaTechnologiesPlcG07.doc",
+          number_of_classification_challenge: 1,
+          owner: "owner_name",
+          path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+          category: {
+            id: 1,
+            name: "Accounting/Tax"
           },
-          {
-            confidence_level: 87,
-            confidentiality_label: "yes/no",
-            creation_date: "2012-04-23",
-            image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-            legal_retention_until: "2012-04-23",
-            modification_date: "2012-04-23",
-            name: "IonaTechnologiesPlcG07.doc",
-            number_of_classification_challenge: 1,
-            owner: "owner_name",
-            path: "assets/group/01/IonaTechnologiesPlcG07.doc",
-            category: {
-              id: 1,
-              name: "Accounting/Tax"
-            },
-            confidentiality: {
-              id: 1,
-              name: "Confidential"
-            }
-          },
-          {
-            confidence_level: 87,
-            confidentiality_label: "yes/no",
-            creation_date: "2012-04-23",
-            image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-            legal_retention_until: "2012-04-23",
-            modification_date: "2012-04-23",
-            name: "IonaTechnologiesPlcG07.doc",
-            number_of_classification_challenge: 1,
-            owner: "owner_name",
-            path: "assets/group/01/IonaTechnologiesPlcG07.doc",
-            category: {
-              id: 1,
-              name: "Accounting/Tax"
-            },
-            confidentiality: {
-              id: 1,
-              name: "Confidential"
-            }
-          },
-          {
-            confidence_level: 87,
-            confidentiality_label: "yes/no",
-            creation_date: "2012-04-23",
-            image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
-            legal_retention_until: "2012-04-23",
-            modification_date: "2012-04-23",
-            name: "IonaTechnologiesPlcG07.doc",
-            number_of_classification_challenge: 1,
-            owner: "owner_name",
-            path: "assets/group/01/IonaTechnologiesPlcG07.doc",
-            category: {
-              id: 1,
-              name: "Accounting/Tax"
-            },
-            confidentiality: {
-              id: 1,
-              name: "Confidential"
-            }
+          confidentiality: {
+            id: 1,
+            name: "Confidential"
           }
-        ],
-
+        }, {
+          confidence_level: 87,
+          confidentiality_label: "yes/no",
+          creation_date: "2012-04-23",
+          image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+          legal_retention_until: "2012-04-23",
+          modification_date: "2012-04-23",
+          name: "IonaTechnologiesPlcG07.doc",
+          number_of_classification_challenge: 1,
+          owner: "owner_name",
+          path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+          category: {
+            id: 1,
+            name: "Accounting/Tax"
+          },
+          confidentiality: {
+            id: 1,
+            name: "Confidential"
+          }
+        }, {
+          confidence_level: 87,
+          confidentiality_label: "yes/no",
+          creation_date: "2012-04-23",
+          image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+          legal_retention_until: "2012-04-23",
+          modification_date: "2012-04-23",
+          name: "IonaTechnologiesPlcG07.doc",
+          number_of_classification_challenge: 1,
+          owner: "owner_name",
+          path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+          category: {
+            id: 1,
+            name: "Accounting/Tax"
+          },
+          confidentiality: {
+            id: 1,
+            name: "Confidential"
+          }
+        }, {
+          confidence_level: 87,
+          confidentiality_label: "yes/no",
+          creation_date: "2012-04-23",
+          image_url: "http://54.254.145.121/static/group/01/IonaTechnologiesPlcG07.doc",
+          legal_retention_until: "2012-04-23",
+          modification_date: "2012-04-23",
+          name: "IonaTechnologiesPlcG07.doc",
+          number_of_classification_challenge: 1,
+          owner: "owner_name",
+          path: "assets/group/01/IonaTechnologiesPlcG07.doc",
+          category: {
+            id: 1,
+            name: "Accounting/Tax"
+          },
+          confidentiality: {
+            id: 1,
+            name: "Confidential"
+          }
+        }],
         {id} = this.state.groupCurrent;
-
-//        this.setState({ documents: data, shouldUpdate: true });
 
     return makeRequest({
       path: "api/group/samples/",
@@ -570,11 +553,11 @@ var GroupReview = React.createClass({
         });
       }
     });
-
   },
 
   getCategories() {
     let arr = [];
+
     makeRequest({
       path: 'api/label/category/',
       success: (data) => {
@@ -582,6 +565,7 @@ var GroupReview = React.createClass({
           if (a.name > b.name) return 1;
           if (a.name < b.name) return -1;
         });
+
         this.setState({categories: data, shouldUpdate: true});
       }
     });
@@ -589,6 +573,7 @@ var GroupReview = React.createClass({
 
   getConfidentialities() {
     let arr = [];
+
     makeRequest({
       path: 'api/label/confidentiality/',
       success: (data) => {
@@ -597,7 +582,7 @@ var GroupReview = React.createClass({
     });
   },
 
-  getCategoryInfo: function () {
+  getCategoryInfo () {
     makeRequest({
       path: "api/group/categories/",
       params: {
@@ -609,23 +594,16 @@ var GroupReview = React.createClass({
     });
   },
 
-  progressbar: function (value) {
-    var {
-        avg_centroid_distance,
-        max_centroid_distance,
-        min_centroid_distance
-    } = this.state.statistics;
+  progressbar(value) {
+    var {avg_centroid_distance, max_centroid_distance, min_centroid_distance} = this.state.statistics;
 
     switch (true) {
-      case value < avg_centroid_distance: {
+      case value < avg_centroid_distance:
         return "progress-bar-success";
-      }
-      case value > avg_centroid_distance && value < (2 / 3) * (max_centroid_distance - min_centroid_distance): {
+      case value > avg_centroid_distance && value < (2 / 3) * (max_centroid_distance - min_centroid_distance):
         return "progress-bar-warning";
-      }
-      case value > (2 / 3) * (max_centroid_distance - min_centroid_distance): {
+      case value > (2 / 3) * (max_centroid_distance - min_centroid_distance):
         return "progress-bar-danger";
-      }
     }
   },
 
@@ -641,6 +619,7 @@ var GroupReview = React.createClass({
 
     return num;
   },
+
   editNumber() {
     let num = 0,
         {documents} = this.state;
@@ -653,6 +632,7 @@ var GroupReview = React.createClass({
 
     return num;
   },
+
   validateNumber() {
     let num = 0,
         {documents} = this.state;
@@ -667,7 +647,6 @@ var GroupReview = React.createClass({
   },
 
   handleClickApproveButton() {
-
     let documents = cloneDeep(this.state.documents);
 
     for (let i = documents.length - 1; i >= 0; i--) {
@@ -680,7 +659,7 @@ var GroupReview = React.createClass({
     this.setState({documents: documents, shouldUpdate: true});
   },
 
-  drawCloud: function () {
+  drawCloud() {
     var word_list = [
       {text: "Entity", weight: 13},
       {text: "matter", weight: 10.5},
@@ -729,27 +708,32 @@ var GroupReview = React.createClass({
     var updateChart = update(this.state.dataChart, {
       cloudWords: {$set: word_list}
     });
+
     this.setState({dataChart: updateChart});
   },
 
   drawCentroid() {
-    var centroids = []
+    var centroids = [];
+
     forEach(this.state.store.centroids, (val, index) => {
       centroids.push([index + 1, val.number_docs]);
     });
+
     var updateChart = update(this.state.dataChart, {
       centroidChart: {$set: centroids}
     });
+
     this.setState({dataChart: updateChart});
   },
 
   drawChart() {
-    var category = this.state.categoriesInfo;
-    var pieChart = [],
+    var category = this.state.categoriesInfo,
+        pieChart = [],
         documentType = {
           categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
           series: []
         };
+
     for (let i = 0, total = category.length; i < total; i++) {
       pieChart[i] = {
         name: upperFirst(category[i].name),
@@ -770,6 +754,7 @@ var GroupReview = React.createClass({
       pieChart: {$set: pieChart},
       documentType: {$set: documentType}
     });
+
     this.setState({dataChart: updateChart});
   },
 

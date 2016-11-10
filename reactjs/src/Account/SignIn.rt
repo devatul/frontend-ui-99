@@ -1,77 +1,86 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 
 <section class="body-sign">
-	<div class="center-sign">
-		<a href="/" class="logo pull-left">
-			<img src="/assets/images/logo_header.png" height="80" alt="Dathena 99" />
-		</a>
-
-		<div class="panel panel-sign">
-			<div class="panel-title-sign mt-xl text-right">
-				<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
-			</div>
-			<div class="panel-body">
-				<form onSubmit="{this.handleSubmit}">
-					<div class="form-group mb-lg">
-						<label>Username</label>
-						<div class="input-group input-group-icon">
-							<input name="username" id="username" class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}" type="text"  onChange={this.getValueInput} autoFocus={true}/>
-							<span class="input-group-addon">
+  <div class="center-sign">
+    <a href="/" class="logo pull-left">
+      <img src="/assets/images/logo_header.png" height="80" alt="Dathena 99"/>
+    </a>
+    <div class="panel panel-sign">
+      <div class="panel-title-sign mt-xl text-right">
+        <h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+      </div>
+      <div class="panel-body">
+        <form onSubmit="{this.handleSubmit}">
+          <div class="form-group mb-lg">
+            <label>Username</label>
+            <div class="input-group input-group-icon">
+              <input
+                name="username"
+                id="username"
+                class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}"
+                type="text"
+                onChange={this.getValueInput} autoFocus={true} />
+              <span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-user"></i>
 								</span>
 							</span>
-						</div>
-					</div>
+            </div>
+          </div>
 
-					<div class="form-group mb-lg">
-						<div class="clearfix">
-							<label for="password" class="pull-left">Password</label>
-							<Link to="/Account/recoverPassword" class="pull-right" tabindex="-1">Lost Password?</Link>
-						</div>
-						<div class="input-group input-group-icon">
-							<input name="password" id="password" type="password" onChange={this.getValueInput} class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}" tabindex="0"/>
-							<span class="input-group-addon">
+          <div class="form-group mb-lg">
+            <div class="clearfix">
+              <label for="password" class="pull-left">Password</label>
+              <Link to="/Account/recoverPassword" class="pull-right" tabindex="-1">Lost Password?</Link>
+            </div>
+            <div class="input-group input-group-icon">
+              <input
+                name="password"
+                id="password"
+                type="password"
+                onChange={this.getValueInput}
+                class="form-control input-md {this.state.is_Error_400 ? 'has-error' : ''}"
+                tabindex="0" />
+              <span class="input-group-addon">
 								<span class="icon icon-md">
 									<i class="fa fa-lock"></i>
 								</span>
 							</span>
-						</div>
-					</div>
+            </div>
+          </div>
 
-					<div class="form-group mb-lg" id="err" style="font-style:italic">{this.state.err}</div>
+          <div class="form-group mb-lg" id="err" style="font-style:italic">{this.state.err}</div>
 
-					<div class="row">
-						<div class="col-sm-8">
-							<div class="checkbox-custom checkbox-default">
-								<input id="isRemember" name="isRemember" onChange={this.getValueInput} type="checkbox" tabindex="0"/>
-								<label for="isRemember">Remember Me</label>
-							</div>
-						</div>
-						<div class="col-sm-4 text-right">
-							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green hidden-xs" tabindex="0">Sign In</button>
-							<button type="submit" onClick="{this.handleSubmit}" class="btn btn-green btn-block btn-lg visible-xs mt-lg" tabindex="0">Sign In</button>
-						</div>
-					</div>
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="checkbox-custom checkbox-default">
+                <input id="isRemember" name="isRemember" onChange={this.getValueInput} type="checkbox" tabindex="0" />
+                <label for="isRemember">Remember Me</label>
+              </div>
+            </div>
+            <div class="col-sm-4 text-right">
+              <button type="submit" onClick="{this.handleSubmit}" class="btn btn-green hidden-xs" tabindex="0">Sign In</button>
+              <button type="submit" onClick="{this.handleSubmit}" class="btn btn-green btn-block btn-lg visible-xs mt-lg" tabindex="0">Sign In</button>
+            </div>
+          </div>
 
-					<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+          <span class="mt-lg mb-lg line-thru text-center text-uppercase">
 						<span>or</span>
 					</span>
 
-					<div class="mb-xs text-center">
-						<p class="text-center"><a href="#">Connect through Single Sign-On (SSO)</a></p>
-
-						<div class="row">
-							<div class="col-sm-6">
-								<Link to="/Account/signUp" class="mb-xs mt-xs mr-xs btn btn-default btn-auth text-green">Register</Link>
-							</div>
-							<div class="col-sm-6">
-								<Link to="/Account/recoverPassword" class="mb-xs mt-xs mr-xs btn btn-default btn-auth text-green">Forgot Your Password?</Link>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+          <div class="mb-xs text-center">
+            <p class="text-center"><a href="#">Connect through Single Sign-On (SSO)</a></p>
+            <div class="row">
+              <div class="col-sm-6">
+                <Link to="/Account/signUp" class="mb-xs mt-xs mr-xs btn btn-default btn-auth text-green">Register</Link>
+              </div>
+              <div class="col-sm-6">
+                <Link to="/Account/recoverPassword" class="mb-xs mt-xs mr-xs btn btn-default btn-auth text-green">Forgot Your Password?</Link>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>
