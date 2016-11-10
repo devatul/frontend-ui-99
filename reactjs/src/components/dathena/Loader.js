@@ -98,7 +98,6 @@ var Loader = React.createClass({
   },
 
   componentWillUnmount() {
-    console.log(this.state.delay);
     clearInterval(this.state.delay);
   },
 
