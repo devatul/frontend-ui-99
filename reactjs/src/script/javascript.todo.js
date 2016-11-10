@@ -2,7 +2,7 @@ module.exports = function () {
   //javascript.js
   $(document).on('click', '.dropdown-menu.has-arrow', function (e) {
         e.stopPropagation();
-    });    
+    });
 
     $(document).on('click', '.dropdown-menu.has-child', function(e){
         e.stopPropagation();
@@ -24,17 +24,16 @@ module.exports = function () {
         $(this).parent().find('.dropdown-menu').toggle();
     });
 
-    // hold onto the drop down menu                                             
+    // hold onto the drop down menu
     var dropdownMenu;
 
-    // and when you show it, move it to the body                                     
+    // and when you show it, move it to the body
     $(window).on('show.bs.dropdown', function (e) {
 
         var windowWidth = $(window).innerWidth();
-        // grab the menu     
+        // grab the menu
         dropdownMenu = $(e.target).find('.dropdown-menu');
         dropdownMenu = $(dropdownMenu[0]);
-        console.log(dropdownMenu);
         setTimeout(function(){
             if (!$(e.target).find('.dropdown-backdrop').length && !$(e.target).find('.dropdown-backdrop-custom').length){
                 if(!$(e.target).hasClass('is-child')) {
@@ -45,7 +44,7 @@ module.exports = function () {
             }
 
         });
-        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){   
+        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             // detach it and append it to the body
             $('body').append(dropdownMenu.detach());
 
@@ -63,13 +62,13 @@ module.exports = function () {
 
     $(window).on('hide.bs.dropdown', function (e) {
         var windowWidth = $(window).innerWidth();
-    // and when you hide it, reattach the drop down, and hide it normally                                                   
+    // and when you hide it, reattach the drop down, and hide it normally
 
         if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
         }
-    });     
+    });
 
     $('select.detail-select').select2({
         minimumResultsForSearch: Infinity
@@ -93,7 +92,7 @@ module.exports = function () {
     //                 $(this).show();
     //             }
     //             else{
-    //                 $(this).hide();   
+    //                 $(this).hide();
     //             }
     //         });
     //     }
@@ -127,7 +126,7 @@ module.exports = function () {
         e.preventDefault();
     });
     //javascrip.todo.js
-   
+
 
 }
 

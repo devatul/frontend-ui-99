@@ -4,7 +4,7 @@ import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Dashboard.rt'
 import update from 'react/lib/update'
 import _ from 'lodash'
-import $ from 'jquery'
+//import $ from 'jquery'
 import { makeRequest } from '../utils/http'
 import Constant from '../Constant.js';
 
@@ -15,6 +15,7 @@ module.exports = React.createClass({
             unseen_notiData: {},
             total_pending: 0,
             total_notification: 0,
+            review_notification:{total: 0, classification_review: 0, user_assignment: 0},
             number_pending : {},
             pending_list: [],
             save_list: [],
@@ -77,6 +78,30 @@ module.exports = React.createClass({
                             this.setState({ total_notification: data.notifications })
                         }
                     });
+                    makeRequest({
+                        path: 'api/notification/bubble/review/classification_review',
+                        success: (data) => {
+                            let notifications = this.state.review_notification
+                            notifications.classification_review = data.notifications
+                            this.setState({ review_notification: notifications })
+                        }
+                    });
+                    makeRequest({
+                        path: 'api/notification/bubble/review/user_assignment',
+                        success: (data) => {
+                            let notifications = this.state.review_notification
+                            notifications.user_assignment = data.notifications
+                            this.setState({ review_notification: notifications })
+                        }
+                    });
+                    makeRequest({
+                        path: 'api/notification/bubble/review/all',
+                        success: (data) => {
+                            let notifications = this.state.review_notification
+                            notifications.total = data.notifications
+                            this.setState({ review_notification: notifications })
+                        }
+                    });
                 }
             }, 5000)})
         } else {
@@ -117,7 +142,6 @@ module.exports = React.createClass({
                 newData.notifications = _.slice(data.notifications,0,3)
                 this.setState({ unseen_notiData: newData, save_list: newData.actions, total_pending : data.actions.length})
                 this.countNumber(data.actions)
-                console.log(this.state.unseen_notiData)
             }
         })
     },
@@ -192,6 +216,20 @@ module.exports = React.createClass({
 
             }))
         }
+    },
+    hideDropdownMenu(element) {
+        if(element) {
+            element.addEventListener('click', (event)=>{
+                if(!$(event.target).closest(this.dropdownMenuElement).length) {
+                    if($(this.dropdownMenuElement).is(":visible")) {
+                        $(this.dropdownMenuElement).collapse('hide')
+                    }
+                }
+            });
+        }
+    },
+    findDropdownMenu(element) {
+        this.dropdownMenuElement = element;
     },
 
     render: template

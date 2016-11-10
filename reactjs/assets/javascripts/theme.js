@@ -865,14 +865,15 @@ window.theme = {};
 
 // Panels
 (function($) {
-
 	$(function() {
-		$('.panel').not('.panel-has-child')
-			.on( 'panel:toggle', function() {
+		//$('.panel').not('.panel-has-child')
+			$(document).on( 'panel:toggle','.panel', function() {
 				var $this,
 					direction;
 
 				$this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
 				direction = $this.hasClass( 'panel-collapsed' ) ? 'Down' : 'Up';
 
 				$this.find('.panel-body, .panel-footer')[ 'slide' + direction ]( 200, function() {
@@ -881,6 +882,9 @@ window.theme = {};
 			})
 			.on( 'panel:dismiss', function() {
 				var $this = $(this);
+
+				if($this.hasClass('panel-has-child'))
+				return;
 
 				if ( !!( $this.parent('div').attr('class') || '' ).match( /col-(xs|sm|md|lg)/g ) && $this.siblings().length === 0 ) {
 					$row = $this.closest('.row');
@@ -894,10 +898,17 @@ window.theme = {};
 			})
 			.on( 'click', '[data-panel-toggle]', function( e ) {
 				e.preventDefault();
+				var $this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
+
 				$(this).closest('.panel').trigger( 'panel:toggle' );
 			})
 			.on( 'click', '[data-panel-dismiss]', function( e ) {
 				e.preventDefault();
+				var $this = $(this);
+				if($this.hasClass('panel-has-child'))
+				return;
 				$(this).closest('.panel').trigger( 'panel:dismiss' );
 			})
 			/* Deprecated */
@@ -905,6 +916,8 @@ window.theme = {};
 				e.preventDefault();
 				var $this = $( this );
 
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this
 					.removeClass( 'fa-caret-up' )
 					.addClass( 'fa-caret-down' );
@@ -914,7 +927,8 @@ window.theme = {};
 			.on( 'click', '.panel-actions a.fa-caret-down', function( e ) {
 				e.preventDefault();
 				var $this = $( this );
-
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this
 					.removeClass( 'fa-caret-down' )
 					.addClass( 'fa-caret-up' );
@@ -924,7 +938,8 @@ window.theme = {};
 			.on( 'click', '.panel-actions a.fa-times', function( e ) {
 				e.preventDefault();
 				var $this = $( this );
-
+				if($this.hasClass('panel-has-child'))
+				return;
 				$this.closest('.panel').trigger( 'panel:dismiss' );
 			});
 	});
@@ -3342,7 +3357,7 @@ window.theme = {};
 	};
 
 	PluginCarousel.defaults = {
-		
+
 	};
 
 	PluginCarousel.prototype = {

@@ -58,7 +58,7 @@
                                     rt-if="review.checkedNumber > 0"
                                     onClick="{this.handleClickApproveButton.bind(this, reviewIndex)}"
                                     class="mb-md mr-xs btn btn-green approve-button"
-                                    bsClass="">
+                                    bsClass="my-btn">
                                     Approve
                                 </Button>
 
@@ -98,7 +98,7 @@
                                                     className="dropdown-file-info-holder"
                                                     setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                                             </th>
-                                            <th class="text-center">Status 
+                                            <th class="text-center">Status
                                             </th>
                                         </tr>
                                     </thead>
@@ -124,17 +124,17 @@
     </Row>
 </div>
 <DocumentPreview
-    currentReview={this.state.dataReview[this.state.current.review]}
+    currentReview={this.state.dataReview[this.state.current.reviewIndex]}
     open="{this.state.openPreview}"
-    document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
+    document="{this.state.dataReview[this.state.current.reviewIndex] && this.state.dataReview[this.state.current.reviewIndex].documents[this.state.current.docIndex]}"
     hasNextDocument={this.state.current.hasNextDocument}
     isNextCategory={this.state.current.isNextCategory}
-    nextDocument="{this.onClickDocumentName.bind(this, this.state.current.review + '_' + (this.state.current.doc + 1))}"
-    undo="{this.handleUndo.bind(this, this.state.current.review)}"
+    nextDocument="{this.handleNextDocument}"
+    undo="{this.handleUndo.bind(this, this.state.current.reviewIndex)}"
     onHide="{this.closePreview}"
     closeModal="{this.closePreview}">
 <div class="table-responsive">
-    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview table-fixed-width" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
             <tr role="row" class="">
                 <!--<th>
@@ -146,43 +146,47 @@
                         <label for="checkboxAllExample2"></label>
                     </div>
                 </th>-->
-                <th class="review_note fix-width">Type
+                <th class="review_note fix-width column-icon">Type
                 </th>
-                <th class="review_note doc-name">Document
+                <th class="review_note doc-name column-name">Document
                     <HelpButton
                         className="dropdown-file-info-holder"
                         classMenu="fix-overview-help-button-table"
                         setValue="This displays the name of each individual document, as it exists in its current state." />
                 </th>
-                <th class="review_note fix-max-width-category-confident">Proposed Category
+                <th class="review_note full-path column-path">Full Path
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
+                <th class="review_note fix-max-width-category-confident column-progress">Proposed Category
                     <HelpButton
                         className="dropdown-file-info-holder"
                         classMenu="fix-overview-help-button-table"
                         setValue="Category proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                 </th>
-                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                <th class="review_note fix-max-width-category-confident column-progress">Proposed Confidentiality
                     <HelpButton
                         className="dropdown-file-info-holder"
                         classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                         setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
                 </th>
-                <th class="text-center">Status</th>
+                <th class="text-center column-icon">Status</th>
             </tr>
         </thead>
         <tbody>
-            <table.row
-                document="{this.state.dataReview[this.state.current.review] && this.state.dataReview[this.state.current.review].documents[this.state.current.doc]}"
+            <table.RowPreview
+                document="{this.state.dataReview[this.state.current.reviewIndex] && this.state.dataReview[this.state.current.reviewIndex].documents[this.state.current.docIndex]}"
                 categories="{this.state.categories}"
                 confidentialities="{this.state.confidentialities}"
                 onClick="{this.handleTableRowOnClick}"
                 onChange="{this.handleTableRowOnChange}"
                 hide="{{ checkbox: true }}"
-                index="{this.state.current.review + '_' + this.state.current.doc}" />
+                index="{this.state.current.reviewIndex + '_' + this.state.current.docIndex}" />
         </tbody>
     </table>
-    <p rt-if="this.state.dataReview[this.state.current.review]" rt-scope="this.state.dataReview[this.state.current.review].documents[this.state.current.doc] as doc">
-        <a href="{doc.image_url}">{doc.path}</a>
-    </p>
+
 </div>
 </DocumentPreview>
 </section>

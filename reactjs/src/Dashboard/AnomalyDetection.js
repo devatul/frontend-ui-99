@@ -15,6 +15,7 @@ var AnomalyDetection = React.createClass({
             display_anomaly: [null],
             user_Client : null,
             active_Directory_Group : null ,
+            user_Access  : null ,
         }
     },
     componentWillMount() {
@@ -117,6 +118,8 @@ var AnomalyDetection = React.createClass({
         });
          this.getAnomaylyRick() ;
          this.getUserClient() ;
+         this.getActiveDirectory();
+         this.getUserAccess();
     },
 
 
@@ -143,6 +146,14 @@ var AnomalyDetection = React.createClass({
             path: 'api/anomaly/iam/active-directory',
             success: (data) => {
                 this.setState({ active_Directory_Group: data })
+            }
+        });
+    },
+    getUserAccess(){
+        return makeRequest({
+            path: 'api/anomaly/iam/user-access',
+            success: (data) => {
+                this.setState({ user_Access: data })
             }
         });
     },

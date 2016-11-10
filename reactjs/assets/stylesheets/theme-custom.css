@@ -281,13 +281,13 @@ html body .tabs-primary .nav-tabs li a:hover {
   font-size: 16px; }
 
 .modal-preview {
-  width: 90%;
+  width: 95%;
   margin-top: 120px;
   height: 80vh; }
   .modal-preview .modal-title {
     font-size: 20px;
     line-height: 44px;
-    font-weight: bold; 
+    font-weight: bold;
   }
     .modal-preview .modal-title span {
          padding-left: 10px;
@@ -594,7 +594,7 @@ tr td {
 .dropdown-menu.dd-sm {
   width: 40vw; }
 
-.dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
+/*.dropdown-menu.has-arrow:after, .dropdown-menu.has-arrow:before {
   bottom: 100%;
   left: 30px;
   border: solid transparent;
@@ -602,7 +602,7 @@ tr td {
   height: 0;
   width: 0;
   position: absolute;
-  pointer-events: none; }
+  pointer-events: none; }*/
 
 .dropdown-noti .col-noti {
   position: relative; }
@@ -957,9 +957,9 @@ tr td {
 .table-my-actions > thead tr th:nth-child(2) {
   width: 50px; }
 
-.table-my-actions > thead tr th:nth-child(6) {
+/*.table-my-actions > thead tr th:nth-child(6) {
   width: 80px;
-  padding-right: 5px !important; }
+  padding-right: 5px !important; }*/
 
 .table-my-actions.orphan-review {
   /*    .doc-check{
@@ -1029,7 +1029,7 @@ tr td {
 
 .table-my-actions .doc-path {
   display: inline-block;
-  max-width: 90px;
+  max-width:100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; }
@@ -1385,7 +1385,6 @@ div[id^='legendContainer'] {
 @media (max-width: 996px) {
   .dropdown-menu.full-mobile {
     width: 90%;
-    left: 5% !important;
     margin-left: 0;
     z-index: 9999; }
   .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before {

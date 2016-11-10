@@ -49,7 +49,7 @@ var DocumentReview = React.createClass({
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.shouldUpdate;  
+        return nextState.shouldUpdate;
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -133,7 +133,7 @@ var DocumentReview = React.createClass({
                             }
 
                             return data;
-                        } 
+                        }
                     }
                 }
             }),
@@ -155,13 +155,13 @@ var DocumentReview = React.createClass({
                 return this.onClickDocumentName(event, actionIndex, docIndex, Review);
             case 'documentStatus':
                 return this.onClickButtonStatus(event, actionIndex, docIndex, Review);
-            case 'validationButton': 
+            case 'validationButton':
                 return this.onClickButtonStatus(event, actionIndex, docIndex, Review);
         }
     },
 
     onClickDocumentName(event, actionIndex, docIndex, Review) {
-        
+
         if(docIndex <= (this.state[Review][actionIndex].documents.length - 1)) {
             this.setState({
                 openPreview: true,
@@ -190,7 +190,7 @@ var DocumentReview = React.createClass({
                 "category": document.category,
                 "confidentiality": document.confidentiality
             }]);
-            
+
             _status = 'status';
 
         } else {
@@ -206,7 +206,7 @@ var DocumentReview = React.createClass({
 
             _status = '2nd_line_validation';
         }
-        
+
 
         this.setState({
             [Review]: update(this.state[Review], {
@@ -272,13 +272,12 @@ var DocumentReview = React.createClass({
     },
 
     handleTableRowOnChange(actionIndex, docIndex, Review, event) {
-        //debugger
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
         let { stackChange } = this.state,
 
             document = this.state[Review][actionIndex].documents[docIndex],
-            
+
             newStack = update(stackChange, {
                 [Review]: {
                     $merge: {
@@ -350,9 +349,9 @@ var DocumentReview = React.createClass({
     },
 
     onChangeCategory(event, actionIndex, docIndex, Review) {
-        debugger
         let categoryIndex = event.target.value,
             document = this.state[Review][actionIndex].documents[docIndex],
+            { categories } = this.state,
             updateData = [];
         if(Review === this.constructor.actions) {
             updateData = update(this.state[Review], {
@@ -360,36 +359,50 @@ var DocumentReview = React.createClass({
                     documents: {
                         [docIndex]: {
                             category: {
-                                $set: this.state.categories[categoryIndex]
+                                $set: categories[categoryIndex]
                             },
                             $merge: {
-                                status: document.init_category && isEqual(this.state.categories[categoryIndex], {
-                                    id: document.init_category.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name,
+                                status: document.init_category && (categories[categoryIndex].id == document.init_category.id) ? status.ACCEPTED.name : status.EDITING.name,
                                 init_category: document.init_category && document.category
                             }
                         }
                     }
                 }
             });
+            this.updateDocuments([{
+                "document_id": document.id,
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "category": document.category,
+                "confidentiality": document.confidentiality
+            }]);
         } else {
             updateData = update(this.state[Review], {
                 [actionIndex]: {
                     documents: {
                         [docIndex]: {
                             current_category: {
-                                $set: this.state.categories[categoryIndex]
+                                $set: categories[categoryIndex]
                             },
                             $merge: {
-                                ['2nd_line_validation']: isEqual(this.state.categories[categoryIndex], {
-                                    id: document.previous_category.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name
+                                ['2nd_line_validation']: (categories[categoryIndex].id == document.previous_category.id ) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
                 }
             });
+            this.challengeDocuments([{
+                "document_id": document.id,
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "comment": document.reviewer_comment ? document.reviewer_comment : " ",
+                "category": document.current_category,
+                "confidentiality": document.current_confidentiality
+            }]);
         }
+        
         this.setState({
             [Review]: updateData,
             shouldUpdate: true
@@ -401,6 +414,8 @@ var DocumentReview = React.createClass({
 
             document = this.state[Review][actionIndex].documents[docIndex],
 
+            { confidentialities } = this.state,
+
             updateData = [];
         if(Review === this.constructor.actions) {
             updateData = update(this.state[Review], {
@@ -408,36 +423,49 @@ var DocumentReview = React.createClass({
                     documents: {
                         [docIndex]: {
                             confidentiality: {
-                                $set: this.state.confidentialities[confidentialityIndex]
+                                $set: confidentialities[confidentialityIndex]
                             },
                             $merge: {
                                 init_confidentiality: document.init_confidentiality && document.confidentiality,
 
-                                status: document.init_confidentiality && isEqual(this.state.confidentialities[confidentialityIndex], {
-                                    id: document.init_confidentiality.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name
+                                status: document.init_confidentiality && (confidentialities[confidentialityIndex].id == document.init_confidentiality.id) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
                 }
             });
+            this.updateDocuments([{
+                "document_id": document.id,
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "category": document.category,
+                "confidentiality": document.confidentiality
+            }]);
         } else {
             updateData = update(this.state[Review], {
                 [actionIndex]: {
                     documents: {
                         [docIndex]: {
                             current_confidentiality: {
-                                $set: this.state.confidentialities[confidentialityIndex]
+                                $set: confidentialities[confidentialityIndex]
                             },
                             $merge: {
-                                ['2nd_line_validation']: isEqual(this.state.confidentialities[confidentialityIndex], {
-                                    id: document.previous_confidentiality.id
-                                }) ? status.ACCEPTED.name : status.EDITING.name
+                                ['2nd_line_validation']: (confidentialities[confidentialityIndex].id == document.previous_confidentiality.id) ? status.ACCEPTED.name : status.EDITING.name
                             }
                         }
                     }
                 }
             });
+            this.challengeDocuments([{
+                "document_id": document.id,
+                "name": document.name,
+                "path": document.path,
+                "owner": document.owner,
+                "comment": document.reviewer_comment ? document.reviewer_comment : " ",
+                "category": document.current_category,
+                "confidentiality": document.current_confidentiality
+            }]);
         }
 
         this.setState({
@@ -481,7 +509,7 @@ var DocumentReview = React.createClass({
                             for(let i = data.length - 1; i >= 0; i--) {
                                 data[i].checked = event.target.checked
                             }
-                            
+
                             return data;
                         }
                     },

@@ -84,61 +84,53 @@ var documentPreview = React.createClass({
     render() {
         let nextDocumentButton = null
         let { document, open } = this.props
-        let currentReview = this.props.currentReview        
-        if(this.props.hasNextDocument){
+        let currentReview = this.props.currentReview
+
+       if(this.props.hasNextDocument){
             if(this.props.isNextCategory){
                 nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Category <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
             }else{
                 nextDocumentButton = <Button className="mb-xs mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleNextDocument}>Go to Next Document <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-            }            
+            }
         }
         if(document != null) {
             return(
                 <Modal
                     role="dialog"
                     animation
-                    show={open}   
+                    show={open}
                     onHide={this.handleOnHide}
                     keyboard={true}
                     dialogClassName="modal-preview">
                     <Modal.Header>
                         <Row>
-                            <Modal.Title className="col-sm-3">
+                            <Modal.Title className="col-sm-3 modal-title-preview">
                                 <i className="fa fa-search"></i>
                                 <span>Document Preview</span>
                             </Modal.Title>
-                            <div className="col-sm-2 modal-info text-center">
+                            <div className="col-sm-4 modal-info margin-top-14">
                                 <span className="text-itatic">
-                                    Proposed Category
+                                    Predicted Label:
                                 </span>
-                                <br/>
                                 <span>
-                                    {document && document.category && document.category.name}
+                                    <strong> {document && document.category && document.category.name +' - '+ document.confidentiality.name}</strong>
                                 </span>
                             </div>
-                            <div className="col-sm-3 modal-info text-center">
-                                <span className="text-itatic">
-                                    { document &&
-                                        document.name
-                                    }
-                                </span><br/>
-                                <span>
-                                { document &&
-                                    'Folder ' + this.cutPath(document.path)
-                                }</span>
+
+                            <div className="col-sm-2 modal-actions margin-top-14">
+                                { this.props.hideLanguage ?
+                                    '' : <div className="inline-block-item">
+                                            <span className="text-itatic">
+                                                Detected Language:
+                                            </span>
+                                            <span>
+                                              <strong>  {currentReview && currentReview.language && currentReview.language.name} </strong>
+                                            </span>
+                                        </div>
+                                }
+
                             </div>
-                            <div className="col-sm-1 modal-actions text-center">
-                                <div className="inline-block-item">
-                                    <span className="text-itatic">
-                                        Language
-                                    </span>
-                                    <br/>
-                                    <span>
-                                        {currentReview && currentReview.language && currentReview.language.name}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="col-sm-3 modal-actions text-right">
+                            <div className="col-sm-4 modal-actions modal-action-preview text-right">
                                 {nextDocumentButton}
                                 <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
                                 <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>

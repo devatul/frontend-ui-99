@@ -44,7 +44,7 @@ var PieChart = React.createClass({
     
     options() {
 
-        var { config, data, id } = this.props,
+        var { config, data, id, legendContainer } = this.props,
             { colors, colorsHover } = config;
         var div = $('#' + id);
         var divLegend = div.closest('.chart-pane');
@@ -58,21 +58,18 @@ var PieChart = React.createClass({
                 events: {
                 load: function () {
                         var chart = this;
+                        var legends = [];
 
-                        var legendChart = document.createElement('ul');
-                            legendChart.className = 'list-unstyled chart-legend';
-                            legendChart.id = 'confidentialityChartLegend';
-                        if($('#' + legendChart.id).length === 0 ) {
-                            for(let i = chart.series.length - 1; i >= 0; i--) {
-
-                                for(let point = chart.series[i].data, j = point.length - 1; j >= 0; j--) {
-                                    legendChart.innerHTML += '<li><i class="legend-symbol" style="background-color: ' + point[j].color + '"></i>' + point[j].name + '</li>';
-                                }
-
+                        for(let i = chart.series.length - 1; i >= 0; i--) {
+                            for(let point = chart.series[i].data, j = point.length - 1; j >= 0; j--) {
+                                legends[i] = <li key={'legend_' + j}><i className="legend-symbol" style={{backgroundColor: point[j].color }}></i>{point[j].name}</li>;
                             }
-
-                            $(legendChart).appendTo(divLegend);
                         }
+
+                        render(React.createElement('ul', {
+                            className: 'list-unstyled chart-legend',
+                            id: 'confidentialityChartLegend'
+                        }, legends), document.getElementById(legendContainer));
                     }
                 },
             },
@@ -117,7 +114,6 @@ var PieChart = React.createClass({
                     },
                     showInLegend: true,
                     borderColor: data && data.length === 1 ? colors[0] : '#FFF',
-                    size: 310,
                     point:  {
                         events: {
                             mouseOver: function(event){

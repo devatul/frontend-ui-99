@@ -42,13 +42,13 @@
                                                 <strong>{ this.state.category.info.number_docs &&
                                                               func.formatNumber(this.state.category.info.number_docs)}</strong>
                                               </span>
-                                              <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                              <!--a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a-->
                                         </div>
                                     </Panel.head>
                                     <Panel.body class="tab-content tab-pane">
                                         <Row>
                                             <Col md={7}>
-                                                <Panel.custom class="panel-has-child panel-featured-compact panel-bordered">
+                                                <Panel.custom class="panel-featured-compact panel-bordered">
                                                     <Panel.head>
                                                         <h2 class="panel-title">
                                                           Sample Parameters
@@ -57,10 +57,10 @@
                                                               setValue="This will determine the size of the document sample, which will generate the list of documents to be reviewed {this.state.category.current.name} category." />
                                                         </h2>
                                                         <div class="panel-actions">
-                                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle ></a>
                                                         </div>
                                                     </Panel.head>
-                                                    <Panel.body class="sample-params clearfix">
+                                                    <Panel.body class="sample-params clearfix" >
                                                         <div class="panel-body sample-params clearfix">
                                                             <div class="form-group user-assign-valid-btn left">
                                                                 <label class="">Fixed Number of Documents</label>
@@ -104,13 +104,15 @@
                                                         series={doctype.series} />
                                                 </div>
                                             </Col>
-                                            <Col sm={5} class="chart-pane chart-user-assignment">
+                                            <Col md={5} class="chart-pane chart-user-assignment">
                                                 <PieChart
                                                     id="confidentialityChart_category"
                                                     key="chart2_category"
                                                     title="Confidentiality"
+                                                    legendContainer="pie-chartLegend"
                                                     data={this.state.dataChart.confidentiality}
                                                     help="Distributions in term of confidentiality ratings assigned to all the documents within the {this.state.category.current.name} category." />
+                                                <div id="pie-chartLegend"></div>
                                             </Col>
                                         </Row>
                                     </Panel.body>
@@ -134,7 +136,7 @@
                                         <Row>
                                             <Col xs={12}>
                                                 <Row class="mt-md">
-                                                    <Col xs={9}>
+                                                    <Col md={9} sm={8} xs={12}>
                                                         <div class="clearfix">
                                                             <ul class="user-assignment-filter filter-buttons list-unstyled pull-left">
                                                                 <li class="dropdown">
@@ -212,7 +214,7 @@
                                                               categories={this.state.dataChart.reviewerChart.categories}
                                                               data={this.state.dataChart.reviewerChart.data} />
                                                     </Col>
-                                                    <Col xs={3} class=" select-reviewers">
+                                                    <Col md={3} sm={4} xs={12} class=" select-reviewers">
                                                         <h4 style="margin-bottom:5px">Select the Reviewer(s)
                                                         <HelpButton
                                                           classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
@@ -247,7 +249,7 @@
                         </Row>
                     </Tab.Pane>
                     <Tab.Pane eventKey="tab_summary">
-                        <Panel.custom rt-repeat="summary in this.state.summary" class="panel-featured-compact panel-bordered">
+                        <Panel.custom rt-repeat="summary in this.state.summary" class="panel-featured-compact panel-bordered" key="{summaryIndex}">
                             <Panel.head>
                                 <h2 class="panel-title" style="text-transform: capitalize">{summary.name}</h2>
                                 <div class="panel-actions">
@@ -273,10 +275,10 @@
                                         </tr>
                                         <tr class="child-table">
                                             <td colspan="4" class="hiddenRow">
-                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}"> 
+                                                <div class="accordian-body collapse in" id="reviewerList{summaryIndex+1}">
                                                     <table class="table">
                                                         <tbody>
-                                                            <tr rt-repeat="viewer in summary.reviewers">
+                                                            <tr rt-repeat="viewer in summary.reviewers" key="{viewerIndex}">
                                                                 <td class="col20 no-border-top"></td>
                                                                 <td class="col40" style="text-transform: capitalize">{viewer.first_name}.{viewer.last_name} (Last Modified)</td>
                                                                 <td class="col15"></td>
@@ -290,7 +292,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                </div> 
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

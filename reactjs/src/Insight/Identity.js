@@ -28,7 +28,8 @@ let Indentity = React.createClass({
                 high_risk_directory: {},
                 key_contributor: []
             },
-            loading: true
+            loading: true,
+            display : 0
         };
     },
 
@@ -67,27 +68,14 @@ let Indentity = React.createClass({
     },
 
     getData() {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/insight/iam?number_users=5',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
-            success: function(data) {
-                console.log('data', data);
-                this.setState({ loading: false });
-                this.updateChartData(data);
-                /* this.setState({ rickInsight: data })*/
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status === 401) {
-                    browserHistory.push('/Account/SignIn');
+        return makeRequest({
+                path: 'api/insight/iam?number_users=5',
+                success: (data) => {
+                    this.setState({ loading: false });
+                    this.updateChartData(data);
                 }
-            }.bind(this)
-        });
+            });
     },
-
     updateChartData(datas) {
         let high_risk_users = {},
             high_risk_directory = {},
@@ -101,8 +89,6 @@ let Indentity = React.createClass({
         high_risk_users = this.configChart(datas.high_risk_users);
         high_risk_directory = this.configChart(datas.high_risk_directory);
 
-        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
-
         for (let i = 0; i < _.size(datas.key_contributor); i++) {
             arr[i] = datas.key_contributor[i];
             key_contributor.push({
@@ -110,12 +96,29 @@ let Indentity = React.createClass({
                 contributors: (this.configChart(arr[i].contributors))
             })
         }
+        let length = key_contributor.length
 
-        console.log('key_contributor', key_contributor);
 
-        height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-        height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-        height_3 = _.size(key_contributor[4].contributors.categories)* 40; /*> _.size(key_contributor[5].contributors.categories) ? _.size(key_contributor[4].contributors.categories) * 40 : _.size(key_contributor[5].contributors.categories) * 40*/
+        /* begin : config hight chart*/
+
+        height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
+        if(length == 1) {
+            height_1 = _.size(key_contributor[0].contributors.categories)* 40;
+        } else{
+            height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
+            if(length == 3) {
+                height_2 = _.size(key_contributor[2].contributors.categories)* 40;
+            } else if(length == 4) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+            } else if( length == 5) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+                height_3 = _.size(key_contributor[5].contributors.categories)* 40;
+            } else if( length == 6) {
+                height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
+                height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
+            }
+        }
+        /*end*/
 
         let updateData_config = update(this.state, {
             dataChart: {
@@ -133,17 +136,19 @@ let Indentity = React.createClass({
             height_0: { $set: height_0 },
             height_1: { $set: height_1 },
             height_2: { $set: height_2 },
-            height_3: { $set: height_3 }
+            height_3: { $set: height_3 },
+            display : {$set : length}
         });
 
         this.setState(updateData_config)
+
     },
 
     configChart(object) {
         let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
             dataChart = [],
             categories = [];
-
+            object = _.orderBy(object, ['docs'], ['desc']);
         for (let i = 0; i < _.size(object); i++) {
             categories.push(object[i].name);
             dataChart.push({

@@ -65,8 +65,8 @@
               </ProgressBar>
             </Col>
             <Col md={3} class="text-right">
-              <span>Detect Language: <b>English</b></span>
-              <Button class="btn btn-green ml-md" bsClass="my-btn">Edit</Button>
+              <span>Detected Language: <b>English</b></span>
+              <Button class="btn btn-green ml-md" bsClass="my-btn" disabled>Edit</Button>
             </Col>
           </Row>
         </Panel.head>
@@ -177,7 +177,7 @@
                       onClick="{this.handleClickRefineButton}"
                       class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
                       bsClass="my-btn">
-                      Refine Orphan
+                      Refine prediction
                     </Button>
                     <HelpButton className=""
                       classNote="review_question_chart"
@@ -220,15 +220,17 @@
           <Panel.head>
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
             <div class="panel-actions my-actions-btn-group">
-              <span class="mr-md">Orphan Review: <b>{this.state.orphanCurrent && this.state.orphanCurrent.name}</b></span>
-              <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <span class="mr-md">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
+              <Button rt-if="this.state.orphanCurrent.id && this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
             </div>
           </Panel.head>
-          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength" >
-            <p rt-if=" docLength === 0 " class="document_note">You don't have any document to review</p>
+          <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as loadingdocuments; this.state.getdocumenterror as docError" >
+            <p rt-if=" docLength === 0 && loadingdocuments === false" class="document_note">You don't have any document to review</p>
+            <p rt-if=" docLength === 0 && loadingdocuments === false && docError !== false" class="document_note">ERROR : { docError }</p>
+            <p rt-if=" docLength === 0 && loadingdocuments === true" class="document_note">Loading documents, please wait...</p>
             <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
               <Button
                 rt-if="this.state.checkedNumber > 0"
@@ -284,7 +286,7 @@
                     rt-repeat=" document in this.state.documents "
                     document={document}
                     index={documentIndex}
-                    key={document.id}
+                    key={documentIndex}
                     categories={this.state.categories}
                     confidentialities={this.state.confidentialities}
                     onClick={this.handleTableRowOnClick}
@@ -296,11 +298,11 @@
             </div>
             <div rt-if="docLength > 0" class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0">
               <ProgressBar class="dathena-progress style-2 fix-label pull-left">
-                <span class="label-percent">{this.state.reviewStatus + '%'}</span>
                 <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress" />
               </ProgressBar>
+              <span class="label-percent">{this.state.reviewStatus + '%'}</span>
 
-              <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
+              <Button rt-if="this.state.orphanCurrent.id &&this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-md mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
               </Button>
@@ -315,14 +317,17 @@
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
     nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    hasNextDocument="{this.state.documents[this.state.documentPreview] !== this.state.documents[this.state.documents.length-1]}"
     undo="{this.handleUndo}"
-    closeModal="{this.closePreview}">
-    <div class="table-responsive">
-      <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions docPreview"
-        id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+    closeModal="{this.closePreview}"
+    hideLanguage="{true}"
+    onHide="{this.closePreview}">
+    <div class="table-responsive table-preview-responsive">
+      <Table class="review_table review_table_no_progress mb-none no-footer table-my-actions table-classification-width docPreview table-fixed-width"
+        id="table-my-actions-1" responsive bordered striped role="grid" aria-describedby="datatable-default_info">
         <thead>
           <tr role="row" class="">
-            <th>
+            <!--<th>
               <div class="checkbox-custom checkbox-primary">
                 <input type="checkbox"
                   class="checkbox-all-1"
@@ -330,40 +335,48 @@
                   checked="{this.state.checkBoxAll}">
                 <label for="checkboxAllExample2"></label>
               </div>
-            </th>
-            <th class="review_note fix-width">Type</th>
-            <th class="review_note">
+            </th>-->
+            <th class="review_note fix-width column-icon">Type</th>
+            <th class="review_note column-name">
               Document name
               <HelpButton
                 className="dropdown-file-info-holder"
                 setValue="This displays the name of each individual document, as it exists in its current state." />
             </th>
-            <th class="review_note fix-max-width-category-confident">
+            <th class="review_note full-path column-path">Full Path
+                <HelpButton
+                    className="dropdown-file-info-holder"
+                    classMenu="fix-overview-help-button-table"
+                    setValue="This displays the name of each individual document, as it exists in its current state." />
+            </th>
+            <th class="review_note fix-max-width-category-confident column-progress">
               Proposed Category
               <HelpButton
                 className="dropdown-file-info-holder"
                 setValue="User is required to assign category for orphan documents." />
             </th>
-            <th class="review_note fix-max-width-category-confident">
+            <th class="review_note fix-max-width-category-confident column-progress">
               Proposed Confidentiality
               <HelpButton
                 className="dropdown-file-info-holder"
                 classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                 setValue="User is required to assign confidentiality level for orphan documents." />
             </th>
-            <th class="text-center">Status</th>
+            <th class="text-center column-icon">Status</th>
           </tr>
         </thead>
         <tbody>
-          <table.row
+          <table.RowPreview
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
+            hide="{{ checkbox: true }}"
+            noConfidence
             onClick={this.handleTableRowOnClick}
             onChange={this.handleTableRowOnChange}
             index={this.state.documentPreview} />
         </tbody>
-      </table>
+      </Table>
     </div>
   </DocumentPreview>
 </section>

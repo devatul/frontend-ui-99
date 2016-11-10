@@ -8,7 +8,7 @@
 <section>
     <!--bar_menu start-->
     <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
-    <div rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
+    <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <!--charts start-->
         <div class="charts container mt-lg">
             <div class="row">
@@ -122,7 +122,7 @@
                 <div class="col-md-12">
                     <section class="panel panel-featured panel-featured-primary">
                         <header class="panel-heading">
-                            <h2 class="panel-title">Classification Summary</h2>
+                            <h2 class="panel-title">Confidentiality Summary</h2>
                             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                                 <ToggleButton setDefault="open" setTarget="#overview-panel-1" />
                             </div>
@@ -147,7 +147,7 @@
                                                     colspan="1">Validated Documents
                                                     <HelpButton
                                                         classMenu="fix-overview-help-button-table overview-table-help"
-                                                        setValue="Percentage of documents validated and classify for each level of confidentiality." />
+                                                        setValue="Percentage of documents validated and classified for each level of confidentiality." />
                                                 </th>
                                                 <th class="text-center" tabindex="0" aria-controls="datatable-default"
                                                     rowspan="1" colspan="1">Review Accuracy

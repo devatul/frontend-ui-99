@@ -225,9 +225,15 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .fix-overview-help-button {
     color: #000011;
     font-weight: normal;
-    width: 330px !important;
-    min-width: 300px;
+    width: 330px;
 }
+
+@media (max-width: 996px) {
+    .dropdown-menu.full-mobile.new-help {
+        width: 90%;
+    }
+}
+
 
 .fix-overview-help-button-table {
     max-width: 300px;
@@ -237,6 +243,10 @@ table.docPreview > thead > tr > th:nth-child(2) {
 	margin-left: 235px;
 }
 
+.help_question_bottom.fix-margin.has-arrow {
+    margin-left: 0;
+    right: -5px;
+}
 
 .note_chart_content_review.fix.has-arrow:after {
 	margin-left: 230px;
@@ -304,7 +314,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 }
 
 .file-distribution {
-    margin: 0 15px 0 0;
+    margin: 0 0px 0 0px;
 }
 .cendroid-chart-legend.new .document-symbol i {
     display: inline-block;
@@ -315,6 +325,35 @@ table.docPreview > thead > tr > th:nth-child(2) {
 
 .cendroid-chart-legend.new .document-symbol span {
     margin-left: 5px;
+}
+
+@media (max-width: 500px) {
+    #centroidChartWrapper {
+        height: 135px;
+    }
+
+    .cendroid-chart-legend h5 {
+        text-align: left;
+    }
+
+    .cendroid-chart-legend.new {
+        width: 91%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .cendroid-chart-legend.new .document-symbol {
+        display: inline-block;
+        padding: 0px;
+        width: initial;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .cendroid-chart-legend.new .document-symbol i {
+        display: block;
+        margin: auto;
+    }
 }
 
 /* fix label progress bar */
@@ -328,6 +367,14 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .dathena-progress.style-2 .label-percent {
     position: absolute;
     margin-left: -35px;
+}
+
+.label-percent {
+    position: absolute;
+    line-height: 35px;
+    font-weight: bold;
+    left: 0;
+    margin-left: 27%;
 }
 
 /**/
@@ -352,7 +399,9 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .filter-buttons .dropdown-menu .select2-selection .select2-selection__rendered {
     line-height: 34px;
 }
-
+.dathena-select {
+   display: inline-flex;
+ }
 .select2-dropdown ul.select2-results__options li[id$="-label"] {
     display: none;
 }
@@ -372,11 +421,13 @@ table.docPreview > thead > tr > th:nth-child(2) {
 .table-my-actions span.file-name.fix-max-width-row2 {
     max-width: 180px;
     margin-right: -35px;
+    padding-right: 5px;
 }
 
 .table-my-actions span.file-name.fix-max-width-row {
     max-width: 250px;
     margin-right: -110px;
+    padding-right: 10px;
 }
 
 /* height select2 filter */
@@ -475,7 +526,7 @@ select.assigment-select.form-control {
 .dropdown-menu.info-scan .table-responsive help-info-button.dropdown {
     float: left;
     width: 40px;
-} 
+}
 
 /* title menu bar */
 .my_main.bar_menu .title-heading {
@@ -522,7 +573,7 @@ select.assigment-select.form-control {
     top: 50%;
     margin-top: -100px;
 }
- 
+
 .custom-modal {
     max-width: 400px;
 }
@@ -613,7 +664,7 @@ select.assigment-select.form-control {
 }
 
 .choose-cluster-block > .form-group .select2-container {
-    width: auto !important;
+    width: 50% !important;
 }
 /* chart legend overview */
 .chart-legend li {
@@ -627,4 +678,13 @@ select.assigment-select.form-control {
 #overview-panel-2 i.fa {
     text-align: center;
     margin-right: 4px;
+}
+
+/* modal preview */
+.modal-title.modal-title-preview {
+    width: 20%;
+}
+
+.modal-preview .modal-action-preview {
+    width: 28%;
 }
