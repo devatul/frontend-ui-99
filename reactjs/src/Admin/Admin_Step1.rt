@@ -1,294 +1,599 @@
-
-<rt-import name = "Input" from="./components/ValidateInput"/>
+<rt-import name="Input" from="./components/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
 <div>
-   <div class="bar_menu admin_header container">
-      <div class="row">
-        <div class="col-md-12 mb-md">
-          <div class="row">
-              <div class="col-sm-8">
-                  <h4 class="inline-block-item">Business Settings Progress: {this.state.complete}/3</h4>
-                  <HelpButton
-                    classMenu="overview_timeframe fix-overview-help-button"
-                    setValue="As part of the administration set up process, 99 will need to know more about your organisation. To ensure that 99 is set up correctly and configured prior to ‘go live’, each step will require positive confirmation before you can move to the next one. This is to ensure that technical details and links are functional prior to implementing 99." />
-                  <div class="progress-radial progress-{this.state.complete == 1 ? '33' : (this.state.complete == 2 ? 66 : (this.state.complete ==3 ? 100 : 0))}"></div>
-              </div>
-
+  <div class="bar_menu admin_header container">
+    <div class="row">
+      <div class="col-md-12 mb-md">
+        <div class="row">
+          <div class="col-sm-8">
+            <h4 class="inline-block-item">Business Settings Progress: {this.state.complete}/3</h4>
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="As part of the administration set up process, 99 will need to know more about your organisation. To ensure that 99 is set up correctly and configured prior to ‘go live’, each step will require positive confirmation before you can move to the next one. This is to ensure that technical details and links are functional prior to implementing 99."/>
+            <div class="progress-radial progress-{this.state.complete == 1 ? '33' : (this.state.complete == 2 ? 66 : (this.state.complete ==3 ? 100 : 0))}"></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <section class="panel panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="{this.state.complete != 0 ? 'fa fa-check icon-succes' : 'fa fa-clock-o icon-succes'}"></i>1. Organisation Details
-              <HelpButton
-                    classMenu="overview_timeframe fix-overview-help-button"
-                    setValue="User provided information of the organisation scanned by 99." />
-            </h2>
-            <div class="panel-actions" style="margin-right: 25px">
-
-                  <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
-
-            </div>
-            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#toggle1" />
-            </div>
-        </header>
-        <div class="panel-body" id="toggle1">
-          <div class="row">
-            <div class="col-md-6">
-              <form class="form-horizontal">
-
-                <div class="form-group">
-                  <div class="col-sm-4 detail-left clearfix">
-                    <label class="control-label">Company Name </label>
-                  </div>
-                  <div class="col-sm-8">
-                   <Input  block = 1 fieldId = 1 disabled={this.state.readOnly} className="form-control" onChange="{this.onChangeInput}"/>
-                  </div>
+  </div>
+  <div class="container">
+    <section class="panel panel-featured panel-featured-primary panel-bordered">
+      <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="{this.state.complete != 0 ? 'fa fa-check icon-succes' : 'fa fa-clock-o icon-succes'}"></i>
+          1. Organisation Details
+          <HelpButton
+            classMenu="overview_timeframe fix-overview-help-button"
+            setValue="User provided information of the organisation scanned by 99."/>
+        </h2>
+        <div class="panel-actions" style="margin-right: 25px">
+          <button class="btn btn-green" rt-if="this.state.complete != 0" onClick="{this.editButton.bind(this,1, this.state.readOnly)}">
+            {this.state.readOnly == true ? 'Edit' : 'Save'}
+          </button>
+        </div>
+        <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+          <ToggleButton
+            setDefault="open"
+            setTarget="#toggle1"/>
+        </div>
+      </header>
+      <div class="panel-body" id="toggle1">
+        <div class="row">
+          <div class="col-md-6">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label for="company-name" class="control-label">Company Name</label>
                 </div>
-
-
-                <div class="form-group">
-                  <div class="col-sm-4 detail-left clearfix">
-                    <label class="control-label" >Region </label>
-                  </div>
-                  <div class="col-sm-8">
-                      <Input block = 1 fieldId = 2 disabled={this.state.readOnly} onChange="{this.onChangeInput}" className="form-control"/>
-                  </div>
+                <div class="col-sm-8">
+                  <Input
+                    id="company-name"
+                    block=1
+                    fieldId=1
+                    disabled={this.state.readOnly}
+                    className="form-control"
+                    onChange="{this.onChangeInput}" />
                 </div>
+              </div>
 
-
-                <div class="form-group">
-                  <div class="col-sm-4 detail-left clearfix">
-                    <label class="control-label">Country </label>
-                  </div>
-                  <div class="col-sm-8">
-                      <Input block = 1 fieldId = 3 disabled={this.state.readOnly} onChange="{this.onChangeInput}" className="form-control"/>
-                  </div>
+              <div class="form-group">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label for="region" class="control-label">Region</label>
                 </div>
+                <div class="col-sm-8">
+                  <Input
+                    id="region"
+                    block=1
+                    fieldId=2
+                    disabled={this.state.readOnly}
+                    onChange="{this.onChangeInput}"
+                    className="form-control" />
+                </div>
+              </div>
 
-              </form>
-            </div>
-          </div>
-          <div class="text-right">
-            <a rt-if="this.state.complete == 0" href="javascript:;" class="btn btn-green validate-btn" onClick= {this.clickComfirm}>Confirm</a>
+              <div class="form-group">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label for="country" class="control-label">Country</label>
+                </div>
+                <div class="col-sm-8">
+                  <Input
+                    id="country"
+                    block=1
+                    fieldId=3
+                    disabled={this.state.readOnly}
+                    onChange="{this.onChangeInput}"
+                    className="form-control" />
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+        <div class="text-right">
+          <a rt-if="this.state.complete == 0" href="javascript:;" class="btn btn-green validate-btn" onClick={this.clickComfirm}>Confirm</a>
+        </div>
+      </div>
+    </section>
 
-      <section class="{this.state.complete >= 1 ? 'panel panel-featured panel-featured-primary panel-bordered panel-policies-fr ' : 'panel panel-featured panel-featured-primary panel-bordered panel-policies-fr disabled '}">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i  class="{this.state.complete >= 2  ? 'fa fa-check icon-succes' : 'fa fa-arrow-circle-right icon-success '}"></i>2. Policies and Framework
-               <HelpButton
-                    classMenu="overview_timeframe fix-overview-help-button"
-                    setValue="Chose the default confidentiality level labels used by Dathena 99 to classify your data. You can rename the default 99 confidentiality levels via the customized confidentiality boxes." />
-            </h2>
-            <div class="panel-actions" style="margin-right: 25px">
-                  <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 2" onClick="{this.editButton.bind(this,2,this.state.readOnly1)}">{this.state.readOnly1 == true ? 'Edit' : 'Save'}</button>
-            </div>
-            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#toggle2" />
-            </div>
-        </header>
-        <div class="panel-body" id="toggle2">
-          <div class="row">
-            <div class="col-xs-12">
-              <form class="form-horizontal">
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <h5>Default Confidentiality Level</h5>
-                      </div>
-                      <div class="col-xs-3">
-                        <h5>Activate</h5>
+    <section class="{this.state.complete >= 1 ? 'panel panel-featured panel-featured-primary panel-bordered panel-policies-fr ' : 'panel panel-featured panel-featured-primary panel-bordered panel-policies-fr disabled '}">
+      <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="{this.state.complete >= 2  ? 'fa fa-check icon-succes' : 'fa fa-arrow-circle-right icon-success '}"></i>
+          2. Policies and Framework
+          <HelpButton
+            classMenu="overview_timeframe fix-overview-help-button"
+            setValue="Chose the default confidentiality level labels used by Dathena 99 to classify your data. You can rename the default 99 confidentiality levels via the customized confidentiality boxes." />
+        </h2>
+        <div class="panel-actions" style="margin-right: 25px">
+          <button class="btn btn-green btn-edit-step" rt-if="this.state.complete >= 2" onClick="{this.editButton.bind(this,2,this.state.readOnly1)}">
+            {this.state.readOnly1 == true ? 'Edit' : 'Save'}
+          </button>
+        </div>
+        <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+          <ToggleButton
+            setDefault="open"
+            setTarget="#toggle2" />
+        </div>
+      </header>
+      <div class="panel-body" id="toggle2">
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <h5>Default Confidentiality Level</h5>
+                    </div>
+                    <div class="col-xs-3">
+                      <h5>Activate</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <h5>Customized Confidentiality Level</h5>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <label for="banking-secrecy" class="control-label">Banking Secrecy</label>
+                    </div>
+                    <div class="col-xs-3">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1"></label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <h5>Customized Confidentiality Level</h5>
-                  </div>
-
                 </div>
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <label class="control-label">Banking Secrecy</label>
-                      </div>
-                      <div class="col-xs-3">
-                         <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox" id="checkbox1">
-                          <label for="checkbox1"></label>
-                        </div>
+                <div class="col-sm-6">
+                  <Input
+                    id="banking-secrecy"
+                    type="text"
+                    block=2
+                    fieldId=1
+                    onChange="{this.onChangeInput}"
+                    disabled={this.state.readOnly1}
+                    className="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <label for="secret" class="control-label">Secret</label>
+                    </div>
+                    <div class="col-xs-3">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2"></label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <Input type="text" block = 2 fieldId = 1  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
-                  </div>
                 </div>
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <label class="control-label">Secret</label>
-                      </div>
-                      <div class="col-xs-3">
-                        <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox"  id="checkbox2" >
-                          <label for="checkbox2"></label>
-                        </div>
+                <div class="col-sm-6">
+                  <Input
+                    id="secret"
+                    type="text"
+                    block=2
+                    fieldId=2
+                    onChange="{this.onChangeInput}"
+                    disabled={this.state.readOnly1}
+                    className="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <label for="confidential" class="control-label">Confidential</label>
+                    </div>
+                    <div class="col-xs-3">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox3">
+                        <label for="checkbox3"></label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                      <Input type="text"  block = 2 fieldId = 2  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
-                  </div>
                 </div>
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <label class="control-label">Confidential</label>
-                      </div>
-                      <div class="col-xs-3">
-                        <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox"  id="checkbox3" >
-                          <label for="checkbox3"></label>
-                        </div>
+                <div class="col-sm-6">
+                  <Input
+                    id="confidential"
+                    type="text"
+                    block=2
+                    fieldId=3
+                    onChange="{this.onChangeInput}"
+                    disabled={this.state.readOnly1}
+                    className="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <label for="internal" class="control-label">Internal</label>
+                    </div>
+                    <div class="col-xs-3">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox4">
+                        <label for="checkbox4"></label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                      <Input type="text"  block = 2 fieldId = 3  onChange="{this.onChangeInput}" disabled={this.state.readOnly1} className="form-control">
-                  </div>
                 </div>
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <label class="control-label">Internal</label>
-                      </div>
-                      <div class="col-xs-3">
-                        <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox"  id="checkbox4" >
-                          <label for="checkbox4"></label>
-                        </div>
+                <div class="col-sm-6">
+                  <Input
+                    id="internal"
+                    type="text"
+                    disabled={this.state.readOnly1}
+                    block=2
+                    fieldId=4
+                    onChange="{this.onChangeInput}"
+                    className="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 detail-left clearfix">
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <label for="public" class="control-label">Public</label>
+                    </div>
+                    <div class="col-xs-3">
+                      <div class="checkbox-custom checkbox-success">
+                        <input type="checkbox" id="checkbox5">
+                        <label for="checkbox5"></label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                     <Input type="text" disabled={this.state.readOnly1}  block = 2 fieldId = 4  onChange="{this.onChangeInput}" className="form-control">
-                  </div>
                 </div>
-
-                <div class="form-group">
-                  <div class="col-sm-6 detail-left clearfix">
-                    <div class="row">
-                      <div class="col-xs-9">
-                        <label class="control-label">Public</label>
-                      </div>
-                      <div class="col-xs-3">
-                        <div class="checkbox-custom checkbox-success">
-                          <input type="checkbox"  id="checkbox5" >
-                          <label for="checkbox5"></label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <Input type="text"   block = 2 fieldId = 5  onChange="{this.onChangeInput}" disabled={this.state.readOnly1}  className="form-control">
-                  </div>
+                <div class="col-sm-6">
+                  <Input
+                    id="public"
+                    type="text"
+                    block=2
+                    fieldId=5
+                    onChange="{this.onChangeInput}"
+                    disabled={this.state.readOnly1}
+                    className="form-control" />
                 </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="text-right">
-            <a rt-if="this.state.complete == 1" href="javascript:;" class="btn btn-green validate-btn" onClick = {this.clickValidate1}>Validate</a>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
-
-      <section class="{this.state.complete >= 2 ? 'panel panel-featured panel-featured-primary panel-bordered panel-service-level' : 'panel panel-featured panel-featured-primary panel-bordered panel-service-level disabled'}">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="{this.state.complete >= 2  ? 'fa fa-check icon-succes' : 'fa fa-arrow-circle-right icon-success '}"></i>3. Service Level Agreement
-              <HelpButton
-                    classMenu="overview_timeframe fix-overview-help-button"
-                    setValue="This will allow you to add a time bound SLA to each respective action within 99. Once the specified time has passed, and no action has been taken, 99 will automatically email the user to remind them to complete their required actions. Users can define a SLA for each confidentiality level and for each document category. In case of conflict between SLAs, the SLA that is applied will always be the SLA linked to the highest confidentiality level." />
-            </h2>
-            <div class="panel-actions" style="margin-right: 25px">
-
-                  <button class="btn btn-green btn-edit-step" rt-if = "this.state.complete >= 3" onClick="{this.editButton.bind(this,3,this.state.readOnly2)}">{this.state.readOnly2 == true ? 'Edit' : 'Save'}</button>
-
-
-            </div>
-            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#block1_step1" />
-            </div>
-
-        </header>
-        <div class="panel-body" id="block1_step1">
-          <div class="row">
-            <div class="col-xs-12">
-              <form class="form-horizontal">
-
-                <h3>Classification Review</h3>
-
-                <div class="sub-block">
-
-                  <div class="sub-block-title">
-                    <h4>1. Document Reviewer
-                      <HelpButton
-                        classMenu="overview_timeframe fix-overview-help-button"
-                        setValue="SLA assigned to the document reviewer to review the category and classification predicted by 99." />
-                    </h4>
-                  </div>
-                  <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-4">Confidentiality Level</div>
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-4">Category</div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">Month(s)</div>
-                        <div class="col-xs-3">Week(s)</div>
-                        <div class="col-xs-3">Day(s)</div>
-                        <div class="col-xs-3">Hours(s)
-                            <HelpButton
-                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
-                        </div>
-
-                      </div>
+        <div class="text-right">
+          <a rt-if="this.state.complete == 1" href="javascript:;" class="btn btn-green validate-btn" onClick={this.clickValidate1}>Validate</a>
+        </div>
+      </div>
+    </section>
+    <section class="{this.state.complete >= 2 ? 'panel panel-featured panel-featured-primary panel-bordered panel-service-level' : 'panel panel-featured panel-featured-primary panel-bordered panel-service-level disabled'}">
+      <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="{this.state.complete >= 2  ? 'fa fa-check icon-succes' : 'fa fa-arrow-circle-right icon-success '}"></i>
+          3. Service Level Agreement
+          <HelpButton
+            classMenu="overview_timeframe fix-overview-help-button"
+            setValue="This will allow you to add a time bound SLA to each respective action within 99. Once the specified time has passed, and no action has been taken, 99 will automatically email the user to remind them to complete their required actions. Users can define a SLA for each confidentiality level and for each document category. In case of conflict between SLAs, the SLA that is applied will always be the SLA linked to the highest confidentiality level."/>
+        </h2>
+        <div class="panel-actions" style="margin-right: 25px">
+          <button class="btn btn-green btn-edit-step" rt-if="this.state.complete >= 3" onClick="{this.editButton.bind(this,3,this.state.readOnly2)}">
+            {this.state.readOnly2 == true ? 'Edit' : 'Save'}
+          </button>
+        </div>
+        <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+          <ToggleButton
+            setDefault="open"
+            setTarget="#block1_step1" />
+        </div>
+      </header>
+      <div class="panel-body" id="block1_step1">
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form-horizontal">
+              <h3>Classification Review</h3>
+              <div class="sub-block">
+                <div class="sub-block-title">
+                  <h4>
+                    1. Document Reviewer
+                    <HelpButton
+                      classMenu="overview_timeframe fix-overview-help-button"
+                      setValue="SLA assigned to the document reviewer to review the category and classification predicted by 99." />
+                  </h4>
+                </div>
+                <div class="form-group hidden-sm hidden-xs">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-4">Confidentiality Level</div>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-4">Category</div>
                     </div>
                   </div>
-
-                  <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">Month(s)</div>
+                      <div class="col-xs-3">Week(s)</div>
+                      <div class="col-xs-3">Day(s)</div>
+                      <div class="col-xs-3">
+                        Hours(s)
+                        <HelpButton
+                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                          setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-1-1" class="control-label">SLA 1.1</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-1-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-1-1" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-1-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-1-1" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-1-1" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-1-1" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-1-1" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-1" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-1-2" class="control-label">SLA 1.2</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-1-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-1-2" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-1-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-1-2" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-1-2" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-1-2" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-1-2" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-2" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-1-3" class="control-label">SLA 1.3</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-1-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-1-3" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-1-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-1-3" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-1-3" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-1-3" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-1-3" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-3" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-1-4" class="control-label">SLA 1.4</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-1-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-1-4" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-1-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-1-4" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-1-4" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-1-4" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-1-4" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-4" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-1-5" class="control-label">SLA 1.5</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-1-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-1-5" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-1-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-1-5" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-1-5" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-1-5" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-1-5" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-5" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div rt-repeat="SLA in this.state.SLA" key="{SLA.key}">
+                  <div class="form-group" style="margin-bottom: 15px">
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-sm-2">
-                          <label class="control-label">SLA 1.1</label>
+                          <label for="sla-1-{6 + SLAIndex}" class="control-label">SLA 1.{6 + SLAIndex}</label>
                         </div>
-                        <div class="col-sm-4" >
-                          <select class="form-control populate placeholder">
+                        <div class="col-sm-4">
+                          <select id="sla-1-{6 + SLAIndex}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -298,10 +603,10 @@
                           </select>
                         </div>
                         <div class="col-sm-1">
-                          <label class="control-label">and</label>
+                          <label for="and-1-{6 + SLAIndex}" class="control-label">and</label>
                         </div>
                         <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
+                          <select id="and-1-{6 + SLAIndex}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -315,1016 +620,748 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
+                          <label for="month-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-1-{6 + SLAIndex}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
+                          <label for="week-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-1-{6 + SLAIndex}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
+                          <label for="day-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-1-{6 + SLAIndex}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
+                          <label for="hour-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-1-{6 + SLAIndex}" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 1.2</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
+                </div>
+                <a href="javascript:;" class="mt-md inline-block-item" onClick="{this.addSLA.bind(this,1)}">
+                  Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="sub-block">
+                <div class="sub-block-title">
+                  <h4>
+                    2. Classification Review Coordinator
+                    <HelpButton
+                      classMenu="overview_timeframe fix-overview-help-button"
+                      setValue="SLA assigned to the coordinator to review the category and classification predicted by 99."/>
+                  </h4>
+                </div>
+                <div class="form-group hidden-sm hidden-xs">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-4">Confidentiality Level</div>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-4">Category</div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">Month(s)</div>
+                      <div class="col-xs-3">Week(s)</div>
+                      <div class="col-xs-3">Day(s)</div>
+                      <div class="col-xs-3">Hours(s)
+                        <HelpButton
+                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                          setValue="SLA timeframes using  Month, Week, Day, Hour metrics."/>
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 1.3</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 1.4</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 1.5</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div rt-repeat="SLA in this.state.SLA" key="{SLA.key}">
-                     <div class="form-group" style="margin-bottom: 15px">
-                        <div class="col-md-6">
-                         <div class="row">
-                            <div class="col-sm-2">
-                              <label class="control-label">SLA 1.{ 6+ SLAIndex}</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-1">
-                              <label class="control-label">and</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  <a href="javascript:;" class="mt-md inline-block-item" onClick ="{this.addSLA.bind(this,1)}">Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-
                 </div>
 
-                <div class="sub-block">
-
-                  <div class="sub-block-title">
-                    <h4>2. Classification Review Coordinator
-                      <HelpButton
-                            classMenu="overview_timeframe fix-overview-help-button"
-                            setValue="SLA assigned to the coordinator to review the category and classification predicted by 99." />
-                    </h4>
-                  </div>
-                  <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-4">Confidentiality Level</div>
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-4">Category</div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-2-1" class="control-label">SLA 2.1</label>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">Month(s)</div>
-                        <div class="col-xs-3">Week(s)</div>
-                        <div class="col-xs-3">Day(s)</div>
-                        <div class="col-xs-3">Hours(s)
-                          <HelpButton
-                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
-                        </div>
+                      <div class="col-sm-4">
+                        <select id="sla-2-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 2.1</label>
-                        </div>
-                        <div class="col-sm-4">
-                         <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
+                      <div class="col-sm-1">
+                        <label for="and-2-1" class="control-label">and</label>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
+                      <div class="col-sm-4">
+                        <select id="and-2-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 2.2</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-2-1" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-1" type="text" class="form-control">
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
+                      <div class="col-xs-3">
+                        <label for="week-2-1" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-2-1" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-2-1" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-1" type="text" class="form-control">
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 2.3</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 2.4</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 2.5</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                 <div rt-repeat="SLA1 in this.state.SLA1" key="{SLA1.key}">
-                     <div class="form-group" style="margin-bottom: 15px">
-                        <div class="col-md-6">
-                         <div class="row">
-                            <div class="col-sm-2">
-                              <label class="control-label">SLA 2.{ 6+ SLA1Index}</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-1">
-                              <label class="control-label">and</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  <a href="javascript:;" class="mt-md inline-block-item" onClick = "{this.addSLA.bind(this,2)}">Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                 </div>
 
-                <h3>Security Anomaly Detection</h3>
-
-                <div class="sub-block">
-
-                  <div class="sub-block-title">
-                    <h4>3. Security Anomaly Review Coordinator
-                      <HelpButton
-                            classMenu="overview_timeframe fix-overview-help-button"
-                            setValue="SLA assigned to the coordinator to review the security anomaly detected by 99." />
-                    </h4>
-                  </div>
-                  <div class="form-group hidden-sm hidden-xs">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-4">Confidentiality Level</div>
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-4">Category</div>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-2-2" class="control-label">SLA 2.2</label>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">Month(s)</div>
-                        <div class="col-xs-3">Week(s)</div>
-                        <div class="col-xs-3">Day(s)</div>
-                        <div class="col-xs-3">Hours(s)
-                          <HelpButton
-                            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                            setValue="SLA timeframes using  Month, Week, Day, Hour metrics." />
-                        </div>
+                      <div class="col-sm-4">
+                        <select id="sla-2-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 3.1</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
+                      <div class="col-sm-1">
+                        <label for="and-2-2" class="control-label">and</label>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
+                      <div class="col-sm-4">
+                        <select id="and-2-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 3.2</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-2-2" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-2" type="text" class="form-control">
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
+                      <div class="col-xs-3">
+                        <label for="week-2-2" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-2-2" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-2-2" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-2" type="text" class="form-control">
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 3.3</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 3.4</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-sm-2">
-                          <label class="control-label">SLA 3.5</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-1">
-                          <label class="control-label">and</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <select class="form-control populate placeholder">
-                            <option>All</option>
-                            <option>Public</option>
-                            <option>Internal</option>
-                            <option>Confidential</option>
-                            <option>Secret</option>
-                            <option>Banking Secrecy</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-               <div rt-repeat="SLA2 in this.state.SLA2" key="{SLA2.key}">
-                     <div class="form-group" style="margin-bottom: 15px">
-                        <div class="col-md-6">
-                         <div class="row">
-                            <div class="col-sm-2">
-                              <label class="control-label">SLA 3.{ 6+ SLA2Index}</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-1">
-                              <label class="control-label">and</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control populate placeholder">
-                                <option>All</option>
-                                <option>Public</option>
-                                <option>Internal</option>
-                                <option>Confidential</option>
-                                <option>Secret</option>
-                                <option>Banking Secrecy</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xs-3">
-                          <label class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  <a href="javascript:;" class="mt-md inline-block-item" onClick = "{this.addSLA.bind(this,3)}">Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-
                 </div>
-              </form>
-            </div>
-          </div>
-           <div class="text-right">
-            <button class="btn btn-green validate-btn" onClick = {this.nextStep}>
-                  Validate
-            </button>
 
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-2-3" class="control-label">SLA 2.3</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-2-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-2-3" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-2-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-2-3" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-2-3" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-2-3" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-2-3" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-3" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-2-4" class="control-label">SLA 2.4</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-2-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-2-4" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-2-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-2-4" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-2-4" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-2-4" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-2-4" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-4" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-2-5" class="control-label">SLA 2.5</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-2-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-2-5" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-2-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-2-5" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-2-5" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-2-5" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-2-5" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-5" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div rt-repeat="SLA1 in this.state.SLA1" key="{SLA1.key}">
+                  <div class="form-group" style="margin-bottom: 15px">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <label for="sla-2-{6 + SLA1Index}" class="control-label">SLA 2.{ 6 + SLA1Index}</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <select id="sla-2-{6 + SLA1Index}" class="form-control populate placeholder">
+                            <option>All</option>
+                            <option>Public</option>
+                            <option>Internal</option>
+                            <option>Confidential</option>
+                            <option>Secret</option>
+                            <option>Banking Secrecy</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-1">
+                          <label for="and-2-{6 + SLA1Index}" class="control-label">and</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <select id="and-2-{6 + SLA1Index}" class="form-control populate placeholder">
+                            <option>All</option>
+                            <option>Public</option>
+                            <option>Internal</option>
+                            <option>Confidential</option>
+                            <option>Secret</option>
+                            <option>Banking Secrecy</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <label for="month-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-2-{6 + SLA1Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="week-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-2-{6 + SLA1Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="day-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-2-{6 + SLA1Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="hour-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-2-{6 + SLA1Index}" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="javascript:;" class="mt-md inline-block-item" onClick="{this.addSLA.bind(this,2)}">
+                  Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </a>
+              </div>
+              <h3>Security Anomaly Detection</h3>
+              <div class="sub-block">
+                <div class="sub-block-title">
+                  <h4>3. Security Anomaly Review Coordinator
+                    <HelpButton
+                      classMenu="overview_timeframe fix-overview-help-button"
+                      setValue="SLA assigned to the coordinator to review the security anomaly detected by 99."/>
+                  </h4>
+                </div>
+                <div class="form-group hidden-sm hidden-xs">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-4">Confidentiality Level</div>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-4">Category</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">Month(s)</div>
+                      <div class="col-xs-3">Week(s)</div>
+                      <div class="col-xs-3">Day(s)</div>
+                      <div class="col-xs-3">Hours(s)
+                        <HelpButton
+                          classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                          setValue="SLA timeframes using  Month, Week, Day, Hour metrics."/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-3-1" class="control-label">SLA 3.1</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-3-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-3-1" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-3-1" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-3-1" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-3-1" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-3-1" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-1" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-3-1" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-1" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-3-2" class="control-label">SLA 3.2</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-3-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-3-2" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-3-2" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-3-2" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-3-2" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-3-2" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-2" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-3-2" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-2" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-3-3" class="control-label">SLA 3.3</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-3-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-3-3" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-3-3" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-3-3" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-3-3" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-3-3" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-3" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-3-3" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-3" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-3-4" class="control-label">SLA 3.4</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-3-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-3-4" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-3-4" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-3-4" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-3-4" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-3-4" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-4" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-3-4" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-4" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <label for="sla-3-5" class="control-label">SLA 3.5</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="sla-3-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-1">
+                        <label for="and-3-5" class="control-label">and</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select id="and-3-5" class="form-control populate placeholder">
+                          <option>All</option>
+                          <option>Public</option>
+                          <option>Internal</option>
+                          <option>Confidential</option>
+                          <option>Secret</option>
+                          <option>Banking Secrecy</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label for="month-3-5" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="week-3-5" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="day-3-5" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-5" type="text" class="form-control">
+                      </div>
+                      <div class="col-xs-3">
+                        <label for="hour-3-5" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-5" type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div rt-repeat="SLA2 in this.state.SLA2" key="{SLA2.key}">
+                  <div class="form-group" style="margin-bottom: 15px">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <label for="sla-3-{ 6 + SLA2Index}" class="control-label">SLA 3.{ 6 + SLA2Index}</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <select id="sla-3-{ 6 + SLA2Index}" class="form-control populate placeholder">
+                            <option>All</option>
+                            <option>Public</option>
+                            <option>Internal</option>
+                            <option>Confidential</option>
+                            <option>Secret</option>
+                            <option>Banking Secrecy</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-1">
+                          <label for="and-3-{ 6 + SLA2Index}" class="control-label">and</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <select id="and-3-{ 6 + SLA2Index}" class="form-control populate placeholder">
+                            <option>All</option>
+                            <option>Public</option>
+                            <option>Internal</option>
+                            <option>Confidential</option>
+                            <option>Secret</option>
+                            <option>Banking Secrecy</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <label for="month-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-3-{ 6 + SLA2Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="week-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-3-{ 6 + SLA2Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="day-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-3-{ 6 + SLA2Index}" type="text" class="form-control">
+                        </div>
+                        <div class="col-xs-3">
+                          <label for="hour-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-3-{ 6 + SLA2Index}" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="javascript:;" class="mt-md inline-block-item" onClick="{this.addSLA.bind(this,3)}">
+                  Add SLA <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </a>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
-
-    </div>
-
+        <div class="text-right">
+          <button class="btn btn-green validate-btn" onClick={this.nextStep}>
+            Validate
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

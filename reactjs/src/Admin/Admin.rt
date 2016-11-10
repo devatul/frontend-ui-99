@@ -1,55 +1,54 @@
-<rt-import name = "Step1" from="./Admin_Step1"/>
-<rt-import name = "Step2" from="./Admin_Step2"/>
-<rt-import name = "Step3" from="./Admin_Step3"/>
-<rt-import name = "Step4" from="./Admin_Step4"/>
-<rt-import name = "Step5" from="./Admin_Step5"/>
+<rt-import name="Step1" from="./Admin_Step1"/>
+<rt-import name="Step2" from="./Admin_Step2"/>
+<rt-import name="Step3" from="./Admin_Step3"/>
+<rt-import name="Step4" from="./Admin_Step4"/>
+<rt-import name="Step5" from="./Admin_Step5"/>
 
-
-<div style="margin-bottom : 30px" rt-scope = "this.state.step as step">
-    <div class="admin-page">
-        <div class="container" style="margin-top : 40px">
-            <div class="wizard-progress wizard-progress-lg">
-                <div class="steps-progress">
-                    <div class="progress-indicator" style="width: {step == 1 ? 0 : (step == 2 ? 25 : (step == 3 ? 50 : (step == 4 ?  75 : 100)))}%;"></div>
-                </div>
-                <ul class="wizard-steps">
-                    <li class="{step == 1 ? 'active' : 'completed'}" style="padding-left: 30px" onClick="{this.changeStep.bind(this,1)}">
-                        <a href="javascript:;"><span>1</span></a>
-                        <p align="center" style="font-weight: bold;">Business</p>
-                    </li>
-                    <li  class="{step == 2 ? 'active' : (step > 2 ? 'completed' : '' )}" style="padding-left: 192px" onClick="{this.changeStep.bind(this,2)}">
-                        <a href="javascript:;"><span>2</span></a>
-                        <p align="center" style="white-space: nowrap; margin-left: -24px; font-weight: bold;">Technology</p>
-                    </li>
-                    <li  class="{step == 3 ? 'active' : (step > 3 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,3)}">
-                        <a><span>3</span></a>
-                        <p align="center" style="margin-left: -9px; font-weight: bold;">Team</p>
-                    </li>
-                    <li  class="{step == 4 ? 'active' : (step > 4 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,4)}">
-                        <a><span>4</span></a>
-                        <p align="center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
-                    </li>
-                    <li  class="{step == 5 ? 'active' : (step > 5 ? 'completed' : '' )}" style="padding-left: 198px" onClick="{this.changeStep.bind(this,5)}">
-                        <a><span>5</span></a>
-                        <p align="center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
-                    </li>
-                </ul>
-            </div>
+<div style="margin-bottom: 30px;" rt-scope="this.state.step as step">
+  <div class="admin-page">
+    <div class="container" style="margin-top: 40px;">
+      <div class="wizard-progress wizard-progress-lg">
+        <div class="steps-progress">
+          <div class="progress-indicator" style="width: {step == 1 ? 0 : (step == 2 ? 25 : (step == 3 ? 50 : (step == 4 ?  75 : 100)))}%;"></div>
         </div>
-        <div  style="display : {step == 1 ? 'block' : 'none'}">
-            <Step1 nextStep = "{this.nextStep}" changeDatapage = {this.getDataPage1} />
-        </div>
-        <div style="display : {step == 2 ? 'block' : 'none'}">
-            <Step2 nextStep = "{this.nextStep}"/>
-        </div>
-        <div style="display : {step == 3 ? 'block' : 'none'}">
-            <Step3 nextStep = "{this.nextStep}"/>
-        </div>
-        <div style="display : {step == 4 ? 'block' : 'none'}">
-            <Step4 nextStep = "{this.nextStep}"/>
-        </div>
-        <div style="display : {step == 5 ? 'block' : 'none'}">
-            <Step5  dataBlock = {this.state.data} />
-        </div>
+        <ul class="wizard-steps">
+          <li class="{step == 1 ? 'active' : 'completed'}" style="padding-left: 30px" onClick="{this.changeStep.bind(this,1)}">
+            <a href="javascript:;"><span>1</span></a>
+            <p align="center" style="font-weight: bold;">Business</p>
+          </li>
+          <li class="{step == 2 ? 'active' : (step > 2 ? 'completed' : '' )}" style="padding-left: 192px" onClick="{this.changeStep.bind(this,2)}">
+            <a href="javascript:;"><span>2</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -24px; font-weight: bold;">Technology</p>
+          </li>
+          <li class="{step == 3 ? 'active' : (step > 3 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,3)}">
+            <a><span>3</span></a>
+            <p align="center" style="margin-left: -9px; font-weight: bold;">Team</p>
+          </li>
+          <li class="{step == 4 ? 'active' : (step > 4 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,4)}">
+            <a><span>4</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
+          </li>
+          <li class="{step == 5 ? 'active' : (step > 5 ? 'completed' : '' )}" style="padding-left: 198px" onClick="{this.changeStep.bind(this,5)}">
+            <a><span>5</span></a>
+            <p align="center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
+          </li>
+        </ul>
+      </div>
     </div>
+    <div style="display : {step == 1 ? 'block' : 'none'}">
+      <Step1 nextStep="{this.nextStep}" changeDatapage={this.getDataPage1} />
+    </div>
+    <div style="display : {step == 2 ? 'block' : 'none'}">
+      <Step2 nextStep="{this.nextStep}"/>
+    </div>
+    <div style="display : {step == 3 ? 'block' : 'none'}">
+      <Step3 nextStep="{this.nextStep}"/>
+    </div>
+    <div style="display : {step == 4 ? 'block' : 'none'}">
+      <Step4 nextStep="{this.nextStep}"/>
+    </div>
+    <div style="display : {step == 5 ? 'block' : 'none'}">
+      <Step5 dataBlock={this.state.data} />
+    </div>
+  </div>
 </div>

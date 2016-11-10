@@ -46,11 +46,11 @@ var ClassificationReview = React.createClass({
         }
       })
     });
+
     this.xhr.getReview = this.getClassificationReview();
     this.xhr.getCat = this.getCategories();
     this.xhr.getConfident = this.getConfidentialities();
   },
-
 
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.shouldUpdate;
@@ -304,7 +304,6 @@ var ClassificationReview = React.createClass({
         docIndex = parseInt(_index[1]),
         document = this.state.dataReview[reviewIndex].documents[docIndex];
 
-
     let updateStackChange = update(stackChange, {});
 
     if (!stackChange[reviewIndex]) {
@@ -433,7 +432,6 @@ var ClassificationReview = React.createClass({
       dataReview: updateData,
       shouldUpdate: true
     });
-
   },
 
   handleCheckAll(index, event) {
@@ -541,6 +539,7 @@ var ClassificationReview = React.createClass({
 
   getCategories() {
     let arr = [];
+
     return makeRequest({
       path: 'api/label/category/',
       success: (data) => {
@@ -552,6 +551,7 @@ var ClassificationReview = React.createClass({
 
   getConfidentialities() {
     let arr = [];
+
     return makeRequest({
       path: 'api/label/confidentiality/',
       success: (data) => {
