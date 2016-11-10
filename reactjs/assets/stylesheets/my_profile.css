@@ -682,15 +682,15 @@ select.record_select {
 }
 
 .column-progress {
-	width: 18%;
+	width: 21%;
 }
 
 .column-name {
-	width: 27% !important;
+	width: 25% !important;
 }
 
 .column-path {
-	width: 29%;
+	width: 25%;
 }
 
 
