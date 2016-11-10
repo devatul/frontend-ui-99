@@ -36,14 +36,29 @@
                             <Col md={12}>
                                 <Panel.custom class="panel-has-child panel-featured-compact panel-bordered">
                                     <Panel.head>
-                                        <h2 class="panel-title">Document Category Information</h2>
+                                        <Row>
+                                            <Col md={8} sm={6}>
+                                                <h2 class="panel-title">Document Category Information</h2>
+                                            </Col>
+                                            <Col md={4} sm={6} class="text-right">
+                                                <span>Number of Documents:
+                                                    <strong>
+                                                        { this.state.category.info.number_docs &&
+                                                            func.formatNumber(this.state.category.info.number_docs)}
+                                                    </strong>
+                                                </span>
+                                            </Col>
+                                        </Row>
+                                         <!-- <h2 class="panel-title">Document Category Information</h2>
                                         <div class="panel-actions">
                                             <span>Number of Documents:
-                                                <strong>{ this.state.category.info.number_docs &&
-                                                              func.formatNumber(this.state.category.info.number_docs)}</strong>
-                                              </span>
-                                              <!--a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a-->
-                                        </div>
+                                                <strong>
+                                                    { this.state.category.info.number_docs &&
+                                                        func.formatNumber(this.state.category.info.number_docs)}
+                                                </strong>
+                                            </span>
+                                              <!--a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a
+                                        </div> -->
                                     </Panel.head>
                                     <Panel.body class="tab-content tab-pane">
                                         <Row>
