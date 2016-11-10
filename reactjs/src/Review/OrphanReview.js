@@ -148,6 +148,21 @@ var OrphanReview = React.createClass({
       });
     }
   },
+  handleNextDocument(index) {
+      if(index <= (this.state.documents.length - 1)) {
+        let updateStack = update(this.state.stackChange, {
+            $push: [{
+                id: this.state.documentPreview,
+                data: Object.assign({}, this.state.documents[this.state.documentPreview])
+            }]
+        });
+          this.setState({
+              documentPreview: index,
+              stackChange: updateStack,
+              shouldUpdate: true
+          });
+      }
+    },
 
   handleTableRowOnClick(event, index) {
     switch (event.currentTarget.id) {
@@ -286,7 +301,7 @@ var OrphanReview = React.createClass({
 
   handleUndo() {
     if (this.state.stackChange.length > 0) {
-      let {documents, stackChange} = this.state,
+      let {documents, stackChange, documentPreview} = this.state,
           item = stackChange[stackChange.length - 1],
           updateDocuments = update(documents, {
             [item.id]: {
@@ -296,8 +311,11 @@ var OrphanReview = React.createClass({
           updateStack = update(stackChange, {
             $splice: [[stackChange.length - 1, 1]]
           });
+          if(item.id !== documentPreview ){
+            documentPreview = item.id;
+          }
 
-      this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
+          this.setState({ documents: updateDocuments, stackChange: updateStack, documentPreview: documentPreview, shouldUpdate: true });
     }
   },
 
