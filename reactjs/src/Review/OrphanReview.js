@@ -49,6 +49,7 @@ var OrphanReview = React.createClass({
     	};
     },
 
+
     componentDidMount() {
         this.getGroups();
         this.getCategories();
@@ -592,7 +593,7 @@ var OrphanReview = React.createClass({
         ];
 
         var updateChart = update(this.state.dataChart, {
-            cloudWords: {$set: word_list }
+            cloudWords: { $set: word_list }
         });
         this.setState({ dataChart: updateChart });
     },

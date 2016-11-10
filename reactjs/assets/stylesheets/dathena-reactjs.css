@@ -327,6 +327,35 @@ table.docPreview > thead > tr > th:nth-child(2) {
     margin-left: 5px;
 }
 
+@media (max-width: 500px) {
+    #centroidChartWrapper {
+        height: 135px;
+    }
+
+    .cendroid-chart-legend h5 {
+        text-align: left;
+    }
+
+    .cendroid-chart-legend.new {
+        width: 91%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .cendroid-chart-legend.new .document-symbol {
+        display: inline-block;
+        padding: 0px;
+        width: initial;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .cendroid-chart-legend.new .document-symbol i {
+        display: block;
+        margin: auto;
+    }
+}
+
 /* fix label progress bar */
 .dathena-progress.style-2.fix-label {
     padding-right: 0px;

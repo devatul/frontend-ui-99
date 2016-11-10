@@ -43,6 +43,8 @@ var CentroidChart = React.createClass({
             events: {
                 load: function () {
                 var chart = this;
+                var weight = $(window).innerWidth() < 500 ? 25 : 100;
+
                 $(chart.series).each(function (i, serie) {
                     var documentNum = serie.data[1].weight;
                     var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
@@ -51,8 +53,8 @@ var CentroidChart = React.createClass({
                     serie.graph.attr({
                         stroke: colorsCentroid[distance-1]
                     });
-                    serie.options.marker.radius = documentNum*3+1;
-                    serie.options.marker.states.hover.radius = documentNum*3+2;
+                    serie.options.marker.radius = ((documentNum*3+1)/100) * weight;
+                    serie.options.marker.states.hover.radius = ((documentNum*3+2)/100) * weight;
                     $.each(points, function (i, e) {
                         var pt = e;
                         pt.color = colorsCentroid[distance-1];
@@ -65,7 +67,7 @@ var CentroidChart = React.createClass({
             },
 
             credits: {
-            enabled: false
+                enabled: false
             },
 
             title: {
@@ -73,50 +75,50 @@ var CentroidChart = React.createClass({
             },
 
             pane: {
-            startAngle: -90,
-            endAngle: 90
+                startAngle: -90,
+                endAngle: 90
             },
 
             xAxis: {
-            tickInterval: 90,
-            min: 0,
-            max: 360,
-            labels: {
-                enabled: false
-            },
-            plotLines: [{
-                color: '#BFDDF7',
-                width: 2,
-                value: [0, 2],
-                zIndex: 1
-            }]
+                tickInterval: 90,
+                min: 0,
+                max: 360,
+                labels: {
+                    enabled: false
+                },
+                plotLines: [{
+                    color: '#BFDDF7',
+                    width: 2,
+                    value: [0, 2],
+                    zIndex: 1
+                }]
             },
 
             yAxis: {
-            min: -5,
-            tickInterval: 5,
-            plotBands: [{
-                from: 0,
-                to: 5,
-                color: '#EDEDED'
-            },{
-                from: 5,
-                to: 10,
-                color: '#F2F2F2'
-            },{
-                from: 10,
-                to: 15,
-                color: '#F7F7F7'
-            },{
-                from: 15,
-                to: 20,
-                color: '#FCFCFC'
-            }],
-            labels: {
-                formatter: function() {
-                return this.value >= 0 ? this.value : null;
-                },
-            }
+                min: -5,
+                tickInterval: 5,
+                plotBands: [{
+                    from: 0,
+                    to: 5,
+                    color: '#EDEDED'
+                },{
+                    from: 5,
+                    to: 10,
+                    color: '#F2F2F2'
+                },{
+                    from: 10,
+                    to: 15,
+                    color: '#F7F7F7'
+                },{
+                    from: 15,
+                    to: 20,
+                    color: '#FCFCFC'
+                }],
+                labels: {
+                    formatter: function() {
+                    return this.value >= 0 ? this.value : null;
+                    },
+                }
             },
 
             plotOptions: {
