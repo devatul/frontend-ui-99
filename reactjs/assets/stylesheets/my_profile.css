@@ -667,7 +667,6 @@ select.record_select {
 }
 
 .table-fixed-width {
-	width: 100%;
 	table-layout: fixed;
 }
 
