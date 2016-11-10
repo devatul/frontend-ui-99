@@ -109,7 +109,9 @@ var CentroidChart = React.createClass({
           color: '#FCFCFC'
         }],
         labels: {
-          formatter: () => this.value >= 0 ? this.value : null
+          formatter: function() {
+            return this.value >= 0 ? this.value : null;
+          }
         }
       },
       plotOptions: {
@@ -129,7 +131,9 @@ var CentroidChart = React.createClass({
         enabled: false
       },
       tooltip: {
-        formatter: () => 'Documents:' + this.series.data[1].document + '<br>' + 'Distance:' + this.y,
+        formatter: function() {
+          return 'Documents:'+ this.series.data[1].document + '<br>' +'Distance:' + this.y;
+        },
         useHTML: true
       },
       series: series
