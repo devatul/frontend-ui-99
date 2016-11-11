@@ -5,6 +5,7 @@ import template from './DataLoss.rt'
 import update from 'react-addons-update'
 import Constant from '../Constant.js'
 import 'jquery'
+import { getDataLoss } from '../utils/function'
 
 var DataLost = React.createClass({
     getInitialState() {
@@ -24,15 +25,7 @@ var DataLost = React.createClass({
     },
     getDataLoss() {
 
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/insight/data-loss/',
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getDataLoss({
             success: function(data) {
 
                 // TODO: refactor with MenuBar.js

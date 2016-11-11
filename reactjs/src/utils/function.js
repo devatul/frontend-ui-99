@@ -1,5 +1,6 @@
-import { _confidentialities } from '../Constant'
+import { _confidentialities, urls } from '../Constant'
 import { makeRequest } from '../utils/http'
+import { getCategories, getConfidentialities, getLanguages, getDoctypes} from "../utils/function"
 
 module.exports = {
     formatNumber: (nStr) => {
@@ -95,22 +96,87 @@ module.exports = {
     },
     
     getCategories: (options) => {
-        options.path = 'api/label/category/'
+        options.path = urls.CATEGORY;
         makeRequest(options);
     },
 
     getConfidentialities: (options) => {
-        options.path = 'api/label/confidentiality/'
+        options.path = urls.CONFIDENTIAL;
         makeRequest(options);
     },
 
     getDoctypes: (options) => {
-        options.path = 'api/label/doctypes/'
+        options.path = urls.DOCTYPES;
         makeRequest(options);
     },
 
     getLanguages: (options) => {
-        options.path = 'api/label/languages/'
+        options.path = urls.LAGNUAGES;
         makeRequest(options);
+    },
+
+    getRole: (options) => {
+        options.path = urls.ROLES;
+        makeRequest(options);
+    },
+
+    getProfile: (options) => {
+        options.path = urls.PROFILE;
+        makeRequest(options);
+    },
+    
+    setProfile: (options) => {
+        options.path = urls.PROFILE;
+        options.method = "PUT";
+        makeRequest(options)
+    },
+
+    getPhoto: (options) => {
+        options.path = urls.PHOTO;
+        makeRequest(options);
+    },
+
+    setPhoto: (options) => {
+        options.path = urls.PHOTO
+        options.method = "PUT"
+        makeRequest(options)
+    },
+
+    setTokenAuth: (options) => {
+        options.path = urls.TOKEN
+        options.method = "POST";
+        makeRequest(options);
+    }, 
+
+    setEmail: (options) => {
+        options.path = urls.EMAIL;
+        options.method = "PUT";
+        makeRequest(options);
+    },
+
+    setPassword: (options) => {
+        options.path = urls.PASSWORD;
+        options.method = "PUT";
+        makeRequest(options)
+    },
+
+    getNotification: (options) => {
+        if (options.urgency)
+            options.path = urls.NOTIFICATION + '?urgency=' + options.urgency;
+        else if (options.period) 
+            options.path = urls.NOTIFICATION + '?period=' + options.period
+        else 
+            return null
+        makeRequest(path); 
+    },
+
+    getDataLose: (options) => {
+        options.path = urls.DATALOSE
+        makeRequest(options)
+    },
+
+    getDataRisk: (options) => {
+        options.path = urls.DATARISK + "?number_users=" + options.number_users;
+        makeRequest(options)
     }
 }

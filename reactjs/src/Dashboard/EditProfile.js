@@ -5,6 +5,7 @@ import template from './EditProfile.rt'
 import Constant from '../Constant.js';
 import $, { JQuery } from 'jquery';
 import update from 'react/lib/update';
+import { getProfile, setProfile, getPhoto, setPhoto, setEmail, setPassword } from '../utils/function'
 
 module.exports = React.createClass({
 	propTypes : {
@@ -277,24 +278,7 @@ module.exports = React.createClass({
 		}
 
 
-		$.ajax({
-			url: Constant.SERVER_API + 'api/account/profile/',
-			dataType: 'json',
-			type: 'PUT',
-			data: {
-				"windows_id": this.state.profile.windows_id,
-				"company_name":this.state.profile.company_name,
-				"corporate_email": this.state.profile.corporate_email,
-				"department": this.state.profile.department,
-				"location": this.state.profile.location,
-				"corporate_phone" :  this.state.profile.corporate_phone,
-				"corporate_mobile" : this.state.profile.corporate_mobile,
-				"use_active_directory" : this.state.profile.use_active_directory,
-				"enable_sso" : this.state.profile.enable_sso,
-			},
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-			},
+		setProfile({
 			success: function(data) {
 				browserHistory.push('/Dashboard/Profile');
 				console.log(data.token);
@@ -315,16 +299,8 @@ module.exports = React.createClass({
 
 
 	changePhoto:function(){
-		$.ajax({
-			url: Constant.SERVER_API + 'api/account/change_photo/',
-			dataType: 'json',
-			type: 'PUT',
-			data: {
-
-			},
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-			},
+		setPhoto({
+			params: {},
 			success: function(data) {
 				console.log("ChangePass: ", data);
 			}.bind(this),
@@ -388,35 +364,29 @@ module.exports = React.createClass({
 
 
 
-		$.ajax({
-			url: Constant.SERVER_API + 'api/account/change_email/',
-			dataType: 'json',
-			type: 'PUT',
-			data: {
+		setEmail({
+			params: {
 				"current_password":this.state.CurrentPass,
 				"email" :this.state.NewEmail,
-			},
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 
 			/*	this.setState({success: data.statusText});
 			console.log("ChangeEmail: ", data);*/
-		}.bind(this),
-		error: function(xhr, status, error) {
-			alert("error")
-			console.log(xhr);
-/*
-				var jsonResponse = JSON.parse(xhr.responseText);
-				this.setState( {errorEmail: jsonResponse});*/
-				//console.log(jsonResponse);
-				if(xhr.status === 401)
-				{
-					browserHistory.push('/Account/SignIn');
-				}
-			}.bind(this)
-		});
+			}.bind(this),
+			error: function(xhr, status, error) {
+				alert("error")
+				console.log(xhr);
+	/*
+					var jsonResponse = JSON.parse(xhr.responseText);
+					this.setState( {errorEmail: jsonResponse});*/
+					//console.log(jsonResponse);
+					if(xhr.status === 401)
+					{
+						browserHistory.push('/Account/SignIn');
+					}
+				}.bind(this)
+			});
 
 	},
 
@@ -472,24 +442,17 @@ module.exports = React.createClass({
 		}
 
 
-		$.ajax({
-			url: Constant.SERVER_API + 'api/account/change_password/',
-			dataType: 'json',
-			type: 'PUT',
-			data: {
+		setPassword({
+			params: {
 				"current_password":this.state.CurrentPassforChangePass,
 				"new_password" :this.state.NewPass,
 				"confirm_password" : this.state.ConfirmPass
-			},
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
 			},
 			success: function(data) {
 				alert("success");
 				console.log("ChangePass: ", data);
 			}.bind(this),
 			error: function(xhr, status, error) {
-
 				console.log(xhr);
 				var jsonResponse = JSON.parse(xhr.responseText);
 				this.setState( {error: jsonResponse});
@@ -506,21 +469,13 @@ module.exports = React.createClass({
 
 	uploadFile : function(fd) {
 			console.log('fd',fd)
-		    $.ajax({
-		    	url: Constant.SERVER_API + 'api/account/change_photo/',
-		    	dataType: 'json',
-		    	type: 'PUT',
-		    	data: fd,
+		    setPhoto({
+		    	param: fd,
 		    	processData: false,
-		    	beforeSend: function(xhr) {
-		    		xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-		    	},
 		    	success: function(data) {
 		    		browserHistory.push('/Dashboard/Profile');
-
 		    	}.bind(this),
 		    	error: function(xhr, status, error) {
-
 		    		console.log(xhr);
 		    		var jsonResponse = JSON.parse(xhr.responseText);
 		    		console.log(jsonResponse);
@@ -530,18 +485,10 @@ module.exports = React.createClass({
 		    		}
 		    	}.bind(this)
 		    });
-
-
 	},
 
 componentWillMount(){
-	$.ajax({
-		url: Constant.SERVER_API + 'api/account/profile/',
-		dataType: 'json',
-		type: 'GET',
-		beforeSend: function(xhr) {
-			xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-		},
+	getProfile({
 		success: function(data) {
 
 			this.setState( {profile: data});
@@ -558,17 +505,9 @@ componentWillMount(){
 			}
 		}.bind(this)
 	});
-	$.ajax({
-		url: Constant.SERVER_API + 'api/account/change_photo/',
-		dataType: 'json',
-		type: 'GET',
-		beforeSend: function(xhr) {
-			xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-		},
+	getPhoto({
 		success: function(data) {
-
 			this.setState( {photo: data});
-
 			console.log("photo: ", photo);
 		}.bind(this),
 		error: function(xhr, status, error) {

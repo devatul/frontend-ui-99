@@ -102,5 +102,20 @@ module.exports = {
         ERROR_400 : "The username and password you entered don't match" ,
         ERROR_500_599 : "Connection failed. Please retry later." ,
         ERROR_ : "An error occurred"
-    }
+    },
+	urls: {
+		CATEGORY: "api/label/category/",
+		CONFIDENTIAL: "api/label/confidentiality/",
+		DOCTYPES: "api/label/doctypes/",
+		LAGNUAGES: "api/label/languages/",
+		ROLES: "api/account/role/",
+		PROFILE: "api/account/profile/",
+		PHOTO: "api/account/change_photo/",
+		TOKEN: "http://54.169.106.24/api-token-auth/",
+		EMAIL: "api/account/change_email/",
+		PASSWORD: "api/account/change_password/",
+		NOTIFICATION: "api/notification/",
+		DATALOSE: "api/insight/data-loss/",
+		DATARISK: "api/insight/data-risk/"
+	}
 };

@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './PasswordNew.rt';
 import $ from 'jquery'
+import { setTokenAuth } from '../utils/function'
+
 var PasswordNew = React.createClass({
   getInitialState() {
 	    return {
@@ -38,11 +40,8 @@ var PasswordNew = React.createClass({
 	        },
 	        submitHandler(form) 
 	        {
-			   	$.ajax({
-				    type: "POST",
-				    url:'http://54.169.106.24/api-token-auth/',
-				    dataType: 'json',
-				    data: {},
+			   	setTokenAuth({
+				    params: {},
 				   	success: function(data) 
 				   	{
 				        browserHistory.push('/Account/resetConfirmation');

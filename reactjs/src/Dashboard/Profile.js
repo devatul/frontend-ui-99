@@ -4,6 +4,8 @@ import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Profile.rt'
 import Constant from '../Constant.js';
 import $, { JQuery } from 'jquery';
+import { getProfile, getPhoto } from '../utils/function'
+
 module.exports = React.createClass({
   	getInitialState() {
 	    return {
@@ -14,16 +16,9 @@ module.exports = React.createClass({
 		this.getProfile();
 		this.getPhoto();	
 	},
-	getProfile(){
-		$.ajax({
-            url: Constant.SERVER_API + 'api/account/profile/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+	getProfile() {
+		getProfile({
             success: function(data) {
-            	
                 this.setState( {profile: data});
                 console.log("scan result: ", data);
             }.bind(this),
@@ -39,17 +34,9 @@ module.exports = React.createClass({
         });
 	},
 	getPhoto(){
-		$.ajax({
-			url: Constant.SERVER_API + 'api/account/change_photo/',
-			dataType: 'json',
-			type: 'GET',
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-			},
+		getPhoto({
 			success: function(data) {
-
 				this.setState( {photo: data});
-
 				console.log("photo: ", this.state.photo);
 			}.bind(this),
 			error: function(xhr, status, error) {

@@ -7,6 +7,7 @@ import _ from 'lodash'
 //import $ from 'jquery'
 import { makeRequest } from '../utils/http'
 import Constant from '../Constant.js';
+import { getRole } from '../utils/function'
 
 module.exports = React.createClass({
     getInitialState() {
@@ -111,13 +112,7 @@ module.exports = React.createClass({
     },
     componentDidMount() {
         console.log("Didcmoit");
-        $.ajax({
-            url: Constant.SERVER_API + 'api/account/role/',
-            dataType: 'json',
-            type: 'GET',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getRole({
             success: function(data) {
                 this.setState({ role: data.role });
                 console.log("role: ", this.state.role);

@@ -6,6 +6,7 @@ import 'jquery'
 import Constant from '../Constant.js'
 import javascriptOver from '../script/javascript-overview.js'
 import javascript from '../script/javascript.js'
+import { getDataRisk } from '../utils/function'
 
  var DataRisk= React.createClass({
   	getInitialState() {
@@ -14,15 +15,8 @@ import javascript from '../script/javascript.js'
 	    };
 	},
     getData() {
-        $.ajax({
-
-            url: Constant.SERVER_API + 'api/insight/data-risk?number_users=5',
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getDataRisk({
+            number_users: "5",
             success: function(data) {
                 console.log('data', data)
                this.setState(Object.assign({}, this.state, {dataRisk : data}));
@@ -54,17 +48,10 @@ import javascript from '../script/javascript.js'
             value = 50
         }
         this.setState(Object.assign({}, this.state, {numberUser : value}));
-        $.ajax({
+        getDataRisk({
 
-            url: Constant.SERVER_API + 'api/insight/data-risk?number_users='+value,
-            dataType: 'json',
-            type: 'GET',
-
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+            number_users: value,
             success: function(data) {
-
                 console.log('data', data)
                 this.setState(Object.assign({}, this.state, {dataRisk : data}));
                /* this.setState({ rickInsight: data })*/
