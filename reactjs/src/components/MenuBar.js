@@ -38,7 +38,7 @@ var MenuBar = React.createClass
 
             selectOpened: false,
 
-            scanResult: {},
+            scanResult: {}
 	    };
 	},
 	propTypes: {
