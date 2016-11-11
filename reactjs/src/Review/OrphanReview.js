@@ -75,6 +75,7 @@ var OrphanReview = React.createClass({
   },
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('this.state',this.state)
     return nextState.shouldUpdate;
   },
 
@@ -138,9 +139,14 @@ var OrphanReview = React.createClass({
   handleNextOrphan() {
     let {index} = this.state.orphanCurrent,
         orphan = Object.assign({}, this.state.orphans[index + 1], {index: index + 1});
-
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          documents:this.state.documents
+        }]
+    });
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
+        stackChange: updateStack,
         orphanCurrent: orphan,
         shouldUpdate: true,
         documents: [],
@@ -302,20 +308,28 @@ var OrphanReview = React.createClass({
   handleUndo() {
     if (this.state.stackChange.length > 0) {
       let {documents, stackChange, documentPreview} = this.state,
-          item = stackChange[stackChange.length - 1],
-          updateDocuments = update(documents, {
-            [item.id]: {
-              $set: item.data
+          item = stackChange[stackChange.length - 1];
+          if(item.documents){
+            let updateDocuments = item.documents,
+            updateStack = update(stackChange, {
+              $splice: [[stackChange.length - 1, 1]]
+            });
+            this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+          }else{
+            let updateDocuments = update(documents, {
+              [item.id]: {
+                $set: item.data
+              }
+            }),
+            updateStack = update(stackChange, {
+              $splice: [[stackChange.length - 1, 1]]
+            });
+            if(item.id !== documentPreview ){
+              documentPreview = item.id;
             }
-          }),
-          updateStack = update(stackChange, {
-            $splice: [[stackChange.length - 1, 1]]
-          });
-          if(item.id !== documentPreview ){
-            documentPreview = item.id;
+            this.setState({ documents: updateDocuments, stackChange: updateStack, documentPreview: documentPreview, shouldUpdate: true });
           }
 
-          this.setState({ documents: updateDocuments, stackChange: updateStack, documentPreview: documentPreview, shouldUpdate: true });
     }
   },
 
@@ -454,7 +468,7 @@ var OrphanReview = React.createClass({
         this.setState({
           documents: res,
           shouldUpdate: true,
-          oadingdocuments: false,
+          loadingdocuments: false,
           getdocumenterror: false
         });
       },
