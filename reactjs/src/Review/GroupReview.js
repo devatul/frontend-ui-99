@@ -180,7 +180,6 @@ var GroupReview = React.createClass({
               data: Object.assign({}, this.state.documents[index])
             }]
           });
-          console.log('updateDocuments',updateDocuments)
           this.updateOnchange(updateDocuments);
 
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
