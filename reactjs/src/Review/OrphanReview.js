@@ -75,7 +75,6 @@ var OrphanReview = React.createClass({
   },
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('this.state',this.state)
     return nextState.shouldUpdate;
   },
 
