@@ -110,14 +110,13 @@ let Indentity = React.createClass({
             height_1 = _.size(key_contributor[0].contributors.categories) * 40;
         } else {
             height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-
             if (length == 3) {
                 height_2 = _.size(key_contributor[2].contributors.categories) * 40;
             } else if (length == 4) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
             } else if (length == 5) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-                height_3 = _.size(key_contributor[5].contributors.categories) * 40;
+                height_3 = _.size(key_contributor[4].contributors.categories) * 40;
             } else if (length == 6) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
                 height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;

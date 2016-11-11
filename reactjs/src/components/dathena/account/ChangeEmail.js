@@ -19,7 +19,6 @@ var ChangeEmail = React.createClass({
 
     },
     getValueInput(event) {
-        debugger
         let datas = _.cloneDeep(this.state.data),
             value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
         datas = _.assignIn(datas, {[event.target.name]: value});

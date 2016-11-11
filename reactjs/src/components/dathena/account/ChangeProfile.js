@@ -9,13 +9,17 @@ var ChangeProfile = React.createClass({
 
     getInitialState() {
         return {
-            default: this.props.setDefault,
-            style: 'collapse',
             data : {}
         }
     },
-    getValueInput(event) {
+    shouldComponentUpdate(nextProps , nextState) {
         debugger
+        if( _.isEqual(this.state.data, nextState.data) && _.isEqual(this.props.profile, nextProps.profile)) {
+            return false
+        }
+        return true
+    },
+    getValueInput(event) {
         let datas = _.cloneDeep(this.state.data),
             value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
 
@@ -40,9 +44,11 @@ var ChangeProfile = React.createClass({
     },
 
     render() {
-        debugger
-        let {profile} = this.props
-        let child = <div className="row">
+
+        let {profile} = this.props ,
+            child = null
+        if(profile != null) {
+            let child = <div className="row">
                         <div className="profile-details-left col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Windows ID</label>
@@ -136,6 +142,8 @@ var ChangeProfile = React.createClass({
                             </div>
                         </div>
                     </div>
+        }
+
         return(
             <div>
                 {child}

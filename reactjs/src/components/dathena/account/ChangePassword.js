@@ -21,7 +21,6 @@ var ChangePass = React.createClass({
         setTarget: PropTypes.string
     },
     getValueInput(event) {
-        debugger
         let datas = _.cloneDeep(this.state.data),
             value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
 
