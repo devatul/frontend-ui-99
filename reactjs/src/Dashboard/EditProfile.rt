@@ -2,7 +2,7 @@
 <rt-import name ="MyTeam" from ="./MyTeam"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="Upload" from="../Insight/components/Upload"/>
-
+<rt-import name="Input" from="../components/dathena/ValidateInput"/>
 
 <div class="container">
   <div class="tabs tabs-primary">

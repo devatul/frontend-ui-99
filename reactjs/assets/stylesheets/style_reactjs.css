@@ -522,3 +522,13 @@ img {
          overflow-x: auto;
     }
 }
+@media (max-width: 480px) {
+    .anomaly-title {
+        font-size: 15px;
+        font-weight: normal;
+        margin-bottom: 15px;
+        margin-top: 0;
+        white-space: normal;
+    }
+}
+

@@ -1,3 +1,5 @@
+<rt-import name="Input" from="../components/dathena/ValidateInput"/>
+
 <section class="body-sign">
   <div class="center-sign">
     <a href="/" class="logo pull-left">
@@ -12,18 +14,18 @@
         <form id="submitForm" novalidate="novalidate">
           <div class="form-group mb-lg">
             <label for="userName">Username</label>
-            <input name="userName" type="text" id="userName" class="form-control input-md" onChange={this.getValueInput} />
-            <div id="usernameExits" class="error"></div>
+             <Input name="username" type="text" id="userName" class="form-control input-md" validate = "required" minlength={6}  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.username} />
           </div>
 
           <div class="form-group mb-lg">
             <label for="password">Password</label>
-            <input name="password" id="password" type="password" class="form-control input-md" onChange={this.getValueInput} />
+            <Input name="password" id="password" type="password" class="form-control input-md" validate = "required" minlength={6}  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.password} />
           </div>
 
           <div class="form-group mb-lg">
             <label for="pwd_confirm">Confirm your password</label>
-            <input name="pwd_confirm" id="pwd_confirm" type="password" class="form-control input-md" />
+            <input name="pwd_confirm" id="pwd_confirm" type="password" class="form-control input-md {this.state.messageEqual == '' ? '' : 'has-error'}" onChange={this.checkEqualPass} />
+            <span className="error">{this.state.messageEqual}</span>
           </div>
 
           <div class="form-group mb-lg">
@@ -35,18 +37,17 @@
 
           <div class="form-group mb-lg">
             <label for="first_name">First name</label>
-            <input name="first_name" type="text" class="form-control input-md" id="first_name" onChange={this.getValueInput} />
+            <Input name="firstname" type="text" class="form-control input-md" id="first_name" validate = "required"  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.firstname} />
           </div>
 
           <div class="form-group mb-lg">
             <label for="last_name">Last name</label>
-            <input name="last_name" type="text" class="form-control input-md" id="last_name" onChange={this.getValueInput} />
+            <Input name="lastname" type="text" class="form-control input-md" id="last_name" validate = "required"  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.lastname} />
           </div>
 
           <div class="form-group mb-lg">
             <label for="email">Corporate E-mail</label>
-            <input name="email" id="email" type="text" class="form-control input-md" onChange={this.getValueInput} />
-            <div id="emailExits" class="error"></div>
+            <Input name="email" id="email" type="text" class="form-control input-md" validate = "required,email"  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.email} />
           </div>
 
           <div class="form-group mb-lg">
@@ -71,7 +72,7 @@
 
           <div class="form-group mb-lg">
             <label for="company">Company name</label>
-            <input name="company" type="text" class="form-control input-md" id="company" onChange={this.getValueInput} />
+            <Input name="company" type="text" class="form-control input-md" id="company" validate = "required"  onChange="{this.getValueInput}" check = "{this.state.check}" data = {this.state.data_submit.company} />
           </div>
 
           <div class="form-group mb-lg">
@@ -89,11 +90,11 @@
               <div class="checkbox-default">
                 <input id="agree" name="agree" type="checkbox" value={this.state.agree} onChange={this.agreeChange} />
                 <label for="agree">I agree with <a href="#">Terms and Conditions</a></label>
+                <p className="error">{this.state.messageUnAgree}</p>
               </div>
             </div>
             <div class="col-sm-4 text-right mb-md">
-              <button type="submit" class="btn btn-green hidden-xs">Register</button>
-              <!-- <button type="submit" class="btn btn-green btn-block btn-lg visible-xs mt-lg" onClick={this.registration}>Register</button> -->
+              <a  class="btn btn-green hidden-xs" onClick="{this.submitHandler}">Register</a>
             </div>
           </div>
         </form>
