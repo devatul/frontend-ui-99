@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
 import Constant from '../Constant.js';
+import { makeRequest } from '../utils/http'
 import $, { JQuery } from 'jquery';
 import update from 'react/lib/update';
 

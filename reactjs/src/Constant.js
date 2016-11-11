@@ -116,10 +116,10 @@ module.exports = {
         pwd_confirm: {
             required: "Please enter the same value again"
         },
-        first_name: {
+        firstname: {
             required: "Please enter your first name",
         },
-        last_name: {
+        lastname: {
             required:  "Please enter your first name",
         },
         email: {

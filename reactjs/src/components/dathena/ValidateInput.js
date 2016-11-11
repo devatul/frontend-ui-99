@@ -33,18 +33,20 @@ var Input = React.createClass({
     },
 
     componentDidUpdate(prevProps , prevState){
-         if (this.props.check !=  prevProps.check) {
-             this.validate(this.props.data)
-        }
+
+            if(this.props.check){
+                 this.validate(this.props.data , this.props.name)
+            }
+
     },
 
-    validate(event) {
+    validate(event , name) {
         debugger
         if(event == undefined) {
-            this.setState({error : 'aaaa'}) ;
+            this.setState({error : 'Please enter your ' + this.props.name}) ;
             return
-        }
-        let value = event.target.value == undefined ? event : event.target.value,
+        }   else {
+            let value = event.target == undefined ? event : event.target.value,
             { validate , name , minlength} = this.props,
             message = '',
             listValidate = _.split(validate , ',');
@@ -66,9 +68,11 @@ var Input = React.createClass({
                     message =  minlength > value.length ? this.getMessage(name).minlength : '';
                     this.setState({ error: message })
                 }
-                 this.props.onChange(event , message)
+                 this.props.onChange(event , name)
 
             }
+        }
+
     },
    /* onChange(event) {
         let value = _.trim(event.target.value);
@@ -93,7 +97,6 @@ var Input = React.createClass({
         }
     },
     checkedNull(value , name){
-        debugger
         let message = value == "" ? this.getMessage(name).required : '';
         this.setState({ error: message })
         return message
@@ -112,9 +115,9 @@ var Input = React.createClass({
         return message
     },
     onChange(event) {
-        debugger
+
         let value = event.target.value
-        this.validate(event);
+        this.validate(event , this.props.name);
 
     },
     render() {
