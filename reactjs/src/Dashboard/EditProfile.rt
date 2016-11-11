@@ -8,63 +8,62 @@
 <rt-import name="Input" from="../components/dathena/ValidateInput"/>
 
 <div class="container">
-  <div class="tabs tabs-primary">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
-      </li>
-      <li class="">
-        <a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-
-      <div id="my_team" class=" tab-pane my-team-content">
-        <MyTeam/>
-      </div>
-      <div id="my_profile" class="my-profile-edit tab-pane active">
-
-        <div class="mpe_top">
-          <Link to="/Dashboard/Profile"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Back to Profile</Link>
-          <h4 class="mpe_top_h4">Edit Profile</h4>
+    <div class="tabs tabs-primary">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
+            </li>
+            <li class="">
+                <a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="my_team" class=" tab-pane my-team-content">
+                <MyTeam/>
+            </div>
+            <div id="my_profile" class="my-profile-edit tab-pane active">
+                <div class="mpe_top">
+                    <Link to="/Dashboard/Profile"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>Back to Profile</Link>
+                    <h4 class="mpe_top_h4">Edit Profile</h4>
+                </div>
+                <div class="my-profile-edit-content">
+                    <div class="tabs tabs-vertical tabs-left tabs-primary">
+                        <ul class="nav nav-tabs col-sm-2 col-xs-12">
+                            <li class="active">
+                                <a href="#profile_details" data-toggle="tab" aria-expanded="true">Profile Details</a>
+                            </li>
+                            <li class="">
+                                <a href="#photo" data-toggle="tab" aria-expanded="false">Photo</a>
+                            </li>
+                            <li class="">
+                                <a href="#change_email" data-toggle="tab" aria-expanded="false">Change Email</a>
+                            </li>
+                            <li class="">
+                                <a href="#password" data-toggle="tab" aria-expanded="false">Password</a>
+                            </li>
+                        </ul>
+                        <div class="mpe-content-right">
+                            <div class="mpe-tab-content tab-content">
+                                <div id="profile_details" class="mpe-tab-pane tab-pane active">
+                                    <h4 class="mpe_top_h4">Change Personal Details</h4>
+                                    <ChangeProfile profile = "{this.state.profile}"/>
+                                </div>
+                                <div id="photo" class="mpe-tab-pane tab-pane">
+                                    <Upload upload={this.uploadFile} title="class"/>
+                                </div>
+                                <div id="change_email" class="mpe-tab-pane tab-pane">
+                                    <h4 class="mpe_top_h4">Change Email Address</h4>
+                                        <ChangeEmail />
+                                </div>
+                                <div id="password" class="mpe-tab-pane tab-pane">
+                                    <h4 class="mpe_top_h4">Change Password</h4>
+                                    <ChangePass />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="my-profile-edit-content">
-          <div class="tabs tabs-vertical tabs-left tabs-primary">
-            <ul class="nav nav-tabs col-sm-2 col-xs-12">
-              <li class="active">
-                <a href="#profile_details" data-toggle="tab" aria-expanded="true">Profile Details</a>
-              </li>
-              <li class="">
-                <a href="#photo" data-toggle="tab" aria-expanded="false">Photo</a>
-              </li>
-              <li class="">
-                <a href="#change_email" data-toggle="tab" aria-expanded="false">Change Email</a>
-              </li>
-              <li class="">
-                <a href="#password" data-toggle="tab" aria-expanded="false">Password</a>
-              </li>
-            </ul>
-            <div class="mpe-content-right">
-              <div class="mpe-tab-content tab-content">
-                <div id="profile_details" class="mpe-tab-pane tab-pane active">
-                  <h4 class="mpe_top_h4">Change Personal Details</h4>
-                  <ChangeProfile profile = "{this.state.profile}"/>
-                </div>
-                <div id="photo" class="mpe-tab-pane tab-pane">
-                  <Upload upload={this.uploadFile} title="class"/>
-                </div>
-                <div id="change_email" class="mpe-tab-pane tab-pane">
-                  <h4 class="mpe_top_h4">Change Email Address</h4>
-                  <ChangeEmail />
-                </div>
-                <div id="password" class="mpe-tab-pane tab-pane">
-                  <h4 class="mpe_top_h4">Change Password</h4>
-                  <ChangePass />
-                </div>
-          </div>
-        </div>
-
     </div>
-  </div>
 </div>
-
