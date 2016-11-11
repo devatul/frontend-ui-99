@@ -31,7 +31,9 @@ var DocumentReview = React.createClass({
             current: {
                 docIndex: 0,
                 review: "actionsReview",
-                actionIndex: 0
+                actionIndex: 0,
+                hasNextDocument: false,
+                isNextCategory: false
             },
             stackChange: {
                 challengedDocs: {},
@@ -150,6 +152,25 @@ var DocumentReview = React.createClass({
     handleTableRowOnClick(actionIndex, docIndex, Review, event) {
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
+        let dataReviews = this.state[Review],
+            {
+                documents
+            } = dataReviews[actionIndex],
+
+            docLength = documents.length;
+
+        this.setState({
+          current: update(this.state.current, {
+            $merge: {
+              docIndex: docIndex,
+              review: Review,
+              actionIndex: actionIndex,
+              hasNextDocument: !((docIndex + 1) >= docLength && (actionIndex + 1) >= dataReviews.length),
+              isNextCategory: (docLength === (docIndex + 1) ? true : false)
+            }
+          })
+        });
+
         switch(event.currentTarget.id) {
             case 'documentName':
                 return this.onClickDocumentName(event, actionIndex, docIndex, Review);
@@ -160,16 +181,55 @@ var DocumentReview = React.createClass({
         }
     },
 
+    handleNextDocument() {
+        let { current } = this.state,
+            dataReviews = this.state[current.review],
+            { documents } = dataReviews[current.actionIndex],
+            isNextCategory = !((current.docIndex + 1) < documents.length && documents.length > 1),
+            hasNextDocument = !((current.docIndex + 2) === documents.length && (current.actionIndex + 1) === dataReviews.length);
+
+        if (isNextCategory) {
+            this.setState({
+                current: update(current, {
+                    actionIndex: {
+                        $set: current.actionIndex + 1
+                    },
+                    docIndex: {
+                        $set: 0
+                    },
+                    isNextCategory: {
+                        $set: !isNextCategory
+                    },
+                    hasNextDocument: {
+                        $set: hasNextDocument
+                    }
+                }),
+                shouldUpdate: true
+            });
+
+        } else {
+            this.setState({
+                current: update(current, {
+                    docIndex: {
+                        $set: (current.docIndex + 1)
+                    },
+                    isNextCategory: {
+                        $set: ((current.docIndex + 2) >= documents.length)
+                    },
+                    hasNextDocument: {
+                        $set: hasNextDocument
+                    }
+                }),
+                shouldUpdate: true
+            });
+        }
+    },
+
     onClickDocumentName(event, actionIndex, docIndex, Review) {
 
         if(docIndex <= (this.state[Review][actionIndex].documents.length - 1)) {
             this.setState({
                 openPreview: true,
-                current: {
-                    review: Review,
-                    actionIndex: actionIndex,
-                    docIndex: docIndex
-                },
                 shouldUpdate: true
             });
         }
@@ -237,12 +297,6 @@ var DocumentReview = React.createClass({
                     }
                 }
             }),
-
-            current: {
-                review: Review,
-                actionIndex: actionIndex,
-                docIndex: docIndex
-            },
             shouldUpdate: true
         });
     },
@@ -274,6 +328,13 @@ var DocumentReview = React.createClass({
     handleTableRowOnChange(actionIndex, docIndex, Review, event) {
         Review = (Review === this.constructor.actions ? this.constructor.actions : this.constructor.challenge);
 
+        let dataReviews = this.state[Review],
+            {
+                documents
+            } = dataReviews[actionIndex],
+
+            docLength = documents.length;
+
         let { stackChange } = this.state,
 
             document = this.state[Review][actionIndex].documents[docIndex],
@@ -295,11 +356,15 @@ var DocumentReview = React.createClass({
             });
         this.setState({
             stackChange: newStack,
-            current: {
-                review: Review,
-                actionIndex: actionIndex,
-                docIndex: docIndex
-            }
+            current: update(this.state.current, {
+                $merge: {
+                    docIndex: docIndex,
+                    review: Review,
+                    actionIndex: actionIndex,
+                    hasNextDocument: !((docIndex + 1) >= docLength && (actionIndex + 1) >= dataReviews.length),
+                    isNextCategory: (docLength === (docIndex + 1) ? true : false)
+                }
+            })
         });
 
         switch(event.target.id) {
@@ -336,13 +401,6 @@ var DocumentReview = React.createClass({
                     }
                 }
             }),
-
-            current:
-            {
-                review: Review,
-                actionIndex: actionIndex,
-                docIndex: docIndex
-            },
 
             shouldUpdate: true
         });
