@@ -133,7 +133,7 @@ var GroupReview = React.createClass({
   handleNextGroup() {
     let {index} = this.state.groupCurrent,
         group = Object.assign({}, this.state.groups[index + 1], {index: index + 1});
-
+        this.updateOnchange(this.state.documents);
     if (index < (this.state.groups.length - 1)) {
       this.setState({
         groupCurrent: group,

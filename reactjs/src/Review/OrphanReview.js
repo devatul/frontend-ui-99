@@ -138,7 +138,7 @@ var OrphanReview = React.createClass({
   handleNextOrphan() {
     let {index} = this.state.orphanCurrent,
         orphan = Object.assign({}, this.state.orphans[index + 1], {index: index + 1});
-
+        this.updateOnchange(this.state.documents);
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
         orphanCurrent: orphan,
