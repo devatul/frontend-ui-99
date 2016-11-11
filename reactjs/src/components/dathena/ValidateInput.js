@@ -17,6 +17,9 @@ var Input = React.createClass({
         }
     },
     shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.disabled != nextProps.disabled){
+            return true
+        }
         if (this.props.value != nextProps.value) {
             return true
         }
@@ -133,9 +136,10 @@ var Input = React.createClass({
                     name = { this.props.name }
                     value = { this.props.value }
                     checked = { this.props.checked }
-                    disabled = { disabled }
+                    disabled = { this.props.disabled }
                     onChange = { this.onChange }
                     onBlur = { this.validate }
+
                 />
                 <span className="error">{this.state.error}</span>
 

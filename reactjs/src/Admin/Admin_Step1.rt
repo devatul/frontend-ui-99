@@ -1,4 +1,4 @@
-<rt-import name="Input" from="./components/ValidateInput"/>
+<rt-import name="Input" from="../components/dathena/ValidateInput"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
@@ -50,11 +50,11 @@
                 <div class="col-sm-8">
                   <Input
                     id="company-name"
-                    block=1
-                    fieldId=1
                     disabled={this.state.readOnly}
+                     name="name"
                     className="form-control"
-                    onChange="{this.onChangeInput}" />
+                    onChange="{this.getValueInputOrganisation}"
+                    value = "{this.state.organisation.name}"/>
                 </div>
               </div>
 
@@ -65,11 +65,11 @@
                 <div class="col-sm-8">
                   <Input
                     id="region"
-                    block=1
-                    fieldId=2
                     disabled={this.state.readOnly}
-                    onChange="{this.onChangeInput}"
-                    className="form-control" />
+                     name="region"
+                    onChange="{this.getValueInputOrganisation}"
+                    className="form-control"
+                    value = "{this.state.organisation.region}"/>
                 </div>
               </div>
 
@@ -80,11 +80,11 @@
                 <div class="col-sm-8">
                   <Input
                     id="country"
-                    block=1
-                    fieldId=3
                     disabled={this.state.readOnly}
-                    onChange="{this.onChangeInput}"
-                    className="form-control" />
+                    name="country"
+                    onChange="{this.getValueInputOrganisation}"
+                    className="form-control"
+                    value = "{this.state.organisation.country}" />
                 </div>
               </div>
             </form>
