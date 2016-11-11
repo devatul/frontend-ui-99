@@ -180,11 +180,40 @@ var GroupReview = React.createClass({
               data: Object.assign({}, this.state.documents[index])
             }]
           });
+          console.log('updateDocuments',updateDocuments)
+          this.updateOnchange(updateDocuments);
 
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
     }
   },
-
+  updateOnchange(updateDocuments){
+      let { id } = this.state.groupCurrent;
+            makeRequest({
+                path: "api/group/orphan/samples?id="+id,
+                method: "POST",
+                dataType: "text",
+                params: JSON.stringify({ "group_id": id, "docs": [
+                  {
+                    "name":updateDocuments[0].name,
+                    "path":updateDocuments[0].path,
+                    "category":updateDocuments[0].category.name,
+                    "confidentiality":updateDocuments[0].confidentiality.name,
+                  },
+                  {
+                    "name":updateDocuments[1].name,
+                    "path":updateDocuments[1].path,
+                    "category":updateDocuments[1].category.name,
+                    "confidentiality":updateDocuments[1].confidentiality.name,
+                  }
+                ]}),
+                success: (res) => {
+                    console.log('assign done',res);
+                },
+                error: (err) =>{
+                  console.log('error',err)
+                }
+            });
+  },
   handleTableRowOnChange(event, index) {
     switch (event.target.id) {
       case 'checkbox':
