@@ -94,22 +94,22 @@ module.exports = {
         }
     },
     
-    getCategories: (obtions) => {
+    getCategories: (options) => {
         options.path = 'api/label/category/'
         makeRequest(options);
     },
 
-    getConfidentialities: (callback) => {
+    getConfidentialities: (options) => {
         options.path = 'api/label/confidentiality/'
         makeRequest(options);
     },
 
-    getDoctypes: (callback) => {
+    getDoctypes: (options) => {
         options.path = 'api/label/doctypes/'
         makeRequest(options);
     },
 
-    getLanguages: (callback) => {
+    getLanguages: (options) => {
         options.path = 'api/label/languages/'
         makeRequest(options);
     }
