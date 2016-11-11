@@ -24,7 +24,7 @@
 
           <div class="form-group mb-lg">
             <label for="pwd_confirm">Confirm your password</label>
-            <input name="pwd_confirm" id="pwd_confirm" type="password" class="form-control input-md" onChange={this.checkEqualPass} />
+            <input name="pwd_confirm" id="pwd_confirm" type="password" class="form-control input-md {this.state.messageEqual == '' ? '' : 'has-error'}" onChange={this.checkEqualPass} />
             <span className="error">{this.state.messageEqual}</span>
           </div>
 

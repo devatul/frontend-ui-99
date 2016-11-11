@@ -13,6 +13,7 @@ var SignUp = React.createClass({
             messageUnAgree: '',
             messageEqual: '',
             agree: false,
+            equal_pass: false,
             data: [],
             data_submit: {},
             check: false,
@@ -28,40 +29,40 @@ var SignUp = React.createClass({
             this.setState({ data: datas, data_submit: data_submit })
     },
     agreeChange(event) {
-        debugger
         this.setState({ agree: event.target.checked });
+        event.target.checked ?  this.setState({ messageUnAgree: '' }) :  false;
     },
     checkEqualPass(event) {
-        debugger
         let value = event.target.value
         if (this.state.data_submit) {
-            this.state.data_submit.password == value ? this.setState({ messageEqual: "" }) : this.setState({ messageEqual: "Please enter the same value again" })
+            this.state.data_submit.password == value ? this.setState({ messageEqual: "" , equal_pass : true}) : this.setState({ messageEqual: "Please enter the same value again", equal_pass : false })
         }
     },
     submitHandler() {
-        debugger
         if (this.state.check) {
             this.setState({ check: false })
         } else {
             this.setState({ check: true })
         }
+        if (this.state.equal_pass) {
+            this.setState({ messageEqual: ""})
+            if (_.size(this.state.data_submit) == 6) {
+                if (this.state.agree) {
+                    this.setState({ messageUnAgree: "" });
+                    return makeRequest({
+                        path: 'api/account/registration/',
+                        method: 'POST',
+                        params: JSON.stringify(this.state.data_submit),
+                        success: (data) => {
+                            browserHistory.push('/Account/SignIn');
+                        },
+                        error: (xhr) => {}
+                    });
+                } else {
+                    this.setState({ messageUnAgree: "Please accept our policy" });
+                }
 
-        if (_.size(this.state.data_submit) == 6 && this.state.messageEqual != '') {
-            if (this.state.agree) {
-                this.setState({ messageUnAgree: "" });
-                return makeRequest({
-                    path: 'api/account/registration/',
-                    method: 'POST',
-                    params: JSON.stringify(this.state.data_submit),
-                    success: (data) => {
-                        browserHistory.push('/Account/SignIn');
-                    },
-                    error: (xhr) => {}
-                });
-            } else {
-                this.setState({ messageUnAgree: "Please accept our policy" });
             }
-
         } else {
             this.setState({ messageEqual: "Please enter the same value again" })
         }
