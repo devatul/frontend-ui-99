@@ -6,6 +6,7 @@ import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js';
 import { isEqual, findIndex, find, cloneDeep, orderBy } from 'lodash';
+import { getCategories, getConfidentialities } from '../utils/function'
 
 var ReviewValidation = React.createClass({
     displayName: 'ReviewValidation',
@@ -93,8 +94,7 @@ var ReviewValidation = React.createClass({
     },
 
     getCategories() {
-        makeRequest({
-            path: "api/label/category/",
+        getCategories({
             success: (res) => {
                 let categoriesReview = cloneDeep(res);
 
@@ -123,10 +123,8 @@ var ReviewValidation = React.createClass({
     },
 
     getConfidentialities() {
-        makeRequest({
-            path: "api/label/confidentiality/",
+        getConfidentialities({
             success: (res) => {
-
                 this.setState({
                     confidentialities: res,
                     shouldUpdate: true

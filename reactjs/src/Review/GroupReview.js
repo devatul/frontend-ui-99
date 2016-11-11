@@ -6,6 +6,7 @@ import template from './GroupReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js'
+import {getCategories, getConfidentialities} from  '../utils/function'
 
 var GroupReview = React.createClass({
     displayName: 'GroupReview',
@@ -564,8 +565,7 @@ var GroupReview = React.createClass({
 
     getCategories() {
         let arr = [];
-        makeRequest({
-            path: 'api/label/category/',
+        getCategories({
             success: (data) => {
                 data.sort(function(a, b) {
                     if (a.name > b.name) return 1;
@@ -578,8 +578,7 @@ var GroupReview = React.createClass({
 
     getConfidentialities() {
         let arr = [];
-        makeRequest({
-            path: 'api/label/confidentiality/',
+        getConfidentialities({
             success: (data) => {
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }

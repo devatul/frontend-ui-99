@@ -7,7 +7,7 @@ import Constant from '../Constant.js'
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
-import { orderByIndex } from '../utils/function'
+import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes } from '../utils/function'
 
 var MenuBar = React.createClass
 ({
@@ -118,19 +118,16 @@ var MenuBar = React.createClass
         }
     },
 	getCategories: function(async) {
-        makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        getCategories({
+			success: (data) => {
                 this.configListLabel(data);
-
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
     },
     getConfidentialities: function(async) {
-        makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
+        getConfidentialities({
+			success: (data) => {
                 this.configListLabel(data);
                 //data = orderByIndex(data, [4,3,2,1,0]);
                 this.setState({ confidentialities: data, shouldUpdate: true });
@@ -138,8 +135,7 @@ var MenuBar = React.createClass
         });
     },
     getDoctypes: function(async) {
-        makeRequest({
-            path: 'api/label/doctypes/',
+        getDoctypes({
             success: (data) => {
                 this.configListLabel(data);
 
@@ -148,47 +144,46 @@ var MenuBar = React.createClass
         });
     },
     getLanguages: function(async) {
-        makeRequest({
-            path: 'api/label/languages/',
-            success: (data) => {
+        getLanguages({
+			success: (data) => {
                 this.configListLabel(data);
                 // TODO: refactor with DataLoss.js
                 let arr = [];
                 let other = null;
                 for (let i = 0; i < data.length; i++) {
-                  switch(data[i].short_name.toUpperCase()){
+                    switch(data[i].short_name.toUpperCase()){
                     case 'OTHER' :
-                      other = data[i];
-                      break;
+                        other = data[i];
+                        break;
                     case 'DE' :
-                      arr.unshift(data[i]);
-                      break;
+                        arr.unshift(data[i]);
+                        break;
                     case 'EN' :
-                      arr.unshift(data[i]);
-                      break;
+                        arr.unshift(data[i]);
+                        break;
                     case 'FR' :
-                      arr.unshift(data[i]);
-                      break;
+                        arr.unshift(data[i]);
+                        break;
                     default : arr.push(data[i]);
-                  }
+                    }
                 }
 
                 let order = ['FR', 'EN', 'DE'];
                 for (let i = 0; i < arr.length - 1; ++i) {
-                  for (let j = 0; j < order.length; ++j) {
+                    for (let j = 0; j < order.length; ++j) {
                     if (arr[i].short_name.toUpperCase() === order[j])
-                      break;
+                        break;
                     if (arr[i+1].short_name.toUpperCase() === order[j]) {
-                      let tmp = arr[i];
-                      arr[i] = arr[i+1];
-                      arr[i+1] = tmp;
-                      i = Math.max(i - 2, -1);
-                      break;
+                        let tmp = arr[i];
+                        arr[i] = arr[i+1];
+                        arr[i+1] = tmp;
+                        i = Math.max(i - 2, -1);
+                        break;
                     }
-                  }
+                    }
                 }
                 if (other)
-                  arr.push(other);
+                    arr.push(other);
 
                 this.setState({ languages: arr, shouldUpdate: true });
             }

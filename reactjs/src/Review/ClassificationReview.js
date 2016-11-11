@@ -5,7 +5,7 @@ import update from 'react/lib/update'
 import Constant, { fetching, status } from '../Constant'
 import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
-import { orderConfidentialities } from '../utils/function'
+import { orderConfidentialities, getCategories, getConfidentialities } from '../utils/function'
 
 var ClassificationReview = React.createClass({
 
@@ -570,10 +570,8 @@ var ClassificationReview = React.createClass({
     },
 
     getCategories() {
-        let arr = [];
-        return makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        return getCategories({
+            success: (data) => { 
                 data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
@@ -581,9 +579,7 @@ var ClassificationReview = React.createClass({
     },
 
     getConfidentialities() {
-        let arr = [];
-        return makeRequest({
-            path: 'api/label/confidentiality/',
+        return getConfidentialities({
             success: (data) => {
                 data = orderConfidentialities(data)
                 this.setState({ confidentialities: data, shouldUpdate: true });

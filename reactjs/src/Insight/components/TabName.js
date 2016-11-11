@@ -5,6 +5,7 @@ import update from 'react-addons-update'
 import _ from 'lodash'
 import $ from 'jquery'
 import { makeRequest } from '../../utils/http'
+import { getLanguages } from '../../utils/function'
 
 var TabName = React.createClass({
 	getInitialState(){
@@ -53,16 +54,15 @@ var TabName = React.createClass({
 			this.setState(colorUpdate)
 	},
 	getLanguages: function(async) {
-			makeRequest({
-					path: 'api/label/languages/',
-					success: (data) => {
-							let arr = [];
-							for (let i = 0; i < data.length; i++) {
-								arr.unshift(data[i]);
-							}
-							this.setState({ languages: arr });
+		getLanguages({
+			success: (data) => {
+					let arr = [];
+					for (let i = 0; i < data.length; i++) {
+						arr.unshift(data[i]);
 					}
-			});
+					this.setState({ languages: arr });
+			}
+		});
 	},
 
     configLanguage(language){

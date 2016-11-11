@@ -7,6 +7,7 @@ import javascript from '../script/javascript.js'
 import Constant from '../Constant.js'
 import { upperFirst, findIndex, find, assignIn, isEqual, cloneDeep, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { getCategories } from '../utils/function'
 
 var UserAssignment = React.createClass({
     static: {
@@ -522,8 +523,7 @@ var UserAssignment = React.createClass({
     },
     getCategories() {
 
-        makeRequest({
-            path: 'api/label/category/',
+        getCategories({
             success: (data) => {
 
                 data = orderBy(data, ['name'], ['asc']);
@@ -553,7 +553,7 @@ var UserAssignment = React.createClass({
                     }
                 });
 
-               	this.setState({ category: updateData, datafilter: updateParam, shouldUpdate: true });
+                this.setState({ category: updateData, datafilter: updateParam, shouldUpdate: true });
             }
         });
 

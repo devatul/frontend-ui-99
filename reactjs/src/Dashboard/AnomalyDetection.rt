@@ -17,9 +17,9 @@
                           <section class="panel" key="{riskIndex}">
                             <div class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
                               <h4 class="widget-title">{this.upperFirst(risk.name)}
-                                         <HelpButton
-                                            classMenu="fix-overview-help-button-table"
-                                            classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
+                                  <HelpButton
+                                    classMenu="fix-overview-help-button-table"
+                                    classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
 
                               </h4>
                               <div class="widget-summary">

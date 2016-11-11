@@ -4,8 +4,6 @@
 <rt-import name="contant" from="../Constant.js"/>
 <section ref='{this.hideDropdownMenu}'>
     <!--my_header start-->
-
-    <!--my_header start-->
     <div class="my_header">
         <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
             <div class="container">

@@ -615,11 +615,10 @@
                       <button class="btn btn-green btn-save-step">Save</button>
                     </div>
 
-
                 </div>
                  <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
                     <ToggleButton setDefault="open" setTarget="#block3_step5" />
-            </div>
+                </div>
             </header>
             <div class="panel-body summary-section" id="block3_step5">
               <div class="row">
@@ -631,51 +630,51 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left mb-lg">
-                        <tbody>
-                          <tr>
-                            <td>Data Repository 1:</td>
-                            <td>Data Repository 1</td>
-                          </tr>
-                          <tr>
-                            <td>Root Repository: </td>
-                            <td>Root Repository</td>
-                          </tr>
-                          <tr>
-                            <td>Path:</td>
-                            <td>Path</td>
-                          </tr>
-                          <tr>
-                            <td>Department:</td>
-                            <td>Department</td>
-                          </tr>
-                          <tr>
-                            <td>Data Owner:</td>
-                            <td>Data Owner</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Data Repository 1:</td>
+                              <td>Data Repository 1</td>
+                            </tr>
+                            <tr>
+                              <td>Root Repository: </td>
+                              <td>Root Repository</td>
+                            </tr>
+                            <tr>
+                              <td>Path:</td>
+                              <td>Path</td>
+                            </tr>
+                            <tr>
+                              <td>Department:</td>
+                              <td>Department</td>
+                            </tr>
+                            <tr>
+                              <td>Data Owner:</td>
+                              <td>Data Owner</td>
+                            </tr>
                           </tbody>
                         </table>
                         <table class="table table-no-border table-align-left">
-                        <tbody>
-                          <tr>
-                            <td>Data Repository 2:</td>
-                            <td>Data Repository 2</td>
-                          </tr>
-                          <tr>
-                            <td>Root Repository: </td>
-                            <td>Root Repository</td>
-                          </tr>
-                          <tr>
-                            <td>Path:</td>
-                            <td>Path</td>
-                          </tr>
-                          <tr>
-                            <td>Department:</td>
-                            <td>Department</td>
-                          </tr>
-                          <tr>
-                            <td>Data Owner:</td>
-                            <td>Data Owner</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Data Repository 2:</td>
+                              <td>Data Repository 2</td>
+                            </tr>
+                            <tr>
+                              <td>Root Repository: </td>
+                              <td>Root Repository</td>
+                            </tr>
+                            <tr>
+                              <td>Path:</td>
+                              <td>Path</td>
+                            </tr>
+                            <tr>
+                              <td>Department:</td>
+                              <td>Department</td>
+                            </tr>
+                            <tr>
+                              <td>Data Owner:</td>
+                              <td>Data Owner</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -688,43 +687,43 @@
                     <div class="panel-body">
                       <div class="table-responsive">
                         <table class="table table-no-border table-align-left mb-lg">
-                        <tbody>
-                          <tr>
-                            <td>Team Lead:</td>
-                            <td>Team Lead</td>
-                          </tr>
-                          <tr>
-                            <td>Job Title: </td>
-                            <td>Job Title</td>
-                          </tr>
-                          <tr>
-                            <td>Email Address:</td>
-                            <td>Email Address</td>
-                          </tr>
-                          <tr>
-                            <td>Permissions Required:</td>
-                            <td>Permissions Required</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Team Lead:</td>
+                              <td>Team Lead</td>
+                            </tr>
+                            <tr>
+                              <td>Job Title: </td>
+                              <td>Job Title</td>
+                            </tr>
+                            <tr>
+                              <td>Email Address:</td>
+                              <td>Email Address</td>
+                            </tr>
+                            <tr>
+                              <td>Permissions Required:</td>
+                              <td>Permissions Required</td>
+                            </tr>
                           </tbody>
                         </table>
                         <table class="table table-no-border table-align-left">
-                        <tbody>
-                          <tr>
-                            <td>Coordinator:</td>
-                            <td>Coordinator</td>
-                          </tr>
-                          <tr>
-                            <td>Job Title: </td>
-                            <td>Job Title</td>
-                          </tr>
-                          <tr>
-                            <td>Email Address:</td>
-                            <td>Email Address</td>
-                          </tr>
-                          <tr>
-                            <td>Permissions Required:</td>
-                            <td>Permissions Required</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Coordinator:</td>
+                              <td>Coordinator</td>
+                            </tr>
+                            <tr>
+                              <td>Job Title: </td>
+                              <td>Job Title</td>
+                            </tr>
+                            <tr>
+                              <td>Email Address:</td>
+                              <td>Email Address</td>
+                            </tr>
+                            <tr>
+                              <td>Permissions Required:</td>
+                              <td>Permissions Required</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -738,38 +737,38 @@
                       <div class="table-responsive">
                         <h5>Audit Officer 1</h5>
                         <table class="table table-no-border table-align-left mb-lg">
-                        <tbody>
-                          <tr>
-                            <td>Job Title: </td>
-                            <td>Job Title</td>
-                          </tr>
-                          <tr>
-                            <td>Email Address:</td>
-                            <td>Email Address</td>
-                          </tr>
-                          <tr>
-                            <td>Permissions Required:</td>
-                            <td>Permissions Required</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Job Title: </td>
+                              <td>Job Title</td>
+                            </tr>
+                            <tr>
+                              <td>Email Address:</td>
+                              <td>Email Address</td>
+                            </tr>
+                            <tr>
+                              <td>Permissions Required:</td>
+                              <td>Permissions Required</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                       <div class="table-responsive">
                         <h5>Audit Officer 2</h5>
                         <table class="table table-no-border table-align-left">
-                        <tbody>
-                          <tr>
-                            <td>Job Title: </td>
-                            <td>Job Title</td>
-                          </tr>
-                          <tr>
-                            <td>Email Address:</td>
-                            <td>Email Address</td>
-                          </tr>
-                          <tr>
-                            <td>Permissions Required:</td>
-                            <td>Permissions Required</td>
-                          </tr>
+                          <tbody>
+                            <tr>
+                              <td>Job Title: </td>
+                              <td>Job Title</td>
+                            </tr>
+                            <tr>
+                              <td>Email Address:</td>
+                              <td>Email Address</td>
+                            </tr>
+                            <tr>
+                              <td>Permissions Required:</td>
+                              <td>Permissions Required</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -800,15 +799,15 @@
                 <div class="col-md-8 col-md-offset-2">
                   <div class="table-responsive">
                     <table class="table table-no-border table-align-left mb-lg">
-                    <tbody>
-                      <tr>
-                        <td>Minimum Number of Cluster:</td>
-                        <td>from 2 to 100</td>
-                      </tr>
-                      <tr>
-                        <td>Maximum Number of Cluster:</td>
-                        <td>from 2 to 100</td>
-                      </tr>
+                      <tbody>
+                        <tr>
+                          <td>Minimum Number of Cluster:</td>
+                          <td>from 2 to 100</td>
+                        </tr>
+                        <tr>
+                          <td>Maximum Number of Cluster:</td>
+                          <td>from 2 to 100</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -825,5 +824,5 @@
 
     </div>
 
-    </div>
+  </div>
 </div>

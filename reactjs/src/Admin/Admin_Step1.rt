@@ -15,7 +15,6 @@
                     setValue="As part of the administration set up process, 99 will need to know more about your organisation. To ensure that 99 is set up correctly and configured prior to ‘go live’, each step will require positive confirmation before you can move to the next one. This is to ensure that technical details and links are functional prior to implementing 99." />
                   <div class="progress-radial progress-{this.state.complete == 1 ? '33' : (this.state.complete == 2 ? 66 : (this.state.complete ==3 ? 100 : 0))}"></div>
               </div>
-
           </div>
         </div>
       </div>
@@ -30,12 +29,10 @@
                     setValue="User provided information of the organisation scanned by 99." />
             </h2>
             <div class="panel-actions" style="margin-right: 25px">
-
-                  <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
-
+              <button class="btn btn-green" rt-if="this.state.complete != 0" onClick = "{this.editButton.bind(this,1, this.state.readOnly)}">{this.state.readOnly == true ? 'Edit' : 'Save'}</button>
             </div>
             <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#toggle1" />
+              <ToggleButton setDefault="open" setTarget="#toggle1" />
             </div>
         </header>
         <div class="panel-body" id="toggle1">
@@ -115,7 +112,6 @@
                   <div class="col-sm-6">
                     <h5>Customized Confidentiality Level</h5>
                   </div>
-
                 </div>
 
                 <div class="form-group">
@@ -1324,7 +1320,5 @@
           </div>
         </div>
       </section>
-
     </div>
-
 </div>

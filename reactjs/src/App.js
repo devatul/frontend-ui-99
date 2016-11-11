@@ -5,9 +5,10 @@ import template from './App.rt'
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
 import { makeRequest } from './utils/http'
-import { orderByIndex } from './utils/function'
+import { orderByIndex, getCategories, getConfidentialities } from './utils/function'
 import { orderBy } from 'lodash'
 import { git_version } from './commit'
+
 module.exports = React.createClass({
 	getInitialState() {
 		return {
@@ -198,21 +199,20 @@ module.exports = React.createClass({
     },
 
 	getCategories: function() {
-        return makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        return getCategories({
+			success: (data) => {
 				data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data });
-            }
-        });
+			}
+		});
     },
+
     getConfidentialities: function(async) {
-        return makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
+        return getConfidentialities({
+			success: (data) => {
                 data = orderByIndex(data, [4,3,2,1,0]);
                 this.setState({ confidentialities: data });
-            }
+			}
         });
     },
 

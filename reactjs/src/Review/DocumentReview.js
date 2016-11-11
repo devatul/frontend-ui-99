@@ -5,6 +5,7 @@ import update from 'react/lib/update'
 import Constant, { status } from '../Constant.js'
 import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { getCategories, getConfidentialities } from '../utils/function'
 
 var DocumentReview = React.createClass({
 
@@ -615,9 +616,8 @@ var DocumentReview = React.createClass({
     },
 
     getCategories() {
-        return makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        return getCategories({
+            success: (data) => { 
                 data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
@@ -625,8 +625,7 @@ var DocumentReview = React.createClass({
     },
 
     getConfidentialities() {
-        return makeRequest({
-            path: 'api/label/confidentiality/',
+        return getConfidentialities({
             success: (data) => {
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }

@@ -6,6 +6,7 @@ import template from './OrphanReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js'
+import { getCategories, getConfidentialities } from '../utils/function'
 
 var OrphanReview = React.createClass({
     displayName: 'OrphanReview',
@@ -436,8 +437,7 @@ var OrphanReview = React.createClass({
 
     getCategories() {
         let arr = [];
-        makeRequest({
-            path: 'api/label/category/',
+        getCategories({
             success: (data) => {
                 data.sort(function(a, b) {
                     if (a.name > b.name) return 1;
@@ -450,8 +450,7 @@ var OrphanReview = React.createClass({
 
     getConfidentialities() {
         let arr = [];
-        makeRequest({
-            path: 'api/label/confidentiality/',
+        getConfidentialities({
             success: (data) => {
                 data.forEach(item => {
                     if(item.name === "Internal Only") {

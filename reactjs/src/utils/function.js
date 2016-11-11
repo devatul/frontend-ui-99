@@ -1,4 +1,5 @@
 import { _confidentialities } from '../Constant'
+import { makeRequest } from '../utils/http'
 
 module.exports = {
     formatNumber: (nStr) => {
@@ -25,9 +26,9 @@ module.exports = {
         return newArray;
     },
 
-  removeUndefined(array) {
-    return array;
-  },
+    removeUndefined(array) {
+        return array;
+    },
 
     orderConfidentialities(array) {
         let newArray = [],
@@ -91,5 +92,25 @@ module.exports = {
             case text.test(documentName) === true:
                 return "fa-file-text-o";
         }
+    },
+    
+    getCategories: (obtions) => {
+        options.path = 'api/label/category/'
+        makeRequest(options);
+    },
+
+    getConfidentialities: (callback) => {
+        options.path = 'api/label/confidentiality/'
+        makeRequest(options);
+    },
+
+    getDoctypes: (callback) => {
+        options.path = 'api/label/doctypes/'
+        makeRequest(options);
+    },
+
+    getLanguages: (callback) => {
+        options.path = 'api/label/languages/'
+        makeRequest(options);
     }
 }

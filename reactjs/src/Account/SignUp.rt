@@ -1,115 +1,113 @@
-		<section class="body-sign">
-			<div class="center-sign">
-				<a href="/" class="logo pull-left">
-					<img src="/assets/images/logo_header.png" height="54" alt="Porto Admin">
-				</a>
-				<div class="panel panel-sign">
-					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
-					</div>
-					<div id="a"></div>
-					<div class="panel-body">
-						<form id="submitForm" novalidate="novalidate">
-							<div class="form-group mb-lg">
-								<label>Username</label>
-								<input name='userName' type='text' id="userName" onChange={this.getValueInput} class="form-control input-md" />
-								<div id="usernameExits" class="error"></div>
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Password</label>
-								<input name="password" id="password" type="password" class="form-control input-md" onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Confirm your password</label>
-								<input name="pwd_confirm" type="password" class="form-control input-md" />
-							</div>
-
-							<div class="form-group mb-lg">
-								<div class="checkbox-custom checkbox-default">
-									<input name="agreeterms" type="checkbox"/>
-									<label for="AgreeTerms">Or I use my Windows credential (SSO)</label>
-								</div>
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>First name</label>
-								<input name="first_name" type="text" class="form-control input-md"
-								 id="first_name" onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Last name</label>
-								<input name="last_name" type="text" class="form-control input-md"
-								 id="last_name" onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Corporate E-mail</label>
-								<input name="email" id="email" type="text" class="form-control input-md"
-								    onChange={this.getValueInput} />
-								<div id="emailExits" class="error"></div>
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Corporate Phone (Landline)</label>
-								<input name="phone_landline" type="text" class="form-control input-md"
-								value={this.state.phoneLandline} onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Corporate Phone (Mobile)</label>
-								<input name="phone_mobile" type="text" class="form-control input-md"
-								 onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Job Position</label>
-								<input name="job" type="text" class="form-control input-md"
-							      onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Department name</label>
-								<input name="deportment" type="text" class="form-control input-md"
-								 onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Company name</label>
-								<input name="company" type="text" class="form-control input-md"
-								 id="company" onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>Country</label>
-								<input name="company_name" type="text" class="form-control input-md"
-								 id="country" onChange={this.getValueInput} />
-							</div>
-
-							<div class="form-group mb-lg">
-								<label>City</label>
-								<input name="city" type="text" class="form-control input-md"
-								 onChange={this.getValueInput} />
-							</div>
-
-							<div class="row">
-								<div class="col-sm-8 mb-md">
-									<div class="checkbox-default">
-										<input id="agree" name="agree" type="checkbox" value={this.state.agree} onChange={this.agreeChange} />
-										<label for="agree">I agree with <a href="#">Terms and Conditions</a></label>
-									</div>
-								</div>
-								<div class="col-sm-4 text-right mb-md">
-									<button type="submit" class="btn btn-green hidden-xs" >Register</button>
-									<!-- <button type="submit" class="btn btn-green btn-block btn-lg visible-xs mt-lg" onClick={this.registration}>Register</button> -->
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-
-
+<section class="body-sign">
+	<div class="center-sign">
+		<a href="/" class="logo pull-left">
+			<img src="/assets/images/logo_header.png" height="54" alt="Porto Admin">
+		</a>
+		<div class="panel panel-sign">
+			<div class="panel-title-sign mt-xl text-right">
+				<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
 			</div>
-		</section>
+			<div id="a"></div>
+			<div class="panel-body">
+				<form id="submitForm" novalidate="novalidate">
+					<div class="form-group mb-lg">
+						<label>Username</label>
+						<input name='userName' type='text' id="userName" onChange={this.getValueInput} class="form-control input-md" />
+						<div id="usernameExits" class="error"></div>
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Password</label>
+						<input name="password" id="password" type="password" class="form-control input-md" onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Confirm your password</label>
+						<input name="pwd_confirm" type="password" class="form-control input-md" />
+					</div>
+
+					<div class="form-group mb-lg">
+						<div class="checkbox-custom checkbox-default">
+							<input name="agreeterms" type="checkbox"/>
+							<label for="AgreeTerms">Or I use my Windows credential (SSO)</label>
+						</div>
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>First name</label>
+						<input name="first_name" type="text" class="form-control input-md"
+							id="first_name" onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Last name</label>
+						<input name="last_name" type="text" class="form-control input-md"
+							id="last_name" onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Corporate E-mail</label>
+						<input name="email" id="email" type="text" class="form-control input-md"
+							onChange={this.getValueInput} />
+						<div id="emailExits" class="error"></div>
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Corporate Phone (Landline)</label>
+						<input name="phone_landline" type="text" class="form-control input-md"
+						value={this.state.phoneLandline} onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Corporate Phone (Mobile)</label>
+						<input name="phone_mobile" type="text" class="form-control input-md"
+							onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Job Position</label>
+						<input name="job" type="text" class="form-control input-md"
+							onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Department name</label>
+						<input name="deportment" type="text" class="form-control input-md"
+							onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Company name</label>
+						<input name="company" type="text" class="form-control input-md"
+							id="company" onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>Country</label>
+						<input name="company_name" type="text" class="form-control input-md"
+							id="country" onChange={this.getValueInput} />
+					</div>
+
+					<div class="form-group mb-lg">
+						<label>City</label>
+						<input name="city" type="text" class="form-control input-md"
+							onChange={this.getValueInput} />
+					</div>
+
+					<div class="row">
+						<div class="col-sm-8 mb-md">
+							<div class="checkbox-default">
+								<input id="agree" name="agree" type="checkbox" value={this.state.agree} onChange={this.agreeChange} />
+								<label for="agree">I agree with <a href="#">Terms and Conditions</a></label>
+							</div>
+						</div>
+						<div class="col-sm-4 text-right mb-md">
+							<button type="submit" class="btn btn-green hidden-xs" >Register</button>
+							<!-- <button type="submit" class="btn btn-green btn-block btn-lg visible-xs mt-lg" onClick={this.registration}>Register</button> -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
