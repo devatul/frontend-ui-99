@@ -104,11 +104,11 @@ var documentPreview = React.createClass({
                     dialogClassName="modal-preview">
                     <Modal.Header>
                         <Row>
-                            <Modal.Title className="col-sm-3 modal-title-preview">
+                            <Modal.Title className="col-sm-3 col-xs-12 modal-title-preview">
                                 <i className="fa fa-search"></i>
                                 <span>Document Preview</span>
                             </Modal.Title>
-                            <div className="col-sm-4 modal-info margin-top-14">
+                            <div className="col-sm-4 col-xs-12 modal-info margin-top-14">
                                 <span className="text-itatic">
                                     Predicted Label:
                                 </span>
@@ -117,7 +117,7 @@ var documentPreview = React.createClass({
                                 </span>
                             </div>
 
-                            <div className="col-sm-2 modal-actions margin-top-14">
+                            <div className="col-sm-2 col-xs-12 margin-top-14">
                                 { this.props.hideLanguage ?
                                     '' : <div className="inline-block-item">
                                             <span className="text-itatic">
@@ -130,10 +130,10 @@ var documentPreview = React.createClass({
                                 }
 
                             </div>
-                            <div className="col-sm-4 modal-actions modal-action-preview text-right">
+                            <div className="col-sm-3 col-xs-12 text-right modal-actions modal-action-preview">
                                 {nextDocumentButton}
                                 <Button className="mb-xs mt-none mr-xs btn btn-green" bsClass="my-btn" onClick={this.handleUndo}>Undo <i className="fa fa-undo" aria-hidden="true"></i></Button>
-                                <Button className="modal-button" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
+                                <Button className="modal-button btn-close" bsClass="my-btn" onClick={this.closeModal}><i className="fa fa-times" aria-hidden="true"></i></Button>
                             </div>
                         </Row>
                     </Modal.Header>

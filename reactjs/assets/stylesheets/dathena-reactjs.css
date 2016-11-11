@@ -327,42 +327,6 @@ table.docPreview > thead > tr > th:nth-child(2) {
     margin-left: 5px;
 }
 
-@media (max-width: 500px) {
-    #centroidChartWrapper {
-        height: 135px;
-    }
-
-    .cendroid-chart-legend h5 {
-        text-align: left;
-    }
-
-    .cendroid-chart-legend.new {
-        width: 91%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .cendroid-chart-legend.new .document-symbol {
-        display: inline-block;
-        padding: 0px;
-        width: initial;
-        text-align: center;
-        margin-right: 5px;
-    }
-
-    .cendroid-chart-legend.new .document-symbol i {
-        display: block;
-        margin: auto;
-    }
-
-    .info-review-validation {
-        text-align: left;
-    }
-
-    .info-review-validation .progress-radial {
-        margin-right: 0px;
-    }
-}
 
 /* fix label progress bar */
 .dathena-progress.style-2.fix-label {
@@ -703,4 +667,60 @@ select.assigment-select.form-control {
 
 .modal-preview .modal-action-preview {
     width: 28%;
+}
+
+@media (max-width: 500px) {
+    #centroidChartWrapper {
+        height: 135px;
+    }
+
+    .cendroid-chart-legend h5 {
+        text-align: left;
+    }
+
+    .cendroid-chart-legend.new {
+        width: 91%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .cendroid-chart-legend.new .document-symbol {
+        display: inline-block;
+        padding: 0px;
+        width: initial;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .cendroid-chart-legend.new .document-symbol i {
+        display: block;
+        margin: auto;
+    }
+
+    .info-review-validation {
+        text-align: left;
+    }
+
+    .info-review-validation .progress-radial {
+        margin-right: 0px;
+    }
+
+    .modal-title.modal-title-preview {
+        width: 100%;
+        text-align: left;
+        margin-top: initial;
+    }
+
+    .modal-preview .modal-action-preview {
+        width: 100%;
+        position: static;
+        text-align: left;
+        margin-top: 14px;
+    }
+
+     .modal-preview .modal-action-preview > .btn-close {
+        position: absolute;
+        top: 25px;
+        right: 15px;
+    }
 }
