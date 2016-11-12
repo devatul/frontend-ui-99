@@ -140,6 +140,7 @@ var OrphanReview = React.createClass({
         orphan = Object.assign({}, this.state.orphans[index + 1], {index: index + 1});
     let updateStack = update(this.state.stackChange, {
         $push: [{
+          index: index,
           documents:this.state.documents
         }]
     });
@@ -239,6 +240,7 @@ var OrphanReview = React.createClass({
                 }
             });
   },
+
   handleTableRowOnChange(event, index) {
     switch (event.target.id) {
       case 'checkbox':
@@ -340,7 +342,13 @@ var OrphanReview = React.createClass({
             updateStack = update(stackChange, {
               $splice: [[stackChange.length - 1, 1]]
             });
-            this.setState({ documents: updateDocuments, stackChange: updateStack, shouldUpdate: true });
+            this.setState({
+              orphanCurrent: Object.assign({}, this.state.orphans[item.index], {index: item.index}),
+              documents: updateDocuments,
+              stackChange: updateStack,
+              loadingdocuments: false,
+              shouldUpdate: true
+            });
           }else{
             let updateDocuments = update(documents, {
               [item.id]: {
@@ -355,7 +363,6 @@ var OrphanReview = React.createClass({
             }
             this.setState({ documents: updateDocuments, stackChange: updateStack, documentPreview: documentPreview, shouldUpdate: true });
           }
-
     }
   },
 
@@ -487,6 +494,8 @@ var OrphanReview = React.createClass({
   getDocuments() {
     let {id} = this.state.orphanCurrent;
 
+      debugger;
+      if (this.state.loadingdocuments)
     return makeRequest({
       path: "api/group/orphan/samples",
       params: {"id": id},
