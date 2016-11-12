@@ -45,10 +45,8 @@ var ChangeProfile = React.createClass({
 
     render() {
 
-        let {profile} = this.props ,
-            child = null
-        if(profile != null) {
-            let child = <div className="row">
+        let {profile} = this.props,
+             child = <div className="row">
                         <div className="profile-details-left col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Windows ID</label>
@@ -142,7 +140,7 @@ var ChangeProfile = React.createClass({
                             </div>
                         </div>
                     </div>
-        }
+
 
         return(
             <div>
