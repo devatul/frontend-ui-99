@@ -208,7 +208,6 @@ var OrphanReview = React.createClass({
             }]
           });
           this.updateOnchange(updateDocuments);
-      //debugger
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
     }
   },
@@ -337,32 +336,37 @@ var OrphanReview = React.createClass({
     if (this.state.stackChange.length > 0) {
       let {documents, stackChange, documentPreview} = this.state,
           item = stackChange[stackChange.length - 1];
-          if(item.documents){
-            let updateDocuments = item.documents,
-            updateStack = update(stackChange, {
-              $splice: [[stackChange.length - 1, 1]]
-            });
-            this.setState({
-              orphanCurrent: Object.assign({}, this.state.orphans[item.index], {index: item.index}),
-              documents: updateDocuments,
-              stackChange: updateStack,
-              loadingdocuments: false,
-              shouldUpdate: true
-            });
-          }else{
-            let updateDocuments = update(documents, {
-              [item.id]: {
-                $set: item.data
-              }
-            }),
-            updateStack = update(stackChange, {
-              $splice: [[stackChange.length - 1, 1]]
-            });
-            if(item.id !== documentPreview ){
-              documentPreview = item.id;
-            }
-            this.setState({ documents: updateDocuments, stackChange: updateStack, documentPreview: documentPreview, shouldUpdate: true });
+      if(item.documents){
+        let updateDocuments = item.documents,
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
+        this.setState({
+          orphanCurrent: Object.assign({}, this.state.orphans[item.index], {index: item.index}),
+          documents: updateDocuments,
+          stackChange: updateStack,
+          loadingdocuments: false,
+          shouldUpdate: true
+        });
+      }else{
+        let updateDocuments = update(documents, {
+          [item.id]: {
+            $set: item.data
           }
+        }),
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
+        if(item.id !== documentPreview ){
+          documentPreview = item.id;
+        }
+        this.setState({
+          documents: updateDocuments,
+          stackChange: updateStack,
+          documentPreview: documentPreview,
+          shouldUpdate: true
+        });
+      }
     }
   },
 
@@ -494,27 +498,26 @@ var OrphanReview = React.createClass({
   getDocuments() {
     let {id} = this.state.orphanCurrent;
 
-      debugger;
-      if (this.state.loadingdocuments)
-    return makeRequest({
-      path: "api/group/orphan/samples",
-      params: {"id": id},
-      success: (res) => {
-        this.setState({
-          documents: res,
-          shouldUpdate: true,
-          loadingdocuments: false,
-          getdocumenterror: false
-        });
-      },
-      error: (err) => {
-        this.setState({
-          documents: [],
-          loadingdocuments: false,
-          getdocumenterror: err
-        })
-      }
-    });
+    if (this.state.loadingdocuments)
+      return makeRequest({
+        path: "api/group/orphan/samples",
+        params: {"id": id},
+        success: (res) => {
+          this.setState({
+            documents: res,
+            shouldUpdate: true,
+            loadingdocuments: false,
+            getdocumenterror: false
+          });
+        },
+        error: (err) => {
+          this.setState({
+            documents: [],
+            loadingdocuments: false,
+            getdocumenterror: err
+          })
+        }
+      });
   },
 
   getCategories() {
