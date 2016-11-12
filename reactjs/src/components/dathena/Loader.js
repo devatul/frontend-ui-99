@@ -22,7 +22,20 @@ var Loader = React.createClass({
   },
 
   componentDidMount() {
-    this.setLoading();
+    var delay = setInterval(this.setLoading, this.state.xhr.timer * (this.state.xhr.loading / 2));
+    this.setState({delay: delay});
+  },
+
+  setLoading() {
+    this.setState({
+      xhr: update(this.state.xhr, {
+        loading: {
+          $set: this.state.xhr.loading + 1
+        }
+      })
+    });
+
+    if (this.state.xhr.loading >= 100) clearInterval(this.state.delay);
   },
 
   componentWillReceiveProps() {
@@ -93,37 +106,10 @@ var Loader = React.createClass({
           break;
       }
     }
-
-    this.setLoading();
   },
 
   componentWillUnmount() {
     clearInterval(this.state.delay);
-  },
-
-  setLoading() {
-    var delay = 0,
-        {xhr} = this.state;
-
-    delay = setInterval(() => {
-      var {loading} = this.state.xhr;
-
-      this.setState({
-        xhr: update(this.state.xhr, {
-          loading: {
-            $set: ++loading
-          }
-        })
-      });
-
-      if (loading >= 100) clearInterval(delay);
-
-    }, xhr.timer * (xhr.loading / 2));
-
-
-    this.setState({
-      delay: delay
-    });
   },
 
   renderMessage() {
