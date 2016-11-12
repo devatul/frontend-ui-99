@@ -48,7 +48,7 @@ var Loader = React.createClass({
                 $set: "Report is loading"
               },
               message: {
-                  $set: "Please wait!"
+                $set: "Please wait!"
               },
               error: {
                 $set: false
@@ -117,9 +117,7 @@ var Loader = React.createClass({
       });
 
       if (loading >= 100) clearInterval(delay);
-
     }, xhr.timer * (xhr.loading / 2));
-
 
     this.setState({
       delay: delay

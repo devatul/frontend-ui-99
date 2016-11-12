@@ -1,9 +1,7 @@
-'use strict';
-import React, {Component, PropTypes} from 'react'
-import {render} from 'react-dom'
-import {isEqual} from 'lodash'
-import HelpButton from '../dathena/HelpButton'
-
+import React, {Component, PropTypes} from 'react';
+import {render} from 'react-dom';
+import {isEqual} from 'lodash';
+import HelpButton from '../dathena/HelpButton';
 
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
@@ -25,13 +23,12 @@ var DonutChart = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    this.draw()
+    this.draw();
   },
 
   draw() {
-    var {id, config} = this.props, {colorDisabled} = this.state;
-
-    var div = $('#' + id);
+    var {id, config} = this.props, {colorDisabled} = this.state,
+        div = $('#' + id);
 
     if (div.length) {
       div.highcharts({
@@ -44,15 +41,13 @@ var DonutChart = React.createClass({
           events: {
             load: function () {
               var chart = this,
-                series = chart.series;
+                  series = chart.series;
+
               if (config.disabled) {
                 for (let i = series.length - 1; i >= 0; i--) {
                   for (let j = series[i].points.length - 1; j >= 0; j--) {
-
                     series[i].points[j].graphic.attr({
-
                       fill: colorDisabled[j]
-
                     });
                   }
                 }
@@ -70,12 +65,7 @@ var DonutChart = React.createClass({
           headerFormat: '',
           pointFormatter: function () {
             var percent = this.percentage.toFixed(1);
-
-            //if(percent < 5.0) {
             return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
-            // } else {
-            //     return 'Documents: ' + this.y;
-            // }
           }
         },
         plotOptions: {
@@ -116,7 +106,6 @@ var DonutChart = React.createClass({
                     });
                   }
                 },
-
                 mouseOut: function (event) {
                   var {series} = this, {points} = series;
 
@@ -138,45 +127,43 @@ var DonutChart = React.createClass({
     }
   },
 
-    render() {
-        var legendChart = [], { id, config, help } = this.props, { colorDisabled } = this.state;
-            if( config.data ) {
-                for( let i = config.data.length - 1; i >= 0; i-- ) {
-                    let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
-                    legendChart[i] = <li key={'legend_' + i} style={config.data.length <= 3 ? {
-                                            margin: '0 auto 5px',
-                                            width: config.data[0].name.length * 8,
-                                            float: 'none'
-                                        } : {}}>
-                                        <i className="legend-symbol" style={{backgroundColor: color }}></i>
-                                        {config.data[i].name}
-                                    </li>;
-                }
-            }
+  render() {
+    var legendChart = [], {id, config, help} = this.props, {colorDisabled} = this.state;
 
-        return (
-            <section className="panel">
-                <div className="panel-body chart-panel widget-panel">
-                    <h4 className="widget-title">{config.name && config.name + ' '}
-                        <HelpButton classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue={help && help} />
-                    </h4>
-                    <div className="widget-chart">
-                        <div className="chart chart-md" id={id}></div>
-                        { legendChart && 
-                            <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
-                                {legendChart}
-                            </ul>
-                        }
-                    </div>
-                    { config.disabled &&
-                        <div id={id} className="chart-disabled-overlay"></div>
-                    }
-                </div>
-            </section>
-            );
+    if (config.data) {
+      for (let i = config.data.length - 1; i >= 0; i--) {
+        let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
+
+        legendChart[i] =
+          <li key={'legend_' + i} style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'none'} : {}}>
+            <i className="legend-symbol" style={{backgroundColor: color}}></i>
+            {config.data[i].name}
+          </li>;
+      }
     }
 
+    return (
+      <section className="panel">
+        <div className="panel-body chart-panel widget-panel">
+          <h4 className="widget-title">
+            {config.name && config.name + ' '}
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue={help && help} />
+          </h4>
+          <div className="widget-chart">
+            <div className="chart chart-md" id={id}></div>
+            { legendChart &&
+              <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
+                {legendChart}
+              </ul>
+            }
+          </div>
+          { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
+        </div>
+      </section>
+    );
+  }
 });
 
 module.exports = DonutChart;
