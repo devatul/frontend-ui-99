@@ -171,10 +171,24 @@ var ClassificationReview = React.createClass({
   },
 
   handleNextDocument() {
-    let {current, dataReview} = this.state,
+    let {current, dataReview, stackChange} = this.state,
         {documents} = dataReview[current.reviewIndex],
         isNextCategory = !((current.docIndex + 1) < documents.length),
         hasNextDocument = !((current.docIndex + 2) >= documents.length && (current.reviewIndex + 2) >= dataReview.length);
+
+    let updateStackChange = update(stackChange, {});
+
+    if(updateStackChange[current.reviewIndex]) {
+        updateStackChange[current.reviewIndex].push({
+            id: current.docIndex,
+            data: documents[current.docIndex]
+        });
+    } else {
+        updateStackChange[current.reviewIndex] = [{
+          id: current.docIndex,
+          data: documents[current.docIndex]
+        }]
+    }
 
     if (current.isNextCategory) {
       // if((current.reviewIndex + 1) < dataReview.length)
@@ -191,6 +205,7 @@ var ClassificationReview = React.createClass({
             $set: hasNextDocument
           }
         }),
+        stackChange: updateStackChange,
         shouldUpdate: true
       });
       //}
@@ -209,6 +224,7 @@ var ClassificationReview = React.createClass({
             $set: hasNextDocument
           }
         }),
+        stackChange: updateStackChange,
         shouldUpdate: true
       });
       // }
@@ -460,42 +476,45 @@ var ClassificationReview = React.createClass({
       shouldUpdate: true
     });
   },
-
-  handleUndo(reviewIndex) {
-    if (this.state.stackChange[reviewIndex] && this.state.stackChange[reviewIndex].length > 0) {
-      let {stackChange} = this.state,
+  undopreview(reviewIndex){
+      let { stackChange } = this.state,
           stackLength = stackChange[reviewIndex].length,
           item = stackChange[reviewIndex][stackLength - 1];
-
       this.setState({
-        dataReview: update(this.state.dataReview, {
-          [reviewIndex]: {
-            documents: {
-              [item.id]: {
-                $set: item.data
+          dataReview: update(this.state.dataReview, {
+              [reviewIndex]: {
+                  documents: {
+                      [item.id]: {
+                          $set: item.data
+                      }
+                  }
               }
-            }
-          }
-        }),
+          }),
 
-        stackChange: update(stackChange, {
-          [reviewIndex]: {
-            $splice: [[stackLength - 1, 1]]
-          }
-        }),
+          stackChange: update(stackChange, {
+              [reviewIndex]: {
+                  $splice: [[stackLength - 1, 1]]
+              }
+          }),
 
-        current: update(this.state.current, {
-          docIndex: {
-            $set: item.id
-          },
-          review: {
-            $set: reviewIndex
-          }
-        }),
-        shouldUpdate: true
+          current: update(this.state.current, {
+              docIndex: {
+                  $set: item.id
+              },
+              reviewIndex: {
+                  $set: reviewIndex
+              }
+          }),
+          shouldUpdate: true
       });
-    }
-  },
+    },
+    handleUndo(reviewIndex) {
+          if(this.state.stackChange[reviewIndex] && this.state.stackChange[reviewIndex].length > 0) {
+              this.undopreview(reviewIndex);
+          }else if(this.state.stackChange[reviewIndex-1] && this.state.stackChange[reviewIndex-1].length > 0){
+              this.undopreview(reviewIndex-1);
+          }
+      },
 
   closePreview() {
     this.setState({openPreview: false, shouldUpdate: true});

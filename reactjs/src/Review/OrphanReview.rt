@@ -332,7 +332,7 @@
   <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    nextDocument="{this.handleNextDocument.bind(this, this.state.documentPreview + 1)}"
     hasNextDocument="{this.state.documents[this.state.documentPreview] !== this.state.documents[this.state.documents.length-1]}"
     undo="{this.handleUndo}"
     closeModal="{this.closePreview}"

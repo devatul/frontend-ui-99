@@ -138,9 +138,16 @@ var OrphanReview = React.createClass({
   handleNextOrphan() {
     let {index} = this.state.orphanCurrent,
         orphan = Object.assign({}, this.state.orphans[index + 1], {index: index + 1});
-        this.updateOnchange(this.state.documents);
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: index,
+          documents:this.state.documents
+        }]
+    });
+    this.updateOnchange(this.state.documents);
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
+        stackChange: updateStack,
         orphanCurrent: orphan,
         shouldUpdate: true,
         documents: [],
@@ -148,6 +155,21 @@ var OrphanReview = React.createClass({
       });
     }
   },
+  handleNextDocument(index) {
+      if(index <= (this.state.documents.length - 1)) {
+        let updateStack = update(this.state.stackChange, {
+            $push: [{
+                id: this.state.documentPreview,
+                data: Object.assign({}, this.state.documents[this.state.documentPreview])
+            }]
+        });
+          this.setState({
+              documentPreview: index,
+              stackChange: updateStack,
+              shouldUpdate: true
+          });
+      }
+    },
 
   handleTableRowOnClick(event, index) {
     switch (event.currentTarget.id) {
@@ -186,7 +208,6 @@ var OrphanReview = React.createClass({
             }]
           });
           this.updateOnchange(updateDocuments);
-      //debugger
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
     }
   },
@@ -218,6 +239,7 @@ var OrphanReview = React.createClass({
                 }
             });
   },
+
   handleTableRowOnChange(event, index) {
     switch (event.target.id) {
       case 'checkbox':
@@ -312,18 +334,39 @@ var OrphanReview = React.createClass({
 
   handleUndo() {
     if (this.state.stackChange.length > 0) {
-      let {documents, stackChange} = this.state,
-          item = stackChange[stackChange.length - 1],
-          updateDocuments = update(documents, {
-            [item.id]: {
-              $set: item.data
-            }
-          }),
-          updateStack = update(stackChange, {
-            $splice: [[stackChange.length - 1, 1]]
-          });
-
-      this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
+      let {documents, stackChange, documentPreview} = this.state,
+          item = stackChange[stackChange.length - 1];
+      if(item.documents){
+        let updateDocuments = item.documents,
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
+        this.setState({
+          orphanCurrent: Object.assign({}, this.state.orphans[item.index], {index: item.index}),
+          documents: updateDocuments,
+          stackChange: updateStack,
+          loadingdocuments: false,
+          shouldUpdate: true
+        });
+      }else{
+        let updateDocuments = update(documents, {
+          [item.id]: {
+            $set: item.data
+          }
+        }),
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
+        if(item.id !== documentPreview ){
+          documentPreview = item.id;
+        }
+        this.setState({
+          documents: updateDocuments,
+          stackChange: updateStack,
+          documentPreview: documentPreview,
+          shouldUpdate: true
+        });
+      }
     }
   },
 
@@ -455,25 +498,26 @@ var OrphanReview = React.createClass({
   getDocuments() {
     let {id} = this.state.orphanCurrent;
 
-    return makeRequest({
-      path: "api/group/orphan/samples",
-      params: {"id": id},
-      success: (res) => {
-        this.setState({
-          documents: res,
-          shouldUpdate: true,
-          oadingdocuments: false,
-          getdocumenterror: false
-        });
-      },
-      error: (err) => {
-        this.setState({
-          documents: [],
-          loadingdocuments: false,
-          getdocumenterror: err
-        })
-      }
-    });
+    if (this.state.loadingdocuments)
+      return makeRequest({
+        path: "api/group/orphan/samples",
+        params: {"id": id},
+        success: (res) => {
+          this.setState({
+            documents: res,
+            shouldUpdate: true,
+            loadingdocuments: false,
+            getdocumenterror: false
+          });
+        },
+        error: (err) => {
+          this.setState({
+            documents: [],
+            loadingdocuments: false,
+            getdocumenterror: err
+          })
+        }
+      });
   },
 
   getCategories() {

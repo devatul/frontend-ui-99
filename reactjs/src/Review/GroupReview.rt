@@ -249,7 +249,7 @@
           </div>
         </Panel.head>
         <Panel.body
-          rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.documentsLoading as docLoading">
+          rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as docLoading">
 
           <Loader rt-if="!docLength && docLoading" xhr="{this.state.xhr}"></Loader>
           <p rt-if="docLength === 0 && !docLoading" class="document_note">You don't have any document to review</p>
@@ -342,7 +342,7 @@
   <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    nextDocument="{this.handleNextDocument.bind(this, this.state.documentPreview + 1)}"
     hasNextDocument="{this.state.documents[this.state.documentPreview] !== this.state.documents[this.state.documents.length-1]}"
     undo={this.handleUndo}
     onHide={this.closePreview}

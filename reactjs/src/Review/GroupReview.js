@@ -27,7 +27,7 @@ var GroupReview = React.createClass({
       centroids: [],
       reviewStatus: 0,
       documents: [],
-      documentsLoading: true,
+      loadingdocuments: true,
       categories: [],
       confidentialities: [],
       categoryInfo: [],
@@ -133,16 +133,38 @@ var GroupReview = React.createClass({
   handleNextGroup() {
     let {index} = this.state.groupCurrent,
         group = Object.assign({}, this.state.groups[index + 1], {index: index + 1});
-        this.updateOnchange(this.state.documents);
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: index,
+          documents:this.state.documents
+        }]
+    });
+    this.updateOnchange(this.state.documents);
     if (index < (this.state.groups.length - 1)) {
       this.setState({
+        stackChange: updateStack,
         groupCurrent: group,
         shouldUpdate: true,
+        loadingdocuments: true,
         lastGroup: index == (this.state.groups.length - 1),
       });
     }
   },
-
+  handleNextDocument(index) {
+      if(index <= (this.state.documents.length - 1)) {
+        let updateStack = update(this.state.stackChange, {
+            $push: [{
+                id: this.state.documentPreview,
+                data: Object.assign({}, this.state.documents[this.state.documentPreview])
+            }]
+        });
+          this.setState({
+              documentPreview: index,
+              stackChange: updateStack,
+              shouldUpdate: true
+          });
+      }
+    },
   handleTableRowOnClick(event, index) {
     switch (event.currentTarget.id) {
       case 'documentName':
@@ -309,18 +331,41 @@ var GroupReview = React.createClass({
 
   handleUndo() {
     if (this.state.stackChange.length > 0) {
-      let {documents, stackChange} = this.state,
-          item = stackChange[stackChange.length - 1],
-          updateDocuments = update(documents, {
-            [item.id]: {
-              $set: item.data
-            }
-          }),
-          updateStack = update(stackChange, {
-            $splice: [[stackChange.length - 1, 1]]
-          });
+      let {documents, stackChange, documentPreview } = this.state,
+          item = stackChange[stackChange.length - 1];
+      if(item.documents){
+        let updateDocuments = item.documents,
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
+        this.setState({
+          groupCurrent: Object.assign({}, this.state.groups[item.index], {index: item.index}),
+          documents: updateDocuments,
+          stackChange: updateStack,
+          loadingdocuments: false,
+          shouldUpdate: true
+        });
+      }else{
+        let updateDocuments = update(documents, {
+          [item.id]: {
+            $set: item.data
+          }
+        }),
+        updateStack = update(stackChange, {
+          $splice: [[stackChange.length - 1, 1]]
+        });
 
-      this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
+        if(item.id !== documentPreview ){
+          documentPreview = item.id;
+        }
+
+        this.setState({
+          documents: updateDocuments,
+          stackChange: updateStack,
+          documentPreview: documentPreview,
+          shouldUpdate: true
+        });
+      }
     }
   },
 
@@ -569,18 +614,19 @@ var GroupReview = React.createClass({
         }],
         {id} = this.state.groupCurrent;
 
-    return makeRequest({
-      path: "api/group/samples/",
-      params: {"id": id},
-      success: (res) => {
-        //data = res;
-        this.setState({
-          documents: res,
-          documentsLoading: false,
-          shouldUpdate: true
-        });
-      }
-    });
+    if (this.state.loadingdocuments)
+      return makeRequest({
+        path: "api/group/samples/",
+        params: {"id": id},
+        success: (res) => {
+          //data = res;
+          this.setState({
+            documents: res,
+            loadingdocuments: false,
+            shouldUpdate: true
+          });
+        }
+      });
   },
 
   getCategories() {
