@@ -10,14 +10,13 @@ var ChangeProfile = React.createClass({
 
     getInitialState() {
         return {
-            data : {}
+            data : null
         }
     },
-    shouldComponentUpdate(nextProps , nextState) {
-        if( _.isEqual(this.state.data, nextState.data) && _.isEqual(this.props.profile, nextProps.profile)) {
-            return false
+    componentDidUpdate(prevProps , prevState) {
+        if(!_.isEqual(this.props.profile, prevProps.profile)) {
+            this.setState({data : this.props.profile})
         }
-        return true
     },
     getValueInput(event) {
         let datas = _.cloneDeep(this.state.data),
@@ -44,16 +43,15 @@ var ChangeProfile = React.createClass({
     },
 
     render() {
-        let {profile} = this.props ,
+        let {data} = this.state,
             child = null ;
-
-        if( !_.isNull(profile)) {
+        if( !_.isNull(data)) {
              child = <div className="row">
                         <div className="profile-details-left col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Windows ID</label>
                                 <div className="mpe_input">
-                                  <input type="text" name="windows_id" value = {profile.windows_id} className="form-control" id="WindowID"
+                                  <input type="text" name="windows_id" value = {data.windows_id} className="form-control" id="WindowID"
                                     onChange = {this.getValueInput}
                                      />
                                 </div>
@@ -61,20 +59,20 @@ var ChangeProfile = React.createClass({
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Department</label>
                                 <div className="mpe_input">
-                                  <input type="text" name="department" value = {profile.department} className="form-control" id="Department" onChange={this.getValueInput} />
+                                  <input type="text" name="department" value = {data.department} className="form-control" id="Department" onChange={this.getValueInput} />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Company Name</label>
                                 <div className="mpe_input">
-                                    <input type="text" name="company_name" value = {profile.company_name}  className="form-control" id="CompanyName"
+                                    <input type="text" name="company_name" value = {data.company_name}  className="form-control" id="CompanyName"
                                      onChange={this.getValueInput} readOnly />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Location</label>
                                 <div className="mpe_input">
-                                    <input type="text" name="location" value = {profile.location} className="form-control" id="Location"  onChange={this.getValueInput} />
+                                    <input type="text" name="location" value = {data.location} className="form-control" id="Location"  onChange={this.getValueInput} />
                                 </div>
                             </div>
                         </div>
@@ -82,21 +80,21 @@ var ChangeProfile = React.createClass({
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Corporate Email</label>
                                 <div className="mpe_input">
-                                  <input type="text" name="corporate_email" value = {profile.corporate_email} className="form-control" id="Email"
+                                  <input type="text" name="corporate_email" value = {data.corporate_email} className="form-control" id="Email"
                                   onChange={this.getValueInput} />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Corporate Phone (Landline)</label>
                                 <div className="mpe_input">
-                                    <input type="text" name="corporate_phone" value = {profile.corporate_phone} className="form-control" id="Corporate_phone"
+                                    <input type="text" name="corporate_phone" value = {data.corporate_phone} className="form-control" id="Corporate_phone"
                                     onChange={this.getValueInput} />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label className="control-label" htmlFor="inputDefault">Corporate Phone (Mobile)</label>
                                 <div className="mpe_input">
-                                  <input type="text" name="corporate_mobile" value = {profile.corporate_mobile} className="form-control" id="Corporate_mobile"
+                                  <input type="text" name="corporate_mobile" value = {data.corporate_mobile} className="form-control" id="Corporate_mobile"
                                    onChange={this.getValueInput} />
                                 </div>
                             </div>

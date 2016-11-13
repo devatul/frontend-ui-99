@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
-import Constant from '../Constant.js';
+import {forEach} from 'lodash'
 import { makeRequest } from '../utils/http'
-import $, { JQuery } from 'jquery';
-import update from 'react/lib/update';
+
 
 module.exports = React.createClass({
     propTypes: {
@@ -35,7 +34,6 @@ module.exports = React.createClass({
         });
     },
     config(data){
-        debugger
         _.forEach(data , function(value , key){
             if(value == null){
                 data[key] = ''
