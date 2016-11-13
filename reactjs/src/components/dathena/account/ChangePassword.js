@@ -6,53 +6,53 @@ import Constant from '../../../Constant.js';
 
 var ChangePass = React.createClass({
   getInitialState() {
-    return {
-      data: {},
-      err_curr: '',
-      err_new: '',
-      err_conf: ''
-    }
-  },
+        return {
+            data: {},
+            err_curr: '',
+            err_new: '',
+            err_conf: ''
+        }
+    },
 
-  PropTypes: {
-    setDefault: PropTypes.string,
-    setTarget: PropTypes.string
-  },
+    PropTypes: {
+        setDefault: PropTypes.string,
+        setTarget: PropTypes.string
+    },
 
-  getValueInput(event) {
-    let datas = _.cloneDeep(this.state.data),
-        value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
+    getValueInput(event) {
+        let datas = _.cloneDeep(this.state.data),
+            value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
 
-    datas = _.assignIn(datas, {[event.target.name]: value});
-    this.setState({data: datas})
-  },
+        datas = _.assignIn(datas, {
+            [event.target.name]: value });
+        this.setState({ data: datas })
+    },
 
-  getConfirmPass(event){
-  },
+    getConfirmPass(event) {},
 
-  submitForm(){
-    $.ajax({
-      url: Constant.SERVER_API + 'api/account/change_password/',
-      dataType: 'json',
-      type: 'PUT',
-      data: JSON.stringify(this.state.data),
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
-      success: function (data) {}.bind(this),
-      error: function (xhr, status, error) {
-        let jsonResponse = JSON.parse(xhr.responseText);
+    submitForm() {
+        $.ajax({
+            url: Constant.SERVER_API + 'api/account/change_password/',
+            dataType: 'json',
+            type: 'PUT',
+            data: JSON.stringify(this.state.data),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+            },
+            success: function(data) {}.bind(this),
+            error: function(xhr, status, error) {
+                let jsonResponse = JSON.parse(xhr.responseText);
 
-        console.log(jsonResponse);
+                console.log(jsonResponse);
 
-        this.setState({
-          err_curr: jsonResponse.current_password[0],
-          err_new: jsonResponse.new_password[0],
-          err_conf: jsonResponse.confirm_password[0]
-        })
-      }.bind(this)
-    });
-  },
+                this.setState({
+                    err_curr: jsonResponse.current_password[0],
+                    err_new: jsonResponse.new_password[0],
+                    err_conf: jsonResponse.confirm_password[0]
+                })
+            }.bind(this)
+        });
+    },
 
   componentDidMount() {
   },

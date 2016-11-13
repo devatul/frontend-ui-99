@@ -6,42 +6,44 @@ import Constant from '../../../Constant.js';
 
 var ChangeEmail = React.createClass({
   getInitialState() {
-    return {
-      data: {},
-      err_email: '',
-      err_pass: ''
-    }
-  },
+         return {
+             data: {},
+             err_email: '',
+             err_pass: ''
+         }
+     },
 
-  PropTypes: {},
+     PropTypes: {},
 
-  getValueInput(event) {
-    let datas = _.cloneDeep(this.state.data),
-        value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
+     getValueInput(event) {
+         let datas = _.cloneDeep(this.state.data),
+             value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
 
-    datas = _.assignIn(datas, {[event.target.name]: value});
-    this.setState({data: datas})
-  },
+         datas = _.assignIn(datas, {
+             [event.target.name]: value });
+         this.setState({ data: datas })
+     },
 
-  submitForm() {
-    $.ajax({
-      url: Constant.SERVER_API + 'api/account/change_email/',
-      dataType: 'json',
-      type: 'PUT',
-      data: JSON.stringify(this.state.data),
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
-      success: function (data) {
-        this.setState({err_email: '', err_pass: ''})
-      }.bind(this),
-      error: function (xhr, status, error) {
-        let jsonResponse = JSON.parse(xhr.responseText);
+     submitForm() {
+         $.ajax({
+             url: Constant.SERVER_API + 'api/account/change_email/',
+             dataType: 'json',
+             type: 'PUT',
+             data: JSON.stringify(this.state.data),
+             beforeSend: function(xhr) {
+                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
+             },
+             success: function(data) {
+                 this.setState({ err_email: '', err_pass: '' })
+             }.bind(this),
+             error: function(xhr, status, error) {
+                 let jsonResponse = JSON.parse(xhr.responseText);
 
-        this.setState({err_email: jsonResponse.email[0], err_pass: jsonResponse.current_password[0]});
-      }.bind(this)
-    });
-  },
+                 this.setState({ err_email: jsonResponse.email[0], err_pass: jsonResponse.current_password[0] });
+             }.bind(this)
+         });
+     },
+
 
   componentDidMount() {
   },

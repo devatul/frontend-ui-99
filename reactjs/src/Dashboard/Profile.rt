@@ -87,12 +87,12 @@
                 </li>
                 <li class="left1">
                   <div class="switch switch-sm switch-primary">
-                    <div class="ios-switch off on">
+                    <div class="ios-switch off {this.state.profile.use_active_directory ? 'on' : ''}" onClick = {this.changeActive}>
                       <div class="on-background background-fill"></div>
                       <div class="state-background background-fill"></div>
                       <div class="handle"></div>
                     </div>
-                    <input type="checkbox" name="switch" data-plugin-ios-switch="" defaultChecked="checked" style="display: none;">
+                    <input type="checkbox" name="switch" data-plugin-ios-switch="" style="display: none;">
                   </div>
                 </li>
                 <li class="left2">
@@ -106,8 +106,8 @@
                     classIcon="overview_question_a help_question_a" setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
                     </li>
                   </ul>
-                  <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check">
-                    <input class="x" id="z" name="agreeterms" type="checkbox">
+                  <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check" rt-if="this.state.profile.use_active_directory">
+                    <input class="x" id="z" name="agreeterms" type="checkbox" checked = {this.state.isChecked} onChange = {this.changeEnable} >
                     <label for="AgreeTerms">Enable SSO</label>
                   </div>
                 </li>
