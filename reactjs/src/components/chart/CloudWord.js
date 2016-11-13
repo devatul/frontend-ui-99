@@ -15,7 +15,6 @@ var CloudWord = React.createClass({
   },
 
   componentDidMount() {
-    var wordframe = $(this.refs.wordframe);
     window.addEventListener('resize', this.draw);
   },
 
@@ -46,7 +45,7 @@ var CloudWord = React.createClass({
         <h4 className="review_cloud_p">{this.props.title}
           <HelpButton
             classMenu="fix-overview-help-button-table"
-            setValue={this.props.help && this.props.help}/>
+            setValue={this.props.help && this.props.help} />
         </h4>
 
         {this.props.children}

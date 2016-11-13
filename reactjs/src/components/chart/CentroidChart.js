@@ -34,31 +34,35 @@ var CentroidChart = React.createClass({
 
   draw() {
     var colorsCentroid = ['#45A446', '#98A33A', '#DAA525', '#EC892B', '#E15E29', '#D0352D', '#D0352D'],
-      {series} = this.props;
+        {series} = this.props;
 
     $('#centroidChart').highcharts({
       chart: {
         polar: true,
         events: {
           load: function () {
-            var chart = this;
-            var weight = $(window).innerWidth() < 500 ? 25 : 100;
+            var chart = this,
+                weight = $(window).innerWidth() < 500 ? 25 : 100;
 
             $(chart.series).each(function (i, serie) {
-              var documentNum = serie.data[1].weight;
-              var distance = parseInt((Math.abs(serie.data[0].y)+5)/5);
-              var points = serie.points;
-              serie.color = colorsCentroid[distance-1];
+              var documentNum = serie.data[1].weight,
+                  distance = parseInt((Math.abs(serie.data[0].y) + 5) / 5),
+                  points = serie.points;
+
+              serie.color = colorsCentroid[distance - 1];
               serie.graph.attr({
-                stroke: colorsCentroid[distance-1]
+                stroke: colorsCentroid[distance - 1]
               });
-              serie.options.marker.radius = ((documentNum*3+1)/100) * weight;
-              serie.options.marker.states.hover.radius = ((documentNum*3+2)/100) * weight;
+
+              serie.options.marker.radius = ((documentNum * 3 + 1) / 100) * weight;
+              serie.options.marker.states.hover.radius = ((documentNum * 3 + 2) / 100) * weight;
+
               $.each(points, function (i, e) {
                 var pt = e;
-                pt.color = colorsCentroid[distance-1];
-                pt.fillColor = colorsCentroid[distance-1];
+                pt.color = colorsCentroid[distance - 1];
+                pt.fillColor = colorsCentroid[distance - 1];
               });
+
               serie.redraw();
             });
           }
@@ -109,7 +113,7 @@ var CentroidChart = React.createClass({
           color: '#FCFCFC'
         }],
         labels: {
-          formatter: function() {
+          formatter: function () {
             return this.value >= 0 ? this.value : null;
           }
         }
@@ -131,8 +135,8 @@ var CentroidChart = React.createClass({
         enabled: false
       },
       tooltip: {
-        formatter: function() {
-          return 'Documents:'+ this.series.data[1].document + '<br>' +'Distance:' + this.y;
+        formatter: function () {
+          return 'Documents:' + this.series.data[1].document + '<br>' + 'Distance:' + this.y;
         },
         useHTML: true
       },
@@ -142,7 +146,7 @@ var CentroidChart = React.createClass({
 
   render() {
     let max = 0,
-      max_circle_size = 6;
+        max_circle_size = 6;
 
     each(this.props.series, (row) => {
       if (row.data[1].document > max) {
@@ -154,53 +158,54 @@ var CentroidChart = React.createClass({
       i++;
 
       let document_no = Math.ceil(((i - 1) * max / max_circle_size) + 1),
-        document_no_next = Math.ceil(((i) * max / max_circle_size));
+          document_no_next = Math.ceil(((i) * max / max_circle_size));
 
-      return (<span key={'legend_' + i} className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} to {document_no_next}</span></span>)
+      return (<span key={'legend_' + i} className="document-symbol"><i className={'size-' + i}></i> <span>{document_no} to {document_no_next}</span></span>);
     });
 
     return (
       <div id="centroid" className="cendroid-frame">
-      <h4 className="chart-title">
-      Centroid Distance Histogram
-      <HelpButton classMenu="fix-overview-help-button-table" setValue={this.props.help}/>
-      </h4>
+        <h4 className="chart-title">
+          Centroid Distance Histogram
+          <HelpButton classMenu="fix-overview-help-button-table" setValue={this.props.help}/>
+        </h4>
 
-      {
-        this.props.loading ? (this.props.children) : (
-          <Row>
-          <Col md={9} sm={9}>
-          <div id="centroidChartWrapper">
-          <div id="centroidChart"></div>
-          <div className="cendroid-chart-label"><strong>Group</strong><span className="number">1</span></div>
-          </div>
-          </Col>
-          <Col md={3} sm={3}>
-          <Row>
-          <div className="cendroid-chart-legend new">
-          <h5>Distance</h5>
-          <span className="symbol" style={{backgroundColor: '#45A446'}}>0</span>
-          <span className="symbol" style={{backgroundColor: '#98A33A'}}>5</span>
-          <span className="symbol" style={{backgroundColor: '#DAA525'}}>10</span>
-          <span className="symbol" style={{backgroundColor: '#EC892B'}}>15</span>
-          <span className="symbol" style={{backgroundColor: '#E15E29'}}>20</span>
-          <span className="symbol" style={{backgroundColor: '#D0352D'}}>25</span>
-          <span className="more-legend">more</span>
-          </div>
-          </Row>
-          <Row>
-          <div className="cendroid-chart-legend new">
-          <h5>Number of documents</h5>
-          {legends}
-          </div>
-          </Row>
-          </Col>
-          </Row>
-        )
-      }
+        {
+          this.props.loading ? (this.props.children) : (
+            <Row>
+              <Col md={9} sm={9}>
+                <div id="centroidChartWrapper">
+                  <div id="centroidChart"></div>
+                  <div className="cendroid-chart-label"><strong>Group</strong><span className="number">1</span>
+                  </div>
+                </div>
+              </Col>
+              <Col md={3} sm={3}>
+                <Row>
+                  <div className="cendroid-chart-legend new">
+                    <h5>Distance</h5>
+                    <span className="symbol" style={{backgroundColor: '#45A446'}}>0</span>
+                    <span className="symbol" style={{backgroundColor: '#98A33A'}}>5</span>
+                    <span className="symbol" style={{backgroundColor: '#DAA525'}}>10</span>
+                    <span className="symbol" style={{backgroundColor: '#EC892B'}}>15</span>
+                    <span className="symbol" style={{backgroundColor: '#E15E29'}}>20</span>
+                    <span className="symbol" style={{backgroundColor: '#D0352D'}}>25</span>
+                    <span className="more-legend">more</span>
+                  </div>
+                </Row>
+                <Row>
+                  <div className="cendroid-chart-legend new">
+                    <h5>Number of documents</h5>
+                    {legends}
+                  </div>
+                </Row>
+              </Col>
+            </Row>
+          )
+        }
       </div>
     );
   }
-
 });
+
 module.exports = CentroidChart;

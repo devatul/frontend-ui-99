@@ -1,449 +1,462 @@
-<rt-import name = " Input" from="./components/ValidateInput"/>
-<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name=" Input" from="./components/ValidateInput" />
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton" />
+<rt-import name="HelpButton" from="../components/dathena/HelpButton" />
+
 <div>
+  <div class="bar_menu admin_header container">
+    <div class="row">
+      <div class="col-md-12 mb-md">
+        <div class="row">
+          <div class="col-sm-8">
+            <h4 class="inline-block-item">Settings Summary</h4>
 
-    <div class="bar_menu admin_header container">
-      <div class="row">
-        <div class="col-md-12 mb-md">
-          <div class="row">
-              <div class="col-sm-8">
-                  <h4 class="inline-block-item">Settings Summary</h4>
-                  <HelpButton
-                    classMenu="overview_timeframe fix-overview-help-button"
-                    setValue="Last step before running the scan of your documents, please review all submitted information to make sure its correct." />
-              </div>
-
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="Last step before running the scan of your documents, please review all submitted information to make sure its correct." />
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <div class="row row-eq-height mb-lg">
+  <div class="container">
+    <div class="row row-eq-height mb-lg">
+      <div class="col-md-6">
+        <section class="panel panel-featured panel-featured-primary panel-bordered panel-same-height">
+          <header class="panel-heading">
+            <h2 class="panel-title">Company Details</h2>
+          </header>
 
-        <div class="col-md-6">
-          <section class="panel panel-featured panel-featured-primary panel-bordered panel-same-height">
-            <header class="panel-heading">
-                <h2 class="panel-title">Company Details</h2>
-            </header>
-            <div class="panel-body summary-section">
-              <table class="table table-no-border table-align-left mb-none">
-                <tbody>
+          <div class="panel-body summary-section">
+            <table class="table table-no-border table-align-left mb-none">
+              <tbody>
                 <tr>
-                  <td>Company Name: </td>
+                  <td>Company Name:</td>
                   <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 1 )}</td>
                 </tr>
                 <tr>
-                  <td>Region: </td>
+                  <td>Region:</td>
                   <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 2 )}</td>
                 </tr>
                 <tr>
-                  <td>Country: </td>
+                  <td>Country:</td>
                   <td>{this.state.data && this.getValue(this.state.data.data_step1.block1 , 3 )}</td>
                 </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
-
-        <div class="col-md-6">
-          <section class="panel panel-featured panel-featured-primary panel-bordered panel-same-height">
-            <header class="panel-heading">
-                <h2 class="panel-title">Level of Confidentiality Applied</h2>
-            </header>
-            <div class="panel-body summary-section">
-              <table class="table table-no-border table-align-left mb-none">
-              <tbody>
-                <tr>
-                    <td>1. Banking Secrecy</td>
-                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 1 )}</td>
-                </tr>
-                <tr>
-                    <td>2. Secret</td>
-                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 2 )}</td>
-                </tr>
-                <tr>
-                    <td>3. Confidentiality</td>
-                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 3 )}</td>
-                </tr>
-                <tr>
-                    <td>4. Internal</td>
-                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 4 )}</td>
-                </tr>
-                <tr>
-                    <td>5. Public</td>
-                    <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 5 )}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
-      <div class="row">
+      <div class="col-md-6">
+        <section class="panel panel-featured panel-featured-primary panel-bordered panel-same-height">
+          <header class="panel-heading">
+            <h2 class="panel-title">Level of Confidentiality Applied</h2>
+          </header>
 
-        <div class="col-md-12">
-          <section class="panel panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Service Level Agreement</h2>
-                <div class="panel-actions" style="margin-right: 25px">
-                  <div class="btn-group-admin">
-                    <button class="btn btn-green btn-edit-step">Edit</button>
-                    <button class="btn btn-green btn-save-step">Save</button>
-                  </div>
+          <div class="panel-body summary-section">
+            <table class="table table-no-border table-align-left mb-none">
+              <tbody>
+                <tr>
+                  <td>1. Banking Secrecy</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 1 )}</td>
+                </tr>
+                <tr>
+                  <td>2. Secret</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 2 )}</td>
+                </tr>
+                <tr>
+                  <td>3. Confidentiality</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 3 )}</td>
+                </tr>
+                <tr>
+                  <td>4. Internal</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 4 )}</td>
+                </tr>
+                <tr>
+                  <td>5. Public</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 5 )}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
 
-                </div>
-                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#block1_step5" />
-                 </div>
-            </header>
-            <div class="panel-body summary-section" id="block1_step5">
-              <div class="table-responsive">
-                <h4>1. Document Reviewer</h4>
-                <table class="table table-no-border table-align-left">
-                  <thead>
-                    <tr>
-                      <th>Rule#</th>
-                      <th>Confidentiality Level</th>
-                      <th>Document Category</th>
-                      <th colspan="4">Timer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>SLA 1.1</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 1.2</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 1.3</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 1.4</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 1.5</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="table-responsive">
-                <h4>2. Classification Review Coordinator</h4>
-                <table class="table table-no-border table-align-left">
-                  <thead>
-                    <tr>
-                      <th>Rule#</th>
-                      <th>Confidentiality Level</th>
-                      <th>Document Category</th>
-                      <th colspan="4">Timer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>SLA 2.1</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 2.2</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 2.3</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 2.4</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 2.5</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="table-responsive">
-                <h4>3. Security Anomaly Review Coordinator</h4>
-                <table class="table table-no-border table-align-left">
-                  <thead>
-                    <tr>
-                      <th>Rule#</th>
-                      <th>Confidentiality Level</th>
-                      <th>Document Category</th>
-                      <th colspan="4">Timer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>SLA 3.1</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 3.2</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 3.3</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 3.4</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                    <tr>
-                      <td>SLA 3.5</td>
-                      <td><span class="text-italic">All</span></td>
-                      <td><span class="text-italic">Client / Customer</span></td>
-                      <td><span class="text-italic">1 Month(s)</span></td>
-                      <td><span class="text-italic">2 Week(s)</span></td>
-                      <td><span class="text-italic">2 Day(s)</span></td>
-                      <td><span class="text-italic">0 Hour(s)</span></td>
-                    </tr>
-                  </tbody>
-                </table>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="panel panel-featured panel-featured-primary panel-bordered">
+          <header class="panel-heading">
+            <h2 class="panel-title">Service Level Agreement</h2>
+            <div class="panel-actions" style="margin-right: 25px;">
+              <div class="btn-group-admin">
+                <button class="btn btn-green btn-edit-step">Edit</button>
+                <button class="btn btn-green btn-save-step">Save</button>
               </div>
             </div>
-          </section>
-        </div>
 
-        <div class="col-md-12">
-          <section class="panel panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Technology</h2>
-                <div class="panel-actions" style="margin-right: 25px">
-                  <div class="btn-group-admin">
-                    <button class="btn btn-green btn-edit-step">Edit</button>
-                    <button class="btn btn-green btn-save-step">Save</button>
-                  </div>
-                </div>
-                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#block2_step5" />
-                 </div>
-            </header>
-            <div class="panel-body summary-section" id="block2_step5">
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Domain Details</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <table class="table table-no-border table-align-left">
+            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+              <ToggleButton setDefault="open" setTarget="#block1_step5" />
+            </div>
+          </header>
+
+          <div class="panel-body summary-section" id="block1_step5">
+            <div class="table-responsive">
+              <h4>1. Document Reviewer</h4>
+
+              <table class="table table-no-border table-align-left">
+                <thead>
+                  <tr>
+                    <th>Rule#</th>
+                    <th>Confidentiality Level</th>
+                    <th>Document Category</th>
+                    <th colspan="4">Timer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SLA 1.1</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 1.2</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 1.3</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 1.4</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 1.5</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-responsive">
+              <h4>2. Classification Review Coordinator</h4>
+
+              <table class="table table-no-border table-align-left">
+                <thead>
+                  <tr>
+                    <th>Rule#</th>
+                    <th>Confidentiality Level</th>
+                    <th>Document Category</th>
+                    <th colspan="4">Timer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SLA 2.1</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 2.2</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 2.3</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 2.4</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 2.5</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-responsive">
+              <h4>3. Security Anomaly Review Coordinator</h4>
+
+              <table class="table table-no-border table-align-left">
+                <thead>
+                  <tr>
+                    <th>Rule#</th>
+                    <th>Confidentiality Level</th>
+                    <th>Document Category</th>
+                    <th colspan="4">Timer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SLA 3.1</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 3.2</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 3.3</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 3.4</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                  <tr>
+                    <td>SLA 3.5</td>
+                    <td><span class="text-italic">All</span></td>
+                    <td><span class="text-italic">Client / Customer</span></td>
+                    <td><span class="text-italic">1 Month(s)</span></td>
+                    <td><span class="text-italic">2 Week(s)</span></td>
+                    <td><span class="text-italic">2 Day(s)</span></td>
+                    <td><span class="text-italic">0 Hour(s)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-md-12">
+        <section class="panel panel-featured panel-featured-primary panel-bordered">
+          <header class="panel-heading">
+            <h2 class="panel-title">Technology</h2>
+
+            <div class="panel-actions" style="margin-right: 25px">
+              <div class="btn-group-admin">
+                <button class="btn btn-green btn-edit-step">Edit</button>
+                <button class="btn btn-green btn-save-step">Save</button>
+              </div>
+            </div>
+
+            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+              <ToggleButton setDefault="open" setTarget="#block2_step5" />
+            </div>
+          </header>
+
+          <div class="panel-body summary-section" id="block2_step5">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Domain Details</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Domain Name: </td>
+                            <td>Domain Name:</td>
                             <td>Domain Name</td>
                           </tr>
                           <tr>
-                            <td>Domain Location: </td>
+                            <td>Domain Location:</td>
                             <td>Domain Location</td>
                           </tr>
                           <tr>
-                            <td>Domain OS: </td>
+                            <td>Domain OS:</td>
                             <td>Domain OS</td>
                           </tr>
                           <tr>
-                            <td>Domain Owner: </td>
+                            <td>Domain Owner:</td>
                             <td>Domain Owner</td>
                           </tr>
                           <tr>
-                            <td>Domain Administrator: </td>
+                            <td>Domain Administrator:</td>
                             <td>Domain Administrator</td>
                           </tr>
                           <tr>
-                            <td>Domain Administrator Name: </td>
+                            <td>Domain Administrator Name:</td>
                             <td>Domain Administrator Name</td>
                           </tr>
                           <tr>
-                            <td>Domain Administrator Email: </td>
+                            <td>Domain Administrator Email:</td>
                             <td>Domain Administrator Email</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
+                  </div>
+                </section>
 
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Folder Details</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <table class="table table-no-border table-align-left">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Folder Details</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Folder Name: </td>
+                            <td>Folder Name:</td>
                             <td>Folder Name</td>
                           </tr>
                           <tr>
-                            <td>Full Folder Path: </td>
+                            <td>Full Folder Path:</td>
                             <td>Full Folder Path</td>
                           </tr>
                           <tr>
-                            <td>Windows Usename: </td>
+                            <td>Windows Usename:</td>
                             <td>Windows Usename</td>
                           </tr>
                           <tr>
-                            <td>Windows Password: </td>
+                            <td>Windows Password:</td>
                             <td>Windows Password</td>
                           </tr>
                           <tr>
-                            <td>Folder Owner: </td>
+                            <td>Folder Owner:</td>
                             <td>Folder Owner</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
+                  </div>
+                </section>
 
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Email Server Details</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive mb-lg">
-                        <table class="table table-no-border table-align-left">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Email Server Details</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive mb-lg">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Email Server: </td>
+                            <td>Email Server:</td>
                             <td>Exchange</td>
                           </tr>
                           <tr>
-                            <td>Name: </td>
+                            <td>Name:</td>
                             <td>Name</td>
                           </tr>
                           <tr>
-                            <td>Email Address: </td>
+                            <td>Email Address:</td>
                             <td>Email Address</td>
                           </tr>
                           <tr>
-                            <td>Username: </td>
+                            <td>Username:</td>
                             <td>Username</td>
                           </tr>
                           <tr>
-                            <td>Password: </td>
+                            <td>Password:</td>
                             <td>Password</td>
                           </tr>
                           <tr>
-                            <td>Internal URL: </td>
+                            <td>Internal URL:</td>
                             <td>Internal URL</td>
                           </tr>
                           <tr>
-                            <td>External URL: </td>
+                            <td>External URL:</td>
                             <td>External URL</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive mb-lg">
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="table-responsive mb-lg">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Mail File Location: </td>
+                            <td>Mail File Location:</td>
                             <td>On Server</td>
                           </tr>
                           <tr>
-                            <td>Mail File: </td>
+                            <td>Mail File:</td>
                             <td>Mail File</td>
                           </tr>
                           <tr>
-                            <td>Domino Mail Domain: </td>
+                            <td>Domino Mail Domain:</td>
                             <td>Domino Mail Domain</td>
                           </tr>
                           <tr>
-                            <td>Format for Messages Addresses to Internet Addresses: </td>
+                            <td>Format for Messages Addresses to Internet Addresses:</td>
                             <td>To Internet Addresses to Internet Addresses</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive">
-                        <h5>Internet Proxy Server</h5>
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="table-responsive">
+                      <h5>Internet Proxy Server</h5>
+
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
                             <td>Name:</td>
@@ -477,22 +490,23 @@
                             <td>Team:</td>
                             <td>Team</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
+                  </div>
+                </section>
 
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Email Server Details</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive mb-lg">
-                        <table class="table table-no-border table-align-left">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Email Server Details</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive mb-lg">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Email Server: </td>
+                            <td>Email Server:</td>
                             <td>Lotus</td>
                           </tr>
                           <tr>
@@ -511,12 +525,14 @@
                             <td>Domino Directory Server:</td>
                             <td>Domino Directory Server</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive">
-                        <h5>Internet Proxy Server</h5>
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="table-responsive">
+                      <h5>Internet Proxy Server</h5>
+
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
                             <td>Name:</td>
@@ -550,19 +566,20 @@
                             <td>Team:</td>
                             <td>Team</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
+                  </div>
+                </section>
 
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">HDP Server Details</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <table class="table table-no-border table-align-left">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">HDP Server Details</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
                             <td>Server Name:</td>
@@ -592,52 +609,52 @@
                             <td>Server Administrator Email:</td>
                             <td>Server Administrator Email</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
-
-                </div>
+                  </div>
+                </section>
               </div>
-
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
 
-        <div class="col-md-12">
-          <section class="panel panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Team</h2>
-                <div class="panel-actions" style="margin-right: 25px">
-                    <div class="btn-group-admin">
-                      <button class="btn btn-green btn-edit-step">Edit</button>
-                      <button class="btn btn-green btn-save-step">Save</button>
-                    </div>
+      <div class="col-md-12">
+        <section class="panel panel-featured panel-featured-primary panel-bordered">
+          <header class="panel-heading">
+            <h2 class="panel-title">Team</h2>
 
-
-                </div>
-                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#block3_step5" />
+            <div class="panel-actions" style="margin-right: 25px;">
+              <div class="btn-group-admin">
+                <button class="btn btn-green btn-edit-step">Edit</button>
+                <button class="btn btn-green btn-save-step">Save</button>
+              </div>
             </div>
-            </header>
-            <div class="panel-body summary-section" id="block3_step5">
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Business and Data Owner</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <table class="table table-no-border table-align-left mb-lg">
+
+            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+              <ToggleButton setDefault="open" setTarget="#block3_step5" />
+            </div>
+          </header>
+
+          <div class="panel-body summary-section" id="block3_step5">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Business and Data Owner</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-no-border table-align-left mb-lg">
                         <tbody>
                           <tr>
                             <td>Data Repository 1:</td>
                             <td>Data Repository 1</td>
                           </tr>
                           <tr>
-                            <td>Root Repository: </td>
+                            <td>Root Repository:</td>
                             <td>Root Repository</td>
                           </tr>
                           <tr>
@@ -652,16 +669,17 @@
                             <td>Data Owner:</td>
                             <td>Data Owner</td>
                           </tr>
-                          </tbody>
-                        </table>
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
                             <td>Data Repository 2:</td>
                             <td>Data Repository 2</td>
                           </tr>
                           <tr>
-                            <td>Root Repository: </td>
+                            <td>Root Repository:</td>
                             <td>Root Repository</td>
                           </tr>
                           <tr>
@@ -676,25 +694,27 @@
                             <td>Data Owner:</td>
                             <td>Data Owner</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Classification Coordinator Team</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <table class="table table-no-border table-align-left mb-lg">
+                  </div>
+                </section>
+
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Classification Coordinator Team</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-no-border table-align-left mb-lg">
                         <tbody>
                           <tr>
                             <td>Team Lead:</td>
                             <td>Team Lead</td>
                           </tr>
                           <tr>
-                            <td>Job Title: </td>
+                            <td>Job Title:</td>
                             <td>Job Title</td>
                           </tr>
                           <tr>
@@ -705,16 +725,17 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
-                          </tbody>
-                        </table>
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
                             <td>Coordinator:</td>
                             <td>Coordinator</td>
                           </tr>
                           <tr>
-                            <td>Job Title: </td>
+                            <td>Job Title:</td>
                             <td>Job Title</td>
                           </tr>
                           <tr>
@@ -725,22 +746,25 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
-                  <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
-                    <header class="panel-heading">
-                      <h2 class="panel-title">Audit Team</h2>
-                    </header>
-                    <div class="panel-body">
-                      <div class="table-responsive">
-                        <h5>Audit Officer 1</h5>
-                        <table class="table table-no-border table-align-left mb-lg">
+                  </div>
+                </section>
+
+                <section class="panel panel-bordered panel-featured-compact panel-featured panel-featured-primary">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Audit Team</h2>
+                  </header>
+
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <h5>Audit Officer 1</h5>
+
+                      <table class="table table-no-border table-align-left mb-lg">
                         <tbody>
                           <tr>
-                            <td>Job Title: </td>
+                            <td>Job Title:</td>
                             <td>Job Title</td>
                           </tr>
                           <tr>
@@ -751,15 +775,17 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive">
-                        <h5>Audit Officer 2</h5>
-                        <table class="table table-no-border table-align-left">
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="table-responsive">
+                      <h5>Audit Officer 2</h5>
+
+                      <table class="table table-no-border table-align-left">
                         <tbody>
                           <tr>
-                            <td>Job Title: </td>
+                            <td>Job Title:</td>
                             <td>Job Title</td>
                           </tr>
                           <tr>
@@ -770,36 +796,39 @@
                             <td>Permissions Required:</td>
                             <td>Permissions Required</td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                  </section>
-                </div>
+                  </div>
+                </section>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
 
-        <div class="col-md-12">
-          <section class="panel panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Data Scientist</h2>
-                <div class="panel-actions" style="margin-right: 25px">
-                    <div class="btn-group-admin">
-                      <button class="btn btn-green btn-edit-step">Edit</button>
-                      <button class="btn btn-green btn-save-step">Save</button>
-                    </div>
-                </div>
-                 <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                    <ToggleButton setDefault="open" setTarget="#block4_step5" />
-                </div>
-            </header>
-            <div class="panel-body summary-section" id="block4_step5">
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <div class="table-responsive">
-                    <table class="table table-no-border table-align-left mb-lg">
+      <div class="col-md-12">
+        <section class="panel panel-featured panel-featured-primary panel-bordered">
+          <header class="panel-heading">
+            <h2 class="panel-title">Data Scientist</h2>
+
+            <div class="panel-actions" style="margin-right: 25px;">
+              <div class="btn-group-admin">
+                <button class="btn btn-green btn-edit-step">Edit</button>
+                <button class="btn btn-green btn-save-step">Save</button>
+              </div>
+            </div>
+
+            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+              <ToggleButton setDefault="open" setTarget="#block4_step5" />
+            </div>
+          </header>
+
+          <div class="panel-body summary-section" id="block4_step5">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <div class="table-responsive">
+                  <table class="table table-no-border table-align-left mb-lg">
                     <tbody>
                       <tr>
                         <td>Minimum Number of Cluster:</td>
@@ -809,21 +838,20 @@
                         <td>Maximum Number of Cluster:</td>
                         <td>from 2 to 100</td>
                       </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          </section>
-        </div>
-
+          </div>
+        </section>
       </div>
-      <div class="text-right mb-lg">
-        <a href="#" class="btn btn-green validate-btn">Validate</a>
-      </div>
-
     </div>
 
+    <div class="text-right mb-lg">
+      <a href="#" class="btn btn-green validate-btn">
+        Validate
+      </a>
     </div>
+  </div>
 </div>

@@ -1,9 +1,8 @@
-'use strict';
-import React, { Component, PropTypes } from 'react'
-import { render } from 'react-dom'
-import { forEach, isEqual, orderBy } from 'lodash'
-import { orderByIndex } from '../../utils/function'
-import HelpButton from '../dathena/HelpButton'
+import React, {Component, PropTypes} from 'react';
+import {render} from 'react-dom';
+import {forEach, isEqual, orderBy} from 'lodash';
+import {orderByIndex} from '../../utils/function';
+import HelpButton from '../dathena/HelpButton';
 
 var StackedChart = React.createClass({
   displayName: 'StackedChart',
@@ -82,12 +81,7 @@ var StackedChart = React.createClass({
           headerFormat: '',
           pointFormatter: function () {
             var percent = this.percentage.toFixed(1);
-
-            //if(percent < 5.0) {
             return '<span style="color:' + this.color + '; font-weight: bold;">' + this.name + ': </span>' + percent + '% / ' + this.y + ' Documents';
-            // } else {
-            //     return 'Documents: ' + this.y;
-            // }
           }
         },
         plotOptions: {
@@ -137,7 +131,6 @@ var StackedChart = React.createClass({
             }
           }
         },
-
         legend: {
           enabled: false
         },
@@ -146,53 +139,56 @@ var StackedChart = React.createClass({
     }
   },
 
-    render() {
-        var legendChart = [], { id, title, config } = this.props,
-            { disabled, colorDisabled } = this.state;
-        if(config) {
-            for(let i = config.length - 1; i >= 0; i--) {
-                var children = [];
-                var { data } = config[i];
-                for(let j = data.length - 1; j >= 0; j--) {
-                    let colorSymbol = disabled === true ? colorDisabled[j] : config[i].colors[j];
-                    children[j] = <li key={'legend_' + j} style={data.length <= 3 ? {
-                                        margin: '0 auto 5px',
-                                        width: data[0].name.length * 8,
-                                        float: 'none',
-                                        textTransform: 'capitalize'
-                                    } : {
-                                        textTransform: 'capitalize'
-                                    } }>
-                                        <i className={'legend-symbol'} style={{backgroundColor: colorSymbol }}></i>
-                                    {data[j].name}
-                                </li>;
-                }
-                legendChart[i] = React.createElement('ul', {
-                    key: 'chart-legend-' + i,
-                    className: 'list-unstyled chart-legend serie-' + i,
-                    style: { textTransform: 'lowercase' }
-                }, children);
-            }
+  render() {
+    var legendChart = [], {id, title, config} = this.props,
+        {disabled, colorDisabled} = this.state;
+
+    if (config) {
+      for (let i = config.length - 1; i >= 0; i--) {
+        var children = [],
+            {data} = config[i];
+
+        for (let j = data.length - 1; j >= 0; j--) {
+          let colorSymbol = disabled === true ? colorDisabled[j] : config[i].colors[j];
+
+          children[j] =
+            <li key={'legend_' + j} style={data.length <= 3 ? {
+                margin: '0 auto 5px',
+                width: data[0].name.length * 8,
+                float: 'none',
+                textTransform: 'capitalize'
+              } : {textTransform: 'capitalize'}}>
+            <i className={'legend-symbol'} style={{backgroundColor: colorSymbol}}></i>
+            {data[j].name}
+          </li>;
         }
-        return (
-            <section className="panel">
-                <div className="panel-body chart-panel widget-panel">
-                    <h4 className="widget-title">{title + ' '}
-                        <HelpButton classMenu="overview_timeframe fix-overview-help-button"
-                                    setValue="A summarised view of each category and document language type for all the documents scanned." />
-                    </h4>
-                    <div className="widget-chart chart-stacked">
-                        <div className="chart chart-md" id={id}></div>
-                        {legendChart}
-                    </div>
-                    { disabled &&
-                        <div id={id} className="chart-disabled-overlay"></div>
-                    }
-                </div>
-            </section>
-            );
+
+        legendChart[i] = React.createElement('ul', {
+            key: 'chart-legend-' + i,
+            className: 'list-unstyled chart-legend serie-' + i,
+            style: {textTransform: 'lowercase'}
+          }, children);
+      }
     }
 
+    return (
+      <section className="panel">
+        <div className="panel-body chart-panel widget-panel">
+          <h4 className="widget-title">
+            {title + ' '}
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="A summarised view of each category and document language type for all the documents scanned." />
+          </h4>
+          <div className="widget-chart chart-stacked">
+            <div className="chart chart-md" id={id}></div>
+            {legendChart}
+          </div>
+          { disabled && <div id={id} className="chart-disabled-overlay"></div>}
+        </div>
+      </section>
+    );
+  }
 });
 
 module.exports = StackedChart;

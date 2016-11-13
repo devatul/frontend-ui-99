@@ -26,18 +26,6 @@ var Loader = React.createClass({
     this.setState({delay: delay});
   },
 
-  setLoading() {
-    this.setState({
-      xhr: update(this.state.xhr, {
-        loading: {
-          $set: this.state.xhr.loading + 1
-        }
-      })
-    });
-
-    if (this.state.xhr.loading >= 100) clearInterval(this.state.delay);
-  },
-
   componentWillReceiveProps() {
     var {xhr} = this.state;
 
@@ -61,7 +49,7 @@ var Loader = React.createClass({
                 $set: "Report is loading"
               },
               message: {
-                  $set: "Please wait!"
+                $set: "Please wait!"
               },
               error: {
                 $set: false
@@ -112,6 +100,29 @@ var Loader = React.createClass({
     clearInterval(this.state.delay);
   },
 
+  setLoading() {
+    var delay = 0,
+        {xhr} = this.state;
+
+    delay = setInterval(() => {
+      var {loading} = this.state.xhr;
+
+      this.setState({
+        xhr: update(this.state.xhr, {
+          loading: {
+            $set: ++loading
+          }
+        })
+      });
+
+      if (loading >= 100) clearInterval(delay);
+    }, xhr.timer * (xhr.loading / 2));
+
+    this.setState({
+      delay: delay
+    });
+  },
+
   renderMessage() {
     let {message, status} = this.state.xhr;
 
@@ -130,7 +141,7 @@ var Loader = React.createClass({
         <div className="progress-example">
           <ProgressLabel
             className="label-1"
-            progress={this.state.xhr.loading}
+            progress={Math.min(this.state.xhr.loading, 100)}
             startDegree={-45}
             progressWidth={3.5}
             trackWidth={4}
@@ -142,7 +153,7 @@ var Loader = React.createClass({
           </ProgressLabel>
           <ProgressLabel
             className="label-2"
-            progress={this.state.xhr.loading}
+            progress={Math.min(this.state.xhr.loading, 100)}
             startDegree={-90}
             progressWidth={3.5}
             trackWidth={4}

@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="text-right">
-          <a rt-if="this.state.complete == 0" href="javascript:;" class="btn btn-green validate-btn" onClick={this.clickComfirm}>Confirm</a>
+          <a rt-if="this.state.complete == 0" href="javascript:;" class="btn btn-green validate-btn" onClick={this.clickConfirm}>Confirm</a>
         </div>
       </div>
     </section>
