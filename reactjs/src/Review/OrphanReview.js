@@ -26,6 +26,7 @@ var OrphanReview = React.createClass({
       documents: [],
       categories: [],
       confidentialities: [],
+      emptyValues: true,
       loadingdocuments: true,
       getdocumenterror: false,
       categoryInfo: [],
@@ -291,6 +292,7 @@ var OrphanReview = React.createClass({
             data: Object.assign({}, documents[index])
           }]
         });
+
     this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
   },
 
@@ -731,8 +733,8 @@ var OrphanReview = React.createClass({
         documentType = {
           categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
           series: []
-        }
-        ;
+        };
+
     for (let i = 0, total = category.length; i < total; i++) {
       pieChart[i] = {
         name: upperFirst(category[i].name),

@@ -500,7 +500,9 @@ var RowPreview = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyValues, hide} = this.props;
+
+    console.log(emptyValues);
 
     return (
       document.path ?
@@ -551,7 +553,8 @@ var RowPreview = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
+                emptyValues={emptyValues}
+                value={ emptyValues ? (null) : findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
             </div>
           </td>
           <td className="select-confidentiality">
@@ -576,7 +579,8 @@ var RowPreview = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
-                value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) } />
+                emptyValues={emptyValues}
+                value={ emptyValues ? (null) : findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) } />
             </div>
           </td>
           <td>
@@ -679,7 +683,7 @@ var Row = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyValues, hide} = this.props;
 
     return (
       document.path ?
@@ -728,7 +732,8 @@ var Row = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
+                emptyValues={emptyValues}
+                value={ emptyValues ? (null) : findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
             </div>
           </td>
           <td className="select-confidentiality">
@@ -752,7 +757,8 @@ var Row = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
-                value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) }/>
+                emptyValues={emptyValues}
+                value={ emptyValues ? (null) : findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) }/>
             </div>
           </td>
           <td>

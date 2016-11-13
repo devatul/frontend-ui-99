@@ -305,6 +305,7 @@
                     key={documentIndex}
                     categories={this.state.categories}
                     confidentialities={this.state.confidentialities}
+                    emptyValues={this.state.emptyValues}
                     onClick={this.handleTableRowOnClick}
                     onChange={this.handleTableRowOnChange}
                     noConfidence
@@ -386,6 +387,7 @@
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
+            emptyValues={this.state.emptyValues}
             hide="{{ checkbox: true }}"
             noConfidence
             onClick={this.handleTableRowOnClick}
