@@ -52,7 +52,6 @@ module.exports = React.createClass({
 
   nextStep(value) {
     this.setState({step: value});
-    console.log(this.state.step);
   },
 
   render: template
