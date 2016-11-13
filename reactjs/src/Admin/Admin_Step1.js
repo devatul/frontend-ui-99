@@ -64,7 +64,6 @@ var Admin_Step1 = React.createClass({
   },
 
   /*onChangeInput(block, fieldId, value) {
-   debugger
    let data = this.state.data_block,
    block_change = (block == '1') ? data.block1 : (block == '2' ? data.block2 : data.block3),
    newData = [],
