@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import HelpButton from "../HelpButton"
+import {isNull} from 'lodash'
 import makeRequest from '../../../utils/http'
 import Constant from '../../../Constant.js';
 
@@ -13,7 +14,6 @@ var ChangeProfile = React.createClass({
         }
     },
     shouldComponentUpdate(nextProps , nextState) {
-        debugger
         if( _.isEqual(this.state.data, nextState.data) && _.isEqual(this.props.profile, nextProps.profile)) {
             return false
         }
@@ -44,8 +44,10 @@ var ChangeProfile = React.createClass({
     },
 
     render() {
+        let {profile} = this.props ,
+            child = null ;
 
-        let {profile} = this.props,
+        if( !_.isNull(profile)) {
              child = <div className="row">
                         <div className="profile-details-left col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
@@ -140,6 +142,8 @@ var ChangeProfile = React.createClass({
                             </div>
                         </div>
                     </div>
+        }
+
 
 
         return(

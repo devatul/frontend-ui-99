@@ -14,7 +14,7 @@ module.exports = React.createClass({
     getInitialState() {
         return {
             photo: {},
-            profile: {},
+            profile: null,
 
         };
     },
@@ -22,7 +22,7 @@ module.exports = React.createClass({
          return makeRequest({
             path: 'api/account/profile/',
             success: (data) => {
-                this.setState({ profile: data })
+                this.setState({ profile: this.config(data) })
             }
         });
     },
@@ -33,6 +33,15 @@ module.exports = React.createClass({
                 this.setState({ photo: data })
             }
         });
+    },
+    config(data){
+        debugger
+        _.forEach(data , function(value , key){
+            if(value == null){
+                data[key] = ''
+            }
+        })
+        return data
     },
     componentDidMount() {
         this.getProfile() ,

@@ -92,7 +92,7 @@
                       <div class="state-background background-fill"></div>
                       <div class="handle"></div>
                     </div>
-                    <input type="checkbox" name="switch" data-plugin-ios-switch="" checked="checked" style="display: none;">
+                    <input type="checkbox" name="switch" data-plugin-ios-switch="" defaultChecked="checked" style="display: none;">
                   </div>
                 </li>
                 <li class="left2">
