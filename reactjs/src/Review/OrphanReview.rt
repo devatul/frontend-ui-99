@@ -37,7 +37,7 @@
               Select an orphan to review
               <HelpButton classMenu="fix-overview-help-button-table" setValue="User is required to assign category and confidentiality Level for orphaned documents." />
             </b>
-            <select2 id="chosse_cluster" width="{300}" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
+            <select2 id="chosse_cluster" width="{235}" onChange="{this.handleOnChangeSelectOrphan}" value={this.state.orphanCurrent.index}>
               <option
                 rt-repeat="orphan in this.state.orphans"
                 value="{orphanIndex}"
@@ -233,6 +233,15 @@
         <Panel.custom class="actions-panel">
           <Panel.head>
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
+            <div class="inline-block-item">
+              <select onChangge="{this.handleChangeNumberDocument}" class="form-control">
+                <option value="10">10 Documents</option>
+                <option value="20">20 Documents</option>
+                <option value="30">30 Documents</option>
+                <option value="40">40 Documents</option>
+                <option value="50">50 Documents</option>
+              </select>
+            </div>
             <div class="panel-actions my-actions-btn-group">
               <span class="mr-md">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
               <Button rt-if="this.state.orphanCurrent.id && this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>

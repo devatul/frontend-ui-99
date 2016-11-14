@@ -389,6 +389,32 @@ var OrphanReview = React.createClass({
     }
   },
 
+  handleChangeNumberDocument(event) {
+    let {
+      value
+    } = event.target;
+
+    // return makeRequest({
+    //     path: "api/group/orphan/samples",
+    //     params: {"id": id, "numbers": value},
+    //     success: (res) => {
+    //       this.setState({
+    //         documents: res,
+    //         shouldUpdate: true,
+    //         loadingdocuments: false,
+    //         getdocumenterror: false
+    //       });
+    //     },
+    //     error: (err) => {
+    //       this.setState({
+    //         documents: [],
+    //         loadingdocuments: false,
+    //         getdocumenterror: err
+    //       })
+    //     }
+    //   });
+  },
+
   getGroups() {
     let data = [];
 

@@ -342,6 +342,32 @@ var GroupReview = React.createClass({
     this.setState({documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true});
   },
 
+  handleChangeNumberDocument(event) {
+    let {
+      value
+    } = event.target;
+
+    // return makeRequest({
+    //     path: "api/group/orphan/samples",
+    //     params: {"id": id, "numbers": value},
+    //     success: (res) => {
+    //       this.setState({
+    //         documents: res,
+    //         shouldUpdate: true,
+    //         loadingdocuments: false,
+    //         getdocumenterror: false
+    //       });
+    //     },
+    //     error: (err) => {
+    //       this.setState({
+    //         documents: [],
+    //         loadingdocuments: false,
+    //         getdocumenterror: err
+    //       })
+    //     }
+    //   });
+  },
+
   handleUndo() {
     if (this.state.stackChange.length > 0) {
       let {documents, stackChange, documentPreview } = this.state,

@@ -237,6 +237,15 @@
       <Panel.custom class="actions-panel">
         <Panel.head>
           <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
+          <div class="inline-block-item">
+            <select onChangge="{this.handleChangeNumberDocument}" class="form-control">
+              <option value="10">10 Documents</option>
+              <option value="20">20 Documents</option>
+              <option value="30">30 Documents</option>
+              <option value="40">40 Documents</option>
+              <option value="50">50 Documents</option>
+            </select>
+          </div>
           <div class="panel-actions my-actions-btn-group">
             <span
               class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
