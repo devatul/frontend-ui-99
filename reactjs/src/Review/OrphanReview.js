@@ -132,7 +132,21 @@ var OrphanReview = React.createClass({
         index = event.target.value,
         orphan = Object.assign({}, orphans[index], {index: parseInt(index)});
 
-    this.setState({orphanCurrent: orphan, shouldUpdate: true});
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: this.state.orphanCurrent.index,
+          documents: this.state.documents
+        }]
+    });
+
+    this.setState({
+      stackChange: updateStack,
+      orphanCurrent: orphan,
+      shouldUpdate: true,
+      documents: [],
+      loadingdocuments: true
+    });
+    // this.updateOnchange(this.state.documents);
   },
 
   handleNextOrphan() {
@@ -144,6 +158,7 @@ var OrphanReview = React.createClass({
           documents:this.state.documents
         }]
     });
+
     this.updateOnchange(this.state.documents);
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
@@ -269,7 +284,11 @@ var OrphanReview = React.createClass({
           }]
         });
 
-    this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
+    this.setState({
+      documents: updateDocuments,
+      stackChange: updateStack,
+      shouldUpdate: true,
+    });
   },
 
   onChangeCategory(event, index) {

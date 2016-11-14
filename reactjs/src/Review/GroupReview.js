@@ -127,7 +127,20 @@ var GroupReview = React.createClass({
         index = event.target.value,
         group = Object.assign({}, groups[index], {index: parseInt(index)});
 
-    this.setState({groupCurrent: group, shouldUpdate: true, lastGroup: index == (this.state.groups.length - 1)});
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: this.state.group.index,
+          documents: this.state.documents
+        }]
+    });
+
+    this.setState({
+      stackChange: updateStack,
+      groupCurrent: group,
+      shouldUpdate: true,
+      loadingdocuments: true,
+      lastGroup: index == (this.state.groups.length - 1)
+    });
   },
 
   handleNextGroup() {
