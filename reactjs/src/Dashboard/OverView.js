@@ -6,7 +6,7 @@ import { isEmpty, forEach, isEqual, upperFirst, orderBy } from 'lodash'
 import javascriptTodo from '../script/javascript.todo.js';
 import { _categories, fetching } from '../Constant.js';
 import { makeRequest } from '../utils/http.js'
-import { orderByIndex, orderConfidentialities } from '../utils/function'
+import { orderByIndex, orderConfidentialities, setScan, getScan } from '../utils/function'
 import $, { JQuery } from 'jquery';
 var OverView = React.createClass
 ({
@@ -69,10 +69,8 @@ var OverView = React.createClass
     },
 
     startScan() {
-        makeRequest({
-            sync: false,
-            method: 'POST',
-            path: 'api/scan/',
+        setScan({
+            async: false,
             success: (data) => {
                 console.log('start scan', data)
             },
@@ -91,8 +89,7 @@ var OverView = React.createClass
                 }
             })
         });
-        return makeRequest({
-            path: 'api/scan/',
+        return getScan({
             success: (data) => {
                 let confidentialities = data.confidentialities;
 

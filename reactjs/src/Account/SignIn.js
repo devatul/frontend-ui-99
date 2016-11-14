@@ -25,17 +25,16 @@ var Signin = React.createClass({
     handleSubmit(e) {
         e.preventDefault();
         let data = this.state.data ;
-
         if(!_.isNull(data)){
-             return makeRequest({
-                path: 'api/token/api-token-auth/',
+            return makeRequest({
+                path: Constant.urls.TOKENAUTH,
                 timeout: 15000,
                 method : 'POST',
                 params :
-                JSON.stringify({
-                    username: this.state.data.username,
-                    password: this.state.data.password
-                }),
+                    JSON.stringify({
+                        username: this.state.data.username,
+                        password: this.state.data.password
+                    }),
                 success: (data) => {
                     sessionStorage.setItem('token', data.token);
                     browserHistory.push('/Dashboard/OverView');

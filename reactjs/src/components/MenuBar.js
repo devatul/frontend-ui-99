@@ -7,7 +7,7 @@ import Constant from '../Constant.js'
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
 import { makeRequest } from '../utils/http'
-import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes } from '../utils/function'
+import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes, getScan } from '../utils/function'
 
 var MenuBar = React.createClass
 ({
@@ -599,8 +599,7 @@ var MenuBar = React.createClass
     },
 
     getscanResult() {
-        makeRequest({
-            path: 'api/scan/',
+        getScan({
             success: (data) => {
                 let { scanResult } = this.state,
                     updateResult = update(scanResult, {
@@ -610,6 +609,6 @@ var MenuBar = React.createClass
             }
         });
     },
-	 render:template
+    render:template
 });
 module.exports = MenuBar;

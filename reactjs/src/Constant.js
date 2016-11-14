@@ -116,6 +116,11 @@ module.exports = {
 		PASSWORD: "api/account/change_password/",
 		NOTIFICATION: "api/notification/",
 		DATALOSE: "api/insight/data-loss/",
-		DATARISK: "api/insight/data-risk/"
+		DATARISK: "api/insight/data-risk/",
+		TOKENAUTH: "api/token/api-token-auth/",
+		REGISTRATION: "api/account/registration/",
+		REFRESHTOKEN: "api/token/api-token-refresh/", 
+		IAM: 'api/anomaly/iam/',
+		SCAN: 'api/scan/'
 	}
 };

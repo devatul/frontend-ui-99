@@ -135,7 +135,7 @@ var AnomalyDetection = React.createClass({
 
     getUserClient(){
         return makeRequest({
-            path: 'api/anomaly/iam/user-client',
+            path: Constant.urls.IAM + 'user-client',
             success: (data) => {
                 this.setState({ user_Client: data })
             }
@@ -143,7 +143,7 @@ var AnomalyDetection = React.createClass({
     },
     getActiveDirectory(){
         return makeRequest({
-            path: 'api/anomaly/iam/active-directory',
+            path: Constant.urls.IAM + 'active-directory',
             success: (data) => {
                 this.setState({ active_Directory_Group: data })
             }
@@ -151,7 +151,7 @@ var AnomalyDetection = React.createClass({
     },
     getUserAccess(){
         return makeRequest({
-            path: 'api/anomaly/iam/user-access',
+            path: Constant.urls.IAM + 'user-access',
             success: (data) => {
                 this.setState({ user_Access: data })
             }

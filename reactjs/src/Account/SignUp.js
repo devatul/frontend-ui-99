@@ -6,6 +6,8 @@ import $ from 'jquery'
 import { assignIn } from 'lodash';
 import validate from 'jquery-validation';
 import Constant from '../Constant.js';
+import makeRequest from '../utils/http';
+
 var SignUp = React.createClass({
     getInitialState() {
         return {
@@ -84,7 +86,7 @@ var SignUp = React.createClass({
             },
             submitHandler: function() {
                 return makeRequest({
-                    path: 'api/account/registration/',
+                    path: Constant.urls.REGISTRATION ,
                     method: 'POST',
                     params: JSON.stringify(this.state.data),
                     success: (data) => {

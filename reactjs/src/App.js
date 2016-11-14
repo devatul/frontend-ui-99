@@ -47,7 +47,7 @@ module.exports = React.createClass({
     			if(token)
 				{
 					makeRequest({
-						path: 'api/token/api-token-refresh/',
+						path: Constant.urls.REFRESHTOKEN,
 						dataType: 'json',
                         method : 'POST',
 						params: JSON.stringify({

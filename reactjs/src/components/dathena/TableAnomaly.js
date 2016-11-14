@@ -6,6 +6,7 @@ import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
 import Anomaly from '../../components/dathena/AnomalyStateSelect'
+import Constant from '../../Constant.js'
 
 var TableAnomaly = React.createClass({
     getInitialState(){
@@ -36,7 +37,7 @@ var TableAnomaly = React.createClass({
     getDataAPI(path){
         if(path != undefined){
             return makeRequest({
-            path: 'api/anomaly/iam/'+path+'?filter=all',
+            path: Constant.urls.IAM +path+'?filter=all',
             success: (data) => {
                 this.setState({ datas: data })
             }
@@ -68,7 +69,7 @@ var TableAnomaly = React.createClass({
         }
         datas[number]['Review Status'] = value
         return makeRequest({
-            path: 'api/anomaly/iam/'+this.props.path,
+            path: Constant.urls.IAM +this.props.path,
             method : 'PUT',
             params : JSON.stringify(_.omit(datas[number], ['selected'])),
             success: (data) => {

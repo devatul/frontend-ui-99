@@ -178,5 +178,16 @@ module.exports = {
     getDataRisk: (options) => {
         options.path = urls.DATARISK + "?number_users=" + options.number_users;
         makeRequest(options)
+    },
+
+    getScan: (options) => {
+        options.path = urls.SCAN
+        makeRequest(options)
+    },
+
+    setScan: (options) => {
+        options.path = urls.SCAN
+        options.method = 'POST'
+        makeRequest(options)
     }
 }
