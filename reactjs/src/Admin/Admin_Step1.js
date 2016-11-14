@@ -196,6 +196,8 @@ var Admin_Step1 = React.createClass({
   nextStep() {
     this.setState({complete: 3, readOnly: true});
 
+    $(window).scrollTop(0);
+
     $("#block1_step1").find("input").prop('disabled', true);
     $("#block1_step1").find("select").attr("disabled", true);
     $("#block1_step1").find("a").css('pointer-events', 'none');

@@ -120,6 +120,8 @@ var Admin_Step2 = React.createClass({
   nextStep(){
     this.setState({complete: 4, readOnly3: true});
 
+    $(window).scrollTop(0);
+
     $("#block4").find("input").prop('disabled', true);
 
     this.props.nextStep(3);
