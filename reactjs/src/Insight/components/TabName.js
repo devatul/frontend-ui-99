@@ -4,7 +4,6 @@ import { render } from 'react-dom'
 import update from 'react-addons-update'
 import _ from 'lodash'
 import $ from 'jquery'
-import { makeRequest } from '../../utils/http'
 import { getLanguages } from '../../utils/function'
 
 var TabName = React.createClass({
