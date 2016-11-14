@@ -101,6 +101,15 @@ var OverView = React.createClass({
     return makeRequest({
       path: 'api/scan/',
       success: (data) => {
+        if (hideUndefined) {
+          data.confidentialities = data.confidentialities.filter(x => {
+            return x.name !== "Undefined";
+          });
+          data.categories = data.categories.filter(x => {
+            return x.name !== "Undefined";
+          });
+        }
+
         this.setState({
           xhr: update(this.state.xhr, {
             isFetching: {
@@ -213,8 +222,6 @@ var OverView = React.createClass({
     categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
 
     for (let i = categories.length - 1; i >= 0; i--) {
-      if (hideUndefined && categories[i].name == "Undefined")
-        continue;
       categoryChart.data[i] = {
         name: upperFirst(categories[i].name),
         y: categories[i].total_reviewed_docs
@@ -292,8 +299,6 @@ var OverView = React.createClass({
         {confidentialities} = this.state.scan.result;
 
     for (let i = confidentialities.length - 1; i >= 0; i--) {
-      if (hideUndefined && confidentialities[i].name == "Undefined")
-        continue;
       confidentialityChart.data[i] = {
         name: upperFirst(confidentialities[i].name),
         y: confidentialities[i].total_reviewed_docs
