@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-xs-3">
                       <div class="checkbox-custom checkbox-success">
-                        <input type="checkbox" id="checkbox1">
+                        <input type="checkbox" id="checkbox1" checked>
                         <label for="checkbox1"></label>
                       </div>
                     </div>
@@ -168,7 +168,7 @@
                     </div>
                     <div class="col-xs-3">
                       <div class="checkbox-custom checkbox-success">
-                        <input type="checkbox" id="checkbox2">
+                        <input type="checkbox" id="checkbox2" checked>
                         <label for="checkbox2"></label>
                       </div>
                     </div>
@@ -193,7 +193,7 @@
                     </div>
                     <div class="col-xs-3">
                       <div class="checkbox-custom checkbox-success">
-                        <input type="checkbox" id="checkbox3">
+                        <input type="checkbox" id="checkbox3" checked>
                         <label for="checkbox3"></label>
                       </div>
                     </div>
@@ -218,7 +218,7 @@
                     </div>
                     <div class="col-xs-3">
                       <div class="checkbox-custom checkbox-success">
-                        <input type="checkbox" id="checkbox4">
+                        <input type="checkbox" id="checkbox4" checked>
                         <label for="checkbox4"></label>
                       </div>
                     </div>
@@ -243,7 +243,7 @@
                     </div>
                     <div class="col-xs-3">
                       <div class="checkbox-custom checkbox-success">
-                        <input type="checkbox" id="checkbox5">
+                        <input type="checkbox" id="checkbox5" checked>
                         <label for="checkbox5"></label>
                       </div>
                     </div>
