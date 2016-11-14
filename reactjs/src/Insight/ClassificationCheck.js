@@ -93,7 +93,6 @@ var ClassificationCheck = React.createClass({
     },*/
 
     onClickDocumentName(index) {
-        debugger
         let hasNextDocument = index == this.state.data.documents.length - 1 ? false : true
         if (index <= this.state.data.documents.length - 1) {
             this.setState({
@@ -139,7 +138,6 @@ var ClassificationCheck = React.createClass({
 
 
     search(event) {
-        debugger
         if(event.which == 13 || event.type == 'click' ) {
             this.setState({result : true})
         }
