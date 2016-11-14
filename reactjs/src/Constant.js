@@ -68,7 +68,7 @@ module.exports = {
             pos: 2
         },
         INTERNAL: {
-            name: 'Internal',
+            name: 'Internal Only',
             pos: 3
         },
         PUBLIC: {
