@@ -9,6 +9,8 @@ import {makeRequest} from '../utils/http.js';
 import {orderByIndex, orderConfidentialities} from '../utils/function';
 import $, {JQuery} from 'jquery';
 
+let hideUndefined = true;
+
 var OverView = React.createClass({
   getInitialState() {
     return {
@@ -211,6 +213,8 @@ var OverView = React.createClass({
     categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
 
     for (let i = categories.length - 1; i >= 0; i--) {
+      if (hideUndefined && categories[i].name == "Undefined")
+        continue;
       categoryChart.data[i] = {
         name: upperFirst(categories[i].name),
         y: categories[i].total_reviewed_docs
@@ -288,6 +292,8 @@ var OverView = React.createClass({
         {confidentialities} = this.state.scan.result;
 
     for (let i = confidentialities.length - 1; i >= 0; i--) {
+      if (hideUndefined && confidentialities[i].name == "Undefined")
+        continue;
       confidentialityChart.data[i] = {
         name: upperFirst(confidentialities[i].name),
         y: confidentialities[i].total_reviewed_docs
