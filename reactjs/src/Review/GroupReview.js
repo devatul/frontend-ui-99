@@ -129,7 +129,7 @@ var GroupReview = React.createClass({
 
     let updateStack = update(this.state.stackChange, {
         $push: [{
-          index: this.state.group.index,
+          index: this.state.groups.index,
           documents: this.state.documents
         }]
     });
