@@ -3,114 +3,73 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './SignUp.rt'
 import $ from 'jquery'
+import { makeRequest } from '../utils/http'
 import { assignIn } from 'lodash';
 import validate from 'jquery-validation';
 import Constant from '../Constant.js';
-import makeRequest from '../utils/http';
 
 var SignUp = React.createClass({
     getInitialState() {
         return {
             messageUnAgree: '',
-            agree: '',
-            data: {}
+            messageEqual: '',
+            agree: false,
+            equal_pass: false,
+            data: [],
+            data_submit: {},
+            check: false,
         };
     },
-    getValueInput(event) {
-        debugger
+    getValueInput(event, name) {
         let datas = _.cloneDeep(this.state.data),
-            value = event.target.type == 'checkbox' ? event.target.checked : event.target.value.trim();
-        datas = _.assignIn(datas, {
-            [event.target.name]: value });
-        this.setState({ data: datas })
+            data_submit = _.cloneDeep(this.state.data_submit),
+            value = typeof event === 'string' ? event : event.target.value;
+        data_submit = _.assignIn(data_submit, {
+                [name]: value,
+            }),
+            this.setState({ data: datas, data_submit: data_submit })
     },
     agreeChange(event) {
         this.setState({ agree: event.target.checked });
-        if (this.state.agree) {
-            this.setState({ messageUnAgree: "Please accept our policy" });
-        } else {
-            this.setState({ messageUnAgree: "" });
+        event.target.checked ?  this.setState({ messageUnAgree: '' }) :  false;
+    },
+    checkEqualPass(event) {
+        let value = event.target.value
+        if (this.state.data_submit) {
+            this.state.data_submit.password == value ? this.setState({ messageEqual: "" , equal_pass : true}) : this.setState({ messageEqual: "Please enter the same value again", equal_pass : false })
         }
     },
-    validate: function() {
-        $('#submitForm').validate({
-            // Specify the validation rules
-            errorElement: 'span',
-            focusInvalid: false,
-            rules: {
-                userName: {
-                    required: true,
-                    minlength: 6
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-                pwd_confirm: {
-                    required: true,
-                    equalTo: "#password"
-                },
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                company: {
-                    required: true
-                },
-                agree: "required"
-            },
-            // Specify the validation error messages
-            messages: {
-                userName: {
-                    required: "Please enter your user name",
-                    minlength: "Your userName must be at least 6 characters long"
-                },
-                first_name: "Please enter your first name",
-                last_name: "Please enter your last name",
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 6 characters long"
-                },
-                pwd_confirm: {
-                    required: "Please enter the same value again"
-                },
-                email: "Please enter a valid email address",
-                company: "Please enter your company name",
-                agree: "Please accept our policy"
-            },
-            submitHandler: function() {
-                return makeRequest({
-                    path: Constant.urls.REGISTRATION ,
-                    method: 'POST',
-                    params: JSON.stringify(this.state.data),
-                    success: (data) => {
-                        browserHistory.push('/Account/SignIn');
-                    },
-                    error: (xhr) => {
-                        /*var jsonResponse = JSON.parse(xhr.responseText);
-                        if (xhr.status === 400) {
-                            if (jsonResponse.email) {
-                                $("#emailExits").text(jsonResponse.email);
-                                $("#email").addClass('error');
-                            }
-                            if (jsonResponse.username) {
-                                $("#usernameExits").text(jsonResponse.username);
-                                $("#userName").addClass('error');
-                            }
-                        }*/
-                    }
-                });
-            }.bind(this)
-        });
+    submitHandler() {
+        if (this.state.check) {
+            this.setState({ check: false })
+        } else {
+            this.setState({ check: true })
+        }
+        if (this.state.equal_pass) {
+            this.setState({ messageEqual: ""})
+            if (_.size(this.state.data_submit) == 6) {
+                if (this.state.agree) {
+                    this.setState({ messageUnAgree: "" });
+                    return makeRequest({
+                        path: Constant.urls.REGISTRATION,
+                        method: 'POST',
+                        params: JSON.stringify(this.state.data_submit),
+                        success: (data) => {
+                            browserHistory.push('/Account/SignIn');
+                        },
+                        error: (xhr) => {}
+                    });
+                } else {
+                    this.setState({ messageUnAgree: "Please accept our policy" });
+                }
+
+            }
+        } else {
+            this.setState({ messageEqual: "Please enter the same value again" })
+        }
     },
     componentDidMount() {
-        this.validate();
+        /*this.validate();*/
     },
 
     render: template

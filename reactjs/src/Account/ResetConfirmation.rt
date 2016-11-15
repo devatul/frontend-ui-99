@@ -1,26 +1,21 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <section class="body-sign">
-	<div class="center-sign">
-		<a href="/" class="logo pull-left">
-			<img src="/assets/images/logo_header.png" height="54" alt="Porto Admin" />
-		</a>
-		<div class="panel panel-sign">
-			<div class="panel-title-sign mt-xl text-right">
-				<h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Reset Successfull</h2>
-			</div>
-			<div class="panel-body">
-				<div class="alert alert-info">
-					<p class="m-none text-weight-semibold h6">
-						Your password has been successfully changed!
-					</p>
-				</div>
-				
-				<div class="text-center">
-					<p class="m-none text-weight-semibold h6">
-						Get back to <Link to="/Account/signIn">Login</Link></a> Page
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="center-sign">
+    <a href="/" class="logo pull-left">
+      <img src="/assets/images/logo_header.png" height="54" alt="Porto Admin"/>
+    </a>
+    <div class="panel panel-sign">
+      <div class="panel-title-sign mt-xl text-right">
+        <h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Reset Successfull</h2>
+      </div>
+      <div class="panel-body">
+        <div class="alert alert-info">
+          <p class="m-none text-weight-semibold h6">Your password has been successfully changed!</p>
+        </div>
+        <div class="text-center">
+          <p class="m-none text-weight-semibold h6">Get back to <Link to="/Account/signIn">Login</Link> Page</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

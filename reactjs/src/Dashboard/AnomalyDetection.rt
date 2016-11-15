@@ -1,8 +1,8 @@
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
-<rt-import name="TableAnomaly" from = "../components/dathena/TableAnomaly"/>
-<rt-import name="Circle" from= "../components/chart/CircleChartAnomaly"/>
-<rt-import name="High" from= "../components/chart/HighChartAnomaly"/>
-
+<rt-import name="TableAnomaly" from="../components/dathena/TableAnomaly"/>
+<rt-import name="Circle" from="../components/chart/CircleChartAnomaly"/>
+<rt-import name="High" from="../components/chart/HighChartAnomaly"/>
+<rt-import name="Loader" from="../components/dathena/Loader"/>
 
 <section>
     <div class="container">
@@ -11,7 +11,9 @@
                 <h2 class="panel-title">Anomaly Overview</h2>
             </header>
             <div class="panel-body pb-none">
-                <div class="row">
+                <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+
+                <div rt-if="this.state.xhr.isFetching == 1" class="row">
                     <!-- Code API Anomaly Review-->
                      <div class="col-md-4" rt-repeat="risk in this.state.anomaly_rick" key="risk_{riskIndex}">
                           <section class="panel" key="{riskIndex}">
@@ -46,7 +48,12 @@
                     setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
                 </h2>
             </header>
-            <div class="panel-body">
+
+            <div class="panel-body" rt-if="this.state.xhr.isFetching != 1">
+              <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+            </div>
+
+            <div class="panel-body" rt-if="this.state.xhr.isFetching == 1">
               <div class="row" rt-if="this.state.user_Client">
                 <div class="col-md-3">
                  <div class="block-header row">

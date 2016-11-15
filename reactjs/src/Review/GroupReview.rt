@@ -8,355 +8,409 @@
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 <rt-import name="SelectBox" from="../components/dathena/SelectBox"/>
-<rt-import name="table" from="../components/dathena/TableReview" />
-<rt-import name="Tab" from ="react-bootstrap/lib/Tab" />
-<rt-import name="Col" from="react-bootstrap/lib/Col" />
-<rt-import name="Row" from="react-bootstrap/lib/Row" />
-<rt-import name="Nav" from="react-bootstrap/lib/Nav" />
-<rt-import name="NavItem" from="react-bootstrap/lib/NavItem" />
-<rt-import name="Panel" from="../components/bootstrap/panel" />
-<rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar" />
-<rt-import name="Button" from="react-bootstrap/lib/Button" />
-<rt-import name="Table" from="react-bootstrap/lib/Table" />
-<rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup" />
+<rt-import name="table" from="../components/dathena/TableReview"/>
+<rt-import name="Tab" from="react-bootstrap/lib/Tab"/>
+<rt-import name="Col" from="react-bootstrap/lib/Col"/>
+<rt-import name="Row" from="react-bootstrap/lib/Row"/>
+<rt-import name="Nav" from="react-bootstrap/lib/Nav"/>
+<rt-import name="NavItem" from="react-bootstrap/lib/NavItem"/>
+<rt-import name="Panel" from="../components/bootstrap/panel"/>
+<rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar"/>
+<rt-import name="Button" from="react-bootstrap/lib/Button"/>
+<rt-import name="Table" from="react-bootstrap/lib/Table"/>
+<rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup"/>
 <rt-import name="Alert" from="../components/bootstrap/alert"/>
-<rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup" />
-<rt-import name="select2" from="../components/dathena/Select2" />
+<rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup"/>
+<rt-import name="select2" from="../components/dathena/Select2"/>
 <rt-import name="LoadingButton" from="../components/dathena/LoadingButton"/>
-<rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview" />
+<rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview"/>
+<rt-import name="Loader" from="../components/dathena/Loader"/>
 
 <section>
-    <div class="container">
-        <Row>
-            <Col sm="{8}" md="{6}" class="review_choose-cluster-block choose-cluster-block clearfix">
-                <FormGroup>
-                    <InputGroup class="mb-md">
-                        <label for="choose_cluster">
-                            <b class="mr-md">
-                                Select a group to review
-                                <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    setValue="User is required to review category and confidentiality level for the documents in the groups."/>
-                            </b>
-                            <select2 id="chosse_cluster" onChange="{this.handleOnChangeSelectGroup}" value="{this.state.groupCurrent.index}">
-                                <optgroup rt-repeat="group_parent in this.state.group_parent" label={group_parent}>
-                                    <option
-                                        rt-repeat="group in this.state.groups_by_name[group_parent]"
-                                        value="{group.index}"
-                                        key="{group.index}">
-                                        {group.name}
-                                    </option>
-                                </optgroup>
-                            </select2>
-                        </label>
-                    </InputGroup>
-                </FormGroup>
-            </Col>
-        </Row>
+  <div class="container">
+    <Row>
+      <Col sm="{8}" md="{6}" class="review_choose-cluster-block choose-cluster-block clearfix">
+        <FormGroup>
+          <InputGroup class="mb-md">
+            <label for="chosse_cluster">
+              <b class="mr-md">
+                Select a group to review
+                <HelpButton
+                  classMenu="fix-overview-help-button-table"
+                  setValue="User is required to review category and confidentiality level for the documents in the groups."/>
+              </b>
+              <select2 id="chosse_cluster"
+                       onChange="{this.handleOnChangeSelectGroup}"
+                       value="{this.state.groupCurrent.index}">
+                <optgroup rt-repeat="group_parent in this.state.group_parent" label={group_parent}>
+                  <option
+                    rt-repeat="group in this.state.groups_by_name[group_parent]"
+                    value="{group.index}"
+                    key="{group.index}">
+                    {group.name}
+                  </option>
+                </optgroup>
+              </select2>
+            </label>
+          </InputGroup>
+        </FormGroup>
+      </Col>
+    </Row>
 
-        <Row>
-            <Col sm="{12}">
-                <Panel.custom class="panel-has-child cluster-block">
-                    <Panel.head class="panel-heading-cluster">
-                        <Row>
-                            <Col md="{4}">
-                                <h2 class="panel-title">Group Statistics</h2>
-                            </Col>
-                            <Col md="{5}" class="review-status-block">
-                                <span>Review Status</span>
-                                <ProgressBar class="dathena-progress">
-                                    <ProgressBar bsStyle="danger" now="{this.state.reviewStatus}" label="{this.state.reviewStatus + '%'}" />
-                                </ProgressBar>
-                            </Col>
-                            <Col md="{3}" class="text-right">
-                                <span>Detected Language: <b>English</b></span>
-                                <Button class="btn btn-green ml-md" bsClass="my-btn" disabled>Edit</Button>
-                            </Col>
-                        </Row>
-                    </Panel.head>
+    <Row>
+      <Col sm="{12}">
+        <Panel.custom class="panel-has-child cluster-block">
+          <Panel.head class="panel-heading-cluster">
+            <Row>
+              <Col md="{4}">
+                <h2 class="panel-title">Group Statistics</h2>
+              </Col>
+              <Col md="{5}" class="review-status-block">
+                <span>Review Status</span>
+                <ProgressBar class="dathena-progress">
+                  <ProgressBar bsStyle="danger" now="{this.state.reviewStatus}" label="{this.state.reviewStatus + '%'}"/>
+                </ProgressBar>
+              </Col>
+              <Col md="{3}" class="text-right">
+                <span>Detected Language: <b>English</b></span>
+                <Button class="btn btn-green ml-md" bsClass="my-btn" disabled>Edit</Button>
+              </Col>
+            </Row>
+          </Panel.head>
 
-                    <Panel.body id="panelOrphanStatistics" class="review_panel-body">
-                        <Row>
-                            <Col md="{3}">
-                                 <section rt-if="this.state.statistics.total_number_documents != null" class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
-                                    <header class="panel-heading">
-                                        <h2 class="panel-title">Basic Statistics</h2>
-                                    </header>
+          <Panel.body id="panelOrphanStatistics" class="review_panel-body">
+            <Row>
+              <Col md="{3}">
+                <section class="panel panel-featured panel-featured-primary panel-featured-compact panel-bordered mt-md">
+                  <header class="panel-heading">
+                    <h2 class="panel-title">Basic Statistics</h2>
+                  </header>
 
-                                    <div class="panel-body" id="stat-block">
-                                        <h4 class="mt-none">Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
-                                            <HelpButton
-                                                classMenu="fix-overview-help-button-table"
-                                                setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended." />
-                                        </h4>
+                  <div class="panel-body" id="stat-block" rt-if="this.state.statistics.total_number_documents == null">
+                    <Loader xhr="{this.state.xhr}"></Loader>
+                  </div>
 
-                                        <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                                            <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
-                                        </div>
+                  <div class="panel-body" id="stat-block" rt-if="this.state.statistics.total_number_documents != null">
+                    <h4 class="mt-none">
+                      Group Quality <i class="cluster-quality-icon fa fa-arrow-down icon-danger"></i>
+                      <HelpButton
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This indicates the quality level of documents that have been classified in the selected group. If this is deemed too low, then a manual review is recommended."/>
+                    </h4>
 
-                                        <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
-                                            <tbody rt-scope="this.state.statistics as statistics">
-                                                <tr>
-                                                    <td class="text-left"><span>Total Number of Documents</span>
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="fix-overview-help-button-table"
-                                                            setValue="Total Number of Documents in the selected group." />
-                                                    </td>
-                                                    <td class="text-right text-num">
-                                                        { statistics.total_number_documents &&
-                                                            statistics.total_number_documents }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Number of Documents Reviewed</span>
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="fix-overview-help-button-table"
-                                                            setValue="Number of Documents reviewed in the selected group." />
-                                                    </td>
-                                                    <td class="text-right text-num">
-                                                        { this.state.validateNumber }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Average Centroid Distance</span>
-                                                    <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="fix-overview-help-button-table"
-                                                            setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results." />
-                                                    </td>
-                                                    <td class="text-right text-num">
-                                                        { statistics.avg_centroid_distance &&
-                                                            statistics.avg_centroid_distance.toFixed(2) }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Maximum Centroid Distance</span>
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results." />
-                                                </td>
-                                                    <td class="text-right text-num">
-                                                        { statistics.max_centroid_distance &&
-                                                            statistics.max_centroid_distance.toFixed(2) }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Minimum Centroid Distance</span>
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                                classMenu="fix-overview-help-button-table"
-                                                                setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct." />
-                                                    </td>
-                                                    <td class="text-right text-num">
-                                                        { statistics.min_centroid_distance &&
-                                                            statistics.min_centroid_distance.toFixed(2) }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left"><span>Centroid Distance Variance</span>
-                                                        <HelpButton className="dropdown-file-info-holder"
-                                                            classMenu="fix-overview-help-button-table"
-                                                            setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid." />
-                                                    </td>
-                                                    <td class="text-right text-num">
-                                                        { statistics.centroid_distance_variance &&
-                                                            statistics.centroid_distance_variance.toFixed(2) }
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                    <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+                      <a class="panel-action panel-action-toggle fix-arrow-panel-action-toggle collapsed" data-toggle="collapse" data-target="#statisticTable"></a>
+                    </div>
 
-                                        <div class="mt-lg">
-                                            <Button onClick="{this.handleClickRefineButton}" class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine" bsClass="my-btn">Refine prediction</Button>
-                                            <HelpButton className=""
-                                                classMenu="fix-overview-help-button-table"
-                                                setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low." />
-                                        </div>
-                                        <div class="refine-progress" style="display: {this.state.showLoading}">
-                                            <LoadingButton open="{true}" elementType="div"/>
-                                        </div>
-                                    </div>
-                                </section>
-                            </Col>
-                            <Col md={9}>
-                                <Row>
-                                    <CloudWord title="Significant Words Cloud"
-                                        help="This presents a grouping of targeted key words that have been detected by Dathena 99 as being common across the selected orphan."
-                                        data="{this.state.dataChart.cloudWords}" />
-                                </Row>
-                                <Row>
-                                    <div id="fileDistribution" class="mb-md">
-                                        <h4 class="chart-title">File Distribution
-                                            <HelpButton classMenu="fix-overview-help-button-table" setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
-                                        </h4>
-                                        {this.fileDistribution()}
-                                    </div>
-                                    <CentroidChart
-                                        series="{this.state.centroids}"
-                                        help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid." />
-                                </Row>
-                            </Col>
-                        </Row>
-                    </Panel.body>
-                </Panel.custom>
-            </Col>
-        </Row>
-    </div>
+                    <table id="statisticTable" class="statistic_table table table-condensed mb-none collapse in">
+                      <tbody rt-scope="this.state.statistics as statistics">
+                        <tr>
+                          <td class="text-left">
+                            <span>Total Number of Documents</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="Total Number of Documents in the selected group."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { statistics.total_number_documents && statistics.total_number_documents }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">
+                            <span>Number of Documents Reviewed</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="Number of Documents reviewed in the selected group."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { this.state.validateNumber }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">
+                            <span>Average Centroid Distance</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="Average level of deviance from the centroid point, where the centroid point represents the optimal point of classification. The smaller the average deviation is, the greater the level of confidence in 99’s classification results."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { statistics.avg_centroid_distance && statistics.avg_centroid_distance.toFixed(2) }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">
+                            <span>Maximum Centroid Distance</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="This represents the distance of the document that has been registered furthest from the centroid point. The shorter the distance from the centroid point, the greater the level of confidence in 99’s classification results."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { statistics.max_centroid_distance && statistics.max_centroid_distance.toFixed(2) }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">
+                            <span>Minimum Centroid Distance</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="This represents the distance of the document that has been registered closest to the centroid point. Documents classified closest to the centroid will demonstrate the highest level of confidence that 99’s classification is correct."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { statistics.min_centroid_distance && statistics.min_centroid_distance.toFixed(2) }
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">
+                            <span>Centroid Distance Variance</span>
+                            <HelpButton
+                              className="dropdown-file-info-holder"
+                              classMenu="fix-overview-help-button-table"
+                              setValue="This represents the document variance within the selected group. Variance is the expectation of the squared deviation of a random variable from its mean, and it informally measures how far the document clusters are spread out from their group’s centroid."/>
+                          </td>
+                          <td class="text-right text-num">
+                            { statistics.centroid_distance_variance && statistics.centroid_distance_variance.toFixed(2) }
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-    <div class="container">
-        <Row>
-            <Col md="{12}">
-                <Panel.custom class="actions-panel">
-                    <Panel.head>
-                        <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
-                        <div class="panel-actions my-actions-btn-group">
-                            <span class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group</Button>
-                            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
-                                Undo <i class="fa fa-undo" aria-hidden="true"></i>
-                            </Button>
-                        </div>
-                    </Panel.head>
-                    <Panel.body rt-scope="this.state.documents as documents; this.state.documents.length as docLength">
-                        <p rt-if=" docLength === 0 " class="document_note">You don't have any document to review</p>
-                        <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
-                            <Button
-                                rt-if="this.state.checkedNumber > 0"
-                                onClick="{this.handleClickApproveButton}"
-                                class="mb-md mr-xs btn btn-green approve-button"
-                                bsClass="my-btn">
-                                Approve
-                            </Button>
+                    <div class="mt-lg">
+                      <Button
+                        onClick="{this.handleClickRefineButton}"
+                        class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
+                        bsClass="my-btn">
+                        Refine prediction
+                      </Button>
+                      <HelpButton
+                        className=""
+                        classMenu="fix-overview-help-button-table"
+                        setValue="Divide the orphan clusters to improve the quality. This action is recommended if the current quality level is deemed too low."/>
+                    </div>
+                    <div class="refine-progress" style="display: {this.state.showLoading}">
+                      <LoadingButton open="{true}" elementType="div"/>
+                    </div>
+                  </div>
+                </section>
+              </Col>
+              <Col md={9}>
+                <Row>
+                  <CloudWord
+                    title="Significant Words Cloud"
+                    help="This presents a grouping of targeted key words that have been detected by Dathena 99 as being common across the selected orphan."
+                    data="{this.state.dataChart.cloudWords}">
+                    <Loader rt-if="!this.state.dataChart.cloudWords.length" xhr="{this.state.xhr}"></Loader>
+                  </CloudWord>
+                </Row>
+                <Row>
+                  <div id="fileDistribution" class="mb-md">
+                    <h4 class="chart-title">
+                      File Distribution
+                      <HelpButton
+                        classMenu="fix-overview-help-button-table"
+                        setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
+                    </h4>
+                    {this.fileDistribution()}
+                  </div>
+                  <CentroidChart
+                    series="{this.state.centroids}"
+                    help="This represents the distance between the center of the selected orphan and all the documents contained within the selected orphan. The bar height represents the number of documents that are situated at the corresponding distance from the selected orphan centroid."
+                    loading="{!this.state.centroids.length}">
+                    <Loader rt-if="!this.state.centroids.length" xhr="{this.state.xhr}"></Loader>
+                  </CentroidChart>
+                </Row>
+              </Col>
+            </Row>
+          </Panel.body>
+        </Panel.custom>
+      </Col>
+    </Row>
+  </div>
 
-                            <Alert bsStyle="success" open="{this.state.documents && (this.state.validateNumber == this.state.documents.length)}">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
-                            </Alert>
+  <div class="container">
+    <Row>
+      <Col md="{12}">
+      <Panel.custom class="actions-panel">
+        <Panel.head>
+          <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
+          <div class="inline-block-item">
+            <select onChangge="{this.handleChangeNumberDocument}" class="form-control">
+              <option value="10">10 Documents</option>
+              <option value="20">20 Documents</option>
+              <option value="30">30 Documents</option>
+              <option value="40">40 Documents</option>
+              <option value="50">50 Documents</option>
+            </select>
+          </div>
+          <div class="panel-actions my-actions-btn-group">
+            <span
+              class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
+            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next
+              Group
+            </Button>
+            <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
+              Undo <i class="fa fa-undo" aria-hidden="true"></i>
+            </Button>
+          </div>
+        </Panel.head>
+        <Panel.body
+          rt-scope="this.state.documents as documents; this.state.documents.length as docLength; this.state.loadingdocuments as docLoading">
 
-                            <Table class="review_table mb-none no-footer table-my-actions" responsive bordered striped>
-                                <thead>
-                                    <tr role="row" class="">
-                                        <th class="fix-padding-th-checkbox">
-                                            <div class="checkbox-custom checkbox-primary">
-                                                <input type="checkbox"
-                                                    class="checkbox-all-1"
-                                                    onChange="{this.handleSelectAll}"
-                                                    checked="{this.state.checkBoxAll}">
-                                                <label for="checkboxAllExample2"></label>
-                                            </div>
-                                        </th>
-                                        <th class="review_note fix-width">Type
-                                            <!--<HelpButton
-                                                className="dropdown-file-info-holder"
-                                                classNote="note_chart_content"
-                                                setValue="This displays the name of each individual document, as it exists in its current state." />-->
-                                        </th>
-                                        <th class="review_note">Document name
-                                            <HelpButton
-                                                className="dropdown-file-info-holder"
-                                                classNote="note_chart_content"
-                                                setValue="This displays the name of each individual document, as it exists in its current state." />
-                                        </th>
-                                        <th class="review_note fix-max-width-category-confident">Proposed Category
-                                            <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
-                                                        setValue="Category proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
-                                        </th>
-                                        <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
-                                            <HelpButton
-                                                classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                                                className="dropdown-file-info-holder"
-                                                setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
-                                        </th>
-                                        <th class="text-center">Status
-                                            <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
-                                                        setValue="This represent the status of the review for each file." />-->
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fix-td-checkbox">
-                                    <table.row rt-repeat=" document in this.state.documents "
-                                        document={document} index={documentIndex}
-                                        key={documentIndex}
-                                        categories={this.state.categories}
-                                        confidentialities={this.state.confidentialities}
-                                        onClick={this.handleTableRowOnClick}
-                                        onChange={this.handleTableRowOnChange}
-                                        numberChecked={this.state.checkedNumber} />
-                                </tbody>
-                            </Table>
-                        </div>
-                        <div rt-if="docLength > 0" class="my-actions-btn-group actions-bottom clearfix mt-md" style="padding-right:0; position: relative">
-                            <ProgressBar class="dathena-progress style-2 fix-label pull-left">
-                                <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress" />
-                            </ProgressBar>
-                            <span class="label-percent">{this.state.reviewStatus + '%'}</span>
-                            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group</Button>
-                            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">Undo <i class="fa fa-undo" aria-hidden="true"></i></Button>
-                        </div>
-                    </Panel.body>
-                </Panel.custom>
-            </Col>
-        </Row>
-    </div>
-<!--<div rt-if="this.state.documentPreview >= 0">-->
-<DocumentPreview
+          <Loader rt-if="!docLength && docLoading" xhr="{this.state.xhr}"></Loader>
+          <p rt-if="docLength === 0 && !docLoading" class="document_note">You don't have any document to review</p>
+
+          <div rt-if="docLength > 0" id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
+            <Button
+              rt-if="this.state.checkedNumber > 0"
+              onClick="{this.handleClickApproveButton}"
+              class="mb-md mr-xs btn btn-green approve-button"
+              bsClass="my-btn">
+              Approve
+            </Button>
+
+            <Alert bsStyle="success"
+                   open="{this.state.documents && (this.state.validateNumber == this.state.documents.length)}">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the
+              classification review!</strong>
+            </Alert>
+
+            <Table class="review_table mb-none no-footer table-my-actions" responsive bordered striped>
+              <thead>
+              <tr role="row" class="">
+                <th class="fix-padding-th-checkbox">
+                  <div class="checkbox-custom checkbox-primary">
+                    <input type="checkbox"
+                           class="checkbox-all-1"
+                           onChange="{this.handleSelectAll}"
+                           checked="{this.state.checkBoxAll}">
+                    <label for="checkboxAllExample2"></label>
+                  </div>
+                </th>
+                <th class="review_note fix-width">Type
+                  <!--<HelpButton
+                      className="dropdown-file-info-holder"
+                      classNote="note_chart_content"
+                      setValue="This displays the name of each individual document, as it exists in its current state." />-->
+                </th>
+                <th class="review_note">Document name
+                  <HelpButton
+                    className="dropdown-file-info-holder"
+                    classNote="note_chart_content"
+                    setValue="This displays the name of each individual document, as it exists in its current state."/>
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Category
+                  <HelpButton classNote="help_question_bottom" className="dropdown-file-info-holder"
+                              setValue="Category proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification."/>
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                  <HelpButton
+                    classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                    className="dropdown-file-info-holder"
+                    setValue="Level of confidentiality proposed by Dathena 99. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification."/>
+                </th>
+                <th class="text-center">Status
+                  <!--<HelpButton classNote="note_chart_content_review" className="dropdown-file-info-holder"
+                              setValue="This represent the status of the review for each file." />-->
+                </th>
+              </tr>
+              </thead>
+              <tbody class="fix-td-checkbox">
+              <table.row rt-repeat=" document in this.state.documents "
+                         document={document} index={documentIndex}
+                         key={documentIndex}
+                         categories={this.state.categories}
+                         confidentialities={this.state.confidentialities}
+                         onClick={this.handleTableRowOnClick}
+                         onChange={this.handleTableRowOnChange}
+                         numberChecked={this.state.checkedNumber}/>
+              </tbody>
+            </Table>
+          </div>
+          <div rt-if="docLength > 0" class="my-actions-btn-group actions-bottom clearfix mt-md"
+               style="padding-right:0; position: relative">
+            <ProgressBar class="dathena-progress style-2 fix-label pull-left">
+              <ProgressBar class="fix-padding" bsStyle="danger" now={this.state.reviewStatus} label="  Progress"/>
+            </ProgressBar>
+            <span class="label-percent">{this.state.reviewStatus + '%'}</span>
+            <Button class="mb-md mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next Group
+            </Button>
+            <Button class="mb-md btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">Undo <i class="fa fa-undo"
+                                                                                                     aria-hidden="true"></i>
+            </Button>
+          </div>
+        </Panel.body>
+      </Panel.custom>
+      </Col>
+    </Row>
+  </div>
+  <!--<div rt-if="this.state.documentPreview >= 0">-->
+  <DocumentPreview
     open={this.state.openPreview}
     document={this.state.documents[this.state.documentPreview]}
-    nextDocument="{this.onClickDocumentName.bind(this, this.state.documentPreview + 1)}"
+    nextDocument="{this.handleNextDocument.bind(this, this.state.documentPreview + 1)}"
     hasNextDocument="{this.state.documents[this.state.documentPreview] !== this.state.documents[this.state.documents.length-1]}"
     undo={this.handleUndo}
     onHide={this.closePreview}
     hideLanguage="{true}"
     closeModal={this.closePreview}>
-<div class="table-responsive">
-    <table class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview table-fixed-width" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+    <div class="table-responsive">
+      <table
+        class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview table-fixed-width"
+        id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
         <thead>
-            <tr role="row" class="">
-                <!--<th>
-                    <div class="checkbox-custom checkbox-primary">
-                        <input type="checkbox"
-                            class="checkbox-all-1"
-                            onChange="{this.handleSelectAll}"
-                            checked="{this.state.checkBoxAll}">
-                        <label for="checkboxAllExample2"></label>
-                    </div>
-                </th>-->
-                <th class="review_note fix-width column-icon">Type
-                </th>
-                <th class="review_note column-name">Document name
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        setValue="This displays the name of each individual document, as it exists in its current state." />
-                </th>
-                <th class="review_note full-path column-path">Full Path
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        classMenu="fix-overview-help-button-table"
-                        setValue="This displays the name of each individual document, as it exists in its current state." />
-                </th>
-                <th class="review_note fix-max-width-category-confident column-progress">Proposed Category
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        setValue="User is required to assign category for orphan documents." />
-                </th>
-                <th class="review_note fix-max-width-category-confident column-progress">Proposed Confidentiality
-                    <HelpButton
-                        className="dropdown-file-info-holder"
-                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-                        setValue="User is required to assign confidentiality level for orphan documents." />
-                </th>
-                <th class="text-center column-icon">Status</th>
-            </tr>
+        <tr role="row" class="">
+          <!--<th>
+              <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox"
+                      class="checkbox-all-1"
+                      onChange="{this.handleSelectAll}"
+                      checked="{this.state.checkBoxAll}">
+                  <label for="checkboxAllExample2"></label>
+              </div>
+          </th>-->
+          <th class="review_note fix-width column-icon">Type
+          </th>
+          <th class="review_note column-name">Document name
+            <HelpButton
+              className="dropdown-file-info-holder"
+              setValue="This displays the name of each individual document, as it exists in its current state."/>
+          </th>
+          <th class="review_note full-path column-path">Full Path
+            <HelpButton
+              className="dropdown-file-info-holder"
+              classMenu="fix-overview-help-button-table"
+              setValue="This displays the name of each individual document, as it exists in its current state."/>
+          </th>
+          <th class="review_note fix-max-width-category-confident column-progress">Proposed Category
+            <HelpButton
+              className="dropdown-file-info-holder"
+              setValue="User is required to assign category for orphan documents."/>
+          </th>
+          <th class="review_note fix-max-width-category-confident column-progress">Proposed Confidentiality
+            <HelpButton
+              className="dropdown-file-info-holder"
+              classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+              setValue="User is required to assign confidentiality level for orphan documents."/>
+          </th>
+          <th class="text-center column-icon">Status</th>
+        </tr>
         </thead>
         <tbody>
-            <table.RowPreview
-                document={this.state.documents[this.state.documentPreview]}
-                categories={this.state.categories}
-                confidentialities={this.state.confidentialities}
-                onClick={this.handleTableRowOnClick}
-                hide="{{ checkbox: true }}"
-                onChange={this.handleTableRowOnChange}
-                index={this.state.documentPreview} />
+        <table.RowPreview
+          document={this.state.documents[this.state.documentPreview]}
+          categories={this.state.categories}
+          confidentialities={this.state.confidentialities}
+          onClick={this.handleTableRowOnClick}
+          hide="{{ checkbox: true }}"
+          onChange={this.handleTableRowOnChange}
+          index={this.state.documentPreview}/>
         </tbody>
-    </table>
-</div>
-</DocumentPreview>
-<!--</div>-->
+      </table>
+    </div>
+  </DocumentPreview>
+  <!--</div>-->
 </section>

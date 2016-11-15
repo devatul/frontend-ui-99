@@ -503,7 +503,6 @@ var Notification = React.createClass({
         return time + " - " + day
     },
   /*  getNewTime(data){
-        debugger
         for(let i = 0 ; i< data.length ;  i++){
             data[i].created = this.getTime(data[i].created)
         }

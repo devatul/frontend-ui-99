@@ -1,77 +1,81 @@
-<!-- <rt-import name = " Input" from="./components/ValidateInput"/> -->
-<rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-<rt-require dependency="react-router/lib/Link" as="Link"/>
-<rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
-<div >
-    <div class="bar_menu admin_header container">
-      <div class="row">
-        <div class="col-md-12 mb-md">
-          <div class="row">
-              <div class="col-sm-8">
-                  <h4 class="inline-block-item">Data Scientist Parameters Progress: 0/1</h4>
-                  <HelpButton
-                  classMenu="overview_timeframe fix-overview-help-button"
-                  setValue="Define the machine learning parameters used by 99." />
-                  <div class="progress-radial progress-0"></div>
-              </div>
+<rt-import name="ToggleButton" from="../components/dathena/ToggleButton" />
+<rt-require dependency="react-router/lib/Link" as="Link" />
+<rt-import name="HelpButton" from="../components/dathena/HelpButton" />
 
+<div>
+  <div class="bar_menu admin_header container">
+    <div class="row">
+      <div class="col-md-12 mb-md">
+        <div class="row">
+          <div class="col-sm-8">
+            <h4 class="inline-block-item">Data Scientist Parameters Progress: 0/1</h4>
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="Define the machine learning parameters used by 99." />
+            <div class="progress-radial progress-0"></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
+  </div>
 
-      <section class="panel panel-featured panel-featured-primary panel-bordered">
-        <header class="panel-heading">
-            <h2 class="panel-title">
-              <i class="fa fa-clock-o icon-success"></i>1. Cluster Parameters
-              <HelpButton
-                  classMenu="overview_timeframe fix-overview-help-button"
-                  setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents.” (May need to add more info here or a link to the wiki, as this is a more complex thing to complete)." />
-            </h2>
-            <div class="panel-actions" style="margin-right: 25px">
-                <div class="btn-group-admin">
-                  <button class="btn btn-green btn-edit-step">Edit</button>
-                  <button class="btn btn-green btn-save-step">Save</button>
-                </div>
+  <div class="container">
+    <section class="panel panel-featured panel-featured-primary panel-bordered">
+      <header class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-clock-o icon-success"></i>
+          1. Cluster Parameters
+          <HelpButton
+            classMenu="overview_timeframe fix-overview-help-button"
+            setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents.” (May need to add more info here or a link to the wiki, as this is a more complex thing to complete)." />
+        </h2>
 
-            </div>
-            <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
-                <ToggleButton setDefault="open" setTarget="#block1_step1" />
-            </div>
-        </header>
-        <div class="panel-body add-detail-section" id="block_step4">
-          <div class="row detail-row">
-            <div class="col-md-8">
-              <form class="form-horizontal">
-
-                <div class="form-group">
-                  <div class="col-sm-4 detail-left clearfix">
-                    <label class="control-label">Minimum Number of Clusters</label>
-                  </div>
-                  <div class="col-sm-8">
-                    <input type="text" name="minimum" class="form-control">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-sm-4 detail-left clearfix">
-                    <label class="control-label">Maximum Number of Clusters</label>
-                  </div>
-                  <div class="col-sm-8">
-                    <input type="text" name="maximum" class="form-control">
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="text-right">
-            <a href="#" class="btn btn-green validate-btn" onClick = {this.nextStep}>Validate</a>
+        <div class="panel-actions" style="margin-right: 25px;">
+          <div class="btn-group-admin">
+            <button class="btn btn-green btn-edit-step">Edit</button>
+            <button class="btn btn-green btn-save-step">Save</button>
           </div>
         </div>
-      </section>
 
-    </div>
+        <div class="panel-actions collapse-stat-table fix-arrow-collapse-stat-table">
+          <ToggleButton setDefault="open" setTarget="#block1_step1" />
+        </div>
+      </header>
 
+      <div class="panel-body add-detail-section" id="block_step4">
+        <div class="row detail-row">
+          <div class="col-md-8">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Minimum Number of Clusters</label>
+                </div>
+
+                <div class="col-sm-8">
+                  <input type="text" name="minimum" class="form-control">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="col-sm-4 detail-left clearfix">
+                  <label class="control-label">Maximum Number of Clusters</label>
+                </div>
+
+                <div class="col-sm-8">
+                  <input type="text" name="maximum" class="form-control">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <a href="#" class="btn btn-green validate-btn" onClick={this.nextStep}>
+            Validate
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

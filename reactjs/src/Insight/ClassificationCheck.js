@@ -1,85 +1,88 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
-import template from './ClassificationCheck.rt'
-import $ from 'jquery'
+import React, {Component} from 'react';
+import {render} from 'react-dom';
+import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
+import template from './ClassificationCheck.rt';
+import $ from 'jquery';
+
 var ClassificationCheck = React.createClass({
     getInitialState() {
-        return {
-            data: {
-                      "number of results": 3,
-                      "elapsed time in second": 0.48,
-                      "documents": [
-                        {
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": true
-                        },
-                        {
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document1.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": false
-                        },{
-                          "type": {
-                            "name": "Excel",
-                            "id": 1
-                          },
-                          "name": "document2.xls",
-                          "path": "/path/to/document",
-                          "category": {
-                            "name": "Accounting/Tax",
-                            "id": "1"
-                          },
-                          "confidentiality": {
-                            "name": "Banking Secrecy",
-                            "id": "1"
-                          },
-                          "last modifier": "FirstName.LastName",
-                          "reviewer": "FirstName.LastName",
-                          "involved in anomaly": false
-                        }
-                      ]
-                    },
-            documents: [],
-            stackChange: [],
-            categories: [],
-            confidentialities: [],
-            shouldUpdate: false,
-            documentPreview: 0,
-            openPreview: false,
-            result : false,
-            className : 'smart-link1',
-            hasNextDocument : true ,
-        };
+      return {
+        data: {
+          "number of results": 3,
+          "elapsed time in second": 0.48,
+          "documents": [
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": true
+            },
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document1.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": false
+            },
+            {
+              "type": {
+                "name": "Excel",
+                "id": 1
+              },
+              "name": "document2.xls",
+              "path": "/path/to/document",
+              "category": {
+                "name": "Accounting/Tax",
+                "id": "1"
+              },
+              "confidentiality": {
+                "name": "Banking Secrecy",
+                "id": "1"
+              },
+              "last modifier": "FirstName.LastName",
+              "reviewer": "FirstName.LastName",
+              "involved in anomaly": false
+            }
+          ]
+        },
+        documents: [],
+        stackChange: [],
+        categories: [],
+        confidentialities: [],
+        shouldUpdate: false,
+        documentPreview: 0,
+        openPreview: false,
+        result : false,
+        className : 'smart-link1',
+        hasNextDocument : true ,
+      };
     },
+
    /* shouldComponentUpdate(nextProps, nextState) {
         return nextState.shouldUpdate;
     },
@@ -90,7 +93,6 @@ var ClassificationCheck = React.createClass({
     },*/
 
     onClickDocumentName(index) {
-        debugger
         let hasNextDocument = index == this.state.data.documents.length - 1 ? false : true
         if (index <= this.state.data.documents.length - 1) {
             this.setState({
@@ -136,7 +138,6 @@ var ClassificationCheck = React.createClass({
 
 
     search(event) {
-        debugger
         if(event.which == 13 || event.type == 'click' ) {
             this.setState({result : true})
         }
@@ -154,7 +155,10 @@ var ClassificationCheck = React.createClass({
         })
         console.log(newData)*/
     },
+
     componentDidMount() {},
+
     render: template
 });
+
 module.exports = ClassificationCheck;

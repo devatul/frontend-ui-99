@@ -11,7 +11,7 @@ import { getCategories } from '../utils/function'
 module.exports = React.createClass({
   	getInitialState() {
 	    return {
-            default_title : 'Accounting/Tax' ,
+            default_title : 'Accounting / Tax' ,
             categories : {},
             default_tab : 'content_review'
 	    };

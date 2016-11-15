@@ -431,7 +431,7 @@
     display: block;
 }
 .display_none {
-    display: none
+    display: none;
 }
 h2 .panel-title p {
     font-family: 'Roboto', 'Helvetica', 'sans-serif';
@@ -522,13 +522,13 @@ img {
          overflow-x: auto;
     }
 }
-@media (max-width: 992px) {
-        .col-md-8 {
-        width: 98.666667%;
+@media (max-width: 480px) {
+    .anomaly-title {
+        font-size: 15px;
+        font-weight: normal;
+        margin-bottom: 15px;
+        margin-top: 0;
+        white-space: normal;
     }
 }
-@media screen and (max-width: 1200px){
-     .col-md-8 {
-        width: 99.666667%;
-    }
-}
+

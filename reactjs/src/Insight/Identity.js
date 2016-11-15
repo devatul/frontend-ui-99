@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Identity.rt'
-import Constant from '../Constant.js'
+import Constant, { fetching } from '../Constant.js'
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
@@ -28,21 +28,24 @@ let Indentity = React.createClass({
                 high_risk_directory: {},
                 key_contributor: []
             },
-            loading: true,
-            display : 0
+            display: 0,
+
+            xhr: {
+                status: "Report is loading",
+                message: "Please wait!",
+                timer: 20,
+                loading: 0,
+                isFetching: fetching.STARTED
+            },
         };
     },
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.dataChart != nextState.dataChart) return true;
-        if (this.setState.sizeFilter != nextState.sizeFilter) return true;
-        if (this.state.data_exports != nextState.data_exports) return true;
-
-        return false
+        return (this.state.dataChart != nextState.dataChart) || (this.setState.sizeFilter != nextState.sizeFilter) || (this.state.data_exports != nextState.data_exports)
     },
 
-    handleFilter: function(bodyRequest) {
-        if(!_.isNull(bodyRequest)){
+    handleFilter(bodyRequest) {
+        if (!_.isNull(bodyRequest)) {
             let value = bodyRequest.number_users;
 
             if (value == 'Top 5') {
@@ -58,7 +61,7 @@ let Indentity = React.createClass({
                 value = 50
             }
 
-            let call= makeRequest({
+            let call = makeRequest({
                 path: 'api/insight/iam?number_users=' + value,
                 success: (data) => {
                     this.updateChartData(data)
@@ -69,13 +72,13 @@ let Indentity = React.createClass({
 
     getData() {
         return makeRequest({
-                path: 'api/insight/iam?number_users=5',
-                success: (data) => {
-                    this.setState({ loading: false });
-                    this.updateChartData(data);
-                }
-            });
+            path: 'api/insight/iam?number_users=5',
+            success: (data) => {
+                this.updateChartData(data);
+            }
+        });
     },
+
     updateChartData(datas) {
         let high_risk_users = {},
             high_risk_directory = {},
@@ -96,24 +99,25 @@ let Indentity = React.createClass({
                 contributors: (this.configChart(arr[i].contributors))
             })
         }
-        let length = key_contributor.length
+
+        let length = key_contributor.length;
 
 
         /* begin : config hight chart*/
-
         height_0 = _.size(high_risk_users) > _.size(high_risk_directory) ? _.size(high_risk_users) * 100 : _.size(high_risk_directory) * 100;
-        if(length == 1) {
-            height_1 = _.size(key_contributor[0].contributors.categories)* 40;
-        } else{
+
+        if (length == 1) {
+            height_1 = _.size(key_contributor[0].contributors.categories) * 40;
+        } else {
             height_1 = Math.max(_.size(key_contributor[0].contributors.categories), _.size(key_contributor[1].contributors.categories)) * 40;
-            if(length == 3) {
-                height_2 = _.size(key_contributor[2].contributors.categories)* 40;
-            } else if(length == 4) {
+            if (length == 3) {
+                height_2 = _.size(key_contributor[2].contributors.categories) * 40;
+            } else if (length == 4) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-            } else if( length == 5) {
+            } else if (length == 5) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
-                height_3 = _.size(key_contributor[5].contributors.categories)* 40;
-            } else if( length == 6) {
+                height_3 = _.size(key_contributor[4].contributors.categories) * 40;
+            } else if (length == 6) {
                 height_2 = Math.max(_.size(key_contributor[2].contributors.categories), _.size(key_contributor[3].contributors.categories)) * 40;
                 height_3 = Math.max(_.size(key_contributor[4].contributors.categories), _.size(key_contributor[5].contributors.categories)) * 40;
             }
@@ -137,7 +141,13 @@ let Indentity = React.createClass({
             height_1: { $set: height_1 },
             height_2: { $set: height_2 },
             height_3: { $set: height_3 },
-            display : {$set : length}
+            display: { $set: length },
+
+            xhr: {
+                isFetching: {
+                    $set: fetching.SUCCESS
+                }
+            }
         });
 
         this.setState(updateData_config)
@@ -148,7 +158,8 @@ let Indentity = React.createClass({
         let colors = ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#E36159', '#edc240', '#8cc1d1', '#b0d6e1', '#349da1', '#8ababc', '#aecccc', '#7986cc', '#a5aaca', '#c0c4df', '#e46159'],
             dataChart = [],
             categories = [];
-            object = _.orderBy(object, ['docs'], ['desc']);
+        object = _.orderBy(object, ['docs'], ['desc']);
+
         for (let i = 0; i < _.size(object); i++) {
             categories.push(object[i].name);
             dataChart.push({
@@ -164,13 +175,14 @@ let Indentity = React.createClass({
     },
 
     upperFirst(value) {
-        let sp = _.split(value, ' '), rt = '';
+        let sp = _.split(value, ' '),
+            rt = '';
 
         for (let i = 0; i < sp.length; i++) {
             rt += _.upperFirst(sp[i]) + ' ';
         }
 
-        return rt
+        return rt;
     },
 
     convertArrayOfObjectsToCSV(args) {
@@ -226,16 +238,12 @@ let Indentity = React.createClass({
         link.click();
     },
 
-    formatNameCategory(str) {
-        return _.replace(str, '/', ' / ')
-    },
+    formatNameCategory: (str) => _.replace(str, '/', ' / '),
 
-    formatNumber(num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-    },
+    formatNumber: (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
 
-    componentDidMount() {
-        this.getData();
+    componentDidMount(prevProps, prevState) {
+        this.getData(prevProps, prevState);
         javascript();
     },
 

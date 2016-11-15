@@ -7,7 +7,6 @@ const limitRetry = 3;
 let count = 0;
 
 function makeRequest({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error, timeout = 0 }) {
-
     return $.ajax({
         url: Constants.SERVER_API + path,
         dataType: dataType,

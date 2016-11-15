@@ -70,6 +70,7 @@ var ReviewValidation = React.createClass({
         return nextState.shouldUpdate;
     },
     componentDidUpdate(prevProps, prevState) {
+      console.log('this.state',this.state)
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
@@ -110,7 +111,6 @@ var ReviewValidation = React.createClass({
                         $set: parseInt(res[0].id)
                     }
                 });
-
                 this.setState({
                     categories: res,
                     categoriesReview: categoriesReview,
@@ -192,15 +192,21 @@ var ReviewValidation = React.createClass({
     },
 
     setCategoryCurrent(tab) {
-        let {
-            categoriesReview
-        } = this.state,
-            categoryIndex = findIndex(categoriesReview, { id: tab.split('_')[1] });
+      let {
+          categoriesReview
+      } = this.state,
+          categoryIndex;
+      if(typeof tab === "number"){
+        categoryIndex = tab;
+      }else{
+        tab = tab.split('_')[1]
+        categoryIndex = findIndex(categoriesReview, { id: tab });
+      }
 
         if(categoryIndex < this.state.categoriesReview.length) {
             let updateCurrent = update(this.state.currentIndex, {
                 category: {
-                    $set: categoryIndex
+                    $set: parseInt(categoryIndex)
                 }
             });
 

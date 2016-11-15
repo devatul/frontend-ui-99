@@ -327,34 +327,6 @@ table.docPreview > thead > tr > th:nth-child(2) {
     margin-left: 5px;
 }
 
-@media (max-width: 500px) {
-    #centroidChartWrapper {
-        height: 135px;
-    }
-
-    .cendroid-chart-legend h5 {
-        text-align: left;
-    }
-
-    .cendroid-chart-legend.new {
-        width: 91%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .cendroid-chart-legend.new .document-symbol {
-        display: inline-block;
-        padding: 0px;
-        width: initial;
-        text-align: center;
-        margin-right: 5px;
-    }
-
-    .cendroid-chart-legend.new .document-symbol i {
-        display: block;
-        margin: auto;
-    }
-}
 
 /* fix label progress bar */
 .dathena-progress.style-2.fix-label {
@@ -587,20 +559,37 @@ select.assigment-select.form-control {
 /* progress lable */
 
 .progress-label-container {
-    background-color: #fff;
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    z-index: 999;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .progress-label-container .progress-example {
-    position: fixed;
+    position: relative;
     width: 45px;
     height: 45px;
-    top: 45%;
-    left: 50%;
-    z-index: 999;
     background-color: transparent;
 }
 
@@ -614,10 +603,7 @@ select.assigment-select.form-control {
 }
 
 .loading-label-2 {
-    position: absolute;
-    z-index: 999;
-    margin-top: 85px;
-    margin-left: -25px;
+    margin-top: 25px;
     text-align: center;
     width: 100px;
     font-weight: bold;
@@ -626,17 +612,11 @@ select.assigment-select.form-control {
 .loading-label-2 .pls {
     color: #7fbdc0;
 }
-
-.progress-label-container .label-1 {
-    top: 0;
-    left: 0;
-}
-.progress-label-container .label-2 {
-    top: 6px;
-    left: 6px;
-}
 .progress-label-container svg {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .loading-backdrop-custom {
@@ -664,7 +644,7 @@ select.assigment-select.form-control {
 }
 
 .choose-cluster-block > .form-group .select2-container {
-    width: 50% !important;
+    width: 43% !important;
 }
 /* chart legend overview */
 .chart-legend li {
@@ -687,4 +667,60 @@ select.assigment-select.form-control {
 
 .modal-preview .modal-action-preview {
     width: 28%;
+}
+
+@media (max-width: 500px) {
+    #centroidChartWrapper {
+        height: 135px;
+    }
+
+    .cendroid-chart-legend h5 {
+        text-align: left;
+    }
+
+    .cendroid-chart-legend.new {
+        width: 91%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .cendroid-chart-legend.new .document-symbol {
+        display: inline-block;
+        padding: 0px;
+        width: initial;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .cendroid-chart-legend.new .document-symbol i {
+        display: block;
+        margin: auto;
+    }
+
+    .info-review-validation {
+        text-align: left;
+    }
+
+    .info-review-validation .progress-radial {
+        margin-right: 0px;
+    }
+
+    .modal-title.modal-title-preview {
+        width: 100%;
+        text-align: left;
+        margin-top: initial;
+    }
+
+    .modal-preview .modal-action-preview {
+        width: 100%;
+        position: static;
+        text-align: left;
+        margin-top: 14px;
+    }
+
+     .modal-preview .modal-action-preview > .btn-close {
+        position: absolute;
+        top: 25px;
+        right: 15px;
+    }
 }

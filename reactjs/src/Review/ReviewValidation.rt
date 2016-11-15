@@ -21,59 +21,59 @@
 <rt-import name="DocumentPreview" from="../components/dathena/DocumentPreview"/>
 <rt-import name="Modal" from="react-bootstrap/lib/Modal"/>
 <section>
-    <div class="container">
-        <Tab.Container activeKey="tab_{this.state.categoryCurrent.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1" id="reviewValidationTabContainer">
-            <div class="tabs tabs-primary reviewer-tab">
-                <Nav bsClass="nav" class="nav-tabs cat-list">
-                    <NavItem rt-repeat="category in this.state.categoriesReview"
-                        key="{categoryIndex}"
-                        class="text-capitalize"
-                        eventKey="tab_{category.id}">
-                        {category.name}
-                    </NavItem>
-                </Nav>
-                <Tab.Content animation>
-                    <Tab.Pane
-                        key="content_category"
-                        eventKey="tab_{this.state.categoryCurrent.id === 'summary' ? 'hide' : this.state.categoryCurrent.id}">
-                        <Row>
-                            <Col md={12}>
-                                <Row class="mb-sm">
-                                    <Col sm={4} xs={6} class="hidden-xs">
-                                        <div class="clearfix">
-                                            <strong>Reviewers List </strong>
-                                            <HelpButton
-                                                classMenu="fix-overview-help-button-table"
-                                                setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
-                                            <Select2 id="chosse_cluster"
-                                                onChange="{this.setReviewerCurrent}"
-                                                value={this.state.currentIndex.reviewer}
-                                                containerCssClass="dathena-select select-user-review"
-                                                dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
-                                                width="200">
-                                                <option
-                                                    value="default">
-                                                    All Reviewers
-                                                </option>
-                                                <option
-                                                    rt-repeat="user in this.state.reviewers.reviewers"
-                                                    value="{userIndex}"
-                                                    key="{userIndex}">
-                                                    {user.first_name + '.' + user.last_name}
-                                                </option>
-                                            </Select2>
-                                        </div>
-                                    </Col>
-                                    <Col rt-if="this.state.dataReview != null"
-                                        sm={8} xs={6} class="text-right text-capitalize">
-                                        {this.state.categoryCurrent.name} Review Status:
-                                        <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
-                                        Progress:
-                                        <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
-                                            <div class="overlay"></div>
-                                        </div>
-                                    </Col>
-                                </Row>
+<div class="container">
+    <Tab.Container activeKey="tab_{this.state.categoryCurrent.id}" onSelect="{this.setCategoryCurrent}" defaultActiveKey="tab_1" id="reviewValidationTabContainer">
+        <div class="tabs tabs-primary reviewer-tab">
+            <Nav bsClass="nav" class="nav-tabs cat-list">
+                <NavItem rt-repeat="category in this.state.categoriesReview"
+                    key="{categoryIndex}"
+                    class="text-capitalize"
+                    eventKey="tab_{category.id}">
+                    {category.name}
+                </NavItem>
+            </Nav>
+            <div class="clearfix"></div>
+            <Tab.Content animation>
+                <Tab.Pane
+                    key="content_category"
+                    eventKey="tab_{this.state.categoryCurrent.id === 'summary' ? 'hide' : this.state.categoryCurrent.id}">
+                    <Row>
+                        <Col md={12}>
+                            <Row class="mb-sm">
+                                <Col sm={4} xs={12}>
+                                    <strong>Reviewers List </strong>
+                                    <HelpButton
+                                        classMenu="fix-overview-help-button-table"
+                                        setValue="In this section you can find all the reviewers that were assigned to review documents in {this.state.categoryCurrent.name} category." />
+                                    <Select2 id="chosse_cluster"
+                                        onChange="{this.setReviewerCurrent}"
+                                        value={this.state.currentIndex.reviewer}
+                                        containerCssClass="dathena-select select-user-review"
+                                        dropdownCssClass="{'dathena-select-dropdown ' + (this.state.dataReview.validation_progress === 100 ? '' : 'background-option-highlighted')}"
+                                        width="200">
+                                        <option
+                                            value="default">
+                                            All Reviewers
+                                        </option>
+                                        <option
+                                            rt-repeat="user in this.state.reviewers.reviewers"
+                                            value="{userIndex}"
+                                            key="{userIndex}">
+                                            {user.first_name + '.' + user.last_name}
+                                        </option>
+                                    </Select2>
+                                </Col>
+                                <Col rt-if="this.state.dataReview != null"
+                                    sm={8} xs={12} class="text-right info-review-validation text-capitalize">
+                                    {this.state.categoryCurrent.name} Review Status:
+                                    <b class="mr-lg">{this.state.reviewInfo.total_users} Users - {this.state.reviewInfo.total_docs} Documents Challenged</b>
+                                    Progress:
+                                    <div class="progress-radial small progress{'-' + this.state.reviewInfo.progress}">
+                                        <div class="overlay"></div>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
                                 <div rt-if="this.state.reviewInfo.total_users <= 0" class="tab-content br-radius">
                                     <p>You have to assign reviewers to {this.state.categoryCurrent.name} to see this report</p>
                                 </div>
@@ -208,6 +208,84 @@
                                                                     classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
                                                                     setValue="Status of the challenge: green means Accepted, grey means pending, red means rejected." />
                                                                 </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody rt-if="this.state.dataReview != null">
+                                                            <table.row3
+                                                                rt-repeat="document in this.state.dataReview.challenge_back_docs"
+                                                                document="{document}"
+                                                                key="document_{documentIndex}"
+                                                                onClick="{this.handleTableRowOnClick}"
+                                                                onChange="{this.handleTableRowOnChange}"
+                                                                categories="{this.state.categories}"
+                                                                confidentialities="{this.state.confidentialities}"
+                                                                index="{this.constructor.challengeBack + '_' + documentIndex}" />
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </Panel.body>
+                                    </Panel.custom>
+                                    <div class="clearfix">
+                                        <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
+                                            onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
+
+                                        <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
+                                            onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
+                                    </div>
+                                </div>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Tab.Pane>
+                <Tab.Pane key="content_summary" eventKey="tab_summary">
+                    <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
+                        <Panel.head>
+                            <h2 class="panel-title text-capitalize">{category.name}</h2>
+                        </Panel.head>
+                        <Panel.body>
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-reviewer-summary">
+                                    <thead>
+                                        <tr>
+                                            <th class="col50">Number of Assigned Reviewers:</th>
+                                            <th class="col25">Number of Documents Challenged</th>
+                                            <th class="col25">Total Numbers of Documents Classified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="no-border-top">
+                                                <span class="assigned-num">{category.number_of_assigned}</span>
+                                                <a data-toggle="collapse" data-target="#reviewerList{categoryIndex}" class="accordion-toggle ml-md">
+                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td class="no-border-top text-center">
+                                                {category.total_challenged_docs}
+                                            </td>
+                                            <td class="no-border-top text-center">
+                                                {category.total_classified_docs}
+                                            </td>
+                                        </tr>
+                                        <tr class="child-table">
+                                            <td colspan="4" class="hiddenRow">
+                                                <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr rt-repeat="reviewer in category.reviewers">
+                                                                <td class="col50">{reviewer.first_name + '.' + reviewer.last_name} (Last Modified)</td>
+                                                                <td class="col25">&#160;</td>
+                                                                <td class="col25 chart-col">
+                                                                    <div class="progress progress-xl progress-squared light">
+                                                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                                                        aria-valuenow="{this.progressSummary(category, reviewer)}"
+                                                                        aria-valuemin="0" aria-valuemax="100"
+                                                                        style="width: {this.progressSummary(category, reviewer)}%;">
+                                                                        <span class="percent">{reviewer.number_classified_docs}</span>
+                                                                    </div>
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         </thead>
                                                         <tbody rt-if="this.state.dataReview != null">

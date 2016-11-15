@@ -278,7 +278,7 @@
                   </div>
 
                   <div class="col-md-9">
-                    <p>Accounting/ Tax Review Status: <b class="mr-lg">60 Users - 23 documents/user - 532/600 Reviewed Documents</b></p>
+                    <p>Accounting / Tax Review Status: <b class="mr-lg">60 Users - 23 documents/user - 532/600 Reviewed Documents</b></p>
 
                     <div class="table-responsive">
                       <table class="table anomaly-table fixReview review-status-table">
@@ -320,7 +320,7 @@
                         <tbody>
                           <tr>
                             <td rowspan="3">
-                              <b>Accounting/Tax</b>
+                              <b>Accounting / Tax</b>
                             </td>
                             <td>Not Started</td>
                             <td>20%/2</td>

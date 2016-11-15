@@ -189,5 +189,16 @@ module.exports = {
         options.path = urls.SCAN
         options.method = 'POST'
         makeRequest(options)
+    },
+
+    getClassificationReview: (options) => {
+        options.path = urls.CLASSIFICATION_REVIEW;
+        makeRequest(options);
+    },
+
+    assignCategoryAndConfidentiality2nd: (options) => {
+        options.path = urls.CLASSIFICATION_REVIEW;
+        options.method = 'POST';
+        makeRequest(options);
     }
 }

@@ -139,14 +139,104 @@
                             <Panel.body>
                                 <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
 
-                                    <Button
-                                        rt-if="challenge.checkedNumber > 0"
-                                        onClick="{this.handleApproveButton.bind(this, challengeIndex, this.constructor.challenge)}"
-                                        class="mb-md mr-xs btn btn-green approve-button"
-                                        bsClass="">
-                                        Approve
-                                    </Button>
-
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <table.RowChallenged
+                                            rt-repeat="document in challenge.documents"
+                                            key="{this.constructor.challenge + '_' + challengeIndex + '_' + documentIndex}"
+                                            document="{document}"
+                                            categories={this.state.categories}
+                                            confidentialities={this.state.confidentialities}
+                                            numberCheck="{challenge.checkedNumber}"
+                                            onChange="{this.handleTableRowOnChange.bind(this, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            onClick="{this.handleTableRowOnClick.bind(this, challengeIndex, documentIndex, this.constructor.challenge)}"
+                                            />
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Panel.body>
+                    </Panel.custom>
+                </Panel.body>
+            </Panel.custom>
+        </Col>
+    </Row>
+</div>
+<DocumentPreview
+    rt-scope="this.state.current as current; this.state[current.review][current.actionIndex] && this.state[current.review][current.actionIndex].documents[current.docIndex] as document"
+    open="{this.state.openPreview}"
+    document="{document}"
+    nextDocument="{this.handleNextDocument}"
+    hasNextDocument="{this.state.current.hasNextDocument}"
+    isNextCategory="{this.state.current.isNextCategory}"
+    undo="{this.handleUndo.bind(this, current.actionIndex, current.review)}"
+    onHide="{this.closePreview}"
+    closeModal="{this.closePreview}">
+<div class="table-responsive">
+    <table
+        rt-if="current.review === this.constructor.actions"
+        class="review_table table table-bordered table-striped mb-none no-footer table-my-actions table-classification-width docPreview" id="table-my-actions-1" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+            <tr role="row" class="">
+                <!--<th>
+                    <div class="checkbox-custom checkbox-primary">
+                        <input type="checkbox"
+                            class="checkbox-all-1"
+                            onChange={this.handleSelectAll}
+                            checked={this.state.checkBoxAll}>
+                        <label for="checkboxAllExample2"></label>
+                    </div>
+                </th>-->
+                <th class="review_note fix-width">Type
+                </th>
+                <th class="review_note doc-name">Document
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="This displays the name of each individual document, as it exists in its current state." />
+                </th>
+                <th class="review_note">Full path
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Category
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="fix-overview-help-button-table"
+                        setValue="Category proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                </th>
+                <th class="review_note fix-max-width-category-confident">Proposed Confidentiality
+                    <HelpButton
+                        className="dropdown-file-info-holder"
+                        classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+                        setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation action. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification." />
+                </th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <table.RowPreview
+                document="{document}"
+                key="{current.docIndex}"
+                categories="{this.state.categories}"
+                confidentialities="{this.state.confidentialities}"
+                onClick="{this.handleTableRowOnClick.bind(this, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                onChange="{this.handleTableRowOnChange.bind(this, current.actionIndex, current.docIndex, this.constructor.actions)}"
+                hide="{{ checkbox: true }}"
+                index="{current.docIndex}" />
+        </tbody>
+    </table>
+    <table
+        rt-if="current.review === this.constructor.challenge"
+        class="document_review_table review_table table table-bordered table-striped mb-none no-footer table-challenge" role="grid" aria-describedby="datatable-default_info">
+        <thead>
+            <tr role="row" class="">
+                <!--<th class="fix">
+                    <div class="checkbox-custom checkbox-primary">
+                        <input type="checkbox" class="checkbox-all-1" onChange="(event)=>this.checkAllButtonChallenged(event, challengedIndex)" checked="{challenged.checkAll}">
+                        <label></label>
+                    </div>
+                </th>-->
+                <th class="review_note">Type
                                     <Alert bsStyle="success" open="{challenge.documents && challenge.documents.length > 0 && (challenge.validateNumber == challenge.documents.length)}">
                                         <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>Well done, you have completed the classification review!</strong>
                                     </Alert>
@@ -321,24 +411,24 @@
                         </th>
                         <th class="review_note" style="max-width: 120px;">Validation
 
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <table.RowChallenged
-                        document="{document}"
-                        key="{current.docIndex}"
-                        categories="{this.state.categories}"
-                        confidentialities="{this.state.confidentialities}"
-                        hide="{{checkbox: true}}"
-                        onChange="{this.handleTableRowOnChange.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
-                        onClick="{this.handleTableRowOnClick.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
-                        />
-                </tbody>
-            </table>
-            <p>
-                <a href="{document && document.image_url}">{document && document.path}</a>
-            </p>
-        </div>
-    </DocumentPreview>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <table.RowChallenged
+                document="{document}"
+                key="{current.docIndex}"
+                categories="{this.state.categories}"
+                confidentialities="{this.state.confidentialities}"
+                hide="{{checkbox: true}}"
+                onChange="{this.handleTableRowOnChange.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                onClick="{this.handleTableRowOnClick.bind(this, current.actionIndex, current.docIndex, this.constructor.challenge)}"
+                />
+        </tbody>
+    </table>
+    <!-- <p>
+        <a href="{document && document.image_url}">{document && document.path}</a>
+    </p> -->
+</div>
+</DocumentPreview>
 </section>

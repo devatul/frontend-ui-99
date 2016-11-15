@@ -1,8 +1,8 @@
 module.exports = {
-	SERVER_API:'http://54.179.166.78/',
+	SERVER_API: 'http://54.179.166.78/',
 	// SERVER_API:'http://54.254.145.121/',
 	// SERVER_API: 'http://54.169.142.202',
-	TIMEVALIDTOKEN :300000,
+	TIMEVALIDTOKEN: 300000,
 	scan: {
 		IS_NO_SCAN: 'no scan',
 		IS_SCANING: 'in progress',
@@ -27,27 +27,27 @@ module.exports = {
 	_categories: {
 		ACCOUNTING: {
 			name: "Accounting / Tax",
-			icon:'fa-calculator'
+			icon: 'fa-calculator'
 		},
 		CLIENT: {
 			name: "Client / Customer",
-			icon:'fa-users'
+			icon: 'fa-users'
 		},
 		CORPORATE: {
 			name: "Corporate Entity",
-			icon:'fa-university'
+			icon: 'fa-university'
 		},
 		EMPLOYEE: {
 			name: "Employee / Personal Data",
-			icon:'fa-male'
+			icon: 'fa-male'
 		},
 		LEGAL: {
 			name: "Legal / Compliance",
-			icon:'fa-balance-scale'
+			icon: 'fa-balance-scale'
 		},
 		TRANSACTION: {
 			name: "Transaction",
-			icon:'fa-usd'
+			icon: 'fa-usd'
 		},
 		UNDEFINED: {
 			name: 'Undefined',
@@ -68,7 +68,7 @@ module.exports = {
 			pos: 2
 		},
 		INTERNAL: {
-			name: 'Internal',
+			 name: 'Internal Only',
 			pos: 3
 		},
 		PUBLIC: {
@@ -77,7 +77,7 @@ module.exports = {
 		}
 	},
 	urgency: [
-		{ name: "low",  class: ""},
+		{ name: "low", class: "" },
 		{ name: "high", class: "fa-clock-o only" },
 		{ name: "very high", class: "fa-clock-o" }
 	],
@@ -97,11 +97,42 @@ module.exports = {
 		SUCCESS: 1,
 		ERROR: -1
 	},
-    messagesError_SignIn : {
-       /* ERROR_Text : "Please wrote some text"*/
-        ERROR_400 : "The username and password you entered don't match" ,
-        ERROR_500_599 : "Connection failed. Please retry later." ,
-        ERROR_ : "An error occurred"
+    messagesError_SignIn: {
+        /* ERROR_Text : "Please wrote some text"*/
+        ERROR_400: "The username and password you entered don't match",
+        ERROR_500_599: "Connection failed. Please retry later.",
+        ERROR_: "An error occurred"
+    },
+    VALIDATION: {
+        username: {
+            required: "Please enter your user name",
+            minlength: "Your username must be at least 6 characters long"
+        },
+        password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 6 characters long"
+        },
+
+        pwd_confirm: {
+            required: "Please enter the same value again"
+        },
+        firstname: {
+            required: "Please enter your first name",
+        },
+        lastname: {
+            required:  "Please enter your first name",
+        },
+        email: {
+            required: "Please enter a valid email address",
+        },
+        company: {
+            required: "Please enter your company name",
+        },
+        agree: {
+            required: "Please accept our policy"
+        },
+
+        // Specify the validation error messages
     },
 	urls: {
 		CATEGORY: "api/label/category/",
@@ -121,6 +152,13 @@ module.exports = {
 		REGISTRATION: "api/account/registration/",
 		REFRESHTOKEN: "api/token/api-token-refresh/", 
 		IAM: 'api/anomaly/iam/',
-		SCAN: 'api/scan/'
+		SCAN: 'api/scan/',
+		CLASSIFICATION_REVIEW: 'api/classification_review/',
+		SATISFISTICS: 'api/group/statistics/',
+		CLOUDWORDS: 'api/group/cloudwords/',
+		CENTROIDS: 'api/group/centroids/',
+		GROUP: 'api/group/',
+		SAMPLES: 'api/group/samples/',
+		ORHPAN_SAMPLES: 'api/group/orphan/samples'
 	}
 };
