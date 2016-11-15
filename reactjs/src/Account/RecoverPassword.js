@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import template from './RecoverPassword.rt';
 import $ from 'jquery';
-import { setTokenAuth } from '../utils/function'
+import { setAuth } from '../utils/function'
 
 var RecoverPassword = React.createClass({
   getInitialState() {
@@ -33,7 +33,7 @@ var RecoverPassword = React.createClass({
           }
         },
         submitHandler(form) {
-          setTokenAuth({
+          setAuth({
             params: {},
             success: function (data) {
               browserHistory.push('/Dashboard/OverView');

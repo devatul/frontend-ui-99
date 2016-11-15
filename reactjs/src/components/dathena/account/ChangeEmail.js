@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import HelpButton from "../HelpButton";
-import makeRequest from '../../../utils/http';
 import Constant from '../../../Constant.js';
 
 var ChangeEmail = React.createClass({

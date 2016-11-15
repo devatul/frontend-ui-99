@@ -165,6 +165,7 @@ module.exports = {
 		ORPHAN_CLOUDWORDS: 'api/group/orphan/cloudwords',
 		ORPHAN_CENTROIDS:'api/group/orphan/centroids',
 		ORPHAN_SAMPLES: 'api/group/orphan/samples',
-		ORPHAN_CATEGORIES: 'api/group/orphan/categories'
+		ORPHAN_CATEGORIES: 'api/group/orphan/categories',
+		ORGANIZATION: 'api/organization/',
 	}
 };

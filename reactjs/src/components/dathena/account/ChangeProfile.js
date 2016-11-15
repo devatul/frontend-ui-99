@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { render } from 'react-dom'
 import HelpButton from "../HelpButton"
 import {isNull} from 'lodash'
-import {makeRequest} from '../../../utils/http'
+import { setProfile } from '../../../utils/function'
 
 
 var ChangeProfile = React.createClass({
@@ -27,9 +27,7 @@ var ChangeProfile = React.createClass({
         this.setState({data: datas})
     },
     submitForm(){
-        return makeRequest({
-            path: 'api/account/profile/',
-            method: 'PUT',
+        return setProfile({
             params: JSON.stringify(this.state.data),
             success: (data) => {
                 browserHistory.push('/Dashboard/Profile');

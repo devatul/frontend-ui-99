@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import template from './PasswordNew.rt';
 import $ from 'jquery'
-import { setTokenAuth } from '../utils/function'
+import { setAuth } from '../utils/function'
 
 var PasswordNew = React.createClass({
   getInitialState() {
@@ -42,7 +42,7 @@ var PasswordNew = React.createClass({
         },
 	        submitHandler(form) 
 	        {
-            setTokenAuth({
+            setAuth({
               params: {},
               success: function(data) {
                   browserHistory.push('/Account/resetConfirmation');

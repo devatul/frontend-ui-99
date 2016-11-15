@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import update from 'react-addons-update';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import _ from 'lodash';
-import {makeRequest} from '../utils/http';
+import { getOrganization, setOrganization } from '../utils/function';
 import template from './Admin_Step1.rt';
 
 var Admin_Step1 = React.createClass({
@@ -28,7 +28,7 @@ var Admin_Step1 = React.createClass({
   },
 
   getOrganisation() {
-    return makeRequest({
+    return getOrganization({
       path: 'api/organization/',
       success: (data) => {
         console.log(data);
@@ -55,9 +55,7 @@ var Admin_Step1 = React.createClass({
   putOrganisation() {
     let data_submit = _.omit(_.cloneDeep(this.state.organisation), ['phone', 'mobile', 'state']);
 
-    return makeRequest({
-      path: 'api/organization/',
-      method: 'PUT',
+    return setOrganization({
       params: JSON.stringify(data_submit),
       success: (data) => {}
     });

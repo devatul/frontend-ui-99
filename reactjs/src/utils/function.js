@@ -165,7 +165,7 @@ module.exports = {
         makeRequest(options)
     },
 
-    setTokenAuth: (options) => {
+    setAuth: (options) => {
         options.path = urls.TOKEN
         options.method = "POST";
         makeRequest(options);
@@ -286,6 +286,35 @@ module.exports = {
 
     getOrphanCategories: (options) => {
         options.path = urls.ORPHAN_CATEGORIES;
+        makeRequest(options);
+    },
+
+    setTokenAuth: (options) => {
+        options.path = urls.TOKENAUTH;
+        options.type = 'POST';
+        makeRequest(options);
+    },
+
+    registration: (options) => {
+        options.path = urls.REGISTRATION;
+        options.type = 'POST';
+        makeRequest(options);
+    },
+
+    getOrganization: (options) => {
+        options.path = urls.ORGANIZATION;
+        makeRequest(options);
+    },
+
+    setOrganization: (options) => {
+        options.path = urls.ORGANIZATION;
+        options.type = 'PUT';
+        makeRequest(options);
+    },
+
+    setRefreshToken: (options) => {
+        options.path = urls.REFRESHTOKEN;
+        options.type = 'POST';
         makeRequest(options);
     }
 }

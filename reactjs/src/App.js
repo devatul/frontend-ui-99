@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import template from './App.rt'
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
-import { makeRequest } from './utils/http'
+import { setRefreshToken } from './utils/function'
 import { orderByIndex, getCategories, getConfidentialities } from './utils/function'
 import { orderBy } from 'lodash'
 import { git_version } from './commit'
@@ -36,10 +36,7 @@ module.exports = React.createClass({
 
 			setInterval(() => {
 				if (token) {
-					makeRequest({
-						path: Constant.urls.REFRESHTOKEN,
-						dataType: 'json',
-						method: 'POST',
+					setRefreshToken({
 						params: JSON.stringify({
 							token: token
 						}),

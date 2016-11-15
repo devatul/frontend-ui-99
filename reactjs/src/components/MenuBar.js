@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router'
 import Constant from '../Constant.js'
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
-import { makeRequest } from '../utils/http'
 import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes, getScan } from '../utils/function'
 
 var MenuBar = React.createClass
