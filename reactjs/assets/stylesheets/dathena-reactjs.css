@@ -396,12 +396,16 @@ table.docPreview > thead > tr > th:nth-child(2) {
     padding-right: 5px;
 }
 
-.table-my-actions span.file-name.fix-max-width-row {
+/*.table-my-actions span.file-name.fix-max-width-row {
     max-width: 250px;
     margin-right: -110px;
     padding-right: 10px;
+}*/
+.table-my-actions span.file-name.fix-max-width-row {
+    max-width: 250px;
+    margin-right: -80px;
+    padding-right: 5px;
 }
-
 /* height select2 filter */
 
 .dathena-select-dropdown.dropdown-select-filter .select2-results__options {
