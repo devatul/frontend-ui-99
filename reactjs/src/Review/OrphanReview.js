@@ -133,7 +133,21 @@ var OrphanReview = React.createClass({
         index = event.target.value,
         orphan = Object.assign({}, orphans[index], {index: parseInt(index)});
 
-    this.setState({orphanCurrent: orphan, shouldUpdate: true});
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: this.state.orphanCurrent.index,
+          documents: this.state.documents
+        }]
+    });
+
+    this.setState({
+      stackChange: updateStack,
+      orphanCurrent: orphan,
+      shouldUpdate: true,
+      documents: [],
+      loadingdocuments: true
+    });
+    // this.updateOnchange(this.state.documents);
   },
 
   handleNextOrphan() {
@@ -145,6 +159,7 @@ var OrphanReview = React.createClass({
           documents:this.state.documents
         }]
     });
+
     this.updateOnchange(this.state.documents);
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
@@ -213,25 +228,23 @@ var OrphanReview = React.createClass({
     }
   },
   updateOnchange(updateDocuments){
+    let docs = [];
+
+    for (let i = 0, len = updateDocuments.length; i < len; ++i) {
+      docs.push({
+        "name": updateDocuments[i].name,
+        "path": updateDocuments[i].path,
+        "category": updateDocuments[i].category.name,
+        "confidentiality": updateDocuments[i].confidentiality.name,
+      });
+    }
+
       let { id } = this.state.orphanCurrent;
             makeRequest({
                 path: "api/group/orphan/samples?id="+id,
                 method: "POST",
                 dataType: "text",
-                params: JSON.stringify({ "group_id": id, "docs": [
-                  {
-                    "name":updateDocuments[0].name,
-                    "path":updateDocuments[0].path,
-                    "category":updateDocuments[0].category.name,
-                    "confidentiality":updateDocuments[0].confidentiality.name,
-                  },
-                  {
-                    "name":updateDocuments[1].name,
-                    "path":updateDocuments[1].path,
-                    "category":updateDocuments[1].category.name,
-                    "confidentiality":updateDocuments[1].confidentiality.name,
-                  }
-                ]}),
+                params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
                     console.log('assign done',res);
                 },
@@ -270,7 +283,11 @@ var OrphanReview = React.createClass({
           }]
         });
 
-    this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
+    this.setState({
+      documents: updateDocuments,
+      stackChange: updateStack,
+      shouldUpdate: true,
+    });
   },
 
   onChangeCategory(event, index) {
@@ -370,6 +387,32 @@ var OrphanReview = React.createClass({
         });
       }
     }
+  },
+
+  handleChangeNumberDocument(event) {
+    let {
+      value
+    } = event.target;
+
+    // return makeRequest({
+    //     path: "api/group/orphan/samples",
+    //     params: {"id": id, "numbers": value},
+    //     success: (res) => {
+    //       this.setState({
+    //         documents: res,
+    //         shouldUpdate: true,
+    //         loadingdocuments: false,
+    //         getdocumenterror: false
+    //       });
+    //     },
+    //     error: (err) => {
+    //       this.setState({
+    //         documents: [],
+    //         loadingdocuments: false,
+    //         getdocumenterror: err
+    //       })
+    //     }
+    //   });
   },
 
   getGroups() {
@@ -544,12 +587,6 @@ var OrphanReview = React.createClass({
     makeRequest({
       path: 'api/label/confidentiality/',
       success: (data) => {
-        data.forEach(item => {
-          if (item.name === "Internal Only") {
-            item.name = "Internal";
-          }
-        });
-
         this.setState({confidentialities: data, shouldUpdate: true});
       }
     });

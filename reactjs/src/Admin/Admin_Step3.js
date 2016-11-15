@@ -97,6 +97,9 @@ var Admin_Step3 = React.createClass({
 
   nextStep() {
     this.setState({complete: 3, readOnly2: true});
+
+    $(window).scrollTop(0);
+
     $("#block3_step3").find("input").prop('disabled', true);
 
     this.props.nextStep(4);

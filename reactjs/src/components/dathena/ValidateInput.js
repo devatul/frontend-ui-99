@@ -44,7 +44,6 @@ var Input = React.createClass({
     },
 
     validate(event , name) {
-        debugger
         if(event == undefined) {
             this.setState({error : 'Please enter your ' + this.props.name}) ;
             return

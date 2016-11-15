@@ -229,6 +229,7 @@
                                     <div class="clearfix">
                                         <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
                                             onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
+
                                         <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
                                             onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
                                     </div>

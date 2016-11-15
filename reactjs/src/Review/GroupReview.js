@@ -127,7 +127,20 @@ var GroupReview = React.createClass({
         index = event.target.value,
         group = Object.assign({}, groups[index], {index: parseInt(index)});
 
-    this.setState({groupCurrent: group, shouldUpdate: true, lastGroup: index == (this.state.groups.length - 1)});
+    let updateStack = update(this.state.stackChange, {
+        $push: [{
+          index: this.state.group.index,
+          documents: this.state.documents
+        }]
+    });
+
+    this.setState({
+      stackChange: updateStack,
+      groupCurrent: group,
+      shouldUpdate: true,
+      loadingdocuments: true,
+      lastGroup: index == (this.state.groups.length - 1)
+    });
   },
 
   handleNextGroup() {
@@ -208,25 +221,23 @@ var GroupReview = React.createClass({
     }
   },
   updateOnchange(updateDocuments){
+    let docs = [];
+
+    for (let i = 0, len = updateDocuments.length; i < len; ++i) {
+      docs.push({
+        "name": updateDocuments[i].name,
+        "path": updateDocuments[i].path,
+        "category": updateDocuments[i].category.name,
+        "confidentiality": updateDocuments[i].confidentiality.name,
+      });
+    }
+
       let { id } = this.state.groupCurrent;
             makeRequest({
                 path: "api/group/orphan/samples?id="+id,
                 method: "POST",
                 dataType: "text",
-                params: JSON.stringify({ "group_id": id, "docs": [
-                  {
-                    "name":updateDocuments[0].name,
-                    "path":updateDocuments[0].path,
-                    "category":updateDocuments[0].category.name,
-                    "confidentiality":updateDocuments[0].confidentiality.name,
-                  },
-                  {
-                    "name":updateDocuments[1].name,
-                    "path":updateDocuments[1].path,
-                    "category":updateDocuments[1].category.name,
-                    "confidentiality":updateDocuments[1].confidentiality.name,
-                  }
-                ]}),
+                params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
                     console.log('assign done',res);
                 },
@@ -327,6 +338,32 @@ var GroupReview = React.createClass({
     });
 
     this.setState({documents: updateDocuments, checkBoxAll: event.target.checked, shouldUpdate: true});
+  },
+
+  handleChangeNumberDocument(event) {
+    let {
+      value
+    } = event.target;
+
+    // return makeRequest({
+    //     path: "api/group/orphan/samples",
+    //     params: {"id": id, "numbers": value},
+    //     success: (res) => {
+    //       this.setState({
+    //         documents: res,
+    //         shouldUpdate: true,
+    //         loadingdocuments: false,
+    //         getdocumenterror: false
+    //       });
+    //     },
+    //     error: (err) => {
+    //       this.setState({
+    //         documents: [],
+    //         loadingdocuments: false,
+    //         getdocumenterror: err
+    //       })
+    //     }
+    //   });
   },
 
   handleUndo() {

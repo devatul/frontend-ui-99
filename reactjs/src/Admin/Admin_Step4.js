@@ -24,6 +24,8 @@ var Admin_Step4 = React.createClass({
   },
 
   nextStep() {
+    $(window).scrollTop(0);
+
     this.props.nextStep(5);
   },
 

@@ -113,13 +113,13 @@ var documentPreview = React.createClass({
                 <span>Document Preview</span>
               </Modal.Title>
               <div className="col-sm-4 col-xs-12 modal-info margin-top-14">
-                <span className="text-itatic">Predicted Label:</span>
+                <span className="text-itatic">Predicted Label: </span>
                 <span><strong>{document && document.category && document.category.name + ' - ' + document.confidentiality.name}</strong></span>
               </div>
               <div className="col-sm-2 col-xs-12 margin-top-14">
                 { this.props.hideLanguage ? '' :
                   <div className="inline-block-item">
-                    <span className="text-itatic">Detected Language:</span>
+                    <span className="text-itatic">Detected Language: </span>
                     <span><strong>{currentReview && currentReview.language && currentReview.language.name}</strong></span>
                   </div>}
               </div>
