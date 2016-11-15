@@ -110,7 +110,7 @@
                             setValue="Level of confidentiality proposed by Dathena 99 as part of the initial categorisation review. The confidence level percentage demonstrates the level of accuracy that Dathena 99 has classified each document with. The higher the percentage, the greater the confidence that 99 has in it’s document classification."/>
                         </th>
                         <th class="text-center">Status</th>
-                      </tr>
+                      </tr> 
                     </thead>
                     <tbody class="fix-td-checkbox">
                       <table.row

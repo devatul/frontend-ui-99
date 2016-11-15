@@ -582,6 +582,68 @@ var RowPreview = React.createClass({
   }
 });
 
+
+var CheckBox = React.createClass({
+  propTypes: {
+    checked: PropTypes.bool,
+  },
+  getInitialState(){
+    return {
+      checked: this.props.checked || false,
+    };
+  },
+  handleOnChange(e) {
+    this.setState({
+      checked:e.target.checked
+    });
+    this.props.onChange(e);
+  },
+  render(){
+    let id = 'checkbox-' + Date.now()
+    return(
+      <input id={id} type="checkbox"  checked={this.state.checked} className="checkbox-item-1" value={this.state.checked}
+onChange={this.handleOnChange} />
+    )
+  }
+});
+
+
+var Status = React.createClass({
+
+  getInitialState(){
+    return {
+      status: this.props.status || false,
+    };
+  },
+  componentWillReceiveProps(props){
+    this.setState({
+      status: props.status || false,
+    });
+  },
+  handleOnclick(e) {
+    this.props.onClick(e);
+  },
+  renderStatus(_status) {
+    let color = "";
+
+    switch (_status) {
+      case status.EDITING.name:
+        color = status.EDITING.color;
+        break;
+    }
+
+    return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
+  },
+
+  render(){
+    return(
+      <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
+        <i className="fa fa-clock-o" aria-hidden="true"></i>
+        {this.renderStatus(document.status)}
+      </a>
+    )
+  }
+});
 var Row = React.createClass({
   propTypes: {
     document: PropTypes.object,
@@ -673,13 +735,16 @@ var Row = React.createClass({
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities} = this.props;
-
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
           <td>
             <div className="checkbox-custom checkbox-default">
-              <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
+              <CheckBox
+                checked={document.checked}
+                onChange={this.handleOnChange}
+              />
+
               <label></label>
             </div>
           </td>
@@ -747,10 +812,10 @@ var Row = React.createClass({
             </div>
           </td>
           <td>
-            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
-              <i className="fa fa-clock-o" aria-hidden="true"></i>
-              {this.renderStatus(document.status)}
-            </a>
+            <Status
+              status= {document.status}
+              onClick={this.handleOnclick}
+            />
           </td>
         </tr> : <div></div>
     );

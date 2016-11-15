@@ -58,7 +58,7 @@ var ClassificationReview = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     let {dataReview, current} = this.state;
-    
+
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
@@ -345,17 +345,24 @@ var ClassificationReview = React.createClass({
         }
       })
     });
-
-    switch (event.target.id) {
-      case 'checkbox':
-        this.onChangeCheckBox(event, reviewIndex, docIndex, document);
-        break;
-      case 'selectCategory':
-        this.onChangeCategory(event, reviewIndex, docIndex, document);
-        break;
-      case 'selectConfidentiality':
-        this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
+    let id = event.target.id
+    if(id.indexOf('checkbox') !== -1){
+      this.onChangeCheckBox(event, reviewIndex, docIndex, document);
+    } else if(id.indexOf('selectCategory') !== -1){
+      this.onChangeCategory(event, reviewIndex, docIndex, document);
+    } else if(id.indexOf('selectConfidentiality') !== -1){
+      this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
     }
+    // switch (event.target.id) {
+    //   case 'checkbox':
+    //     this.onChangeCheckBox(event, reviewIndex, docIndex, document);
+    //     break;
+    //   case 'selectCategory':
+    //     this.onChangeCategory(event, reviewIndex, docIndex, document);
+    //     break;
+    //   case 'selectConfidentiality':
+    //     this.onChangeConfidentiality(event, reviewIndex, docIndex, document);
+    // }
   },
 
   onChangeCheckBox(event, reviewIndex, docIndex, document) {
