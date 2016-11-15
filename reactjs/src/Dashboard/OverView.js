@@ -6,7 +6,7 @@ import {isEmpty, forEach, isEqual, upperFirst, orderBy} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
 import {_categories, fetching} from '../Constant.js';
 import {makeRequest} from '../utils/http.js';
-import {orderByIndex, orderConfidentialities} from '../utils/function';
+import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
 import $, {JQuery} from 'jquery';
 
 let hideUndefined = true;
@@ -121,6 +121,7 @@ var OverView = React.createClass({
         let confidentialities = data.confidentialities;
 
         data.confidentialities = orderConfidentialities(confidentialities);
+        data.languages = orderLanguages(data.languages);
         let setResult = update(this.state.scan, {
           result: {$set: data}
         });
@@ -223,26 +224,29 @@ var OverView = React.createClass({
     for (let i = categories.length - 1; i >= 0; i--) {
       categoryChart.data[i] = {
         name: upperFirst(categories[i].name),
-        y: categories[i].total_reviewed_docs
+        y: categories[i].total_docs
       };
     }
 
     //order languages by percentage
-    let other = null, langLen = languages.length;
+    let index = -1;
+    let other = null;
+    for (let i = 0, len = languages.length; i < len; i++) {
+        if (languages[i].short_name.toUpperCase() === 'OTHER') {
+            index = i;
+            break;
+        }
+    }
 
-    for (let i = langLen - 1; i >= 0; i--) {
-      var name = languages[i].name.toLowerCase();
-
-      if (name == 'other') {
-        other = languages[i];
-      }
-      if (other != null) {
-        languages[i] = languages[i + 1];
-      }
+    if (index != -1) {
+      other = languages[index];
+      languages.splice(index, 1);
     }
 
     languages = orderBy(languages, ['total_docs'], ['desc']);
-    languages[langLen - 1] = other;
+    if (index != -1) {
+      languages.push(other);
+    }
 
     //add to data chart
     for (let i = languages.length - 1; i >= 0; i--) {

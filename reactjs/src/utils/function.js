@@ -31,6 +31,29 @@ module.exports = {
         return array;
     },
 
+  orderLanguages(array) {
+    let order = ['EN', 'FR', 'DE', 'OTHER'];
+    let orderLength = order.length,
+      arrayLength = array.length;
+    for (let i = 0; i < arrayLength - 1; ++i) {
+      for (let j = 0; j < orderLength; ++j) {
+        if ((array[i].short_name && array[i].short_name.toUpperCase() === order[j])
+          || (array[i].language && array[i].language.toUpperCase() === order[j]))
+          break;
+        if ((array[i+1].short_name && array[i+1].short_name.toUpperCase() === order[j])
+        || (array[i+1].language && array[i+1].language.toUpperCase() === order[j])) {
+          let tmp = array[i];
+          array[i] = array[i+1];
+          array[i+1] = tmp;
+          i = Math.max(i - 2, -1);
+          break;
+        }
+      }
+    }
+
+    return array;
+  },
+
     orderConfidentialities(array) {
         let newArray = [],
             {

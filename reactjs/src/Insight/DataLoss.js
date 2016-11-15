@@ -4,6 +4,7 @@ import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-
 import template from './DataLoss.rt'
 import update from 'react-addons-update'
 import Constant, {fetching} from '../Constant.js'
+import {orderLanguages} from '../utils/function';
 import 'jquery'
 import { getDataLoss } from '../utils/function'
 
@@ -55,46 +56,10 @@ var DataLost = React.createClass({
 
     getDataLoss({
       success: function (data) {
-        let arr = [],
-            other = null;
-
-        for (let i = 0; i < data.length; i++) {
-          switch (data[i].language) {
-            case 'OTHER' :
-              other = (data[i].language);
-              break;
-            case 'de' :
-              arr.unshift(data[i].language);
-              break;
-            case 'en' :
-              arr.unshift(data[i].language);
-              break;
-            case 'fr' :
-              arr.unshift(data[i].language);
-              break;
-            default :
-              arr.push(data[i].language);
-          }
-        }
-
-        let order = ['fr', 'en', 'de'];
-
-        for (let i = 0; i < arr.length - 1; ++i) {
-          for (let j = 0; j < order.length; ++j) {
-            if (arr[i] == order[j]) break;
-            if (arr[i + 1] == order[j]) {
-              let tmp = arr[i];
-
-              arr[i] = arr[i + 1];
-              arr[i + 1] = tmp;
-              i = Math.max(i - 2, -1);
-
-              break;
-            }
-          }
-        }
-
-        if (other) arr.push(other);
+        let languages_arr = [];
+        let languages = orderLanguages(data);
+        for (let i = 0, len = languages.length; i < len; ++i)
+              languages_arr.push(languages[i].language);
 
         data.forEach(lang => {
           let keywordsArr = [];
@@ -111,7 +76,7 @@ var DataLost = React.createClass({
         let updateDataLoss = update(this.state, {
           dataLoss: {$set: data},
           default_data: {$set: data[0]},
-          language: {$set: arr},
+          language: {$set: languages_arr},
 
           xhr: {
             isFetching: {
