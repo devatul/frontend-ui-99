@@ -531,7 +531,6 @@ var ClassificationReview = React.createClass({
 
   getClassificationReview() {
     return getClassificationReview({
-      path: "api/classification_review/",
       success: (data) => {
         this.setState({
           xhr: update(this.state.xhr, {

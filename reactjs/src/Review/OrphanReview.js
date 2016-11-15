@@ -6,7 +6,7 @@ import template from './OrphanReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import Constant, { status } from '../Constant.js'
-import { getCategories, getConfidentialities } from '../utils/function'
+import { getCategories, getConfidentialities, setOrphanDocuments, getOrphanStatistics, getOrphanCloudwords, getOrphanCentroids, getOrphanCategories } from '../utils/function'
 
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
@@ -240,10 +240,8 @@ var OrphanReview = React.createClass({
     }
 
       let { id } = this.state.orphanCurrent;
-            makeRequest({
-                path: "api/group/orphan/samples?id="+id,
-                method: "POST",
-                dataType: "text",
+            setOrphanDocuments({
+                id: id,
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
                     console.log('assign done',res);
@@ -418,7 +416,6 @@ var OrphanReview = React.createClass({
     let data = [];
 
     makeRequest({
-      path: "api/group/orphan",
       success: (res) => {
         res.sort(function (a, b) {
           return +a.id - (+b.id);
@@ -459,8 +456,7 @@ var OrphanReview = React.createClass({
   },
 
   getStatistics: function () {
-    makeRequest({
-      path: "api/group/orphan/statistics/",
+    getOrphanStatistics({
       params: {
         "id": this.state.orphanCurrent.id
       },
@@ -471,8 +467,7 @@ var OrphanReview = React.createClass({
   },
 
   getCloudwords: function () {
-    makeRequest({
-      path: "api/group/orphan/cloudwords/",
+    getOrphanCloudwords({
       params: {
         "id": this.state.orphanCurrent.id
       },
@@ -492,8 +487,7 @@ var OrphanReview = React.createClass({
   },
 
   getCentroids: function () {
-    makeRequest({
-      path: "api/group/orphan/centroids/",
+    getOrphanCentroids({
       params: {
         "id": this.state.orphanCurrent.id
       },
@@ -544,7 +538,6 @@ var OrphanReview = React.createClass({
 
     if (this.state.loadingdocuments)
       return makeRequest({
-        path: "api/group/orphan/samples",
         params: {"id": id},
         success: (res) => {
           this.setState({
@@ -592,8 +585,7 @@ var OrphanReview = React.createClass({
   },
 
   getCategoryInfo: function () {
-    return makeRequest({
-      path: "api/group/orphan/categories",
+    return getOrphanCategories({
       params: {
         "id": this.state.orphanCurrent.id
       },

@@ -6,7 +6,7 @@ import template from './GroupReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
 import Constant, {status, fetching} from '../Constant.js';
-import {getCategories, getConfidentialities} from  '../utils/function'
+import { getCategories, getConfidentialities, getStatistics, getCloudwords, getCentroids, getDocuments, getGroups, setOrphanDocuments } from  '../utils/function'
 
 var GroupReview = React.createClass({
   displayName: 'GroupReview',
@@ -234,9 +234,8 @@ var GroupReview = React.createClass({
     }
 
       let { id } = this.state.groupCurrent;
-            makeRequest({
-                path: "api/group/orphan/samples?id="+id,
-                method: "POST",
+            setOrphanDocuments({
+                id: id,
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
@@ -410,8 +409,7 @@ var GroupReview = React.createClass({
   getGroups() {
     let data = [];
 
-    makeRequest({
-      path: "api/group/",
+    getGroups({
       success: (res) => {
         let group = Object.assign({}, res[0], {index: 0}),
             groups_by_name = [],
@@ -492,8 +490,7 @@ var GroupReview = React.createClass({
   },
 
   getStatistics() {
-    makeRequest({
-      path: "api/group/statistics/",
+    getStatistics({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -504,8 +501,7 @@ var GroupReview = React.createClass({
   },
 
   getCloudwords() {
-    return makeRequest({
-      path: "api/group/cloudwords/",
+    return getCloudwords({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -525,8 +521,7 @@ var GroupReview = React.createClass({
   },
 
   getCentroids() {
-    makeRequest({
-      path: "api/group/centroids/",
+    getCentroids({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -653,8 +648,7 @@ var GroupReview = React.createClass({
         {id} = this.state.groupCurrent;
 
     if (this.state.loadingdocuments)
-      return makeRequest({
-        path: "api/group/samples/",
+      return getDocuments({
         params: {"id": id},
         success: (res) => {
           //data = res;

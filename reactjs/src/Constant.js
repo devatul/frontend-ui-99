@@ -159,6 +159,12 @@ module.exports = {
 		CENTROIDS: 'api/group/centroids/',
 		GROUP: 'api/group/',
 		SAMPLES: 'api/group/samples/',
-		ORHPAN_SAMPLES: 'api/group/orphan/samples'
+		ORPHAN_SAMPLES: 'api/group/orphan/samples',
+		ORPHAN: 'api/group/orphan',
+		ORPHAN_STATISTICS: 'api/group/orphan/statistics',
+		ORPHAN_CLOUDWORDS: 'api/group/orphan/cloudwords',
+		ORPHAN_CENTROIDS:'api/group/orphan/centroids',
+		ORPHAN_SAMPLES: 'api/group/orphan/samples',
+		ORPHAN_CATEGORIES: 'api/group/orphan/categories'
 	}
 };

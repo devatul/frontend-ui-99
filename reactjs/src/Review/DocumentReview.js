@@ -5,7 +5,7 @@ import update from 'react/lib/update'
 import Constant, { status } from '../Constant.js'
 import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
-import { getCategories, getConfidentialities } from '../utils/function'
+import { getCategories, getConfidentialities, assignCategoryAndConfidentiality2nd } from '../utils/function'
 
 var DocumentReview = React.createClass({
 
@@ -644,10 +644,8 @@ var DocumentReview = React.createClass({
     },
 
     assignCategoryAndConfidentiality2nd() {
-        return makeRequest({
-            method: "POST",
+        return assignCategoryAndConfidentiality2nd({
             params: JSON.stringify(this.state.dataRequest),
-            path: "api/classification_review/",
             success: (res) => {
                 console.log("assign success", res);
             }

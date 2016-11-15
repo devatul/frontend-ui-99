@@ -223,5 +223,69 @@ module.exports = {
         options.path = urls.CLASSIFICATION_REVIEW;
         options.method = 'POST';
         makeRequest(options);
+    },
+
+    getStatistics: (options) => {
+        options.path = urls.SATISFISTICS;
+        makeRequest(options);
+    },
+
+    getCloudwords: (options) => {
+        options.path = urls.CLOUDWORDS;
+        makeRequest(options);
+    },
+
+    getCentroids: (options) => {
+        options.path = urls.CENTROIDS;
+        makeRequest(options);
+    },
+
+    getDocuments: (options) => {
+        options.path = urls.SAMPLES;
+        makeRequest(options);
+    },
+
+    getGroups: (options) => {
+        options.path = urls.GROUP;
+        makeRequest(options);
+    },
+
+    getOrphanDocuments: (options) => {
+        options.path = urls.ORPHAN_SAMPLES;
+        makeRequest(options);
+    },
+
+    setOrphanDocuments: (options) => {
+        options.path = urls.ORPHAN_SAMPLES;
+        if (options.id) {
+            options.path += '?id=' + options.id;
+        }
+        options.type = 'POST';
+        makeRequest(options);
+    },
+
+    getOrphan: (options) => {
+        options.path = urls.ORPHAN;
+        makeRequest(options);
+    },
+
+    getOrphanStatistics: (options) => {
+        options.path = urls.ORPHAN_STATISTICS;
+        makeRequest(options);
+    },
+
+    getOrphanCloudwords: (options) => {
+        options.path = urls.ORPHAN_CLOUDWORDS;
+        makeRequest(options);
+    },
+
+    getOrphanCentroids: (options) => {
+        options.path = urls.ORPHAN_CENTROIDS;
+        makeRequest(options);
+    },
+
+    getOrphanCategories: (options) => {
+        options.path = urls.ORPHAN_CATEGORIES;
+        makeRequest(options);
     }
 }
