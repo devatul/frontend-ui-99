@@ -15,6 +15,7 @@ var ClassificationReview = React.createClass({
       dataReview: [],
       shouldUpdate: false,
       openPreview: false,
+      docLimit: 1,
       current: {
         docIndex: 0,
         reviewIndex: 0
@@ -57,6 +58,7 @@ var ClassificationReview = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('this.state',this.state)
     let {dataReview, current} = this.state;
 
     if (this.state.shouldUpdate === true) {
@@ -85,7 +87,12 @@ var ClassificationReview = React.createClass({
       })
     });
   },
-
+  handlelimit(e){
+    this.setState({
+      docLimit: e.target.value,
+      shouldUpdate: true
+    });
+  },
   checkValidNumber(documents) {
     let numCheck = 0, numValid = 0, updateData = {},
         {dataReview, current} = this.state,

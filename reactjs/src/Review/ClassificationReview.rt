@@ -34,6 +34,24 @@
                 classIcon="overview_question_a help_question_a"
                 setValue="This summarises all the actions assigned to the user. Users must review each document of this section."/>
             </h2>
+            <div class="sample-document">
+            <FormGroup>
+            <InputGroup class="mb-md">
+            <label>
+              <b class="mr-md">
+                Sample Size
+              </b>
+              <select2 id="chosse_cluster" width="{170}" onChange={this.handlelimit} value={this.state.docLimit}>
+                <option value="{1}"> 1 Document </option>
+                <option value="{2}"> 2 Document </option>
+                <option value="{3}"> 3 Document </option>
+                <option value="{5}"> 5 Document </option>
+                <option value="{10}"> 10 Document </option>
+              </select2>
+            </label>
+          </InputGroup>
+        </FormGroup>
+            </div>
           </Panel.head>
           <Panel.body>
 
@@ -115,7 +133,7 @@
                     <tbody class="fix-td-checkbox">
                       <table.row
                         rt-repeat="document in review.documents"
-                        document={document}
+                        document="{(documentIndex < this.state.docLimit) ? document : {path:false}}"
                         key="document_{documentIndex}"
                         index="{reviewIndex + '_' + documentIndex}"
                         action="{review}"
