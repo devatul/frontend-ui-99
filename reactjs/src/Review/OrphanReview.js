@@ -464,6 +464,12 @@ var OrphanReview = React.createClass({
         "id": this.state.orphanCurrent.id
       },
       success: (res) => {
+        // TODO: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          res.completed_number_documents *= Constant.MULTIPLIER;
+          res.total_number_documents *= Constant.MULTIPLIER;
+        }
+
         this.setState({statistics: res, shouldUpdate: true});
       }
     });
@@ -497,6 +503,12 @@ var OrphanReview = React.createClass({
         "id": this.state.orphanCurrent.id
       },
       success: (centroids) => {
+        // TODO: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          for (let i = 0, len = centroids.length; i < len; ++i) {
+            centroids[i].number_docs *= Constant.MULTIPLIER;
+          }
+        }
         var series = [],
             total = centroids.length;
 

@@ -375,7 +375,7 @@ var UserAssignment = React.createClass({
         list = _.orderBy(list, ['number_hits'], ['desc']);
 
         for(var i = 0, total = list.length; i < total; i++) {
-            categories[i] = list[i].first_name + '.' + list[i].last_name;
+            categories[i] = list[i].lastmodifier;
             data[i] = list[i].number_hits;
         }
 
