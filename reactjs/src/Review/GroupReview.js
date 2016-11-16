@@ -485,8 +485,8 @@ var GroupReview = React.createClass({
             <span className="item-legend">{data[i].total}</span>
           </div>;
     }
-
-    return (<div className="file-distribution clearfix">{children}</div>);
+    return children;
+    //return (<div className="file-distribution clearfix">{children}</div>);
   },
 
   getStatistics() {

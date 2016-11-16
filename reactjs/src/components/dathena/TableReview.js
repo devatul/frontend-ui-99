@@ -500,13 +500,14 @@ var RowPreview = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide, group} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
 
-    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
-      if(group){
-        let v = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
-        confidentiality = (v != -1) ? v : findIndex(confidentialities, (con) => { return con.name == "Confidential" })
-      }
+    let confidentiality;
+    if(typeof document.reviewedconfidentiality !== 'undefined' && document.reviewedconfidentiality.id !== 'undefined' ){
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewedconfidentiality.id })
+    }else{
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
+    }
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
@@ -678,11 +679,12 @@ var Row = React.createClass({
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities, hide, group} = this.props;
-    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
-      if(group){
-        let v = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
-        confidentiality = (v != -1) ? v : findIndex(confidentialities, (con) => { return con.name == "Confidential" })
-      }
+    let confidentiality;
+    if(typeof document.reviewedconfidentiality !== 'undefined' && document.reviewedconfidentiality.id !== 'undefined' ){
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewedconfidentiality.id })
+    }else{
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
+    }
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
