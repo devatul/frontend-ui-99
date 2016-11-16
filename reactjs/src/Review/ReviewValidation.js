@@ -69,7 +69,6 @@ var ReviewValidation = React.createClass({
         return nextState.shouldUpdate;
     },
     componentDidUpdate(prevProps, prevState) {
-      console.log('this.state',this.state)
         if(this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
