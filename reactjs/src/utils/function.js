@@ -325,5 +325,47 @@ module.exports = {
     setAnomalyIamInfo: (options, path) => {
         options.path = urls.IAM + path;
         makeRequest(options);
+    },
+
+    getSla: (options) => {
+        options.path = urls.SLA;
+        makeRequest(options);
+    }, 
+
+    checkConfidentiality: (options) => {
+        options.path = urls.CONFIDENTIAL;
+        makeRequest(options);
+    },
+
+    getTechDomain: (options) => {
+        options.path = urls.TECH_DOMAIN
+        makeRequest(options)
+    },
+
+    setTechDomain: (options) => {
+        options.path = urls.TECH_DOMAIN
+        options.method = 'PUT'
+        makeRequest(options)
+    },
+
+    getTechHdpserver: (options) => {
+        options.path = urls.TECH_HDPSERVER
+        makeRequest(options)
+    },
+
+    getTechFolder: (options) => {
+        options.path = urls.TECH_FOLDER
+        makeRequest(options)
+    },
+
+    setTechFolder: (options) => {
+        options.path = urls.TECH_FOLDER
+        options.method = 'PUT'
+        makeRequest(options)
+    },
+
+    getTechEmailServerExchange: (options) => {
+        options.paht = urls.TECH_EMAILSERVER_EXCHANGE
+        makeRequest(options)
     }
 }

@@ -3,8 +3,7 @@ import { render } from 'react-dom';
 import update from 'react-addons-update';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import _ from 'lodash';
-import { getOrganization, setOrganization } from '../utils/function';
-import { makeRequest } from '../utils/http';
+import { getOrganization, setOrganization, getSla , checkConfidentiality } from '../utils/function';
 import template from './Admin_Step1.rt';
 
 var Admin_Step1 = React.createClass({
@@ -48,8 +47,7 @@ var Admin_Step1 = React.createClass({
         });
     },
     getSLAs() {
-        return makeRequest({
-            path: 'api/sla/',
+        return getSla({
             success: (data) => {
                 console.log(data);
                 this.setState({ sla: this.configSLA(data) });
@@ -70,8 +68,7 @@ var Admin_Step1 = React.createClass({
         }
     },
     getConfidentialities(){
-        return makeRequest({
-            path: 'api/confidentiality/',
+        return checkConfidentiality({
             success: (results) => {
                 let data = [
                                 {

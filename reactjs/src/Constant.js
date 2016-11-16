@@ -168,5 +168,11 @@ module.exports = {
 		ORPHAN_SAMPLES: 'api/group/orphan/samples',
 		ORPHAN_CATEGORIES: 'api/group/orphan/categories',
 		ORGANIZATION: 'api/organization/',
+        SLA: 'api/sla/',
+        CONFIDENTIAL: 'api/confidentiality/',
+        TECH_DOMAIN: 'api/technology/domain/',
+        TECH_HDPSERVER: 'api/technology/hdpserver/',
+        TECH_FOLDER: 'api/technology/folder/',
+        TECH_EMAILSERVER_EXCHANGE: 'api/technology/emailserver_exchange/',
 	}
 };
