@@ -113,14 +113,12 @@ var MenuBar1 = React.createClass({
                 newObject.selectId = id;
                 newObject.index = index;
             }
-            /*console.log('object', newObject)*/
             arr.push(newObject);
         }.bind(this));
         newData[id] = arr;
         this.setState({
             dataSelectBox: newData
         });
-        /*  console.log('dataSelectBox', newData)*/
     },
     getCategory: function(async) {
         getCategories({
@@ -235,7 +233,6 @@ var MenuBar1 = React.createClass({
             _.forEach(this.state.dataSelectBox[selectId], function(object, index) {
                 if (object.checked) {
                     number = object.name, filter['number_users'] = object.name;
-                    /* console.log('fitter', filter['number_users'])  */
                 }
             })
         } else {
@@ -270,13 +267,10 @@ var MenuBar1 = React.createClass({
                 }) == null) {
 
                 arr.push(field);
-                console.log("arr", arr)
             }
             this.setState({
                 filterLabel: arr
             });
-            console.log('filterLabel', this.state.filterLabel)
-                /* console.log('filterLabel', this.state.filterLabel)*/
         }
     },
 
@@ -291,7 +285,6 @@ var MenuBar1 = React.createClass({
         });
     },
     handleSelectBoxChange: function(field, index) {
-        console.log('field_then', field)
         var updateData = update(this.state.dataSelectBox, {
             [field.selectId]: {
                 [index]: {
@@ -305,7 +298,6 @@ var MenuBar1 = React.createClass({
             dataSelectBox: updateData,
             eventContext: field.selectId
         });
-        /* console.log('dataSelectBox_notNumber', this.state.dataSelectBox)*/
         if (field.checked) {
             this.addLabel(field);
         } else {
@@ -314,7 +306,6 @@ var MenuBar1 = React.createClass({
     },
     handleSelectNumber(field, index) {
         var updateData_selected = _.assignIn({}, this.state.dataSelectBox)
-            /*  console.log('updateData_selected', this.state.dataSelectBox)*/
         for (var i = 0; i < 4; i++) {
             if (i == index) {
                 updateData_selected.number_users[i].checked = true;
@@ -334,12 +325,10 @@ var MenuBar1 = React.createClass({
                 }
             }
         });
-        /* console.log('dataselected', updateData)*/
         this.setState({
                 dataSelectBox: updateData,
                 eventContext: field.selectId
             })
-            /* console.log('dataSelectBox', this.state.dataSelectBox['number_users'])*/
         if (field.checked) {
             this.addLabel(field);
         } else {
@@ -351,7 +340,6 @@ var MenuBar1 = React.createClass({
         let filterLabel_clone = _.cloneDeep(this.state.filterLabel);
         let selectBox_clone = this.state.dataSelectBox;
         _.forEach(filterLabel_clone, function(object, index) {
-            console.log(object.selectId)
             if (object.selectId == id) {
                 arr.push(index);
                 var updateData = update(selectBox_clone, {
@@ -374,9 +362,6 @@ var MenuBar1 = React.createClass({
                 dataSelectBox: { $set: selectBox_clone }
             }))
             /*this.setState({dataSelectBox : {$set : selectBox_clone }})*/
-        console.log("selectBox_after:", this.state.dataSelectBox)
-        console.log("filterLabel_after:", this.state.filterLabel)
-
     },
 
     render: template

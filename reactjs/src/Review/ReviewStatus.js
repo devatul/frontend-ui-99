@@ -33,11 +33,9 @@ module.exports = React.createClass({
         }else {
              this.setState({categories : categories_1 , default_title :value, default_tab: 'content_review'})
         }
-        console.log(categories_1)
 
     },
     nextCategory(value){
-        console.log(this.state.categories)
         let categories_1 = _.cloneDeep(this.state.categories)
         let id = 0
         _.forEach(categories_1 , function(object , index){
@@ -72,7 +70,6 @@ module.exports = React.createClass({
                     'name' : 'Summary'
                 })
                 this.setState({ categories: data});
-                console.log('data_review' , data)
             }
         });
     },
