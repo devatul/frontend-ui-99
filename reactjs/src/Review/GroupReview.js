@@ -503,7 +503,7 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (res) => {
-        // TODO: Demo fix
+        // FIXME: Demo fix
         if (Constant.MULTIPLIER != 1) {
           res.completed_number_documents *= Constant.MULTIPLIER;
           res.total_number_documents *= Constant.MULTIPLIER;
@@ -542,7 +542,7 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (centroids) => {
-        // TODO: Demo fix
+        // FIXME: Demo fix
         if (Constant.MULTIPLIER != 1) {
           for (let i = 0, len = centroids.length; i < len; ++i) {
             centroids[i].number_docs *= Constant.MULTIPLIER;

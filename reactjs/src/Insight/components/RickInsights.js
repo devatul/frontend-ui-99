@@ -34,6 +34,23 @@ var RickInsight = React.createClass({
     return makeRequest({
       path: 'api/insight/risk/',
       success: (data) => {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          for (let i = 0, len = data.risks.length; i < len; ++i) {
+            data.risks[i].current_scan_value *= Constant.MULTIPLIER;
+            data.risks[i].previous_scan_value *= Constant.MULTIPLIER;
+          }
+
+          if (data.stale_files) {
+            data.stale_files.total *= Constant.MULTIPLIER;
+            for (let i = 0, len = data.stale_files.years.length; i < len; ++i) {
+              data.stale_files.years[i].value *= Constant.MULTIPLIER;
+            }
+          }
+        }
+
+        console.log(data);
+
         let classIcon_StaleFiles = data.stale_files.total > data.stale_files.previous_scan_value ? 'fa fa-chevron-up' : (data.stale_files.total < data.stale_files.previous_scan_value ? 'fa fa-chevron-down' : 'fa fa-minus');
         this.setState({rickInsight: data, classIcon: classIcon_StaleFiles});
         this.setState({
@@ -190,7 +207,7 @@ var RickInsight = React.createClass({
                             <div className="col-xs-6 text-left"><span>Total</span></div>
                             <div className="col-xs-6 text-right">
                               <span className="bold">
-                                {this.state.rickInsight.stale_files && this.state.rickInsight.stale_files.total}
+                                {this.state.rickInsight.stale_files && this.formatNumber(this.state.rickInsight.stale_files.total)}
                               </span>
                             </div>
                           </div>

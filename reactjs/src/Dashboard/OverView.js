@@ -119,7 +119,7 @@ var OverView = React.createClass({
           })
         });
 
-        // TODO: Demo fix, to be removed
+        // FIXME: Demo fix, to be removed
         if (Constant.MULTIPLIER != 1) {
           data.documents_analyzed = parseInt(data.documents_analyzed) * Constant.MULTIPLIER;
           data.documents_skipped *= Constant.MULTIPLIER;
@@ -152,7 +152,6 @@ var OverView = React.createClass({
             data.languages[i].total_docs *= Constant.MULTIPLIER;
           }
         }
-        console.log(data);
 
         let confidentialities = data.confidentialities;
 
