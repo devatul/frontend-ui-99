@@ -135,10 +135,10 @@ module.exports = {
         // Specify the validation error messages
     },
 	urls: {
-		CATEGORY: "api/label/category/",
-		CONFIDENTIAL: "api/label/confidentiality/",
-		DOCTYPES: "api/label/doctypes/",
-		LAGNUAGES: "api/label/languages/",
+		LABEL_CATEGORY: "api/label/category/",
+		LABEL_CONFIDENTIAL: "api/label/confidentiality/",
+		LABEL_DOCTYPES: "api/label/doctypes/",
+		LABEL_LAGNUAGES: "api/label/languages/",
 		ROLES: "api/account/role/",
 		PROFILE: "api/account/profile/",
 		PHOTO: "api/account/change_photo/",

@@ -73,8 +73,8 @@ var Admin_Step1 = React.createClass({
     getConfidentialities(){
         return makeRequest({
             path: 'api/confidentiality/',
-            success: (data) => {
-                let datas = [
+            success: (results) => {
+                let data = [
                                 {
                                     "level": "unrestricted",
                                     "level_name": "Unrestricted",
@@ -106,8 +106,8 @@ var Admin_Step1 = React.createClass({
                                     "custom_name": null
                                 }
                             ]
-                console.log(data);
-                this.setState({ confidentialities: datas });
+                console.log(results);
+                this.setState({ confidentialities: data });
             }
         });
     },

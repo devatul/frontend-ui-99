@@ -1,6 +1,5 @@
 import { _confidentialities, urls } from '../Constant'
 import { makeRequest } from '../utils/http'
-import { getCategories, getConfidentialities, getLanguages, getDoctypes} from "../utils/function"
 
 module.exports = {
     formatNumber: (nStr) => {
@@ -119,22 +118,22 @@ module.exports = {
     },
     
     getCategories: (options) => {
-        options.path = urls.CATEGORY;
+        options.path = urls.LABEL_CATEGORY;
         makeRequest(options);
     },
 
     getConfidentialities: (options) => {
-        options.path = urls.CONFIDENTIAL;
+        options.path = urls.LABEL_CONFIDENTIAL;
         makeRequest(options);
     },
 
     getDoctypes: (options) => {
-        options.path = urls.DOCTYPES;
+        options.path = urls.LABEL_DOCTYPES;
         makeRequest(options);
     },
 
     getLanguages: (options) => {
-        options.path = urls.LAGNUAGES;
+        options.path = urls.LABEL_LAGNUAGES;
         makeRequest(options);
     },
 

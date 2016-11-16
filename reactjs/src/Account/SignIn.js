@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './SignIn.rt';
 import { assignIn, isNull } from 'lodash';
 import Constant from '../Constant.js';
+import { setTokenAuth } from '../utils/function'
 
 var Signin = React.createClass({
     getInitialState() {
