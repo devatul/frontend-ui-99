@@ -1,7 +1,7 @@
 import React,  { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
-import {makeRequest} from '../../utils/http'
+import { getAnomalyIamInfo, setAnomalyIamInfo } from '../../utils/function'
 import HelpButton from "./HelpButton"
 import _ from 'lodash'
 import $ from 'jquery'
@@ -43,12 +43,11 @@ var TableAnomaly = React.createClass({
 
   getDataAPI(path) {
     if (path != undefined) {
-      return makeRequest({
-        path: Constant.urls.IAM + path + '?filter=all',
+      return getAnomalyIamInfo({
         success: (data) => {
           this.setState({datas: data});
         }
-      });
+      }, path + '?filter=all');
     }
   },
 
@@ -91,12 +90,10 @@ var TableAnomaly = React.createClass({
 
     datas[number]['Review Status'] = value;
 
-    return makeRequest({
-      path:  Constant.urls.IAM + this.props.path,
-      method: 'PUT',
+    return setAnomalyIamInfo({
       params: JSON.stringify(_.omit(datas[number], ['selected'])),
       success: (data) => {}
-    });
+    },  this.props.path);
   },
 
   showSelect(datas, number) {

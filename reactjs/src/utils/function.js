@@ -316,5 +316,15 @@ module.exports = {
         options.path = urls.REFRESHTOKEN;
         options.type = 'POST';
         makeRequest(options);
+    },
+
+    getAnomalyIamInfo: (options, path) => {
+        options.path = urls.IAM + path;
+        makeRequest(options);
+    },
+
+    setAnomalyIamInfo: (options, path) => {
+        options.path = urls.IAM + path;
+        makeRequest(options);
     }
 }
