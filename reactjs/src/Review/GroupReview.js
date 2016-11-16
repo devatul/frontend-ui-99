@@ -22,6 +22,7 @@ var GroupReview = React.createClass({
         index: 0,
         lastGroup: false,
       },
+      fileDistribution: {},
       statistics: {},
       cloudwords: [],
       centroids: [],
@@ -66,6 +67,7 @@ var GroupReview = React.createClass({
     this.getCategories();
     this.getConfidentialities();
     this.drawCloud();
+    this.fileDistribution()
   },
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -73,6 +75,7 @@ var GroupReview = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('this.state',this.state)
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
@@ -464,7 +467,30 @@ var GroupReview = React.createClass({
   },
 
   fileDistribution() {
-    let data = [
+        // let id = this.state.groupCurrent.id;
+        // makeRequest({
+        //   path: "api/group/file-distributions?id="+id,
+        //   params: {
+        //     "id": id
+        //   },
+        //   success: (res) => {
+        //     let data = [
+        //           {name: 'Word', color: 'yellow', total: 5015},
+        //           {name: 'Excel', color: 'red', total: 3299},
+        //           {name: 'Power Point', color: 'purple', total: 3991},
+        //           {name: 'PDF', color: 'green', total: 3842},
+        //           {name: 'Other', color: 'blue', total: 1067}
+        //         ],
+        //         total = 0;
+        //         data.map(function (e) {
+        //           total += e.total;
+        //         });
+        //         this.setState({
+        //           fileDistribution:{file: data, total: total}
+        //         });
+        //     }
+        // });
+        let data = [
           {name: 'Word', color: 'yellow', total: 5015},
           {name: 'Excel', color: 'red', total: 3299},
           {name: 'Power Point', color: 'purple', total: 3991},
