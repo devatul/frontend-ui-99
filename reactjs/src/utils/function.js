@@ -259,7 +259,7 @@ module.exports = {
         if (options.id) {
             options.path += '?id=' + options.id;
         }
-        options.type = 'POST';
+        options.method = 'POST';
         makeRequest(options);
     },
 
@@ -288,14 +288,15 @@ module.exports = {
         makeRequest(options);
     },
 
-    getTokenAuth: (options) => {
+    setTokenAuth: (options) => {
         options.path = urls.TOKENAUTH;
+        options.method = ''
         makeRequest(options);
     },
 
     registration: (options) => {
         options.path = urls.REGISTRATION;
-        options.type = 'POST';
+        options.method = 'POST';
         makeRequest(options);
     },
 
@@ -306,13 +307,13 @@ module.exports = {
 
     setOrganization: (options) => {
         options.path = urls.ORGANIZATION;
-        options.type = 'PUT';
+        options.method = 'PUT';
         makeRequest(options);
     },
 
     setRefreshToken: (options) => {
         options.path = urls.REFRESHTOKEN;
-        options.type = 'POST';
+        options.method = 'POST';
         makeRequest(options);
     },
 
