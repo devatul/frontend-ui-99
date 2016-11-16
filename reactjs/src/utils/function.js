@@ -290,7 +290,7 @@ module.exports = {
 
     setTokenAuth: (options) => {
         options.path = urls.TOKENAUTH;
-        options.method = ''
+        options.method = 'POST'
         makeRequest(options);
     },
 

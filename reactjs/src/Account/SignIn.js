@@ -28,6 +28,7 @@ var Signin = React.createClass({
     handleSubmit(e) {
         e.preventDefault();
         let data = this.state.data ;
+        debugger
         if(!_.isNull(data)){
             return setTokenAuth({
                 timeout: 15000,
