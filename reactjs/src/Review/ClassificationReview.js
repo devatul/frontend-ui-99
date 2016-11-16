@@ -58,7 +58,7 @@ var ClassificationReview = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     let {dataReview, current} = this.state;
-    
+
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
@@ -526,7 +526,6 @@ var ClassificationReview = React.createClass({
       params: JSON.stringify(request),
       path: "api/classification_review/",
       success: (res) => {
-        console.log("assign success", res);
       }
     });
   },

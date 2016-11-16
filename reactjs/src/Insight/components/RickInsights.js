@@ -49,8 +49,6 @@ var RickInsight = React.createClass({
           }
         }
 
-        console.log(data);
-
         let classIcon_StaleFiles = data.stale_files.total > data.stale_files.previous_scan_value ? 'fa fa-chevron-up' : (data.stale_files.total < data.stale_files.previous_scan_value ? 'fa fa-chevron-down' : 'fa fa-minus');
         this.setState({rickInsight: data, classIcon: classIcon_StaleFiles});
         this.setState({

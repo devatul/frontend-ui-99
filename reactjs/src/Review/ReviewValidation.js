@@ -61,7 +61,6 @@ var ReviewValidation = React.createClass({
     },
 
     componentDidMount() {
-        //console.log("sfdssss", this.state.categories);
         this.getCategories();
         this.getConfidentialities();
     },
@@ -323,13 +322,11 @@ var ReviewValidation = React.createClass({
     },
 
     validateDocuments() {
-        console.log('bodyRequest', this.state.bodyRequest)
         return makeRequest({
             method: "PUT",
             path: "api/review/review_validation/",
             params: JSON.stringify(this.state.bodyRequest),
             success: (res) => {
-                console.log('validateDocument: success');
             }
         });
     },
@@ -715,7 +712,6 @@ var ReviewValidation = React.createClass({
         });
     },
     changeIcon(event) {
-        console.log(event.target);
         event.target.classList.toggle('fa-minus-square');
         event.target.classList.toggle('fa-plus-square');
     },

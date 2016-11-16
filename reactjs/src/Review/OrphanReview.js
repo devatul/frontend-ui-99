@@ -245,7 +245,6 @@ var OrphanReview = React.createClass({
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
-                    console.log('assign done',res);
                 },
                 error: (err) =>{
                   console.log('error',err)
