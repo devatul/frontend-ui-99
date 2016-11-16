@@ -129,7 +129,7 @@ var GroupReview = React.createClass({
 
     let updateStack = update(this.state.stackChange, {
         $push: [{
-          index: this.state.group.index,
+          index: this.state.groupCurrent.index,
           documents: this.state.documents
         }]
     });
@@ -239,7 +239,6 @@ var GroupReview = React.createClass({
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
-                    console.log('assign done',res);
                 },
                 error: (err) =>{
                   console.log('error',err)
@@ -497,6 +496,12 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (res) => {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          res.completed_number_documents *= Constant.MULTIPLIER;
+          res.total_number_documents *= Constant.MULTIPLIER;
+        }
+
         this.setState({statistics: res, shouldUpdate: true});
       }
     });
@@ -530,6 +535,13 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (centroids) => {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          for (let i = 0, len = centroids.length; i < len; ++i) {
+            centroids[i].number_docs *= Constant.MULTIPLIER;
+          }
+        }
+
         var series = [], total = centroids.length;
 
         let max = maxBy(centroids, doc => doc.number_docs),

@@ -153,7 +153,7 @@ var ClassificationCheck = React.createClass({
             }
 
         })
-        console.log(newData)*/
+        */
     },
 
     componentDidMount() {},

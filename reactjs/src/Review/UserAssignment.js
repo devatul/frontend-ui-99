@@ -258,7 +258,6 @@ var UserAssignment = React.createClass({
             method: "POST",
             params: JSON.stringify(this.state.datafilter.request),
             success: (res) => {
-                console.log('assign done');
             }
         });
     },
@@ -375,7 +374,7 @@ var UserAssignment = React.createClass({
         list = _.orderBy(list, ['number_hits'], ['desc']);
 
         for(var i = 0, total = list.length; i < total; i++) {
-            categories[i] = list[i].first_name + '.' + list[i].last_name;
+            categories[i] = list[i].lastmodifier;
             data[i] = list[i].number_hits;
         }
 
@@ -507,7 +506,6 @@ var UserAssignment = React.createClass({
                         }
                     }
                 }
-                console.log('data')
                 let updateListReviewer = update(this.state.reviewer, {
                     list: {
                         $set: data
