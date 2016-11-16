@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './SignIn.rt';
 import { assignIn, isNull } from 'lodash';
 import Constant from '../Constant.js';
-import { setTokenAuth } from '../utils/function'
+import { getTokenAuth } from '../utils/function'
 
 var Signin = React.createClass({
     getInitialState() {
@@ -29,7 +29,7 @@ var Signin = React.createClass({
         e.preventDefault();
         let data = this.state.data ;
         if(!_.isNull(data)){
-            return setTokenAuth({
+            return getTokenAuth({
                 timeout: 15000,
                 params : JSON.stringify({
                         username: this.state.data.username,

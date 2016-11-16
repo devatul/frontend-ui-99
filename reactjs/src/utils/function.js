@@ -288,9 +288,8 @@ module.exports = {
         makeRequest(options);
     },
 
-    setTokenAuth: (options) => {
+    getTokenAuth: (options) => {
         options.path = urls.TOKENAUTH;
-        options.type = 'POST';
         makeRequest(options);
     },
 
