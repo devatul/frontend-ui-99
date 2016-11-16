@@ -403,7 +403,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
 }*/
 .table-my-actions span.file-name.fix-max-width-row {
     max-width: 250px;
-    margin-right: -80px;
+    margin-right: -50px;
     padding-right: 5px;
 }
 /* height select2 filter */
