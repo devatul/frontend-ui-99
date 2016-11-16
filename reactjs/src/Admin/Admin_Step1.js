@@ -30,7 +30,6 @@ var Admin_Step1 = React.createClass({
         }
     },
     changeCheckbox(event){
-        debugger
         let data = _.cloneDeep(this.state.confidentialities) ;
         _.forEach(data , function(object , index){
             if(event.target.name == object.level){
