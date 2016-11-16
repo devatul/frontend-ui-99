@@ -604,6 +604,8 @@ var Row = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    let {confidentialities} = this.props;
+    
     if (this.props.confidentialities != prevProps.confidentialities) {
       orderByIndex(confidentialities, [4, 3, 2, 1, 0])
     }
@@ -678,7 +680,7 @@ var Row = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide, group} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
     let confidentiality;
     if(typeof document.reviewedconfidentiality !== 'undefined' && document.reviewedconfidentiality.id !== 'undefined' ){
       confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewedconfidentiality.id })
