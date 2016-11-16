@@ -8,7 +8,7 @@ let count = 0;
 
 function makeRequest({ sync = true, dataType = 'json', contentType = "application/json", method = 'GET', path, params = {}, success, error, timeout = 0 }) {
     return $.ajax({
-        url: Constants.SERVER_API + path,
+        url: path.indexOf('http:') == 0 ? path : Constants.SERVER_API + path,
         dataType: dataType,
         timeout: timeout,
         contentType: contentType,
