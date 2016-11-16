@@ -322,6 +322,7 @@
               <table.row rt-repeat=" document in this.state.documents "
                          document={document} index={documentIndex}
                          key={documentIndex}
+                         group={true}
                          categories={this.state.categories}
                          confidentialities={this.state.confidentialities}
                          onClick={this.handleTableRowOnClick}
