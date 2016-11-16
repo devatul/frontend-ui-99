@@ -42,11 +42,11 @@
               <select2 id="chosse_cluster"
                        onChange="{this.handleOnChangeSelectGroup}"
                        value="{this.state.groupCurrent.index}">
-                <optgroup rt-repeat="group_parent in this.state.group_parent" label={group_parent}>
+                <optgroup rt-repeat="group_parent in this.state.group_parent" key="{group_parentIndex}" label={group_parent}>
                   <option
                     rt-repeat="group in this.state.groups_by_name[group_parent]"
                     value="{group.index}"
-                    key="{group.index}">
+                    key="{groupIndex}">
                     {group.name}
                   </option>
                 </optgroup>
@@ -238,7 +238,7 @@
         <Panel.head>
           <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
           <div class="inline-block-item">
-            <select onChangge="{this.handleChangeNumberDocument}" class="form-control">
+            <select onChange="{this.handleChangeNumberDocument}" class="form-control">
               <option value="10">10 Documents</option>
               <option value="20">20 Documents</option>
               <option value="30">30 Documents</option>
@@ -405,7 +405,6 @@
           categories={this.state.categories}
           confidentialities={this.state.confidentialities}
           onClick={this.handleTableRowOnClick}
-          hide="{{ checkbox: true }}"
           onChange={this.handleTableRowOnChange}
           index={this.state.documentPreview}/>
         </tbody>

@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import {cloneDeep, isEqual} from 'lodash';
+import {makeRequest} from '../../utils/http.js';
 
 var documentPreview = React.createClass({
   PropTypes: {
@@ -56,15 +57,26 @@ var documentPreview = React.createClass({
         {document} = this.props;
 
     if (preview) {
+      makeRequest({
+        path: 'api/converter/',
+        dataType: 'text',
+        method: 'POST',
+        params: JSON.stringify({ 'file_url': document.image_url }),
+        success: (data) => {
+          console.log("Converter: got " + data);
+        }
+      });
+
       render(React.createElement('div', {
-          className: "gdocsviewer"
+          className: 'gdocsviewer'
         },
         React.createElement('iframe', {
+          // src: data.file_url,
           src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
           width: 600,
           height: 700,
           style: {border: 'none'}
-        })), preview)
+        })), preview);
     }
   },
 
@@ -113,13 +125,13 @@ var documentPreview = React.createClass({
                 <span>Document Preview</span>
               </Modal.Title>
               <div className="col-sm-4 col-xs-12 modal-info margin-top-14">
-                <span className="text-itatic">Predicted Label:</span>
+                <span className="text-itatic">Predicted Label: </span>
                 <span><strong>{document && document.category && document.category.name + ' - ' + document.confidentiality.name}</strong></span>
               </div>
               <div className="col-sm-2 col-xs-12 margin-top-14">
                 { this.props.hideLanguage ? '' :
                   <div className="inline-block-item">
-                    <span className="text-itatic">Detected Language:</span>
+                    <span className="text-itatic">Detected Language: </span>
                     <span><strong>{currentReview && currentReview.language && currentReview.language.name}</strong></span>
                   </div>}
               </div>

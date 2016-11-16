@@ -27,7 +27,7 @@
           1. Cluster Parameters
           <HelpButton
             classMenu="overview_timeframe fix-overview-help-button"
-            setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents.” (May need to add more info here or a link to the wiki, as this is a more complex thing to complete)." />
+            setValue="Define the minimum and the maximum number of clusters used by 99 to classify your documents. The number of groups and orphans will be in this range. A small number of clusters may need to inaccurate results, and too much clusters will make the supervised classification longer." />
         </h2>
 
         <div class="panel-actions" style="margin-right: 25px;">

@@ -239,12 +239,12 @@
                     </Row>
                 </Tab.Pane>
                 <Tab.Pane key="content_summary" eventKey="tab_summary">
-                    <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
+                    <Panel.custom rt-repeat="category in this.state.summary" key="{categoryIndex}" class="panel-featured-compact panel-bordered" >
                         <Panel.head>
                             <h2 class="panel-title text-capitalize">{category.name}</h2>
                         </Panel.head>
                         <Panel.body>
-                            <div class="table-responsive">
+                            <div class="table-responsive" key={category.id}>
                                 <table class="table table-condensed table-reviewer-summary">
                                     <thead>
                                         <tr>
@@ -273,7 +273,7 @@
                                                 <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
                                                     <table class="table">
                                                         <tbody>
-                                                            <tr rt-repeat="reviewer in category.reviewers">
+                                                            <tr rt-repeat="reviewer in category.reviewers" key="{reviewerIndex}" >
                                                                 <td class="col50">{reviewer.first_name + '.' + reviewer.last_name} (Last Modified)</td>
                                                                 <td class="col25">&#160;</td>
                                                                 <td class="col25 chart-col">

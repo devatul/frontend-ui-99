@@ -58,7 +58,7 @@ var ClassificationReview = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     let {dataReview, current} = this.state;
-
+    
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
@@ -125,21 +125,21 @@ var ClassificationReview = React.createClass({
                 data[i].checked = false;
               }
             }
-
             return data;
           }
         }
       }
     });
-
+    let updateCurrent = update(this.state.current, {
+      docIndex:{$set: this.state.current.docIndex},
+      reviewIndex:{$set: reviewIndex}
+    })
     this.setState({
       dataReview: updateData,
-      current: update(this.state.current, {
-        docIndex: this.state.current.docIndex,
-        reviewIndex: reviewIndex
-      }),
+      current: updateCurrent,
       shouldUpdate: true
     });
+
   },
 
   handleTableRowOnClick(event, index) {

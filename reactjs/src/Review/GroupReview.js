@@ -128,9 +128,11 @@ var GroupReview = React.createClass({
         index = event.target.value,
         group = Object.assign({}, groups[index], {index: parseInt(index)});
 
+    console.log(this.state.groupCurrent);
+
     let updateStack = update(this.state.stackChange, {
         $push: [{
-          index: this.state.group.index,
+          index: this.state.groupCurrent.index,
           documents: this.state.documents
         }]
     });
@@ -451,6 +453,10 @@ var GroupReview = React.createClass({
             res_groups.push(elt);
           })
         });
+
+        console.log(res_groups);
+        console.log(group_parent);
+        console.log(groups_by_name);
 
         this.setState({
           groups: res_groups,

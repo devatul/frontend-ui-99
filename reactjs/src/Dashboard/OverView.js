@@ -122,6 +122,15 @@ var OverView = React.createClass({
 
         data.confidentialities = orderConfidentialities(confidentialities);
         data.languages = orderLanguages(data.languages);
+
+        data.doctypes.sort((a, b) => {
+          if (a.name === "Others")
+            return 1;
+          if (b.name === "Others")
+            return -1;
+          return a.percentage_docs < b.percentage_docs;
+        });
+
         let setResult = update(this.state.scan, {
           result: {$set: data}
         });
