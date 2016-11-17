@@ -438,20 +438,45 @@ var OrphanReview = React.createClass({
         total = 0,
         children = [];
 
-    data.map(function (e) {
-      total += e.total;
-    });
+        makeRequest({
+          path: "api/group/orphan/file-distributions",
+          params: {
+            "id": this.state.orphanCurrent.id
+          },
+          success: (res) => {
+            /************* temporary commented****************/
+            // console.log(res)
+            // res.map(function (e) {
+            //   total += e.total;
+            // });
+            //
+            // for (let i = res.length - 1; i >= 0; i--) {
+            //   children[i] =
+            //       <div key={'file_' + i} className={'item ' + res[i].color} style={{width: ((res[i].total / total) * 100).toFixed(2) + '%'}}>
+            //         {res[i].name}
+            //         <span className="item-legend">{res[i].total}</span>
+            //       </div>;
+            // }
+            // this.ch = <div className="file-distribution clearfix">{children}</div>;
+          },
+          error: (err) => {
+            //*************will be deleted when api active*******//
+            data.map(function (e) {
+              total += e.total;
+            });
 
-    for (let i = data.length - 1; i >= 0; i--) {
-      children[i] =
-          <div key={'item_' + i} className={'item ' + data[i].color}
-               style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
-            {data[i].name}
-            <span className="item-legend">{data[i].total}</span>
-          </div>;
-    }
-
-    return (<div className="file-distribution clearfix">{children}</div>);
+            for (let i = data.length - 1; i >= 0; i--) {
+              children[i] =
+                  <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
+                    {data[i].name}
+                    <span className="item-legend">{data[i].total}</span>
+                  </div>;
+            }
+            this.ch = <div className="file-distribution clearfix">{children}</div>;
+            /************************************/
+          }
+        });
+        return this.ch;
   },
 
   getStatistics: function () {

@@ -66,7 +66,12 @@ var DataLost = React.createClass({
 
           lang['most efficient keywords'].forEach(keyword => {
             if (keyword.category_name !== 'Undefined') {
-              keywordsArr.push(keyword)
+              for (let i = keyword['confidentiality levels'].length - 1; i >= 0; --i) {
+                if (keyword['confidentiality levels'][i].keywords.length == 0)
+                    keyword['confidentiality levels'].splice(i, 1);
+              }
+              if (keyword['confidentiality levels'].length !== 0)
+                keywordsArr.push(keyword)
             }
           });
 
