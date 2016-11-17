@@ -1,8 +1,8 @@
 module.exports = {
-    SERVER_API: 'http://54.179.166.78/',
+    SERVER_API: 'http://54.254.154.35/',
     // SERVER_API:'http://54.254.145.121/',
     // SERVER_API: 'http://54.169.142.202',
-    MULTIPLIER: 1143,
+    MULTIPLIER: 1,
     TIMEVALIDTOKEN: 300000,
     scan: {
         IS_NO_SCAN: 'no scan',

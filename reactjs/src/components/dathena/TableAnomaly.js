@@ -1,13 +1,12 @@
-import React,  { Component, PropTypes } from 'react'
-import { render } from 'react-dom'
-import update from 'react-addons-update'
+import React, {Component, PropTypes} from 'react';
+import {render} from 'react-dom';
+import update from 'react-addons-update';
+import {makeRequest} from '../../utils/http';
+import HelpButton from "./HelpButton";
+import _ from 'lodash';
+import Anomaly from '../../components/dathena/AnomalyStateSelect';
+import Constant from '../../Constant.js';
 import { getAnomalyIamInfo, setAnomalyIamInfo } from '../../utils/function'
-import HelpButton from "./HelpButton"
-import _ from 'lodash'
-import $ from 'jquery'
-import Anomaly from '../../components/dathena/AnomalyStateSelect'
-import Constant from '../../Constant.js'
-
 
 var TableAnomaly = React.createClass({
   getInitialState() {
@@ -45,6 +44,13 @@ var TableAnomaly = React.createClass({
     if (path != undefined) {
       return getAnomalyIamInfo({
         success: (data) => {
+          if (Constant.MULTIPLIER != 1) {
+            for (let i = 0, len = data.length; i < len; ++i) {
+              data[i]["Document at Risk"] *= Constant.MULTIPLIER;
+              data[i]["Folder at Risk"] *= Constant.MULTIPLIER;
+            }
+          }
+
           this.setState({datas: data});
         }
       }, path + '?filter=all');
@@ -206,6 +212,7 @@ var TableAnomaly = React.createClass({
         child1 = null;
 
     if (this.props.type == 'table1') {
+
       child1 =
         <tr>
           <th>ID</th>
