@@ -214,12 +214,6 @@
                         classMenu="fix-overview-help-button-table"
                         setValue="Distributions in terms of confidentiality ratings assigned to all the document within the selected group."/>
                     </h4>
-                    <!--<div className="file-distribution clearfix">
-                      <div rt-repeat="file in this.state.fileDistribution.file" key="file_ + {fileIndex}" class="{'item ' + file.color}" style="'width:'+ {((file.total / this.state.fileDistribution.total) * 100).toFixed(2)} + '%'">
-                        {file.name}
-                        <span className="item-legend">{file.total}</span>
-                      </div>
-                    </div>-->
                     {this.fileDistribution()}
                   </div>
                   <CentroidChart

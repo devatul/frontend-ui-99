@@ -22,12 +22,12 @@ var GroupReview = React.createClass({
         index: 0,
         lastGroup: false,
       },
-      fileDistribution: {},
       statistics: {},
       cloudwords: [],
       centroids: [],
       reviewStatus: 0,
       documents: [],
+      fileDistribution: {},
       loadingdocuments: true,
       categories: [],
       confidentialities: [],
@@ -67,7 +67,6 @@ var GroupReview = React.createClass({
     this.getCategories();
     this.getConfidentialities();
     this.drawCloud();
-    this.fileDistribution()
   },
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -75,12 +74,13 @@ var GroupReview = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.state',this.state)
+    console.log(this.state)
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
 
     if (!isEqual(this.state.groupCurrent, prevState.groupCurrent)) {
+      //this.fileDistribution();
       this.getDocuments();
       this.getStatistics();
       this.getCategoryInfo();
@@ -467,30 +467,7 @@ var GroupReview = React.createClass({
   },
 
   fileDistribution() {
-        // let id = this.state.groupCurrent.id;
-        // makeRequest({
-        //   path: "api/group/file-distributions?id="+id,
-        //   params: {
-        //     "id": id
-        //   },
-        //   success: (res) => {
-        //     let data = [
-        //           {name: 'Word', color: 'yellow', total: 5015},
-        //           {name: 'Excel', color: 'red', total: 3299},
-        //           {name: 'Power Point', color: 'purple', total: 3991},
-        //           {name: 'PDF', color: 'green', total: 3842},
-        //           {name: 'Other', color: 'blue', total: 1067}
-        //         ],
-        //         total = 0;
-        //         data.map(function (e) {
-        //           total += e.total;
-        //         });
-        //         this.setState({
-        //           fileDistribution:{file: data, total: total}
-        //         });
-        //     }
-        // });
-        let data = [
+    let data = [
           {name: 'Word', color: 'yellow', total: 5015},
           {name: 'Excel', color: 'red', total: 3299},
           {name: 'Power Point', color: 'purple', total: 3991},
@@ -499,20 +476,45 @@ var GroupReview = React.createClass({
         ],
         total = 0,
         children = [];
+    makeRequest({
+      path: "api/group/file-distributions",
+      params: {
+        "id": this.state.groupCurrent.id
+      },
+      success: (res) => {
+        /************* temprary commented****************/
+        // console.log(res)
+        // res.map(function (e) {
+        //   total += e.total;
+        // });
+        //
+        // for (let i = res.length - 1; i >= 0; i--) {
+        //   children[i] =
+        //       <div key={'file_' + i} className={'item ' + res[i].color} style={{width: ((res[i].total / total) * 100).toFixed(2) + '%'}}>
+        //         {res[i].name}
+        //         <span className="item-legend">{res[i].total}</span>
+        //       </div>;
+        // }
+        // this.ch = <div className="file-distribution clearfix">{children}</div>;
+      },
+      error: (err) => {
+        //*************will be deleted when api active*******//
+        data.map(function (e) {
+          total += e.total;
+        });
 
-    data.map(function (e) {
-      total += e.total;
+        for (let i = data.length - 1; i >= 0; i--) {
+          children[i] =
+              <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
+                {data[i].name}
+                <span className="item-legend">{data[i].total}</span>
+              </div>;
+        }
+        this.ch = <div className="file-distribution clearfix">{children}</div>;
+        /************************************/
+      }
     });
-
-    for (let i = data.length - 1; i >= 0; i--) {
-      children[i] =
-          <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
-            {data[i].name}
-            <span className="item-legend">{data[i].total}</span>
-          </div>;
-    }
-
-    return (<div className="file-distribution clearfix">{children}</div>);
+    return this.ch;
   },
 
   getStatistics() {
