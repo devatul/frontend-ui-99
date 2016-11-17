@@ -248,7 +248,7 @@
           </div>
           <div class="panel-actions my-actions-btn-group">
             <span
-              class="mr-md">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
+              class="mr-md orphan-review-label">Group Review: <b>{this.state.groupCurrent && this.state.groupCurrent.realname}</b></span>
             <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextGroup}" bsClass="my-btn">Next
               Group
             </Button>

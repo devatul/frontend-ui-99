@@ -66,7 +66,7 @@
               </ProgressBar>
             </Col>
             <Col md={3} class="text-right">
-              <span>Detected Language: <b>English</b></span>
+              <span class="language">Detected Language: <b>English</b></span>
               <Button class="btn btn-green ml-md" bsClass="my-btn" disabled>Edit</Button>
             </Col>
           </Row>
@@ -243,7 +243,7 @@
               </select>
             </div>
             <div class="panel-actions my-actions-btn-group">
-              <span class="mr-md">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
+              <span class="mr-md orphan-review-label">Orphan Review: <b>Orphan {this.state.orphanCurrent && this.state.orphanCurrent.id}</b></span>
               <Button rt-if="this.state.orphanCurrent.id && this.state.orphanCurrent.id !== this.state.orphans[this.state.orphans.length-1].id" class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleNextOrphan}" bsClass="my-btn">Next Orphan</Button>
               <Button class="mb-xs mt-none mr-xs btn btn-green" onClick="{this.handleUndo}" bsClass="my-btn">
                 Undo <i class="fa fa-undo" aria-hidden="true"></i>
