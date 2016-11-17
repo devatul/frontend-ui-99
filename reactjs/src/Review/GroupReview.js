@@ -27,7 +27,6 @@ var GroupReview = React.createClass({
       centroids: [],
       reviewStatus: 0,
       documents: [],
-      fileDistribution: {},
       loadingdocuments: true,
       categories: [],
       confidentialities: [],
@@ -74,13 +73,11 @@ var GroupReview = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state)
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
 
     if (!isEqual(this.state.groupCurrent, prevState.groupCurrent)) {
-      //this.fileDistribution();
       this.getDocuments();
       this.getStatistics();
       this.getCategoryInfo();
@@ -482,7 +479,7 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (res) => {
-        /************* temprary commented****************/
+        /************* temporary commented****************/
         // console.log(res)
         // res.map(function (e) {
         //   total += e.total;

@@ -446,7 +446,7 @@ var OrphanReview = React.createClass({
             "id": this.state.orphanCurrent.id
           },
           success: (res) => {
-            /************* temprary commented****************/
+            /************* temporary commented****************/
             // console.log(res)
             // res.map(function (e) {
             //   total += e.total;
