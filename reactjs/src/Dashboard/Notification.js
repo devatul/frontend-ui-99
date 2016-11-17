@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Notification.rt'
 import update from 'react/lib/update'
 import javascriptTodo from '../script/javascript.todo.js';
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
 import _ from 'lodash'
 import $ from 'jquery'
 import { getNotification } from '../utils/function'

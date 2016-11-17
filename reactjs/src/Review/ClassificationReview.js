@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './ClassificationReview.rt';
 import update from 'react/lib/update';
-import Constant, {fetching, status} from '../Constant';
+import Constant, {fetching, status} from '../App/Constant';
 import {cloneDeep, isEqual, find, findIndex, orderBy} from 'lodash';
 import {makeRequest} from '../utils/http';
 import { getCategories, getConfidentialities, getClassificationReview, assignCategoryAndConfidentiality2nd } from '../utils/function'

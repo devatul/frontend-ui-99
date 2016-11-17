@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './UserAssignment.rt'
 import update from 'react/lib/update'
 import javascript from '../script/javascript.js'
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
 import { upperFirst, findIndex, find, assignIn, isEqual, cloneDeep, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
 import { getCategories } from '../utils/function'

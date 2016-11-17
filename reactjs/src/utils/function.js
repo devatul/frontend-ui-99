@@ -1,4 +1,4 @@
-import { _confidentialities, urls } from '../Constant'
+import { _confidentialities, urls } from '../App/Constant'
 import { makeRequest } from '../utils/http'
 
 module.exports = {

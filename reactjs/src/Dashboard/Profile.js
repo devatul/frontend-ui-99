@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Profile.rt'
 import { makeRequest } from '../utils/http'
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
 import $, { JQuery } from 'jquery';
 import { getProfile, getPhoto } from '../utils/function'
 

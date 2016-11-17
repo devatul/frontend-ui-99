@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './AnomalyDetection.rt';
 import update from 'react/lib/update';
-import Constant, {fetching} from '../Constant.js';
+import Constant, {fetching} from '../App/Constant.js';
 import _ from 'lodash';
 import {makeRequest} from '../utils/http';
 import 'jquery';

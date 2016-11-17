@@ -1,4 +1,4 @@
-import Constants from '../Constant'
+import Constants from '../App/Constant'
 import { browserHistory } from 'react-router'
 import $ from 'jquery'
 

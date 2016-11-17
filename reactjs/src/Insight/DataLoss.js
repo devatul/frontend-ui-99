@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router'
 import template from './DataLoss.rt'
 import update from 'react-addons-update'
-import Constant, {fetching} from '../Constant.js'
+import Constant, {fetching} from '../App/Constant.js'
 import {orderLanguages} from '../utils/function';
 import 'jquery'
 import { getDataLoss } from '../utils/function'

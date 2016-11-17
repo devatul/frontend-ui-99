@@ -5,7 +5,7 @@ import {forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy} from 'lodash'
 import template from './GroupReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
-import Constant, {status, fetching} from '../Constant.js';
+import Constant, {status, fetching} from '../App/Constant.js';
 import { getCategories, getConfidentialities, getStatistics, getCloudwords, getCentroids, getDocuments, getGroups, setOrphanDocuments } from  '../utils/function'
 
 var GroupReview = React.createClass({

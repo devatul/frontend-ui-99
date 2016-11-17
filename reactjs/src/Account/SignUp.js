@@ -5,7 +5,7 @@ import template from './SignUp.rt'
 import $ from 'jquery'
 import { assignIn } from 'lodash';
 import validate from 'jquery-validation';
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
 import { registration } from '../utils/function'
 
 var SignUp = React.createClass({

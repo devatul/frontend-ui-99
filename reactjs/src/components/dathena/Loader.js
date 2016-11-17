@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import update from 'react-addons-update';
-import Constant, {fetching} from '../../Constant.js';
+import Constant, {fetching} from '../../App/Constant.js';
 import ProgressLabel from './progress-label';
 
 var Loader = React.createClass({

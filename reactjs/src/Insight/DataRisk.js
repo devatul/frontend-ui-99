@@ -4,7 +4,7 @@ import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-
 import template from './DataRisk.rt';
 import update from 'react/lib/update';
 import 'jquery';
-import Constant, {fetching} from '../Constant.js';
+import Constant, {fetching} from '../App/Constant.js';
 import javascriptOver from '../script/javascript-overview.js';
 import javascript from '../script/javascript.js';
 import { getDataRisk } from '../utils/function'

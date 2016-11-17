@@ -1,4 +1,4 @@
-<rt-import name="ProgressLabel" from="./components/dathena/progress-label"/>
+<rt-import name="ProgressLabel" from="../components/dathena/progress-label"/>
 
 <div>
   {this.mapStateToProps(this.props.children, ['categories', 'confidentialities'])}

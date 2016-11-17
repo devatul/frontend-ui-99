@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect, IndexRoute  } from 'react-router'
 var path = require('path');
-var App = require('./App');
+var App = require('./App/App');
 var SignIn = require('./Account/SignIn');
 var SignUp = require('./Account/SignUp');
 var PasswordNew = require('./Account/PasswordNew');

@@ -5,7 +5,7 @@ import {makeRequest} from '../../utils/http';
 import HelpButton from "./HelpButton";
 import _ from 'lodash';
 import Anomaly from '../../components/dathena/AnomalyStateSelect';
-import Constant from '../../Constant.js';
+import Constant from '../../App/Constant.js';
 import { getAnomalyIamInfo, setAnomalyIamInfo } from '../../utils/function'
 
 var TableAnomaly = React.createClass({

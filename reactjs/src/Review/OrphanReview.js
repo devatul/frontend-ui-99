@@ -5,7 +5,7 @@ import { forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy } from 'lodas
 import template from './OrphanReview.rt'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
-import Constant, { status } from '../Constant.js'
+import Constant, { status } from '../App/Constant.js'
 import { getCategories, getConfidentialities, setOrphanDocuments, getOrphanStatistics, getOrphanCloudwords, getOrphanCentroids, getOrphanCategories } from '../utils/function'
 
 var OrphanReview = React.createClass({

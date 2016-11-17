@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './MyTeam.rt'
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
 import $, { JQuery } from 'jquery';
 import update from 'react-addons-update';
 import { getRole } from '../utils/function'

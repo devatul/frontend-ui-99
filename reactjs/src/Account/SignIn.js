@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import template from './SignIn.rt';
 import { assignIn, isNull } from 'lodash';
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
 import { setTokenAuth } from '../utils/function'
 
 var Signin = React.createClass({

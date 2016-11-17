@@ -4,10 +4,9 @@ import { browserHistory } from 'react-router'
 import template from './App.rt'
 import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
-import { setRefreshToken } from './utils/function'
-import { orderByIndex, getCategories, getConfidentialities } from './utils/function'
+import { orderByIndex, getCategories, getConfidentialities, setRefreshToken } from '../utils/function'
 import { orderBy } from 'lodash'
-import { git_version } from './commit'
+import { git_version } from '../commit'
 
 module.exports = React.createClass({
 	getInitialState() {
