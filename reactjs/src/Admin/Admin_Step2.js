@@ -33,7 +33,6 @@ var Admin_Step2 = React.createClass({
         this.getEmailserve();
     },
     getValueInputDomain(event, name) {
-        debugger
         let data_submit = _.cloneDeep(this.state.DomainDetails),
             value = typeof event === 'string' ? event : event.target.value;
 
@@ -44,7 +43,6 @@ var Admin_Step2 = React.createClass({
         this.setState({ DomainDetails: data_submit });
     },
     getValueInputDomainAdmin(event, name) {
-        debugger
         let data_submit = _.cloneDeep(this.state.DomainDetails),
             _name = _.split(name , ' ' , 2),
             value = typeof event === 'string' ? event : event.target.value;
@@ -54,7 +52,6 @@ var Admin_Step2 = React.createClass({
         this.setState({ DomainDetails: data_submit });
     },
     getValueInputEmailserve(event, name) {
-        debugger
         let data_submit = _.cloneDeep(this.state.emailserve),
             value = typeof event === 'string' ? event : event.target.value;
 
@@ -158,7 +155,6 @@ var Admin_Step2 = React.createClass({
 
     add(value) {
         if (value == 1) {
-            debugger
             let addNew = {  "name" : null ,
                             "email" : null },
                 domain = _.cloneDeep(this.state.DomainDetails);

@@ -10,7 +10,7 @@ import Constant, {status, fetching} from '../Constant.js';
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       orphans: [],
       orphanCurrent: {
@@ -26,6 +26,7 @@ var OrphanReview = React.createClass({
       documents: [],
       categories: [],
       confidentialities: [],
+      emptyOptions: true,
       loadingdocuments: true,
       getdocumenterror: false,
       categoryInfo: [],
@@ -78,7 +79,7 @@ var OrphanReview = React.createClass({
     return nextState.shouldUpdate;
   },
 
-  componentDidUpdate: function (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.shouldUpdate === true) {
       this.setState({shouldUpdate: false});
     }
@@ -113,7 +114,7 @@ var OrphanReview = React.createClass({
     // }
   },
 
-  ucwords: function (str) {
+  ucwords(str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function (a) {
       return a.toUpperCase();
     });
@@ -160,6 +161,7 @@ var OrphanReview = React.createClass({
     });
 
     this.updateOnchange(this.state.documents);
+
     if (index < (this.state.orphans.length - 1)) {
       this.setState({
         stackChange: updateStack,
@@ -170,21 +172,23 @@ var OrphanReview = React.createClass({
       });
     }
   },
+
   handleNextDocument(index) {
-      if(index <= (this.state.documents.length - 1)) {
-        let updateStack = update(this.state.stackChange, {
+    if (index <= (this.state.documents.length - 1)) {
+      let updateStack = update(this.state.stackChange, {
             $push: [{
-                id: this.state.documentPreview,
-                data: Object.assign({}, this.state.documents[this.state.documentPreview])
+              id: this.state.documentPreview,
+              data: Object.assign({}, this.state.documents[this.state.documentPreview])
             }]
-        });
-          this.setState({
-              documentPreview: index,
-              stackChange: updateStack,
-              shouldUpdate: true
           });
-      }
-    },
+
+      this.setState({
+        documentPreview: index,
+        stackChange: updateStack,
+        shouldUpdate: true
+      });
+    }
+  },
 
   handleTableRowOnClick(event, index) {
     switch (event.currentTarget.id) {
@@ -208,6 +212,7 @@ var OrphanReview = React.createClass({
 
   onClickButtonStatus(index) {
     let document = this.state.documents[index];
+
     if (document.status !== status.ACCEPTED.name) {
       let updateDocuments = update(this.state.documents, {
             [index]: {
@@ -222,11 +227,13 @@ var OrphanReview = React.createClass({
               data: Object.assign({}, this.state.documents[index])
             }]
           });
-          this.updateOnchange(updateDocuments);
+
+      this.updateOnchange(updateDocuments);
       this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
     }
   },
-  updateOnchange(updateDocuments){
+
+  updateOnchange(updateDocuments) {
     let docs = [];
 
     for (let i = 0, len = updateDocuments.length; i < len; ++i) {
@@ -238,18 +245,20 @@ var OrphanReview = React.createClass({
       });
     }
 
-      let { id } = this.state.orphanCurrent;
-            makeRequest({
-                path: "api/group/orphan/samples?id="+id,
-                method: "POST",
-                dataType: "text",
-                params: JSON.stringify({ "group_id": id, "docs": docs}),
-                success: (res) => {
-                },
-                error: (err) =>{
-                  console.log('error',err)
-                }
-            });
+    let {id} = this.state.orphanCurrent;
+
+    makeRequest({
+      path: "api/group/orphan/samples?id="+id,
+      method: "POST",
+      dataType: "text",
+      params: JSON.stringify({"group_id": id, "docs": docs}),
+      success: (res) => {
+        console.log('assign done',res);
+      },
+      error: (err) =>{
+        console.log('error',err)
+      }
+    });
   },
 
   handleTableRowOnChange(event, index) {
@@ -307,6 +316,7 @@ var OrphanReview = React.createClass({
             data: Object.assign({}, documents[index])
           }]
         });
+
     this.setState({documents: updateDocuments, stackChange: updateStack, shouldUpdate: true});
   },
 
@@ -352,11 +362,13 @@ var OrphanReview = React.createClass({
     if (this.state.stackChange.length > 0) {
       let {documents, stackChange, documentPreview} = this.state,
           item = stackChange[stackChange.length - 1];
-      if(item.documents){
+
+      if (item.documents) {
         let updateDocuments = item.documents,
-        updateStack = update(stackChange, {
-          $splice: [[stackChange.length - 1, 1]]
-        });
+            updateStack = update(stackChange, {
+              $splice: [[stackChange.length - 1, 1]]
+            });
+
         this.setState({
           orphanCurrent: Object.assign({}, this.state.orphans[item.index], {index: item.index}),
           documents: updateDocuments,
@@ -364,18 +376,20 @@ var OrphanReview = React.createClass({
           loadingdocuments: false,
           shouldUpdate: true
         });
-      }else{
+      } else {
         let updateDocuments = update(documents, {
-          [item.id]: {
-            $set: item.data
-          }
-        }),
-        updateStack = update(stackChange, {
-          $splice: [[stackChange.length - 1, 1]]
-        });
-        if(item.id !== documentPreview ){
+              [item.id]: {
+                $set: item.data
+              }
+            }),
+            updateStack = update(stackChange, {
+              $splice: [[stackChange.length - 1, 1]]
+            });
+
+        if (item.id !== documentPreview) {
           documentPreview = item.id;
         }
+
         this.setState({
           documents: updateDocuments,
           stackChange: updateStack,
@@ -387,9 +401,7 @@ var OrphanReview = React.createClass({
   },
 
   handleChangeNumberDocument(event) {
-    let {
-      value
-    } = event.target;
+    let {value} = event.target;
 
     // return makeRequest({
     //     path: "api/group/orphan/samples",
@@ -429,7 +441,7 @@ var OrphanReview = React.createClass({
     });
   },
 
-  fileDistribution: function () {
+  fileDistribution() {
     let data = [
           {name: 'Word', color: 'yellow', total: 5015},
           {name: 'Excel', color: 'red', total: 3299},
@@ -481,7 +493,7 @@ var OrphanReview = React.createClass({
         return this.ch;
   },
 
-  getStatistics: function () {
+  getStatistics() {
     makeRequest({
       path: "api/group/orphan/statistics/",
       params: {
@@ -499,7 +511,7 @@ var OrphanReview = React.createClass({
     });
   },
 
-  getCloudwords: function () {
+  getCloudwords() {
     makeRequest({
       path: "api/group/orphan/cloudwords/",
       params: {
@@ -520,7 +532,7 @@ var OrphanReview = React.createClass({
     });
   },
 
-  getCentroids: function () {
+  getCentroids() {
     makeRequest({
       path: "api/group/orphan/centroids/",
       params: {
@@ -582,6 +594,11 @@ var OrphanReview = React.createClass({
         path: "api/group/orphan/samples",
         params: {"id": id},
         success: (res) => {
+          for (var i = 0, resLength = res.length; i < resLength; i++) {
+            res[i].category.id = -1;
+            res[i].confidentiality.id = -1;
+          }
+
           this.setState({
             documents: res,
             shouldUpdate: true,
@@ -626,19 +643,21 @@ var OrphanReview = React.createClass({
     });
   },
 
-  getCategoryInfo: function () {
+  getCategoryInfo() {
     return makeRequest({
       path: "api/group/orphan/categories",
       params: {
         "id": this.state.orphanCurrent.id
       },
       success: (res) => {
-        this.setState({categoryInfo: res})
+        this.setState({
+          categoryInfo: res
+        })
       }
     });
   },
 
-  progressbar: function (value) {
+  progressbar(value) {
     var {avg_centroid_distance, max_centroid_distance, min_centroid_distance} = this.state.statistics;
 
     switch (true) {
@@ -699,60 +718,66 @@ var OrphanReview = React.createClass({
         documents[i].checked = false;
       }
     }
-    this.setState({documents: documents, shouldUpdate: true});
+
+    this.setState({
+      documents: documents,
+      shouldUpdate: true
+    });
   },
 
-  drawCloud: function () {
+  drawCloud() {
     var word_list = [
-      {text: "Entity", weight: 13},
-      {text: "matter", weight: 10.5},
-      {text: "science", weight: 9.4},
-      {text: "properties", weight: 8},
-      {text: "speed", weight: 6.2},
-      {text: "Accounting", weight: 5},
-      {text: "interactions", weight: 5},
-      {text: "nature", weight: 5},
-      {text: "branch", weight: 5},
-      {text: "concerned", weight: 4},
-      {text: "Sapien", weight: 4},
-      {text: "Pellentesque", weight: 3},
-      {text: "habitant", weight: 3},
-      {text: "morbi", weight: 3},
-      {text: "tristisque", weight: 3},
-      {text: "senectus", weight: 3},
-      {text: "et netus", weight: 3},
-      {text: "et malesuada", weight: 3},
-      {text: "fames", weight: 2},
-      {text: "ac turpis", weight: 2},
-      {text: "egestas", weight: 2},
-      {text: "Aenean", weight: 2},
-      {text: "vestibulum", weight: 2},
-      {text: "elit", weight: 2},
-      {text: "sit amet", weight: 2},
-      {text: "metus", weight: 2},
-      {text: "adipiscing", weight: 2},
-      {text: "ut ultrices", weight: 2},
-      {text: "justo", weight: 1},
-      {text: "dictum", weight: 1},
-      {text: "Ut et leo", weight: 1},
-      {text: "metus", weight: 1},
-      {text: "at molestie", weight: 1},
-      {text: "purus", weight: 1},
-      {text: "Curabitur", weight: 1},
-      {text: "diam", weight: 1},
-      {text: "dui", weight: 1},
-      {text: "ullamcorper", weight: 1},
-      {text: "id vuluptate ut", weight: 1},
-      {text: "mattis", weight: 1},
-      {text: "et nulla", weight: 1},
-      {text: "Sed", weight: 1}
-    ];
+        {text: "Entity", weight: 13},
+        {text: "matter", weight: 10.5},
+        {text: "science", weight: 9.4},
+        {text: "properties", weight: 8},
+        {text: "speed", weight: 6.2},
+        {text: "Accounting", weight: 5},
+        {text: "interactions", weight: 5},
+        {text: "nature", weight: 5},
+        {text: "branch", weight: 5},
+        {text: "concerned", weight: 4},
+        {text: "Sapien", weight: 4},
+        {text: "Pellentesque", weight: 3},
+        {text: "habitant", weight: 3},
+        {text: "morbi", weight: 3},
+        {text: "tristisque", weight: 3},
+        {text: "senectus", weight: 3},
+        {text: "et netus", weight: 3},
+        {text: "et malesuada", weight: 3},
+        {text: "fames", weight: 2},
+        {text: "ac turpis", weight: 2},
+        {text: "egestas", weight: 2},
+        {text: "Aenean", weight: 2},
+        {text: "vestibulum", weight: 2},
+        {text: "elit", weight: 2},
+        {text: "sit amet", weight: 2},
+        {text: "metus", weight: 2},
+        {text: "adipiscing", weight: 2},
+        {text: "ut ultrices", weight: 2},
+        {text: "justo", weight: 1},
+        {text: "dictum", weight: 1},
+        {text: "Ut et leo", weight: 1},
+        {text: "metus", weight: 1},
+        {text: "at molestie", weight: 1},
+        {text: "purus", weight: 1},
+        {text: "Curabitur", weight: 1},
+        {text: "diam", weight: 1},
+        {text: "dui", weight: 1},
+        {text: "ullamcorper", weight: 1},
+        {text: "id vuluptate ut", weight: 1},
+        {text: "mattis", weight: 1},
+        {text: "et nulla", weight: 1},
+        {text: "Sed", weight: 1}
+      ];
 
     var updateChart = update(this.state.dataChart, {
       cloudWords: {$set: word_list}
     });
 
-    this.setState({dataChart: updateChart});
+    this.setState({
+      dataChart: updateChart
+    });
   },
 
   drawCentroid() {
@@ -795,7 +820,9 @@ var OrphanReview = React.createClass({
       centroidChart: {$set: centroids}
     });
 
-    this.setState({dataChart: updateChart});
+    this.setState({
+      dataChart: updateChart
+    });
   },
 
   drawChart() {
@@ -804,8 +831,8 @@ var OrphanReview = React.createClass({
         documentType = {
           categories: ['Word', 'Excel', 'PDF', 'Power Point', 'Other'],
           series: []
-        }
-        ;
+        };
+
     for (let i = 0, total = category.length; i < total; i++) {
       pieChart[i] = {
         name: upperFirst(category[i].name),
@@ -827,7 +854,9 @@ var OrphanReview = React.createClass({
       documentType: {$set: documentType}
     });
 
-    this.setState({dataChart: updateChart});
+    this.setState({
+      dataChart: updateChart
+    });
   },
 
   render: template
