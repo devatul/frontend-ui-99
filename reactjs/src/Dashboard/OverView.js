@@ -125,8 +125,12 @@ var OverView = React.createClass({
           data.documents_skipped *= Constant.MULTIPLIER;
           data.total_correctly_classified *= Constant.MULTIPLIER;
           data.total_documents_scanned *= Constant.MULTIPLIER;
-          data.total_duplicates *= Constant.MULTIPLIER;
-          data.total_twins *= Constant.MULTIPLIER;
+
+          data.percentage_duplicates = 24.2;
+          data.total_duplicates = Math.round((data.total_documents_scanned * data.percentage_duplicates)/100);
+
+          data.percentage_twins = 8.4;
+          data.total_twins = Math.round((data.total_documents_scanned * data.percentage_twins) / 100);
 
           for (let i = 0, len = data.categories.length; i < len; ++i) {
             data.categories[i].total_classified_docs *= Constant.MULTIPLIER;
