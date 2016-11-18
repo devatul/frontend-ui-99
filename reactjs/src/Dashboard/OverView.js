@@ -173,7 +173,7 @@ var OverView = React.createClass({
         let setResult = update(this.state.scan, {
           result: {$set: data}
         });
-
+        console.log('getScanResult')
         this.setState({scan: setResult})
       },
       error: (err) => {
@@ -412,15 +412,17 @@ var OverView = React.createClass({
   },
 
   handleFilter: function (bodyRequest) {
+    console.log('bodyRequest',bodyRequest)
     if (!isEmpty(bodyRequest)) {
       makeRequest({
         method: 'POST',
-        path: 'api/scan/filter/',
+        path: 'api/scan/filter',
         params: JSON.stringify(bodyRequest),
         success: (data) => {
           var setResult = update(this.state.scan, {
             result: {$set: data}
           });
+          console.log('bodyRequest')
           this.setState({scan: setResult});
         }
       })
