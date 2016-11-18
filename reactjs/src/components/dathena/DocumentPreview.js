@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import {cloneDeep, isEqual} from 'lodash';
+import {makeRequest} from '../../utils/http.js';
 
 var documentPreview = React.createClass({
   PropTypes: {
@@ -56,15 +57,26 @@ var documentPreview = React.createClass({
         {document} = this.props;
 
     if (preview) {
+      makeRequest({
+        path: 'api/converter/',
+        dataType: 'text',
+        method: 'POST',
+        params: JSON.stringify({ 'file_url': document.image_url }),
+        success: (data) => {
+          console.log("Converter: got " + data);
+        }
+      });
+
       render(React.createElement('div', {
-          className: "gdocsviewer"
+          className: 'gdocsviewer'
         },
         React.createElement('iframe', {
+          // src: data.file_url,
           src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
           width: 600,
           height: 700,
           style: {border: 'none'}
-        })), preview)
+        })), preview);
     }
   },
 

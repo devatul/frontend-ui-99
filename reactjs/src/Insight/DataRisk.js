@@ -49,6 +49,16 @@ var DataRisk = React.createClass({
         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
       },
       success: function (data) {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          data.duplicated.value *= Constant.MULTIPLIER;
+          for (let i = 0, len = data.file_identification_risk.length; i < len; ++i) {
+            data.file_identification_risk[i].num_files *= Constant.MULTIPLIER;
+          }
+          data.stale_files.value *= Constant.MULTIPLIER;
+          data.twins.value *= Constant.MULTIPLIER;
+        }
+
         this.setState({
           xhr: update(this.state.xhr, {
             isFetching: {
@@ -56,7 +66,6 @@ var DataRisk = React.createClass({
             }
           })
         });
-        console.log('data', data);
         this.setState(Object.assign({}, this.state, {dataRisk: data}));
       }.bind(this),
       error: function (xhr, error) {
@@ -76,8 +85,6 @@ var DataRisk = React.createClass({
 
   handleFilter(bodyRequest) {
     let value = bodyRequest.number_users;
-
-    console.log('bodyRequest', bodyRequest);
 
     if (value == 'Top 5') {
       value = 5;
@@ -102,7 +109,6 @@ var DataRisk = React.createClass({
         xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
       },
       success: function (data) {
-        console.log('data', data);
         this.setState(Object.assign({}, this.state, {dataRisk: data}));
       }.bind(this),
       error: function (xhr, error) {

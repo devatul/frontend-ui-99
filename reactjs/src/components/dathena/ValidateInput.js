@@ -79,7 +79,6 @@ var Input = React.createClass({
    /* onChange(event) {
         let value = _.trim(event.target.value);
         if (value == "") {
-            console.log("value_null :", "yes")
         }
         switch (this.props.name) {
             case 'number':

@@ -131,21 +131,21 @@ var ClassificationReview = React.createClass({
                 data[i].checked = false;
               }
             }
-
             return data;
           }
         }
       }
     });
-
+    let updateCurrent = update(this.state.current, {
+      docIndex:{$set: this.state.current.docIndex},
+      reviewIndex:{$set: reviewIndex}
+    })
     this.setState({
       dataReview: updateData,
-      current: update(this.state.current, {
-        docIndex: this.state.current.docIndex,
-        reviewIndex: reviewIndex
-      }),
+      current: updateCurrent,
       shouldUpdate: true
     });
+
   },
 
   handleTableRowOnClick(event, index) {
@@ -532,7 +532,6 @@ var ClassificationReview = React.createClass({
       params: JSON.stringify(request),
       path: "api/classification_review/",
       success: (res) => {
-        console.log("assign success", res);
       }
     });
   },

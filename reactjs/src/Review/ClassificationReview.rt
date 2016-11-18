@@ -219,7 +219,6 @@
             confidentialities="{this.state.confidentialities}"
             onClick="{this.handleTableRowOnClick}"
             onChange="{this.handleTableRowOnChange}"
-            hide="{{ checkbox: true }}"
             index="{this.state.current.reviewIndex + '_' + this.state.current.docIndex}"/>
         </tbody>
       </table>

@@ -42,7 +42,6 @@ module.exports = React.createClass({
 
 
     logOut() {
-        //console.log(sessionStorage.getItem('token'));
         sessionStorage.removeItem('token');
 
         browserHistory.push('/Account/SignIn');
@@ -110,7 +109,6 @@ module.exports = React.createClass({
         }
     },
     componentDidMount() {
-        console.log("Didcmoit");
         $.ajax({
             url: Constant.SERVER_API + 'api/account/role/',
             dataType: 'json',
@@ -207,7 +205,6 @@ module.exports = React.createClass({
         })
         _.pullAt(data, arr);
         arr = [];
-        console.log('pending_list', data)
         if (this.state.unseen_notiData.actions != null) {
             this.setState(update(this.state, {
                 unseen_notiData: {

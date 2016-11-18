@@ -16,11 +16,8 @@ var Upload = React.createClass({
 		var fd = new FormData();
 		var fileInput = document.getElementById('myFile');
 		var file = fileInput.files[0];
-		/*console.log('file', file)*/
 	     fd.append('file', file);
-	     /*console.log('fd',fd);*/
 	   	this.props.upload(fd,this);
-	   	/*console.log(this.props.title)*/
   	},
 
 	_handleImageChange(e) {
@@ -37,7 +34,7 @@ var Upload = React.createClass({
 
 	    reader.readAsDataURL(file)
 	  },
-	
+
 
   render() {
 	    let {imagePreviewUrl} = this.state;
@@ -70,7 +67,7 @@ var Upload = React.createClass({
     )
   }
 
-  
+
 
 
 });
