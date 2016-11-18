@@ -494,8 +494,15 @@ var RowPreview = React.createClass({
       case status.EDITING.name:
         color = status.EDITING.color;
         break;
+      case status.ACCEPTED.name:
+        color = status.ACCEPTED.color;
+        break;
     }
-
+    if(this.reviewed === "reviewed"){
+      color = status.ACCEPTED.color;
+    }else{
+      color = status.EDITING.color;
+    }
     return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
   },
 
@@ -503,8 +510,14 @@ var RowPreview = React.createClass({
     let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
 
     let confidentiality;
-    if(typeof document.reviewedconfidentiality !== 'undefined' && document.reviewedconfidentiality.id !== 'undefined' ){
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewedconfidentiality.id })
+    this.reviewed = false;
+    if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
+      if(confidentiality !== -1 && document.reviewed_confidentiality.id === document.confidentiality.id){
+        this.reviewed = "reviewed";
+      }else{
+        this.reviewed = "not-reviewed";
+      }
     }else{
       confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
     }
@@ -579,8 +592,9 @@ var RowPreview = React.createClass({
             </div>
           </td>
           <td>
-            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
-              <i className="fa fa-clock-o" aria-hidden="true"></i> {this.renderStatus(document.status)}
+            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status || this.reviewed ? 'validated' : '')}>
+              <i className="fa fa-clock-o" aria-hidden="true"></i>
+                {this.renderStatus(document.status)}
             </a>
           </td>
         </tr>: <div></div>
@@ -605,7 +619,7 @@ var Row = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     let {confidentialities} = this.props;
-    
+
     if (this.props.confidentialities != prevProps.confidentialities) {
       orderByIndex(confidentialities, [4, 3, 2, 1, 0])
     }
@@ -674,16 +688,29 @@ var Row = React.createClass({
       case status.EDITING.name:
         color = status.EDITING.color;
         break;
+      case status.ACCEPTED.name:
+        color = status.ACCEPTED.color;
+        break;
     }
-
+    if(this.reviewed === "reviewed"){
+      color = status.ACCEPTED.color;
+    }else{
+      color = status.EDITING.color;
+    }
     return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
   },
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
     let confidentiality;
-    if(typeof document.reviewedconfidentiality !== 'undefined' && document.reviewedconfidentiality.id !== 'undefined' ){
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewedconfidentiality.id })
+    this.reviewed = false;
+    if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
+      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
+      if(confidentiality !== -1 && document.reviewed_confidentiality.id === document.confidentiality.id){
+        this.reviewed = "reviewed";
+      }else{
+        this.reviewed = "not-reviewed";
+      }
     }else{
       confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
     }
@@ -760,7 +787,7 @@ var Row = React.createClass({
             </div>
           </td>
           <td>
-            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
+            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status || this.reviewed ? 'validated' : '')}>
               <i className="fa fa-clock-o" aria-hidden="true"></i>
               {this.renderStatus(document.status)}
             </a>
