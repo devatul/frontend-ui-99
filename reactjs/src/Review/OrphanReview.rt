@@ -308,13 +308,13 @@
                 </thead>
                 <tbody class="fix-td-checkbox">
                   <table.row
-                    rt-repeat=" document in this.state.documents "
+                    rt-repeat="document in this.state.documents "
                     document={document}
                     index={documentIndex}
                     key={documentIndex}
                     categories={this.state.categories}
                     confidentialities={this.state.confidentialities}
-                    emptyValues={this.state.emptyValues}
+                    emptyOptions={this.state.emptyOptions}
                     onClick={this.handleTableRowOnClick}
                     onChange={this.handleTableRowOnChange}
                     noConfidence
@@ -396,7 +396,7 @@
             document="{(this.state.documents[this.state.documentPreview] ? this.state.documents[this.state.documentPreview] : {})}"
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
-            emptyValues={this.state.emptyValues}
+            emptyOptions={this.state.emptyOptions}
             hide="{{ checkbox: true }}"
             noConfidence
             onClick={this.handleTableRowOnClick}

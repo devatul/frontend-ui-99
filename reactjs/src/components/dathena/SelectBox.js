@@ -33,14 +33,14 @@ var SelectBox = React.createClass({
 
   render: function () {
     let children = [],
-        {binding, defaultValue, data, emptyValues} = this.props,
+        {binding, defaultValue, data, emptyOptions} = this.props,
         _props = Object.assign({}, this.props),
         name = binding ? binding.name : 'name',
         value = binding ? binding.value : 'index';
 
     _props.data && delete _props.data;
     _props.binding && delete _props.binding;
-    _props.emptyValues && delete _props.emptyValues;
+    _props.emptyOptions && delete _props.emptyOptions;
     (_props.defaultValue >= 0 || defaultValue != "") && delete _props.defaultValue;
 
     for (let i = data.length - 1; i >= 0; i--) {
@@ -50,8 +50,8 @@ var SelectBox = React.createClass({
         </option>
     }
 
-    if (emptyValues) {
-      children.unshift(<option key="empty" className="lt" disabled="disabled" selected="selected" ></option>);
+    if (emptyOptions) {
+      children.unshift(<option key="empty" className="lt" disabled="disabled" value={-1}></option>);
     }
 
     return (
