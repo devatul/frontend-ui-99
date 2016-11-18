@@ -685,7 +685,7 @@ select.assigment-select.form-control {
     .cendroid-chart-legend.new {
         width: 91%;
         margin: auto;
-        text-align: center;
+        text-align: left;
     }
 
     .cendroid-chart-legend.new .document-symbol {
