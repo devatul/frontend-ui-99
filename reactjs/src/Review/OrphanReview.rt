@@ -234,7 +234,7 @@
           <Panel.head>
             <h2 class="panel-title inline-block-item mr-sm">My Review</h2>
             <div class="inline-block-item">
-              <select onChangge="{this.handleChangeNumberDocument}" class="form-control">
+              <select onChange="{this.handleChangeNumberDocument}" class="form-control">
                 <option value="10">10 Documents</option>
                 <option value="20">20 Documents</option>
                 <option value="30">30 Documents</option>
@@ -397,7 +397,6 @@
             categories={this.state.categories}
             confidentialities={this.state.confidentialities}
             emptyOptions={this.state.emptyOptions}
-            hide="{{ checkbox: true }}"
             noConfidence
             onClick={this.handleTableRowOnClick}
             onChange={this.handleTableRowOnChange}

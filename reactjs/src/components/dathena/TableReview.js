@@ -505,13 +505,6 @@ var RowPreview = React.createClass({
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
-          { (hide && hide.checkbox) ? '' :
-            <td>
-              <div className="checkbox-custom checkbox-default">
-                <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
-                <label></label>
-              </div>
-            </td> }
           <td className="text-center"><i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i></td>
           <td className="text-left" ref="documentNameContainer">
             <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{document.name}</Tooltip>}>
@@ -585,7 +578,7 @@ var RowPreview = React.createClass({
               <i className="fa fa-clock-o" aria-hidden="true"></i> {this.renderStatus(document.status)}
             </a>
           </td>
-        </tr> : <div></div>
+        </tr>: <div></div>
     );
   }
 });
@@ -680,19 +673,17 @@ var Row = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions} = this.props;
 
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
-          { (hide && hide.checkbox) ? '' :
-            <td>
-              <div className="checkbox-custom checkbox-default">
-                <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
-                <label></label>
-              </div>
-            </td>
-          }
+          <td>
+            <div className="checkbox-custom checkbox-default">
+              <input id="checkbox" type="checkbox" checked={document.checked} className="checkbox-item-1"/>
+              <label></label>
+            </div>
+          </td>
           <td className="text-center"><i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i></td>
           <td className="text-left">
             <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{document.name}</Tooltip>}>

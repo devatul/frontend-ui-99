@@ -307,7 +307,6 @@ var DocumentReview = React.createClass({
             path: 'api/review/documents/',
             params: JSON.stringify(documents),
             success: (res) => {
-                console.log('update document', res)
             }
         });
 
@@ -319,7 +318,6 @@ var DocumentReview = React.createClass({
             path: 'api/review/challenged_docs/',
             params: JSON.stringify(documents),
             success: (res) => {
-                console.log('update document', res)
             }
         });
 
@@ -460,7 +458,7 @@ var DocumentReview = React.createClass({
                 "confidentiality": document.current_confidentiality
             }]);
         }
-        
+
         this.setState({
             [Review]: updateData,
             shouldUpdate: true
@@ -648,7 +646,6 @@ var DocumentReview = React.createClass({
             params: JSON.stringify(this.state.dataRequest),
             path: "api/classification_review/",
             success: (res) => {
-                console.log("assign success", res);
             }
         });
     },

@@ -61,20 +61,37 @@ let Indentity = React.createClass({
                 value = 50
             }
 
-            let call = makeRequest({
-                path: 'api/insight/iam?number_users=' + value,
-                success: (data) => {
-                    this.updateChartData(data)
-                }
-            });
+          this.getData(value);
         }
     },
 
-    getData() {
+    getData(num) {
         return makeRequest({
-            path: 'api/insight/iam?number_users=5',
+            path: 'api/insight/iam?number_users=' + num,
             success: (data) => {
-                this.updateChartData(data);
+              // FIXME: Demo fix
+              if (Constant.MULTIPLIER != 1) {
+                if (data['high_risk_directory']) {
+                  for (let i = 0, len = data['high_risk_directory'].length; i < len; ++i) {
+                    data['high_risk_directory'][i].docs *= Constant.MULTIPLIER;
+                  }
+                }
+
+                if (data['high_risk_users']) {
+                  for (let i = 0, len = data['high_risk_users'].length; i < len; ++i) {
+                    data['high_risk_users'][i].docs *= Constant.MULTIPLIER;
+                  }
+                }
+
+                if (data['key_contributor']) {
+                  for (let i = 0, leni = data['key_contributor'].length; i < leni; ++i) {
+                    for (let j = 0, lenj = data['key_contributor'][i]['contributors'].length; j < lenj; ++j) {
+                      data['key_contributor'][i]['contributors'][j].docs *= Constant.MULTIPLIER;
+                    }
+                  }
+                }
+              }
+              this.updateChartData(data);
             }
         });
     },
@@ -243,7 +260,7 @@ let Indentity = React.createClass({
     formatNumber: (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
 
     componentDidMount(prevProps, prevState) {
-        this.getData(prevProps, prevState);
+        this.getData(5);
         javascript();
     },
 

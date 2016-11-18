@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import HelpButton from '../dathena/HelpButton';
-import  'jquery';
+import 'jquery';
+import Constant from '../../Constant.js';
 
 var HighChart = React.createClass({
   displayName: 'LiquidMeter',
@@ -19,57 +20,56 @@ var HighChart = React.createClass({
   },
 
   draw() {
+    // FIXME: Use API instead
+    let values = [6, 8, 14, 12, 18, 21, 23, 6, 6, 6, 6];
+    let green = '#27C57F';
+    let orange = '#EB9428';
+    let red = '#E1605B';
+
     var anomalyChartData = [{
         xTitle: 'Anomaly Occurence',
         yTitle: 'Users',
-        data: [{y: 6, color: '#27C57F'}, {y: 8, color: '#EB9428'}, {y: 14, color: '#E1605B'}, {
-          y: 12,
-          color: '#EB9428'
-        }, {y: 18, color: '#E1605B'}, {y: 21, color: '#E1605B'}, {y: 23, color: '#E1605B'}, {
-          y: 22,
-          color: '#E1605B'
-        }, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}]
+        data: []
       }, {
         xTitle: 'Anomaly Occurence',
         yTitle: 'AD Group',
-        data: [{y: 6, color: '#27C57F'}, {y: 8, color: '#EB9428'}, {y: 14, color: '#E1605B'}, {
-          y: 12,
-          color: '#EB9428'
-        }, {y: 18, color: '#E1605B'}, {y: 21, color: '#E1605B'}, {y: 23, color: '#E1605B'}, {
-          y: 22,
-          color: '#E1605B'
-        }, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}]
+        data: []
       }, {
         xTitle: 'Anomaly Occurence',
         yTitle: 'Users',
-        data: [{y: 6, color: '#27C57F'}, {y: 8, color: '#EB9428'}, {y: 14, color: '#E1605B'}, {
-          y: 12,
-          color: '#EB9428'
-        }, {y: 18, color: '#E1605B'}, {y: 21, color: '#E1605B'}, {y: 23, color: '#E1605B'}, {
-          y: 22,
-          color: '#E1605B'
-        }, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}]
+        data: []
       }, {
         xTitle: 'Anomaly Occurence',
         yTitle: 'Folders',
-        data: [{y: 6, color: '#27C57F'}, {y: 8, color: '#EB9428'}, {y: 14, color: '#E1605B'}, {
-          y: 12,
-          color: '#EB9428'
-        }, {y: 18, color: '#E1605B'}, {y: 21, color: '#E1605B'}, {y: 23, color: '#E1605B'}, {
-          y: 22,
-          color: '#E1605B'
-        }, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}]
+        data: []
       }, {
         xTitle: 'Anomaly Occurence',
         yTitle: 'Users',
-        data: [{y: 6, color: '#27C57F'}, {y: 8, color: '#EB9428'}, {y: 14, color: '#E1605B'}, {
-          y: 12,
-          color: '#EB9428'
-        }, {y: 18, color: '#E1605B'}, {y: 21, color: '#E1605B'}, {y: 23, color: '#E1605B'}, {
-          y: 22,
-          color: '#E1605B'
-        }, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}, {y: 6, color: '#D4D4D4'}]
+        data: []
       }];
+
+    let min = values[0];
+    let max = values[1];
+
+    for (let i = 1, len = values.length; i < len; ++i) {
+      if (values[i] < min)
+        min = values[i];
+      if (values[i] > max)
+        max = values[i];
+    }
+
+    let step = (min + max) / 3;
+
+    for (let i = 0, len = anomalyChartData.length; i < len; ++i) {
+      for (let j = 0, lenj = values.length; j < lenj; j++) {
+        let color = green;
+        if (values[j] > step * 2)
+          color = red;
+        else if (values[j] > step)
+          color = orange;
+        anomalyChartData[i].data.push({ y: values[j] * Constant.MULTIPLIER, color: color});
+      }
+    }
 
     $('.anomaly-chart').each(function (i) {
       $(this).highcharts({

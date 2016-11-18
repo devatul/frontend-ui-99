@@ -129,7 +129,7 @@ var GroupReview = React.createClass({
 
     let updateStack = update(this.state.stackChange, {
         $push: [{
-          index: this.state.group.index,
+          index: this.state.groupCurrent.index,
           documents: this.state.documents
         }]
     });
@@ -239,7 +239,6 @@ var GroupReview = React.createClass({
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
-                    console.log('assign done',res);
                 },
                 error: (err) =>{
                   console.log('error',err)
@@ -474,20 +473,45 @@ var GroupReview = React.createClass({
         ],
         total = 0,
         children = [];
+    makeRequest({
+      path: "api/group/file-distributions",
+      params: {
+        "id": this.state.groupCurrent.id
+      },
+      success: (res) => {
+        /************* temporary commented****************/
+        // console.log(res)
+        // res.map(function (e) {
+        //   total += e.total;
+        // });
+        //
+        // for (let i = res.length - 1; i >= 0; i--) {
+        //   children[i] =
+        //       <div key={'file_' + i} className={'item ' + res[i].color} style={{width: ((res[i].total / total) * 100).toFixed(2) + '%'}}>
+        //         {res[i].name}
+        //         <span className="item-legend">{res[i].total}</span>
+        //       </div>;
+        // }
+        // this.ch = <div className="file-distribution clearfix">{children}</div>;
+      },
+      error: (err) => {
+        //*************will be deleted when api active*******//
+        data.map(function (e) {
+          total += e.total;
+        });
 
-    data.map(function (e) {
-      total += e.total;
+        for (let i = data.length - 1; i >= 0; i--) {
+          children[i] =
+              <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
+                {data[i].name}
+                <span className="item-legend">{data[i].total}</span>
+              </div>;
+        }
+        this.ch = <div className="file-distribution clearfix">{children}</div>;
+        /************************************/
+      }
     });
-
-    for (let i = data.length - 1; i >= 0; i--) {
-      children[i] =
-          <div key={'file_' + i} className={'item ' + data[i].color} style={{width: ((data[i].total / total) * 100).toFixed(2) + '%'}}>
-            {data[i].name}
-            <span className="item-legend">{data[i].total}</span>
-          </div>;
-    }
-
-    return (<div className="file-distribution clearfix">{children}</div>);
+    return this.ch;
   },
 
   getStatistics() {
@@ -497,6 +521,12 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (res) => {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          res.completed_number_documents *= Constant.MULTIPLIER;
+          res.total_number_documents *= Constant.MULTIPLIER;
+        }
+
         this.setState({statistics: res, shouldUpdate: true});
       }
     });
@@ -530,6 +560,13 @@ var GroupReview = React.createClass({
         "id": this.state.groupCurrent.id
       },
       success: (centroids) => {
+        // FIXME: Demo fix
+        if (Constant.MULTIPLIER != 1) {
+          for (let i = 0, len = centroids.length; i < len; ++i) {
+            centroids[i].number_docs *= Constant.MULTIPLIER;
+          }
+        }
+
         var series = [], total = centroids.length;
 
         let max = maxBy(centroids, doc => doc.number_docs),
