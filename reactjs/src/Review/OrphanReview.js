@@ -638,14 +638,9 @@ var OrphanReview = React.createClass({
     });
   },
 
-<<<<<<< HEAD
-  getCategoryInfo: function () {
-    return getOrphanCategories({
-=======
   getCategoryInfo() {
     return makeRequest({
       path: "api/group/orphan/categories",
->>>>>>> master
       params: {
         "id": this.state.orphanCurrent.id
       },
