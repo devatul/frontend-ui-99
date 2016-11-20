@@ -16,7 +16,7 @@ module.exports = React.createClass({
             unseen_notiData: {},
             total_pending: 0,
             total_notification: 0,
-            review_notification:{total: 0, classification_review: 0, user_assignment: 0},
+            review_notification:{total: 0, orphan_review: 0, group_review: 0, classification_review: 0, user_assignment: 0},
             number_pending : {},
             pending_list: [],
             save_list: [],
@@ -78,6 +78,25 @@ module.exports = React.createClass({
                             this.setState({ total_notification: data.notifications })
                         }
                     });
+                    /***********orphan review notification************/
+                    makeRequest({
+                        path: 'api/notification/bubble/review/classification_review', // path will be changed when orphan review notification api will available
+                        success: (data) => {
+                            let notifications = this.state.review_notification
+                            notifications.orphan_review = data.notifications
+                            this.setState({ review_notification: notifications })
+                        }
+                    });
+                    /***************group review notification***************/
+                    makeRequest({
+                        path: 'api/notification/bubble/review/classification_review', // path will be changed when group review notification api will available
+                        success: (data) => {
+                            let notifications = this.state.review_notification
+                            notifications.group_review = data.notifications
+                            this.setState({ review_notification: notifications })
+                        }
+                    });
+                    /*****************classification_review notification****************/
                     makeRequest({
                         path: 'api/notification/bubble/review/classification_review',
                         success: (data) => {
@@ -86,6 +105,7 @@ module.exports = React.createClass({
                             this.setState({ review_notification: notifications })
                         }
                     });
+                    /**************user_assignment notification*******************/
                     makeRequest({
                         path: 'api/notification/bubble/review/user_assignment',
                         success: (data) => {
@@ -94,6 +114,7 @@ module.exports = React.createClass({
                             this.setState({ review_notification: notifications })
                         }
                     });
+                    /*************total review notification**************/
                     makeRequest({
                         path: 'api/notification/bubble/review/all',
                         success: (data) => {

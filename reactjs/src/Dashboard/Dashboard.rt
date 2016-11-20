@@ -153,10 +153,11 @@
                     </a>
                     <ul class="dropdown-menu fix-review-menu">
                         <li>
-                            <!-- <span class="badge">20</span> -->
+                            <span class="badge">{this.state.review_notification.orphan_review}</span>
                             <Link to="/Review/OrphanReview" activeClassName="active">Orphan Review</Link>
                         </li>
                         <li>
+                            <span class="badge">{this.state.review_notification.group_review}</span>
                             <Link to="/Review/GroupReview" activeClassName="active">Group Review</Link>
                         </li>
                         <li>

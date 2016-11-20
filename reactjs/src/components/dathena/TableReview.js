@@ -499,7 +499,7 @@ var RowPreview = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
 
     return (
       document.path ?
@@ -543,6 +543,7 @@ var RowPreview = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
+                emptyOptions={emptyOptions}
                 value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
             </div>
           </td>
@@ -558,8 +559,7 @@ var RowPreview = React.createClass({
                         max={100}
                         now={document.confidence_level}
                         active
-                        label={document.confidence_level && <span
-                        className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                        label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                     </ProgressBar>
                   </div>
                 }
@@ -568,6 +568,7 @@ var RowPreview = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
+                emptyOptions={emptyOptions}
                 value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) } />
             </div>
           </td>
@@ -671,7 +672,7 @@ var Row = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions} = this.props;
 
     return (
       document.path ?
@@ -709,8 +710,7 @@ var Row = React.createClass({
                       max={100}
                       now={document.confidence_level}
                       active
-                      label={document.confidence_level && <span
-                      className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                      label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                   </ProgressBar>
                 </div>
               }
@@ -718,6 +718,7 @@ var Row = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
+                emptyOptions={emptyOptions}
                 value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
             </div>
           </td>
@@ -742,6 +743,7 @@ var Row = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
+                emptyOptions={emptyOptions}
                 value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) }/>
             </div>
           </td>
