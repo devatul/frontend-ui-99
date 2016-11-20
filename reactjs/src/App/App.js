@@ -6,7 +6,7 @@ import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
 import { orderByIndex, getCategories, getConfidentialities, setRefreshToken } from '../utils/function'
 import { orderBy } from 'lodash'
-import { git_version } from '../commit'
+import { git_version } from '../Config/commit'
 
 module.exports = React.createClass({
 	getInitialState() {
