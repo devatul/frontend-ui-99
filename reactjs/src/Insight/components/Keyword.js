@@ -168,7 +168,7 @@ var Keywords = React.createClass({
             let className = "pie-wrapper pie-progress-" + object['predicted efficiency'] + " style-1 pie-sm"
             for (let i = 0; i < object.keywords.length; i++) {
                 if (i != object.keywords.length - 1) {
-                    keywords = _.concat(keywords, object.keywords[i], ' , ')
+                    keywords = _.concat(keywords, object.keywords[i], ', ')
                 } else {
                     keywords = _.concat(keywords, object.keywords[i])
                 }
