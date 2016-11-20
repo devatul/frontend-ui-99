@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import {cloneDeep, isEqual} from 'lodash';
 import {makeRequest} from '../../utils/http.js';
+import Iframe from 'react-iframe';
 
 var documentPreview = React.createClass({
   PropTypes: {
@@ -54,30 +55,21 @@ var documentPreview = React.createClass({
 
   loadDocument() {
     let {preview} = this.refs,
-        {document} = this.props;
+        {document} = this.props,
+        documentUrl = document.image_url;
 
-    if (preview) {
-      makeRequest({
-        path: 'api/converter/',
-        dataType: 'text',
-        method: 'POST',
-        params: JSON.stringify({ 'file_url': document.image_url }),
-        success: (data) => {
-          console.log("Converter: got " + data);
-        }
-      });
+    makeRequest({
+      path: 'api/converter/',
+      dataType: 'text',
+      method: 'POST',
+      params: JSON.stringify({ 'file_url': documentUrl }),
+      success: (data) => {
+        let fileExtension = this.getFileExtension(documentUrl),
+            iFrameUrl = fileExtension == 'xls' ? JSON.parse(data).file_url : 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url;
 
-      render(React.createElement('div', {
-          className: 'gdocsviewer'
-        },
-        React.createElement('iframe', {
-          // src: data.file_url,
-          src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
-          width: 600,
-          height: 700,
-          style: {border: 'none'}
-        })), preview);
-    }
+        render(<Iframe url={iFrameUrl} height="700" position="static"></Iframe>, preview);
+      }
+    });
   },
 
   closeModal(event) {
@@ -88,6 +80,10 @@ var documentPreview = React.createClass({
     if (str !== undefined && str.length > 0) {
       return str.substring(0, str.lastIndexOf('/') + 1);
     }
+  },
+
+  getFileExtension(fileName) {
+    return fileName.substr((~-fileName.lastIndexOf(".") >>> 0) + 2);
   },
 
   render() {
