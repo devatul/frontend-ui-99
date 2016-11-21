@@ -414,6 +414,7 @@ var RowPreview = React.createClass({
   },
 
   componentWillMount() {
+    this.count = 1
   },
 
   componentDidMount() {
@@ -507,19 +508,19 @@ var RowPreview = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
-
-    let confidentiality;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
+    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
     this.reviewed = false;
     if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
-      if(confidentiality !== -1 && document.reviewed_confidentiality.id === document.confidentiality.id){
+      if(this.count){
+          confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
+          this.count=0
+      }
+      if(confidentiality !== -1 && document.reviewed_confidentiality.id == document.confidentiality.id){
         this.reviewed = "reviewed";
       }else{
         this.reviewed = "not-reviewed";
       }
-    }else{
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
     }
     return (
       document.path ?
@@ -563,6 +564,7 @@ var RowPreview = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
+                emptyOptions={emptyOptions}
                 value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
             </div>
           </td>
@@ -578,8 +580,7 @@ var RowPreview = React.createClass({
                         max={100}
                         now={document.confidence_level}
                         active
-                        label={document.confidence_level && <span
-                        className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                        label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                     </ProgressBar>
                   </div>
                 }
@@ -588,6 +589,7 @@ var RowPreview = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
+                emptyOptions={emptyOptions}
                 value={ confidentiality } />
             </div>
           </td>
@@ -608,6 +610,7 @@ var Row = React.createClass({
   },
 
   componentWillMount() {
+    this.count = 1
   },
 
   componentDidMount() {
@@ -701,18 +704,19 @@ var Row = React.createClass({
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, hide} = this.props;
-    let confidentiality;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
+    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
     this.reviewed = false;
     if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
-      if(confidentiality !== -1 && document.reviewed_confidentiality.id === document.confidentiality.id){
+      if(this.count){
+          confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
+          this.count=0
+      }
+      if(confidentiality !== -1 && document.reviewed_confidentiality.id == document.confidentiality.id){
         this.reviewed = "reviewed";
       }else{
         this.reviewed = "not-reviewed";
       }
-    }else{
-      confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id })
     }
     return (
       document.path ?
@@ -750,8 +754,7 @@ var Row = React.createClass({
                       max={100}
                       now={document.confidence_level}
                       active
-                      label={document.confidence_level && <span
-                      className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
+                      label={document.confidence_level && <span className="progress-percentage">{'(' + document.confidence_level.toFixed(2) + '%)'}</span>} />
                   </ProgressBar>
                 </div>
               }
@@ -759,6 +762,7 @@ var Row = React.createClass({
                 id="selectCategory"
                 className="form-control"
                 data={categories}
+                emptyOptions={emptyOptions}
                 value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
             </div>
           </td>
@@ -783,7 +787,9 @@ var Row = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
-                value={confidentiality}/>
+                value={confidentiality}
+                emptyOptions={emptyOptions}
+                />
             </div>
           </td>
           <td>

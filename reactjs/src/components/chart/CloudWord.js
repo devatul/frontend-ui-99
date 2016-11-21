@@ -19,9 +19,9 @@ var CloudWord = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.data != prevProps.data) {
+    //if (this.props.data != prevProps.data) {
       this.draw();
-    }
+    //}
   },
 
   componentWillUnmount() {
@@ -50,7 +50,7 @@ var CloudWord = React.createClass({
 
         {this.props.children}
 
-        <div ref="wordframe" id="words-cloud"></div>
+        <div ref="wordframe" id="words-cloud" className="words-cloud"></div>
       </div>
     );
   }

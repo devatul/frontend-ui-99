@@ -23,13 +23,16 @@ var Admin_Step1 = React.createClass({
                 block2: [],
                 block3: []
             },
-            organisation: {},
+            organisation: {
+                name: '',
+                region: '',
+                country: ''
+            },
             confidentialities : [],
             sla : []
         }
     },
     changeCheckbox(event){
-        debugger
         let data = _.cloneDeep(this.state.confidentialities) ;
         _.forEach(data , function(object , index){
             if(event.target.name == object.level){
@@ -79,31 +82,31 @@ var Admin_Step1 = React.createClass({
                                     "level": "unrestricted",
                                     "level_name": "Unrestricted",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "internal_only",
                                     "level_name": "Internal Only",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "confidential",
                                     "level_name": "Confidential",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "secret",
                                     "level_name": "Secret",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "banking_secrecy",
                                     "level_name": "Banking Secrecy",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 }
                             ]
                 console.log(data);

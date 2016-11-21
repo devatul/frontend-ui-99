@@ -1050,14 +1050,16 @@ tr td {
   text-align: right;
   padding-right: 20px; }
 
-#words-cloud {
-  width: 500px;
-  height: 350px;
+.words-cloud {
+  width: 500px !important;
+  height: 350px !important;
   margin: auto; }
   @media (max-width: 480px) {
-    #words-cloud {
-      width: 230px;
-      height: 150px; } }
+    .words-cloud {
+      width: 230px !important;
+      height: 150px !important;
+    }
+  }
 
 .chart-container {
   position: relative; }
@@ -1357,6 +1359,7 @@ div[id^='legendContainer'] {
   width: calc(100% - 100px); }
 
 /*Responsive*/
+
 @media (max-width: 768px) {
   ul.filter-list {
     text-align: left;
@@ -5672,3 +5675,34 @@ div[id^='legendContainer'] {
     text-align: center; }
   .error-action {
     text-align: center; } }
+
+@media (max-width: 320px) {
+    .review-status-block > span{
+      width: 100%;
+      float: left;
+    }
+    .review-status-block .progress {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .language{
+      float: left;
+    }
+    .my-actions-btn-group{
+      position: initial;
+
+    }
+    .my-actions-btn-group > .orphan-review-label{
+      float: left;
+      width: 100%;
+      text-align: left;
+      margin: 5px 0;
+    }
+    .my-actions-btn-group .progress {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .CloudWord{
+      width:90%;
+    }
+}

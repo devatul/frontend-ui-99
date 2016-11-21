@@ -14,23 +14,23 @@
         <ul class="wizard-steps">
           <li class="{step == 1 ? 'active' : 'completed'}" style="padding-left: 30px" onClick="{this.changeStep.bind(this,1)}">
             <a href="javascript:;"><span>1</span></a>
-            <p align="center" style="font-weight: bold;">Business</p>
+            <p class="text-center" style="font-weight: bold;">Business</p>
           </li>
           <li class="{step == 2 ? 'active' : (step > 2 ? 'completed' : '' )}" style="padding-left: 192px" onClick="{this.changeStep.bind(this,2)}">
             <a href="javascript:;"><span>2</span></a>
-            <p align="center" style="white-space: nowrap; margin-left: -24px; font-weight: bold;">Technology</p>
+            <p class="text-center" style="white-space: nowrap; margin-left: -24px; font-weight: bold;">Technology</p>
           </li>
           <li class="{step == 3 ? 'active' : (step > 3 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,3)}">
             <a><span>3</span></a>
-            <p align="center" style="margin-left: -9px; font-weight: bold;">Team</p>
+            <p class="text-center" style="margin-left: -9px; font-weight: bold;">Team</p>
           </li>
           <li class="{step == 4 ? 'active' : (step > 4 ? 'completed' : '' )}" style="padding-left: 202px" onClick="{this.changeStep.bind(this,4)}">
             <a><span>4</span></a>
-            <p align="center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
+            <p class="text-center" style="white-space: nowrap; margin-left: -30px; font-weight: bold;">Data Scientist</p>
           </li>
           <li class="{step == 5 ? 'active' : (step > 5 ? 'completed' : '' )}" style="padding-left: 198px" onClick="{this.changeStep.bind(this,5)}">
             <a><span>5</span></a>
-            <p align="center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
+            <p class="text-center" style="white-space: nowrap; margin-left: -15px; font-weight: bold;">Run Scan</p>
           </li>
         </ul>
       </div>
