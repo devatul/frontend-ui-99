@@ -590,6 +590,31 @@ var ClassificationReview = React.createClass({
       }
     });
   },
+  handleLimit(e){
+    return makeRequest({
+      path: "api/classification_review/",
+      //params: {limit: e.target.value},
+      success: (data) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.SUCCESS
+            }
+          })
+        });
+        this.setState({dataReview: data, docLimit: e.target.value, shouldUpdate: true});
+      },
+      error: (err) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.ERROR
+            }
+          })
+        });
+      }
+    });
+  },
 
   render: template
 });

@@ -826,6 +826,11 @@ select.record_select {
 		padding-left: 15px;
 	}
 }
+
+.sample-document{
+    float: right;
+    width: 85%;
+}
 @media (max-width: 400px) {
 	.my-profile-ul>li.left2 {
 		margin-left: 0px;

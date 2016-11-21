@@ -775,6 +775,7 @@ var Row = React.createClass({
               <li>Creation Date: <b>{document.creation_date}</b></li>
               <li>Modification Date: <b>{document.modification_date}</b></li>
               {document.legal_retention_until ? <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li> : ''}
+              <li>Confidentiality Level: <b> N/A</b></li>
               <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
             </InfoButton>
           </td>
@@ -833,7 +834,7 @@ var Row = React.createClass({
               {this.renderStatus(document.status)}
             </a>
           </td>
-        </tr> : <div></div>
+        </tr> : <tr></tr>
     );
   }
 });
