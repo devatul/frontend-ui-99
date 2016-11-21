@@ -49,12 +49,13 @@
                 </div>
                 <div class="col-sm-8">
                   <Input
+                    type="text"
                     id="company-name"
                     disabled={this.state.readOnly}
-                     name="name"
+                    name="name"
                     className="form-control"
                     onChange="{this.getValueInputOrganisation}"
-                    value = "{this.state.organisation.name}"/>
+                    value="{this.state.organisation.name}"/>
                 </div>
               </div>
 
@@ -64,12 +65,13 @@
                 </div>
                 <div class="col-sm-8">
                   <Input
+                    type="text"
                     id="region"
                     disabled={this.state.readOnly}
-                     name="region"
+                    name="region"
                     onChange="{this.getValueInputOrganisation}"
                     className="form-control"
-                    value = "{this.state.organisation.region}"/>
+                    value="{this.state.organisation.region}"/>
                 </div>
               </div>
 
@@ -79,12 +81,13 @@
                 </div>
                 <div class="col-sm-8">
                   <Input
+                    type="text"
                     id="country"
                     disabled={this.state.readOnly}
                     name="country"
                     onChange="{this.getValueInputOrganisation}"
                     className="form-control"
-                    value = "{this.state.organisation.country}" />
+                    value="{this.state.organisation.country}" />
                 </div>
               </div>
             </form>
@@ -135,7 +138,7 @@
                           <h5>Customized Confidentiality Level</h5>
                         </div>
                     </div>
-                    <div class="form-group" rt-repeat="rt in this.state.confidentialities" key = "{rtIndex}">
+                    <div class="form-group" rt-repeat="rt in this.state.confidentialities" key="{rtIndex}">
                         <div class="col-sm-6 detail-left clearfix">
                             <div class="row">
                                 <div class="col-xs-9">
@@ -143,7 +146,7 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <div class="checkbox-custom checkbox-success">
-                                        <input type="checkbox" id="checkbox1" checked = {rt.is_active} onChange = {this.changeCheckbox} name = {rt.level}>
+                                        <input type="checkbox" id="checkbox1" checked={rt.is_active} onChange={this.changeCheckbox} name={rt.level}>
                                         <label for="checkbox1"></label>
                                     </div>
                                 </div>
@@ -153,10 +156,10 @@
                             <Input
                                 id="banking-secrecy"
                                 type="text"
-                                name = {rt.level}
+                                name={rt.level}
                                 block=2
                                 fieldId=1
-                                value = {rt.custom_name}
+                                value={rt.custom_name}
                                 onChange="{this.onChangeInput}"
                                 disabled={this.state.readOnly1}
                                 className="form-control" />
@@ -227,14 +230,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group" rt-repeat = "rt in this.state.sla.document_owner" key = "{rtIndex}">
+                <div class="form-group" rt-repeat="rt in this.state.sla.document_owner" key="{rtIndex}">
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-sm-2">
-                        <label for="sla-1-1" class="control-label">SLA 1.{rtIndex + 1}</label>
+                        <label for="sla-1-{rtIndex + 1}" class="control-label">SLA 1.{rtIndex + 1}</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="sla-1-1" class="form-control populate placeholder">
+                        <select id="sla-1-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -244,10 +247,10 @@
                         </select>
                       </div>
                       <div class="col-sm-1">
-                        <label for="and-1-1" class="control-label">and</label>
+                        <label for="and-1-{rtIndex + 1}" class="control-label">and</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="and-1-1" class="form-control populate placeholder">
+                        <select id="and-1-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -261,20 +264,20 @@
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-xs-3">
-                        <label for="month-1-1" class="control-label visible-xs visible-sm">Month(s)</label>
-                        <input id="month-1-1" type="text" class="form-control" defaultValue = {rt.month} >
+                        <label for="month-1-{rtIndex + 1}" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-1-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.month} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="week-1-1" class="control-label visible-xs visible-sm">Week(s)</label>
-                        <input id="week-1-1" type="text" class="form-control" defaultValue = {rt.week} >
+                        <label for="week-1-{rtIndex + 1}" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-1-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.week} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="day-1-1" class="control-label visible-xs visible-sm">Day(s)</label>
-                        <input id="day-1-1" type="text" class="form-control" defaultValue = {rt.day} >
+                        <label for="day-1-{rtIndex + 1}" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-1-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.day} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="hour-1-1" class="control-label visible-xs visible-sm">Hour(s)</label>
-                        <input id="hour-1-1" type="text" class="form-control " defaultValue = {rt.hour}>
+                        <label for="hour-1-{rtIndex + 1}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-1-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.hour}>
                       </div>
                     </div>
                   </div>
@@ -284,10 +287,10 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-sm-2">
-                          <label for="sla-1-{6 + SLAIndex}" class="control-label">SLA 1.{7 + SLAIndex}</label>
+                          <label for="sla-1-{SLAIndex + 7}" class="control-label">SLA 1.{SLAIndex + 7}</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="sla-1-{6 + SLAIndex}" class="form-control populate placeholder">
+                          <select id="sla-1-{SLAIndex + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -297,10 +300,10 @@
                           </select>
                         </div>
                         <div class="col-sm-1">
-                          <label for="and-1-{6 + SLAIndex}" class="control-label">and</label>
+                          <label for="and-1-{SLAIndex + 7}" class="control-label">and</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="and-1-{6 + SLAIndex}" class="form-control populate placeholder">
+                          <select id="and-1-{SLAIndex + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -314,20 +317,20 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">
-                          <label for="month-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input id="month-1-{6 + SLAIndex}" type="text" class="form-control">
+                          <label for="month-1-{SLAIndex + 7}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-1-{SLAIndex + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="week-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input id="week-1-{6 + SLAIndex}" type="text" class="form-control">
+                          <label for="week-1-{SLAIndex + 7}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-1-{SLAIndex + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="day-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input id="day-1-{6 + SLAIndex}" type="text" class="form-control">
+                          <label for="day-1-{SLAIndex + 7}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-1-{SLAIndex + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="hour-1-{6 + SLAIndex}" class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input id="hour-1-{6 + SLAIndex}" type="text" class="form-control">
+                          <label for="hour-1-{SLAIndex + 7}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-1-{SLAIndex + 7}" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -369,14 +372,14 @@
                   </div>
                 </div>
 
-                <div class="form-group" rt-repeat = "rt in this.state.sla.class_review" key= "{rtIndex}">
+                <div class="form-group" rt-repeat="rt in this.state.sla.class_review" key="{rtIndex}">
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-sm-2">
-                        <label for="sla-2-1" class="control-label">SLA 2.{1 + rtIndex}</label>
+                        <label for="sla-2-{rtIndex + 1}" class="control-label">SLA 2.{rtIndex + 1}</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="sla-2-1" class="form-control populate placeholder">
+                        <select id="sla-2-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -386,10 +389,10 @@
                         </select>
                       </div>
                       <div class="col-sm-1">
-                        <label for="and-2-1" class="control-label">and</label>
+                        <label for="and-2-{rtIndex + 1}" class="control-label">and</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="and-2-1" class="form-control populate placeholder">
+                        <select id="and-2-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -403,20 +406,20 @@
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-xs-3">
-                        <label for="month-2-1" class="control-label visible-xs visible-sm">Month(s)</label>
-                        <input id="month-2-1" type="text" class="form-control" defaultValue = {rt.month} >
+                        <label for="month-2-{rtIndex + 1}" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-2-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.month} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="week-2-1" class="control-label visible-xs visible-sm">Week(s)</label>
-                        <input id="week-2-1" type="text" class="form-control" defaultValue = {rt.week} >
+                        <label for="week-2-{rtIndex + 1}" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-2-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.week} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="day-2-1" class="control-label visible-xs visible-sm">Day(s)</label>
-                        <input id="day-2-1" type="text" class="form-control" defaultValue = {rt.day} >
+                        <label for="day-2-{rtIndex + 1}" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-2-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.day} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="hour-2-1" class="control-label visible-xs visible-sm">Hour(s)</label>
-                        <input id="hour-2-1" type="text" class="form-control" defaultValue = {rt.hour} >
+                        <label for="hour-2-{rtIndex + 1}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-2-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.hour} >
                       </div>
                     </div>
                   </div>
@@ -427,10 +430,10 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-sm-2">
-                          <label for="sla-2-{6 + SLA1Index}" class="control-label">SLA 2.{ 6 + SLA1Index}</label>
+                          <label for="sla-2-{SLA1Index + 7}" class="control-label">SLA 2.{SLA1Index + 7}</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="sla-2-{6 + SLA1Index}" class="form-control populate placeholder">
+                          <select id="sla-2-{SLA1Index + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -440,10 +443,10 @@
                           </select>
                         </div>
                         <div class="col-sm-1">
-                          <label for="and-2-{6 + SLA1Index}" class="control-label">and</label>
+                          <label for="and-2-{SLA1Index + 7}" class="control-label">and</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="and-2-{6 + SLA1Index}" class="form-control populate placeholder">
+                          <select id="and-2-{SLA1Index + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -457,20 +460,20 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">
-                          <label for="month-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input id="month-2-{6 + SLA1Index}" type="text" class="form-control">
+                          <label for="month-2-{SLA1Index + 7}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-2-{SLA1Index + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="week-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input id="week-2-{6 + SLA1Index}" type="text" class="form-control">
+                          <label for="week-2-{SLA1Index + 7}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-2-{SLA1Index + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="day-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input id="day-2-{6 + SLA1Index}" type="text" class="form-control">
+                          <label for="day-2-{SLA1Index + 7}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-2-{SLA1Index + 7}" type="text" class="form-control">
                         </div>
                         <div class="col-xs-3">
-                          <label for="hour-2-{6 + SLA1Index}" class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input id="hour-2-{6 + SLA1Index}" type="text" class="form-control">
+                          <label for="hour-2-{SLA1Index + 7}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-2-{SLA1Index + 7}" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -512,14 +515,14 @@
                   </div>
                 </div>
 
-                <div class="form-group" rt-repeat = "rt in this.state.sla.security_review" key = "{rtIndex}">
+                <div class="form-group" rt-repeat="rt in this.state.sla.security_review" key="{rtIndex}">
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-sm-2">
-                        <label for="sla-3-1" class="control-label">SLA 3.{1+ rtIndex}</label>
+                        <label for="sla-3-{rtIndex + 1}" class="control-label">SLA 3.{rtIndex + 1}</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="sla-3-1" class="form-control populate placeholder">
+                        <select id="sla-3-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -529,10 +532,10 @@
                         </select>
                       </div>
                       <div class="col-sm-1">
-                        <label for="and-3-1" class="control-label">and</label>
+                        <label for="and-3-{rtIndex + 1}" class="control-label">and</label>
                       </div>
                       <div class="col-sm-4">
-                        <select id="and-3-1" class="form-control populate placeholder">
+                        <select id="and-3-{rtIndex + 1}" class="form-control populate placeholder">
                           <option>All</option>
                           <option>Public</option>
                           <option>Internal</option>
@@ -546,20 +549,20 @@
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-xs-3">
-                        <label for="month-3-1" class="control-label visible-xs visible-sm">Month(s)</label>
-                        <input id="month-3-1" type="text" class="form-control" defaultValue = {rt.month} >
+                        <label for="month-3-{rtIndex + 1}" class="control-label visible-xs visible-sm">Month(s)</label>
+                        <input id="month-3-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.month} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="week-3-1" class="control-label visible-xs visible-sm">Week(s)</label>
-                        <input id="week-3-1" type="text" class="form-control" defaultValue = {rt.week} >
+                        <label for="week-3-{rtIndex + 1}" class="control-label visible-xs visible-sm">Week(s)</label>
+                        <input id="week-3-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.week} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="day-3-1" class="control-label visible-xs visible-sm">Day(s)</label>
-                        <input id="day-3-1" type="text" class="form-control" defaultValue = {rt.day} >
+                        <label for="day-3-{rtIndex + 1}" class="control-label visible-xs visible-sm">Day(s)</label>
+                        <input id="day-3-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.day} >
                       </div>
                       <div class="col-xs-3">
-                        <label for="hour-3-1" class="control-label visible-xs visible-sm">Hour(s)</label>
-                        <input id="hour-3-1" type="text" class="form-control" defaultValue = {rt.hour} >
+                        <label for="hour-3-{rtIndex + 1}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                        <input id="hour-3-{rtIndex + 1}" type="text" class="form-control" defaultValue={rt.hour} >
                       </div>
                     </div>
                   </div>
@@ -569,10 +572,10 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-sm-2">
-                          <label for="sla-3-{ 6 + SLA2Index}" class="control-label">SLA 3.{ 6 + SLA2Index}</label>
+                          <label for="sla-3-{SLA2Index + 7}" class="control-label">SLA 3.{SLA2Index + 7}</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="sla-3-{ 6 + SLA2Index}" class="form-control populate placeholder">
+                          <select id="sla-3-{SLA2Index + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -582,10 +585,10 @@
                           </select>
                         </div>
                         <div class="col-sm-1">
-                          <label for="and-3-{ 6 + SLA2Index}" class="control-label">and</label>
+                          <label for="and-3-{SLA2Index + 7}" class="control-label">and</label>
                         </div>
                         <div class="col-sm-4">
-                          <select id="and-3-{ 6 + SLA2Index}" class="form-control populate placeholder">
+                          <select id="and-3-{SLA2Index + 7}" class="form-control populate placeholder">
                             <option>All</option>
                             <option>Public</option>
                             <option>Internal</option>
@@ -599,20 +602,20 @@
                     <div class="col-md-6">
                       <div class="row">
                         <div class="col-xs-3">
-                          <label for="month-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Month(s)</label>
-                          <input id="month-3-{ 6 + SLA2Index}" type="text" class="form-control" >
+                          <label for="month-3-{SLA2Index + 7}" class="control-label visible-xs visible-sm">Month(s)</label>
+                          <input id="month-3-{SLA2Index + 7}" type="text" class="form-control" >
                         </div>
                         <div class="col-xs-3">
-                          <label for="week-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Week(s)</label>
-                          <input id="week-3-{ 6 + SLA2Index}" type="text" class="form-control" >
+                          <label for="week-3-{SLA2Index + 7}" class="control-label visible-xs visible-sm">Week(s)</label>
+                          <input id="week-3-{SLA2Index + 7}" type="text" class="form-control" >
                         </div>
                         <div class="col-xs-3">
-                          <label for="day-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Day(s)</label>
-                          <input id="day-3-{ 6 + SLA2Index}" type="text" class="form-control" >
+                          <label for="day-3-{SLA2Index + 7}" class="control-label visible-xs visible-sm">Day(s)</label>
+                          <input id="day-3-{SLA2Index + 7}" type="text" class="form-control" >
                         </div>
                         <div class="col-xs-3">
-                          <label for="hour-3-{ 6 + SLA2Index}" class="control-label visible-xs visible-sm">Hour(s)</label>
-                          <input id="hour-3-{ 6 + SLA2Index}" type="text" class="form-control" >
+                          <label for="hour-3-{SLA2Index + 7}" class="control-label visible-xs visible-sm">Hour(s)</label>
+                          <input id="hour-3-{SLA2Index + 7}" type="text" class="form-control" >
                         </div>
                       </div>
                     </div>
