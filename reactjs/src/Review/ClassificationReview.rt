@@ -41,7 +41,7 @@
               <b class="mr-md">
                 Sample Size
               </b>
-              <select2 id="chosse_cluster" width="{170}" onChange={this.handlelimit} value={this.state.docLimit}>
+              <select2 id="chosse_cluster" width="{170}" onChange={this.handleLimit} value={this.state.docLimit}>
                 <option value="{6}"> 6 Document </option>
                 <option value="{8}"> 8 Document </option>
                 <option value="{10}"> 10 Document </option>

@@ -579,7 +579,7 @@ var ClassificationReview = React.createClass({
       }
     });
   },
-  handlelimit(e){
+  handleLimit(e){
     return makeRequest({
       path: "api/classification_review/",
       //params: {limit: e.target.value},
