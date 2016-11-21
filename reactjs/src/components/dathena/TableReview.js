@@ -417,6 +417,10 @@ var RowPreview = React.createClass({
     this.count = 1
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    this.count = 1
+  },
+
   componentDidMount() {
   },
 
@@ -509,19 +513,34 @@ var RowPreview = React.createClass({
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
-    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
+    let confidentiality = findIndex(confidentialities, (con) => { return con.name == document.confidentiality.name });
+    let category = findIndex(categories, (cat) => { return cat.name == document.category.name });
+
+    let count = this.count;
+    this.count = 0;
     this.reviewed = false;
-    if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
-      if(this.count){
-          confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
-          this.count=0
+    if (typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.name !== 'undefined') {
+      if (count) {
+          confidentiality = findIndex(confidentialities, (con) => { return con.name == document.reviewed_confidentiality.name });
       }
-      if(confidentiality !== -1 && document.reviewed_confidentiality.id == document.confidentiality.id){
+
+      if (confidentiality !== -1 && document.reviewed_confidentiality.name == document.confidentiality.name) {
         this.reviewed = "reviewed";
-      }else{
+      } else {
         this.reviewed = "not-reviewed";
       }
     }
+
+    if (typeof document.reviewed_category !== 'undefined' && document.reviewed_category.name !== 'undefined') {
+      if (count) {
+          category = findIndex(categories, (cat) => { return cat.name == document.reviewed_category.name });
+      }
+
+      if (document.reviewed_category.name != document.category.name) {
+        this.reviewed = "not-reviewed";
+      }
+    }
+
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
@@ -565,7 +584,7 @@ var RowPreview = React.createClass({
                 className="form-control"
                 data={categories}
                 emptyOptions={emptyOptions}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
+                value={ category } />
             </div>
           </td>
           <td className="select-confidentiality">
@@ -705,19 +724,35 @@ var Row = React.createClass({
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
-    let confidentiality = findIndex(confidentialities, (con) => { return con.id == document.confidentiality.id });
+    let confidentiality = findIndex(confidentialities, (con) => { return con.name == document.confidentiality.name });
+    let category = findIndex(categories, (cat) => { return cat.name == document.category.name });
+
+    let count = this.count;
+    this.count = 0;
     this.reviewed = false;
-    if(typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.id !== 'undefined' ){
-      if(this.count){
-          confidentiality = findIndex(confidentialities, (con) => { return con.id == document.reviewed_confidentiality.id })
-          this.count=0
+
+    if (typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.name !== 'undefined') {
+      if (count) {
+          confidentiality = findIndex(confidentialities, (con) => { return con.name == document.reviewed_confidentiality.name });
       }
-      if(confidentiality !== -1 && document.reviewed_confidentiality.id == document.confidentiality.id){
+
+      if (confidentiality !== -1 && document.reviewed_confidentiality.name == document.confidentiality.name) {
         this.reviewed = "reviewed";
-      }else{
+      } else {
         this.reviewed = "not-reviewed";
       }
     }
+
+    if (typeof document.reviewed_category !== 'undefined' && document.reviewed_category.name !== 'undefined') {
+      if (count) {
+          category = findIndex(categories, (cat) => { return cat.name == document.reviewed_category.name });
+      }
+
+      if (document.reviewed_category.name != document.category.name) {
+        this.reviewed = "not-reviewed";
+      }
+    }
+
     return (
       document.path ?
         <tr className={(numberChecked > 0) && !document.checked && 'inactive'} onChange={this.handleOnChange}>
@@ -763,7 +798,7 @@ var Row = React.createClass({
                 className="form-control"
                 data={categories}
                 emptyOptions={emptyOptions}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
+                value={ category }/>
             </div>
           </td>
           <td className="select-confidentiality">
