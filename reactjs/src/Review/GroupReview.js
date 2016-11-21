@@ -507,6 +507,7 @@ var GroupReview = React.createClass({
       error: (err) => {
       }
     });
+
     return this.ch;
   },
 
