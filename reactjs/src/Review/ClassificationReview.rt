@@ -134,7 +134,7 @@
                     <tbody class="fix-td-checkbox">
                       <table.row
                         rt-repeat="document in review.documents"
-                        document="{(documentIndex < this.state.docLimit) ? document : {path:false}}"
+                        document="{document}"
                         key="document_{documentIndex}"
                         index="{reviewIndex + '_' + documentIndex}"
                         action="{review}"
