@@ -58,7 +58,6 @@ var ClassificationReview = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.state',this.state)
     let {dataReview, current} = this.state;
 
     if (this.state.shouldUpdate === true) {
@@ -257,7 +256,7 @@ var ClassificationReview = React.createClass({
             documents: {
               [docIndex]: {
                 reviewed_category: {
-                  $set: document.category  
+                  $set: document.category
                 },
                 reviewed_confidentiality: {
                   $set: document.confidentiality
