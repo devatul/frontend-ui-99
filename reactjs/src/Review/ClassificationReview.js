@@ -86,12 +86,7 @@ var ClassificationReview = React.createClass({
       })
     });
   },
-  handlelimit(e){
-    this.setState({
-      docLimit: e.target.value,
-      shouldUpdate: true
-    });
-  },
+
   checkValidNumber(documents) {
     let numCheck = 0, numValid = 0, updateData = {},
         {dataReview, current} = this.state,
@@ -581,6 +576,31 @@ var ClassificationReview = React.createClass({
       success: (data) => {
         data = orderConfidentialities(data)
         this.setState({confidentialities: data, shouldUpdate: true});
+      }
+    });
+  },
+  handlelimit(e){
+    return makeRequest({
+      path: "api/classification_review/",
+      //params: {limit: e.target.value},
+      success: (data) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.SUCCESS
+            }
+          })
+        });
+        this.setState({dataReview: data, docLimit: e.target.value, shouldUpdate: true});
+      },
+      error: (err) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.ERROR
+            }
+          })
+        });
       }
     });
   },
