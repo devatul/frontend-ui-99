@@ -17,12 +17,11 @@
                     <!-- Code API Anomaly Review-->
                      <div class="col-md-4" rt-repeat="risk in this.state.anomaly_rick" key="risk_{riskIndex}">
                           <section class="panel" key="{riskIndex}">
-                            <div class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
+                            <div rt-if="this.getRickType(riskIndex)" class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
                               <h4 class="widget-title">{this.upperFirst(risk.name)}
                                          <HelpButton
                                             classMenu="fix-overview-help-button-table"
                                             classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
-
                               </h4>
                               <div class="widget-summary">
                                   <div class="widget-summary-col">
@@ -382,7 +381,7 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="anomaly-radial">
+                        <div class="anomaly-radial" rt-if="this.state.documentRepository">
                             <Circle id='chart_4' value_inner="{this.state.documentRepository['prediction percentage']}" value_outer="{this.state.documentRepository['risk percentage']}"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{this.state.documentRepository['risk type']}" content_inner="Prediction Quality: {this.state.documentRepository['prediction quality']} " />
                         </div>
                     </div>
@@ -409,7 +408,7 @@
                                   <div class="anomaly-pie-chart"></div>
                                   <div class="anomaly-pie-chart-legend">
                                     <ul class="list-unstyled clearfix">
-                                      <li rt-repeat="label in this.state.documentRepositoryChart" key="documentRepositoryColors_{labelIndex}"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
+                                      <li rt-if="this.state.documentrepositoryChart" rt-repeat="label in this.state.documentRepositoryChart" key="documentRepositoryColors_{labelIndex}"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
                                     </ul>
                                   </div>
                                 </td>
@@ -426,7 +425,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr rt-if="this.state.documentRepository && this.state.documentRepository['data second table'] && this.state.documentRepository['data second table'][0]">
                                 <td>
                                   <span class="text-block">
                                     <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Anomaly"].value }</span>
@@ -480,7 +479,7 @@
                             </h4>
                         </div>
                     </div>
-                    <div class="anomaly-radial">
+                    <div class="anomaly-radial" rt-if="this.state.clientDataRepository">
                         <Circle id = 'chart_5' value_inner="{ this.state.clientDataRepository['prediction percentage'] }" value_outer="{ this.state.clientDataRepository['risk percentage'] }"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{ this.state.clientDataRepository['risk type'] }" content_inner="Prediction Quality: { this.state.clientDataRepository['prediction quality'] }"/>
                     </div>
                 </div>
@@ -517,7 +516,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
+                                  <tr rt-if="this.state.clientDataRepository&& this.state.clientDataRepository['data second table'] && this.state.clientDataRepository['data second table'][0]">
                                     <td>
                                       <span class="text-block">
                                         <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Total Anomaly"].value }</span>
