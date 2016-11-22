@@ -418,7 +418,8 @@ var RowPreview = React.createClass({
   },
 
   componentWillUpdate(nextProps, nextState) {
-    this.count = 1
+    if (nextProps.index !== this.props.index)
+      this.count = 1
   },
 
   componentDidMount() {
