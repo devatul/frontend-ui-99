@@ -472,7 +472,10 @@ tr td {
   padding: 5px 10px;
   border-top-left-radius: 5px;
   border-bottom-right-radius: 5px; }
-
+.analyticsChart .widget-panel .widget-title {
+  text-align: center;
+  position: relative;
+}
 .widget-panel .widget-summary {
   padding-top: 25px;
   text-align: center; }
@@ -1013,7 +1016,9 @@ tr td {
   vertical-align: middle;
   position: relative;
   padding: 10px !important; }
-
+.analytics.table-my-actions > tbody > tr > td {
+  padding: 2px 10px !important;
+}
 .table-my-actions > tbody > tr.inactive > td:after {
   content: '';
   width: 100%;
@@ -1341,7 +1346,12 @@ div[id^='legendContainer'] {
       font-size: 14px;
       font-weight: bold;
       line-height: 30px; }
-
+.analytics-progress.progress-bar {
+  color: #FFFFFF !important;
+  height: 100% !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
 .panel-heading-cluster {
   padding: 12px 18px; }
   .panel-heading-cluster .panel-title {

@@ -28,7 +28,8 @@ var Identity = require('./Insight/Identity');
 var DataRisk = require('./Insight/DataRisk');
 var DataLoss = require('./Insight/DataLoss');
 var ClassificationCheck = require('./Insight/ClassificationCheck');
-var Admin = require('./Admin/Admin')
+var AdvancedAnalytics = require('./Insight/AdvancedAnalytics');
+var Admin = require('./Admin/Admin');
 
 render((
   	<Router history={browserHistory}>
@@ -62,7 +63,8 @@ render((
 					<Route path="/Insight/Identity" component={Identity}/>
 					<Route path="/Insight/DataRisk" component={DataRisk}/>
 					<Route path="/Insight/DataLoss" component={DataLoss}/>
-                    <Route path="/Insight/ClassificationCheck" component={ClassificationCheck}/>
+            <Route path="/Insight/ClassificationCheck" component={ClassificationCheck}/>
+            <Route path="/Insight/advancedanalytics" component={AdvancedAnalytics}/>
 				</Route>
 	  		</Route>
     	</Route>
