@@ -377,7 +377,7 @@
                             </div>
                         </div>
                         <div class="anomaly-radial">
-                            <Circle id='chart_4' value_inner={50} value_outer={80}  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer= "Medium Risk" content_inner="Prediction Quality: High " />
+                            <Circle id='chart_4' value_inner="{this.state.documentRepository['prediction percentage']}" value_outer="{this.state.documentRepository['risk percentage']}"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{this.state.documentRepository['risk type']}" content_inner="Prediction Quality: {this.state.documentRepository['prediction quality']} " />
                         </div>
                     </div>
                 <div class="col-md-9">
@@ -390,42 +390,23 @@
                                 <th>Document at Risk</th>
                                 <th>Folder at Risk</th>
                                 <th>User Anomaly</th>
-                                <th>Category at Risk
-
-                                </th>
+                                <th>Category at Risk</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td><span class="text-normal">Secret</span></td>
-                                <td><span class="text-big">1,4k</span></td>
-                                <td><span class="text-big">132</span></td>
-                                <td><span class="text-big">830</span></td>
-                                <td style="width: 250px" rowspan="3">
+                              <tr rt-if="this.state.documentRepository" rt-repeat="confidentiality in this.state.documentRepository['data first table']" key="documentRepository_{confidentialityIndex}">
+                                <td><span class="text-normal">{confidentiality["Confidentiality at Risk"]}</span></td>
+                                <td><span class="text-big">{confidentiality["Document at Risk"]}</span></td>
+                                <td><span class="text-big">{confidentiality["Folder at Risk"]}</span></td>
+                                <td><span class="text-big">{confidentiality["User Anomaly"]}</span></td>
+                                <td rt-if="confidentialityIndex == 0" style="width: 250px" rowspan="3">
                                   <div class="anomaly-pie-chart"></div>
                                   <div class="anomaly-pie-chart-legend">
                                     <ul class="list-unstyled clearfix">
-                                      <li><span class="symbol" style="background-color: #09B3B5"></span> Accounting/Tax</li>
-                                      <li><span class="symbol" style="background-color: #51CFE8"></span> Employees</li>
-                                      <li><span class="symbol" style="background-color: #FBAC08"></span> Corporate Entity</li>
-                                      <li><span class="symbol" style="background-color: #9295D7"></span> Legal/Compliance</li>
-                                      <li><span class="symbol" style="background-color: #4F6AE7"></span> Client/Customer</li>
-                                      <li><span class="symbol" style="background-color: #FF503F"></span> Accounting/Tax</li>
+                                      <li rt-repeat="label in this.state.documentRepositoryChart"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
                                     </ul>
                                   </div>
                                 </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-normal">Confidential</span></td>
-                                <td><span class="text-big">7,6k</span></td>
-                                <td><span class="text-big">804</span></td>
-                                <td><span class="text-big">2,1k</span></td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-normal">Internal</span></td>
-                                <td><span class="text-big">2,6k</span></td>
-                                <td><span class="text-big">454</span></td>
-                                <td><span class="text-big">170</span></td>
                               </tr>
                             </tbody>
                           </table>
@@ -442,24 +423,27 @@
                               <tr>
                                 <td>
                                   <span class="text-block">
-                                    <span class="text-big text-red">11,6k</span>
-                                    <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Anomaly"].value }</span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                                   </span>
-                                  <span>Documents</span>
+                                  <span>{ this.state.documentRepository["data second table"][0]["Total Anomaly"].type }</span>
                                 </td>
                                 <td>
                                   <span class="text-block">
-                                    <span class="text-big text-red">1,39k</span>
-                                    <span class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total User at Risk"].value }</span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                                   </span>
-                                  <span>Windows User Account</span>
+                                  <span>{ this.state.documentRepository["data second table"][0]["Total User at Risk"].type }</span>
                                 </td>
                                 <td>
                                   <span class="text-block">
-                                    <span class="text-big text-red">1,39k</span>
-                                    <span class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].value }</span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
                                   </span>
-                                  <span>Folders</span>
+                                  <span>{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].type }</span>
                                 </td>
                                 <td class="td-chart">
                                    <High id_hight = "highChart_4"/>

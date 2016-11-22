@@ -15,6 +15,7 @@ var AnomalyDetection = React.createClass({
       check_anomaly: 0,
       display_anomaly: [null],
       user_Client: null,
+      documentRepository: null,
       active_Directory_Group: null,
       user_Access: null,
       xhr: {
@@ -88,80 +89,12 @@ var AnomalyDetection = React.createClass({
     }
   },
 
+  componentWillMount() {
+    this.getDocumentRepository();
+    this.getClientDataRepository();
+  },
+
   componentDidMount() {
-    let data = [{
-      name: 'Transaction',
-      y: 60,
-      color: '#FF503F'
-    }, {
-      name: 'Legal/Compliance',
-      y: 15,
-      color: '#9295D7'
-    }, {
-      name: 'Accounting/Tax',
-      y: 12,
-      color: '#09B3B5'
-    }, {
-      name: 'Corporate Entity',
-      y: 8,
-      color: '#FBAC08'
-    }, {
-      name: 'Employees',
-      y: 5,
-      color: '#4FCFE9'
-    }];
-
-    var start = 0,
-      series = [];
-
-    for (var i = 0; i < data.length; i++) {
-      var end = start + 360 * data[i].y / 100;
-
-      series.push({
-        type: 'pie',
-        size: 120 - 12 * i,
-        innerSize: 0,
-        startAngle: start,
-        endAngle: end,
-        data: [data[i]]
-      });
-
-      start = end;
-    }
-
-    $('.anomaly-pie-chart').highcharts({
-      series: series,
-      chart: {
-        type: 'pie',
-        height: 160,
-        spacing: [0, 0, 0, 0],
-        backgroundColor: 'rgba(255, 255, 255, 0)'
-      },
-      credits: {
-        enabled: false
-      },
-      title: {
-        text: ''
-      },
-      plotOptions: {
-        pie: {
-          borderWidth: 0,
-          dataLabels: {
-            distance: -15,
-            color: 'white',
-            useHTML: true,
-            style: {fontFamily: '\'Roboto\', sans-serif', fontSize: '10px', "fontWeight": "300"},
-            formatter: function () {
-              return this.y >= 15 ? this.y + '%' : this.y;
-            }
-          }
-        }
-      },
-      tooltip: {
-        enabled: false
-      }
-    });
-
     this.setState({
       xhr: update(this.state.xhr, {
         isFetching: {
@@ -172,24 +105,12 @@ var AnomalyDetection = React.createClass({
         }
       })
     });
+
     this.getAnomalyRick();
-
-    this.setState({
-      xhr: update(this.state.xhr, {
-        isFetching: {
-          $set: fetching.STARTED
-        },
-        isUserClientFetching: {
-          $set: fetching.STARTED
-        }
-      })
-    });
     this.getUserClient();
-
     this.getActiveDirectory();
     this.getUserAccess();
-    this.getDocumentRepository();
-    this.getClientDataRepository();
+    this.renderDocumentRepositoryTrend();
   },
 
   // Get data form APIs
@@ -296,6 +217,169 @@ var AnomalyDetection = React.createClass({
   },
 
   getDocumentRepository() {
+  let doc_data = {
+    "title": "Document Repository Anomaly",
+    "risk percentage": 80,
+    "risk type": "High Risk",
+    "prediction percentage": 35,
+    "prediction quality": "High",
+    "data first table": [
+      {
+        "Confidentiality at Risk": "Internal",
+        "Document at Risk": 132,
+        "Folder at Risk": 132,
+        "User Anomaly": 830
+      },
+      {
+        "Confidentiality at Risk": "Confidential",
+        "Document at Risk": 432,
+        "Folder at Risk": 128,
+        "User Anomaly": 50
+      }
+    ],
+    "Category at Risk": [
+      {
+        "name": "Accounting/Tax",
+        "percentage": 15
+      },
+      {
+        "name": "Corporate Entity",
+        "percentage": 4
+      },
+      {
+        "name": "Client/Customer",
+        "percentage": 1
+      },
+      {
+        "name": "Employees",
+        "percentage": 20
+      },
+      {
+        "name": "Legal/Compliance",
+        "percentage": 20
+      },
+      {
+        "name": "Transaction",
+        "percentage": 40
+      }
+    ],
+    "data second table": [
+      {
+        "Total Anomaly": {
+          "value": 11600,
+          "type": "Documents",
+          "trend": "up"
+        },
+        "Total User at Risk": {
+          "value": 1390,
+          "type": "Windows User Account",
+          "trend": "down"
+        },
+        "Total Folder at Risk": {
+          "value": 1390,
+          "type": "Folders",
+          "trend": "up"
+        },
+        "Document Repository Anomaly Trend": [
+          {
+            "occurence": 1,
+            "users": 5,
+            "type": "low"
+          },
+          {
+            "occurence": 2,
+            "users": 15,
+            "type": "medium"
+          },
+          {
+            "occurence": 3,
+            "users": 50,
+            "type": "high"
+          }
+        ]
+      }
+    ]
+  };
+    this.setState({ documentRepository: doc_data });
+  },
+
+  renderDocumentRepositoryTrend() {
+    let colors= [
+      "#09B3B5",
+      "#51CFE8",
+      "#FBAC08",
+      "#9295D7",
+      "#4F6AE7",
+      "#FF503F"
+    ];
+
+    let data = [];
+    for (let i = 0, len = this.state.documentRepository["Category at Risk"].length; i < len; ++i) {
+      data.push({
+        y: this.state.documentRepository["Category at Risk"][i].percentage,
+        name: this.state.documentRepository["Category at Risk"][i].name,
+        color: colors[i]
+      });
+    }
+
+    data.sort(function (a, b) {
+      return a.y < b.y;
+    });
+
+    var start = 0,
+      series = [];
+
+    for (var i = 0; i < data.length; i++) {
+      var end = start + 360 * data[i].y / 100;
+
+      series.push({
+        type: 'pie',
+        size: 120 - 12 * i,
+        innerSize: 0,
+        startAngle: start,
+        endAngle: end,
+        data: [data[i]]
+      });
+
+      start = end;
+    }
+
+    $('.anomaly-pie-chart').highcharts({
+      series: series,
+      chart: {
+        type: 'pie',
+        height: 160,
+        spacing: [0, 0, 0, 0],
+        backgroundColor: 'rgba(255, 255, 255, 0)'
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: ''
+      },
+      plotOptions: {
+        pie: {
+          borderWidth: 0,
+          dataLabels: {
+            distance: -15,
+            color: 'white',
+            useHTML: true,
+            style: {fontFamily: '\'Roboto\', sans-serif', fontSize: '10px', "fontWeight": "300"},
+            formatter: function () {
+              return this.y >= 15 ? this.y + '%' : this.y;
+            }
+          }
+        }
+      },
+      tooltip: {
+        enabled: false
+      }
+    });
+    this.setState({ documentRepositoryChart: data });
+  },
+
+  getClientDataRepository() {
     let data = {
       "confidentialities": [
         {
@@ -327,11 +411,7 @@ var AnomalyDetection = React.createClass({
       "Total User at Risk": 1240,
       "Total Folder at Risk": 3904,
     }
-    this.setState({ documentRepository: data });
-  },
-
-  getClientDataRepository() {
-
+    this.setState({ clientDataRepository: data });
   },
 
   render: template
