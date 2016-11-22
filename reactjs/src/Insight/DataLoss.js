@@ -4,6 +4,7 @@ import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-
 import template from './DataLoss.rt'
 import update from 'react-addons-update'
 import Constant, {fetching} from '../App/Constant.js'
+import Demo from '../Demo.js';
 import {orderLanguages} from '../utils/function';
 import 'jquery'
 import { getDataLoss } from '../utils/function'
@@ -77,6 +78,11 @@ var DataLost = React.createClass({
 
           lang['most efficient keywords'] = keywordsArr;
         });
+
+        if (Demo.MULTIPLIER != 1) {
+          languages_arr = [ "en" ];
+          data = Demo.DATALOSS_DATA;
+        }
 
         let updateDataLoss = update(this.state, {
           dataLoss: {$set: data},

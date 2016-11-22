@@ -5,6 +5,7 @@ import template from './DataRisk.rt';
 import update from 'react/lib/update';
 import 'jquery';
 import Constant, {fetching} from '../App/Constant.js';
+import Demo from '../Demo.js';
 import javascriptOver from '../script/javascript-overview.js';
 import javascript from '../script/javascript.js';
 import { getDataRisk } from '../utils/function'
@@ -46,13 +47,13 @@ var DataRisk = React.createClass({
       number_users: 5,
       success: function (data) {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
-          data.duplicated.value *= Constant.MULTIPLIER;
+        if (Demo.MULTIPLIER != 1) {
+          data.duplicated.value *= Demo.MULTIPLIER;
           for (let i = 0, len = data.file_identification_risk.length; i < len; ++i) {
-            data.file_identification_risk[i].num_files *= Constant.MULTIPLIER;
+            data.file_identification_risk[i].num_files *= Demo.MULTIPLIER;
           }
-          data.stale_files.value *= Constant.MULTIPLIER;
-          data.twins.value *= Constant.MULTIPLIER;
+          data.stale_files.value *= Demo.MULTIPLIER;
+          data.twins.value *= Demo.MULTIPLIER;
         }
 
         this.setState({

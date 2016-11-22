@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import HelpButton from '../dathena/HelpButton';
 import 'jquery';
 import Constant from '../../App/Constant.js';
+import Demo from '../../Demo.js';
 
 var HighChart = React.createClass({
   displayName: 'LiquidMeter',
@@ -22,6 +23,12 @@ var HighChart = React.createClass({
   draw() {
     // FIXME: Use API instead
     let values = [6, 8, 14, 12, 18, 21, 23, 6, 6, 6, 6];
+    if (Demo.MULTIPLIER != 1) {
+      for (let i = 0, len = values.length; i < len; ++i) {
+        values[i] *= Demo.MULTIPLIER;
+      }
+    }
+
     let green = '#27C57F';
     let orange = '#EB9428';
     let red = '#E1605B';
@@ -67,7 +74,7 @@ var HighChart = React.createClass({
           color = red;
         else if (values[j] > step)
           color = orange;
-        anomalyChartData[i].data.push({ y: values[j] * Constant.MULTIPLIER, color: color});
+        anomalyChartData[i].data.push({ y: values[j], color: color});
       }
     }
 
