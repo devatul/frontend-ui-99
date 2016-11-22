@@ -114,8 +114,9 @@
                             <td>
                               <span class="text-block">
                                 <span class="text-big text-red">{tbl["Total Anomaly"].value}</span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows User Account</span>
                             </td>
@@ -124,14 +125,16 @@
                                 <span class="text-big text-red">{tbl["Client Data at Risk"].value}</span>
                                 <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                 <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Client Data at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Documents</span>
                             </td>
                             <td>
                               <span class="text-block">
                                 <span class="text-big text-red">{tbl["Security Settings at Risk"].value}</span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Security Settings at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Security Settings at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl['Security Settings at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Active Directory Group</span>
                             </td>
@@ -214,6 +217,7 @@
                                 <span class="text-big text-red">{tbl_1['Total Anomaly'].value}</span>
                                 <span rt-if="tbl_1['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                 <span rt-if="tbl_1['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Active Directory Group</span>
                             </td>
@@ -222,6 +226,7 @@
                                 <span class="text-big text-red">{tbl_1['Document at Risk'].value}</span>
                                 <span rt-if="tbl_1['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                 <span rt-if="tbl_1['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Documents</span>
                             </td>
@@ -230,6 +235,7 @@
                                 <span class="text-big text-red">{tbl_1['Total Users at Risk'].value}</span>
                                 <span rt-if="tbl_1['Total Users at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                 <span rt-if="tbl_1['Total Users at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                               </span>
                               <span>Windows Users Account</span>
                             </td>
@@ -403,7 +409,7 @@
                                   <div class="anomaly-pie-chart"></div>
                                   <div class="anomaly-pie-chart-legend">
                                     <ul class="list-unstyled clearfix">
-                                      <li rt-repeat="label in this.state.documentRepositoryChart"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
+                                      <li rt-repeat="label in this.state.documentRepositoryChart" key="documentRepositoryColors_{labelIndex}"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
                                     </ul>
                                   </div>
                                 </td>
@@ -426,6 +432,7 @@
                                     <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Anomaly"].value }</span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                   </span>
                                   <span>{ this.state.documentRepository["data second table"][0]["Total Anomaly"].type }</span>
                                 </td>
@@ -434,6 +441,7 @@
                                     <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total User at Risk"].value }</span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                   </span>
                                   <span>{ this.state.documentRepository["data second table"][0]["Total User at Risk"].type }</span>
                                 </td>
@@ -442,6 +450,7 @@
                                     <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].value }</span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                     <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                   </span>
                                   <span>{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].type }</span>
                                 </td>
@@ -514,6 +523,7 @@
                                         <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Total Anomaly"].value }</span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                       </span>
                                       <span>{ this.state.clientDataRepository['data second table'][0]['Total Anomaly'].type }</span>
                                     </td>
@@ -522,6 +532,7 @@
                                         <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Document at Risk"].value }</span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                       </span>
                                       <span>{ this.state.clientDataRepository['data second table'][0]['Document at Risk'].type }</span>
                                     </td>
@@ -530,6 +541,7 @@
                                         <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Active Directory at Risk"].value }</span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
                                         <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
                                       </span>
                                       <span>{ this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].type }</span>
                                     </td>
