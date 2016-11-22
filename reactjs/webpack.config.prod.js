@@ -13,27 +13,6 @@ const paths = {
     css: './assets/stylesheets/'
 }
 
-function getFilesFromDir(dir, fileTypes) {
-  var filesToReturn = {};
-  filesToReturn["main"] = dir + 'index';
-  function walkDir(currentPath) {
-    var files = fs.readdirSync(currentPath);
-    for (var i in files) {
-      var curFile = path.join(currentPath, files[i]);      
-      if (fs.statSync(curFile).isFile() && fileTypes.indexOf(path.extname(curFile)) != -1) {
-          var filename = (curFile.replace('.rt', ''));
-          filesToReturn[filename.replace(dir, '').replace(currentPath + '/', '')] = './' + filename;
-      } else if (fs.statSync(curFile).isDirectory()) {
-        walkDir(curFile);
-      }
-    }
-  };
-  walkDir(dir);
-  
-  console.log(filesToReturn);
-  return filesToReturn; 
-}
-
 module.exports = {
   devtool: 'source-map',
   entry: {

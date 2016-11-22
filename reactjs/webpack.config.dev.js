@@ -31,6 +31,7 @@ module.exports = {
         loaders: ['babel'],
         include: path.join(__dirname, 'src')
       },
+
       {
         test: /\.rt/, 
         loaders: ['react-templates-loader'], 
@@ -64,4 +65,5 @@ module.exports = {
       }
     ]
   }
+  
 };
