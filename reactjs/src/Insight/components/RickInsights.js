@@ -4,6 +4,7 @@ import update from 'react-addons-update';
 import _ from 'lodash';
 import $ from 'jquery';
 import Constant, {fetching} from '../../Constant.js';
+import Demo from '../../Demo.js';
 import {makeRequest} from '../../utils/http';
 import HelpButton1 from '../../components/dathena/HelpButton';
 import Loader from '../../components/dathena/Loader';
@@ -35,16 +36,16 @@ var RickInsight = React.createClass({
       path: 'api/insight/risk/',
       success: (data) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = data.risks.length; i < len; ++i) {
-            data.risks[i].current_scan_value *= Constant.MULTIPLIER;
-            data.risks[i].previous_scan_value *= Constant.MULTIPLIER;
+            data.risks[i].current_scan_value *= Demo.MULTIPLIER;
+            data.risks[i].previous_scan_value *= Demo.MULTIPLIER;
           }
 
           if (data.stale_files) {
-            data.stale_files.total *= Constant.MULTIPLIER;
+            data.stale_files.total *= Demo.MULTIPLIER;
             for (let i = 0, len = data.stale_files.years.length; i < len; ++i) {
-              data.stale_files.years[i].value *= Constant.MULTIPLIER;
+              data.stale_files.years[i].value *= Demo.MULTIPLIER;
             }
           }
         }

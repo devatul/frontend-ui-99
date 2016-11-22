@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Identity.rt'
 import Constant, { fetching } from '../Constant.js'
+import Demo from '../Demo.js';
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'
 import _ from 'lodash'
@@ -70,23 +71,23 @@ let Indentity = React.createClass({
             path: 'api/insight/iam?number_users=' + num,
             success: (data) => {
               // FIXME: Demo fix
-              if (Constant.MULTIPLIER != 1) {
+              if (Demo.MULTIPLIER != 1) {
                 if (data['high_risk_directory']) {
                   for (let i = 0, len = data['high_risk_directory'].length; i < len; ++i) {
-                    data['high_risk_directory'][i].docs *= Constant.MULTIPLIER;
+                    data['high_risk_directory'][i].docs *= Demo.MULTIPLIER;
                   }
                 }
 
                 if (data['high_risk_users']) {
                   for (let i = 0, len = data['high_risk_users'].length; i < len; ++i) {
-                    data['high_risk_users'][i].docs *= Constant.MULTIPLIER;
+                    data['high_risk_users'][i].docs *= Demo.MULTIPLIER;
                   }
                 }
 
                 if (data['key_contributor']) {
                   for (let i = 0, leni = data['key_contributor'].length; i < leni; ++i) {
                     for (let j = 0, lenj = data['key_contributor'][i]['contributors'].length; j < lenj; ++j) {
-                      data['key_contributor'][i]['contributors'][j].docs *= Constant.MULTIPLIER;
+                      data['key_contributor'][i]['contributors'][j].docs *= Demo.MULTIPLIER;
                     }
                   }
                 }

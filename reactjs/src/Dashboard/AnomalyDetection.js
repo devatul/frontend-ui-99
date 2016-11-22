@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import template from './AnomalyDetection.rt';
 import update from 'react/lib/update';
 import Constant, {fetching} from '../Constant.js';
+import Demo from '../Demo.js';
 import _ from 'lodash';
 import {makeRequest} from '../utils/http';
 import 'jquery';
@@ -187,6 +188,8 @@ var AnomalyDetection = React.createClass({
 
     this.getActiveDirectory();
     this.getUserAccess();
+    this.getDocumentRepository();
+    this.getClientDataRepository();
   },
 
   // Get data form APIs
@@ -195,9 +198,9 @@ var AnomalyDetection = React.createClass({
       path: 'api/anomaly/risk/',
       success: (data) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = data.length; i < len; ++i) {
-            data[i].value *= Constant.MULTIPLIER;
+            data[i].value *= Demo.MULTIPLIER;
           }
         }
 
@@ -221,20 +224,20 @@ var AnomalyDetection = React.createClass({
       path: 'api/anomaly/iam/user-client',
       success: (data) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = data.data_first_table.length; i < len; ++i) {
-            data.data_first_table[i]['Active Directory at Risk'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['Folder at Risk'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['User Access Right Accuracy'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['User with Anomaly'] *= Constant.MULTIPLIER;
+            data.data_first_table[i]['Active Directory at Risk'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['Folder at Risk'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['User Access Right Accuracy'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['User with Anomaly'] *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.data_second_table.length; i < len; ++i) {
-            data.data_second_table[i]['Client Data at Risk'].value *= Constant.MULTIPLIER;
-            data.data_second_table[i]['Security Settings at Risk'].value *= Constant.MULTIPLIER;
-            data.data_second_table[i]['Total Anomaly'].value *= Constant.MULTIPLIER;
+            data.data_second_table[i]['Client Data at Risk'].value *= Demo.MULTIPLIER;
+            data.data_second_table[i]['Security Settings at Risk'].value *= Demo.MULTIPLIER;
+            data.data_second_table[i]['Total Anomaly'].value *= Demo.MULTIPLIER;
             for (let j = 0, lenj = data.data_second_table[i]['User Client Data Access Anomaly Trend'].length; j < lenj; ++j) {
-              data.data_second_table[i]['User Client Data Access Anomaly Trend'][j].docs *= Constant.MULTIPLIER;
+              data.data_second_table[i]['User Client Data Access Anomaly Trend'][j].docs *= Demo.MULTIPLIER;
             }
           }
         }
@@ -259,12 +262,12 @@ var AnomalyDetection = React.createClass({
       path: 'api/anomaly/iam/active-directory',
       success: (data) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = data.data_first_table.length; i < len; ++i) {
-            data.data_first_table[i]['AD Group Anomaly'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['Active Directory at Risk'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['Folder at Risk'] *= Constant.MULTIPLIER;
-            data.data_first_table[i]['User Access Right Accuracy'] *= Constant.MULTIPLIER;
+            data.data_first_table[i]['AD Group Anomaly'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['Active Directory at Risk'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['Folder at Risk'] *= Demo.MULTIPLIER;
+            data.data_first_table[i]['User Access Right Accuracy'] *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.data_second_table.length; i < len; ++i) {
@@ -272,9 +275,9 @@ var AnomalyDetection = React.createClass({
               data.data_second_table[i]['Anomaly Trend'][j]['occurence'] *= 1;
               data.data_second_table[i]['Anomaly Trend'][j]['AD Group'] *= 1;
             }
-            data.data_second_table[i]['Document at Risk'].value *= Constant.MULTIPLIER;
-            data.data_second_table[i]['Total Anomaly'].value *= Constant.MULTIPLIER;
-            data.data_second_table[i]['Total Users at Risk'].value *= Constant.MULTIPLIER;
+            data.data_second_table[i]['Document at Risk'].value *= Demo.MULTIPLIER;
+            data.data_second_table[i]['Total Anomaly'].value *= Demo.MULTIPLIER;
+            data.data_second_table[i]['Total Users at Risk'].value *= Demo.MULTIPLIER;
           }
         }
 
@@ -290,6 +293,45 @@ var AnomalyDetection = React.createClass({
         this.setState({user_Access: data})
       }
     });
+  },
+
+  getDocumentRepository() {
+    let data = {
+      "confidentialities": [
+        {
+          "name": "Banking Secrecy",
+          "Document at Risk": 12,
+          "Folder at Risk": 5,
+          "User Anomaly": 234
+        },
+        {
+          "name": "Secret",
+          "Document at Risk": 12,
+          "Folder at Risk": 5,
+          "User Anomaly": 234
+        },
+        {
+          "name": "Confidential",
+          "Document at Risk": 12,
+          "Folder at Risk": 5,
+          "User Anomaly": 234
+        },
+        {
+          "name": "Internal",
+          "Document at Risk": 12,
+          "Folder at Risk": 5,
+          "User Anomaly": 234
+        },
+      ],
+      "Total Anomaly": 11678,
+      "Total User at Risk": 1240,
+      "Total Folder at Risk": 3904,
+    }
+    this.setState({ documentRepository: data });
+  },
+
+  getClientDataRepository() {
+
   },
 
   render: template

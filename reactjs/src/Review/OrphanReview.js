@@ -6,6 +6,7 @@ import template from './OrphanReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
 import Constant, {status, fetching} from '../Constant.js';
+import Demo from '../Demo.js';
 
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
@@ -478,7 +479,7 @@ var OrphanReview = React.createClass({
                children[i] =
                    <div key={'file_' + i} className={'item ' + colors[i].color} style={{ width: data_width + "%" }}>
                      {res[i].name}
-                     <span className="item-legend">{res[i]["number of docs"] * Constant.MULTIPLIER}</span>
+                     <span className="item-legend">{res[i]["number of docs"] * Demo.MULTIPLIER}</span>
                    </div>;
              }
              this.ch = <div className="file-distribution clearfix">{children}</div>;
@@ -497,9 +498,9 @@ var OrphanReview = React.createClass({
       },
       success: (res) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
-          res.completed_number_documents *= Constant.MULTIPLIER;
-          res.total_number_documents *= Constant.MULTIPLIER;
+        if (Demo.MULTIPLIER != 1) {
+          res.completed_number_documents *= Demo.MULTIPLIER;
+          res.total_number_documents *= Demo.MULTIPLIER;
         }
 
         this.setState({statistics: res, shouldUpdate: true});
@@ -536,9 +537,9 @@ var OrphanReview = React.createClass({
       },
       success: (centroids) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = centroids.length; i < len; ++i) {
-            centroids[i].number_docs *= Constant.MULTIPLIER;
+            centroids[i].number_docs *= Demo.MULTIPLIER;
           }
         }
         var series = [],

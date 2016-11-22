@@ -8,7 +8,8 @@ import {_categories, fetching} from '../Constant.js';
 import {makeRequest} from '../utils/http.js';
 import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
 import $, {JQuery} from 'jquery';
-import Constant from '../Constant'
+import Constant from '../Constant';
+import Demo from '../Demo.js';
 
 let hideUndefined = true;
 
@@ -120,11 +121,11 @@ var OverView = React.createClass({
         });
 
         // FIXME: Demo fix, to be removed
-        if (Constant.MULTIPLIER != 1) {
-          data.documents_analyzed = parseInt(data.documents_analyzed) * Constant.MULTIPLIER;
-          data.documents_skipped *= Constant.MULTIPLIER;
-          data.total_correctly_classified *= Constant.MULTIPLIER;
-          data.total_documents_scanned *= Constant.MULTIPLIER;
+        if (Demo.MULTIPLIER != 1) {
+          data.documents_analyzed = parseInt(data.documents_analyzed) * Demo.MULTIPLIER;
+          data.documents_skipped *= Demo.MULTIPLIER;
+          data.total_correctly_classified *= Demo.MULTIPLIER;
+          data.total_documents_scanned *= Demo.MULTIPLIER;
 
           data.percentage_duplicates = 24.2;
           data.total_duplicates = Math.round((data.total_documents_scanned * data.percentage_duplicates)/100);
@@ -133,27 +134,27 @@ var OverView = React.createClass({
           data.total_twins = Math.round((data.total_documents_scanned * data.percentage_twins) / 100);
 
           for (let i = 0, len = data.categories.length; i < len; ++i) {
-            data.categories[i].total_classified_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_reviewed_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_validated_docs *= Constant.MULTIPLIER;
+            data.categories[i].total_classified_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_reviewed_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_validated_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.confidentialities.length; i < len; ++i) {
-            data.confidentialities[i].total_classified_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_reviewed_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_validated_docs *= Constant.MULTIPLIER;
+            data.confidentialities[i].total_classified_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_reviewed_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_validated_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.doctypes.length; i < len; ++i) {
-            data.doctypes[i].total_docs *= Constant.MULTIPLIER;
+            data.doctypes[i].total_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.languages.length; i < len; ++i) {
-            data.languages[i].total_docs *= Constant.MULTIPLIER;
+            data.languages[i].total_docs *= Demo.MULTIPLIER;
           }
         }
 
