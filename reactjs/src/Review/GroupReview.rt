@@ -406,7 +406,7 @@
           confidentialities={this.state.confidentialities}
           onClick={this.handleTableRowOnClick}
           onChange={this.handleTableRowOnChange}
-          index={this.state.documentPreview}/>
+          index={this.state.documentPreview} />
         </tbody>
       </table>
     </div>
