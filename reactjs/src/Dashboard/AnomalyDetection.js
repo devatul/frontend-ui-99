@@ -381,36 +381,66 @@ var AnomalyDetection = React.createClass({
 
   getClientDataRepository() {
     let data = {
-      "confidentialities": [
+      "title": "Client Data Repository Anomaly",
+      "risk percentage": 80,
+      "risk type": "High Risk",
+      "prediction percentage": 35,
+      "prediction quality": "high",
+      "data first table": [
         {
-          "name": "Banking Secrecy",
-          "Document at Risk": 12,
-          "Folder at Risk": 5,
-          "User Anomaly": 234
+          "User Anomaly": 2100,
+          "Confidentiality at Risk": "Banking Secrecy",
+          "Folder at Risk": 132,
+          "Active Directory Group at Risk": 54,
+          "User Access Right Accuracy": 99.25
         },
         {
-          "name": "Secret",
-          "Document at Risk": 12,
-          "Folder at Risk": 5,
-          "User Anomaly": 234
-        },
-        {
-          "name": "Confidential",
-          "Document at Risk": 12,
-          "Folder at Risk": 5,
-          "User Anomaly": 234
-        },
-        {
-          "name": "Internal",
-          "Document at Risk": 12,
-          "Folder at Risk": 5,
-          "User Anomaly": 234
-        },
+          "User Anomaly": 2345,
+          "Confidentiality at Risk": "Confidential",
+          "Folder at Risk": 532,
+          "Active Directory Group at Risk": 65,
+          "User Access Right Accuracy": 98.25
+
+        }
       ],
-      "Total Anomaly": 11678,
-      "Total User at Risk": 1240,
-      "Total Folder at Risk": 3904,
-    }
+      "data second table": [
+        {
+          "Total Anomaly": {
+            "value": 3100,
+            "type": "Windows User Account",
+            "trend": "down"
+          },
+          "Document at Risk": {
+            "value": 92,
+            "type": "Documents",
+            "trend": "up"
+          },
+          "Active Directory at Risk": {
+            "value": 12,
+            "type": "Active Directory Group",
+            "trend": "up"
+          },
+          "User Client Data Access Anomaly Trend": [
+            {
+              "occurence": 1,
+              "users": 5,
+              "type": "low"
+            },
+            {
+              "occurence": 2,
+              "users": 15,
+              "type": "medium"
+            },
+            {
+              "occurence": 3,
+              "users": 50,
+              "type": "high"
+            }
+          ]
+        }
+      ]
+    };
+
     this.setState({ clientDataRepository: data });
   },
 
