@@ -12,7 +12,7 @@ import { orderByIndex, orderLanguages } from '../utils/function'
 var MenuBar = React.createClass
 ({
 	getInitialState() {
-	    return {
+	    return { 
             categories: [],
             confidentialities: [],
             'doc-types': [],

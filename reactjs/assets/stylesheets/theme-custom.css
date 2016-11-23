@@ -793,6 +793,10 @@ tr td {
   position: relative;
   margin-top: 14px;
   overflow: hidden; }
+  .analytics.widget-chart{
+    margin-top: 0px;
+    padding-top: 23px;
+  }
   .widget-panel .widget-chart .chart.chart-md {
     height: 320px;
     position: relative; }

@@ -6,7 +6,7 @@
 <rt-import name="StackedChart" from="../components/chart/StackedChart" />
 <rt-import name="Loader" from="../components/dathena/Loader"/>
 
-<section>
+<section> 
     <MenuBar title="Dashboard Overview" dataScan="{this.state.scan.result}" handleFilter={this.handleFilter} showInfo={true} showFilter={true}></MenuBar>
 
     <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">

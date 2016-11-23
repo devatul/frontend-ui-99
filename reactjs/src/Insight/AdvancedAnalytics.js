@@ -15,6 +15,16 @@ let hideUndefined = true;
 var AdvancedAnalytics = React.createClass({
   getInitialState() {
     return {
+      categories: [],
+      confidentialities: [],
+      'doc-types': [],
+      languages: [],
+      value: {
+          category: 'label',
+          confidentiality: "label",
+          language: "label",
+          doctype: 'label'
+      },
       scan: {
         result: {}
       },
@@ -43,6 +53,10 @@ var AdvancedAnalytics = React.createClass({
 
   componentDidMount() {
     javascriptTodo();
+    this.getCategories();
+    this.getConfidentialities();
+    this.getDoctypes();
+    this.getLanguages();
     this.xhr.getScan = this.getScanResult();
   },
 
@@ -79,7 +93,50 @@ var AdvancedAnalytics = React.createClass({
       this.updateChart(result, prevResult);
     }
   },
+  getCategories: function(async) {
+        makeRequest({
+            path: 'api/label/category/',
+            success: (data) => {
+                this.configListLabel(data);
 
+                this.setState({ categories: data, shouldUpdate: true });
+            }
+        });
+    },
+    getConfidentialities: function(async) {
+        makeRequest({
+            path: 'api/label/confidentiality/',
+            success: (data) => {
+                this.configListLabel(data);
+                //data = orderByIndex(data, [4,3,2,1,0]);
+                this.setState({ confidentialities: data, shouldUpdate: true });
+            }
+        });
+    },
+    getDoctypes: function(async) {
+        makeRequest({
+            path: 'api/label/doctypes/',
+            success: (data) => {
+                this.configListLabel(data);
+
+                this.setState({ ['doc-types']: data, shouldUpdate: true });
+            }
+        });
+    },
+    getLanguages: function(async) {
+        makeRequest({
+            path: 'api/label/languages/',
+            success: (data) => {
+                this.configListLabel(data);
+                this.setState({ languages: orderLanguages(data), shouldUpdate: true });
+            }
+        });
+    },
+    configListLabel: function(data) {
+        for(let i = data.length - 1; i >= 0; i--) {
+            data[i].checked = false;
+        }
+    },
   startScan() {
     makeRequest({
       sync: false,
@@ -247,6 +304,16 @@ var AdvancedAnalytics = React.createClass({
         for(let i = 0; i < categoryChart.data.length; i++){
           total += categoryChart.data[i].y;
         }
+        categoryChart.options = {
+          filter: true,
+          search: false,
+          user: true,
+          users: true,
+          folder: true,
+          archive: true,
+          config: false,
+          shield: true,
+        }
         categoryChart.total = total;
       return categoryChart;
   },
@@ -255,7 +322,7 @@ var AdvancedAnalytics = React.createClass({
     var confidentialityChart = {
           name: 'Confidentiality',
           disabled: false,
-          innerSize: '60%',
+          innerSize: '70%',
           colors: ['#EA8B85', '#E46159', '#8D1B19', '#FBDDDD', '#B82820'],
           colorsHover: ['#EA8B85', '#E46159', '#8D1B19', '#FBDDDD', '#B82820'],
           data: [
@@ -275,7 +342,16 @@ var AdvancedAnalytics = React.createClass({
     if (confidentialityChart.data.length <= 1) {
       confidentialityChart.disabled = true;
     }
-
+    confidentialityChart.options = {
+      filter: true,
+      search: false,
+      user: true,
+      users: true,
+      folder: true,
+      archive: true,
+      config: false,
+      shield: false,
+    }
     return confidentialityChart;
   },
 
@@ -283,7 +359,7 @@ var AdvancedAnalytics = React.createClass({
     var securityGroupChart = {
           name: 'Security Group',
           disabled: false,
-          innerSize: '60%',
+          innerSize: '70%',
           colors: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
           colorsHover: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
           data: [
@@ -303,7 +379,16 @@ var AdvancedAnalytics = React.createClass({
     if (securityGroupChart.data.length <= 1) {
       securityGroupChart.disabled = true;
     }
-
+    securityGroupChart.options = {
+      filter: true,
+      search: true,
+      user: true,
+      users: false,
+      folder: true,
+      archive: true,
+      config: true,
+      shield: false,
+    }
     return securityGroupChart;
   },
 
@@ -311,7 +396,7 @@ var AdvancedAnalytics = React.createClass({
     var foldersChart = {
           name: 'Folders',
           disabled: false,
-          innerSize: '60%',
+          innerSize: '70%',
           colors: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
           colorsHover: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
           data: [
@@ -327,7 +412,16 @@ var AdvancedAnalytics = React.createClass({
           total += foldersChart.data[i].y;
         }
         foldersChart.total = total;
-
+        foldersChart.options = {
+          filter: true,
+          search: true,
+          user: true,
+          users: false,
+          folder: false,
+          archive: true,
+          config: true,
+          shield: false,
+        }
     if (foldersChart.data.length <= 1) {
       foldersChart.disabled = true;
     }
@@ -340,7 +434,7 @@ var AdvancedAnalytics = React.createClass({
           name: 'Users',
           showLegend:'1',
           disabled: false,
-          innerSize: '60%',
+          innerSize: '70%',
           colors: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
           colorsHover: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
           data: [
@@ -356,7 +450,16 @@ var AdvancedAnalytics = React.createClass({
           total += usersChart.data[i].y;
         }
         usersChart.total = total;
-
+        usersChart.options = {
+          filter: true,
+          search: true,
+          user: false,
+          users: false,
+          folder: false,
+          archive: true,
+          config: true,
+          shield: false,
+        }
     if (usersChart.data.length <= 1) {
       usersChart.disabled = true;
     }
@@ -368,7 +471,7 @@ var AdvancedAnalytics = React.createClass({
     var documentsChart = {
           name: 'Documents',
           disabled: false,
-          innerSize: '60%',
+          innerSize: '70%',
           colors: ['#237C7E', '#349DA1', '#0F2D2F', '#6DCCD0', '#1B5054'],
           colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
           data: [
@@ -384,7 +487,16 @@ var AdvancedAnalytics = React.createClass({
           total += documentsChart.data[i].y;
         }
         documentsChart.total = total;
-        
+        documentsChart.options = {
+          filter: true,
+          search: true,
+          user: false,
+          users: false,
+          folder: false,
+          archive: false,
+          config: true,
+          shield: false,
+        }
     if (documentsChart.data.length <= 1) {
       documentsChart.disabled = true;
     }

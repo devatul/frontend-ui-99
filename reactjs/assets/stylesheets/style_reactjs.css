@@ -100,7 +100,74 @@
     padding-top: 1px;
     padding-left: 0.5px;
 }
-
+.analytics.filter{
+    position: absolute;
+    margin-top: -180px;
+    margin-left: 25px;
+    background-color: #9B59A3;
+    font-size: 17px;
+}
+.analytics.search{
+  position: absolute;
+  margin-top: -316px;
+  margin-left: 150px;
+  background-color: #3F50A2;
+}
+.analytics.user{
+  position: absolute;
+  margin-top: -270px;
+  margin-left: 55px;
+  background-color: #7986CC;
+  font-size: 18px;
+}
+.analytics.users{
+  position: absolute;
+  margin-top: -270px;
+  margin-left: 264px;
+  font-size: 18px;
+  background-color: #46A246;
+}
+.analytics.folder-open{
+  position: absolute;
+  margin-top: -90px;
+  margin-left: 260px;
+  background-color: #ED9C27;
+}
+.analytics.archive{
+  position: absolute;
+  margin-top: -90px;
+  margin-left: 60px;
+  background-color: #349DA1;
+}
+.analytics.config{
+  position: absolute;
+  margin-top: -53px;
+  margin-left: 170px;
+  background-color: #A4CF5C;
+  font-size: 18px;
+}
+.analytics.shield{
+  position: absolute;
+  margin-top: -180px;
+  margin-left: 296px;
+  background-color: #E46159;
+  font-size: 20px;
+}
+.analytics.bottom-line{
+  color: #04A6E6;
+  font-size: 18px;
+  background: #04A6E6;
+  position: relative;
+  height: 3px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: -42px;
+  z-index: 999;
+}
+.analytics.bottom-line i{
+  margin-top: -12px;
+  position: absolute;
+}
 .help_guide_sub .filter-tags-userassign {
     padding-top: 10px;
     padding-left: 15px;
@@ -531,4 +598,3 @@ img {
         white-space: normal;
     }
 }
-

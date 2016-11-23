@@ -10,6 +10,7 @@
 <rt-import name="Panel" from="../components/bootstrap/panel"/>
 <rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar" />
+<rt-import name="Select2" from="../components/dathena/Select2" />
 
 <section>
   <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
@@ -21,6 +22,7 @@
                 <div class="col-md-4">
                     <DonutChart
                         id="confidentialityPieChart"
+                        analytics = "{true}"
                         config={configChart.category}
                         help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
@@ -28,31 +30,83 @@
                 <div class="col-md-4">
                     <DonutChart
                         id="confidentialityPieChart1"
+                        analytics = "{true}"
                         config={configChart.confidentiality}
                         help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
-
                 <div class="col-md-4">
                   <DonutChart
                       id="confidentialityPieChart5"
+                      analytics = "{true}"
                       config={configChart.securityGroup}
                       help="Repartition of each level of confidentiality for all the documents scanned." />
+                  <div class="col-md-12">
+                  <ul rt-if="this.state.show" class="filter-buttons pull-right">
+                      <li  class="dropdown">
+                          <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                          <div class="dropdown-backdrop-custom" style="display:none"></div>
+                          <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                              <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state as listLabel ">
+                                  <li class="mb-sm">
+                                      <div class="form-group">
+                                          <Select2
+                                              id="selectConfidentiality"
+
+                                              width="off"
+                                              containerCssClass="dathena"
+                                              dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
+                                              minimumResultsForSearch="Infinity"
+                                              closeOnSelect={false}>
+                                                  <option
+                                                      value="label"
+                                                      key="label">
+                                                      Confidentiality
+                                                  </option>
+                                                  <option
+                                                      value="all"
+                                                      key="selectall">
+                                                      Clear All
+                                                  </option>
+                                                  <option
+                                                      rt-repeat="confidentiality in this.state.confidentialities"
+                                                      value="{confidentialityIndex}"
+                                                      key="{confidentialityIndex}">
+                                                      {confidentiality.name}
+                                                  </option>
+                                          </Select2>
+                                          <!--<MultiSelectBox
+                                              id="confidentialities"
+                                              title="Confidentiality"
+                                              onChange={this.handleSelectBoxChange}
+                                              onClear={this.handleClearAll}
+                                              checkDefault={true}
+                                              data={listLabel.confidentialities} />-->
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <DonutChart
                       id="confidentialityPieChart2"
+                      analytics = "{true}"
                       config={configChart.folders}
                       help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
                 <div class="col-md-4">
                   <DonutChart
                       id="confidentialityPieChart3"
+                      analytics = "{true}"
                       config={configChart.users}
                       help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
                 <div class="col-md-4">
                   <DonutChart
                       id="confidentialityPieChart4"
+                      analytics = "{true}"
                       config={configChart.documents}
                       help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
@@ -85,7 +139,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.category.data">
+                            <tr rt-repeat= "row in this.state.configChart.category.data" key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
@@ -132,7 +186,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.confidentiality.data">
+                            <tr rt-repeat= "row in this.state.configChart.confidentiality.data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
@@ -179,7 +233,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.securityGroup.data">
+                            <tr rt-repeat= "row in this.state.configChart.securityGroup.data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
@@ -226,7 +280,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.folders.data">
+                            <tr rt-repeat= "row in this.state.configChart.folders.data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
@@ -273,7 +327,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.users.data">
+                            <tr rt-repeat= "row in this.state.configChart.users.data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
@@ -320,7 +374,7 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.documents.data">
+                            <tr rt-repeat= "row in this.state.configChart.documents.data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
