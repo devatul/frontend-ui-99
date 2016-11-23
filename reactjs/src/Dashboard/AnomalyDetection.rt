@@ -173,8 +173,8 @@
                         className = "anomaly-icon anomaly-icon-fix fix-icon-window"
                         value_inner="{this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_percentage}"
                         value_outer="{this.state.active_Directory_Group && this.state.active_Directory_Group.risk_percentage}"
-                        content_outer="{this.state.active_Directory_Group &&  this.state.active_Directory_Group.risk_type}"
-                        content_inner="Prediction Quality: {this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_quality} " />
+                        content_outer="{this.state.active_Directory_Group && (this.state.active_Directory_Group.risk_type || 'Unknown')}"
+                        content_inner="Prediction Quality: {this.state.active_Directory_Group && (this.state.active_Directory_Group.prediction_quality || 'Unknown')} " />
                 </div>
                 <div class="col-md-9">
                   <div class="anomaly-block" style="margin-top: 50px">
@@ -277,7 +277,7 @@
                         className = "anomaly-icon anomaly-icon-fix fix-icon-user"
                         value_inner="{this.state.user_Access && this.state.user_Access.prediction_percentage}"
                         value_outer="{this.state.user_Access && this.state.user_Access.risk_percentage}"
-                        content_outer="{this.state.user_Access &&  this.state.user_Access.risk_type}"
+                        content_outer="{this.state.user_Access && this.state.user_Access.risk_type}"
                         content_inner="Prediction Quality: {this.state.user_Access && this.state.user_Access.prediction_quality} "
                     />
                   </div>
@@ -368,7 +368,7 @@
                 </h2>
             </header>
             <div class="panel-body">
-                <div class="row">
+                <div class="row" rt-if="this.state.documentRepository">
                     <div class="col-md-3">
                         <div class="block-header row">
                             <div class="col-md-5" style="margin-left: 3px">
@@ -381,8 +381,14 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="anomaly-radial" rt-if="this.state.documentRepository">
-                            <Circle id='chart_4' value_inner="{this.state.documentRepository['prediction percentage']}" value_outer="{this.state.documentRepository['risk percentage']}"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{this.state.documentRepository['risk type']}" content_inner="Prediction Quality: {this.state.documentRepository['prediction quality']} " />
+                        <div class="anomaly-radial">
+                            <Circle
+                                id='chart_4'
+                                value_inner="{this.state.documentRepository['prediction percentage']}"
+                                value_outer="{this.state.documentRepository['risk percentage']}"
+                                className="anomaly-icon anomaly-icon-fix fix-icon-folder"
+                                content_outer="{this.state.documentRepository['risk type'] || 'Unknown'}"
+                                content_inner="Prediction Quality: {this.state.documentRepository['prediction quality'] || 'Unknown' }" />
                         </div>
                     </div>
                 <div class="col-md-9">
@@ -466,7 +472,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-lg">
+            <div class="row mt-lg" rt-if="this.state.clientDataRepository">
                 <div class="col-md-3">
                     <div class="block-header row">
                         <div class="col-md-5" style="margin-left: 8px">
@@ -479,8 +485,14 @@
                             </h4>
                         </div>
                     </div>
-                    <div class="anomaly-radial" rt-if="this.state.clientDataRepository">
-                        <Circle id = 'chart_5' value_inner="{ this.state.clientDataRepository['prediction percentage'] }" value_outer="{ this.state.clientDataRepository['risk percentage'] }"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{ this.state.clientDataRepository['risk type'] }" content_inner="Prediction Quality: { this.state.clientDataRepository['prediction quality'] }"/>
+                    <div class="anomaly-radial">
+                        <Circle
+                            id = 'chart_5'
+                            value_inner="{ this.state.clientDataRepository['prediction percentage'] }"
+                            value_outer="{ this.state.clientDataRepository['risk percentage'] }"
+                            className="anomaly-icon anomaly-icon-fix fix-icon-folder"
+                            content_outer="{ this.state.clientDataRepository['risk type'] || 'Unknown' }"
+                            content_inner="Prediction Quality: { this.state.clientDataRepository['prediction quality'] || 'Unknown' }"/>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -497,7 +509,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr rt-if="this.state.clientDataRepository" rt-repeat="confidentiality in this.state.clientDataRepository['data first table']" key="clientDataRepository_{confidentialityIndex}">
+                                    <tr rt-repeat="confidentiality in this.state.clientDataRepository['data first table']" key="clientDataRepository_{confidentialityIndex}">
                                         <td><span class="text-normal">{ confidentiality["Confidentiality at Risk"] }</span></td>
                                         <td><span class="text-big">{ confidentiality["Active Directory Group at Risk"] }</span></td>
                                         <td><span class="text-big">{ confidentiality["Folder at Risk"] }</span></td>
@@ -516,7 +528,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr rt-if="this.state.clientDataRepository&& this.state.clientDataRepository['data second table'] && this.state.clientDataRepository['data second table'][0]">
+                                  <tr rt-if="this.state.clientDataRepository['data second table'] && this.state.clientDataRepository['data second table'][0]">
                                     <td>
                                       <span class="text-block">
                                         <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Total Anomaly"].value }</span>
