@@ -707,6 +707,12 @@ var Row = React.createClass({
   renderStatus(_status) {
     let color = "";
 
+    if (this.reviewed === "reviewed"){
+      color = status.ACCEPTED.color;
+    }else{
+      color = status.EDITING.color;
+    }
+
     switch (_status) {
       case status.EDITING.name:
         color = status.EDITING.color;
@@ -714,11 +720,6 @@ var Row = React.createClass({
       case status.ACCEPTED.name:
         color = status.ACCEPTED.color;
         break;
-    }
-    if(this.reviewed === "reviewed"){
-      color = status.ACCEPTED.color;
-    }else{
-      color = status.EDITING.color;
     }
     return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
   },
