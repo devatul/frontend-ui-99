@@ -6,7 +6,7 @@ import Constant, { fetching } from './Constant.js';
 import update from 'react-addons-update'
 import { orderByIndex, getCategories, getConfidentialities, setRefreshToken } from '../utils/function'
 import { orderBy } from 'lodash'
-import { git_version } from '../Config/commit'
+import { git_version } from '../commit'
 
 module.exports = React.createClass({
 	getInitialState() {
@@ -62,7 +62,7 @@ module.exports = React.createClass({
 	// 	this.getCategories();
 	// 	this.getConfidentialities();
 	// },
-	
+
 	componentWillUpdate(nextProps, nextState) {
 		let {categories} = this.state;
 
@@ -102,10 +102,10 @@ module.exports = React.createClass({
 
 		// function send to all children
 		stateMap['mapStateToProps'] = this.mapStateToProps;
-		
+
 		return React.Children.map(children, (child) => React.cloneElement(child, stateMap));
   },
-		
+
 	commit() {
 		return git_version;
 	},
