@@ -33,7 +33,7 @@ var Admin = require('./Admin/Admin')
 
 
 /**
- * Import CSS files in oder to concat and minify css files using Webpack  
+ * Import CSS files in oder to concat and minify css files using Webpack
  */
 // Web Font
 require("../assets/stylesheets/font/dathena.css");
@@ -51,7 +51,7 @@ require("../assets/vendor/bootstrap-toggle-master/css/bootstrap-toggle.min.css")
 require("../assets/vendor/jqcloud/jqcloud.css");
 require("../assets/stylesheets/theme.css");
 
-// Skin CSS 
+// Skin CSS
 require("../assets/stylesheets/skins/default.css")
 
 // Theme Custom CSS
@@ -67,38 +67,38 @@ require("../assets/stylesheets/my_profile.css")
  * Rooter
  */
 render((
-	<Router history={browserHistory}>
-    	<Route path="/" component={App}>
-			<Route path="/Account/signIn" component={SignIn}/>
-			<Route path="/Account/signUp" component={SignUp}/>
-			<Route path="/Account/passwordNew" component={PasswordNew}/>
-			<Route path="/Account/resetConfirmation" component={ResetConfirmation}/>
-			<Route path="/Account/emailSend" component={EmailSend}/>
-			<Route path="/Account/recoverPassword" component={RecoverPassword}/>
-			<Route path="/Dashboard/Dashboard" component={Dashboard}>
-				<Route path="/Dashboard/Notification" component={Notification}/>
-				<Route path="/Dashboard/OverView" component={OverView}/>
-				<Route path="/Dashboard/Profile" component={Profile}/>
-				<Route path="/Dashboard/MyTeam" component={MyTeam}/>
-				<Route path="/Dashboard/EditProfile" component={EditProfile}/>
-				<Route path="/AnomalyDetection" component={AnomalyDetection}/>
-				<Route path="/Admin" component={Admin} />
-				<Route path="/Review/Review" component={Review}>
-					<Route path="/Review/OrphanReview" component={OrphanReview}/>
-					<Route path="/Review/GroupReview" component={GroupReview}/>
-					<Route path="/Review/UserAssignment" component={UserAssignment}/>
-					<Route path="/Review/ClassificationReview" component={ClassificationReview}/>
-					<Route path="/Review/DocumentReview" component={DocumentReview}/>
-					<Route path="/Review/ReviewValidation" component={ReviewValidation}/>
-                    <Route path="/Review/ReviewStatus" component={ReviewStatus}/>
-				</Route>
-				<Route path="/Insight/Insight" component={Insight}>
-					<Route path="/Insight/Identity" component={Identity}/>
-					<Route path="/Insight/DataRisk" component={DataRisk}/>
-					<Route path="/Insight/DataLoss" component={DataLoss}/>
-                    <Route path="/Insight/ClassificationCheck" component={ClassificationCheck}/>
-				</Route>
-			</Route>
-    	</Route>
-	</Router>
-), document.getElementById('root'))
+      <Router history={browserHistory}>
+        <Route path="/" component={App}>
+          <Route path="/Account/signIn" component={SignIn}/>
+          <Route path="/Account/signUp" component={SignUp}/>
+          <Route path="/Account/passwordNew" component={PasswordNew}/>
+          <Route path="/Account/resetConfirmation" component={ResetConfirmation}/>
+          <Route path="/Account/emailSend" component={EmailSend}/>
+          <Route path="/Account/recoverPassword" component={RecoverPassword}/>
+          <Route path="/Dashboard/Dashboard" component={Dashboard}>
+            <Route path="/Dashboard/Notification" component={Notification}/>
+            <Route path="/Dashboard/OverView" component={OverView}/>
+            <Route path="/Dashboard/Profile" component={Profile}/>
+            <Route path="/Dashboard/MyTeam" component={MyTeam}/>
+            <Route path="/Dashboard/EditProfile" component={EditProfile}/>
+            <Route path="/AnomalyDetection" component={AnomalyDetection}/>
+            <Route path="/Admin" component={Admin} />
+            <Route path="/Review/Review" component={Review}>
+              <Route path="/Review/OrphanReview" component={OrphanReview}/>
+              <Route path="/Review/GroupReview" component={GroupReview}/>
+              <Route path="/Review/UserAssignment" component={UserAssignment}/>
+              <Route path="/Review/ClassificationReview" component={ClassificationReview}/>
+              <Route path="/Review/DocumentReview" component={DocumentReview}/>
+              <Route path="/Review/ReviewValidation" component={ReviewValidation}/>
+              <Route path="/Review/ReviewStatus" component={ReviewStatus}/>
+            </Route>
+            <Route path="/Insight/Insight" component={Insight}>
+              <Route path="/Insight/Identity" component={Identity}/>
+              <Route path="/Insight/DataRisk" component={DataRisk}/>
+              <Route path="/Insight/DataLoss" component={DataLoss}/>
+              <Route path="/Insight/ClassificationCheck" component={ClassificationCheck}/>
+            </Route>
+          </Route>
+        </Route>
+      </Router>
+      ), document.getElementById('root'))
