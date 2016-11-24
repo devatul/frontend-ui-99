@@ -7,8 +7,7 @@ import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import {renderClassType, orderByIndex} from '../../utils/function';
-import {status} from '../../Constant';
-import makeRequest from '../../utils/http';
+import {status} from '../../App/Constant';
 import {findIndex, isEqual} from 'lodash';
 
 var Table = React.createClass({

@@ -4,11 +4,11 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import {isEmpty, forEach, isEqual, upperFirst, orderBy} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
-import {_categories, fetching} from '../Constant.js';
+import {_categories, fetching} from '../App/Constant.js';
 import {makeRequest} from '../utils/http.js';
 import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
 import $, {JQuery} from 'jquery';
-import Constant from '../Constant';
+import Constant from '../App/Constant'
 import Demo from '../Demo.js';
 
 let hideUndefined = true;

@@ -1,4 +1,5 @@
-import { _confidentialities } from '../Constant'
+import { _confidentialities, urls } from '../App/Constant'
+import { makeRequest } from '../utils/http'
 
 module.exports = {
     formatNumber: (nStr) => {
@@ -25,9 +26,9 @@ module.exports = {
         return newArray;
     },
 
-  removeUndefined(array) {
-    return array;
-  },
+    removeUndefined(array) {
+        return array;
+    },
 
   orderLanguages(array) {
     let order = ['EN', 'FR', 'DE', 'OTHER'];
@@ -114,5 +115,266 @@ module.exports = {
             case text.test(documentName) === true:
                 return "fa-file-text-o";
         }
+    },
+
+    getCategories: (options) => {
+        options.path = urls.LABEL_CATEGORY;
+        makeRequest(options);
+    },
+
+    getConfidentialities: (options) => {
+        options.path = urls.LABEL_CONFIDENTIAL;
+        makeRequest(options);
+    },
+
+    getDoctypes: (options) => {
+        options.path = urls.LABEL_DOCTYPES;
+        makeRequest(options);
+    },
+
+    getLanguages: (options) => {
+        options.path = urls.LABEL_LAGNUAGES;
+        makeRequest(options);
+    },
+
+    getRole: (options) => {
+        options.path = urls.ROLES;
+        makeRequest(options);
+    },
+
+    getProfile: (options) => {
+        options.path = urls.PROFILE;
+        makeRequest(options);
+    },
+
+    setProfile: (options) => {
+        options.path = urls.PROFILE;
+        options.method = "PUT";
+        makeRequest(options)
+    },
+
+    getPhoto: (options) => {
+        options.path = urls.PHOTO;
+        makeRequest(options);
+    },
+
+    setPhoto: (options) => {
+        options.path = urls.PHOTO
+        options.method = "PUT"
+        makeRequest(options)
+    },
+
+    setAuth: (options) => {
+        options.path = urls.TOKEN
+        options.method = "POST";
+        makeRequest(options);
+    },
+
+    setEmail: (options) => {
+        options.path = urls.EMAIL;
+        options.method = "PUT";
+        makeRequest(options);
+    },
+
+    setPassword: (options) => {
+        options.path = urls.PASSWORD;
+        options.method = "PUT";
+        makeRequest(options)
+    },
+
+    getNotification: (options) => {
+        if (options.urgency)
+            options.path = urls.NOTIFICATION + '?urgency=' + options.urgency;
+        else if (options.period)
+            options.path = urls.NOTIFICATION + '?period=' + options.period
+        else
+            return null
+        makeRequest(path);
+    },
+
+    getDataLoss: (options) => {
+        options.path = urls.DATALOSS
+        makeRequest(options)
+    },
+
+    getDataRisk: (options) => {
+        options.path = urls.DATARISK + "?number_users=" + options.number_users;
+        makeRequest(options)
+    },
+
+    getScan: (options) => {
+        options.path = urls.SCAN
+        makeRequest(options)
+    },
+
+    setScan: (options) => {
+        options.path = urls.SCAN
+        options.method = 'POST'
+        makeRequest(options)
+    },
+
+    getClassificationReview: (options) => {
+        options.path = urls.CLASSIFICATION_REVIEW;
+        makeRequest(options);
+    },
+
+    assignCategoryAndConfidentiality2nd: (options) => {
+        options.path = urls.CLASSIFICATION_REVIEW;
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
+    getStatistics: (options) => {
+        options.path = urls.STATISTICS;
+        makeRequest(options);
+    },
+
+    getCloudwords: (options) => {
+        options.path = urls.CLOUDWORDS;
+        makeRequest(options);
+    },
+
+    getCentroids: (options) => {
+        options.path = urls.CENTROIDS;
+        makeRequest(options);
+    },
+
+    getDocuments: (options) => {
+        options.path = urls.SAMPLES;
+        makeRequest(options);
+    },
+
+    getGroups: (options) => {
+        options.path = urls.GROUP;
+        makeRequest(options);
+    },
+
+    setGroupDocuments: (options) => {
+        options.path = urls.GROUP_SAMPLES;
+        if (options.id) {
+            options.path += '?id=' + options.id;
+        }
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
+    getOrphanDocuments: (options) => {
+        options.path = urls.ORPHAN_SAMPLES;
+        makeRequest(options);
+    },
+
+    setOrphanDocuments: (options) => {
+        options.path = urls.ORPHAN_SAMPLES;
+        if (options.id) {
+            options.path += '?id=' + options.id;
+        }
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
+    getOrphan: (options) => {
+        options.path = urls.ORPHAN;
+        makeRequest(options);
+    },
+
+    getOrphanStatistics: (options) => {
+        options.path = urls.ORPHAN_STATISTICS;
+        makeRequest(options);
+    },
+
+    getOrphanCloudwords: (options) => {
+        options.path = urls.ORPHAN_CLOUDWORDS;
+        makeRequest(options);
+    },
+
+    getOrphanCentroids: (options) => {
+        options.path = urls.ORPHAN_CENTROIDS;
+        makeRequest(options);
+    },
+
+    getOrphanCategories: (options) => {
+        options.path = urls.ORPHAN_CATEGORIES;
+        makeRequest(options);
+    },
+
+    setTokenAuth: (options) => {
+        options.path = urls.TOKENAUTH;
+        options.method = 'POST'
+        makeRequest(options);
+    },
+
+    registration: (options) => {
+        options.path = urls.REGISTRATION;
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
+    getOrganization: (options) => {
+        options.path = urls.ORGANIZATION;
+        makeRequest(options);
+    },
+
+    setOrganization: (options) => {
+        options.path = urls.ORGANIZATION;
+        options.method = 'PUT';
+        makeRequest(options);
+    },
+
+    setRefreshToken: (options) => {
+        options.path = urls.REFRESHTOKEN;
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
+    getAnomalyIamInfo: (options, path) => {
+        options.path = urls.IAM + path;
+        makeRequest(options);
+    },
+
+    setAnomalyIamInfo: (options, path) => {
+        options.path = urls.IAM + path;
+        makeRequest(options);
+    },
+
+    getSla: (options) => {
+        options.path = urls.SLA;
+        makeRequest(options);
+    },
+
+    checkConfidentiality: (options) => {
+        options.path = urls.CONFIDENTIAL;
+        makeRequest(options);
+    },
+
+    getTechDomain: (options) => {
+        options.path = urls.TECH_DOMAIN
+        makeRequest(options)
+    },
+
+    setTechDomain: (options) => {
+        options.path = urls.TECH_DOMAIN
+        options.method = 'PUT'
+        makeRequest(options)
+    },
+
+    getTechHdpserver: (options) => {
+        options.path = urls.TECH_HDPSERVER
+        makeRequest(options)
+    },
+
+    getTechFolder: (options) => {
+        options.path = urls.TECH_FOLDER
+        makeRequest(options)
+    },
+
+    setTechFolder: (options) => {
+        options.path = urls.TECH_FOLDER
+        options.method = 'PUT'
+        makeRequest(options)
+    },
+
+    getTechEmailServerExchange: (options) => {
+        options.paht = urls.TECH_EMAILSERVER_EXCHANGE
+        makeRequest(options)
     }
 }

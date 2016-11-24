@@ -6,6 +6,7 @@ import _ from 'lodash'
 import update from 'react/lib/update'
 import { makeRequest } from '../utils/http'
 import $ from 'jquery'
+import { getCategories } from '../utils/function'
 
 module.exports = React.createClass({
   	getInitialState() {
@@ -52,8 +53,7 @@ module.exports = React.createClass({
     },
     getCategories() {
         let arr = [];
-        return makeRequest({
-            path: 'api/label/category/',
+        return getCategories({
             success: (data) => {
                 data = _.orderBy(data, ['name'], ['asc']);
 

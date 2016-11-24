@@ -7,9 +7,9 @@
           <li class="{this.state.categories[rtIndex].active}" rt-repeat = "rt in this.state.categories" key = "{rtIndex}">
             <a href="javascript:;" onClick="{this.changeTitle.bind(this, this.state.categories[rtIndex].name)}">{this.state.categories[rtIndex].name}</a>
           </li>
-       <!--    <li class="">
-            <a href="#summary" data-toggle="tab" aria-expanded="true">Summary</a>
-          </li> -->
+          <!--    <li class="">
+                <a href="#summary" data-toggle="tab" aria-expanded="true">Summary</a>
+              </li> -->
         </ul>
         <div class="tab-content" style="border: none">
           <div id="content_review" rt-if="this.state.default_tab == 'content_review'">

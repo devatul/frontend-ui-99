@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './ClassificationReview.rt';
 import update from 'react/lib/update';
-import Constant, {fetching, status} from '../Constant';
+import Constant, {fetching, status} from '../App/Constant';
 import {cloneDeep, isEqual, find, findIndex, orderBy} from 'lodash';
 import {makeRequest} from '../utils/http';
-import {orderConfidentialities} from '../utils/function';
+import { getCategories, getConfidentialities, getClassificationReview, assignCategoryAndConfidentiality2nd, orderConfidentialities } from '../utils/function'
 
 var ClassificationReview = React.createClass({
   getInitialState() {
@@ -533,18 +533,15 @@ var ClassificationReview = React.createClass({
   },
 
   assignCategoryAndConfidentiality2nd(request) {
-    return makeRequest({
-      method: "POST",
+    return assignCategoryAndConfidentiality2nd({
       params: JSON.stringify(request),
-      path: "api/classification_review/",
       success: (res) => {
       }
     });
   },
 
   getClassificationReview() {
-    return makeRequest({
-      path: "api/classification_review/",
+    return getClassificationReview({
       success: (data) => {
         this.setState({
           xhr: update(this.state.xhr, {
@@ -570,8 +567,7 @@ var ClassificationReview = React.createClass({
   getCategories() {
     let arr = [];
 
-    return makeRequest({
-      path: 'api/label/category/',
+    return getCategories({
       success: (data) => {
         data = orderBy(data, ['name'], ['asc']);
         this.setState({categories: data, shouldUpdate: true});
@@ -582,8 +578,7 @@ var ClassificationReview = React.createClass({
   getConfidentialities() {
     let arr = [];
 
-    return makeRequest({
-      path: 'api/label/confidentiality/',
+    return getConfidentialities({
       success: (data) => {
         data = orderConfidentialities(data)
         this.setState({confidentialities: data, shouldUpdate: true});

@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react/lib/update'
 import { browserHistory } from 'react-router'
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
 import template from './InsightMenuBar.rt'
 import javascript from '../script/javascript.js'
 import _, { isEqual } from 'lodash'
 import $ from 'jquery'
+import { getLanguages, getCategories, getConfidentialities, getDoctypes } from '../utils/function'
 
 var MenuBar1 = React.createClass({
     static: {
@@ -120,14 +121,7 @@ var MenuBar1 = React.createClass({
         });
     },
     getCategory: function(async) {
-        $.ajax({
-            url: Constant.SERVER_API + 'api/label/category/',
-            dataType: 'json',
-            method: 'GET',
-            async: async,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getCategories({
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.categoryId);
                 this.setState({
@@ -135,23 +129,11 @@ var MenuBar1 = React.createClass({
                         [this.static.categoryId]: data
                     }
                 });
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status == 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            }
         });
     },
     getConfidentiality: function(async) {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/confidentiality/",
-            dataType: 'json',
-            async: async,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getConfidentialities({
             success: function(data) {
                 data.reverse();
                 this.copyToDataSelectBox(data, this.static.confidentialId);
@@ -160,23 +142,11 @@ var MenuBar1 = React.createClass({
                         [this.static.confidentialId]: data
                     }
                 });
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status == 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            }
         });
     },
     getDoctypes: function(async) {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/doctypes/",
-            dataType: 'json',
-            async: async,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getDoctypes({
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.doctypeId);
                 this.setState({
@@ -184,23 +154,11 @@ var MenuBar1 = React.createClass({
                         [this.static.doctypeId]: data
                     }
                 });
-            }.bind(this),
-            error: function(xhr, error) {
-                if (xhr.status == 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
-            }.bind(this)
+            }
         });
     },
     getLanguages: function(async) {
-        $.ajax({
-            method: 'GET',
-            url: Constant.SERVER_API + "api/label/languages/",
-            dataType: 'json',
-            async: async,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getLanguages({
             success: function(data) {
                 this.copyToDataSelectBox(data, this.static.languageId);
                 this.setState({
@@ -208,12 +166,12 @@ var MenuBar1 = React.createClass({
                         [this.static.languageId]: data
                     }
                 });
-            }.bind(this),
+            },
             error: function(xhr, error) {
                 if (xhr.status == 401) {
                     browserHistory.push('/Account/SignIn');
                 }
-            }.bind(this)
+            }
         });
     },
     copyNumberOfUser(async) {

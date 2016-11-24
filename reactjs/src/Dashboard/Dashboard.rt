@@ -1,11 +1,9 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="HelpButton1" from="../Insight/components/MyTeamHelpButton"/>
-<rt-import name="constant" from="../Constant.js"/>
+<rt-import name="constant" from="../App/Constant.js"/>
 
 <section ref='{this.hideDropdownMenu}'>
-    <!--my_header start-->
-
     <!--my_header start-->
     <div class="my_header">
         <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">

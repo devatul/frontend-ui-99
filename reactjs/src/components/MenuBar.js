@@ -3,12 +3,11 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import { browserHistory } from 'react-router'
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
 import Demo from '../Demo.js';
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
-import { makeRequest } from '../utils/http'
-import { orderByIndex, orderLanguages } from '../utils/function'
+import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes, getScan, orderLanguages } from '../utils/function'
 
 var MenuBar = React.createClass
 ({
@@ -119,19 +118,16 @@ var MenuBar = React.createClass
         }
     },
 	getCategories: function(async) {
-        makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        getCategories({
+			success: (data) => {
                 this.configListLabel(data);
-
                 this.setState({ categories: data, shouldUpdate: true });
             }
         });
     },
     getConfidentialities: function(async) {
-        makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
+        getConfidentialities({
+			success: (data) => {
                 this.configListLabel(data);
                 //data = orderByIndex(data, [4,3,2,1,0]);
                 this.setState({ confidentialities: data, shouldUpdate: true });
@@ -139,8 +135,7 @@ var MenuBar = React.createClass
         });
     },
     getDoctypes: function(async) {
-        makeRequest({
-            path: 'api/label/doctypes/',
+        getDoctypes({
             success: (data) => {
                 this.configListLabel(data);
 
@@ -149,9 +144,8 @@ var MenuBar = React.createClass
         });
     },
     getLanguages: function(async) {
-        makeRequest({
-            path: 'api/label/languages/',
-            success: (data) => {
+        getLanguages({
+			success: (data) => {
                 this.configListLabel(data);
                 this.setState({ languages: orderLanguages(data), shouldUpdate: true });
             }
@@ -567,8 +561,7 @@ var MenuBar = React.createClass
     },
 
     getscanResult() {
-        makeRequest({
-            path: 'api/scan/',
+        getScan({
             success: (data) => {
               // FIXME: Demo fix, to be removed
               if (Demo.MULTIPLIER != 1) {
@@ -612,6 +605,6 @@ var MenuBar = React.createClass
             }
         });
     },
-	 render:template
+    render:template
 });
 module.exports = MenuBar;

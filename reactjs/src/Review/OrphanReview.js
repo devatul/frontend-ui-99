@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import Constant, { status, fetching } from '../App/Constant.js'
 import {browserHistory} from 'react-router';
 import {forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy} from 'lodash';
 import template from './OrphanReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
-import Constant, {status, fetching} from '../Constant.js';
 import Demo from '../Demo.js';
+import {getOrphan, getOrphanDocuments, setOrphanDocuments} from '../utils/function.js';
 
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
@@ -248,9 +249,8 @@ var OrphanReview = React.createClass({
 
     let {id} = this.state.orphanCurrent;
 
-    makeRequest({
-      path: "api/group/orphan/samples?id="+id,
-      method: "POST",
+    setOrphanDocuments({
+      id: id,
       dataType: "text",
       params: JSON.stringify({"group_id": id, "docs": docs}),
       success: (res) => {
@@ -426,10 +426,8 @@ var OrphanReview = React.createClass({
   },
 
   getGroups() {
-    let data = [];
-
-    makeRequest({
-      path: "api/group/orphan",
+    getOrphan({
+      path: Constant.ORPHAN,
       success: (res) => {
         res.sort(function (a, b) {
           return +a.id - (+b.id);
@@ -587,8 +585,7 @@ var OrphanReview = React.createClass({
     let {id} = this.state.orphanCurrent;
 
     if (this.state.loadingdocuments)
-      return makeRequest({
-        path: "api/group/orphan/samples",
+      return getOrphanDocuments({
         params: {"id": id},
         success: (res) => {
           for (var i = 0, resLength = res.length; i < resLength; i++) {

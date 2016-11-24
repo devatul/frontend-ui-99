@@ -1,4 +1,4 @@
-<rt-import name="Const" from="../Constant.js"/>
+<rt-import name="Const" from="../App/Constant.js"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>

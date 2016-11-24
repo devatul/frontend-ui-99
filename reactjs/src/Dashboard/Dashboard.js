@@ -6,7 +6,8 @@ import update from 'react/lib/update'
 import _ from 'lodash'
 //import $ from 'jquery'
 import { makeRequest } from '../utils/http'
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
+import { getRole } from '../utils/function'
 
 module.exports = React.createClass({
     getInitialState() {

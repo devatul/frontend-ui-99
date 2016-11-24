@@ -4,9 +4,10 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './Notification.rt'
 import update from 'react/lib/update'
 import javascriptTodo from '../script/javascript.todo.js';
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
 import _ from 'lodash'
 import $ from 'jquery'
+import { getNotification } from '../utils/function'
 
 var Notification = React.createClass({
     getInitialState() {
@@ -517,33 +518,20 @@ var Notification = React.createClass({
         var pending = 0;
         var high = 0;
         var veryhigh = 0
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?period=last_thirty_days',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getNotification({
+            period: 'last_thirty_days',
+            sync: false,
             success: function(data) {
                 console.log(data)
-
                 last_thirty_days = data
-
-
             },
             error: function(xhr, status, err) {
                 console.log(err);
             }
         });
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?period=last_seven_days',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getNotification({
+            period: 'last_seven_days',
+            sync: false,
             success: function(data) {
                 last_seven_days = data;
             },
@@ -551,11 +539,9 @@ var Notification = React.createClass({
                 console.log(err);
             }
         });
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?period=today',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
+        getNotification({
+            period: 'today',
+            sync: false,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
             },
@@ -566,14 +552,9 @@ var Notification = React.createClass({
                 console.log(err);
             }
         });
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?period=pending',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getNotification({
+            period: 'pending',
+            sync: false,
             success: function(data) {
                 pending = data.length
             },
@@ -581,14 +562,9 @@ var Notification = React.createClass({
                 console.log(err);
             }
         });
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?urgency=high',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getNotification({
+            urgency: 'high',
+            sync: false,
             success: function(data) {
                 high = data.length;
             },
@@ -596,14 +572,9 @@ var Notification = React.createClass({
                 console.log(err);
             }
         });
-        $.ajax({
-            url: Constant.SERVER_API + 'api/notification/?urgency=very_high',
-            dataType: 'json',
-            type: 'GET',
-            async: false,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-            },
+        getNotification({
+            urgency: 'very_high',
+            sync: false,
             success: function(data) {
                 veryhigh = data.length;
             },

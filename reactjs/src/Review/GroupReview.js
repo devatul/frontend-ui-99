@@ -5,8 +5,9 @@ import {forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy} from 'lodash'
 import template from './GroupReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
-import Constant, {status, fetching} from '../Constant.js';
+import Constant, {status, fetching} from '../App/Constant.js';
 import Demo from '../Demo.js';
+import {getGroups, getCategories, getDocuments, getConfidentialities, getStatistics, getCentroids, getCloudwords, setGroupDocuments} from '../utils/function.js';
 
 var GroupReview = React.createClass({
   displayName: 'GroupReview',
@@ -234,9 +235,8 @@ var GroupReview = React.createClass({
     }
 
       let { id } = this.state.groupCurrent;
-            makeRequest({
-                path: "api/group/orphan/samples?id="+id,
-                method: "POST",
+            setGroupDocuments({
+                id: id,
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
                 success: (res) => {
@@ -409,8 +409,7 @@ var GroupReview = React.createClass({
   getGroups() {
     let data = [];
 
-    makeRequest({
-      path: "api/group/",
+    getGroups({
       success: (res) => {
         let group = Object.assign({}, res[0], {index: 0}),
             groups_by_name = [],
@@ -513,8 +512,7 @@ var GroupReview = React.createClass({
   },
 
   getStatistics() {
-    makeRequest({
-      path: "api/group/statistics/",
+    getStatistics({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -531,8 +529,7 @@ var GroupReview = React.createClass({
   },
 
   getCloudwords() {
-    return makeRequest({
-      path: "api/group/cloudwords/",
+    return getCloudwords({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -552,8 +549,7 @@ var GroupReview = React.createClass({
   },
 
   getCentroids() {
-    makeRequest({
-      path: "api/group/centroids/",
+    getCentroids({
       params: {
         "id": this.state.groupCurrent.id
       },
@@ -687,8 +683,7 @@ var GroupReview = React.createClass({
         {id} = this.state.groupCurrent;
 
     if (this.state.loadingdocuments)
-      return makeRequest({
-        path: "api/group/samples/",
+      return getDocuments({
         params: {"id": id},
         success: (res) => {
           //data = res;
@@ -704,8 +699,7 @@ var GroupReview = React.createClass({
   getCategories() {
     let arr = [];
 
-    makeRequest({
-      path: 'api/label/category/',
+    getCategories({
       success: (data) => {
         data.sort(function (a, b) {
           if (a.name > b.name) return 1;
@@ -720,8 +714,7 @@ var GroupReview = React.createClass({
   getConfidentialities() {
     let arr = [];
 
-    makeRequest({
-      path: 'api/label/confidentiality/',
+    getConfidentialities({
       success: (data) => {
         this.setState({confidentialities: data, shouldUpdate: true});
       }
@@ -729,8 +722,7 @@ var GroupReview = React.createClass({
   },
 
   getCategoryInfo () {
-    makeRequest({
-      path: "api/group/categories/",
+    getCategories({
       params: {
         "id": this.state.groupCurrent.id
       },

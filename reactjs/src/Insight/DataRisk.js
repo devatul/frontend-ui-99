@@ -4,10 +4,11 @@ import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-
 import template from './DataRisk.rt';
 import update from 'react/lib/update';
 import 'jquery';
-import Constant, {fetching} from '../Constant.js';
+import Constant, {fetching} from '../App/Constant.js';
 import Demo from '../Demo.js';
 import javascriptOver from '../script/javascript-overview.js';
 import javascript from '../script/javascript.js';
+import { getDataRisk } from '../utils/function'
 
 var DataRisk = React.createClass({
   getInitialState() {
@@ -42,13 +43,8 @@ var DataRisk = React.createClass({
       })
     });
 
-    $.ajax({
-      url: Constant.SERVER_API + 'api/insight/data-risk?number_users=5',
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
+    getDataRisk({
+      number_users: 5,
       success: function (data) {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
@@ -99,16 +95,10 @@ var DataRisk = React.createClass({
     if (value == 'Top 50') {
       value = 50;
     }
-
     this.setState(Object.assign({}, this.state, {numberUser: value}));
 
-    $.ajax({
-      url: Constant.SERVER_API + 'api/insight/data-risk?number_users=' + value,
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
+    getDataRisk({
+      number_users: value,
       success: function (data) {
         this.setState(Object.assign({}, this.state, {dataRisk: data}));
       }.bind(this),
