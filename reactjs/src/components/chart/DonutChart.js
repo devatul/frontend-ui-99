@@ -141,7 +141,8 @@ var DonutChart = React.createClass({
           </li>;
       }
     }
-    let lineStyle = {color:config.colors[0], backgroundColor:config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-42px' };
+    
+    let lineStyle = {color:config.colors[0], backgroundColor:config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-70px' };
     let top6 = config.top6 && <div className="top6"><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i><span>{config.top6}</span></div>
     return (
       <section className="panel">
@@ -154,7 +155,7 @@ var DonutChart = React.createClass({
           </h4>
             {this.props.analytics ?
               <span>
-              <div className="widget-chart analytics" >
+              <div className="widget-chart analytics">
 
               <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto'}}></div>
             {options.filter ? <a className="toggle-button btn btn-default analytics filter"><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}

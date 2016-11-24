@@ -111,7 +111,7 @@
                       help="Repartition of each level of confidentiality for all the documents scanned." />
                 </div>
             </div>
-            <Row>
+            <Row class="analytics-table">
             <Col md="{6}">
               <Panel.custom class="panel-has-child actions-panel">
                 <Panel.body>

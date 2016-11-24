@@ -166,6 +166,7 @@
   background-color: #E46159;
   font-size: 20px;
 }
+
 .analytics.bottom-line{
   color: #04A6E6;
   font-size: 18px;
@@ -179,6 +180,157 @@
 .analytics.bottom-line i{
   margin-top: -12px;
   position: absolute;
+}
+@media (max-width: 991px){
+.analytics.bottom-line{
+  margin-right: 0px !important;
+}
+}
+@media (max-width: 1200px){
+  .analytics-table .table{
+    width:100%;
+  }
+}
+@media (max-width: 1199px){
+  .analytics.filter{
+    margin-left: 18px;
+  }
+  .analytics.search{
+    margin-top: -280px;
+    margin-left: 125px;
+  }
+  .analytics.user{
+    margin-top: -250px;
+    margin-left: 45px;
+  }
+  .analytics.users{
+    margin-top: -250px;
+    margin-left: 195px;
+  }
+  .analytics.config{
+    margin-top: -83px;
+    margin-left: 116px;
+  }
+  .analytics.folder-open{
+    margin-top: -115px;
+    margin-left: 192px;
+  }
+  .analytics.archive{
+    margin-top: -113px;
+    margin-left: 43px;
+  }
+  .analytics.shield{
+    margin-top: -185px;
+    margin-left: 219px;
+  }
+}
+@media (max-width: 991px){
+.analytics.filter{
+    margin-top: -185px;
+    margin-left: 140px;
+}
+.analytics.search{
+  margin-top: -343px;
+  margin-left: 307px;
+}
+.analytics.user{
+  margin-top: -295px;
+  margin-left: 190px;
+}
+.analytics.users{
+  margin-top: -295px;
+  margin-left: 430px;
+}
+.analytics.folder-open{
+  margin-top: -78px;
+  margin-left: 436px;
+}
+.analytics.archive{
+  margin-top: -74px;
+  margin-left: 184px;
+}
+.analytics.config{
+  margin-top: -18px;
+  margin-left: 307px;
+}
+.analytics.shield{
+  margin-top: -185px;
+  margin-left: 475px;
+}
+}
+@media (max-width: 767px){
+.analytics.filter{
+  margin-top: -185px;
+  margin-left: 28px;
+}
+.analytics.search{
+  margin-top: -318px;
+  margin-left: 160px;
+}
+.analytics.user{
+  margin-top: -275px;
+  margin-left: 65px;
+}
+.analytics.users{
+  margin-top: -274px;
+  margin-left: 265px;
+}
+.analytics.folder-open{
+  margin-top: -95px;
+  margin-left: 268px;
+}
+.analytics.archive{
+  margin-top: -92px;
+  margin-left: 64px;
+}
+.analytics.config{
+  margin-top: -49px;
+  margin-left: 160px;
+}
+.analytics.shield{
+  margin-top: -185px;
+  margin-left: 300px;
+}
+}
+@media (max-width: 460px){
+  .analyticsChart{
+    width:320px !important;
+  }
+  .analytics.filter{
+    margin-top: -185px;
+    margin-left: 17px;
+  }
+  .analytics.search{
+    margin-top: -275px;
+    margin-left: 118px;
+  }
+  .analytics.user{
+    margin-top: -258px;
+    margin-left: 55px;
+  }
+  .analytics.users{
+    margin-top: -247px;
+    margin-left: 181px;
+  }
+  .analytics.folder-open{
+    margin-top: -117px;
+    margin-left: 178px;
+  }
+  .analytics.archive{
+    margin-top: -119px;
+    margin-left: 42px;
+  }
+  .analytics.config{
+    margin-top: -88px;
+    margin-left: 107px;
+  }
+  .analytics.shield{
+    margin-top: -185px;
+    margin-left: 205px;
+  }
+  .analytics-table .table{
+    width:460px;
+  }
 }
 .help_guide_sub .filter-tags-userassign {
     padding-top: 10px;

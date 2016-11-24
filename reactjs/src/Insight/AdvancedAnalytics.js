@@ -293,11 +293,11 @@ var AdvancedAnalytics = React.createClass({
             }
           },
           data: [
-            {"y": 377,"name": "Banking Secrecy"},
-            {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 109,"name": "Accounting / Tax"},
+            {"y": 129,"name": "Corporate Entity"},
+            {"y": 377,"name": "Client / Customer"},
+            {"y": 11,"name": "Employee / Personal Data"},
+            {"y": 37,"name": "Legal / Compliance"}
           ]
         }
         let total = 0;
@@ -306,12 +306,12 @@ var AdvancedAnalytics = React.createClass({
         }
         categoryChart.options = {
           filter: true,
-          search: false,
+          search: true,
           user: true,
           users: true,
           folder: true,
           archive: true,
-          config: false,
+          config: true,
           shield: true,
         }
         categoryChart.total = total;
@@ -328,9 +328,9 @@ var AdvancedAnalytics = React.createClass({
           data: [
             {"y": 377,"name": "Banking Secrecy"},
             {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 8,"name": "Internal Only"},
+            {"y": 2,"name": "Public"},
+            {"y": 38,"name": "Secret"}
           ]
         };
         let total = 0;
@@ -363,11 +363,11 @@ var AdvancedAnalytics = React.createClass({
           colors: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
           colorsHover: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
           data: [
-            {"y": 377,"name": "Banking Secrecy"},
-            {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 377,"name": "Security Group 1"},
+            {"y": 234,"name": "Security Group 2"},
+            {"y": 188,"name": "Security Group 3"},
+            {"y": 202,"name": "Security Group 4"},
+            {"y": 308,"name": "Security Group 5"}
           ]
         };
         let total = 0;
@@ -401,11 +401,11 @@ var AdvancedAnalytics = React.createClass({
           colors: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
           colorsHover: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
           data: [
-            {"y": 377,"name": "Banking Secrecy"},
-            {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 377,"name": "Folder 1"},
+            {"y": 234,"name": "Folder 2"},
+            {"y": 188,"name": "Folder 3"},
+            {"y": 202,"name": "Folder 4"},
+            {"y": 308,"name": "Folder 5"}
           ]
         };
         let total = 0;
@@ -440,11 +440,11 @@ var AdvancedAnalytics = React.createClass({
           colors: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
           colorsHover: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
           data: [
-            {"y": 377,"name": "Banking Secrecy"},
-            {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 37,"name": "User 1"},
+            {"y": 234,"name": "User 2"},
+            {"y": 88,"name": "User 3"},
+            {"y": 22,"name": "User 4"},
+            {"y": 308,"name": "User 5"}
           ]
         };
         let total = 0;
@@ -478,11 +478,11 @@ var AdvancedAnalytics = React.createClass({
           colors: ['#237C7E', '#349DA1', '#0F2D2F', '#6DCCD0', '#1B5054'],
           colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
           data: [
-            {"y": 377,"name": "Word.doc"},
-            {"y": 234,"name": "Excel.xls"},
-            {"y": 188,"name": "PowerPoint.ppt"},
-            {"y": 202,"name": "PDF.pdf"},
-            {"y": 308,"name": "Other"}
+            {"y": 454,"name": "Word.doc"},
+            {"y": 408,"name": "Excel.xls"},
+            {"y": 322,"name": "PowerPoint.ppt"},
+            {"y": 341,"name": "PDF.pdf"},
+            {"y": 488,"name": "Other"}
           ]
         };
         let total = 0;
