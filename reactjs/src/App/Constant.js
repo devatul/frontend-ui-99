@@ -147,7 +147,7 @@ module.exports = {
     EMAIL: "api/account/change_email/",
     PASSWORD: "api/account/change_password/",
     NOTIFICATION: "api/notification/",
-    DATALOSE: "api/insight/data-loss/",
+    DATALOSS: "api/insight/data-loss/",
     DATARISK: "api/insight/data-risk/",
     TOKENAUTH: "api/token/api-token-auth/",
     REGISTRATION: "api/account/registration/",

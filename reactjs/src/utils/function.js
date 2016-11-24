@@ -192,8 +192,8 @@ module.exports = {
         makeRequest(path);
     },
 
-    getDataLose: (options) => {
-        options.path = urls.DATALOSE
+    getDataLoss: (options) => {
+        options.path = urls.DATALOSS
         makeRequest(options)
     },
 
