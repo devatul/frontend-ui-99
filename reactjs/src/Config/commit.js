@@ -1,1 +1,0 @@
-module.exports = { "git_version": "1.0-7369767d" }
