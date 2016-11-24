@@ -194,6 +194,10 @@
 
                             <Link to="/Insight/ClassificationCheck" activeClassName="active">Classification Check</Link>
                         </li>
+                        <li>
+
+                           <Link to="/Insight/AdvancedAnalytics" activeClassName="active">Advanced Analytics</Link>
+                       </li>
                     </ul>
                 </li>
                 <li>

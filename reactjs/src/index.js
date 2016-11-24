@@ -1,35 +1,37 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect, IndexRoute  } from 'react-router'
+
 var path = require('path');
+var Admin = require('./Admin/Admin');
+var AdvancedAnalytics = require('./Insight/AdvancedAnalytics');
+var AnomalyDetection = require('./Dashboard/AnomalyDetection');
 var App = require('./App/App');
+var ClassificationCheck = require('./Insight/ClassificationCheck');
+var ClassificationReview = require('./Review/ClassificationReview');
+var Dashboard = require('./Dashboard/Dashboard');
+var DataLoss = require('./Insight/DataLoss');
+var DataRisk = require('./Insight/DataRisk');
+var DocumentReview = require('./Review/DocumentReview');
+var EditProfile = require('./Dashboard/EditProfile');
+var EmailSend = require('./Account/EmailSend');
+var GroupReview = require('./Review/GroupReview');
+var Identity = require('./Insight/Identity');
+var Insight = require('./Insight/Insight');
+var MyTeam = require('./Dashboard/MyTeam');
+var Notification = require('./Dashboard/Notification');
+var OrphanReview = require('./Review/OrphanReview');
+var OverView = require('./Dashboard/OverView');
+var PasswordNew = require('./Account/PasswordNew');
+var Profile = require('./Dashboard/Profile');
+var RecoverPassword = require('./Account/RecoverPassword');
+var ResetConfirmation = require('./Account/ResetConfirmation');
+var Review = require('./Review/Review');
+var ReviewStatus = require('./Review/ReviewStatus');
+var ReviewValidation = require('./Review/ReviewValidation');
 var SignIn = require('./Account/SignIn');
 var SignUp = require('./Account/SignUp');
-var PasswordNew = require('./Account/PasswordNew');
-var ResetConfirmation = require('./Account/ResetConfirmation');
-var EmailSend = require('./Account/EmailSend');
-var RecoverPassword = require('./Account/RecoverPassword');
-var Dashboard = require('./Dashboard/Dashboard');
-var OverView = require('./Dashboard/OverView');
-var Profile = require('./Dashboard/Profile');
-var MyTeam = require('./Dashboard/MyTeam');
-var AnomalyDetection = require('./Dashboard/AnomalyDetection');
-var EditProfile = require('./Dashboard/EditProfile');
-var ReviewValidation = require('./Review/ReviewValidation');
-var Review = require('./Review/Review');
-var OrphanReview = require('./Review/OrphanReview');
-var GroupReview = require('./Review/GroupReview');
 var UserAssignment = require('./Review/UserAssignment');
-var ClassificationReview = require('./Review/ClassificationReview');
-var ReviewStatus = require('./Review/ReviewStatus');
-var Notification = require('./Dashboard/Notification');
-var DocumentReview = require('./Review/DocumentReview');
-var Insight = require('./Insight/Insight');
-var Identity = require('./Insight/Identity');
-var DataRisk = require('./Insight/DataRisk');
-var DataLoss = require('./Insight/DataLoss');
-var ClassificationCheck = require('./Insight/ClassificationCheck');
-var Admin = require('./Admin/Admin')
 
 
 /**
@@ -97,6 +99,7 @@ render((
               <Route path="/Insight/DataRisk" component={DataRisk}/>
               <Route path="/Insight/DataLoss" component={DataLoss}/>
               <Route path="/Insight/ClassificationCheck" component={ClassificationCheck}/>
+              <Route path="/Insight/AdvancedAnalytics" component={AdvancedAnalytics}/>
             </Route>
           </Route>
         </Route>
