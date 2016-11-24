@@ -10,11 +10,11 @@ We need to install the external packages first:
 
 The project is then ready to run and will, by default, be deployed on localhost:3000:
 
-    npm run
+    npm start
 
 In short:
 
-    npm install && npm run
+    npm install && npm start
 
 ## Packaging for deployment
 Firstly, generates the package bundle:
@@ -23,8 +23,8 @@ Firstly, generates the package bundle:
 
 Then, create an archive with the project:
 
-    tar xf deploy.tar.bz2 assets dist
+    tar cf deploy.tar.bz2 assets dist
 
 In short:
 
-    npm run build && tar xf deploy.tar.bz2 assets dist
+    npm run build && tar cf deploy.tar.bz2 assets dist

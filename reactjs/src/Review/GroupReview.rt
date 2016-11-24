@@ -182,7 +182,7 @@
                     <div class="mt-lg">
                       <Button
                         onClick="{this.handleClickRefineButton}"
-                        class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
+                        class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine disabled"
                         bsClass="my-btn">
                         Refine prediction
                       </Button>
@@ -406,7 +406,7 @@
           confidentialities={this.state.confidentialities}
           onClick={this.handleTableRowOnClick}
           onChange={this.handleTableRowOnChange}
-          index={this.state.documentPreview}/>
+          index={this.state.documentPreview} />
         </tbody>
       </table>
     </div>

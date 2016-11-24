@@ -110,7 +110,7 @@ var AnomalyDetection = React.createClass({
     this.getUserClient();
     this.getActiveDirectory();
     this.getUserAccess();
-    this.renderDocumentRepositoryTrend();
+    this.renderDocumentRepositoryCategoryAtRisk();
   },
 
   // Get data form APIs
@@ -163,8 +163,33 @@ var AnomalyDetection = React.createClass({
           }
         }
 
+      let colors = {
+        "low": '#27C57F',
+        "medium": '#EB9428',
+        "high":'#E1605B'
+      };
+
+      data['data_second_table'][0]['User Client Data Access Anomaly Trend'].sort(function(a, b) {
+        return a.occurence > b.occurence;
+      });
+
+      let chartValues = [];
+      for (let i = 0, len = data['data_second_table'][0]['User Client Data Access Anomaly Trend'].length; i < len; ++i) {
+        chartValues.push({
+          y: data['data_second_table'][0]['User Client Data Access Anomaly Trend'][i].docs * Demo.MULTIPLIER,
+          color: colors[data['data_second_table'][0]['User Client Data Access Anomaly Trend'][i].type],
+        });
+      }
+
+      let chartData = {
+        xTitle: 'Anomaly Occurence',
+        yTitle: 'Users',
+        data: chartValues,
+      };
+
         this.setState({
           user_Client: data,
+          user_Client_Chart: chartData,
           xhr: update(this.state.xhr, {
             isFetching: {
               $set: fetching.SUCCESS
@@ -193,7 +218,6 @@ var AnomalyDetection = React.createClass({
 
           for (let i = 0, len = data.data_second_table.length; i < len; ++i) {
             for (let j = 0, lenj = data.data_second_table[i]['Anomaly Trend'].length; j < lenj; ++j) {
-              data.data_second_table[i]['Anomaly Trend'][j]['occurence'] *= 1;
               data.data_second_table[i]['Anomaly Trend'][j]['AD Group'] *= 1;
             }
             data.data_second_table[i]['Document at Risk'].value *= Demo.MULTIPLIER;
@@ -202,7 +226,34 @@ var AnomalyDetection = React.createClass({
           }
         }
 
-        this.setState({active_Directory_Group: data})
+      data['data_second_table'][0]['Anomaly Trend'].sort(function(a, b) {
+        return a.occurence > b.occurence;
+      });
+
+        let colors = {
+          "low": '#27C57F',
+          "medium": '#EB9428',
+          "high":'#E1605B'
+        };
+
+        let chartValues = [];
+        for (let i = 0, len = data['data_second_table'][0]['Anomaly Trend'].length; i < len; ++i) {
+          chartValues.push({
+            y: data['data_second_table'][0]['Anomaly Trend'][i]["AD Group"] * Demo.MULTIPLIER,
+            color: colors[data['data_second_table'][0]['Anomaly Trend'][i].type],
+          });
+        }
+
+        let chartData = {
+          xTitle: 'Anomaly Occurence',
+          yTitle: 'AD Group',
+          data: chartValues,
+        };
+
+        this.setState({
+          active_Directory_Group: data,
+          active_Directory_Group_Chart: chartData
+        })
       }
     });
   },
@@ -211,13 +262,23 @@ var AnomalyDetection = React.createClass({
     return makeRequest({
       path: 'api/anomaly/iam/user-access',
       success: (data) => {
-        this.setState({user_Access: data})
+
+      let chartData = {
+        xTitle: 'Anomaly Occurence',
+        yTitle: 'Users',
+        data: [],
+      };
+
+        this.setState({
+          user_Access: data,
+          user_Access_Chart: chartData
+        })
       }
     });
   },
 
   getDocumentRepository() {
-  let doc_data = {
+  let data = {
     "title": "Document Repository Anomaly",
     "risk percentage": 80,
     "risk type": "High Risk",
@@ -300,10 +361,38 @@ var AnomalyDetection = React.createClass({
       }
     ]
   };
-    this.setState({ documentRepository: doc_data });
+
+      data['data second table'][0]['Document Repository Anomaly Trend'].sort(function(a, b) {
+        return a.occurence > b.occurence;
+      });
+
+        let colors = {
+          "low": '#27C57F',
+          "medium": '#EB9428',
+          "high":'#E1605B'
+        };
+
+        let chartValues = [];
+        for (let i = 0, len = data['data second table'][0]['Document Repository Anomaly Trend'].length; i < len; ++i) {
+          chartValues.push({
+            y: data['data second table'][0]['Document Repository Anomaly Trend'][i].users * Demo.MULTIPLIER,
+            color: colors[data['data second table'][0]['Document Repository Anomaly Trend'][i].type],
+          });
+        }
+
+        let chartData = {
+          xTitle: 'Anomaly Occurence',
+          yTitle: 'Folders',
+          data: chartValues,
+        };
+
+    this.setState({
+      documentRepository: data,
+      documentRepositoryChart: chartData,
+    });
   },
 
-  renderDocumentRepositoryTrend() {
+  renderDocumentRepositoryCategoryAtRisk() {
     let colors= [
       "#09B3B5",
       "#51CFE8",
@@ -441,7 +530,31 @@ var AnomalyDetection = React.createClass({
       ]
     };
 
-    this.setState({ clientDataRepository: data });
+    let colors = {
+      "low": '#27C57F',
+      "medium": '#EB9428',
+      "high":'#E1605B'
+    };
+
+    data['data second table'][0]['User Client Data Access Anomaly Trend'].sort(function (a, b) {
+      return a.occurence > b.occurence;
+    });
+
+    let chartValues = [];
+    for (let i = 0, len = data['data second table'][0]['User Client Data Access Anomaly Trend'].length; i < len; ++i) {
+      chartValues.push({
+        y: data['data second table'][0]['User Client Data Access Anomaly Trend'][i].users * Demo.MULTIPLIER,
+        color: colors[data['data second table'][0]['User Client Data Access Anomaly Trend'][i].type],
+      });
+    }
+
+    let chartData = {
+      xTitle: 'Anomaly Occurence',
+      yTitle: 'Users',
+      data: chartValues,
+    };
+
+    this.setState({ clientDataRepository: data, clientDataRepositoryChartData: chartData });
   },
 
   render: template

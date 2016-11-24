@@ -180,7 +180,7 @@
                   <div class="mt-lg">
                     <Button
                       onClick="{this.handleClickRefineButton}"
-                      class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
+                      class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine disabled"
                       bsClass="my-btn">
                       Refine prediction
                     </Button>

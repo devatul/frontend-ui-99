@@ -5,559 +5,584 @@
 <rt-import name="Loader" from="../components/dathena/Loader"/>
 
 <section>
-    <div class="container">
-        <section class="panel panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Anomaly Overview</h2>
-            </header>
-            <div class="panel-body pb-none">
-                <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+  <div class="container">
+    <section class="panel panel-featured panel-featured-primary panel-bordered">
+      <header class="panel-heading">
+        <h2 class="panel-title">Anomaly Overview</h2>
+      </header>
+      <div class="panel-body pb-none">
+        <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
 
-                <div rt-if="this.state.xhr.isFetching == 1" class="row">
-                    <!-- Code API Anomaly Review-->
-                     <div class="col-md-4" rt-repeat="risk in this.state.anomaly_rick" key="risk_{riskIndex}">
-                          <section class="panel" key="{riskIndex}">
-                            <div class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
-                              <h4 class="widget-title">{this.upperFirst(risk.name)}
-                                  <HelpButton
-                                    classMenu="fix-overview-help-button-table"
-                                    classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
-
-                              </h4>
-                              <div class="widget-summary">
-                                  <div class="widget-summary-col">
-                                      <div class="summary">
-                                          <div class="info">
-                                              <strong class="amount">{risk.value}</strong>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                          </section>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-              <h2 class="panel-title">Identity and Access Management Anomaly
-                <HelpButton
+        <div rt-if="this.state.xhr.isFetching == 1" class="row">
+          <!-- Code API Anomaly Review-->
+          <div class="col-md-4" rt-repeat="risk in this.state.anomaly_rick" key="risk_{riskIndex}">
+            <section class="panel" key="{riskIndex}">
+              <div rt-if="this.getRickType(riskIndex)" class="panel-body {this.getRickType(riskIndex).color} widget-panel insight-panel">
+                <h4 class="widget-title">{this.upperFirst(risk.name)}
+                  <HelpButton
                     classMenu="fix-overview-help-button-table"
-                    classIcon="overview_question_a help_question_a"
-                    setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
-                </h2>
-            </header>
-
-            <div class="panel-body" rt-if="this.state.xhr.isFetching != 1">
-              <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
-            </div>
-
-            <div class="panel-body" rt-if="this.state.xhr.isFetching == 1">
-              <div class="row" rt-if="this.state.user_Client">
-                <div class="col-md-3">
-                 <div class="block-header row">
-                      <div class="col-md-5" style="margin-left: 3px">
-                        <h4 class="anomaly-title ">User - Client Data Access Anomaly
-                            <div class="fix_whitespace">
-                                      <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on user perspective."/>
-                            </div>
-                        </h4>
+                    classIcon="overview_question_a help_question_a" setValue="{this.getRickType(riskIndex).info}" />
+                </h4>
+                <div class="widget-summary">
+                  <div class="widget-summary-col">
+                    <div class="summary">
+                      <div class="info">
+                        <strong class="amount">{risk.value}</strong>
                       </div>
                     </div>
-                     <Circle
-                        id='chart_1'
-                        className="anomaly-icon anomaly-icon-fix fix-icon-user"
-                        value_inner="{this.state.user_Client && this.state.user_Client.prediction_percentage}"
-                        value_outer="{this.state.user_Client && this.state.user_Client.risk_percentage}"
-                        content_outer="{this.state.user_Client &&  this.state.user_Client.risk_type}"
-                        content_inner="Prediction Quality: {this.state.user_Client && this.state.user_Client.prediction_quality} " />
-                </div>
-                <div class="col-md-9">
-                  <div class="anomaly-block" style="margin-top: 50px">
-
-                    <div class="table-responsive" >
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>User with Anomaly</th>
-                            <th>Confidentiality at Risk</th>
-                            <th>Folder at Risk</th>
-                            <th>Active Directory at Risk</th>
-                            <th>User Access Right Accuracy
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat="tbl in this.state.user_Client.data_first_table" key="tbl_{tblIndex}">
-                            <td><span class="text-big">{tbl["User with Anomaly"]}</span></td>
-                            <td><span class="text-normal">{tbl["Confidentiality at Risk"]}</span></td>
-                            <td><span class="text-big">{tbl["Folder at Risk"]}</span></td>
-                            <td><span class="text-big">{tbl["Active Directory at Risk"]}</span></td>
-                            <td><span class="text-big text-light-green">{tbl["User Access Right Accuracy"]}%</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>Total Anomaly</th>
-                            <th>Client Data at Risk</th>
-                            <th>Security Settings at Risk</th>
-                            <th>User Client Data Access Anomaly Trend</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat="tbl in this.state.user_Client.data_second_table" key="tbl_{tblIndex}">
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl["Total Anomaly"].value}</span>
-                                <span rt-if="tbl['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Windows User Account</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl["Client Data at Risk"].value}</span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Client Data at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Documents</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl["Security Settings at Risk"].value}</span>
-                                <span rt-if="tbl['Security Settings at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Security Settings at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl['Security Settings at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Windows Active Directory Group</span>
-                            </td>
-                            <td class="td-chart">
-                                <High id_hight = "highChart_1"/>
-                             <!--  <div class="anomaly-chart"></div> -->
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="anomaly-block" >
-                     <TableAnomaly
-                        type = "table1"
-                        path="user-client"
-                    />
                   </div>
                 </div>
               </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+      <header class="panel-heading">
+        <h2 class="panel-title">Identity and Access Management Anomaly
+          <HelpButton
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a"
+            setValue="This details the client data access anomalies from user and active directory group perspective, and the access rights anomalies from user perspective."/>
+        </h2>
+      </header>
 
-              <div class="row mt-lg" rt-if="this.state.active_Directory_Group">
-               <div class="block-header row" >
-                    <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
-                        <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
-                        <div class="fix_whitespace">
-                            <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
-                            </div>
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                  <Circle
-                        id = 'chart_2'
-                        className = "anomaly-icon anomaly-icon-fix fix-icon-window"
-                        value_inner="{this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_percentage}"
-                        value_outer="{this.state.active_Directory_Group && this.state.active_Directory_Group.risk_percentage}"
-                        content_outer="{this.state.active_Directory_Group &&  this.state.active_Directory_Group.risk_type}"
-                        content_inner="Prediction Quality: {this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_quality} " />
-                </div>
-                <div class="col-md-9">
-                  <div class="anomaly-block" style="margin-top: 50px">
+      <div class="panel-body" rt-if="this.state.xhr.isFetching != 1">
+        <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
+      </div>
 
-                    <div class="table-responsive">
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>User with Anomaly</th>
-                            <th>Confidentiality at Risk</th>
-                            <th>Folder at Risk</th>
-                            <th>Active Directory at Risk</th>
-                            <th>User Access Right Accuracy</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_first_table" key="tbl_1_{tbl_1Index}">
-                            <td><span class="text-big">{tbl_1["AD Group Anomaly"]}</span></td>
-                            <td><span class="text-normal">{tbl_1["Confidentiality at Risk"]}</span></td>
-                            <td><span class="text-big">{tbl_1["Folder at Risk"]}</span></td>
-                            <td><span class="text-big">{tbl_1["Active Directory at Risk"]}</span></td>
-                            <td><span class="text-big text-light-green">{tbl_1["User Access Right Accuracy"]}%</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>Total Anomaly</th>
-                            <th>Document at Risk</th>
-                            <th>Total Users at Risk</th>
-                            <th>Anomaly Trend</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_second_table" key="tbl_1_{tbl_1Index}">
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_1['Total Anomaly'].value}</span>
-                                <span rt-if="tbl_1['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Windows Active Directory Group</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_1['Document at Risk'].value}</span>
-                                <span rt-if="tbl_1['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Documents</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_1['Total Users at Risk'].value}</span>
-                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_1['Total Users at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Windows Users Account</span>
-                            </td>
-                            <td class="td-chart">
-                               <High id_hight = "highChart_2"/>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                  </div>
-                  <div class="anomaly-block" >
-                        <TableAnomaly
-                            type= "table2"
-                            path= "active-directory"
-                        />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mt-lg" rt-if="this.state.user_Access != null">
-                <div class="col-md-3">
-                <div class="block-header row">
-                    <div class="col-md-5" style="margin-left:8px">
-
-                        <h4 class="anomaly-title">User - Access Right Anomaly
-                         <div class="fix_whitespace">
-                          <HelpButton
-                                classMenu="fix-overview-help-button-table"
-                                classIcon="overview_question_a help_question_a"   setValue=" This details the access rights anomaly."/>
-                            </div>
-
-                        </h4>
-                    </div>
-                    </div>
-                  <div class="anomaly-radial">
-                    <Circle
-                        id = 'chart_3'
-                        className = "anomaly-icon anomaly-icon-fix fix-icon-user"
-                        value_inner="{this.state.user_Access && this.state.user_Access.prediction_percentage}"
-                        value_outer="{this.state.user_Access && this.state.user_Access.risk_percentage}"
-                        content_outer="{this.state.user_Access &&  this.state.user_Access.risk_type}"
-                        content_inner="Prediction Quality: {this.state.user_Access && this.state.user_Access.prediction_quality} "
-                    />
-                  </div>
-                </div>
-                <div class="col-md-9" style="margin-top: 50px">
-                  <div class="anomaly-block">
-
-                    <div class="table-responsive">
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>User Anomaly</th>
-                            <th>Confidentiality at Risk</th>
-                            <th>Folder at Risk</th>
-                            <th>Active Directory at Risk</th>
-                            <th>User Access Right Accuracy</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat = "tbl_3 in this.state.user_Access.data_first_table" key="tbl_3{tbl_3Index}">
-                            <td><span class="text-big">{tbl_3['User Anomaly']}</span></td>
-                            <td><span class="text-normal">{tbl_3['Confidentiality at Risk']}</span></td>
-                            <td><span class="text-big">{tbl_3['Folder at Risk']}</span></td>
-                            <td><span class="text-big">{tbl_3['Active Directory Group at Risk']}</span></td>
-                            <td><span class="text-big text-light-green">{tbl_3['User Access Right Accuracy']}%</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table class="table anomaly-table">
-                        <thead>
-                          <tr>
-                            <th>Total Anomaly</th>
-                            <th>Document at Risk</th>
-                            <th>Total Active Directory Group at Risk</th>
-                            <th>Access Right Anomaly Trend</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr rt-repeat = "tbl_3 in this.state.user_Access.data_second_table" key="tbl_3{tbl_3Index}">
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_3['Total Anomaly'].value}</span>
-                                <span rt-if="tbl_3['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_3['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Windows User Account</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_3['Document at Risk'].value}</span>
-                                <span rt-if="tbl_3['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_3['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Documents</span>
-                            </td>
-                            <td>
-                              <span class="text-block">
-                                <span class="text-big text-red">{tbl_3['Total Active Directory Group at Risk'].value}</span>
-                                <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                              </span>
-                              <span>Active Directory Group</span>
-                            </td>
-                            <td class="td-chart">
-                               <High id_hight = "highChart_3"/>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="anomaly-block">
-                        <TableAnomaly
-                            type = 'table1'
-                            path = 'user-access'
-                        />
-                  </div>
-                </div>
-              </div>
-            </div>
-        </section>
-        <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
-            <header class="panel-heading">
-                <h2 class="panel-title">Data Architecture Risk Management
+      <div class="panel-body" rt-if="this.state.xhr.isFetching == 1">
+        <div class="row" rt-if="this.state.user_Client">
+          <div class="col-md-3">
+            <div class="block-header row">
+              <div class="col-md-5" style="margin-left: 3px">
+                <h4 class="anomaly-title ">User - Client Data Access Anomaly
+                  <div class="fix_whitespace">
                     <HelpButton
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies for all the documents and for client data." />
-                </h2>
-            </header>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="block-header row">
-                            <div class="col-md-5" style="margin-left: 3px">
-                                <h4 class="anomaly-title">Document Repository Anomaly
-                                    <div class="fix_whitespace">
-                                        <HelpButton
-                                            classMenu="fix-overview-help-button-table"
-                                            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
-                                    </div>
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="anomaly-radial">
-                            <Circle id='chart_4' value_inner="{this.state.documentRepository['prediction percentage']}" value_outer="{this.state.documentRepository['risk percentage']}"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{this.state.documentRepository['risk type']}" content_inner="Prediction Quality: {this.state.documentRepository['prediction quality']} " />
-                        </div>
-                    </div>
-                <div class="col-md-9">
-                    <div class="anomaly-block" style="margin-top: 50px">
-                        <div class="table-responsive">
-                          <table class="table anomaly-table">
-                            <thead>
-                              <tr>
-                                <th>Confidentiality at Risk</th>
-                                <th>Document at Risk</th>
-                                <th>Folder at Risk</th>
-                                <th>User Anomaly</th>
-                                <th>Category at Risk</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr rt-if="this.state.documentRepository" rt-repeat="confidentiality in this.state.documentRepository['data first table']" key="documentRepository_{confidentialityIndex}">
-                                <td><span class="text-normal">{confidentiality["Confidentiality at Risk"]}</span></td>
-                                <td><span class="text-big">{confidentiality["Document at Risk"]}</span></td>
-                                <td><span class="text-big">{confidentiality["Folder at Risk"]}</span></td>
-                                <td><span class="text-big">{confidentiality["User Anomaly"]}</span></td>
-                                <td rt-if="confidentialityIndex == 0" style="width: 250px" rowspan="3">
-                                  <div class="anomaly-pie-chart"></div>
-                                  <div class="anomaly-pie-chart-legend">
-                                    <ul class="list-unstyled clearfix">
-                                      <li rt-repeat="label in this.state.documentRepositoryChart" key="documentRepositoryColors_{labelIndex}"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
-                                    </ul>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <table class="table anomaly-table">
-                            <thead>
-                              <tr>
-                                <th>Total Anomaly</th>
-                                <th>Total User at Risk</th>
-                                <th>Total Folder at Risk</th>
-                                <th>Document Repository Anomaly Trend</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <span class="text-block">
-                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Anomaly"].value }</span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                  </span>
-                                  <span>{ this.state.documentRepository["data second table"][0]["Total Anomaly"].type }</span>
-                                </td>
-                                <td>
-                                  <span class="text-block">
-                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total User at Risk"].value }</span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                  </span>
-                                  <span>{ this.state.documentRepository["data second table"][0]["Total User at Risk"].type }</span>
-                                </td>
-                                <td>
-                                  <span class="text-block">
-                                    <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].value }</span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                    <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                  </span>
-                                  <span>{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].type }</span>
-                                </td>
-                                <td class="td-chart">
-                                   <High id_hight = "highChart_4"/>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                    </div>
-                    <div class="anomaly-block">
-                        <TableAnomaly type='table1'/>
-                    </div>
-                </div>
+                      classMenu="fix-overview-help-button-table"
+                      classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on user perspective."/>
+                  </div>
+                </h4>
+              </div>
             </div>
-            <div class="row mt-lg">
-                <div class="col-md-3">
-                    <div class="block-header row">
-                        <div class="col-md-5" style="margin-left: 8px">
-                            <h4 class="anomaly-title">Client Data Repository Anomaly
-                                <div class="fix_whitespace">
-                                    <HelpButton
-                                        classMenu="fix-overview-help-button-table"
-                                        classIcon="overview_question_a help_question_a"     setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."  />
-                                </div>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="anomaly-radial">
-                        <Circle id = 'chart_5' value_inner="{ this.state.clientDataRepository['prediction percentage'] }" value_outer="{ this.state.clientDataRepository['risk percentage'] }"  className="anomaly-icon anomaly-icon-fix fix-icon-folder" content_outer="{ this.state.clientDataRepository['risk type'] }" content_inner="Prediction Quality: { this.state.clientDataRepository['prediction quality'] }"/>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="anomaly-block" style="margin-top:50px">
-                        <div class="table-responsive">
-                            <table class="table anomaly-table">
-                                <thead>
-                                    <tr>
-                                        <th>Confidentiality at Risk</th>
-                                        <th>Active Directory at Risk</th>
-                                        <th>Folder at Risk</th>
-                                        <th>User Anomaly</th>
-                                        <th>User Access Right Accuracy</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr rt-if="this.state.clientDataRepository" rt-repeat="confidentiality in this.state.clientDataRepository['data first table']" key="clientDataRepository_{confidentialityIndex}">
-                                        <td><span class="text-normal">{ confidentiality["Confidentiality at Risk"] }</span></td>
-                                        <td><span class="text-big">{ confidentiality["Active Directory Group at Risk"] }</span></td>
-                                        <td><span class="text-big">{ confidentiality["Folder at Risk"] }</span></td>
-                                        <td><span class="text-big">{ confidentiality["User Anomaly"] }</span></td>
-                                        <td><span class="text-big text-light-green">{ confidentiality["User Access Right Accuracy"] }%</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table anomaly-table">
-                                <thead>
-                                    <tr>
-                                    <th>Total Anomaly</th>
-                                    <th>Document at Risk</th>
-                                    <th>Active Directory at Risk</th>
-                                    <th>User Client Data Access Anomaly Trend</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <span class="text-block">
-                                        <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Total Anomaly"].value }</span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                      </span>
-                                      <span>{ this.state.clientDataRepository['data second table'][0]['Total Anomaly'].type }</span>
-                                    </td>
-                                    <td>
-                                      <span class="text-block">
-                                        <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Document at Risk"].value }</span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                      </span>
-                                      <span>{ this.state.clientDataRepository['data second table'][0]['Document at Risk'].type }</span>
-                                    </td>
-                                    <td>
-                                      <span class="text-block">
-                                        <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Active Directory at Risk"].value }</span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
-                                        <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
-                                      </span>
-                                      <span>{ this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].type }</span>
-                                    </td>
-                                    <td class="td-chart">
-                                       <High id_hight = "highChart_5"/>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="anomaly-block">
-                        <TableAnomaly type = 'table1'/>
-                    </div>
-                </div>
+            <Circle
+              id='chart_1'
+              className="anomaly-icon anomaly-icon-fix fix-icon-user"
+              value_inner="{this.state.user_Client && this.state.user_Client.prediction_percentage}"
+              value_outer="{this.state.user_Client && this.state.user_Client.risk_percentage}"
+              content_outer="{this.state.user_Client &&  this.state.user_Client.risk_type}"
+              content_inner="Prediction Quality: {this.state.user_Client && this.state.user_Client.prediction_quality} " />
+          </div>
+          <div class="col-md-9">
+            <div class="anomaly-block" style="margin-top: 50px">
+
+              <div class="table-responsive" >
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>User with Anomaly</th>
+                      <th>Confidentiality at Risk</th>
+                      <th>Folder at Risk</th>
+                      <th>Active Directory at Risk</th>
+                      <th>User Access Right Accuracy
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat="tbl in this.state.user_Client.data_first_table" key="tbl_{tblIndex}">
+                      <td><span class="text-big">{tbl["User with Anomaly"]}</span></td>
+                      <td><span class="text-normal">{tbl["Confidentiality at Risk"]}</span></td>
+                      <td><span class="text-big">{tbl["Folder at Risk"]}</span></td>
+                      <td><span class="text-big">{tbl["Active Directory at Risk"]}</span></td>
+                      <td><span class="text-big text-light-green">{tbl["User Access Right Accuracy"]}%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Total Anomaly</th>
+                      <th>Client Data at Risk</th>
+                      <th>Security Settings at Risk</th>
+                      <th>User Client Data Access Anomaly Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat="tbl in this.state.user_Client.data_second_table" key="tbl_{tblIndex}">
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl["Total Anomaly"].value}</span>
+                          <span rt-if="tbl['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Windows User Account</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl["Client Data at Risk"].value}</span>
+                          <span rt-if="tbl['Client Data at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Client Data at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Client Data at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Documents</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl["Security Settings at Risk"].value}</span>
+                          <span rt-if="tbl['Security Settings at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Security Settings at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl['Security Settings at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Windows Active Directory Group</span>
+                      </td>
+                      <td class="td-chart">
+                        <High
+                          id_hight = "highChart_1"
+                          setValue = "{ this.state.user_Client_Chart }"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-        </section>
+            <div class="anomaly-block" >
+              <TableAnomaly
+                type = "table1"
+                path="user-client"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-lg" rt-if="this.state.active_Directory_Group">
+          <div class="block-header row" >
+            <div class="col-md-5" style="margin-left: 25px  ;  font-weight: bold">
+              <h4 class="anomaly-title">Active Directory Group - Client Data Access Anomaly
+                <div class="fix_whitespace">
+                  <HelpButton
+                    classMenu="fix-overview-help-button-table"
+                    classIcon="overview_question_a help_question_a"   setValue="This details the client data access Anomaly focusing on Active Directory Group perspective."/>
+                </div>
+              </h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <Circle
+              id = 'chart_2'
+              className = "anomaly-icon anomaly-icon-fix fix-icon-window"
+              value_inner="{this.state.active_Directory_Group && this.state.active_Directory_Group.prediction_percentage}"
+              value_outer="{this.state.active_Directory_Group && this.state.active_Directory_Group.risk_percentage}"
+              content_outer="{this.state.active_Directory_Group && (this.state.active_Directory_Group.risk_type || 'Unknown')}"
+              content_inner="Prediction Quality: {this.state.active_Directory_Group && (this.state.active_Directory_Group.prediction_quality || 'Unknown')} " />
+          </div>
+          <div class="col-md-9">
+            <div class="anomaly-block" style="margin-top: 50px">
+
+              <div class="table-responsive">
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>User with Anomaly</th>
+                      <th>Confidentiality at Risk</th>
+                      <th>Folder at Risk</th>
+                      <th>Active Directory at Risk</th>
+                      <th>User Access Right Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_first_table" key="tbl_1_{tbl_1Index}">
+                      <td><span class="text-big">{tbl_1["AD Group Anomaly"]}</span></td>
+                      <td><span class="text-normal">{tbl_1["Confidentiality at Risk"]}</span></td>
+                      <td><span class="text-big">{tbl_1["Folder at Risk"]}</span></td>
+                      <td><span class="text-big">{tbl_1["Active Directory at Risk"]}</span></td>
+                      <td><span class="text-big text-light-green">{tbl_1["User Access Right Accuracy"]}%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Total Anomaly</th>
+                      <th>Document at Risk</th>
+                      <th>Total Users at Risk</th>
+                      <th>Anomaly Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat="tbl_1 in this.state.active_Directory_Group.data_second_table" key="tbl_1_{tbl_1Index}">
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_1['Total Anomaly'].value}</span>
+                          <span rt-if="tbl_1['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Windows Active Directory Group</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_1['Document at Risk'].value}</span>
+                          <span rt-if="tbl_1['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Documents</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_1['Total Users at Risk'].value}</span>
+                          <span rt-if="tbl_1['Total Users at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Total Users at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_1['Total Users at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Windows Users Account</span>
+                      </td>
+                      <td class="td-chart">
+                        <High
+                          id_hight = "highChart_2"
+                          setValue = "{this.state.active_Directory_Group_Chart}"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+            <div class="anomaly-block" >
+              <TableAnomaly
+                type= "table2"
+                path= "active-directory"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-lg" rt-if="this.state.user_Access != null">
+          <div class="col-md-3">
+            <div class="block-header row">
+              <div class="col-md-5" style="margin-left:8px">
+
+                <h4 class="anomaly-title">User - Access Right Anomaly
+                  <div class="fix_whitespace">
+                    <HelpButton
+                      classMenu="fix-overview-help-button-table"
+                      classIcon="overview_question_a help_question_a"   setValue=" This details the access rights anomaly."/>
+                  </div>
+
+                </h4>
+              </div>
+            </div>
+            <div class="anomaly-radial">
+              <Circle
+                id = 'chart_3'
+                className = "anomaly-icon anomaly-icon-fix fix-icon-user"
+                value_inner="{this.state.user_Access && this.state.user_Access.prediction_percentage}"
+                value_outer="{this.state.user_Access && this.state.user_Access.risk_percentage}"
+                content_outer="{this.state.user_Access && this.state.user_Access.risk_type}"
+                content_inner="Prediction Quality: {this.state.user_Access && this.state.user_Access.prediction_quality} "
+              />
+            </div>
+          </div>
+          <div class="col-md-9" style="margin-top: 50px">
+            <div class="anomaly-block">
+
+              <div class="table-responsive">
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>User Anomaly</th>
+                      <th>Confidentiality at Risk</th>
+                      <th>Folder at Risk</th>
+                      <th>Active Directory at Risk</th>
+                      <th>User Access Right Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat = "tbl_3 in this.state.user_Access.data_first_table" key="tbl_3{tbl_3Index}">
+                      <td><span class="text-big">{tbl_3['User Anomaly']}</span></td>
+                      <td><span class="text-normal">{tbl_3['Confidentiality at Risk']}</span></td>
+                      <td><span class="text-big">{tbl_3['Folder at Risk']}</span></td>
+                      <td><span class="text-big">{tbl_3['Active Directory Group at Risk']}</span></td>
+                      <td><span class="text-big text-light-green">{tbl_3['User Access Right Accuracy']}%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Total Anomaly</th>
+                      <th>Document at Risk</th>
+                      <th>Total Active Directory Group at Risk</th>
+                      <th>Access Right Anomaly Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat = "tbl_3 in this.state.user_Access.data_second_table" key="tbl_3{tbl_3Index}">
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_3['Total Anomaly'].value}</span>
+                          <span rt-if="tbl_3['Total Anomaly'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_3['Total Anomaly'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Windows User Account</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_3['Document at Risk'].value}</span>
+                          <span rt-if="tbl_3['Document at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_3['Document at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Documents</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{tbl_3['Total Active Directory Group at Risk'].value}</span>
+                          <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'low'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="tbl_3['Total Active Directory Group at Risk'].trend == 'high'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                        </span>
+                        <span>Active Directory Group</span>
+                      </td>
+                      <td class="td-chart">
+                        <High
+                          id_hight = "highChart_3"
+                          setValue = "{ this.state.user_Access_Chart }"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="anomaly-block">
+              <TableAnomaly
+                type = 'table1'
+                path = 'user-access'
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="panel panel-anomaly panel-has-child panel-featured panel-featured-primary panel-bordered">
+      <header class="panel-heading">
+        <h2 class="panel-title">Data Architecture Risk Management
+          <HelpButton
+            classMenu="fix-overview-help-button-table"
+            classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies for all the documents and for client data." />
+        </h2>
+      </header>
+      <div class="panel-body">
+        <div class="row" rt-if="this.state.documentRepository">
+          <div class="col-md-3">
+            <div class="block-header row">
+              <div class="col-md-5" style="margin-left: 3px">
+                <h4 class="anomaly-title">Document Repository Anomaly
+                  <div class="fix_whitespace">
+                    <HelpButton
+                      classMenu="fix-overview-help-button-table"
+                      classIcon="overview_question_a help_question_a"    setValue="This details the document repository anomalies that have been detected at the file level. These anomalies detail files from a range of data categories are present in a single repository, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective." />
+                  </div>
+                </h4>
+              </div>
+            </div>
+            <div class="anomaly-radial">
+              <Circle
+                id='chart_4'
+                value_inner="{this.state.documentRepository['prediction percentage']}"
+                value_outer="{this.state.documentRepository['risk percentage']}"
+                className="anomaly-icon anomaly-icon-fix fix-icon-folder"
+                content_outer="{this.state.documentRepository['risk type'] || 'Unknown'}"
+                content_inner="Prediction Quality: {this.state.documentRepository['prediction quality'] || 'Unknown' }" />
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="anomaly-block" style="margin-top: 50px">
+              <div class="table-responsive">
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Confidentiality at Risk</th>
+                      <th>Document at Risk</th>
+                      <th>Folder at Risk</th>
+                      <th>User Anomaly</th>
+                      <th>Category at Risk</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-if="this.state.documentRepository" rt-repeat="confidentiality in this.state.documentRepository['data first table']" key="documentRepository_{confidentialityIndex}">
+                      <td><span class="text-normal">{confidentiality["Confidentiality at Risk"]}</span></td>
+                      <td><span class="text-big">{confidentiality["Document at Risk"]}</span></td>
+                      <td><span class="text-big">{confidentiality["Folder at Risk"]}</span></td>
+                      <td><span class="text-big">{confidentiality["User Anomaly"]}</span></td>
+                      <td rt-if="confidentialityIndex == 0" style="width: 250px" rowspan="3">
+                        <div class="anomaly-pie-chart"></div>
+                        <div class="anomaly-pie-chart-legend">
+                          <ul class="list-unstyled clearfix">
+                            <li rt-if="this.state.documentrepositoryChart" rt-repeat="label in this.state.documentRepositoryChart" key="documentRepositoryColors_{labelIndex}"><span class="symbol" style="background-color: {label.color}"></span> {label.name}</li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Total Anomaly</th>
+                      <th>Total User at Risk</th>
+                      <th>Total Folder at Risk</th>
+                      <th>Document Repository Anomaly Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-if="this.state.documentRepository && this.state.documentRepository['data second table'] && this.state.documentRepository['data second table'][0]">
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Anomaly"].value }</span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.documentRepository["data second table"][0]["Total Anomaly"].type }</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total User at Risk"].value }</span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total User at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.documentRepository["data second table"][0]["Total User at Risk"].type }</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].value }</span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.documentRepository['data second table'][0]['Total Folder at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].type }</span>
+                      </td>
+                      <td class="td-chart">
+                        <High
+                          id_hight = "highChart_4"
+                          setValue = "{ this.state.documentRepositoryChart }"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="anomaly-block">
+              <TableAnomaly type='table1'/>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-lg" rt-if="this.state.clientDataRepository">
+          <div class="col-md-3">
+            <div class="block-header row">
+              <div class="col-md-5" style="margin-left: 8px">
+                <h4 class="anomaly-title">Client Data Repository Anomaly
+                  <div class="fix_whitespace">
+                    <HelpButton
+                      classMenu="fix-overview-help-button-table"
+                      classIcon="overview_question_a help_question_a"     setValue="This details the client data repository anomalies that have been detected at the file level. These anomalies detail files from client category are present in a single repository with other categories, indicating that sensitive data may be co-mingling, meaning the current data repository structure may be ineffective."  />
+                  </div>
+                </h4>
+              </div>
+            </div>
+            <div class="anomaly-radial">
+              <Circle
+                id = 'chart_5'
+                value_inner="{ this.state.clientDataRepository['prediction percentage'] }"
+                value_outer="{ this.state.clientDataRepository['risk percentage'] }"
+                className="anomaly-icon anomaly-icon-fix fix-icon-folder"
+                content_outer="{ this.state.clientDataRepository['risk type'] || 'Unknown' }"
+                content_inner="Prediction Quality: { this.state.clientDataRepository['prediction quality'] || 'Unknown' }"/>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="anomaly-block" style="margin-top:50px">
+              <div class="table-responsive">
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Confidentiality at Risk</th>
+                      <th>Active Directory at Risk</th>
+                      <th>Folder at Risk</th>
+                      <th>User Anomaly</th>
+                      <th>User Access Right Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-repeat="confidentiality in this.state.clientDataRepository['data first table']" key="clientDataRepository_{confidentialityIndex}">
+                      <td><span class="text-normal">{ confidentiality["Confidentiality at Risk"] }</span></td>
+                      <td><span class="text-big">{ confidentiality["Active Directory Group at Risk"] }</span></td>
+                      <td><span class="text-big">{ confidentiality["Folder at Risk"] }</span></td>
+                      <td><span class="text-big">{ confidentiality["User Anomaly"] }</span></td>
+                      <td><span class="text-big text-light-green">{ confidentiality["User Access Right Accuracy"] }%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table anomaly-table">
+                  <thead>
+                    <tr>
+                      <th>Total Anomaly</th>
+                      <th>Document at Risk</th>
+                      <th>Active Directory at Risk</th>
+                      <th>User Client Data Access Anomaly Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr rt-if="this.state.clientDataRepository['data second table'] && this.state.clientDataRepository['data second table'][0]">
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Total Anomaly"].value }</span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Total Anomaly'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.clientDataRepository['data second table'][0]['Total Anomaly'].type }</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Document at Risk"].value }</span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Document at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.clientDataRepository['data second table'][0]['Document at Risk'].type }</span>
+                      </td>
+                      <td>
+                        <span class="text-block">
+                          <span class="text-big text-red">{ this.state.clientDataRepository["data second table"][0]["Active Directory at Risk"].value }</span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'down'" class="text-semi-big text-light-green fa fa-chevron-down" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'up'" class="text-semi-big text-red fa fa-chevron-up" style="margin-left: 5px"></span>
+                          <span rt-if="this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].trend == 'none'" class="text-semi-big fa fa-minus" style="margin-left: 5px"></span>
+                        </span>
+                        <span>{ this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].type }</span>
+                      </td>
+                      <td class="td-chart">
+                        <High
+                          id_hight = "highChart_5"
+                          setValue = "{ this.state.clientDataRepositoryChartData }"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="anomaly-block">
+              <TableAnomaly type = 'table1'/>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-</section>
+    </section>
