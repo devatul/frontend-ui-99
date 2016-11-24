@@ -389,6 +389,7 @@ var AdvancedAnalytics = React.createClass({
       config: true,
       shield: false,
     }
+    securityGroupChart.top6 = "Volume: Top 6 Active Group"
     return securityGroupChart;
   },
 
@@ -422,6 +423,7 @@ var AdvancedAnalytics = React.createClass({
           config: true,
           shield: false,
         }
+        foldersChart.top6 = "Volume of Data: Top 6 Folders"
     if (foldersChart.data.length <= 1) {
       foldersChart.disabled = true;
     }
@@ -460,6 +462,7 @@ var AdvancedAnalytics = React.createClass({
           config: true,
           shield: false,
         }
+        usersChart.top6 = "Anomaly: Top 6 Users at Risk"
     if (usersChart.data.length <= 1) {
       usersChart.disabled = true;
     }
@@ -475,11 +478,11 @@ var AdvancedAnalytics = React.createClass({
           colors: ['#237C7E', '#349DA1', '#0F2D2F', '#6DCCD0', '#1B5054'],
           colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
           data: [
-            {"y": 377,"name": "Banking Secrecy"},
-            {"y": 234,"name": "Confidential"},
-            {"y": 188,"name": "Internal Only"},
-            {"y": 202,"name": "Public"},
-            {"y": 308,"name": "Secret"}
+            {"y": 377,"name": "Word.doc"},
+            {"y": 234,"name": "Excel.xls"},
+            {"y": 188,"name": "PowerPoint.ppt"},
+            {"y": 202,"name": "PDF.pdf"},
+            {"y": 308,"name": "Other"}
           ]
         };
         let total = 0;
@@ -497,6 +500,7 @@ var AdvancedAnalytics = React.createClass({
           config: true,
           shield: false,
         }
+        documentsChart.top6 = "Anomaly: Risk Posture(High | Medium | Low)"
     if (documentsChart.data.length <= 1) {
       documentsChart.disabled = true;
     }

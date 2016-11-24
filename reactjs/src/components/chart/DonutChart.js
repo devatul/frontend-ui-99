@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {isEqual} from 'lodash';
 import HelpButton from '../dathena/HelpButton';
 
+
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
 
@@ -141,7 +142,7 @@ var DonutChart = React.createClass({
       }
     }
     let lineStyle = {color:config.colors[0], backgroundColor:config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-42px' };
-
+    let top6 = config.top6 && <div className="top6"><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i><span>{config.top6}</span></div>
     return (
       <section className="panel">
         <div className="panel-body chart-panel widget-panel">
@@ -165,15 +166,21 @@ var DonutChart = React.createClass({
             {options.config ? <a className="toggle-button btn btn-default analytics config"><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
             {options.shield ? <a className="toggle-button btn btn-default analytics shield"><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
             { legendChart &&
-                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none'}}>
                   {legendChart}
                 </ul>
               }
             </div>
             { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
+            <div style={{paddingLeft:'11px'}}>
               <div className="analytics bottom-line" style={lineStyle}>
                 <i className="fa fa-caret-up" aria-hidden="true"></i>
               </div>
+              <div className="filter-tags-block">
+                  <label class="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
+              </div>
+              {top6}
+            </div>
           </span>
           :
           <span>

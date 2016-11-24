@@ -100,6 +100,19 @@
     padding-top: 1px;
     padding-left: 0.5px;
 }
+.analyticsChart{
+  background: #fff;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.analyticsChart .top6 i{
+  margin-right: 7px;
+  font-size: 18px;
+}
+/*.analyticsChart .top6 span{
+  //color:#000000
+}*/
 .analytics.filter{
     position: absolute;
     margin-top: -180px;
@@ -160,7 +173,6 @@
   position: relative;
   height: 3px;
   margin-top: 15px;
-  margin-left: 10px;
   margin-right: -42px;
   z-index: 999;
 }

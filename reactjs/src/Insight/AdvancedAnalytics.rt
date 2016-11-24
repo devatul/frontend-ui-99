@@ -376,6 +376,7 @@
                           <tbody class="fix-td-checkbox">
                             <tr rt-repeat= "row in this.state.configChart.documents.data"  key="{rowIndex}">
                               <td class="text-left">
+                              <i class="{'fa ' + (func.renderClassType(row.name)) + ' action-file-icon'}"></i>
                                 {row.name}
                               </td>
                               <td>
