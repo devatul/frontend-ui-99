@@ -1,4 +1,3 @@
-
 <rt-import name="MenuBar" from="../components/MenuBar"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="InfoButton" from="../components/dathena/InfoButton"/>
@@ -287,83 +286,7 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody rt-if="this.state.dataReview != null">
-                                                            <table.row3
-                                                                rt-repeat="document in this.state.dataReview.challenge_back_docs"
-                                                                document="{document}"
-                                                                key="document_{documentIndex}"
-                                                                onClick="{this.handleTableRowOnClick}"
-                                                                onChange="{this.handleTableRowOnChange}"
-                                                                categories="{this.state.categories}"
-                                                                confidentialities="{this.state.confidentialities}"
-                                                                index="{this.constructor.challengeBack + '_' + documentIndex}" />
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </Panel.body>
-                                    </Panel.custom>
-                                    <div class="clearfix">
-                                        <Button bsClass="my-btn" class="btn btn-green btn-next-cat pull-right ml-md"
-                                            onClick="{this.setCategoryCurrent.bind(this, this.state.currentIndex.category + 1)}">Go to Next Category</Button>
-                                        <Button bsClass="my-btn" class="btn btn-green btn-next-reviewer pull-right"
-                                            onClick="{this.handleNextReviewer}">Go to Next Reviewer</Button>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Tab.Pane>
-                    <Tab.Pane key="content_summary" eventKey="tab_summary">
-                        <Panel.custom rt-repeat="category in this.state.summary" class="panel-featured-compact panel-bordered">
-                            <Panel.head>
-                                <h2 class="panel-title text-capitalize">{category.name}</h2>
-                            </Panel.head>
-                            <Panel.body>
-                                <div class="table-responsive">
-                                    <table class="table table-condensed table-reviewer-summary">
-                                        <thead>
-                                            <tr>
-                                                <th class="col50">Number of Assigned Reviewers:</th>
-                                                <th class="col25">Number of Documents Challenged</th>
-                                                <th class="col25">Total Numbers of Documents Classified</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="no-border-top">
-                                                    <span class="assigned-num">{category.number_of_assigned}</span>
-                                                    <a data-toggle="collapse" data-target="#reviewerList{categoryIndex}" class="accordion-toggle ml-md">
-                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
-                                                    </a>
-                                                </td>
-                                                <td class="no-border-top text-center">
-                                                    {category.total_challenged_docs}
-                                                </td>
-                                                <td class="no-border-top text-center">
-                                                    {category.total_classified_docs}
-                                                </td>
-                                            </tr>
-                                            <tr class="child-table">
-                                                <td colspan="4" class="hiddenRow">
-                                                    <div class="accordian-body collapse" id="reviewerList{categoryIndex}">
-                                                        <table class="table">
-                                                            <tbody>
-                                                                <tr rt-repeat="reviewer in category.reviewers">
-                                                                    <td class="col50">{reviewer.first_name + '.' + reviewer.last_name} (Last Modified)</td>
-                                                                    <td class="col25">&#160;</td>
-                                                                    <td class="col25 chart-col">
-                                                                        <div class="progress progress-xl progress-squared light">
-                                                                        <div class="progress-bar progress-bar-info" role="progressbar"
-                                                                            aria-valuenow="{this.progressSummary(category, reviewer)}"
-                                                                            aria-valuemin="0" aria-valuemax="100"
-                                                                            style="width: {this.progressSummary(category, reviewer)}%;">
-                                                                            <span class="percent">{reviewer.number_classified_docs}</span>
-                                                                        </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
+                                                          </tbody>
                                                         </table>
                                                     </div>
                                                 </td>
