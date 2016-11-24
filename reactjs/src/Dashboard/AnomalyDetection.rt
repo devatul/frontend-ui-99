@@ -138,8 +138,10 @@
                               <span>Windows Active Directory Group</span>
                             </td>
                             <td class="td-chart">
-                                <High id_hight = "highChart_1"/>
-                             <!--  <div class="anomaly-chart"></div> -->
+                              <High
+                                id_hight = "highChart_1"
+                                setValue = "{ this.state.user_Client_Chart }"
+                              />
                             </td>
                           </tr>
                         </tbody>
@@ -239,7 +241,10 @@
                               <span>Windows Users Account</span>
                             </td>
                             <td class="td-chart">
-                               <High id_hight = "highChart_2"/>
+                              <High
+                                id_hight = "highChart_2"
+                                setValue = "{this.state.active_Directory_Group_Chart}"
+                              />
                             </td>
                           </tr>
                         </tbody>
@@ -342,7 +347,10 @@
                               <span>Active Directory Group</span>
                             </td>
                             <td class="td-chart">
-                               <High id_hight = "highChart_3"/>
+                              <High
+                                id_hight = "highChart_3"
+                                setValue = "{ this.state.user_Access_Chart }"
+                              />
                             </td>
                           </tr>
                         </tbody>
@@ -460,7 +468,10 @@
                                   <span>{ this.state.documentRepository["data second table"][0]["Total Folder at Risk"].type }</span>
                                 </td>
                                 <td class="td-chart">
-                                   <High id_hight = "highChart_4"/>
+                                  <High
+                                    id_hight = "highChart_4"
+                                    setValue = "{ this.state.documentRepositoryChart }"
+                                  />
                                 </td>
                               </tr>
                             </tbody>
@@ -557,7 +568,10 @@
                                       <span>{ this.state.clientDataRepository['data second table'][0]['Active Directory at Risk'].type }</span>
                                     </td>
                                     <td class="td-chart">
-                                       <High id_hight = "highChart_5"/>
+                                      <High
+                                        id_hight = "highChart_5"
+                                        setValue = "{ this.state.clientDataRepositoryChartData }"
+                                      />
                                     </td>
                                   </tr>
                                 </tbody>
