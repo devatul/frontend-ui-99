@@ -116,7 +116,7 @@ module.exports = {
                 return "fa-file-text-o";
         }
     },
-    
+
     getCategories: (options) => {
         options.path = urls.LABEL_CATEGORY;
         makeRequest(options);
@@ -146,7 +146,7 @@ module.exports = {
         options.path = urls.PROFILE;
         makeRequest(options);
     },
-    
+
     setProfile: (options) => {
         options.path = urls.PROFILE;
         options.method = "PUT";
@@ -168,7 +168,7 @@ module.exports = {
         options.path = urls.TOKEN
         options.method = "POST";
         makeRequest(options);
-    }, 
+    },
 
     setEmail: (options) => {
         options.path = urls.EMAIL;
@@ -185,11 +185,11 @@ module.exports = {
     getNotification: (options) => {
         if (options.urgency)
             options.path = urls.NOTIFICATION + '?urgency=' + options.urgency;
-        else if (options.period) 
+        else if (options.period)
             options.path = urls.NOTIFICATION + '?period=' + options.period
-        else 
+        else
             return null
-        makeRequest(path); 
+        makeRequest(path);
     },
 
     getDataLose: (options) => {
@@ -225,7 +225,7 @@ module.exports = {
     },
 
     getStatistics: (options) => {
-        options.path = urls.SATISFISTICS;
+        options.path = urls.STATISTICS;
         makeRequest(options);
     },
 
@@ -246,6 +246,15 @@ module.exports = {
 
     getGroups: (options) => {
         options.path = urls.GROUP;
+        makeRequest(options);
+    },
+
+    setGroupDocuments: (options) => {
+        options.path = urls.GROUP_SAMPLES;
+        if (options.id) {
+            options.path += '?id=' + options.id;
+        }
+        options.method = 'POST';
         makeRequest(options);
     },
 
@@ -330,7 +339,7 @@ module.exports = {
     getSla: (options) => {
         options.path = urls.SLA;
         makeRequest(options);
-    }, 
+    },
 
     checkConfidentiality: (options) => {
         options.path = urls.CONFIDENTIAL;

@@ -7,6 +7,7 @@ import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
 import Constant, {status, fetching} from '../App/Constant.js';
 import Demo from '../Demo.js';
+import {getGroups, getCategories, getDocuments, getConfidentialities, getStatistics, getCentroids, getCloudwords, setGroupDocuments} from '../utils/function.js';
 
 var GroupReview = React.createClass({
   displayName: 'GroupReview',
@@ -234,7 +235,7 @@ var GroupReview = React.createClass({
     }
 
       let { id } = this.state.groupCurrent;
-            setOrphanDocuments({
+            setGroupDocuments({
                 id: id,
                 dataType: "text",
                 params: JSON.stringify({ "group_id": id, "docs": docs}),
