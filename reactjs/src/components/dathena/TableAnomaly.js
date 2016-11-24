@@ -7,6 +7,7 @@ import _ from 'lodash';
 import Anomaly from '../../components/dathena/AnomalyStateSelect';
 import Constant from '../../App/Constant.js';
 import Demo from '../../Demo.js';
+import {getAnomalyIamInfo} from '../../utils/function.js';
 
 var TableAnomaly = React.createClass({
   getInitialState() {
