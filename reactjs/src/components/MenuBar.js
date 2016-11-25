@@ -370,11 +370,11 @@ var MenuBar = React.createClass
                     //
                     for(let i = array.length - 1; i >= 0; i--) {
 
-                        let indexParam = findIndex(data, { id: array[i].id });
+                        let indexParam = findIndex(data, { id: parseInt(array[i].id) });
 
                         if(array[i].checked && indexParam === -1) {
                             data.push({
-                                id: array[i].id,
+                                id: parseInt(array[i].id),
                                 name: array[i].name
                             });
                         }
