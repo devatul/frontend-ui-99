@@ -267,8 +267,8 @@ var OverView = React.createClass({
         {dataChart} = this.state,
         {languages, categories} = this.state.scan.result;
 
-    //add data categories
-    categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
+        //add data categories
+        categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
 
     for (let i = categories.length - 1; i >= 0; i--) {
       categoryChart.data[i] = {
@@ -413,7 +413,17 @@ var OverView = React.createClass({
   },
 
   handleFilter: function (bodyRequest) {
-    if (!isEmpty(bodyRequest)) {
+    let notEmpty = false;
+
+    for (let i in bodyRequest) {
+      if (bodyRequest.hasOwnProperty(i)
+        && bodyRequest[i].length !== 0) {
+          notEmpty = true;
+          break;
+        }
+    }
+
+    if (notEmpty) {
       makeRequest({
         method: 'POST',
         path: 'api/scan/filter/',

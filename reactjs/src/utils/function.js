@@ -23,6 +23,8 @@ module.exports = {
             }
         }
 
+        newArray = newArray.filter(function (a) { return a !== undefined; });
+
         return newArray;
     },
 

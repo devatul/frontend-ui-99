@@ -170,19 +170,19 @@
                                                             Clear All
                                                         </option>
                                                         <option
-                                                            rt-repeat="doctype in this.state['doc-types']"
+                                                            rt-repeat="doctype in this.state['doc_types']"
                                                             value="{doctypeIndex}"
                                                             key="{doctypeIndex}">
                                                             {doctype.name}
                                                         </option>
                                                 </Select2>
                                                 <!--<MultiSelectBox
-                                                    id="doc-types"
+                                                    id="doc_types"
                                                     title="Document Type"
                                                     onChange={this.handleSelectBoxChange}
                                                     onClear={this.handleClearAll}
                                                     checkDefault={true}
-                                                    data={listLabel['doc-types']} />-->
+                                                    data={listLabel['doc_types']} />-->
                                             </div>
                                         </li>
                                     </ul>
