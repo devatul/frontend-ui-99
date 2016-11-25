@@ -366,28 +366,31 @@ var MenuBar = React.createClass
             [property]: {
                 $apply: (data) => {
                     data = cloneDeep(data);
-                    //let indexParam = -1;
-                    //
-                    for(let i = array.length - 1; i >= 0; i--) {
-
+                    for (let i = array.length - 1; i >= 0; i--) {
                         let indexParam = findIndex(data, { id: parseInt(array[i].id) });
 
-                        if(array[i].checked && indexParam === -1) {
+                        if (array[i].checked && indexParam === -1) {
                             data.push({
                                 id: parseInt(array[i].id),
                                 name: array[i].name
                             });
+                          if (property == "languages") {
+                            let lang = this.state.languages.find(function (a) { return a.id == parseInt(array[i].id); });
+                            if (lang) {
+                              data[data.length - 1]["short_name"] = lang.short_name;
+                            } else {
+                              data.splice(1, data[data.length -1]);
+                            }
+                          }
                         }
-                        if(!array[i].checked && indexParam >= 0) {
+                        if (!array[i].checked && indexParam >= 0) {
                             data.splice(indexParam, 1);
                         }
                     }
-                    //
                     return data;
                 }
             }
         });
-        //
         return updateParam;
     },
 
