@@ -105,6 +105,7 @@ var UserAssignment = React.createClass({
     },
 
     componentWillUpdate(nextProps, nextState) {
+      console.log('this.state-user',this.state)
         if(this.state.category.current != nextState.category.current) {
             var { reviewers } = this.state.datafilter.request;
             var { current } = this.state.category;

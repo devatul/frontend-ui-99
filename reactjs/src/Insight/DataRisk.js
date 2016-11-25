@@ -13,6 +13,12 @@ var DataRisk = React.createClass({
   getInitialState() {
     return {
       dataRisk: {},
+      chart:{
+        duplicated: {},
+        stale_files: {},
+        storage_cost_saving_opportunity: {},
+        twins: {},
+      },
       xhr: {
         status: "Report is loading",
         message: "Please wait!",
@@ -59,6 +65,19 @@ var DataRisk = React.createClass({
           data.stale_files.value *= Demo.MULTIPLIER;
           data.twins.value *= Demo.MULTIPLIER;
         }
+
+        let chart = this.state.chart;
+        chart.duplicated.config = {name: 'Documents', colors: [ '#0FABE6'], colorsHover: '#0FABE6'}
+        chart.duplicated.data = [data.duplicated.value];
+
+        chart.stale_files.config = {name: 'Documents', colors: [ '#ED9C27'], colorsHover: '#DFF2F8'}
+        chart.stale_files.data = [data.stale_files.value];
+
+        chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A'}
+        chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
+
+        chart.twins.config = {name: 'Documents', colors: [ '#359CA1'], colorsHover: '#359CA1'}
+        chart.twins.data = [data.twins.value];
 
         this.setState({
           xhr: update(this.state.xhr, {

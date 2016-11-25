@@ -3265,6 +3265,13 @@ div[id^='legendContainer'] {
       margin-top: 5px;
       vertical-align: super;
       display: block; }
+    .datarisk-files.label{
+      z-index: 1;
+      position: absolute;
+      padding-top: 0px !important;
+      left: 24px;
+      margin-top: -25px;
+    }
   .pie-wrapper.pie-md {
     height: 60px;
     width: 60px;

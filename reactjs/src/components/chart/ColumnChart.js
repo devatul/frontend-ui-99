@@ -27,18 +27,21 @@ var ColumnChart = React.createClass({
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props.series, nextProps.series);
   },
-
+  componentDidMount(){
+    this.draw();
+  },
   componentDidUpdate(prevProps, prevState) {
     this.draw();
   },
 
   draw() {
-    var {config, series, categories, id} = this.props,
+    var {config, series, categories, id, data} = this.props,
         {colors, colorsHover} = config;
 
     $('#' + id).highcharts({
       chart: {
-        type: 'column'
+        type: 'column',
+        height: 150,
       },
       title: {
         text: ''
@@ -56,13 +59,13 @@ var ColumnChart = React.createClass({
             'font-size': '10px'
           },
         },
-        tickInterval: 1,
+        tickInterval: 100,
         tickWidth: 0,
         lineWidth: 0,
         minPadding: 0,
         maxPadding: 0,
         gridLineWidth: 0,
-        tickmarkPlacement: 'on'
+        tickmarkPlacement: 'off'
       },
       yAxis: {
         min: 0,
@@ -120,10 +123,18 @@ var ColumnChart = React.createClass({
           }
         }
       },
-      series: series
+      series:  [{
+        colorByPoint: true,
+        name: config.name,
+        colors: config.colors,
+        colorsHover: config.colorsHover,
+        data: data
+      }] //series
     });
   },
-
+  // <HelpButton
+  //   classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
+  //   setValue={help} />
   render() {
     var {id, title, help} = this.props;
 
@@ -131,9 +142,7 @@ var ColumnChart = React.createClass({
       <div>
         <h4 className="chart-title">
           {title}
-          <HelpButton
-            classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-            setValue={help} />
+
         </h4>
         <div id={id}></div>
       </div>

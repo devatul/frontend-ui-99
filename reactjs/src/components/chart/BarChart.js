@@ -16,7 +16,9 @@ var BarChart = React.createClass({
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props.data, nextProps.data);
   },
-
+  componentDidMount(){
+    this.draw();
+  },
   componentDidUpdate(prevProps, prevState) {
     this.draw();
   },
@@ -141,7 +143,6 @@ var BarChart = React.createClass({
 
   render() {
     let {id, config} = this.props;
-
     return (
       <div>
         <div id={id}></div>

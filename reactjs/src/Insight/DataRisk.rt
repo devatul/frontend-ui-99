@@ -4,6 +4,7 @@
 <rt-import name="HelpButton2" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="Risk" from="./components/RickInsights"/>
 <rt-import name="Loader" from="../components/dathena/Loader"/>
+<rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
 
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
@@ -57,17 +58,17 @@
               <div class="widget-summary">
                 <div class="widget-summary-col">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.duplicated && this.floor(this.state.dataRisk.duplicated.percentage)} style-2 pie-blue">
-                    <span class="label">
-                      {this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.value}
-                      <span class="smaller">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.label}</span>
-                    </span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
+                  <div class="label datarisk-files ">
+                    {this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.value}
+                    <span class="smaller">{this.state.dataRisk.duplicated && this.state.dataRisk.duplicated.label}</span>
                   </div>
-                  <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage)}% against total files scanned</span>
+                  <ColumnChart
+                      id="duplicated"
+                      config={this.state.chart.duplicated.config}
+
+                      data={this.state.chart.duplicated.data} />
+                  </div>
+                  <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage).toFixed(2)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -89,17 +90,16 @@
               <div class="widget-summary">
                 <div class="widget-summary-col">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.twins && this.floor(this.state.dataRisk.twins.percentage)} style-2 pie-green">
-                    <span class="label">
+                    <div class="label datarisk-files">
                       {this.state.dataRisk.twins && this.state.dataRisk.twins.value}
                       <span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.twins.label}</span>
-                    </span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
                     </div>
-                    <div class="shadow"></div>
+                    <ColumnChart
+                        id="twins"
+                        config={this.state.chart.twins.config}
+                        data={this.state.chart.twins.data} />
                   </div>
-                  <span class="pie-info">{this.state.dataRisk.twins && this.formatNumber(this.state.dataRisk.twins.percentage)}% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.twins && this.formatNumber(this.state.dataRisk.twins.percentage).toFixed(2)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -120,17 +120,16 @@
               <div class="widget-summary">
                 <div class="widget-summary-col">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.stale_files && this.floor(this.state.dataRisk.stale_files.percentage)} style-2 pie-yellow">
-                    <span class="label">
+                    <div class="label datarisk-files">
                       {this.state.dataRisk.stale_files && this.state.dataRisk.stale_files.value}
                       <span class="smaller">{this.state.dataRisk.twins && this.state.dataRisk.stale_files.label}</span>
-                    </span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
                     </div>
-                    <div class="shadow"></div>
+                    <ColumnChart
+                        id="stale_files"
+                        config={this.state.chart.stale_files.config}
+                        data={this.state.chart.stale_files.data}  />
                   </div>
-                  <span class="pie-info">{this.state.dataRisk.stale_files && this.formatNumber(this.state.dataRisk.stale_files.percentage)}% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.stale_files && this.formatNumber(this.state.dataRisk.stale_files.percentage).toFixed(2)}% against total files scanned</span>
                 </div>
               </div>
             </div>
@@ -150,17 +149,16 @@
               <div class="widget-summary">
                 <div class="widget-summary-col">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.storage_cost_saving_opportunity && this.floor(this.state.dataRisk.storage_cost_saving_opportunity.percentage)} style-2 pie-red">
-                    <span class="label">
+                    <div class="label datarisk-files">
                       {this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.size}{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'terabytes' ? 'TB' : (this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.unit == 'kilobytes' ? 'KB' : 'B') }
                       <span class="smaller">{this.state.dataRisk.storage_cost_saving_opportunity && this.state.dataRisk.storage_cost_saving_opportunity.label}</span>
-                    </span>
-                    <div class="pie">
-                      <div class="left-side half-circle"></div>
-                      <div class="right-side half-circle"></div>
                     </div>
-                    <div class="shadow"></div>
+                    <ColumnChart
+                        id="storage_cost_saving_opportunity"
+                        config={this.state.chart.storage_cost_saving_opportunity.config}
+                        data={this.state.chart.storage_cost_saving_opportunity.data}  />
                   </div>
-                  <span class="pie-info">{this.state.dataRisk.storage_cost_saving_opportunity && this.formatNumber(this.state.dataRisk.storage_cost_saving_opportunity.percentage)}% against total files scanned</span>
+                  <span class="pie-info">{this.state.dataRisk.storage_cost_saving_opportunity && this.formatNumber(this.state.dataRisk.storage_cost_saving_opportunity.percentage).toFixed(2)}% against total files scanned</span>
                 </div>
               </div>
             </div>
