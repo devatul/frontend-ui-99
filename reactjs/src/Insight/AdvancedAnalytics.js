@@ -85,7 +85,6 @@ var AdvancedAnalytics = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state)
     var prevResult = prevState.scan.result,
         result = this.state.scan.result;
 
@@ -306,12 +305,12 @@ var AdvancedAnalytics = React.createClass({
         }
         categoryChart.options = {
           filter: true,
-          search: true,
+          search: false,
           user: true,
           users: true,
           folder: true,
           archive: true,
-          config: true,
+          config: false,
           shield: true,
         }
         categoryChart.total = total;

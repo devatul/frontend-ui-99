@@ -141,8 +141,8 @@ var DonutChart = React.createClass({
           </li>;
       }
     }
-    
-    let lineStyle = {color:config.colors[0], backgroundColor:config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-70px' };
+
+    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-70px' };
     let top6 = config.top6 && <div className="top6"><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i><span>{config.top6}</span></div>
     return (
       <section className="panel">
@@ -178,7 +178,7 @@ var DonutChart = React.createClass({
                 <i className="fa fa-caret-up" aria-hidden="true"></i>
               </div>
               <div className="filter-tags-block">
-                  <label class="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
+                  <label className="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
               </div>
               {top6}
             </div>
