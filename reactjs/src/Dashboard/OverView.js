@@ -216,6 +216,7 @@ var OverView = React.createClass({
       confidentiality: {$set: confidentialityData},
       doctypes: {$set: doctypeData}
     });
+
     this.setState({configChart: updateData});
   },
 
@@ -310,30 +311,21 @@ var OverView = React.createClass({
     categoryNumber = categoryChart.data.length;
     languageNumber = languageChart.data.length;
 
-    //Check if data is 0 || 1 => disabled
-    if (languageNumber > 1 && categoryNumber > 1) {
+    categoryChart.disabled = categoryNumber == 0;
+    languageChart.disabled = languageNumber == 0;
+
+    if (categoryNumber > 0 && languageNumber > 0) {
+      // Normal case
       categoryLanguageChart[0] = categoryChart;
       categoryLanguageChart[1] = languageChart;
-    }
-
-    if (languageNumber <= 1 && categoryNumber > 1) {
+    } else if (categoryNumber > 0 && languageNumber == 0) {
+      // No internal donut
       categoryChart.innerSize = '60%';
       categoryLanguageChart[0] = categoryChart;
-    }
-
-    if (categoryNumber <= 1 && languageNumber > 1) {
+    } else if (categoryNumber == 0 && languageNumber > 0) {
+      // Bigger languages chart
       languageChart.size = '100%';
       categoryLanguageChart[0] = languageChart;
-    } else {
-      categoryLanguageChart[0] = categoryChart;
-    }
-
-    if (categoryNumber <= 1 && languageNumber <= 1) {
-      categoryChart.disabled = true;
-      languageChart.disabled = true;
-
-      categoryLanguageChart[0] = categoryChart;
-      categoryLanguageChart[1] = languageChart;
     }
 
     return categoryLanguageChart;
@@ -357,7 +349,7 @@ var OverView = React.createClass({
       };
     }
 
-    if (confidentialityChart.data.length <= 1) {
+    if (confidentialityChart.data.length < 1) {
       confidentialityChart.disabled = true;
     }
 
@@ -382,7 +374,7 @@ var OverView = React.createClass({
       };
     }
 
-    if (doctypesChart.data.length <= 1) {
+    if (doctypesChart.data.length < 1) {
       doctypesChart.disabled = true;
     }
 
