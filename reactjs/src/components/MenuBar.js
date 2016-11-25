@@ -12,7 +12,7 @@ import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoc
 var MenuBar = React.createClass
 ({
 	getInitialState() {
-	    return { 
+	    return {
             categories: [],
             confidentialities: [],
             'doc-types': [],
@@ -51,14 +51,14 @@ var MenuBar = React.createClass
 	},
 
     componentDidMount() {
-        if(this.props.showFilter) {
+        if (this.props.showFilter) {
             this.getCategories();
             this.getConfidentialities();
             this.getDoctypes();
             this.getLanguages();
         }
-        if(this.props.showInfo && !this.props.dataScan) {
-            this.getscanResult();
+        if (this.props.showInfo && !this.props.dataScan) {
+            this.getScanResult();
         }
     },
 
@@ -84,34 +84,40 @@ var MenuBar = React.createClass
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.shouldUpdate === true) {
+        if (this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
-        if(!isEqual( this.state.params, prevState.params )) {
-            var { params } = this.state,
-                {
-                    categories,
-                    languages,
-                    confidentialities
-                } = this.state.params;
-            if(categories && categories.length === 0) {
-                delete params.categories;
-            }
-
-            if(confidentialities && confidentialities.length === 0) {
-                delete params.confidentialities;
-            }
-
-            if(languages && languages.length === 0) {
-                delete params.languages;
-            }
-
-            if(params["doc-types"] && params["doc-types"].length === 0) {
-                delete params["doc-types"];
-            }
-            this.props.handleFilter(params);
+        if (!isEqual(this.state.params, prevState.params)) {
+          this.changeFilters();
         }
     },
+
+  changeFilters() {
+    var { params } = this.state,
+      {
+        categories,
+        languages,
+        confidentialities
+      } = this.state.params;
+    if (categories && categories.length === 0) {
+      delete params.categories;
+    }
+
+    if (confidentialities && confidentialities.length === 0) {
+      delete params.confidentialities;
+    }
+
+    if (languages && languages.length === 0) {
+      delete params.languages;
+    }
+
+    if (params["doc-types"] && params["doc-types"].length === 0) {
+      delete params["doc-types"];
+    }
+
+    this.props.handleFilter(params);
+  },
+
     configListLabel: function(data) {
         for(let i = data.length - 1; i >= 0; i--) {
             data[i].checked = false;
@@ -178,8 +184,8 @@ var MenuBar = React.createClass
                         let label = this.state.labels[indexLabel];
                         arr = cloneDeep(arr);
 
-                        for(let i = arr.length - 1; i >= 0; i--) {
-                            if(arr[i].id === label.id) {
+                        for (let i = arr.length - 1; i >= 0; i--) {
+                            if (arr[i].name === label.name) {
                                 arr.splice(i, 1);
                                 break;
                             }
@@ -298,12 +304,9 @@ var MenuBar = React.createClass
             }
             break;
             case parseInt(index) >= 0: {
-                //
-
                 array[index].checked = !array[index].checked;
-                //
 
-                for(let i = array.length - 1; i >= 0; i--) {
+                for (let i = array.length - 1; i >= 0; i--) {
                     if(!array[i].checked) {
                         array['checkall'] = false;
                     }
@@ -560,7 +563,8 @@ var MenuBar = React.createClass
         this.setState({ listLabel: updateLabel, filter: updateFilter });
     },
 
-    getscanResult() {
+  // FIXME: Code duplicated with OverView.js
+    getScanResult() {
         getScan({
             success: (data) => {
               // FIXME: Demo fix, to be removed
