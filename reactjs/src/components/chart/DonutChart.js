@@ -157,7 +157,7 @@ var DonutChart = React.createClass({
               <span>
               <div className="widget-chart analytics">
 
-              <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto'}}></div>
+              <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto',zIndex: '1'}}></div>
             {options.filter ? <a className="toggle-button btn btn-default analytics filter"><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
             {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
             {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
