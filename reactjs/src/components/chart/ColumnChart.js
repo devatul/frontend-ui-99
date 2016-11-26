@@ -36,8 +36,9 @@ var ColumnChart = React.createClass({
 
   draw() {
     var {config, series, categories, id, data} = this.props,
-        {colors, colorsHover} = config;
-
+        {colors, colorsHover} = config,
+        maxPoint = 200,
+        empty = maxPoint - data[0];
     $('#' + id).highcharts({
       chart: {
         type: 'column',
@@ -52,7 +53,9 @@ var ColumnChart = React.createClass({
       colors: colors,
       xAxis: {
         categories: categories,
+        minorGridLineColor: "#FFFFFF",
         labels: {
+           enabled: false,
           autoRotation: false,
           style: {
             color: '#272727',
@@ -61,14 +64,16 @@ var ColumnChart = React.createClass({
         },
         tickInterval: 100,
         tickWidth: 0,
-        lineWidth: 0,
+        lineWidth: 0.7,
         minPadding: 0,
         maxPadding: 0,
         gridLineWidth: 0,
         tickmarkPlacement: 'off'
       },
       yAxis: {
+        gridLineColor: 'transparent',
         min: 0,
+        max: maxPoint,
         title: {
           text: ''
         },
@@ -125,10 +130,18 @@ var ColumnChart = React.createClass({
       },
       series:  [{
         colorByPoint: true,
+        colors: ["#F0F1F5"],
+        colorsHover: config.colorsHover,
+        maxPointWidth: 100,
+        followPointer:false,
+        data: [empty]
+      }, {
+        colorByPoint: true,
         name: config.name,
         colors: config.colors,
         colorsHover: config.colorsHover,
-        data: data
+        data: data,
+        maxPointWidth: 500
       }] //series
     });
   },

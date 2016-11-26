@@ -87,7 +87,8 @@ img {
   border: 0;
 }
 svg:not(:root) {
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: inherit;
 }
 figure {
   margin: 1em 40px;
