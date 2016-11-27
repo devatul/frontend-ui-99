@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {isEqual} from 'lodash';
 import HelpButton from '../dathena/HelpButton';
 
+
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
 
@@ -129,19 +130,20 @@ var DonutChart = React.createClass({
 
   render() {
     var legendChart = [], {id, config, help} = this.props, {colorDisabled} = this.state;
-
+    let options = config.options ? config.options : false;
     if (config.data) {
       for (let i = config.data.length - 1; i >= 0; i--) {
         let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
-
         legendChart[i] =
           <li key={'legend_' + i} style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'none'} : {}}>
-            <i className="legend-symbol" style={{backgroundColor: color}}></i>
+            {this.props.analytics ? <i className="fa fa-map-marker" aria-hidden="true" style={{color: color,paddingRight:'3px'}}></i> : <i className="legend-symbol" style={{backgroundColor: color}}></i>}
             {config.data[i].name}
           </li>;
       }
     }
-
+    
+    let lineStyle = {color:config.colors[0], backgroundColor:config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-70px' };
+    let top6 = config.top6 && <div className="top6"><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i><span>{config.top6}</span></div>
     return (
       <section className="panel">
         <div className="panel-body chart-panel widget-panel">
@@ -151,15 +153,51 @@ var DonutChart = React.createClass({
               classMenu="overview_timeframe fix-overview-help-button"
               setValue={help && help} />
           </h4>
-          <div className="widget-chart">
-            <div className="chart chart-md" id={id}></div>
+            {this.props.analytics ?
+              <span>
+              <div className="widget-chart analytics">
+
+              <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto'}}></div>
+            {options.filter ? <a className="toggle-button btn btn-default analytics filter"><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
+            {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
+            {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
+            {options.users ? <a className="toggle-button btn btn-default analytics users"><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
+            {options.folder ? <a className="toggle-button btn btn-default analytics folder-open"><i className="fa fa-folder-open-o" aria-hidden="true"></i></a> : ""}
+            {options.archive ? <a className="toggle-button btn btn-default analytics archive"><i className="fa fa-file-archive-o" aria-hidden="true"></i></a> : ""}
+            {options.config ? <a className="toggle-button btn btn-default analytics config"><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
+            {options.shield ? <a className="toggle-button btn btn-default analytics shield"><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
             { legendChart &&
-              <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
-                {legendChart}
-              </ul>
-            }
-          </div>
-          { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none'}}>
+                  {legendChart}
+                </ul>
+              }
+            </div>
+            { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
+            <div style={{paddingLeft:'11px'}}>
+              <div className="analytics bottom-line" style={lineStyle}>
+                <i className="fa fa-caret-up" aria-hidden="true"></i>
+              </div>
+              <div className="filter-tags-block">
+                  <label class="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
+              </div>
+              {top6}
+            </div>
+          </span>
+          :
+          <span>
+          <div className="widget-chart analytics" >
+          <div className="chart chart-md" id={id} ></div>
+            { legendChart &&
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
+                  {legendChart}
+                </ul>
+              }
+            </div>
+            { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
+          </span>
+          }
+
+
         </div>
       </section>
     );

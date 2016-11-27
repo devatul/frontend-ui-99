@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
+import { getProfile, getPhoto } from '../utils/function'
 import { forEach } from 'lodash'
 import { makeRequest } from '../utils/http'
-
 
 module.exports = React.createClass({
     propTypes: {
@@ -18,16 +18,14 @@ module.exports = React.createClass({
         };
     },
     getProfile() {
-        return makeRequest({
-            path: 'api/account/profile/',
+        return getProfile({
             success: (data) => {
                 this.setState({ profile: this.config(data) })
             }
         });
     },
     getPhoto() {
-        return makeRequest({
-            path: 'api/account/change_photo/',
+        return getPhoto({
             success: (data) => {
                 this.setState({ photo: data })
             }

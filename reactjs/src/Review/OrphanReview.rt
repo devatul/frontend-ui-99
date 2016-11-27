@@ -1,4 +1,4 @@
-<rt-import name="Const" from="../Constant.js" />
+<rt-import name="Const" from="../App/Constant.js" />
 <rt-import name="PieChart" from="../components/chart/PieChart" />
 <rt-import name="ColumnChart" from="../components/chart/ColumnChart" />
 <rt-import name="CentroidChart" from="../components/chart/CentroidChart" />
@@ -180,7 +180,7 @@
                   <div class="mt-lg">
                     <Button
                       onClick="{this.handleClickRefineButton}"
-                      class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine"
+                      class="btn {this.state.showLoading == 'block' ? 'btn-disabled' : 'btn-green'} btn-refine disabled"
                       bsClass="my-btn">
                       Refine prediction
                     </Button>

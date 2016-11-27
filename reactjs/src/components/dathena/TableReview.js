@@ -7,8 +7,7 @@ import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import {renderClassType, orderByIndex} from '../../utils/function';
-import {status} from '../../Constant';
-import makeRequest from '../../utils/http';
+import {status} from '../../App/Constant';
 import {findIndex, isEqual} from 'lodash';
 
 var Table = React.createClass({
@@ -414,6 +413,12 @@ var RowPreview = React.createClass({
   },
 
   componentWillMount() {
+    this.count = 1
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.index !== this.props.index)
+      this.count = 1
   },
 
   componentDidMount() {
@@ -494,13 +499,47 @@ var RowPreview = React.createClass({
       case status.EDITING.name:
         color = status.EDITING.color;
         break;
+      case status.ACCEPTED.name:
+        color = status.ACCEPTED.color;
+        break;
     }
-
+    if(this.reviewed === "reviewed"){
+      color = status.ACCEPTED.color;
+    }else{
+      color = status.EDITING.color;
+    }
     return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
   },
 
   render() {
     let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
+    let confidentiality = findIndex(confidentialities, (con) => { return con.name == document.confidentiality.name });
+    let category = findIndex(categories, (cat) => { return cat.name == document.category.name });
+
+    let count = this.count;
+    this.count = 0;
+    this.reviewed = false;
+    if (typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.name !== 'undefined') {
+      if (count) {
+          confidentiality = findIndex(confidentialities, (con) => { return con.name == document.reviewed_confidentiality.name });
+      }
+
+      if (confidentiality !== -1 && document.reviewed_confidentiality.name == document.confidentiality.name) {
+        this.reviewed = "reviewed";
+      } else {
+        this.reviewed = "not-reviewed";
+      }
+    }
+
+    if (typeof document.reviewed_category !== 'undefined' && document.reviewed_category.name !== 'undefined') {
+      if (count) {
+          category = findIndex(categories, (cat) => { return cat.name == document.reviewed_category.name });
+      }
+
+      if (document.reviewed_category.name != document.category.name) {
+        this.reviewed = "not-reviewed";
+      }
+    }
 
     return (
       document.path ?
@@ -545,7 +584,7 @@ var RowPreview = React.createClass({
                 className="form-control"
                 data={categories}
                 emptyOptions={emptyOptions}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) } />
+                value={ category } />
             </div>
           </td>
           <td className="select-confidentiality">
@@ -570,12 +609,13 @@ var RowPreview = React.createClass({
                 className="form-control"
                 data={confidentialities}
                 emptyOptions={emptyOptions}
-                value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) } />
+                value={ confidentiality } />
             </div>
           </td>
           <td>
-            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
-              <i className="fa fa-clock-o" aria-hidden="true"></i> {this.renderStatus(document.status)}
+            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status || this.reviewed ? 'validated' : '')}>
+              <i className="fa fa-clock-o" aria-hidden="true"></i>
+                {this.renderStatus(document.status)}
             </a>
           </td>
         </tr>: <div></div>
@@ -589,6 +629,7 @@ var Row = React.createClass({
   },
 
   componentWillMount() {
+    this.count = 1
   },
 
   componentDidMount() {
@@ -599,6 +640,8 @@ var Row = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    let {confidentialities} = this.props;
+
     if (this.props.confidentialities != prevProps.confidentialities) {
       orderByIndex(confidentialities, [4, 3, 2, 1, 0])
     }
@@ -663,17 +706,53 @@ var Row = React.createClass({
   renderStatus(_status) {
     let color = "";
 
+    if (this.reviewed === "reviewed"){
+      color = status.ACCEPTED.color;
+    }else{
+      color = status.EDITING.color;
+    }
+
     switch (_status) {
       case status.EDITING.name:
         color = status.EDITING.color;
         break;
+      case status.ACCEPTED.name:
+        color = status.ACCEPTED.color;
+        break;
     }
-
     return <i className="fa fa-check" style={{color: color}} aria-hidden="true"></i>;
   },
 
   render() {
-    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions} = this.props;
+    let {action, document, numberChecked, noConfidence, categories, confidentialities, emptyOptions, hide} = this.props;
+    let confidentiality = findIndex(confidentialities, (con) => { return con.name == document.confidentiality.name });
+    let category = findIndex(categories, (cat) => { return cat.name == document.category.name });
+
+    let count = this.count;
+    this.count = 0;
+    this.reviewed = false;
+
+    if (typeof document.reviewed_confidentiality !== 'undefined' && document.reviewed_confidentiality.name !== 'undefined') {
+      if (count) {
+          confidentiality = findIndex(confidentialities, (con) => { return con.name == document.reviewed_confidentiality.name });
+      }
+
+      if (confidentiality !== -1 && document.reviewed_confidentiality.name == document.confidentiality.name) {
+        this.reviewed = "reviewed";
+      } else {
+        this.reviewed = "not-reviewed";
+      }
+    }
+
+    if (typeof document.reviewed_category !== 'undefined' && document.reviewed_category.name !== 'undefined') {
+      if (count) {
+          category = findIndex(categories, (cat) => { return cat.name == document.reviewed_category.name });
+      }
+
+      if (document.reviewed_category.name != document.category.name) {
+        this.reviewed = "not-reviewed";
+      }
+    }
 
     return (
       document.path ?
@@ -697,6 +776,7 @@ var Row = React.createClass({
               <li>Creation Date: <b>{document.creation_date}</b></li>
               <li>Modification Date: <b>{document.modification_date}</b></li>
               {document.legal_retention_until ? <li>Required Legal Retention until: <b>{document.legal_retention_until}</b></li> : ''}
+              <li>Confidentiality Level: <b> N/A</b></li>
               <li>Number of Classification Challenge: <b>{document.number_of_classification_challenge}</b></li>
             </InfoButton>
           </td>
@@ -720,7 +800,7 @@ var Row = React.createClass({
                 className="form-control"
                 data={categories}
                 emptyOptions={emptyOptions}
-                value={ findIndex(categories, (cat) => {return cat.id == document.category.id}) }/>
+                value={ category }/>
             </div>
           </td>
           <td className="select-confidentiality">
@@ -744,17 +824,18 @@ var Row = React.createClass({
                 id="selectConfidentiality"
                 className="form-control"
                 data={confidentialities}
+                value={confidentiality}
                 emptyOptions={emptyOptions}
-                value={ findIndex(confidentialities, (con) => {return con.id == document.confidentiality.id}) }/>
+                />
             </div>
           </td>
           <td>
-            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status ? 'validated' : '')}>
+            <a id="documentStatus" style={{cursor: 'pointer'}} onClick={this.handleOnclick} className={'doc-check fix-size ' + (document.status || this.reviewed ? 'validated' : '')}>
               <i className="fa fa-clock-o" aria-hidden="true"></i>
               {this.renderStatus(document.status)}
             </a>
           </td>
-        </tr> : <div></div>
+        </tr> : <tr></tr>
     );
   }
 });

@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import template from './DocumentReview.rt'
 import update from 'react/lib/update'
-import Constant, { status } from '../Constant.js'
+import Constant, { status } from '../App/Constant.js'
 import { cloneDeep, isEqual, find, findIndex, orderBy } from 'lodash'
 import { makeRequest } from '../utils/http'
+import { getCategories, getConfidentialities, assignCategoryAndConfidentiality2nd } from '../utils/function'
 
 var DocumentReview = React.createClass({
 
@@ -641,10 +642,8 @@ var DocumentReview = React.createClass({
     },
 
     assignCategoryAndConfidentiality2nd() {
-        return makeRequest({
-            method: "POST",
+        return assignCategoryAndConfidentiality2nd({
             params: JSON.stringify(this.state.dataRequest),
-            path: "api/classification_review/",
             success: (res) => {
             }
         });
@@ -670,9 +669,8 @@ var DocumentReview = React.createClass({
     },
 
     getCategories() {
-        return makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
+        return getCategories({
+            success: (data) => { 
                 data = orderBy(data, ['name'], ['asc']);
                 this.setState({ categories: data, shouldUpdate: true });
             }
@@ -680,8 +678,7 @@ var DocumentReview = React.createClass({
     },
 
     getConfidentialities() {
-        return makeRequest({
-            path: 'api/label/confidentiality/',
+        return getConfidentialities({
             success: (data) => {
                 this.setState({ confidentialities: data, shouldUpdate: true });
             }

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import Constant, { status, fetching } from '../App/Constant.js'
 import {browserHistory} from 'react-router';
 import {forEach, upperFirst, isEqual, cloneDeep, findIndex, maxBy} from 'lodash';
 import template from './OrphanReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
-import Constant, {status, fetching} from '../Constant.js';
+import Demo from '../Demo.js';
+import {getOrphan, getOrphanDocuments, setOrphanDocuments} from '../utils/function.js';
 
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
@@ -247,9 +249,8 @@ var OrphanReview = React.createClass({
 
     let {id} = this.state.orphanCurrent;
 
-    makeRequest({
-      path: "api/group/orphan/samples?id="+id,
-      method: "POST",
+    setOrphanDocuments({
+      id: id,
       dataType: "text",
       params: JSON.stringify({"group_id": id, "docs": docs}),
       success: (res) => {
@@ -425,10 +426,8 @@ var OrphanReview = React.createClass({
   },
 
   getGroups() {
-    let data = [];
-
-    makeRequest({
-      path: "api/group/orphan",
+    getOrphan({
+      path: Constant.ORPHAN,
       success: (res) => {
         res.sort(function (a, b) {
           return +a.id - (+b.id);
@@ -478,7 +477,7 @@ var OrphanReview = React.createClass({
                children[i] =
                    <div key={'file_' + i} className={'item ' + colors[i].color} style={{ width: data_width + "%" }}>
                      {res[i].name}
-                     <span className="item-legend">{res[i]["number of docs"] * Constant.MULTIPLIER}</span>
+                     <span className="item-legend">{res[i]["number of docs"] * Demo.MULTIPLIER}</span>
                    </div>;
              }
              this.ch = <div className="file-distribution clearfix">{children}</div>;
@@ -497,9 +496,9 @@ var OrphanReview = React.createClass({
       },
       success: (res) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
-          res.completed_number_documents *= Constant.MULTIPLIER;
-          res.total_number_documents *= Constant.MULTIPLIER;
+        if (Demo.MULTIPLIER != 1) {
+          res.completed_number_documents *= Demo.MULTIPLIER;
+          res.total_number_documents *= Demo.MULTIPLIER;
         }
 
         this.setState({statistics: res, shouldUpdate: true});
@@ -536,9 +535,9 @@ var OrphanReview = React.createClass({
       },
       success: (centroids) => {
         // FIXME: Demo fix
-        if (Constant.MULTIPLIER != 1) {
+        if (Demo.MULTIPLIER != 1) {
           for (let i = 0, len = centroids.length; i < len; ++i) {
-            centroids[i].number_docs *= Constant.MULTIPLIER;
+            centroids[i].number_docs *= Demo.MULTIPLIER;
           }
         }
         var series = [],
@@ -586,8 +585,7 @@ var OrphanReview = React.createClass({
     let {id} = this.state.orphanCurrent;
 
     if (this.state.loadingdocuments)
-      return makeRequest({
-        path: "api/group/orphan/samples",
+      return getOrphanDocuments({
         params: {"id": id},
         success: (res) => {
           for (var i = 0, resLength = res.length; i < resLength; i++) {

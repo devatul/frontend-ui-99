@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './ClassificationReview.rt';
 import update from 'react/lib/update';
-import Constant, {fetching, status} from '../Constant';
+import Constant, {fetching, status} from '../App/Constant';
 import {cloneDeep, isEqual, find, findIndex, orderBy} from 'lodash';
 import {makeRequest} from '../utils/http';
-import {orderConfidentialities} from '../utils/function';
+import { getCategories, getConfidentialities, getClassificationReview, assignCategoryAndConfidentiality2nd, orderConfidentialities } from '../utils/function'
 
 var ClassificationReview = React.createClass({
   getInitialState() {
@@ -15,6 +15,7 @@ var ClassificationReview = React.createClass({
       dataReview: [],
       shouldUpdate: false,
       openPreview: false,
+      docLimit: 1,
       current: {
         docIndex: 0,
         reviewIndex: 0
@@ -85,7 +86,12 @@ var ClassificationReview = React.createClass({
       })
     });
   },
-
+  handlelimit(e){
+    this.setState({
+      docLimit: e.target.value,
+      shouldUpdate: true
+    });
+  },
   checkValidNumber(documents) {
     let numCheck = 0, numValid = 0, updateData = {},
         {dataReview, current} = this.state,
@@ -249,6 +255,12 @@ var ClassificationReview = React.createClass({
           [reviewIndex]: {
             documents: {
               [docIndex]: {
+                reviewed_category: {
+                  $set: document.category
+                },
+                reviewed_confidentiality: {
+                  $set: document.confidentiality
+                },
                 $merge: {
                   status: status.ACCEPTED.name
                 }
@@ -289,8 +301,8 @@ var ClassificationReview = React.createClass({
     //}
   },
 
-  addDocIntoRequest(document) {
-    let documentRequest = {
+      addDocIntoRequest(document) {
+        let documentRequest = {
           "name": document.name,
           "path": document.path,
           "owner": document.owner,
@@ -521,18 +533,15 @@ var ClassificationReview = React.createClass({
   },
 
   assignCategoryAndConfidentiality2nd(request) {
-    return makeRequest({
-      method: "POST",
+    return assignCategoryAndConfidentiality2nd({
       params: JSON.stringify(request),
-      path: "api/classification_review/",
       success: (res) => {
       }
     });
   },
 
   getClassificationReview() {
-    return makeRequest({
-      path: "api/classification_review/",
+    return getClassificationReview({
       success: (data) => {
         this.setState({
           xhr: update(this.state.xhr, {
@@ -558,8 +567,7 @@ var ClassificationReview = React.createClass({
   getCategories() {
     let arr = [];
 
-    return makeRequest({
-      path: 'api/label/category/',
+    return getCategories({
       success: (data) => {
         data = orderBy(data, ['name'], ['asc']);
         this.setState({categories: data, shouldUpdate: true});
@@ -570,11 +578,35 @@ var ClassificationReview = React.createClass({
   getConfidentialities() {
     let arr = [];
 
-    return makeRequest({
-      path: 'api/label/confidentiality/',
+    return getConfidentialities({
       success: (data) => {
         data = orderConfidentialities(data)
         this.setState({confidentialities: data, shouldUpdate: true});
+      }
+    });
+  },
+  handleLimit(e){
+    return makeRequest({
+      path: "api/classification_review/",
+      //params: {limit: e.target.value},
+      success: (data) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.SUCCESS
+            }
+          })
+        });
+        this.setState({dataReview: data, docLimit: e.target.value, shouldUpdate: true});
+      },
+      error: (err) => {
+        this.setState({
+          xhr: update(this.state.xhr, {
+            isFetching: {
+              $set: fetching.ERROR
+            }
+          })
+        });
       }
     });
   },

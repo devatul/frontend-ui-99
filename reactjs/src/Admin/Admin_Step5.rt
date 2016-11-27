@@ -1,4 +1,4 @@
-<rt-import name=" Input" from="./components/ValidateInput" />
+<rt-import name=" Input" from="../components/dathena/AdminValidateInput" />
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton" />
 <rt-import name="HelpButton" from="../components/dathena/HelpButton" />
 

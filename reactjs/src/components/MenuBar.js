@@ -3,27 +3,31 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import { browserHistory } from 'react-router'
-import Constant from '../Constant.js'
+import Constant from '../App/Constant.js'
+import Demo from '../Demo.js';
 import template from './MenuBar.rt'
 import { assignIn, isEqual, forEach, concat, find, findIndex, remove, cloneDeep } from 'lodash'
-import { makeRequest } from '../utils/http'
-import { orderByIndex, orderLanguages } from '../utils/function'
+import { orderByIndex, getCategories, getConfidentialities, getLanguages, getDoctypes, getScan, orderLanguages } from '../utils/function'
 
 var MenuBar = React.createClass
 ({
+  getInitialParams() {
+    return {
+                categories: [],
+                confidentialities: [],
+                'doc_types': [],
+                languages: []
+            }
+  },
+
 	getInitialState() {
 	    return {
             categories: [],
             confidentialities: [],
-            'doc-types': [],
+            'doc_types': [],
             languages: [],
 
-            params: {
-                categories: [],
-                confidentialities: [],
-                'doc-types': [],
-                languages: []
-            },
+            params: this.getInitialParams(),
 
             labels: [],
 
@@ -41,6 +45,7 @@ var MenuBar = React.createClass
             scanResult: {}
 	    };
 	},
+
 	propTypes: {
 		title: React.PropTypes.string,
         help: React.PropTypes.string,
@@ -51,14 +56,14 @@ var MenuBar = React.createClass
 	},
 
     componentDidMount() {
-        if(this.props.showFilter) {
+        if (this.props.showFilter) {
             this.getCategories();
             this.getConfidentialities();
             this.getDoctypes();
             this.getLanguages();
         }
-        if(this.props.showInfo && !this.props.dataScan) {
-            this.getscanResult();
+        if (this.props.showInfo && !this.props.dataScan) {
+            this.getScanResult();
         }
     },
 
@@ -84,53 +89,44 @@ var MenuBar = React.createClass
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.shouldUpdate === true) {
+        if (this.state.shouldUpdate === true) {
             this.setState({ shouldUpdate: false });
         }
-        if(!isEqual( this.state.params, prevState.params )) {
-            var { params } = this.state,
-                {
-                    categories,
-                    languages,
-                    confidentialities
-                } = this.state.params;
-            if(categories && categories.length === 0) {
-                delete params.categories;
-            }
-
-            if(confidentialities && confidentialities.length === 0) {
-                delete params.confidentialities;
-            }
-
-            if(languages && languages.length === 0) {
-                delete params.languages;
-            }
-
-            if(params["doc-types"] && params["doc-types"].length === 0) {
-                delete params["doc-types"];
-            }
-            this.props.handleFilter(params);
+        if (!isEqual(this.state.params, prevState.params)) {
+          this.changeFilters();
         }
     },
+
+  changeFilters() {
+    var { params } = this.state,
+      {
+        categories,
+        languages,
+        confidentialities
+      } = this.state.params;
+
+    this.props.handleFilter(params);
+  },
+
     configListLabel: function(data) {
         for(let i = data.length - 1; i >= 0; i--) {
             data[i].checked = false;
         }
     },
-	getCategories: function(async) {
-        makeRequest({
-            path: 'api/label/category/',
-            success: (data) => {
-                this.configListLabel(data);
-
-                this.setState({ categories: data, shouldUpdate: true });
-            }
-        });
+  getCategories: function(async) {
+    getCategories({
+      success: (data) => {
+        for (let i = 0, len = data.length; i < len; ++i) {
+          data[i].id = parseInt(data[i].id);
+        }
+        this.configListLabel(data);
+        this.setState({ categories: data, shouldUpdate: true });
+      }
+    });
     },
     getConfidentialities: function(async) {
-        makeRequest({
-            path: 'api/label/confidentiality/',
-            success: (data) => {
+        getConfidentialities({
+          success: (data) => {
                 this.configListLabel(data);
                 //data = orderByIndex(data, [4,3,2,1,0]);
                 this.setState({ confidentialities: data, shouldUpdate: true });
@@ -138,19 +134,17 @@ var MenuBar = React.createClass
         });
     },
     getDoctypes: function(async) {
-        makeRequest({
-            path: 'api/label/doctypes/',
+        getDoctypes({
             success: (data) => {
                 this.configListLabel(data);
 
-                this.setState({ ['doc-types']: data, shouldUpdate: true });
+                this.setState({ ['doc_types']: data, shouldUpdate: true });
             }
         });
     },
     getLanguages: function(async) {
-        makeRequest({
-            path: 'api/label/languages/',
-            success: (data) => {
+        getLanguages({
+          success: (data) => {
                 this.configListLabel(data);
                 this.setState({ languages: orderLanguages(data), shouldUpdate: true });
             }
@@ -160,22 +154,25 @@ var MenuBar = React.createClass
     onclearFilter: function() {
         let { labels, params } = this.state;
 
-        for(let i = labels.length - 1; i >= 0; i--) {
+        for (let i = labels.length - 1; i >= 0; i--) {
             let splitId = labels[i].id.split('_');
+            let array = this.state[splitId.slice(0, splitId.length - 1).join("_")];
+            let index = array.findIndex(function (a) { return a.id == splitId[splitId.length - 1]; });
 
-            let array = this.state[splitId[0]];
-
-            array[splitId[1]].checked = false;
+            if (index !== -1)
+              array[index].checked = false;
         }
 
-        this.setState({ labels: [], params: {}, shouldUpdate: true });
+        this.setState({ labels: [], params: this.getInitialParams(), shouldUpdate: true });
     },
 
     onClickLabel: function(label, indexLabel) {
         let { labels } = this.state,
-            splitId = label.id.split('_'),
-            property = splitId[0],
-            index = splitId[1];
+            splitId = label.id.split('_');
+        let property = splitId.slice(0, splitId.length - 1).join("_");
+      let index = this.state[property].findIndex(function (a) {
+        return a.id == splitId[splitId.length - 1];
+      });
 
             let updateParam = update(this.state.params, {
                 [property]: {
@@ -183,8 +180,8 @@ var MenuBar = React.createClass
                         let label = this.state.labels[indexLabel];
                         arr = cloneDeep(arr);
 
-                        for(let i = arr.length - 1; i >= 0; i--) {
-                            if(arr[i].id === label.id) {
+                        for (let i = arr.length - 1; i >= 0; i--) {
+                            if ((property + "_" + arr[i].id) === label.id) {
                                 arr.splice(i, 1);
                                 break;
                             }
@@ -238,7 +235,7 @@ var MenuBar = React.createClass
                 property = "languages";
             break;
             case "selectDoctype":
-                property = "doc-types"
+                property = "doc_types"
         }
 
         array = this.state[property];
@@ -277,39 +274,28 @@ var MenuBar = React.createClass
                 property = "languages";
             break;
             case "selectDoctype":
-                property = "doc-types"
+                property = "doc_types"
         }
 
         array = this.state[property];
         switch(true) {
-
             case index === 'all': {
                 //array['checkall'] = !array['checkall'];
-
-                for(let i = selection.length - 1; i >= 0; i--) {
+                for (let i = selection.length - 1; i >= 0; i--) {
                     let a = selection[i].id.split('-'),
                         indexCategory = parseInt(a[a.length-1]);
 
-                        // if(indexCategory >= 0) {
-                        //     array[indexCategory].checked = array['checkall'];
-                        // }
-
-                        //set false all item
-                        if(indexCategory >= 0) {
+                        if (indexCategory >= 0) {
                             array[indexCategory].checked = false;
-
                         }
                 }
             }
             break;
             case parseInt(index) >= 0: {
-                //
-
                 array[index].checked = !array[index].checked;
-                //
 
-                for(let i = array.length - 1; i >= 0; i--) {
-                    if(!array[i].checked) {
+                for (let i = array.length - 1; i >= 0; i--) {
+                    if (!array[i].checked) {
                         array['checkall'] = false;
                     }
                 }
@@ -353,11 +339,11 @@ var MenuBar = React.createClass
         if(!array['checkall']) {
 
             for(let i = array.length - 1; i >= 0; i--) {
-                indexLabel = findIndex(labels, { id: property + '_' + i });
+                indexLabel = findIndex(labels, { id: property + '_' + array[i].id });
 
                 if(indexLabel === -1 && array[i].checked) {
                     labels.push({
-                        id: property + '_' + i,
+                        id: property + '_' + array[i].id,
                         name: array[i].name
                     })
                 }
@@ -366,7 +352,6 @@ var MenuBar = React.createClass
                 }
             }
         }
-
     },
 
     updateParams(property) {
@@ -381,28 +366,31 @@ var MenuBar = React.createClass
             [property]: {
                 $apply: (data) => {
                     data = cloneDeep(data);
-                    //let indexParam = -1;
-                    //
-                    for(let i = array.length - 1; i >= 0; i--) {
+                    for (let i = array.length - 1; i >= 0; i--) {
+                        let indexParam = findIndex(data, { id: parseInt(array[i].id) });
 
-                        let indexParam = findIndex(data, { id: array[i].id });
-
-                        if(array[i].checked && indexParam === -1) {
+                        if (array[i].checked && indexParam === -1) {
                             data.push({
-                                id: array[i].id,
+                                id: parseInt(array[i].id),
                                 name: array[i].name
                             });
+                          if (property == "languages") {
+                            let lang = this.state.languages.find(function (a) { return a.id == parseInt(array[i].id); });
+                            if (lang) {
+                              data[data.length - 1]["short_name"] = lang.short_name;
+                            } else {
+                              data.splice(1, data[data.length -1]);
+                            }
+                          }
                         }
-                        if(!array[i].checked && indexParam >= 0) {
+                        if (!array[i].checked && indexParam >= 0) {
                             data.splice(indexParam, 1);
                         }
                     }
-                    //
                     return data;
                 }
             }
         });
-        //
         return updateParam;
     },
 
@@ -429,7 +417,7 @@ var MenuBar = React.createClass
         //     break;
 
         //     case "SelectDoctype": {
-        //         property = 'doc-types';
+        //         property = 'doc_types';
         //     }
         //     break;
 
@@ -565,41 +553,41 @@ var MenuBar = React.createClass
         this.setState({ listLabel: updateLabel, filter: updateFilter });
     },
 
-    getscanResult() {
-        makeRequest({
-            path: 'api/scan/',
+  // FIXME: Code duplicated with OverView.js
+    getScanResult() {
+        getScan({
             success: (data) => {
               // FIXME: Demo fix, to be removed
-              if (Constant.MULTIPLIER != 1) {
-                data.documents_analyzed = parseInt(data.documents_analyzed) * Constant.MULTIPLIER;
-                data.documents_skipped *= Constant.MULTIPLIER;
-                data.total_correctly_classified *= Constant.MULTIPLIER;
-                data.total_documents_scanned *= Constant.MULTIPLIER;
-                data.total_duplicates *= Constant.MULTIPLIER;
-                data.total_twins *= Constant.MULTIPLIER;
+              if (Demo.MULTIPLIER != 1) {
+                data.documents_analyzed = parseInt(data.documents_analyzed) * Demo.MULTIPLIER;
+                data.documents_skipped *= Demo.MULTIPLIER;
+                data.total_correctly_classified *= Demo.MULTIPLIER;
+                data.total_documents_scanned *= Demo.MULTIPLIER;
+                data.total_duplicates *= Demo.MULTIPLIER;
+                data.total_twins *= Demo.MULTIPLIER;
 
                 for (let i = 0, len = data.categories.length; i < len; ++i) {
-                  data.categories[i].total_classified_docs *= Constant.MULTIPLIER;
-                  data.categories[i].total_docs *= Constant.MULTIPLIER;
-                  data.categories[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-                  data.categories[i].total_reviewed_docs *= Constant.MULTIPLIER;
-                  data.categories[i].total_validated_docs *= Constant.MULTIPLIER;
+                  data.categories[i].total_classified_docs *= Demo.MULTIPLIER;
+                  data.categories[i].total_docs *= Demo.MULTIPLIER;
+                  data.categories[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+                  data.categories[i].total_reviewed_docs *= Demo.MULTIPLIER;
+                  data.categories[i].total_validated_docs *= Demo.MULTIPLIER;
                 }
 
                 for (let i = 0, len = data.confidentialities.length; i < len; ++i) {
-                  data.confidentialities[i].total_classified_docs *= Constant.MULTIPLIER;
-                  data.confidentialities[i].total_docs *= Constant.MULTIPLIER;
-                  data.confidentialities[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-                  data.confidentialities[i].total_reviewed_docs *= Constant.MULTIPLIER;
-                  data.confidentialities[i].total_validated_docs *= Constant.MULTIPLIER;
+                  data.confidentialities[i].total_classified_docs *= Demo.MULTIPLIER;
+                  data.confidentialities[i].total_docs *= Demo.MULTIPLIER;
+                  data.confidentialities[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+                  data.confidentialities[i].total_reviewed_docs *= Demo.MULTIPLIER;
+                  data.confidentialities[i].total_validated_docs *= Demo.MULTIPLIER;
                 }
 
                 for (let i = 0, len = data.doctypes.length; i < len; ++i) {
-                  data.doctypes[i].total_docs *= Constant.MULTIPLIER;
+                  data.doctypes[i].total_docs *= Demo.MULTIPLIER;
                 }
 
                 for (let i = 0, len = data.languages.length; i < len; ++i) {
-                  data.languages[i].total_docs *= Constant.MULTIPLIER;
+                  data.languages[i].total_docs *= Demo.MULTIPLIER;
                 }
               }
 
@@ -611,6 +599,6 @@ var MenuBar = React.createClass
             }
         });
     },
-	 render:template
+    render:template
 });
 module.exports = MenuBar;

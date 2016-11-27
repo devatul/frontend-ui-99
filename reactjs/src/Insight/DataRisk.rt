@@ -188,7 +188,7 @@
                   setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99."/>
               </h4>
               <div class="widget-summary">
-                <div class="widget-summary-col">
+                <div class="widget-summary-col" rt-if="this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk.length > 0">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[0].percentage)} style-2 pie-blue">
                     <span class="label">
                       {this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[0].num_files}
@@ -218,7 +218,7 @@
                   setValue="This represents insights into repositories that contain a high volume of client data, materially higher than other repositories that have been scanned. This indicates that these repositories present a higher risk to the organisation, as they hold the highest volumes of client data assets." />
               </h4>
               <div class="widget-summary">
-                <div class="widget-summary-col">
+                <div class="widget-summary-col" rt-if="this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk.length > 1">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[1].percentage)} style-2 pie-green">
                     <span class="label">
                       {this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[1].num_files}

@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import template from './RecoverPassword.rt';
 import $ from 'jquery';
+import { setAuth } from '../utils/function'
 
 var RecoverPassword = React.createClass({
   getInitialState() {
@@ -32,11 +33,8 @@ var RecoverPassword = React.createClass({
           }
         },
         submitHandler(form) {
-          $.ajax({
-            type: "POST",
-            url: 'http://54.169.106.24/api-token-auth/',
-            dataType: 'json',
-            data: {},
+          setAuth({
+            params: {},
             success: function (data) {
               browserHistory.push('/Dashboard/OverView');
             }.bind(this),

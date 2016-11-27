@@ -3,8 +3,10 @@ import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Profile.rt'
 import { makeRequest } from '../utils/http'
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
 import $, { JQuery } from 'jquery';
+import { getProfile, getPhoto } from '../utils/function'
+
 module.exports = React.createClass({
     getInitialState() {
         return {
@@ -31,16 +33,14 @@ module.exports = React.createClass({
         this.setState({isChecked: !this.state.isChecked })
     },
     getProfile() {
-        return makeRequest({
-            path: 'api/account/profile/',
+        return getProfile({
             success: (data) => {
                 this.setState({ profile: data, isChecked: data.enable_sso })
             }
         });
     },
     getPhoto() {
-        return makeRequest({
-            path: 'api/account/change_photo/',
+        return getPhoto({
             success: (data) => {
                 this.setState({ photo: data })
             }

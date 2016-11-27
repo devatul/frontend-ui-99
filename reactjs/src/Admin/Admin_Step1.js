@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import update from 'react-addons-update';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import _ from 'lodash';
-import { makeRequest } from '../utils/http';
+import { getOrganization, setOrganization, getSla , checkConfidentiality } from '../utils/function';
 import template from './Admin_Step1.rt';
 
 var Admin_Step1 = React.createClass({
@@ -23,7 +23,11 @@ var Admin_Step1 = React.createClass({
                 block2: [],
                 block3: []
             },
-            organisation: {},
+            organisation: {
+                name: '',
+                region: '',
+                country: ''
+            },
             confidentialities : [],
             sla : []
         }
@@ -39,8 +43,7 @@ var Admin_Step1 = React.createClass({
     },
 
     getOrganisation() {
-        return makeRequest({
-            path: 'api/organization/',
+        return getOrganization({
             success: (data) => {
                 console.log(data);
                 this.setState({ organisation: data });
@@ -48,8 +51,7 @@ var Admin_Step1 = React.createClass({
         });
     },
     getSLAs() {
-        return makeRequest({
-            path: 'api/sla/',
+        return getSla({
             success: (data) => {
                 console.log(data);
                 this.setState({ sla: this.configSLA(data) });
@@ -70,43 +72,42 @@ var Admin_Step1 = React.createClass({
         }
     },
     getConfidentialities(){
-        return makeRequest({
-            path: 'api/confidentiality/',
-            success: (data) => {
-                let datas = [
+        return checkConfidentiality({
+            success: (results) => {
+                let data = [
                                 {
                                     "level": "unrestricted",
                                     "level_name": "Unrestricted",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "internal_only",
                                     "level_name": "Internal Only",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "confidential",
                                     "level_name": "Confidential",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "secret",
                                     "level_name": "Secret",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 },
                                 {
                                     "level": "banking_secrecy",
                                     "level_name": "Banking Secrecy",
                                     "is_active": true,
-                                    "custom_name": null
+                                    "custom_name": ''
                                 }
                             ]
-                console.log(data);
-                this.setState({ confidentialities: datas });
+                console.log(results);
+                this.setState({ confidentialities: data });
             }
         });
     },
@@ -139,8 +140,7 @@ var Admin_Step1 = React.createClass({
     putOrganisation() {
         let data_submit = _.omit(_.cloneDeep(this.state.organisation), ['phone', 'mobile', 'state']);
 
-        return makeRequest({
-            path: 'api/organization/',
+        return setOrganization({
             method: 'PUT',
             params: JSON.stringify(data_submit),
             success: (data) => {}

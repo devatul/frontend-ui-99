@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import HelpButton from '../dathena/HelpButton';
 import 'jquery';
-import Constant from '../../Constant.js';
+import Constant from '../../App/Constant.js';
+import Demo from '../../Demo.js';
 
 var HighChart = React.createClass({
   displayName: 'LiquidMeter',
@@ -21,58 +22,9 @@ var HighChart = React.createClass({
 
   draw() {
     // FIXME: Use API instead
-    let values = [6, 8, 14, 12, 18, 21, 23, 6, 6, 6, 6];
-    let green = '#27C57F';
-    let orange = '#EB9428';
-    let red = '#E1605B';
+    let { setValue } = this.props;
 
-    var anomalyChartData = [{
-        xTitle: 'Anomaly Occurence',
-        yTitle: 'Users',
-        data: []
-      }, {
-        xTitle: 'Anomaly Occurence',
-        yTitle: 'AD Group',
-        data: []
-      }, {
-        xTitle: 'Anomaly Occurence',
-        yTitle: 'Users',
-        data: []
-      }, {
-        xTitle: 'Anomaly Occurence',
-        yTitle: 'Folders',
-        data: []
-      }, {
-        xTitle: 'Anomaly Occurence',
-        yTitle: 'Users',
-        data: []
-      }];
-
-    let min = values[0];
-    let max = values[1];
-
-    for (let i = 1, len = values.length; i < len; ++i) {
-      if (values[i] < min)
-        min = values[i];
-      if (values[i] > max)
-        max = values[i];
-    }
-
-    let step = (min + max) / 3;
-
-    for (let i = 0, len = anomalyChartData.length; i < len; ++i) {
-      for (let j = 0, lenj = values.length; j < lenj; j++) {
-        let color = green;
-        if (values[j] > step * 2)
-          color = red;
-        else if (values[j] > step)
-          color = orange;
-        anomalyChartData[i].data.push({ y: values[j] * Constant.MULTIPLIER, color: color});
-      }
-    }
-
-    $('.anomaly-chart').each(function (i) {
-      $(this).highcharts({
+    $('.anomaly-chart-' + this.props.id_hight).highcharts({
         chart: {
           type: 'column',
           height: 120,
@@ -96,7 +48,7 @@ var HighChart = React.createClass({
           tickmarkPlacement: 'on',
           pointPadding: 0,
           title: {
-            text: anomalyChartData[i].xTitle,
+            text: setValue.xTitle,
             align: 'low',
             style: {
               fontFamily: '\'Roboto\', sans-serif',
@@ -110,7 +62,7 @@ var HighChart = React.createClass({
           endOnTick: false,
           tickInterval: 10,
           title: {
-            text: anomalyChartData[i].yTitle,
+            text: setValue.yTitle,
             align: 'high',
             style: {
               fontFamily: '\'Roboto\', sans-serif',
@@ -140,16 +92,14 @@ var HighChart = React.createClass({
           }
         },
         series: [{
-          name: 'Documents',
-          data: anomalyChartData[i].data
+          name: setValue.yTitle,
+          data: setValue.data
         }]
       });
-    });
   },
 
   render() {
-    let id = this.props.id;
-    return (<div className="anomaly-chart" id={this.props.id_hight}></div>)
+    return (<div className={"anomaly-chart-" + this.props.id_hight} id={this.props.id_hight}></div>)
   }
 });
 

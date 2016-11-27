@@ -5,307 +5,307 @@
 <rt-import name="Select2" from="./dathena/Select2" />
 
 <div rt-scope="this.state.scanResult as scanResult">
-<div class="my_main bar_menu container">
-    <div class="row">
-        <div class="col-md-12 mb-md">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="page-heading-sm title-heading">{this.props.title}
-                        <HelpButton
-                            rt-if="this.props.help"
-                            class="help-info-button"
-                            classMenu="fix-overview-help-button-table"
-                            classIcon="review_question_a help_question_a"
-                            setValue="{this.props.help}"/>
-                    </div>
-                    <div class="filter-tags-block">
-                        <label rt-if="this.state.labels.length > 0" class="pull-left mr-md">Filters:</label>
-                        <div rt-scope="this.state.labels as listLabel" class="pull-left filter-tags" style="text-transform: capitalize">
-                            <FilterLabel data={listLabel} onClick={this.onClickLabel} onClear={this.onclearFilter} />
+    <div class="my_main bar_menu container">
+        <div class="row">
+            <div class="col-md-12 mb-md">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="page-heading-sm title-heading">{this.props.title}
+                            <HelpButton
+                                rt-if="this.props.help"
+                                class="help-info-button"
+                                classMenu="fix-overview-help-button-table"
+                                classIcon="review_question_a help_question_a"
+                                setValue="{this.props.help}"/>
+                        </div>
+                        <div class="filter-tags-block">
+                            <label rt-if="this.state.labels.length > 0" class="pull-left mr-md">Filters:</label>
+                            <div rt-scope="this.state.labels as listLabel" class="pull-left filter-tags" style="text-transform: capitalize">
+                                <FilterLabel data={listLabel} onClick={this.onClickLabel} onClear={this.onclearFilter} />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <ul class="filter-buttons pull-right">
-                        <li rt-if="this.props.showFilter" class="dropdown">
-                            <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                            <div class="dropdown-backdrop-custom" style="display:none"></div>
-                            <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
-                                <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state as listLabel ">
-                                    <li class="mb-sm">
-                                        <div class="form-group">
-                                            <Select2
-                                                id="selectConfidentiality"
-                                                value="{this.state.value.confidentiality}"
-                                                onOpen={this.onOpenSelect}
-                                                onChange={this.handleOnChangeConfidentiality}
-                                                width="off"
-                                                containerCssClass="dathena"
-                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
-                                                minimumResultsForSearch="Infinity"
-                                                closeOnSelect={false}>
-                                                    <option
-                                                        value="label"
-                                                        key="label">
-                                                        Confidentiality
-                                                    </option>
-                                                    <option
-                                                        value="all"
-                                                        key="selectall">
-                                                        Clear All
-                                                    </option>
-                                                    <option
-                                                        rt-repeat="confidentiality in this.state.confidentialities"
-                                                        value="{confidentialityIndex}"
-                                                        key="{confidentialityIndex}">
-                                                        {confidentiality.name}
-                                                    </option>
-                                            </Select2>
-                                            <!--<MultiSelectBox
-                                                id="confidentialities"
-                                                title="Confidentiality"
-                                                onChange={this.handleSelectBoxChange}
-                                                onClear={this.handleClearAll}
-                                                checkDefault={true}
-                                                data={listLabel.confidentialities} />-->
-                                        </div>
-                                    </li>
+                    <div class="col-sm-4">
+                        <ul class="filter-buttons pull-right">
+                            <li rt-if="this.props.showFilter" class="dropdown">
+                                <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
+                                <div class="dropdown-backdrop-custom" style="display:none"></div>
+                                <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
+                                    <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state as listLabel ">
+                                        <li class="mb-sm">
+                                            <div class="form-group">
+                                                <Select2
+                                                    id="selectConfidentiality"
+                                                    value="{this.state.value.confidentiality}"
+                                                    onOpen={this.onOpenSelect}
+                                                    onChange={this.handleOnChangeConfidentiality}
+                                                    width="off"
+                                                    containerCssClass="dathena"
+                                                    dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
+                                                    minimumResultsForSearch="Infinity"
+                                                    closeOnSelect={false}>
+                                                        <option
+                                                            value="label"
+                                                            key="label">
+                                                            Confidentiality
+                                                        </option>
+                                                        <option
+                                                            value="all"
+                                                            key="selectall">
+                                                            Clear All
+                                                        </option>
+                                                        <option
+                                                            rt-repeat="confidentiality in this.state.confidentialities"
+                                                            value="{confidentialityIndex}"
+                                                            key="{confidentialityIndex}">
+                                                            {confidentiality.name}
+                                                        </option>
+                                                </Select2>
+                                                <!--<MultiSelectBox
+                                                    id="confidentialities"
+                                                    title="Confidentiality"
+                                                    onChange={this.handleSelectBoxChange}
+                                                    onClear={this.handleClearAll}
+                                                    checkDefault={true}
+                                                    data={listLabel.confidentialities} />-->
+                                            </div>
+                                        </li>
 
-                                    <li class="mb-sm">
-                                        <div class="form-group">
-                                            <Select2
-                                                id="selectCategory"
-                                                value="{this.state.value.category}"
-                                                onOpen={this.onOpenSelect}
-                                                onChange={this.handleOnChangeConfidentiality}
-                                                width="off"
-                                                containerCssClass="dathena"
-                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
-                                                minimumResultsForSearch="Infinity"
-                                                closeOnSelect={false}>
-                                                    <option
-                                                        value="label"
-                                                        key="label">
-                                                        Category
-                                                    </option>
-                                                    <option
-                                                        value="all"
-                                                        key="selectall">
-                                                        Clear All
-                                                    </option>
-                                                    <option
-                                                        rt-repeat="category in this.state.categories"
-                                                        value="{categoryIndex}"
-                                                        key="{categoryIndex}">
-                                                        {category.name}
-                                                    </option>
-                                            </Select2>
-                                            <!--<MultiSelectBox
-                                                id="categories"
-                                                title="Category"
-                                                onChange={this.handleSelectBoxChange}
-                                                onClear={this.handleClearAll}
-                                                checkDefault={true}
-                                                data={listLabel.categories} />-->
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="form-group">
-                                            <Select2
-                                                id="selectLanguage"
-                                                value="{this.state.value.language}"
-                                                onOpen={this.onOpenSelect}
-                                                onChange={this.handleOnChangeConfidentiality}
-                                                width="off"
-                                                containerCssClass="dathena"
-                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
-                                                minimumResultsForSearch="Infinity"
-                                                closeOnSelect={false}>
-                                                    <option
-                                                        value="label"
-                                                        key="label">
-                                                        Languages
-                                                    </option>
-                                                    <option
-                                                        value="all"
-                                                        key="selectall">
-                                                        Clear All
-                                                    </option>
-                                                    <option
-                                                        rt-repeat="language in this.state.languages"
-                                                        value="{languageIndex}"
-                                                        key="{languageIndex}">
-                                                        {language.name}
-                                                    </option>
-                                            </Select2>
-                                            <!--<MultiSelectBox
-                                                id="languages"
-                                                title="Languages"
-                                                onChange={this.handleSelectBoxChange}
-                                                onClear={this.handleClearAll}
-                                                checkDefault={true}
-                                                data={listLabel.languages} />-->
-                                        </div>
-                                    </li>
-                                    <li class="mb-sm">
-                                        <div class="form-group">
-                                            <Select2
-                                                id="selectDoctype"
-                                                value="{this.state.value.doctype}"
-                                                onOpen={this.onOpenSelect}
-                                                onChange={this.handleOnChangeConfidentiality}
-                                                width="off"
-                                                containerCssClass="dathena"
-                                                dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
-                                                minimumResultsForSearch="Infinity"
-                                                closeOnSelect={false}>
-                                                    <option
-                                                        value="label"
-                                                        key="label">
-                                                        Document Type
-                                                    </option>
-                                                    <option
-                                                        value="all"
-                                                        key="selectall">
-                                                        Clear All
-                                                    </option>
-                                                    <option
-                                                        rt-repeat="doctype in this.state['doc-types']"
-                                                        value="{doctypeIndex}"
-                                                        key="{doctypeIndex}">
-                                                        {doctype.name}
-                                                    </option>
-                                            </Select2>
-                                            <!--<MultiSelectBox
-                                                id="doc-types"
-                                                title="Document Type"
-                                                onChange={this.handleSelectBoxChange}
-                                                onClear={this.handleClearAll}
-                                                checkDefault={true}
-                                                data={listLabel['doc-types']} />-->
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li rt-if="this.props.showInfo" class="dropdown">
-                            <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                            <div class="dropdown-menu has-arrow dd-sm dd-md full-mobile dd-right info-scan overview-table-help ">
-                                <div class="table-responsive">
-                                    <table class="table general-table table-info table-bordered table-striped mb-none">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Last Data Scan:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Time of the last data scan by Dathena 99." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{scanResult.last_data_scan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Country in Scope:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Country(s) in scope for the last scan." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{scanResult.country}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Business in Scope:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Business unit(s) in scope for the last scan." />
-                                            </td>
-                                            <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Scan Status:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Details whether the scan was successful or not." />
-                                            </td>
-                                            <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Documents Analyzed:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="The total number of documents that were detected by 99 during the scan process." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
-                                        </tr>
-                                        <tr>
-                                        <td class="text-left"><div class='text'>File Extension Processed:</div>
-                                            <HelpButton
-                                                class="help-info-button"
-                                                classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                classIcon="review_question_a help_question_a mr-sm"
-                                                setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
-                                        </td>
-                                            <td class="text-right" colspan="3">{scanResult.file_extensions_processed}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Duplicated Documents:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Two or more files with identical content and file names." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
-                                        </tr>
-                                        <tr>
-                                        <td class="text-left"><div class="text">Twins Documents:</div>
-                                            <HelpButton
-                                                class="help-info-button"
-                                                classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                classIcon="review_question_a help_question_a mr-sm"
-                                                setValue="Two or more files with identical content, but with different file names." />
-                                        </td>
-                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Encrypted Documents or Archives:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-left"><div class='text'>Documents Skipped:</div>
-                                                <HelpButton
-                                                    class="help-info-button"
-                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
-                                                    classIcon="review_question_a help_question_a mr-sm"
-                                                    setValue="Documents in the data repository that have not been scanned by Dathena 99." />
-                                            </td>
-                                            <td class="text-right" colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                        <li class="mb-sm">
+                                            <div class="form-group">
+                                                <Select2
+                                                    id="selectCategory"
+                                                    value="{this.state.value.category}"
+                                                    onOpen={this.onOpenSelect}
+                                                    onChange={this.handleOnChangeConfidentiality}
+                                                    width="off"
+                                                    containerCssClass="dathena"
+                                                    dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
+                                                    minimumResultsForSearch="Infinity"
+                                                    closeOnSelect={false}>
+                                                        <option
+                                                            value="label"
+                                                            key="label">
+                                                            Category
+                                                        </option>
+                                                        <option
+                                                            value="all"
+                                                            key="selectall">
+                                                            Clear All
+                                                        </option>
+                                                        <option
+                                                            rt-repeat="category in this.state.categories"
+                                                            value="{categoryIndex}"
+                                                            key="{categoryIndex}">
+                                                            {category.name}
+                                                        </option>
+                                                </Select2>
+                                                <!--<MultiSelectBox
+                                                    id="categories"
+                                                    title="Category"
+                                                    onChange={this.handleSelectBoxChange}
+                                                    onClear={this.handleClearAll}
+                                                    checkDefault={true}
+                                                    data={listLabel.categories} />-->
+                                            </div>
+                                        </li>
+                                        <li class="mb-sm">
+                                            <div class="form-group">
+                                                <Select2
+                                                    id="selectLanguage"
+                                                    value="{this.state.value.language}"
+                                                    onOpen={this.onOpenSelect}
+                                                    onChange={this.handleOnChangeConfidentiality}
+                                                    width="off"
+                                                    containerCssClass="dathena"
+                                                    dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
+                                                    minimumResultsForSearch="Infinity"
+                                                    closeOnSelect={false}>
+                                                        <option
+                                                            value="label"
+                                                            key="label">
+                                                            Languages
+                                                        </option>
+                                                        <option
+                                                            value="all"
+                                                            key="selectall">
+                                                            Clear All
+                                                        </option>
+                                                        <option
+                                                            rt-repeat="language in this.state.languages"
+                                                            value="{languageIndex}"
+                                                            key="{languageIndex}">
+                                                            {language.name}
+                                                        </option>
+                                                </Select2>
+                                                <!--<MultiSelectBox
+                                                    id="languages"
+                                                    title="Languages"
+                                                    onChange={this.handleSelectBoxChange}
+                                                    onClear={this.handleClearAll}
+                                                    checkDefault={true}
+                                                    data={listLabel.languages} />-->
+                                            </div>
+                                        </li>
+                                        <li class="mb-sm">
+                                            <div class="form-group">
+                                                <Select2
+                                                    id="selectDoctype"
+                                                    value="{this.state.value.doctype}"
+                                                    onOpen={this.onOpenSelect}
+                                                    onChange={this.handleOnChangeConfidentiality}
+                                                    width="off"
+                                                    containerCssClass="dathena"
+                                                    dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
+                                                    minimumResultsForSearch="Infinity"
+                                                    closeOnSelect={false}>
+                                                        <option
+                                                            value="label"
+                                                            key="label">
+                                                            Document Type
+                                                        </option>
+                                                        <option
+                                                            value="all"
+                                                            key="selectall">
+                                                            Clear All
+                                                        </option>
+                                                        <option
+                                                            rt-repeat="doctype in this.state['doc_types']"
+                                                            value="{doctypeIndex}"
+                                                            key="{doctypeIndex}">
+                                                            {doctype.name}
+                                                        </option>
+                                                </Select2>
+                                                <!--<MultiSelectBox
+                                                    id="doc_types"
+                                                    title="Document Type"
+                                                    onChange={this.handleSelectBoxChange}
+                                                    onClear={this.handleClearAll}
+                                                    checkDefault={true}
+                                                    data={listLabel['doc_types']} />-->
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
+                            </li>
+                            <li rt-if="this.props.showInfo" class="dropdown">
+                                <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu has-arrow dd-sm dd-md full-mobile dd-right info-scan overview-table-help ">
+                                    <div class="table-responsive">
+                                        <table class="table general-table table-info table-bordered table-striped mb-none">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Last Data Scan:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Time of the last data scan by Dathena 99." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{scanResult.last_data_scan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Country in Scope:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Country(s) in scope for the last scan." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{scanResult.country}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Business in Scope:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Business unit(s) in scope for the last scan." />
+                                                </td>
+                                                <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.business_unit}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Scan Status:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Details whether the scan was successful or not." />
+                                                </td>
+                                                <td class="text-right" colspan="3" style="text-transform: capitalize">{scanResult.scan_status}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Documents Analyzed:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="The total number of documents that were detected by 99 during the scan process." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_documents_scanned)}</td>
+                                            </tr>
+                                            <tr>
+                                            <td class="text-left"><div class='text'>File Extension Processed:</div>
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                    classIcon="review_question_a help_question_a mr-sm"
+                                                    setValue="Of the total number of files scanned by 99, this displays the complete list of file types that 99 has detected." />
+                                            </td>
+                                                <td class="text-right" colspan="3">{scanResult.file_extensions_processed}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Duplicated Documents:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Two or more files with identical content and file names." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_duplicates)}</td>
+                                            </tr>
+                                            <tr>
+                                            <td class="text-left"><div class="text">Twins Documents:</div>
+                                                <HelpButton
+                                                    class="help-info-button"
+                                                    classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                    classIcon="review_question_a help_question_a mr-sm"
+                                                    setValue="Two or more files with identical content, but with different file names." />
+                                            </td>
+                                                <td class="text-right" colspan="3">{func.formatNumber(scanResult.total_twins)}</td>
+                                            </tr>
 
-                        </li>
-                    </ul>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Encrypted Documents or Archives:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="The number of encrypted documents that have been detected by 99 are displayed here. Encrypted documents will need to be decrypted for 99 to be able scan and classify them." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{func.formatNumber(scanResult.encrypted_documents)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><div class='text'>Documents Skipped:</div>
+                                                    <HelpButton
+                                                        class="help-info-button"
+                                                        classMenu="fix-overview-help-button-table overview-table-help info-scan-submenu"
+                                                        classIcon="review_question_a help_question_a mr-sm"
+                                                        setValue="Documents in the data repository that have not been scanned by Dathena 99." />
+                                                </td>
+                                                <td class="text-right" colspan="3">{func.formatNumber(scanResult.documents_skipped)}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<hr>
+    <hr>
 </div>

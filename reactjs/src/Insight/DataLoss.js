@@ -3,9 +3,11 @@ import {render} from 'react-dom'
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router'
 import template from './DataLoss.rt'
 import update from 'react-addons-update'
-import Constant, {fetching} from '../Constant.js'
+import Constant, {fetching} from '../App/Constant.js'
+import Demo from '../Demo.js';
 import {orderLanguages} from '../utils/function';
 import 'jquery'
+import { getDataLoss } from '../utils/function'
 
 var DataLost = React.createClass({
   getInitialState() {
@@ -53,13 +55,7 @@ var DataLost = React.createClass({
       })
     });
 
-    $.ajax({
-      url: Constant.SERVER_API + 'api/insight/data-loss/',
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
+    getDataLoss({
       success: function (data) {
         let languages_arr = [];
         let languages = orderLanguages(data);
@@ -82,6 +78,11 @@ var DataLost = React.createClass({
 
           lang['most efficient keywords'] = keywordsArr;
         });
+
+        if (Demo.MULTIPLIER != 1) {
+          languages_arr = [ "en" ];
+          data = Demo.DATALOSS_DATA;
+        }
 
         let updateDataLoss = update(this.state, {
           dataLoss: {$set: data},

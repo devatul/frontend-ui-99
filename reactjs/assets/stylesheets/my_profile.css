@@ -25,6 +25,7 @@ body .btn-primary:hover {
 .my-profile-a {
 	float: left;
 	color: #000;
+	
 }
 .my-profile-a>img {
 	border-radius: 50px;
@@ -703,6 +704,11 @@ select.record_select {
   .table{
     width:1091px;
   }
+
+	.overview-table-help .table {
+		width: 100%;
+	}
+
 	.table-responsive > .document_review_table  > tbody > tr > td.ipab_document {
 	white-space: normal;
 	}
@@ -820,6 +826,11 @@ select.record_select {
 	.document_note {
 		padding-left: 15px;
 	}
+}
+
+.sample-document{
+    float: right;
+    width: 85%;
 }
 @media (max-width: 400px) {
 	.my-profile-ul>li.left2 {
