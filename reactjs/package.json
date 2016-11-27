@@ -85,6 +85,8 @@
     "react": ">=0.14.7",
     "react-dom": ">=0.14.7",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-iframe": "0.0.4",
+    "react-pdf-js": "^1.0.31",
     "react-router": ">=2.4.1",
     "react-templates": "v0.5.2",
     "react-templates-loader": "v0.5.1"
