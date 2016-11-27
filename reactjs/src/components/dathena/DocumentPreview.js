@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/lib/Button';
 import {cloneDeep, isEqual} from 'lodash';
 import {makeRequest} from '../../utils/http.js';
 import Iframe from 'react-iframe';
+import PDF from 'react-pdf-js';
 
 var documentPreview = React.createClass({
   PropTypes: {
@@ -65,9 +66,16 @@ var documentPreview = React.createClass({
       params: JSON.stringify({ 'file_url': documentUrl }),
       success: (data) => {
         let fileExtension = this.getFileExtension(documentUrl),
-            iFrameUrl = fileExtension == 'xls' ? JSON.parse(data).file_url : 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url;
+            iFrameUrl = JSON.parse(data).file_url,
+            previewDocument;
 
-        render(<Iframe url={iFrameUrl} height="700" position="static"></Iframe>, preview);
+        if (fileExtension == 'xls') {
+          previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
+        } else {
+          previewDocument = <PDF file={iFrameUrl} />
+        }
+
+        render(previewDocument, preview);
       }
     });
   },
