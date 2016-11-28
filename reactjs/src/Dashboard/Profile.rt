@@ -1,6 +1,7 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
-<rt-import name ="MyTeam" from ="./MyTeam"/>
+<rt-import name="MyTeam" from="./MyTeam"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+
 <div class="container">
   <div class="tabs tabs-primary">
     <ul class="my-profile-header nav nav-tabs">
@@ -17,58 +18,58 @@
           <div class="my-profile-left">
             <div class="row">
               <div class="col-md-4 col-sm-8 col-xs-12">
-                  <a class="my-profile-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a>
-                  <div class="my-profile-user">
-                    <h4>Login: {this.state.profile.user}</h4>
-                    <h4>Application Role: {this.state.profile.job_position}</h4>
-                    <h4>Job Title: CEO & Founder</h4>
-                  </div>
+                <a class="my-profile-a"><img src="/assets/images/User_font_awesome.svg.jpg"/></a>
+                <div class="my-profile-user">
+                  <h4>Login: {this.state.profile.user}</h4>
+                  <h4>Application Role: {this.state.profile.job_position}</h4>
+                  <h4>Job Title: CEO & Founder</h4>
+                </div>
               </div>
               <div class="my-profile-bottom col-md-8 col-sm-4 col-xs-12">
-                  <Link to="/Dashboard/EditProfile" class="btn btn-primary btn-ok">Edit Profile</Link>
+                <Link to="/Dashboard/EditProfile" class="btn btn-primary btn-ok">Edit Profile</Link>
               </div>
             </div>
             <div class="my-profile-content-top pro_content">
               <div class="pro_panel-body my-profile-content panel-body">
                 <form class="form-horizontal my-profile-form-bordered form-bordered" method="get">
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Windows ID:</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Windows ID:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.windows_id}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Department:</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Department:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.department}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Company Name:</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Company Name:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.company_name}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Location:</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Location:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.location}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Email:</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Corporate Email:</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_email}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Landline):</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Corporate Phone (Landline):</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_phone}</p>
                     </div>
                   </div>
                   <div class="pro_form-group form-group row">
-                    <label class="col-md-3 col-sm-4 pro_control-label control-label" for="inputDefault">Corporate Phone (Mobile):</label>
+                    <label class="col-md-3 col-sm-4 pro_control-label control-label">Corporate Phone (Mobile):</label>
                     <div class="col-md-9 col-sm-8">
                       <p>{this.state.profile.corporate_mobile}</p>
                     </div>
@@ -80,19 +81,19 @@
               <ul class="my-profile-ul">
                 <li class="left3">System User</li>
                 <li>
-                 <HelpButton
+                  <HelpButton
                     classMenu="fix-overview-help-button-table"
-                    classIcon="overview_question_a help_question_a" setValue="Use your user name and password provided by Dathena to connect into Dathena99." />
-
+                    classIcon="overview_question_a help_question_a"
+                    setValue="Use your user name and password provided by Dathena to connect into Dathena99." />
                 </li>
                 <li class="left1">
                   <div class="switch switch-sm switch-primary">
-                    <div class="ios-switch off {this.state.profile.use_active_directory ? 'on' : ''}" onClick = {this.changeActive}>
+                    <div class="ios-switch off {this.state.profile.use_active_directory ? 'on' : ''}" onClick={this.changeActive}>
                       <div class="on-background background-fill"></div>
                       <div class="state-background background-fill"></div>
                       <div class="handle"></div>
                     </div>
-                    <input type="checkbox" name="switch" data-plugin-ios-switch="" style="display: none;">
+                    <input type="checkbox" name="switch" data-plugin-ios-switch="" style="display: none;" />
                   </div>
                 </li>
                 <li class="left2">
@@ -101,25 +102,25 @@
                       <p class="content_profile_note">Active Directory</p>
                     </li>
                     <li class="left4">
-                    <HelpButton
-                    classMenu="fix-overview-help-button-table"
-                    classIcon="overview_question_a help_question_a" setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
+                      <HelpButton
+                        classMenu="fix-overview-help-button-table"
+                        classIcon="overview_question_a help_question_a"
+                        setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
                     </li>
                   </ul>
                   <div class="my-profile-check-none checkbox-custom checkbox-default my-profile-check" rt-if="this.state.profile.use_active_directory">
-                    <input class="x" id="z" name="agreeterms" type="checkbox" checked = {this.state.isChecked} onChange = {this.changeEnable} >
-                    <label for="AgreeTerms">Enable SSO</label>
+                    <input class="x" id="z" name="agreeterms" type="checkbox" checked={this.state.isChecked} onChange={this.changeEnable} />
+                    <label for="z">Enable SSO</label>
                   </div>
                 </li>
               </ul>
             </div>
+          </div>
         </div>
-
+      </div>
+      <div id="my_team" class=" tab-pane my-team-content">
+        <MyTeam />
       </div>
     </div>
-
-    <div id="my_team" class=" tab-pane my-team-content">
-      <MyTeam/>
-    </div>
-
-
+  </div>
+</div>
