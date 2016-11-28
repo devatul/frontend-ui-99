@@ -47,7 +47,7 @@ module.exports = React.createClass({
 						}
 					});
 				}
-			}, Constant.TIMEVALIDTOKEN);
+			}, Constant.TIMEVALIDTOKEN / 10);
 		} else {
 			console.log("noToken");
 			browserHistory.push('/Account/Signin');
