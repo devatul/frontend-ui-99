@@ -96,7 +96,7 @@ var DonutChart = React.createClass({
               events: {
                 mouseOver: function (event) {
                   var {series} = this, {points} = series;
-
+                  div.css({'z-index':1,'transition': 'z-index 0s'})
                   this.graphic.attr({
                     fill: this.color
                   });
@@ -115,6 +115,7 @@ var DonutChart = React.createClass({
                       fill: points[i].color
                     });
                   }
+                  div.css({'z-index':0, 'transition': 'z-index 3s'})
                 }
               }
             }
@@ -149,23 +150,24 @@ var DonutChart = React.createClass({
         <div className="panel-body chart-panel widget-panel">
           <h4 className="widget-title">
             {config.name && config.name + ' '}
-            <HelpButton
+            {this.props.analytics ? "" :<HelpButton
               classMenu="overview_timeframe fix-overview-help-button"
-              setValue={help && help} />
+              setValue={help && help} />}
           </h4>
             {this.props.analytics ?
               <span>
               <div className="widget-chart analytics">
 
-              <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto',zIndex: '1'}}></div>
-            {options.filter ? <a className="toggle-button btn btn-default analytics filter"><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
-            {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
-            {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
-            {options.users ? <a className="toggle-button btn btn-default analytics users"><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
-            {options.folder ? <a className="toggle-button btn btn-default analytics folder-open"><i className="fa fa-folder-open-o" aria-hidden="true"></i></a> : ""}
-            {options.archive ? <a className="toggle-button btn btn-default analytics archive"><i className="fa fa-file-archive-o" aria-hidden="true"></i></a> : ""}
-            {options.config ? <a className="toggle-button btn btn-default analytics config"><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
-            {options.shield ? <a className="toggle-button btn btn-default analytics shield"><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
+              <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto',zIndex: '0'}}></div>
+                {options.filter ? <a className="toggle-button btn btn-default analytics filter"><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
+                  {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
+                  {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
+                  {options.users ? <a className="toggle-button btn btn-default analytics users"><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
+                  {options.folder ? <a className="toggle-button btn btn-default analytics folder-open"><i className="fa fa-folder-open-o" aria-hidden="true"></i></a> : ""}
+                  {options.archive ? <a className="toggle-button btn btn-default analytics archive"><i className="fa fa-file-archive-o" aria-hidden="true"></i></a> : ""}
+                  {options.config ? <a className="toggle-button btn btn-default analytics config"><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
+                  {options.shield ? <a className="toggle-button btn btn-default analytics shield"><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
+
             { legendChart &&
                 <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none'}}>
                   {legendChart}

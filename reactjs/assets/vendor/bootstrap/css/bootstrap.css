@@ -89,6 +89,9 @@ img {
 svg:not(:root) {
   overflow: hidden;
 }
+.analytics .highcharts-container svg:not(:root) {
+  overflow: visible !important;
+}
 figure {
   margin: 1em 40px;
 }

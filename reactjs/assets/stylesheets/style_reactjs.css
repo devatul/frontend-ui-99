@@ -104,6 +104,8 @@
   background: #fff;
   margin: 0 auto;
   margin-bottom: 25px;
+  padding-top: 10px;
+  border-radius: 10px;
 }
 
 .analyticsChart .top6 i{
