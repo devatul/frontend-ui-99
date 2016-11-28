@@ -28,14 +28,16 @@ var AdvancedAnalytics = React.createClass({
       scan: {
         result: {}
       },
-      configChart: {
-        category: {},
-        confidentiality: {},
-        securityGroup: {},
-        folders: {},
-        users: {},
-        documents: {}
-      },
+      starting_point_label: false,
+      starting_point:[-1],
+      configChart: [],
+      //   category: {},
+      //   confidentiality: {},
+      //   securityGroup: {},
+      //   folders: {},
+      //   users: {},
+      //   documents: {}
+      // ],
 
       xhr: {
         status: "Report is loading",
@@ -77,11 +79,10 @@ var AdvancedAnalytics = React.createClass({
   },
 
   shouldComponentUpdate(nextProps, nextState) {
-    let {scan, dataChart, configChart} = this.state,
-        {categoryLanguageChart, confidentiality, doctypes} = configChart,
+    let {scan, dataChart, configChart, starting_point} = this.state,
+        //{categoryLanguageChart, confidentiality, doctypes} = configChart,
         nextConfig = nextState.configChart;
-
-    return !isEqual(scan.result, nextState.scan.result) || !isEqual(configChart, nextConfig);
+    return !isEqual(this.state, nextState) || !isEqual(scan.result, nextState.scan.result) || !isEqual(configChart, nextConfig) || !isEqual(starting_point, nextState.starting_point);
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -248,7 +249,27 @@ var AdvancedAnalytics = React.createClass({
       }
     })
   },
+  handleEditStartingPointLabel(){
+      this.setState({starting_point_label:false})
+  },
+  handleStartingPoint(e){
+    let startingPoint = parseInt(e.target.value),
+    updateStartingPoint = [],
+    updateStartingPointLabel = false;
+    if(startingPoint !== -1){
+      for(let i = startingPoint; i < this.state.configChart.length; i++){
+        updateStartingPoint.push(i);
+      }
+      for(let i = 0; i < startingPoint; i++){
+        updateStartingPoint.push(i);
+      }
+      updateStartingPointLabel = this.state.configChart[startingPoint].name
+    }else{
+      updateStartingPoint.push(-1);
+    }
 
+    this.setState({starting_point: updateStartingPoint, starting_point_label: updateStartingPointLabel, shouldUpdate: true});
+  },
   updateChart(result, prevResult) {
     var categoryData = {}, confidentialityData = {}, securityGroupData = {}, foldersData = {}, usersData = {}, documentsData = {},
 
@@ -259,14 +280,21 @@ var AdvancedAnalytics = React.createClass({
     usersData = this.usersChart();
     documentsData = this.documentsChart();
 
-    let updateData = update(this.state.configChart, {
-      category: {$set: categoryData},
-      confidentiality: {$set: confidentialityData},
-      securityGroup: {$set: securityGroupData},
-      folders: {$set: foldersData},
-      users: {$set: usersData},
-      documents: {$set: documentsData}
-    });
+    let updateData = [];
+    updateData.push(categoryData);
+    updateData.push(confidentialityData);
+    updateData.push(securityGroupData);
+    updateData.push(foldersData);
+    updateData.push(usersData);
+    updateData.push(documentsData);
+    // let updateData = update(this.state.configChart, [
+    //   category: {$set: categoryData},
+    //   confidentiality: {$set: confidentialityData},
+    //   securityGroup: {$set: securityGroupData},
+    //   folders: {$set: foldersData},
+    //   users: {$set: usersData},
+    //   documents: {$set: documentsData}
+    // ]);
     this.setState({configChart: updateData});
   },
 

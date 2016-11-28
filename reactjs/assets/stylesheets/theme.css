@@ -2978,6 +2978,9 @@ input.input-rounded {
       background: #fff; }
     .checkbox-custom label + label.error {
       display: block; }
+.select-starting-point .form-group label{
+  margin-right: 20px;
+}
 
 html.dark .checkbox-custom label:before {
   background: #282d36;
@@ -7043,7 +7046,7 @@ html.dark .toggle > label {
   max-width: 600px;
   margin: 40px auto;
   position: relative; }
-  .modal-block.modal-block-xs { 
+  .modal-block.modal-block-xs {
     max-width: 200px; }
   .modal-block.modal-block-sm {
     max-width: 400px; }

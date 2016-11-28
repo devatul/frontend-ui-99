@@ -11,107 +11,64 @@
 <rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar" />
 <rt-import name="Select2" from="../components/dathena/Select2" />
+<rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup"/>
+<rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup"/>
+<rt-import name="select2" from="../components/dathena/Select2"/>
 
 <section>
+
   <div rt-if="this.state.scan.result.total_duplicates !== null" rt-scope=" this.state.scan as scan; this.state.configChart as configChart;">
         <div class="charts container mt-lg">
             <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
-
-            <div class="row analyticsChart" rt-if="this.state.xhr.isFetching == 1">
-
-                <div class="col-md-4">
-                    <DonutChart
-                        id="confidentialityPieChart"
-                        analytics = "{true}"
-                        config={configChart.category}
-                        help="Repartition of each level of confidentiality for all the documents scanned." />
-                </div>
-
-                <div class="col-md-4">
-                    <DonutChart
-                        id="confidentialityPieChart1"
-                        analytics = "{true}"
-                        config={configChart.confidentiality}
-                        help="Repartition of each level of confidentiality for all the documents scanned." />
-                </div>
-                <div class="col-md-4">
-                  <DonutChart
-                      id="confidentialityPieChart5"
-                      analytics = "{true}"
-                      config={configChart.securityGroup}
-                      help="Repartition of each level of confidentiality for all the documents scanned." />
-                  <div class="col-md-12">
-                  <ul rt-if="this.state.show" class="filter-buttons pull-right">
-                      <li  class="dropdown">
-                          <a class="toggle-button btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i></a>
-                          <div class="dropdown-backdrop-custom" style="display:none"></div>
-                          <div id="dropdownFilter" class="dropdown-menu has-child has-arrow dd-md dd-right dd-filter">
-                              <ul class="filter-list list-unstyled pt-xs" rt-scope=" this.state as listLabel ">
-                                  <li class="mb-sm">
-                                      <div class="form-group">
-                                          <Select2
-                                              id="selectConfidentiality"
-
-                                              width="off"
-                                              containerCssClass="dathena"
-                                              dropdownCssClass="dathena-select-dropdown dropdown-select-filter"
-                                              minimumResultsForSearch="Infinity"
-                                              closeOnSelect={false}>
-                                                  <option
-                                                      value="label"
-                                                      key="label">
-                                                      Confidentiality
-                                                  </option>
-                                                  <option
-                                                      value="all"
-                                                      key="selectall">
-                                                      Clear All
-                                                  </option>
-                                                  <option
-                                                      rt-repeat="confidentiality in this.state.confidentialities"
-                                                      value="{confidentialityIndex}"
-                                                      key="{confidentialityIndex}">
-                                                      {confidentiality.name}
-                                                  </option>
-                                          </Select2>
-                                          <!--<MultiSelectBox
-                                              id="confidentialities"
-                                              title="Confidentiality"
-                                              onChange={this.handleSelectBoxChange}
-                                              onClear={this.handleClearAll}
-                                              checkDefault={true}
-                                              data={listLabel.confidentialities} />-->
-                                      </div>
-                                  </li>
-                              </ul>
-                          </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <DonutChart
-                      id="confidentialityPieChart2"
-                      analytics = "{true}"
-                      config={configChart.folders}
-                      help="Repartition of each level of confidentiality for all the documents scanned." />
-                </div>
-                <div class="col-md-4">
-                  <DonutChart
-                      id="confidentialityPieChart3"
-                      analytics = "{true}"
-                      config={configChart.users}
-                      help="Repartition of each level of confidentiality for all the documents scanned." />
-                </div>
-                <div class="col-md-4">
-                  <DonutChart
-                      id="confidentialityPieChart4"
-                      analytics = "{true}"
-                      config={configChart.documents}
-                      help="Repartition of each level of confidentiality for all the documents scanned." />
-                </div>
+            <div class="select-starting-point">
+            <FormGroup>
+            <InputGroup class="mb-md"  rt-if="this.state.starting_point_label !== false">
+            <label>
+              <i className="fa fa-map-marker" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+              Starting Point
+              <b class="mr-md" >
+                 {this.state.starting_point_label}
+              </b>
+            </label>
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="test value" />
+              <button class="btn btn-default" onClick={this.handleEditStartingPointLabel}>Edit</button>
+            </InputGroup>
+            <InputGroup class="mb-md" rt-if="this.state.starting_point_label == false">
+            <label>
+              <b class="mr-md">
+              <i className="fa fa-map-marker" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
+                Select  a
+              </b>
+              <select id="chosse_cluster" width="{170}" onChange={this.handleStartingPoint} value={this.state.starting_point[0]} >
+                <option value="{-1}"> Starting Point </option>
+                <option value="{0}"> Category </option>
+                <option value="{1}"> Confidentiality </option>
+                <option value="{2}"> Security Group </option>
+                <option value="{3}"> Folders </option>
+                <option value="{4}"> User </option>
+                <option value="{5}"> Documents </option>
+              </select>
+            </label>
+            <HelpButton
+              classMenu="overview_timeframe fix-overview-help-button"
+              setValue="test value" />
+            </InputGroup>
+            </FormGroup>
             </div>
-            <Row class="analytics-table">
+            <div class="row analyticsChart" rt-if="this.state.xhr.isFetching == 1 && this.state.starting_point[0] !== -1">
+            <div class="col-md-4" rt-repeat="graph in this.state.starting_point" key={graphIndex} >
+            <DonutChart
+                rt-scope="configChart[this.state.starting_point[graphIndex]] as config"
+                id="{config.name.indexOf('Security') == -1 ? config.name : 'security'}"
+                analytics = "{true}"
+                index = "{graphIndex}"
+                config={config}
+                help="Repartition of each level of confidentiality for all the documents scanned." />
+            </div>
+            </div>
+            <Row class="analytics-table" rt-if="this.state.xhr.isFetching == 1 && this.state.configChart[0]">
             <Col md="{6}">
               <Panel.custom class="panel-has-child actions-panel">
                 <Panel.body>
@@ -139,13 +96,13 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.category.data" key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[0].data" key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.category.total)*100} label="{((row.y/this.state.configChart.category.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[0].total)*100} label="{((row.y/this.state.configChart[0].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>
@@ -186,13 +143,13 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.confidentiality.data"  key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[1].data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.confidentiality.total)*100} label="{((row.y/this.state.configChart.confidentiality.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[1].total)*100} label="{((row.y/this.state.configChart[1].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>
@@ -233,13 +190,13 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.securityGroup.data"  key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[2].data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.securityGroup.total)*100} label="{((row.y/this.state.configChart.securityGroup.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[2].total)*100} label="{((row.y/this.state.configChart[2].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>
@@ -280,13 +237,13 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.folders.data"  key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[3].data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.folders.total)*100} label="{((row.y/this.state.configChart.folders.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[3].total)*100} label="{((row.y/this.state.configChart[3].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>
@@ -327,13 +284,13 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.users.data"  key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[4].data"  key="{rowIndex}">
                               <td class="text-left">
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.users.total)*100} label="{((row.y/this.state.configChart.users.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[4].total)*100} label="{((row.y/this.state.configChart[4].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>
@@ -374,14 +331,14 @@
                             </tr>
                           </thead>
                           <tbody class="fix-td-checkbox">
-                            <tr rt-repeat= "row in this.state.configChart.documents.data"  key="{rowIndex}">
+                            <tr rt-repeat= "row in this.state.configChart[5].data"  key="{rowIndex}">
                               <td class="text-left">
                               <i class="{'fa ' + (func.renderClassType(row.name)) + ' action-file-icon'}"></i>
                                 {row.name}
                               </td>
                               <td>
                               <ProgressBar class="dathena-progress style-2 fix-label pull-left" style="width:100%">
-                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart.documents.total)*100} label="{((row.y/this.state.configChart.documents.total)*100).toFixed(0)}%" />
+                                <ProgressBar class="analytics-progress" bsStyle="warning" now={(row.y/this.state.configChart[5].total)*100} label="{((row.y/this.state.configChart[5].total)*100).toFixed(0)}%" />
                               </ProgressBar>
                               <span class="label-percent progress-analytics">{row.y}</span>
                               </td>

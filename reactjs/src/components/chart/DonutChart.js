@@ -22,7 +22,9 @@ var DonutChart = React.createClass({
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props.config, nextProps.config);
   },
-
+  componentDidMount(){
+    this.draw();
+  },
   componentDidUpdate(prevProps, prevState) {
     this.draw();
   },
@@ -30,7 +32,6 @@ var DonutChart = React.createClass({
   draw() {
     var {id, config} = this.props, {colorDisabled} = this.state,
         div = $('#' + id);
-
     if (div.length) {
       div.highcharts({
         chart: {
@@ -130,8 +131,8 @@ var DonutChart = React.createClass({
   },
 
   render() {
-    var legendChart = [], {id, config, help} = this.props, {colorDisabled} = this.state;
-    let options = config.options ? config.options : false;
+    var legendChart = [], {id, config, help, index} = this.props, {colorDisabled} = this.state;
+    let options = config && config.options ? config.options : false;
     if (config.data) {
       for (let i = config.data.length - 1; i >= 0; i--) {
         let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
@@ -143,8 +144,8 @@ var DonutChart = React.createClass({
       }
     }
 
-    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (id == "confidentialityPieChart5" || id == "confidentialityPieChart4") ? '0px' : '-70px' };
-    let top6 = config.top6 && <div className="top6"><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i><span>{config.top6}</span></div>
+    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-70px' };
+    let top6 = config.top6 && <div><span>{config.top6}</span><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i></div>
     return (
       <section className="panel">
         <div className="panel-body chart-panel widget-panel">
@@ -182,7 +183,9 @@ var DonutChart = React.createClass({
               <div className="filter-tags-block">
                   <label className="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
               </div>
-              {top6}
+              <div className="top6">
+                {top6}
+              </div>
             </div>
           </span>
           :
