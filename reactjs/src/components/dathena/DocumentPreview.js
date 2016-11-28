@@ -59,25 +59,36 @@ var documentPreview = React.createClass({
         {document} = this.props,
         documentUrl = document.image_url;
 
-    makeRequest({
-      path: 'api/converter/',
-      dataType: 'text',
-      method: 'POST',
-      params: JSON.stringify({ 'file_url': documentUrl }),
-      success: (data) => {
-        let fileExtension = this.getFileExtension(documentUrl),
-            iFrameUrl = JSON.parse(data).file_url,
-            previewDocument;
+    let extension = this.getFileExtension(documentUrl),
+        iFrameUrl = documentUrl,
+        previewDocument;
 
-        if (fileExtension == 'xls') {
-          previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
-        } else {
-          previewDocument = <PDF file={iFrameUrl} />
+    if (extension === 'pdf') {
+      previewDocument = <PDF file={iFrameUrl} />;
+      render(previewDocument, preview);
+    } else if (extension === 'html') {
+      previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
+      render(previewDocument, preview);
+    } else {
+      makeRequest({
+        path: 'api/converter/',
+        dataType: 'text',
+        method: 'POST',
+        params: JSON.stringify({ 'file_url': documentUrl }),
+        success: (data) => {
+          let fileExtension = this.getFileExtension(documentUrl);
+          iFrameUrl = JSON.parse(data).file_url;
+
+          if (fileExtension == 'xls' || fileExtension == 'xlsx') {
+            previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
+          } else {
+            previewDocument = <PDF file={iFrameUrl} />;
+          }
+
+          render(previewDocument, preview);
         }
-
-        render(previewDocument, preview);
-      }
-    });
+      });
+    }
   },
 
   closeModal(event) {
@@ -91,6 +102,8 @@ var documentPreview = React.createClass({
   },
 
   getFileExtension(fileName) {
+    if (fileName === undefined)
+      return '';
     return fileName.substr((~-fileName.lastIndexOf(".") >>> 0) + 2);
   },
 
