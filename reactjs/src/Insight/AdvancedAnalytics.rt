@@ -2,7 +2,7 @@
 <rt-import name="MenuBar" from="../components/MenuBar"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
-<rt-import name="DonutChart" from="../components/chart/DonutChart" />
+<rt-import name="DonutChart" from="./components/DonutChart" />
 <rt-import name="StackedChart" from="../components/chart/StackedChart" />
 <rt-import name="Loader" from="../components/dathena/Loader"/>
 <rt-import name="Col" from="react-bootstrap/lib/Col"/>

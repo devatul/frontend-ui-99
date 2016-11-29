@@ -121,6 +121,10 @@
 .analyticsChart .top6 span{
   float: right;
 }
+.dropdown-menu.analyticsFilter{
+    margin-left: 65px;
+    margin-top: -240px;
+}
 /*.analyticsChart .top6 span{
   //color:#000000
 }*/
