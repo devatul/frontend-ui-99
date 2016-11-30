@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './AdvancedAnalytics.rt';
 import update from 'react/lib/update';
-import {isEmpty, forEach, isEqual, upperFirst, orderBy} from 'lodash';
+import {isEmpty, forEach, isEqual, upperFirst, orderBy, indexOf} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
 import {makeRequest} from '../utils/http.js';
 import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
@@ -31,13 +31,7 @@ var AdvancedAnalytics = React.createClass({
       starting_point_label: false,
       starting_point:[-1],
       configChart: [],
-      //   category: {},
-      //   confidentiality: {},
-      //   securityGroup: {},
-      //   folders: {},
-      //   users: {},
-      //   documents: {}
-      // ],
+      buttonsList: [],
 
       xhr: {
         status: "Report is loading",
@@ -78,14 +72,18 @@ var AdvancedAnalytics = React.createClass({
     this.xhr = null;
   },
 
-  shouldComponentUpdate(nextProps, nextState) {
-    let {scan, dataChart, configChart, starting_point} = this.state,
-        //{categoryLanguageChart, confidentiality, doctypes} = configChart,
-        nextConfig = nextState.configChart;
-    return !isEqual(this.state, nextState) || !isEqual(scan.result, nextState.scan.result) || !isEqual(configChart, nextConfig) || !isEqual(starting_point, nextState.starting_point);
-  },
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(nextState);
+  //   console.log(this.state);
+  //   let {scan, dataChart, configChart, starting_point} = this.state,
+  //       //{categoryLanguageChart, confidentiality, doctypes} = configChart,
+  //       nextConfig = nextState.configChart;
+  //       console.log('!',!isEqual(starting_point, nextState.starting_point),starting_point, nextState.starting_point)
+  //   return !isEqual(this.state, nextState) || !isEqual(scan.result, nextState.scan.result) || !isEqual(configChart, nextConfig) || !isEqual(starting_point, nextState.starting_point);
+  // },
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('this.state',this.state)
     var prevResult = prevState.scan.result,
         result = this.state.scan.result;
 
@@ -252,23 +250,84 @@ var AdvancedAnalytics = React.createClass({
   handleEditStartingPointLabel(){
       this.setState({starting_point_label:false})
   },
-  handleStartingPoint(e){
-    let startingPoint = parseInt(e.target.value),
-    updateStartingPoint = [],
-    updateStartingPointLabel = false;
+  handleNextDiagram(nextDiagram){
+    nextDiagram = parseInt(nextDiagram);
+
+    let updateNextDiagram = this.state.starting_point || [], updateButtonsList = this.state.buttonsList || [];
+    if(updateNextDiagram[0] !== -1 && indexOf(updateNextDiagram, nextDiagram) === -1){
+      updateNextDiagram.push(nextDiagram);
+      updateButtonsList = this.handleGraphButtons(updateNextDiagram)
+    }else{
+
+    }
+    this.setState({starting_point: updateNextDiagram, buttonsList: updateButtonsList});
+  },
+
+  handleStartingPoint(startingPoint){
+    startingPoint = parseInt(startingPoint);
+    let updateStartingPoint = [], updateStartingPointLabel = false, updateButtonsList;
+
     if(startingPoint !== -1){
-      for(let i = startingPoint; i < this.state.configChart.length; i++){
-        updateStartingPoint.push(i);
-      }
-      for(let i = 0; i < startingPoint; i++){
-        updateStartingPoint.push(i);
-      }
-      updateStartingPointLabel = this.state.configChart[startingPoint].name
+      updateStartingPoint.push(startingPoint);
+      updateButtonsList = this.handleGraphButtons(updateStartingPoint)
     }else{
       updateStartingPoint.push(-1);
+      updateButtonsList = [];
     }
 
-    this.setState({starting_point: updateStartingPoint, starting_point_label: updateStartingPointLabel, shouldUpdate: true});
+    this.setState({starting_point: updateStartingPoint, buttonsList: updateButtonsList, starting_point_label: updateStartingPointLabel, shouldUpdate: true});
+  },
+
+  handleGraphButtons(activeChart){
+    let updateButtonsList = activeChart.length > 1 ? this.state.buttonsList : [],
+    options = {
+       filter: true,
+       search: true,
+       config: true,
+       category: true,
+       user: true,
+       security: true,
+       folder: true,
+       document: true,
+       confidentiality: true,
+     };
+    activeChart.map((chart,i)=>{
+      switch(chart){
+        case 0:
+        options.category = false;
+        options.search = false;
+        options.config = false;
+        break;
+        case 1:
+        options.confidentiality = false;
+        options.search = false;
+        options.config = false;
+        break;
+        case 2:
+        options.security = false;
+        options.search = true;
+        options.config = true;
+        break;
+        case 3:
+        options.folder = false;
+        options.search = true;
+        options.config = true;
+        break;
+        case 4:
+        options.user = false;
+        options.search = true;
+        options.config = true;
+        break;
+        case 5:
+        options.document = false;
+        options.search = true;
+        options.config = true;
+        break;
+
+      }
+    });
+    updateButtonsList.push(options)
+    return updateButtonsList;
   },
   updateChart(result, prevResult) {
     var categoryData = {}, confidentialityData = {}, securityGroupData = {}, foldersData = {}, usersData = {}, documentsData = {},
@@ -301,10 +360,11 @@ var AdvancedAnalytics = React.createClass({
   categoryChart() {
     var categoryChart = {
           name: 'Category',
-          innerSize: '70%',
+          innerSize: '55%',
           disabled: false,
           colors: ['#67CFF4', '#0FABE6', '#0A6486', '#95DEF9', '#0D88B4'],
           colorsHover: ['#67CFF4', '#0FABE6', '#0A6486', '#95DEF9', '#0D88B4'],
+          centerIcon:"tags",
           dataLabels: {
             formatter: function () {
               var percent = this.percentage.toFixed(1);
@@ -349,9 +409,10 @@ var AdvancedAnalytics = React.createClass({
     var confidentialityChart = {
           name: 'Confidentiality',
           disabled: false,
-          innerSize: '70%',
+          innerSize: '55%',
           colors: ['#EA8B85', '#E46159', '#8D1B19', '#FBDDDD', '#B82820'],
           colorsHover: ['#EA8B85', '#E46159', '#8D1B19', '#FBDDDD', '#B82820'],
+          centerIcon:"shield",
           data: [
             {"y": 377,"name": "Banking Secrecy"},
             {"y": 234,"name": "Confidential"},
@@ -386,9 +447,10 @@ var AdvancedAnalytics = React.createClass({
     var securityGroupChart = {
           name: 'Security Group',
           disabled: false,
-          innerSize: '70%',
+          innerSize: '55%',
           colors: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
           colorsHover: ['#87CD87', '#47A547', '#163516', '#63BD63', '#378037'],
+          centerIcon:"users",
           data: [
             {"y": 377,"name": "Security Group 1"},
             {"y": 234,"name": "Security Group 2"},
@@ -424,9 +486,10 @@ var AdvancedAnalytics = React.createClass({
     var foldersChart = {
           name: 'Folders',
           disabled: false,
-          innerSize: '70%',
+          innerSize: '55%',
           colors: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
           colorsHover: ['#FADDB5', '#ED9C27', '#D08011', '#F1AE59', '#6F4509'],
+          centerIcon:"folder-open-o",
           data: [
             {"y": 377,"name": "Folder 1"},
             {"y": 234,"name": "Folder 2"},
@@ -463,9 +526,10 @@ var AdvancedAnalytics = React.createClass({
           name: 'Users',
           showLegend:'1',
           disabled: false,
-          innerSize: '70%',
+          innerSize: '55%',
           colors: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
           colorsHover: ['#3F50A2', '#7986CC', '#8B8FB2', '#EBEEF7', '#9EA8D9'],
+          centerIcon:"user",
           data: [
             {"y": 37,"name": "User 1"},
             {"y": 234,"name": "User 2"},
@@ -501,9 +565,10 @@ var AdvancedAnalytics = React.createClass({
     var documentsChart = {
           name: 'Documents',
           disabled: false,
-          innerSize: '70%',
+          innerSize: '55%',
           colors: ['#237C7E', '#349DA1', '#0F2D2F', '#6DCCD0', '#1B5054'],
           colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE'],
+          centerIcon:"file",
           data: [
             {"y": 454,"name": "Word.doc"},
             {"y": 408,"name": "Excel.xls"},

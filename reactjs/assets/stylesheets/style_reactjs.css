@@ -125,59 +125,103 @@
     margin-left: 65px;
     margin-top: -240px;
 }
-/*.analyticsChart .top6 span{
-  //color:#000000
-}*/
-.analytics.filter{
+.dropdown-menu.analyticsConfig{
+    margin-left: 0px;
+    margin-top: -124px;
+    width: 100%;
+}
+.dropdown-menu.analyticsSearch{
+    margin-left: 0px;
+    margin-top: -343px;
+    width: 80%;
+}
+.dropdown-menu.analyticsSearch hr{
+  height: 2px;
+  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.6), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, 0.6), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, 0.6), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(0, 0, 0, 0.6), transparent);
+}
+.dropdown-menu.analyticsSearch input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  text-align: center;
+  font-size: large;
+}
+.dropdown-menu.analyticsSearch input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  text-align: center;
+  font-size: large;
+}
+.dropdown-menu.analyticsSearch input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  text-align: center;
+  font-size: large;
+}
+.dropdown-menu.analyticsSearch input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  text-align: center;
+  font-size: large;
+}
+
+.analytics.center-graph{
+  position: absolute;
+  margin-top: -174px;
+  margin-left: 167px;
+  font-size: 24px;
+}
+.analytics.btn.filter{
     position: absolute;
     margin-top: -180px;
-    margin-left: 25px;
+    margin-left: 30px;
     background-color: #9B59A3;
     font-size: 17px;
 }
-.analytics.search{
+.analytics.btn.search{
   position: absolute;
-  margin-top: -316px;
-  margin-left: 150px;
+  margin-top: -290px;
+  margin-left: 227px;
   background-color: #3F50A2;
 }
-.analytics.user{
+.analytics.btn.user{
   position: absolute;
-  margin-top: -270px;
-  margin-left: 55px;
+  margin-top: -264px;
+  margin-left: 57px;
   background-color: #7986CC;
   font-size: 18px;
 }
-.analytics.users{
+.analytics.btn.security{
   position: absolute;
-  margin-top: -270px;
-  margin-left: 264px;
+  margin-top: -225px;
+  margin-left: 278px;
   font-size: 18px;
   background-color: #46A246;
 }
-.analytics.folder-open{
+.analytics.btn.folder{
   position: absolute;
-  margin-top: -90px;
-  margin-left: 260px;
+  margin-top: -58px;
+  margin-left: 127px;
   background-color: #ED9C27;
 }
-.analytics.archive{
+.analytics.btn.document{
   position: absolute;
-  margin-top: -90px;
-  margin-left: 60px;
+  margin-top: -102px;
+  margin-left: 54px;
   background-color: #349DA1;
 }
-.analytics.config{
+.analytics.btn.config{
   position: absolute;
-  margin-top: -53px;
-  margin-left: 170px;
+  margin-top: -70px;
+  margin-left: 220px;
   background-color: #A4CF5C;
   font-size: 18px;
 }
-.analytics.shield{
+.analytics.btn.confidentiality{
   position: absolute;
-  margin-top: -180px;
-  margin-left: 296px;
+  margin-top: -138px;
+  margin-left: 280px;
+  background-color: #E46159;
+  font-size: 20px;
+}
+.analytics.btn.category{
+  position: absolute;
+  margin-top: -308px;
+  margin-left: 133px;
   background-color: #E46159;
   font-size: 20px;
 }

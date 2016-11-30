@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {isEqual, pull, indexOf} from 'lodash';
 import HelpButton from '../../components/dathena/HelpButton';
 import update from 'react/lib/update';
+import Select2 from '../../components/dathena/Select2';
 
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
@@ -139,7 +140,7 @@ var DonutChart = React.createClass({
       });
     }
   },
-  toggleDiolog(back, front){
+  toggleDialog(back, front){
     $('#' + back).toggle()
     $('#' + front).toggle()
   },
@@ -185,28 +186,28 @@ var DonutChart = React.createClass({
     this.setState({config:updateConfig, filter: dataFilter, shouldUpdate: true});
   },
   render() {
-    var legendChart = [], {id, config, help, index} = this.props, {colorDisabled} = this.state;
+    var legendChart = [], {id, help, index, options} = this.props, {colorDisabled, config} = this.state, configProps = this.props.config;
     let listChartItems = [];
-    let options = config && config.options ? config.options : false;
+
     if (config.data) {
       for (let i = config.data.length - 1; i >= 0; i--) {
         let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
         legendChart[i] =
-          <li key={'legend_' + i} style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'none'} : {}}>
-            {this.props.analytics ? <i className="fa fa-map-marker" aria-hidden="true" style={{color: color,paddingRight:'3px'}}></i> : <i className="legend-symbol" style={{backgroundColor: color}}></i>}
+          <li key={'legend_' + i} style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'left'} : {}}>
+            <i className="fa fa-map-marker" aria-hidden="true" style={{color: color,paddingRight:'3px'}}></i>
             {config.data[i].name}
           </li>;
       }
-      config.data.map((data,i)=>{
-        listChartItems.push(
-        <li className="mb-sm" key={i}>
-            <div className="form-group">
-                <input type="checkbox" id={id} className="check" onChange={(e)=>this.filter(i, e)} /> {config.data[i].name}
-            </div>
-        </li>)
-      })
     }
 
+    configProps.data.map((data,i)=>{
+      listChartItems.push(
+      <li className="mb-sm" key={i}>
+          <div className="form-group">
+              <input type="checkbox" id={id} className="check" onChange={(e)=>this.filter(i, e)} /> {configProps.data[i].name}
+          </div>
+      </li>);
+    });
     let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-70px' };
     let top6 = config.top6 && <div><span>{config.top6}</span><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i></div>
     return (
@@ -214,24 +215,24 @@ var DonutChart = React.createClass({
         <div className="panel-body chart-panel widget-panel">
           <h4 className="widget-title">
             {config.name && config.name + ' '}
-            {this.props.analytics ? "" :<HelpButton
-              classMenu="overview_timeframe fix-overview-help-button"
-              setValue={help && help} />}
           </h4>
-            {this.props.analytics ?
-              <span>
 
               <div className="widget-chart analytics">
 
               <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto',zIndex: '0'}}></div>
-                {options.filter ? <a className="toggle-button btn btn-default analytics filter" onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
-                  {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
-                  {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
-                  {options.users ? <a className="toggle-button btn btn-default analytics users"><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
-                  {options.folder ? <a className="toggle-button btn btn-default analytics folder-open"><i className="fa fa-folder-open-o" aria-hidden="true"></i></a> : ""}
-                  {options.archive ? <a className="toggle-button btn btn-default analytics archive"><i className="fa fa-file-archive-o" aria-hidden="true"></i></a> : ""}
-                  {options.config ? <a className="toggle-button btn btn-default analytics config"><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
-                  {options.shield ? <a className="toggle-button btn btn-default analytics shield"><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
+                  <i className={"fa fa-"+config.centerIcon+" analytics center-graph"} aria-hidden="true"></i>
+
+                  {options.filter ? <a className="toggle-button btn btn-default analytics filter" onClick={()=>this.toggleDialog(id + "FilterBack",id + "Filter")} ><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
+                  {options.search ? <a className="toggle-button btn btn-default analytics search" onClick={()=>this.toggleDialog(id + "searchBack",id + "search")} ><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
+                  {options.config ? <a className="toggle-button btn btn-default analytics config" onClick={()=>this.toggleDialog(id + "configBack",id + "config")} ><i className="fa fa-cog" aria-hidden="true"></i></a> : ""}
+
+                  {options.category ? <a className="toggle-button btn btn-default analytics category" onClick={()=>this.props.handleNextDiagram(0)}><i className="fa fa-tags" aria-hidden="true"></i></a> : ""}
+                  {options.confidentiality ? <a className="toggle-button btn btn-default analytics confidentiality" onClick={()=>this.props.handleNextDiagram(1)}><i className="fa fa-shield" aria-hidden="true"></i></a> : ""}
+                  {options.security ? <a className="toggle-button btn btn-default analytics security" onClick={()=>this.props.handleNextDiagram(2)}><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
+                  {options.folder ? <a className="toggle-button btn btn-default analytics folder" onClick={()=>this.props.handleNextDiagram(3)}><i className="fa fa-folder-open-o" aria-hidden="true"></i></a> : ""}
+                  {options.user ? <a className="toggle-button btn btn-default analytics user" onClick={()=>this.props.handleNextDiagram(4)}><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
+                  {options.document ? <a className="toggle-button btn btn-default analytics document" onClick={()=>this.props.handleNextDiagram(5)}><i className="fa fa-file-archive-o" aria-hidden="true"></i></a> : ""}
+
 
             { legendChart &&
                 <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none'}}>
@@ -239,19 +240,7 @@ var DonutChart = React.createClass({
                 </ul>
               }
             </div>
-            <div className="dropdown">
-                <div id={id + "FilterBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}></div>
-                <div id={id + "Filter"} className="dropdown-menu has-child has-arrow analyticsFilter">
-                    <ul className="list-unstyled pt-xs">
-                    <li className="mb-sm">
-                        <div className="form-group">
-                          <input type="checkbox" id={id} className="clear" onChange={(e)=>this.filter(-1, e)} /> Clear all
-                        </div>
-                    </li>
-                        {listChartItems}
-                    </ul>
-                </div>
-            </div>
+
             { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
             <div style={{paddingLeft:'11px'}}>
               <div className="analytics bottom-line" style={lineStyle}>
@@ -264,21 +253,44 @@ var DonutChart = React.createClass({
                 {top6}
               </div>
             </div>
-          </span>
-          :
-          <span>
-          <div className="widget-chart analytics" >
-          <div className="chart chart-md" id={id} ></div>
-            { legendChart &&
-                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0">
-                  {legendChart}
-                </ul>
-              }
+            <div className="dropdown">
+                <div id={id + "FilterBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDialog(id + "FilterBack",id + "Filter")}></div>
+                <div id={id + "Filter"} className="dropdown-menu has-child has-arrow analyticsFilter">
+                    <ul className="list-unstyled pt-xs">
+                    <li className="mb-sm">
+                        <div className="form-group">
+                          <input type="checkbox" id={id} className="clear" onChange={(e)=>this.filter(-1, e)} /> Clear all
+                        </div>
+                    </li>
+                        {listChartItems}
+                    </ul>
+                </div>
             </div>
-            { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
-          </span>
-          }
+            <div className="dropdown">
+                <div id={id + "configBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDialog(id + "configBack",id + "config")}></div>
+                <div id={id + "config"} className="dropdown-menu has-child has-arrow analyticsConfig">
+                  <Select2 id="chosse_cluster" width={100+"%"} >
+                    <option value="{-1}"> Top 6 Security Groups </option>
+                    <option value="{0}"> Top 6 Most Diverse Security Groups for the Past 12 Months </option>
+                    <option value="{1}"> Top 6 Most Diverse Security Groups for the Past 6 Months </option>
+                    <option value="{2}"> Top 6 Most Diverse Security Groups for the Past 4 Weeks </option>
+                    <option value="{3}"> Top 6 Most Active Security Groups for the Past 12 Months </option>
+                    <option value="{4}"> Top 6 Most Active Security Groups for the Past 6 Months </option>
+                    <option value="{5}"> Top 6 Most Used Folders for the Past 4 Weeks </option>
+                    <option value="{6}"> Risk Posture </option>
+                    <option value="{7}"> Top 6 Folders at Risk </option>
+                  </Select2>
+                </div>
+            </div>
+            <div className="dropdown">
+                <div id={id + "searchBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDialog(id + "searchBack",id + "search")}></div>
+                <div id={id + "search"} className="dropdown-menu has-child has-arrow analyticsSearch">
+                    <input type="text" className="form-control" style={{border:'none'}} placeholder="search" />
+                    <hr className="solid"/>
+                </div>
+            </div>
         </div>
+
       </section>
     );
   }

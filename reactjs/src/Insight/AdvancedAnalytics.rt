@@ -13,7 +13,6 @@
 <rt-import name="Select2" from="../components/dathena/Select2" />
 <rt-import name="FormGroup" from="react-bootstrap/lib/FormGroup"/>
 <rt-import name="InputGroup" from="react-bootstrap/lib/InputGroup"/>
-<rt-import name="select2" from="../components/dathena/Select2"/>
 
 <section>
 
@@ -22,7 +21,7 @@
             <Loader rt-if="this.state.xhr.isFetching != 1" xhr="{this.state.xhr}"></Loader>
             <div class="select-starting-point">
             <FormGroup>
-            <InputGroup class="mb-md"  rt-if="this.state.starting_point_label !== false">
+            <!--<InputGroup class="mb-md"  rt-if="this.state.starting_point_label !== false">
             <label>
               <i className="fa fa-map-marker" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
               Starting Point
@@ -32,16 +31,16 @@
             </label>
             <HelpButton
               classMenu="overview_timeframe fix-overview-help-button"
-              setValue="test value" />
+              setValue="Select a starting point" />
               <button class="btn btn-default" onClick={this.handleEditStartingPointLabel}>Edit</button>
-            </InputGroup>
+            </InputGroup>-->
             <InputGroup class="mb-md" rt-if="this.state.starting_point_label == false">
             <label>
               <b class="mr-md">
               <i className="fa fa-map-marker" aria-hidden="true" style="font-size: 20px;margin-right: 5px;"></i>
                 Select  a
               </b>
-              <select id="chosse_cluster" width="{170}" onChange={this.handleStartingPoint} value={this.state.starting_point[0]} >
+              <Select2 id="chosse_cluster" width="{170}" onChange='{(e)=>{this.handleStartingPoint(e.target.value)}}' value={this.state.starting_point[0]} >
                 <option value="{-1}"> Starting Point </option>
                 <option value="{0}"> Category </option>
                 <option value="{1}"> Confidentiality </option>
@@ -49,11 +48,11 @@
                 <option value="{3}"> Folders </option>
                 <option value="{4}"> User </option>
                 <option value="{5}"> Documents </option>
-              </select>
+              </Select2>
             </label>
             <HelpButton
               classMenu="overview_timeframe fix-overview-help-button"
-              setValue="test value" />
+              setValue="Select a starting point" />
             </InputGroup>
             </FormGroup>
             </div>
@@ -62,7 +61,8 @@
             <DonutChart
                 rt-scope="configChart[this.state.starting_point[graphIndex]] as config"
                 id="{config.name.indexOf('Security') == -1 ? config.name : 'security'}"
-                analytics = "{true}"
+                handleNextDiagram = "{this.handleNextDiagram}"
+                options = "{this.state.buttonsList[graphIndex]}"
                 index = "{graphIndex}"
                 config={config}
                 help="Repartition of each level of confidentiality for all the documents scanned." />
