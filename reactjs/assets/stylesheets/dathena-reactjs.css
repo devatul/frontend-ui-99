@@ -544,7 +544,9 @@ select.assigment-select.form-control {
 .chart-stacked .highcharts-container {
     z-index: 10 !important;
 }
-
+.analytics .highcharts-container{
+  overflow: visible !important;
+}
 /*modal-backdrop*/
 .modal-backdrop {
     background-color: rgba(255, 255, 255, 0.5);

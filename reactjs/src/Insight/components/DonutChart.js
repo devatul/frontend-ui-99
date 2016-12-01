@@ -1,14 +1,18 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
-import {isEqual} from 'lodash';
-import HelpButton from '../dathena/HelpButton';
+import {isEqual, pull, indexOf} from 'lodash';
+import HelpButton from '../../components/dathena/HelpButton';
+import update from 'react/lib/update';
 
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
 
   getInitialState() {
     return {
-      colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1']
+      colorDisabled: ['#D7D8DA', '#CBCCCE', '#CFCED3', '#D8D7DC', '#CECFD1'],
+      config: this.props.config || {},
+      filter: [-1],
+      shouldUpdate:false,
     };
   },
 
@@ -17,20 +21,27 @@ var DonutChart = React.createClass({
     config: PropTypes.object.isRequired,
     help: PropTypes.string
   },
-
+  componentWillReceiveProps(props){
+    this.setState({config:props.config});
+  },
   shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.props.config, nextProps.config);
+    return !isEqual(this.props.config, nextProps.config) || nextState.shouldUpdate;
   },
   componentDidMount(){
     this.draw();
   },
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.shouldUpdate === true) {
+      this.setState({shouldUpdate: false});
+    }
     this.draw();
   },
 
   draw() {
-    var {id, config} = this.props, {colorDisabled} = this.state,
+    var {id} = this.props, {colorDisabled, config} = this.state,
+
         div = $('#' + id);
+
     if (div.length) {
       div.highcharts({
         chart: {
@@ -96,6 +107,7 @@ var DonutChart = React.createClass({
               events: {
                 mouseOver: function (event) {
                   var {series} = this, {points} = series;
+                  div.css({'z-index':1,'transition': 'z-index 0s'})
                   this.graphic.attr({
                     fill: this.color
                   });
@@ -114,6 +126,7 @@ var DonutChart = React.createClass({
                       fill: points[i].color
                     });
                   }
+                  div.css({'z-index':0, 'transition': 'z-index 3s'})
                 }
               }
             }
@@ -126,8 +139,55 @@ var DonutChart = React.createClass({
       });
     }
   },
+  toggleDiolog(back, front){
+    $('#' + back).toggle()
+    $('#' + front).toggle()
+  },
+  filter(data, e){
+    let {filter} = this.state, {config, id} = this.props,
+    colors = [], colorsHover = [], configData = [], updateConfig,
+     dataFilter = (filter[0] == -1) ? [] : filter;
+
+    if(data !== -1){
+      e.target.checked ? dataFilter.push(data) : pull(dataFilter, data);
+      if(dataFilter.length !== 0){
+        $('#'+ id + '.clear').prop('checked', false);
+        for(let i = 0; i < config.data.length; i++){
+          if(indexOf(dataFilter, i) !== -1){
+            configData.push(config.data[i]);
+            colors.push(config.colors[i]);
+            colorsHover.push(config.colorsHover[i]);
+          }
+        }
+         updateConfig = update(config, {
+          data:{$set:configData},
+          colors:{$set:colors},
+          colorsHover:{$set:colorsHover}
+        });
+      }else{
+        $('#'+ id + '.clear').prop('checked', true);
+        dataFilter=[-1];
+        updateConfig = config;
+      }
+    }else{
+      if(e.target.checked){
+        $('#'+ id + '.check').prop('checked', false);
+        dataFilter=[-1];
+      }else{
+        $('#'+ id + '.check').prop('checked', true);
+        config.data.map((data,i)=>{
+          dataFilter.push(i);
+        })
+      }
+      updateConfig = config;
+    }
+
+    this.setState({config:updateConfig, filter: dataFilter, shouldUpdate: true});
+  },
   render() {
     var legendChart = [], {id, config, help, index} = this.props, {colorDisabled} = this.state;
+    let listChartItems = [];
+    let options = config && config.options ? config.options : false;
     if (config.data) {
       for (let i = config.data.length - 1; i >= 0; i--) {
         let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
@@ -137,6 +197,14 @@ var DonutChart = React.createClass({
             {config.data[i].name}
           </li>;
       }
+      config.data.map((data,i)=>{
+        listChartItems.push(
+        <li className="mb-sm" key={i}>
+            <div className="form-group">
+                <input type="checkbox" id={id} className="check" onChange={(e)=>this.filter(i, e)} /> {config.data[i].name}
+            </div>
+        </li>)
+      })
     }
 
     let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-70px' };
@@ -152,40 +220,11 @@ var DonutChart = React.createClass({
           </h4>
             {this.props.analytics ?
               <span>
+
               <div className="widget-chart analytics">
 
               <div className="chart chart-md" id={id} style={{width:'70%',margin:' 0 auto',zIndex: '0'}}></div>
-                {options.filter ?
-                  <div className="dropdown">
-                      <a className="toggle-button btn btn-default analytics filter" onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}><i className="fa fa-filter" aria-hidden="true"></i></a>
-                      <div id={id + "FilterBack"} className="dropdown-backdrop-custom" style={{'display':'none'}} onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}></div>
-                      <div id={id + "Filter"} className="dropdown-menu has-child has-arrow analyticsFilter">
-                          <ul className="list-unstyled pt-xs">
-                              <li className="mb-sm">
-                                  <div className="form-group">
-                                    list 1
-                                  </div>
-                              </li>
-
-                              <li className="mb-sm">
-                                  <div className="form-group">
-                                      list 2
-                                  </div>
-                              </li>
-                              <li className="mb-sm">
-                                  <div className="form-group">
-                                      list 3
-                                  </div>
-                              </li>
-                              <li className="mb-sm">
-                                  <div className="form-group">
-                                      step 4
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  : ""}
+                {options.filter ? <a className="toggle-button btn btn-default analytics filter" onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}><i className="fa fa-filter" aria-hidden="true"></i></a> : ""}
                   {options.search ? <a className="toggle-button btn btn-default analytics search"><i className="fa fa-search" aria-hidden="true"></i></a> : ""}
                   {options.user ? <a className="toggle-button btn btn-default analytics user"><i className="fa fa-user" aria-hidden="true"></i></a> : ""}
                   {options.users ? <a className="toggle-button btn btn-default analytics users"><i className="fa fa-users" aria-hidden="true"></i></a> : ""}
@@ -199,6 +238,19 @@ var DonutChart = React.createClass({
                   {legendChart}
                 </ul>
               }
+            </div>
+            <div className="dropdown">
+                <div id={id + "FilterBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDiolog(id + "FilterBack",id + "Filter")}></div>
+                <div id={id + "Filter"} className="dropdown-menu has-child has-arrow analyticsFilter">
+                    <ul className="list-unstyled pt-xs">
+                    <li className="mb-sm">
+                        <div className="form-group">
+                          <input type="checkbox" id={id} className="clear" onChange={(e)=>this.filter(-1, e)} /> Clear all
+                        </div>
+                    </li>
+                        {listChartItems}
+                    </ul>
+                </div>
             </div>
             { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
             <div style={{paddingLeft:'11px'}}>
@@ -226,8 +278,6 @@ var DonutChart = React.createClass({
             { config.disabled && <div id={id} className="chart-disabled-overlay"></div>}
           </span>
           }
-
-
         </div>
       </section>
     );

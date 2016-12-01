@@ -14,6 +14,7 @@ module.exports = function () {
         $(parent).find('.dropdown-menu.has-child').toggle();
     });
 
+
     $('.dropdown-backdrop-custom').on('click', function(e){
         $('.dropdown-backdrop-custom').toggle();
         $('.dropdown-menu.has-child').toggle();
