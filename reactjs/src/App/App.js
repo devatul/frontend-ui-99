@@ -49,8 +49,8 @@ module.exports = React.createClass({
 				}
 			}, Constant.TIMEVALIDTOKEN / 10);
 		} else {
-			console.log("noToken");
-			browserHistory.push('/Account/Signin');
+			console.log("No token found");
+			browserHistory.push('/Account/SignIn');
 		}
 	},
 
