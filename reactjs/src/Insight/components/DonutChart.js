@@ -206,7 +206,7 @@ var DonutChart = React.createClass({
       for (let i = config.data.length - 1; i >= 0; i--) {
         let color = ( config.disabled ) ? colorDisabled[i] : config.colors[i];
         legendChart[i] =
-          <li key={'legend_' + i} style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'left'} : {}}>
+          <li key={'legend_' + i}  style={config.data.length <= 3 ? {margin: '0 auto 5px', width: config.data[0].name.length * 8, float: 'left'} : {}}>
             <i className="fa fa-map-marker" aria-hidden="true" style={{color: color,paddingRight:'3px'}}></i>
             {config.data[i].name}
           </li>;
@@ -228,7 +228,7 @@ var DonutChart = React.createClass({
       });
     }
 
-    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-42px' };
+    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-70px' };
     let top6 = config.top6 && <div><span>{config.top6}</span><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i></div>
     return (
       <section className="panel">
@@ -255,7 +255,7 @@ var DonutChart = React.createClass({
 
 
             { legendChart &&
-                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none',height:'66px'}}>
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none',height:'66px',overflow:'hidden'}}>
                   {legendChart}
                 </ul>
               }

@@ -72,7 +72,7 @@
             </div>
             </div>
             <div rt-repeat="graph in this.state.starting_point" key={graphIndex}  >
-            <div class="col-md-4"  key={graphIndex} rt-if="graphIndex > 2" >
+            <div class="col-md-4" rt-if="graphIndex > 2" >
             <DonutChart
                 rt-scope="configChart[this.state.starting_point[graphIndex]] as config"
                 id="{config.name.indexOf('Security') == -1 ? config.name : 'security'}"

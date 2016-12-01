@@ -83,7 +83,6 @@ var AdvancedAnalytics = React.createClass({
   // },
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.state',this.state)
     var prevResult = prevState.scan.result,
         result = this.state.scan.result;
 

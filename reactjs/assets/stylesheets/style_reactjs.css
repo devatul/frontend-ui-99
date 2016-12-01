@@ -251,144 +251,174 @@
   }
 }
 @media (max-width: 1199px){
-  .analytics.filter{
-    margin-left: 18px;
+  .analytics.center-graph{
+    margin-left: 129px;
+    font-size: 20px;
   }
-  .analytics.search{
-    margin-top: -280px;
-    margin-left: 125px;
+  .analytics.btn.filter{
+    margin-top: -180px;
+    margin-left: 16px;
   }
-  .analytics.user{
-    margin-top: -250px;
-    margin-left: 45px;
+  .analytics.btn.search{
+    margin-top: -271px;
+    margin-left: 182px;
   }
-  .analytics.users{
-    margin-top: -250px;
-    margin-left: 195px;
+  .analytics.btn.config{
+    margin-top: -96px;
+    margin-left: 173px;
   }
-  .analytics.config{
-    margin-top: -83px;
-    margin-left: 116px;
+  .analytics.btn.category{
+    margin-top: -287px;
+    margin-left: 107px;
   }
-  .analytics.folder-open{
-    margin-top: -115px;
-    margin-left: 192px;
+  .analytics.btn.confidentiality{
+    margin-top: -148px;
+    margin-left: 218px;
   }
-  .analytics.archive{
-    margin-top: -113px;
-    margin-left: 43px;
-  }
-  .analytics.shield{
-    margin-top: -185px;
+  .analytics.btn.security{
+    margin-top: -216px;
     margin-left: 219px;
+  }
+  .analytics.btn.folder{
+    margin-top: -81px;
+    margin-left: 100px;
+  }
+  .analytics.btn.user{
+    margin-top: -250px;
+    margin-left: 39px;
+  }
+  .analytics.btn.document{
+    margin-top: -116px;
+    margin-left: 42px;
   }
 }
 @media (max-width: 991px){
-.analytics.filter{
+  .analytics.center-graph{
+    margin-left: 320px;
+    font-size: 30px;
+  }
+  .analytics.btn.filter{
     margin-top: -185px;
     margin-left: 140px;
-}
-.analytics.search{
-  margin-top: -343px;
-  margin-left: 307px;
-}
-.analytics.user{
-  margin-top: -295px;
-  margin-left: 190px;
-}
-.analytics.users{
-  margin-top: -295px;
-  margin-left: 430px;
-}
-.analytics.folder-open{
-  margin-top: -78px;
-  margin-left: 436px;
-}
-.analytics.archive{
-  margin-top: -74px;
-  margin-left: 184px;
-}
-.analytics.config{
-  margin-top: -18px;
-  margin-left: 307px;
-}
-.analytics.shield{
-  margin-top: -185px;
-  margin-left: 475px;
-}
+  }
+  .analytics.btn.search{
+    margin-top: -318px;
+    margin-left: 414px;
+  }
+  .analytics.btn.config{
+    margin-top: -46px;
+    margin-left: 412px;
+  }
+  .analytics.btn.category{
+    margin-top: -343px;
+    margin-left: 288px;
+  }
+  .analytics.btn.confidentiality{
+    margin-top: -130px;
+    margin-left: 473px;
+  }
+  .analytics.btn.security{
+    margin-top: -234px;
+    margin-left: 469px;
+  }
+  .analytics.btn.folder{
+    margin-top: -19px;
+    margin-left: 278px;
+  }
+  .analytics.btn.user{
+    margin-top: -291px;
+    margin-left: 182px;
+  }
+  .analytics.btn.document{
+    margin-top: -82px;
+    margin-left: 176px;
+  }
 }
 @media (max-width: 767px){
-.analytics.filter{
-  margin-top: -185px;
-  margin-left: 28px;
-}
-.analytics.search{
-  margin-top: -318px;
-  margin-left: 160px;
-}
-.analytics.user{
-  margin-top: -275px;
-  margin-left: 65px;
-}
-.analytics.users{
-  margin-top: -274px;
-  margin-left: 265px;
-}
-.analytics.folder-open{
-  margin-top: -95px;
-  margin-left: 268px;
-}
-.analytics.archive{
-  margin-top: -92px;
-  margin-left: 64px;
-}
-.analytics.config{
-  margin-top: -49px;
-  margin-left: 160px;
-}
-.analytics.shield{
-  margin-top: -185px;
-  margin-left: 300px;
-}
+  .analytics.center-graph{
+    margin-left: 176px;
+    font-size: 25px;
+  }
+  .analytics.btn.filter{
+    margin-top: -185px;
+    margin-left: 28px;
+  }
+  .analytics.btn.search{
+    margin-top: -292px;
+    margin-left: 245px;
+  }
+  .analytics.btn.config{
+    margin-top: -73px;
+    margin-left: 245px;
+  }
+  .analytics.btn.category{
+    margin-top: -318px;
+    margin-left: 148px;
+  }
+  .analytics.btn.confidentiality{
+    margin-top: -144px;
+    margin-left: 297px;
+  }
+  .analytics.btn.security{
+    margin-top: -228px;
+    margin-left: 302px;
+  }
+  .analytics.btn.folder{
+    margin-top: -53px;
+    margin-left: 136px;
+  }
+  .analytics.btn.user{
+    margin-top: -275px;
+    margin-left: 59px;
+  }
+  .analytics.btn.document{
+    margin-top: -103px;
+    margin-left: 56px;
+  }
 }
 @media (max-width: 460px){
   .analyticsChart{
     width:320px !important;
   }
-  .analytics.filter{
+  .analytics.center-graph{
+    margin-left: 122px;
+    font-size: 18px;
+  }
+  .analytics.btn.filter{
     margin-top: -185px;
-    margin-left: 17px;
+    margin-left: 16px;
   }
-  .analytics.search{
-    margin-top: -275px;
-    margin-left: 118px;
-  }
-  .analytics.user{
+  .analytics.btn.search{
     margin-top: -258px;
-    margin-left: 55px;
+    margin-left: 164px;
   }
-  .analytics.users{
+  .analytics.btn.config{
+    margin-top: -102px;
+    margin-left: 156px;
+  }
+  .analytics.btn.category{
+    margin-top: -274px;
+    margin-left: 103px;
+  }
+  .analytics.btn.confidentiality{
+    margin-top: -148px;
+    margin-left: 196px;
+  }
+  .analytics.btn.security{
+    margin-top: -211px;
+    margin-left: 200px;
+  }
+  .analytics.btn.folder{
+    margin-top: -94px;
+    margin-left: 88px;
+  }
+  .analytics.btn.user{
     margin-top: -247px;
-    margin-left: 181px;
+    margin-left: 46px;
   }
-  .analytics.folder-open{
-    margin-top: -117px;
-    margin-left: 178px;
-  }
-  .analytics.archive{
-    margin-top: -119px;
-    margin-left: 42px;
-  }
-  .analytics.config{
-    margin-top: -88px;
-    margin-left: 107px;
-  }
-  .analytics.shield{
-    margin-top: -185px;
-    margin-left: 205px;
-  }
-  .analytics-table .table{
-    width:460px;
+  .analytics.btn.document{
+    margin-top: -125px;
+    margin-left: 38px;
   }
 }
 .help_guide_sub .filter-tags-userassign {
