@@ -57,7 +57,9 @@
             </FormGroup>
             </div>
             <div class="row analyticsChart" rt-if="this.state.xhr.isFetching == 1 && this.state.starting_point[0] !== -1">
-            <div class="col-md-4" rt-repeat="graph in this.state.starting_point" key={graphIndex} >
+            <div style="overflow:hidden" >
+            <div rt-repeat="graph in this.state.starting_point" >
+            <div class="col-md-4"  key={graphIndex} rt-if="graphIndex < 3" >
             <DonutChart
                 rt-scope="configChart[this.state.starting_point[graphIndex]] as config"
                 id="{config.name.indexOf('Security') == -1 ? config.name : 'security'}"
@@ -66,6 +68,20 @@
                 index = "{graphIndex}"
                 config={config}
                 help="Repartition of each level of confidentiality for all the documents scanned." />
+            </div>
+            </div>
+            </div>
+            <div rt-repeat="graph in this.state.starting_point" key={graphIndex}  >
+            <div class="col-md-4"  key={graphIndex} rt-if="graphIndex > 2" >
+            <DonutChart
+                rt-scope="configChart[this.state.starting_point[graphIndex]] as config"
+                id="{config.name.indexOf('Security') == -1 ? config.name : 'security'}"
+                handleNextDiagram = "{this.handleNextDiagram}"
+                options = "{this.state.buttonsList[graphIndex]}"
+                index = "{graphIndex}"
+                config={config}
+                help="Repartition of each level of confidentiality for all the documents scanned." />
+            </div>
             </div>
             </div>
             <Row class="analytics-table" rt-if="this.state.xhr.isFetching == 1 && this.state.configChart[0]">

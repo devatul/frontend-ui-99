@@ -255,7 +255,7 @@ var DonutChart = React.createClass({
 
 
             { legendChart &&
-                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none',height:'64px'}}>
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none',height:'66px'}}>
                   {legendChart}
                 </ul>
               }
