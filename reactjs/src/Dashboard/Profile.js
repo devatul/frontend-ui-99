@@ -5,19 +5,26 @@ import template from './Profile.rt';
 import {makeRequest} from '../utils/http';
 import Constant from '../App/Constant.js';
 import $, {JQuery} from 'jquery';
-import {getProfile, getPhoto} from '../utils/function';
+import {getProfile, getPhoto, getRole} from '../utils/function';
 
 module.exports = React.createClass({
   getInitialState() {
     return {
       profile: {},
-      isChecked: false
+      isChecked: false,
+      role: "",
     };
   },
 
   componentWillMount() {
     this.getProfile();
     this.getPhoto();
+
+    getRole({
+      success: function(data) {
+        this.setState({ role: data.role });
+      }.bind(this)
+    });
   },
 
   /*  shouldComponentUpdate(nextProps , nextState){

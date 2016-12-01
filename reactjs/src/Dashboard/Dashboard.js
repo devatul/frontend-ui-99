@@ -132,7 +132,7 @@ module.exports = React.createClass({
     },
     componentDidMount() {
         $.ajax({
-            url: Constant.SERVER_API + 'api/account/role/',
+            url: Constant.SERVER_API + Constant.urls.ROLES,
             dataType: 'json',
             type: 'GET',
             beforeSend: function(xhr) {

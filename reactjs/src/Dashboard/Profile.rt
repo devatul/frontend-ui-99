@@ -1,6 +1,7 @@
 <rt-require dependency="react-router/lib/Link" as="Link"/>
 <rt-import name="MyTeam" from="./MyTeam"/>
 <rt-import name="HelpButton" from="../components/dathena/HelpButton"/>
+<rt-import name="constant" from="../App/Constant.js"/>
 
 <div class="container">
   <div class="tabs tabs-primary">
@@ -8,7 +9,7 @@
       <li class="active">
         <a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
       </li>
-      <li class="">
+      <li rt-if="this.state.role === constant.role.IS_2ND || this.state.role === constant.role.RISK_LEAD || this.state.role === constant.role.IS_1ST" class="">
         <a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
       </li>
     </ul>
@@ -118,7 +119,7 @@
           </div>
         </div>
       </div>
-      <div id="my_team" class=" tab-pane my-team-content">
+      <div rt-if="this.state.role === constant.role.IS_2ND || this.state.role === constant.role.RISK_LEAD || this.state.role === constant.role.IS_1ST" id="my_team" class=" tab-pane my-team-content">
         <MyTeam />
       </div>
     </div>

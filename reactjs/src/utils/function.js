@@ -378,5 +378,15 @@ module.exports = {
     getTechEmailServerExchange: (options) => {
         options.paht = urls.TECH_EMAILSERVER_EXCHANGE
         makeRequest(options)
-    }
+    },
+
+    getMyTeam: (options) => {
+        options.path = urls.MY_TEAM;
+        makeRequest(options);
+    },
+
+    getRole: (options) => {
+        options.path = urls.ROLES;
+        makeRequest(options);
+    },
 }

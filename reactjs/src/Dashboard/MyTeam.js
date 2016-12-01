@@ -7,7 +7,7 @@ import $, {JQuery} from 'jquery';
 import _ from 'lodash';
 import update from 'react-addons-update';
 import {makeRequest} from '../utils/http';
-import {getRole} from '../utils/function';
+import {getRole, getMyTeam} from '../utils/function';
 
 module.exports = React.createClass({
   getInitialState() {
@@ -19,8 +19,7 @@ module.exports = React.createClass({
   },
 
   getTeam() {
-    makeRequest({
-      path: 'api/team/',
+    getMyTeam({
       success: (res) => {
         console.log(res);
 
