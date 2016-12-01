@@ -9,106 +9,114 @@ import { orderBy } from 'lodash'
 import { git_version } from '../commit'
 
 module.exports = React.createClass({
-	getInitialState() {
-		return {
-			categories: [],
-			confidentialities: [],
-			scanResult: {},
-			tokenAuth: ""
-		};
-	},
+  getInitialState() {
+    return {
+      categories: [],
+      confidentialities: [],
+      scanResult: {},
+      tokenAuth: "",
+      intervalId: undefined,
+    };
+  },
 
-	componentWillMount() {
+  componentWillMount() {
     let {pathname} = this.props.location;
 
     var token = sessionStorage.getItem('token');
 
     if (token) {
       switch (true) {
-				case pathname == '/' || pathname == '/Account/SignIn':
-					browserHistory.push('/Dashboard/OverView');
-					break;
-				case pathname != '/':
-					browserHistory.push(pathname);
-					break;
-			}
+        case pathname == '/' || pathname == '/Account/SignIn':
+          browserHistory.push('/Dashboard/OverView');
+          break;
+        case pathname != '/':
+          browserHistory.push(pathname);
+          break;
+      }
 
-			setInterval(() => {
-				if (token) {
-					setRefreshToken({
-						params: JSON.stringify({
-							token: token
-						}),
-						success: (data) => {
-							sessionStorage.setItem('token', data.token);
-						},
-						error: (data) => {
-							console.log(JSON.parse(data.responseText).detail)
-						}
-					});
-				}
-			}, Constant.TIMEVALIDTOKEN / 10);
-		} else {
-			console.log("No token found");
-			browserHistory.push('/Account/SignIn');
-		}
-	},
+      let interval = setInterval(() => {
+        var refreshToken = sessionStorage.getItem('token');
 
-	componentWillUnmount() {
-		sessionStorage.removeItem('token')
-	},
+        if (refreshToken) {
+          setRefreshToken({
+            params: JSON.stringify({
+              token: refreshToken
+            }),
+            success: (data) => {
+              sessionStorage.setItem('token', data.token);
+            },
+            error: (data) => {
+              console.log(JSON.parse(data.responseText).detail)
+            }
+          });
+        }
+      }, Constant.TIMEVALIDTOKEN / 10);
+      this.setState({ intervalId: interval });
+    } else {
+      console.log("No token found");
+      if (this.state.intervalId !== undefined) {
+        clearInterval(this.state.intervalId);
+        this.setState({ intervalId: undefined });
+      }
+      browserHistory.push('/Account/SignIn');
+    }
+  },
 
-	// componentDidMount() {
-	// 	this.getCategories();
-	// 	this.getConfidentialities();
-	// },
+  componentWillUnmount() {
+    sessionStorage.removeItem('token')
+  },
 
-	componentWillUpdate(nextProps, nextState) {
-		let {categories} = this.state;
+  // componentDidMount() {
+  // 	this.getCategories();
+  // 	this.getConfidentialities();
+  // },
 
-		// if( !categories.length ) {
-		// 	this.getCategories()
-		// }
-	},
+  componentWillUpdate(nextProps, nextState) {
+    let {categories} = this.state;
 
-	getCategories: function () {
+    // if( !categories.length ) {
+    // 	this.getCategories()
+    // }
+  },
+
+  getCategories: function () {
     return getCategories({
-				success: (data) => {
-					data = orderBy(data, ['name'], ['asc']);
-					this.setState({categories: data});
-				}
-		});
+      success: (data) => {
+        data = orderBy(data, ['name'], ['asc']);
+        this.setState({categories: data});
+      }
+    });
   },
 
-	getConfidentialities: function(async) {
-		return getConfidentialities({
-				success: (data) => {
-						data = orderByIndex(data, [4, 3, 2, 1, 0]);
-						this.setState({confidentialities: data});
-				}
-		});
-	},
-
-	mapStateToProps(children, states = []) {
-		let stateMap = {},
-		total = 0;
-
-		// select store in array name store
-		if ((total = states.length) > 0) {
-			for (let i = total - 1; i >= 0; i--) {
-				stateMap[states[i]] = this.state[states[i]];
-			}
-		}
-
-		// function send to all children
-		stateMap['mapStateToProps'] = this.mapStateToProps;
-
-		return React.Children.map(children, (child) => React.cloneElement(child, stateMap));
+  getConfidentialities: function(async) {
+    return getConfidentialities({
+      success: (data) => {
+        data = orderByIndex(data, [4, 3, 2, 1, 0]);
+        this.setState({confidentialities: data});
+      }
+    });
   },
 
-	commit() {
-		return git_version;
-	},
+  mapStateToProps(children, states = []) {
+    let stateMap = {},
+      total = 0;
+
+    // select store in array name store
+    if ((total = states.length) > 0) {
+      for (let i = total - 1; i >= 0; i--) {
+        stateMap[states[i]] = this.state[states[i]];
+      }
+    }
+
+    // function send to all children
+    stateMap['mapStateToProps'] = this.mapStateToProps;
+
+    return React.Children.map(children, (child) => React.cloneElement(child, stateMap));
+  },
+
+  commit() {
+    return git_version;
+  },
 
   render: template
 });

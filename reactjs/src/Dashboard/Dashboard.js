@@ -48,7 +48,6 @@ module.exports = React.createClass({
         browserHistory.push('/Account/SignIn');
     },
     componentWillUnmount() {
-
          clearInterval(this.state.interval);
     },
     componentDidUpdate(prevProps, prevState) {
