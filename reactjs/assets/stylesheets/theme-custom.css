@@ -1224,7 +1224,9 @@ div[id^='legendContainer'] {
 
 .panel-policies .col-default {
   padding-top: 5px; }
-
+.filter-tags{
+  height: auto;
+}
 .filter-tags .filter-label, .filter-tags-clear .filter-label {
   margin-right: 5px;
   font-size: 100%;

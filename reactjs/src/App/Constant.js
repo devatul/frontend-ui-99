@@ -1,5 +1,6 @@
 module.exports = {
-    SERVER_API: 'http://54.254.154.35/',
+    SERVER_API: 'http://52.77.255.91/',
+    //SERVER_API: 'http://54.254.154.35/',
     // SERVER_API: 'http://54.179.166.78/',
     // SERVER_API:'http://54.254.145.121/',
     // SERVER_API: 'http://54.169.142.202',

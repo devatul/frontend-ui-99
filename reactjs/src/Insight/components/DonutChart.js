@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
-import {isEqual, pull, indexOf} from 'lodash';
+import {isEqual, pull, indexOf, findIndex, pullAllBy} from 'lodash';
 import HelpButton from '../../components/dathena/HelpButton';
 import update from 'react/lib/update';
 import Select2 from '../../components/dathena/Select2';
+import FilterLabel from '../../components/dathena/FilterLabel';
 
 var DonutChart = React.createClass({
   displayName: 'DonutChart',
@@ -144,17 +145,17 @@ var DonutChart = React.createClass({
     $('#' + back).toggle()
     $('#' + front).toggle()
   },
-  filter(data, e){
+  filter(data, checked){
     let {filter} = this.state, {config, id} = this.props,
     colors = [], colorsHover = [], configData = [], updateConfig,
      dataFilter = (filter[0] == -1) ? [] : filter;
 
     if(data !== -1){
-      e.target.checked ? dataFilter.push(data) : pull(dataFilter, data);
+      checked ? dataFilter.push(data) : pullAllBy(dataFilter, [data], 'id');
       if(dataFilter.length !== 0){
         $('#'+ id + '.clear').prop('checked', false);
         for(let i = 0; i < config.data.length; i++){
-          if(indexOf(dataFilter, i) !== -1){
+          if(findIndex(dataFilter, {name:config.data[i].name}) !== -1){
             configData.push(config.data[i]);
             colors.push(config.colors[i]);
             colorsHover.push(config.colorsHover[i]);
@@ -171,19 +172,31 @@ var DonutChart = React.createClass({
         updateConfig = config;
       }
     }else{
-      if(e.target.checked){
+      if(checked){
         $('#'+ id + '.check').prop('checked', false);
         dataFilter=[-1];
       }else{
         $('#'+ id + '.check').prop('checked', true);
         config.data.map((data,i)=>{
-          dataFilter.push(i);
+          dataFilter.push({id:id+"_"+i, name:data.name});
         })
       }
       updateConfig = config;
     }
 
     this.setState({config:updateConfig, filter: dataFilter, shouldUpdate: true});
+  },
+  onclearFilter: function() {
+      let {config, id} = this.props;
+      $('#'+ id + '.check').prop('checked', false);
+      $('#'+ id + '.clear').prop('checked', true);
+
+      this.setState({ filter: [-1], config:config, shouldUpdate: true});
+  },
+  onClickLabel: function(label, indexLabel) {
+     let {id} = this.props;
+     $('#'+ id + '.check.'+label.id).prop('checked', false);
+     this.filter(label, false);
   },
   render() {
     var legendChart = [], {id, help, index, options} = this.props, {colorDisabled, config} = this.state, configProps = this.props.config;
@@ -200,15 +213,22 @@ var DonutChart = React.createClass({
       }
     }
 
-    configProps.data.map((data,i)=>{
+    configProps.data.map((data, i)=>{
       listChartItems.push(
       <li className="mb-sm" key={i}>
           <div className="form-group">
-              <input type="checkbox" id={id} className="check" onChange={(e)=>this.filter(i, e)} /> {configProps.data[i].name}
+              <input type="checkbox" id={id} className={"check " + id+"_"+i } onChange={(e)=>this.filter({id:id+"_"+i, name: data.name}, e.target.checked)} /> {data.name}
           </div>
       </li>);
     });
-    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-70px' };
+    let configList;
+    if(config.configList){
+      configList = config.configList.map((listItem, i)=>{
+          return <option value={listItem.value} key={i}> {listItem.label} </option>;
+      });
+    }
+
+    let lineStyle = {color:config.colors && config.colors[0], backgroundColor:config.colors && config.colors[0], marginRight: (index == 2 || index == 5) ? '0px' : '-42px' };
     let top6 = config.top6 && <div><span>{config.top6}</span><i className="fa fa-cog" style={{color:config.colors[0]}} aria-hidden="true"></i></div>
     return (
       <section className="panel">
@@ -235,7 +255,7 @@ var DonutChart = React.createClass({
 
 
             { legendChart &&
-                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none'}}>
+                <ul id={'legend' + id} className="list-unstyled chart-legend serie-0" style={{border:'none',height:'64px'}}>
                   {legendChart}
                 </ul>
               }
@@ -248,6 +268,9 @@ var DonutChart = React.createClass({
               </div>
               <div className="filter-tags-block">
                   <label className="pull-left mr-md">{config.name && config.name + ' Filters: '}</label>
+                    <div className="pull-left filter-tags" style={{textTransform: 'capitalize'}}>
+                      {this.state.filter[0] != -1 ? <FilterLabel data={this.state.filter} onClick={this.onClickLabel} onClear={this.onclearFilter} /> : ""}
+                    </div>
               </div>
               <div className="top6">
                 {top6}
@@ -259,7 +282,7 @@ var DonutChart = React.createClass({
                     <ul className="list-unstyled pt-xs">
                     <li className="mb-sm">
                         <div className="form-group">
-                          <input type="checkbox" id={id} className="clear" onChange={(e)=>this.filter(-1, e)} /> Clear all
+                          <input type="checkbox" id={id} className="clear" onChange={(e)=>this.filter(-1, e.target.checked)} /> Clear all
                         </div>
                     </li>
                         {listChartItems}
@@ -270,15 +293,7 @@ var DonutChart = React.createClass({
                 <div id={id + "configBack"} className="dropdown-backdrop-custom" style={{'display':'none','opacity':0}} onClick={()=>this.toggleDialog(id + "configBack",id + "config")}></div>
                 <div id={id + "config"} className="dropdown-menu has-child has-arrow analyticsConfig">
                   <Select2 id="chosse_cluster" width={100+"%"} >
-                    <option value="{-1}"> Top 6 Security Groups </option>
-                    <option value="{0}"> Top 6 Most Diverse Security Groups for the Past 12 Months </option>
-                    <option value="{1}"> Top 6 Most Diverse Security Groups for the Past 6 Months </option>
-                    <option value="{2}"> Top 6 Most Diverse Security Groups for the Past 4 Weeks </option>
-                    <option value="{3}"> Top 6 Most Active Security Groups for the Past 12 Months </option>
-                    <option value="{4}"> Top 6 Most Active Security Groups for the Past 6 Months </option>
-                    <option value="{5}"> Top 6 Most Used Folders for the Past 4 Weeks </option>
-                    <option value="{6}"> Risk Posture </option>
-                    <option value="{7}"> Top 6 Folders at Risk </option>
+                    {configList}
                   </Select2>
                 </div>
             </div>

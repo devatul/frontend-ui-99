@@ -346,14 +346,8 @@ var AdvancedAnalytics = React.createClass({
     updateData.push(foldersData);
     updateData.push(usersData);
     updateData.push(documentsData);
-    // let updateData = update(this.state.configChart, [
-    //   category: {$set: categoryData},
-    //   confidentiality: {$set: confidentialityData},
-    //   securityGroup: {$set: securityGroupData},
-    //   folders: {$set: foldersData},
-    //   users: {$set: usersData},
-    //   documents: {$set: documentsData}
-    // ]);
+
+
     this.setState({configChart: updateData});
   },
 
@@ -391,16 +385,6 @@ var AdvancedAnalytics = React.createClass({
         for(let i = 0; i < categoryChart.data.length; i++){
           total += categoryChart.data[i].y;
         }
-        categoryChart.options = {
-          filter: true,
-          search: false,
-          user: true,
-          users: true,
-          folder: true,
-          archive: true,
-          config: false,
-          shield: true,
-        }
         categoryChart.total = total;
       return categoryChart;
   },
@@ -430,16 +414,6 @@ var AdvancedAnalytics = React.createClass({
     if (confidentialityChart.data.length <= 1) {
       confidentialityChart.disabled = true;
     }
-    confidentialityChart.options = {
-      filter: true,
-      search: false,
-      user: true,
-      users: true,
-      folder: true,
-      archive: true,
-      config: false,
-      shield: false,
-    }
     return confidentialityChart;
   },
 
@@ -468,16 +442,17 @@ var AdvancedAnalytics = React.createClass({
     if (securityGroupChart.data.length <= 1) {
       securityGroupChart.disabled = true;
     }
-    securityGroupChart.options = {
-      filter: true,
-      search: true,
-      user: true,
-      users: false,
-      folder: true,
-      archive: true,
-      config: true,
-      shield: false,
-    }
+    securityGroupChart.configList = [
+      {label:"Top 6 Security Groups", value:0},
+      {label:"Top 6 Most Diverse Security Groups for the Past 12 Months", value:1},
+      {label:"Top 6 Most Diverse Security Groups for the Past 6 Months", value:2},
+      {label:"Top 6 Most Diverse Security Groups for the Past 4 Weeks", value:3},
+      {label:"Top 6 Most Active Security Groups for the Past 12 Months", value:4},
+      {label:"Top 6 Most Active Security Groups for the Past 6 Months", value:5},
+      {label:"Top 6 Most Used Folders for the Past 4 Weeks", value:6},
+      {label:"Risk Posture", value:7},
+      {label:"Top 6 Folders at Risk", value:8},
+    ]
     securityGroupChart.top6 = "Volume: Top 6 Active Group"
     return securityGroupChart;
   },
@@ -503,16 +478,17 @@ var AdvancedAnalytics = React.createClass({
           total += foldersChart.data[i].y;
         }
         foldersChart.total = total;
-        foldersChart.options = {
-          filter: true,
-          search: true,
-          user: true,
-          users: false,
-          folder: false,
-          archive: true,
-          config: true,
-          shield: false,
-        }
+        foldersChart.configList =[
+          {label:"Top 6 Folders", value:0},
+          {label:"Top 6 Most Used Folders for the Past 12 Months", value:1},
+          {label:"Top 6 Most Used Folders for the Past 6 Months", value:2},
+          {label:"Top 6 Most Used Folders for the Past 4 Weeks", value:3},
+          {label:"Top 6 Most Used Folders for the Past 12 Months", value:4},
+          {label:"Top 6 Most Used Folders for the Past 6 Months", value:5},
+          {label:"Top 6 Most Used Folders for the Past 4 Weeks", value:6},
+          {label:"Risk Posture", value:7},
+          {label:"Top 6 Folders at Risk", value:8},
+        ]
         foldersChart.top6 = "Volume of Data: Top 6 Folders"
     if (foldersChart.data.length <= 1) {
       foldersChart.disabled = true;
@@ -543,16 +519,15 @@ var AdvancedAnalytics = React.createClass({
           total += usersChart.data[i].y;
         }
         usersChart.total = total;
-        usersChart.options = {
-          filter: true,
-          search: true,
-          user: false,
-          users: false,
-          folder: false,
-          archive: true,
-          config: true,
-          shield: false,
-        }
+        usersChart.configList = [
+          {label:"Top 6 Users Accessing Data", value:0},
+          {label:"Top 6 Users creating the most diverse documents for the Past 12 Months", value:1},
+          {label:"Top 6 Users creating the most diverse documents for the Past 6 Months", value:2},
+          {label:"Top 6 Users creating the most diverse documents for the Past 4 weeks", value:3},
+          {label:"Key Contributor", value:4},
+          {label:"Risk Posture", value:5},
+          {label:"Top 6 Users at Risk", value:6},
+        ]
         usersChart.top6 = "Anomaly: Top 6 Users at Risk"
     if (usersChart.data.length <= 1) {
       usersChart.disabled = true;
@@ -582,16 +557,11 @@ var AdvancedAnalytics = React.createClass({
           total += documentsChart.data[i].y;
         }
         documentsChart.total = total;
-        documentsChart.options = {
-          filter: true,
-          search: true,
-          user: false,
-          users: false,
-          folder: false,
-          archive: false,
-          config: true,
-          shield: false,
-        }
+        documentsChart.configList = [
+          {label:"Document Type", value:0},
+          {label:"Document Language", value:1},
+          {label:"Risk Posture", value:2},
+        ]
         documentsChart.top6 = "Anomaly: Risk Posture(High | Medium | Low)"
     if (documentsChart.data.length <= 1) {
       documentsChart.disabled = true;
