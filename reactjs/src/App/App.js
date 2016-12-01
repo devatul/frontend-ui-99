@@ -25,7 +25,7 @@ module.exports = React.createClass({
 
     if (token) {
       switch (true) {
-				case pathname == '/':
+				case pathname == '/' || pathname == '/Account/SignIn':
 					browserHistory.push('/Dashboard/OverView');
 					break;
 				case pathname != '/':
