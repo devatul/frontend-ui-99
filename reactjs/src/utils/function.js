@@ -376,7 +376,7 @@ module.exports = {
     },
 
     getTechEmailServerExchange: (options) => {
-        options.paht = urls.TECH_EMAILSERVER_EXCHANGE
+        options.path = urls.TECH_EMAILSERVER_EXCHANGE
         makeRequest(options)
     }
 }

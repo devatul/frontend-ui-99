@@ -48,7 +48,6 @@ module.exports = React.createClass({
         browserHistory.push('/Account/SignIn');
     },
     componentWillUnmount() {
-
          clearInterval(this.state.interval);
     },
     componentDidUpdate(prevProps, prevState) {
@@ -69,66 +68,59 @@ module.exports = React.createClass({
     },
     componentWillMount() {
         let token = sessionStorage.getItem('token');
-        if (token != null) {
-           this.setState({interval : setInterval(() => {
-                if (token) {
-                    makeRequest({
-                        path: 'api/notification/bubble',
-                        success: (data) => {
-                            this.setState({ total_notification: data.notifications })
-                        }
-                    });
-                    /***********orphan review notification************/
-                    makeRequest({
-                        path: 'api/notification/bubble/review/classification_review', // path will be changed when orphan review notification api will available
-                        success: (data) => {
-                            let notifications = this.state.review_notification
-                            notifications.orphan_review = data.notifications
-                            this.setState({ review_notification: notifications })
-                        }
-                    });
-                    /***************group review notification***************/
-                    makeRequest({
-                        path: 'api/notification/bubble/review/classification_review', // path will be changed when group review notification api will available
-                        success: (data) => {
-                            let notifications = this.state.review_notification
-                            notifications.group_review = data.notifications
-                            this.setState({ review_notification: notifications })
-                        }
-                    });
-                    /*****************classification_review notification****************/
-                    makeRequest({
-                        path: 'api/notification/bubble/review/classification_review',
-                        success: (data) => {
-                            let notifications = this.state.review_notification
-                            notifications.classification_review = data.notifications
-                            this.setState({ review_notification: notifications })
-                        }
-                    });
-                    /**************user_assignment notification*******************/
-                    makeRequest({
-                        path: 'api/notification/bubble/review/user_assignment',
-                        success: (data) => {
-                            let notifications = this.state.review_notification
-                            notifications.user_assignment = data.notifications
-                            this.setState({ review_notification: notifications })
-                        }
-                    });
-                    /*************total review notification**************/
-                    makeRequest({
-                        path: 'api/notification/bubble/review/all',
-                        success: (data) => {
-                            let notifications = this.state.review_notification
-                            notifications.total = data.notifications
-                            this.setState({ review_notification: notifications })
-                        }
-                    });
+        this.setState({interval : setInterval(() => {
+            makeRequest({
+                path: 'api/notification/bubble',
+                success: (data) => {
+                    this.setState({ total_notification: data.notifications })
                 }
-            }, 5000)})
-        } else {
-            console.log("noToken");
-            browserHistory.push('/Account/Signin');
-        }
+            });
+            /***********orphan review notification************/
+            makeRequest({
+                path: 'api/notification/bubble/review/classification_review', // path will be changed when orphan review notification api will available
+                success: (data) => {
+                    let notifications = this.state.review_notification
+                    notifications.orphan_review = data.notifications
+                    this.setState({ review_notification: notifications })
+                }
+            });
+            /***************group review notification***************/
+            makeRequest({
+                path: 'api/notification/bubble/review/classification_review', // path will be changed when group review notification api will available
+                success: (data) => {
+                    let notifications = this.state.review_notification
+                    notifications.group_review = data.notifications
+                    this.setState({ review_notification: notifications })
+                }
+            });
+            /*****************classification_review notification****************/
+            makeRequest({
+                path: 'api/notification/bubble/review/classification_review',
+                success: (data) => {
+                    let notifications = this.state.review_notification
+                    notifications.classification_review = data.notifications
+                    this.setState({ review_notification: notifications })
+                }
+            });
+            /**************user_assignment notification*******************/
+            makeRequest({
+                path: 'api/notification/bubble/review/user_assignment',
+                success: (data) => {
+                    let notifications = this.state.review_notification
+                    notifications.user_assignment = data.notifications
+                    this.setState({ review_notification: notifications })
+                }
+            });
+            /*************total review notification**************/
+            makeRequest({
+                path: 'api/notification/bubble/review/all',
+                success: (data) => {
+                    let notifications = this.state.review_notification
+                    notifications.total = data.notifications
+                    this.setState({ review_notification: notifications })
+                }
+            });
+        }, 5000)})
     },
     componentDidMount() {
         $.ajax({

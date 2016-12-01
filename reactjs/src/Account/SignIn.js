@@ -53,7 +53,6 @@ var Signin = React.createClass({
     },
 
     componentDidMount() {
-        console.log("token");
     },
 
     componentWillMount() {},

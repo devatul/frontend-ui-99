@@ -45,7 +45,6 @@ var Admin_Step1 = React.createClass({
     getOrganisation() {
         return getOrganization({
             success: (data) => {
-                console.log(data);
                 this.setState({ organisation: data });
             }
         });

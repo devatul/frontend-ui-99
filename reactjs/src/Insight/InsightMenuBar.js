@@ -166,11 +166,6 @@ var MenuBar1 = React.createClass({
                         [this.static.languageId]: data
                     }
                 });
-            },
-            error: function(xhr, error) {
-                if (xhr.status == 401) {
-                    browserHistory.push('/Account/SignIn');
-                }
             }
         });
     },
