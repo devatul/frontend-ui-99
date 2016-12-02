@@ -431,6 +431,20 @@ var OverView = React.createClass({
       this.getScanResult();
     }
   },
+  handleStartClassification: function() {
+    console.log('function called')
+    makeRequest({
+      sync: false,
+      method: 'GET',
+      path: 'api/start_classification/',
+      success: (data) => {
+        console.log('start classification', data)
+      },
+      error: (err) => {
+        console.log('start classification error', err)
+      }
+    });
+  },
 
   render: template
 });

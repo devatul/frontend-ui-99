@@ -301,6 +301,9 @@
                                 </div>
 
                             </li>
+                            <li rt-if="this.props.showRiskLead" class="dropdown">
+                                <a class="toggle-button btn btn-default" onClick={this.props.handleStartClassification} title="Risk Lead"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
