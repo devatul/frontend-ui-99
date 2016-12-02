@@ -109,7 +109,10 @@
             setValue="Chose the default confidentiality level labels used by Dathena 99 to classify your data. You can rename the default 99 confidentiality levels via the customized confidentiality boxes." />
         </h2>
         <div class="panel-actions" style="margin-right: 25px">
-          <button class="btn btn-green btn-edit-step" rt-if="this.state.complete >= 2" onClick="{this.editButton.bind(this,2,this.state.readOnly1)}">
+          <button
+            class="btn btn-green btn-edit-step"
+            rt-if="this.state.complete >= 2"
+            onClick="{this.editButton.bind(this,2,this.state.readOnly1)}">
             {this.state.readOnly1 == true ? 'Edit' : 'Save'}
           </button>
         </div>
@@ -142,7 +145,7 @@
                         <div class="col-sm-6 detail-left clearfix">
                             <div class="row">
                                 <div class="col-xs-9">
-                                    <label for="banking-secrecy" class="control-label">{rt.level_name}</label>
+                                    <label for="{rt.level}" class="control-label">{rt.level_name}</label>
                                 </div>
                                 <div class="col-xs-3">
                                     <div class="checkbox-custom checkbox-success">
@@ -154,12 +157,9 @@
                         </div>
                         <div class="col-sm-6">
                             <Input
-                                id="banking-secrecy"
+                                id="{rt.level}"
                                 type="text"
                                 name={rt.level}
-                                block=2
-                                fieldId=1
-                                value={rt.custom_name}
                                 onChange="{this.onChangeInput}"
                                 disabled={this.state.readOnly1}
                                 className="form-control" />
