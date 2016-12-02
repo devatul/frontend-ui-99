@@ -59,23 +59,23 @@
               <tbody>
                 <tr>
                   <td>1. Banking Secrecy</td>
-                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 1 )}</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2, 1 )}</td>
                 </tr>
                 <tr>
                   <td>2. Secret</td>
-                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 2 )}</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2, 2 )}</td>
                 </tr>
                 <tr>
                   <td>3. Confidentiality</td>
-                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 3 )}</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2, 3 )}</td>
                 </tr>
                 <tr>
                   <td>4. Internal</td>
-                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 4 )}</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2, 4 )}</td>
                 </tr>
                 <tr>
                   <td>5. Public</td>
-                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2 , 5 )}</td>
+                  <td>{this.state.data && this.getValue(this.state.data.data_step1.block2, 5 )}</td>
                 </tr>
               </tbody>
             </table>

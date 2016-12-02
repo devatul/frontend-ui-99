@@ -29,14 +29,14 @@ var Admin_Step5 = React.createClass({
       let updatedata = update(this.state, {
         data: {$set: this.props.dataBlock}
       });
-      this.setState(updatedata)
+      this.setState(updatedata);
     }
   },
 
   getValue(arr, key) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id == key) {
-        return arr[i].value
+        return arr[i].value;
       }
     }
   },
