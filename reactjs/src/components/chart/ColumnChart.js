@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import HelpButton from '../dathena/HelpButton';
-import {isEqual} from 'lodash';
+import {isEqual, ceil, round, floor} from 'lodash';
 
 var ColumnChart = React.createClass({
   displayName: 'selectButton',
@@ -33,17 +33,28 @@ var ColumnChart = React.createClass({
   componentDidUpdate(prevProps, prevState) {
     this.draw();
   },
-
+  heightChartInterval(length) {
+    let a = ceil(length/5)
+    let b = floor(a/50);
+    let c = b*50;
+    if(c+25 > a){
+      a = c;
+    }else{
+      a = c+50;
+    }
+    return a;
+  },
   draw() {
     var {config, series, categories, id, data} = this.props,
         {colors, colorsHover} = config,
-        maxPoint = config.height, //  200,
+        maxPoint = config.height,
         empty = maxPoint - data[0];
-        console.log(config.height,  maxPoint)
+        let interval = this.heightChartInterval(maxPoint);
     $('#' + id).highcharts({
       chart: {
         type: 'column',
         height: 150,
+        backgroundColor: 'rgba(76, 175, 80, 0)',
       },
       title: {
         text: ''
@@ -54,7 +65,6 @@ var ColumnChart = React.createClass({
       colors: colors,
       xAxis: {
         categories: categories,
-        minorGridLineColor: "#FFFFFF",
         labels: {
            enabled: false,
           autoRotation: false,
@@ -73,8 +83,11 @@ var ColumnChart = React.createClass({
       },
       yAxis: {
         gridLineColor: 'transparent',
+        tickInterval: interval,
         min: 0,
         max: maxPoint,
+        endOnTick: false,
+        maxPadding: 0.02,
         title: {
           text: ''
         },
@@ -91,6 +104,9 @@ var ColumnChart = React.createClass({
         pointFormat: '{series.name}: {point.percentage:.1f}% / {point.y} Documents<br/>Total: {point.stackTotal} Documents'
       },
       plotOptions: {
+        series:{
+          pointWidth: 80,
+        },
         column: {
           stacking: 'normal',
           dataLabels: {
@@ -132,9 +148,9 @@ var ColumnChart = React.createClass({
       },
       series:  [{
         colorByPoint: true,
-        colors: ["#F0F1F5"],
+        colors: ["#e0e1e2"],
         colorsHover: config.colorsHover,
-        maxPointWidth: 100,
+        maxPointWidth: 500,
         followPointer:false,
         data: [empty]
       }, {
@@ -160,7 +176,6 @@ var ColumnChart = React.createClass({
 
         </h4>
         <div id={id}></div>
-        <div></div>
       </div>
     );
   }

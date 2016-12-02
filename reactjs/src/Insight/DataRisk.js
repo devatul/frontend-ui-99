@@ -20,6 +20,8 @@ var DataRisk = React.createClass({
         twins: {},
         stale_files: {},
         storage_cost_saving_opportunity: {},
+        unreadable_files: {},
+        volume_of_client: {},
       },
       xhr: {
         status: "Report is loading",
@@ -40,7 +42,10 @@ var DataRisk = React.createClass({
       })
     });
   },
-
+shouldComponentUpdate(){
+  console.log(this.state)
+  return true
+},
   getData() {
     this.setState({
       xhr: update(this.state.xhr, {
@@ -68,10 +73,10 @@ var DataRisk = React.createClass({
         let chart = this.state.chart;
 
         let dataArray = [] ;
-        // data.duplicated.value = 258,
-        // data.twins.value = 155,
-        // data.stale_files.value = 3582,
-        // data.storage_cost_saving_opportunity.size = 2415;
+        data.duplicated.value = 4508,
+        data.twins.value = 1555,
+        data.stale_files.value = 5832,
+        data.storage_cost_saving_opportunity.size = 155;
 
         dataArray.push(data.duplicated.value);
         dataArray.push(data.twins.value);
@@ -92,6 +97,12 @@ var DataRisk = React.createClass({
 
         chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: height}
         chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
+
+        chart.unreadable_files.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: 1000}
+        chart.unreadable_files.data = [200];
+
+        // chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: height}
+        // chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
 
         this.setState({
           xhr: update(this.state.xhr, {

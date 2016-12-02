@@ -5,6 +5,7 @@
 <rt-import name="Risk" from="./components/RickInsights"/>
 <rt-import name="Loader" from="../components/dathena/Loader"/>
 <rt-import name="ColumnChart" from="../components/chart/ColumnChart"/>
+<rt-import name="StackBarChart" from="../components/chart/StackBarChart"/>
 
 <div class="container">
   <section class="panel panel-featured panel-featured-primary">
@@ -185,7 +186,20 @@
                   setValue="This represents files that cannot be read or file types that cannot be queried by Dathena 99."/>
               </h4>
               <div class="widget-summary">
-                <div class="widget-summary-col" rt-if="this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk.length > 0">
+              <div class="widget-summary-col">
+                <div class="pie-wrapper pie-progress-0 style-2 pie-blue">
+                  <div class="label  datarisk-files">
+                  Unreadable
+                    <span class="smaller">files</span>
+                  </div>
+                  <StackBarChart
+                      id="unreadable_files"
+                      config={this.state.chart.unreadable_files.config}
+                      data={this.state.chart.unreadable_files.data}  />
+                </div>
+                <!--<span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[0].percentage)}% against total files scanned</span>-->
+              </div>
+                <!--<div class="widget-summary-col" rt-if="this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk.length > 0">
                   <div class="pie-wrapper pie-progress-{this.state.dataRisk.file_identification_risk && this.floor(this.state.dataRisk.file_identification_risk[0].percentage)} style-2 pie-blue">
                     <span class="label">
                       {this.state.dataRisk.file_identification_risk && this.state.dataRisk.file_identification_risk[0].num_files}
@@ -198,7 +212,7 @@
                     <div class="shadow"></div>
                   </div>
                   <span class="pie-info">{this.state.dataRisk.file_identification_risk && this.formatNumber(this.state.dataRisk.file_identification_risk[0].percentage)}% against total files scanned</span>
-                </div>
+                </div>-->
               </div>
             </div>
           </section>
