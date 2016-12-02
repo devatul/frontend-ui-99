@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import template from './SignIn.rt';
 import { assignIn, isNull } from 'lodash';
-import Constant from '../Constant.js';
-import { makeRequest } from '../utils/http';
+import Constant from '../App/Constant.js';
+import { setTokenAuth } from '../utils/function'
 
 var Signin = React.createClass({
     getInitialState() {
@@ -27,18 +27,14 @@ var Signin = React.createClass({
 
     handleSubmit(e) {
         e.preventDefault();
-
-        let data = this.state.data;
-
-        if (!_.isNull(data)) {
-            return makeRequest({
-                path: 'api/token/api-token-auth/',
+        let data = this.state.data ;
+        if(!_.isNull(data)){
+            return setTokenAuth({
                 timeout: 15000,
-                method: 'POST',
-                params: JSON.stringify({
-                    username: this.state.data.username,
-                    password: this.state.data.password
-                }),
+                params : JSON.stringify({
+                        username: this.state.data.username,
+                        password: this.state.data.password
+                    }),
                 success: (data) => {
                     sessionStorage.setItem('token', data.token);
                     browserHistory.push('/Dashboard/OverView');
@@ -57,7 +53,6 @@ var Signin = React.createClass({
     },
 
     componentDidMount() {
-        console.log("token");
     },
 
     componentWillMount() {},

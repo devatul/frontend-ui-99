@@ -5,6 +5,8 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import {cloneDeep, isEqual} from 'lodash';
 import {makeRequest} from '../../utils/http.js';
+import Iframe from 'react-iframe';
+import PDF from 'react-pdf-js';
 
 var documentPreview = React.createClass({
   PropTypes: {
@@ -54,29 +56,38 @@ var documentPreview = React.createClass({
 
   loadDocument() {
     let {preview} = this.refs,
-        {document} = this.props;
+        {document} = this.props,
+        documentUrl = document.image_url;
 
-    if (preview) {
+    let extension = this.getFileExtension(documentUrl),
+        iFrameUrl = documentUrl,
+        previewDocument;
+
+    if (extension === 'pdf') {
+      previewDocument = <PDF file={iFrameUrl} />;
+      render(previewDocument, preview);
+    } else if (extension === 'html') {
+      previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
+      render(previewDocument, preview);
+    } else {
       makeRequest({
         path: 'api/converter/',
         dataType: 'text',
         method: 'POST',
-        params: JSON.stringify({ 'file_url': document.image_url }),
+        params: JSON.stringify({ 'file_url': documentUrl }),
         success: (data) => {
-          console.log("Converter: got " + data);
+          let fileExtension = this.getFileExtension(documentUrl);
+          iFrameUrl = JSON.parse(data).file_url;
+
+          if (fileExtension == 'xls' || fileExtension == 'xlsx') {
+            previewDocument = <Iframe url={iFrameUrl} position="static"></Iframe>;
+          } else {
+            previewDocument = <PDF file={iFrameUrl} />;
+          }
+
+          render(previewDocument, preview);
         }
       });
-
-      render(React.createElement('div', {
-          className: 'gdocsviewer'
-        },
-        React.createElement('iframe', {
-          // src: data.file_url,
-          src: 'http://docs.google.com/viewer?embedded=true&url=' + document.image_url,
-          width: 600,
-          height: 700,
-          style: {border: 'none'}
-        })), preview);
     }
   },
 
@@ -88,6 +99,12 @@ var documentPreview = React.createClass({
     if (str !== undefined && str.length > 0) {
       return str.substring(0, str.lastIndexOf('/') + 1);
     }
+  },
+
+  getFileExtension(fileName) {
+    if (fileName === undefined)
+      return '';
+    return fileName.substr((~-fileName.lastIndexOf(".") >>> 0) + 2);
   },
 
   render() {

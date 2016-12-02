@@ -4,11 +4,11 @@ import template from './OverView.rt';
 import update from 'react/lib/update';
 import {isEmpty, forEach, isEqual, upperFirst, orderBy} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
-import {_categories, fetching} from '../Constant.js';
+import {_categories, fetching} from '../App/Constant.js';
 import {makeRequest} from '../utils/http.js';
 import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
 import $, {JQuery} from 'jquery';
-import Constant from '../Constant';
+import Constant from '../App/Constant'
 import Demo from '../Demo.js';
 
 let hideUndefined = true;
@@ -216,6 +216,7 @@ var OverView = React.createClass({
       confidentiality: {$set: confidentialityData},
       doctypes: {$set: doctypeData}
     });
+
     this.setState({configChart: updateData});
   },
 
@@ -267,8 +268,8 @@ var OverView = React.createClass({
         {dataChart} = this.state,
         {languages, categories} = this.state.scan.result;
 
-    //add data categories
-    categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
+        //add data categories
+        categories = orderByIndex(categories, [0, 2, 1, 3, 4, 5, 6]);
 
     for (let i = categories.length - 1; i >= 0; i--) {
       categoryChart.data[i] = {
@@ -310,30 +311,21 @@ var OverView = React.createClass({
     categoryNumber = categoryChart.data.length;
     languageNumber = languageChart.data.length;
 
-    //Check if data is 0 || 1 => disabled
-    if (languageNumber > 1 && categoryNumber > 1) {
+    categoryChart.disabled = categoryNumber == 0;
+    languageChart.disabled = languageNumber == 0;
+
+    if (categoryNumber > 0 && languageNumber > 0) {
+      // Normal case
       categoryLanguageChart[0] = categoryChart;
       categoryLanguageChart[1] = languageChart;
-    }
-
-    if (languageNumber <= 1 && categoryNumber > 1) {
+    } else if (categoryNumber > 0 && languageNumber == 0) {
+      // No internal donut
       categoryChart.innerSize = '60%';
       categoryLanguageChart[0] = categoryChart;
-    }
-
-    if (categoryNumber <= 1 && languageNumber > 1) {
+    } else if (categoryNumber == 0 && languageNumber > 0) {
+      // Bigger languages chart
       languageChart.size = '100%';
       categoryLanguageChart[0] = languageChart;
-    } else {
-      categoryLanguageChart[0] = categoryChart;
-    }
-
-    if (categoryNumber <= 1 && languageNumber <= 1) {
-      categoryChart.disabled = true;
-      languageChart.disabled = true;
-
-      categoryLanguageChart[0] = categoryChart;
-      categoryLanguageChart[1] = languageChart;
     }
 
     return categoryLanguageChart;
@@ -357,7 +349,7 @@ var OverView = React.createClass({
       };
     }
 
-    if (confidentialityChart.data.length <= 1) {
+    if (confidentialityChart.data.length < 1) {
       confidentialityChart.disabled = true;
     }
 
@@ -382,7 +374,7 @@ var OverView = React.createClass({
       };
     }
 
-    if (doctypesChart.data.length <= 1) {
+    if (doctypesChart.data.length < 1) {
       doctypesChart.disabled = true;
     }
 
@@ -413,7 +405,17 @@ var OverView = React.createClass({
   },
 
   handleFilter: function (bodyRequest) {
-    if (!isEmpty(bodyRequest)) {
+    let notEmpty = false;
+
+    for (let i in bodyRequest) {
+      if (bodyRequest.hasOwnProperty(i)
+        && bodyRequest[i].length !== 0) {
+          notEmpty = true;
+          break;
+        }
+    }
+
+    if (notEmpty) {
       makeRequest({
         method: 'POST',
         path: 'api/scan/filter/',

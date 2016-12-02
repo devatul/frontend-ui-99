@@ -90,6 +90,9 @@ svg:not(:root) {
   /*overflow: hidden;*/
   overflow: inherit;
 }
+.analytics .highcharts-container svg:not(:root) {
+  overflow: visible !important;
+}
 figure {
   margin: 1em 40px;
 }

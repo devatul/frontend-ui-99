@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {browserHistory} from 'react-router';
-import template from './App.rt';
-import Constant, {fetching} from './Constant.js';
-import update from 'react-addons-update';
-import {makeRequest} from './utils/http';
-import {orderByIndex} from './utils/function';
-import {orderBy} from 'lodash';
-import {git_version} from './commit';
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { browserHistory } from 'react-router'
+import template from './App.rt'
+import Constant, { fetching } from './Constant.js';
+import update from 'react-addons-update'
+import { orderByIndex, getCategories, getConfidentialities, setRefreshToken } from '../utils/function'
+import { orderBy } from 'lodash'
+import { git_version } from '../commit'
 
 module.exports = React.createClass({
   getInitialState() {
@@ -15,7 +14,8 @@ module.exports = React.createClass({
       categories: [],
       confidentialities: [],
       scanResult: {},
-      tokenAuth: ""
+      tokenAuth: "",
+      intervalId: undefined,
     };
   },
 
@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
     if (token) {
       switch (true) {
-        case pathname == '/':
+        case pathname == '/' || pathname == '/Account/SignIn':
           browserHistory.push('/Dashboard/OverView');
           break;
         case pathname != '/':
@@ -34,14 +34,13 @@ module.exports = React.createClass({
           break;
       }
 
-      setInterval(() => {
-        if (token) {
-          makeRequest({
-            path: 'api/token/api-token-refresh/',
-            dataType: 'json',
-            method: 'POST',
+      let interval = setInterval(() => {
+        var refreshToken = sessionStorage.getItem('token');
+
+        if (refreshToken) {
+          setRefreshToken({
             params: JSON.stringify({
-              token: token
+              token: refreshToken
             }),
             success: (data) => {
               sessionStorage.setItem('token', data.token);
@@ -51,10 +50,15 @@ module.exports = React.createClass({
             }
           });
         }
-      }, Constant.TIMEVALIDTOKEN);
+      }, Constant.TIMEVALIDTOKEN / 10);
+      this.setState({ intervalId: interval });
     } else {
-      console.log("noToken");
-      browserHistory.push('/Account/Signin');
+      console.log("No token found");
+      if (this.state.intervalId !== undefined) {
+        clearInterval(this.state.intervalId);
+        this.setState({ intervalId: undefined });
+      }
+      browserHistory.push('/Account/SignIn');
     }
   },
 
@@ -76,8 +80,7 @@ module.exports = React.createClass({
   },
 
   getCategories: function () {
-    return makeRequest({
-      path: 'api/label/category/',
+    return getCategories({
       success: (data) => {
         data = orderBy(data, ['name'], ['asc']);
         this.setState({categories: data});
@@ -85,9 +88,8 @@ module.exports = React.createClass({
     });
   },
 
-  getConfidentialities: function (async) {
-    return makeRequest({
-      path: 'api/label/confidentiality/',
+  getConfidentialities: function(async) {
+    return getConfidentialities({
       success: (data) => {
         data = orderByIndex(data, [4, 3, 2, 1, 0]);
         this.setState({confidentialities: data});
@@ -97,7 +99,7 @@ module.exports = React.createClass({
 
   mapStateToProps(children, states = []) {
     let stateMap = {},
-        total = 0;
+      total = 0;
 
     // select store in array name store
     if ((total = states.length) > 0) {

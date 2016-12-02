@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
 import HelpButton from '../dathena/HelpButton';
 import 'jquery';
-import Constant from '../../Constant.js';
+import Constant from '../../App/Constant.js';
 import Demo from '../../Demo.js';
 
 var HighChart = React.createClass({

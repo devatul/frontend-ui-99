@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import _ from 'lodash'
-import Constant from '../../Constant.js';
+import Constant from '../../App/Constant.js';
 
 
 var Input = React.createClass({

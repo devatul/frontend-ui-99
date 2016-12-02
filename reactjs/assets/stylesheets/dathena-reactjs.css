@@ -159,6 +159,10 @@
         padding-right: 15px;
         padding-left: 15px;
     }
+    .analyticsChart .col-md-4{
+      padding-right: 0px !important;
+      padding-left: 0px !important;
+    }
 }
 
 
@@ -336,6 +340,7 @@ table.docPreview > thead > tr > th:nth-child(2) {
     padding-right: 0px;
     padding-left: 0px;
 }
+
 .dathena-progress.style-2 .label-percent {
     position: absolute;
     margin-left: -35px;
@@ -347,6 +352,9 @@ table.docPreview > thead > tr > th:nth-child(2) {
     font-weight: bold;
     left: 0;
     margin-left: 27%;
+}
+.progress-analytics.label-percent{
+  margin-left: 85%;
 }
 
 /**/
@@ -536,10 +544,10 @@ select.assigment-select.form-control {
 .chart-stacked .highcharts-container {
     z-index: 10 !important;
 }
-.highcharts-container {
-overflow: inherit !important;
+.analytics .highcharts-container{
+  overflow: visible !important;
 }
-/*modal-backdrop*/
+
 .modal-backdrop {
     background-color: rgba(255, 255, 255, 0.5);
 }

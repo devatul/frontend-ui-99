@@ -3,10 +3,11 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
 import template from './SignUp.rt'
 import $ from 'jquery'
-import { makeRequest } from '../utils/http'
 import { assignIn } from 'lodash';
 import validate from 'jquery-validation';
-import Constant from '../Constant.js';
+import Constant from '../App/Constant.js';
+import { registration } from '../utils/function'
+
 var SignUp = React.createClass({
     getInitialState() {
         return {
@@ -49,9 +50,8 @@ var SignUp = React.createClass({
             if (_.size(this.state.data_submit) == 6) {
                 if (this.state.agree) {
                     this.setState({ messageUnAgree: "" });
-                    return makeRequest({
-                        path: 'api/account/registration/',
-                        method: 'POST',
+                    return registration({
+                        path: Constant.urls.REGISTRATION,
                         params: JSON.stringify(this.state.data_submit),
                         success: (data) => {
                             browserHistory.push('/Account/SignIn');

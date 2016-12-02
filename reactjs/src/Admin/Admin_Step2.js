@@ -2,7 +2,7 @@ import React, { Component, propTypes } from 'react';
 import { render } from 'react-dom';
 import update from 'react-addons-update';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
-import { makeRequest } from '../utils/http';;
+import { getTechDomain, setTechDomain, getTechHdpserver, getTechFolder, setTechFolder, getTechEmailServerExchange } from '../utils/function'
 import _ from 'lodash';
 import 'jquery';
 import template from './Admin_Step2.rt';
@@ -82,32 +82,28 @@ var Admin_Step2 = React.createClass({
     },
 
     getDomainDetails() {
-        return makeRequest({
-            path: 'api/technology/domain/',
+        return getTechDomain({
             success: (data) => {
                 this.setState({ DomainDetails: data });
             }
         });
     },
     getHDPServer() {
-        return makeRequest({
-            path: 'api/technology/hdpserver/',
+        return getTechHdpserver({
             success: (data) => {
                 this.setState({ hdpServer: data });
             }
         });
     },
     getFolder() {
-        return makeRequest({
-            path: 'api/technology/folder/',
+        return getTechFolder({
             success: (data) => {
                 this.setState({ folder: data });
             }
         });
     },
     getEmailserve() {
-        return makeRequest({
-            path: 'api/technology/emailserver_exchange/',
+        return getTechEmailServerExchange({
             success: (data) => {
                 let datas =  {
                               name: 'Mail Server Exchange',
@@ -134,17 +130,13 @@ var Admin_Step2 = React.createClass({
         });
     },
     putDomain() {
-        return makeRequest({
-            path: 'api/technology/domain/',
-            method: 'PUT',
+        return setTechDomain({
             params: JSON.stringify(this.state.DomainDetails),
             success: (data) => {}
         });
     },
     putFolder() {
-        return makeRequest({
-            path: 'api/technology/folder/',
-            method: 'PUT',
+        return setTechFolder({
             params: JSON.stringify(this.state.folder),
             success: (data) => {}
         });

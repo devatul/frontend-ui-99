@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import update from 'react-addons-update';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import _ from 'lodash';
-import { makeRequest } from '../utils/http';
+import { getOrganization, setOrganization, getSla , checkConfidentiality } from '../utils/function';
 import template from './Admin_Step1.rt';
 
 var Admin_Step1 = React.createClass({
@@ -43,17 +43,14 @@ var Admin_Step1 = React.createClass({
     },
 
     getOrganisation() {
-        return makeRequest({
-            path: 'api/organization/',
+        return getOrganization({
             success: (data) => {
-                console.log(data);
                 this.setState({ organisation: data });
             }
         });
     },
     getSLAs() {
-        return makeRequest({
-            path: 'api/sla/',
+        return getSla({
             success: (data) => {
                 console.log(data);
                 this.setState({ sla: this.configSLA(data) });
@@ -74,10 +71,9 @@ var Admin_Step1 = React.createClass({
         }
     },
     getConfidentialities(){
-        return makeRequest({
-            path: 'api/confidentiality/',
-            success: (data) => {
-                let datas = [
+        return checkConfidentiality({
+            success: (results) => {
+                let data = [
                                 {
                                     "level": "unrestricted",
                                     "level_name": "Unrestricted",
@@ -109,8 +105,8 @@ var Admin_Step1 = React.createClass({
                                     "custom_name": ''
                                 }
                             ]
-                console.log(data);
-                this.setState({ confidentialities: datas });
+                console.log(results);
+                this.setState({ confidentialities: data });
             }
         });
     },
@@ -143,8 +139,7 @@ var Admin_Step1 = React.createClass({
     putOrganisation() {
         let data_submit = _.omit(_.cloneDeep(this.state.organisation), ['phone', 'mobile', 'state']);
 
-        return makeRequest({
-            path: 'api/organization/',
+        return setOrganization({
             method: 'PUT',
             params: JSON.stringify(data_submit),
             success: (data) => {}

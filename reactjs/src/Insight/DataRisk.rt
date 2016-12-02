@@ -65,7 +65,6 @@
                   <ColumnChart
                       id="duplicated"
                       config={this.state.chart.duplicated.config}
-
                       data={this.state.chart.duplicated.data} />
                   </div>
                   <span class="pie-info">{this.state.dataRisk.duplicated && this.formatNumber(this.state.dataRisk.duplicated.percentage).toFixed(2)}% against total files scanned</span>

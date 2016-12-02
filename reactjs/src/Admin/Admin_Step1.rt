@@ -3,7 +3,7 @@
 <rt-import name="ToggleButton" from="../components/dathena/ToggleButton"/>
 
 <div>
-  <div class="bar_menu admin_header container">
+<div class="bar_menu admin_header container">
     <div class="row">
       <div class="col-md-12 mb-md">
         <div class="row">

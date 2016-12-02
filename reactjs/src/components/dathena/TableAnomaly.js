@@ -5,8 +5,9 @@ import {makeRequest} from '../../utils/http';
 import HelpButton from "./HelpButton";
 import _ from 'lodash';
 import Anomaly from '../../components/dathena/AnomalyStateSelect';
-import Constant from '../../Constant.js';
+import Constant from '../../App/Constant.js';
 import Demo from '../../Demo.js';
+import {getAnomalyIamInfo} from '../../utils/function.js';
 
 var TableAnomaly = React.createClass({
   getInitialState() {
@@ -42,8 +43,7 @@ var TableAnomaly = React.createClass({
 
   getDataAPI(path) {
     if (path != undefined) {
-      return makeRequest({
-        path: 'api/anomaly/iam/' + path + '?filter=all',
+      return getAnomalyIamInfo({
         success: (data) => {
           if (Demo.MULTIPLIER != 1) {
             for (let i = 0, len = data.length; i < len; ++i) {
@@ -54,7 +54,7 @@ var TableAnomaly = React.createClass({
 
           this.setState({datas: data});
         }
-      });
+      }, path + '?filter=all');
     }
   },
 
@@ -97,12 +97,10 @@ var TableAnomaly = React.createClass({
 
     datas[number]['Review Status'] = value;
 
-    return makeRequest({
-      path: 'api/anomaly/iam/' + this.props.path,
-      method: 'PUT',
+    return setAnomalyIamInfo({
       params: JSON.stringify(_.omit(datas[number], ['selected'])),
       success: (data) => {}
-    });
+    },  this.props.path);
   },
 
   showSelect(datas, number) {

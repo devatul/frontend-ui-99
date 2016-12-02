@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import template from './PasswordNew.rt';
-import $ from 'jquery';
+import $ from 'jquery'
+import { setAuth } from '../utils/function'
 
 var PasswordNew = React.createClass({
   getInitialState() {
@@ -39,28 +40,27 @@ var PasswordNew = React.createClass({
             required: "Please enter the same value again"
           },
         },
-        submitHandler(form) {
-          $.ajax({
-            type: "POST",
-            url: 'http://54.169.106.24/api-token-auth/',
-            dataType: 'json',
-            data: {},
-            success: function (data) {
-              browserHistory.push('/Account/resetConfirmation');
-            }.bind(this),
-            error: function (xhr, status, err) {
-              $('#err').text("Wrong ");
-              browserHistory.push('/Account/resetConfirmation');
-            }.bind(this)
-          });
+	        submitHandler(form) 
+	        {
+            setAuth({
+              params: {},
+              success: function(data) {
+                  browserHistory.push('/Account/resetConfirmation');
+              }.bind(this),
+              error: function(xhr, status, err) {			      		
+                $('#err').text("Wrong ");
+                browserHistory.push('/Account/resetConfirmation');
+              }.bind(this)
+            });
 
-          return false;
-        }
-      });
-    });
-  },
+            return false;
+          }
+	    	});
+	    });
+  	},
 
-  render: template
+  	render: template
+
 });
 
 module.exports = PasswordNew;

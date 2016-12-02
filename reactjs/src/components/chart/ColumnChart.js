@@ -37,8 +37,9 @@ var ColumnChart = React.createClass({
   draw() {
     var {config, series, categories, id, data} = this.props,
         {colors, colorsHover} = config,
-        maxPoint = 200,
+        maxPoint = config.height, //  200,
         empty = maxPoint - data[0];
+        console.log(config.height,  maxPoint)
     $('#' + id).highcharts({
       chart: {
         type: 'column',
@@ -85,6 +86,7 @@ var ColumnChart = React.createClass({
         enabled: false
       },
       tooltip: {
+        enabled:false,
         headerFormat: '<b>{point.x}</b><br/>',
         pointFormat: '{series.name}: {point.percentage:.1f}% / {point.y} Documents<br/>Total: {point.stackTotal} Documents'
       },
@@ -158,6 +160,7 @@ var ColumnChart = React.createClass({
 
         </h4>
         <div id={id}></div>
+        <div></div>
       </div>
     );
   }

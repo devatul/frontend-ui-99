@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
+import {max} from 'lodash';
 import template from './DataRisk.rt';
 import update from 'react/lib/update';
 import 'jquery';
-import Constant, {fetching} from '../Constant.js';
+import Constant, {fetching} from '../App/Constant.js';
 import Demo from '../Demo.js';
 import javascriptOver from '../script/javascript-overview.js';
 import javascript from '../script/javascript.js';
+import { getDataRisk } from '../utils/function'
 
 var DataRisk = React.createClass({
   getInitialState() {
@@ -15,9 +17,9 @@ var DataRisk = React.createClass({
       dataRisk: {},
       chart:{
         duplicated: {},
+        twins: {},
         stale_files: {},
         storage_cost_saving_opportunity: {},
-        twins: {},
       },
       xhr: {
         status: "Report is loading",
@@ -48,13 +50,8 @@ var DataRisk = React.createClass({
       })
     });
 
-    $.ajax({
-      url: Constant.SERVER_API + 'api/insight/data-risk?number_users=5',
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
+    getDataRisk({
+      number_users: 5,
       success: function (data) {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
@@ -66,18 +63,35 @@ var DataRisk = React.createClass({
           data.twins.value *= Demo.MULTIPLIER;
         }
 
+        /* assign data to this.state.chart */
+
         let chart = this.state.chart;
-        chart.duplicated.config = {name: 'Documents', colors: [ '#0FABE6'], colorsHover: '#0FABE6'}
+
+        let dataArray = [] ;
+        // data.duplicated.value = 258,
+        // data.twins.value = 155,
+        // data.stale_files.value = 3582,
+        // data.storage_cost_saving_opportunity.size = 2415;
+
+        dataArray.push(data.duplicated.value);
+        dataArray.push(data.twins.value);
+        dataArray.push(data.stale_files.value);
+        dataArray.push(data.storage_cost_saving_opportunity.size);
+
+        let maxNum = max(dataArray);
+        let height = maxNum/70*100;
+
+        chart.duplicated.config = {name: 'Documents', colors: [ '#0FABE6'], colorsHover: '#0FABE6', height: height}
         chart.duplicated.data = [data.duplicated.value];
 
-        chart.stale_files.config = {name: 'Documents', colors: [ '#ED9C27'], colorsHover: '#DFF2F8'}
+        chart.twins.config = {name: 'Documents', colors: [ '#359CA1'], colorsHover: '#359CA1', height: height}
+        chart.twins.data = [data.twins.value];
+
+        chart.stale_files.config = {name: 'Documents', colors: [ '#ED9C27'], colorsHover: '#DFF2F8', height: height}
         chart.stale_files.data = [data.stale_files.value];
 
-        chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A'}
+        chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: height}
         chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
-
-        chart.twins.config = {name: 'Documents', colors: [ '#359CA1'], colorsHover: '#359CA1'}
-        chart.twins.data = [data.twins.value];
 
         this.setState({
           xhr: update(this.state.xhr, {
@@ -118,16 +132,10 @@ var DataRisk = React.createClass({
     if (value == 'Top 50') {
       value = 50;
     }
-
     this.setState(Object.assign({}, this.state, {numberUser: value}));
 
-    $.ajax({
-      url: Constant.SERVER_API + 'api/insight/data-risk?number_users=' + value,
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Authorization", "JWT " + sessionStorage.getItem('token'));
-      },
+    getDataRisk({
+      number_users: value,
       success: function (data) {
         this.setState(Object.assign({}, this.state, {dataRisk: data}));
       }.bind(this),

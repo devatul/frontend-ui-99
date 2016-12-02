@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './Identity.rt'
-import Constant, { fetching } from '../Constant.js'
+import Constant, { fetching } from '../App/Constant.js'
 import Demo from '../Demo.js';
 import javascript from '../script/javascript.js'
 import update from 'react/lib/update'

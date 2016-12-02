@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import template from './AnomalyDetection.rt';
 import update from 'react/lib/update';
-import Constant, {fetching} from '../Constant.js';
+import Constant, {fetching} from '../App/Constant.js';
 import Demo from '../Demo.js';
 import _ from 'lodash';
 import {makeRequest} from '../utils/http';
@@ -142,7 +142,7 @@ var AnomalyDetection = React.createClass({
 
   getUserClient() {
     return makeRequest({
-      path: 'api/anomaly/iam/user-client',
+      path: Constant.urls.IAM + 'user-client',
       success: (data) => {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
