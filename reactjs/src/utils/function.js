@@ -241,10 +241,10 @@ module.exports = {
                             for (let j = 0, len_j = data[i]["most efficient keywords"].length; j < len_j; ++j) {
                                 // Iterates over categories
                                 let cat_index = Demo.INDUSTRIES[0].categories.findIndex(function(e) { return e.name == data[i]["most efficient keywords"][j].category_name; });
-                                data[i]["most efficient keywords"][j].category_name = mode.categories[cat_index != -1 ? cat_index : 0].name;
+                                data[i]["most efficient keywords"][j].category_name = mode.categories[cat_index != -1 ? Math.min(cat_index, mode.categories.length - 1) : 0].name;
                                 for (let k = 0, len_k = data[i]["most efficient keywords"][j]["confidentiality levels"].length; k < len_k; ++k) {
-                                  let conf_index = Demo.INDUSTRIES[0].confidentialities.findIndex(function(e) { return e.name == data[i]["most efficient keywords"][j]["confidentiality levels"][k].name; });
-                                    data[i]["most efficient keywords"][j]["confidentiality levels"][k].name = mode.confidentialities[conf_index != -1 ? conf_index : 0].name;
+                                    let conf_index = Demo.INDUSTRIES[0].confidentialities.findIndex(function(e) { return e.name == data[i]["most efficient keywords"][j]["confidentiality levels"][k].name; });
+                                    data[i]["most efficient keywords"][j]["confidentiality levels"][k].name = mode.confidentialities[conf_index != -1 ? Math.min(conf_index, mode.confidentialities.length - 1) : 0].name;
                                 }
                             }
                         }
@@ -353,7 +353,7 @@ module.exports = {
                             let conf = data[i].name.split(',')[1];
                             let cat_index = Demo.INDUSTRIES[0].categories.findIndex(function(e) { return e.name == cat; });
                             let conf_index = Demo.INDUSTRIES[0].confidentialities.findIndex(function(e) { return e.name == conf; });
-                            data[i].name = (cat_index == -1 ? "Undefined" : mode.categories[cat_index].name) + "," + (conf_index == -1 ? "Undefined" : mode.confidentialities[conf_index].name);
+                            data[i].name = (cat_index == -1 ? "Undefined" : mode.categories[Math.min(cat_index, mode.categories.length - 1)].name) + "," + (conf_index == -1 ? "Undefined" : mode.confidentialities[Math.min(conf_index, mode.confidentialities.length - 1)].name);
                             console.log(data[i].name);
                         }
 
