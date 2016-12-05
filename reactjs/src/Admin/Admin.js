@@ -19,13 +19,7 @@ module.exports = React.createClass({
   },
 
   getDataPage1(data) {
-    let updateData = update(this.state, {
-      data: {
-        data_step1: {$set: data}
-      }
-    });
-
-    this.setState(updateData);
+    this.setState({data_step1: data});
   },
 
   getDataPage2(data) {
@@ -41,7 +35,6 @@ module.exports = React.createClass({
   },
 
   changeStep(value) {
-    /*   if(value <= this.state.step)*/
     this.setState({step: value});
   },
 

@@ -79,11 +79,6 @@ var DataLost = React.createClass({
           lang['most efficient keywords'] = keywordsArr;
         });
 
-        if (Demo.MULTIPLIER != 1) {
-          languages_arr = [ "en" ];
-          data = Demo.DATALOSS_DATA;
-        }
-
         let updateDataLoss = update(this.state, {
           dataLoss: {$set: data},
           default_data: {$set: data[0]},

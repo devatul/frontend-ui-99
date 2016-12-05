@@ -6,6 +6,7 @@
 <rt-import name="ChangePass" from="../components/dathena/account/ChangePassword"/>
 <rt-import name="Upload" from="../Insight/components/Upload"/>
 <rt-import name="Input" from="../components/dathena/ValidateInput"/>
+<rt-import name="constant" from="../App/Constant.js"/>
 
 <div class="container">
     <div class="tabs tabs-primary">
@@ -13,12 +14,12 @@
             <li class="active">
                 <a href="#my_profile" data-toggle="tab" aria-expanded="false">My Profile</a>
             </li>
-            <li class="">
+            <li rt-if="this.state.role === constant.role.IS_2ND || this.state.role === constant.role.RISK_LEAD || this.state.role === constant.role.IS_1ST" class="">
                 <a href="#my_team" data-toggle="tab" aria-expanded="true">My Team</a>
             </li>
         </ul>
         <div class="tab-content">
-            <div id="my_team" class=" tab-pane my-team-content">
+            <div rt-if="this.state.role === constant.role.IS_2ND || this.state.role === constant.role.RISK_LEAD || this.state.role === constant.role.IS_1ST" id="my_team" class=" tab-pane my-team-content">
                 <MyTeam/>
             </div>
             <div id="my_profile" class="my-profile-edit tab-pane active">

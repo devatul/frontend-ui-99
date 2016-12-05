@@ -116,7 +116,7 @@ var AnomalyDetection = React.createClass({
   // Get data form APIs
   getAnomalyRick() {
     return makeRequest({
-      path: 'api/anomaly/risk/',
+      path: Constant.urls.ANOMALY_RISK,
       success: (data) => {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
@@ -142,7 +142,7 @@ var AnomalyDetection = React.createClass({
 
   getUserClient() {
     return makeRequest({
-      path: Constant.urls.IAM + 'user-client',
+      path: Constant.urls.IAM_USER_CLIENT,
       success: (data) => {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
@@ -205,7 +205,7 @@ var AnomalyDetection = React.createClass({
 
   getActiveDirectory() {
     return makeRequest({
-      path: 'api/anomaly/iam/active-directory',
+      path: Constant.urls.IAM_ACTIVE_DIRECTORY,
       success: (data) => {
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
@@ -260,7 +260,7 @@ var AnomalyDetection = React.createClass({
 
   getUserAccess() {
     return makeRequest({
-      path: 'api/anomaly/iam/user-access',
+      path: Constant.urls.IAM_USER_ACCESS,
       success: (data) => {
 
       let chartData = {
@@ -278,89 +278,89 @@ var AnomalyDetection = React.createClass({
   },
 
   getDocumentRepository() {
-  let data = {
-    "title": "Document Repository Anomaly",
-    "risk percentage": 80,
-    "risk type": "High Risk",
-    "prediction percentage": 35,
-    "prediction quality": "High",
-    "data first table": [
-      {
-        "Confidentiality at Risk": "Internal",
-        "Document at Risk": 132,
-        "Folder at Risk": 132,
-        "User Anomaly": 830
-      },
-      {
-        "Confidentiality at Risk": "Confidential",
-        "Document at Risk": 432,
-        "Folder at Risk": 128,
-        "User Anomaly": 50
-      }
-    ],
-    "Category at Risk": [
-      {
-        "name": "Accounting/Tax",
-        "percentage": 15
-      },
-      {
-        "name": "Corporate Entity",
-        "percentage": 4
-      },
-      {
-        "name": "Client/Customer",
-        "percentage": 1
-      },
-      {
-        "name": "Employees",
-        "percentage": 20
-      },
-      {
-        "name": "Legal/Compliance",
-        "percentage": 20
-      },
-      {
-        "name": "Transaction",
-        "percentage": 40
-      }
-    ],
-    "data second table": [
-      {
-        "Total Anomaly": {
-          "value": 11600,
-          "type": "Documents",
-          "trend": "up"
+    let data = {
+      "title": "Document Repository Anomaly",
+      "risk percentage": 80,
+      "risk type": "High Risk",
+      "prediction percentage": 35,
+      "prediction quality": "High",
+      "data first table": [
+        {
+          "Confidentiality at Risk": "Internal",
+          "Document at Risk": 132,
+          "Folder at Risk": 132,
+          "User Anomaly": 830
         },
-        "Total User at Risk": {
-          "value": 1390,
-          "type": "Windows User Account",
-          "trend": "down"
+        {
+          "Confidentiality at Risk": "Confidential",
+          "Document at Risk": 432,
+          "Folder at Risk": 128,
+          "User Anomaly": 50
+        }
+      ],
+      "Category at Risk": [
+        {
+          "name": "Accounting/Tax",
+          "percentage": 15
         },
-        "Total Folder at Risk": {
-          "value": 1390,
-          "type": "Folders",
-          "trend": "up"
+        {
+          "name": "Corporate Entity",
+          "percentage": 4
         },
-        "Document Repository Anomaly Trend": [
-          {
-            "occurence": 1,
-            "users": 5,
-            "type": "low"
+        {
+          "name": "Client/Customer",
+          "percentage": 1
+        },
+        {
+          "name": "Employees",
+          "percentage": 20
+        },
+        {
+          "name": "Legal/Compliance",
+          "percentage": 20
+        },
+        {
+          "name": "Transaction",
+          "percentage": 40
+        }
+      ],
+      "data second table": [
+        {
+          "Total Anomaly": {
+            "value": 11600,
+            "type": "Documents",
+            "trend": "up"
           },
-          {
-            "occurence": 2,
-            "users": 15,
-            "type": "medium"
+          "Total User at Risk": {
+            "value": 1390,
+            "type": "Windows User Account",
+            "trend": "down"
           },
-          {
-            "occurence": 3,
-            "users": 50,
-            "type": "high"
-          }
-        ]
-      }
-    ]
-  };
+          "Total Folder at Risk": {
+            "value": 1390,
+            "type": "Folders",
+            "trend": "up"
+          },
+          "Document Repository Anomaly Trend": [
+            {
+              "occurence": 1,
+              "users": 5,
+              "type": "low"
+            },
+            {
+              "occurence": 2,
+              "users": 15,
+              "type": "medium"
+            },
+            {
+              "occurence": 3,
+              "users": 50,
+              "type": "high"
+            }
+          ]
+        }
+      ]
+    };
 
       data['data second table'][0]['Document Repository Anomaly Trend'].sort(function(a, b) {
         return a.occurence > b.occurence;

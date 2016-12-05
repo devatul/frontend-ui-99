@@ -7,7 +7,7 @@ import template from './OrphanReview.rt';
 import update from 'react/lib/update';
 import {makeRequest} from '../utils/http';
 import Demo from '../Demo.js';
-import {getOrphan, getOrphanDocuments, setOrphanDocuments} from '../utils/function.js';
+import {getOrphan, getOrphanDocuments, setOrphanDocuments, getConfidentialities, getCategories} from '../utils/function.js';
 
 var OrphanReview = React.createClass({
   displayName: 'OrphanReview',
@@ -611,10 +611,7 @@ var OrphanReview = React.createClass({
   },
 
   getCategories() {
-    let arr = [];
-
-    makeRequest({
-      path: 'api/label/category/',
+    getCategories({
       success: (data) => {
         data.sort(function (a, b) {
           if (a.name > b.name) return 1;
@@ -627,10 +624,7 @@ var OrphanReview = React.createClass({
   },
 
   getConfidentialities() {
-    let arr = [];
-
-    makeRequest({
-      path: 'api/label/confidentiality/',
+    getConfidentialities({
       success: (data) => {
         this.setState({confidentialities: data, shouldUpdate: true});
       }

@@ -26,36 +26,44 @@ module.exports = {
         level1: 30,
         level2: 50
     },
-    _categories: {
-        ACCOUNTING: {
+    _categories: [
+        {
             name: "Accounting / Tax",
             icon: 'fa-calculator'
         },
-        CLIENT: {
+        {
             name: "Client / Customer",
             icon: 'fa-users'
         },
-        CORPORATE: {
+        {
             name: "Corporate Entity",
             icon: 'fa-university'
         },
-        EMPLOYEE: {
+        {
+            name: "Intellectual Property",
+            icon: 'fa-university'
+        },
+        {
             name: "Employee / Personal Data",
             icon: 'fa-male'
         },
-        LEGAL: {
+        {
             name: "Legal / Compliance",
             icon: 'fa-balance-scale'
         },
-        TRANSACTION: {
+        {
+            name: "Patient Data",
+            icon: 'fa-male'
+        },
+        {
             name: "Transaction",
             icon: 'fa-usd'
         },
-        UNDEFINED: {
+        {
             name: 'Undefined',
             icon: 'fa-ban'
         },
-    },
+    ],
     _confidentialities: {
         BANKING: {
             name: 'Banking Secrecy',
@@ -137,43 +145,51 @@ module.exports = {
         // Specify the validation error messages
     },
   urls: {
-    LABEL_CATEGORY: "api/label/category/",
-    LABEL_CONFIDENTIAL: "api/label/confidentiality/",
-    LABEL_DOCTYPES: "api/label/doctypes/",
-    LABEL_LAGNUAGES: "api/label/languages/",
-    ROLES: "api/account/role/",
-    PROFILE: "api/account/profile/",
-    PHOTO: "api/account/change_photo/",
-    TOKEN: "http://54.169.106.24/api-token-auth/",
-    EMAIL: "api/account/change_email/",
-    PASSWORD: "api/account/change_password/",
-    NOTIFICATION: "api/notification/",
-    DATALOSS: "api/insight/data-loss/",
-    DATARISK: "api/insight/data-risk/",
-    TOKENAUTH: "api/token/api-token-auth/",
-    REGISTRATION: "api/account/registration/",
-    REFRESHTOKEN: "api/token/api-token-refresh/",
-    IAM: 'api/anomaly/iam/',
-    SCAN: 'api/scan/',
-    CLASSIFICATION_REVIEW: 'api/classification_review/',
-    STATISTICS: 'api/group/statistics/',
-    CLOUDWORDS: 'api/group/cloudwords/',
-    CENTROIDS: 'api/group/centroids/',
-    SAMPLES: 'api/group/samples/',
-    GROUP: 'api/group/',
-    GROUP_SAMPLES: 'api/group/samples/',
-    ORPHAN: 'api/group/orphan',
-    ORPHAN_STATISTICS: 'api/group/orphan/statistics',
-    ORPHAN_CLOUDWORDS: 'api/group/orphan/cloudwords',
-    ORPHAN_CENTROIDS:'api/group/orphan/centroids',
-    ORPHAN_SAMPLES: 'api/group/orphan/samples',
-    ORPHAN_CATEGORIES: 'api/group/orphan/categories',
-    ORGANIZATION: 'api/organization/',
-    SLA: 'api/sla/',
-    CONFIDENTIAL: 'api/confidentiality/',
-    TECH_DOMAIN: 'api/technology/domain/',
-    TECH_HDPSERVER: 'api/technology/hdpserver/',
-    TECH_FOLDER: 'api/technology/folder/',
-    TECH_EMAILSERVER_EXCHANGE: 'api/technology/emailserver_exchange/',
+    LABEL_CATEGORY            : "api/label/category/",
+    LABEL_CONFIDENTIAL        : "api/label/confidentiality/",
+    LABEL_DOCTYPES            : "api/label/doctypes/",
+    LABEL_LAGNUAGES           : "api/label/languages/",
+    ROLES                     : "api/account/role/",
+    PROFILE                   : "api/account/profile/",
+    PHOTO                     : "api/account/change_photo/",
+    EMAIL                     : "api/account/change_email/",
+    PASSWORD                  : "api/account/change_password/",
+    REGISTRATION              : "api/account/registration/",
+    TOKEN                     : "api-token-auth/",
+    NOTIFICATION              : "api/notification/",
+    DATALOSS                  : "api/insight/data-loss/",
+    DATARISK                  : "api/insight/data-risk/",
+    INSIGHT_IAM               : "api/insight/iam",
+    TOKENAUTH                 : "api/token/api-token-auth/",
+    REFRESHTOKEN              : "api/token/api-token-refresh/",
+    IAM                       : 'api/anomaly/iam/',
+    IAM_USER_CLIENT           : 'api/anomaly/iam/user-client/',
+    IAM_USER_ACCESS           : 'api/anomaly/iam/user-access/',
+    IAM_ACTIVE_DIRECTORY      : 'api/anomaly/iam/active-directory/',
+    ANOMALY_RISK              : 'api/anomaly/risk/',
+    DOCUMENT_REPOSITORY       : 'api/anomaly/datarisk/document-repository',
+    CLIENT_DATA_REPOSITORY    : 'api/anomaly/datarisk/client-data-repository',
+    SCAN                      : 'api/scan/',
+    CLASSIFICATION_REVIEW     : 'api/classification_review/',
+    GROUP                     : 'api/group/',
+    STATISTICS                : 'api/group/statistics/',
+    CLOUDWORDS                : 'api/group/cloudwords/',
+    CENTROIDS                 : 'api/group/centroids/',
+    SAMPLES                   : 'api/group/samples/',
+    GROUP_SAMPLES             : 'api/group/samples/',
+    ORPHAN                    : 'api/group/orphan',
+    ORPHAN_STATISTICS         : 'api/group/orphan/statistics',
+    ORPHAN_CLOUDWORDS         : 'api/group/orphan/cloudwords',
+    ORPHAN_CENTROIDS          : 'api/group/orphan/centroids',
+    ORPHAN_SAMPLES            : 'api/group/orphan/samples',
+    ORPHAN_CATEGORIES         : 'api/group/orphan/categories',
+    ORGANIZATION              : 'api/organization/',
+    SLA                       : 'api/sla/',
+    CONFIDENTIAL              : 'api/confidentiality/',
+    TECH_DOMAIN               : 'api/technology/domain/',
+    TECH_HDPSERVER            : 'api/technology/hdpserver/',
+    TECH_FOLDER               : 'api/technology/folder/',
+    TECH_EMAILSERVER_EXCHANGE : 'api/technology/emailserver_exchange/',
+    MY_TEAM                   : 'api/my_team/',
   }
 };

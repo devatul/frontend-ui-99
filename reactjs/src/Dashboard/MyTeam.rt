@@ -1,109 +1,70 @@
 <rt-import name="HelpButton" from="../Insight/components/MyTeamHelpButton"/>
 <rt-import name="HelpButton1" from="../components/dathena/HelpButton"/>
+
 <section class="panel-bordered panel panel-featured panel-featured-primary panel-featured-compact">
   <header class="panel-heading">
-    <h2 class="panel-title">My Team
-      <HelpButton className="r dropdown inline-block-item" type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile" content={this.state.content} />
+    <h2 class="panel-title">
+      My Team
+      <HelpButton
+        className="r dropdown inline-block-item"
+        type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_popup dd-md full-mobile"
+        content={this.state.content} />
     </h2>
   </header>
-
   <div class="panel-body">
     <div id="datatable-editable_wrapper" class="no-footer">
       <div class="table-responsive table-responsive2">
         <table class="my-team-table table table-bordered my-team-table-striped table-striped mb-none no-footer" id="datatable-editable" role="grid" aria-describedby="datatable-default_info">
           <thead>
             <tr role="row">
-              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">Reviewer
+              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" aria-sort="ascending">
+                Reviewer
               </th>
-              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 280px;">Number of Documents Reviewed within SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 280px;">
+                Number of Documents Reviewed within SLA
+                <HelpButton
+                  className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item "
+                  type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile"
+                  content="Number of documents sucessfully reviewed before the prescribed SLA defined by the administrator expired." />
               </th>
-              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 290px;">Number of Documents Reviewed outside of SLA
-               <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item  " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired."/>
+              <th tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1" style="max-width: 290px;">
+                Number of Documents Reviewed outside of SLA
+                <HelpButton
+                  className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item  "
+                  type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile"
+                  content="Number of documents unsucessfully reviewed before the prescribed SLA defined by the administrator expired." />
               </th>
-              <th  tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Total Number of Documents Reviewed
-                <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item  " type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile" content="This presents a summary of all the documents reviewed."/>
+              <th tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">
+                Total Number of Documents Reviewed
+                <HelpButton
+                  className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item"
+                  type="overview_timeframe help_timeframe dropdown-menu fix-z-index-info-button has-arrow fix_helpbutton_myteam dd-md full-mobile"
+                  content="This presents a summary of all the documents reviewed." />
               </th>
-              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">Progress
-                <HelpButton className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item edit_right" type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile" content="This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed."/>
+              <th class="text-center" tabindex="0" aria-controls="datatable-default" rowspan="1" colspan="1">
+                Progress
+                <HelpButton
+                  className="r dropdown dropdown-file-info-holder fix_myteam inline-block-item edit_right"
+                  type="my_team help_question_content dropdown-menu has-arrow dd-md dd-md fix full-mobile"
+                  content="This presents a progress tracker, comparing the number of successfully reviewed documents compared to the total number of documents to be reviewed." />
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="even" role="row">
-              <td class="bold">
-                Gabriel
-              </td>
-              <td>50</td>
-              <td>50</td>
-              <td>100</td>
+            <tr rt-repeat="team in this.state.teams" key="{team.id}" class="even" role="row">
+              <td class="bold">{team.name}</td>
+              <td>{team.inSLA}</td>
+              <td>{team.outSLA}</td>
+              <td>{team.SLA}</td>
               <td>
-                <div className="pie-wrapper pie-progress-75 style-1 pie-sm">
-                    <span className="label">75%</span>
-                    <div className="pie">
+                <div className="pie-wrapper pie-progress-{team.progress} style-1 pie-sm">
+                  <span className="label">{team.progress}%</span>
+                  <div className="pie">
                     <div className="left-side half-circle"></div>
                     <div className="right-side half-circle"></div>
-                    </div>
-                    <div className="shadow"></div>
-                    </div>
-                </td>
-              </td>
-            </tr>
-            <tr class="even" role="row">
-              <td class="bold">
-                Chris
-              </td>
-              <td>100</td>
-              <td>0</td>
-              <td>100</td>
-              <td>
-                <div className="pie-wrapper pie-progress-100 style-1 pie-sm">
-                    <span className="label">100%</span>
-                    <div className="pie">
-                    <div className="left-side half-circle"></div>
-                    <div className="right-side half-circle"></div>
-                    </div>
-                    <div className="shadow"></div>
-                    </div>
-                </td>
-              </td>
-            </tr>
-            <tr class="even" role="row">
-              <td class="bold">
-                John
-              </td>
-              <td>80</td>
-              <td>10</td>
-              <td>90</td>
-              <td>
-                <div className="pie-wrapper pie-progress-81 style-1 pie-sm">
-                    <span className="label">81%</span>
-                    <div className="pie">
-                    <div className="left-side half-circle"></div>
-                    <div className="right-side half-circle"></div>
-                    </div>
-                    <div className="shadow"></div>
-                    </div>
-                </td>
-              </td>
-            </tr>
-            <tr class="even" role="row">
-              <td class="bold">
-                Ben
-              </td>
-              <td>20</td>
-              <td>0</td>
-              <td>20</td>
-              <td>
-                <div className="pie-wrapper pie-progress-9 style-1 pie-sm">
-                    <span className="label">9%</span>
-                    <div className="pie">
-                    <div className="left-side half-circle"></div>
-                    <div className="right-side half-circle"></div>
-                    </div>
-                    <div className="shadow"></div>
-                    </div>
-                </td>
+                  </div>
+                  <div className="shadow"></div>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -111,5 +72,4 @@
       </div>
     </div>
   </div>
-
 </section>
