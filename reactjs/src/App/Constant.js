@@ -158,6 +158,7 @@ module.exports = {
     NOTIFICATION              : "api/notification/",
     DATALOSS                  : "api/insight/data-loss/",
     DATARISK                  : "api/insight/data-risk/",
+    INSIGHT_IAM               : "api/insight/iam",
     TOKENAUTH                 : "api/token/api-token-auth/",
     REFRESHTOKEN              : "api/token/api-token-refresh/",
     IAM                       : 'api/anomaly/iam/',

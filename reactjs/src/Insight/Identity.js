@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { render } from 'react-dom'
-import { Link, IndexLink, browserHistory } from 'react-router'
-import template from './Identity.rt'
-import Constant, { fetching } from '../App/Constant.js'
+import { Link, IndexLink, browserHistory } from 'react-router';
+import template from './Identity.rt';
+import Constant, { fetching } from '../App/Constant.js';
 import Demo from '../Demo.js';
-import javascript from '../script/javascript.js'
-import update from 'react/lib/update'
-import _ from 'lodash'
-import $, { JQuery } from 'jquery'
-import { makeRequest } from '../utils/http'
+import javascript from '../script/javascript.js';
+import update from 'react/lib/update';
+import _ from 'lodash';
+import $, { JQuery } from 'jquery';
+import { makeRequest } from '../utils/http';
+import { getInsightIAM } from '../utils/function.js';
 
 let Indentity = React.createClass({
     getInitialState() {
@@ -67,8 +68,8 @@ let Indentity = React.createClass({
     },
 
     getData(num) {
-        return makeRequest({
-            path: 'api/insight/iam?number_users=' + num,
+        return getInsightIAM({
+            number_users: num,
             success: (data) => {
               // FIXME: Demo fix
               if (Demo.MULTIPLIER != 1) {

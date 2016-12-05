@@ -297,10 +297,42 @@ module.exports = {
         makeRequest(options);
     },
 
+  getInsightIAM: (options) => {
+        options.path = urls.INSIGHT_IAM;
+        if (options.id) {
+            options.path += '?number_users=' + options.number_users;
+        } else {
+            options.path += '?number_users=5';
+        }
+
+        if (Demo.MULTIPLIER != 1) {
+            let old_success = options.success;
+            options.success = function(data) {
+                module.exports.getProfile({
+                    success: function(profile_data) {
+                        let department = profile_data.department;
+                        if (department == null)
+                          department = "Swiss Bank";
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
+                        if (mode === undefined)
+                            mode = Demo.INDUSTRIES[0];
+
+                        for (let i = 0, len = data.key_contributor.length; i < len; ++i) {
+                            let cat_index = Demo.INDUSTRIES[0].categories.findIndex(function(e) { return e.name == data.key_contributor[i].category_name; });
+                            data.key_contributor[i].category_name = mode.categories[cat_index != -1 ? Math.min(cat_index, mode.categories.length - 1) : 0].name;
+                        }
+                        old_success(data);
+                    }
+                });
+            };
+        }
+        makeRequest(options);
+  },
+
     setScan: (options) => {
-        options.path = urls.SCAN
-        options.method = 'POST'
-        makeRequest(options)
+        options.path = urls.SCAN;
+        options.method = 'POST';
+        makeRequest(options);
     },
 
     getClassificationReview: (options) => {
