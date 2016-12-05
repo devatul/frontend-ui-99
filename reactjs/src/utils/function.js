@@ -337,6 +337,28 @@ module.exports = {
 
     getClassificationReview: (options) => {
         options.path = urls.CLASSIFICATION_REVIEW;
+        if (Demo.MULTIPLIER != 1) {
+            let old_success = options.success;
+            options.success = function(data) {
+                module.exports.getProfile({
+                    success: function(profile_data) {
+                        let department = profile_data.department;
+                        if (department == null)
+                          department = "Swiss Bank";
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
+                        if (mode === undefined)
+                            mode = Demo.INDUSTRIES[0];
+
+                        console.log(data);
+                        for (let i = 0, len = data.length; i < len; ++i) {
+                            data[i].confidentiality.name = mode.confidentialities[Math.min(parseInt(data[i].confidentiality.id), mode.confidentialities.length - 1)].name;
+                            data[i].category.name = mode.categories[Math.min(parseInt(data[i].category.id), mode.categories.length - 1)].name;
+                        }
+                        old_success(data);
+                    }
+                });
+            };
+        }
         makeRequest(options);
     },
 
