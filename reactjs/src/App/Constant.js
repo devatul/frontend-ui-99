@@ -188,5 +188,6 @@ module.exports = {
     TECH_HDPSERVER            : 'api/technology/hdpserver/',
     TECH_FOLDER               : 'api/technology/folder/',
     TECH_EMAILSERVER_EXCHANGE : 'api/technology/emailserver_exchange/',
+    MY_TEAM                   : 'api/my_team/',
   }
 };

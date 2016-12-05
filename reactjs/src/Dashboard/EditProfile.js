@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import { Link, IndexLink, browserHistory } from 'react-router'
 import template from './EditProfile.rt'
-import { getProfile, getPhoto } from '../utils/function'
+import { getProfile, getPhoto, getRole } from '../utils/function'
 import { forEach } from 'lodash'
 import { makeRequest } from '../utils/http'
 
@@ -14,7 +14,7 @@ module.exports = React.createClass({
         return {
             photo: {},
             profile: null,
-
+            role: "",
         };
     },
     getProfile() {
@@ -39,9 +39,18 @@ module.exports = React.createClass({
         })
         return data
     },
+
+    componentWillMount() {
+      getRole({
+        success: function(data) {
+          this.setState({ role: data.role });
+        }.bind(this)
+      });
+    },
+
     componentDidMount() {
-        this.getProfile(),
-        this.getPhoto()
+        this.getProfile();
+        this.getPhoto();
     },
     render: template
 });
