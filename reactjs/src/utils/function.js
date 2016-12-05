@@ -125,7 +125,10 @@ module.exports = {
         if (Demo.MULTIPLIER != 1) {
             module.exports.getProfile({
               success: function(profile_data) {
-                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                let department = profile_data.department;
+                if (department == null)
+                  department = "Swiss Bank";
+                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
                 if (mode === undefined)
                   mode = Demo.INDUSTRIES[0];
                 options.success(mode.categories);
@@ -141,7 +144,10 @@ module.exports = {
         if (Demo.MULTIPLIER != 1) {
             module.exports.getProfile({
               success: function(profile_data) {
-                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                let department = profile_data.department;
+                if (department == null)
+                  department = "Swiss Bank";
+                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
                 if (mode === undefined)
                   mode = Demo.INDUSTRIES[0];
                 options.success(mode.confidentialities);
@@ -224,7 +230,10 @@ module.exports = {
             options.success = function(data) {
                 module.exports.getProfile({
                     success: function(profile_data) {
-                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        let department = profile_data.department;
+                        if (department == null)
+                          department = "Swiss Bank";
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
                         if (mode === undefined)
                             mode = Demo.INDUSTRIES[0];
                         for (let i = 0, len = data.length; i < len; ++i) {
@@ -261,7 +270,10 @@ module.exports = {
             options.success = function(data) {
                 module.exports.getProfile({
                     success: function(profile_data) {
-                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        let department = profile_data.department;
+                        if (department == null)
+                          department = "Swiss Bank";
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
                         if (mode === undefined)
                             mode = Demo.INDUSTRIES[0];
                         if (data.categories.length > mode.categories.length) {
@@ -329,7 +341,10 @@ module.exports = {
             options.success = function(data) {
                 module.exports.getProfile({
                     success: function(profile_data) {
-                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        let department = profile_data.department;
+                        if (department == null)
+                          department = "Swiss Bank";
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === department.toUpperCase(); });
                         if (mode === undefined)
                             mode = Demo.INDUSTRIES[0];
 
