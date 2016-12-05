@@ -7,7 +7,7 @@
 <rt-import name="Loader" from="../components/dathena/Loader"/>
 <rt-import name="Col" from="react-bootstrap/lib/Col"/>
 <rt-import name="Row" from="react-bootstrap/lib/Row"/>
-<rt-import name="Panel" from="../components/bootstrap/panel"/>
+<rt-import name="Panel" from="../components/bootstrap/panel"/> 
 <rt-import name="Table" from="react-bootstrap/lib/Table"/>
 <rt-import name="ProgressBar" from="react-bootstrap/lib/ProgressBar" />
 <rt-import name="Select2" from="../components/dathena/Select2" />

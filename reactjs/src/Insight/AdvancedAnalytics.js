@@ -5,10 +5,11 @@ import update from 'react/lib/update';
 import {isEmpty, forEach, isEqual, upperFirst, orderBy, indexOf} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
 import {makeRequest} from '../utils/http.js';
-import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
+import {orderByIndex, orderConfidentialities, orderLanguages, getScan} from '../utils/function';
 import $, {JQuery} from 'jquery';
 import Constant from '../App/Constant';
 import {_categories, fetching} from '../App/Constant.js';
+import Demo from '../Demo.js';
 
 let hideUndefined = true;
 
@@ -157,8 +158,7 @@ var AdvancedAnalytics = React.createClass({
       })
     });
 
-    return makeRequest({
-      path: 'api/scan/',
+    return getScan({
       success: (data) => {
         if (hideUndefined) {
           data.confidentialities = data.confidentialities.filter(x => {
@@ -178,11 +178,11 @@ var AdvancedAnalytics = React.createClass({
         });
 
         // FIXME: Demo fix, to be removed
-        if (Constant.MULTIPLIER != 1) {
-          data.documents_analyzed = parseInt(data.documents_analyzed) * Constant.MULTIPLIER;
-          data.documents_skipped *= Constant.MULTIPLIER;
-          data.total_correctly_classified *= Constant.MULTIPLIER;
-          data.total_documents_scanned *= Constant.MULTIPLIER;
+        if (Demo.MULTIPLIER != 1) {
+          data.documents_analyzed = parseInt(data.documents_analyzed) * Demo.MULTIPLIER;
+          data.documents_skipped *= Demo.MULTIPLIER;
+          data.total_correctly_classified *= Demo.MULTIPLIER;
+          data.total_documents_scanned *= Demo.MULTIPLIER;
 
           data.percentage_duplicates = 24.2;
           data.total_duplicates = Math.round((data.total_documents_scanned * data.percentage_duplicates)/100);
@@ -191,27 +191,27 @@ var AdvancedAnalytics = React.createClass({
           data.total_twins = Math.round((data.total_documents_scanned * data.percentage_twins) / 100);
 
           for (let i = 0, len = data.categories.length; i < len; ++i) {
-            data.categories[i].total_classified_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_reviewed_docs *= Constant.MULTIPLIER;
-            data.categories[i].total_validated_docs *= Constant.MULTIPLIER;
+            data.categories[i].total_classified_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_reviewed_docs *= Demo.MULTIPLIER;
+            data.categories[i].total_validated_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.confidentialities.length; i < len; ++i) {
-            data.confidentialities[i].total_classified_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_owner_accuracy_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_reviewed_docs *= Constant.MULTIPLIER;
-            data.confidentialities[i].total_validated_docs *= Constant.MULTIPLIER;
+            data.confidentialities[i].total_classified_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_owner_accuracy_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_reviewed_docs *= Demo.MULTIPLIER;
+            data.confidentialities[i].total_validated_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.doctypes.length; i < len; ++i) {
-            data.doctypes[i].total_docs *= Constant.MULTIPLIER;
+            data.doctypes[i].total_docs *= Demo.MULTIPLIER;
           }
 
           for (let i = 0, len = data.languages.length; i < len; ++i) {
-            data.languages[i].total_docs *= Constant.MULTIPLIER;
+            data.languages[i].total_docs *= Demo.MULTIPLIER;
           }
         }
 
@@ -219,6 +219,7 @@ var AdvancedAnalytics = React.createClass({
 
         data.confidentialities = orderConfidentialities(confidentialities);
         data.languages = orderLanguages(data.languages);
+        data.categories.sort(function (a, b) { return a.name > b.name; });
 
         data.doctypes.sort((a, b) => {
           if (a.name === "Others")
@@ -246,6 +247,7 @@ var AdvancedAnalytics = React.createClass({
       }
     })
   },
+
   handleEditStartingPointLabel(){
       this.setState({starting_point_label:false})
   },
@@ -372,19 +374,23 @@ var AdvancedAnalytics = React.createClass({
               textShadow: '0px 1px 2px black'
             }
           },
-          data: [
-            {"y": 109,"name": "Accounting / Tax"},
-            {"y": 129,"name": "Corporate Entity"},
-            {"y": 377,"name": "Client / Customer"},
-            {"y": 11,"name": "Employee / Personal Data"},
-            {"y": 37,"name": "Legal / Compliance"}
-          ]
-        }
-        let total = 0;
-        for(let i = 0; i < categoryChart.data.length; i++){
-          total += categoryChart.data[i].y;
+          data: []
+        },
+        total = 0,
+        {categories} = this.state.scan.result;
+
+        for (let i = categories.length - 1; i >= 0; i--) {
+          categoryChart.data[i] = {
+            name: upperFirst(categories[i].name),
+            y: categories[i].total_docs
+          };
+          total += categories[i].total_docs;
         }
         categoryChart.total = total;
+
+        if (categoryChart.data.length <= 0) {
+          categoryChart.disabled = true;
+        }
       return categoryChart;
   },
 
@@ -403,11 +409,18 @@ var AdvancedAnalytics = React.createClass({
             {"y": 2,"name": "Public"},
             {"y": 38,"name": "Secret"}
           ]
-        };
-        let total = 0;
-        for(let i = 0; i < confidentialityChart.data.length; i++){
-          total += confidentialityChart.data[i].y;
+        },
+        total = 0,
+        {confidentialities} = this.state.scan.result;
+
+        for (let i = confidentialities.length - 1; i >= 0; i--) {
+          confidentialityChart.data[i] = {
+            name: upperFirst(confidentialities[i].name),
+            y: confidentialities[i].total_reviewed_docs
+          };
+          total += confidentialities[i].total_reviewed_docs
         }
+
         confidentialityChart.total = total;
 
     if (confidentialityChart.data.length <= 1) {
@@ -550,11 +563,18 @@ var AdvancedAnalytics = React.createClass({
             {"y": 341,"name": "PDF.pdf"},
             {"y": 488,"name": "Other"}
           ]
-        };
-        let total = 0;
-        for(let i = 0; i < documentsChart.data.length; i++){
-          total += documentsChart.data[i].y;
+        },
+        total = 0,
+        {doctypes} = this.state.scan.result;
+
+        for (let i = doctypes.length - 1; i >= 0; i--) {
+          documentsChart.data[i] = {
+            name: upperFirst(doctypes[i].name),
+            y: doctypes[i].total_docs
+          };
+          total += doctypes[i].total_docs;
         }
+
         documentsChart.total = total;
         documentsChart.configList = [
           {label:"Document Type", value:0},

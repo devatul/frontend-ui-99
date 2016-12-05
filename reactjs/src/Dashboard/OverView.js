@@ -416,7 +416,7 @@ var OverView = React.createClass({
     }
   },
   handleStartClassification: function() {
-    console.log('function called')
+    console.log('start_classification api called')
     makeRequest({
       sync: false,
       method: 'GET',
