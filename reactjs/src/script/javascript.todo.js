@@ -45,7 +45,7 @@ module.exports = function () {
             }
 
         });
-        //if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
+        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             // detach it and append it to the body
             $('body').append(dropdownMenu.detach());
 
@@ -58,17 +58,17 @@ module.exports = function () {
                 'top': eOffset.top + $(e.target).outerHeight(),
                 'left': eOffset.left
             });
-      //  }
+        }
     });
 
     $(window).on('hide.bs.dropdown', function (e) {
         var windowWidth = $(window).innerWidth();
     // and when you hide it, reattach the drop down, and hide it normally
 
-      //  if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
+        if ( windowWidth <=996 && dropdownMenu.hasClass('full-mobile') ){
             $(e.target).append(dropdownMenu.detach());
             dropdownMenu.hide();
-        //}
+        }
     });
 
     $('select.detail-select').select2({
