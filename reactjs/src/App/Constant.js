@@ -25,36 +25,44 @@ module.exports = {
         level1: 30,
         level2: 50
     },
-    _categories: {
-        ACCOUNTING: {
+    _categories: [
+        {
             name: "Accounting / Tax",
             icon: 'fa-calculator'
         },
-        CLIENT: {
+        {
             name: "Client / Customer",
             icon: 'fa-users'
         },
-        CORPORATE: {
+        {
             name: "Corporate Entity",
             icon: 'fa-university'
         },
-        EMPLOYEE: {
+        {
+            name: "Intellectual Property",
+            icon: 'fa-university'
+        },
+        {
             name: "Employee / Personal Data",
             icon: 'fa-male'
         },
-        LEGAL: {
+        {
             name: "Legal / Compliance",
             icon: 'fa-balance-scale'
         },
-        TRANSACTION: {
+        {
+            name: "Patient Data",
+            icon: 'fa-male'
+        },
+        {
             name: "Transaction",
             icon: 'fa-usd'
         },
-        UNDEFINED: {
+        {
             name: 'Undefined',
             icon: 'fa-ban'
         },
-    },
+    ],
     _confidentialities: {
         BANKING: {
             name: 'Banking Secrecy',

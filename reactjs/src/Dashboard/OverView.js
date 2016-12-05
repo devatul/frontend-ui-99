@@ -6,7 +6,7 @@ import {isEmpty, forEach, isEqual, upperFirst, orderBy} from 'lodash';
 import javascriptTodo from '../script/javascript.todo.js';
 import {_categories, fetching} from '../App/Constant.js';
 import {makeRequest} from '../utils/http.js';
-import {orderByIndex, orderConfidentialities, orderLanguages} from '../utils/function';
+import {orderByIndex, orderConfidentialities, orderLanguages, getScan} from '../utils/function';
 import $, {JQuery} from 'jquery';
 import Constant from '../App/Constant'
 import Demo from '../Demo.js';
@@ -100,8 +100,7 @@ var OverView = React.createClass({
       })
     });
 
-    return makeRequest({
-      path: 'api/scan/',
+    return getScan({
       success: (data) => {
         if (hideUndefined) {
           data.confidentialities = data.confidentialities.filter(x => {
@@ -162,6 +161,7 @@ var OverView = React.createClass({
 
         data.confidentialities = orderConfidentialities(confidentialities);
         data.languages = orderLanguages(data.languages);
+        data.categories.sort(function (a, b) { return a.name > b.name; });
 
         data.doctypes.sort((a, b) => {
           if (a.name === "Others")
@@ -384,24 +384,8 @@ var OverView = React.createClass({
   renderIcon(name) {
     name = name.toLowerCase();
 
-    switch (name) {
-      case _categories.ACCOUNTING.name.toLowerCase():
-        return _categories.ACCOUNTING.icon;
-      case _categories.CLIENT.name.toLowerCase():
-        return _categories.CLIENT.icon;
-      case _categories.CORPORATE.name.toLowerCase():
-        return _categories.CORPORATE.icon;
-      case _categories.EMPLOYEE.name.toLowerCase():
-        return _categories.EMPLOYEE.icon;
-      case _categories.LEGAL.name.toLowerCase():
-        return _categories.LEGAL.icon;
-      case _categories.TRANSACTION.name.toLowerCase():
-        return _categories.TRANSACTION.icon;
-      case _categories.UNDEFINED.name.toLocaleLowerCase():
-        return _categories.UNDEFINED.icon;
-      default:
-        return " ";
-    }
+    let v = _categories.find(function(e) { return name === e.name.toLowerCase(); });
+    return v === undefined ? " " : v.icon;
   },
 
   handleFilter: function (bodyRequest) {

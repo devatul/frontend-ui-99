@@ -1,5 +1,6 @@
-import { _confidentialities, urls } from '../App/Constant'
-import { makeRequest } from '../utils/http'
+import { _confidentialities, urls } from '../App/Constant';
+import { makeRequest } from '../utils/http';
+import Demo from '../Demo.js';
 
 module.exports = {
     formatNumber: (nStr) => {
@@ -121,12 +122,34 @@ module.exports = {
 
     getCategories: (options) => {
         options.path = urls.LABEL_CATEGORY;
-        makeRequest(options);
+        if (Demo.MULTIPLIER != 1) {
+            module.exports.getProfile({
+              success: function(profile_data) {
+                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                if (mode === undefined)
+                  mode = Demo.INDUSTRIES[0];
+                options.success(mode.categories);
+              }
+            });
+        } else {
+            makeRequest(options);
+        }
     },
 
     getConfidentialities: (options) => {
         options.path = urls.LABEL_CONFIDENTIAL;
-        makeRequest(options);
+        if (Demo.MULTIPLIER != 1) {
+            module.exports.getProfile({
+              success: function(profile_data) {
+                let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                if (mode === undefined)
+                  mode = Demo.INDUSTRIES[0];
+                options.success(mode.confidentialities);
+              }
+            });
+        } else {
+            makeRequest(options);
+        }
     },
 
     getDoctypes: (options) => {
@@ -196,17 +219,70 @@ module.exports = {
 
     getDataLoss: (options) => {
         options.path = urls.DATALOSS
-        makeRequest(options)
+        if (Demo.MULTIPLIER != 1) {
+            let old_success = options.success;
+            options.success = function(data) {
+                module.exports.getProfile({
+                    success: function(profile_data) {
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        if (mode === undefined)
+                            mode = Demo.INDUSTRIES[0];
+                        for (let i = 0, len = data.length; i < len; ++i) {
+                            // Iterates over languages
+                            for (let j = 0, len_j = data[i]["most efficient keywords"].length; j < len_j; ++j) {
+                                // Iterates over categories
+                                let cat_index = Demo.INDUSTRIES[0].categories.findIndex(function(e) { return e.name == data[i]["most efficient keywords"][j].category_name; });
+                                data[i]["most efficient keywords"][j].category_name = mode.categories[cat_index != -1 ? cat_index : 0].name;
+                                for (let k = 0, len_k = data[i]["most efficient keywords"][j]["confidentiality levels"].length; k < len_k; ++k) {
+                                  let conf_index = Demo.INDUSTRIES[0].confidentialities.findIndex(function(e) { return e.name == data[i]["most efficient keywords"][j]["confidentiality levels"][k].name; });
+                                    data[i]["most efficient keywords"][j]["confidentiality levels"][k].name = mode.confidentialities[conf_index != -1 ? conf_index : 0].name;
+                                }
+                            }
+                        }
+                        old_success(data);
+                    }
+                });
+            };
+            options.success(Demo.DATALOSS_DATA);
+        } else {
+            makeRequest(options);
+        }
     },
 
     getDataRisk: (options) => {
         options.path = urls.DATARISK + "?number_users=" + options.number_users;
-        makeRequest(options)
+        makeRequest(options);
     },
 
     getScan: (options) => {
         options.path = urls.SCAN
-        makeRequest(options)
+        if (Demo.MULTIPLIER != 1) {
+            let old_success = options.success;
+            options.success = function(data) {
+                module.exports.getProfile({
+                    success: function(profile_data) {
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        if (mode === undefined)
+                            mode = Demo.INDUSTRIES[0];
+                        if (data.categories.length > mode.categories.length) {
+                            data.categories = data.categories.slice(0, mode.categories.length);
+                        }
+                        for (let i = 0, len = data.categories.length; i < len; ++i) {
+                            data.categories[i].name = mode.categories[i].name;
+                        }
+
+                        if (data.confidentialities.length > mode.confidentialities.length) {
+                            data.confidentialities = data.confidentialities.slice(0, mode.confidentialities.length);
+                        }
+                        for (let i = 0, len = data.confidentialities.length; i < len; ++i) {
+                            data.confidentialities[i].name = mode.confidentialities[i].name;
+                        }
+                        old_success(data);
+                    }
+                });
+            };
+        }
+        makeRequest(options);
     },
 
     setScan: (options) => {
@@ -248,6 +324,29 @@ module.exports = {
 
     getGroups: (options) => {
         options.path = urls.GROUP;
+        if (Demo.MULTIPLIER != 1) {
+            let old_success = options.success;
+            options.success = function(data) {
+                module.exports.getProfile({
+                    success: function(profile_data) {
+                        let mode = Demo.INDUSTRIES.find(function(e) { return e.name.toUpperCase() === profile_data.department.toUpperCase(); });
+                        if (mode === undefined)
+                            mode = Demo.INDUSTRIES[0];
+
+                        for (let i = 0, len = data.length; i < len; ++i) {
+                            let cat = data[i].name.split(',')[0];
+                            let conf = data[i].name.split(',')[1];
+                            let cat_index = Demo.INDUSTRIES[0].categories.findIndex(function(e) { return e.name == cat; });
+                            let conf_index = Demo.INDUSTRIES[0].confidentialities.findIndex(function(e) { return e.name == conf; });
+                            data[i].name = (cat_index == -1 ? "Undefined" : mode.categories[cat_index].name) + "," + (conf_index == -1 ? "Undefined" : mode.confidentialities[conf_index].name);
+                            console.log(data[i].name);
+                        }
+
+                        old_success(data);
+                    }
+                });
+            }
+        }
         makeRequest(options);
     },
 
