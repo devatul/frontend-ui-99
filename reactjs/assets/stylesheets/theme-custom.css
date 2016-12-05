@@ -3383,6 +3383,8 @@ div[id^='legendContainer'] {
     border-color: #0FABE6; }
   .pie-wrapper.style-2.pie-blue .label {
     color: #0FABE6; }
+  .pie-wrapper.style-2.pie-white.label {
+    color: #FFFFFF; }
 
 .pie-wrapper.pie-progress-0.style-1 .label {
   background-color: #d2322d; }

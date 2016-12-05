@@ -71,12 +71,22 @@ shouldComponentUpdate(){
 
         let chart = this.state.chart;
 
-        let dataArray = [] ;
-        data.duplicated.value = 4508,
-        data.twins.value = 1555,
-        data.stale_files.value = 5832,
-        data.storage_cost_saving_opportunity.size = 155;
+        chart.duplicated.config = {name: 'Documents', colors: [ '#0FABE6'], colorsHover: '#0FABE6', height: (data.duplicated.value * 100) / data.duplicated.percentage};
+        chart.duplicated.data = [data.duplicated.value];
 
+        chart.twins.config = {name: 'Documents', colors: [ '#359CA1'], colorsHover: '#359CA1', height: (data.twins.value * 100) / data.twins.percentage};
+        chart.twins.data = [data.twins.value];
+
+        chart.stale_files.config = {name: 'Documents', colors: [ '#ED9C27'], colorsHover: '#DFF2F8', height: (data.stale_files.value * 100) / data.stale_files.percentage};
+        chart.stale_files.data = [data.stale_files.value];
+
+        chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: (data.storage_cost_saving_opportunity.size * 100) / data.storage_cost_saving_opportunity.percentage };
+        chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
+
+        //FIXME: Use real data
+        console.log(data);
+
+        let dataArray = [] ;
         dataArray.push(data.duplicated.value);
         dataArray.push(data.twins.value);
         dataArray.push(data.stale_files.value);
@@ -84,18 +94,6 @@ shouldComponentUpdate(){
 
         let maxNum = max(dataArray);
         let height = maxNum/70*100;
-
-        chart.duplicated.config = {name: 'Documents', colors: [ '#0FABE6'], colorsHover: '#0FABE6', height: height}
-        chart.duplicated.data = [data.duplicated.value];
-
-        chart.twins.config = {name: 'Documents', colors: [ '#359CA1'], colorsHover: '#359CA1', height: height}
-        chart.twins.data = [data.twins.value];
-
-        chart.stale_files.config = {name: 'Documents', colors: [ '#ED9C27'], colorsHover: '#DFF2F8', height: height}
-        chart.stale_files.data = [data.stale_files.value];
-
-        chart.storage_cost_saving_opportunity.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: height}
-        chart.storage_cost_saving_opportunity.data = [data.storage_cost_saving_opportunity.size];
 
         chart.unreadable_files.config = {name: 'Documents', colors: [ '#DF625A'], colorsHover: '#DF625A', height: height}
         chart.unreadable_files.data = [2000];

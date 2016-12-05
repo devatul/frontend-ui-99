@@ -42,7 +42,7 @@ var ColumnChart = React.createClass({
     }else{
       a = c+50;
     }
-    return a;
+    return Math.max(a, 1);
   },
   draw() {
     var {config, series, categories, id, data} = this.props,
