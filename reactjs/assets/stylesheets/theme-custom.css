@@ -3281,6 +3281,34 @@ div[id^='legendContainer'] {
       margin-top: 5px;
       vertical-align: super;
       display: block; }
+    .datarisk-files.label{
+      z-index: 1;
+      position: absolute;
+      padding-top: 0px !important;
+      left: 31px;
+      margin-top: 6px;
+    }
+    .pie-wrapper.style-2.identification-risk{
+      display: inherit;
+    }
+    .identification-risk-files.label{
+      z-index: 1;
+      position: absolute;
+      padding-top: 0px !important;
+      right: 26px;
+      margin-top: 50px;
+
+      color: #ecf0f1;
+      font-size: 1.5em;
+    }
+    .identification-risk-files.label .smaller {
+      color: #727272;
+      font-size: .5em;
+      padding-bottom: 20px;
+      font-weight: 300;
+      margin-top: 5px;
+      vertical-align: super;
+      display: block; }
   .pie-wrapper.pie-md {
     height: 60px;
     width: 60px;
@@ -3336,7 +3364,7 @@ div[id^='legendContainer'] {
     color: #7f8c8d;
     line-height: 1;
     font-weight: normal;
-    font-size: 3rem;
+    font-size: 2rem;
     padding: 0;
     padding-top: 40px; }
     .pie-wrapper.style-2 .label .smaller {
@@ -3357,6 +3385,8 @@ div[id^='legendContainer'] {
     border-color: #0FABE6; }
   .pie-wrapper.style-2.pie-blue .label {
     color: #0FABE6; }
+  .pie-wrapper.style-2.pie-white.label {
+    color: #FFFFFF; }
 
 .pie-wrapper.pie-progress-0.style-1 .label {
   background-color: #d2322d; }

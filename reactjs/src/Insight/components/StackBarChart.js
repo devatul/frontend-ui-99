@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {render} from 'react-dom';
-import HelpButton from '../dathena/HelpButton';
-import {isEqual, ceil, floor} from 'lodash';
+import HelpButton from '../../components/dathena/HelpButton';
+import {isEqual,  ceil, floor} from 'lodash';
 
-var ColumnChart = React.createClass({
+var stackBarChart = React.createClass({
   displayName: 'selectButton',
 
   PropTypes: {
@@ -20,16 +20,19 @@ var ColumnChart = React.createClass({
       config: {
         colors: ['#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
         colorsHover: ['#DFF2F8', '#D7EBEC', '#E4E7F6', '#FBEBD4', '#F9DFDE']
-      }
+      },
+      help: 'help content',
+      title: 'title',
+      id: 'id'
     };
   },
-
+  componentDidMount() {
+    this.draw();
+  },
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.props.series, nextProps.series);
   },
-  componentDidMount(){
-    this.draw();
-  },
+
   componentDidUpdate(prevProps, prevState) {
     this.draw();
   },
@@ -42,19 +45,18 @@ var ColumnChart = React.createClass({
     }else{
       a = c+50;
     }
-    return Math.max(a, 1);
+    return a;
   },
   draw() {
-    var {config, series, categories, id, data} = this.props,
+    var {config, series, data, categories, id} = this.props,
         {colors, colorsHover} = config,
         maxPoint = config.height,
         empty = maxPoint - data[0],
         interval = this.heightChartInterval(maxPoint);
     $('#' + id).highcharts({
       chart: {
-        type: 'column',
-        height: 150,
-        backgroundColor: 'rgba(76, 175, 80, 0)',
+        type: 'bar',
+        height:150
       },
       title: {
         text: ''
@@ -66,24 +68,24 @@ var ColumnChart = React.createClass({
       xAxis: {
         categories: categories,
         labels: {
-           enabled: false,
+          enabled: false,
           autoRotation: false,
           style: {
             color: '#272727',
             'font-size': '10px'
           },
         },
-        tickInterval: 100,
+        tickInterval: 1,
         tickWidth: 0,
-        lineWidth: 0.7,
+        lineWidth: 0.8,
         minPadding: 0,
         maxPadding: 0,
         gridLineWidth: 0,
-        tickmarkPlacement: 'off'
+        tickmarkPlacement: 'on'
       },
       yAxis: {
         gridLineColor: 'transparent',
-        tickInterval: interval,
+        //tickInterval: interval,
         min: 0,
         max: maxPoint,
         endOnTick: false,
@@ -99,16 +101,19 @@ var ColumnChart = React.createClass({
         enabled: false
       },
       tooltip: {
-        enabled:false,
+        enabled: false,
         headerFormat: '<b>{point.x}</b><br/>',
         pointFormat: '{series.name}: {point.percentage:.1f}% / {point.y} Documents<br/>Total: {point.stackTotal} Documents'
       },
       plotOptions: {
         series:{
-          pointWidth: 80,
+          pointWidth: 70,
         },
-        column: {
+        bar: {
           stacking: 'normal',
+          pointWidth: 18,
+          pointPadding: 0,
+          borderWidth: 0,
           dataLabels: {
             enabled: false,
           },
@@ -116,7 +121,6 @@ var ColumnChart = React.createClass({
             events: {
               mouseOver: function () {
                 var {series} = this.series.chart;
-
                 for (let i = series.length - 1; i >= 0; i--) {
                   for (let j = series[i].points.length - 1; j >= 0; j--) {
                     if (series[i].points[j].category !== this.category) {
@@ -146,7 +150,7 @@ var ColumnChart = React.createClass({
           }
         }
       },
-      series:  [{
+      series:[{
         colorByPoint: true,
         colors: ["#e0e1e2"],
         colorsHover: config.colorsHover,
@@ -160,25 +164,18 @@ var ColumnChart = React.createClass({
         colorsHover: config.colorsHover,
         data: data,
         maxPointWidth: 500
-      }] //series
+      }] // series
     });
   },
-  // <HelpButton
-  //   classMenu="help_question_bottom fix-margin fix-overview-help-button-table"
-  //   setValue={help} />
+
   render() {
     var {id, title, help} = this.props;
-
     return (
       <div>
-        <h4 className="chart-title">
-          {title}
-
-        </h4>
         <div id={id}></div>
       </div>
     );
   }
 });
 
-module.exports = ColumnChart;
+module.exports = stackBarChart;

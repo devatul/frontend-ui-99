@@ -36,7 +36,7 @@ var stackBarChart = React.createClass({
   },
 
   draw() {
-    var {config, series, categories, id} = this.props,
+    var {config, series, data, categories, id} = this.props,
         {colors, colorsHover} = config;
 
     $('#' + id).highcharts({
@@ -132,7 +132,6 @@ var stackBarChart = React.createClass({
 
   render() {
     var {id, title, help} = this.props;
-
     return (
       <div>
         <h4 className="chart-title">{title}
