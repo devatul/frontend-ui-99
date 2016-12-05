@@ -60,11 +60,13 @@ shouldComponentUpdate(){
         // FIXME: Demo fix
         if (Demo.MULTIPLIER != 1) {
           data.duplicated.value *= Demo.MULTIPLIER;
+          data.duplicated.percentage = 24.20;
           for (let i = 0, len = data.file_identification_risk.length; i < len; ++i) {
             data.file_identification_risk[i].num_files *= Demo.MULTIPLIER;
           }
           data.stale_files.value *= Demo.MULTIPLIER;
           data.twins.value *= Demo.MULTIPLIER;
+          data.twins.percentage = 8.40;
         }
 
         /* assign data to this.state.chart */
