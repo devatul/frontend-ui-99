@@ -3286,6 +3286,27 @@ div[id^='legendContainer'] {
       left: 31px;
       margin-top: 6px;
     }
+    .pie-wrapper.style-2.identification-risk{
+      display: inherit;
+    }
+    .identification-risk-files.label{
+      z-index: 1;
+      position: absolute;
+      padding-top: 0px !important;
+      right: 26px;
+      margin-top: 50px;
+
+      color: #ecf0f1;
+      font-size: 1.5em;
+    }
+    .identification-risk-files.label .smaller {
+      color: #727272;
+      font-size: .5em;
+      padding-bottom: 20px;
+      font-weight: 300;
+      margin-top: 5px;
+      vertical-align: super;
+      display: block; }
   .pie-wrapper.pie-md {
     height: 60px;
     width: 60px;

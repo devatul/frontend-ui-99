@@ -132,7 +132,6 @@ var stackBarChart = React.createClass({
 
   render() {
     var {id, title, help} = this.props;
-    console.log('this.props',this.props)
     return (
       <div>
         <h4 className="chart-title">{title}

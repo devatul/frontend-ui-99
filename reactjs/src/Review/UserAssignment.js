@@ -77,7 +77,7 @@ var UserAssignment = React.createClass({
             summary: [],
             dataChart: {
                 reviewerChart: {
-                    config: { 
+                    config: {
                         name: 'Documents',
                         colors: [ '#5bc0de', '#349da2', '#7986cb', '#ed9c28', '#e36159'],
                         colorsHover: '#DFF2F8'
@@ -106,7 +106,6 @@ var UserAssignment = React.createClass({
     },
 
     componentWillUpdate(nextProps, nextState) {
-      console.log('this.state-user',this.state)
         if(this.state.category.current != nextState.category.current) {
             var { reviewers } = this.state.datafilter.request;
             var { current } = this.state.category;
