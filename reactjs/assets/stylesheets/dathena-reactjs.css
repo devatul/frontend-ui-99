@@ -500,6 +500,20 @@ select.assigment-select.form-control {
 .dropdown-menu.info-scan {
     max-width: 530px;
 }
+@media (min-width:500px){
+  .dropdown-menu.showInfo{
+    left: auto !important;
+    right: 50;
+    width: 500px;
+  }
+}
+@media (min-width:320px){
+  .dropdown-menu.showInfo{
+    left: auto !important;
+    right: 0;
+    min-width: 300px;
+  }
+}
 
 .dropdown-menu.info-scan .table-responsive .text {
     float: left;
