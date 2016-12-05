@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import template from './SignIn.rt';
 import { assignIn, isNull } from 'lodash';
 import Constant from '../App/Constant.js';
-import { setTokenAuth } from '../utils/function'
+import { setTokenAuth, setVerifyToken } from '../utils/function'
 
 var Signin = React.createClass({
     getInitialState() {
@@ -55,7 +55,21 @@ var Signin = React.createClass({
     componentDidMount() {
     },
 
-    componentWillMount() {},
+  componentWillMount() {
+    let token = sessionStorage.getItem('token');
+    if (token != undefined)
+      setVerifyToken({
+        timeout: 5000,
+        params : JSON.stringify({
+          token: token,
+        }),
+        success: (data) => {
+          browserHistory.push('/Dashboard/OverView');
+        },
+        error: (xhr) => {
+        }
+      });
+  },
 
     render: template
 });

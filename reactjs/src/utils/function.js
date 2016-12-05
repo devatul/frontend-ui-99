@@ -496,6 +496,12 @@ module.exports = {
         makeRequest(options);
     },
 
+    setVerifyToken: (options) => {
+        options.path = urls.VERIFYTOKEN;
+        options.method = 'POST';
+        makeRequest(options);
+    },
+
     getAnomalyIamInfo: (options, path) => {
         options.path = urls.IAM + path;
         makeRequest(options);

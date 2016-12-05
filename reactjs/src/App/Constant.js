@@ -161,6 +161,7 @@ module.exports = {
     INSIGHT_IAM               : "api/insight/iam",
     TOKENAUTH                 : "api/token/api-token-auth/",
     REFRESHTOKEN              : "api/token/api-token-refresh/",
+    VERIFYTOKEN               : "api/token/api-token-verify/",
     IAM                       : 'api/anomaly/iam/',
     IAM_USER_CLIENT           : 'api/anomaly/iam/user-client/',
     IAM_USER_ACCESS           : 'api/anomaly/iam/user-access/',
