@@ -190,9 +190,9 @@
                             </li>
                             <li rt-if="this.props.showInfo" class="dropdown">
                                 <a data-toggle="dropdown" class="toggle-button btn btn-default fix-center-info-toggle-button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                                <div class="dropdown-menu has-arrow dd-sm dd-md full-mobile dd-right info-scan overview-table-help ">
+                                <div class="dropdown-menu has-arrow dd-sm dd-md full-mobile dd-right info-scan overview-table-help showInfo ">
                                     <div class="table-responsive">
-                                        <table class="table general-table table-info table-bordered table-striped mb-none">
+                                        <table class="table general-table table-info table-bordered table-striped mb-none" style="min-width:300">
                                             <tbody>
                                             <tr>
                                                 <td class="text-left"><div class='text'>Last Data Scan:</div>

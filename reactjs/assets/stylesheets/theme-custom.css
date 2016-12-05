@@ -593,6 +593,7 @@ tr td {
       .dropdown-menu.dd-md.dd-right.has-arrow:after {
         right: 10px;
         left: auto; } }
+      
 
 .dropdown-menu.dd-sm {
   width: 40vw; }
@@ -1403,7 +1404,8 @@ div[id^='legendContainer'] {
   .dropdown-menu.full-mobile {
     width: 90%;
     margin-left: 0;
-    z-index: 9999; }
+    z-index: 9999;
+  }
   .dropdown-menu.full-mobile:after, .dropdown-menu.full-mobile:before {
     display: none; }
   .dropdown-menu.dd-filter {
