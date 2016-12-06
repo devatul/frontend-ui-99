@@ -15,7 +15,7 @@
                         <img class="logo-small mt-lg" alt="Dathena Logo" src="../assets/images/logo_header.png">
                         <span class="logo-subtitle text-weight-bold">smart cyber risk & data governance</span>
                         <div class="start-page search-box-wrap">
-                          <input class="search-box-input" type="text" placeholder="Document name, folder of full path" onKeyPress="{this.search}">
+                          <input class="search-box-input" type="text" placeholder="Document name, folder of full path" onKeyUp="{this.search}">
                           <i class="fa fa-search text-green"></i>
                         </div>
                         <a href="javascript:;" class="{this.state.className}" onMouseOver = "{this.handleOnMouseOver}" onMouseOut = "{this.handleOnMouseOut}" onClick="{this.search}">I'd rather be smart than lucky</a>

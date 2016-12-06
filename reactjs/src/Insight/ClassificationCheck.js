@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRoute, Link, IndexLink, browserHistory} from 'react-router';
 import template from './ClassificationCheck.rt';
 import $ from 'jquery';
+import {makeRequest} from '../utils/http.js';
 
 var ClassificationCheck = React.createClass({
     getInitialState() {
@@ -141,19 +142,17 @@ var ClassificationCheck = React.createClass({
         if(event.which == 13 || event.type == 'click' ) {
             this.setState({result : true})
         }
-       /* this.setState({result : true})*/
-       /* let value = event.target.value
-        let data = _.cloneDeep(this.state.data)
-        let newData = []
-        _.forEach(data, function(object, index) {
-            if ((object['name']).search(value) >= 0) {
-                newData.push(
-                    object
-                )
-            }
-
-        })
-        */
+        if(event.type == 'keyup'){
+          let keywords = {"keyword": event.target.value};
+          makeRequest({
+              path: 'api/insight/classification-check',
+              method: 'POST',
+              params: JSON.stringify(keywords),
+              success: (data) => {
+                this.setState({data: data});
+              }
+          });
+        }
     },
 
     componentDidMount() {},
