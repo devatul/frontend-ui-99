@@ -25,7 +25,7 @@ body .btn-primary:hover {
 .my-profile-a {
 	float: left;
 	color: #000;
-	
+
 }
 .my-profile-a>img {
 	border-radius: 50px;
@@ -69,6 +69,14 @@ body .btn-primary:hover {
 	padding-left: 5px;
 	color: #000;
 	font-size: 14px;
+}
+.my-profile-ul>li:last-child {
+	 border: none !important;
+}
+.my-profile-ul>li span{
+  margin-right: 5px;
+  color: #747474;
+  font-size: 13px;
 }
 .left3>p {
 	margin-bottom: 0px;

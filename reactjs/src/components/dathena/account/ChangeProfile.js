@@ -99,11 +99,22 @@ var ChangeProfile = React.createClass({
 
                             <div className="profile_details_bottom_right">
                                 <ul className="my-profile-ul">
-                                    <li className="left3">System User</li>
-                                    <li>
+                                    <li className="left3">
+                                      <span>System User</span>
                                         <HelpButton
                                             classMenu="fix-overview-help-button-table"
                                             classIcon="overview_question_a help_question_a" setValue="Use your user name and password provided by Dathena to connect into Dathena99." />
+                                    </li>
+                                    <li className="left2">
+                                      <span className="content_profile_note">Active Directory</span>
+                                        <HelpButton
+                                            classMenu="fix-overview-help-button-table"
+                                            classIcon="overview_question_a help_question_a" setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
+
+                                        <div className="my-profile-check-none checkbox-custom checkbox-default">
+                                          <input className="x" id="z" name="agreeterms" type="checkbox" />
+                                          <label htmlFor="AgreeTerms">Enable SSO</label>
+                                        </div>
                                     </li>
                                     <li className="left1">
                                         <div className="switch switch-sm switch-primary">
@@ -112,22 +123,6 @@ var ChangeProfile = React.createClass({
                                                 </div>
                                                 <div className="handle"></div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li className="left2">
-                                        <ul className="content_profile_note_ul">
-                                            <li>
-                                                <p className="content_profile_note">Active Directory</p>
-                                            </li>
-                                            <li className="left4">
-                                                <HelpButton
-                                                    classMenu="fix-overview-help-button-table"
-                                                    classIcon="overview_question_a help_question_a" setValue="Use your Microsoft user name and password to connect into Dathena 99. Enable Dathena 99 to connect automatically using your Microsoft credentials." />
-                                            </li>
-                                        </ul>
-                                        <div className="my-profile-check-none checkbox-custom checkbox-default">
-                                          <input className="x" id="z" name="agreeterms" type="checkbox" />
-                                          <label htmlFor="AgreeTerms">Enable SSO</label>
                                         </div>
                                     </li>
                                 </ul>
