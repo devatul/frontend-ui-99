@@ -30,7 +30,7 @@
                          <button class="inline-block-item ml-sm search-box-wrap btn btn-green returned-screen" onClick="{this.backScreen}" >New Search <i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                         <div class="results-search">
-                            3 results (0.48 seconds)
+                            {this.state.data['number of results']} results ({this.state.data['elapsed time in second']} seconds)
                         </div>
                         <div id="datatable-default_wrapper" class="dataTables_wrapper no-footer">
                             <div class="table-responsive">
