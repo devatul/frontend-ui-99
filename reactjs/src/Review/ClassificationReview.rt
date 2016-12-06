@@ -131,7 +131,7 @@
                         </th>
                         <th class="text-center">Status</th>
                       </tr>
-                    </thead>
+                    </thead> 
                     <tbody class="fix-td-checkbox">
                       <table.row
                         rt-repeat="document in review.documents"

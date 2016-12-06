@@ -547,7 +547,7 @@ var RowPreview = React.createClass({
           <td className="text-center"><i className={'fa ' + (renderClassType(document.name)) + ' action-file-icon'}></i></td>
           <td className="text-left" ref="documentNameContainer">
             <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{document.name}</Tooltip>}>
-              <span id="documentName" style={{maxWidth: 100 + '%'}} onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
+              <span id="documentName" style={{maxWidth: 94 + '%'}} onClick={this.handleOnclick} className="text-italic file-name fix-max-width-row doc-path">{document.name}</span>
             </OverlayTrigger>
 
             <InfoButton>
@@ -561,7 +561,7 @@ var RowPreview = React.createClass({
             </InfoButton>
           </td>
           <td className="text-center">
-            <a href={document.image_url}>{document.path}</a>
+            <a href={document.image_url} className="doc-path">{document.path}</a>
           </td>
           <td className="select-category">
             <div className="select-group">
